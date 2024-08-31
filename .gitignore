@@ -25,7 +25,7 @@ Thumbs.db
 *.sbr
 obj/
 [Rr]elease*/
-[Nn]node_modules*/
+[Nn]ode_modules*/
 _ReSharper*/
 [Tt]est[Rr]esult*
 .vs/
