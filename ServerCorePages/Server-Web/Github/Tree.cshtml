@@ -60,7 +60,7 @@
         @if (Model.Parent != null)
         {
             <tr>
-                <td class="collapsing"><i class="folder icon"></i><a href="@Url.UnencodedRouteLink("~/server-locked/razor-pages/github/GetTreeView", new { repoName = currRepo, id = currId, path = Model.Parent })">..</a></td>
+                <td class="collapsing"><i class="folder icon"></i><a href="@Url.UnencodedRouteLink("~/server-integrated/razor-pages/github/GetTreeView", new { repoName = currRepo, id = currId, path = Model.Parent })">..</a></td>
                 <td>Initial commit</td>
                 <td class="right aligned collapsing">10 hours ago</td>
             </tr>
@@ -69,7 +69,7 @@
         {
             bool isTree = fvm.Type == ObjectType.Tree;
             <tr>
-                <td class="collapsing"><i class="@((isTree) ? "folder" : "file outline") icon"></i><a href="@Url.UnencodedRouteLink((isTree) ? "~/server-locked/razor-pages/github/GetTreeView" : "~/server-locked/razor-pages/github/GetBlobView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name</a></td>
+                <td class="collapsing"><i class="@((isTree) ? "folder" : "file outline") icon"></i><a href="@Url.UnencodedRouteLink((isTree) ? "~/server-integrated/razor-pages/github/GetTreeView" : "~/server-integrated/razor-pages/github/GetBlobView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name</a></td>
                 <td>@lastcommit.MessageShort</td>
                 <td class="right aligned collapsing">@lastcommit.Committer.When.ToString("dd.MM.yyyy HH:mm:ss")</td>
             </tr>

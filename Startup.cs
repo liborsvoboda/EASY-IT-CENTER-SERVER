@@ -93,7 +93,6 @@ namespace EasyITCenter {
             ServerModules.ConfigureDBEntitySchema(ref services);
             ServerModules.ConfigureGitServer(ref services);
             ServerModules.ConfigureMarkdownAsHtmlFiles(ref services);
-            ServerModules.ConfigureCodeBrowser(ref services);
             ServerModules.ConfigureReportDesigner(ref services);
 
             services.AddGitServerCore(opt => { opt.GitRepoExtractDir = "Git"; });
@@ -254,12 +253,6 @@ namespace EasyITCenter {
                 websites = new EasyITCenterContext().SolutionWebsiteLists.Where(a => a.Active).ToList();
             }
 
-            //CodeBrowser
-            if (ServerConfigSettings.EnableCodeBrowser) {
-                app.UseStaticFiles(new StaticFileOptions {
-                    RequestPath = $"/ProjectsBrowser", FileProvider = new PhysicalFileProvider(Path.Combine(ServerRuntimeData.WebRoot_path, "ProjectsBrowser"), ExclusionFilters.Sensitive & ~ExclusionFilters.DotPrefixed)
-                });
-            }
             app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, /*OnPrepareResponse = */ });
 
             app.UseCookiePolicy();

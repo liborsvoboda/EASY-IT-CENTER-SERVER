@@ -30,7 +30,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     if (data != null) {
                         WebCoreFileList minFile = new() { FileName = data.FileName, Sequence = data.Sequence, SpecificationType = data.SpecificationType, MetroPath = data.MetroPath };
                         
-                        if (SystemPortalOperations.SaveWebSourceFile(ref _hostingEnvironment, ref minFile)) {
+                        if (ServerPortalOperations.SaveWebSourceFile(ref _hostingEnvironment, ref minFile)) {
                             var resData = new EasyITCenterContext().WebCoreFileLists.Update(data);
                             int result = await resData.Context.SaveChangesAsync();
                         }

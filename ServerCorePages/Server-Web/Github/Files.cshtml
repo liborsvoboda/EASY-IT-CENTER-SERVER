@@ -25,7 +25,7 @@ else if (Model.IsDirectory)
 	<ul class="file-browser">
 		@foreach (GithubFileTreeEntry entry in Model) {
 			<li class="@(entry.IsFile ? "file" : "dir")">
-				<a href="@Url.UnencodedRouteLink("~/server-locked/razor-pages/github/GetFileView", new { repoName = entry.RepoName, filePath = entry.Path })">@entry.Name</a>
+				<a href="@Url.UnencodedRouteLink("~/server-integrated/razor-pages/github/GetFileView", new { repoName = entry.RepoName, filePath = entry.Path })">@entry.Name</a>
 			</li>
 		}
 	</ul>

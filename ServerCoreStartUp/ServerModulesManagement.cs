@@ -11,7 +11,6 @@ using Pek.Markdig.HighlightJs;
 using Docfx.MarkdigEngine.Extensions;
 using Markdig.Prism;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SourceBrowserIndex = EASYTools.SourceBrowser.SourceIndexServer.Models.Index;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
 
@@ -33,18 +32,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     options.BasePath = ServerRuntimeData.GitServerPath;
                     options.GitPath = "git";
                 });
-            }
-        }
-
-
-        /// <summary>
-        /// Server Module: Set Startup Path for CodeBrowser 
-        /// </summary>
-        /// <param name="services"></param>
-        internal static void ConfigureCodeBrowser(ref IServiceCollection services) {
-            if (ServerConfigSettings.EnableCodeBrowser) {
-                var subfolder = Path.Combine(ServerRuntimeData.ServerWeb_path, "ProjectBrowser");
-                if (File.Exists(subfolder)) { services.AddSingleton(new SourceBrowserIndex(subfolder)); }
             }
         }
 

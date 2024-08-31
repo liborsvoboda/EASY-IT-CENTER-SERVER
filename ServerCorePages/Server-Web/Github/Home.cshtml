@@ -7,7 +7,7 @@
 }
 <h2 class="ui header">Přehled repozitářů</h2>
 <div class="right">
-    <a href="~/server-locked/razor-pages/github/Home/Create">
+    <a href="~/server-integrated/razor-pages/github/Home/Create">
         <button class="ui teal right labeled icon button"><i class="right arrow icon"></i>Vytvořit nový Repozitář</button>
     </a>
 </div>
@@ -17,7 +17,7 @@
         <div class="item">
             <i class="large github middle aligned icon"></i>
             <div class="content">
-                <form action="~/server-locked/razor-pages/github/Home/DeleteRepository" id="delete_@repo.Id" method="post" class="ui form">
+                <form action="~/server-integrated/razor-pages/github/Home/DeleteRepository" id="delete_@repo.Id" method="post" class="ui form">
                     <input type="hidden" name="id" value="@repo.Id">
                     <div class="d-flex">
                         @Html.RouteLink(repo.Name, "GetRepositoryHomeView", new { userName = repo.UserName, repoName = repo.Name }, new { @class = "header medium ui" })

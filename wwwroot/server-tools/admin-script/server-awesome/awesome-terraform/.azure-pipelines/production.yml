@@ -1,0 +1,34 @@
+trigger:
+- release
+
+variables:
+  terraformVersion: '1.3.6'
+  azureSubscription: 'Azure Sponsorship'
+  backendResourceGroup: 'ServerlessTest-RG'
+  backendStorageAccount: 'tfstatedemo1'
+  tfstateName: 'production.tfstate'
+  workingDirectory: '$(Build.SourcesDirectory)/envs/prd'
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Terraform_Plan
+  condition: ne(variables['Build.SourceBranch'], 'refs/heads/release')
+  jobs:
+  - job: Production
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - template: templates/run-terraform.yml
+      parameters:
+        command: 'plan'
+
+- stage: Terraform_Apply
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/release')
+  jobs:
+  - job: Production
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - template: templates/run-terraform.yml
+      parameters:
+        command: 'apply'

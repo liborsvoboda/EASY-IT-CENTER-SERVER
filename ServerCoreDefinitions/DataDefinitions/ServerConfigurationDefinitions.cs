@@ -374,11 +374,6 @@
         /// </summary>
         public static bool ModuleCSharpCodeBuilder { get; set; } = true;
 
-
-        /// <summary>
-        /// Zapíná/Vypína Modul Procházení Kódů Projektů Online
-        /// </summary>
-        public static bool EnableCodeBrowser { get; set; } = true;
         
         #endregion Server Modules
 
