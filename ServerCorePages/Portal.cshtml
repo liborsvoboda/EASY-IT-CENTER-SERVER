@@ -1,0 +1,26 @@
+﻿@page "/Portal"
+@* @addTagHelper *, WebOptimizer.Core *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using ServerCorePages;
+@using Microsoft.AspNetCore.Html;
+@using EasyITCenter.DBModel;
+@using EasyITCenter.ServerCoreWebPages;
+@using EasyITCenter.ServerCoreStructure;
+@using System.Security.Claims;
+@model ServerCorePages.PortalModel
+@{
+    string? sourcePath = HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "RequestedModulePath").Value?.ToString();
+    ServerModuleAndServiceList? serverModule = ((ServerModuleAndServiceList?)HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "ServerModule").Value);
+    ServerWebPagesToken? webpagestoken = ((ServerWebPagesToken?)HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "ServerWebPagesToken").Value);
+}
+
+
+
+@* @(Html.Raw(this.Model.GetManagedJsScriptsForLayout().ViewName)) *@
+
+@* 
+@if (serverModule != null) {
+    @Html.Raw(serverModule.CustomHtmlContent);
+} 
+*@

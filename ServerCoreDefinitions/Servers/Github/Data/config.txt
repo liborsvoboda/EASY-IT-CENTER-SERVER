@@ -1,0 +1,1 @@
+Server=127.0.0.1,1433;Database=GitServer;User Id=gitserver;Password=gitserver;TrustServerCertificate=True

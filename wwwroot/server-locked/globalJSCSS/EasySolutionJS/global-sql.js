@@ -1,0 +1,1 @@
+//Global SQL help FOR EASY use 

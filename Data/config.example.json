@@ -1,0 +1,16 @@
+
+Windows By Logged Account
+
+{
+  "DatabaseConnectionString": "Server=127.0.0.1;Database=EasyITCenter;Trusted_Connection=True;TrustServerCertificate=True"
+}
+
+Windows
+{
+  "DatabaseConnectionString": "Server=127.0.0.1,1433;Database=EasyITCenter;User ID=easyitcenter;Password=easyitcenter;TrustServerCertificate=True;"
+}
+
+Linux
+{
+  "DatabaseConnectionString": "Server=127.0.0.1,1433;Database=EasyITCenter;User ID=easyitcenter;Password=easyitcenter;Integrated Security=False;TrustServerCertificate=True;"
+}
