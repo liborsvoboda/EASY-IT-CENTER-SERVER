@@ -102,7 +102,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     if (!mdBookPrepared && webFilesRequest.MdBookLibrary) {
                         mdBookPrepared = true;
                         FileOperations.DeleteDirectory(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook");
-                        FileOperations.CopyDirectory(Path.Combine(ServerRuntimeData.DistributedPackagesPath, "Documentation", "MdInteliBook"), ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook");
+                        FileOperations.CopyDirectory(Path.Combine(ServerRuntimeData.ServerGenerators_path, "Docs", "MdInteliBook"), ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook");
                     }
 
                     fileList.Where(a => !a.Contains(Path.Combine(Path.Combine(ServerRuntimeData.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook"))).ToList().ForEach(file => {
@@ -147,7 +147,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
                 //COPY MD-BROWSER TOOL AFTER FILE PROCESSES
                 if (!processInterrupted && webFilesRequest.CentralIndexOnly) {
-                    FileOperations.CopyFiles(Path.Combine(ServerRuntimeData.DistributedPackagesPath, "Documentation", "MdBrowser"), ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath), webFilesRequest.OveriteExisting);
+                    FileOperations.CopyFiles(Path.Combine(ServerRuntimeData.ServerGenerators_path, "Docs", "MdBrowser"), ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath), webFilesRequest.OveriteExisting);
                 }
 
                 //SUMMARY MOVE FILES AND CLEAN STRUCTURE

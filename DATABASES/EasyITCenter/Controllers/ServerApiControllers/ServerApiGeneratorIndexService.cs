@@ -61,7 +61,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         ///Convert List Any FileType List Any FileType,
         ///Convert MD->Docx,List<Md>->List<Docx>
         ///Generate List<Md>->Index.Md,Generate List<Md>->Index.Html,Generate List<Html>->Index.Html
-        ////ODO Ošetřit aby Mohli menit soubory jen ve svem ulozisti
+        ///TODO Ošetřit aby Mohli menit soubory jen ve svem ulozisti
         ///TODO Udelat Aendu Dynamicke Registace Trid Pro Dynamicka API a tam se zadaji file Extensions
         ///TODO VKladat Static DB Soubory 
         ///TODO Vracet jako Zip
