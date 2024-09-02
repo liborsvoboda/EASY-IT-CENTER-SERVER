@@ -7,6 +7,7 @@
 
 function UserChangeTranslateSetting() {
     Metro.storage.setItem('UserAutomaticTranslate', $("#UserAutomaticTranslate").val('checked')[0].checked);
+	if ($("#UserAutomaticTranslate").val('checked')[0].checked) { GoogleTranslateElementInit(); } else { CancelTranslation(); }
 }
 
 function hidePageLoading() { Metro.activity.close(pageLoader); }
@@ -33,7 +34,7 @@ function ChangeSchemeTo(n) {
 
 
 
-function googleTranslateElementInit() {
+function GoogleTranslateElementInit() {
     $(document).ready(function () {
         new google.translate.TranslateElement({
             pageLanguage: 'cs', //includedLanguages: 'en,cs',

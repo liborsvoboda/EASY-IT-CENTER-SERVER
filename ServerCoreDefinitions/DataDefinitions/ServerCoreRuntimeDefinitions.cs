@@ -54,6 +54,12 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         public static string ServerIntegrated_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-integrated");
 
+        /// <summary>
+        /// Server Integrated Web Tools Path.
+        /// Tools are Programatically Used
+        /// </summary>
+        public static string DistributeLibrary_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "distribute-library");
+
 
         /// <summary>
         /// Server Path for Generators
@@ -66,6 +72,11 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         public static string SystemWebPortal_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "system-portal");
 
+
+        /// <summary>
+        /// Server Path for Generators
+        /// </summary>
+        public static string ServerWebPages_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-webpages");
 
 
         /// <summary>

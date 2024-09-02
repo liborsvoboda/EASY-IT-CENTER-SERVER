@@ -14,12 +14,10 @@ using EasyITCenter.ServerCoreConfiguration;
 using SQLitePCL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using DocumentFormat.OpenXml.Office2010.Ink;
 using Fawdlstty.GitServerCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.AspNetCore.ResponseCompression;
-using Ninject.Activation;
 
 
 
@@ -196,7 +194,7 @@ namespace EasyITCenter {
                     //Show MarkDownFile in Layout by missing .md extension
                     if (!redirected && routeLayout == RouteLayoutTypes.DevPortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/DevPortal"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
                     //Show MarkDownFile in Layout by missing .md extension
-                    else if (!redirected && routeLayout == RouteLayoutTypes.ViewerMarkDownFileLayout ) { redirected = true; context.Request.Path = "/server-webpages/ViewerMarkDownFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
+                    else if (!redirected && routeLayout == RouteLayoutTypes.ViewerMarkDownFileLayout ) { redirected = true; context.Request.Path = "/ViewerMarkDownFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
                     //Show Report File in Layout by .frx extension
                     else if (!redirected && routeLayout == RouteLayoutTypes.ViewerReportFileLayout) { redirected = true; context.Request.Path = "/ReportViewer/ViewerReportFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
                     //Show Portal in Layout

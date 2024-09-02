@@ -12,11 +12,13 @@ using Dapper;
 
 namespace EasyITCenter.Controllers {
 
-
+    /// <summary>
+    /// MUST be Ignore Generate Ambigiolous Error
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("ServerApi")]
-    //[ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ServerApiSqLiteInitService : ControllerBase {
 
         private string connectionString;

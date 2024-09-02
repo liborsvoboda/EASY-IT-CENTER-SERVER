@@ -112,13 +112,18 @@ namespace EasyITCenter.ServerCoreStructure {
 
                 //Check MarkDown Type missing .md for Show in Markdown Layout
                 if (ServerConfigSettings.EnableAutoShowStaticMdAsHtml) {
-                    if (!routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + ".md")) { validPath = routePath; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
-                    else if (!routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/index.md")) { validPath = routePath + "/index"; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
+                    if (!routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + ".md")) 
+                        { validPath = routePath; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
+                    else if (!routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/index.md")) 
+                        { validPath = routePath + "/index"; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; } 
+                    else if (!routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/readme.md")) 
+                        { validPath = routePath + "/readme"; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
                 }
 
 
                 //Check Report By extension '.frx' for Show
-                if (routePath.EndsWith(".frx") || routePath.EndsWith(".fpx")) { routeLayout = RouteLayoutTypes.ViewerReportFileLayout; validPath = routePath; routingResult = RoutingActionTypes.Next; }
+                if (routePath.EndsWith(".frx") || routePath.EndsWith(".fpx")) 
+                    { routeLayout = RouteLayoutTypes.ViewerReportFileLayout; validPath = routePath; routingResult = RoutingActionTypes.Next; }
 
 
                 //Check Html By missing '.html' for Open In HTML Editor
