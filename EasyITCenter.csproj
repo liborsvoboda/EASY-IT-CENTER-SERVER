@@ -109,16 +109,634 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
      <Content Include="Data\favicon.ico" />
-     <Content Include="Docs\Extension.md" />
-     <Content Include="Docs\index.md" />
+     <Content Include="Docs\assets\cc_bysa.flat.guokr.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\assets\editor-awesome.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\assets\logo.svg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\Awesome-AI.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-algolia.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-badges.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-beginners.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-c-sharp.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-chatgp.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-chrome-devtools.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-cli-apps.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-dotnet-core.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-dotnet.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-echarts.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\Awesome-eCommerce.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-editor.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-editorjs.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-falsehood.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-github-vue.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-gpt3.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\Awesome-Hacking.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-hyperterm.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-ilp.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-interledger.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-javascript-learning.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-javascript.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-jekyll-editors.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-jekyll-plugins.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-jekyll-themes.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-jekyll.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-main.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-master.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-microsoft-repos.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-newsletters.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-nodejs.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\Awesome-Nugets.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-opensource.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-osint.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-podcasts.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-puppetier.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-research.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-ripple.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-selfhosted.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-shell.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-slack.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-speakers.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-split-keyboards.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-sysadmin.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-vue-3.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-vue.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-web-browsers.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-web-editor.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-workflow.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome-wysiwyg.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\awesome_hacking.gif">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\Hyperterm-Mark-Large.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\images\logo.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Arke.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Atreis.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Atreus.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Atreus62.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\BFO-9000.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\bfo9000_pcb.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\catboard.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\catboard_layout.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\CherryErgoPlus.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Chimera.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\colosseum44.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\colosseum60.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Dactyl-ManuForm.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Dactyl.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Dumang-DK6-1.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Dumang-DK6-2.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Dygma-Raise-Mechanical-Split-Keyboard.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Dygma-Raise-Mechanical-Split-Keyboard_white.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Ergodash.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Ergodone.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Ergodone_PCB.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\ErgoDox-original-min.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Ergodox_EZ.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Ergodox_EZ_PCB.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Ergodox_EZ_white.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\ErgoDox_Infinity.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\ErgoDox_Infinity_PCB.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\ergoinu.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Ergotravel.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\ForScience.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\ForScience_PCB.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Fortitude60-ikiriwhite.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Fortitude60-otakublack.jpeg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Fourier40.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Georgi.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Georgi2.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Gergo.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Gergo2.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Goldtouch-Go2.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\HeliDox.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\HeliDox_PCB.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Helix.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Iris.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Keyboardio_Model01.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\keycaps_profiles.jpeg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\keycaps_profiles.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\KinesisAdvantage2.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\KinesisFreestylePro.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Kyria.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\LetsSplit.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Levinson.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\lily58_keyboard.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Maltron.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\matias_ergo_pro.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\MiniDox.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\MistelBarocco.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Mitosis.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Moonlander1.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Nyquist.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Nyquist_PCB.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\pinky3.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\pinky4.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Pteron.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Redox.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Redox_PCB.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\rgo_split.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\SA_DCS_DSA.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\SmartYaoly092.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\sofle_keyboard.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Sol.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\switch diagram lol.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\switches.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\switch_tester.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\switch_tester2.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Ultimatehackingkeyboard.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\VEA.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Viterbi.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\xbows.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Zen.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\img\Zen_PCB.jpg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\logo.svg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\badge-flat.svg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\badge-flat2.svg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\badge.ai">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\badge.svg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\logo-dark.svg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\logo.ai">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\logo.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\logo.psd">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\logo.svg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\mentioned-badge-flat.svg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\mentioned-badge.sketch">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\mentioned-badge.svg">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\osep.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\readme.md">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\media\social-preview.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\osint_logo.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include="Docs\screenshot.png">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
      <Content Include="wwwroot\**" />
   </ItemGroup>  
 
 
    <ItemGroup>
      <None Remove="C:\Users\tatka\.nuget\packages\microsoft.applicationinsights.profiler.aspnetcore\2.6.0\contentFiles\any\netstandard2.1\ServiceProfiler\TraceUpload.zip" />
+     <None Remove="Docs\assets\cc_bysa.flat.guokr.png" />
+     <None Remove="Docs\assets\editor-awesome.png" />
+     <None Remove="Docs\assets\logo.svg" />
+     <None Remove="Docs\Awesome-AI.md" />
+     <None Remove="Docs\awesome-algolia.md" />
+     <None Remove="Docs\awesome-badges.md" />
+     <None Remove="Docs\awesome-beginners.md" />
+     <None Remove="Docs\awesome-c-sharp.md" />
+     <None Remove="Docs\awesome-chatgp.md" />
+     <None Remove="Docs\awesome-chrome-devtools.md" />
+     <None Remove="Docs\awesome-cli-apps.md" />
+     <None Remove="Docs\awesome-dotnet-core.md" />
+     <None Remove="Docs\awesome-dotnet.md" />
+     <None Remove="Docs\awesome-echarts.md" />
+     <None Remove="Docs\Awesome-eCommerce.md" />
+     <None Remove="Docs\awesome-editor.md" />
+     <None Remove="Docs\awesome-editorjs.md" />
+     <None Remove="Docs\awesome-falsehood.md" />
+     <None Remove="Docs\awesome-github-vue.md" />
+     <None Remove="Docs\awesome-gpt3.md" />
+     <None Remove="Docs\Awesome-Hacking.md" />
+     <None Remove="Docs\awesome-hyperterm.md" />
+     <None Remove="Docs\awesome-ilp.md" />
+     <None Remove="Docs\awesome-interledger.md" />
+     <None Remove="Docs\awesome-javascript-learning.md" />
+     <None Remove="Docs\awesome-javascript.md" />
+     <None Remove="Docs\awesome-jekyll-editors.md" />
+     <None Remove="Docs\awesome-jekyll-plugins.md" />
+     <None Remove="Docs\awesome-jekyll-themes.md" />
+     <None Remove="Docs\awesome-jekyll.md" />
+     <None Remove="Docs\awesome-main.md" />
+     <None Remove="Docs\awesome-master.md" />
+     <None Remove="Docs\awesome-microsoft-repos.md" />
+     <None Remove="Docs\awesome-newsletters.md" />
+     <None Remove="Docs\awesome-nodejs.md" />
+     <None Remove="Docs\Awesome-Nugets.md" />
+     <None Remove="Docs\awesome-opensource.md" />
+     <None Remove="Docs\awesome-osint.md" />
+     <None Remove="Docs\awesome-podcasts.md" />
+     <None Remove="Docs\awesome-puppetier.md" />
+     <None Remove="Docs\awesome-research.md" />
+     <None Remove="Docs\awesome-ripple.md" />
+     <None Remove="Docs\awesome-selfhosted.md" />
+     <None Remove="Docs\awesome-shell.md" />
+     <None Remove="Docs\awesome-slack.md" />
+     <None Remove="Docs\awesome-speakers.md" />
+     <None Remove="Docs\awesome-split-keyboards.md" />
+     <None Remove="Docs\awesome-sysadmin.md" />
+     <None Remove="Docs\awesome-vue-3.md" />
+     <None Remove="Docs\awesome-vue.md" />
+     <None Remove="Docs\awesome-web-browsers.md" />
+     <None Remove="Docs\awesome-web-editor.md" />
+     <None Remove="Docs\awesome-workflow.md" />
+     <None Remove="Docs\awesome-wysiwyg.md" />
+     <None Remove="Docs\awesome_hacking.gif" />
      <None Remove="Docs\Extension.md" />
+     <None Remove="Docs\Hyperterm-Mark-Large.png" />
+     <None Remove="Docs\images\logo.jpg" />
+     <None Remove="Docs\img\Arke.jpg" />
+     <None Remove="Docs\img\Atreis.jpg" />
+     <None Remove="Docs\img\Atreus.jpg" />
+     <None Remove="Docs\img\Atreus62.jpg" />
+     <None Remove="Docs\img\BFO-9000.jpg" />
+     <None Remove="Docs\img\bfo9000_pcb.jpg" />
+     <None Remove="Docs\img\catboard.jpg" />
+     <None Remove="Docs\img\catboard_layout.png" />
+     <None Remove="Docs\img\CherryErgoPlus.jpg" />
+     <None Remove="Docs\img\Chimera.jpg" />
+     <None Remove="Docs\img\colosseum44.jpg" />
+     <None Remove="Docs\img\colosseum60.jpg" />
+     <None Remove="Docs\img\Dactyl-ManuForm.jpg" />
+     <None Remove="Docs\img\Dactyl.jpg" />
+     <None Remove="Docs\img\Dumang-DK6-1.png" />
+     <None Remove="Docs\img\Dumang-DK6-2.jpg" />
+     <None Remove="Docs\img\Dygma-Raise-Mechanical-Split-Keyboard.jpg" />
+     <None Remove="Docs\img\Dygma-Raise-Mechanical-Split-Keyboard_white.jpg" />
+     <None Remove="Docs\img\Ergodash.jpg" />
+     <None Remove="Docs\img\Ergodone.jpg" />
+     <None Remove="Docs\img\Ergodone_PCB.jpg" />
+     <None Remove="Docs\img\ErgoDox-original-min.png" />
+     <None Remove="Docs\img\Ergodox_EZ.jpg" />
+     <None Remove="Docs\img\Ergodox_EZ_PCB.jpg" />
+     <None Remove="Docs\img\Ergodox_EZ_white.jpg" />
+     <None Remove="Docs\img\ErgoDox_Infinity.jpg" />
+     <None Remove="Docs\img\ErgoDox_Infinity_PCB.jpg" />
+     <None Remove="Docs\img\ergoinu.jpg" />
+     <None Remove="Docs\img\Ergotravel.jpg" />
+     <None Remove="Docs\img\ForScience.jpg" />
+     <None Remove="Docs\img\ForScience_PCB.png" />
+     <None Remove="Docs\img\Fortitude60-ikiriwhite.jpg" />
+     <None Remove="Docs\img\Fortitude60-otakublack.jpeg" />
+     <None Remove="Docs\img\Fourier40.jpg" />
+     <None Remove="Docs\img\Georgi.jpg" />
+     <None Remove="Docs\img\Georgi2.jpg" />
+     <None Remove="Docs\img\Gergo.jpg" />
+     <None Remove="Docs\img\Gergo2.jpg" />
+     <None Remove="Docs\img\Goldtouch-Go2.jpg" />
+     <None Remove="Docs\img\HeliDox.jpg" />
+     <None Remove="Docs\img\HeliDox_PCB.jpg" />
+     <None Remove="Docs\img\Helix.jpg" />
+     <None Remove="Docs\img\Iris.jpg" />
+     <None Remove="Docs\img\Keyboardio_Model01.jpg" />
+     <None Remove="Docs\img\keycaps_profiles.jpeg" />
+     <None Remove="Docs\img\keycaps_profiles.jpg" />
+     <None Remove="Docs\img\KinesisAdvantage2.jpg" />
+     <None Remove="Docs\img\KinesisFreestylePro.jpg" />
+     <None Remove="Docs\img\Kyria.jpg" />
+     <None Remove="Docs\img\LetsSplit.jpg" />
+     <None Remove="Docs\img\Levinson.jpg" />
+     <None Remove="Docs\img\lily58_keyboard.jpg" />
+     <None Remove="Docs\img\Maltron.jpg" />
+     <None Remove="Docs\img\matias_ergo_pro.jpg" />
+     <None Remove="Docs\img\MiniDox.jpg" />
+     <None Remove="Docs\img\MistelBarocco.jpg" />
+     <None Remove="Docs\img\Mitosis.jpg" />
+     <None Remove="Docs\img\Moonlander1.jpg" />
+     <None Remove="Docs\img\Nyquist.jpg" />
+     <None Remove="Docs\img\Nyquist_PCB.jpg" />
+     <None Remove="Docs\img\pinky3.jpg" />
+     <None Remove="Docs\img\pinky4.jpg" />
+     <None Remove="Docs\img\Pteron.jpg" />
+     <None Remove="Docs\img\Redox.jpg" />
+     <None Remove="Docs\img\Redox_PCB.jpg" />
+     <None Remove="Docs\img\rgo_split.jpg" />
+     <None Remove="Docs\img\SA_DCS_DSA.png" />
+     <None Remove="Docs\img\SmartYaoly092.jpg" />
+     <None Remove="Docs\img\sofle_keyboard.jpg" />
+     <None Remove="Docs\img\Sol.jpg" />
+     <None Remove="Docs\img\switch diagram lol.jpg" />
+     <None Remove="Docs\img\switches.jpg" />
+     <None Remove="Docs\img\switch_tester.jpg" />
+     <None Remove="Docs\img\switch_tester2.jpg" />
+     <None Remove="Docs\img\Ultimatehackingkeyboard.jpg" />
+     <None Remove="Docs\img\VEA.jpg" />
+     <None Remove="Docs\img\Viterbi.jpg" />
+     <None Remove="Docs\img\xbows.jpg" />
+     <None Remove="Docs\img\Zen.jpg" />
+     <None Remove="Docs\img\Zen_PCB.jpg" />
      <None Remove="Docs\index.md" />
+     <None Remove="Docs\logo.svg" />
+     <None Remove="Docs\media\badge-flat.svg" />
+     <None Remove="Docs\media\badge-flat2.svg" />
+     <None Remove="Docs\media\badge.ai" />
+     <None Remove="Docs\media\badge.svg" />
+     <None Remove="Docs\media\logo-dark.svg" />
+     <None Remove="Docs\media\logo.ai" />
+     <None Remove="Docs\media\logo.png" />
+     <None Remove="Docs\media\logo.psd" />
+     <None Remove="Docs\media\logo.svg" />
+     <None Remove="Docs\media\mentioned-badge-flat.svg" />
+     <None Remove="Docs\media\mentioned-badge.sketch" />
+     <None Remove="Docs\media\mentioned-badge.svg" />
+     <None Remove="Docs\media\osep.png" />
+     <None Remove="Docs\media\readme.md" />
+     <None Remove="Docs\media\social-preview.png" />
+     <None Remove="Docs\osint_logo.png" />
+     <None Remove="Docs\screenshot.png" />
    </ItemGroup>
 
   

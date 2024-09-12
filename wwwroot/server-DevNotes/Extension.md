@@ -15,9 +15,9 @@ https://learn.microsoft.com/cs-cz/dotnet/core/extensions/generic-host?tabs=appbu
 
 GRPC SERVERY
 https://github.com/grpc/grpc-dotnet/blob/master/examples/Tester/Client/GreetRepository.cs
-JINA SLUZBA MIMO API pro psani ruznych sluzeb
+JINA SLUZBA MIMO API pro psani ruynzch sluzeb
 
-INTERACTIVE NETCORE
+INTERACTIBE NETCORE
 https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/blazor/javascript-interoperability
 
 
