@@ -300,7 +300,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     builder.HighlightJsStyle = ServerRuntimeData.ServerIntegrated_path + "/server-modules/Docs/material-darker.css";
                     builder.GetMdlStyle = ServerRuntimeData.ServerIntegrated_path + "/server-modules/Docs/material.min.css";
                     builder.NavBarStyle = MarkdownDocumenting.Elements.NavBarStyle.Default;
-                    builder.RootPathHandling = HandlingType.Handle;
+                    builder.RootPathHandling = HandlingType.HandleWithHighOrder;
                     //builder.SetIndexDocument(new EasyITCenterContext().DocSrvDocumentationLists.OrderBy(a => a.DocumentationGroup.Sequence)
                     //.ThenBy(a => a.Sequence).ThenBy(a => a.Name).FirstOrDefault().Name.Replace(" ", ""));
 

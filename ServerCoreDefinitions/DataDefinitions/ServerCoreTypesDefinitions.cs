@@ -26,6 +26,7 @@
         PortalLayout,
         ServerModulesLayout,
         StaticFileLayout,
+        ToolViewerLayout,
         ViewerMarkDownFileLayout,
         ViewerReportFileLayout,
 

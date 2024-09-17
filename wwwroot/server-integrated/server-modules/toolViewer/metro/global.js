@@ -38,7 +38,7 @@ function CreateToolPanel() {
         ["#585b5d", "darcula.css?#585b5d"], ["#AF0015", "red-alert.css?#AF0015"], ["#690012", "red-dark.css?#690012"], ["#0CA9F2", "sky-net.css?#0CA9F2"]
     ];
     themes.forEach((theme, index) => {
-        html += '<button class="button shadowed w-50px opc-05 mt-1" style="background-color: ' + theme[0] + ';" onclick="ChangeSchemeTo(\'' + theme[1] + '\')" ></button>';
+        html += '<button class="button shadowed w-25 opc-05 mt-1" style="background-color: ' + theme[0] + ';" onclick="ChangeSchemeTo(\'' + theme[1] + '\')" ></button>';
         if (index == 3) { html += '</div><div class="d-flex w-100" title="BackGround">'; }
     });
     return html;
