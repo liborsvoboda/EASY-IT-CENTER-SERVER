@@ -133,11 +133,12 @@ namespace EasyITCenter {
             app.Use(async (HttpContext context, Func<Task> next) => {
                 string requestPath = context.Request.Path.ToString().ToLower(); bool redirected = false;
                 context = CoreOperations.IncludeCookieTokenToRequest(context); //Include TOKEN
-
+                
                 if (!context.WebSockets.IsWebSocketRequest) { await next();// WebSocket Ignored
 
+                   
 
-                    //TODO NOC CORRECT AND MISSING ACCESS IN DB
+                    //TODO NOT CORRECT AND MISSING ACCESS IN DB
                     //Excluded Url For Server Browsing From Page Settings, redirected Defined paths
                     if (DbOperations.CheckDBServerApiRule(requestPath)?.Count() > 0
                     //|| (!string.IsNullOrEmpty(System.IO.Path.GetExtension(context.Request.Path)))
@@ -216,16 +217,6 @@ namespace EasyITCenter {
                     else if (!redirected && commandType == RoutingActionTypes.Next && context.Request.Path.ToString().ToLower() == fileValidUrl) { return; }
                 }
             });
-
-            //https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-7.0
-            //HOSTOVANI
-
-
-            // HERE HAS CONTENT Response Injection + MY INJECTION  CONTENT
-            //app.Run(async (context) => {
-            //    if (context.Response.StatusCode == StatusCodes.Status401Unauthorized) { context.Response.Redirect("/ServerControls/401UnauthorizedPage"); }
-            //    if (context.Response.StatusCode == StatusCodes.Status404NotFound) { context.Response.Redirect("/ServerControls/404NonExistPage"); }
-            //});
 
 
             //app.UseExceptionHandler("/Error");
