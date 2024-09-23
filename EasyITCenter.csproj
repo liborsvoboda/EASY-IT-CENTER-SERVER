@@ -99,13 +99,10 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
-    <Compile Remove="DATABASES\WebHosting\ApplicationDbContext.cs" />
-    <Compile Remove="DATABASES\WebHosting\ApplicationUser.cs" />
     <Compile Remove="DATABASES\WebHosting\Controllers\AccountController.cs" />
     <Compile Remove="DATABASES\WebHosting\Controllers\DashboardsController.cs" />
     <Compile Remove="DATABASES\WebHosting\Controllers\ProfileController.cs" />
     <Compile Remove="DATABASES\WebHosting\Controllers\SettingsController.cs" />
-    <Compile Remove="DATABASES\WebHosting\Extensions\IsTrueRequired.cs" />
     <Compile Remove="DATABASES\WebHosting\Extensions\MailManagerExtensions.cs" />
     <Compile Remove="DATABASES\WebHosting\Extensions\PageModelExtensions.cs" />
     <Compile Remove="DATABASES\WebHosting\Extensions\UrlHelperExtensions.cs" />
@@ -114,6 +111,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Compile Remove="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.cs" />
     <Compile Remove="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
     <Compile Remove="DATABASES\WebHosting\Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Remove="DATABASES\WebHosting\WebHostingDbContext.cs" />
+    <Compile Remove="DATABASES\WebHosting\WebHostingUser.cs" />
   </ItemGroup>  
 
    <ItemGroup>
@@ -123,14 +122,13 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
-     <Content Include="DATABASES\WebHosting\ApplicationDbContext.cs" />
-     <Content Include="DATABASES\WebHosting\ApplicationUser.cs" />
+     <Content Include="DATABASES\WebHosting\WebHostingDbContext.cs" />
+     <Content Include="DATABASES\WebHosting\WebHostingUser.cs" />
      <Content Include="DATABASES\WebHosting\Controllers\AccountController.cs" />
      <Content Include="DATABASES\WebHosting\Controllers\DashboardsController.cs" />
      <Content Include="DATABASES\WebHosting\Controllers\ProfileController.cs" />
      <Content Include="DATABASES\WebHosting\Controllers\SettingsController.cs" />
-     <Content Include="DATABASES\WebHosting\Extensions\IsTrueRequired.cs" />
-     <Content Include="DATABASES\WebHosting\Extensions\MailManagerExtensions.cs" />
+     <Content Include="DATABASES\WebHosting\Services\Mail\MailManagerExtensions.cs" />
      <Content Include="DATABASES\WebHosting\Extensions\PageModelExtensions.cs" />
      <Content Include="DATABASES\WebHosting\Extensions\UrlHelperExtensions.cs" />
      <Content Include="DATABASES\WebHosting\Extensions\UserManagerExtensions.cs" />
@@ -494,6 +492,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.SourceLink.Tools" Version="1.1.1" />
     <PackageReference Include="Microsoft.SQL.Server.2016.LocalDB" Version="13.1.4001" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.17" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
     <PackageReference Include="Microsoft.WSMan.Management" Version="7.2.23" />
     <PackageReference Include="Microsoft.WSMan.Runtime" Version="7.2.23" />
     <PackageReference Include="MimeKit" Version="4.7.1" />

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Company.WebApplication1.Pages.UI
-{
+namespace ServerCorePages {
+
     public class ModalsModel : PageModel
     {
         public void OnGet()

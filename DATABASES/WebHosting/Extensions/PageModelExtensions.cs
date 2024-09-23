@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Microsoft.AspNetCore.Mvc.RazorPages
-{
+namespace EasyITCenter.DevPortal  {
+
     public static class PageModelExtensions
     {
         public static void SetStatusMessage(this PageModel pageModel, string message)

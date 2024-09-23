@@ -1,4 +1,4 @@
-﻿using EasyITCenter.Sevices;
+﻿using EasyITCenter.Services;
 
 namespace EasyITCenter.Controllers {
 

@@ -3,7 +3,7 @@ using Quartz.Spi;
 using System.Linq;
 using System.Threading;
 
-namespace EasyITCenter.Sevices {
+namespace EasyITCenter.Services {
 
 
     public class AutoSchedulerService : IHostedService {

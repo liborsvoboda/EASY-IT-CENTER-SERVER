@@ -1,12 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Company.WebApplication1.Services.Mail;
+using EasyITCenter.Services;
 
-namespace Microsoft.AspNetCore.Mvc
-{
+namespace EasyITCenter.DevPortal {
+
+
     public static class MailManagerExtensions
     {
         public static Task SendEmailConfirmationAsync(this IMailManager emailManager, string email, string link)

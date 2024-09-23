@@ -221,7 +221,24 @@ namespace EasyITCenter.ServerCoreConfiguration {
                         
                     }).AddRazorPagesOptions(opt => {
                         opt.RootDirectory = "/ServerCorePages";
-                        opt.Conventions.AuthorizeFolder("/DefaultWebPages/GlobalLogin");
+                        //opt.Conventions.AuthorizeFolder("/DefaultWebPages/GlobalLogin");
+
+                        opt.Conventions.AuthorizeFolder("/DevPortal");
+                        opt.Conventions.AllowAnonymousToPage("/Error");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/AccessDenied");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ConfirmEmail");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ExternalLogin");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ForgotPassword");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ForgotPasswordConfirmation");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/Lockout");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/Login");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/LoginWith2fa");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/LoginWithRecoveryCode");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/Register");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ResetPassword");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ResetPasswordConfirmation");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/SignedOut");
+
 
                         //TODO SEMDAT TY MODULY
                         //LAYOUTY
@@ -229,11 +246,11 @@ namespace EasyITCenter.ServerCoreConfiguration {
                         //options.Conventions.AddFolderRouteModelConvention("/OtherPages", model =>
 
 
-                    //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/razor-pages-conventions/samples/6.x/SampleApp/Program.cs
-                    //https://learn.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-3.1 FULL DOC
-                    //options.Conventions.Add(new GlobalTemplatePageRouteModelConvention());
-                    //VYPADA TO, ZE CONVENTION Obohati vsechny stranky na urovni modelu
-                    // options.Conventions.AddPageRoute("/Contact", "TheContactPage/{text?}"); stranka
+                        //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/razor-pages-conventions/samples/6.x/SampleApp/Program.cs
+                        //https://learn.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-3.1 FULL DOC
+                        //options.Conventions.Add(new GlobalTemplatePageRouteModelConvention());
+                        //VYPADA TO, ZE CONVENTION Obohati vsechny stranky na urovni modelu
+                        // options.Conventions.AddPageRoute("/Contact", "TheContactPage/{text?}"); stranka
 
                     }).AddRazorRuntimeCompilation();
                     //.WithRazorPagesAtContentRoot(); 

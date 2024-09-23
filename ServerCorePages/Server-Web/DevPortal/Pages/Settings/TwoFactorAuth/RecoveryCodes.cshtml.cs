@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Company.WebApplication1.Data;
-using Company.WebApplication1.Services.Mail;
+using EasyITCenter.DevPortal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace ServerCorePages.Settings.TwoFactorAuth
+namespace ServerCorePages
 {
     public class RecoveryCodesModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RecoveryCodesModel> _logger;
-        private readonly ApplicationDbContext _dbContext;
+        private readonly WebHostingDbContext _dbContext;
 
-        public RecoveryCodesModel(UserManager<ApplicationUser> userManager, ILogger<RecoveryCodesModel> logger, ApplicationDbContext dbContext)
+        public RecoveryCodesModel(UserManager<IdentityUser> userManager, ILogger<RecoveryCodesModel> logger, EasyITCenter.DevPortal dbContext)
         {
             _userManager = userManager;
             _logger = logger;

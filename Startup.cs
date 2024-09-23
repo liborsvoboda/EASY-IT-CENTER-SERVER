@@ -18,6 +18,8 @@ using Fawdlstty.GitServerCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.AspNetCore.ResponseCompression;
+using Google;
+using Microsoft.AspNetCore.Identity;
 
 
 
@@ -105,6 +107,35 @@ namespace EasyITCenter {
             //primi chat s aplikaci
             //services.AddSignalR();
             //services.AddServerSideBlazor();
+
+
+            services.AddIdentity<IdentityUser, IdentityRole>(config => {
+                config.User.RequireUniqueEmail = true;    // уникальный email
+                config.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -._@+";
+                config.SignIn.RequireConfirmedEmail = false;
+            })
+                .AddEntityFrameworkStores<WebHostingDbContext>()
+                .AddDefaultTokenProviders();
+
+            /*
+            if (Configuration["Authentication:Facebook:IsEnabled"] == "true") {
+                services
+                    .AddAuthentication()
+                    .AddFacebook(facebookOptions => {
+                        facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                        facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                    });
+            }
+
+            if (Configuration["Authentication:Google:IsEnabled"] == "true") {
+                services
+                    .AddAuthentication()
+                    .AddGoogle(googleOptions => {
+                        googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                        googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                    });
+            }
+            */
 
         }
 

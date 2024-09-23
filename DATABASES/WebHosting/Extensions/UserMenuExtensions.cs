@@ -9,8 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Microsoft.AspNetCore.Mvc
-{
+namespace EasyITCenter.DevPortal {
+
     public static class UserMenuExtensions
     {
         public static bool IsMenuActive(this IHtmlHelper htmlHelper, string menuItemUrl)

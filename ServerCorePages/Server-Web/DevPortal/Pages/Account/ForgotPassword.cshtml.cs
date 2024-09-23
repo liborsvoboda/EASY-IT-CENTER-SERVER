@@ -5,18 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Company.WebApplication1.Data;
-using Company.WebApplication1.Services;
-using Company.WebApplication1.Services.Mail;
+using EasyITCenter.DevPortal;
 
-namespace ServerCorePages.Account
+
+namespace ServerCorePages
 {
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IMailManager _emailSender;
 
-        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IMailManager emailSender)
+        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IMailManager emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

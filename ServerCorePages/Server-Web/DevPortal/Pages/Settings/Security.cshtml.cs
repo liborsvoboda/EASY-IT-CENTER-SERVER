@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Company.WebApplication1.Data;
-using Company.WebApplication1.Services.Mail;
+using EasyITCenter.DevPortal;
+using EasyITCenter.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace ServerCorePages.Settings
+namespace ServerCorePages
 {
     public class SecurityModel : PageModel
     {
         private readonly ILogger<DevPortalModel> _logger;
 
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public SecurityModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ILogger<DevPortalModel> logger) 
+        public SecurityModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ILogger<DevPortalModel> logger) 
         {
             _userManager = userManager;
             _signInManager = signInManager;

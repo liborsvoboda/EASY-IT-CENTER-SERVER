@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Company.WebApplication1.Pages.UI
-{
-    public class GeneralModel : PageModel
+namespace ServerCorePages {
+
+    public class GeneralUIModel : PageModel
     {
         public void OnGet()
         {

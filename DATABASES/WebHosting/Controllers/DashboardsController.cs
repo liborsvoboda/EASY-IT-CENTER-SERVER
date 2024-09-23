@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Company.WebApplication1.Controllers
+namespace EasyITCenter.Controllers
 {
     public class DashboardsController : Controller
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Dashboard1");
+            return RedirectToAction("AdminDashboard");
         }
 
         public IActionResult Dashboard1()

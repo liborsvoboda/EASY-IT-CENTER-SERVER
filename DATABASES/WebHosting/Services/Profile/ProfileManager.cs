@@ -1,4 +1,4 @@
-﻿using Company.WebApplication1.Data;
+﻿using EasyITCenter.DevPortal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -6,24 +6,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Company.WebApplication1.Services.Profile
+namespace EasyITCenter.DevPortal
 {
     public class ProfileManager
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         IHttpContextAccessor _httpContextAccessor;
 
-        private ApplicationUser _currentUser;
+        private IdentityUser _currentUser;
 
-        public ProfileManager(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IHttpContextAccessor httpContextAccessor)
+        public ProfileManager(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public ApplicationUser CurrentUser
+        public IdentityUser CurrentUser
         {
             get
             {
@@ -34,12 +34,12 @@ namespace Company.WebApplication1.Services.Profile
             }
         }
 
-        public bool IsHasPassword(ApplicationUser user)
+        public bool IsHasPassword(IdentityUser user)
         {
             return _userManager.HasPasswordAsync(user).Result;
         }
 
-        public bool IsEmailConfirmed(ApplicationUser user)
+        public bool IsEmailConfirmed(IdentityUser user)
         {
             return _userManager.IsEmailConfirmedAsync(user).Result;
         }

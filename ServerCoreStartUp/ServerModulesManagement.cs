@@ -13,7 +13,7 @@ using Markdig.Prism;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
-using EasyITCenter.Sevices;
+using EasyITCenter.DevPortal;
 
 
 namespace EasyITCenter.ServerCoreConfiguration {
@@ -43,6 +43,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services"></param>
         internal static void ConfigureReportDesigner(ref IServiceCollection services) => services.AddFastReport();
         
+
 
         /// <summary>
         /// Server Module: Configure Automatic MDtoHtml Files Show in WebPages
@@ -379,6 +380,11 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 });
             }
         }
+
+
+
+
+
 
 
     }

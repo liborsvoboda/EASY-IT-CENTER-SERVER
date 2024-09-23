@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Company.WebApplication1.Controllers
+namespace EasyITCenter.Controllers
 {
     public class SettingsController : Controller
     {

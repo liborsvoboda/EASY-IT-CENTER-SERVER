@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Company.WebApplication1.Data;
-using Company.WebApplication1.Services.Mail;
+using EasyITCenter.DevPortal;
+using EasyITCenter.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ServerCorePages.Settings
+namespace ServerCorePages
 {
     public class ProfileModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IMailManager _emailSender;
 
-        public ProfileModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IMailManager emailSender) 
+        public ProfileModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IMailManager emailSender) 
             //: base(userManager, signInManager, emailSender)
         {
             _userManager = userManager;
@@ -41,7 +41,7 @@ namespace ServerCorePages.Settings
 
         public async Task<IActionResult> OnGetAsync()
         {
-            ApplicationUser user = await _userManager.GetUserAsync(User);
+            IdentityUser user = await _userManager.GetUserAsync(User);
             if (user == null)
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
 
@@ -61,7 +61,7 @@ namespace ServerCorePages.Settings
                 return Page();
             }
 
-            ApplicationUser user = await _userManager.GetUserAsync(User);
+            IdentityUser user = await _userManager.GetUserAsync(User);
             if (user == null) throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
 
             if (UserName != user.UserName)
@@ -107,7 +107,7 @@ namespace ServerCorePages.Settings
                 return Page();
             }
 
-            ApplicationUser user = await _userManager.GetUserAsync(User);
+            IdentityUser user = await _userManager.GetUserAsync(User);
             if (user == null) throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

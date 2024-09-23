@@ -7,23 +7,34 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Company.WebApplication1.Data;
-using Company.WebApplication1.Services;
-using Company.WebApplication1.Data.DataAnnotations;
-using Company.WebApplication1.Services.Mail;
+using EasyITCenter.DevPortal;
+using EasyITCenter.Services;
+using DataType = System.ComponentModel.DataAnnotations.DataType;
 
-namespace ServerCorePages.Account
+namespace ServerCorePages
 {
+
+    public class IsTrueRequired : ValidationAttribute {
+        public override bool IsValid(object value) {
+            if (value is bool) {
+                return (bool)value;
+            }
+
+            return false;
+        }
+    }
+
+
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly IMailManager _emailSender;
 
         public RegisterModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
             ILogger<LoginModel> logger,
             IMailManager emailSender)
         {
@@ -76,7 +87,7 @@ namespace ServerCorePages.Account
             ReturnUrl = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.FullName, Email = Input.Email };
+                var user = new IdentityUser { UserName = Input.FullName, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

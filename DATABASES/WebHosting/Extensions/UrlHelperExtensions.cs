@@ -1,17 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Microsoft.AspNetCore.Mvc
-{
+namespace EasyITCenter.DevPortal {
+
     public static class UrlHelperExtensions
     {
         public static string GetLocalUrl(this IUrlHelper urlHelper, string localUrl)
         {
             if (!urlHelper.IsLocalUrl(localUrl))
             {
-                return urlHelper.Page("/Index");
+                return urlHelper.Page("/DevPortal");
             }
 
             return localUrl;
@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Mvc
         public static string EmailConfirmationLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
         {
             return urlHelper.Page(
-                "/Account/ConfirmEmail",
+                "/DevPortal/Account/ConfirmEmail",
                 pageHandler: null,
                 values: new { userId, code },
                 protocol: scheme);
@@ -29,7 +29,7 @@ namespace Microsoft.AspNetCore.Mvc
         public static string ResetPasswordCallbackLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
         {
             return urlHelper.Page(
-                "/Account/ResetPassword",
+                "/DevPortal/Account/ResetPassword",
                 pageHandler: null,
                 values: new { userId, code },
                 protocol: scheme);

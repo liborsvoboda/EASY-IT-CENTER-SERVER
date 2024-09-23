@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Microsoft.AspNetCore.Identity
-{
+namespace MicrosoftEasyITCenter.DevPortal {
+
     public static class UserManagerExtensions
     {
         

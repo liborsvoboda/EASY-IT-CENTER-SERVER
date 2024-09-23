@@ -5,24 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Company.WebApplication1.Data;
-using Company.WebApplication1.Services.Mail;
+using EasyITCenter.DevPortal;
+using EasyITCenter.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using DataType = System.ComponentModel.DataAnnotations.DataType;
 
-namespace ServerCorePages.Settings.TwoFactorAuth
+namespace ServerCorePages
 {
     public class ConfigModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<ConfigModel> _logger;
         private readonly UrlEncoder _urlEncoder;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
-        public ConfigModel(UserManager<ApplicationUser> userManager, ILogger<ConfigModel> logger, UrlEncoder urlEncoder) 
+        public ConfigModel(UserManager<IdentityUser> userManager, ILogger<ConfigModel> logger, UrlEncoder urlEncoder) 
         {
             _userManager = userManager;
             _logger = logger;
@@ -95,7 +96,7 @@ namespace ServerCorePages.Settings.TwoFactorAuth
             return RedirectToPage("/DevPortal/RecoveryCodes");
         }
 
-        private async Task LoadSharedKeyAndQrCodeUriAsync(ApplicationUser user)
+        private async Task LoadSharedKeyAndQrCodeUriAsync(IdentityUser user)
         {
             // Load the authenticator key & QR code URI to display on the form
             var unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
@@ -128,7 +129,7 @@ namespace ServerCorePages.Settings.TwoFactorAuth
         {
             return string.Format(
                 AuthenicatorUriFormat,
-                _urlEncoder.Encode("Company.WebApplication1"),
+                _urlEncoder.Encode("EasyITCenter"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }
