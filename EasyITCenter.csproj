@@ -88,7 +88,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <TypeScriptCompile Remove="*" />
     <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
-    <Content Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />   
   </ItemGroup>
 
   <ItemGroup>
@@ -99,6 +99,21 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
+    <Compile Remove="DATABASES\WebHosting\ApplicationDbContext.cs" />
+    <Compile Remove="DATABASES\WebHosting\ApplicationUser.cs" />
+    <Compile Remove="DATABASES\WebHosting\Controllers\AccountController.cs" />
+    <Compile Remove="DATABASES\WebHosting\Controllers\DashboardsController.cs" />
+    <Compile Remove="DATABASES\WebHosting\Controllers\ProfileController.cs" />
+    <Compile Remove="DATABASES\WebHosting\Controllers\SettingsController.cs" />
+    <Compile Remove="DATABASES\WebHosting\Extensions\IsTrueRequired.cs" />
+    <Compile Remove="DATABASES\WebHosting\Extensions\MailManagerExtensions.cs" />
+    <Compile Remove="DATABASES\WebHosting\Extensions\PageModelExtensions.cs" />
+    <Compile Remove="DATABASES\WebHosting\Extensions\UrlHelperExtensions.cs" />
+    <Compile Remove="DATABASES\WebHosting\Extensions\UserManagerExtensions.cs" />
+    <Compile Remove="DATABASES\WebHosting\Extensions\UserMenuExtensions.cs" />
+    <Compile Remove="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="DATABASES\WebHosting\Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>  
 
    <ItemGroup>
@@ -108,6 +123,21 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
+     <Content Include="DATABASES\WebHosting\ApplicationDbContext.cs" />
+     <Content Include="DATABASES\WebHosting\ApplicationUser.cs" />
+     <Content Include="DATABASES\WebHosting\Controllers\AccountController.cs" />
+     <Content Include="DATABASES\WebHosting\Controllers\DashboardsController.cs" />
+     <Content Include="DATABASES\WebHosting\Controllers\ProfileController.cs" />
+     <Content Include="DATABASES\WebHosting\Controllers\SettingsController.cs" />
+     <Content Include="DATABASES\WebHosting\Extensions\IsTrueRequired.cs" />
+     <Content Include="DATABASES\WebHosting\Extensions\MailManagerExtensions.cs" />
+     <Content Include="DATABASES\WebHosting\Extensions\PageModelExtensions.cs" />
+     <Content Include="DATABASES\WebHosting\Extensions\UrlHelperExtensions.cs" />
+     <Content Include="DATABASES\WebHosting\Extensions\UserManagerExtensions.cs" />
+     <Content Include="DATABASES\WebHosting\Extensions\UserMenuExtensions.cs" />
+     <Content Include="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.cs" />
+     <Content Include="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+     <Content Include="DATABASES\WebHosting\Migrations\ApplicationDbContextModelSnapshot.cs" />
      <Content Include="Data\favicon.ico" />
      <Content Include="Docs\Readme.md">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -346,6 +376,9 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Magick.NET.Core" Version="13.6.0" />
     <PackageReference Include="MailKit" Version="4.6.0" />
     <PackageReference Include="Markdig" Version="0.37.0" />
+    <PackageReference Include="Markdig.Signed" Version="0.37.0">
+      <Aliases>MarkdigSigned</Aliases>
+    </PackageReference>
     <PackageReference Include="MarkdigBadHeaders" Version="2017.12.11" />
     <PackageReference Include="MarkdigExtensions.SyntaxHighlighting" Version="1.0.3" />
     <PackageReference Include="MarkdigExtensions.UrlRewriter" Version="1.0.0" />
@@ -456,6 +489,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.NETCore.DotNetHostPolicy" Version="6.0.33" />
     <PackageReference Include="Microsoft.NETCore.DotNetHostResolver" Version="6.0.33" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.13" />
+    <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics" Version="7.2.23" />
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.23" />
     <PackageReference Include="Microsoft.SourceLink.Tools" Version="1.1.1" />
     <PackageReference Include="Microsoft.SQL.Server.2016.LocalDB" Version="13.1.4001" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
@@ -560,7 +595,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.DirectoryServices" Version="6.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" />
-    <PackageReference Include="System.Net.Http.WinHttpHandler" Version="6.0.0" />
+    <PackageReference Include="System.Management.Automation" Version="7.2.23" />
+    <PackageReference Include="System.Net.Http.WinHttpHandler" Version="6.0.1" />
     <PackageReference Include="System.Reactive" Version="6.0.0" />
     <PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.1" />
@@ -631,6 +667,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
  
   <ItemGroup>
     <Folder Include="Data\certificates\" />
+    <Folder Include="wwwroot\server-Integrated\razor-pages\devportal\" />
   </ItemGroup>
   
  

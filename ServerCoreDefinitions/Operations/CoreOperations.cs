@@ -289,8 +289,11 @@ namespace EasyITCenter.ServerCoreStructure {
             return await httpClient.GetStringAsync(url);
         }
 
+
         /// <summary>
-        /// Server Function For Running External Processes
+        /// Server Function For Running External Processes,
+        /// Solved Windows/Linux processing,
+        /// startup script name is automatically corrected from .bat to .sh with same name,
         /// </summary>
         /// <param name="processDefinition">The process definition.</param>
         /// <returns></returns>
@@ -299,9 +302,17 @@ namespace EasyITCenter.ServerCoreStructure {
 
             try {
                 using (Process proc = new Process()) {
-                    proc.StartInfo.FileName = processDefinition.Command;
-                    if (GetOperatingSystemInfo.IsWindows()) { proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null; }
-                    proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
+                   
+                    if (CoreOperations.GetOperatingSystemInfo.IsWindows()) {
+                        proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".bat");
+                        proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
+                        proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
+                    } else {
+                        proc.StartInfo.FileName = "/bin/bash";
+                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command.Replace(".bat",".sh"));
+                    }
+
+                   
                     //proc.StartInfo.LoadUserProfile = false;
                     proc.StartInfo.CreateNoWindow = true;
                     proc.StartInfo.UseShellExecute = false;
@@ -326,6 +337,9 @@ namespace EasyITCenter.ServerCoreStructure {
             }
             return resultOutput + Environment.NewLine + resultError;
         }
+
+
+       
 
         /// <summary>
         /// Server Token Validation Parameters definition For Api is Used if is ON/Off for Api is On everyTime

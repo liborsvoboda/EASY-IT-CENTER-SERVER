@@ -13,6 +13,7 @@ using Markdig.Prism;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
+using EasyITCenter.Sevices;
 
 
 namespace EasyITCenter.ServerCoreConfiguration {

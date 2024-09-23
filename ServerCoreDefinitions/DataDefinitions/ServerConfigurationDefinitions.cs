@@ -107,6 +107,13 @@
         /// </summary>
         public static bool ServiceUseDbLocalAutoupdatedDials { get; set; } = false;
 
+
+        /// <summary>
+        /// LocalDb WebHosting Separate Database
+        /// </summary>
+        public static string WebHostingDBConnString { get; set; } = "(localdb)\\MSSQLLocalDB";
+
+
         /// <summary>
         /// Server Language for Translating Server internal statuses
         /// Recommended: cz or en - other languages are not implemented
@@ -145,7 +152,8 @@
         
 
         /// <summary>
-        /// Root Složka pro Statické soubory Webu
+        /// NetCore Default webroot Folder
+        /// default is wwwroot
         /// </summary>
         public static string DefaultStaticWebFilesFolder { get; set; } = "wwwroot";
         

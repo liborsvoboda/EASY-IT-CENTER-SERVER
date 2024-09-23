@@ -1,9 +1,9 @@
-using EasyITCenter.Services;
+﻿using EasyITCenter.Services;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 using System.Collections;
 
-namespace EasyITCenter.ServerCoreStructure {
+namespace EasyITCenter.Services {
 
     public class StaticFilesFileProviderService : IFileProvider {
         private readonly IServiceProvider serviceProvider;

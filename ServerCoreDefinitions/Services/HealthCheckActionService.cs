@@ -1,4 +1,4 @@
-﻿namespace EasyITCenter.ServerCoreStructure {
+﻿namespace EasyITCenter.Services {
 
     /// <summary>
     /// HeathCheck Handler For Sending Information About Fails

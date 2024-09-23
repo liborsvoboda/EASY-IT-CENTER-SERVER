@@ -212,6 +212,25 @@
             }
         }
 
+
+        /// <summary>
+        /// Move Directory Content
+        /// from Source to Destination Folder
+        /// </summary>
+        /// <param name="sourcePath"></param>
+        /// <param name="targetPath"></param>
+        public static void MoveDirectory(string sourcePath, string targetPath) {
+            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories)) {
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+            }
+            Directory.CreateDirectory(targetPath);
+
+            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories)) {
+                File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+            }
+            Directory.Delete(sourcePath, true);
+        }
+
         /// <summary>
         /// /
         /// </summary>
@@ -221,6 +240,23 @@
         public static bool CopyFile(string from, string to) {
             try {
                 File.Copy(from, to, true);
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+
+        /// <summary>
+        /// Move file From source to destination
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public static bool MoveFile(string from, string to) {
+            try {
+                File.Copy(from, to, true);
+                File.Delete(from);
                 return true;
             } catch {
                 return false;

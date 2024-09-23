@@ -31,6 +31,7 @@
             return new RedirectResult("/server-doc/md-preview");
         }
 
+
         /// <summary> MD Preview Api file after Saving Its same for Library & Document </summary>
         /// <param name="id">The identifier.</param> <returns></returns>
         [HttpGet("/WebApi/WebDocumentation/MdPreviewFile")]
@@ -38,6 +39,7 @@
             string previewMd = System.IO.File.ReadAllText(Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-preview", "data", "preview.md"));
             return previewMd.ToString();
         }
+
 
         /// <summary>
         /// Documentation Code Manager Html Preview Api Startup Viewer

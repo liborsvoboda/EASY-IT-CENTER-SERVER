@@ -43,40 +43,20 @@ namespace EasyITCenter.ServerCoreStructure {
         public static string WebRoot_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder);
 
 
-        /// <summary>
-        /// Server WebPages Path for Generated Web Pages.
-        /// </summary>
-        public static string ServerWeb_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-webpages");
 
-        /// <summary>
-        /// Server Integrated Web Tools Path.
-        /// Tools are Programatically Used
-        /// </summary>
-        public static string ServerIntegrated_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-integrated");
 
-        /// <summary>
-        /// Server Integrated Web Tools Path.
-        /// Tools are Programatically Used
-        /// </summary>
+        public static string ServerAdmin_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-admin");
+        public static string ServerPrivate_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-private");
+
+        public static string ServerIntegrated_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-Integrated");
+        public static string ServerGenerators_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-Generators");
+
         public static string DistributeLibrary_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "distribute-library");
 
+        public static string ServerWebPages_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-PagesWeb");
+        public static string ServerHelpPages_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-PagesHelp");
 
-        /// <summary>
-        /// Server Path for Generators
-        /// </summary>
-        public static string ServerGenerators_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-generator");
-
-
-        /// <summary>
-        /// Server Path for Generators
-        /// </summary>
-        public static string SystemWebPortal_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "system-portal");
-
-
-        /// <summary>
-        /// Server Path for Generators
-        /// </summary>
-        public static string ServerWebPages_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "server-webpages");
+        public static string SystemWebPortal_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ServerConfigSettings.DefaultStaticWebFilesFolder, "system-Portal");
 
 
         /// <summary>

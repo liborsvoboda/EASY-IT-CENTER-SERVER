@@ -111,9 +111,6 @@
         public string Value { get; set; } = null!;
     }
 
-    public class WebUrlRequest {
-        public string Url { get; set; }
-    }
 
     public class RssPost {
         public string Title { get; set; }

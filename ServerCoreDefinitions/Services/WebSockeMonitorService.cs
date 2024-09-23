@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace EasyITCenter.ServerCoreStructure {
+namespace EasyITCenter.Services {
 
     /// <summary>
     /// !!! Implemented Server Core WebSocket System LogProvider Stream This Is Special Serice For

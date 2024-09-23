@@ -228,10 +228,11 @@ namespace EasyITCenter {
 
             //Allowed File Types For Web TODO define over Administration
             var staticFilesProvider = new FileExtensionContentTypeProvider();
-            staticFilesProvider.Mappings[".js"] = "application/javascript"; staticFilesProvider.Mappings[".css"] = "text/css";
+            staticFilesProvider.Mappings[".js"] = "text/javascript"; staticFilesProvider.Mappings[".css"] = "text/css";
             staticFilesProvider.Mappings[".json"] = "text/json"; staticFilesProvider.Mappings[".code"] = "text/cs";
             staticFilesProvider.Mappings[".xaml"] = "text/xaml"; staticFilesProvider.Mappings[".zip"] = "application/zip";
             staticFilesProvider.Mappings[".markdown"] = "text/markdown"; staticFilesProvider.Mappings[".snippets"] = "text/plain";
+            staticFilesProvider.Mappings[".tsx"] = "text/javascript";
 
             if (ServerConfigSettings.ConfigServerStartupOnHttps) { app.UseHttpsRedirection(); }
             //app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html" });

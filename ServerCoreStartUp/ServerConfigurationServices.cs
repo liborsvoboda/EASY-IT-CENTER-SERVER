@@ -357,6 +357,10 @@ namespace EasyITCenter.ServerCoreConfiguration {
             if (ServerRuntimeData.DebugMode) { services.AddDatabaseDeveloperPageExceptionFilter(); }
             try {
                 services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(ServerConfigSettings.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+                services.AddDbContext<EasyITCenterContext>(opt => 
+                opt.UseSqlServer(
+                    ServerConfigSettings.WebHostingDBConnString + $"Database = EmployeeDB; AttachDbFileName ={Path.Combine(ServerRuntimeData.ServerPrivate_path,"databases","EIC_WebHosting.mdf")}; Trusted_Connection = True; MultipleActiveResultSets = true"
+                    ).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
                 //services.AddDbContext<Context>(options => options.UseFileContextDatabase(databaseName: "LocalDatabase",location: @"C:\Users\mjanatzek\Documents\Projects\test",password: "EasyITCenter"));
                 //services.AddDbContext<dbcontext>(options => options.UseSqlite("connectionstring"));
             } catch (Exception ex) { }
