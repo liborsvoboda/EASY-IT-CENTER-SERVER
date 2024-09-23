@@ -94,11 +94,11 @@ namespace ServerCorePages
                     _logger.LogInformation("User created a new account with password.");
                     
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(Input.Email, callbackUrl);
+                   // var callbackUrl = Url...EmailConfirmationLink(user.Id, code, Request.Scheme);
+                   // await _emailSender.SendEmailConfirmationAsync(Input.Email, callbackUrl);
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(Url.GetLocalUrl(returnUrl));
+                    return LocalRedirect(Url.Page(returnUrl));
                 }
                 foreach (var error in result.Errors)
                 {

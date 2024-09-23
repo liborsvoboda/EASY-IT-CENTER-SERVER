@@ -76,7 +76,7 @@ namespace ServerCorePages
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
-                return LocalRedirect(Url.GetLocalUrl(returnUrl));
+                return LocalRedirect(Url.Page(returnUrl));
             }
             if (result.IsLockedOut)
             {

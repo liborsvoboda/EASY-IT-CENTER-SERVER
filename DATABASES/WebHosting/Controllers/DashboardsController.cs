@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EasyITCenter.Controllers
 {
+    //[Authorize(Roles = "admin")]
+    [ApiController]
+    [Route("/DevPortal")]
     public class DashboardsController : Controller
     {
-        public IActionResult Index()
+        public IActionResult DevPortal()
         {
             return RedirectToAction("AdminDashboard");
         }

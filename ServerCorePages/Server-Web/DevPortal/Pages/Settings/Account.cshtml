@@ -1,10 +1,14 @@
-﻿@page
+﻿@page "/DevPortal/Account"
+@{
+    Layout = "/ServerCorePages/Server-Web/DevPortal/Shared/DevPortalLayout.cshtml";
+}
 @model AccountModel
 @{
     ViewData["Title"] = "Account";
 }
 
-@inject Company.WebApplication1.Services.Profile.ProfileManager ProfileManager
+@inject EasyITCenter.DevPortal.ProfileManager ProfileManager
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>

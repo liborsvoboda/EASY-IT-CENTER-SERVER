@@ -69,13 +69,13 @@ namespace ServerCorePages
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToPage("/DevPortal/ResetPasswordConfirmation");
+                return RedirectToPage("/DevPortal/ResetPasswordConfirm");
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
-                return RedirectToPage("/DevPortal/ResetPasswordConfirmation");
+                return RedirectToPage("/DevPortal/ResetPasswordConfirm");
             }
 
             foreach (var error in result.Errors)

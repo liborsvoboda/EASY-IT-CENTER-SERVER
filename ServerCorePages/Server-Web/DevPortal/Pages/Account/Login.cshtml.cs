@@ -77,11 +77,11 @@ namespace ServerCorePages
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
-                        return LocalRedirect(Url.GetLocalUrl(returnUrl));
+                        return LocalRedirect(Url.Page(returnUrl));
                     }
                     if (result.RequiresTwoFactor)
                     {
-                        return RedirectToPage("/DevPortal/LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                        return RedirectToPage("/DevPortal/Login2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                     }
                     if (result.IsLockedOut)
                     {

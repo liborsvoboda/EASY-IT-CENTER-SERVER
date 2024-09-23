@@ -1,4 +1,7 @@
-﻿@page
+﻿@page "/DevPortal/Page404"
+@{
+    Layout = "/ServerCorePages/Server-Web/DevPortal/Shared/DevPortalLayout.cshtml";
+}
 @model Page404Model
 @{
     ViewData["Title"] = "Page404";
@@ -27,7 +30,7 @@
 
             <p>
                 We could not find the page you were looking for.
-                Meanwhile, you may <a href="../../index.html">return to dashboard</a> or try using the search form.
+                Meanwhile, you may <a href="/DevPortal">return to dashboard</a> or try using the search form.
             </p>
 
             <form class="search-form">

@@ -111,8 +111,8 @@ namespace ServerCorePages
             if (user == null) throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-            await _emailSender.SendEmailConfirmationAsync(user.Email, callbackUrl);
+            //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+            //await _emailSender.SendEmailConfirmationAsync(user.Email, callbackUrl);
 
             TempData["StatusMessage"] = "Verification email sent. Please check your email.";
 

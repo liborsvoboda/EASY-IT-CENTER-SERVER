@@ -10,12 +10,12 @@ namespace EasyITCenter.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToPage("/Settings/Profile");
+            return RedirectToPage("/DevPortal/Profile");
         }
 
         public IActionResult TwoFactorAuth()
         {
-            return RedirectToPage("/Settings/TwoFactorAuth/Config");
+            return RedirectToPage("/DevPortal/TwoFactorAuth/Config");
         }
     }
 }

@@ -20,7 +20,7 @@ namespace EasyITCenter.DevPortal {
         public static string EmailConfirmationLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
         {
             return urlHelper.Page(
-                "/DevPortal/Account/ConfirmEmail",
+                "/DevPortal/ConfirmEmail",
                 pageHandler: null,
                 values: new { userId, code },
                 protocol: scheme);
@@ -29,7 +29,7 @@ namespace EasyITCenter.DevPortal {
         public static string ResetPasswordCallbackLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
         {
             return urlHelper.Page(
-                "/DevPortal/Account/ResetPassword",
+                "/DevPortal/ResetPassword",
                 pageHandler: null,
                 values: new { userId, code },
                 protocol: scheme);

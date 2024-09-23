@@ -78,7 +78,7 @@ namespace ServerCorePages
             if (result.Succeeded)
             {
                 _logger.LogInformation("User with ID '{UserId}' logged in with 2fa.", user.Id);
-                return LocalRedirect(Url.GetLocalUrl(returnUrl));
+                return LocalRedirect(Url.Page(returnUrl));
             }
             else if (result.IsLockedOut)
             {

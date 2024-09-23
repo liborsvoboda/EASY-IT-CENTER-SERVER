@@ -7,27 +7,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EasyITCenter.DevPortal;
 
-namespace EasyITCenter.Controllers
-{
-    [Route("[controller]/[action]")]
-    public class AccountController : Controller
-    {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger _logger;
+namespace EasyITCenter.Controllers {
 
-        public AccountController(SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger)
-        {
-            _signInManager = signInManager;
-            _logger = logger;
+    //[Authorize(Roles = "admin")]
+    [ApiController]
+    [Route("/DevPortal")]
+    public class AccountController : ControllerBase {
+
+
+        //[HttpPost("/DevPortal/Login")]
+        public IActionResult Login() {
+            return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-            return RedirectToPage("/DevPortal");
+        public IActionResult Register() {
+            return View();
+        }
+
+
+        public IActionResult ForgotPassword() {
+            return View();
+        }
+
+
+        public IActionResult RecoverPassword() {
+            return View();
         }
     }
 }

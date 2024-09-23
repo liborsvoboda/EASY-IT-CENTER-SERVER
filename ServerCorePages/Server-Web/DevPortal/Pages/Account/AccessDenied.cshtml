@@ -1,4 +1,7 @@
 ﻿@page
+@{
+    Layout = "/ServerCorePages/Server-Web/DevPortal/Shared/DevPortalLayout.cshtml";
+}
 @model AccessDeniedModel
 @{
     ViewData["Title"] = "Access denied";
@@ -7,7 +10,7 @@
 <div class="login-box-body">
     <p class="login-box-msg">
         You do not have access to this resource. <br />
-        Please <a asp-page="/Devportal/Login">click here to log in</a>.
+        Please <a asp-page="/DevPortal/Account/Login">click here to log in</a>.
     </p>
 </div>
 <!-- /.login-box-body -->

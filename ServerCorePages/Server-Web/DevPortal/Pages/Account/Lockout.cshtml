@@ -1,5 +1,9 @@
-﻿@page
-@model LockoutModel
+﻿@page "/DevPortal/Lockout"
+@{
+    Layout = "/ServerCorePages/Server-Web/DevPortal/Shared/DevPortalLayout.cshtml";
+}
+
+@model ServerCorePages.LockoutModel
 @{
     ViewData["Title"] = "Locked out";
 }
@@ -9,7 +13,7 @@
         This account has been locked out,<br /> please try again later.
     </p>
     <p class="login-box-msg">
-        <a asp-page="/Devportal/Login">Click here to log in again</a>.
+        <a asp-page="/DevPortal/Login">Click here to log in again</a>.
     </p>
 </div>
 <!-- /.login-box-body -->

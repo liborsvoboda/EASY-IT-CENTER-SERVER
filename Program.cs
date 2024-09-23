@@ -136,7 +136,7 @@ namespace EasyITCenter {
                     webBuilder.UseUrls(ServerConfigSettings.ConfigServerStartupOnHttps ? $"https://*:{ServerConfigSettings.ConfigServerStartupHttpsPort}" : $"http://*:{ServerConfigSettings.ConfigServerStartupHttpPort}");
                 }
 
-
+                
 
                 webBuilder.UseStartup<Startup>();
                 webBuilder.UseWebRoot(ServerRuntimeData.WebRoot_path);

@@ -85,15 +85,15 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.Lax;
                 options.Secure = CookieSecurePolicy.Always;
+                options.ConsentCookie.IsEssential = true;
                 options.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.None;
-                //options.ConsentCookie.IsEssential = false;
             });
         }
 
         /// <summary>
         /// Server Core: Configure Server Controllers
         /// options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = [ValidateNever]
-        /// in Class options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        /// in Class options.Serialize Settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         /// = [JsonIgnore] in Class
         /// </summary>
         /// <param name="services"></param>
@@ -104,12 +104,13 @@ namespace EasyITCenter.ServerCoreConfiguration {
             services.AddControllersWithViews(options => {
                 //if (ServerConfigSettings.ConfigServerStartupOnHttps) { options.Filters.Add(new RequireHttpsAttribute()); }
                 options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+                options.EnableEndpointRouting = true;
             }).AddNewtonsoftJson(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 options.SerializerSettings.Formatting = Formatting.Indented;
             }).AddJsonOptions(x => {
-                //x.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                //x.JsonSerialize Options.PropertyNameCaseInsensitive = true;
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 x.JsonSerializerOptions.WriteIndented = true;
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -163,6 +164,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
             //        };
             //    });
             //}
+
+            /*
             services.AddAuthentication(x => {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -186,6 +189,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     }
                 };
             });
+            */
 
             /*
             services.AddAuthentication().AddGoogle(options => { 
@@ -221,23 +225,24 @@ namespace EasyITCenter.ServerCoreConfiguration {
                         
                     }).AddRazorPagesOptions(opt => {
                         opt.RootDirectory = "/ServerCorePages";
-                        //opt.Conventions.AuthorizeFolder("/DefaultWebPages/GlobalLogin");
 
-                        opt.Conventions.AuthorizeFolder("/DevPortal");
-                        opt.Conventions.AllowAnonymousToPage("/Error");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/AccessDenied");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ConfirmEmail");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ExternalLogin");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ForgotPassword");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ForgotPasswordConfirmation");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/Lockout");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/Login");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/LoginWith2fa");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/LoginWithRecoveryCode");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/Register");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ResetPassword");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/ResetPasswordConfirmation");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Account/SignedOut");
+                        opt.Conventions.AuthorizeFolder($"/{ServerRuntimeData.ServerPrivate_path}");
+                        opt.Conventions.AuthorizeFolder($"/{ServerRuntimeData.ServerAdmin_path}");
+
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Error");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/AccessDenied");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ConfirmEmail");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ExternalLogin");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ForgotPassword");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ForgotPasswordConfirm");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Lockout");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Login");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Login2fa");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/LoginWithRecoveryCode");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Register");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ResetPassword");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ResetPasswordConfirm");
+                        opt.Conventions.AllowAnonymousToPage("/DevPortal/SignedOut");
 
 
                         //TODO SEMDAT TY MODULY
@@ -374,11 +379,14 @@ namespace EasyITCenter.ServerCoreConfiguration {
             if (ServerRuntimeData.DebugMode) { services.AddDatabaseDeveloperPageExceptionFilter(); }
             try {
                 services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(ServerConfigSettings.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-                services.AddDbContext<EasyITCenterContext>(opt => 
+               
+                /*
+                services.AddDbContext<WebHostingDbContext>(opt =>
                 opt.UseSqlServer(
-                    ServerConfigSettings.WebHostingDBConnString + $"Database = EmployeeDB; AttachDbFileName ={Path.Combine(ServerRuntimeData.ServerPrivate_path,"databases","EIC_WebHosting.mdf")}; Trusted_Connection = True; MultipleActiveResultSets = true"
-                    ).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-                //services.AddDbContext<Context>(options => options.UseFileContextDatabase(databaseName: "LocalDatabase",location: @"C:\Users\mjanatzek\Documents\Projects\test",password: "EasyITCenter"));
+                     $"{ServerConfigSettings.WebHostingDBConnString};Database = EmployeeDB; AttachDbFileName ={Path.Combine(ServerRuntimeData.ServerPrivate_path, "databases", "EIC_WebHosting.mdf")}; Trusted_Connection = True; MultipleActiveResultSets = true"
+                    , ss => ss.UseNetTopologySuite()).EnableSensitiveDataLogging()
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+                */
                 //services.AddDbContext<dbcontext>(options => options.UseSqlite("connectionstring"));
             } catch (Exception ex) { }
         }

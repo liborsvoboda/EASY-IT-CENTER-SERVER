@@ -1,4 +1,7 @@
-﻿@page 
+﻿@page "/DevPortal/Widgets"
+@{
+    Layout = "/ServerCorePages/Server-Web/DevPortal/Shared/DevPortalLayout.cshtml";
+}
 @model ServerCorePages.WidgetsModel
 @{
     ViewData["Title"] = "Widgets";
@@ -10,7 +13,7 @@
         <small>Preview page</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/DevPortal"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Widgets</li>
     </ol>
 </section>

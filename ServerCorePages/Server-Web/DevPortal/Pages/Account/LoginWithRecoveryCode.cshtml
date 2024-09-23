@@ -1,4 +1,7 @@
-﻿@page
+﻿@page "/DevPortal/LoginWithRecoveryCode"
+@{
+    Layout = "/ServerCorePages/Server-Web/DevPortal/Shared/DevPortalLayout.cshtml";
+}
 @model LoginWithRecoveryCodeModel
 @{
     ViewData["Title"] = "Recovery code verification";
@@ -29,7 +32,7 @@
     </form>
 
     <p>
-        <a asp-page="/Devportal/Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-center">I want login again with Username/Password</a>
+        <a asp-page="/DevPortal/Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-center">I want login again with Username/Password</a>
     </p>
 </div>
 <!-- /.login-box-body -->

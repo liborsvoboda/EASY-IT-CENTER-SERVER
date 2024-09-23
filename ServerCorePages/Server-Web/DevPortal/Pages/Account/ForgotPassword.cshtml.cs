@@ -33,21 +33,19 @@ namespace ServerCorePages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-                {
+                if (user == null || !( await _userManager.IsEmailConfirmedAsync(user) )) {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToPage("/DevPortal/ForgotPasswordConfirmation");
+                    return RedirectToPage("/DevPortal/ForgotPasswordConfirm");
                 }
 
                 // For more information on how to enable account confirmation and password reset please 
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
-                await _emailSender.SendResetPasswordAsync(Input.Email, callbackUrl);
-                return RedirectToPage("/DevPortal/ForgotPasswordConfirmation");
+                var callbackUrl = Url.Page("/DevPortal/Login");// (user.Id, code, Request.Scheme);
+                //await _emailSender..SendResetPasswordAsync(Input.Email, callbackUrl);
+                return RedirectToPage("/DevPortal/ForgotPasswordConfirm");
             }
 
             return Page();

@@ -14,13 +14,13 @@ namespace ServerCorePages
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RecoveryCodesModel> _logger;
-        private readonly WebHostingDbContext _dbContext;
+        private readonly EasyITCenterContext _dbContext;
 
-        public RecoveryCodesModel(UserManager<IdentityUser> userManager, ILogger<RecoveryCodesModel> logger, EasyITCenter.DevPortal dbContext)
+        public RecoveryCodesModel(UserManager<IdentityUser> userManager, ILogger<RecoveryCodesModel> logger, EasyITCenterContext dbContext)
         {
             _userManager = userManager;
             _logger = logger;
-            _dbContext = dbContext;
+            //_dbContext = dbContext;
         }
 
         public string[] RecoveryCodes { get; set; }
@@ -42,13 +42,13 @@ namespace ServerCorePages
             //var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
             //RecoveryCodes = recoveryCodes.ToArray();
 
-            IdentityUserToken<string> userToken = _dbContext.UserTokens
-                .Where(token => token.UserId == _userManager.GetUserId(User) &&
-                                token.Name == "RecoveryCodes" &&
-                                token.LoginProvider == "[AspNetUserStore]")
-                .FirstOrDefault();
+            //IdentityUserToken<string> userToken = _dbContext.UserTokens
+            //    .Where(token => token.UserId == _userManager.GetUserId(User) &&
+            //                    token.Name == "RecoveryCodes" &&
+            //                    token.LoginProvider == "[AspNetUserStore]")
+            //    .FirstOrDefault();
 
-            RecoveryCodes = userToken.Value.Split(";");
+            //RecoveryCodes = userToken.Value.Split(";");
 
             
 

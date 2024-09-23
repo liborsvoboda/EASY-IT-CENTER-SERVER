@@ -71,7 +71,7 @@ namespace ServerCorePages
             if (result.Succeeded)
             {
                 _logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", user.Id);
-                return LocalRedirect(Url.GetLocalUrl(returnUrl));
+                return LocalRedirect(Url.Page(returnUrl));
             }
             if (result.IsLockedOut)
             {

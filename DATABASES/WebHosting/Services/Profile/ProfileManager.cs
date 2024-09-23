@@ -6,24 +6,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EasyITCenter.DevPortal
-{
+namespace EasyITCenter.DevPortal {
+
+
     public class ProfileManager
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         IHttpContextAccessor _httpContextAccessor;
 
-        private IdentityUser _currentUser;
+        private ApplicationUser _currentUser;
 
-        public ProfileManager(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IHttpContextAccessor httpContextAccessor)
+        public ProfileManager(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public IdentityUser CurrentUser
+        public ApplicationUser CurrentUser
         {
             get
             {
@@ -34,12 +35,12 @@ namespace EasyITCenter.DevPortal
             }
         }
 
-        public bool IsHasPassword(IdentityUser user)
+        public bool IsHasPassword(ApplicationUser user)
         {
             return _userManager.HasPasswordAsync(user).Result;
         }
 
-        public bool IsEmailConfirmed(IdentityUser user)
+        public bool IsEmailConfirmed(ApplicationUser user)
         {
             return _userManager.IsEmailConfirmedAsync(user).Result;
         }

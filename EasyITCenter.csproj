@@ -111,8 +111,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Compile Remove="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.cs" />
     <Compile Remove="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
     <Compile Remove="DATABASES\WebHosting\Migrations\ApplicationDbContextModelSnapshot.cs" />
-    <Compile Remove="DATABASES\WebHosting\WebHostingDbContext.cs" />
-    <Compile Remove="DATABASES\WebHosting\WebHostingUser.cs" />
   </ItemGroup>  
 
    <ItemGroup>
@@ -122,8 +120,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
-     <Content Include="DATABASES\WebHosting\WebHostingDbContext.cs" />
-     <Content Include="DATABASES\WebHosting\WebHostingUser.cs" />
      <Content Include="DATABASES\WebHosting\Controllers\AccountController.cs" />
      <Content Include="DATABASES\WebHosting\Controllers\DashboardsController.cs" />
      <Content Include="DATABASES\WebHosting\Controllers\ProfileController.cs" />
@@ -160,6 +156,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="Aguacongas.IdentityServer.EntityFramework.Store.Duende" Version="6.3.1" />
     <PackageReference Include="AngleSharp" Version="0.17.1" />
     <PackageReference Include="AngleSharp.Css" Version="0.17.0" />
     <PackageReference Include="AngleSharp.Diffing" Version="0.18.2" />
@@ -249,6 +246,13 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Dotmim.Sync.SqlServer.ChangeTracking" Version="0.9.8" />
     <PackageReference Include="Dotmim.Sync.Web.Client" Version="0.9.8" />
     <PackageReference Include="Dotmim.Sync.Web.Server" Version="0.9.8" />
+    <PackageReference Include="Duende.IdentityServer" Version="6.3.10" />
+    <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.3.10" />
+    <PackageReference Include="Duende.IdentityServer.Configuration" Version="6.3.10" />
+    <PackageReference Include="Duende.IdentityServer.Configuration.EntityFramework" Version="6.3.10" />
+    <PackageReference Include="Duende.IdentityServer.EntityFramework" Version="6.3.10" />
+    <PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" Version="6.3.10" />
+    <PackageReference Include="Duende.IdentityServer.Storage" Version="6.3.10" />
     <PackageReference Include="Eaf" Version="7.0.5" />
     <PackageReference Include="Eaf.AspNetCore" Version="7.0.5" />
     <PackageReference Include="Eaf.AspNetCore.OData" Version="7.0.5" />
@@ -401,6 +405,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.ApplicationInsights.SnapshotCollector" Version="1.4.6" />
     <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer" Version="2.22.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.22.0" />
+    <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.33" />
@@ -423,8 +428,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Connections.Client" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Connections.Common" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Metadata" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
@@ -458,22 +461,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.33" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.33" />
     <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.33" />
     <PackageReference Include="Microsoft.Graph" Version="5.56.0" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.61.3" />
-    <PackageReference Include="Microsoft.Identity.Web" Version="2.19.0" />
-    <PackageReference Include="Microsoft.Identity.Web.Certificate" Version="2.19.0" />
-    <PackageReference Include="Microsoft.Identity.Web.Certificateless" Version="2.19.0" />
-    <PackageReference Include="Microsoft.Identity.Web.Diagnostics" Version="2.19.0" />
-    <PackageReference Include="Microsoft.Identity.Web.TokenCache" Version="2.19.0" />
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.6.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Protocols.WsFederation" Version="7.6.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.6.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens.Saml" Version="7.6.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Validators" Version="7.6.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Xml" Version="7.6.0" />
     <PackageReference Include="Microsoft.JSInterop" Version="6.0.33" />
     <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.33" />
     <PackageReference Include="Microsoft.MarkedNet" Version="1.0.13" />
@@ -515,6 +504,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="NPOI" Version="2.6.2" />
     <PackageReference Include="NUglify" Version="1.21.4" />
     <PackageReference Include="OpenGraph-Net" Version="4.0.1" />
+    <PackageReference Include="Peachpie.Library" Version="1.1.10" />
+    <PackageReference Include="Peachpie.Runtime" Version="1.1.10" />
     <PackageReference Include="Pek.Markdig.HighlightJs" Version="0.5.1" />
     <PackageReference Include="Portable.Xaml" Version="0.26.0" />
     <PackageReference Include="Processing.js" Version="1.3.6" />

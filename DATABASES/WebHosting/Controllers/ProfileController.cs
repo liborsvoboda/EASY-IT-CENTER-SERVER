@@ -9,32 +9,27 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace EasyITCenter.Controllers
-{
-    public class ProfileController : Controller
-    {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+namespace EasyITCenter.Controllers {
+
+    public class ProfileController : Controller {
+
+        private readonly UserManager<WebHostingUser> _userManager;
+        private readonly SignInManager<WebHostingUser> _signInManager;
         private readonly ILogger<ProfileController> _logger;
 
-        public ProfileController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ILogger<ProfileController> logger)
-        {
+        public ProfileController(UserManager<WebHostingUser> userManager, SignInManager<WebHostingUser> signInManager, ILogger<ProfileController> logger) {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }
 
-        private IdentityUser _currentUser;
+        private WebHostingUser _currentUser;
 
-        public IdentityUser CurrentUser
-        {
-            get
-            {
-                if (_currentUser == null)
-                {
+        public WebHostingUser CurrentUser {
+            get {
+                if (_currentUser == null) {
                     var user = _userManager.GetUserAsync(User);
-                    if (user == null)
-                    {
+                    if (user == null) {
                         throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
                     }
 
@@ -44,24 +39,19 @@ namespace EasyITCenter.Controllers
             }
         }
 
-        public bool IsEmailConfirmed
-        {
-            get
-            {
+        public bool IsEmailConfirmed {
+            get {
                 return _userManager.IsEmailConfirmedAsync(CurrentUser).Result;
             }
         }
 
-        public bool IsHasPassword
-        {
-            get
-            {
+        public bool IsHasPassword {
+            get {
                 return _userManager.HasPasswordAsync(CurrentUser).Result;
             }
         }
 
-        public class ChangePasswordInput
-        {
+        public class ChangePasswordInput {
             [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Current password")]
@@ -81,18 +71,14 @@ namespace EasyITCenter.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangePassword(ChangePasswordInput model)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IActionResult> ChangePassword(ChangePasswordInput model) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
             var changePasswordResult = await _userManager.ChangePasswordAsync(CurrentUser, model.OldPassword, model.NewPassword);
-            if (!changePasswordResult.Succeeded)
-            {
-                foreach (var error in changePasswordResult.Errors)
-                {
+            if (!changePasswordResult.Succeeded) {
+                foreach (var error in changePasswordResult.Errors) {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return BadRequest(ModelState);
@@ -104,8 +90,7 @@ namespace EasyITCenter.Controllers
             return Ok("Your password has been changed.");
         }
 
-        public class SetPasswordInput
-        {
+        public class SetPasswordInput {
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -120,18 +105,14 @@ namespace EasyITCenter.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SetPassword(SetPasswordInput model)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IActionResult> SetPassword(SetPasswordInput model) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
             var addPasswordResult = await _userManager.AddPasswordAsync(CurrentUser, model.NewPassword);
-            if (!addPasswordResult.Succeeded)
-            {
-                foreach (var error in addPasswordResult.Errors)
-                {
+            if (!addPasswordResult.Succeeded) {
+                foreach (var error in addPasswordResult.Errors) {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return BadRequest(ModelState);
@@ -142,5 +123,6 @@ namespace EasyITCenter.Controllers
 
             return Ok("Your password has been set.");
         }
+
     }
 }

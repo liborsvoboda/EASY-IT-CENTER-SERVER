@@ -1,5 +1,8 @@
-﻿@page
-@model LoginModel
+﻿@page "/DevPortal/Login"
+@{
+    Layout = "/ServerCorePages/Server-Web/DevPortal/Shared/DevPortalLayout.cshtml";
+}
+@model ServerCorePages.LoginModel
 
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
@@ -37,7 +40,7 @@
         </div>
         @Html.AntiForgeryToken()
     </form>
-    <form asp-page="/Devportal/ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+    <form asp-page="/DevPortal/ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
         <div class="social-auth-links text-center">
             <p>- OR -</p>
             @if (Configuration["Authentication:Facebook:IsEnabled"] == "true")
