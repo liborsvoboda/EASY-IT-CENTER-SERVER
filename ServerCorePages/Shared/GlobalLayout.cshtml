@@ -1,4 +1,4 @@
-﻿@model ServerCorePages.ServerModulesModel
+﻿@model ServerCorePages.SystemModulesModel
 
 @* @addTagHelper *, WebOptimizer.Core *@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -8,17 +8,20 @@
 @using EasyITCenter.ServerCoreWebPages;
 @using System.Security.Claims;
 @using System.Text.RegularExpressions;
+
+@inject EasyITCenter.Managers.UserProfileManager UserProfileManager
+
 @namespace ServerCorePages
 @{
 
-    ServerModuleAndServiceList? serverModule = null; ServerModuleAndServiceList? loginModule = null; ServerWebPagesToken? webpagestoken = null;
-    try { serverModule = ((ServerModuleAndServiceList?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "ServerModule").Value); } catch { }
+    ServerModuleAndServiceList? systemModule = null; ServerModuleAndServiceList? loginModule = null; ServerWebPagesToken? webpagestoken = null;
+    try { systemModule = ((ServerModuleAndServiceList?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "SystemModule").Value); } catch { }
     try { loginModule = ((ServerModuleAndServiceList?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "LoginModule").Value); } catch { }
     try { webpagestoken = ((ServerWebPagesToken?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "ServerWebPagesToken").Value); } catch { }
 
 }
 
-@if (serverModule != null && serverModule.InheritedPageType == "HtmlBodyOnly" && loginModule == null && (!serverModule.RestrictedAccess || (serverModule.RestrictedAccess && webpagestoken != null && webpagestoken.IsValid && serverModule.AllowedRoles.Split(",").ToList().Contains(webpagestoken.UserClaims.FindFirstValue(ClaimTypes.Role))))) {
+@if (systemModule != null && systemModule.InheritedPageType == "HtmlBodyOnly" && loginModule == null && (!systemModule.RestrictedAccess || (systemModule.RestrictedAccess && webpagestoken != null && webpagestoken.IsValid && systemModule.AllowedRoles.Split(",").ToList().Contains(webpagestoken.UserClaims.FindFirstValue(ClaimTypes.Role))))) {
     <!DOCTYPE html>
     <html lang="cs-CZ">
     <head>
@@ -47,7 +50,7 @@
     <body id="body" style="background: url(~/server-portal/metro/images/anime-background-images-1.jpg) center center no-repeat;background-size: cover;background-position: center;background-repeat: no-repeat;background-attachment: fixed;">
         <div class="d-block w-100 h-100">
             <main id="WebPageHTMLContent" role="main" class="pb-10 w-100 h-100" >
-                @Html.Raw(serverModule.CustomHtmlContent)
+                @Html.Raw(systemModule.CustomHtmlContent)
               @*   @RenderBody() *@
             </main>
         </div>
@@ -112,7 +115,7 @@ else if (loginModule != null && loginModule.InheritedPageType == "FullHtmlPage")
     </body>
     </html>
 }
-else if (serverModule != null && serverModule.InheritedPageType == "FullHtmlPage" && loginModule == null && (!serverModule.RestrictedAccess || (serverModule.RestrictedAccess && webpagestoken != null && webpagestoken.IsValid && serverModule.AllowedRoles.Split(",").ToList().Contains(webpagestoken.UserClaims.FindFirstValue(ClaimTypes.Role))))) {
+else if (systemModule != null && systemModule.InheritedPageType == "FullHtmlPage" && loginModule == null && (!systemModule.RestrictedAccess || (systemModule.RestrictedAccess && webpagestoken != null && webpagestoken.IsValid && systemModule.AllowedRoles.Split(",").ToList().Contains(webpagestoken.UserClaims.FindFirstValue(ClaimTypes.Role))))) {
     <!DOCTYPE html>
     <html lang="cs-CZ">
     <head>
@@ -129,7 +132,7 @@ else if (serverModule != null && serverModule.InheritedPageType == "FullHtmlPage
         @Html.Raw(this.Model.GetManagedGlobalJsFiles().ContentType)
     </head>
     <body>
-        @Html.Raw(serverModule?.CustomHtmlContent)
+        @Html.Raw(systemModule?.CustomHtmlContent)
         @RenderBody()
     </body>
     </html>
@@ -142,7 +145,7 @@ else { //Using by Static Tool or unspecified
         @Html.Raw(this.Model.GetManagedGlobalJsFiles().ContentType)
     </head>
     <body>
-        @Html.Raw(serverModule?.CustomHtmlContent)
+        @Html.Raw(systemModule?.CustomHtmlContent)
         @RenderBody()
     </body>
     </html>

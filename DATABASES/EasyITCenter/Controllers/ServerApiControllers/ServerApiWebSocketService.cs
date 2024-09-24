@@ -22,8 +22,8 @@
         public async Task GetBySocketAPIPath(string socketAPIPath) {
             if (HttpContext.WebSockets.IsWebSocketRequest) {
                 using WebSocket? webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
-                ServerCoreWebHelpers.AddSocketConnectionToCentralList(webSocket, socketAPIPath);
-                await ServerCoreWebHelpers.ListenClientWebSocketMessages(webSocket, socketAPIPath);
+                Managers.WebSocketManager.AddSocketConnectionToCentralList(webSocket, socketAPIPath);
+                await Managers.WebSocketManager.ListenClientWebSocketMessages(webSocket, socketAPIPath);
             }
             else {
                 HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
@@ -38,8 +38,8 @@
         public async Task Get() {
             if (HttpContext.WebSockets.IsWebSocketRequest) {
                 using var webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
-                ServerCoreWebHelpers.AddSocketConnectionToCentralList(webSocket, "");
-                await ServerCoreWebHelpers.ListenClientWebSocketMessages(webSocket, "");
+                Managers.WebSocketManager.AddSocketConnectionToCentralList(webSocket, "");
+                await Managers.WebSocketManager.ListenClientWebSocketMessages(webSocket, "");
                 //await Echo(HttpContext, webSocket);
             }
             else {

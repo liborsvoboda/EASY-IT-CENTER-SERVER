@@ -81,7 +81,7 @@ namespace EasyITCenter {
             services.AddMemoryCache();
             services.AddEndpointsApiExplorer();
             ServerConfigurationServices.ConfigureWebSocketLoggerMonitor(ref services);
-            ServerConfigurationServices.ConfigureRSSfeed(ref services);
+            ServerConfigurationServices.ConfigureRssFeed(ref services);
 
             #endregion Server Core & Security Web
 
@@ -101,6 +101,8 @@ namespace EasyITCenter {
 
             #endregion Server Modules
 
+            //REGISTERING SERVICES BY CLASS OR INTERFACE
+            ServerConfigurationServices.AutoRegisterClassServices(ref services);
             ServerConfigurationServices.ConfigureTransient(ref services);
             ServerConfigurationServices.ConfigureSingletons(ref services);
             ServerConfigurationServices.ConfigureCentralServicesProviders(ref services);
@@ -110,62 +112,6 @@ namespace EasyITCenter {
             //services.AddSignalR();
             //services.AddServerSideBlazor();
 
-            //Default Web Admin
-            ApplicationUser webAdmin = new ApplicationUser() { UserName = "remoteroot", Email = ServerConfigSettings.EmailerServiceEmailAddress, EmailConfirmed = true, PhoneNumber = "724 986 873", LockoutEnabled = false };
-            services.AddIdentityServer(options => {
-
-                options.Discovery.ShowEndpoints = true;
-                options.Discovery.ShowResponseModes = true;
-                options.Discovery.ShowResponseTypes = true;
-                options.Discovery.ShowTokenEndpointAuthenticationMethods = true;
-
-                options.KeyManagement.Enabled = true;
-                options.UserInteraction.ConsentUrl = "/DevPortal";
-
-                options.UserInteraction.LoginUrl = "/DevPortal/Login";
-                options.UserInteraction.LogoutUrl = "/DevPortal/Lockout";
-                options.UserInteraction.CreateAccountUrl = "/DevPortal/Register";
-
-
-                options.Endpoints.EnableAuthorizeEndpoint = true;
-                options.Endpoints.EnableDiscoveryEndpoint = true;
-                options.Endpoints.EnableTokenEndpoint = true;
-                options.Endpoints.EnableUserInfoEndpoint = true;
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
-                options.KeyManagement.RotationInterval = TimeSpan.FromDays(30); // new key every 30 days
-                options.KeyManagement.PropagationTime = TimeSpan.FromDays(2); // announce new key 2 days in advance in discovery
-                options.KeyManagement.RetentionDuration = TimeSpan.FromDays(7);// keep old key for 7 days in discovery for validation of tokens
-                options.KeyManagement.DeleteRetiredKeys = false; // don't delete keys after their retention period is over
-                //options.Endpoints
-            })
-
-               //.AddInMemoryIdentityResources(Config.IdentityResources)
-               //.AddInMemoryApiScopes(Config.ApiScopes)
-               //.AddInMemoryClients(Config.Clients);
-
-                //.AddAspNetIdentity<SolutionUserList>()
-                .AddKeyManagement().AddDefaultEndpoints().AddDeveloperSigningCredential()
-                .AddConfigurationStore(options => {
-                    options.ConfigureDbContext = b =>
-                    b.UseSqlServer($"Data Source={Path.Combine(ServerRuntimeData.ServerPrivate_path, "databases", "CfgEIC_WebHosting.mdf")}; Trusted_Connection = True; MultipleActiveResultSets = true",
-                     opt => opt.MigrationsAssembly(ServerConfigSettings.ConfigCoreServerRegisteredName));
-                })
-                .AddOperationalStore(options => {
-
-                    
-                    options.ConfigureDbContext = b =>
-                    b.UseSqlServer($"Data Source={Path.Combine(ServerRuntimeData.ServerPrivate_path, "databases", "ProcEIC_WebHosting.mdf")}; Trusted_Connection = True; MultipleActiveResultSets = true",
-                    opt => opt.MigrationsAssembly(ServerConfigSettings.ConfigCoreServerRegisteredName));
-
-                    //options.EnablePooling = true;
-                    //options.ConfigureDbContext.DynamicInvoke(); 
-                    options.EnableTokenCleanup = true;
-                    options.RemoveConsumedTokens = true;
-                }).AddAspNetIdentity<ApplicationUser>(); 
-            
             /*
             if (Configuration["Authentication:Facebook:IsEnabled"] == "true") {
                 services
@@ -214,7 +160,12 @@ namespace EasyITCenter {
                 string requestPath = context.Request.Path.ToString().ToLower(); bool redirected = false;
                 context = CoreOperations.IncludeCookieTokenToRequest(context); //Include TOKEN
 
-                if (!context.WebSockets.IsWebSocketRequest) { await next();// WebSocket Ignored
+                //Ignored WEBSOCKET && DEFINED SPECIAL PATHS RUN DIRECLY
+                if (!context.WebSockets.IsWebSocketRequest 
+                    && !requestPath.StartsWith("razortemplate") && !requestPath.StartsWith("easydata")  //Ignored path RUN DIRECLY
+
+                ) { await next(); 
+                //GO TO CONTROLLED AREA
 
 
 
@@ -237,7 +188,7 @@ namespace EasyITCenter {
                                 if (context.Items.FirstOrDefault(a => a.Key.ToString() == "LoginModule").Value != null) { context.Items.Remove("LoginModule"); }
                                 try { context.Items.Add(new KeyValuePair<object, object?>("LoginModule", loginModule)); } catch { }
                                 try { context.Response.Cookies.Append("RequestedModulePath", requestPath); } catch { }
-                                redirected = true; context.Request.Path = "/ServerModules"; await next();
+                                redirected = true; context.Request.Path = "/SystemModules"; await next();
                             }
                         } else if (context.User.Identity != null && context.User.FindFirstValue(ClaimTypes.PrimarySid) != null
                               && ( ( context.Request.Method == "GET" && serverApiSecurity.ReadRestrictedAccess && serverApiSecurity.ReadAllowedRoles != null && !serverApiSecurity.ReadAllowedRoles.ToLower().Split(",").Contains(context.User.FindFirstValue(ClaimTypes.Role).ToLower()) )
@@ -248,7 +199,7 @@ namespace EasyITCenter {
                                 if (context.Items.FirstOrDefault(a => a.Key.ToString() == "LoginModule").Value != null) { context.Items.Remove("LoginModule"); }
                                 try { context.Items.Add(new KeyValuePair<object, object?>("LoginModule", loginModule)); } catch { }
                                 try { context.Response.Cookies.Append("RequestedModulePath", requestPath); } catch { }
-                                redirected = true; context.Request.Path = "/ServerModules"; await next();
+                                redirected = true; context.Request.Path = "/SystemModules"; await next();
 
                             }
                         }
@@ -262,7 +213,7 @@ namespace EasyITCenter {
                     RouteLayoutTypes routeLayout = RouteLayoutTypes.EmptyLayout; RoutingActionTypes commandType = RoutingActionTypes.None; string fileValidUrl = context.Request.Path;
                     context = CoreOperations.ChechUrlRequestValidOrAuthorized(context);
                     try { routeLayout = ( (RouteLayoutTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "RouteLayoutTypes").Value ); } catch { }
-                    try { commandType = ( (RoutingActionTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "ComandType").Value ); } catch { }
+                    try { commandType = ( (RoutingActionTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "CommandType").Value ); } catch { }
                     try { fileValidUrl = ( (string)context.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value ); } catch { }
 
 
@@ -270,15 +221,13 @@ namespace EasyITCenter {
                     //Start DocPortal by Link Without index.md
                     //if (!redirected && routeLayout == RouteLayoutTypes.DocPortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/server-webpages/CodeDocs"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
                     //Show MarkDownFile in Layout by missing .md extension
-                    if (!redirected && routeLayout == RouteLayoutTypes.DevPortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/DevPortal"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
-                    //Show MarkDownFile in Layout by missing .md extension
-                    else if (!redirected && routeLayout == RouteLayoutTypes.ViewerMarkDownFileLayout) { redirected = true; context.Request.Path = "/ViewerMarkDownFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
+                    if (!redirected && routeLayout == RouteLayoutTypes.ViewerMarkDownFileLayout) { redirected = true; context.Request.Path = "/ViewerMarkDownFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
                     //Show Report File in Layout by .frx extension
                     else if (!redirected && routeLayout == RouteLayoutTypes.ViewerReportFileLayout) { redirected = true; context.Request.Path = "/ReportViewer/ViewerReportFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
                     //Show Portal in Layout
-                    else if (!redirected && routeLayout == RouteLayoutTypes.PortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/Portal"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
-                    //Show ServerModules
-                    else if (!redirected && routeLayout == RouteLayoutTypes.ServerModulesLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/ServerModules"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
+                    else if (!redirected && routeLayout == RouteLayoutTypes.SystemPortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemPortal"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
+                    //Show SystemModules
+                    else if (!redirected && routeLayout == RouteLayoutTypes.SystemModulesLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemModules"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
 
 
 
@@ -370,7 +319,10 @@ namespace EasyITCenter {
             if (ServerConfigSettings.BrowserLinkEnabled) { app.UseBrowserLink(); }
             if (ServerConfigSettings.ModuleWebDataManagerEnabled) { app.UseEasyData(); }
 
-            app.UseIdentityServer();
+
+            //app.UseIdentityServer();
+            app.UseMigrationsEndPoint();
+
 
             //Load registered routes List To Runtime
             CoreOperations.GetServerRegisteredRoutesList("",true);

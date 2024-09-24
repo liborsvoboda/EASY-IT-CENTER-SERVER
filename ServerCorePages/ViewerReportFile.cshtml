@@ -6,13 +6,18 @@
 @* @addTagHelper *, WebOptimizer.Core *@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@using ServerCorePages;
-@using Microsoft.AspNetCore.Html;
-@using EasyITCenter.DBModel;
-@using EasyITCenter.ServerCoreWebPages;
-@using EasyITCenter.ServerCoreStructure;
-@using System.Security.Claims;
+@using ServerCorePages
+@using Microsoft.AspNetCore.Html
+@using EasyITCenter.DBModel
+@using EasyITCenter.ServerCoreWebPages
+@using EasyITCenter.ServerCoreStructure
+@using System.Security.Claims
 @model ServerCorePages.ViewerReportFileModel
+
+@inject EasyITCenter.Managers.UserProfileManager UserProfileManager
+
+@namespace ServerCorePages
+
 @{
 
     //Standalone Load File From Url Request

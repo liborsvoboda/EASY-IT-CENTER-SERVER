@@ -1,0 +1,101 @@
+﻿@{
+    Layout = null;
+}
+
+@using Microsoft.AspNetCore.Identity;
+@using EasyITCenter;
+@using EasyITCenter.ServerCoreStructure;
+@using ServerCorePages;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EIC&ESB Developer Portal</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/ionicons/css/ionicons.min.css">
+    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/admin-lte/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/admin-lte/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/icheck/skins/square/blue.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <environment include="Development">
+        <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/css/site.css" />
+    </environment>
+
+    <environment exclude="Development">
+        <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body class="hold-transition login-page" style="height: auto;">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="/RazorTemplate"><b>Admin</b>LTE</a>
+        </div>
+        <!-- /.login-logo -->
+        @RenderBody()
+        <!-- /.content-wrapper -->
+        <!-- =============================================== -->
+        <!-- Page footer. -->
+        @await Html.PartialAsync("~/ServerCorePages/RazorTemplate/Partial/_Footer.cshtml")
+
+        <!-- =============================================== -->
+        <!-- Control Sidebar -->
+        @await Html.PartialAsync("~/ServerCorePages/RazorTemplate/Partial/_SideBar.cshtml")
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="/server-Integrated/razor-pages/RazorTemplate/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/server-Integrated/razor-pages/RazorTemplate/bootstrap/js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="/server-Integrated/razor-pages/RazorTemplate/icheck/icheck.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <!-- SlimScroll -->
+    <script src="/server-Integrated/razor-pages/RazorTemplate/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="/server-Integrated/razor-pages/RazorTemplate/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/server-Integrated/razor-pages/RazorTemplate/admin-lte/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/server-Integrated/razor-pages/RazorTemplate/admin-lte/js/demo.js"></script>
+
+    <!-- ASP.NET site script -->
+    <environment include="Development">
+        <script src="/server-Integrated/razor-pages/RazorTemplate/js/site.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="/server-Integrated/razor-pages/RazorTemplate/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    <script>
+        $(document).ready(function () {
+            $('.sidebar-menu').tree()
+        })
+
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });
+    </script>
+
+    @await Html.PartialAsync("~/ServerCorePages/RazorTemplate/Partial/_ValidationScriptsPartial.cshtml")
+</body>
+</html>
+

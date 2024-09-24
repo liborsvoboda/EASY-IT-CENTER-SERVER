@@ -13,19 +13,16 @@ namespace EasyITCenter.Controllers {
 
     public class ProfileController : Controller {
 
-        private readonly UserManager<WebHostingUser> _userManager;
-        private readonly SignInManager<WebHostingUser> _signInManager;
+        private readonly UserManager<WebUser> _userManager;
+        private readonly SignInManager<WebUser> _signInManager;
         private readonly ILogger<ProfileController> _logger;
+        private WebUser _currentUser;
 
-        public ProfileController(UserManager<WebHostingUser> userManager, SignInManager<WebHostingUser> signInManager, ILogger<ProfileController> logger) {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _logger = logger;
+        public ProfileController(UserManager<WebUser> userManager, SignInManager<WebUser> signInManager, ILogger<ProfileController> logger) {
+            _userManager = userManager; _signInManager = signInManager; _logger = logger;
         }
 
-        private WebHostingUser _currentUser;
-
-        public WebHostingUser CurrentUser {
+        public WebUser CurrentUser {
             get {
                 if (_currentUser == null) {
                     var user = _userManager.GetUserAsync(User);
@@ -39,6 +36,7 @@ namespace EasyITCenter.Controllers {
             }
         }
 
+
         public bool IsEmailConfirmed {
             get {
                 return _userManager.IsEmailConfirmedAsync(CurrentUser).Result;
@@ -51,19 +49,20 @@ namespace EasyITCenter.Controllers {
             }
         }
 
+
         public class ChangePasswordInput {
             [Required]
-            [DataType(DataType.Password)]
+            [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
             [Display(Name = "Current password")]
             public string OldPassword { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
+            [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
             [Display(Name = "New password")]
             public string NewPassword { get; set; }
 
-            [DataType(DataType.Password)]
+            [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
             [Display(Name = "Confirm new password")]
             [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
@@ -93,15 +92,16 @@ namespace EasyITCenter.Controllers {
         public class SetPasswordInput {
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
+            [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
             [Display(Name = "New password")]
             public string NewPassword { get; set; }
 
-            [DataType(DataType.Password)]
+            [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
             [Display(Name = "Confirm new password")]
             [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

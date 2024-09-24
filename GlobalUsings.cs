@@ -1,5 +1,6 @@
 ﻿global using EasyITCenter.ControllersExtensions;
 global using EasyITCenter.DBModel;
+global using EasyITCenter.Managers;
 global using EasyITCenter.ServerCoreConfiguration;
 global using EasyITCenter.ServerCoreDBSettings;
 global using EasyITCenter.ServerCoreServers;

@@ -185,7 +185,7 @@ namespace EasyITCenter.Services {
                         }
                         else if (jobType == "websocketnotify") {
                             try {
-                                ServerCoreWebHelpers.SendMessageAndUpdateWebSocketsInSpecificPath(ServerConfigSettings.WebSocketGlobalNotifyPath, data);
+                                Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(ServerConfigSettings.WebSocketGlobalNotifyPath, data);
 
                             } catch (Exception ex) { taskResult.ProcessCrashed = true; taskResult.ProcessLog = DataOperations.GetSystemErrMessage(ex); CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(ex) }); }
                         }
@@ -193,7 +193,7 @@ namespace EasyITCenter.Services {
                             try {
                                 if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin") {
                                     string? result = new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>($"EXEC {data};").ToString();
-                                    ServerCoreWebHelpers.SendMessageAndUpdateWebSocketsInSpecificPath(ServerConfigSettings.WebSocketGlobalNotifyPath, result);
+                                    Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(ServerConfigSettings.WebSocketGlobalNotifyPath, result);
                                 }
 
                             } catch (Exception ex) { taskResult.ProcessCrashed = true; taskResult.ProcessLog = DataOperations.GetSystemErrMessage(ex); CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(ex) }); }

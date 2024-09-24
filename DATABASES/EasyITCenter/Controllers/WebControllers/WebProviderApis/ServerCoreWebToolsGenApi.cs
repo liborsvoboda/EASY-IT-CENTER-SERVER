@@ -334,7 +334,7 @@ namespace EasyITCenter.ControllersExtensions {
         [Authorize]
         [HttpPost("/Generators/GenerateMdToMdBook")]
         [Consumes("application/json")]
-        public IActionResult GenerateMdToMdBook([FromBody] UploadGeneratorFiles fileList) {
+        public async Task<IActionResult> GenerateMdToMdBook([FromBody] UploadGeneratorFiles fileList) {
             try {
                 FileOperations.ClearFolder(Path.Combine(ServerRuntimeData.UserPath, User.Claims.First(a => a.Issuer != null).Value));
                 FileOperations.CopyDirectory(Path.Combine(ServerRuntimeData.Startup_path, ServerConfigSettings.DefaultStaticWebFilesFolder, "Tools\\EDC_ESB_InteliHelp\\generator"), Path.Combine(ServerRuntimeData.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook"));
@@ -353,7 +353,7 @@ namespace EasyITCenter.ControllersExtensions {
                     Command = Path.Combine(ServerRuntimeData.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "GenerateMdBook.bat"),
                     WorkingDirectory = Path.Combine(ServerRuntimeData.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook")
                 };
-                CoreOperations.RunSystemProcess(process);
+                await CoreOperations.RunSystemProcess(process);
 
                 ZipFile.CreateFromDirectory(Path.Combine(ServerRuntimeData.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "book"), Path.Combine(ServerRuntimeData.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdBook.zip"));
 

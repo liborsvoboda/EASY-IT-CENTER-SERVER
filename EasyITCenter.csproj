@@ -79,6 +79,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <BondCodegen Remove="wwwroot\server-Integrated\razor-pages\devportal\**" />
     <Compile Remove="bin\**" />
     <Compile Remove="wwwroot\**" />
     <EmbeddedResource Remove="bin\**" />
@@ -88,7 +89,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <TypeScriptCompile Remove="*" />
     <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
-    <Content Remove="wwwroot\**" />   
+    <Content Remove="wwwroot\**" />
+    <EntityDeploy Remove="wwwroot\server-Integrated\razor-pages\devportal\**" />   
   </ItemGroup>
 
   <ItemGroup>
@@ -99,18 +101,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
-    <Compile Remove="DATABASES\WebHosting\Controllers\AccountController.cs" />
-    <Compile Remove="DATABASES\WebHosting\Controllers\DashboardsController.cs" />
-    <Compile Remove="DATABASES\WebHosting\Controllers\ProfileController.cs" />
-    <Compile Remove="DATABASES\WebHosting\Controllers\SettingsController.cs" />
-    <Compile Remove="DATABASES\WebHosting\Extensions\MailManagerExtensions.cs" />
-    <Compile Remove="DATABASES\WebHosting\Extensions\PageModelExtensions.cs" />
-    <Compile Remove="DATABASES\WebHosting\Extensions\UrlHelperExtensions.cs" />
-    <Compile Remove="DATABASES\WebHosting\Extensions\UserManagerExtensions.cs" />
-    <Compile Remove="DATABASES\WebHosting\Extensions\UserMenuExtensions.cs" />
-    <Compile Remove="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.cs" />
-    <Compile Remove="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
-    <Compile Remove="DATABASES\WebHosting\Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>  
 
    <ItemGroup>
@@ -120,18 +110,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
-     <Content Include="DATABASES\WebHosting\Controllers\AccountController.cs" />
-     <Content Include="DATABASES\WebHosting\Controllers\DashboardsController.cs" />
-     <Content Include="DATABASES\WebHosting\Controllers\ProfileController.cs" />
-     <Content Include="DATABASES\WebHosting\Controllers\SettingsController.cs" />
-     <Content Include="DATABASES\WebHosting\Services\Mail\MailManagerExtensions.cs" />
-     <Content Include="DATABASES\WebHosting\Extensions\PageModelExtensions.cs" />
-     <Content Include="DATABASES\WebHosting\Extensions\UrlHelperExtensions.cs" />
-     <Content Include="DATABASES\WebHosting\Extensions\UserManagerExtensions.cs" />
-     <Content Include="DATABASES\WebHosting\Extensions\UserMenuExtensions.cs" />
-     <Content Include="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.cs" />
-     <Content Include="DATABASES\WebHosting\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
-     <Content Include="DATABASES\WebHosting\Migrations\ApplicationDbContextModelSnapshot.cs" />
      <Content Include="Data\favicon.ico" />
      <Content Include="Docs\Readme.md">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -166,6 +144,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="AngleSharp.Xml" Version="0.17.0" />
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.15" />
     <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="6.0.15" />
+    <PackageReference Include="AspNetCore.Client" Version="0.19.1" />
     <PackageReference Include="AspNetCore.HealthChecks.ApplicationStatus" Version="6.0.0" />
     <PackageReference Include="AspNetCore.HealthChecks.AzureStorage" Version="6.1.2" />
     <PackageReference Include="AspNetCore.HealthChecks.EventStore" Version="6.0.3" />
@@ -246,6 +225,9 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Dotmim.Sync.SqlServer.ChangeTracking" Version="0.9.8" />
     <PackageReference Include="Dotmim.Sync.Web.Client" Version="0.9.8" />
     <PackageReference Include="Dotmim.Sync.Web.Server" Version="0.9.8" />
+    <PackageReference Include="Duende.AccessTokenManagement" Version="2.1.2" />
+    <PackageReference Include="Duende.BFF" Version="2.2.0" />
+    <PackageReference Include="Duende.BFF.EntityFramework" Version="2.2.0" />
     <PackageReference Include="Duende.IdentityServer" Version="6.3.10" />
     <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.3.10" />
     <PackageReference Include="Duende.IdentityServer.Configuration" Version="6.3.10" />
@@ -345,6 +327,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Hangfire.Ninject" Version="2.0.0" />
     <PackageReference Include="Hangfire.RecurringJobExtensions" Version="1.1.6" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.8.12" />
+    <PackageReference Include="HdrHistogram" Version="2.5.0" />
     <PackageReference Include="Heleonix.Docfx.Plugins.XmlDoc" Version="3.0.0" />
     <PackageReference Include="HT.Minify" Version="6.0.11" />
     <PackageReference Include="HTML.Generator.Helper" Version="1.0.0" />
@@ -405,7 +388,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.ApplicationInsights.SnapshotCollector" Version="1.4.6" />
     <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer" Version="2.22.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.22.0" />
-    <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.33" />
@@ -531,7 +513,10 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Sentry.AspNetCore" Version="4.4.0" />
     <PackageReference Include="Sentry.DiagnosticSource" Version="4.4.0" />
     <PackageReference Include="Sentry.EntityFramework" Version="4.4.0" />
+    <PackageReference Include="ServiceAutoRegistration" Version="1.0.4" />
+    <PackageReference Include="ServiceRegistration.NET" Version="1.0.0" />
     <PackageReference Include="ServiceStack" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Admin" Version="6.0.2" />
     <PackageReference Include="ServiceStack.Api.OpenApi" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Api.Swagger" Version="5.14.0" />
     <PackageReference Include="ServiceStack.Client" Version="8.2.2" />
@@ -539,25 +524,35 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="ServiceStack.Common" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Common.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Host.AspNet" Version="4.5.12" />
+    <PackageReference Include="ServiceStack.Host.Mvc" Version="4.5.12" />
     <PackageReference Include="ServiceStack.HttpClient" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.HttpClient.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Interfaces" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Interfaces.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Logging.NLog" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.MsgPack" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Mvc" Version="8.2.2" />
     <PackageReference Include="ServiceStack.OrmLite" Version="8.2.2" />
     <PackageReference Include="ServiceStack.OrmLite.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.Sqlite.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.OrmLite.SqlServer" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Server" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Server.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Stripe" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Text" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Text.Core" Version="8.2.2" />
     <PackageReference Include="SharpCompress" Version="0.36.0" />
     <PackageReference Include="SimpleMvcSitemap" Version="4.0.1" />
+    <PackageReference Include="Skoruba.Duende.IdentityServer.Admin.UI" Version="1.2.0" />
     <PackageReference Include="SMBLibrary" Version="1.5.1.3" />
     <PackageReference Include="SMBLibrary.Adapters" Version="1.5.1" />
     <PackageReference Include="SMBLibrary.Async" Version="0.0.1" />
     <PackageReference Include="SMBLibrary.RootNS" Version="1.4.9" />
     <PackageReference Include="SMBLibraryCore.Client" Version="1.7.1" />
     <PackageReference Include="Snickler.RSSCore" Version="2.0.0" />
+    <PackageReference Include="SoapCore-net5.0" Version="1.1.0.10" />
+    <PackageReference Include="SoapHttpClient" Version="3.0.0" />
     <PackageReference Include="Sphinx" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -658,7 +653,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
  
   <ItemGroup>
     <Folder Include="Data\certificates\" />
-    <Folder Include="wwwroot\server-Integrated\razor-pages\devportal\" />
+    <Folder Include="ServerCoreDefinitions\Generators\" />
   </ItemGroup>
   
  

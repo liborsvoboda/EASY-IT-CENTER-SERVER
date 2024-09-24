@@ -4,20 +4,22 @@
 @* @addTagHelper *, WebOptimizer.Core *@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@using ServerCorePages;
-@using Microsoft.AspNetCore.Html;
-@using EasyITCenter.DBModel;
-@using EasyITCenter.ServerCoreWebPages;
-@using EasyITCenter.ServerCoreStructure;
-@using System.Security.Claims;
+@using ServerCorePages
+@using Microsoft.AspNetCore.Html
+@using EasyITCenter.DBModel
+@using EasyITCenter.ServerCoreWebPages
+@using EasyITCenter.ServerCoreStructure
+@using System.Security.Claims
+
 @model ServerCorePages.EasyDataModel
 
+@inject EasyITCenter.Managers.UserProfileManager UserProfileManager
 
 @* TODO PLNE PREVEST TENTO OBSAH DO AGENDY DYNAMICKE STRANKY  *@
 @* MOZNOST UDELAT DESKTOP ALA UZIVATEL  DASHBOARD UZIVATELE *@
 @namespace ServerCorePages
 @{
-    ViewData["Title"] = "DB EasyData Manager";
+    ViewData["Title"] = "EIC Database Manager";
 
   
     @* https://github.com/KorzhCom/EasyData/blob/master/easydata.net/src/EasyData.Exporters.Default/Html/HtmlDataExporter.cs  *@
@@ -27,9 +29,7 @@
     if (token != null) { srvWebPagesToken = CoreOperations.CheckTokenValidityFromString(token); }
 
 
-    @if (srvWebPagesToken != null && srvWebPagesToken.IsValid && srvWebPagesToken.UserClaims.FindFirstValue(ClaimTypes.Role.ToString()) == "admin")
-
-    { 
+    if (srvWebPagesToken != null && srvWebPagesToken.IsValid && srvWebPagesToken.UserClaims.FindFirstValue(ClaimTypes.Role.ToString()) == "admin") { 
         <link rel="stylesheet" href="~/server-integrated/server-modules/easydata/css/easydata.min.css" inline />
         <script type="text/javascript" src="~/server-integrated/server-modules/easydata/js/easydata.min.js" /></script>
             <div class="container text-center pt-5 mb-2">
@@ -87,7 +87,7 @@
             </window>
         </div>
         <script>
-            //Startup 
+            
             let loginpageLoader;
             $("#loginform").show();
 

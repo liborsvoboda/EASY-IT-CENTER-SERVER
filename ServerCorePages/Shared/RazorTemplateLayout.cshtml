@@ -1,0 +1,76 @@
+﻿@inject EasyITCenter.Managers.UserProfileManager UserProfileManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EIC&ESB Razor Template</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/razortemplate/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/razortemplate/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/razortemplate/ionicons/css/ionicons.min.css">
+
+    @RenderSection("Styles", required: false)
+
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/razortemplate/admin-lte/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/razortemplate/admin-lte/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/razortemplate/icheck/skins/square/blue.css">
+
+
+    <script src="/server-Integrated/razor-pages/razortemplate/js/html5shiv.min.js"></script>
+    <script src="/server-Integrated/razor-pages/razortemplate/respond.min.js"></script>
+
+
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/razortemplate/css/google.css">
+
+    <environment include="Development">
+        <link rel="stylesheet" href="/server-Integrated/razor-pages/razortemplate/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="/server-Integrated/razor-pages/razortemplate/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+
+    <div class="wrapper">
+
+        @await Html.PartialAsync("~/ServerCorePages/razortemplate/Partial/_Header.cshtml")
+        @await Html.PartialAsync("~/ServerCorePages/razortemplate/Partial/_NavBar.cshtml")
+        <div class="content-wrapper">
+
+            @await Html.PartialAsync("~/ServerCorePages/razortemplate/Partial/_StatusMessage.cshtml", TempData["StatusMessage"])
+            @RenderBody()
+        </div>
+        @await Html.PartialAsync("~/ServerCorePages/razortemplate/Partial/_Footer.cshtml")
+        @await Html.PartialAsync("~/ServerCorePages/razortemplate/Partial/_SideBar.cshtml")
+    </div>
+    <script src="/server-Integrated/razor-pages/razortemplate/jquery/jquery.min.js"></script>
+    <script src="/server-Integrated/razor-pages/razortemplate/bootstrap/js/bootstrap.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="/server-Integrated/razor-pages/razortemplate/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/server-Integrated/razor-pages/razortemplate/fastclick/fastclick.min.js"></script>
+    <script src="/server-Integrated/razor-pages/razortemplate/admin-lte/js/adminlte.min.js"></script>
+    <script src="/server-Integrated/razor-pages/razortemplate/admin-lte/js/demo.js"></script>
+
+    <environment include="Development">
+        <script src="/server-Integrated/razor-pages/razortemplate/js/site.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="/server-Integrated/razor-pages/razortemplate/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <script>
+        $(document).ready(function () {
+            $('.sidebar-menu').tree()
+        })
+    </script>
+
+    @await Html.PartialAsync("~/ServerCorePages/razortemplate/Partial/_ValidationScriptsPartial.cshtml")
+</body>
+</html>

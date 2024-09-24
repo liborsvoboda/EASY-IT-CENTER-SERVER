@@ -7,12 +7,16 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, Westwind.AspNetCore.Markdown
 
-@using Microsoft.AspNetCore.Html;
-@using EasyITCenter.ServerCoreStructure;
-@using Westwind.AspNetCore.Markdown;
-@using System.IO;
+@using Microsoft.AspNetCore.Html
+@using EasyITCenter.ServerCoreStructure
+@using Westwind.AspNetCore.Markdown
+@using System.IO
 @model ServerCorePages.ViewerMarkDownFileModel
-@{ ViewBag.Title = "EIC-MDsolution"; }
+
+@inject EasyITCenter.Managers.UserProfileManager UserProfileManager
+
+@namespace ServerCorePages
+@{ ViewBag.Title = "MarkDown Viewer"; }
 
 @* <markdown> *@ 
 @{

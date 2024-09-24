@@ -19,7 +19,7 @@ namespace EasyITCenter.ServerCoreStructure {
     /// PowerShell, System Commands, Scripts Processing
     /// Used *.cmd, *.bat, *.ps1, *.sh 
     /// Linux/Windows has same filename,
-    /// File Extension is autochange *.sh <-> *.cmd
+    /// File Extension has Auto Change *.sh and *.cmd
     /// </summary>
     public static class ProcessOperations {
 

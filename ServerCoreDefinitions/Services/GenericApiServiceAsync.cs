@@ -2,8 +2,13 @@
 
 namespace EasyITCenter.Services {
 
-    // Generic Repository implementing generic interface takes two generic paremeters DbContext and
-    // model class type
+    /// <summary>
+    /// Generic Repository implementing generic interface 
+    /// Takes two generic parameters DbContext and
+    /// model class type
+    /// </summary>
+    /// <typeparam name="DbEntity"></typeparam>
+    /// <typeparam name="Tentity"></typeparam>
     public class GenericApiServiceAsync<DbEntity, Tentity> : IGenericApiServiceAsync<DbEntity, Tentity> where DbEntity : EasyITCenterContext where Tentity : class {
         private readonly DbContext _context;
         private readonly DbSet<Tentity> dbSet;
@@ -61,7 +66,7 @@ namespace EasyITCenter.Services {
             return await _context.SaveChangesAsync();
         }
 
-        // =============================== Async version
+       
         public virtual async Task<List<Tentity>> GetListAsync(
             Expression<Func<Tentity, bool>>? filter = null,
             Func<IQueryable<Tentity>, IOrderedQueryable<Tentity>>? orderBy = null,

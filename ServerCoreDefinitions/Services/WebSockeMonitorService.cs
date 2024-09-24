@@ -17,7 +17,7 @@ namespace EasyITCenter.Services {
         }
 
         protected virtual void Dispose(bool disposing) {
-            if (ServerCoreWebHelpers.DisposeSocketConnectionsWithTimeOut() == 0) { disposedValue = true; }
+            if (Managers.WebSocketManager.DisposeSocketConnectionsWithTimeOut() == 0) { disposedValue = true; }
         }
 
         public void Dispose() {
@@ -60,7 +60,7 @@ namespace EasyITCenter.Services {
                     string? json = "";
                     if (IsEnabled(logLevel)) {
                         json = JsonSerializer.Serialize(logLevel.ToString()) + JsonSerializer.Serialize(eventId) + JsonSerializer.Serialize(state) + JsonSerializer.Serialize(exception);
-                        if (!string.IsNullOrWhiteSpace(json)) { ServerCoreWebHelpers.SendMessageAndUpdateWebSocketsInSpecificPath("ServerCoreMonitor", json); }
+                        if (!string.IsNullOrWhiteSpace(json)) { Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("ServerCoreMonitor", json); }
                     }
                 }
             } catch { _webSocketLogProvider.Dispose(); }

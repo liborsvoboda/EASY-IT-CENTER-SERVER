@@ -9,29 +9,31 @@ using EasyITCenter.DevPortal;
 
 namespace EasyITCenter.Controllers {
 
-    //[Authorize(Roles = "admin")]
-    [ApiController]
+/*
+    [Controller]
     [Route("/DevPortal")]
-    public class AccountController : ControllerBase {
+    public class AccountController : Controller {
 
 
-        //[HttpPost("/DevPortal/Login")]
+        [HttpGet("/DevPortal/Login")]
         public IActionResult Login() {
             return View();
         }
 
+        [HttpGet("/DevPortal/Register")]
         public IActionResult Register() {
             return View();
         }
 
-
+        [HttpGet("/DevPortal/ForgotPassword")]
         public IActionResult ForgotPassword() {
             return View();
         }
 
-
+        [HttpGet("/DevPortal/RecoverPassword")]
         public IActionResult RecoverPassword() {
             return View();
         }
     }
+*/
 }

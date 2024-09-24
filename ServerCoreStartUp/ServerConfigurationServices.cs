@@ -21,6 +21,15 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Snickler.RSSCore.Extensions;
 using FileContextCore;
+using Microsoft.AspNetCore.Identity;
+using EasyITCenter.ServerCoreDBSettings;
+using ServiceAutoRegistration;
+using ServiceAutoRegistration.Providers;
+using Aguacongas.TheIdServer.Data;
+using Aguacongas.TheIdServer.Models;
+using LinqToDB;
+using FileContextCore.FileManager;
+using FileContextCore.Serializer;
 
 namespace EasyITCenter.ServerCoreConfiguration {
 
@@ -29,6 +38,19 @@ namespace EasyITCenter.ServerCoreConfiguration {
     /// Rights, Conditions, Formats, Services, Logging, etc..
     /// </summary>
     public class ServerConfigurationServices {
+
+
+
+        internal static void AutoRegisterClassServices(ref IServiceCollection services) {
+
+            services.AutoRegisterServices(options =>
+            {
+                options.Namespaces.Scoped = "Managers";
+                options.Provider = new ClassRegistrationProvider();
+            });
+
+
+        }
 
 
         /// <summary>
@@ -165,7 +187,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             //    });
             //}
 
-            /*
+            
             services.AddAuthentication(x => {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -189,7 +211,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     }
                 };
             });
-            */
+            
 
             /*
             services.AddAuthentication().AddGoogle(options => { 
@@ -222,13 +244,16 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     services.AddMvc(options => {
                         options.CacheProfiles.Add("Default30", new CacheProfile() { Duration = 30 });
                         options.AllowEmptyInputInBodyModelBinding = true;
-                        
+
                     }).AddRazorPagesOptions(opt => {
                         opt.RootDirectory = "/ServerCorePages";
 
-                        opt.Conventions.AuthorizeFolder($"/{ServerRuntimeData.ServerPrivate_path}");
-                        opt.Conventions.AuthorizeFolder($"/{ServerRuntimeData.ServerAdmin_path}");
+                        //options.Conventions.AuthorizeFolder("/Account/Manage");
+                        //options.Conventions.AuthorizePage("/Account/Logout");
+                        //opt.Conventions.AuthorizeFolder($"/{ServerRuntimeData.ServerPrivate_path}");
+                        //opt.Conventions.AuthorizeFolder($"/{ServerRuntimeData.ServerAdmin_path}");
 
+                        /*
                         opt.Conventions.AllowAnonymousToPage("/DevPortal/Error");
                         opt.Conventions.AllowAnonymousToPage("/DevPortal/AccessDenied");
                         opt.Conventions.AllowAnonymousToPage("/DevPortal/ConfirmEmail");
@@ -243,12 +268,11 @@ namespace EasyITCenter.ServerCoreConfiguration {
                         opt.Conventions.AllowAnonymousToPage("/DevPortal/ResetPassword");
                         opt.Conventions.AllowAnonymousToPage("/DevPortal/ResetPasswordConfirm");
                         opt.Conventions.AllowAnonymousToPage("/DevPortal/SignedOut");
-
+                        */
 
                         //TODO SEMDAT TY MODULY
-                        //LAYOUTY
                         //options.Conventions.Add(new GlobalTemplatePageRouteModelConvention());
-                        //options.Conventions.AddFolderRouteModelConvention("/OtherPages", model =>
+                        //options.Conventions.AddFolderRouteModelConvention("/OtherPages", model => model.add())
 
 
                         //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/razor-pages-conventions/samples/6.x/SampleApp/Program.cs
@@ -258,6 +282,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                         // options.Conventions.AddPageRoute("/Contact", "TheContactPage/{text?}"); stranka
 
                     }).AddRazorRuntimeCompilation();
+                    //.AddControllersAsServices(); PROBLEM WITH GIT
                     //.WithRazorPagesAtContentRoot(); 
                 }
                 else {
@@ -306,13 +331,15 @@ namespace EasyITCenter.ServerCoreConfiguration {
             }
         }
 
-        internal static void ConfigureRSSfeed(ref IServiceCollection services) {
+
+        internal static void ConfigureRssFeed(ref IServiceCollection services) {
             if (ServerConfigSettings.WebRSSFeedsEnabled) { services.AddRSSFeed<SomeRSSProvider>(); }
         }
 
         /// <summary>
-        /// Server core: Configures the WebSocket logger monitor. For multi monitoring and for
-        /// Example Posibilities
+        /// Server core: Configures the WebSocket logger monitor. 
+        /// For multi monitoring and for
+        /// Example Possibilities
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureWebSocketLoggerMonitor(ref IServiceCollection services) {
@@ -320,7 +347,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         }
 
         /// <summary>
-        /// Server Core: Configure HTTP Client for work with third party API
+        /// Server Core: Configure Clients for work with third party API
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureThirdPartyApi(ref IServiceCollection services) {
@@ -344,7 +371,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
 
         /// <summary>
-        /// Server Core: Configures the singletons. Its Register Custom Listeners For Actions
+        /// Server Core: Configures the singletons. 
+        /// Its Register Custom Listeners For Actions
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureSingletons(ref IServiceCollection services) {
@@ -358,9 +386,10 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureScoped(ref IServiceCollection services) {
+            services.AddScoped<UserProfileManager>();
             services.AddScoped(typeof(IGenericApiServiceAsync<,>), typeof(GenericApiServiceAsync<,>));
             services.AddScoped(typeof(IGenericApiService<,>), typeof(GenericApiService<,>));
-            services.AddScoped<StaticFileDbService> ();
+            services.AddScoped<StaticFileDbService>();
         }
 
         /// <summary>
@@ -378,15 +407,78 @@ namespace EasyITCenter.ServerCoreConfiguration {
         internal static void ConfigureDatabaseContext(ref IServiceCollection services) {
             if (ServerRuntimeData.DebugMode) { services.AddDatabaseDeveloperPageExceptionFilter(); }
             try {
+                //MAIN DB
                 services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(ServerConfigSettings.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-               
+                //WEBHOSTING DB
+                services.AddDbContext<WebHostingDbContext>(
+                    opt =>opt.UseFileContextDatabase<JSONSerializer, DefaultFileManager>(databaseName: "EICwebHosting", location: Path.Combine(ServerRuntimeData.WebRoot_path, FileOperations.GetLastFolderFromPath(ServerRuntimeData.ServerPrivate_path), "databases", "EICwebHosting.mdf"), password: "EICwebHOSTING"));
+
+                //var test = new WebHostingDbContext();
                 /*
-                services.AddDbContext<WebHostingDbContext>(opt =>
-                opt.UseSqlServer(
-                     $"{ServerConfigSettings.WebHostingDBConnString};Database = EmployeeDB; AttachDbFileName ={Path.Combine(ServerRuntimeData.ServerPrivate_path, "databases", "EIC_WebHosting.mdf")}; Trusted_Connection = True; MultipleActiveResultSets = true"
-                    , ss => ss.UseNetTopologySuite()).EnableSensitiveDataLogging()
-                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+                services.AddDbContext<WebHostingDbContext>(opt => opt.UseSqlServer(Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-private\databases\EICwebHosting.mdf;Integrated Security=True;Multiple Active Result Sets=True;Connect Timeout=30;Application Name=EICwebHosting, x => x.MigrationsAssembly(typeof(DataContext).Assembly.FullName))
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
                 */
+
+                /*
+                  .AddIdentity<WebUser, WebUserRole>().AddSignInManager()
+                  .AddRoleManager<WebUserRole>().AddRoleStore<WebHostingDbContext>().AddRoleValidator<WebHostingDbContext>()
+                  .AddUserStore<WebHostingDbContext>().AddUserManager<WebUser>().AddUserValidator<WebUser>()
+                  .AddSignInManager().AddDefaultTokenProviders().AddTheIdServerStores().AddUserConfirmation<WebUserRole>()
+                  .AddDefaultUI().AddEntityFrameworkStores<WebHostingDbContext>()
+                */
+
+
+                services.AddIdentity<WebUser, WebRole>(config =>
+                {
+                    config.Password.RequireDigit = false;
+                    config.Password.RequireLowercase = false;
+                    config.Password.RequireNonAlphanumeric = false;
+                    config.Password.RequireUppercase = false;
+                    config.Password.RequiredLength = 8;
+                    config.Password.RequiredUniqueChars = 1;
+                    config.User.RequireUniqueEmail = true;
+                    config.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -._@+";
+                    config.SignIn.RequireConfirmedEmail = false;
+                }).AddRoles<WebRole>().AddEntityFrameworkStores<WebHostingDbContext>()
+                /*.AddDefaultUI()*/.AddDefaultTokenProviders();
+                /*
+                if (Configuration["Authentication:Facebook:IsEnabled"] == "true") {
+                    services
+                        .AddAuthentication()
+                        .AddFacebook(facebookOptions => {
+                            facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                            facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                        });
+                }
+
+                if (Configuration["Authentication:Google:IsEnabled"] == "true") {
+                    services
+                        .AddAuthentication()
+                        .AddGoogle(googleOptions => {
+                            googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                            googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                        });
+                }*/
+
+
+                /*
+                services.AddIdentityServer(options =>
+                {
+                    options.Events.RaiseErrorEvents = true;
+                    options.Events.RaiseInformationEvents = true;
+                    options.Events.RaiseFailureEvents = true;
+                    options.Events.RaiseSuccessEvents = true;
+
+                    // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
+                    options.EmitStaticAudienceClaim = true;
+                });
+                */
+                // in-memory, code config
+                //services.AddInMemoryIdentityResources(Config.IdentityResources);
+                //services.AddInMemoryApiScopes(Config.ApiScopes);
+                //services.AddInMemoryClients(Config.Clients);
+
+
                 //services.AddDbContext<dbcontext>(options => options.UseSqlite("connectionstring"));
             } catch (Exception ex) { }
         }

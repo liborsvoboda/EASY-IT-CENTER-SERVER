@@ -6,25 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EasyITCenter.Controllers
 {
+    /*
     //[Authorize(Roles = "admin")]
     [ApiController]
     [Route("/DevPortal")]
     public class DashboardsController : Controller
     {
+        [HttpGet("/DevPortal")]
         public IActionResult DevPortal()
         {
             return RedirectToAction("AdminDashboard");
         }
 
-        public IActionResult Dashboard1()
+        [HttpGet("/DevPortal/AdminDashboard")]
+        public IActionResult AdminDashboard()
         {
             return View();
         }
 
-        public IActionResult Dashboard2()
+        [HttpGet("/DevPortal/UserDashboard")]
+        public IActionResult UserDashboard()
         {
             return View();
         }
 
     }
+    */
 }

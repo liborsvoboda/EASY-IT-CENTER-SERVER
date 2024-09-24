@@ -2,7 +2,7 @@
 
 namespace EasyITCenter.Services {
 
-    // Generic Repository implementing generic interface takes two generic paremeters DbContext and
+    // Generic Repository implementing generic interface takes two generic parameters DbContext and
     // model class type
     public class GenericApiService<DbEntity, Tentity> : IGenericApiService<DbEntity, Tentity> where DbEntity : EasyITCenterContext where Tentity : class {
         private readonly DbContext _context;

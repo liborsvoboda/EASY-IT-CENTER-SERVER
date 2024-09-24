@@ -50,32 +50,32 @@ namespace EasyITCenter.ServerCoreStructure {
                 }
 
                 //Check Server Module
-                ServerModuleAndServiceList serverModule = DbOperations.CheckDefinedWebPageExists(routePath);
-                if (serverModule != null) {
-                    if (context.Items.FirstOrDefault(a => a.Key.ToString() == "ServerModule").Value != null) { context.Items.Remove("ServerModule"); }
-                    try { context.Items.Add(new KeyValuePair<object, object>("ServerModule", serverModule)); } catch { }
+                ServerModuleAndServiceList SystemModule = DbOperations.CheckDefinedWebPageExists(routePath);
+                if (SystemModule != null) {
+                    if (context.Items.FirstOrDefault(a => a.Key.ToString() == "SystemModule").Value != null) { context.Items.Remove("SystemModule"); }
+                    try { context.Items.Add(new KeyValuePair<object, object>("SystemModule", SystemModule)); } catch { }
 
                     string? userRole = context.User.Claims?.FirstOrDefault(a => a.Type.ToString() == ClaimTypes.Role.ToString())?.Value;
-                    if (!serverModule.RestrictedAccess
-                        || (serverModule.RestrictedAccess && userRole != null && serverModule.AllowedRoles != null && serverModule.AllowedRoles.Split(",").ToList().Contains(userRole))) {
+                    if (!SystemModule.RestrictedAccess
+                        || (SystemModule.RestrictedAccess && userRole != null && SystemModule.AllowedRoles != null && SystemModule.AllowedRoles.Split(",").ToList().Contains(userRole))) {
                         /*Go To Server Module*/
-                        routeLayout = RouteLayoutTypes.ServerModulesLayout; validPath = routePath; routingResult = RoutingActionTypes.Return;
-                    } else if (serverModule.RestrictedAccess && (userRole == null || userRole != null && (string.IsNullOrWhiteSpace(serverModule.AllowedRoles) ||
-                        (!string.IsNullOrWhiteSpace(serverModule.AllowedRoles) && !serverModule.AllowedRoles.Split(",").ToList().Contains(userRole))))) {
+                        routeLayout = RouteLayoutTypes.SystemModulesLayout; validPath = routePath; routingResult = RoutingActionTypes.Return;
+                    } else if (SystemModule.RestrictedAccess && (userRole == null || userRole != null && (string.IsNullOrWhiteSpace(SystemModule.AllowedRoles) ||
+                        (!string.IsNullOrWhiteSpace(SystemModule.AllowedRoles) && !SystemModule.AllowedRoles.Split(",").ToList().Contains(userRole))))) {
                         ServerModuleAndServiceList? loginmodule = new EasyITCenterContext().ServerModuleAndServiceLists.FirstOrDefault(a => a.IsLoginModule);
                         if (context.Items.FirstOrDefault(a => a.Key.ToString() == "LoginModule").Value != null) { context.Items.Remove("LoginModule"); }
                         try { context.Items.Add(new KeyValuePair<object, object?>("LoginModule", loginmodule)); } catch { }
-                        try { if (serverModule.UrlSubPath != null) { context.Response.Cookies.Append("RequestedModulePath", serverModule.UrlSubPath); } } catch { }
+                        try { if (SystemModule.UrlSubPath != null) { context.Response.Cookies.Append("RequestedModulePath", SystemModule.UrlSubPath); } } catch { }
                     }
-                    routeLayout = RouteLayoutTypes.ServerModulesLayout;
-                    if (routePath != "/ServerModules") { validPath = "/ServerModules"; routingResult = RoutingActionTypes.Next;
+                    routeLayout = RouteLayoutTypes.SystemModulesLayout;
+                    if (routePath != "/systemmodules") { validPath = "/systemmodules"; routingResult = RoutingActionTypes.Next;
                     } else { validPath = routePath; routingResult = RoutingActionTypes.Return; }
                 }
 
                 #region Solve Controlled Static Files
                 //Startup Redirect To Static File
                 if (validPath == null && context.Response.StatusCode == StatusCodes.Status200OK && routePath == "/"
-                    && routePath != ServerConfigSettings.RedirectPath && ServerConfigSettings.RedirectOnPageNotFound && ServerConfigSettings.RedirectPath.ToLower() != "/portal") {
+                    && routePath != ServerConfigSettings.RedirectPath && ServerConfigSettings.RedirectOnPageNotFound && ServerConfigSettings.RedirectPath.ToLower() != "/systemportal") {
                     routeLayout = RouteLayoutTypes.StaticFileLayout; /*enable change for md */ routePath = ServerConfigSettings.RedirectPath; routingResult = RoutingActionTypes.Next;
                 }
 
@@ -84,9 +84,9 @@ namespace EasyITCenter.ServerCoreStructure {
                 try {
                     int webMenuId = 0; webMenuId = int.TryParse(routePath.Split("/").Last().Split("-")[0], out int checkInt) ? checkInt : 0;
                     if (
-                        /*Portal started*/ (routePath == "/" && ServerConfigSettings.RedirectOnPageNotFound && ServerConfigSettings.RedirectPath.ToLower() == "/portal") || routePath == "/portal" ||
+                        /*Portal started*/ (routePath == "/" && ServerConfigSettings.RedirectOnPageNotFound && ServerConfigSettings.RedirectPath.ToLower() == "/systemportal" ) || routePath == "/systemportal" ||
                         /*Portal run*/ (new EasyITCenterContext().WebMenuLists.Where(a => a.Id == webMenuId || a.Name.ToLower() == routePath.Substring(1)).Any())
-                    ) { routeLayout = RouteLayoutTypes.PortalLayout; validPath = ServerConfigSettings.RedirectPath; routingResult = RoutingActionTypes.Next; }
+                    ) { routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = ServerConfigSettings.RedirectPath; routingResult = RoutingActionTypes.Next; }
                 } catch { }
                 #endregion
 
@@ -97,18 +97,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 if (validPath == null && routePath.StartsWith("/easydata", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.MetroLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
 
 
-                /*Check DocPortal index.md Type EveryTime
-                if (ServerConfigSettings.EnableAutoShowStaticMdAsHtml) {
-                    if (routePath.EndsWith(".md")) {
-                        validPath = routePath.Replace(".md", "");
-                        routeLayout = RouteLayoutTypes.DocPortalLayout; routingResult = RoutingActionTypes.Next;
-                    } else if ((routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "index.md"))
-                        || (!routePath.EndsWith("/") && !context.Request.Path.ToString().Split("/").Last().Contains(".") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + Path.DirectorySeparatorChar + "index.md"))
-                        ) {
-                        validPath = File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "index.md") ? routePath + "index" : routePath + "/index";
-                        routeLayout = RouteLayoutTypes.DocPortalLayout; routingResult = RoutingActionTypes.Next;
-                    }
-                }*/
+              
 
 
                 //Check MarkDown Type missing .md for Show in Markdown Layout
@@ -149,19 +138,19 @@ namespace EasyITCenter.ServerCoreStructure {
                 }
 
                 //Any Validation Founded
-                if (validPath == null && context.Items.FirstOrDefault(a => a.Key.ToString() == "ComandType").Value == null) {
+                if (validPath == null && context.Items.FirstOrDefault(a => a.Key.ToString() == "CommandType").Value == null) {
                     routeLayout = DataOperations.GenericToEnum<RouteLayoutTypes>(DbOperations.CheckDefinedWebPageExists("/DefaultWebPages/404NonExistPage").InheritedLayoutType);
                     validPath = "/ServerControls/404NonExistPage"; routingResult = RoutingActionTypes.Next;
                 }
             } catch (Exception Ex) {
-                routeLayout = RouteLayoutTypes.PortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return;
+                routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return;
                 CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) });
             }
 
             if (context.Items.FirstOrDefault(a => a.Key.ToString() == "RouteLayoutTypes").Value == null) { context.Items.Add("RouteLayoutTypes", routeLayout); }
             if (context.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value == null) { context.Items.Add("FileValidUrl", validPath); }
-            if (context.Items.FirstOrDefault(a => a.Key.ToString() == "ComandType").Value != null) { context.Items.Remove("ComandType"); context.Items.Add("ComandType", RoutingActionTypes.Return); }
-            else { context.Items.Add("ComandType", routingResult); }
+            if (context.Items.FirstOrDefault(a => a.Key.ToString() == "CommandType").Value != null) { context.Items.Remove("CommandType"); context.Items.Add("CommandType", RoutingActionTypes.Return); }
+            else { context.Items.Add("CommandType", routingResult); }
 
             return context;
         }

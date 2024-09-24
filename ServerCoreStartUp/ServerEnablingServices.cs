@@ -87,10 +87,12 @@ namespace EasyITCenter.ServerCoreConfiguration {
             }
         }
 
+
         /// <summary>
         /// Server Endpoints Configuration
         /// </summary>
         internal static void EnableEndpoints(ref IApplicationBuilder app) {
+
             app.UseEndpoints(endpoints => {
 
                 //EasyData Support
@@ -102,6 +104,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                 if (ServerConfigSettings.WebRazorPagesEngineEnabled) {
                     endpoints.MapRazorPages();
+                    endpoints.MapDefaultControllerRoute(); //MAYBE
+                    endpoints.MapAreaControllerRoute(name: "Dashboard",areaName: "Dashboard",pattern: "D/{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute(name: "DevPortal",pattern: "{controller=DevPortal}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute(name: "RazorPages", pattern: "{controller=ServerCorePages}/{action=Index}/{id?}");
                 }
 
@@ -159,6 +164,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     o.AddMetadataReferencesFromFiles(FileOperations.GetPathFiles(ServerRuntimeData.Startup_path, "*.dll", SearchOption.TopDirectoryOnly).ToArray());
                     // = ..MetadataReferences = GetAllReferences().ToImmutableList();
                 })); }
+
 
                 static IEnumerable<MetadataReference> GetAllReferences() {
                     yield return ReferenceAssembly("System.Runtime");
