@@ -15,7 +15,7 @@
                 <img src="/server-Integrated/razor-pages/RazorTemplate/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>@UserProfileManager.CurrentUser?.UserName</p>
+                <p>@UserProfileManager?.CurrentUser?.UserName</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -84,7 +84,7 @@
                     <li class="@(Html.IsMenuActive("/RazorTemplate/Inline") ? "active" : "")"><a href="/RazorTemplate/Inline"><i class="fa fa-circle-o"></i> Inline charts</a></li>
                 </ul>
             </li>
-            <li class="treeview @(Html.IsMenuActive("/RazorTemplate/UI") ? "active" : "")">
+            <li class="treeview @(Html.IsMenuActive("/RazorTemplate") ? "active" : "")">
                 <a href="#">
                     <i class="fa fa-laptop"></i>
                     <span>UI Elements</span>
@@ -93,12 +93,12 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/UI/General") ? "active" : "")"><a href="/RazorTemplate/UI/General"><i class="fa fa-circle-o"></i> General</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/UI/Icons") ? "active" : "")"><a href="/RazorTemplate/UI/Icons"><i class="fa fa-circle-o"></i> Icons</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/UI/Buttons") ? "active" : "")"><a href="/RazorTemplate/UI/Buttons"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/UI/Sliders") ? "active" : "")"><a href="/RazorTemplate/UI/Sliders"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/UI/Timeline") ? "active" : "")"><a href="/RazorTemplate/UI/Timeline"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/UI/Modals") ? "active" : "")"><a href="/RazorTemplate/UI/Modals"><i class="fa fa-circle-o"></i> Modals</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/General") ? "active" : "")"><a href="/RazorTemplate/General"><i class="fa fa-circle-o"></i> General</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Icons") ? "active" : "")"><a href="/RazorTemplate/Icons"><i class="fa fa-circle-o"></i> Icons</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Buttons") ? "active" : "")"><a href="/RazorTemplate/Buttons"><i class="fa fa-circle-o"></i> Buttons</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Sliders") ? "active" : "")"><a href="/RazorTemplate/Sliders"><i class="fa fa-circle-o"></i> Sliders</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Timeline") ? "active" : "")"><a href="/RazorTemplate/Timeline"><i class="fa fa-circle-o"></i> Timeline</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Modals") ? "active" : "")"><a href="/RazorTemplate/Modals"><i class="fa fa-circle-o"></i> Modals</a></li>
                 </ul>
             </li>
             <li class="treeview @(Html.IsMenuActive("/RazorTemplate/Forms") ? "active" : "")">
@@ -109,9 +109,9 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Forms/General") ? "active" : "")"><a href="/RazorTemplate/Forms/General"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Forms/Advanced") ? "active" : "")"><a href="/RazorTemplate/Forms/Advanced"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Forms/Editors") ? "active" : "")"><a href="/RazorTemplate/Forms/Editors"><i class="fa fa-circle-o"></i> Editors</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/General") ? "active" : "")"><a href="/RazorTemplate/General"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Advanced") ? "active" : "")"><a href="/RazorTemplate/Advanced"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Editors") ? "active" : "")"><a href="/RazorTemplate/Editors"><i class="fa fa-circle-o"></i> Editors</a></li>
                 </ul>
             </li>
             <li class="treeview @(Html.IsMenuActive("/RazorTemplate/Tables") ? "active" : "")">
@@ -122,8 +122,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Tables/Simple") ? "active" : "")"><a href="/RazorTemplate/Tables/Simple"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Tables/DataTable") ? "active" : "")"><a href="/RazorTemplate/Tables/DataTable"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Simple") ? "active" : "")"><a href="/RazorTemplate/Simple"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/DataTable") ? "active" : "")"><a href="/RazorTemplate/DataTable"><i class="fa fa-circle-o"></i> Data tables</a></li>
                 </ul>
             </li>
             <li class="@(Html.IsMenuActive("/RazorTemplate/Calendar") ? "active" : "")">
@@ -136,7 +136,7 @@
                 </a>
             </li>
             <li class="treeview @(Html.IsMenuActive("/RazorTemplate/Mail") ? "active" : "")">
-                <a href="/RazorTemplate/Mail/Inbox">
+                <a href="/RazorTemplate/Inbox">
                     <i class="fa fa-envelope"></i> <span>Mailbox</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-yellow">12</small>
@@ -145,16 +145,16 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Mail/Inbox") ? "active" : "")">
-                        <a href="/RazorTemplate/Mail/Inbox">
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Inbox") ? "active" : "")">
+                        <a href="/RazorTemplate/Inbox">
                             Inbox
                             <span class="pull-right-container">
                                 <span class="label label-primary pull-right">13</span>
                             </span>
                         </a>
                     </li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Mail/Compose") ? "active" : "")"><a href="/RazorTemplate/Mail/Compose">Compose</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Mail/Read") ? "active" : "")"><a href="/RazorTemplate/Mail/Read">Read</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Compose") ? "active" : "")"><a href="/RazorTemplate/Compose">Compose</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Read") ? "active" : "")"><a href="/RazorTemplate/Read">Read</a></li>
                 </ul>
             </li>
             <li class="treeview @(Html.IsMenuActive("/RazorTemplate/Examples") ? "active" : "")">
@@ -165,12 +165,12 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Examples/Invoice") ? "active" : "")"><a href="/RazorTemplate/Examples/Invoice"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Examples/Profile") ? "active" : "")"><a href="/RazorTemplate/Examples/Profile"><i class="fa fa-circle-o"></i> Profile</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Examples/Page404") ? "active" : "")"><a href="/RazorTemplate/Examples/Page404"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Examples/Page500") ? "active" : "")"><a href="/RazorTemplate/Examples/Page500"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Examples/Blank") ? "active" : "")"><a href="/RazorTemplate/Examples/Blank"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-                    <li class="@(Html.IsMenuActive("/RazorTemplate/Examples/Pace") ? "active" : "")"><a href="/RazorTemplate/Examples/Pace"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Invoice") ? "active" : "")"><a href="/RazorTemplate/Invoice"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Profile") ? "active" : "")"><a href="/RazorTemplate/Profile"><i class="fa fa-circle-o"></i> Profile</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Page404") ? "active" : "")"><a href="/RazorTemplate/Page404"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Page500") ? "active" : "")"><a href="/RazorTemplate/Page500"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Blank") ? "active" : "")"><a href="/RazorTemplate/Blank"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+                    <li class="@(Html.IsMenuActive("/RazorTemplate/Pace") ? "active" : "")"><a href="/RazorTemplate/Pace"><i class="fa fa-circle-o"></i> Pace Page</a></li>
                 </ul>
             </li>
             <li class="treeview">

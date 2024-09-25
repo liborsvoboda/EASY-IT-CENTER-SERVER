@@ -14,7 +14,7 @@
     /// <summary>
     /// The DB result message.
     /// </summary>
-    public class DBResultMessage {
+    public class ResMsg {
 
         public int InsertedId { get; set; } = 0;
         public string Status { get; set; }
@@ -145,7 +145,7 @@
                         CreatedDate = item.TimeStamp
                     });
                 });
-            } catch (Exception ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(ex) }); }
+            } catch (Exception ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }); }
             return posts;
         }
     }

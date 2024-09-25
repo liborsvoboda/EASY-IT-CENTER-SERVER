@@ -14,8 +14,8 @@
         /// <returns></returns>
         public Task PublishAsync(HealthReport report, CancellationToken cancellationToken) {
             if ((report.Status == HealthStatus.Degraded || report.Status == HealthStatus.Unhealthy) &&
-            ServerConfigSettings.ServiceCoreCheckerEmailSenderActive &&
-            ((ServerConfigSettings.ModuleHealthServiceMessageOnChangeOnly && _prevStatus?.Status == HealthStatus.Healthy) || !ServerConfigSettings.ModuleHealthServiceMessageOnChangeOnly)) {
+            SrvConfig.ServiceCoreCheckerEmailSenderActive &&
+            ((SrvConfig.ModuleHealthServiceMessageOnChangeOnly && _prevStatus?.Status == HealthStatus.Healthy) || !SrvConfig.ModuleHealthServiceMessageOnChangeOnly)) {
                 string message = "";
                 report.Entries.ToList().ForEach(monit => {
                     if (monit.Value.Status == HealthStatus.Degraded || monit.Value.Status == HealthStatus.Unhealthy) {

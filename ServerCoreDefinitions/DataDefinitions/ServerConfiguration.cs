@@ -3,7 +3,7 @@
     /// <summary>
     /// The server settings.
     /// </summary>
-    public partial class ServerConfigSettings {
+    public partial class SrvConfig {
 
         #region Emailer Service
 
@@ -382,7 +382,13 @@
         /// </summary>
         public static bool ModuleCSharpCodeBuilder { get; set; } = true;
 
-        
+
+        /// <summary>
+        /// Enable Identity Sever Administration, 
+        /// disable Default Basic/JWT Authentication
+        /// </summary>
+        public static bool EnableIdentityServer { get; set; } = false;
+
         #endregion Server Modules
 
         #region Server Web Portal

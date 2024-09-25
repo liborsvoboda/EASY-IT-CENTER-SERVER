@@ -75,8 +75,8 @@ namespace EasyITCenter.ServerCoreStructure {
                 #region Solve Controlled Static Files
                 //Startup Redirect To Static File
                 if (validPath == null && context.Response.StatusCode == StatusCodes.Status200OK && routePath == "/"
-                    && routePath != ServerConfigSettings.RedirectPath && ServerConfigSettings.RedirectOnPageNotFound && ServerConfigSettings.RedirectPath.ToLower() != "/systemportal") {
-                    routeLayout = RouteLayoutTypes.StaticFileLayout; /*enable change for md */ routePath = ServerConfigSettings.RedirectPath; routingResult = RoutingActionTypes.Next;
+                    && routePath != SrvConfig.RedirectPath && SrvConfig.RedirectOnPageNotFound && SrvConfig.RedirectPath.ToLower() != "/systemportal") {
+                    routeLayout = RouteLayoutTypes.StaticFileLayout; /*enable change for md */ routePath = SrvConfig.RedirectPath; routingResult = RoutingActionTypes.Next;
                 }
 
 
@@ -84,9 +84,9 @@ namespace EasyITCenter.ServerCoreStructure {
                 try {
                     int webMenuId = 0; webMenuId = int.TryParse(routePath.Split("/").Last().Split("-")[0], out int checkInt) ? checkInt : 0;
                     if (
-                        /*Portal started*/ (routePath == "/" && ServerConfigSettings.RedirectOnPageNotFound && ServerConfigSettings.RedirectPath.ToLower() == "/systemportal" ) || routePath == "/systemportal" ||
+                        /*Portal started*/ (routePath == "/" && SrvConfig.RedirectOnPageNotFound && SrvConfig.RedirectPath.ToLower() == "/systemportal" ) || routePath == "/systemportal" ||
                         /*Portal run*/ (new EasyITCenterContext().WebMenuLists.Where(a => a.Id == webMenuId || a.Name.ToLower() == routePath.Substring(1)).Any())
-                    ) { routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = ServerConfigSettings.RedirectPath; routingResult = RoutingActionTypes.Next; }
+                    ) { routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = SrvConfig.RedirectPath; routingResult = RoutingActionTypes.Next; }
                 } catch { }
                 #endregion
 
@@ -101,12 +101,12 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
                 //Check MarkDown Type missing .md for Show in Markdown Layout
-                if (ServerConfigSettings.EnableAutoShowStaticMdAsHtml) {
-                    if (!routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + ".md")) 
+                if (SrvConfig.EnableAutoShowStaticMdAsHtml) {
+                    if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + ".md")) 
                         { validPath = routePath; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
-                    else if (!routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/index.md")) 
+                    else if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/index.md")) 
                         { validPath = routePath + "/index"; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; } 
-                    else if (!routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/readme.md")) 
+                    else if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/readme.md")) 
                         { validPath = routePath + "/readme"; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
                 }
 
@@ -122,12 +122,12 @@ namespace EasyITCenter.ServerCoreStructure {
 
                 //Check Index.html & Html file
                 if (validPath == null) {
-                    if (routePath.EndsWith(".html") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath))) {
+                    if (routePath.EndsWith(".html") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath))) {
                         routeLayout = RouteLayoutTypes.StaticFileLayout; validPath = routePath; routingResult = RoutingActionTypes.Next;
                     }
 
-                    if ((routePath.EndsWith("/") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "index.html"))
-                        || (!routePath.EndsWith("/") && !context.Request.Path.ToString().Split("/").Last().Contains(".") && File.Exists(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + Path.DirectorySeparatorChar + "index.html"))
+                    if ((routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "index.html"))
+                        || (!routePath.EndsWith("/") && !context.Request.Path.ToString().Split("/").Last().Contains(".") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + Path.DirectorySeparatorChar + "index.html"))
                         ) {
                         if (!routePath.ToLower().EndsWith(".html")) {
                             validPath = !routePath.ToLower().EndsWith(".html") && !routePath.ToLower().EndsWith("index") && !routePath.EndsWith('/')
@@ -144,7 +144,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 }
             } catch (Exception Ex) {
                 routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return;
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) });
+                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) });
             }
 
             if (context.Items.FirstOrDefault(a => a.Key.ToString() == "RouteLayoutTypes").Value == null) { context.Items.Add("RouteLayoutTypes", routeLayout); }
@@ -176,30 +176,30 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="sendImmediately"></param>
         public static string SendEmail(SendMailRequest mailRequest, bool sendImmediately = false) {
             try {
-                if ((!ServerRuntimeData.DebugMode && !ServerConfigSettings.ConfigLogWarnPlusToDbEnabled) || sendImmediately) {
-                    if (ServerConfigSettings.ServiceCoreCheckerEmailSenderActive || sendImmediately) {
-                        MailMessage Email = new() { From = new MailAddress(mailRequest.Sender ?? ServerConfigSettings.EmailerSMTPLoginUsername) };
+                if ((!SrvRuntime.DebugMode && !SrvConfig.ConfigLogWarnPlusToDbEnabled) || sendImmediately) {
+                    if (SrvConfig.ServiceCoreCheckerEmailSenderActive || sendImmediately) {
+                        MailMessage Email = new() { From = new MailAddress(mailRequest.Sender ?? SrvConfig.EmailerSMTPLoginUsername) };
 
                         if (mailRequest.Recipients != null && mailRequest.Recipients.Any()) { mailRequest.Recipients.ForEach(email => { Email.To.Add(email); }); }
-                        else { Email.To.Add(ServerConfigSettings.EmailerServiceEmailAddress); }
+                        else { Email.To.Add(SrvConfig.EmailerServiceEmailAddress); }
 
-                        Email.Subject = mailRequest.Subject ?? ServerConfigSettings.ConfigCoreServerRegisteredName;
+                        Email.Subject = mailRequest.Subject ?? SrvConfig.ConfigCoreServerRegisteredName;
                         Email.Body = mailRequest.Content;
                         Email.IsBodyHtml = true;
 
-                        SmtpClient MailClient = new(ServerConfigSettings.EmailerSMTPServerAddress, ServerConfigSettings.EmailerSMTPPort) {
-                            Credentials = new NetworkCredential(ServerConfigSettings.EmailerSMTPLoginUsername, ServerConfigSettings.EmailerSMTPLoginPassword),
-                            EnableSsl = ServerConfigSettings.EmailerSMTPSslIsEnabled,
-                            Host = ServerConfigSettings.EmailerSMTPServerAddress,
-                            Port = ServerConfigSettings.EmailerSMTPPort
+                        SmtpClient MailClient = new(SrvConfig.EmailerSMTPServerAddress, SrvConfig.EmailerSMTPPort) {
+                            Credentials = new NetworkCredential(SrvConfig.EmailerSMTPLoginUsername, SrvConfig.EmailerSMTPLoginPassword),
+                            EnableSsl = SrvConfig.EmailerSMTPSslIsEnabled,
+                            Host = SrvConfig.EmailerSMTPServerAddress,
+                            Port = SrvConfig.EmailerSMTPPort
                         };
                         MailClient.Timeout = 5000;
                         MailClient.SendAsync(Email, Guid.NewGuid().ToString());
                     }
                 }
                 else {
-                    if (ServerConfigSettings.ConfigLogWarnPlusToDbEnabled && mailRequest.Content != null &&
-                        !ServerRuntimeData.ServerRestartRequest && ServerRuntimeData.ServerCoreStatus == ServerStatusTypes.Running.ToString()) {
+                    if (SrvConfig.ConfigLogWarnPlusToDbEnabled && mailRequest.Content != null &&
+                        !SrvRuntime.SrvRestartReq && SrvRuntime.ServerCoreStatus == ServerStatusTypes.Running.ToString()) {
                         SolutionFailList SolutionFailList = new SolutionFailList() { UserId = null, Source = "Server", Message = mailRequest.Content, LogLevel = null, UserName = null };
                         new EasyITCenterContext().SolutionFailLists.Add(SolutionFailList).Context.SaveChanges();
                         Console.WriteLine(mailRequest.Content); Debug.WriteLine(mailRequest.Content);
@@ -217,7 +217,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="password">The password.</param>
         /// <returns></returns>
         public static X509Certificate2 GetSelfSignedCertificate(string password) {
-            var commonName = ServerConfigSettings.ConfigCertificateDomain;
+            var commonName = SrvConfig.ConfigCertificateDomain;
             var rsaKeySize = 2048;
             var years = 10;
             var hashAlgorithm = HashAlgorithmName.SHA256;
@@ -241,11 +241,11 @@ namespace EasyITCenter.ServerCoreStructure {
 
                 var notAfter = DateTimeOffset.Now.AddYears(years);
                 var certificate = request.CreateSelfSigned(DateTimeOffset.Now.AddDays(-1), notAfter);
-                if (GetOperatingSystemInfo.IsWindows()) { certificate.FriendlyName = Assembly.GetExecutingAssembly().GetName().FullName; }
+                if (SrvOStype.IsWindows()) { certificate.FriendlyName = Assembly.GetExecutingAssembly().GetName().FullName; }
 
                 try { //Saving Autogenerate Certificate
                     byte[] exportedData = certificate.Export(X509ContentType.Pfx, password);
-                    File.WriteAllBytes(System.IO.Path.Combine(ServerRuntimeData.Startup_path, ServerRuntimeData.DataPath, "ServerAutoCertificate.pfx"), exportedData);
+                    File.WriteAllBytes(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath, "ServerAutoCertificate.pfx"), exportedData);
                 } catch { }
 
                 return new X509Certificate2(certificate.Export(X509ContentType.Pfx, password), password, X509KeyStorageFlags.Exportable);
@@ -261,11 +261,11 @@ namespace EasyITCenter.ServerCoreStructure {
             byte[]? certificate = null;
             string? password = null;
             try {
-                certificate = File.ReadAllBytes(System.IO.Path.Combine(ServerRuntimeData.Startup_path, ServerRuntimeData.DataPath, FileNameFromDataPath));
-                password = ServerConfigSettings.ConfigCertificatePassword;
+                certificate = File.ReadAllBytes(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath, FileNameFromDataPath));
+                password = SrvConfig.ConfigCertificatePassword;
                 return new X509Certificate2(certificate, password);
-            } catch (Exception Ex) { SendEmail(new SendMailRequest() { Content = "Incorrect Certificate Path or Password, " + DataOperations.GetSystemErrMessage(Ex) }); }
-            return GetSelfSignedCertificate(ServerConfigSettings.ConfigCertificatePassword);
+            } catch (Exception Ex) { SendEmail(new SendMailRequest() { Content = "Incorrect Certificate Path or Password, " + DataOperations.GetErrMsg(Ex) }); }
+            return GetSelfSignedCertificate(SrvConfig.ConfigCertificatePassword);
         }
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace EasyITCenter.ServerCoreStructure {
             try {
                 using (Process proc = new Process()) {
                    
-                    if (CoreOperations.GetOperatingSystemInfo.IsWindows()) {
+                    if (CoreOperations.SrvOStype.IsWindows()) {
                         proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".bat");
                         proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
                         proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
@@ -322,7 +322,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 }
 
             } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(ex) });
+                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
             }
             return resultOutput + Environment.NewLine + resultError;
         }
@@ -337,11 +337,11 @@ namespace EasyITCenter.ServerCoreStructure {
         public static TokenValidationParameters ValidAndGetTokenParameters() {
             return new TokenValidationParameters {
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(ServerConfigSettings.ConfigJwtLocalKey)),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SrvConfig.ConfigJwtLocalKey)),
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                ValidateLifetime = ServerConfigSettings.ConfigTimeTokenValidationEnabled,
-                ClockSkew = TimeSpan.FromMinutes(ServerConfigSettings.ConfigApiTokenTimeoutMin),
+                ValidateLifetime = SrvConfig.ConfigTimeTokenValidationEnabled,
+                ClockSkew = TimeSpan.FromMinutes(SrvConfig.ConfigApiTokenTimeoutMin),
             };
         }
 
@@ -364,7 +364,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <summary>
         /// Extension For Checking Operation System of Server Running
         /// </summary>
-        public static class GetOperatingSystemInfo {
+        public static class SrvOStype {
             public static bool IsWindows() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
             public static bool IsMacOS() => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
             public static bool IsLinux() => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
@@ -380,11 +380,11 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="updateList"></param>
         public static bool GetServerRegisteredRoutesList(string patchForCheck, bool updateList = false) {
             try {
-                if (updateList || ServerRuntimeData.ServerRegisteredRoutesList == null) { //a=>a.AttributeRouteInfo.Name action
-                    var RouteGroups = ((IReadOnlyList<ActionDescriptor>)ServerRuntimeData.ActionRouterProvider.ActionDescriptors.Items).GroupBy(a => a.AttributeRouteInfo?.Template).ToJson();
+                if (updateList || SrvRuntime.ServerRegisteredRoutesList == null) { //a=>a.AttributeRouteInfo.Name action
+                    var RouteGroups = ((IReadOnlyList<ActionDescriptor>)SrvRuntime.ActionRouterProvider.ActionDescriptors.Items).GroupBy(a => a.AttributeRouteInfo?.Template).ToJson();
 
                     
-                    ServerRuntimeData.ServerRegisteredRoutesList = ServerRuntimeData.ActionRouterProvider.ActionDescriptors.Items.ToArray().ToList();
+                    SrvRuntime.ServerRegisteredRoutesList = SrvRuntime.ActionRouterProvider.ActionDescriptors.Items.ToArray().ToList();
                     //.Select(a => a.JoinAsString("/")).ToList();
 
                     return RouteGroups.Contains(patchForCheck);

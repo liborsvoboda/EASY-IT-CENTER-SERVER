@@ -38,7 +38,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetSystemErrMessage(ex) }); }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetErrMsg(ex) }); }
         }
 
     }

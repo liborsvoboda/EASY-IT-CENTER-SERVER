@@ -29,19 +29,19 @@
                     });
 
                     return Ok(JsonSerializer.Serialize(
-                    new DBResultMessage() {
+                    new ResMsg() {
                         Status = DBResult.success.ToString(),
                         ErrorMessage = string.Empty
                     }));
                 }
                 else {
-                    return BadRequest(new DBResultMessage() {
+                    return BadRequest(new ResMsg() {
                         Status = DBResult.error.ToString(),
                         ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights")
                     });
                 }
             } catch (Exception ex) {
-                return BadRequest(new DBResultMessage() {
+                return BadRequest(new ResMsg() {
                     Status = DBResult.error.ToString(),
                     ErrorMessage = DataOperations.GetUserApiErrMessage(ex)
                 });

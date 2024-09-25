@@ -26,7 +26,7 @@
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
                 //}
-            } catch (Exception ex) { return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetSystemErrMessage(ex) }); }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetErrMsg(ex) }); }
         }
 
         [HttpGet("/WebApi/WebPages/WebCodeLibraryList")]
@@ -47,7 +47,7 @@
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
                 //}
-            } catch (Exception ex) { return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetSystemErrMessage(ex) }); }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetErrMsg(ex) }); }
         }
 
         [HttpGet("/WebApi/WebPages/GetWebMenuList")]
@@ -67,7 +67,7 @@
                     DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetSystemErrMessage(ex) }); }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetErrMsg(ex) }); }
         }
 
         [Authorize]
@@ -107,14 +107,14 @@
                         result = await data.Context.SaveChangesAsync();
                     }
 
-                    if (result > 0) return JsonSerializer.Serialize(new DBResultMessage() { InsertedId = webMenu.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
-                    else return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
+                    if (result > 0) return JsonSerializer.Serialize(new ResMsg() { InsertedId = webMenu.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
+                    else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                 }
                 else {
-                    return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") });
+                    return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") });
                 }
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
 
@@ -124,21 +124,21 @@
         public async Task<string> DeleteWebMenuList(string id) {
             try {
                 if (ServerApiServiceExtension.IsAdmin()) {
-                    if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
+                    if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     WebMenuList record = new() { Id = int.Parse(id) };
 
                     var data = new EasyITCenterContext().WebMenuLists.Remove(record);
                     int result = await data.Context.SaveChangesAsync();
 
-                    if (result > 0) return JsonSerializer.Serialize(new DBResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
-                    else return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
+                    if (result > 0) return JsonSerializer.Serialize(new ResMsg() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
+                    else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                 }
                 else {
-                    return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") });
+                    return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") });
                 }
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
     }

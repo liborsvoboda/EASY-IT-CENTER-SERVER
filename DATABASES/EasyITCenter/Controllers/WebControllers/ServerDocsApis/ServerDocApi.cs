@@ -33,7 +33,7 @@ namespace EasyITCenter.Controllers {
                     List<DocSrvDocTemplateList> templates; List<DocSrvDocumentationList> data;
 
                     //DOCS PORTAL
-                    FileOperations.CreatePath(Path.Combine(ServerRuntimeData.WebRoot_path, "server-doc", "md-book", "src"), true); 
+                    FileOperations.CreatePath(Path.Combine(SrvRuntime.WebRoot_path, "server-doc", "md-book", "src"), true); 
                     //FileOperations.CreatePath(Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book", "src"), true);
 
                    
@@ -55,7 +55,7 @@ namespace EasyITCenter.Controllers {
                             summary += "- [" + "Ver." + documentation.AutoVersion + ": " + documentation.Name + "](" + DataOperations.RemoveWhitespace(documentation.Name) + ".md" + ")   " + Environment.NewLine;
 
                             docDescription = "# Úvod   " + documentation.DocumentationGroup.Name + "  " + Environment.NewLine + Environment.NewLine + documentation.DocumentationGroup.Description + Environment.NewLine + documentation.Description + Environment.NewLine + Environment.NewLine;
-                            System.IO.File.WriteAllText(Path.Combine(ServerRuntimeData.Startup_path, ServerConfigSettings.DefaultStaticWebFilesFolder, "server-doc", "md-book", "src", DataOperations.RemoveWhitespace(documentation.Name) + ".md"), docDescription + documentation.MdContent, Encoding.UTF8);
+                            System.IO.File.WriteAllText(Path.Combine(SrvRuntime.Startup_path, SrvConfig.DefaultStaticWebFilesFolder, "server-doc", "md-book", "src", DataOperations.RemoveWhitespace(documentation.Name) + ".md"), docDescription + documentation.MdContent, Encoding.UTF8);
 
                             //Dev wwwroot not bin/net6/wwwroot
                             System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book", "src", DataOperations.RemoveWhitespace(documentation.Name) + ".md"), docDescription + documentation.MdContent, Encoding.UTF8);
@@ -84,14 +84,14 @@ namespace EasyITCenter.Controllers {
                         }); summary += "    ```  " + Environment.NewLine + Environment.NewLine + "---" + Environment.NewLine;
                         */
 
-                        System.IO.File.WriteAllText(Path.Combine(ServerRuntimeData.WebRoot_path, "server-doc", "md-book", "src", "SUMMARY.md"), summary, Encoding.UTF8);
+                        System.IO.File.WriteAllText(Path.Combine(SrvRuntime.WebRoot_path, "server-doc", "md-book", "src", "SUMMARY.md"), summary, Encoding.UTF8);
                         //System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book", "src", "SUMMARY.md"), summary, Encoding.UTF8);
 
                         RunProcessRequest process = new RunProcessRequest();
                         //if (CoreOperations.GetOperatingSystemInfo.IsWindows()) {
                             process = new RunProcessRequest() { 
-                                Command = Path.Combine(ServerRuntimeData.WebRoot_path, "server-doc", "md-book", "generate-mdbook.cmd"), 
-                                Arguments = "", WorkingDirectory = Path.Combine(ServerRuntimeData.WebRoot_path, "server-doc", "md-book") 
+                                Command = Path.Combine(SrvRuntime.WebRoot_path, "server-doc", "md-book", "generate-mdbook.cmd"), 
+                                Arguments = "", WorkingDirectory = Path.Combine(SrvRuntime.WebRoot_path, "server-doc", "md-book") 
                             };
                             //process = new RunProcessRequest() { Command = Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book", "generate-mdbook.cmd"), Arguments = "", WorkingDirectory = Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book") };
                         /*
@@ -104,9 +104,9 @@ namespace EasyITCenter.Controllers {
                         CoreOperations.RunSystemProcess(process);
                     }
                 }
-                return JsonSerializer.Serialize(new DBResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
-            return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DBResult.DeniedYouAreNotAdmin.ToString() });
+                return JsonSerializer.Serialize(new ResMsg() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+            return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DBResult.DeniedYouAreNotAdmin.ToString() });
         }
     }
 }

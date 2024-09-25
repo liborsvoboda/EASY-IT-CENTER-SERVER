@@ -25,11 +25,15 @@ using Microsoft.AspNetCore.Identity;
 using EasyITCenter.ServerCoreDBSettings;
 using ServiceAutoRegistration;
 using ServiceAutoRegistration.Providers;
-using Aguacongas.TheIdServer.Data;
-using Aguacongas.TheIdServer.Models;
 using LinqToDB;
 using FileContextCore.FileManager;
 using FileContextCore.Serializer;
+using Microsoft.Extensions.DependencyInjection;
+using PuppeteerExtraSharp.Plugins.Recaptcha;
+using Codeuctivity.OpenXmlPowerTools;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using IdentityModel;
+
 
 namespace EasyITCenter.ServerCoreConfiguration {
 
@@ -42,13 +46,13 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
 
         internal static void AutoRegisterClassServices(ref IServiceCollection services) {
-
+            /*
             services.AutoRegisterServices(options =>
             {
                 options.Namespaces.Scoped = "Managers";
                 options.Provider = new ClassRegistrationProvider();
             });
-
+            */
 
         }
 
@@ -58,7 +62,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureAutoMinify(ref IServiceCollection services) {
-            if (ServerConfigSettings.EnableAutoMinify)
+            if (SrvConfig.EnableAutoMinify)
             {
                 services.AddWebOptimizer(cfg =>
                 {
@@ -75,24 +79,24 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureFTPServer(ref IServiceCollection services) {
-            if (ServerConfigSettings.ServerFtpEngineEnabled) {
+            if (SrvConfig.ServerFtpEngineEnabled) {
                 services.AddFtpServer(
                     builder => {
-                        if (!ServerConfigSettings.ServerFtpSecurityEnabled) { 
+                        if (!SrvConfig.ServerFtpSecurityEnabled) { 
                             builder.UseDotNetFileSystem().DisableChecks().UseSingleRoot().EnableAnonymousAuthentication(); } else { builder.UseDotNetFileSystem().DisableChecks().UseRootPerUser(); 
                         }
                     });
                 services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "127.0.0.1"; /*opt.Port*/ });
                 services.Configure<DotNetFileSystemOptions>(opt => {
-                    opt.RootPath = !ServerConfigSettings.ServerFtpSecurityEnabled ? Path.Combine(ServerRuntimeData.FTPServerPath,"guest") : ServerRuntimeData.FTPServerPath;
+                    opt.RootPath = !SrvConfig.ServerFtpSecurityEnabled ? Path.Combine(SrvRuntime.FTPServerPath,"guest") : SrvRuntime.FTPServerPath;
                     opt.AllowNonEmptyDirectoryDelete = true;
                 });
                 services.AddSingleton<IMembershipProvider, HostedFtpServerMembershipProvider>();
                 services.AddHostedService<HostedFtpServer>();
 
                 using (var serviceProvider = services.BuildServiceProvider()) {
-                    ServerRuntimeData.ServerFTPProvider = serviceProvider.GetRequiredService<IFtpServerHost>();
-                    ServerRuntimeData.ServerFTPRunningStatus = true;
+                    SrvRuntime.ServerFTPProvider = serviceProvider.GetRequiredService<IFtpServerHost>();
+                    SrvRuntime.FTPSrvStatus = true;
                 }
             }
         }
@@ -103,7 +107,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services"></param>
         internal static void ConfigureCookie(ref IServiceCollection services) {
             services.Configure<CookiePolicyOptions>(options => {
-                options.ConsentCookie.Name = ServerConfigSettings.ConfigCoreServerRegisteredName;
+                options.ConsentCookie.Name = SrvConfig.ConfigCoreServerRegisteredName;
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.Lax;
                 options.Secure = CookieSecurePolicy.Always;
@@ -145,7 +149,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureLogging(ref IServiceCollection services) {
-            if (ServerRuntimeData.DebugMode) {
+            if (SrvRuntime.DebugMode) {
                 services.AddLogging(builder => {
                     builder.AddConsole().AddDebug().SetMinimumLevel(LogLevel.Debug)
                     .AddFilter<ConsoleLoggerProvider>(category: null, level: LogLevel.Debug)
@@ -160,87 +164,14 @@ namespace EasyITCenter.ServerCoreConfiguration {
             });
         }
 
-        /// <summary>
-        /// Server Core: Configure Server Authentication Support
-        /// IDENTITY FULL
-        /// https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/security/authentication/scaffold-identity/sample/StartupFull.cs
-        /// ///https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/other-logins?view=aspnetcore-3.1
-        /// </summary>
-        /// <param name="services"></param>
-        internal static void ConfigureAuthentication(ref IServiceCollection services) {
-
-
-            //FUTURE  Certificate Auth
-            //if (ServerConfigSettings.ConfigServerStartupHttpAndHttps || ServerConfigSettings.ConfigServerStartupOnHttps) {
-            //    services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(options =>
-            //    {
-            //        options.Events = new CertificateAuthenticationEvents {
-            //            OnCertificateValidated = context => { var claims = new[]{
-            //        new Claim(context.ClientCertificate.Subject,
-            //            ClaimValueTypes.String, context.Options.ClaimsIssuer),
-            //        new Claim(ClaimTypes.Name,context.ClientCertificate.Subject,
-            //            ClaimValueTypes.String, context.Options.ClaimsIssuer)};
-            //                context.Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, context.Scheme.Name));
-            //                context.Success();return Task.CompletedTask;
-            //            }
-            //        };
-            //    });
-            //}
-
-            
-            services.AddAuthentication(x => {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => {
-                x.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = CoreOperations.ValidAndGetTokenParameters();
-                x.ForwardSignIn = new EasyITCenterContext().ServerModuleAndServiceLists.Where(a => a.IsLoginModule).FirstOrDefault()?.UrlSubPath;
-
-                if (ServerConfigSettings.ConfigTimeTokenValidationEnabled) { x.TokenValidationParameters.LifetimeValidator = EasyITCenterAuthenticationApi.TokenLifetimeValidator; }
-
-                x.Events = new JwtBearerEvents {
-                    OnAuthenticationFailed = context => {
-                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException)) {
-                            context.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
-                        }
-                        return Task.CompletedTask;
-                    }
-                };
-            });
-            
-
-            /*
-            services.AddAuthentication().AddGoogle(options => { 
-                //options.ClientId = "";
-                //options.ClientSecret = "";
-            }).AddFacebook(options => {
-                //options.ClientId = "";
-                //options.ClientSecret = "";
-                options.AppId = "";
-                options.AppSecret = "";
-            }).AddMicrosoftAccount(microsoftOptions => {
-                //microsoftOptions.ClientId = "";
-                //microsoftOptions.ClientSecret = "";
-            }).AddTwitter(twitterOptions => {
-                twitterOptions.ConsumerKey = "";
-                twitterOptions.ConsumerSecret = "";
-                twitterOptions.RetrieveUserDetails = true;
-            });
-            */
-           
-        }
 
         /// <summary>
         /// Configures the MVC server pages on Server format "cshtml"
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureServerWebPages(ref IServiceCollection services) {
-            if (ServerConfigSettings.WebRazorPagesEngineEnabled) {
-                if (ServerConfigSettings.WebRazorPagesCompileOnRuntime) {
+            if (SrvConfig.WebRazorPagesEngineEnabled) {
+                if (SrvConfig.WebRazorPagesCompileOnRuntime) {
                     services.AddMvc(options => {
                         options.CacheProfiles.Add("Default30", new CacheProfile() { Duration = 30 });
                         options.AllowEmptyInputInBodyModelBinding = true;
@@ -295,8 +226,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 }
             }
 
-            if (ServerConfigSettings.WebMvcPagesEngineEnabled) {
-                if (ServerConfigSettings.WebRazorPagesCompileOnRuntime) {
+            if (SrvConfig.WebMvcPagesEngineEnabled) {
+                if (SrvConfig.WebRazorPagesCompileOnRuntime) {
                     services.AddMvc(options => {
                         options.EnableEndpointRouting = false;
                         options.AllowEmptyInputInBodyModelBinding = true;
@@ -315,25 +246,25 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureLetsEncrypt(ref IServiceCollection services) {
-            if (ServerConfigSettings.ConfigServerGetLetsEncrypt) {
+            if (SrvConfig.ConfigServerGetLetsEncrypt) {
                 services.AddLettuceEncrypt(option => {
-                    List<string> domainList = ServerConfigSettings.ConfigCertificateDomain.Contains(',')
-                    ? ServerConfigSettings.ConfigCertificateDomain.Split(',').ToList()
-                    : ServerConfigSettings.ConfigCertificateDomain.Split(';').ToList();
+                    List<string> domainList = SrvConfig.ConfigCertificateDomain.Contains(',')
+                    ? SrvConfig.ConfigCertificateDomain.Split(',').ToList()
+                    : SrvConfig.ConfigCertificateDomain.Split(';').ToList();
 
                     domainList.ForEach(domain => { if (string.IsNullOrWhiteSpace(domain)) domainList.Remove(domain); });
                     option.DomainNames = domainList.ToArray();
-                    option.EmailAddress = ServerConfigSettings.EmailerServiceEmailAddress;
+                    option.EmailAddress = SrvConfig.EmailerServiceEmailAddress;
                     option.AcceptTermsOfService = true;
                     option.RenewDaysInAdvance = new TimeSpan(10, 0, 0, 0);
                     option.RenewalCheckPeriod = new TimeSpan(1, 0, 0, 0);
-                }).PersistDataToDirectory(new DirectoryInfo(System.IO.Path.Combine(ServerRuntimeData.Startup_path, ServerRuntimeData.DataPath)), ServerConfigSettings.ConfigCertificatePassword);
+                }).PersistDataToDirectory(new DirectoryInfo(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath)), SrvConfig.ConfigCertificatePassword);
             }
         }
 
 
         internal static void ConfigureRssFeed(ref IServiceCollection services) {
-            if (ServerConfigSettings.WebRSSFeedsEnabled) { services.AddRSSFeed<SomeRSSProvider>(); }
+            if (SrvConfig.WebRSSFeedsEnabled) { services.AddRSSFeed<SomeRSSProvider>(); }
         }
 
         /// <summary>
@@ -343,7 +274,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureWebSocketLoggerMonitor(ref IServiceCollection services) {
-            if (ServerConfigSettings.WebSocketServerMonitorEnabled) { services.AddSingleton<ILoggerProvider, ServerWebSockeMonitorService>(); }
+            if (SrvConfig.WebSocketServerMonitorEnabled) { services.AddSingleton<ILoggerProvider, ServerWebSockeMonitorService>(); }
         }
 
         /// <summary>
@@ -386,7 +317,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureScoped(ref IServiceCollection services) {
-            services.AddScoped<UserProfileManager>();
+            if (SrvConfig.EnableIdentityServer) { services.AddScoped<UserProfileManager>(); }
             services.AddScoped(typeof(IGenericApiServiceAsync<,>), typeof(GenericApiServiceAsync<,>));
             services.AddScoped(typeof(IGenericApiService<,>), typeof(GenericApiService<,>));
             services.AddScoped<StaticFileDbService>();
@@ -397,7 +328,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureCentralServicesProviders(ref IServiceCollection services) {
-            ServerRuntimeData.ServerServiceProvider = services.BuildServiceProvider();
+            SrvRuntime.SrvServiceProvider = services.BuildServiceProvider();
+
         }
 
         /// <summary>
@@ -405,82 +337,107 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureDatabaseContext(ref IServiceCollection services) {
-            if (ServerRuntimeData.DebugMode) { services.AddDatabaseDeveloperPageExceptionFilter(); }
+            if (SrvRuntime.DebugMode) { services.AddDatabaseDeveloperPageExceptionFilter(); }
             try {
-                //MAIN DB
-                services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(ServerConfigSettings.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+                //EIC&ESB MAIN DB
+                services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(SrvConfig.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+
                 //WEBHOSTING DB
-                services.AddDbContext<WebHostingDbContext>(
-                    opt =>opt.UseFileContextDatabase<JSONSerializer, DefaultFileManager>(databaseName: "EICwebHosting", location: Path.Combine(ServerRuntimeData.WebRoot_path, FileOperations.GetLastFolderFromPath(ServerRuntimeData.ServerPrivate_path), "databases", "EICwebHosting.mdf"), password: "EICwebHOSTING"));
+                services.AddDbContext<WebHostingDbContext>((p, o) => o.UseSqlServer($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30",
+                    x => x.MigrationsHistoryTable("MigrationHistory").UseNetTopologySuite())
+                .UseInternalServiceProvider(p));
 
-                //var test = new WebHostingDbContext();
-                /*
-                services.AddDbContext<WebHostingDbContext>(opt => opt.UseSqlServer(Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-private\databases\EICwebHosting.mdf;Integrated Security=True;Multiple Active Result Sets=True;Connect Timeout=30;Application Name=EICwebHosting, x => x.MigrationsAssembly(typeof(DataContext).Assembly.FullName))
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-                */
+                // Database File Example
+                // services.AddDbContext<WebHostingDbContext>(
+                // opt =>opt.UseFileContextDatabase<JSONSerializer, DefaultFileManager>(databaseName: "EICwebHosting", location: Path.Combine(ServerRuntimeData.WebRoot_path, FileOperations.GetLastFolderFromPath(ServerRuntimeData.ServerPrivate_path), "databases", "EICwebHosting.mdf"), password: "EICwebHOSTING"));
+                //context.Database.Migrate();
 
-                /*
-                  .AddIdentity<WebUser, WebUserRole>().AddSignInManager()
-                  .AddRoleManager<WebUserRole>().AddRoleStore<WebHostingDbContext>().AddRoleValidator<WebHostingDbContext>()
-                  .AddUserStore<WebHostingDbContext>().AddUserManager<WebUser>().AddUserValidator<WebUser>()
-                  .AddSignInManager().AddDefaultTokenProviders().AddTheIdServerStores().AddUserConfirmation<WebUserRole>()
-                  .AddDefaultUI().AddEntityFrameworkStores<WebHostingDbContext>()
-                */
+            } catch (Exception ex) { }
+        }
 
 
-                services.AddIdentity<WebUser, WebRole>(config =>
-                {
-                    config.Password.RequireDigit = false;
-                    config.Password.RequireLowercase = false;
-                    config.Password.RequireNonAlphanumeric = false;
-                    config.Password.RequireUppercase = false;
-                    config.Password.RequiredLength = 8;
-                    config.Password.RequiredUniqueChars = 1;
-                    config.User.RequireUniqueEmail = true;
-                    config.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -._@+";
-                    config.SignIn.RequireConfirmedEmail = false;
-                }).AddRoles<WebRole>().AddEntityFrameworkStores<WebHostingDbContext>()
-                /*.AddDefaultUI()*/.AddDefaultTokenProviders();
-                /*
-                if (Configuration["Authentication:Facebook:IsEnabled"] == "true") {
-                    services
-                        .AddAuthentication()
-                        .AddFacebook(facebookOptions => {
-                            facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-                            facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-                        });
-                }
+        /// <summary>
+        /// Server Core: Configure Server Authentication Support
+        /// Default Basic/JWT Authentication /Expiration BY 
+        /// Main EasyITCenter Database
+        /// </summary>
+        /// <param name="services"></param>
+        internal static void ConfigureDefaultAuthentication(ref IServiceCollection services) {
 
-                if (Configuration["Authentication:Google:IsEnabled"] == "true") {
-                    services
-                        .AddAuthentication()
-                        .AddGoogle(googleOptions => {
-                            googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                            googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-                        });
-                }*/
+            if (!SrvConfig.EnableIdentityServer) {
+                services.AddAuthentication(x => {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(x => {
+                    x.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = CoreOperations.ValidAndGetTokenParameters();
+                    x.ForwardSignIn = new EasyITCenterContext().ServerModuleAndServiceLists.Where(a => a.IsLoginModule).FirstOrDefault()?.UrlSubPath;
+                    if (SrvConfig.ConfigTimeTokenValidationEnabled) { x.TokenValidationParameters.LifetimeValidator = EasyITCenterAuthenticationApi.TokenLifetimeValidator; }
+                    x.Events = new JwtBearerEvents {
+                        OnAuthenticationFailed = context => {
+                            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException)) {
+                                context.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
+                            }
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
+            }
+        }
 
-
-                /*
-                services.AddIdentityServer(options =>
-                {
+        /// <summary>
+        /// Configure Identity Server Management
+        /// </summary>
+        /// <param name="services"></param>
+        internal static void ConfigureIdentityServer(ref IServiceCollection services) {
+            if (SrvConfig.EnableIdentityServer) {
+                services.AddIdentityServer(options => {
                     options.Events.RaiseErrorEvents = true;
                     options.Events.RaiseInformationEvents = true;
                     options.Events.RaiseFailureEvents = true;
                     options.Events.RaiseSuccessEvents = true;
-
-                    // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
+                    options.UserInteraction.ErrorUrl = "/DevPortal/Error";
+                    options.UserInteraction.LoginUrl = "/DevPortal/Login";
+                    options.UserInteraction.LogoutUrl = "/DevPortal/Logout";
+                    options.Discovery.ShowEndpoints = true;
+                    options.Endpoints.EnableUserInfoEndpoint = true;
+                    options.Endpoints.EnableTokenRevocationEndpoint = true;
+                    options.Endpoints.EnableAuthorizeEndpoint = true;
                     options.EmitStaticAudienceClaim = true;
+                    options.Discovery.ShowTokenEndpointAuthenticationMethods = true;
+
+                }).AddInMemoryIdentityResources(new List<IdentityServer4.Models.IdentityResource>())
+                .AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
+                .AddInMemoryClients(new List<IdentityServer4.Models.Client>())
+                .AddInMemoryApiScopes(new List<IdentityServer4.Models.ApiScope>())
+                .AddCoreServices().AddInMemoryPersistedGrants()//.AddPluggableServices()
+                .AddJwtBearerClientAuthentication().AddCookieAuthentication()
+                .AddResponseGenerators().AddDeveloperSigningCredential();
+
+
+                /*
+                services.AddAuthentication().AddGoogle(options => { 
+                    //options.ClientId = "";
+                    //options.ClientSecret = "";
+                }).AddFacebook(options => {
+                    //options.ClientId = "";
+                    //options.ClientSecret = "";
+                    options.AppId = "";
+                    options.AppSecret = "";
+                }).AddMicrosoftAccount(microsoftOptions => {
+                    //microsoftOptions.ClientId = "";
+                    //microsoftOptions.ClientSecret = "";
+                }).AddTwitter(twitterOptions => {
+                    twitterOptions.ConsumerKey = "";
+                    twitterOptions.ConsumerSecret = "";
+                    twitterOptions.RetrieveUserDetails = true;
                 });
                 */
-                // in-memory, code config
-                //services.AddInMemoryIdentityResources(Config.IdentityResources);
-                //services.AddInMemoryApiScopes(Config.ApiScopes);
-                //services.AddInMemoryClients(Config.Clients);
-
-
-                //services.AddDbContext<dbcontext>(options => options.UseSqlite("connectionstring"));
-            } catch (Exception ex) { }
+            }
         }
     }
 }

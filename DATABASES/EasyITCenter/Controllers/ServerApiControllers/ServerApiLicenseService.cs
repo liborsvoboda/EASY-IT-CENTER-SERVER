@@ -37,7 +37,7 @@ namespace EasyITCenter.ControllersExtensions {
                     data = new EasyITCenterContext().Database.ExecuteSqlRaw("exec SpServiceCheckUnlockKey @unlockCode, @partNumber , @ipAddress, @allowed output", parameters.ToArray()).ToString();
                     allowed = bool.Parse(parameters[3].Value.ToString());
                 }
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return JsonSerializer.Serialize(allowed);
         }
 

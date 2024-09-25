@@ -11,33 +11,33 @@ namespace EasyITCenter {
     /// <summary>
     /// Server Main Definition Starting Point Of Project
     /// </summary>
-    public class BackendServer {
-        private static ServerConfigSettings _serverConfigSettings = new();
-        private static readonly ServerRuntimeData _serverRuntimeData = new();
-        internal static readonly string SwaggerModuleDescription = "Full Backend Server DB & API & WebSocket model";
+    public class EICServer {
+        private static SrvConfig _srvConfig = new();
+        private static readonly SrvRuntime _srvRuntime = new();
+        internal static readonly string SwaggerDesc = "Full Backend Server DB & API & WebSocket model";
 
         /// <summary>
         /// Startup Server Initialization Server Setting Data
         /// </summary>
-        public static readonly ServerConfigSettings ServerConfigSettings = _serverConfigSettings;
+        public static readonly SrvConfig SrvConfig = _srvConfig;
 
         /// <summary>
         /// Startup Server Initialization Server Runtime Data
         /// </summary>
-        public static readonly ServerRuntimeData ServerRuntimeData = _serverRuntimeData;
+        public static readonly SrvRuntime SrvRuntime = _srvRuntime;
 
         /// <summary>
         /// Server Startup Process
         /// </summary>
         /// <param name="args"></param>
         public static async Task Main(string[] args) {
-            ServerRuntimeData.ServerArgs = args;
+            SrvRuntime.ServerArgs = args;
 
             await StartServer();
 
             //Restart Server Control
-            while (ServerRuntimeData.ServerRestartRequest) {
-                ServerRuntimeData.ServerRestartRequest = false;
+            while (SrvRuntime.SrvRestartReq) {
+                SrvRuntime.SrvRestartReq = false;
                 await StartServer();
             }
         }
@@ -46,8 +46,8 @@ namespace EasyITCenter {
         /// Server Restart Controller
         /// </summary>
         public static void RestartServer() {
-            ServerRuntimeData.ServerRestartRequest = true;
-            ServerRuntimeData.ServerCancelToken.Cancel();
+            SrvRuntime.SrvRestartReq = true;
+            SrvRuntime.ServerCancelToken.Cancel();
         }
 
         /// <summary>
@@ -56,25 +56,25 @@ namespace EasyITCenter {
         private static async Task StartServer() {
             try {
                 CheckLicense();
-                ServerRuntimeData.ServerCancelToken = new CancellationTokenSource();
+                SrvRuntime.ServerCancelToken = new CancellationTokenSource();
                 FileOperations.LoadOrCreateSettings();
 
-                var hostBuilder = BuildWebHost(ServerRuntimeData.ServerArgs);
-                if (CoreOperations.GetOperatingSystemInfo.IsWindows()) {
+                var hostBuilder = BuildWebHost(SrvRuntime.ServerArgs);
+                if (CoreOperations.SrvOStype.IsWindows()) {
                     hostBuilder.UseWindowsService(options => {
-                        options.ServiceName = ServerConfigSettings.ConfigCoreServerRegisteredName;
+                        options.ServiceName = SrvConfig.ConfigCoreServerRegisteredName;
                     });
                 }
 
                 //Load StartupDBdata
-                if (ServerConfigSettings.ServiceUseDbLocalAutoupdatedDials) { ServerStartupDbDataLoading(); }
+                if (SrvConfig.ServiceUseDbLocalAutoupdatedDials) { ServerStartupDbDataLoading(); }
 
                 //Start Server
-                await hostBuilder.Build().RunAsync(ServerRuntimeData.ServerCancelToken.Token);
+                await hostBuilder.Build().RunAsync(SrvRuntime.ServerCancelToken.Token);
             } catch (Exception Ex) {
                 
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) });
-                Console.WriteLine("Server Startup Error: " + DataOperations.GetSystemErrMessage(Ex));
+                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) });
+                Console.WriteLine("Server Startup Error: " + DataOperations.GetErrMsg(Ex));
                 Environment.Exit(3);
             }
         }
@@ -91,24 +91,24 @@ namespace EasyITCenter {
             
             return Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder => {
-                if (ServerConfigSettings.ConfigServerStartupOnHttps || ServerConfigSettings.ConfigServerStartupHTTPAndHTTPS) {
+                if (SrvConfig.ConfigServerStartupOnHttps || SrvConfig.ConfigServerStartupHTTPAndHTTPS) {
                     webBuilder.ConfigureKestrel(options => {
                         options.AddServerHeader = true;
 
                         //TODO umoznuje naslouchat i na více portech soucasne
                         //options.ListenAnyIP(500);
-                        options.ListenAnyIP(ServerConfigSettings.ConfigServerStartupHttpsPort, opt => {
+                        options.ListenAnyIP(SrvConfig.ConfigServerStartupHttpsPort, opt => {
                             opt.Protocols = HttpProtocols.Http1AndHttp2;
                             opt.KestrelServerOptions.AllowAlternateSchemes = true;
 
-                            if (!ServerConfigSettings.ConfigServerGetLetsEncrypt) {
-                                opt.UseHttps(ServerConfigSettings.ConfigCertificatePath.Length > 0
-                                    ? CoreOperations.GetSelfSignedCertificateFromFile(ServerConfigSettings.ConfigCertificatePath)
-                                        : CoreOperations.GetSelfSignedCertificate(ServerConfigSettings.ConfigCertificatePassword),
-                                      httpsOptions => {
-                                          httpsOptions.SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
-                                          httpsOptions.ClientCertificateMode = ClientCertificateMode.NoCertificate;
-                                          httpsOptions.AllowAnyClientCertificate();
+                            if (!SrvConfig.ConfigServerGetLetsEncrypt) {
+                                opt.UseHttps(SrvConfig.ConfigCertificatePath.Length > 0
+                                    ? CoreOperations.GetSelfSignedCertificateFromFile(SrvConfig.ConfigCertificatePath)
+                                        : CoreOperations.GetSelfSignedCertificate(SrvConfig.ConfigCertificatePassword),
+                                      opt => {
+                                          opt.SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
+                                          opt.ClientCertificateMode = ClientCertificateMode.NoCertificate;
+                                          opt.AllowAnyClientCertificate();
                                       });
                             }
                         });
@@ -116,7 +116,7 @@ namespace EasyITCenter {
                 }
 
                 //Lets Encrypt
-                if (ServerConfigSettings.ConfigServerStartupOnHttps && ServerConfigSettings.ConfigServerGetLetsEncrypt) {
+                if (SrvConfig.ConfigServerStartupOnHttps && SrvConfig.ConfigServerGetLetsEncrypt) {
                     webBuilder.UseKestrel(options => { var appServices = options.ApplicationServices;
                         options.ConfigureHttpsDefaults(h => {
                             h.SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
@@ -130,16 +130,16 @@ namespace EasyITCenter {
                 //udelat seznam naslouchani na urcitych portech portal=1,moduly=2 udelat v tom poradek
                 //webBuilder.UseUrls(new string[] { "http://*:5000", "https://*:5001" });
 
-                if (ServerConfigSettings.ConfigServerStartupHTTPAndHTTPS) {
-                    webBuilder.UseUrls($"https://*:{ServerConfigSettings.ConfigServerStartupHttpsPort}",$"http://*:{ServerConfigSettings.ConfigServerStartupHttpPort}");
+                if (SrvConfig.ConfigServerStartupHTTPAndHTTPS) {
+                    webBuilder.UseUrls($"https://*:{SrvConfig.ConfigServerStartupHttpsPort}",$"http://*:{SrvConfig.ConfigServerStartupHttpPort}");
                 } else {
-                    webBuilder.UseUrls(ServerConfigSettings.ConfigServerStartupOnHttps ? $"https://*:{ServerConfigSettings.ConfigServerStartupHttpsPort}" : $"http://*:{ServerConfigSettings.ConfigServerStartupHttpPort}");
+                    webBuilder.UseUrls(SrvConfig.ConfigServerStartupOnHttps ? $"https://*:{SrvConfig.ConfigServerStartupHttpsPort}" : $"http://*:{SrvConfig.ConfigServerStartupHttpPort}");
                 }
 
                 
 
                 webBuilder.UseStartup<Startup>();
-                webBuilder.UseWebRoot(ServerRuntimeData.WebRoot_path);
+                webBuilder.UseWebRoot(SrvRuntime.WebRoot_path);
                 webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
                 webBuilder.UseStaticWebAssets();
 
@@ -174,24 +174,24 @@ namespace EasyITCenter {
         private static void LoadConfigurationFromFile() {
             try {
                 //Load From Config File
-                string json = CoreOperations.GetOperatingSystemInfo.IsWindows()
-                    ?  File.ReadAllText(Path.Combine(ServerRuntimeData.Setting_folder, ServerRuntimeData.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(ServerRuntimeData.Setting_folder, ServerRuntimeData.ConfigFile)))
-                    : File.ReadAllText(Path.Combine(ServerRuntimeData.Startup_path, "Data", ServerRuntimeData.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(ServerRuntimeData.Startup_path, "Data", ServerRuntimeData.ConfigFile)))
+                string json = CoreOperations.SrvOStype.IsWindows()
+                    ?  File.ReadAllText(Path.Combine(SrvRuntime.Setting_folder, SrvRuntime.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(SrvRuntime.Setting_folder, SrvRuntime.ConfigFile)))
+                    : File.ReadAllText(Path.Combine(SrvRuntime.Startup_path, "Data", SrvRuntime.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(SrvRuntime.Startup_path, "Data", SrvRuntime.ConfigFile)))
                     ;
 
                 Dictionary<string, object> exportServerSettingList = new Dictionary<string, object>();
                 exportServerSettingList.AddRange(JsonSerializer.Deserialize<Dictionary<string, object>>(json).ToList());
 
                 exportServerSettingList.ToList().ForEach(configItem => {
-                    foreach (PropertyInfo property in _serverConfigSettings.GetType().GetProperties()) {
+                    foreach (PropertyInfo property in _srvConfig.GetType().GetProperties()) {
                         if (configItem.Key == property.Name) {
-                            try { property.SetValue(_serverConfigSettings, Convert.ChangeType(configItem.Value.ToString(), property.GetValue(ServerConfigSettings).GetType())); } catch { }
+                            try { property.SetValue(_srvConfig, Convert.ChangeType(configItem.Value.ToString(), property.GetValue(SrvConfig).GetType())); } catch { }
                         }
                     }
                 });
             } catch (Exception ex) {
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(ex) }, true);
-                Console.WriteLine("LoadConfigurationFromFile Error: " + DataOperations.GetSystemErrMessage(ex));
+                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }, true);
+                Console.WriteLine("LoadConfigurationFromFile Error: " + DataOperations.GetErrMsg(ex));
                 Environment.Exit(10);
             }
         }
@@ -204,18 +204,18 @@ namespace EasyITCenter {
             try {
                 //Load Configuration From Database
                 List<ServerSettingList> ConfigData = new EasyITCenterContext().ServerSettingLists.ToList();
-                foreach (PropertyInfo property in _serverConfigSettings.GetType().GetProperties()) {
+                foreach (PropertyInfo property in _srvConfig.GetType().GetProperties()) {
                     if (ConfigData.FirstOrDefault(a => a.Key == property.Name) != null) {
-                        property.SetValue(_serverConfigSettings, Convert.ChangeType(ConfigData.First(a => a.Key == property.Name).Value, property.PropertyType), null);
+                        property.SetValue(_srvConfig, Convert.ChangeType(ConfigData.First(a => a.Key == property.Name).Value, property.PropertyType), null);
                     }
                 }
             } catch (Exception ex) {
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(ex) });
+                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
                 Console.WriteLine("LoadConfigurationFromDb Error: "
                     + "Config File from Folder: "
-                    + (CoreOperations.GetOperatingSystemInfo.IsWindows() ? Path.Combine(ServerRuntimeData.Setting_folder, ServerRuntimeData.ConfigFile) : Path.Combine(ServerRuntimeData.Startup_path, "Data", ServerRuntimeData.ConfigFile))
-                    + "With ConnectionString: " + ServerConfigSettings.DatabaseConnectionString + Environment.NewLine 
-                    + "Has Error: " + DataOperations.GetSystemErrMessage(ex));
+                    + (CoreOperations.SrvOStype.IsWindows() ? Path.Combine(SrvRuntime.Setting_folder, SrvRuntime.ConfigFile) : Path.Combine(SrvRuntime.Startup_path, "Data", SrvRuntime.ConfigFile))
+                    + "With ConnectionString: " + SrvConfig.DatabaseConnectionString + Environment.NewLine 
+                    + "Has Error: " + DataOperations.GetErrMsg(ex));
                 Environment.Exit(20);
             }
         }

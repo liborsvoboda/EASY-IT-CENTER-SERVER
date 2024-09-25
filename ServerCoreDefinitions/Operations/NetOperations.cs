@@ -31,7 +31,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
                 return result;
             } catch (Exception Ex) {
-                result = DataOperations.GetSystemErrMessage(Ex);
+                result = DataOperations.GetErrMsg(Ex);
                 CoreOperations.SendEmail(new SendMailRequest() { Content = result });
                 return result;
             }

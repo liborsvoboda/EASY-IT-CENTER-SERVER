@@ -25,7 +25,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="app"></param>
         internal static void EnableAutoMinify(ref IApplicationBuilder app) {
-            if (ServerConfigSettings.EnableAutoMinify) { app.UseWebOptimizer(); }
+            if (SrvConfig.EnableAutoMinify) { app.UseWebOptimizer(); }
         }
                
 
@@ -33,7 +33,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// Enable Server Logging in Debug Mode
         /// </summary>
         internal static void EnableLogging(ref IApplicationBuilder app) {
-                if (ServerRuntimeData.DebugMode) { app.UseHttpLogging(); }
+                if (SrvRuntime.DebugMode) { app.UseHttpLogging(); }
          }
 
 
@@ -41,17 +41,17 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// Server Cors Configuration
         /// </summary>
         internal static void EnableCors(ref IApplicationBuilder app) {
-            if (ServerConfigSettings.ServerCorsEnabled) {
+            if (SrvConfig.ServerCorsEnabled) {
                 app.UseCors(x => {
                     List<ServerCorsDefAllowedOriginList> data;
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         data = new EasyITCenterContext().ServerCorsDefAllowedOriginLists.Where(a => a.Active).ToList();
                     }
 
-                    if (ServerConfigSettings.ServerCorsAllowAnyHeader) { x.AllowAnyHeader(); }
-                    if (ServerConfigSettings.ServerCorsAllowAnyMethod) { x.AllowAnyMethod(); }
-                    if (ServerConfigSettings.ServerCorsAllowCredentials) { x.AllowCredentials(); }
-                    if (ServerConfigSettings.ServerCorsAllowAnyOrigin) { x.AllowAnyOrigin(); }
+                    if (SrvConfig.ServerCorsAllowAnyHeader) { x.AllowAnyHeader(); }
+                    if (SrvConfig.ServerCorsAllowAnyMethod) { x.AllowAnyMethod(); }
+                    if (SrvConfig.ServerCorsAllowCredentials) { x.AllowCredentials(); }
+                    if (SrvConfig.ServerCorsAllowAnyOrigin) { x.AllowAnyOrigin(); }
                     else if (data.Any()) { string[] allowedDomains = data.Select(a => a.AllowedDomain).ToArray(); x.WithOrigins(allowedDomains); }
                 });
             };
@@ -63,9 +63,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="app"></param>
         /// <returns></returns>
         internal static void EnableWebSocket(ref IApplicationBuilder app) {
-            if (ServerConfigSettings.WebSocketEngineEnabled) {
+            if (SrvConfig.WebSocketEngineEnabled) {
                 var webSocketOptions = new WebSocketOptions() {
-                    KeepAliveInterval = TimeSpan.FromHours(ServerConfigSettings.WebSocketTimeoutMin),
+                    KeepAliveInterval = TimeSpan.FromHours(SrvConfig.WebSocketTimeoutMin),
                 };
                 app.UseWebSockets(webSocketOptions);
             }
@@ -74,14 +74,14 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
         //RssFeed Support
         internal static void EnableRssFeed(ref IApplicationBuilder app) {
-            if (ServerConfigSettings.WebRSSFeedsEnabled) {
+            if (SrvConfig.WebRSSFeedsEnabled) {
                 app.UseRSSFeed("/feed", new RSSFeedOptions {
-                    Title = ServerConfigSettings.ConfigCoreServerRegisteredName + " RSS Feed",
-                    Copyright = "2023 " + ServerConfigSettings.ConfigCoreServerRegisteredName,
+                    Title = SrvConfig.ConfigCoreServerRegisteredName + " RSS Feed",
+                    Copyright = "2023 " + SrvConfig.ConfigCoreServerRegisteredName,
                     Description = "RSS Feed with Company Portfolio",
-                    ManagingEditor = ServerConfigSettings.ConfigManagerEmailAddress,
-                    Webmaster = ServerConfigSettings.EmailerServiceEmailAddress,
-                    Url = new Uri(ServerConfigSettings.ServerPublicUrl),
+                    ManagingEditor = SrvConfig.ConfigManagerEmailAddress,
+                    Webmaster = SrvConfig.EmailerServiceEmailAddress,
+                    Url = new Uri(SrvConfig.ServerPublicUrl),
                     Caching = new MemoryCacheProvider { CacheDuration = TimeSpan.FromDays(5), Key = "RSSCacheKey" }
                 });
             }
@@ -96,15 +96,15 @@ namespace EasyITCenter.ServerCoreConfiguration {
             app.UseEndpoints(endpoints => {
 
                 //EasyData Support
-                if (ServerConfigSettings.ModuleWebDataManagerEnabled) { endpoints.MapEasyData(options => {
+                if (SrvConfig.ModuleWebDataManagerEnabled) { endpoints.MapEasyData(options => {
                     options.UseDbContext<EasyITCenterContext>();
                 }); }
 
                 endpoints.MapControllers();
 
-                if (ServerConfigSettings.WebRazorPagesEngineEnabled) {
+                if (SrvConfig.WebRazorPagesEngineEnabled) {
                     endpoints.MapRazorPages();
-                    endpoints.MapDefaultControllerRoute(); //MAYBE
+                    //endpoints.MapDefaultControllerRoute(); //MAYBE
                     endpoints.MapAreaControllerRoute(name: "Dashboard",areaName: "Dashboard",pattern: "D/{controller=Home}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute(name: "DevPortal",pattern: "{controller=DevPortal}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute(name: "RazorPages", pattern: "{controller=ServerCorePages}/{action=Index}/{id?}");
@@ -116,7 +116,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
 
                 //HeathService Support
-                if (ServerConfigSettings.ModuleHealthServiceEnabled) {
+                if (SrvConfig.ModuleHealthServiceEnabled) {
                     endpoints.MapHealthChecks("/HealthResultService",
                         new HealthCheckOptions() {
                             Predicate = p => true,
@@ -159,9 +159,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
 
                 //MirrorSharp Support
-                if (ServerConfigSettings.ModuleCSharpCodeBuilder) { endpoints.MapMirrorSharp("/mirrorsharp", new MirrorSharpOptions { SelfDebugEnabled = true, IncludeExceptionDetails = true  }
+                if (SrvConfig.ModuleCSharpCodeBuilder) { endpoints.MapMirrorSharp("/mirrorsharp", new MirrorSharpOptions { SelfDebugEnabled = true, IncludeExceptionDetails = true  }
                 .SetupCSharp(o => {
-                    o.AddMetadataReferencesFromFiles(FileOperations.GetPathFiles(ServerRuntimeData.Startup_path, "*.dll", SearchOption.TopDirectoryOnly).ToArray());
+                    o.AddMetadataReferencesFromFiles(FileOperations.GetPathFiles(SrvRuntime.Startup_path, "*.dll", SearchOption.TopDirectoryOnly).ToArray());
                     // = ..MetadataReferences = GetAllReferences().ToImmutableList();
                 })); }
 
@@ -189,16 +189,16 @@ namespace EasyITCenter.ServerCoreConfiguration {
             });
             
             //MirrorSharp Support
-            if (ServerConfigSettings.ModuleCSharpCodeBuilder) { app.MapMirrorSharp("/mirrorsharp"); }
+            if (SrvConfig.ModuleCSharpCodeBuilder) { app.MapMirrorSharp("/mirrorsharp"); }
 
             //HeathService Support
-            if (ServerConfigSettings.ModuleHealthServiceEnabled) {
+            if (SrvConfig.ModuleHealthServiceEnabled) {
                 app.UseHealthChecks("/HealthResultService");
                 app.UseHealthChecksUI(setup => {
-                    setup.UIPath = ServerConfigSettings.ModuleHealthServicePath.StartsWith("/") ? ServerConfigSettings.ModuleHealthServicePath : "/" + ServerConfigSettings.ModuleHealthServicePath;
+                    setup.UIPath = SrvConfig.ModuleHealthServicePath.StartsWith("/") ? SrvConfig.ModuleHealthServicePath : "/" + SrvConfig.ModuleHealthServicePath;
                     setup.AsideMenuOpened = true;
-                    setup.PageTitle = ServerConfigSettings.ConfigCoreServerRegisteredName;
-                    setup.AddCustomStylesheet(Path.Combine(ServerRuntimeData.ServerIntegrated_path, "server-modules", "HealthCheck", "HealthChecksUI.css"));
+                    setup.PageTitle = SrvConfig.ConfigCoreServerRegisteredName;
+                    setup.AddCustomStylesheet(Path.Combine(SrvRuntime.SrvIntegrated_path, "server-modules", "HealthCheck", "HealthChecksUI.css"));
                 });
             }
 

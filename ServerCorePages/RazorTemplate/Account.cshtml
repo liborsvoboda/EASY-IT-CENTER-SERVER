@@ -38,9 +38,9 @@
                     <h3 class="box-title">Public profile</h3>
                 </div>
                 <div class="box-body box-account">
-                    <form id="formChangePassword" asp-controller="Profile" asp-action="@(UserProfileManager.IsHasPassword(UserProfileManager.CurrentUser) ? "ChangePassword" : "SetPassword")"
+                    <form id="formChangePassword" asp-controller="Profile" asp-action="@(UserProfileManager?.IsHasPassword(UserProfileManager?.CurrentUser) ? "ChangePassword" : "SetPassword")"
                           class="form-horizontal" method="post">
-                        @if (UserProfileManager.IsHasPassword(UserProfileManager.CurrentUser))
+                        @if (UserProfileManager?.IsHasPassword(UserProfileManager?.CurrentUser))
                         {
                             <div class="form-group">
 

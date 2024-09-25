@@ -162,10 +162,10 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="exception"></param>
         /// <param name="msgCount"> </param>
         /// <returns></returns>
-        public static string GetSystemErrMessage(Exception exception, int msgCount = 1) {
+        public static string GetErrMsg(Exception exception, int msgCount = 1) {
             return exception != null ? string.Format("{0}: {1}\n{2}", msgCount, (exception.TargetSite?.ReflectedType?.FullName + Environment.NewLine
                 + exception.Message + Environment.NewLine + exception.StackTrace + Environment.NewLine), 
-                GetSystemErrMessage(exception.InnerException, ++msgCount)) : string.Empty;
+                GetErrMsg(exception.InnerException, ++msgCount)) : string.Empty;
         }
 
         /// <summary>

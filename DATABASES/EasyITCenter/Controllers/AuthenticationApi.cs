@@ -14,7 +14,7 @@ namespace EasyITCenter.ControllersExtensions {
             AuthenticateResponse? user = Authenticate(username, password);
             
             if (!string.IsNullOrWhiteSpace(user?.Message)) { return Ok(JsonSerializer.Serialize(user)); 
-            } else if (user == null) { { return BadRequest(new { message = DbOperations.DBTranslate("UsernameOrPasswordIncorrect", ServerConfigSettings.ServiceServerLanguage) }); }; }
+            } else if (user == null) { { return BadRequest(new { message = DbOperations.DBTranslate("UsernameOrPasswordIncorrect", SrvConfig.ServiceServerLanguage) }); }; }
 
             try { if (HttpContext.Connection.RemoteIpAddress != null && user != null) {
                     string clientIPAddr = Dns.GetHostEntry(HttpContext.Connection.RemoteIpAddress).AddressList.First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
@@ -23,7 +23,7 @@ namespace EasyITCenter.ControllersExtensions {
             } catch { }
 
             
-            if (!ServerConfigSettings.ConfigTimeTokenValidationEnabled) { user.Expiration = null; }
+            if (!SrvConfig.ConfigTimeTokenValidationEnabled) { user.Expiration = null; }
 
             RefreshUserToken(username, user);
             UserStorageOperations.CreateUserStorage(username);
@@ -57,7 +57,7 @@ namespace EasyITCenter.ControllersExtensions {
         public static AuthenticateResponse? Authenticate(string? username, string? password) {
             SecurityToken? token = null; string? errorMessage = null;
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(ServerConfigSettings.ConfigJwtLocalKey);
+            var key = Encoding.ASCII.GetBytes(SrvConfig.ConfigJwtLocalKey);
 
 
             if (username == null) { return null; }
@@ -74,33 +74,33 @@ namespace EasyITCenter.ControllersExtensions {
                     new Claim(ClaimTypes.NameIdentifier, user.UserName),
                     new Claim(ClaimTypes.Email, user.InfoEmail),
                     new Claim(ClaimTypes.Role, user.Role.SystemName.ToLower()),
-                    new Claim(ClaimTypes.Dns, ServerConfigSettings.ConfigCertificateDomain)
+                    new Claim(ClaimTypes.Dns, SrvConfig.ConfigCertificateDomain)
                 }),
                     CompressionAlgorithm = CompressionAlgorithms.Deflate,
                     Issuer = user.UserName,
                     TokenType = "JWT",
                     IssuedAt = DateTimeOffset.Now.DateTime,
                     NotBefore = DateTimeOffset.Now.DateTime,
-                    Expires = DateTimeOffset.Now.AddMinutes(ServerConfigSettings.ConfigApiTokenTimeoutMin).DateTime,
+                    Expires = DateTimeOffset.Now.AddMinutes(SrvConfig.ConfigApiTokenTimeoutMin).DateTime,
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), 
                     (
-                        ServerConfigSettings.ConfigTokenEncryption == "Aes256Encryption" ? SecurityAlgorithms.Aes256Encryption :
-                        ServerConfigSettings.ConfigTokenEncryption == "Aes256Gcm" ? SecurityAlgorithms.Aes256Gcm :
-                        ServerConfigSettings.ConfigTokenEncryption == "EcdsaSha256" ? SecurityAlgorithms.EcdsaSha256 :
-                        ServerConfigSettings.ConfigTokenEncryption == "EcdsaSha512" ? SecurityAlgorithms.EcdsaSha512 :
-                        ServerConfigSettings.ConfigTokenEncryption == "HmacSha256" ? SecurityAlgorithms.HmacSha256 :
-                        ServerConfigSettings.ConfigTokenEncryption == "HmacSha384" ? SecurityAlgorithms.HmacSha384 :
-                        ServerConfigSettings.ConfigTokenEncryption == "HmacSha512" ? SecurityAlgorithms.HmacSha512 :
-                        ServerConfigSettings.ConfigTokenEncryption == "RsaOAEP" ? SecurityAlgorithms.RsaOAEP :
-                        ServerConfigSettings.ConfigTokenEncryption == "RsaPKCS1" ? SecurityAlgorithms.RsaPKCS1 :
-                        ServerConfigSettings.ConfigTokenEncryption == "RsaSha256" ? SecurityAlgorithms.RsaSha256 :
-                        ServerConfigSettings.ConfigTokenEncryption == "RsaSha512" ? SecurityAlgorithms.RsaSha512 :
-                        ServerConfigSettings.ConfigTokenEncryption == "RsaV15KeyWrap" ? SecurityAlgorithms.RsaV15KeyWrap :
-                        ServerConfigSettings.ConfigTokenEncryption == "Sha256" ? SecurityAlgorithms.Sha256 :
-                        ServerConfigSettings.ConfigTokenEncryption == "Sha512" ? SecurityAlgorithms.Sha512 : SecurityAlgorithms.RsaSha512
+                        SrvConfig.ConfigTokenEncryption == "Aes256Encryption" ? SecurityAlgorithms.Aes256Encryption :
+                        SrvConfig.ConfigTokenEncryption == "Aes256Gcm" ? SecurityAlgorithms.Aes256Gcm :
+                        SrvConfig.ConfigTokenEncryption == "EcdsaSha256" ? SecurityAlgorithms.EcdsaSha256 :
+                        SrvConfig.ConfigTokenEncryption == "EcdsaSha512" ? SecurityAlgorithms.EcdsaSha512 :
+                        SrvConfig.ConfigTokenEncryption == "HmacSha256" ? SecurityAlgorithms.HmacSha256 :
+                        SrvConfig.ConfigTokenEncryption == "HmacSha384" ? SecurityAlgorithms.HmacSha384 :
+                        SrvConfig.ConfigTokenEncryption == "HmacSha512" ? SecurityAlgorithms.HmacSha512 :
+                        SrvConfig.ConfigTokenEncryption == "RsaOAEP" ? SecurityAlgorithms.RsaOAEP :
+                        SrvConfig.ConfigTokenEncryption == "RsaPKCS1" ? SecurityAlgorithms.RsaPKCS1 :
+                        SrvConfig.ConfigTokenEncryption == "RsaSha256" ? SecurityAlgorithms.RsaSha256 :
+                        SrvConfig.ConfigTokenEncryption == "RsaSha512" ? SecurityAlgorithms.RsaSha512 :
+                        SrvConfig.ConfigTokenEncryption == "RsaV15KeyWrap" ? SecurityAlgorithms.RsaV15KeyWrap :
+                        SrvConfig.ConfigTokenEncryption == "Sha256" ? SecurityAlgorithms.Sha256 :
+                        SrvConfig.ConfigTokenEncryption == "Sha512" ? SecurityAlgorithms.Sha512 : SecurityAlgorithms.RsaSha512
                     ))
                 };                token = tokenHandler.CreateToken(tokenDescriptor);
-            } catch (Exception ex) { errorMessage = DataOperations.GetSystemErrMessage(ex); }
+            } catch (Exception ex) { errorMessage = DataOperations.GetErrMsg(ex); }
 
             AuthenticateResponse authResponse = new() 
             { Id = user.Id, Name = user.Name, SurName = user.SurName, Token = token == null ? string.Empty : tokenHandler.WriteToken(token), 
@@ -145,7 +145,7 @@ namespace EasyITCenter.ControllersExtensions {
         internal static bool TokenLifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken token, TokenValidationParameters @params) {
             if (RefreshUserToken(token.Issuer, new AuthenticateResponse() {
                 Token = ((JwtSecurityToken)token).RawData.ToString(),
-                Expiration = DateTimeOffset.Now.AddMinutes(ServerConfigSettings.ConfigApiTokenTimeoutMin).DateTime
+                Expiration = DateTimeOffset.Now.AddMinutes(SrvConfig.ConfigApiTokenTimeoutMin).DateTime
             })) { return true; } else { return false; }
         }
     }

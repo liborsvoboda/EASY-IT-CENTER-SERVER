@@ -39,8 +39,8 @@ namespace EasyITCenter.ControllersExtensions {
                         file.WebFileContent);
                 });
 
-                return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.success.ToString(), RecordCount = filelist.WebFile.Count(), ErrorMessage = string.Empty });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "error:" + DataOperations.GetUserApiErrMessage(ex) }); }
+                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.success.ToString(), RecordCount = filelist.WebFile.Count(), ErrorMessage = string.Empty });
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "error:" + DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
 
@@ -66,7 +66,7 @@ namespace EasyITCenter.ControllersExtensions {
                 return JsonSerializer.Serialize(filelist, new JsonSerializerOptions() {
                     ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
-            } catch (Exception ex) {return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "error:" + DataOperations.GetUserApiErrMessage(ex) }); }
+            } catch (Exception ex) {return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "error:" + DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
 

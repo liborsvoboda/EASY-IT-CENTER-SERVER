@@ -65,7 +65,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 xmlExport += Environment.NewLine + "</ResourceDictionary>";
 
                 return File(Encoding.UTF8.GetBytes(xmlExport), "application/xml", "StringResources.cs-CZ.xaml");
-            } catch (Exception ex) { return BadRequest(new { message = DataOperations.GetSystemErrMessage(ex) }); }
+            } catch (Exception ex) { return BadRequest(new { message = DataOperations.GetErrMsg(ex) }); }
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 xmlExport += Environment.NewLine + "</ResourceDictionary>";
 
                 return File(Encoding.UTF8.GetBytes(xmlExport), "application/xml", "StringResources.xaml");
-            } catch (Exception ex) { return BadRequest(new { message = DataOperations.GetSystemErrMessage(ex) }); }
+            } catch (Exception ex) { return BadRequest(new { message = DataOperations.GetErrMsg(ex) }); }
         }
 
 
@@ -103,24 +103,24 @@ namespace EasyITCenter.ServerCoreDBSettings {
         public async Task<IActionResult> ExportStaticWebPortal() {
             try {
 
-                FileOperations.CreatePath(Path.Combine(ServerRuntimeData.Startup_path, "Export"));
-                FileOperations.ClearFolder(Path.Combine(ServerRuntimeData.Startup_path, "Export"));
-                FileOperations.CreatePath(Path.Combine(ServerRuntimeData.Startup_path, "Export", "Webpages", "metro", "managed", "storage"));
-                FileOperations.CopyDirectory(Path.Combine(ServerRuntimeData.Startup_path, ServerConfigSettings.DefaultStaticWebFilesFolder, "metro", "managed", "storage"), Path.Combine(ServerRuntimeData.Startup_path, "Export", "Webpages", "metro", "managed", "storage"));
+                FileOperations.CreatePath(Path.Combine(SrvRuntime.Startup_path, "Export"));
+                FileOperations.ClearFolder(Path.Combine(SrvRuntime.Startup_path, "Export"));
+                FileOperations.CreatePath(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage"));
+                FileOperations.CopyDirectory(Path.Combine(SrvRuntime.Startup_path, SrvConfig.DefaultStaticWebFilesFolder, "metro", "managed", "storage"), Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage"));
 
-                string json = System.IO.File.ReadAllText(Path.Combine(ServerRuntimeData.Startup_path, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"));
-                FileOperations.WriteToFile(Path.Combine(ServerRuntimeData.Startup_path, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"), json.Replace("window.location.origin",ServerConfigSettings.ServerPublicUrl));
+                string json = System.IO.File.ReadAllText(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"));
+                FileOperations.WriteToFile(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"), json.Replace("window.location.origin",SrvConfig.ServerPublicUrl));
 
                 HtmlWeb hw = new HtmlWeb();
                 HtmlDocument doc = hw.Load((Request.IsHttps ? "https" : "http") + "://" + Request.Host + "/Portal");
-                string index = doc.Text.Replace("../..", ServerConfigSettings.ServerPublicUrl);
-                System.IO.File.WriteAllText(Path.Combine(ServerRuntimeData.Startup_path, "Export", "Webpages", "Index.html"), index);
+                string index = doc.Text.Replace("../..", SrvConfig.ServerPublicUrl);
+                System.IO.File.WriteAllText(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "Index.html"), index);
 
-                ZipFile.CreateFromDirectory(Path.Combine(ServerRuntimeData.Startup_path, "Export", "Webpages"), Path.Combine(ServerRuntimeData.Startup_path, "Export", "Webpages.zip"));
-                var zipData = await System.IO.File.ReadAllBytesAsync(Path.Combine(ServerRuntimeData.Startup_path, "Export", "Webpages.zip"));
+                ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages"), Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages.zip"));
+                var zipData = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages.zip"));
 
                 return File(zipData, "application/x-zip-compressed", "Webpages.zip");
-            } catch (Exception ex) { return BadRequest(new { message = DataOperations.GetSystemErrMessage(ex) }); }
+            } catch (Exception ex) { return BadRequest(new { message = DataOperations.GetErrMsg(ex) }); }
         }
 
 
@@ -130,7 +130,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// <returns></returns>
         [HttpGet("/ServerApi/ExportServices/DgmlDatabaseSchema")]
         public IActionResult GetDgml() {
-            if (ServerConfigSettings.ModuleDbDiagramGeneratorEnabled) {
+            if (SrvConfig.ModuleDbDiagramGeneratorEnabled) {
                 var response = File(Encoding.UTF8.GetBytes(new EasyITCenterContext().AsDgml()), MimeTypes.GetMimeType("DBschema.dgml"), "DBschema.dgml");
                 return response;
             }
@@ -144,7 +144,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// <returns></returns>
         [HttpGet("/ServerApi/ExportServices/SqlDatabaseSchema")]
         public IActionResult Get() {
-            if (ServerConfigSettings.ModuleDbDiagramGeneratorEnabled) {
+            if (SrvConfig.ModuleDbDiagramGeneratorEnabled) {
                 var response = File(Encoding.UTF8.GetBytes(Context.AsSqlScript()), MimeTypes.GetMimeType("DBschema.sql"), "DBschema.sql");
                 return response;
             }

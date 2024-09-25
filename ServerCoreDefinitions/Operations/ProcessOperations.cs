@@ -37,7 +37,7 @@ namespace EasyITCenter.ServerCoreStructure {
             try {
                 using (Process proc = new Process()) {
                    
-                    if (CoreOperations.GetOperatingSystemInfo.IsWindows()) {
+                    if (CoreOperations.SrvOStype.IsWindows()) {
                         proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".cmd");
                         proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
                         proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
@@ -67,7 +67,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 }
 
             } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(ex) });
+                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
             }
             return resultOutput + Environment.NewLine + resultError;
         }
@@ -87,7 +87,7 @@ namespace EasyITCenter.ServerCoreStructure {
                     return results.AsEnumerable().ToList().ToJson();
                 }
             } catch (Exception ex) {
-                string err = DataOperations.GetSystemErrMessage(ex);
+                string err = DataOperations.GetErrMsg(ex);
                 CoreOperations.SendEmail(new SendMailRequest() { Content = err });
                 return err;
             }

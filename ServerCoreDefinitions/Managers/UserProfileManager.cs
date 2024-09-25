@@ -11,20 +11,22 @@ namespace EasyITCenter.Managers {
 
     public class UserProfileManager
     {
-        private readonly UserManager<WebUser> _userManager;
-        private readonly SignInManager<WebUser> _signInManager;
+        
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         IHttpContextAccessor _httpContextAccessor;
 
-        private WebUser _currentUser;
-
-        public UserProfileManager(UserManager<WebUser> userManager, SignInManager<WebUser> signInManager, IHttpContextAccessor httpContextAccessor)
+        private ApplicationUser _currentUser;
+        /*
+        public UserProfileManager(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _httpContextAccessor = httpContextAccessor;
         }
+        */
 
-        public WebUser CurrentUser
+        public ApplicationUser CurrentUser
         {
             get
             {
@@ -35,12 +37,12 @@ namespace EasyITCenter.Managers {
             }
         }
 
-        public bool IsHasPassword(WebUser user)
+        public bool IsHasPassword(ApplicationUser user)
         {
             return _userManager.HasPasswordAsync(user).Result;
         }
 
-        public bool IsEmailConfirmed(WebUser user)
+        public bool IsEmailConfirmed(ApplicationUser user)
         {
             return _userManager.IsEmailConfirmedAsync(user).Result;
         }

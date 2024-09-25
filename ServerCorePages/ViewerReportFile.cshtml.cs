@@ -44,7 +44,7 @@ namespace ServerCorePages {
                 if (requestedUrlPath != null && requestedUrlPath.ToLower().EndsWith(".frx")) { /*TODO LOAD FROM DB BY UNIQUE NAME AFTER SELECT DELETE FROM DB*/}
 
                 else {//Show Examples
-                    var exampleFiles = FileOperations.GetPathFiles(Path.Combine(ServerRuntimeData.ServerIntegrated_path, "server-modules", "reporting", "reportviewer", "Example"), "*.*", SearchOption.TopDirectoryOnly);
+                    var exampleFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvIntegrated_path, "server-modules", "reporting", "reportviewer", "Example"), "*.*", SearchOption.TopDirectoryOnly);
 
                     string param = this.Request.Query.FirstOrDefault(a => a.Key == "ReportId").Value;
                     int? reportId = param != null && int.TryParse(param, out int intParam) ? intParam : null;

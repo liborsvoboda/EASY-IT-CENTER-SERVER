@@ -96,7 +96,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
                     if (string.IsNullOrWhiteSpace(webfilesrequest.IndexWebRootSubFolderPathName)) { indexRootList.Add("");
                     } else {
-                        var folderList = System.IO.Directory.GetDirectories(Path.Combine(ServerRuntimeData.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath));
+                        var folderList = System.IO.Directory.GetDirectories(Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath));
                         folderList.ToList().ForEach(folder => indexRootList.Add(System.IO.Path.GetFullPath(folder).Split("\\").Last() + "\\"));
                     }
 
@@ -104,7 +104,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     indexRootList.ForEach(rootIndex => {
                         //Modify WebRoot For Each Index
                         webfilesrequest.WebRootFilePath = $"{webfilesrequest.WebRootFilePath.Split(webfilesrequest.IndexWebRootSubFolderPathName)[0]}{webfilesrequest.IndexWebRootSubFolderPathName}{( !string.IsNullOrWhiteSpace(webfilesrequest.IndexWebRootSubFolderPathName) ? "\\" : "" )}" + rootIndex;
-                        List<string> filelist = FileOperations.GetPathFiles(Path.Combine(ServerRuntimeData.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath),
+                        List<string> filelist = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath),
                             $"*.{webfilesrequest.FromType.ToString().ToLower()}", webfilesrequest.ScanRootOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories
                         );
 
@@ -132,7 +132,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                                                     */
                                         });
                                     if (webfilesrequest.ToType.ToLower() == SupportGenFileTypes.Md.ToString().ToLower()) { generatedFile = DataOperations.MarkDownLineEndSpacesResolve(generatedFile); }
-                                    FileOperations.WriteToFile(Path.Combine(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"index{webfilesrequest.genHtmlIndexFileSuffix}.{webfilesrequest.ToType.ToString()}"), generatedFile);
+                                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"index{webfilesrequest.genHtmlIndexFileSuffix}.{webfilesrequest.ToType.ToString()}"), generatedFile);
                                 }
 
                             } else if (!webfilesrequest.IndexOnly && webfilesrequest.FromType.ToLower() == SupportGenFileTypes.Md.ToString().ToLower() && webfilesrequest.ToType.ToLower() == SupportGenFileTypes.Html.ToString().ToLower()) {
@@ -141,7 +141,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                                     if (!webfilesrequest.RewriteAllowed && FileOperations.CheckFile(file.Replace(file.Split(".").Last(), $".{webfilesrequest.ToType.ToString()}"))) {
                                         resultMessage = resultMessage == DbOperations.DBTranslate("ProcessSucessfullyCompleted", webfilesrequest.ServerLanguage) ? $"Fail on Exist File {file}" : resultMessage + $"Fail on Exist File {file}";
                                     } else {
-                                        try { FileOperations.WriteToFile(Path.Combine(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"), Markdown.ParseHtmlString(System.IO.File.ReadAllText(file), false, false, false).Value?.ToString()); } catch { }
+                                        try { FileOperations.WriteToFile(Path.Combine(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"), Markdown.ParseHtmlString(System.IO.File.ReadAllText(file), false, false, false).Value?.ToString()); } catch { }
                                     }
                                 });
 
@@ -151,7 +151,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                                     if (!webfilesrequest.RewriteAllowed && FileOperations.CheckFile(file.Replace(file.Split(".").Last(), $".{webfilesrequest.ToType.ToString()}"))) {
                                         resultMessage = resultMessage == DbOperations.DBTranslate("ProcessSucessfullyCompleted", webfilesrequest.ServerLanguage) ? $"Fail on Exist File {file}" : resultMessage + $"Fail on Exist File {file}";
                                     } else {
-                                        FileOperations.WriteToFile(Path.Combine(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"), new ReverseMarkdown.Converter().Convert(System.IO.File.ReadAllText(file)));
+                                        FileOperations.WriteToFile(Path.Combine(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"), new ReverseMarkdown.Converter().Convert(System.IO.File.ReadAllText(file)));
                                     }
                                 });
                             } else if (!webfilesrequest.IndexOnly && webfilesrequest.FromType.ToLower() == SupportGenFileTypes.Md.ToString().ToLower() && webfilesrequest.ToType.ToLower() == SupportGenFileTypes.Docx.ToString().ToLower()) {
@@ -170,7 +170,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                                     } else {
                                         try {
                                             object exportedFile = Markdig.Markdown.Convert(System.IO.File.ReadAllText(file), renderer, pipeline);
-                                            ( (DocxDocumentRenderer)exportedFile ).Document.SaveAs(Path.Combine(ServerRuntimeData.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"));
+                                            ( (DocxDocumentRenderer)exportedFile ).Document.SaveAs(Path.Combine(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"));
                                         } catch { }
                                     }
                                 });
@@ -189,7 +189,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     //else { return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") }); }
                 } else { return new ContentResult() { Content = DbOperations.DBTranslate("YouDoesNotHaveRights", webfilesrequest.ServerLanguage), StatusCode = StatusCodes.Status200OK }; }
             } catch (Exception ex) {
-                return new ContentResult() { Content = DataOperations.GetSystemErrMessage(ex), StatusCode = StatusCodes.Status200OK };
+                return new ContentResult() { Content = DataOperations.GetErrMsg(ex), StatusCode = StatusCodes.Status200OK };
             }
         }
 
@@ -242,51 +242,51 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 try {
                     switch (configuration.SelectedLibrary) {
                         case LibraryList.Integrated:
-                            rootFolder = ServerRuntimeData.ServerIntegrated_path;
+                            rootFolder = SrvRuntime.SrvIntegrated_path;
                             loadedRootFolders.AddRange(Directory.EnumerateDirectories(rootFolder));
                             break;
                         case LibraryList.Metro2:
-                            rootFolder = Path.Combine(ServerRuntimeData.DistributeLibrary_path, "Metro-Library", "Metro2", "Docs");
+                            rootFolder = Path.Combine(SrvRuntime.DistributeLibrary_path, "Metro-Library", "Metro2", "Docs");
                             loadedRootFolders.Add(rootFolder);
                             break;
                         case LibraryList.Metro3:
-                            rootFolder = Path.Combine(ServerRuntimeData.DistributeLibrary_path, "Metro-Library", "Metro3", "DocsA");
+                            rootFolder = Path.Combine(SrvRuntime.DistributeLibrary_path, "Metro-Library", "Metro3", "DocsA");
                             loadedRootFolders.Add(rootFolder);
                             break;
                         case LibraryList.Metro4:
-                            rootFolder = Path.Combine(ServerRuntimeData.DistributeLibrary_path, "Metro-Library", "Metro4", "DocsA");
+                            rootFolder = Path.Combine(SrvRuntime.DistributeLibrary_path, "Metro-Library", "Metro4", "DocsA");
                             loadedRootFolders.Add(rootFolder);
                             break;
                         case LibraryList.Metro5:
-                            rootFolder = Path.Combine(ServerRuntimeData.DistributeLibrary_path, "Metro-Library", "Metro5", "Docs");
+                            rootFolder = Path.Combine(SrvRuntime.DistributeLibrary_path, "Metro-Library", "Metro5", "Docs");
                             loadedRootFolders.Add(rootFolder);
                             break;
                         case LibraryList.MetroWebPages:
-                            rootFolder = Path.Combine(ServerRuntimeData.DistributeLibrary_path, "Metro-Library", "50xMetroWEB");
+                            rootFolder = Path.Combine(SrvRuntime.DistributeLibrary_path, "Metro-Library", "50xMetroWEB");
                             loadedRootFolders.AddRange(Directory.EnumerateDirectories(rootFolder));
                             break;
                         case LibraryList.MetroSolution:
-                            rootFolder = Path.Combine(ServerRuntimeData.DistributeLibrary_path, "Metro-Library", "MetroSolutions");
+                            rootFolder = Path.Combine(SrvRuntime.DistributeLibrary_path, "Metro-Library", "MetroSolutions");
                             loadedRootFolders.AddRange(Directory.EnumerateDirectories(rootFolder));
                             break;
                         case LibraryList.Awesome:
-                            rootFolder = Path.Combine(ServerRuntimeData.DistributeLibrary_path, "LIBRARY-AWESOME");
+                            rootFolder = Path.Combine(SrvRuntime.DistributeLibrary_path, "LIBRARY-AWESOME");
                             loadedRootFolders.AddRange(Directory.EnumerateDirectories(rootFolder));
                             break;
                         case LibraryList.DistributedWebApps:
-                            rootFolder = Path.Combine(ServerRuntimeData.DistributeLibrary_path, "WEB-APPS");
+                            rootFolder = Path.Combine(SrvRuntime.DistributeLibrary_path, "WEB-APPS");
                             loadedRootFolders.AddRange(Directory.EnumerateDirectories(rootFolder));
                             break;
                         case LibraryList.Generators:
-                            rootFolder = Path.Combine(ServerRuntimeData.ServerGenerators_path);
+                            rootFolder = Path.Combine(SrvRuntime.SrvGenerators_path);
                             loadedRootFolders.AddRange(Directory.EnumerateDirectories(rootFolder));
                             break;
                         case LibraryList.DevNotes:
-                            rootFolder = Path.Combine(ServerRuntimeData.WebRoot_path, "server-DevNotes");
+                            rootFolder = Path.Combine(SrvRuntime.WebRoot_path, "server-DevNotes");
                             loadedRootFolders.Add(rootFolder);
                             break;
                         case LibraryList.WebPages:
-                            rootFolder = Path.Combine(ServerRuntimeData.ServerWebPages_path);
+                            rootFolder = Path.Combine(SrvRuntime.SrvWebPages_path);
                             loadedRootFolders.AddRange(Directory.EnumerateDirectories(rootFolder));
                             break;
                         default: break;

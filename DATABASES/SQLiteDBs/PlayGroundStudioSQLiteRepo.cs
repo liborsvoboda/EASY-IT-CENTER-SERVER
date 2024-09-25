@@ -7,7 +7,7 @@ namespace EasyITCenter.DBModel {
 
 
     public class RepoSettings {
-        public string RepoPath { get; set; } = Path.Combine(ServerRuntimeData.WebRoot_path, ServerRuntimeData.ServerPrivate_path,"Databases","PlayGround");
+        public string RepoPath { get; set; } = Path.Combine(SrvRuntime.WebRoot_path, SrvRuntime.SrvPrivate_path,"Databases","PlayGround");
     }
 
 

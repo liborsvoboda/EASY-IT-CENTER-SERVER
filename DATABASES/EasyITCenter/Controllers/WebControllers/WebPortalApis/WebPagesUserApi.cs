@@ -1,7 +1,7 @@
 ﻿namespace EasyITCenter.ServerCoreDBSettings {
 
     [ApiController]
-    [Route("/WebApi/WebUser")]
+    [Route("/WebApi/ClientUsers")]
      //[ApiExplorerSettings(IgnoreApi = true)]
     public class WebPagesUserApi : ControllerBase {
 
@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="email">The email.</param>
         /// <returns></returns>
-        [HttpPost("/WebApi/WebUser/SendVerifyCode")]
+        [HttpPost("/WebApi/ClientUsers/SendVerifyCode")]
         [Consumes("application/json")]
         public async Task<IActionResult> PostSendVerifyCode([FromBody] EmailVerification record) {
             try {
@@ -23,7 +23,7 @@
                         count = new EasyITCenterContext().SolutionUserLists.Where(a => a.UserName == record.EmailAddress && a.Active).Count();
                     }
                     if (count > 0) {
-                        return BadRequest(JsonSerializer.Serialize(new DBResultMessage() {
+                        return BadRequest(JsonSerializer.Serialize(new ResMsg() {
                             Status = DBWebApiResponses.emailExist.ToString(),
                             ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.emailExist.ToString(), record.Language)
                         }));
@@ -50,12 +50,12 @@
 
                     if (result == DBResult.success.ToString()) { return Ok(JsonSerializer.Serialize(new { verifyCode = verifyCode })); } else { return BadRequest(JsonSerializer.Serialize(result)); }
                 }
-                else { return BadRequest(new { message = DbOperations.DBTranslate("EmailAddressIsNotValid", ServerConfigSettings.ServiceServerLanguage) }); }
+                else { return BadRequest(new { message = DbOperations.DBTranslate("EmailAddressIsNotValid", SrvConfig.ServiceServerLanguage) }); }
             } catch { }
-            return BadRequest(new { message = DbOperations.DBTranslate("EmailCannotBeSend", ServerConfigSettings.ServiceServerLanguage) });
+            return BadRequest(new { message = DbOperations.DBTranslate("EmailCannotBeSend", SrvConfig.ServiceServerLanguage) });
         }
 
-        [HttpPost("/WebApi/WebUser/Registration")]
+        [HttpPost("/WebApi/ClientUsers/Registration")]
         [Consumes("application/json")]
         public async Task<string> PostRegistration([FromBody] WebRegistration record) {
             try {
@@ -65,7 +65,7 @@
                     count = new EasyITCenterContext().SolutionUserLists.Where(a => a.UserName == record.EmailAddress && a.Active).Count();
                 }
                 if (count > 0) {
-                    return JsonSerializer.Serialize(new DBResultMessage() {
+                    return JsonSerializer.Serialize(new ResMsg() {
                         Status = DBWebApiResponses.emailExist.ToString(),
                         ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.emailExist.ToString(), record.Language)
                     });
@@ -110,13 +110,13 @@
                     };
                 }
                 CoreOperations.SendEmail(mailRequest, true);
-                if (result > 0) return JsonSerializer.Serialize(new DBResultMessage() { InsertedId = origUser.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.loginInfoSentToEmail.ToString(), record.Language) });
-                else return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
+                if (result > 0) return JsonSerializer.Serialize(new ResMsg() { InsertedId = origUser.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.loginInfoSentToEmail.ToString(), record.Language) });
+                else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
             } catch { }
-            return JsonSerializer.Serialize(new { message = DbOperations.DBTranslate("EmailCannotBeSend", ServerConfigSettings.ServiceServerLanguage) });
+            return JsonSerializer.Serialize(new { message = DbOperations.DBTranslate("EmailCannotBeSend", SrvConfig.ServiceServerLanguage) });
         }
 
-        [HttpPost("/WebApi/WebUser/ResetPassword")]
+        [HttpPost("/WebApi/ClientUsers/ResetPassword")]
         [Consumes("application/json")]
         public IActionResult PostResetPassword([FromBody] EmailVerification record) {
             try {
@@ -129,7 +129,7 @@
                         data = new EasyITCenterContext().SolutionUserLists.Where(a => a.UserName == record.EmailAddress && a.Active).FirstOrDefault();
                     }
                     if (data == null) {
-                        return BadRequest(JsonSerializer.Serialize(new DBResultMessage() {
+                        return BadRequest(JsonSerializer.Serialize(new ResMsg() {
                             Status = DBWebApiResponses.emailNotExist.ToString(),
                             ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.emailNotExist.ToString(), record.Language)
                         }));
@@ -169,7 +169,7 @@
         }
 
         [Authorize]
-        [HttpPost("/WebApi/WebUser/UpdateRegistration")]
+        [HttpPost("/WebApi/ClientUsers/UpdateRegistration")]
         [Consumes("application/json")]
         public async Task<string> UpdateRegistration([FromBody] UserProfile record) {
             try {
@@ -183,15 +183,15 @@
 
                     var data = new EasyITCenterContext().SolutionUserLists.Update(user);
                     int result = await data.Context.SaveChangesAsync();
-                    if (result > 0) return JsonSerializer.Serialize(new DBResultMessage() { InsertedId = user.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DBWebApiResponses.loginInfoSentToEmail.ToString() });
-                    else return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
+                    if (result > 0) return JsonSerializer.Serialize(new ResMsg() { InsertedId = user.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DBWebApiResponses.loginInfoSentToEmail.ToString() });
+                    else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                 }
-                else return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
         [Authorize]
-        [HttpGet("/WebApi/WebUser/GetWebUser/{language}")]
+        [HttpGet("/WebApi/ClientUsers/GetWebUser/{language}")]
         public async Task<string> GetWebUser(string language = "cz") {
             try {
                 string authId = User.FindFirst(ClaimTypes.PrimarySid.ToString()).Value;
@@ -206,7 +206,7 @@
                     DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new DBResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
     }
 }

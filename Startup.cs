@@ -20,7 +20,6 @@ using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.AspNetCore.ResponseCompression;
 using Google;
 using Microsoft.AspNetCore.Identity;
-using Duende.IdentityServer.Test;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
 
 
@@ -45,7 +44,6 @@ namespace EasyITCenter {
             #region Server Data Segment
             //DB first for Configuration
             ServerConfigurationServices.ConfigureDatabaseContext(ref services);
-
             ServerConfigurationServices.ConfigureScoped(ref services);
             ServerConfigurationServices.ConfigureThirdPartyApi(ref services);
             ServerConfigurationServices.ConfigureLogging(ref services);
@@ -56,7 +54,7 @@ namespace EasyITCenter {
 
             ServerConfigurationServices.ConfigureServerWebPages(ref services);
             ServerConfigurationServices.ConfigureFTPServer(ref services);
-            if (ServerConfigSettings.WebBrowserContentEnabled) { services.AddDirectoryBrowser(); }
+            if (SrvConfig.WebBrowserContentEnabled) { services.AddDirectoryBrowser(); }
 
             services.AddSession(options => {
                 options.Cookie.Name = "SessionCookie";
@@ -73,7 +71,7 @@ namespace EasyITCenter {
 
             ServerConfigurationServices.ConfigureCookie(ref services);
             ServerConfigurationServices.ConfigureControllers(ref services);
-            ServerConfigurationServices.ConfigureAuthentication(ref services);
+            ServerConfigurationServices.ConfigureDefaultAuthentication(ref services);
             ServerConfigurationServices.ConfigureLetsEncrypt(ref services);
             services.AddHttpContextAccessor();
             services.AddResponseCompression(options => { options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "text/javascript" }); });
@@ -106,31 +104,12 @@ namespace EasyITCenter {
             ServerConfigurationServices.ConfigureTransient(ref services);
             ServerConfigurationServices.ConfigureSingletons(ref services);
             ServerConfigurationServices.ConfigureCentralServicesProviders(ref services);
+            ServerConfigurationServices.ConfigureIdentityServer(ref services);
 
             //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/signalr/dotnet-client/sample/SignalRChatClient/MainWindow.xaml.cs
             //primi chat s aplikaci
             //services.AddSignalR();
             //services.AddServerSideBlazor();
-
-            /*
-            if (Configuration["Authentication:Facebook:IsEnabled"] == "true") {
-                services
-                    .AddAuthentication()
-                    .AddFacebook(facebookOptions => {
-                        facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-                        facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-                    });
-            }
-
-            if (Configuration["Authentication:Google:IsEnabled"] == "true") {
-                services
-                    .AddAuthentication()
-                    .AddGoogle(googleOptions => {
-                        googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                        googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-                    });
-            }
-            */
 
         }
 
@@ -142,13 +121,23 @@ namespace EasyITCenter {
         /// <param name="serverLifetime"></param>
         public void Configure(IApplicationBuilder app, IHostApplicationLifetime serverLifetime, IActionDescriptorCollectionProvider routerActionProvider) {
 
-            ServerRuntimeData.ActionRouterProvider = routerActionProvider;
+            SrvRuntime.ActionRouterProvider = routerActionProvider;
             serverLifetime.ApplicationStarted.Register(ServerOnStarted); serverLifetime.ApplicationStopping.Register(ServerOnStopping); serverLifetime.ApplicationStopped.Register(ServerOnStopped);
-
             ServerEnablingServices.EnableLogging(ref app);
 
+            //Generate ALL Registered Databases IF NOT EXIST
+            try {
+                //TODO ADD TO CYCLE
+                var webHosting = new WebHostingDbContext();
+                try { if (webHosting.Users.Count() == 0) { } } catch {
+                    webHosting.Database.EnsureCreated();
+                    //webHosting.Users.Add(new WebUser() { UserName Name = "admin", Password = "admin", Nickname = "admin", Email = "", WebSite = "", IsSystemAdministrator = true, CreationDate = DateTime.UtcNow });
+                    webHosting.SaveChanges();
+                }
+            } catch { }
 
-            if (ServerConfigSettings.ConfigServerStartupOnHttps) {
+           
+            if (SrvConfig.ConfigServerStartupOnHttps) {
                 app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All });
                 app.UseCertificateForwarding();
             }
@@ -160,12 +149,14 @@ namespace EasyITCenter {
                 string requestPath = context.Request.Path.ToString().ToLower(); bool redirected = false;
                 context = CoreOperations.IncludeCookieTokenToRequest(context); //Include TOKEN
 
+
                 //Ignored WEBSOCKET && DEFINED SPECIAL PATHS RUN DIRECLY
-                if (!context.WebSockets.IsWebSocketRequest 
+                //TODO INSERT ALL Server PORTAL Prefixes SAME AS Registered DB
+                if (!context.WebSockets.IsWebSocketRequest
                     && !requestPath.StartsWith("razortemplate") && !requestPath.StartsWith("easydata")  //Ignored path RUN DIRECLY
 
-                ) { await next(); 
-                //GO TO CONTROLLED AREA
+                ) { await next();
+                    //GO TO CONTROLLED AREA
 
 
 
@@ -258,7 +249,7 @@ namespace EasyITCenter {
             staticFilesProvider.Mappings[".markdown"] = "text/markdown"; staticFilesProvider.Mappings[".snippets"] = "text/plain";
             staticFilesProvider.Mappings[".tsx"] = "text/javascript";
 
-            if (ServerConfigSettings.ConfigServerStartupOnHttps) { app.UseHttpsRedirection(); }
+            if (SrvConfig.ConfigServerStartupOnHttps) { app.UseHttpsRedirection(); }
             //app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html" });
 
             //TODO Websites and subdomains
@@ -273,6 +264,10 @@ namespace EasyITCenter {
             app.UseSession();
             app.UseResponseCaching();
             app.UseResponseCompression();
+
+
+            if (SrvConfig.EnableIdentityServer) { app.UseIdentityServer(); }
+
             app.UseAuthentication();
             app.UseAuthorization();
             ServerEnablingServices.EnableAutoMinify(ref app);
@@ -297,31 +292,27 @@ namespace EasyITCenter {
             ServerModulesEnabling.EnableDocumentation(ref app);
             ServerEnablingServices.EnableRssFeed(ref app);
 
-            if (ServerConfigSettings.WebBrowserContentEnabled) { //Browsable Path Definitions
+            if (SrvConfig.WebBrowserContentEnabled) { //Browsable Path Definitions
                 List<ServerStaticOrMvcDefPathList> data;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().ServerStaticOrMvcDefPathLists.Where(a => a.IsBrowsable && a.Active).ToList(); }
                 data.ForEach(path => {
                     try {
                         app.UseFileServer(new FileServerOptions {
-                            FileProvider = new PhysicalFileProvider(Path.Combine(ServerRuntimeData.Startup_path, ServerConfigSettings.DefaultStaticWebFilesFolder) + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath)),
+                            FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.Startup_path, SrvConfig.DefaultStaticWebFilesFolder) + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath)),
                             RequestPath = path.WebRootSubPath.StartsWith("/") ? path.WebRootSubPath : "/" + path.WebRootSubPath, EnableDirectoryBrowsing = true
                         });
-                        if (!string.IsNullOrWhiteSpace(path.AliasPath)) { app.UseFileServer(new FileServerOptions { FileProvider = new PhysicalFileProvider(Path.Combine(ServerRuntimeData.Startup_path, ServerConfigSettings.DefaultStaticWebFilesFolder) + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath)),
+                        if (!string.IsNullOrWhiteSpace(path.AliasPath)) { app.UseFileServer(new FileServerOptions { FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.Startup_path, SrvConfig.DefaultStaticWebFilesFolder) + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath)),
                             RequestPath = !string.IsNullOrWhiteSpace(path.AliasPath) ? ( path.AliasPath.StartsWith("/") ? path.AliasPath : "/" + path.AliasPath ) : "", EnableDirectoryBrowsing = true
                         });
                         }
-                    } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+                    } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
                 });
             }
 
-            if (ServerConfigSettings.WebMvcPagesEngineEnabled) { app.UseMvcWithDefaultRoute(); }
-            try { app.UsePathBase(ServerConfigSettings.RedirectPath); } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
-            if (ServerConfigSettings.BrowserLinkEnabled) { app.UseBrowserLink(); }
-            if (ServerConfigSettings.ModuleWebDataManagerEnabled) { app.UseEasyData(); }
-
-
-            //app.UseIdentityServer();
-            app.UseMigrationsEndPoint();
+            if (SrvConfig.WebMvcPagesEngineEnabled) { app.UseMvcWithDefaultRoute(); }
+            try { app.UsePathBase(SrvConfig.RedirectPath); } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
+            if (SrvConfig.BrowserLinkEnabled) { app.UseBrowserLink(); }
+            if (SrvConfig.ModuleWebDataManagerEnabled) { app.UseEasyData(); }
 
 
             //Load registered routes List To Runtime
@@ -331,8 +322,8 @@ namespace EasyITCenter {
         /// <summary>
         /// Server Core Enabling Disabling Hosted Services
         /// </summary>
-        private void ServerOnStarted() => ServerRuntimeData.ServerCoreStatus = ServerStatusTypes.Running.ToString();
-        private void ServerOnStopping() => ServerRuntimeData.ServerCoreStatus = ServerStatusTypes.Stopping.ToString();
-        private void ServerOnStopped() => ServerRuntimeData.ServerCoreStatus = ServerStatusTypes.Stopped.ToString();
+        private void ServerOnStarted() => SrvRuntime.ServerCoreStatus = ServerStatusTypes.Running.ToString();
+        private void ServerOnStopping() => SrvRuntime.ServerCoreStatus = ServerStatusTypes.Stopping.ToString();
+        private void ServerOnStopped() => SrvRuntime.ServerCoreStatus = ServerStatusTypes.Stopped.ToString();
     }
 }

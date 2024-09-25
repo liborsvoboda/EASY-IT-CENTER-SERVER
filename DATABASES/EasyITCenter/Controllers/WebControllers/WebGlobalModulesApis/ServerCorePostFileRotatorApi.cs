@@ -21,7 +21,7 @@ namespace EasyITCenter.ControllersExtensions {
         [HttpGet("/WebApi/GetApiFileRotator/{filename}"), DisableRequestSizeLimit]
         public async Task<IActionResult> GetApiFileRotator(string filename) {
             try {
-                byte[] fileArray = ServerRuntimeData.FileRotatorRuntineLibrary.FirstOrDefault(a => a.Key.ToString() == filename).Value as byte[];
+                byte[] fileArray = SrvRuntime.FileRotatorTool.FirstOrDefault(a => a.Key.ToString() == filename).Value as byte[];
                 return File(fileArray, MimeTypes.GetMimeType(filename), filename);
             } catch (Exception ex) { return BadRequest(new string[] { "error:" + DataOperations.GetUserApiErrMessage(ex), "application/json" }); }
         }
@@ -55,7 +55,7 @@ namespace EasyITCenter.ControllersExtensions {
                     { "file",  File(fileByteArray, mimeType, DataOperations.RandomString(20) + "." + mimeType.Split("/")[1]) }
                 };
 
-                ServerRuntimeData.FileRotatorRuntineLibrary.Add(uniqueFilename, fileByteArray);
+                SrvRuntime.FileRotatorTool.Add(uniqueFilename, fileByteArray);
                 return Ok(JsonSerializer.Serialize(detail));
             } catch (Exception ex) { return BadRequest(new string[] { "error:" + DataOperations.GetUserApiErrMessage(ex), "application/json" }); }
         }
@@ -71,7 +71,7 @@ namespace EasyITCenter.ControllersExtensions {
             string filename = Request.Form.AsEnumerable().First(a => a.Key == "url").Value.ToString().Split("/").Last();
             try {
 
-                byte[] fileArray = ServerRuntimeData.FileRotatorRuntineLibrary.FirstOrDefault(a => a.Key.ToString() == filename).Value as byte[];
+                byte[] fileArray = SrvRuntime.FileRotatorTool.FirstOrDefault(a => a.Key.ToString() == filename).Value as byte[];
                 mimeType = MimeTypes.GetMimeType(filename);
                 stringFile = Convert.ToBase64String(fileArray);
                 IDictionary<object, object> detail = new Dictionary<object, object> {
@@ -83,7 +83,7 @@ namespace EasyITCenter.ControllersExtensions {
                     { "file",  File(fileArray, mimeType, DataOperations.RandomString(20) + "." + mimeType.Split("/")[1]) }
                 };
 
-                ServerRuntimeData.FileRotatorRuntineLibrary.Remove(filename);
+                SrvRuntime.FileRotatorTool.Remove(filename);
                 return Ok(JsonSerializer.Serialize(detail));
             } catch (Exception ex) { return BadRequest(new string[] { "error:" + DataOperations.GetUserApiErrMessage(ex), "application/json" }); }
         }

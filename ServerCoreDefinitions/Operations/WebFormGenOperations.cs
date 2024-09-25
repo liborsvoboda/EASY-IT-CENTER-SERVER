@@ -8,7 +8,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
         private static string GetOrCreateFilePath(string fileName, string contentRootPath, string userName, string filesDirectory = "uploadFiles") {
-            var directoryPath = Path.Combine(ServerRuntimeData.UserPath, userName, filesDirectory);
+            var directoryPath = Path.Combine(SrvRuntime.UserPath, userName, filesDirectory);
             FileOperations.CreateDirectory(directoryPath);
             return Path.Combine(directoryPath, fileName);
         }

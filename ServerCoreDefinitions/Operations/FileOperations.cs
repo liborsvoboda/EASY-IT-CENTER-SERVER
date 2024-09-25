@@ -9,12 +9,12 @@
         /// </summary>
         public static void LoadOrCreateSettings() {
             try {
-                if (!CheckDirectory(ServerRuntimeData.Setting_folder)) {
-                    CreatePath(ServerRuntimeData.Setting_folder);
-                    CopyFile(System.IO.Path.Combine(ServerRuntimeData.Startup_path, ServerRuntimeData.DataPath, ServerRuntimeData.ConfigFile), System.IO.Path.Combine(ServerRuntimeData.Setting_folder, ServerRuntimeData.ConfigFile));
+                if (!CheckDirectory(SrvRuntime.Setting_folder)) {
+                    CreatePath(SrvRuntime.Setting_folder);
+                    CopyFile(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath, SrvRuntime.ConfigFile), System.IO.Path.Combine(SrvRuntime.Setting_folder, SrvRuntime.ConfigFile));
                 }
                 //if (!CheckDirectory(ServerRuntimeData.UserPath)) { CreatePath(ServerRuntimeData.UserPath); }
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
         }
 
 

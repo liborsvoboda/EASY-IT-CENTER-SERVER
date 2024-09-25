@@ -22,7 +22,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public static bool SaveWebSourceFile(ref Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment, ref WebCoreFileList record) {
             try {
                 FileOperations.CreatePath(Path.Combine(hostingEnvironment.WebRootPath, "server-portal", "metro", record.MetroPath.ToLower()));
-                FileOperations.CreatePath(Path.Combine(ServerRuntimeData.SystemWebPortal_path, "metro", record.MetroPath.ToLower()));
+                FileOperations.CreatePath(Path.Combine(SrvRuntime.SysPortal_path, "metro", record.MetroPath.ToLower()));
 
                 string fileExt = record.FileName.Split(".").Last();
 
@@ -30,32 +30,32 @@ namespace EasyITCenter.ServerCoreStructure {
                     if (record.SpecificationType.ToLower().EndsWith("minjs")) { record.GuestFileContent = NUglify.Uglify.Js(record.GuestFileContent).Code;
                     } else if (record.SpecificationType.ToLower().EndsWith("mincss")) { record.GuestFileContent = NUglify.Uglify.Css(record.GuestFileContent).Code; }
                     File.WriteAllText(Path.Combine(hostingEnvironment.WebRootPath, "server-portal", "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName)), record.GuestFileContent, Encoding.UTF8);
-                    File.WriteAllText(Path.Combine(ServerRuntimeData.SystemWebPortal_path, "metro", record.MetroPath, record.FileName), record.GuestFileContent, Encoding.UTF8);
+                    File.WriteAllText(Path.Combine(SrvRuntime.SysPortal_path, "metro", record.MetroPath, record.FileName), record.GuestFileContent, Encoding.UTF8);
                 }
 
                 if (!string.IsNullOrWhiteSpace(record.UserFileContent)) {
                     if (record.SpecificationType.ToLower().EndsWith("minjs")) { record.UserFileContent = NUglify.Uglify.Js(record.UserFileContent).Code;
                     } else if (record.SpecificationType.ToLower().EndsWith("mincss")) { record.UserFileContent = NUglify.Uglify.Css(record.UserFileContent).Code; }
                     File.WriteAllText(Path.Combine(hostingEnvironment.WebRootPath, "server-portal", "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "user." + fileExt)), record.UserFileContent, Encoding.UTF8);
-                    File.WriteAllText(Path.Combine(ServerRuntimeData.SystemWebPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "user." + fileExt)), record.UserFileContent, Encoding.UTF8);
+                    File.WriteAllText(Path.Combine(SrvRuntime.SysPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "user." + fileExt)), record.UserFileContent, Encoding.UTF8);
                 }
 
                 if (!string.IsNullOrWhiteSpace(record.AdminFileContent)) {
                     if (record.SpecificationType.ToLower().EndsWith("minjs")) { record.AdminFileContent = NUglify.Uglify.Js(record.AdminFileContent).Code;
                     } else if (record.SpecificationType.ToLower().EndsWith("mincss")) { record.AdminFileContent = NUglify.Uglify.Css(record.AdminFileContent).Code; }
                     File.WriteAllText(Path.Combine(hostingEnvironment.WebRootPath, "server-portal", "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "admin." + fileExt)), record.AdminFileContent, Encoding.UTF8);
-                    File.WriteAllText(Path.Combine(ServerRuntimeData.SystemWebPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "admin." + fileExt)), record.AdminFileContent, Encoding.UTF8);
+                    File.WriteAllText(Path.Combine(SrvRuntime.SysPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "admin." + fileExt)), record.AdminFileContent, Encoding.UTF8);
                 }
 
                 if (!string.IsNullOrWhiteSpace(record.ProviderContent)) {
                     if (record.SpecificationType.ToLower().EndsWith("minjs")) { record.ProviderContent = NUglify.Uglify.Js(record.ProviderContent).Code;
                     } else if (record.SpecificationType.ToLower().EndsWith("mincss")) { record.ProviderContent = NUglify.Uglify.Css(record.ProviderContent).Code; }
                     File.WriteAllText(Path.Combine(hostingEnvironment.WebRootPath, "server-portal", "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "provider." + fileExt)), record.ProviderContent, Encoding.UTF8);
-                    File.WriteAllText(Path.Combine(ServerRuntimeData.SystemWebPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "provider." + fileExt)), record.ProviderContent, Encoding.UTF8);
+                    File.WriteAllText(Path.Combine(SrvRuntime.SysPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "provider." + fileExt)), record.ProviderContent, Encoding.UTF8);
                 }
 
                 return true;
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return false;
         }
 
@@ -69,19 +69,19 @@ namespace EasyITCenter.ServerCoreStructure {
             try {
                 string fileExt = record.FileName.Split(".").Last();
                 FileOperations.DeleteFile(Path.Combine(hostingEnvironment.WebRootPath, "server-portal", "metro", record.MetroPath, record.FileName));
-                FileOperations.DeleteFile(Path.Combine(ServerRuntimeData.SystemWebPortal_path, "metro", record.MetroPath, record.FileName));
+                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SysPortal_path, "metro", record.MetroPath, record.FileName));
 
                 FileOperations.DeleteFile(Path.Combine(hostingEnvironment.WebRootPath, "server-portal", "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "user." + fileExt)));
-                FileOperations.DeleteFile(Path.Combine(ServerRuntimeData.SystemWebPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "user." + fileExt)));
+                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SysPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "user." + fileExt)));
 
                 FileOperations.DeleteFile(Path.Combine(hostingEnvironment.WebRootPath, "server-portal", "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "admin." + fileExt)));
-                FileOperations.DeleteFile(Path.Combine(ServerRuntimeData.SystemWebPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "admin." + fileExt)));
+                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SysPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "admin." + fileExt)));
 
                 FileOperations.DeleteFile(Path.Combine(hostingEnvironment.WebRootPath, "server-portal", "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "provider." + fileExt)));
-                FileOperations.DeleteFile(Path.Combine(ServerRuntimeData.SystemWebPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "provider." + fileExt)));
+                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SysPortal_path, "metro", record.MetroPath, DataOperations.RemoveWhitespace(record.FileName).Replace(fileExt, "provider." + fileExt)));
 
                 return true;
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return false;
         }
 

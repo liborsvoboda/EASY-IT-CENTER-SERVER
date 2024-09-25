@@ -27,21 +27,21 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             if (!optionsBuilder.IsConfigured) {
-                optionsBuilder.ConfigureLoggingCacheTime(TimeSpan.FromMinutes(ServerConfigSettings.DatabaseInternalCacheTimeoutMin));
-                optionsBuilder.EnableServiceProviderCaching(ServerConfigSettings.DatabaseInternalCachingEnabled);
+                optionsBuilder.ConfigureLoggingCacheTime(TimeSpan.FromMinutes(SrvConfig.DatabaseInternalCacheTimeoutMin));
+                optionsBuilder.EnableServiceProviderCaching(SrvConfig.DatabaseInternalCachingEnabled);
                 optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                 optionsBuilder.EnableSensitiveDataLogging(false); //everytime must be disabled other problem on release
 
-                optionsBuilder.UseSqlServer(ServerConfigSettings.DatabaseConnectionString,
+                optionsBuilder.UseSqlServer(SrvConfig.DatabaseConnectionString,
                       x => x.MigrationsHistoryTable("MigrationsHistory", "dbo"));
 
-                if (ServerRuntimeData.DebugMode) {
+                if (SrvRuntime.DebugMode) {
                     optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => {
                         builder.AddEventLog().AddConsole();
                     }
                     )).LogTo(message => { Debug.WriteLine(message); }).LogTo(Console.WriteLine);
                 }
-                else if (ServerConfigSettings.ConfigLogWarnPlusToDbEnabled) {
+                else if (SrvConfig.ConfigLogWarnPlusToDbEnabled) {
                     optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => {
                         builder.SetMinimumLevel(LogLevel.Warning).AddEventLog();
                     })).EnableSensitiveDataLogging(false).LogTo(message => {
@@ -112,7 +112,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 //(table.AsDataView());
 
                 return results;
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); } finally { cmd.Connection?.Close(); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); } finally { cmd.Connection?.Close(); }
             return null;
         }
 
@@ -130,7 +130,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 results = DataOperations.GenericConvertTableToClassList<T>(table).ToList();
 
                 return results;
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); } finally { cmd.Connection?.Close(); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); } finally { cmd.Connection?.Close(); }
             return new List<T>();
         }
 
@@ -186,7 +186,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 }
                 return value;
 
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return new object();
         }
 
@@ -208,7 +208,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 }
                 return value;
 
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return new object();
         }
 
@@ -235,7 +235,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     //cmd.Connection?.Close();
                     return value;
                 }
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return new int();
         }
 
@@ -261,7 +261,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     //cmd.Connection?.Close();
                     return value;
                 }
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return new int();
         }
 
@@ -301,7 +301,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     cmd.Connection?.Close();
                     return table;
                   }
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return null;
         }
 
@@ -341,7 +341,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     cmd.Connection?.Close();
                     return table;
                 }
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(Ex) }); }
+            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return null;
         }
 

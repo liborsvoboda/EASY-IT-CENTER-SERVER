@@ -29,13 +29,13 @@ namespace EasyITCenter.ServerCoreDBSettings {
             IList<RSSItem> syndicationList = new List<RSSItem>();
             var synd1 = new RSSItem() {
                 Title = DataOperations.RemoveDiacritism("IT Řešení v nejmodenější podobě jaké jinde Nenajdete"),
-                PermaLink = new Uri(ServerConfigSettings.ServerPublicUrl),
-                LinkUri = new Uri(ServerConfigSettings.ServerPublicUrl),
+                PermaLink = new Uri(SrvConfig.ServerPublicUrl),
+                LinkUri = new Uri(SrvConfig.ServerPublicUrl),
                 LastUpdated = DateTime.Now,
                 PublishDate = DateTime.Now,
-                CommentsUri = new Uri(ServerConfigSettings.ServerPublicUrl),
+                CommentsUri = new Uri(SrvConfig.ServerPublicUrl),
                 Content = "Novinky",
-                FeaturedImage = new Uri(ServerConfigSettings.ServerPublicUrl + "/logo")
+                FeaturedImage = new Uri(SrvConfig.ServerPublicUrl + "/logo")
             };
             syndicationList.Add(synd1);
             return Task.FromResult(syndicationList);
@@ -57,8 +57,8 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
         public ActionResult Index() {
             try {
-                if (ServerConfigSettings.WebRSSFeedsEnabled) {
-                    var feed = new SyndicationFeed("Nazev", "Popisek", new Uri(ServerConfigSettings.ServerPublicUrl), "RSSUrl", DateTime.Now);
+                if (SrvConfig.WebRSSFeedsEnabled) {
+                    var feed = new SyndicationFeed("Nazev", "Popisek", new Uri(SrvConfig.ServerPublicUrl), "RSSUrl", DateTime.Now);
                     feed.Copyright = new TextSyndicationContent($"{DateTime.Now.Year} Libor Svoboda");
                     var items = new List<SyndicationItem>();
                     var postings = ServerModulesExtensions.GetItemRssList();
@@ -85,7 +85,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     }
                 }
                 else { return BadRequest(); }
-            } catch (Exception ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetSystemErrMessage(ex) }); }
+            } catch (Exception ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }); }
             return BadRequest();
         }
     }

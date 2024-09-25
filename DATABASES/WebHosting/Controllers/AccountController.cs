@@ -9,31 +9,23 @@ using EasyITCenter.DevPortal;
 
 namespace EasyITCenter.Controllers {
 
-/*
-    [Controller]
-    [Route("/DevPortal")]
+    [Route("[controller]/[action]")]
     public class AccountController : Controller {
 
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ILogger _logger;
 
-        [HttpGet("/DevPortal/Login")]
-        public IActionResult Login() {
-            return View();
+        public AccountController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger) {
+            _signInManager = signInManager;
+            _logger = logger;
         }
 
-        [HttpGet("/DevPortal/Register")]
-        public IActionResult Register() {
-            return View();
-        }
-
-        [HttpGet("/DevPortal/ForgotPassword")]
-        public IActionResult ForgotPassword() {
-            return View();
-        }
-
-        [HttpGet("/DevPortal/RecoverPassword")]
-        public IActionResult RecoverPassword() {
-            return View();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout() {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            return RedirectToPage("/Index");
         }
     }
-*/
 }

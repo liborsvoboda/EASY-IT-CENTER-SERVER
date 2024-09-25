@@ -14,9 +14,9 @@
         /// <returns></returns>
         [HttpGet("/")]
         public IActionResult Index() {
-            return ServerConfigSettings.RedirectOnPageNotFound ?
-                new RedirectResult(ServerConfigSettings.RedirectPath) : 
-                new RedirectResult(ServerConfigSettings.RedirectPath.StartsWith("/") ? ServerConfigSettings.RedirectPath : "/" + ServerConfigSettings.RedirectPath);
+            return SrvConfig.RedirectOnPageNotFound ?
+                new RedirectResult(SrvConfig.RedirectPath) : 
+                new RedirectResult(SrvConfig.RedirectPath.StartsWith("/") ? SrvConfig.RedirectPath : "/" + SrvConfig.RedirectPath);
         }
 
 
