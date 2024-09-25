@@ -125,7 +125,8 @@ namespace EasyITCenter {
             serverLifetime.ApplicationStarted.Register(ServerOnStarted); serverLifetime.ApplicationStopping.Register(ServerOnStopping); serverLifetime.ApplicationStopped.Register(ServerOnStopped);
             ServerEnablingServices.EnableLogging(ref app);
 
-            //Generate ALL Registered Databases IF NOT EXIST
+            //Generate ALL Registered Databases IF NOT EXIST && FILL DATA
+            /*
             try {
                 //TODO ADD TO CYCLE
                 var webHosting = new WebHostingDbContext();
@@ -135,7 +136,7 @@ namespace EasyITCenter {
                     webHosting.SaveChanges();
                 }
             } catch { }
-
+            */
            
             if (SrvConfig.ConfigServerStartupOnHttps) {
                 app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All });
@@ -153,8 +154,8 @@ namespace EasyITCenter {
                 //Ignored WEBSOCKET && DEFINED SPECIAL PATHS RUN DIRECLY
                 //TODO INSERT ALL Server PORTAL Prefixes SAME AS Registered DB
                 if (!context.WebSockets.IsWebSocketRequest
-                    && !requestPath.StartsWith("razortemplate") && !requestPath.StartsWith("easydata")  //Ignored path RUN DIRECLY
-
+                    && !requestPath.StartsWith("/razortemplate") && !requestPath.StartsWith("/easydata")  //Ignored path RUN DIRECLY
+                    && !requestPath.StartsWith("/WebAdmin") && !requestPath.StartsWith("/devportal")
                 ) { await next();
                     //GO TO CONTROLLED AREA
 
@@ -234,7 +235,7 @@ namespace EasyITCenter {
             });
 
 
-            //app.UseExceptionHandler("/Error");
+            app.UseExceptionHandler("/Error");
             app.UseRouting();
             app.UseDefaultFiles(new DefaultFilesOptions() { DefaultFileNames = new List<string> { "index.html" } });
             ServerModulesEnabling.EnableMarkdownAsHtmlFiles(ref app);
@@ -264,9 +265,6 @@ namespace EasyITCenter {
             app.UseSession();
             app.UseResponseCaching();
             app.UseResponseCompression();
-
-
-            if (SrvConfig.EnableIdentityServer) { app.UseIdentityServer(); }
 
             app.UseAuthentication();
             app.UseAuthorization();

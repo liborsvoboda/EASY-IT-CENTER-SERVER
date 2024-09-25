@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace EasyITCenter.DevPortal {
 
     #region DefaultStructure
+
     public class ApplicationUser : IdentityUser {
     }
 
@@ -46,7 +47,7 @@ namespace EasyITCenter.DevPortal {
     /// Shared WebHosting Standalone Database 
     /// https://github.com/morrisjdev/FileContextCore/blob/master/Example/Program.cs
     /// </summary>
-    public class WebHostingDbContext : IdentityDbContext<ApplicationUser> { 
+    public class WebHostingDbContext : IdentityDbContext { 
         
         private readonly Microsoft.AspNetCore.Hosting.IWebHostEnvironment _hostingEnvironment;
         private readonly IServiceProvider _serviceProvider;
@@ -65,16 +66,14 @@ namespace EasyITCenter.DevPortal {
         public DbSet<WebSetting> WebSetting { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseSqlServer($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30",
-                        x => x.MigrationsAssembly(typeof(WebHostingDbContext).Assembly.FullName).MigrationsHistoryTable("MigrationHistory").UseNetTopologySuite())
-                    .UseInternalServiceProvider(_serviceProvider);
-            //optionsBuilder.UseFileContextDatabase<JSONSerializer, DefaultFileManager>(databaseName: "EICwebHosting",location: Path.Combine(_hostingEnvironment.WebRootPath, FileOperations.GetLastFolderFromPath(ServerRuntimeData.ServerPrivate_path), "databases", "EICwebHosting.mdf"), password: "EICwebHOSTING");
-            //optionsBuilder.UseFileContextDatabase<JSONSerializer, DefaultFileManager>();
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        //    optionsBuilder.UseSqlServer($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30",
+        //                x => x.MigrationsAssembly(typeof(WebHostingDbContext).Assembly.FullName).MigrationsHistoryTable("MigrationHistory").UseNetTopologySuite())
+        //            .UseInternalServiceProvider(_serviceProvider);
+        //}
 
         protected override void OnModelCreating(ModelBuilder builder) {
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(builder);
            

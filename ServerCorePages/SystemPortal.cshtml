@@ -11,7 +11,11 @@
 
 @model ServerCorePages.SystemPortalModel
 
-@inject EasyITCenter.Managers.UserProfileManager UserProfileManager
+@*   
+inject example
+@inject EasyITCenter.Managers.UserProfileManager UserProfileManager 
+*@
+
 
 @{
     string? sourcePath = HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "RequestedModulePath").Value?.ToString();

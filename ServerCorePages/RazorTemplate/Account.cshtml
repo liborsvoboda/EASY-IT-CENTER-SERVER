@@ -7,7 +7,7 @@
     ViewData["Title"] = "Account";
 }
 
-@inject EasyITCenter.Managers.UserProfileManager UserProfileManager
+
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -38,10 +38,11 @@
                     <h3 class="box-title">Public profile</h3>
                 </div>
                 <div class="box-body box-account">
-                    <form id="formChangePassword" asp-controller="Profile" asp-action="@(UserProfileManager?.IsHasPassword(UserProfileManager?.CurrentUser) ? "ChangePassword" : "SetPassword")"
+                    <form id="formChangePassword" asp-controller="Profile" asp-action="1 == 0 ? "ChangePassword" : "SetPassword")"
                           class="form-horizontal" method="post">
-                        @if (UserProfileManager?.IsHasPassword(UserProfileManager?.CurrentUser))
-                        {
+
+                        @* @if (UserProfileManager?.IsHasPassword(UserProfileManager?.CurrentUser)) { *@
+
                             <div class="form-group">
 
                                 <label for="OldPassword" class="col-sm-2 control-label">Current Password</label>
@@ -54,14 +55,14 @@
                                           data-valmsg-for="OldPassword" data-valmsg-replace="true"></span>
                                 </div>
                             </div>
-                        }
-                        else
-                        {
+                        
+                        
+                        @* {
                             <div class="alert alert-info alert-dismissible" role="alert">
                                 You do not have a local username/password for this site. Add a local
                                 account so you can log in without an external login.
                             </div>
-                        }
+                        } *@
                         <div class="form-group">
                             <label for="inputNewPassword" class="col-sm-2 control-label">New Password</label>
 

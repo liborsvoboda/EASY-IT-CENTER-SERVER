@@ -104,9 +104,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                 if (SrvConfig.WebRazorPagesEngineEnabled) {
                     endpoints.MapRazorPages();
-                    //endpoints.MapDefaultControllerRoute(); //MAYBE
-                    endpoints.MapAreaControllerRoute(name: "Dashboard",areaName: "Dashboard",pattern: "D/{controller=Home}/{action=Index}/{id?}");
-                    endpoints.MapControllerRoute(name: "DevPortal",pattern: "{controller=DevPortal}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute(name: "DevPortal", pattern: "{controller=DevPortal}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute(name: "WebAdmin",pattern: "{controller=WebAdmin}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute(name: "RazorPages", pattern: "{controller=ServerCorePages}/{action=Index}/{id?}");
                 }
 

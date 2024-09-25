@@ -28,7 +28,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <StartupObject>EasyITCenter.BackendServer</StartupObject>
+    <StartupObject></StartupObject>
     <UserSecretsId>d02dd1e4-194b-4a5e-8910-be572e7389cf</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
@@ -226,8 +226,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Dotmim.Sync.SqlServer.ChangeTracking" Version="0.9.8" />
     <PackageReference Include="Dotmim.Sync.Web.Client" Version="0.9.8" />
     <PackageReference Include="Dotmim.Sync.Web.Server" Version="0.9.8" />
-    <PackageReference Include="IdentityModel" Version="7.0.0" />
- <PackageReference Include="IdentityServer4" Version="4.1.2" />
     <PackageReference Include="Eaf" Version="7.0.5" />
     <PackageReference Include="Eaf.AspNetCore" Version="7.0.5" />
     <PackageReference Include="Eaf.AspNetCore.OData" Version="7.0.5" />
@@ -403,7 +401,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.AspNetCore.Http.Connections.Client" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Connections.Common" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Metadata" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
@@ -437,11 +434,10 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.33" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.33" />
+ <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.10" />
     <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.33" />
     <PackageReference Include="Microsoft.Graph" Version="5.56.0" />
-    <PackageReference Include="Microsoft.Identity.Web" Version="2.19.0" />
     <PackageReference Include="Microsoft.JSInterop" Version="6.0.33" />
     <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.33" />
     <PackageReference Include="Microsoft.MarkedNet" Version="1.0.13" />

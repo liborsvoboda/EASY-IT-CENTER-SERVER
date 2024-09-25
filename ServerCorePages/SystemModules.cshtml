@@ -11,7 +11,7 @@
 @using System.Security.Claims
 @model ServerCorePages.SystemModulesModel
 
-@inject EasyITCenter.Managers.UserProfileManager UserProfileManager
+
 
 @{
     string? sourcePath = HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "RequestedModulePath").Value?.ToString();

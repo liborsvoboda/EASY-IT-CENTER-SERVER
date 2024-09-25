@@ -64,8 +64,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         internal static void ConfigureAutoMinify(ref IServiceCollection services) {
             if (SrvConfig.EnableAutoMinify)
             {
-                services.AddWebOptimizer(cfg =>
-                {
+                services.AddWebOptimizer(cfg => {
                     cfg.MinifyCssFiles(); cfg.MinifyJsFiles();/*cfg.MinifyHtmlFiles();*/
                 }, option => {  
                     option.EnableTagHelperBundling = true; 
@@ -106,13 +105,21 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureCookie(ref IServiceCollection services) {
-            services.Configure<CookiePolicyOptions>(options => {
-                options.ConsentCookie.Name = SrvConfig.ConfigCoreServerRegisteredName;
-                options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.Lax;
-                options.Secure = CookieSecurePolicy.Always;
-                options.ConsentCookie.IsEssential = true;
-                options.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.None;
+            services.ConfigureApplicationCookie(options => {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = "/SrvAdmin/Account/Login";
+                options.AccessDeniedPath = "/SrvAdmin/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+            services.Configure<CookiePolicyOptions>(opt => {
+                opt.ConsentCookie.Name = SrvConfig.ConfigCoreServerRegisteredName;
+                opt.CheckConsentNeeded = context => false;
+                opt.MinimumSameSitePolicy = SameSiteMode.Lax;
+                opt.Secure = CookieSecurePolicy.Always;
+                opt.ConsentCookie.IsEssential = true;
+                opt.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.Always;
             });
         }
 
@@ -317,7 +324,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureScoped(ref IServiceCollection services) {
-            if (SrvConfig.EnableIdentityServer) { services.AddScoped<UserProfileManager>(); }
             services.AddScoped(typeof(IGenericApiServiceAsync<,>), typeof(GenericApiServiceAsync<,>));
             services.AddScoped(typeof(IGenericApiService<,>), typeof(GenericApiService<,>));
             services.AddScoped<StaticFileDbService>();
@@ -395,28 +401,28 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services"></param>
         internal static void ConfigureIdentityServer(ref IServiceCollection services) {
             if (SrvConfig.EnableIdentityServer) {
-                services.AddIdentityServer(options => {
-                    options.Events.RaiseErrorEvents = true;
-                    options.Events.RaiseInformationEvents = true;
-                    options.Events.RaiseFailureEvents = true;
-                    options.Events.RaiseSuccessEvents = true;
-                    options.UserInteraction.ErrorUrl = "/DevPortal/Error";
-                    options.UserInteraction.LoginUrl = "/DevPortal/Login";
-                    options.UserInteraction.LogoutUrl = "/DevPortal/Logout";
-                    options.Discovery.ShowEndpoints = true;
-                    options.Endpoints.EnableUserInfoEndpoint = true;
-                    options.Endpoints.EnableTokenRevocationEndpoint = true;
-                    options.Endpoints.EnableAuthorizeEndpoint = true;
-                    options.EmitStaticAudienceClaim = true;
-                    options.Discovery.ShowTokenEndpointAuthenticationMethods = true;
-
-                }).AddInMemoryIdentityResources(new List<IdentityServer4.Models.IdentityResource>())
-                .AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
-                .AddInMemoryClients(new List<IdentityServer4.Models.Client>())
-                .AddInMemoryApiScopes(new List<IdentityServer4.Models.ApiScope>())
-                .AddCoreServices().AddInMemoryPersistedGrants()//.AddPluggableServices()
-                .AddJwtBearerClientAuthentication().AddCookieAuthentication()
-                .AddResponseGenerators().AddDeveloperSigningCredential();
+                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true);
+                services.Configure<IdentityOptions>(options => {
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequiredUniqueChars = 1;
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.AllowedForNewUsers = true;
+                    options.User.AllowedUserNameCharacters =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                    options.User.RequireUniqueEmail = true;
+                });
+                //    .AddInMemoryIdentityResources(new List<IdentityServer4.Models.IdentityResource>())
+                //.AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
+                //.AddInMemoryClients(new List<IdentityServer4.Models.Client>())
+                //.AddInMemoryApiScopes(new List<IdentityServer4.Models.ApiScope>())
+                //.AddCoreServices().AddInMemoryPersistedGrants()//.AddPluggableServices()
+                //.AddJwtBearerClientAuthentication().AddCookieAuthentication()
+                //.AddResponseGenerators().AddDeveloperSigningCredential();
 
 
                 /*
