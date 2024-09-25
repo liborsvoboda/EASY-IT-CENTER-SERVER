@@ -153,10 +153,7 @@ namespace EasyITCenter {
 
                 //Ignored WEBSOCKET && DEFINED SPECIAL PATHS RUN DIRECLY
                 //TODO INSERT ALL Server PORTAL Prefixes SAME AS Registered DB
-                if (!context.WebSockets.IsWebSocketRequest
-                    && !requestPath.StartsWith("/razortemplate") && !requestPath.StartsWith("/easydata")  //Ignored path RUN DIRECLY
-                    && !requestPath.StartsWith("/WebAdmin") && !requestPath.StartsWith("/devportal")
-                ) { await next();
+                if (!context.WebSockets.IsWebSocketRequest) { await next();
                     //GO TO CONTROLLED AREA
 
 
