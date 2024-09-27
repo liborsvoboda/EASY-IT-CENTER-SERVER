@@ -1,0 +1,88 @@
+﻿
+
+@* @addTagHelper *, WebOptimizer.Core *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using Microsoft.AspNetCore.Html
+@using ServerCorePages
+@using EasyITCenter.DBModel
+@using EasyITCenter.ServerCoreWebPages
+@using System.Security.Claims
+@using System.Text.RegularExpressions
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="charset" content="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Libor Svoboda">
+    <meta name="description" content="EasyITCenter">
+    <meta name="keywords" content="System, Backend, API, EASY-DATA-Center, EASY-SYSTEM-Builder, Application, Server, IT, Solution, Help, HowTo, Javascript, HTML5, UI, Library, Web, Development, Framework">
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+    <title>EIC&ESB Dev Portal</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/ionicons/css/ionicons.min.css">
+    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/admin-lte/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/admin-lte/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/icheck/skins/square/blue.css">
+    <script src="/server-Integrated/razor-pages/serverportal/js/html5shiv.min.js"></script>
+    <script src="/server-Integrated/razor-pages/serverportal/respond.min.js"></script>
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/css/google.css">
+
+    <environment include="Development">
+        <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+
+    <div class="wrapper">
+
+        @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_Header.cshtml")
+        @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_NavBar.cshtml")
+        <div class="content-wrapper">
+
+            @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_StatusMessage.cshtml", TempData["StatusMessage"])
+            @RenderBody()
+        </div>
+        @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_Footer.cshtml")
+        @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_SideBar.cshtml")
+    </div>
+    <script src="/server-Integrated/razor-pages/serverportal/jquery/jquery.min.js"></script>
+    <script src="/server-Integrated/razor-pages/serverportal/bootstrap/js/bootstrap.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="/server-Integrated/razor-pages/serverportal/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/server-Integrated/razor-pages/serverportal/fastclick/fastclick.min.js"></script>
+    <script src="/server-Integrated/razor-pages/serverportal/admin-lte/js/adminlte.min.js"></script>
+    <script src="/server-Integrated/razor-pages/serverportal/admin-lte/js/demo.js"></script>
+
+    <environment include="Development">
+        <script src="/server-Integrated/razor-pages/serverportal/js/site.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="/server-Integrated/razor-pages/serverportal/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <script>
+        $(document).ready(function () {
+            $('.sidebar-menu').tree()
+        })
+    </script>
+
+    @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_ValidationScriptsPartial.cshtml")
+</body>
+</html>

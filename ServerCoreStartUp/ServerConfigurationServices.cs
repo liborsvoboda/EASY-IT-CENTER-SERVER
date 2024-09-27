@@ -349,8 +349,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(SrvConfig.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
                 //WEBHOSTING DB
-                services.AddDbContext<WebHostingDbContext>((p, o) => o.UseSqlServer($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30",
-                    x => x.MigrationsHistoryTable("MigrationHistory").UseNetTopologySuite())
+                services.AddDbContext<WebHostingDbContext>((p, o) => o.UseSqlServer($"Data Source={SrvConfig.WebHostingDBConnString};AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30",
+                    x => x.UseNetTopologySuite())
                 .UseInternalServiceProvider(p));
 
                 // Database File Example
@@ -401,7 +401,16 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services"></param>
         internal static void ConfigureIdentityServer(ref IServiceCollection services) {
             if (SrvConfig.EnableIdentityServer) {
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true);
+                services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddUserStore<ApplicationUser>()
+                     //    .AddInMemoryIdentityResources(new List<IdentityServer4.Models.IdentityResource>())
+                //.AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
+                //.AddInMemoryClients(new List<IdentityServer4.Models.Client>())
+                //.AddInMemoryApiScopes(new List<IdentityServer4.Models.ApiScope>())
+                //.AddCoreServices().AddInMemoryPersistedGrants()//.AddPluggableServices()
+                //.AddJwtBearerClientAuthentication().AddCookieAuthentication()
+                //.AddResponseGenerators().AddDeveloperSigningCredential();
+                ;
                 services.Configure<IdentityOptions>(options => {
                     options.Password.RequireDigit = true;
                     options.Password.RequireLowercase = true;
@@ -416,13 +425,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                     options.User.RequireUniqueEmail = true;
                 });
-                //    .AddInMemoryIdentityResources(new List<IdentityServer4.Models.IdentityResource>())
-                //.AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
-                //.AddInMemoryClients(new List<IdentityServer4.Models.Client>())
-                //.AddInMemoryApiScopes(new List<IdentityServer4.Models.ApiScope>())
-                //.AddCoreServices().AddInMemoryPersistedGrants()//.AddPluggableServices()
-                //.AddJwtBearerClientAuthentication().AddCookieAuthentication()
-                //.AddResponseGenerators().AddDeveloperSigningCredential();
+               
 
 
                 /*

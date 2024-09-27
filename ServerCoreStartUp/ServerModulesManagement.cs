@@ -256,11 +256,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
                      if (File.Exists(xmlFile)) { try { c.IncludeXmlComments(xmlFile,true); } catch { } }
                      foreach (var assembly in Assembly.GetExecutingAssembly().InList()) {
                          if (File.Exists(assembly.Location)) { try {c.IncludeXmlComments(assembly.Location, true); } catch { } } }
-                     
 
-
-                    //c.InferSecuritySchemes();
-                    c.UseOneOfForPolymorphism();
+                     //c.InferSecuritySchemes();
+                     c.UseOneOfForPolymorphism();
                     //c.UseInlineDefinitionsForEnums();
                     c.DescribeAllParametersInCamelCase();
                     c.EnableAnnotations(true, true);

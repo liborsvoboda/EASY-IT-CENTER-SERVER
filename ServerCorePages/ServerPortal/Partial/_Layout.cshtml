@@ -1,0 +1,87 @@
+﻿@{
+    Layout = null;
+}
+
+@using Microsoft.AspNetCore.Identity;
+@using EasyITCenter;
+@using EasyITCenter.ServerCoreStructure;
+@using ServerCorePages;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EIC&ESB Developer Portal</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/ionicons/css/ionicons.min.css">
+    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/admin-lte/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/admin-lte/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/icheck/skins/square/blue.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/google.css">
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/metro/css/metro.all.min.css">
+    
+    
+   
+
+    <environment include="Development">
+        <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/css/site.css" />
+    </environment>
+
+    <environment exclude="Development">
+        <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body class="hold-transition login-page" style="height: auto;">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="/ServerPortal"><b>Admin</b>LTE</a>
+        </div>
+        @RenderBody()
+        @await Html.PartialAsync("~/ServerCorePages/ServerPortal/Partial/_Footer.cshtml")
+        @await Html.PartialAsync("~/ServerCorePages/ServerPortal/Partial/_SideBar.cshtml")
+    </div>
+
+    
+
+    @await Html.PartialAsync("~/ServerCorePages/ServerPortal/Partial/_ValidationScriptsPartial.cshtml")
+</body>
+
+<script src="/server-Integrated/razor-pages/ServerPortal/jquery/jquery.min.js"></script>
+<script src="/server-Integrated/razor-pages/ServerPortal/bootstrap/js/bootstrap.min.js"></script>
+<script src="/server-Integrated/razor-pages/ServerPortal/icheck/icheck.min.js"></script>
+<script src="/server-Integrated/razor-pages/ServerPortal/html5shiv.min.js"></script>
+<script src="/server-Integrated/razor-pages/ServerPortal/respond.min.js"></script>
+@RenderSection("Scripts", required: false)
+
+<script src="/server-Integrated/razor-pages/ServerPortal/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/server-Integrated/razor-pages/ServerPortal/fastclick/fastclick.min.js"></script>
+<script src="/server-Integrated/razor-pages/ServerPortal/admin-lte/js/adminlte.min.js"></script>
+<script src="/server-Integrated/razor-pages/ServerPortal/admin-lte/js/demo.js"></script>
+<script src="/server-Integrated/razor-pages/ServerPortal/metro/js/metro.4.5.2.min.js"></script>
+ 
+<environment include="Development">
+    <script src="/server-Integrated/razor-pages/ServerPortal/js/site.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="/server-Integrated/razor-pages/ServerPortal/js/site.min.js" asp-append-version="true"></script>
+</environment>
+<script>
+
+    $(document).ready(function () {
+        $('.sidebar-menu').tree();
+    });
+
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+    });
+</script>
+</html>
+

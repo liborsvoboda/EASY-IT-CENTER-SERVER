@@ -1,5 +1,4 @@
-﻿using CommandLine.Text;
-using EasyITCenter.ServerCoreStructure;
+﻿using EasyITCenter.ServerCoreStructure;
 using FastReport;
 using FastReport.Web;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,7 +11,7 @@ namespace ServerCorePages {
     /// <summary>
     /// Fast Report Webový Prohlížeč Reportů 
     /// V případě že je zadána Cesta nástroje Zobrazí Ukázky
-    /// Cesta Nástoje: /ServerCoreTools/ViewerReportFile
+    /// Cesta Nástroje: /ServerCoreTools/ViewerReportFile
     /// </summary>
     public class ViewerReportFileModel : PageModel {
         public static ServerWebPagesToken serverWebPagesToken;

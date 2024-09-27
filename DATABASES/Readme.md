@@ -1,19 +1,59 @@
 ﻿
-# update tool   
+# Update EntityFramework Scaffold Tool   
+
+`````         
 dotnet tool update --global dotnet-ef --version 6.0.33   
+`````        
 
+# Managing AND Scaffolding SQLLocalDB 
 
+- Database can Be Managed By MS Management Studio
+- can be connected from file with Connection String
 
-https://github.com/zzzprojects/docs/blob/master/learnentityframeworkcore.com/pages/migrations/index.md
+````        
+'Data Source=Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30'
 
-Command Line	Description
-dotnet ef migrations add [name]	Create a new migration with the specific migration name.
-dotnet ef migrations remove	Remove the latest migration.
-dotnet ef database update	Update the database to the latest migration.
-dotnet ef database update [name]	Update the database to a specific migration name point.
-dotnet ef migrations list	Lists all available migrations.
-dotnet ef migrations script	Generates a SQL script for all migrations.
-dotnet ef migrations has-pending-model-changes	Check if there is any model changes since the last migration.
-dotnet ef database drop	Drop the database.
+````        
 
-dotnet ef migrations script
+- LocalDB must be connected to '(localdb)\MSSQLLocalDB'   
+- By MSSQL connection can be scaffolded [Generate Model & DBContext] to Project Code
+- Scaffold LocalDB From direct file is not possible    
+
+`````    
+dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EICWebHostingDbContext" Microsoft.EntityFrameworkCore.SqlServer    
+
+Scaffold-DbContext 'Data Source=Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=EICWebHostingDbContext;Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -ContextDir WebHosting   
+
+`````        
+# Possible Scaffold Parameters    
+
+`````    
+dotnet ef dbcontext scaffold ... --table Artist --table Album    
+dotnet ef dbcontext scaffold ... --schema Customer --schema Contractor    
+dotnet ef dbcontext scaffold ... --table Customer.Purchases --table Contractor.Accounts --table Contractor.Contracts   
+dotnet ef dbcontext scaffold ... --context-dir Data --output-dir Models --namespace Your.Namespace --context-namespace Your.DbContext.Namespace --force   
+dotnet ef dbcontext scaffold ... --force   
+
+`````    
+# Managing SQL Scripts nad Migrations commands    
+
+`````     
+Command Line	Description    
+dotnet ef migrations add [name]	Create a new migration with the specific migration name.   
+dotnet ef migrations remove	Remove the latest migration.   
+dotnet ef database update	Update the database to the latest migration.   
+dotnet ef database update [name]	Update the database to a specific migration name point.   
+dotnet ef migrations list	Lists all available migrations.   
+dotnet ef migrations script	Generates a SQL script for all migrations.   
+dotnet ef migrations has-pending-model-changes	Check if there is any model changes since the last migration.   
+dotnet ef database drop	Drop the database.   
+dotnet ef migrations script   
+`````    
+
+# Documentation For EntityFramework, Migrations, Scaffolding     
+
+[Migrations](https://github.com/zzzprojects/docs/blob/master/learnentityframeworkcore.com/pages/migrations/index.md)   
+
+# NoSQL alternative Database Solution RavenDB   
+
+[github Repo](https://github.com/rflechner/ravendb-fork)     

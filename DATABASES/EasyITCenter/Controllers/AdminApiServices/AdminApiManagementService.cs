@@ -29,10 +29,17 @@ namespace EasyITCenter.ServerCoreDBSettings {
     [Authorize(Roles = "admin")]
     public class AdminApiManagementService : ControllerBase {
 
-        //IS FOR WORKING WITH WWWDATA OF PROJECT FOLDER
         private readonly Microsoft.AspNetCore.Hosting.IWebHostEnvironment _hostingEnvironment;
+
+        /// <summary>
+        /// IS FOR WORKING WITH WWWDATA OF PROJECT FOLDER
+        /// If Used in Code Path file storage modify Project wwwroot 
+        /// not need Transfer changed data from BIN/DEGUG to Project
+        /// Usage: _hostingEnvironment.WebRootPath
+        /// </summary>
+        /// <param name="hostingEnvironment"></param>
         public AdminApiManagementService(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment) {
-            _hostingEnvironment = hostingEnvironment;
+            _hostingEnvironment = hostingEnvironment; 
         }
 
 

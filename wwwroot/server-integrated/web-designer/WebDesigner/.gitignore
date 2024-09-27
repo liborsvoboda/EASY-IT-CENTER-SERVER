@@ -1,7 +1,0 @@
-.DS_Store
-private/
-/locale
-node_modules/
-*.log
-localStorage_relational.json
-stats.json

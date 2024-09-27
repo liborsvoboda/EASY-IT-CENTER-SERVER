@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TypeScriptSourceMap>False</TypeScriptSourceMap>
@@ -29,7 +29,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject></StartupObject>
-    <UserSecretsId>d02dd1e4-194b-4a5e-8910-be572e7389cf</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
     <OutputType>Exe</OutputType>
@@ -46,6 +45,7 @@
     <TypeScriptEnabled>false</TypeScriptEnabled>
     <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
     <TypeScriptToolsVersion>3.9</TypeScriptToolsVersion>
+    <UserSecretsId>dffec4f1-eb35-43b7-a694-a0f10862b4a8</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -79,18 +79,16 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <BondCodegen Remove="wwwroot\server-Integrated\razor-pages\devportal\**" />
     <Compile Remove="bin\**" />
-    <Compile Remove="wwwroot\**" />
+	<Compile Remove="wwwroot\**" />
     <EmbeddedResource Remove="bin\**" />
-    <EmbeddedResource Remove="wwwroot\**" />
+	<EmbeddedResource Remove="wwwroot\**" />
     <None Remove="bin\**" />
-    <None Remove="wwwroot\**" />
+	<None Remove="wwwroot\**" />
     <TypeScriptCompile Remove="*" />
     <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
-    <Content Remove="wwwroot\**" />
-    <EntityDeploy Remove="wwwroot\server-Integrated\razor-pages\devportal\**" />   
+	<Content Remove="wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -120,8 +118,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
 
    <ItemGroup>
      <None Remove="C:\Users\tatka\.nuget\packages\microsoft.applicationinsights.profiler.aspnetcore\2.6.0\contentFiles\any\netstandard2.1\ServiceProfiler\TraceUpload.zip" />
-     <None Remove="Docs\Extension.md" />
-     <None Remove="Docs\index.md" />
      <None Remove="Docs\Readme.md" />
    </ItemGroup>
 
@@ -141,6 +137,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="AngleSharp.Js" Version="0.15.0" />
     <PackageReference Include="AngleSharp.Wasm" Version="0.13.0" />
     <PackageReference Include="AngleSharp.Xml" Version="0.17.0" />
+    <PackageReference Include="Ardin.ScrapySharp" Version="1.0.0" />
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.15" />
     <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="6.0.15" />
     <PackageReference Include="AspNetCore.Client" Version="0.19.1" />
@@ -368,16 +365,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="MediaBrowser.Server.Core" Version="4.8.2" />
     <PackageReference Include="MermaidNetHtmlBuilder" Version="1.0.0" />
     <PackageReference Include="MessagePack" Version="2.5.140" />
-    <PackageReference Include="Metro4" Version="4.5.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.22.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.DependencyCollector" Version="2.22.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.EventCounterCollector" Version="2.22.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.PerfCounterCollector" Version="2.22.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.Profiler.AspNetCore" Version="2.6.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.SnapshotCollector" Version="1.4.6" />
-    <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer" Version="2.22.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.22.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.33" />
@@ -424,7 +411,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.KeyPerFile" Version="6.0.33" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.33" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.33" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.33" />
@@ -434,8 +421,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.1" />
- <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.10" />
     <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.33" />
     <PackageReference Include="Microsoft.Graph" Version="5.56.0" />
     <PackageReference Include="Microsoft.JSInterop" Version="6.0.33" />
@@ -478,6 +463,9 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="NJsonSchema.Yaml" Version="11.0.2" />
     <PackageReference Include="NPOI" Version="2.6.2" />
     <PackageReference Include="NUglify" Version="1.21.4" />
+    <PackageReference Include="Octokit" Version="13.0.1" />
+    <PackageReference Include="Octokit.Webhooks" Version="2.2.3" />
+    <PackageReference Include="Octokit.Webhooks.AspNetCore" Version="2.2.3" />
     <PackageReference Include="OpenGraph-Net" Version="4.0.1" />
     <PackageReference Include="Peachpie.Library" Version="1.1.10" />
     <PackageReference Include="Peachpie.Runtime" Version="1.1.10" />
@@ -499,7 +487,9 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="ReportGenerator.Core" Version="5.1.10" />
     <PackageReference Include="ReverseMarkdown" Version="4.3.0" />
     <PackageReference Include="RotativaCore" Version="4.1.0" />
+    <PackageReference Include="ScrapySharp" Version="3.0.0" />
     <PackageReference Include="Scriban" Version="5.6.0" />
+    <PackageReference Include="scriptcs" Version="0.17.1" />
     <PackageReference Include="SendGridSharp" Version="1.4.1" />
     <PackageReference Include="SendGridSharp.Core" Version="2.0.0" />
     <PackageReference Include="Sentry" Version="4.4.0" />
@@ -557,13 +547,13 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Statik.Markdown" Version="0.14.0" />
     <PackageReference Include="Statik.Mvc" Version="0.14.0" />
     <PackageReference Include="Streamx.Linq.SQL.EFCore" Version="6.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.6.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.8.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SchemaBuilder" Version="1.6.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.6.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.6.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.6.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.8.0" />
     <PackageReference Include="System.AppContext" Version="4.3.0" />
     <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
     <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
@@ -580,6 +570,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.1" />
     <PackageReference Include="TensorFlow.NET" Version="0.150.0" />
     <PackageReference Include="TensorFlowSharp" Version="1.15.1" />
+    <PackageReference Include="Tesseract" Version="5.2.0" />
     <PackageReference Include="TGrid" Version="0.2.7" />
     <PackageReference Include="TGrid.TypeScript.DefinitelyTyped" Version="0.2.5" />
     <PackageReference Include="TimeZoneConverter" Version="6.1.0" />
@@ -613,10 +604,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   <ItemGroup>
     <Content Update="Data\config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="ServerCorePages\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
   
@@ -664,4 +651,9 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Exec Command="robocopy &quot;$(ProjectDir)wwwroot&quot; &quot;$(ProjectDir)bin\$(ConfigurationName)\net6.0\wwwroot&quot; /s /e &#xD;&#xA; exit /b 0" />
     <Exec Command="robocopy &quot;$(ProjectDir)Docs&quot; &quot;$(ProjectDir)bin\$(ConfigurationName)\net6.0\Docs&quot; /s /e &#xD;&#xA; exit /b 0" />
   </Target>
+  
+
+ 
+ 
+   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
  </Project>

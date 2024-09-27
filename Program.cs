@@ -1,7 +1,6 @@
-﻿using AngleSharp.Diffing.Extensions;
-using LicenseVerify;
+﻿using LicenseVerify;
 using Microsoft.AspNetCore;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using NuGet.Packaging;
 using System.Runtime.InteropServices;
 
 
@@ -54,6 +53,7 @@ namespace EasyITCenter {
         /// Server Start Controller
         /// </summary>
         private static async Task StartServer() {
+
             try {
                 CheckLicense();
                 SrvRuntime.ServerCancelToken = new CancellationTokenSource();
@@ -66,7 +66,7 @@ namespace EasyITCenter {
                     });
                 }
 
-                //Load StartupDBdata
+                //Load Startup DB Data
                 if (SrvConfig.ServiceUseDbLocalAutoupdatedDials) { ServerStartupDbDataLoading(); }
 
                 //Start Server
@@ -198,7 +198,7 @@ namespace EasyITCenter {
 
         /// <summary>
         /// Server Core: Load Configuration From Database First Must be From File With DB
-        /// Connection, Others File Settings than DBconnection is Optional
+        /// Connection, Others File Settings than DB connection is Optional
         /// </summary>
         private static void LoadConfigurationFromDb() {
             try {

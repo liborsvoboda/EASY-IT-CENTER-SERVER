@@ -1,4 +1,5 @@
-﻿using FubarDev.FtpServer;
+﻿using Eaf.Middleware.Identity;
+using FubarDev.FtpServer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -10,6 +11,7 @@ namespace EasyITCenter.ServerCoreStructure {
     /// The server runtime data.
     /// </summary>
     public partial class SrvRuntime {
+
 
         /// <summary>
         /// Server Startup Path
@@ -153,21 +155,15 @@ namespace EasyITCenter.ServerCoreStructure {
 
         /// <summary>
         /// Registered Routes List Update 
-        /// Over 
         /// </summary>
         public static List<ActionDescriptor> ServerRegisteredRoutesList;
-
 
 
         /// <summary>
         /// Identity Server Management Extension
         /// </summary>
-
-        //public static UserManager<ApplicationUser> ServerUserManager = new UserManager<ApplicationUser>();
-        //public static SignInManager<ApplicationUser> ServerSignInManager = new SignInManager<ApplicationUser>();
-        //public static UserProfileManager ServerProfileManager = new UserProfileManager(ServerUserManager, ServerSignInManager);
-
-
+        public static UserManagement UserManagement = new();
+        
 
         //Generic Complicated Example
         //public static List<Tuple<string, T>>? ServerHostedServicesContollerList = new List<Tuple<string, T>>();
