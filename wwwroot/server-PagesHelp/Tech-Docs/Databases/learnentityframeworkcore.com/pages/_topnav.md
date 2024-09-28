@@ -1,2 +1,0 @@
-- [EF Core](/index.md)
-- [Dapper ORM](/Dapper/index.md)

@@ -40,15 +40,6 @@ namespace EasyITCenter.UserManageControllers {
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [HttpPost("/WebUser/Logout")]
-        [Consumes("application/json")]
-        public async Task<IActionResult> Logout() {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-            return RedirectToPage("/Index");
-        }
 
         public bool IsEmailConfirmed {
             get {
@@ -61,6 +52,17 @@ namespace EasyITCenter.UserManageControllers {
                 return _userManager.HasPasswordAsync(CurrentUser).Result;
             }
         }
+
+
+        [ValidateAntiForgeryToken]
+        [HttpPost("/WebUser/Logout")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> Logout() {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            return RedirectToPage("/Index");
+        }
+
 
         [ValidateAntiForgeryToken]
         [HttpPost("/UserManage/ChangePassword")]
