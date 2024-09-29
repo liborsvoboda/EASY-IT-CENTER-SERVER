@@ -20,9 +20,9 @@ dotnet tool update --global dotnet-ef --version 6.0.33
 - Scaffold LocalDB From direct file is not possible    
 
 `````    
-dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EICWebHostingDbContext" Microsoft.EntityFrameworkCore.SqlServer    
+dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EICWebHostingDb" Microsoft.EntityFrameworkCore.SqlServer    
 
-Scaffold-DbContext 'Data Source=Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=EICWebHostingDbContext;Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -ContextDir WebHosting   
+Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=EICWebHostingDb;Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer -ContextName EICWebHostingDbContext -Namespace EasyITCenter.WebDBModel -OutputDir DATABASES/WebHosting/WebHostingModel -ContextDir DATABASES/WebHosting -force    
 
 `````        
 # Possible Scaffold Parameters    

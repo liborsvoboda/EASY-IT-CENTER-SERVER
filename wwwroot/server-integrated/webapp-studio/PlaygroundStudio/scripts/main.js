@@ -1,4 +1,4 @@
-define(function (require, exports, module) {
+﻿define(function (require, exports, module) {
     var INDENT_SIZE = 4;
 
     var ace = require('ace/ace');
@@ -2423,7 +2423,7 @@ define(function (require, exports, module) {
 
     function RestServices() {
         var self = this;
-        var restBaseUrl = window.location.origin + "/ServerApi/PlayGroundStudio/";
+        var restBaseUrl = window.location.origin + "/DevToolsApi/PlayGroundStudio/";
 
         function newFile() {
             $.post(restBaseUrl + "newFile", function (resp) {

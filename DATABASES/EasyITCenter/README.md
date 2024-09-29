@@ -11,7 +11,7 @@ Api se nabízí jako Služby, plánované úlohy, Procesy, Operace, Generátory,
 - WebApi: Jsou unikátní Api pro centrální Ovládání WebServeru
 
 **Uživatel**
-Každý Užiatel může mít svo vlastní SQLServer  Databázi a SQLFile Databázi pro testování    
+Každý Uživatel může mít svo vlastní SQLServer  Databázi a SQLFile Databázi pro testování    
 Může vyvíjet svůj vlastní SubServer a SubSystém odvozené z řešení EIC & ESB  
 
 
@@ -20,11 +20,11 @@ Může vyvíjet svůj vlastní SubServer a SubSystém odvozené z řešení EIC 
 # TODO
 
 1] Přesunout datové Definice dio lok8ln9 tabulky a agendy Dynamické Datové Definice
-a z tama je používat jak na serveru tak v systému - převádět je viz JsonSerilize: TypickáTabulka
+a z tama je používat jak na serveru tak v systému - převádět je viz JsonSerialize: Typická Tabulka
 
 GenericTable ConvertGenericClassToStandard
 
-2] vztvo5it proceduru na hromadné změny v tabulkách 
+2] vytvořit proceduru na hromadné změny v tabulkách 
 
 jako přidání sloupce, změna typu, nahrazení stringu
 
@@ -32,16 +32,16 @@ jako přidání sloupce, změna typu, nahrazení stringu
 ---   
 # TODO DATABASE MANAGEMENT   
 
-*   MassOnsert: db.BulkInsertAsync/Update/Delete/ 
+*   MassInsert: db.BulkInsertAsync/Update/Delete/ 
 *   Clear cache by EasyITCenterContext.RefreshModel()
 *   New Table by EasyITCenterContext.Attach()
-*   Testing and Comit/rollback EasyITCenterContext.GetDbTransaction().Save/Release/Rollback 
+*   Testing and Commit/rollback EasyITCenterContext.GetDbTransaction().Save/Release/Rollback 
 *   EasyITCenterContext.GetDbTransaction(). + next can be solution for Selection
 *   a.Model. -get procedures/function,schema,views,
-*   a.Database.AutoTransactionsEnabled = true, a.Database.beginTransaction/close,comit
+*   a.Database.AutoTransactionsEnabled = true, a.Database.beginTransaction/close,commit
 *   createDB a.Database.EnsureCreated
 *   Script For Create All Tables a.Database.GenerateCreateScript()
-*   a.Database.GetDbConnection().ChangeDatabase(dbname)
+*   a.Database.GetDbConnection().ChangeDatabase(dbName)
 *   a.Database.GetDbConnection().GetSchema()
 *   CONTEXT TO DB a.Database.Migrate()
 *   Open custom connect a.Database.OpenConnection() a.Database.UseTransaction() 

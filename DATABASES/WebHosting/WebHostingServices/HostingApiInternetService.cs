@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using EasyITCenter.DevPortal;
+
 using Octokit;
 using static EasyITCenter.ServerCoreDBSettings.ServerApiGeneratorServerIndexService;
 using static EasyITCenter.Controllers.PlayGroundStudioControllers;
@@ -14,7 +14,7 @@ using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using SharpCompress;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-namespace EasyITCenter.Controllers {
+namespace EasyITCenter.WebControllers {
 
     public enum DocsType {
         Html,

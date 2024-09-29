@@ -1,8 +1,0 @@
-import { defineConfig } from 'vite';
-
-export default defineConfig({
-  root: 'dev-stand',
-  preview: {
-    open: true,
-  },
-});

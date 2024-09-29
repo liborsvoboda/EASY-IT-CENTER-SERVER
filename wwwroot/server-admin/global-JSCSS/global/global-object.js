@@ -64,3 +64,37 @@ function CreateToolPanel(elementId) {
     });
     $("#" + `${elementId}`).html(html);
 }
+
+
+function initCodeSamples() {
+    var $source = $("#sourceCode");
+    $("#codeExample").clickToggle(
+        function () {
+            $source.show("fast");
+            if (!this.old) {
+                this.old = $(this).html();
+                $.get(this.href, function (code) {
+                    code = code.replace(/<!-- Start_Exclude(.|\n|\r)*?End_Exclude -->/gi, "<!-- (Irrelevant source removed.) -->");
+                    code = code.replace(/\t/g, "  ");
+                    $source.text(code);
+                    try {
+                        prettyPrint();
+                    } catch (e) {
+                        alert(e);
+                    }
+                }, "html");
+            }
+            $(this).html("Hide source code");
+        },
+        function () {
+            $(this).html(this.old);
+            $source.hide("fast");
+        }
+    );
+    if (jQuery.ui) {
+        var info = "EIC&ESB Groupware Solution" + jQuery.ui.dynatree.version
+            + ", jQuery UI " + jQuery.ui.version
+            + ", jQuery " + jQuery.fn.jquery;
+        $("p.sample-links").after("<p class='version-info'>" + info + "</p>");
+    }
+}

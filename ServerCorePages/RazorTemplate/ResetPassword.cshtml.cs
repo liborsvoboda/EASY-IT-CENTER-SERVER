@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using EasyITCenter.DevPortal;
+
 using DataType = System.ComponentModel.DataAnnotations.DataType;
 
 namespace ServerCorePages
