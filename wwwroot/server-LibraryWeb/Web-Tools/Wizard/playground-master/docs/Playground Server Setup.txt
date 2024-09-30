@@ -1,0 +1,160 @@
+
+# ------------------------------------------------------------------------------------
+#
+#   This file describes step by step how the Playground Server is setup.
+#   This commands can be ran from a web based terminal such as AWS Lightsail.
+#
+#   These instructions assume the Linux OS: Ubuntu 18.04 LTS
+#
+# ------------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------------
+#
+#            ** Setup for New Server (December 30th, 2021) **
+#
+# This site is now hosted with several open source sites. See the new version of setup
+# commands at the link below. The commands described in this file are still relevant
+# because they provide more detailed comments on the purpose of each command.
+#
+# https://github.com/fastsitephp/fastsitephp/blob/master/docs/server-setup/server-setup.sh
+#
+# ------------------------------------------------------------------------------------
+
+# Update [apt] Package Manager
+# The [upgrade] is not required but recommend (however, it takes many minutes)
+sudo apt update
+sudo apt upgrade
+
+# Install Apache and PHP
+sudo apt install apache2
+sudo apt install php
+
+# Enable PHP for Apache
+sudo apt install libapache2-mod-php
+
+# Enable PHP zip extension for FastSitePHP install script
+sudo apt install php7.2-zip
+
+# Enable a Fallback page so that [index.php]
+# does not show in the URL.
+sudo nano /etc/apache2/apache2.conf
+# Scroll through the file and look for line:
+#    <Directory /var/www/>
+# Under it add the line:
+#    FallbackResource /index.php
+# Save using:
+#    {control+s} -> {control+x}
+#    or {control+x} -> {y} -> {enter}
+
+# Enable Gzip Compression for JSON Responses
+#   (This is not enabled by default on Apache)
+sudo nano /etc/apache2/mods-available/deflate.conf
+# Add the following under similar commands:
+#       AddOutputFilterByType DEFLATE application/json
+
+# Edit PHP Settings in [php.ini]
+sudo nano /etc/php/7.2/apache2/php.ini
+
+# Settings to use, the purpose of the settings is to use
+# minimal sever resources and prevent file uploads.
+max_execution_time = 1
+max_input_time = 1
+memory_limit = 16M
+post_max_size = 1M
+file_uploads = Off
+
+# Restart Apache
+sudo service apache2 restart
+
+# Set Permissions
+# This assumes that the user [ubuntu] exists and
+# is used to create and update files on the site.
+sudo adduser ubuntu www-data
+sudo chown ubuntu:www-data -R /var/www
+sudo chmod 0775 -R /var/www
+
+# Create and view a PHP test file
+cd /var/www/html
+echo "<?php phpinfo(); ?>" | sudo tee phpinfo.php
+# http://your-server.example.com/phpinfo.php
+# http://52.37.34.134/phpinfo.php
+
+# Delete file [phpinfo.php] after checking server
+sudo rm phpinfo.php
+
+# Download Site Files
+cd ~
+wget https://github.com/dataformsjs/playground/archive/master.zip
+sudo apt install unzip
+unzip master.zip
+ls
+
+# Copy Files
+cp -r ~/playground-master/app /var/www/app
+cp -r ~/playground-master/app_data /var/www/app_data
+cp -r ~/playground-master/html/. /var/www/html
+cp -r ~/playground-master/scripts /var/www/scripts
+mkdir /var/www/html/sites
+ls /var/www
+ls -la /var/www/html
+
+# Install FastSitePHP (~470 kb) and Dependencies (~20 - 40 kb)
+# This also generates the [app_data/.env] file
+sudo apt install php7.2-zip
+php /var/www/scripts/install.php
+
+# Delete the Apache default page
+sudo rm /var/www/html/index.html
+
+# After copying files, permissions need to be reset.
+# If testing locally on the server without client-side UI
+# this is needed in order to edit files created by the web service.
+sudo chown ubuntu:www-data -R /var/www
+sudo chmod 0775 -R /var/www
+
+# Setup a Cron Job using sudo to check for and delete expired sites.
+# Runs once per minute, if not using [sudo] then sites will end up
+# not being deleted.
+sudo crontab -e
+# Enter [1] for nano, and add the following after header comments:
+* * * * * php /var/www/scripts/delete-expired-sites.php
+
+# To view cron history:
+grep CRON /var/log/syslog
+
+# View last result and sites directory:
+cat /var/www/app_data/delete-sites-last-result.txt
+cd /var/www/html/sites
+ls -la
+
+# Update Local Playground JavaScript File with the new URL
+# Search for "localhost:8888" or "urlRoot:" in the file and make related changes
+#
+# File:
+#    Website\public\js\page-playground.js
+# Example:
+#   urlRoot: 'http://52.37.34.134/',
+
+# Test the site from the Playground UI to verify it works
+
+# Keep a site live for an hour then verify it get's deleted automatically
+cat /var/www/app_data/delete-sites-last-result.txt
+ls -la /var/www/html/sites
+
+# Download HTML Update scripts
+# Used to update the site template when new CDN versions are published
+cd /var/www/scripts
+wget https://raw.githubusercontent.com/dataformsjs/website/master/scripts/update-html-files-cdn-version.php
+
+# Additional Steps performed for the live site
+https://playground.dataformsjs.com/
+
+# 1) Created Static IP in AWS Lightsail for the Sever: 52.37.34.134
+# 2) GoDaddy - Added an A Record for 'playground' that points to the IP
+# 3) Update AWS to allow HTTPS in the Firewall on the Networking Tab
+# 4) Installed HTTPS Certificate using certbot:
+#    https://certbot.eff.org/lets-encrypt/ubuntubionic-apache
+#    Host: playground.dataformsjs.com
+
+# Additionally a shell script is used to sync changes from GitHub back to the server
+https://github.com/dataformsjs/playground/blob/master/scripts/sync-server-from-github.sh

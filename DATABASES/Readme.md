@@ -21,7 +21,6 @@ dotnet tool update --global dotnet-ef --version 6.0.33
 
 `````    
 dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EICWebHostingDb" Microsoft.EntityFrameworkCore.SqlServer    
-
 Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=EICWebHostingDb;Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer -ContextName EICWebHostingDbContext -Namespace EasyITCenter.WebDBModel -OutputDir DATABASES/WebHosting/WebHostingModel -ContextDir DATABASES/WebHosting -force    
 
 `````        

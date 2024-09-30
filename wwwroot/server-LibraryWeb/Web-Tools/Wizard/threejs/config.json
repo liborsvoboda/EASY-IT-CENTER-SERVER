@@ -1,0 +1,39 @@
+{
+  "globals": {
+    "geometries/hilbert2D.js": ["hilbert2D"],
+    "geometries/hilbert3D.js": ["hilbert3D"],
+    "GPUComputationRenderer.js": ["GPUComputationRenderer"],
+    "ImprovedNoise.js": ["ImprovedNoise"],
+    "interactive/SelectionBox.js": ["SelectionBox"],
+    "interactive/SelectionHelper.js": ["SelectionHelper"],
+    "PRNG.js": ["PRNG"],
+    "RollerCoaster.js": ["RollerCoasterGeometry", "RollerCoasterLiftersGeometry", "RollerCoasterShadowGeometry", "SkyGeometry", "TreesGeometry"],
+    "SimplexNoise.js": ["SimplexNoise"],
+    "vr/WebVR.js": ["WEBVR"],
+    "WebGL.js": ["WEBGL"]
+  },
+  "noUMD": [
+    "nodes/**/*.js",
+    "loaders/ctm/CTMWorker.js",
+    "loaders/XLoader.js",
+    "renderers/RaytracingWorker.js",
+    "Cloth.js"
+  ],
+  "ignore": [
+    "crossfade/**",
+    "libs/**",
+    "loaders/deprecated/**",
+    "loaders/draco/draco_decoder.js",
+    "loaders/draco/draco_wasm_wrapper.js",
+    "loaders/ctm/ctm.js",
+    "loaders/ctm/lzma.js",
+    "loaders/sea3d/SEA3D.js",
+    "loaders/sea3d/SEA3DDeflate.js",
+    "loaders/sea3d/SEA3DDraco.js",
+    "loaders/sea3d/SEA3DLZMA.js",
+    "loaders/sea3d/o3dgc/SEA3DGC.js",
+    "loaders/sea3d/physics/**",
+    "offscreen/**",
+    "utils/ldraw/**"
+  ]
+}

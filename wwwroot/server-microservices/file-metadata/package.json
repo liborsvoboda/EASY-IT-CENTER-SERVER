@@ -1,12 +1,16 @@
 {
-  "name": "fileMetadataMicroservice",
+  "name": "File Service",
   "version": "1.0.0",
-  "description": "Basejump challenge from FCC",
-  "main": "server.js",
-  "repository": "https://github.com/AndrewGHC/file-metadata-microservice",
-  "author": "AndrewGHC",
+  "description": "Install/Start by Command: 'npm run install', 'npm run start'  ",
+  "main": "./server.js",
+  "repository": "https://kliknetezde.cz",
+  "author": "Libor Svoboda",
   "dependencies": {
     "express": "^4.13.3",
     "multer": "^1.1.0"
+  },
+  "scripts": {
+	"install": "npm install ",
+    "start": "node .\server.js "
   }
 }
