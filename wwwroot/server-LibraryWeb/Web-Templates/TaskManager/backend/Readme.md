@@ -1,6 +1,6 @@
-# API Node.js 
+# Backend Server SQLite
 
-nainstalovat NodeJs
+> You need installed NodeJs   
 
 npm install  - instalace balíčků
 npm run dev  - spuštění backendu na portu 3000
