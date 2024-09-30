@@ -1,0 +1,12 @@
+<div class="doc-links">
+
+    {{#with order.prevDocLink() }}
+        <span>&#8592; <a href="{{ Key }}">{{ Value }}</a></span>
+    {{/with}}
+
+
+    {{#with order.nextDocLink() }}
+        <span style="float:right"><a href="{{ Key }}">{{ Value }}</a> &#8594;</span>
+    {{/with}}
+
+</div>

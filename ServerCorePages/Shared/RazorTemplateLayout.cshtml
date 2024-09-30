@@ -1,11 +1,30 @@
-﻿@{
-    Layout = null;
-}
+﻿@* @addTagHelper *, WebOptimizer.Core *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Westwind.AspNetCore
+@addTagHelper *, Westwind.AspNetCore.Markdown
 
-@using Microsoft.AspNetCore.Identity;
-@using EasyITCenter;
-@using EasyITCenter.ServerCoreStructure;
-@using ServerCorePages;
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
+@using Westwind.AspNetCore.Markdown
+
+@using System.IO
+@using System.Linq
+@using System.Collections.Generic
+@using System.Text.RegularExpressions
+@using System.Security.Claims
+@using System.Threading.Tasks
+
+@using EasyITCenter
+@using ServerCorePages
+@using ServerCorePages
+@using EasyITCenter.WebDBModel
+@using EasyITCenter.WebControllers
+@using EasyITCenter.ServerCoreStructure
+
+@namespace ServerCorePages
 
 <!DOCTYPE html>
 <html>
@@ -22,17 +41,20 @@
     <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/admin-lte/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/icheck/skins/square/blue.css">
     <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/google.css">
-    <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/metro/css/metro.all.min.css">
-
     <link rel="stylesheet" href="/server-Integrated/razor-pages/RazorTemplate/css/site.css" />
    
 </head>
 <body class="hold-transition login-page" style="height: auto;">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="/RazorTemplate"><b>Admin</b>LTE</a>
+    <div class="wrapper">
+
+        @await Html.PartialAsync("~/ServerCorePages/RazorTemplate/Partial/_Header.cshtml")
+        @await Html.PartialAsync("~/ServerCorePages/RazorTemplate/Partial/_NavBar.cshtml")
+
+        <div class="content-wrapper">
+
+            @await Html.PartialAsync("~/ServerCorePages/RazorTemplate/Partial/_StatusMessage.cshtml", TempData["StatusMessage"])
+            @RenderBody()
         </div>
-        @RenderBody()
         @await Html.PartialAsync("~/ServerCorePages/RazorTemplate/Partial/_Footer.cshtml")
         @await Html.PartialAsync("~/ServerCorePages/RazorTemplate/Partial/_SideBar.cshtml")
     </div>
@@ -50,8 +72,6 @@
 <script src="/server-Integrated/razor-pages/RazorTemplate/fastclick/fastclick.min.js"></script>
 <script src="/server-Integrated/razor-pages/RazorTemplate/admin-lte/js/adminlte.min.js"></script>
 <script src="/server-Integrated/razor-pages/RazorTemplate/admin-lte/js/demo.js"></script>
-<script src="/server-Integrated/razor-pages/RazorTemplate/metro/js/metro.4.5.2.min.js"></script>
-
 <script src="/server-Integrated/razor-pages/RazorTemplate/js/site.js"></script>
 
 <script>
@@ -67,6 +87,6 @@
     //     });
     // });
 </script>
-@await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_ValidationScriptsPartial.cshtml")
+@await Html.PartialAsync("~/ServerCorePages/RazorTemplate/Partial/_ValidationScriptsPartial.cshtml")
 </html>
 

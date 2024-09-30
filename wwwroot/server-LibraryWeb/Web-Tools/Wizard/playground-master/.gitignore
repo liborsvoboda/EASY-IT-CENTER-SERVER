@@ -1,0 +1,13 @@
+# Directories
+vendor/
+__pycache__/
+node_modules/
+sites/
+
+# OS Files
+.DS_Store
+Desktop.ini
+Thumbs.db
+
+# Enviroment Variable Files
+.env

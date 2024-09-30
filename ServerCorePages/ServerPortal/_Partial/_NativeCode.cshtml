@@ -1,0 +1,77 @@
+﻿@* @addTagHelper *, WebOptimizer.Core *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Westwind.AspNetCore
+@addTagHelper *, Westwind.AspNetCore.Markdown
+
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
+@using Westwind.AspNetCore.Markdown
+
+@using System.IO
+@using System.Linq
+@using System.Collections
+@using System.Collections.Generic
+@using System.Text.RegularExpressions
+@using System.Security.Claims
+@using System.Threading.Tasks
+
+@using EasyITCenter
+@using EasyITCenter.DBModel
+@using EasyITCenter.Managers
+@using EasyITCenter.WebClasses
+@using EasyITCenter.WebModel
+@using EasyITCenter.WebDBModel
+@using EasyITCenter.WebControllers
+@using EasyITCenter.ServerCoreStructure
+@using EasyITCenter.ServerCorePages
+
+@namespace ServerCorePages
+@model ServerCorePages.ServerPortalModel
+
+
+<div id="GeneratedCode"></div>
+
+
+<script>
+
+
+            
+
+
+    @{string token = Context.Request.Cookies.FirstOrDefault(a => a.Key == "ApiToken").Value;}
+
+        @{var data = new WebHostingDbContext().GeneratorLists.First();}
+        // var ahs = new WebHostingDbContext().GeneratorLists.Where(a => a.Name == "").First();
+        @{var test = @ServerPortalModel.GetFromMainFrame();}
+    
+    
+</script>
+    
+
+
+
+
+
+            
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+

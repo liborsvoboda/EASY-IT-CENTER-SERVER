@@ -72,7 +72,7 @@ namespace EasyITCenter.ControllersExtensions {
 
                     new Claim(ClaimTypes.PrimarySid, user.Id.ToString()),
                     new Claim(ClaimTypes.NameIdentifier, user.UserName),
-                    new Claim(ClaimTypes.Email, user.InfoEmail),
+                    new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Role, user.Role.SystemName.ToLower()),
                     new Claim(ClaimTypes.Dns, SrvConfig.ConfigCertificateDomain)
                 }),
@@ -104,7 +104,7 @@ namespace EasyITCenter.ControllersExtensions {
 
             AuthenticateResponse authResponse = new() 
             { Id = user.Id, Name = user.Name, SurName = user.SurName, Token = token == null ? string.Empty : tokenHandler.WriteToken(token), 
-                Email = user.InfoEmail, Message = !string.IsNullOrWhiteSpace(errorMessage) ? $"Token Generation Error, Check {errorMessage}" : "",
+                Email = user.Email, Message = !string.IsNullOrWhiteSpace(errorMessage) ? $"Token Generation Error, Check {errorMessage}" : "",
                 Expiration = token?.ValidTo.ToLocalTime(), Role = user.Role.SystemName.ToLower() 
             };
             return authResponse;
@@ -121,9 +121,9 @@ namespace EasyITCenter.ControllersExtensions {
             try {
                 var dbUser = new EasyITCenterContext().SolutionUserLists
                     .Where(a => a.Active == true && a.UserName == username).First();
-                if (dbUser == null || dbUser.Token == token.Token && dbUser.Expiration < DateTimeOffset.Now) { return false; }
+                if (dbUser == null || dbUser.AccessToken == token.Token && dbUser.Expiration < DateTimeOffset.Now) { return false; }
 
-                dbUser.Token = token.Token; dbUser.Expiration = token.Expiration;
+                dbUser.AccessToken = token.Token; dbUser.Expiration = token.Expiration;
                 var data = new EasyITCenterContext().SolutionUserLists.Update(dbUser);
                 int result = data.Context.SaveChanges();
 

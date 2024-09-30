@@ -1,0 +1,48 @@
+<!--
+	[app-web.htm]演示中数据页面的HTML模板.
+-->
+
+<h1>国家</h1>
+
+<json-data
+    url="https://www.dataformsjs.com/data/geonames/countries"
+    load-only-once
+    class="mw-100pct">
+    <is-loading>
+        <span class="loading">正在加载...</span>
+    </is-loading>
+    <has-error>
+        <span class="error" data-bind="errorMessage"></span>
+    </has-error>
+    <is-loaded>
+        <input
+            is="input-filter"
+            filter-selector="table"
+            filter-results-selector="h1"
+            filter-results-text-all="{totalCount} Countries"
+            filter-results-text-filtered="Showing {displayCount} of {totalCount} Countries"
+            placeholder="Enter filter, example 'Asia'">
+
+        <data-table
+            data-bind="countries"
+            highlight-class="highlight"
+            labels="代码, 名字, 尺寸 (KM), 人口, 洲"
+            col-class="2=text-right, 3=text-right"
+            table-attr="is=sortable-table,
+                        data-sort-class-odd=row-odd,
+                        data-sort-class-even=row-even">
+            <script type="text/x-template">
+                <tr>
+                    <td>${iso}</td>
+                    <td>
+                        <i class="${iso.toLowerCase()} flag"></i>
+                        ${country}
+                    </td>
+                    <td class="text-right" data-value="${area_km}">${format.number(area_km)}</td>
+                    <td class="text-right" data-value="${population}">${format.number(population)}</td>
+                    <td>${continent}</td>
+                </tr>
+            </script>
+        </data-table>
+    </is-loaded>
+</json-data>

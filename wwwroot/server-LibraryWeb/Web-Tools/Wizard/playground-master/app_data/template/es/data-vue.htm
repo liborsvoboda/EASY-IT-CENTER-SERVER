@@ -1,0 +1,41 @@
+<div v-if="isLoading" data-template-id="loading-screen"></div>
+<div v-if="hasError" data-template-id="error-screen"></div>
+<div v-if="isLoaded" class="mw-100pct">
+    <h1>Países</h1>
+
+    <div>
+        <input
+            data-filter-selector="table"
+            data-filter-results-text-selector="h1"
+            data-filter-results-text-all="{totalCount} Países"
+            data-filter-results-text-filtered="Mostrando {displayCount} de {totalCount} países"
+            placeholder="Introduzca filtro, ejemplo 'South America'">
+    </div>
+    
+    <table
+           data-sort
+           data-sort-class-odd="row-odd"
+           data-sort-class-even="row-even">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th class="text-right">Tamaño (KM)</th>
+                <th class="text-right">Población</th>
+                <th>Continente</th>
+            </tr>
+        </thead>
+        <tbody class="click-to-highlight">
+            <tr v-for="country in countries">
+                <td>{{ country.iso }}</td>
+                <td>
+                	<i v-bind:class="country.iso.toLowerCase() + ' flag'"></i>
+                	<span>{{ country.country }}<span>
+                </td>
+                <td class="text-right" v-bind:data-value="country.area_km" v-format-number="country.area_km"></td>
+                <td class="text-right" v-bind:data-value="country.population" v-format-number="country.population"></td>
+                <td>{{ country.continent }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

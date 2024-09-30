@@ -1,0 +1,48 @@
+﻿@page "/github/create"
+
+@{
+    ViewData["Title"] = "Nový Repozitář";
+}
+
+<h2 class="ui header">Nový Repozitář</h2>
+@if (Model != null)
+{
+    <div class="ui negative message">
+        <i class="close icon"></i>
+        <div class="header">@Model</div>
+    </div>
+}
+<div>
+    <form asp-route="~/server-integrated/razor-pages/github/Create" method="post" class="ui form">
+        <div class="field">
+            <label>
+                Název Repozitáře
+            </label>
+            <input type="text" name="name" placeholder="repository name" required autofocus>
+        </div> 
+        <div class="field">
+            <label title="pokud je vypnuto, je sdílený mezi všemi uživateli">
+                Je Privátní
+            </label>
+            <input type="checkbox" name="isPrivate" checked autofocus>
+        </div>
+        <div class="field">
+            <label title="zapnutím nastavíte veřejnou viditelnost">
+                Je viditelný Veřejně
+            </label>
+            <input type="checkbox" name="isMirror" autofocus>
+        </div>
+        <div class="field">
+            <label>
+                Popisek
+            </label>
+            <input type="text" name="description" placeholder="Popisek">
+        </div>
+@*         <div class="field">
+            <label>Remote Url</label>
+            <input type="text" name="remoteurl" placeholder="remote url for clone, is optional">
+        </div> *@
+        <button class="ui button" type="submit">Vytvořit</button>
+    </form>
+</div>
+

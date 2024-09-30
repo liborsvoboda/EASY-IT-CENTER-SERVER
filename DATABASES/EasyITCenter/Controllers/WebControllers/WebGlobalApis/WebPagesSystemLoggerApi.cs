@@ -1,4 +1,5 @@
-﻿namespace EasyITCenter.Controllers {
+﻿
+namespace EasyITCenter.Controllers {
 
     [AllowAnonymous]
     [ApiController]

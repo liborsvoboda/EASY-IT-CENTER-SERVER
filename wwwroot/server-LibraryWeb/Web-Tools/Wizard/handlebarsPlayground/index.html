@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
+        <script type="text/javascript" src="./node_modules/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="./dist/bundle.js"></script>
+        <link rel="stylesheet" type="text/css" href="./dist/main.css">
+
+    </head>
+    <body>
+        <!-- main -->
+        <script id="main-template" type="text/x-handlebars-template">
+            <div class="hb-pgr">
+                {{> headerPartial header}}
+                <div class="hb-pgr-main">
+                    <section class="hb-pgr-latest-news row">
+                        <div class="hb-pgr-latest-news__left col-sm-3">
+                            <ul class="list-unstyled" >
+                                {{#each latestNews.leftSideNews}}
+                                <li>{{> newsPartial this}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <div class="hb-pgr-latest-news__center col-sm-6">
+                            {{> newsPartial latestNews.topNews}}
+                        </div>
+                        <div class="hb-pgr-latest-news__right col-sm-3">
+                            <ul class="list-unstyled">
+                                {{#each latestNews.rightSideNews}}
+                                <li>{{> newsPartial this}}</li>
+                                {{/each}}
+                            </ul>
+                            <p><a href="#">View All Stories</a></p>
+                        </div>
+                    </section>
+                    <section class="hb-pgr-most-popular-news">
+                        {{> sectionHeaderPartial mostPopular}}
+                        <ul class="list-unstyled">
+                            {{#each mostPopular.news}}
+                            <li>{{> newsPartial this}}</li>
+                            {{/each}}
+                        </ul>
+                    </section>
+                    <section class="hb-pgr-special-report">
+                        {{> sectionHeaderPartial specialReport}}
+                    </section>
+                    <section class="hb-pgr-special-videos">
+                        {{> sectionHeaderPartial videos}}
+                        <div class="hb-pgr-special-videos__main-video"></div>
+                        <div class="hb-pgr-special-videos__sub-videos"></div>
+                    </section>
+                </div>
+                {{> footerPartial footer}}
+            </div>
+        </script>
+
+        <!-- header -->
+        <script id="header-partial" type="text/x-handlebars">
+            <div class="hb-pgr-header">
+                <h1>{{title}}</h1>
+                <ul class="list-unstyled hb-pgr-header__menu">
+                    {{#each menuPoints}}
+                      <li class="hb-pgr-header__menupoint"><a href="">{{name}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+        </script>
+
+        <!-- news item -->
+        <script id="news-partial" type="text/x-handlebars">
+            <article class="hb-pgr-news {{#if isTop}} hb-pgr-news--top{{/if}} {{#if isFloating}} hb-pgr-news--floating{{/if}}">
+                <a href="{{href}}" class="hb-pgr-news__wrapper">
+                    {{#if image}}
+
+                    <div class="hb-pgr-news__thumb">
+                        <picture>
+                            <source srcset="{{image.mobile}}" media="(max-width: 700px)">
+                            <img
+                                class="hb-pgr-news__image"
+                                src="{{image.base}}"
+                                alt="{{title}}"
+                            >
+                        </picture>
+                        <span class="hb-pgr-news__category">{{category}}</span>
+                    </div>
+                    {{/if}}
+                    <div class="hb-pgr-news__text-block">
+                        <h2 class="hb-pgr-news__title">{{title}}</h2>
+                        <p class="hb-pgr-news__summary">{{summary}}</p>
+                        <p class="hb-pgr-news__description">{{ newsDescriptionHelper description }}</p>
+                    </div>
+                </a>
+            </article>
+        </script>
+
+        <!-- section header -->
+        <script id="section-header-partial" type="text/x-handlebars">
+            <h2 class="hb-pgr-section-header">
+                <div class="hb-pgr-section-header__wing"></div>
+                <span class="hb-pgr-section-header__caption">{{title}}</span>
+                <div class="hb-pgr-section-header__wing"></div>
+            </h2>
+        </script>
+
+        <!-- footer -->
+        <script id="footer-partial" type="text/x-handlebars">
+            <div class="hb-pgr-footer"> {{value}}</div>
+        </script>
+    </body>
+</html>

@@ -1,0 +1,181 @@
+<!--
+title: Installation
+order: 1
+-->
+
+<h3>Running Sharp Scripts or creating Sharp Apps</h3>
+
+<p>
+    If you're only looking to run
+    <a href="/docs/sharp-scripts">Sharp Scripts</a> or creating <a href="/docs/sharp-apps">Sharp Apps</a>
+    or <a href="/docs/gist-desktop-apps">Gist Desktop Apps</a> then you'll only need to install the 
+    <a href="https://docs.servicestack.net/dotnet-tool">x</a> or <a href="https://docs.servicestack.net/netcore-windows-desktop">app</a> dotnet tools.
+</p>
+
+<h4>Cross-platform command-line tool for Windows, macOS and Linux</h4>
+
+<pre>$ dotnet tool install -g x</pre>
+
+<h4>Windows 64bit in Chromium Desktop App</h4>
+
+<pre>$ dotnet tool install -g app</pre>
+
+<h4>Update to latest versions</h4>
+
+<p>
+    If you already have the tools installed, upgrade them to the latest version with:
+</p>
+
+<pre>$ dotnet tool update -g x
+$ dotnet tool update -g app</pre>
+
+<h3>Using <em>#Script</em> within .NET or .NET Core Apps</h3>
+
+<p>
+    <em>#Script</em> is available for <b>.NET Core</b> or <b>.NET v4.5+</b> Framework projects from the <a href="https://www.nuget.org/packages/ServiceStack.Common">ServiceStack.Common</a> NuGet Package:
+</p>
+
+<pre><code>PM> Install-Package ServiceStack.Common</code></pre>
+
+<p>
+    It's also available for <a href="https://docs.servicestack.net/templates-corefx">ASP.NET Core Apps on the .NET Framework</a> by installing:
+</p>
+
+<pre><code>PM> Install-Package ServiceStack.Common.Core</code></pre>
+
+<p>
+    You're now all set to have fun with #Script! Start by evaluating a script:
+</p>
+
+{{ 'gfm/installation/01.md' |> githubMarkdown }}
+
+{{ "live-template" |> partial({ template: "The time is now: {{ now |> dateFormat('HH:mm:ss') }}" }) }}
+
+<h4>Configure with ServiceStack</h4>
+
+<p>
+    To utilize <a href="/docs/sharp-pages">#Script Pages in ServiceStack</a>, 
+    register the <em>SharpPagesFeature</em> plugin:
+</p>
+
+{{ 'gfm/installation/02.md' |> githubMarkdown }}
+
+<h2 id="starter-projects">Starter Project Templates</h2>
+
+<p>
+    The Starter Projects below provide a quick way to get started with a pre-configured ServiceStack App with #Script Pages:
+</p>
+
+<h4>.NET Core #Script Pages Project</h4>
+
+<p>
+    Create a new <a href="https://github.com/NetCoreTemplates/templates">#Script Pages Website</a> .NET 5.0 App with 
+    <a href="https://docs.servicestack.net/web-new">x new</a>:
+</p>
+
+<div class="gfm">
+<pre>$ dotnet tool install --global x 
+
+$ x new script ProjectName</pre></div>
+    
+<a href="https://github.com/NetCoreTemplates/templates">
+<img src="https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/script.png" alt=".NET Core Starter Template"></a>
+
+<h4>ASP.NET Core #Script Pages Project on .NET Framework</h4>
+
+<p>
+    To create <a href="https://docs.servicestack.net/templates-corefx">ASP.NET Core Project on the .NET Framework</a>:
+</p>
+
+<div class="gfm">
+<pre>$ x new script-corefx ProjectName</pre></div>
+    
+<h4>ASP.NET v4.5 #Script Pages Project</h4>
+
+<p>
+    For ASP.NET v4.5+ projects create a new <b>ServiceStack ASP.NET #Script Pages with Bootstrap</b> from the VS.NET Templates in
+    <a href="https://docs.servicestack.net/templates-overview#servicestackvs-vsnet-extension">ServiceStackVS VS.NET Extension</a>
+    to create an ASP.NET v4.5 Project using
+    <a href="https://docs.servicestack.net/create-your-first-webservice#step-4-exploring-the-servicestack-solution">ServiceStack's recommended project structure</a>:    
+</p>
+
+<p>
+    <a href="https://github.com/ServiceStack/ServiceStackVS">
+        <img src="/assets/img/screenshots/ssvs-bootstrap.png" alt="ASP.NET v4.5 Starter Template">
+    </a>
+</p>
+
+<h2 id="webapp-templates">SharpApp Project Templates</h2>
+
+<p>
+    <a href="/docs/sharp-apps">Sharp Apps</a> is our revolutionary new approach to dramatically simplify .NET Wep App development by using ServiceStack 
+    Templates to build entire Websites in a live real-time development workflow without any C# and requiring no development environment, 
+    IDE’s or build tools - dramatically reducing the cognitive overhead and conceptual knowledge required for developing .NET Core Websites in 
+    a powerful dynamic templating language that's simple, safe and intuitive enough that Web Designers and Content Authors can use. 
+</p>
+
+<h4 id="init">Init Sharp App</h4>
+
+<p>
+    The easiest way to create an empty Sharp App is to run <em>app init</em> from an Empty App Directory:
+</p>
+
+<pre class="sh"><code>$ md Acme && cd Acme && web init</code></pre>
+
+<p>
+    Which will create an empty Sharp App as seen in the <a href="/docs/sharp-apps#spirals">Spirals video</a>:
+</p>
+
+<img src="/assets/img/screenshots/app-init.png" alt="">
+
+
+<h4 id="bare-app">Bare SharpApp</h4>
+
+<p>
+    To start with a simple and minimal website, create a new <a href="https://github.com/NetCoreTemplates/bare-app">bare-app</a> project template:
+</p>
+
+<a href="https://github.com/NetCoreTemplates/bare-app"><img src="https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/bare-app.png" alt=""></a>
+
+<pre class="sh"><code>$ x new bare-app ProjectName</code></pre>
+
+<p>
+    This creates a multi-page Bootstrap Website with Menu navigation that's ideal for content-heavy Websites.
+</p>
+
+<h3 id="parcel-app">Parcel SharpApp</a></h3>
+
+<p>
+    For more sophisticated JavaScript Sharp Apps we recommended starting with the 
+    <a href="https://github.com/NetCoreTemplates/parcel-app">parcel-app</a> project template:
+</p>
+
+<a href="https://github.com/NetCoreTemplates/parcel-app"><img src="https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/parcel-app.png" alt=""></a>
+
+<pre class="sh"><code>$ x new parcel-app ProjectName</code></pre>
+
+<p>
+    This provides a simple and powerful starting template for developing modern JavaScript .NET Core Sharp Apps utilizing the 
+    zero-configuration <a href="https://parceljs.org">Parcel</a> bundler to enable a rapid development workflow with access to 
+    best-of-class web technologies like TypeScript that's managed by pre-configured
+    <a href="https://github.com/NetCoreTemplates/parcel-app#client">npm scripts</a> to handle its entire dev workflow.
+</p>
+
+<h3 id="webapp-examples">SharpApp Examples</h3>
+
+<p>
+    View our Example Sharp Apps to explore different features and see examples of how easy it is to create with Sharp Apps:
+</p>
+
+<ul>
+    <li><a href="/docs/sharp-apps#about-bare-app">About Bare SharpApp</a> - Simple Content Website with Menu navigation</li>
+    <li><a href="/docs/sharp-apps#about-parcel-app">About Parcel SharpApp</a> - Simple Integrated Parcel SPA Website utilizing TypeScript</li>
+    <li><a href="/docs/sharp-apps#redis-html">Redis HTML</a> - A Redis Admin Viewer developed as server-generated HTML Website</li>
+    <li><a href="/docs/sharp-apps#redis-vue">Redis Vue</a> - A Redis Admin Viewer developed as Vue Client Single Page App</li>
+    <li><a href="/docs/sharp-apps#rockwind">Rockwind</a> - Combination of mult-layout Rockstars website + data-driven Nortwhind Browser</li>
+    <li><a href="/docs/sharp-apps#plugins">Plugins</a> - Extend Sharp Apps with Plugins, Filters, ServiceStack Services and other C# extensions</li>
+    <li><a href="/docs/sharp-apps#chat">Chat</a> - Highly extensible App with custom AppHost that leverages OAuth + Server Events for real-time Chat</li>
+    <li><a href="/docs/sharp-apps#blog">Blog</a> - A minimal, multi-user Twitter OAuth blogging platform that can create living, powerful pages</li>
+</ul>
+
+{{ "doc-links" |> partial({ order }) }}

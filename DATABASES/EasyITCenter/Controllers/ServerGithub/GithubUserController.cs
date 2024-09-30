@@ -46,7 +46,7 @@ namespace EasyITCenter.GitServer.Controllers
                     identity.AddClaim(new Claim(ClaimTypes.PrimarySid, user.Id.ToString()));
                     identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Name));
                     identity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
-                    identity.AddClaim(new Claim(ClaimTypes.Email, user.InfoEmail));
+                    identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
                     var principal = new ClaimsPrincipal(identity);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                     return Redirect("/servercoretools/webpages/Github");

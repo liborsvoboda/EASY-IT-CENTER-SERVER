@@ -79,6 +79,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <BondCodegen Remove="wwwroot\server-Integrated\razor-pages\serverportal\NováSložka\**" />
     <Compile Remove="bin\**" />
 	<Compile Remove="wwwroot\**" />
     <EmbeddedResource Remove="bin\**" />
@@ -89,6 +90,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
 	<Content Remove="wwwroot\**" />
+	<EntityDeploy Remove="wwwroot\server-Integrated\razor-pages\serverportal\NováSložka\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -165,6 +167,13 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="AspNetCore.MailKitMailer" Version="1.2.2" />
     <PackageReference Include="AspNetCore.MarkdownDocumenting" Version="2.3.1" />
     <PackageReference Include="AspNetStatic" Version="0.24.0" />
+    <PackageReference Include="Autofac" Version="8.1.0" />
+    <PackageReference Include="Autofac.AspNetCore.Multitenant" Version="8.0.0" />
+    <PackageReference Include="Autofac.Extras.AggregateService" Version="6.1.2" />
+    <PackageReference Include="Autofac.Extras.AttributeMetadata" Version="6.0.0" />
+    <PackageReference Include="Autofac.Extras.CommonServiceLocator" Version="6.1.0" />
+    <PackageReference Include="Autofac.Mef" Version="7.0.0" />
+    <PackageReference Include="Autofac.Multitenant" Version="8.0.3" />
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Collection" Version="9.0.0" />
     <PackageReference Include="Bond" Version="0.2.3.2" />
@@ -223,22 +232,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Dotmim.Sync.SqlServer.ChangeTracking" Version="0.9.8" />
     <PackageReference Include="Dotmim.Sync.Web.Client" Version="0.9.8" />
     <PackageReference Include="Dotmim.Sync.Web.Server" Version="0.9.8" />
-    <PackageReference Include="Eaf" Version="7.0.5" />
-    <PackageReference Include="Eaf.AspNetCore" Version="7.0.5" />
-    <PackageReference Include="Eaf.AspNetCore.OData" Version="7.0.5" />
-    <PackageReference Include="Eaf.AspNetCore.SignalR" Version="7.0.5" />
-    <PackageReference Include="Eaf.Dapper" Version="7.0.5" />
-    <PackageReference Include="Eaf.EntityFramework.Common" Version="7.0.5" />
-    <PackageReference Include="Eaf.EntityFrameworkCore" Version="7.0.5" />
-    <PackageReference Include="Eaf.HangFire.AspNetCore" Version="7.0.5" />
-    <PackageReference Include="Eaf.MailKit" Version="7.0.5" />
-    <PackageReference Include="Eaf.Middleware.Application" Version="7.0.5" />
-    <PackageReference Include="Eaf.Middleware.Common" Version="7.0.5" />
-    <PackageReference Include="Eaf.Middleware.Core" Version="7.0.5" />
-    <PackageReference Include="Eaf.Middleware.Ldap" Version="7.0.5" />
-    <PackageReference Include="Eaf.MiddlewareCore" Version="7.0.5" />
-    <PackageReference Include="Eaf.MiddlewareCore.EntityFrameworkCore" Version="7.0.5" />
-    <PackageReference Include="Eaf.Web.Common" Version="7.0.5" />
     <PackageReference Include="EasyData.AspNetCore" Version="1.5.2" />
     <PackageReference Include="EasyData.Core" Version="1.5.2" />
     <PackageReference Include="EasyData.EntityFrameworkCore.Relational" Version="1.5.2" />
@@ -265,6 +258,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="FastReport.OpenSource.Web" Version="2024.2.1" />
     <PackageReference Include="Fawdlstty.GitServerCore" Version="0.0.3.1" />
     <PackageReference Include="FileContextCore" Version="3.4.0" />
+    <PackageReference Include="FluentAssertions.Autofac" Version="6.5.1" />
     <PackageReference Include="FluentFTP" Version="50.0.1" />
     <PackageReference Include="FluentMermaid" Version="0.1.0" />
     <PackageReference Include="FreeSpire.Barcode" Version="6.6.0" />
@@ -322,6 +316,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="HtmlSharpCore" Version="1.1.3" />
     <PackageReference Include="HtmlWarningsReportGenerator" Version="1.0.5" />
     <PackageReference Include="Jint" Version="4.0.0" />
+    <PackageReference Include="jose-jwt" Version="5.0.0" />
     <PackageReference Include="jQueryDOM" Version="1.0.0" />
     <PackageReference Include="JsonSchemaClassGenerator" Version="1.0.0.8" />
     <PackageReference Include="jsurl.TypeScript.DefinitelyTyped" Version="1.2.2.1" />
@@ -450,6 +445,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MiniProfiler.Shared" Version="4.3.8" />
     <PackageReference Include="MirrorSharp.AspNetCore" Version="4.0.0" />
     <PackageReference Include="MirrorSharp.Common" Version="3.0.9" />
     <PackageReference Include="MirrorSharp.Testing" Version="3.0.0" />
@@ -471,6 +467,11 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Peachpie.Runtime" Version="1.1.10" />
     <PackageReference Include="Pek.Markdig.HighlightJs" Version="0.5.1" />
     <PackageReference Include="Portable.Xaml" Version="0.26.0" />
+    <PackageReference Include="PowerBridge" Version="1.3.6326.41344">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="PowerScript.Bridge" Version="2.3.1" />
     <PackageReference Include="Processing.js" Version="1.3.6" />
     <PackageReference Include="PuppeteerExtraSharp" Version="2.0.0" />
     <PackageReference Include="Python.Deployment" Version="2.0.5" />
@@ -481,7 +482,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Quartz.Jobs" Version="3.8.1" />
     <PackageReference Include="Quartz.Plugins" Version="3.8.1" />
     <PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
-    <PackageReference Include="RazorTemplates" Version="1.2.1" />
     <PackageReference Include="React.AspNet" Version="5.2.12" />
     <PackageReference Include="React.AspNet.Middleware" Version="5.2.12" />
     <PackageReference Include="React.TypeScript.DefinitelyTyped" Version="0.1.12" />
@@ -502,29 +502,59 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="ServiceRegistration.NET" Version="1.0.0" />
     <PackageReference Include="ServiceStack" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Admin" Version="6.0.2" />
+    <PackageReference Include="ServiceStack.Admin.Core" Version="6.0.2" />
+    <PackageReference Include="ServiceStack.AI" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Api.OpenApi" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Api.OpenApi.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Api.Swagger" Version="5.14.0" />
+    <PackageReference Include="ServiceStack.Authentication.MongoDb.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Aws" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Client" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Client.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Common" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Common.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.GoogleCloud" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.GrpcClient" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Host.AspNet" Version="4.5.12" />
     <PackageReference Include="ServiceStack.Host.Mvc" Version="4.5.12" />
     <PackageReference Include="ServiceStack.HttpClient" Version="8.2.2" />
     <PackageReference Include="ServiceStack.HttpClient.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Interfaces" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Interfaces.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Kestrel" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Logging.NLog" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Logging.Slack" Version="8.2.2" />
     <PackageReference Include="ServiceStack.MsgPack" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Mvc" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Mvc.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.OrmLite" Version="8.2.2" />
     <PackageReference Include="ServiceStack.OrmLite.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.MySql" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.MySql.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.MySqlConnector" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.MySqlConnector.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.Oracle" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.PostgreSQL" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.PostgreSQL.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.Sqlite" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.Sqlite.Cil" Version="8.2.2" />
     <PackageReference Include="ServiceStack.OrmLite.Sqlite.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.Sqlite.Data" Version="8.2.2" />
     <PackageReference Include="ServiceStack.OrmLite.SqlServer" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.SqlServer.Converters" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.SqlServer.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.SqlServer.Data" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.OrmLite.T4" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.ProtoBuf" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.ProtoBuf.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.RabbitMq.Core" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Redis" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Redis.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Server" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Server.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Stripe" Version="8.2.2" />
+    <PackageReference Include="ServiceStack.Stripe.Core" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Text" Version="8.2.2" />
     <PackageReference Include="ServiceStack.Text.Core" Version="8.2.2" />
     <PackageReference Include="SharpCompress" Version="0.36.0" />
@@ -561,7 +591,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.8.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.8.0" />
     <PackageReference Include="System.AppContext" Version="4.3.0" />
-    <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="7.0.0" />
+    <PackageReference Include="System.CommandLine.Hosting" Version="0.4.0-alpha.22272.1" />
     <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
     <PackageReference Include="System.Diagnostics.EventLog" Version="6.0.0" />
     <PackageReference Include="System.Diagnostics.StackTrace" Version="4.3.0" />
@@ -576,6 +607,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.1" />
     <PackageReference Include="TensorFlow.NET" Version="0.150.0" />
     <PackageReference Include="TensorFlowSharp" Version="1.15.1" />
+    <PackageReference Include="Terminal.Gui" Version="1.18.0-pre.35" />
     <PackageReference Include="Tesseract" Version="5.2.0" />
     <PackageReference Include="TGrid" Version="0.2.7" />
     <PackageReference Include="TGrid.TypeScript.DefinitelyTyped" Version="0.2.5" />
@@ -587,6 +619,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="UI-AdminLTE" Version="2.3.11" />
     <PackageReference Include="UriGeneration" Version="3.0.5" />
     <PackageReference Include="VanType" Version="3.3.0" />
+    <PackageReference Include="Vereyon.Web.FlashMessage" Version="3.0.0" />
+    <PackageReference Include="Vereyon.Web.HtmlSanitizer" Version="1.8.0" />
     <PackageReference Include="WebOptimizer.JSObfuscator" Version="1.1.5" />
     <PackageReference Include="WebPush-NetCore" Version="1.0.2" />
     <PackageReference Include="WebStoating.Markdig.Prism" Version="1.0.0" />

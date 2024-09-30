@@ -1,0 +1,26 @@
+﻿&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;…&lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;view&quot;&gt;&lt;/div&gt;
+         
+        &lt;<mark>url-router</mark> view-selector=&quot;#view&quot;&gt;
+                    
+            &lt;<mark>url-route</mark> path=&quot;/&quot;&gt;
+                &lt;template&gt;
+                    &lt;h1&gt;[[i18n Hello World!]]&lt;/h1&gt;
+                &lt;/template&gt;
+            &lt;/url-route&gt;
+
+            &lt;url-route <mark>path=&quot;/:name&quot;</mark>&gt;
+                &lt;template&gt;
+                    &lt;h1&gt;[[i18n Hello]] &lt;span <mark>url-param=&quot;name&quot;</mark>&gt;&lt;/span&gt;!&lt;/h1&gt;
+                &lt;/template&gt;
+            &lt;/url-route&gt;
+
+        &lt;/url-router&gt;
+        
+        &lt;script type=&quot;module&quot; src=&quot;js/web-components/url-router.js&quot;&gt;&lt;/script&gt;
+        &lt;script nomodule src=&quot;js/web-components/polyfill.js&quot;&gt;&lt;/script&gt;       
+    &lt;/body&gt;
+&lt;/html&gt;

@@ -1,0 +1,2953 @@
+Ledian,FinalGrade,Midterm,CanvasGrade,Section,Lab,TAEngagement,TACommunication,MeanDiffRank,Points,Hours Spent in BlockPy,Median # of Days Submitted Before Due Date,Number of Days Spent Working,Assignments With 0s,Major,Level,Gender,Native Speaker?,Location,Prior,PointsGrade,Race/Ethnicity,coarse_race,OpenShape,OpenScreen,ClosedScreen,OpenMovement,ClosedMovement,ClosedWave,ClosedStep,ClosedEvent,ClosedState,OpenSprite,ClosedSprite,OpenCode,PriorGameDev,OpenPython,GameDevOpenCode,MockMidterm14
+Weezing,D,A,A-,11,31L,Regularly skipped lab or was disengaged,"Not super communicative, but not silent",47.3,769.95,18.11720452,3,28,4,['Computer Science'],Freshman,Man,False,DE,True,A-,Asian,White/Asian,,,,,,,,,,,,,,,,"from cisc108 import assert_equal
+def check_day(daymonth:int,dayname:str)->str:
+    if daymonth>31 or daymonth<1:
+        return ""Invalid!""
+    elif daymonth==13 and dayname==""Friday"":
+        return ""Boo!""
+    else:
+        return dayname+"" the ""+ str(daymonth)
+
+assert_equal(check_day(13,""Friday""),""Boo!"")
+assert_equal(check_day(90, ""Tuesday""),""Invalid!"")
+assert_equal(check_day(12,""Friday""),""Friday the 12"")"
+Giratina,D,F,D,12,41L,Participated in lab activities,"Not super communicative, but not silent",2.4,587.26,9.378304361,24,19,14,['University Studies/Undecided/Undeclared'],Freshman,Man,True,Delaware,False,D,"Hispanic\, Latino\, or Spanish origin",PoC,make_rectangle,Borderlines,View,Moving,Glide,Action,Repeat,Attach,State,Characters,Characters,,No.,"I've learned a lot about not just python but coding in general. I have never used apps like these before and I am having fun learning to do it. It surprised me how simple, yet complicated it was.",,"turtle = turtle.Turtle()
+turtle.penup()
+turtle.goto(-25,100)
+turtle.pendown()
+turtle.circle(5)
+
+turtle.penup()
+turtle.goto(25,100)
+turtle.pendown()
+turlte.circle(5)
+
+turtle.penup()
+turtle.goto(0,0)
+turtle.pendown()
+turtle.cirlce(50,40)
+
+turtle.penup()
+turtle.goto(0,0)
+turtle.pendown()
+turtle.circle(-50,40)
+"
+Glameow,A,A,A,80,80L,"Super engaged, really tried",They stayed in touch well,58.0,815.5,8.29436737,-2,25,2,"['Computer Science,Other Arts and Sciences']",Freshman,Man,True,Missouri,True,A,White,White/Asian,,,,,,,,,,,,,,,,"turtle.circle(25)
+# circle(radius): center is radius up and radius forward from start, returns to same heading and position as start
+turtle.penup()
+turtle.setheading(90)
+turtle.forward(35)
+turtle.right(90)
+turtle.forward(15)
+turtle.pendown()
+turtle.circle(2.5)
+turtle.penup()
+turtle.forward(20)
+turtle.pendown()
+turtle.circle(2.5)
+turtle.penup()
+turtle.back(10)
+turtle.right(90)
+turtle.forward(20)
+turtle.right(90)
+turtle.forward(20)
+turtle.setheading(0)
+turtle.pendown()
+turtle.curve(40, -5)
+# curve(distance forward, distance vertically from start at deepest point: returns to same heading as start)
+"
+Lumineon,A,C,A,11,31L,"Super engaged, really tried","Not super communicative, but not silent",50.3,814.6,21.51251722,2,37,1,['Computer Science'],Freshman,Woman,True,Delaware,True,A,Asian,White/Asian,,,,,,,,,,,,,,,,"turtle.penup()
+turtle.moveto(500,500) '''or middle of page'''
+turtle.right(90)
+turtle.forward(50)
+turtle.pendown()
+turtle.circle(10,360) '''for diameter and for length(half circle or full circle'''
+turtle.penup()
+turlte.right(180)
+turtle.forward(100)
+turtle.pendown()
+turtle.circle(10,360)
+turtle.penup()
+turtle.setheading(0)
+turtle.right(90)
+turtle.forward(50)
+turtle.left(50)
+turtle.circle(70,180)
+turtle.moveto(500,500)
+turtle.forward (175)
+turtle.circle(200,360)
+
+"
+Squirtle,A,A,A,12,40L,Participated in lab activities,"Not super communicative, but not silent",67.5,820.72,14.8940426,-1,31,1,['Computer Science'],Freshman,Man,True,United States,True,A,"White,Asian",White/Asian,make_rectangle,border,Screen,moving,Movement,Animation,Iteration,When,State,characters,Characters,,"Yes, but only small simple games",I found that Python was way easier to work with than Java,"frog.move_forward(50)
+","pen.draw_circle(100)
+pen.pen_up()
+pen.go_to(50,125)
+pen.pen_down()
+pen.go_up(25)
+pen.pen_up()
+pen.go_to(150,125)
+pen.go_up(25)
+pen.pen_up()
+pen.go_to(100,50)
+pen.draw_upward_parabola(25)"
+Venomoth,A-,A-,A-,12,40L,Participated in lab activities,"Not super communicative, but not silent",42.6,747.97,24.78511894,-1,40,4,['Other college not listed'],Sophomore,Man,True,Pennsylvania,False,A-,White,White/Asian,def create_rectangle,Border,Screen,hovering with forward momentum,Glide,Action,Repeat,When,Status,sprites,Sprites,,No.,"Coding in general is incredibly hard as I expected. It's not as hard as a foreign language is for me, with the language thankfully still being english. But at the same time it is incredibly challenging to try and remember all of the different types of things I needs tot remember to potentially use, as well as being incredibly creative as well. I feel like you have to be incredibly creative at times when coding, which can suck at times because I'm usually better at learning things in a linear formant at times. 
+
+One thing that has surprised me though is how simple some things have been at times. As creative and complex as it can get, just stepping back, taking a break, and coming back to a problem has allowed me to see how simple some solutions to fixing/writing some code can be. By always seeing such complex and confusing code (at least for a beginner), I at times forget that programmers are humans too; humans who will always try to find the easiest and simplest way to do something just like the rest of us.","return(glide)
+
+","______________________________
+|                            |
+|     __            __       |
+|    |__|          |__|      |
+|                            |
+|      |            |        |
+|      |            |        |
+|      |            |        |
+|      |____________|        |
+|                            |
+\____________________________/
+"
+Timburr,A,A-,A,10,20L,Participated in lab activities,Very quiet sometimes,32.5,806.2,23.97960901,0,34,3,['University Studies/Undecided/Undeclared'],Freshman,Woman,False,Japan,False,A,Asian,White/Asian,rectangle,screen,Screen,move,Movement,Animation,Repeat,Connect,Moment,object,Objects,,No.,python can make games and draw pictures,,"import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-50, -50)
+turtle.pendown()
+turtle.speed(10)
+turtle.circle(100)
+turtle.penup()
+turtle.goto(-80, 80)
+turtle.pendown()
+turtle.setheading(-90)
+turtle.forward(30)
+turtle.penup()
+turtle.goto(-20, 80)
+turtle.pendown()
+turtle.setheading(-90)
+turtle.forward(30)
+turtle.penup()
+turtle.goto(-100, 10)
+turtle.pendown()
+turtle.setheading(-50)
+turtle.forward(65)
+turtle.setheading(50)
+turtle.forward(65)
+turtle.setheading(180)
+turtle.forward(87)
+"
+Crustle,A-,A,A-,12,40L,"Super engaged, really tried",They stayed in touch well,79.9,792.69,24.24337739,-6,36,2,['Computer Science'],Freshman,Man,True,NY,True,A,White,White/Asian,,,,,,,,,,,,,,,,"import turtle
+turtle.penup()
+turtle.goto(-40,100)
+turtle.pendown()
+turtle.begin_fill(""black"")
+turtle.circle(20)
+turtle.end_fill
+turtle.penup()
+turtle.goto(40,100)
+turtle.begin_fill(""black"")
+turtle.circle(20)
+turtle.end_fill()
+turtle.penup()
+turtle.goto(0,100)
+turtle.pendown()
+
+turtle.begin_fill(""yellow"")
+turtle.circle(50)
+turtle.end_fill()
+
+turtle.penup()
+turtle.goto(-30,30)
+turtle.pendown()
+for x in range(-30,30):
+    turtle.forward(1)
+    turtle.left(1)
+    
+
+"
+Latios,A-,F,D,10,20L,Regularly skipped lab or was disengaged,Very quiet sometimes,18.9,587.07,12.93257577,8,27,24,['Computer Science'],Freshman,Man,False,New Jersey,False,D,"Asian,Some other race\, ethnicity\, or origin",PoC,,,,,,,,,,,,,,,,"import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(3)
+
+def draw_smiley():
+    turtle.penup()
+turtle.forward(400)
+turtle.left(90)
+turtle.forward(400)
+turtle.left(90)
+turtle.forward(400)
+turtle.left(90)
+turtle.forward(400)
+turtle.backward(200)
+turtle.penup()
+turtle.setheading(0)
+turtle.forward(50)
+turtle.pendown()
+turtle.left(90)
+turtle.forward(100)
+turtle.right(45)
+turtle.forward(50)
+turtle.penup()
+turtle.setheading(0)
+turtle.right(45)
+turtle.backward(200)
+turtle.pendown()
+turtle.left(45)
+turtle.forward(50)
+turtle.right(45)
+turtle.forward(100)
+turtle.penup()
+turtle.setheading(0)
+turtle.left(90)
+turtle.forward(150)
+turtle.right(90)
+turtle.forward(100)
+turtle.pendown()
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(50)
+turtle.penup()
+turtle.setheading(0)
+turtle.backward(300)
+turtle.pendown()
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(50)
+
+x_position = draw_smiley(-100, 100)
+"
+Pikachu,A,A,A,10,20L,"Super engaged, really tried",They stayed in touch well,30.2,803.83,45.36571291,9,34,2,['Computer Science'],Freshman,Woman,False,"Newark, Delaware",False,A,"White,Asian",White/Asian,rectangle,"(the_height_length:int, width_length:int)",Screen,wizard_man,Movement,Animation,Iteration,Attach,State,the verbs. values,Objects,,No.,"Python is the first language I learn in my life thus, i believe that python has opened my eyes to the world of programming. It was not easy to learn it but once i complete the problem the sense of accomplishment I feel is really great. Python confused me a lot many times. ","import turtle
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(50)
+turtle.forward(50)
+turtle.left(90)
+print(turtle)
+","def smiley_face(circle:float)->float
+    PI= 3.14159265359
+    circle= wasist/(2*PI)
+    return circle
+
+"
+Yamask,D,F,A-,10,21L,Regularly skipped lab or was disengaged,Very quiet sometimes,13.6,768.66,12.77459925,26,28,3,['University Studies/Undecided/Undeclared'],Freshman,Man,False,China,False,A-,Asian,White/Asian,rectangle,frame,World,floating,Glide,Movement,Repeat,When,Moment,objects,Objects,,No.,I find the rules in Python too simple to be flexible. It's hard to see where you're going wrong when you're doing something wrong.,"def frog_movement(x_position:int,y_position:int)->int:
+    frog.right(90)
+    frog.forward(500)
+    frog.back(500)
+    repeat frog_movement
+","import turtle
+
+smiles = turtle.Turtle()    
+smiles.penup()
+smiles.goto(-75,150)
+smiles.pendown()
+smiles.circle(10)     
+
+smiles.penup()
+smiles.goto(75,150)
+smiles.pendown()
+smiles.circle(10)    
+
+smiles.penup()
+smiles.goto(0,0)
+smiles.pendown()
+smiles.circle(100,90)  
+
+smiles.penup()           
+smiles.setheading(180) 
+smiles.goto(0,0)
+smiles.pendown()
+smiles.circle(-100,90)
+
+"
+Zapdos,F,D,F,10,21L,Completely ghosted me/lab,Ghosted me,7.7,358.23,4.8287586110000005,-1,31,40,['Computer Science'],Junior,Man,True,United States,True,F,Black or African Am.,PoC,Integer,border,View,move forward,Movement,Animation,Step,Connect,State,objects,Objects,,No.,The amount of things that I have to remember ,,"turtle.turn (360)
+turtle.down(60)
+turtle.turn(180)
+"
+Heracross,A,A-,A,80,80L,Participated in lab activities,"Not super communicative, but not silent",53.3,790.6,12.92209291,0,27,4,['Computer Science'],Freshman,Man,True,DE,True,A,White,White/Asian,,,,,,,,,,,,,,,,"from graphics_library import circle
+from graphics_library import semicircle
+from graphics_library import movecursor
+from graphics_library import Black
+from graphics_library import Yellow
+
+movecursor(0,0)
+circle(10,Black)
+movecursor(0,0)
+circle(8,Yellow)
+movecursor(-2, 2)
+circle(1, Black)
+movecursor(2,2)
+circle(1, Black)
+movecursor(0,-2)
+semicircle(4, Black)
+movecursor(0,-2)
+semicircle(3, Yellow)
+#circle and semicircle consume an int representing the size of the shape, and an variable assigned an int, representing the color of the shape
+#they draw the shape filled in
+#move cursor consumes two ints representing the x and y position of the cursor, it will move the cursor to this position"
+Elgyem,C,A-,C,11,31L,Participated in lab activities,"Not super communicative, but not silent",22.5,721.21,22.13724073,3,33,5,['Other Engineering'],Freshman,Woman,True,Delaware,False,A-,Black or African Am.,PoC,shapes,outs puts,View,movements,Glide,Animation,Repeat,When,Moment,pictures,Characters,,No.,"I have learned how to iterate through data in lists and strings. I have also learned the structure need o make a loop, define a function, and call a function. I have learned a lot of what not to do through the many errors that I have made. Nothing was very surprising. ","slide(frog)
+",
+Minun,A-,C,A-,10,21L,Regularly skipped lab or was disengaged,"Not super communicative, but not silent",30.8,740.4,28.06880318,7,28,6,"['Computer Science,Math']",Junior,Man,True,DE,True,A-,Asian,White/Asian,,,,,,,,,,,,,,,,"import turtle
+
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(100)
+
+turtle.penup()
+turtle.goto(0,-300)
+turtle.pendown()
+turtle.circle(200)
+
+turtle.penup()
+turtle.left(90)
+turtle.forward(300)
+turtle.left(90)
+turtle.forward(70)
+turtle.pendown()
+turtle.circle(10)
+
+turtle.penup()
+turtle.goto(0,-300)
+turtle.right(90)
+turtle.forward(290)
+turtle.right(90)
+turtle.forward(70)
+turtle.right(90)
+turtle.pendown()
+turtle.circle(10)
+
+turtle.penup()
+turtle.left(90)
+turtle.goto(-1,-300)
+turtle.pendown()
+turtle.circle(100,180)
+"
+Voltorb,A,C,A,10,20L,"Super engaged, really tried",They stayed in touch well,54.4,743.93,21.31721695,0,38,3,['Psychology'],Sophomore,Man,True,Delaware,True,A-,White,White/Asian,make_rectangle,The border,View,gliding,Glide,Movement,Repeat,When,Moment,The player and the objective,Objects,,"Yes, but only small simple games","It surprised me how many functions there are already that can be used in python. I personally thought that I would have to define everything and do it myself, but that is not the case, which is good.","frog_right(100)
+frog_reset()
+
+","""""""
+Personally I have no idea how I would make a curve with the turtle and if I used continuous turning right it would be a very blocky smile
+So I am hoping that there are circle funtions that the turtle can just draw.""""""
+
+def draw_face(x:int,y:int)->int:
+    turtle.pendown()
+    turtle.circle(0,100)
+    
+    
+def draw_eye(x:int,y:int)->int:
+    turtle.penup()
+    turtle.goto()
+    turtle.pendown()
+    turtle.circle()
+
+    
+def draw_mouth(x:int,y:int)->int:
+    turtle.penup()
+    turtle.goto()
+    turtle.pendown()
+    turtle.forward(85)
+
+draw_face(100,100)
+draw_eye(0,100)
+draw_eye(0,50)
+draw_mouth(0,100)"
+Cherubi,A,A,A,80,80L,"Super engaged, really tried",They stayed in touch well,91.1,833.5,9.423622282,-5,24,1,['Computer Science'],Freshman,Man,True,Delaware,True,A,White,White/Asian,,,,,,,,,,,,,,,,"import graphics
+
+def draw_face_outline(x_center:float, y_center:float, radius:float, filled:bool) -> float:
+    '''This function takes in x/y coords for the center of a circle, a radius for the circle,
+    and a boolean value of whether or not to fill the circle when finished. For this outline,
+    ""filled"" is expected to be False so the face's details can be seen.
+    '''
+    graphics.circle(x_center, y_center, radius, filled)
+    return x_center
+
+def draw_eye(x_center:float, y_center:float, radius:float, filled:bool) -> float:
+    '''This function takes in x/y coords for the center of a circle, a radius for the circle,
+    and a boolean value of whether or not to fill the circle when finished. For these eyes,
+    ""filled"" is expected to be True so the eyes are filled in.
+    '''
+    graphics.circle(x_center, y_center, radius, filled)
+    return x_center
+
+def draw_mouth(x_center:float, y_center:float, radius:float, angle1:float, angle2:float, filled:bool) -> float:
+    '''This function takes in x/y coords for the center of a circle, a radius for the circle,
+    two angles from which the circle should be drawn in accordance with the traditional unit circle, 
+    and a boolean value of whether or not to fill the circle when finished. For this particular 
+    mouth, ""filled"" is expected to be False so the mouth will be just a grin [like :)] rather than 
+    an open-mouthed smile [like :D].
+    '''
+    graphics.partialcircle(x_center, y_center, radius, angle1, angle2, filled)
+    return x_center
+
+draw_face_outline(300, 0, 100, False)
+draw_eye(250, 50, 10, True)
+draw_eye(350, 50, 10, True)
+draw_mouth(300, -50, 50, 180, 360, False)
+print(""Finished!"")
+   "
+Makuhita,A,A,A,10,21L,"Super engaged, really tried",They stayed in touch well,59.2,791.99,71.59382156,-6,45,1,['Computer Science'],Freshman,Woman,True,Maryland,True,A,Asian,White/Asian,draw_rectangle,perimeter,Screen,walking,Glide,Animation,Step,On,State,figures,Characters,,No.," I never really worked on python so all the skills were kind of new to me but I was surprised at how fast I was picking up on things. Also, I found while loops to be more confusing than for loops.",,"print(""          "")print(""|"") print(""     "")print(""|"")
+print(""          "")print(""|"") print(""     "")print(""|"")
+print(""          "")print(""|"") print(""     "")print(""|"")
+print(""          "")print(""|"") print(""     "")print(""|"")
+print(""          "")print(""|"") print(""     "")print(""|"")
+print(""          "")print(""|"") print(""     "")print(""|"")
+print(""          "")print(""|"") print(""     "")print(""|"")
+            
+            print(""\\                                /"")
+             print(""\\                              /"")
+              print(""\\                            /"")
+               print(""\\                          /"")
+                print(""\\                        /"")
+                 print(""\\                      /"")
+                  print(""\\                    /"")
+                   print(""\\                  /"")
+                    print(""\\                /"")
+                     print(""\\              /"")
+                      print(""\\            /"")
+                       print(""\\          /"")
+                        print(""\\        /"")
+                         print(""\\      /"")
+                          print(""\\    /"")
+                           print(""\\  /"")
+                            print(""\\/"")"
+Croagunk,C,C,C,11,31L,Regularly skipped lab or was disengaged,Very quiet sometimes,43.8,734.97,25.09238097,-1,26,8,['University Studies/Undecided/Undeclared'],Freshman,Man,True,Delaware,True,A-,White,White/Asian,,,,,,,,,,,,,,,,"def circle(dim1: int dim2: int):
+    graphic.circle(dim1, dim2)
+def eyes(loc1: int, loc2: int):
+    graphic.dot(loc1)
+    graphic.dot(loc1)
+def expression(angle: int):
+    graphic.center.line(angle)
+"
+Claydol,A-,C,A-,80,80L,Completely ghosted me/lab,Ghosted me,29.6,793.13,8.770227849,-1,21,4,['Computer Science'],Freshman,Man,True,Delaware,True,A,Asian,White/Asian,,,,,,,,,,,,,,,,"import graphics
+def draw_smiley_face(x,y):
+    graphics.circle(100,x,y)        # I want the smiley face circle to have a radius of 100 and centered at coordinates (x,y)
+                                    # parameters for circle: radius, x-coordinate of center , y-coordinate of center
+    graphics.dot(3,x-17,y+17)       # smiley face left eye
+                                    # parameters for dot: radius, x-coordinate of center, y-coordinate of center
+    graphics.dot(3,x+17,y+17)       # smiley face right eye
+    graphics.semicircle(50,270,x,y) # smiley face mouth semicircle
+                                    # parameters for semicircle: radius, angle which it faces referencing the unit circle
+                                    # (e.g. ∪ shaped would be 270 degrees and ∩ shaped would be 90), x-coordinate of full circle center,
+                                    # y-coordinate of full circle center
+                                     
+                                    # Alternatively, since the Graphics library does not actually exist, I COULD pretend that it has
+                                    # a sophisticaed smiley face image function already in it.
+                                    # By that logic, I could just write graphics.smileyface(x,y)"
+Venipede,A-,C,A-,80,80L,Participated in lab activities,They stayed in touch well,34.9,703.39,12.04412192,-1,28,5,['Computer Science'],Freshman,Man,True,"New Jersey through September, but I am going to live in Hawaii from October 1-December 1. Also I couldn’t add it down there but Hawaii’s UTC offset is -10",True,A-,White,White/Asian,,,,,,,,,,,,,,,,"#first draw outer large circle for face
+turtle.goto(100, 100)
+turtle.drawCircle(50)
+turtle.penup()
+turtle.left(90) #Turning it to look up, assuming it started looking right
+turtle.forward(25)
+turtle.left(90)
+turtle.forward(20)
+#draw eye #1
+turtle.pendown()
+turtle.drawCircle(8)
+#draw eye #2
+turtle.penup()
+turtle.backward(40)
+turtle.pendown()
+turtle.drawCircle(8)
+#move to position to draw mouth
+turtle.penup()
+turtle.left(90)
+turtle.forward(30)
+turtle.pendown()
+#draw Mouth: Starting position (120, 95)
+turtle.goto(100, 85)
+turtle.goto(80, 95)
+            
+                  
+                  "
+Drilbur,A-,A-,A-,11,30L,Participated in lab activities,Very quiet sometimes,46.7,736.79,10.58256153,-1,29,2,['Computer Science'],Freshman,Woman,True,New Jersey,True,A-,White,White/Asian,create_rectangle,border,Screen,floating,Glide,Movement,Step,When,State,animations,Objects,,"Yes, but only small simple games","I first learned to code in C++ then Java. I feel like python is a better place to start for beginners. What confused me about python was just learning the little differences that I had been so used to with other languages. But once I got used to coding in python, I began to enjoy it more than c++ or java. ","frog.start(left)
+frog.speed(3)
+frog.move(100,right)
+","#circle with radius 100 and center 0,0
+drawing.circle(0,0,200)
+#eye 1 with center at 25,50 and radius 25
+drawing.circle(25,50, 25)
+#eye 2 with center 75,50 with radius 25
+drawing.circle(75,50,25)
+#draw u-shape for the smile with center 0,-25 thats 20 units long
+drawing.ushape(0,-25,20)"
+Ferroseed,A,C,A,11,30L,Participated in lab activities,"Not super communicative, but not silent",49.1,800.46,20.57870239,3,40,4,['Computer Science'],Freshman,Man,True,Delaware,True,A,White,White/Asian,make_rectangle,outer_border,Screen,walk_forward,Movement,Animation,Repeat,Register,State,Objects,Objects,,No.,"I was surprised by how simple Python is. I originally learned to program in Java and we used || to symbolize or but in Python you just need to type ""or"".",,"
+turtle.pendown()
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(50)
+turtle.penup()
+turtle.goto(25,25)
+turtle.pendown()
+turtle.forward(12.5)
+turtle.backward(25)
+turtle.forward(12.5)
+turtle.penup()
+turtle.goto(12.5, 35)
+turtle.forward(5)
+turtle.penup()
+turtle.forward(10)
+turtle.pendown()
+turtle.forward(5)
+
+"
+Pangoro,D,F,F,10,20L,"Super engaged, really tried",They stayed in touch well,4.1,410.26,8.69300302,16,18,36,['Other college not listed'],Sophomore,Man,True,Delaware,False,F,White,White/Asian,generate.rectangle,border,Camera,sweeping,Glide,Animation,Iteration,When,Status,elements,Sprites,,No.,"Being completely new to computer science, Python was my first experience with coding at all. If I had to say one thing that ""surprised""
+me it would be how precise you have to be in your code. Every time an answer is revealed, you don't feel like you were completely off, you were just missing 1 or 2 elements.",,"import turtle
+
+turtle.backward(50)
+"
+Sneasel,C,A,C,10,21L,Participated in lab activities,"Not super communicative, but not silent",37.3,707.77,14.95075856,3,24,4,['Other Arts and Sciences'],Grad student,Man,True,Delaware,False,A-,Asian,White/Asian,,,,,,,,,,,,,,,,"from cisc108 import graphics_fake
+
+def circle (radius: int, x_position: int, y_position: int) -> int:
+    pencil.up()
+    goto.position(x_position, y_position)
+    set.heading(0)
+    pencil.down()
+    draw.circle(radius)
+    pencil.up()
+    return x_position
+    
+def smile (width: int, height: int, x_position: int, y_position: int) -> int:
+    pencil.up()
+    goto.position(x_position, y_position)
+    set.heading(0)
+    pencil.down()
+    pencil.forward(width - width*(0.2))
+    pencil.left(30)
+    pencil.forward(height-height*(0.5))
+    pencil.left(30)
+    pencil.forward(height)
+    pencil.left(30)
+    pencil.forward(height)
+    pencil.left(90)
+    pencil.forward(width*(5/4))
+    pencil.left(120)
+    pencil.forward(height)
+    pencil.left(30)
+    pencil.forward(height)
+    pencil.left(30)
+    pencil.forward(height)
+    pencil.up()
+    return x_position
+
+x_position = draw_circle(10, 0, 0)
+x_position = draw_circle (2, 3, 5)
+x_position = draw_circle (2, -3, 5)
+x_position = draw_smile (16, 6,-8, -6)
+"
+Lopunny,I,F,A-,11,31L,Regularly skipped lab or was disengaged,Very quiet sometimes,12.4,780.41,19.30186162,23,36,4,['University Studies/Undecided/Undeclared'],Freshman,Man,False,Delaware,True,A,American Indian or Alaska Native,PoC,,,,,,,,,,,,,,,,"
+"
+Arbok,A,A,A-,12,40L,"Super engaged, really tried",They stayed in touch well,42.0,791.12,47.65672577,-5,43,1,['Math'],Junior,Woman,True,Pennsylvania,False,A,White,White/Asian,,,,,,,,,,,,,,,,"import turtles
+
+#upper half of face
+turtles.draw(arc, (-5,0), (5,0))
+#lower half of face
+turtles.draw(arc, (5,0), (-5,0))
+#smile
+turtles.draw(arc, (-4,-3), (4,-3))
+#left eye
+turtles.draw(arc, (-3.5, 3.5), (-2.5, 3.5))
+turtles.draw(arc, (-2.5, 3.5), (-3.5, 3.5))
+#right eye
+turtles.draw(arc, (3.5, 3.5), (2.5, 3.5))
+turtles.draw(arc, (2.5, 3.5), (3.5, 3.5))  "
+Fennekin,A-,D,A-,12,40L,Participated in lab activities,Very quiet sometimes,46.2,759.43,45.04875695,1,34,4,['University Studies/Undecided/Undeclared'],Sophomore,Man,False,china,False,A-,Asian,White/Asian,make_rectangle,margin,World,walking,Glide,Action,Repeat,When,Moment,component,Characters,,No.,"programming is not like what I thought. I began to be interested in it.
+
+I also realized that it is literally helpful in many domains other than programing.","frog.forward(50)
+","import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-190, 0)
+turtle.pendown()
+turtle.speed(3)
+
+turtle.left(90)
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(50)
+turtle.backward(50)
+turtle.right(45)
+turtle.forward(50)
+turtle.left(180)
+turtle.right(90)"
+Stunfisk,F,F,F,11,31L,Completely ghosted me/lab,Ghosted me,4.7,545.42,2.438896188,27,13,7,['Computer Science'],Freshman,Man,True,NJ,True,D,"Hispanic\, Latino\, or Spanish origin,Black or African Am.",PoC,,,,,,,,,,,,,,,,
+Haunter,D,A-,A-,10,20L,Completely ghosted me/lab,Ghosted me,24.9,734.86,15.01775291,0,21,11,['Computer Science'],Freshman,Man,False,USA or CHINA,False,A-,Asian,White/Asian,,,,,,,,,,,,,,,,"import turtle
+turtle.set()
+turtle.speed(5)
+turtle.penup()
+
+
+t.goto(-135,10)
+t.pendown()
+t.left(90)
+t.circle(15,180)
+
+t.penup()
+t.goto(-35,10)
+t.pendown()
+t.left(180)
+t.circle(15,180)
+
+
+
+
+
+
+
+
+
+
+"
+Wynaut,A,A,A,11,30L,"Super engaged, really tried",They stayed in touch well,60.4,816.47,21.864394,-4,40,2,['Computer Science'],Freshman,Man,True,NY,True,A,Asian,White/Asian,def draw_rectangle,game perimeter,World,repositioning,Movement,Animation,Repeat,When,State,objects,Objects,,"Yes, but only small simple games",One thing that both surprised and confused me was the use of dictionaries and records. In the past I hadn't learned anything about them so when introduced to them they felt completely new. I found it quite cool however that you can store information in dictionaries using multiple sub-levels and I think it will be a useful programming tool in the future.,"positiion == getXposition
+range = 50
+for i in range:
+    positiion == position + 5
+    setXposition(position)","new turtle
+
+#(i forgot all the old turtle commands)
+#creates face outline
+pen.moveto(0,0)
+circle(radius)
+turtle.circle(100)
+
+#draws eyes
+pen.up()
+pen.width(20)
+pen.moveto(-40,60)
+pen.down()
+turtle.dot
+pen.up()
+pen.moveto(40,60)
+pen.down()
+turtle.dot
+
+#draws mouth
+pen.up()
+pen.moveto(-40,-60)
+pen.down()
+turtle.setposition(0)
+turtle.arc(80)"
+Krabby,A-,A-,A-,10,21L,Participated in lab activities,"Not super communicative, but not silent",36.7,769.53,21.97790212,9,39,4,['Other Arts and Sciences'],Junior,Man,True,"DE, USA",True,A-,White,White/Asian,,,,,,,,,,,,,,,,"import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(3)
+
+import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(6)
+
+turtle.penup()
+turtle.setheading(0)
+turtle.forward(30)
+turtle.pendown()
+
+turtle.left(15)
+import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(6)
+
+turtle.penup()
+turtle.setheading(0)
+turtle.forward(30)
+turtle.pendown()
+
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+turtle.left(15)
+turtle.forward(50)
+
+turtle.penup()
+turtle.setheading(0)
+turtle.left(90)
+turtle.left(90)
+turtle.forward(100)
+turtle.right(90)
+turtle.forward(260)
+turtle.pendown()
+
+turtle.forward(50)
+
+turtle.penup()
+turtle.setheading(0)
+turtle.right(90)
+turtle.left(90)
+turtle.forward(150)
+turtle.right(90)
+turtle.pendown()
+
+turtle.forward(50)
+
+turtle.penup()
+turtle.setheading(0)
+turtle.right(90)
+turtle.forward(150)
+turtle.right(90)
+turtle.forward(150)
+turtle.right(195)
+turtle.pendown()
+
+turtle.forward(30)
+turtle.left(7)
+turtle.forward(30)
+turtle.left(7)
+turtle.forward(30)
+turtle.left(7)
+turtle.forward(30)
+turtle.left(7)
+turtle.forward(30)
+turtle.left(7)
+turtle.forward(30)
+turtle.left(7)
+turtle.forward(30)
+turtle.left(7)
+turtle.forward(30)
+turtle.left(7)
+
+
+"
+Sunflora,A,C,A,12,40L,"Super engaged, really tried",They stayed in touch well,32.0,802.9,18.40299841,7,32,3,['Computer Science'],Freshman,Man,False,Delaware,True,A,"Hispanic\, Latino\, or Spanish origin",PoC,rectangle,border,View,Move,Movement,Action,Repeat,When,State,objects,Objects,,"Yes, but only small simple games",Something that was surprising to find out was the truthiness of if statements. Where when writing an if statement you don't need to specify if something is true. ,"frog.move_right(10)
+","from Graphics import shapes
+
+shapes.goto(0,0)
+shapes.circle(50)
+#the number inside () is the radius
+shapes.goto(-25,25)
+shapes.circle(10)
+shapes.goto(25,25)
+shapes.circle(10)
+shapes.goto(0,0)
+shapes.half_circle_down(25)
+
+shapes.draw()"
+Mesprit,A,A,A,11,31L,"Super engaged, really tried",They stayed in touch well,88.8,842.3,31.82310697,-5,49,0,['Computer Science'],Freshman,Man,True,New Jersey,True,A,White,White/Asian,rectangle,border,Screen,moveforward,Glide,Action,Repeat,Attach,State,characters,Sprites,,"Yes, but only small simple games","Prior to this course I had taken programming courses in high school for around 2 years. Although I'd had decent prior knowledge of how things work, I didn't actually remember how to properly create code. Over the semester I have learned how to take advantage of built in components of python to better enhance code. I prefer python to JavaScript, which is the language I was previously learning. What surprised me about python that it was similar to JavaScript, yet somehow easier to understand. ","frog.moveforward(90)
+","import graphics
+graphics.penup()
+graphics.goto(-300, 0)
+graphics.pendown()
+graphics.speed(3)
+
+# drawing the circle
+    graphics.penup()
+    graphics.goto(-300,0)
+    graphics.pendown()
+    graphics.right(90)
+    graphics.round(180)
+    graphics.left(90)
+    graphics.round(180)
+"
+Dratini,A-,A-,A-,10,20L,"Super engaged, really tried",They stayed in touch well,28.4,709.49,12.78915942,6,23,15,['Math'],Senior,Woman,True,Delaware,False,A-,"White,Black or African Am.",PoC,draw_square,the frame or boundaries,View,gliding,Glide,Movement,Iteration,Attach,Moment,elements,Objects,,No.,"Sometimes you think you are giving a function or line of code one type of input, but the way that python works turns that input into some other type. For example, you may do a mathematical operation and try to pass the answer to the function, but it doesn't work because the solution is a float and not an integer, or you may use several functions to create and edit lists, but you end up with extra brackets in there somehow and then you get an error.","glide_right(frog)
+","import turtle
+turtle.penup
+turtle.goto(50, 50)
+turtle.pendown()
+turtle.circle(100)
+turtle.penup()
+turtle.setheading(90)
+turtle.forward(150)
+turtle.setheading(180)
+turtle.forward (33)
+turtle.pendown()
+turtle.circle(10)
+turtle.penup()
+turtle.setheading(270)
+turtle.moveforward(10)
+turtle.setheading(0)
+turtle.forward(66)
+turtle.pendown()
+turtle.circle(10)
+turtle.penup()
+turtle.setheading(70)
+turtle.forward(20)
+turtle.pendown
+turtle.arc(270, 180)
+"
+Hippowdon,D,C,F,10,21L,Participated in lab activities,"Not super communicative, but not silent",20.1,400.15,16.25117109,-4,23,40,['Computer Science'],Freshman,Woman,True,Delaware,True,F,White,White/Asian,makeRectangle,border,View,moveRight,Glide,Action,Repeat,When,State,characters,Characters,,"Yes, but only small simple games","I think that keeping code organized has been difficult, although that problem is not specific to python. I get confused with indentation and keeping track of variables sometimes. ","import turtle
+turtle.mainloop()
+turtle.forward(50)
+","goto (-100, 100)
+curveleft(180)
+pickuppen
+goto(50,25)
+droppen
+pickuppen
+goto(50, 25)
+droppen
+pickuppen
+goto(-75, 25)
+curveleft(50)
+
+
+"
+Beartic,A,A,A,10,21L,"Super engaged, really tried",They stayed in touch well,94.1,816.79,24.0967866,-7,32,2,['Other Engineering'],Freshman,Man,True,"Delaware, USA",True,A,White,White/Asian,def draw_rect,window,Scene,moving,Movement,Action,Iteration,Register,Status,sprites,Sprites,,"Yes, but only small simple games","The complete lack of semicolons.
+
+ 
+
+I'm joking of course, but my experience with programming was largely with java and c#, so a lot of the confusion I found was in transitioning from something a little closer (but not too much closer) to computer language to python which feels a little more human. Most people seem to find this makes python easier to use and understand which I understand, but honestly I find the more explicitly computer-like language of java easier to understand.","
+gameObject.transform(800, 0, 2)
+#'transform' is a method that moves the character 
+#with the parameters of x motion, y motion, and 
+#the time it takes to move there","draw.color(black) #Makes the 'pen' black
+
+draw.ellipse(0, 0, 100, 100) #Head
+'''The imaginary ""draw"" function from the Graphics library 
+   has an ellipse function within in it which takes x and y 
+   coords, height, and width. It starts in the center of
+   the shape.'''
+
+draw.ellipse(-50, 50, 10, 10) #Left eye
+draw.ellipse(50, 50, 10, 10) #Right eye
+
+draw.ellipse(0, 0, 50, 76) #Oval shaped smile
+
+draw.color(white) #Makes the pen white to cover the top half of the oval smile
+draw.rect(-38, 25, 25, 38) 
+'''Draws a rectangle that covers the top half of the oval smile. The 
+   rect function works the same way as the ellipse function, but it 
+   starts in the top left corner.'''"
+Carbink,F,F,F,10,20L,Regularly skipped lab or was disengaged,Very quiet sometimes,3.0,516.46,8.77751639,35,11,23,['Computer Science'],Freshman,Man,False,China,False,F,Asian,White/Asian,,,,,,,,,,,,,,,,
+Lombre,F,D,F,11,31L,Completely ghosted me/lab,Ghosted me,11.2,488.01,5.8411817379999995,15,13,29,['Other college not listed'],Freshman,Man,False,MD,False,F,Asian,White/Asian,,,,,,,,,,,,,,,,
+Corsola,A,A,A,12,40L,Participated in lab activities,"Not super communicative, but not silent",72.8,799.43,20.30877006,-4,36,5,['Computer Science'],Freshman,Man,True,Maryland,True,A,"White,Asian",White/Asian,draw_rectangle(),bounds,Scene,move_left,Movement,Animation,Step,When,State,characters,Characters,,"Yes, but only small simple games","Dictionary referencing was where I learned a lot, I thought it was interesting that dictionary elements can be accessed so easily. It also clarified a lot of misconceptions I had and taught me how to use python3, instead of python2.","for i in range(n):
+    move_right()
+","def draw_forward(amount: int, ch: str) -> None:
+    the_str = """"
+    for i in range(amount):
+        the_str+=ch
+    print(the_str)
+
+def draw_outline_horizontal(amount: int, ch: str) -> None:
+    the_str = ch 
+    for i in range(len(ch) * amount - len(ch)%amount-1):
+        the_str+="" ""
+    the_str += ch 
+    print(the_str)
+    
+#def draw_down(amount: int, ch: str) -> None:
+#    the_str = """"
+#    for i in range(amount):
+#        the_str+='\n' + ch
+#    print(the_str)
+
+def draw_rectangle(amount: int, ch: str) -> None:
+    draw_forward(amount, ch)
+    for h in range(amount-2):
+        draw_outline_horizontal(amount,ch)
+    draw_forward(amount, ch) 
+    
+draw_rectangle(8, ""👍"")"
+Larvesta,A-,F,A-,12,40L,Participated in lab activities,They stayed in touch well,14.8,716.03,24.36813771,6,34,6,['Computer Science'],Freshman,Woman,False,United States,True,A-,Asian,White/Asian,create_shape,frame,Screen,sliding,Animation,Action,Repeat,Register,Moment,figures,Characters,,No.,Python taught me a lot of new things about programming in general. It is really interesting because I learn something different everyday. The most surprising thing I find is we can be so creative using Python. ,,"print(                                    
+                 ""                        ""                        ""
+             ""        ""              ""          ""           ""           ""
+          ""              ""     ""                   ""     ""                   ""
+        ""                    ""                        ""                       
+      ""                        ""                         ""
+    ""                           ""                          ""
+)"
+Swadloon,D,D,D,12,41L,Completely ghosted me/lab,Very quiet sometimes,11.8,578.25,4.643346335,18,27,14,"['Computer Science,University Studies/Undecided/Undeclared']",Freshman,Man,False,Delaware,False,D,Black or African Am.,PoC,,,,,,,,,,,,,,,,
+Aromatisse,A,A,A,12,40L,Participated in lab activities,"Not super communicative, but not silent",89.3,802.49,47.80344662,-6,30,2,['Computer Science'],Freshman,Man,False,Newark or China,False,A,Asian,White/Asian,square,frog,Screen,walk,Movement,Action,Repeat,Connect,Status,item,Objects,,"Yes, but only small simple games","For loops, the for loops inside for loops confused me.",,"import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(3)
+
+def small(x:int,y:int)-> int:
+    turtle.penup()
+    turtle.goto(x,y)
+    turtle.pendown()
+    turtle.left(90)
+    turtle.forward(50)
+    turtle.right(90)
+    turtle.forward(50)
+    turtle.right(90)
+    turtle.forward(50)
+    turtle.right(90)
+    turtle.forward(50)
+   
+
+    turtle.penup()
+    turtle.setheading(0)
+    turtle.forward(30)
+    turtle.pendown()
+    return x + 80
+
+x=-300
+y=0
+small(x,y)"
+Uxie,A,C,A,12,40L,"Super engaged, really tried",They stayed in touch well,35.5,794.04,9.345788209,10,33,3,['Computer Science'],Freshman,Man,True,"United States, Maryland",True,A,White,White/Asian,draw_rectangle,border,Scene,translate,Glide,Animation,Step,When,State,Sprites,Sprites,,"Yes, but only small simple games","How intuitive it was, for sure, but also, for loops. They're still not something I'd... Expect, if that makes any sense.","move(frog,10,0)
+move(frog,10,0)
+move(frog,10,0)
+move(frog,10,0)
+move(frog,10,0)
+move(frog,10,0)
+move(frog,10,0)
+move(frog,10,0)
+move(frog,10,0)
+move(frog,10,0)
+","import circle_lib
+
+#Draws smile at coords -300,200 of size 10
+circle_lib.drawarc(-300,200,10)
+#Draws Eyes at coords 100,250 of size 5 and at 100,150 of size 5
+circle_lib.drawcircle(100,250,5)
+circle_lib.drawcircle(100,150,5)
+#Draws Top of Smile at coords -300,200 of size 10
+circle_lib.drawline(-300,200,10)"
+Gorebyss,A,A-,A,12,41L,Participated in lab activities,Very quiet sometimes,75.7,778.79,20.80427575,-1,35,1,['University Studies/Undecided/Undeclared'],Freshman,Man,True,Delaware,True,A,"White,Asian",White/Asian,draw_rectangle,border,Scene,sliding,Glide,Action,Update,When,Status,sprites,Sprites,,No.,"How deep and complex some things can be, like lists inside of lists or dictionaries and having to pull certain things out of them.  Also the capabilities of what you can accomplish with programming.","frog_glide(100)
+","def smiley():
+    turtle.penup()
+    turtle.goto(100,100)
+    turtle.pendown()
+    turtle.circle(4)
+    turtle.penup()
+    turtle.goto(0,100)
+    turtle.pendown()
+    turle.circle(4)
+    
+    
+"
+Blaziken,C,A,C,12,40L,Regularly skipped lab or was disengaged,Very quiet sometimes,41.4,632.72,21.85864393,-4,35,12,['University Studies/Undecided/Undeclared'],Freshman,Woman,True,Delaware,False,C,"Hispanic\, Latino\, or Spanish origin",PoC,,,,,,,,,,,,,,,,"set_color(253, 252, 131) #set color to yellow with rgb #drawing the circle of the smiley face based on coordinates
+draw.circle50(0, 0) #50 would represent the radius of which it would draw the circle
+fill.circle50(0, 0) 
+pen.pickup
+set_color(0, 0, 0) #different color for eyes
+pen.goto(-20, 10)
+pen.putdown
+draw.circle5(-20, 25)
+pen.pickup
+pen.goto(20, 25)
+pen.putdown
+draw.circle5(20, 25)
+pen.pickup 
+pen.goto(12.5, -25)
+pen.setheading(0)
+draw.halfcircle25(90) #will draw which half of the circle based on the 90 positioning of the pen
+
+
+"
+Ledyba,A,A,A,11,30L,Participated in lab activities,Very quiet sometimes,74.0,816.86,31.38605315,-5,30,2,['Computer Science'],Freshman,Man,True,Delaware,True,A,White,White/Asian,create_rectangle,Border,Screen,Animation,Animation,Animation,Update,Register,State,Sprites,Sprites,,"Yes, but only small simple games",It surprised me just how similar it was to java.  I thought different languages were completely different from each other.,,"#Assume drawing grid is 100x100,
+
+#toggleon/toggleoff methods stop program from drawing while moving
+#(toggleon draws, toggleoff doesnt draw) 
+graphics.toggleoff
+
+#move method moves cursor to input coordinates 
+graphics.move(50, 50)
+
+#circle method draws circle with input diameter 
+graphics.toggleon()
+graphics.circle(50)
+graphics.toggleoff()
+graphics.move(40, 75)
+graaphics.toggleon()
+graphics.circle(5)
+graphics.toggleoff()
+graphics.move(60, 75)
+graphics.toggleon()
+graphics.circle(5)
+graphics.toggleoff
+graphics.move(40, 40)
+graphics.toggleon
+graphics.move(50, 35)
+graphics.move(60, 40)
+
+
+"
+Staravia,A,A-,A,10,20L,Participated in lab activities,Very quiet sometimes,31.4,797.4,8.16782541,2,21,4,['Computer Science'],Freshman,Woman,True,Delaware,True,A,Asian,White/Asian,,,,,,,,,,,,,,,,"import graphics_library
+
+def square(x:int, y:int, size:int):
+    '''
+    The function draws a square at a specified size, 
+    with the bottom left corner at the specified coordinates.
+    
+    Args:
+        x (int): The x-coordinate
+        y (int): The y-coordinate
+        size (int): The size or length of the square
+    '''
+    graphics.penup()
+    graphics.goto(x,y)
+    graphics.pendown()
+    #Resets in the default position so the pen is facing up, 
+    #so it starts drawing at the bottom left of the square.
+    graphics.reset()
+    graphics.forward(size)
+    graphics.right(90)
+    graphics.forward(size)
+    graphics.right(90)
+    graphics.forward(size)
+    graphics.right(90)
+    graphics.forward(size)
+    graphics.penup()
+    
+def smile(x:int, y:int, height:int, width:int):
+    '''
+    The function draws a mouth with a specific size, starting at 
+    the top left corner of the mouth at the specified coordinates.
+    
+    Args:
+        x (int): The x-coordinate
+        y (int): The y-coordinate
+        height (int): The height of the mouth
+        width (int): The width of the mouth
+    '''
+    graphics.penup()
+    graphics.goto(x,y)
+    graphics.pendown()
+    graphics.reset()
+    graphics.left(180)
+    graphics.forward(height)
+    graphics.left(90)
+    graphics.forward(width)
+    graphics.left(90)
+    graphics.forward(height)
+    graphics.penup()
+    
+graphics.penwidth(3)
+#face
+square(0, 0, 100)
+#eyes
+square(25, 60, 15)
+square(60, 60, 15)
+#mouth
+smile(25, 40, 15, 50)
+"
+Regigigas,A,A-,A,11,31L,Regularly skipped lab or was disengaged,"Not super communicative, but not silent",69.2,804.76,29.03527634,-1,39,1,['Computer Science'],Freshman,Man,True,At my home in Jersey cause of covid,True,A,White,White/Asian,draw_rectangle,outer border,View,moving to the right,Animation,Animation,Step,Attach,Moment,characters,Characters,,No.,"That python is way easier than java code wise, because java has you constantly writing out entire pieces of code while python can be straight to the point.","character(move_right)
+","from cisc108 import turtle
+
+turtle.circle(100)
+turtle.penup()
+turtle.middle_of_circle()
+turtle.left(180)
+turtle.forward(25)
+turtle.right(90)
+turtle.pendown()
+turtle.forward(25)
+turtle.right(90)
+turtle.penup()
+turtle.forward()
+turtle.right(90)
+turtle.pendown()
+turtle.forward(25)
+turtle.penup() 
+turtle.forward(25)
+turtle.pendown()
+turtle.forward_right(100)
+"
+Diglett,A,A,A,10,20L,"Super engaged, really tried","Not super communicative, but not silent",55.6,802.9,21.01694738,-1,30,4,['Other college not listed'],Sophomore,Woman,False,China,True,A,Asian,White/Asian,rectangle,frame,Screen,movement,Movement,Action,Repeat,When,Status,objects,Characters,,No.,Python is a very useful and interesting language. I learned words and symbols in Python that very different than in English. ,"def frog(x: int, y: int) -> int:
+    frog.penup()
+    frog.goto(x_position, y_position)
+    turtle.pendown()
+    frog.right(90)
+    frog.forward(100)
+    
+    
+","import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(3)
+turtle.left(90)
+turtle.forward(100)
+turtle.right(90)
+turtle.forward(200)
+turtle.right(90)
+turtle.forward(200)
+turtle.right(90)
+turtle.forward(200)
+turtle.right(90)
+turtle.forward(100)
+turtle.penup()
+turtle.goto(-250, 45)
+turtle.pendown()
+turtle.left(90)
+turtle.forward(5)
+turtle.right(90)
+turtle.forward(10)
+turtle.right(90)
+turtle.forward(10)
+turtle.right(90)
+turtle.forward(10)
+turtle.right(90)
+turtle.forward(5)
+turtle.penup()
+turtle.setheading(0)
+turtle.forward(100)
+turtle.pendown()
+turtle.left(90)
+turtle.forward(5)
+turtle.right(90)
+turtle.forward(10)
+turtle.right(90)
+turtle.forward(10)
+turtle.right(90)
+turtle.forward(10)
+turtle.right(90)
+turtle.forward(5)
+turtle.penup()
+turtle.goto(-250, -50)
+turtle.pendown()
+turtle.right(45)
+turtle.forward(10)
+turtle.left(45)
+turtle.forward(20)
+turtle.lefe(45)
+turtle.forward(10)"
+Roselia,A,A,A,11,30L,Participated in lab activities,They stayed in touch well,50.9,797.4,11.49971251,-3,20,1,['Computer Science'],Freshman,Man,True,Delaware,True,A,White,White/Asian,draw_square,border,View,move_forward,Movement,Animation,Iteration,When,State,sprites,Sprites,,"Yes, but only small simple games","In python, I was confused about the act that you don't have to include the type of parameters. It  was interesting that you don't have to, but confused me a little bit.","move_forward(frog,50)
+","graphics.make_circle(0,0,10)
+'''This is my circle making function in the theoretical built-in graphics library. 
+Instead of turtle., I used graphics. as the built-in command, and make_circle as the action.
+The first 2 parameters are the x and y coordinates of the circle's center
+The last parameter is the circle's radius. 
+This would theoretically make a circle with the given radius around the given center point
+'''
+
+graphics.make_circle(-4,4,2)
+'''This makes the eyeball on the left side.
+The eyeball is a circle witht a radius of 2 centered around the point (-4,4)
+This is in the upper left corner of the face so it actually makes the eye.
+'''
+
+graphics.make_circle(4,4,2)
+''' This makes the eyeball on the left side.
+The eyeball is a circle witht a radius of 2 centered around the point (4,4)
+This is in the upper right corner of the face so it completes the set of eyes.
+'''
+
+graphics.make_semicircle_down(0,-2,3)
+''' This is my function for making a semi circle facing down (curved downwards)
+Theoretically, there would be more functions available to make it face different directions, ex. semicircle_left
+This follows the same paramters as the function for making a regular circle, x,y,radius
+This makes the smile in the smiley face
+It is in the center of the lower half of the main circle and curves down like a smiling mouth, so it actually makes the smile.
+"
+Klefki,A,A,A,10,21L,Participated in lab activities,"Not super communicative, but not silent",81.7,778.32,21.19889471,-3,34,2,['Other Arts and Sciences'],Sophomore,Man,True,Delaware,True,A,White,White/Asian,generate_rectangle,border,View,floating,Glide,Movement,Iteration,Attach,Status,characters,Characters,,No.,It was easier to learn than I thought. ,"move_right(2)
+","goto(150,150)
+pendown()
+circle(radius50)
+penup()
+goto(175,175)
+pendown()
+circle(radius5)
+penup()
+goto(125,175)
+pendown()
+circle(radius5)
+penup()
+goto(150,110)
+parabola(20x**2)
+"
+Honedge,A,A,A,12,40L,Participated in lab activities,Very quiet sometimes,82.2,802.05,10.45703895,-2,28,1,['Computer Science'],Freshman,Man,True,Virginia,True,A,White,White/Asian,draw_rectangle,frame,Screen,moving,Movement,Action,Step,Attach,State,characters,Objects,,"Yes, but only small simple games","Putting colons at the start of a loop after you call it was interesting, but I got used to it easily",,"art.draw_circle(0, 0, 1)
+art.draw_circle(0.5, 0.5, 0.1)
+art.draw_circle(-0.5, 0.5, 0.1)
+art.draw_arc(-0.5, 0, 0, -0.5, 0.5, 0)
+"
+Purugly,F,D,F,10,20L,Completely ghosted me/lab,Ghosted me,8.9,327.21,5.976189057000001,-1,12,61,['Other Engineering'],Junior,Man,False,USA,False,F,"White,Hispanic\, Latino\, or Spanish origin",PoC,,,,,,,,,,,,,,,,
+Barbaracle,L,F,F,10,21L,Regularly skipped lab or was disengaged,Ghosted me,10.7,317.58,4.629219492,-1,14,54,"['Computer Science,University Studies/Undecided/Undeclared']",Junior,Man,True,DE,True,F,White,White/Asian,,,,,,,,,,,,,,,,
+Joltik,F,F,F,10,20L,Completely ghosted me/lab,Ghosted me,1.2,242.84,1.4929965669999998,10,9,65,['Other college not listed'],Junior,Man,True,new jersey,True,F,Asian,White/Asian,make_rectangle,border,Scene,move_right,Movement,Animation,Iteration,When,Status,objects,Objects,,"Yes, but only small simple games","One thing python has surprised me in is the simplicity, in other languages I have learned you need to use a lot of specific syntax like declaring a variables type when declaring it, but in python they make it a lot more user friendly.",,
+Marowak,C,C,C,10,21L,Participated in lab activities,"Not super communicative, but not silent",24.3,616.15,9.616454426,7,26,10,['Computer Science'],Freshman,Man,True,Delaware,True,C,White,White/Asian,,,,,,,,,,,,,,,,"turtle.goto(-50,0)
+#images would have a value associated with them, an eye takes the value 125 (made-up value)
+turtle.drawimage(125)
+turtle.goto(50,0)
+turtle.drawimage(125)
+turtle.goto(0,-10)
+#428 is nose
+turtle.drawimage(428)
+turtle.goto(0,-30)
+#1560 is smile mouth
+turtle.drawimage(1560)
+
+"
+Patrat,A-,A,A-,11,31L,Participated in lab activities,"Not super communicative, but not silent",66.3,747.24,15.83421604,-4,22,10,['University Studies/Undecided/Undeclared'],Junior,Man,True,"Delaware, US",False,A-,White,White/Asian,,,,,,,,,,,,,,,,"
+draw.origin(0,0)
+# (x,y) coordinates
+draw.circle(2,2)
+# Height, width
+
+draw.point(.5,.5)
+draw.point(-.5,.5)
+#(x,y) coordinates
+
+draw.downward_curve(-.75,.75,-.25,-.5)
+#(x1, x2, y1, y2)"
+Audino,A,A,A,11,30L,"Super engaged, really tried","Not super communicative, but not silent",91.7,825.27,32.8386333,-5,42,1,['Computer Science'],Freshman,Woman,True,Massachusetts,True,A,White,White/Asian,draw_rectangle,yellow_border,View,slide_right,Glide,Animation,Iteration,When,Status,sceneic_elements,Sprites,,"Yes, but only small simple games",the main thing that confused me this semester were some of the actions involving for loops and nested lists or dictionaries. they can still give a little bit of trouble now and again but i feel as though i have a much firmer grasp on them because of the monster mash project. ,"'''the frog sprite is the image of the frog that moves across the screen
+.glide is a made up function that takes the direction, length and time 
+then applys that movement to the sprite the command follows'''
+frog_sprite.glide(right, 1000 px, 3 sec)","# advanced_graphics. is the tool that carries out the commands specified below
+# draw circle is a function that draws a circle, you need to input a radius in the parenthese
+advanced_graphics.draw_circle(100)
+# go_to is a function that will make the drawing tool go to a specific place on the canvas with specified x and y coordinates
+advanced_graphics.go_to(-25, -25)
+# draw arc is a function that will draw an arc, you need to imput the length of the arc and how many degreese you want it to go around
+advanced_graphics.draw_arc(25, 60)
+advanced_graphics.go_to(-25, 15)
+#draw_oval is a function that will draw an oval, you need to specify the width and height you want for your oval
+advanced_graphics.draw_oval(10, 25)
+advanced_graphics.go_to(25, 15)
+advanced_graphics.draw_oval(10,25)"
+Seel,A,A-,A,11,31L,Participated in lab activities,Very quiet sometimes,52.1,788.85,10.84224838,-1,25,4,['Other Arts and Sciences'],Sophomore,Man,False,US,False,A,Asian,White/Asian,cuboid,marginal area,World,Horizontal displacement（X move forward?),Movement,Action,Repeat,On,Moment,Characters,Objects,,No.,"We often need a different way of thinking about how to program. And that's a way of thinking that I'm not very good at, but it's interesting",,"import turtle
+turtle.reset()
+turtle.speed(20)
+turtle.penup()
+turtle.goto(-100, 0)
+turtle.pendown()
+turtle.speed(3)
+
+turtle.left(135)
+turtle.forward(160)
+turtle.right(45)
+turtle.forward(50)
+turtle.right(45)
+turtle.forward(40)
+turtle.right(45)
+turtle.forward(50)
+turtle.right(45)
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(50)
+turtle.right(45)
+turtle.forward(50)
+turtle.right(45)
+turtle.forward(40)
+turtle.right(45)
+turtle.forward(50)
+turtle.right(45)
+turtle.forward(160)"
+Pawniard,D,F,F,12,40L,Participated in lab activities,Very quiet sometimes,15.4,547.5,8.474312142,14,25,22,['Computer Science'],Freshman,Man,True,Delaware,True,D,"White,Hispanic\, Latino\, or Spanish origin",PoC,make_rectangle,border,Screen,walking,Glide,Action,Repeat,On,Status,objects,Objects,,"Yes, but only small simple games",One thing that confused me was the difference in writing in Python compared to writing in Java or Javascript. It was just a learning curve ,,"graphic_turtle.circle(dia: 50)
+graphics_turtle.penup()
+graphic_turtle.center()
+graphic_turtle.moveleft(25)
+graphic_turtle.moveright(12.5)
+graphic_turtle.pendown()
+graphic_turtle.circle(dia:5)
+graphics_turtle.penup()
+graphics_turtle.moveright(37.5)
+graphics_turtle.moveleft(12.5)
+graphics_turtle.pendown()
+graphics_turtle.circle(dia:5)
+graphics_turtle.penup()
+graphics_turtle.center()
+graphics_turtle.down(12.5)
+graphics_turtle.upsidedownparenthesis(45)
+
+
+"
+Ho-Oh,C,A-,C,11,31L,Regularly skipped lab or was disengaged,Very quiet sometimes,26.0,561.99,38.97876452,-4,40,6,['Computer Science'],Junior,Man,True,DE,True,D,Black or African Am.,PoC,,,,,,,,,,,,,,,,"import turtle 
+#turtle object
+pen = turtle.turtle() 
+# function for creation of eye 
+def eye(col, rad): 
+    pen.down() 
+    pen.fillcolor(col) 
+    pen.begin_fill() 
+    pen.circle(rad) 
+    pen.end_fill() 
+    pen.up() 
+  
+  
+# draw face 
+pen.fillcolor('yellow') 
+pen.begin_fill() 
+pen.circle(100) 
+pen.end_fill() 
+pen.up() 
+  
+# draw eyes 
+pen.goto(-40, 120) 
+eye('white', 15) 
+pen.goto(-37, 125) 
+eye('black', 5) 
+pen.goto(40, 120) 
+eye('white', 15) 
+pen.goto(40, 125) 
+eye('black', 5) 
+  
+# draw nose 
+pen.goto(0, 75) 
+eye('black', 8) 
+  
+# draw mouth 
+pen.goto(-40, 85) 
+pen.down() 
+pen.right(90) 
+pen.circle(40, 180) 
+pen.up() "
+Suicune,A-,D,A-,11,30L,Regularly skipped lab or was disengaged,Very quiet sometimes,6.5,716.77,5.130946069,26,18,7,"['Other Arts and Sciences,Other college not listed']",Junior,Woman,True,Delaware,True,A-,White,White/Asian,,,,,,,,,,,,,,,,
+Hoothoot,A,A-,A,11,30L,Regularly skipped lab or was disengaged,"Not super communicative, but not silent",79.3,857.5,24.93752416,-1,34,0,['Other Arts and Sciences'],Freshman,Woman,True,Sri Lanka,True,A,Asian,White/Asian,create_rectangle,the game border,Screen,sliding,Glide,Action,Iteration,Register,Status,the subjects,Sprites,,No.,Dictionaries and records felt a bit confusing at first but after a while they became easier to handle and understand.,,"import Graphics
+#outer circle a.k.a the face
+#radius, horizontal position, vertical position respectively are parameters
+graphics.pendown()
+graphics.circle(100, 0, 0)
+#two inner circles a.k.a the eyes
+graphic.circle(20,-50,50)
+graphic.circle(20,50,50)
+#curve line a.k.a smile
+#horizontal start position and end position are parameters
+#No need to define verticle position because 0 is default position
+graphic.curve(-50,50)
+graphics.penup()
+
+
+
+
+
+"
+Swablu,A,A,A,10,21L,"Super engaged, really tried",They stayed in touch well,59.8,805.7,19.50268804,0,33,1,['Other Arts and Sciences'],Sophomore,Man,True,USA,True,A,White,White/Asian,draw_rectangle,background or border,View,shifting,Glide,Movement,Iteration,When,Status,foreground,Characters,,"Yes, but only small simple games","One thing in the python language that confused me a bit at first (and this may be applicable to other languages as well, but I am not sure) was the idea of unit testing, which I had not done before this course. I was confused how when we would program, simply using using the ""assert_equal"" function to verify that our function calls were producing the right output could be done. I just did not understand how that was able to be done at first, but then I came to the assumption that it worked because the assert_equal function was embedded into the language and therefore the program was able to recognize that and carry through the correct process. ","when click(right_arrow):
+    frog.right(20)
+    
+","'''
+VERY rough estimates on placement of 
+each component of the smiley face as 
+well as the proper size of each component.
+'''
+turtle.penup()
+turtle.goto(100, 100)
+def draw_smile():
+    turtle.goto(150, 150)
+    turtle.pendown()
+    turtle.drawsemicircle
+    turtle.penup()
+def draw_eye_1():
+    turtle.goto(150, 300)
+    turtle.pendown()
+    turtle.drawdot()
+    turtle.penup()
+def draw_eye_2():
+    turtle.goto(300,300)
+    turtle.pendown()
+    turtle.drawdot()
+    turtle.penup()
+def draw_circle(radius: int): 
+    turtle.goto(-100, 100)
+    turtle.pendown()
+    turtle.drawcircle(11)
+    turtle.penup()
+def draw_smiley_face():
+    draw_circle()
+    draw_smile()
+    draw_eye_1()
+    draw_eye_2()
+
+    
+"
+Shedinja,A-,F,A-,10,20L,Regularly skipped lab or was disengaged,Ghosted me,13.0,739.05,7.980215557999999,18,29,5,['Other Arts and Sciences'],Sophomore,Man,True,Idaho,True,A-,White,White/Asian,,,,,,,,,,,,,,,,🙂
+Vanillite,A,A,A,10,20L,"Super engaged, really tried",They stayed in touch well,95.9,793.35,10.18488961,-8,34,3,['Other Arts and Sciences'],Sophomore,Man,False,Pennsylvania,True,A,Asian,White/Asian,draw_rectangle,border,View,constant horizontal translation,Glide,Animation,Iteration,On,State,objects,Objects,,"Yes, but only small simple games","I've done some things with Game Maker in the past, but I never knew about for loops and dictionaries. As I was learning about them, I thought about how they could make networking easier (e.g., keeping track of connected users).","while frog_x < 200:
+    frog_move_x(1)
+    #frog_x would be updated in the function","import turtle
+
+#I used some while functions, which I know from having done some programming before.
+#The result isn't perfect, but some number tweaking should do it.
+
+turtle.penup()
+turtle.goto(0, 360/3.14)
+turtle.setheading(0)
+turtle.pendown()
+
+#draw circle
+angle = 0
+while angle < 360:
+    turtle.forward(2)
+    turtle.right(1)
+    angle += 1
+
+turtle.penup()
+turtle.goto(-20, 50)
+turtle.setheading(270)
+turtle.pendown()
+
+#draw left eye
+turtle.forward(40)
+
+turtle.penup()
+turtle.goto(20, 50)
+turtle.setheading(270)
+turtle.pendown()
+
+#draw_right eye
+turtle.forward(40)
+
+turtle.penup()
+turtle.goto(0, -50)
+turtle.setheading(0)
+turtle.pendown()
+
+#draw right side of mouth
+angle = 0
+while angle < 20:
+    turtle.forward(1)
+    turtle.left(1)
+    angle += 1
+    
+turtle.penup()
+turtle.goto(0, -50)
+turtle.setheading(180)
+turtle.pendown()
+
+#draw left side of mouth
+angle = 0
+while angle < 20:
+    turtle.forward(1)
+    turtle.right(1)
+    angle += 1"
+Milotic,D,F,F,10,20L,Regularly skipped lab or was disengaged,Very quiet sometimes,3.6,485.28,8.732548813,8,27,18,['Math'],Junior,Man,True,Delaware,True,F,White,White/Asian,draw_rectangle,Border,Scene,move.right,Glide,Movement,Iteration,When,Status,objects,Objects,,No.,,,
+Smoochum,A,C,A,10,21L,Participated in lab activities,They stayed in touch well,40.8,794.76,27.96038344,2,39,3,['Computer Science'],Freshman,Man,True,Delaware,True,A,"White,Asian",White/Asian,make_box,Borders,View,Moving a sprite,Movement,Animation,Repeat,When,State,Sprites,Sprites,,"Yes, but only small simple games","One thing in python that confused me was the Nested code, because I know you can right code inside of code but I did not know that you had to have a specific call function for the code within the code for it to work. I thought you could call the main function and it would automatically know the parameters and go through all the code based on what you explained in the parameters.","move_frog_right(90)
+","draw.circle(100)
+pen.pickup
+move.to(20, 80)
+pen.pendown
+draw.circle(20)
+pen.pickup
+move.to(80, 80)
+pen.pendown
+draw.circle(20)
+pen.pickup
+move.to(20, 20)
+pen.pendown
+draw.linex(20, 80)
+pen.pickup
+move.to(20, 10)
+pen.pendown 
+draw.linex(20, 80)
+pen.pickup
+draw.liney(20, 10)
+pen.pickup
+move.to(20, 20)
+pen.pendown
+draw.liney(20, 10)"
+Persian,C,A-,C,11,30L,Regularly skipped lab or was disengaged,Very quiet sometimes,21.3,627.55,16.10471272,-4,38,12,['Other Arts and Sciences'],Junior,Man,True,DE,False,C,White,White/Asian,,,,,,,,,,,,,,,,"import turtle
+
+turtle.mainloop()
+turtle.pencolor('blue')
+turtle.setx(100)
+turtle.sety(100)
+turtle.setheading(270)
+turtle.pendown()
+turtle.goto(20, 40)
+turtle.goto(0, 20)
+turtle.goto(0, 0)
+"
+Poochyena,A-,C,A-,10,20L,Participated in lab activities,They stayed in touch well,26.6,713.95,14.08102708,-1,30,7,['University Studies/Undecided/Undeclared'],Freshman,Man,False,United States,False,A-,Asian,White/Asian,a_rectangle,A border,Scene,walk,Movement,Action,Repeat,Connect,Moment,figure,Objects,,No.,"I learned some basic information about Python. The thing that confused me is that sometimes when I write if statement, the assumption that the order is different will also lead to different results",,"import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(3)
+turtle.circle(30)
+
+turtle.penup()
+turtle.goto(0,0)
+turtle.pendown()
+turtle.circle(100)
+turtle.penup()
+turtle.goto(-50,100)
+turtle.pendown()
+turtle.circle(25)
+turtle.penup()
+turtle.goto(50,100)
+turtle.pendown()
+turtle.circle(25)
+turtle.penup()
+turtle.goto(0,0)
+turtle.pendown()
+turtle.circle(25)"
+Illumise,C,C,C,12,40L,Participated in lab activities,"Not super communicative, but not silent",25.4,699.06,7.78735394,1,26,11,['Computer Science'],Freshman,Man,True,New Jersey,True,A-,White,White/Asian,,,,,,,,,,,,,,,,"circle(25)
+# the number in the parenthesis would be the radius of the circle
+penup()
+goto(-15, 30)
+pendown()
+circle(10)
+penup()
+setx(15)
+pendown()
+circle(10)
+penup()
+goto(-15, 20)
+pendown()
+goto(0, 5)
+goto(15, 20)"
+Horsea,C,A-,C,12,41L,Participated in lab activities,"Not super communicative, but not silent",23.7,632.93,17.31257361,0,26,13,['University Studies/Undecided/Undeclared'],Freshman,Man,True,Delaware,True,C,"White,Black or African Am.,Asian",PoC,,,,,,,,,,,,,,,,"from cisc108 import assert_equal #""idk if i even do this""#
+#plot_point consumes to integers (x,y) 
+#and plots a point on that coordinate
+#plot_point (x = int , y = int) 
+#can assign number to each point 
+plot_point1(3,3)
+plot_point2(-3,3)
+plot_point3(-3,-1)
+plot_point4(-2,-2)
+plot_point5(0,-3)
+plot_point6(2,-2)
+plot_point7(3,-3)
+#make_connect is a code that connects coordinates together
+#make_connect consumes a list of coordinates
+#the code then determines the best path to connect them 
+#connects from left to right
+make_connect [plot_point3,plot_point4,plot_point5,plot_point6,plot_point7] "
+Drapion,A-,A-,A-,11,30L,Participated in lab activities,"Not super communicative, but not silent",48.5,798.81,9.46042652,-1,28,2,['Computer Science'],Freshman,Man,True,DE,True,A,White,White/Asian,,,,,,,,,,,,,,,,"import turtle
+turtle.pendown(-25,100)
+turtle.penup()
+turtle.pendown(25,100)
+turtle.penup()
+turtle.pendown(50,0)
+turtle.forward(5)
+turtle.right(5)
+turtle.forward(5)
+turtle.right(5)
+turtle.forward(5)
+turtle.right(5)
+turtle.forward(5)
+turtle.right(5)
+turtle.forward(5)
+turtle.right(5)
+turtle.forward(5)
+turtle.right(5)
+turtle.forward(5)
+turtle.right(5)
+turtle.forward(5)
+turtle.right(5)"
+Roggenrola,A,A,A,10,21L,"Super engaged, really tried",They stayed in touch well,89.9,833.36,13.58884875,-4,32,1,['University Studies/Undecided/Undeclared'],Sophomore,Man,True,Pennsylvania,False,A,White,White/Asian,create_rectangle,border,View,move_wizard_forward,Movement,Action,Step,When,State,game pieces,Objects,,No.,"Honestly, I was mostly surprised by how easy I found it to learn. I tried learning Javascript with some website back in early high school and really struggled before eventually calling it quits, so I expected this course to be of similar difficulty to me. I think it's cool how much you can do with python (and probably coding in general), and I know we've only just scratched the surface in this course.","window_is_open=True
+while window_is_open:
+    move_object_right(frog, 50)
+    set_object_location(frog, 0)
+    window_is_open=is_window_still_open(window_state)
+","turtle.setheading(270)
+turtle.pendown()
+turtle.forward(20)
+turtle.penup()
+turtle.forward(20)
+turtle.left(45)
+turtle.pendown()
+turtle.forward(20)
+turtle.left(45)
+turtle.forward(20)
+turtle.left(45)
+turtle.forward(20)
+turtle.penup()
+turtle.setheading(90)
+turtle.forward(20)
+turtle.pendown()
+turtle.forward(20)
+"
+Cacnea,A-,C,A-,10,21L,Participated in lab activities,"Not super communicative, but not silent",33.7,749.4,29.25505225,-2,30,5,['Computer Science'],Junior,Man,True,United States,True,A-,White,White/Asian,turtle,border,Scene,move,Movement,Action,Repeat,Connect,State,element,Objects,,"Yes, but only small simple games",The complexity of problem solving and how easy it can really be to identify problems,,"import turtle
+
+turtle.pendown()
+turtle.circle(100)
+turtle.left(90)
+turtle.penup()
+turtle.foward(60)
+turtle.left(20)
+turtle.pendown()
+turtle.circle(15)
+turtle.penup()
+turtle.forward(70)
+turtle.pendown()
+turtle.circle(15)
+turtle.penup()
+turtle.right(90)
+turtle.forward(60)
+turtle.pendown()
+turtle.circle(80, 180)
+"
+Remoraid,A,A,A,10,21L,Participated in lab activities,"Not super communicative, but not silent",87.0,827.27,13.34655369,-4,30,1,['Computer Science'],Freshman,Man,True,Maryland,True,A,White,White/Asian,create_rectangle,border,View,walking,Movement,Action,Repeat,When,State,objects,Objects,,No.,"Something that surprised me was how similar yet different Python and Java are since I originally learned a bit of Java. Throughout the course, I've seen that both languages can do similar things, but those things are different in how you have to do them.","frog = avatar1
+frog.walk(20)
+","graphic_circle(0,0, 50)
+graphic_oval(12,12, 10)
+graphic_oval(-12,12, 10)
+graphic_down_facing_arc(-12, -12, 12, -12)
+"
+Quilava,A-,A-,A-,12,40L,Participated in lab activities,"Not super communicative, but not silent",23.1,731.15,14.65207153,3,35,12,['Computer Science'],Freshman,Woman,True,New Jersey,True,A-,White,White/Asian,draw_rectangle,visuals,Screen,sliding,Glide,Animation,Step,When,Moment,characters,Characters,,No.,This semester I have learned the way the Python language works and how to correctly write it so the program executes. One thing that confused me was how there is a kind of lack of structure in the language. The only other language I've learned is Visual Basic which I thought was very structured with a lot of rules. These rules made it easier for me to write code out. Python has less and not as strict rules which leaves a lot of room for me to confuse myself. ,"for frog in screen:
+    if position = 0:
+        move = position + 4
+return frog 
+","import graphics 
+
+graphics.speed(10)
+graphics.penup()
+graphics.goto(-100,0)
+graphics.pendown()
+
+graphics.circle(180)
+graphics.penup()
+graphics.goto(-65,30)
+graphics.pendown()
+graphics.circle(5)
+graphics.penup()
+graphics.goto(-30,30)
+graphics.circle(5)
+"
+Growlithe,D,F,D,12,40L,Regularly skipped lab or was disengaged,Very quiet sometimes,10.1,570.44,7.044128361,13,10,18,"['University Studies/Undecided/Undeclared,Other Engineering']",Freshman,Man,False,China,True,D,Asian,White/Asian,,,,,,,,,,,,,,,,"import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-190, 0)
+turtle.pendown()
+turtle.speed(3)
+
+turtle.left(100)
+turtle.forward(50)
+turtle.right(100)
+turtle.forward(50)
+turtle.backward(50)
+turtle.right(50)
+turtle.forward(50)
+turtle.left(200)
+turtle.right(100)
+
+turtle.mainloop()"
+Altaria,A,A,A,80,80L,"Super engaged, really tried",They stayed in touch well,75.1,822.5,11.08281291,-4,21,2,['Computer Science'],Freshman,Man,True,Maryland,True,A,White,White/Asian,,,,,,,,,,,,,,,,"from graphics import arc
+from graphics import circle
+from graphics import canvas
+
+canvas(200, 200) # Starts a canvas to draw on that goes from (-200, -200) to (200, 200)
+circle(0, 0, 100, 5, 'black', 'yellow') # Draws a black circle with thickness 5 and radius 100 at (0, 0) . It is filled yellow.
+arc([-50, -20, 0, -40, 50, -20], 5, 'black') # Draws a black arc with thickness 5 that fits the points (-50, -20), (0, -40), and (50, -20).
+circle(-30, 30, 4, 5, 'black', 'black') # Draws a black circle with thickness 5 and radius 4 at (-30, 30).
+circle(30, 30, 4, 5, 'black', 'black') # Draws a black circle with thickness 5 and radius 4 at (30, 30).
+print(""I am Mr. Smiley :)"")"
+Slurpuff,A,A,A,11,31L,"Super engaged, really tried",They stayed in touch well,52.7,812.46,23.03643064,-4,41,2,['Other college not listed'],Freshman,Man,True,Maryland,True,A,White,White/Asian,black_rectangle,yellow_game_border,View,sliding,Glide,Animation,Iteration,When,Moment,Characters,Characters,,No.,One thing that surprised me was how a small mistake in Python can have disastrous results. There have been many times that a small syntax error such as the wrong amounts of indentation can make a whole function work incorrectly.,,"from cisc108 import assert_equal
+pi = 3.1416
+def function_of_x(slope: int, x_value: int, exponent: int, y_intercept: int)-> int
+    #this function is y=m(x)+b)
+    y = slope * (x_value ** exponent) + y_intercept
+    return y
+def plot_face_points(x: int, h: int, v: int)-> [int]
+    #(x – h)2 + (y – v)2
+    y = f_of_x(pi, x, 2, 0)
+    return [(x-h)**2, (y-v)**2]
+def plot_eye_points(x: int)-> [int]
+    ##(x – h)2 + (y – v)2 
+    y = f_of_x(pi, x, 2, 5)
+    return [(x-h)**2, (y-v)**2] 
+def plot_smile_points(x: int)-> [int]
+    y = f_of_x(5, x, 2, -2)
+    return [x, y]
+  
+    
+
+
+"
+Keldeo,A,A,A,11,30L,Participated in lab activities,Very quiet sometimes,85.2,803.51,15.50682002,-4,37,1,['Computer Science'],Freshman,Woman,False,"On campus, Delaware",True,A,"White,Hispanic\, Latino\, or Spanish origin",PoC,rectangle_shape,borders,Scene,go forward,Action,Animation,Iteration,Attach,Status,Objects,Objects,,"Yes, but only small simple games","I've learnt almost everything in Python this semester. The only things I had done before it was using Scratch. I really discovered Python andit fascinates me. I enjoyed it a lot!!!
+
+The thing that has surprised me the most is the facility you can write programs","go_forward(frog)
+
+","graphics.goto(0,0)
+graphics.setheading(0)
+graphics.pendown()
+graphics.circle(30)
+graphics.penup()
+graphics.goto(15,15)
+graphics.pendown()
+graphics.circle(5)
+graphics.penup()
+graphics.goto(45,15)
+graphics.pendown()
+graphics.circle(5)
+graphics.penup()
+graphics.goto(0,-15)
+graphics.pendown()
+graphics.circle(25,180)
+
+"
+Noivern,A,A-,A,80,80L,"Super engaged, really tried",They stayed in touch well,65.7,733.28,14.16587655,-3,30,3,['Computer Science'],Freshman,Man,True,New Jersey,True,A-,White,White/Asian,,,,,,,,,,,,,,,,"graphics.penup()
+graphics.goto(-250,100) #starting point
+graphics.pendown()
+
+""""""
+circle(x,y)
+This method would draw a circle (or oval) from its current starting point, across x
+units to the right and up y/2 units from the midpoint of the x length.
+
+If x and y are equivalent, it will produce a circle.
+""""""
+graphics.circle(500,500)
+graphics.penup()
+graphics.goto(-100,200) #point of left eye.
+
+graphics.pendown()
+graphics.right(90) #faces pen downwards, assuming it is facing the right.
+graphics.forward(100)
+
+graphics.penup()
+graphics.goto(100,200) #point of right eye.
+
+graphics.pendown()
+graphics.right(90) #faces pen downwards, assuming it is facing the right.
+graphics.forward(100)
+
+graphics.penup()
+graphics.goto(-100,-400) #point of smile from left.
+
+""""""
+half_circle(x,y)
+
+This method will draw a half circle (or oval) x units to the right and y units up or down
+(+ for arching down, - for arching up).
+""""""
+graphics.pendown()
+graphics.half_circle(200, -50)
+"
+Chimchar,A,A,A,80,80L,Participated in lab activities,"Not super communicative, but not silent",94.7,801.67,13.52393706,-10,28,1,['Computer Science'],Freshman,Man,True,DE,True,A,"White,Hispanic\, Latino\, or Spanish origin",PoC,,,,,,,,,,,,,,,,"from graphics import draw
+
+face = draw.new.circle(0, 0)
+face.changeradius(100)
+face.print()
+smile = draw.new.arc(0, -30)
+smile.changearclength(60)
+smile.print()
+eye = draw.new.dot(-30, 30)
+eye.changeradius(5)
+eye.print()
+eye = draw.new.dot(30, 30)
+eye.changeradius(5)
+eye.print()"
+Goomy,A-,A-,A-,80,80L,"Super engaged, really tried",They stayed in touch well,68.6,750.77,9.145651771,-4,28,8,['Computer Science'],Freshman,Man,True,Connecticut,True,A-,White,White/Asian,,,,,,,,,,,,,,,,"pen.goto(100, 100)
+pen.circle(150)
+pen.goto(50, 70)
+pen.circle(20)
+pen.goto(100, 70)
+pen.circle(20)
+pen.goto (50, 30)
+pen.arc(50, 100)
+"
+Roserade,A,A,A,80,80L,Participated in lab activities,Very quiet sometimes,85.8,827.5,27.97910141,-4,36,1,['Computer Science'],Freshman,Woman,True,Delaware,True,A,White,White/Asian,,,,,,,,,,,,,,,,"draw_circle(0, 0, 50)
+'''
+draw_circle arguments:
+argument #1: x position of center 
+argument #2: y position of center
+argument #3: circle radius
+'''
+
+draw_oval(-10, 10, 3, 1, 0)
+'''
+draw_oval arguments:
+Argument #1: x position of center of oval
+Argument #2: y position of center of oval
+Argument #3: length of major axis 
+Argument #4: length of minor axis
+Argument #5: Degrees that the oval is rotated counterclockwise. draw_oval defaults to having the minor axis be horizontal and the 
+major axis be vertical when degrees=0, 180, 360...
+'''
+draw_oval(10, 10, 3, 1, 0)
+
+draw_segment(0, 50, 80, 160, 220)
+'''
+draw_segment arguments:
+Argument #1: x position of center of circle
+Argument #2: y position of center of circle
+Argument #3: Radius of circle
+Argument #4: Number of degrees around the circle (assume top = 0 degrees and degrees increase in the counterclockwise direction) that
+the segment begins
+Argument #5: Number of degrees around the circle (assume top = 0 degrees and degrees increase in the counterclockwise direction) that
+the segment ends.
+'''
+
+
+
+"
+Salamence,A,A,A,11,30L,Participated in lab activities,"Not super communicative, but not silent",76.3,861.5,24.68876603,-5,31,0,['University Studies/Undecided/Undeclared'],Freshman,Woman,False,China,False,A,Asian,White/Asian,generate_rectangle,edge,Scene,walking,Movement,Movement,Iteration,When,Status,element,Objects,,No.,,,
+Bergmite,A,A,A,80,80L,Participated in lab activities,They stayed in touch well,53.8,797.9,17.68431166,-1,36,3,['Computer Science'],Freshman,Man,True,DE,False,A,"Asian,American Indian or Alaska Native",PoC,,,,,,,,,,,,,,,,"# This will draw a circle based on the diameter in the ()
+# Also assume that circle is drawn base on x-axis and top portion on y=50
+draw.circle(50)
+
+# This should lift up the pen
+draw.penup()
+
+# This should move to an x, y location based on what's in the ()
+draw.move(-13, 35)
+
+# This should put the pen back down
+draw.pendown()
+
+# This should draw another circle
+draw.circle(1)
+
+# This should lift the pen back up
+draw.penup()
+
+# This should move to a new x, y location
+draw.move(13, 35)
+
+# This should put the pen back down
+draw.pendown()
+
+# This should draw another circle
+draw.circle (1)
+
+# This should lift the pen back up
+draw.penup()
+
+# This should move to a new x, y location
+draw.move(0, 10)
+
+# This should put the pen back down
+draw.pendown()
+
+# This should draw the smiling mouth in the shape of a parabola based on an equation limited by 2 x's
+draw.parabola(x**2/100, -8, 8)"
+Carracosta,A,A-,A,80,80L,"Super engaged, really tried",They stayed in touch well,34.3,778.38,20.17364639,2,31,4,['Other college not listed'],Freshman,Woman,True,DE,True,A,Asian,White/Asian,,,,,,,,,,,,,,,,"""""""Create code that will draw a smiley face. 
+Use methods.
+You need to draw:
+-Circle
+-Two dots
+-Semicircle or 1/2 circumference of a circle
+-Fill and colours
+Set coordinates for placement
+You are operating on a ([-2,2], [-2,2]) 4x4 plane.""""""
+
+import pen
+# or import ""graphics""?
+pen.reset()
+pen.color('black')
+
+# draw circle. integer value is radius
+pen.goto(0,0)
+pen.circle(2)
+# draw 2 dots
+pen.goto(-1,1)
+pen.dot()
+pen.goto(1,1)
+pen.dot()
+# draw smiley, integer value is radius of semicircle 
+pen.goto(0,-1)
+pen.semicircle(1)
+# colour. pen will fill all spots not already drawn in
+pen.color('yellow')
+pen.fill()"
+Virizion,A,A,A,80,80L,Participated in lab activities,They stayed in touch well,93.5,832.5,22.61358961,-5,41,1,['Computer Science'],Freshman,Man,True,Delaware,True,A,Asian,White/Asian,,,,,,,,,,,,,,,,"graphics.straiht(50)
+graphics.right(50)
+graphics.up(50)
+graphics.left(50)
+graphics.straight(50)
+graphics.left(50)
+graphics.down(50)
+"
+Gastrodon,A,A,A,11,30L,"Super engaged, really tried",They stayed in touch well,70.4,827.13,33.20872538,-6,43,1,['Other Engineering'],Freshman,Woman,True,New Jersey,True,A,White,White/Asian,draw_rectangle(),border,Screen,moving,Animation,Action,Iteration,When,Status,elements,Objects,,"Yes, large games","It surprised me how different python was from java. It is much less object oriented and less specific. I really enjoy python, especially what we have been learning lately which is more complex.","frog.glide()
+","def draw_smiley()
+    turtle.penDown()
+    turtle.drawEye()
+    turtle.forward(50)
+    turtle.drawEye()
+    turtle.left(180)
+    turtle.forward(30)
+    turtle.right(90)
+    turtle.forward(50)
+    turtle.drawNose()
+    turtle.left(90)
+    turtle.forward(30)
+    turtle.drawMouth()
+    turtle.penUp()"
+Krokorok,D,F,D,10,21L,Completely ghosted me/lab,Ghosted me,5.9,588.97,8.595920059,31,21,17,['Psychology'],Sophomore,Man,True,Delaware,True,D,Black or African Am.,PoC,,,,,,,,,,,,,,,,
+Houndour,A,C,A,11,30L,Regularly skipped lab or was disengaged,Very quiet sometimes,56.2,806.88,24.22522566,1,27,2,"['Computer Science,Other college not listed']",Sophomore,Man,True,Illinois,True,A,White,White/Asian,make_rectangle,boarder,Screen,move to right,Glide,Action,Repeat,When,State,character,Characters,,"Yes, but only small simple games",I knew most basic python before but I really liked how I was able to dive into it more and learn small intricacies I did not know before,,"print(""-     -"")
+print(""   |   "")
+print(""\_____/"")
+"
+Rampardos,A,A,A,10,20L,"Super engaged, really tried",They stayed in touch well,71.6,781.75,31.2993928,-6,33,3,['Computer Science'],Freshman,Woman,False,Delaware,True,A,White,White/Asian,make_rectangle,border,View,forward,Glide,Action,Repeat,Attach,Status,characters,Characters,,"Yes, but only small simple games","In high school I learned java, so python was similar yet different in a few ways. I found it to be a bit easier to understand in comparison to java, though, and I liked how we directly applied what we learned each week on a project or all the programming codes because they helped me really understand how python works. Nothing surprised me in learning the language, but there were some confusing ideas at times. Some lessons were sometimes just more challenging than others. For instance, I just finished module 11 about files which I found more difficult in comparison to when we learned how to define functions and write for loops.","move_frog_forward(50)
+","''' This code would turn the turtle 1 degree everytime it moves forward 1 space, eventually drawing a giant cirle. I'm
+not sure how to make a loop for this, but I would somehow make it repeat until the turtle returns back to it's original position.'''
+turtle.right(1)
+turtle.forward(1)
+
+'''This code draws the smiley face's eyes. I'd somehow write a function for it so that I can just call it when I go to draw
+the other eye.'''
+turtle.forward(50)
+
+'''This code would draw the smiley face's smile. I'm not sure how big the circle will end up being if I actually ran it, so 
+the numbers I entered are completely random. And I'd somehow figure out where to make it stop so that the smile doesn't just trace the 
+outside of the face.'''
+turtle.right(3)
+turtle.forward(3)"
+Phantump,A,A,A,11,31L,Participated in lab activities,"Not super communicative, but not silent",84.6,817.71,34.15109316,-4,39,1,['Computer Science'],Freshman,No answer,True,United States,True,A,White,White/Asian,Draw_Rectangle,the border,Scene,moving,Animation,Animation,Repeat,When,State,sprites,Sprites,,"Yes, but only small simple games","Working with files has been a lot more complex and a lot less straightforward than everything else. I guess it makes sense, but it feels like it could be organized a little but better than it currently is.
+
+I've learned a lot of other things about python, though. Basic things like math or calculations or editing strings, but useful things nonetheless. My previous computer science class in high school certainly helped me.","move_character(30, left)","from cisc108 import assert_equal
+
+turtle.penup()
+turtle.goto(0,0)
+#rotate to x degrees, eg 0 would be facing directly right, i just forget what the actual command is right now
+turtle.face(0)
+turtle.pendown()
+#The turtle's current position would work as it's center point. The first number is the radius, the second number is the degrees of the circle the turtle will draw
+#EX: turtle.counterclockwise(30,90) will draw one quarter of a circle with a radius of 30, moving counterclockwise from the point the turtle is facing
+turtle.clockwise_circle(100, 360)
+turtle.penup()
+turtle.goto(-50,50)
+turtle.pendown()
+turtle.clockwise_circle(10,360)
+turtle.penup()
+turtle.goto(50,50)
+turtle.pendown()
+turtle.clockwise_circle(10,360)
+turtle.penup()
+turtle.goto(0,0)
+turtle.face(0)
+turtle.pendown()
+turtle.clockwise_circle(50,180)
+
+
+
+"
+Krookodile,A,A,A,12,41L,Participated in lab activities,"Not super communicative, but not silent",77.5,823.7,24.21165799,-1,27,2,['University Studies/Undecided/Undeclared'],Freshman,Man,False,Delaware,False,A,Asian,White/Asian,rectangle,frame,Camera,slow_walking,Movement,Action,Repeat,Connect,Moment,table,Objects,,No.,"This is a very interesting language, learning is not as complex as I imagined, but it has aroused my great interest.","move_forward（frog，10）
+","#just like programming 2 "" heart""
+import matplotlib.pyplot as plt
+
+x_coordinates_1 =(0，100)
+y_coordinates_1 = (1-x**2) ** 0.5
+y_coordinates_2 = -（1-x**2）** 0.5
+
+
+draw point(20,20)
+draw point(20,-20)
+
+x_coordinates_1 =(0，50)
+y_coordinates_3 = -（1-x**2）** 0.5
+
+"
+Staraptor,A,C,A,10,21L,Participated in lab activities,They stayed in touch well,39.1,836.41,11.97257036,6,37,2,['Computer Science'],Freshman,Woman,True,New Jersey,True,A,White,White/Asian,draw_square,border,View,slide,Glide,Movement,Repeat,On,Status,charecters,Characters,,"Yes, but only small simple games",It surprised me how little you have to type to get python to run compared to Java. You can write the same program in python and java and the java code would be longer.,,"#head
+graphics.draw_circle(50, 100, 100) 
+#50 is radius, 100 is x coordninate of the circles center and 100 is y coord of center
+
+#eyes
+graphics.draw_circle(5, 120, 125)
+graphics.draw_circle(5, 80, 125)
+
+#mouth
+graphics.draw_semicircle(25, 100, 100)
+"
+Scizor,A-,A-,A-,10,21L,Regularly skipped lab or was disengaged,Very quiet sometimes,63.9,715.52,33.10998182,-4,39,3,['Computer Science'],Freshman,Woman,True,Delaware,True,A-,Asian,White/Asian,make_rectangle,boarder,Screen,gliding,Glide,Movement,Repeat,Attach,Status,sprites,Sprites,,"Yes, but only small simple games","What surprised me is that Python is written more like how we write. Also, Python used to be harder for me than Javascript and Java but now I understand, and is a little easier. ","if button == right_arrow:
+    movement = move + 1
+    return movement","grapic.goto(0, 0)
+
+#radus and circle body
+r = 20
+grapic.circle()
+grapic.penup()
+
+
+grapic.forward(4)
+grapic.pendown()
+grapic.forward(2)
+grapic.penup()
+
+grapic.penup()
+grapic.goto(5,0)
+grapic.pendown()
+grapic.circle(5,10) 
+
+"
+Inkay,A,A,A,80,80L,"Super engaged, really tried",They stayed in touch well,92.3,821.63,19.847523100000004,-5,33,1,['Computer Science'],Freshman,Man,True,Delaware,True,A,White,White/Asian,,,,,,,,,,,,,,,,"import Turtle
+
+#Assumption is that turtle is at (0,0) on the coordinate plane
+turtle.circle(250) #inital circle used as base radius of 250
+turtle.penup()
+turtle.goto(-125,300) #top left of face
+turtle.pendown()
+turtle.circle(25) #25 is the radius of the circle
+turtle.penup()
+turtle.goto(125,300)#top right of face
+turtle.pendown()
+turtle.circle(25)
+turtle.penup()
+turtle.goto(0,125) #center bottom of face
+turtle.pendown()
+turtle.triangle(120,30,30,150) #(angle1,angle2,angle3,total area(not accurate)) results in upside down triangle for smile"
+Shellos,A,A,A,10,20L,"Super engaged, really tried",They stayed in touch well,98.2,822.5,12.24990301,-7,31,2,['Computer Science'],Freshman,Man,True,Delaware,True,A,White,White/Asian,draw_square(),The Border,Scene,Sliding,Animation,Animation,Step,Connect,State,Assets,Sprites,,No.,"I was slightly surprised that we would be able to access the internet through Python, and that Python can make graphs easily.
+
+The only thing I was slightly confused about was JSON files and accessing them.",,"#Assuming Graphics works similar to turtle and starts facing right
+Graphics.circle(30) #Make hollow circle from center point with radius 30, return to center point
+Graphics.half_circle(15) #Make half circle from same center point with radius 15, return to center
+Graphics.forward(13) #Same as turtle method
+Graphics.left(90) #Same as turtle method
+Graphics.forward(10) #Moving to space to make eye
+Graphics.fill_circle(2) #Making eye by using a solid circle of radius 2, return to center
+Graphics.left(90) 
+Graphics.forward(26) #Moving to other space for eye
+Graphics.fill_circle(2) #Making other eye by using a solid circle of radius 2, return to center
+"
+Tympole,A,A,A,10,21L,,,98.8,831.7,17.7577619,-11,25,1,['Computer Science'],Junior,Man,True,Delaware,True,A,White,White/Asian,,,,,,,,,,,,,,,,"import turtle
+from turtle import graphics
+
+
+circle1 = graphics.draw(cirle,50) #draw(shape,perimeter) <-- depending on shape, different parameters, such as draw(square,20,40) <-- length and height, this would draw the face
+graphics.goto(circle.centerX-50,+50) #goto(circle.center == center of circle, then the format is the same as turtle method goto(x,y) this moves the turtle into position to draw the first eye
+circle2 = graphics.draw(circle,15) #draw first eye
+graphics.goto(circle2.centerX+50,turtle.ycor()) # move turtle into position to draw second eye
+circle3 = graphics.draw(circle,15) #draw second eye
+graphics.goto(circle1.centerX-50,circle1.centerY) #move turtle into position to draw smile
+halfcircle = graphics.draw(halfcircle,35) #draw smile
+graphics.fillColor(circle1,yellow) # Make the face yellow
+graphics.LineColor(circle2,Black) # Make first eye black
+graphics.LineColor(circle1,Black) # Make second eye black
+graphics.LineColor(halfcircle,Black) #Make smile black
+"
+Porygon,A,A,A,10,20L,"Super engaged, really tried",They stayed in touch well,62.1,801.71,26.31298141,-2,48,2,['Other college not listed'],Freshman,Man,True,Nj,True,A,White,White/Asian,make_rectangle,frame,Screen,move,Movement,Action,Repeat,Connect,State,key,Characters,,No.,debugging is still really surprising and annoying to me. i can spend 20 minutes on an assignemnt and it wont work but i know its only one small step away from working. and then i ask questions in the discord or ill ask my brother and itll be fixed in a minute. but i personally can never really debug my functions.,"def move_frog(horizontal:int,vertical:int)->int:
+    frog=moving_object1
+    new_frog_location=horizontal+vertical
+    return new_frog_location
+","
+
+#basic 
+import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(3)
+
+#function
+def draw_smile(x:int,y:int) -> int:
+    turtle.left(90)
+    turtle.forward(50)
+    turtle.right(90)
+    turtle.forward(50)
+    turtle.right(90)
+    turtle.forward(50)
+    turtle.right(90)
+    turtle.forward(50)
+    turtle.penup()
+    turtle.right(90)
+    turtle.forward(10)
+    turtle.right(90)
+    turtle.forward(10)
+    turtle.pendown()
+    turtle.forward(25)
+    turtle.penup()
+    turtle.left(90)
+    turtle.forward(20)
+    turtle.pendown()
+    turtle.left(90)
+    turtle.forward(10)
+    turtle.penup()
+    turtle.forward(10)
+    turtle.pendown()
+    turtle.pendown()
+    turtle.forward(10)
+    return draw_smile
+#tests. cant figure out how to test it.looked at my turtle project and it looks similar not sure why that one works and this doesnt.
+x_position = draw_smile(x_position, 100)
+x_position = draw_smile(x_position, 100)
+
+"
+Noctowl,A-,A,A-,10,20L,Participated in lab activities,"Not super communicative, but not silent",68.0,744.36,34.06546852,-3,49,7,"['Computer Science,University Studies/Undecided/Undeclared']",Freshman,Man,False,DE,True,A-,"Asian,Middle Eastern or North African",PoC,rectangle,area_of_game,View,move,Movement,Animation,Repeat,Attach,Status,objects,Objects,,No.,almost everything,,"import turtle 
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.speed(50)
+
+def Square(x:int, y:int) -> int:
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.setheading(0)
+    turtle.forward(30)
+    turtle.pendown()
+    
+    turtle.left(90)
+    turtle.forward(100)
+    turtle.right(90)
+    turtle.forward(100)
+    turtle.right(90)
+    turtle.forward(100)
+    turtle.right(90)
+    turtle.forward(100)
+def eyes(x:int, y:int) -> int:
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.setheading(0)
+    turtle.forward(30)
+    turtle.pendown()
+    
+    turtle.right()
+    turtle.right()
+    turtle.right()
+    turtle.forward(20)
+    
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.setheading(0)
+    turtle.forward(60)
+    turtle.pendown()
+    
+    turtle.forward(30)
+    
+def smile(x:int, y:int) -> int:
+    
+    "
+Seaking,A-,A-,A-,10,21L,Participated in lab activities,They stayed in touch well,49.7,791.67,20.07151165,-4,33,1,['University Studies/Undecided/Undeclared'],Freshman,Woman,True,Pennsylvania,True,A,White,White/Asian,,,,,,,,,,,,,,,,"def draw_circle(radius:int, x_value:int, y_value:int) -> int:
+    pass
+
+def draw_arc(radius:int,x_value:int,y_value:int) -> int:
+    pass
+
+draw_circle(10,0,0)
+draw_circle(1,-3,7)
+draw_circle(1,3,7)
+draw_arc(6,0,3)"
+Zoroark,A,A,A,80,80L,Participated in lab activities,"Not super communicative, but not silent",72.2,810.0,21.71458863,-4,38,2,['Computer Science'],Freshman,Woman,True,Delaware,True,A,Asian,White/Asian,,,,,,,,,,,,,,,,"
+import turtle.pkg
+turtle.speed(3)
+turtle.pen(orange)
+
+def draw_circle (x: int, y: int, r: int) -> drawing:
+    turtle.pendown()
+    turtle.goto(x, y)
+    turtle.forward(r)
+    turtle.penup()
+    
+def draw_smile (x:int, y: int) :
+    turtle.pendown()
+    turtle.right(45)
+    turtle.forward(40)
+    turtle.left(45)
+    turtle.forward(45)
+    turtle.penup()
+    
+xpos = draw_circle(100, 100, 150)
+xpos = draw_circle(xpos + 25, 75, 45)
+xpos = draw_circle(xpos + 50, 75, 45)
+xpos = draw_smile(xpos - 25, 25)"
+Simisage,A,C,A,11,30L,Participated in lab activities,They stayed in touch well,18.3,799.73,24.57781909,7,35,2,['Computer Science'],Freshman,Man,True,Pennsylvania,True,A,White,White/Asian,,,,,,,,,,,,,,,,"from cisc108 import Graphicslibrary
+'''Import the library used to draw'''
+
+
+draw (circle 100) '''draw a complete circle with a radius of 100 units at that spot'''
+'''body is created'''
+draw (up 25) '''move up 25 units'''
+draw (right 25) '''move to the right 25 units'''
+draw (lineright 10) '''make a line 10 units to the right'''
+draw (right 30) '''move to the right 30 units'''
+draw (lineright 10) '''Draw a line 10 units to the right'''
+'''eyes are done'''
+draw (left 50) '''move 50 units to the left'''
+draw (down 50) '''move 50 units to the right'''
+draw (semicircle 60) '''draw a semicircle with a radius of 60 units at that spot'''
+'''Face is created'''
+'''smiley face is now done'''"
+Sliggoo,A,A,A,80,80L,"Super engaged, really tried",They stayed in touch well,95.3,792.17,11.57180781,-11,22,3,['Computer Science'],Freshman,Man,True,Delaware,True,A,White,White/Asian,,,,,,,,,,,,,,,,"#For Reference Lets Call this Library 'graphics'
+import graphics
+
+graphics.goto(10, 10)
+graphics.circle(rad=2)     ##The rad parameter specified the radius of the circle, with the origin at location specified in the line above.
+graphics.goto(17, 10)
+graphics.circle(rad=2)
+graphics.goto(13,15)
+graphics.arc(rad=5, startx='w', direction=counterclockwise, angle=180)  
+'''The rad parameter is the radius of the arc, with startx being the compass direction (ie North, South, East, West)
+of the arc's origin, direction specifying which direction the arc will be drawn in, and angle representing the angle
+the arc segment drawn will have''' 
+graphics.circle(rad=8)     ##Draws a circle with an origin at the same point as the arc in the previous line."
+Dragalge,A,C,A,80,80L,"Super engaged, really tried",They stayed in touch well,51.5,780.25,14.39353535,0,40,3,['Computer Science'],Freshman,Man,True,Delaware,True,A,Asian,White/Asian,,,,,,,,,,,,,,,,"""""""
+Assuming the turtle boy can draw the emoji
+and the turtle can read this code
+""""""
+
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+turtle.forward(5)
+turtle.left(10)
+
+#smile
+turtle.position(-20,20)
+turtle.right(10)
+turtle forward(5)
+turtle.right(10)
+turtle forward(5)
+turtle.right(10)
+turtle forward(5)
+turtle.right(10)
+turtle forward(5)
+turtle.right(10)
+turtle forward(5)
+
+#eyes
+#left eye
+turtle.position(-30, 50)
+turtle.right(90)
+turtle.forward(10)
+
+#right eye
+turtle.position(30, 50)
+turtle.right(90)
+turtle.forward(10)
+
+turtle.forward(10)"
+Beldum,A,A,A,11,31L,,,92.9,859.45,11.022911599999999,-4,31,0,['Computer Science'],Freshman,Man,True,Delaware in the US,True,A,White,White/Asian,make_rect,wall,View,changing the x value,Movement,Animation,Repeat,When,State,sprites,Sprites,,"Yes, but only small simple games","I didn't know that you could iterate through lists using for loops, and I didn't know that dictionaries existed. They were both really useful when solving problems this semester.",,"from cisc108 import assert_equal
+
+def circle():
+    penup()
+    goto(200,400)
+    pendown()
+    repeat 360 times :
+        moveforward(10)
+        turnrightdegrees(1)
+    return pass
+
+def eyes():
+    penup()
+    goto(150,300)
+    pendown()
+    penup()
+    goto(250,300)
+    pendown()
+    return pass
+
+def mouth():
+    penup()
+    goto(150,100)
+    pendown()
+    setdegrees(0)
+    turnrightdegrees(90)
+    repeat 180 times:
+        turnleftdegrees(1)
+        moveforward(5)
+    return pass
+    
+circle()
+eyes()
+mouth()
+    "
+Machoke,A,A,A,12,40L,Participated in lab activities,They stayed in touch well,55.0,829.5,21.36047675,-5,34,1,['Computer Science'],Freshman,Woman,True,Delaware,True,A,White,White/Asian,,,,,,,,,,,,,,,,"# graphics library - graphics()  
+# drawcurve(length of curve) 
+#drawcircle(radius) 
+#drawline(length) 
+graphics.penup()
+graphics.goto(0,0)  
+graphics.pendown()
+graphics.drawcircle(100) 
+graphics.penup() 
+graphics.goto(0,-50) 
+graphics.pendown() 
+graphics.drawcurve(100)  
+graphics.penup() 
+graphics.goto(-50,50) 
+graphics.pendown()
+graphics.drawline(25) 
+graphics.penup() 
+graphics.goto(50,50) 
+graphics.pendown() 
+graphics.drawline(25)
+"
+Kecleon,A,A,A,10,20L,"Super engaged, really tried",They stayed in touch well,81.1,738.17,18.50119568,-8,35,5,['Computer Science'],Freshman,Man,True,Delaware,True,A-,Black or African Am.,PoC,generate_square,Border,View,"Changing x position to the right, once it reaches a point it goes back to where it started.",Movement,Animation,Repeat,When,State,Objects,Objects,,"Yes, large games","I've always wanted to learn arrays/dictionaries and they were surprising.
+
+I also wanted to know how to use loops effectively and this is my first time with the language so this class was great!","frog_move_horizontal(3)
+reset()
+","#So this is assuming the turtle is starting on the bottom left to draw the smiley
+
+turtle.left(90)
+turtle.forward(50)
+turtle.right(180)
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(50)
+turtle.left(90)
+turtle.penup()
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(10)
+turtle.right(90)
+turtle.forward(25)
+turtle.left(90)
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(25)
+
+#All done!
+"
+Furret,C,C,C,11,30L,Participated in lab activities,"Not super communicative, but not silent",44.4,627.91,18.72361572,0,37,7,['Computer Science'],Freshman,Woman,True,New York,False,C,White,White/Asian,rectangle,an outline,Screen,moving forward,Action,Animation,Iteration,Connect,Status,objects,Objects,,No.,One thing in Python that surprised me is the while loops because they can go on forever if you do not program them correctly,"import turtle
+
+turtle.pendown()
+turtle.mainloop()
+turtle.forward(50)
+","import graphics
+
+graphics.penup()
+graphics.goto(0, 0)
+graphics.pendown()
+graphics.circle(100)
+graphics.penup()
+graphics.goto(25, 25)
+graphics.pendown()
+graphics.right(90)
+graphics.forward(25)
+graphics.penup()
+graphics.goto(75,75)
+graphics.pendown()
+graphics.right(90)
+graphics.forward(25)
+graphics.penup()
+graphics.goto(15, -5)
+graphics.pendown()
+graphics.circle(25, 75)
+
+
+"
+Swoobat,A,A,A,10,20L,"Super engaged, really tried",They stayed in touch well,63.3,802.21,37.82291849,-1,36,4,['Other college not listed'],Sophomore,Woman,False,China,False,A,Asian,White/Asian,square,insider of the square,Screen,moving,Action,Movement,Repeat,Connect,Status,special point or movement,Characters,,No.,"how to explain the movement and what the object doing on the screen. 
+
+It's kind of hard for me, it has many details that need to pay attention to. And most of the time, you just soooo close to the answer and you will spend a long time thinking about that. Then you got the correct, you will think that is so easy why I didn't think about that. ","def grog-pump(one:str)->moving(str)
+","import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300,0)
+turtle.pendown()
+turtle.speed(3)
+
+turtle. right(90)
+turtle. forward(50)
+turtle. left(90)
+turtle. forward(50)
+turtle. left(90)
+turtle. forward(50)
+turtle. left(90)
+turtle. forward(50)
+
+turtle.penup()
+turtle.setheading(0)
+turtle.forward(150)
+turtle.pendown()
+
+turtle. right(90)
+turtle. forward(50)
+turtle. left(90)
+turtle. forward(50)
+turtle. left(90)
+turtle. forward(50)
+turtle. left(90)
+turtle. forward(50)
+
+turtle.penup()
+turtle.setheading(0)
+turtle.right(90)
+turtle.forward(100)
+turtle.right(90)
+turtle.forward(150)
+turtle.pendown()
+
+turtle. left(90)
+turtle. forward(70)
+turtle. left(90)
+turtle. forward(200)
+turtle. left(90)
+turtle. forward(70)
+turtle. left(90)
+"
+Tepig,A,A,A,12,41L,"Super engaged, really tried",They stayed in touch well,96.4,834.5,27.40889311,-7,40,1,['University Studies/Undecided/Undeclared'],Freshman,Man,False,China,False,A,Asian,White/Asian,g_rectangle,edge,Scene,moving right,Movement,Action,Repeat,Attach,Moment,characters,Objects,,No.,"Python is a way yo programming, but what is the first programming language and how to program the first program software?
+
+In other way, how can the first programmer program? What does he/she use to program?
+
+For example, we are using Thonny to program. Assume that Thonny is the first program software, who create it and how?","frog.moveright(100)
+","import graphics_library_pen
+import math 
+def draw_squares_as_eyes(x:int,y:int):
+    pen.up()
+    pen.goto(x, y)
+    pen.down()
+    pen.setheading(0)
+    pen.goahead(30)
+    pen.right(90)
+    pen.goahead(30)
+    pen.right(90)
+    pen.goahead(30)
+    pen.right(90)
+    pen.goahead(30)
+    # make a square as eyes
+
+def draw_circle_as_face(first_point_x:int, second_point_x:int):
+    y1 = math.sqrt(1 - first_point_x ** 2)
+    y2 = - math.sqrt(1 - first_point_x ** 2)
+    pen.down()
+    pen.run_start(first_point_x, y1)
+    pen.stop_end(second_point_x, y2)
+    # pen will run as a normal circle from a start point, it will stop at the ending point.
+    # make a half circle from right of start point
+    pen.run_start(second_point_x, y2)
+    pen.stop_end(first_point_x, y1)
+    pen.up()
+    
+    
+def draw_half_circle_as_mouth(first_point_x:int, second_point_x:int):
+    y1 = math.sqrt(1 - first_point_x ** 2)
+    y2 = - math.sqrt(1 - first_point_x ** 2)
+    pen.up()
+    pen.goto(first_point_x, y1)
+    pen.down()
+    pen.setheading(0)
+    pen.goahead(second_point_x, y2)
+    # make a straight line
+    pen.run_start(second_point_x, y2)
+    pen.stop_end(first_point_x, y1)
+    # make a half circle from right of start point
+    pen.up()
+    
+draw_circle_as_face(-100,100)
+# draw the whole face
+draw_squares_as_eyes(-50, 50)
+# draw the left eye
+draw_squares_as_eyes(50, 50)
+# draw the right eye
+draw_half_circle_as_mouth(-50,50)
+# draw the mouth
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+"
+Vullaby,A,A,A,11,31L,"Super engaged, really tried",They stayed in touch well,47.9,830.13,35.28101322,-3,42,1,['Computer Science'],Freshman,Woman,True,Delaware,True,A,Asian,White/Asian,rect,Outline,Level,Gliding,Glide,Action,Iteration,Connect,State,animations,Characters,,No.,"I learned a lot about python this semester. Coming into freshman year of college, I knew a little bit about python but high school but not much. I learned how to code large projects, such as the crypto corgi project which honestly taught me a lot. In the programming problems, we would implement a lot of the concepts that we learned in the videos and quizzes and the project were not easy but they were fun to figure out and it was kinda like a puzzle in a way. ","def frog(moving):
+    moving=[]
+    for f in frog:
+        f=f+moving","# smileyface
+graphics.circle
+graphics.penup
+graphics.forward (50)
+graphics.circle
+graphics.forward(50)
+graphics.pendown
+
+'''
+I'm very confused on how to do this. I think I started it wrong. I'm confused on how to make the mouth. 
+'''
+"
+Tyrogue,D,F,F,10,20L,Regularly skipped lab or was disengaged,Ghosted me,17.8,495.77,11.90240112,4,27,21,['Other Arts and Sciences'],Senior,Man,True,Delaware,True,F,"Hispanic\, Latino\, or Spanish origin",PoC,,,,,,,,,,,,,,,,"import turtle
+
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-200,0)
+turtle.pendown()
+turtle.begin_fill()
+turtle.color(""black"")
+turtle.circle(5)
+turtle.penup()
+turtle.goto(200,0)
+turtle.pendown()
+turtle.circle(5)
+turtle.end_fill()
+turtle.penup()
+turtle.goto(-150,-100)
+turtle.pendown()
+turtle.right(90)
+turtle.circle(150,180)
+"
+Zygarde,A,A,A,11,30L,,,99.4,822.03,17.20282707,-11,22,1,['Computer Science'],Freshman,Man,True,United States,True,A,White,White/Asian,draw_rectangle,The boundary,Scene,move_right,Movement,Animation,Step,Register,State,Objects,Objects,,"Yes, but only small simple games",I was surprised how easy (kind of) it was to read and manipulate files and website data.,,"import drawing
+drawing.reset()
+drawing.speed(10)
+drawing.penup()
+drawing.goto(-300, 0)
+drawing.pendown()
+drawing.speed(3)
+
+#imagine the drawing.circle function has an x location variable and a radius
+drawing.circle(-300, 10)
+drawing.circle(-200, 10)
+drawing.goto(-250, -50)
+drawing.semicircle(-250, 40)
+"
+Trubbish,A,A,A,80,80L,Participated in lab activities,Very quiet sometimes,88.2,789.5,17.49259188,-6,30,4,['Computer Science'],Freshman,Woman,True,Massachusetts,True,A,Asian,White/Asian,,,,,,,,,,,,,,,,"from cisc108 import Graphics 
+
+window = Window(200,200)
+#head
+head = Circle(50) #radius = 20
+window.draw(head, 100, 100) #100 = x coordinate, 100 = y coordinate of center
+#eyes
+eye = Oval(5,2) #height, width
+window.draw(eye, 125, 125) #shape, x coordinate, y coordinate
+window.draw(eye, 75, 125)
+#smile
+smile = Parabola(10,15) #height, length as if were composed in a box
+window.draw(smile, 100, 140) #shape, x coordinate, y coordinate
+
+"
+Pineco,A,A,A,11,30L,"Super engaged, really tried","Not super communicative, but not silent",84.0,772.8,15.74570739,-4,23,2,['Computer Science'],Freshman,Man,True,New Jersey,True,A-,White,White/Asian,rect,border,View,walking,Movement,Action,Step,When,State,entities,Sprites,,No.,Before this semester python was a language I knew the basics too and how to make a simple physics program in but not much else. Now I understand how to do more complex things like loading files and manipulating them as needed. One thing that surprised me was how dictionaries work with certain values only accessible by certain keys. ,,"
+def arc(radius:int, degree:int): #draws an arc with a radius and a degree (from 0 to 360) to specify arc length with turtle facing along the circumference
+    pass
+
+turtle.arc(50, 360)
+turtle.penup()
+turtle.left(90)
+turtle.move(35)
+turle.pendown()
+turtle.left(90)
+turtle.move(20)
+turtle.right(90)
+turtle.penup()
+turtle.move(50)
+turtle.pendown()
+turtle.right(90)
+turtle.move(20)
+turtle.penup()
+turtle.left(45)
+turtle.move(20)
+turtle.right(90)
+turtle.arc(25, 135)"
+Avalugg,D,C,D,11,31L,Participated in lab activities,"Not super communicative, but not silent",21.9,572.22,21.67011575,-4,37,13,"['Computer Science,Other Arts and Sciences']",Sophomore,Man,False,Delaware,True,D,Asian,White/Asian,"def rectangle(length: int, width: int) -> int:",border,Screen,scrolling,Movement,Action,Repeat,Register,State,Game elements,Sprites,,"Yes, but only small simple games","What I learned in python is that it is a very versatile language that can be used for simple mathematics, all the way to making games. One thing that did surprise me was how lenient it was, and how it didn't adhere to strict rules live java or C++.",,"import turtle
+turtle.reset()
+turtle.speed(10)
+turtle.penup()
+turtle.goto(-300, 0)
+turtle.pendown()
+turtle.setheading(-300)
+turtle.speed(3)
+
+#Draw Circle
+def circle(x_position: int, y_position: int) -> int:
+turtle.penup()
+turtle.goto(x_position, y_position)
+turtle.pendown()
+x_position = x_position + 20
+turtle.setheading(180)
+turtle.forward(60)
+turtle.setheading(45)
+turtle.forward(60)
+turtle.setheading(90)
+turtle.forward(60)
+turtle.setheading(25)
+turtle.downward(60)
+turtle.setheading(90)
+turtle.forward(180)
+turtle.forward(180)
+turtle.forward(60)
+    return x_position
+# Draw Eyes
+def eyes(x_position: int, y_position: int) -> int:
+turtle.penup()
+turtle.goto(x_position, y_position)
+turtle.pendown()
+x_position = x_position + -90
+turtle.setheading(-180)
+turtle.downward(60)
+    return x_position
+def eyes_second(x_position: int, y_position int:) -> int:
+turtle.penup()
+turtle.goto(x_position, y_position)
+turtle.pendown
+x_position = x_position + -90
+turtle.setheading(-180)
+turtle.downward(60)
+    return x_position
+#Draw smile
+def smile(x_position: int, y_position: int) -> int:
+turtle.penup()
+turtle.goto(x_position, y_position)
+turtle.pendown()
+turtle.setheading(180)
+turtle.forward(20)
+turtle.setheading(-180)
+turtle.forward(5)
+turtle.setheading(90)
+turtle.forward(50)
+turtle.setheading(180)
+turtle.forward(20)
+turtle.setheading(-180)
+turtle.forward(5)
+    return x_position
+
+"
+Doduo,A,A,A,12,40L,Participated in lab activities,Very quiet sometimes,83.4,823.33,16.11759745,-3,32,1,['Psychology'],Sophomore,Woman,True,Delaware,True,A,White,White/Asian,rectangle,border,Screen,glide,Glide,Action,Repeat,When,Status,elements,Objects,,"Yes, but only small simple games","I was surprised how Python was actually much more intuitive than other languages I have learned. 
+
+Python confused/surprised me with how it iterates. Using a word rather than a number such as for x<1 ","frog.right(90)
+frog.forward(50)
+","print(""    |    |"")
+print(""   \      /"")
+print(""    \____/"")"
+Hawlucha,F,F,F,10,20L,Regularly skipped lab or was disengaged,Ghosted me,7.1,263.13,3.349895998,-5,17,64,['Other college not listed'],Freshman,Man,True,Delaware,False,F,White,White/Asian,,,,,,,,,,,,,,,,
+Scatterbug,A,A,A,10,21L,"Super engaged, really tried","Not super communicative, but not silent",82.8,795.57,17.30565067,-4,34,2,['Computer Science'],Freshman,Man,True,Delaware,True,A,White,White/Asian,generate_rect,Borders,Screen,floating,Glide,Action,Iteration,When,State,characters,Characters,,No.,"I am surprised at the versatility of the simple language. I have previously learned a bit of python, but not as far as dictionaries go. I also learned a lot more about functions and what they can do. I was surprised at the different ways you can write function headers.","glide_right(300)
+","graphics = graphics.set()
+graphics.draw()
+graphics.bigCircle(100, 100)
+graphics.smCircle(10,80)
+graphics.smCircle(40,80)
+graphics.semiCircle(25,20)
+graphics.endDraw()"
+Gliscor,A,A,A,12,40L,"Super engaged, really tried","Not super communicative, but not silent",71.0,789.72,13.07429104,-1,36,1,['Computer Science'],Freshman,Man,True,New Jersey,True,A,White,White/Asian,rectangle,border,Screen,gliding,Glide,Action,Repeat,Attach,State,player,Sprites,,"Yes, but only small simple games",The Crypto Corgi Company Project suprised me.,,"turtle.circle(0,0,100)
+turtle.circle(-50,50,10)
+turtle.circle(50,50,10)
+turtle.arc(-50,50,25)"
+Anorith,A,A,A,11,30L,"Super engaged, really tried",They stayed in touch well,80.5,809.05,18.95531014,-4,39,1,['Computer Science'],Freshman,Woman,True,"Delaware, USA",True,A,White,White/Asian,draw_rectangle,"Window, Frame, or Camera Area",Screen,Move right,Movement,Animation,Iteration,On,State,Sprites,Sprites,,"Yes, but only small simple games","I was surprised at how simple it was compared to Java. It's hard to use Python for games, but Python (despite its simplicity) can be used for AI. I had no idea it was capable of something like that, especially when it's so difficult to make games with. Python renewed my love for programming and convinced me that I made the right choice in my major, since I was doubting myself beforehand. Hence, why I made that discord bot and code out of class for fun.",,"def draw_smiley(x: int, y: int):
+    '''
+    This function assumes that the circle is built in already. Furthermore, it also assumes that
+    the circle will be drawn with a diameter of 60px while the pen stops at the center bottom.
+    You can use this function to draw multiple smiley faces in various areas of the canvas.
+    
+    Args:
+        x(int): x position
+        y(int): y position
+        
+    Returns: A computer drawn smiley face.
+    '''
+    pen.draw(circle)
+    pen.up()
+    pen.turn(180)
+    pen.forward(10)
+    pen.turn(-90)
+    pen.forward(50)
+    pen.down()
+    pen.forward(5)
+    pen.up()
+    pen.turn(-90)
+    pen.forward(20)
+    pen.turn(90)
+    pen.forward(5)
+    
+draw_smiley(0,0)
+"
+Shinx,A,A,A,12,40L,Participated in lab activities,Very quiet sometimes,97.6,832.25,15.27305396,-12,45,1,['Computer Science'],Freshman,Man,True,Delaware,True,A,Asian,White/Asian,create_rectangle,game_window,Scene,shift,Movement,Action,Iteration,On,State,objects,Objects,,"Yes, but only small simple games","I learned so much about Python, but also just about programming in general. The concepts that I learned in Python seem to carry over into other languages as well. Not only in the programming world, but also in real life. Learning loops and helper functions were definitely the most efficient and helpful things I learned in Python.
+
+One thing that surprised me about Python was the syntax, last month I started to teach myself Java and the syntax and rules with colons and curly braces is very intensive compared to Python.","green_frog = create_frog(green, 10)
+green_frog.moveRight(50)
+","from graphics import gl
+
+window = gl.wn() #Creates window
+pen = gl #Creates graphics library pointer called pen
+pen.goto(300, 300) #Goes to these coordinates in window
+pen.up()
+circle1 = pen.circle(25) #Creates circle
+circle1.setColor(""yellow"") #Makes circle yellow
+pen.down()
+pen.goto(312.5, 300) #Goes to eye one
+pen.setHeading(0)
+pen.right(90)
+pen.forward(5)
+pen.backward(10)
+pen.setHeading(0)
+pen.down()
+pen.goto(287.5, 300) #Goes to eye two
+pen.up()
+pen.setHeading(0)
+pen.right(90)
+pen.forward(5)
+pen.backward(10)
+window.exitOnClick()
+
+
+"
+Golurk,A-,A-,A-,12,40L,"Super engaged, really tried",They stayed in touch well,57.4,774.78,19.7180628,-4,39,1,['Computer Science'],Freshman,Woman,True,"Delaware, USA",True,A-,White,White/Asian,def rectangle_shape(shape: str)->str:,the border,Screen,moving from left to right --> turtle alphabet project,Movement,Animation,Iteration,Register,Status,body of object,Objects,,No.,"It is NOT easy. I took a couple-month course on Java back in high school and I find it to be much, much simpler than Python. This language requires dedication, determination, and A LOT of patience in order to actually code something and make it work. ","def frog_action(movement: int)->str: 
+    movement = 0
+    action.append(movement+90)
+    return action 
+","# I remember the turtle code for an ""o"" which is like the smiley face...
+turtle.penup()
+turtle.goto(x,y)
+turtle.pendown()
+turtle.forward(50)
+turtle.setheading(90)
+turtle.forward(50)
+turtle.left(50)
+turtle.setheading(180) #?
+turtle.forward(50)
+turtle.setheading(270) #?
+turtle.forward(50)
+turtle.penup()
+turtle.setheading(0)
+return x+80
+
+# for the two eyes...
+turtle.penup()
+turtle.goto(x,y)
+turtle.pendown()
+turtle.left(90)
+turtle.forward(5)
+turtle.penup()
+turtle.setheading(0)
+return x+80
+#repeat for other eye
+
+#for smile 
+turtle.penup()
+turtle.goto(x,y)
+turtle.pendown()
+turtle.right(90)
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(50)
+#not too sure
+
+"
+Snorunt,A,D,C,12,41L,Participated in lab activities,They stayed in touch well,17.2,657.83,6.254627659,20,20,7,['Other Arts and Sciences'],Junior,Woman,True,"Delaware, United States",True,C,Asian,White/Asian,,,,,,,,,,,,,,,,"import graphics -> circle functions
+
+def make_circle(length:int, width:int):
+    length = 50
+    width = 50
+    return circle(50,50)
+
+def circle_within_circle(x_coordinate_within_circle:int, y_coordinate_within_circle:int, length:int, width:int):
+    x_coordinate_within_circle = 20
+    y_coordinate_within_circle = 40
+    length = 10
+    width = 10
+    return circle(20,40,10,10)
+
+
+def circle_within_circle(x_coordinate_within_circle:int, y_coordinate_within_circle:int, length:int, width:int):
+    x_coordinate_within_circle = 30
+    y_coordinate_within_circle = 40
+    length = 10
+    width = 10
+    return circle(30,40,10,10)
+
+def line_within_circle(x_coordinate_within_circle:int, y_coordinate_within_circle:int, x:int):
+    x_coordinate_within_circle = 25
+    y_coordinate_within_circle = 10
+    y = (1/16)*x**2
+    return y(graph)
+    
+
+"
+Furfrou,D,D,F,11,30L,Participated in lab activities,"Not super communicative, but not silent",19.5,494.79,9.746185889,0,32,23,['Computer Science'],Freshman,Woman,True,New Jersey,False,F,Black or African Am.,PoC,shape,the boarder,Level,floating,Glide,Action,Repeat,Connect,Moment,cartoons,Objects,,No.,Before I started this class I thought programming would be insanely difficult but Python language is something you just have to practice to get better at.,"def frog (x:int, y:int)->int:
+    turtle.forward(90)
+","def draw_face(x:int, y:int)->int 
+    return x+90
+def draw_eyes(x:int,y:int)->int
+    return x+90
+point= draw_face(-100,100)
+point= draw_eyes(point,100)
+#try to make all the point come to 360 degrees
+
+
+"
+Fletchinder,A,A,A,80,80L,"Super engaged, really tried",They stayed in touch well,90.5,825.19,9.600179006,-5,20,1,['Computer Science'],Freshman,Man,True,Connecticut,True,A,White,White/Asian,,,,,,,,,,,,,,,,"#Draw large circle for outline of smiley face
+graphics.circle(0, 0, 10, 250, False, ""Black"") #Draws a circle with center at position (0,0) with line thickness of 10px, a radius of 250px, and not filled in (not solid) and the color black
+
+#Draw eyes for smiley face
+graphics.circle(-200, 150, 5, 25, True, ""Black"") # Draws a circle with center at position (-200,150) with line thickness of 5px, a radius of 25px, and filled in (solid) and the color black
+graphics.circle(200, 150, 5, 25, True, ""Black"") # Draws a circle with center at position (200,150) with line thickness of 5px, a radius of 25px, and filled in (solid) and the color black
+
+#Draw nose for smiley face
+graphics.circle(0, 50, 3, 10, True, ""Black"") # Draws a circle with center at position (0,50) with line thickness of 3px, a radius of 10px, and filled in (solid) and the color black
+
+#Draw lips for smiley face
+graphics.circle(0, -350, 5, 60, False, ""Black"") #Draws a circle with center at (0,-350) with line thickness of 5 px, a radius of 60px, and not filled in (not solid) and the color black
+graphics.rectangle(-60, -350, 150, 150, True, ""White"") #Draws a rectangle with bottom-left corner at (-60, -350) with a base of 150px and a height of 150px that is solid and the color white"
+Stunky,A-,A-,A-,12,40L,Participated in lab activities,"Not super communicative, but not silent",40.2,729.84,19.87154432,-1,43,2,['Computer Science'],Freshman,Man,True,Delaware,True,A-,Black or African Am.,PoC,shape_rectangle,Window,Screen,moving,Glide,Animation,Iteration,When,State,objects,Objects,,No.,"The one thing that confused me in python is for loops, I always seem to struggle with them from time to time.",,"def shape(circle:str)-> str:
+    new_circle = circle(""**********""
+                        ""*        *""
+                        ""*        *""
+                        ""**********"")
+    return new_circle
+"
+Magneton,A,A-,A,11,30L,Participated in lab activities,Very quiet sometimes,58.6,773.77,28.55911115,0,42,0,['University Studies/Undecided/Undeclared'],Freshman,Woman,True,"New York, USA",False,A-,"Some other race\, ethnicity\, or origin",PoC,firstRectangle,perimeter,Screen,floating,Animation,Action,Repeat,Register,State,bubble,Sprites,,No.,"One thing in the python language that confused me was the import stuff, how does it know what it is importing. Also how many built in functions there are.  I've come to really like python, it is still a bit confusing though.",,
+Gible,A,A,A,80,80L,"Super engaged, really tried","Not super communicative, but not silent",76.9,826.04,24.75547994,-6,41,1,['Computer Science'],Freshman,Woman,True,Delaware,True,A,Asian,White/Asian,,,,,,,,,,,,,,,,"
+# import graphics library here 
+
+draw_circle(x: int, y: int, radius_length: int)-> int: #functions that draw basic shapes from graphics
+    return y 
+draw_circle(x: int, y: int, radius_length: int)  -> int:
+    return y 
+draw_curve(x: int, y: int, length: int)  -> int:
+    return y
+
+
+
+
+yposition = 0  
+yposition = draw_circle(x, y, radius) #draw first eye 
+yposition = draw_circle(x+50, y, radius) #draw second eye 
+yposition = draw_curve(x-50, yposition-100, length) #draw mouth
+yposition = draw_circle(x - length/2, y, radius) #draw head by finding halfway point on mouth
+                                                 # the radius can be the distance from halfway point to a litle above eyes 
+
+
+    "
+Clawitzer,A,A,A,80,80L,"Super engaged, really tried",They stayed in touch well,74.6,786.6,19.19846824,-7,38,3,['Computer Science'],Sophomore,Woman,True,Delaware,True,A,White,White/Asian,,,,,,,,,,,,,,,,"import turtle
+#draw red 150x150 box starting at the point 150,0
+turtle.setx(150)
+turtle.sety(0)
+turtle.setheading(270)
+turtle.pendown()
+turtle.pencolor('red')
+turtle.forward(150)
+turtle.right(90)
+turtle.forward(150)
+turtle.right(90)
+turtle.forward(150)
+turtle.right(90)
+turtle.forward(150)
+#draw blue 25x25 box on inside of red one, starting at point 25,0
+turtle.setx(25)
+turtle.sety(0)
+turtle.setheading(270)
+turtle.pendown()
+turtle.pencolor('blue')
+turtle.forward(25)
+turtle.right(90)
+turtle.forward(25)
+turtle.right(90)
+turtle.forward(25)
+turtle.right(90)
+turtle.forward(25)
+#center turtle at origin
+turtle.setx(0)
+set.turtle(0)
+#draw outer circle of smiley face
+#circle function to draw circle based on radius r from where turtle is located
+r=15
+turtle.circle(r)
+#draw left eye 
+turtle.setx(-5)
+turtle.sety(7)
+r=3
+turtle.circle(r)
+#draw right eye 
+turtle.setx(5)
+turtle.sety(7)
+r=3
+turtle.circle(r)
+#draw smile
+turtle.setx(-5)
+turtle.sety(-2)
+turtle.setheading(300)
+turtle.forward(4)
+turtle.setheading(360)
+turtle.forward(7)
+turtle.setheading(45)
+turtle.forward(4)"

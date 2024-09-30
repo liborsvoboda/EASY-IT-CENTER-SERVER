@@ -1,4 +1,6 @@
-﻿namespace EasyITCenter.Controllers {
+﻿using ServerCorePages;
+
+namespace EasyITCenter.Controllers {
 
     [Authorize]
     [ApiController]

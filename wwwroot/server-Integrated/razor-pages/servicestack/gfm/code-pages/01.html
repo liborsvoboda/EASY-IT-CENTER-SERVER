@@ -1,0 +1,30 @@
+<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">using</span> <span class="pl-en">System</span>.<span class="pl-en">Linq</span>;
+<span class="pl-k">using</span> <span class="pl-en">System</span>.<span class="pl-en">Collections</span>.<span class="pl-en">Generic</span>;
+<span class="pl-k">using</span> <span class="pl-en">ServiceStack</span>;
+<span class="pl-k">using</span> <span class="pl-en">ServiceStack</span>.<span class="pl-en">Script</span>;
+
+<span class="pl-k">namespace</span> <span class="pl-en">SharpScript</span>
+{
+    [<span class="pl-en">Page</span>(<span class="pl-s"><span class="pl-pds">"</span>products<span class="pl-pds">"</span></span>)]
+    [<span class="pl-en">PageArg</span>(<span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Products<span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">ProductsPage</span> : <span class="pl-en">SharpCodePage</span>
+    {
+        <span class="pl-k">string</span> <span class="pl-en">render</span>(<span class="pl-en">Product</span>[] <span class="pl-smi">products</span>) <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">$@"</span></span>
+<span class="pl-s">        &lt;table class='table table-striped'&gt;</span>
+<span class="pl-s">            &lt;thead&gt;</span>
+<span class="pl-s">                &lt;tr&gt;</span>
+<span class="pl-s">                    &lt;th&gt;&lt;/th&gt;</span>
+<span class="pl-s">                    &lt;th&gt;Name&lt;/th&gt;</span>
+<span class="pl-s">                    &lt;th&gt;Price&lt;/th&gt;</span>
+<span class="pl-s">                &lt;/tr&gt;</span>
+<span class="pl-s">            &lt;/thead&gt;</span>
+<span class="pl-s">            {<span class="pl-smi">products</span>.<span class="pl-en">OrderBy</span>(<span class="pl-smi">x</span> <span class="pl-k">=&gt;</span> <span class="pl-smi">x</span>.<span class="pl-smi">Category</span>).<span class="pl-en">ThenBy</span>(<span class="pl-smi">x</span> <span class="pl-k">=&gt;</span> <span class="pl-smi">x</span>.<span class="pl-smi">ProductName</span>).<span class="pl-en">Map</span>(<span class="pl-smi">x</span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">$@"</span></span></span>
+<span class="pl-s"><span class="pl-s">                &lt;tr&gt;</span></span>
+<span class="pl-s"><span class="pl-s">                    &lt;th&gt;{<span class="pl-smi">x</span>.<span class="pl-smi">Category</span>}&lt;/th&gt;</span></span>
+<span class="pl-s"><span class="pl-s">                    &lt;td&gt;{<span class="pl-smi">x</span>.<span class="pl-smi">ProductName</span>.<span class="pl-en">HtmlEncode</span>()}&lt;/td&gt;</span></span>
+<span class="pl-s"><span class="pl-s">                    &lt;td&gt;{<span class="pl-smi">x</span>.<span class="pl-smi">UnitPrice</span>:<span class="pl-smi">C</span>}&lt;/td&gt;</span></span>
+<span class="pl-s"><span class="pl-s">                &lt;/tr&gt;<span class="pl-pds">"</span></span>).<span class="pl-en">Join</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>)}</span>
+<span class="pl-s">        &lt;/table&gt;<span class="pl-pds">"</span></span>;
+    }
+}</pre></div>
+</div>

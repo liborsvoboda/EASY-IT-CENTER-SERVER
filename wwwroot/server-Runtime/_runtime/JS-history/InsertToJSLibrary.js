@@ -1,4 +1,4 @@
-
+﻿
 
 //window onload
 window.onload = function(e) {
@@ -6,7 +6,6 @@ window.onload = function(e) {
 };
 
 
-load files
 
 //const fs=require('fs');
 var files = [];
@@ -24,7 +23,7 @@ function getFiles (dir, files_){
     return files_;
 }
 
-load file function
+
 function readFile(file) {
   const reader = new FileReader();
   reader.addEventListener('load', (event) => {
@@ -33,7 +32,7 @@ function readFile(file) {
   });
 }
 
-automatic load files
+//automatic load files
 let sources = [];
 for (var i = 104; i >= -1; i--) {sources.push({title: i, href: './images/'+i+'.png', thumbnail: './images/'+i+'.png'});};
 

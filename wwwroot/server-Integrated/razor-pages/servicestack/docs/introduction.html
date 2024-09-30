@@ -1,0 +1,383 @@
+<!--
+title: Introduction
+order: 2
+-->
+
+<p>
+    <em>#Script</em> is a simple and elegant, <a href="/docs/methods">highly-extensible</a>, <a href="/docs/sandbox">sandboxed</a>, 
+    high-performance <a href="/docs/page-formats">general-purpose</a>, <b>embeddable</b> scripting language for .NET Core and .NET Framework. 
+    It's designed from the ground-up to be incrementally adoptable where its basic usage is simple enough 
+    for non-technical users to use whilst it progressively enables access to more power and functionality allowing it to scale up to 
+    support full server-rendering Web Server workloads and beyond. Its high-fidelity with JavaScript syntax allows it to use a common
+    language for seamlessly integrating with client-side JavaScript Single Page App frameworks where its syntax is designed to be 
+    compatible with <a href="https://vuejs.org/v2/guide/syntax.html#Filters">Vue filters</a>.
+</p>
+
+<h3 id="embed">Executing #Script in .NET</h3>
+
+<p>
+    To render the pages we first create and initialize a <em>ScriptContext</em>
+</p>
+
+{{ 'gfm/introduction/01.md' |> githubMarkdown }}
+
+<p>
+    The ScriptContext is the sandbox where all scripts are executed within, everything your script has access to and generates 
+    is maintained within the ScriptContext. Once initialize you can start using it to evaluate scripts which you can do with:
+</p>
+
+{{ 'gfm/introduction/02.md' |> githubMarkdown }}
+
+<p>
+    Scripts only have access to script methods, blocks and arguments defined within its Context, which for an empty Context are
+    the comprehensive suite of safe <a href="/docs/default-scripts">Default Scripts</a> and <a href="/docs/html-scripts">HTML Scripts</a>.
+</p>
+
+
+<h5 id="rendering-pages">Rendering Script Pages</h5>
+
+<p>
+    Behind the scenes this creates a dynamic page with your Script and uses the <em>PageResult</em> to render it to a string:
+</p>
+
+{{ 'gfm/introduction/09.md' |> githubMarkdown }}
+
+<h4 id="evaluate-return-values">Evaluating Scripts with return values</h4>
+
+<p>
+    Sharp Scripts can be used to either render text as above, they can also have return values with the <em>return</em> method
+    which can be accessed using the <em>Evaluate()</em> API:
+</p>
+
+{{ 'gfm/introduction/10.md' |> githubMarkdown }}
+
+
+<h3 id="net-usage">Usage in .NET</h3>
+
+<p>
+    To evaluate <em>#Script</em> in .NET you'll first create the <em>ScriptContext</em> containing all functionality and features 
+    your Scripts have access to:
+</p>
+
+{{ "net-usage" |> partial }}
+
+<h3>Scripting .NET Types</h3>
+
+<p>
+    To find out how to enable unrestricted access to existing .NET Types see <a href="/docs/script-net">Scripting .NET Types</a>.
+</p>
+
+<h4>Autowired using ScriptContext IOC</h4>
+
+<p>
+    <em>ScanTypes</em> is useful for Autowiring instances of scripts created using ScriptContext's configured IOC 
+    where they're also injected with any registered IOC dependencies and can be used to autowire 
+    <a href="/docs/methods">ScriptMethods</a>, 
+    <a href="/docs/blocks">ScriptBlocks</a>  and 
+    <a href="/docs/code-pages">Code Pages</a>:
+</p>
+
+{{ 'gfm/methods/07.md' |> githubMarkdown }}
+
+<p>
+    When the <em>ScriptContext</em> is initialized it will go through each Type and create an autowired instance of each Type
+    and register them in the <em>ScriptMethods</em>, <em>ScriptBlocks</em> and <em>CodePages</em> collections. 
+</p>
+
+<p> 
+    An alternative to registering a single Type is to register an entire Assembly, e.g:    
+</p>
+
+{{ 'gfm/methods/08.md' |> githubMarkdown }}
+
+<p>
+    Where it will search each Type in the Assembly for Script Methods and automatically register them.
+</p>
+
+<h4>Multi page Scripts</h4>
+
+{{ "live-pages" |> partial(
+    {
+        page: 'page', 
+        files: 
+        { 
+            '_layout.html': 'I am the Layout: <b>{{ page }}</b>',   
+            'page.html' : 'I am the Page' 
+        } 
+    }) 
+}}
+
+
+<p>
+    Typically you'll want to use #Script to render entire pages which are sourced from its configured
+    <a href="https://docs.servicestack.net/virtual-file-system">Virtual File System</a> which uses an In Memory Virtual 
+    File System by default that we can programmatically populate:
+</p>
+
+{{ 'gfm/introduction/03.md' |> githubMarkdown }}
+    
+<p>
+    Pages are rendered using a <em>PageResult</em> essentially a rendering context that needs to be provided the Page to render:
+</p>
+
+{{ 'gfm/introduction/04.md' |> githubMarkdown }}
+
+<p>
+    The script page output can then be asynchronously rendered to any Stream:
+</p>
+
+{{ 'gfm/introduction/05.md' |> githubMarkdown }}
+
+<p>
+    Or to access the output as a string you can use the convenience extension method:
+</p>
+
+{{ 'gfm/introduction/06.md' |> githubMarkdown }}
+
+<p>
+    All I/O within #Script is non-blocking, but if you're evaluating an adhoc script or using the default In Memory Virtual FileSystem 
+    there's no I/O so you can safely block to get the generated output with:
+</p>
+
+{{ 'gfm/introduction/07.md' |> githubMarkdown }}
+
+<p>
+    Both APIs returns the result you see in the Live Example above.
+</p>
+    
+<h4 id="cascading-resolution">Cascading Resolution</h4>
+
+<p>
+    There's no forced special centralized folders like <em>/Views</em> or <em>/Views/Shared</em> required to store layouts or share partials or 
+    artificial "Areas" concept to isolate website sections. Different websites or sections are intuitively grouped into different 
+    folders and #Script automatically resolves the closest layout it finds for each page. Cascading resolution also applies to 
+    including files or partial pages where you can use just its name to resolve the closest one, or an absolute path from the 
+    <em>WebRootPath</em> to include a specific partial or file from a different folder.
+</p>
+
+<h3 id="instant-startup">Instant Startup</h3>
+
+<p>
+    There's no pre-compilation, pre-loading or Startup penalty, all Pages are lazily loaded on first use and cached for fast subsequent
+    evaluation. Its instant Startup, fast runtime performance and sandboxed isolation opens it up to a myriad of new use-cases which
+    can enhance .NET Apps with a rich Live programming experience.
+</p>
+
+<h3 id="fast-runtime-performance">Fast Runtime Performance</h3>
+
+<p>
+    <em>#Script</em> is fast, parsing is done using StringSegment for minimal GC pressure, all I/O is non-blocking inc. async
+    writes to OutputStream's. There's no buffering: Layouts, Pages and Partials are asynchronously written to a forward only stream.
+    There's no runtime reflection, each filter or binding within #Script expressions executes compiled and cached C# Expressions.
+</p>
+
+<h3>Pure, Functional and Reactive</h3>
+
+<p>
+    <em>#Script</em> is pure at both the library-level where they're a clean library with no external dependencies outside
+    <a href="https://www.nuget.org/packages/ServiceStack.Common">ServiceStack.Common</a>, no coupling to web frameworks, external configuration files,
+    designer tooling, build tools, pre-compilation steps or require any special deployment requirements.
+    It binds to simple, clean, small interfaces for its
+    <a href="https://docs.servicestack.net/virtual-file-system">Virtual File System</a>,
+    <a href="https://docs.servicestack.net/ioc">IOC</a> and
+    <a href="https://docs.servicestack.net/appsettings">AppSettings</a> providers which are easily overridden to
+    <a href="/docs/view-engine#view-engine-in-servicestack">integrate cleanly into external web frameworks</a>.
+</p>
+
+<p>
+    It's also pure at the code-level where it doesn't have any coupling to concrete dependencies, components or static classes. Default script methods
+    don't mutate any external state and return an expression. This forces a more readable and declarative
+    programming-style, one where it is easier to quickly determine the subject of expressions and the states that need to be met for methods to be executed.
+    Conceptually scripts are "evaluated" in that they take in arguments, methods and script pages as inputs and evaluates them to an output stream.
+    They're highly testable by design where the same environment used to create the context can easily be re-created in Unit tests,
+    including simulating pages in a File System using its In Memory Virtual File System.
+</p>
+
+<h3 id="optimal-dev">Optimal Development Experience</h3>
+
+<p>
+    The above attributes enables an instant iterative development workflow with a Live Development experience that supports
+    configuration-free <a href="/docs/hot-reloading">Hot Reloading</a> out of the box that lets you build entire
+    <a href="/usecases/content-websites">Web Apps</a> and <a href="/docs/sharp-apis">Web APIs</a> without ever having to compile or manually Refresh pages.
+</p>
+
+<h3 id="simplicity-end-to-end">Simplicity end-to-end</h3>
+
+<p>
+    There are 3 main concepts in <em>#Script</em>: <a href="/docs/arguments">Arguments</a> - variables which can be made available
+    through a number of cascading sources, <a href="/docs/blocks">Script Blocks</a> which define the statements available and
+    <a href="/docs/methods">Script Methods</a> - public C# methods that exist in the list of
+    <em>ScriptMethods</em> registered in the PageResult or ScriptContext that scripts are executed within.
+</p>
+
+<p>
+    Layouts, Pages and Partials are all just "pages", evaluated in the same way with access to arguments and filters. Parameters passed
+    to partials are just scoped arguments, accessed like any other arguments. Typically pages are sourced from the configured
+    File System but when access to more advanced functionality is required they can also be <a href="/docs/code-pages">Code Pages</a> implemented
+    in pure C# that are otherwise interchangeable and can be used anywhere a normal page is requested.
+</p>
+
+<p>
+    There's no language constructs or reserved words in <em>#Script</em> itself, all functionality is implemented inside script methods.
+    There's also nothing special about the <a href="/docs/default-scripts">Default Scripts</a> included with #Script
+    other than they're pre-registered by default. External script methods can do anything built-in methods can do which can just
+    as easily be <a href="/docs/methods#shadowing">shadowed or removed</a> giving you a clean slate where you're free to define your own
+    language and preferred language naming scheme.
+</p>
+
+<p>
+    They're non-invasive, by default <a href="/docs/sharp-pages">#Script Pages</a> is configured to handle
+    <em>.html</em> files but can be configured to handle any html extension or <a href="/docs/page-formats">text file format</a>.
+    When a page doesn't contain any #Script Expressions it's contents are returned as-is, making it easy to adopt in existing
+    static websites.
+</p>
+
+<p>
+    <em>#Script</em> scripts are <a href="/docs/sandbox">sandboxed</a>, they can't call static or instance methods, invoke setters or access anything
+    outside of the arguments, methods and blocks made available to them. Without methods or blocks, expressions wouldn't have any methods
+    they can call, leaving them with the only thing they can do which is access arguments and replace their variable placeholders,
+    including the <em>{{ pass: page }}</em> placeholder to tell the Layout where to render the page.
+</p>
+
+<h3 id="declarative">High-level, Declarative and Intent-based</h3>
+
+<p>
+    High-level APIs are usually synonymous with being slow by virtue of paying a penalty for their high-level abstraction,
+    but in the domain of I/O and Streams such-as rendering text to Streams they make it trivial to compose high-level functionality
+    that's implemented more efficiently than would be typically written in C# / ASP.NET MVC Apps.
+</p>
+
+<p>
+    As an example let's analyze the script below:
+</p>
+
+{{ 'gfm/introduction/08.md' |> githubMarkdown }}
+
+<p>
+    The intent of <em>#Script</em> code should be clear even if it's the first time reading it. From left-to-right we can deduce that it
+     retrieves a url from the quote table, downloads its contents of and converts it to markdown before replacing the text "Razor" and
+     "2010" and displaying the <em>raw</em> non-HTML encoded html output. 
+</p>
+
+<h5>Implementation using ASP.NET MVC</h5>
+<p>
+    In MVC the typical and easiest approach would be to create a an MVC Controller Action, use EF to make a sync call to access the database,
+    a sync call with a new HTTP Client to download the content which is buffered inside the Controller action before returned inside a View Model
+    that is handed off to MVC to execute the View inside the default Layout.
+</p>
+
+<h5>Implementation using #Script</h5>
+<p>
+    What does <em>#Script</em> do? lets step through the first filter:
+</p>
+
+{{ "live-template" |> partial({ output:'no-scroll', rows:1, template: "{{ 'select url from quote where id= @id' |> dbScalar({ id:1 }) |> htmlLink }}" }) }}
+
+<p>
+    What filter implementation gets called depends on which <a href="/docs/db-scripts">DB Scripts</a> is registered, if your RDBMS supports ADO.NET's 
+    async API you can register 
+    <a href="https://github.com/ServiceStack/ServiceStack.OrmLite/blob/master/src/ServiceStack.OrmLite/DbScriptsAsync.cs">DbScriptsAsync</a>
+    to execute all queries asynchronously, otherwise if using an RDBMS whose ADO.NET Provider doesn't support async you can register the
+    <a href="https://github.com/ServiceStack/ServiceStack.OrmLite/blob/master/src/ServiceStack.OrmLite/DbScripts.cs">DbScripts</a>
+    to execute each DB request synchronously without paying for any <i>pseudo-async</i> overhead, in each case the exact same code executes
+    the most optimal ADO.NET APIs. #Script also benefits from using the much faster 
+    <a href="https://github.com/ServiceStack/ServiceStack.OrmLite">OrmLite</a> and also saves on the abstraction cost from generating a 
+    parameterized SQL Statement from a Typed Expression-based API.    
+</p>
+
+<h5>Arguments chain</h5>
+<p>
+    The next question becomes what is <em>id</em> bound to? Similar to JavaScript's prototype chain it resolves the closest 
+    argument in its <a href="/docs/arguments">Arguments hierarchy</a>, e.g. when evaluated as a view page it could be set 
+    by arguments in [paged based routes](/docs/sharp-pages#page-based-routing) or when the same page is evaluated as a 
+    partial it could be set from the scoped arguments it was called with.
+</p>
+
+<h5>Async I/O</h5>
+<p>
+    The url returned from the db is then passed to the <em>urlContents</em> filter which if it was the last filter in the expression
+    avoids any buffering by asynchronously streaming the url content stream directly to the forward-only HTTP Response Stream:
+</p>
+
+<pre class="cs"><code>{{ pass: url |> urlContents }}</code></pre>
+
+<p>
+    <em>urlContents</em> is a <a href="/docs/methods#block-methods">Block Method</a> which instead of returning a value writes its 
+    response to the OutputStream it's given. But then how could we convert it to Markdown if it's already written to the Response Stream?
+    #Script analyzes the Expression's AST to determine if there's any filters remaining, if there is it gives the <em>urlContents</em> 
+    Block filter a <em>MemoryStream</em> to write to, then forwards its buffered output to the next filter. Since they don't return values, 
+    the only thing that can come after a Block Filter are other Block filters or <a href="/docs/transformers">Stream Transformers</a>. 
+    <em>markdown</em> is one such <a href="/docs/transformers#filter-transformers">Filter Transformer</a> which takes in a stream of Markdown 
+    and returns a Stream of HTML.
+</p>
+
+<pre class="cs"><code>{{ pass: url |> urlContents |> markdown }}</code></pre>
+
+<h5>Same intent, different implementations</h5>
+<p>
+    The <em>assignTo</em> filter is used to set a value in the current scope. After Block Filters, a different <em>assignTo</em> Block Filter
+    is used with the same name and purpose but a different implementation that reads all the contents of the stream into a UTF-8 string
+    and sets a value in the current scope before returning an empty Stream so nothing is written to the Response. 
+</p>
+
+<pre class="cs"><code>{{ pass: url |> urlContents |> markdown |> to => quote }}</code></pre>
+
+<p>
+    Once the streamed output is captured and assigned it goes back into becoming a normal argument that opens it up to be 
+    able to use all filters again, which is how we're able to use the string <em>replace</em> filters before rendering the final result :)
+</p>
+
+<h4><a href="/examples/qotd?id=1">/examples/qotd?id=1</a></h4>
+
+<h5>Using the most efficient implementation allowable</h5>
+<p>
+    So whilst it conceptually looks like each filter is transforming large buffered strings inside every filter, the expression is 
+    inspected to utilize the most efficient implementation allowable. At the same time filters are not statically bound to 
+    any implementation so you could for instance <a href="/docs/methods#registering-methods">insert a Custom Filter</a> before the Default 
+    Filters containing the same name and arguments count to have #Script execute your custom script methods instead, all whilst the  
+    script source code and intent remains untouched.
+</p>
+
+<h5>Intent-based code is easier to augment</h5>
+<p>
+    If it was later discovered that some URLs were slow or rate-limited and you needed to introduce caching, your original C# code
+    would require a fair amount of rework, in #Script you can simply add <em>WithCache</em> to call the
+    <a href="/docs/protected-scripts#includeurlwithcache">urlContentsWithCache</a> filter to return locally cached contents 
+    on subsequent requests.
+</p>
+
+<pre class="cs"><code>{{ pass: url |> urlContentsWithCache |> markdown }}</code></pre>
+
+<h4>Simplified Language</h4>
+
+<p>
+    As there's very little ceremony in #Script, a chain of filters looks like it's using its own DSL to accomplish each task and
+    given <a href="/docs/methods#registering-methods">implementing and registering custom filters </a> is trivial you're 
+    encouraged to write the intent of your code first then implement any filters that are missing to realize its intent. Once 
+    you've captured the intent of what you want to do, it's less likely to ever need to change, focus is instead on 
+    fixing any bugs and making the filter implementations as efficient as possible, which benefits all existing code using the same filter.
+</p>
+
+<p>    
+    To improve readability and make it more approachable, #Script aims to normalize the mechanics of the underlying implementation from 
+    the code's intent so you can use the same syntax to access an argument, e.g. <em>{{ pass: arg }}</em> as you would a filter without 
+    arguments  <em>{{ pass: now }}</em> and just like JavaScript you can use <em>obj.Property</em> syntax to access both a public property 
+    on a Type or an entry in a Dictionary.
+</p>
+
+<h3 id="late-bound">Late-bound flexibility</h3>
+
+<p>
+    There's no static coupling to concrete classes, static methods or other filters, ambiguous method exceptions or namespace collisions. 
+    Each filter is self-contained and can easily be shared and dropped into any Web App by 
+    <a href="/docs/methods#registering-methods">registering them in a list</a>. Inspired by the power and 
+    <a href="http://mythz.servicestack.net">flexibility in Smalltalk and LISP</a>, filters are late-bound at run-time to the first matching filter 
+    in the user-defined list of <em>ScriptMethods</em>. This ability to shadow filters enables high-level intent-based APIs decoupled from implementations which 
+    <a href="/docs/servicestack-scripts#sendToAutoQuery-rdbms">sendToAutoQuery</a> leverages to automatically route filter invocations to 
+    the appropriate implementation depending of if it's an <a href="https://docs.servicestack.net/autoquery-rdbms">AutoQuery RDBMS</a> or an 
+    <a href="https://docs.servicestack.net/autoquery-data">AutoQuery Data</a> request, masking their implementations as a transparent detail. 
+    This flexibility also makes it easy create proxies, intercept and inject behavior like logging or profiling without modifying existing 
+    script method implementations or script source code.
+</p>
+
+{{ "doc-links" |> partial({ order }) }}

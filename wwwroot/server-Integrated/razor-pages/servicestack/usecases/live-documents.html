@@ -1,0 +1,60 @@
+<!--
+title: Live Documents
+order: 4
+-->
+
+<p>
+    The lack of pre-compilation and its fast startup and runtime performance makes Templates ideal for maintaining 
+    reactive live documents containing a mix of docs, processing and calculations like creating a personal budget:
+</p>
+
+{{ 'examples/monthly-budget.txt' |> includeFile |> to => template }}
+{{ "live-template" |> partial({ rows:36, template }) }}
+
+<style>
+    .output {
+        font-family: Monaco, Consolas;
+    }
+</style>
+
+<h3>csv</h3>
+
+<p>
+    Similar to <em>keyvalues</em>, you can specify a multi-column inline data set using the <em>#csv</em> block, e.g:    
+</p>
+
+<div class="linq-preview {{ output }}">
+    <div class="template">
+        <textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control" rows="7"
+>{{#raw}}{{#csv cars}}
+Tesla,Model S,79990
+Tesla,Model 3,38990
+Tesla,Model X,84990
+{{/csv}}
+{{ cars |> map => { Make: it[0], Model: it[1], Cost: it[2] } |> htmlDump  }}
+Total Cost: {{ cars |> sum => it[2] |> currency }}{{/raw}}</textarea>
+    </div>
+    <div class="result">
+        <div class="output" style="font-family: Monaco, Consolas"></div>
+    </div>
+</div> 
+
+<h3>Live Document Blog</h3>
+
+<p>
+    The <a href="http://localhost:5000/docs/sharp-apps#blog">blog</a> Sharp App shows you can create a blog where each post is a Live Document
+    with real-time feedback:
+</p>
+
+<iframe width="840" height="472" src="https://www.youtube.com/embed/FlKeaav0gt8?start=67" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h3>Embed Live Data from JSON APIs</h3>
+
+{{ 'examples/query-github.txt' |> includeFile |> to => template }}
+
+<pre class="sh"><code>{{template}}</code></pre>
+
+<img src="/assets/img/query-github.png">
+
+{{ "usecase-links" |> partial({ order }) }}
+

@@ -1,0 +1,29 @@
+<div class="gfm"><div class="highlight highlight-text-html-handlebars"><pre><span class="pl-c"><span class="pl-c">&lt;!--</span></span>
+<span class="pl-c">debug false</span>
+<span class="pl-c"><span class="pl-c">--&gt;</span></span>
+
+Markdown:
+<span class="pl-c1">{{</span><span class="pl-c1">#markdown</span><span class="pl-c1">}}</span>
+## Title
+
+&gt; quote
+
+Paragraph with [a link](https://example.org).
+<span class="pl-c1">{{</span><span class="pl-c1">/markdown</span><span class="pl-c1">}}</span>
+
+JS:
+<span class="pl-c1">{{</span><span class="pl-c1">#minifyjs</span><span class="pl-c1">}}</span>
+function add(left, right) {
+    return left + right;
+}
+add(1, 2);
+<span class="pl-c1">{{</span><span class="pl-c1">/minifyjs</span><span class="pl-c1">}}</span>
+
+
+CSS:
+<span class="pl-c1">{{</span><span class="pl-c1">#minifycss</span><span class="pl-c1">}}</span>
+body {
+    background-color: #ffffff;
+}
+<span class="pl-c1">{{</span><span class="pl-c1">/minifycss</span><span class="pl-c1">}}</span></pre></div>
+</div>

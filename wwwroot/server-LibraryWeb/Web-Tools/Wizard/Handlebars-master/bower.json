@@ -1,0 +1,27 @@
+{
+  "name": "handlebars",
+  "version": "0.0.2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "homepage": "https://github.com/niczak/Handlebars",
+  "authors": [
+    "F. Stephen Kirschbaum <@fskirschbaum>",
+    "Nicholas Kreidberg <@niczak>"
+  ],
+  "description": "A simple example of using remote templates and data for handlebars.",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "modernizr": "~2.7.2",
+    "handlebars": "~1.3.0",
+    "fontawesome" : "~4.0.3"
+  }
+}

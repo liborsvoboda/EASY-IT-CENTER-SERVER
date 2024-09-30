@@ -1,0 +1,65 @@
+<!--
+title: Hot Reloading
+order: 19
+-->
+
+<p>
+    <em>#Script</em> has a simple, but effective configuration-free hot-reloading feature built-in that's enabled 
+    when registering the <a href="/docs/sharp-pages">SharpPagesFeature</a> plugin:
+</p>
+
+{{ 'gfm/hot-reloading/01.md' |> githubMarkdown }}
+
+<p>
+    It can then be enabled in your website by adding the expression below at the top of your <b>_layout.html</b>:
+</p>
+
+{{ 'gfm/hot-reloading/02.md' |> githubMarkdown }}
+
+<p>
+    This will embed the dependency-free <a href="https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/js/hot-loader.js">hot-loader.js</a>
+    script during <a href="https://docs.servicestack.net/debugging#debugmode">development</a> to poll the service endpoint below:
+</p>
+
+<pre class="url"><code>/templates/hotreload/page?path=path/to/page&amp;eTag=lastETagReceived</code></pre>
+
+<p>
+    Which responds with whether or not the client should reload their current page, preserving their current scroll offset.
+</p>
+
+<blockquote>
+    An easy way to temporarily disable hot reloading is to surround the expression with the <em>noop</em> block 
+    <em>{{#raw}}{{#noop}}{{#if debug}} ...{{/noop}}{{/raw}}</em> or if preferred you can just use comments 
+    <em>{{#raw}}{{* #if debug ... *}}{{/raw}}</em> 
+</blockquote>
+
+<h4>When to reload</h4>
+
+<p>
+    Hot Reloading only monitors #Script Pages. You'll need to do a hard refresh with <em>Ctrl+Shift+F5</em> if making changes to 
+    <em>.css</em> or <em>.js</em> to force the browser to not use its cache. For App Code or Configuration changes you'll 
+    need to restart your App to pick up the changes.
+</p>
+
+<h4>Implementation</h4>
+
+<p>
+    The Service is just a wrapper around the <em>ISharpPages.GetLastModified(page)</em> API which returns the 
+    last modified date of the page and any of its dependencies by scanning each expression in the page's AST to 
+    find each referenced partial or included file to find the most recent modified date which it compares against 
+    the eTag provided by the client to determine whether or not any of the pages resources have changed.
+</p>
+
+<p>
+    Since it's just scanning the AST instead of evaluating it, it will only be able to find files and partials that were 
+    statically referenced, i.e. the typical case of using a string literal for the file name as opposed to a dynamically creating it.
+</p>
+
+<h4>Preview</h4>
+
+<p>If enabled and working correctly hot reloading should allow you to view instant UI changes on save:</p>
+
+<a href="https://www.vuedesktop.com"><img src="https://raw.githubusercontent.com/ServiceStack/docs/master/docs/images/app/vue-desktop/vuedesktop-livereload.gif" alt=""></a>
+
+
+{{ "doc-links" |> partial({ order }) }}

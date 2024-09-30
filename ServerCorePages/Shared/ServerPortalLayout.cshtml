@@ -1,20 +1,40 @@
-﻿
-
-@* @addTagHelper *, WebOptimizer.Core *@
+﻿@* @addTagHelper *, WebOptimizer.Core *@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Westwind.AspNetCore
+@addTagHelper *, Westwind.AspNetCore.Markdown
 
+@using Microsoft.AspNetCore.Mvc
 @using Microsoft.AspNetCore.Html
-@using ServerCorePages
-@using EasyITCenter.DBModel
-@using EasyITCenter.ServerCoreWebPages
-@using System.Security.Claims
-@using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.RazorPages
 
+@using Westwind.AspNetCore.Markdown
+
+@using System.IO
+@using System.Linq
+@using System.Collections
+@using System.Collections.Generic
+@using System.Text.RegularExpressions
+@using System.Security.Claims
+@using System.Threading.Tasks
+
+@using EasyITCenter
+@using EasyITCenter.DBModel
+@using EasyITCenter.Managers
+@using EasyITCenter.WebClasses
+@using EasyITCenter.WebModel
+@using EasyITCenter.WebDBModel
+@using EasyITCenter.WebControllers
+@using EasyITCenter.ServerCoreStructure
+@using EasyITCenter.ServerCorePages
+
+@namespace ServerCorePages
+@model ServerCorePages.ServerPortalModel
 
 <!DOCTYPE html>
-<html>
+<html class=" scrollbar-type-1 sb-cyan">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"" />
     <meta name="charset" content="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -23,67 +43,112 @@
     <meta name="keywords" content="System, Backend, API, EASY-DATA-Center, EASY-SYSTEM-Builder, Application, Server, IT, Solution, Help, HowTo, Javascript, HTML5, UI, Library, Web, Development, Framework">
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
     <link rel="icon" href="~/favicon.ico" type="image/x-icon">
-    <title>EIC&ESB Dev Portal</title>
+    <title>EIC&ESB Server Portal</title>
 
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/ionicons/css/ionicons.min.css" />
-    @RenderSection("Styles", required: false)
-    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/admin-lte/css/AdminLTE.min.css" />
-    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/admin-lte/css/skins/_all-skins.min.css" />
-    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/icheck/skins/square/blue.css" />
-    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/css/google.css" />
-    @* <link rel="stylesheet" href="/server-Integrated/razor-pages/ServerPortal/metro/css/metro-all.min.css" /> *@
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/metro/css/metro-all.min.css" />
+    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/manage/css/global.css" />
 
-    <link rel="stylesheet" href="/server-Integrated/razor-pages/serverportal/css/site.css" />
+    <script type="text/javascript" src="/server-Integrated/razor-pages/serverportal/AddOns/jquery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/server-Integrated/razor-pages/serverportal/metro/js/metro.min.js"></script>
+    <script type="text/javascript" src="/server-Integrated/razor-pages/serverportal/Manage/js/global.js"></script>
+    <script type="text/javascript" src="/server-Integrated/razor-pages/serverportal/Manage/js/js.cookie.min.js"></script>
+
+
+    <script>
+        window.on_page_functions = [];
+    </script>
+
+     @* Google Translation *@
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini fixed">
 
-    <div class="wrapper">
-
-        @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_Header.cshtml")
-        @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_NavBar.cshtml")
-        <div class="content-wrapper">
-
-            @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_StatusMessage.cshtml", TempData["StatusMessage"])
-            @RenderBody()
+<body class="m4-cloak h-vh-100">
+<div data-role="navview" data-toggle="#paneToggle" data-expand="xl" data-compact="lg" data-active-state="true">
+    <div class="navview-pane">
+        <div class="bg-cyan d-flex flex-align-center">
+            <button class="pull-button m-0 bg-darkCyan-hover">
+                <span class="mif-menu fg-white"></span>
+            </button>
+            <h2 class="text-light m-0 fg-white pl-7" style="line-height: 52px" title="EasyIT-Server & EasySYSTEM-Builder UNLIMITED IT Cloud Solution">EIC & ESB</h2>
         </div>
-        @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_Footer.cshtml")
-        @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_SideBar.cshtml")
+
+        <div class="suggest-box">
+            <div class="data-box">
+                    <img src="/server-Integrated/razor-pages/serverportal/images/logo.png" class="avatar">
+                <div class="ml-4 avatar-title flex-column">
+                    <a href="#" class="d-block fg-white text-medium no-decor"><span class="reduce-1">Jack Sparrow</span></a>
+                    <p class="m-0"><span class="fg-green mr-2">&#x25cf;</span><span class="text-small">online</span></p>
+                </div>
+            </div>
+                <img src="/server-Integrated/razor-pages/serverportal/images/jek_vorobey.jpg" class="avatar holder ml-2">
+        </div>
+
+        <div class="suggest-box">
+            <input type="text" data-role="input" data-clear-button="false" data-search-button="true">
+            <button class="holder">
+                <span class="mif-search fg-white"></span>
+            </button>
+        </div>
+
+
+            @await Html.PartialAsync("~/ServerCorePages/ServerPortal/_Partial/_LeftMenu.cshtml")
+
+        <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
+            <div>&copy; 2019 <a href="mailto:sergey@pimenov.com.ua" class="text-muted fg-white-hover no-decor">Sergey Pimenov</a></div>
+            <div>Created with <a href="https://metroui.org.ua" class="text-muted fg-white-hover no-decor">Metro 4</a></div>
+        </div>
     </div>
 
-    
 
-   
+    <div class="navview-content h-100">
+            @await Html.PartialAsync("~/ServerCorePages/ServerPortal/_Partial/_HeaderMenu.cshtml")
+        
+            @RenderBody()
+         
+            @await Html.PartialAsync("~/ServerCorePages/ServerPortal/_Partial/_Modal.cshtml")
+    </div>
+</div>
+
+   @* <div class="pos-absolute d-flex text-center" style="bottom:10px;width:100%;left:10px;">
+        <a class="button m-1 text-bold bg-lightblue c-pointer shadowed" onclick=OpenCharm(0)>Zavřít Nástroje</a>
+        <a class="button m-1 text-bold bg-lightblue c-pointer shadowed" onclick=ShowMessagePanel()>Poslat Zprávu</a>
+        <a class="button m-1 text-bold bg-lightblue c-pointer shadowed" onclick=DownloadFrameHtmlElement();>Stáhni si Html</a>
+        <a class="button m-1 text-bold bg-lightblue c-pointer shadowed" onclick=ShowFrameSource();>Zobraz si Kód</a>
+        <a class="button m-1 text-bold bg-lightblue c-pointer shadowed" onclick=ChangeSource('./Downloads/');>Mrkni do DovnLoad</a>
+        <a class="button m-1 text-bold bg-lightblue c-pointer shadowed" onclick=GetNewsList();>Zobrazit Novinky</a>
+        <a class="button m-1 text-bold bg-lightblue c-pointer shadowed" onclick=ChangeSource('./server-provider/AwesomeCode/AwesomeJS/projects.html');>Dá se Cokoliv a Snadno</a>
+        <a class="button m-1 text-bold bg-lightblue c-pointer shadowed" onclick=window.open("https://calendar.app.google/7GtS8wkYG9HoUVAB7");>Rezervace Schůzky</a>
+ *@
+
 </body>
-<script src="/server-Integrated/razor-pages/serverportal/jquery/jquery.min.js"></script>
-<script src="/server-Integrated/razor-pages/serverportal/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/server-Integrated/razor-pages/serverportal/AddOns/chartjs/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="/server-Integrated/razor-pages/serverportal/AddOns/qrcode/qrcode.min.js"></script>
+<script type="text/javascript" src="/server-Integrated/razor-pages/serverportal/AddOns/jsbarcode/JsBarcode.all.min.js"></script>
+<script type="text/javascript" src="/server-Integrated/razor-pages/serverportal/AddOns/ckeditor/ckeditor.js"></script>
 
-@RenderSection("Scripts", required: false)
-
-<script src="/server-Integrated/razor-pages/serverportal/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/server-Integrated/razor-pages/serverportal/fastclick/fastclick.min.js"></script>
-<script src="/server-Integrated/razor-pages/serverportal/admin-lte/js/adminlte.min.js"></script>
-<script src="/server-Integrated/razor-pages/serverportal/admin-lte/js/demo.js"></script>
-<script src="/server-Integrated/razor-pages/serverportal/js/html5shiv.min.js"></script>
-<script src="/server-Integrated/razor-pages/serverportal/respond.min.js"></script>
-<script src="/server-Integrated/razor-pages/ServerPortal/metro/js/metro.4.5.2.min.js"></script>
-
-<script src="/server-Integrated/razor-pages/serverportal/js/site.js"></script>
+<!-- Google Calendar Appointment Scheduling begin -->
+<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
 <script>
+(function() {
+  var target = document.currentScript;
+  window.addEventListener('load', function() {
+    calendar.schedulingButton.load({
+      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ36J_NEP4KC5K1F1vlohKK-HuhtBvsphh4AGvjYNZgbz0ZYw39VxZ7Mb-7GghfAvUn7UHLi6XV3?gv=true',
+      color: '#039BE5',
+      label: 'Rezervovat si schůzku',
+      target,
+    });
+  });
+})();
+</script>
+<!-- end Google Calendar Appointment Scheduling -->
+
+<script>
+    /*
     $(document).ready(function () {
         $('.sidebar-menu').tree()
     })
-
-    // $(function () {
-    //     $('input').iCheck({
-    //         checkboxClass: 'icheckbox_square-blue',
-    //         radioClass: 'iradio_square-blue',
-    //         increaseArea: '20%'
-    //     });
-    // });
+    */
 </script>
- @await Html.PartialAsync("~/ServerCorePages/serverportal/Partial/_ValidationScriptsPartial.cshtml")
-
 </html>

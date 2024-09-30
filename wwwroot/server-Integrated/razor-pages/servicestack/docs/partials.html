@@ -1,0 +1,120 @@
+<!--
+title: Partials
+order: 10
+-->
+
+<p>
+    Partials are just normal pages which contain reusable scripts you'd like to embed in different pages.
+    There is no difference between pages and partials other than how they're embedded where pages are embedded 
+    in a <b>_layout</b> using the <em>{{ pass: page }}</em> expression and partials are embedded using the
+    <em>partial</em> block method which can also define scoped arguments on the call-site using an Object
+    literal:
+</p>
+
+{{ "live-pages" |> partial(
+    {
+        page: 'page', 
+        files: 
+        { 
+            '_layout.html': `{{ 'from layout' |> to => layoutArg }}
+I am a Layout with page
+{{ page }}`,
+            'page.html' : `I am a Page with a partial
+{{ 'my-partial' |> partial({ arg: "from page" }) }}`,
+            'my-partial.html' : `I am a partial called with the scoped argument <b>{{ arg }}</b>
+Who can also access other arguments in scope <b>{{ layoutArg }}</b>`
+        } 
+    }) 
+}}
+
+<h4>Select Partial</h4>
+
+<p>
+    Another way that partials can be embedded is using the <em>selectPartial</em> block method which will re-evaluate
+    the same partial for each item in the collection which is made available in the <em>it</em> binding, e.g:
+</p>
+
+<div class="linq-preview">
+    <div class="files">
+        <section>
+            <h5>customer.html</h5>
+            <textarea class="form-control" rows="3">{{ "code/linq04-customer.ss" |> includeFile }}</textarea>
+        </section>
+        <section>
+            <h5>order.html</h5>
+            <textarea class="form-control" rows="3">{{ "code/linq04-order.ss" |> includeFile }}</textarea>
+        </section>
+    </div>
+    <div class="template">
+        <textarea class="form-control" rows="3">{{ "code/linq04-partials.ss" |> includeFile }}</textarea>
+    </div>
+    <div class="result">
+        <div class="output"></div>
+    </div>
+</div>
+
+<h4 id="inline-partials">Inline Partials</h4>
+
+<p>
+    Partials can also be defined in-line with the <em>{{pass: #partial}}</em> block statement:
+</p>
+
+{{ 'live-template' |> partial({ rows:13, template: `
+{{#partial order}}
+  Order {{ it.OrderId }}: {{ it.OrderDate |> dateFormat }}
+{{/partial}}
+{{#partial customer}}
+Customer {{ it.CustomerId }} {{ it.CompanyName |> raw }}
+{{ it.Orders |> selectPartial: order }}{{/partial}}
+
+{{ customers |> where => it.Region == 'WA' |> to => waCustomers }}
+ Customers from Washington and their orders:
+ {{ waCustomers |> selectPartial: customer }}` }) }}
+
+<blockquote>
+    The <a href="/linq/restriction-operators#linq4-where---drilldown">linq 04</a> 
+    example below shows how to implement this without partials using <em>{{pass: #each}}</em> statement blocks:
+</blockquote>
+
+{{ 'live-template' |> partial({ rows:7, template: `Customers from Washington and their orders:
+{{#each c in customers where c.Region == 'WA'}}
+Customer {{ c.CustomerId }} {{ c.CompanyName |> raw }}
+{{#each c.Orders}}
+    Order {{ OrderId }}: {{ OrderDate |> dateFormat }}
+{{/each}}
+{{/each}}` }) }}
+
+
+<h4>Resolving Partials and Pages</h4>
+
+<p>
+    Just like pages, partials are resolved from the ScriptContext's configured <em>VirtualFiles</em> sources 
+    where partials in the root directory can be resolved without any specifying any folders:
+</p>
+
+<pre class="cs"><code>{{ pass: 'my-partial' |> partial }}</code></pre>
+
+<h5>Cascading resolution</h5>
+
+<p>
+    If an exact match isn't found it will look for the closest page with that name it can find, starting from the directory
+    where the page that contains the partial is located and traversing up until it reaches the root folder.
+</p>
+
+<p>
+    Otherwise you can specify the virtual path to the partial from the Virtual Files root, e.g:
+</p>
+
+<pre class="cs"><code>{{ pass: 'dir/subdir/my-partial' |> partial }}</code></pre>
+
+<h4>ownProps</h4>
+
+<p>
+    Use <em>ownProps</em> to iterate all user-defined arguments specified for a partial, e.g:
+</p>
+
+{{ 'live-template' |> partial({ rows:2, template: `{{#partial test}} {{ it.ownProps() |> map => it.Key |> dump }} {{/partial}}
+{{ 'test' |> partial({ A:1, B:2, C:3 }) }}` }) }}
+
+
+{{ "doc-links" |> partial({ order }) }}

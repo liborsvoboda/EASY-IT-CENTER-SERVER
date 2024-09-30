@@ -1,0 +1,34 @@
+<!--
+title: Overview
+order: 0
+-->
+
+<p>
+    All LINQ Examples are executed using the same ScriptContext instance below:
+</p>
+
+{{ 'gfm/linq/01.md' |> githubMarkdown }}
+
+<p>
+    Which makes available the <b>products</b> and <b>customer</b> data sources to each template, all other data 
+    sources are created within the template that uses them. 
+</p>
+
+<p>
+    The <b>comparer</b> and <b>anagramComparer</b> are examples of custom .NET objects the templates can't create themselves 
+    so they need to defined externally so they're available to the LINQ examples that need them.
+</p>
+
+<p>
+    The <em>Args[DefaultDateFormat]</em> changes the default format the <em>dateFormat</em> filter uses if none is provided.
+</p>
+
+<p>
+    View the LINQ Examples in all of <em>#Script</em> Languages:
+</p>
+
+<div class="text-center pt-3">
+    <a href="/linq/restriction-operators" class="btn btn-outline-primary btn-lg">template</a>
+    <a href="/linq/restriction-operators?lang=code" class="btn btn-outline-primary btn-lg">code</a>
+    <a href="/linq/restriction-operators?lang=lisp" class="btn btn-outline-primary btn-lg">lisp</a>
+</div>

@@ -1,0 +1,37 @@
+{
+  "name": "handlebarsplayground",
+  "version": "1.0.0",
+  "description": "handlebars playground",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "scss-compile": "gulp sass:watch",
+    "js-compile": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lamap/handlebarsPlayground.git"
+  },
+  "keywords": [
+    "handlebars"
+  ],
+  "author": "lamap",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lamap/handlebarsPlayground/issues"
+  },
+  "homepage": "https://github.com/Lamap/handlebarsPlayground#readme",
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "gulp-sass": "^3.1.0",
+    "jquery": "^3.2.1",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6"
+  },
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "gulp": "^3.9.1",
+    "handlebars": "^4.0.10",
+    "scss-compile": "^0.1.7"
+  }
+}

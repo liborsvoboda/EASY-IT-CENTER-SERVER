@@ -15,7 +15,7 @@ using EasyITCenter.GitServer.Models;
 using EasyITCenter.GitServer.Controllers;
 using RefactorWebSites;
 using Westwind.AspNetCore.Markdown;
-using ServerCorePages;
+
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Authentication.Facebook;
@@ -33,6 +33,7 @@ using PuppeteerExtraSharp.Plugins.Recaptcha;
 using Codeuctivity.OpenXmlPowerTools;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using IdentityModel;
+using Korzh.DbUtils;
 
 
 namespace EasyITCenter.ServerCoreConfiguration {
@@ -348,14 +349,19 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 //EIC&ESB MAIN DB
                 services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(SrvConfig.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
-                //WEBHOSTING DB
-                services.AddDbContext<WebHostingDbContext>((p, o) => o.UseSqlServer($"Data Source={SrvConfig.WebHostingDBConnString};AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30",
-                    x => x.UseNetTopologySuite())
-                .UseInternalServiceProvider(p));
 
+                //services.AddDbContext<WebHostingDbContext>((p, o) => o.UseSqlServer($"Data Source={SrvConfig.WebHostingDBConnString};AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30",
+                //    x => x.UseNetTopologySuite())
+                //.UseInternalServiceProvider(p));
+                //services.AddDbContext<WebHostingDbContext>( (provider, cfg) => cfg.UseSqlServer($"Data Source={SrvConfig.WebHostingDBConnString};Initial Catalog=EICWebHostingDb")
+                //.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                //.UseApplicationServiceProvider(provider).UseSqlServer($"Data Source={SrvConfig.WebHostingDBConnString};Initial Catalog=EICWebHostingDb")
+                //);
+
+                //WEBHOSTING DB
                 // Database File Example
                 // services.AddDbContext<WebHostingDbContext>(
-                // opt =>opt.UseFileContextDatabase<JSONSerializer, DefaultFileManager>(databaseName: "EICwebHosting", location: Path.Combine(ServerRuntimeData.WebRoot_path, FileOperations.GetLastFolderFromPath(ServerRuntimeData.ServerPrivate_path), "databases", "EICwebHosting.mdf"), password: "EICwebHOSTING"));
+                //opt =>opt.UseFileContextDatabase<JSONSerializer, DefaultFileManager>(databaseName: "EICwebHosting", location: Path.Combine(ServerRuntimeData.WebRoot_path, FileOperations.GetLastFolderFromPath(ServerRuntimeData.ServerPrivate_path), "databases", "EICwebHosting.mdf"), password: "EICwebHOSTING"));
                 //context.Database.Migrate();
 
             } catch (Exception ex) { }

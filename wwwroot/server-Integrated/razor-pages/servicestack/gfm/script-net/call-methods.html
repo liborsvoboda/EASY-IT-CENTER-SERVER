@@ -1,0 +1,27 @@
+<div class="gfm"><p>Use the <code>call</code> and <code>Function</code> APIs to call methods on .NET Types:</p>
+<ul>
+<li>
+<code>call</code> - invoke a method on an instance</li>
+<li>
+<code>Function</code> - create a Function <strong>delegate</strong> that can invoke methods via normal method invocation</li>
+</ul>
+<h2>
+<a id="user-content-call" class="anchor" href="#call" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>call</h2>
+<p>In its most simplest form you can invoke an instance method that doesn't have any arguments using just its name:</p>
+<div class="highlight highlight-source-js"><pre><span class="pl-s"><span class="pl-pds">'</span>Ints<span class="pl-pds">'</span></span>.<span class="pl-en">new</span>([<span class="pl-c1">1</span>,<span class="pl-c1">2</span>]) <span class="pl-k">|</span><span class="pl-k">&gt;</span> <span class="pl-smi">to</span> <span class="pl-k">=&gt;</span> ints
+<span class="pl-smi">ints</span>.<span class="pl-c1">call</span>(<span class="pl-s"><span class="pl-pds">'</span>GetMethod<span class="pl-pds">'</span></span>)</pre></div>
+<p>Any arguments can be specified in an arguments list:</p>
+<div class="highlight highlight-source-js"><pre><span class="pl-s"><span class="pl-pds">'</span>Adder<span class="pl-pds">'</span></span>.<span class="pl-en">new</span>([<span class="pl-c1">1.0</span>,<span class="pl-c1">2.0</span>]) <span class="pl-k">|</span><span class="pl-k">&gt;</span> <span class="pl-smi">to</span> <span class="pl-k">=&gt;</span> adder3
+<span class="pl-smi">adder3</span>.<span class="pl-c1">call</span>(<span class="pl-s"><span class="pl-pds">'</span>Add<span class="pl-pds">'</span></span>,[<span class="pl-c1">3.0</span>]) <span class="pl-c"><span class="pl-c">//</span>= 6.0</span></pre></div>
+<h3>
+<a id="user-content-method-resolution" class="anchor" href="#method-resolution" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Method Resolution</h3>
+<p>The same Resolution rules in <strong>Constructor Resolution</strong> also applies when calling methods where any <strong>ambiguous methods</strong> needs to be
+called with arguments containing the <strong>exact types</strong> (as above), or you can specify the argument types of the method you want to call,
+in which case it will let you use the built-in Auto Mapping to call a method expecting a <code>double</code> with an <code>int</code> argument:</p>
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">adder3</span>.<span class="pl-c1">call</span>(<span class="pl-s"><span class="pl-pds">'</span>Add(double)<span class="pl-pds">'</span></span>,[<span class="pl-c1">3</span>])</pre></div>
+<h3>
+<a id="user-content-generic-methods" class="anchor" href="#generic-methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Generic Methods</h3>
+<p>You can call generic methods by specifying the Generic Type in the method name:</p>
+<div class="highlight highlight-source-js"><pre><span class="pl-s"><span class="pl-pds">'</span>Ints<span class="pl-pds">'</span></span>.<span class="pl-en">new</span>([<span class="pl-c1">1</span>,<span class="pl-c1">2</span>]).<span class="pl-c1">call</span>(<span class="pl-s"><span class="pl-pds">'</span>GenericMethod&lt;string&gt;<span class="pl-pds">'</span></span>,[<span class="pl-s"><span class="pl-pds">'</span>A<span class="pl-pds">'</span></span>])</pre></div>
+<p><code>call</code> only invokes instance methods, to call static methods you'll need to use <code>Function</code>.</p>
+</div>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<!----------------------------------------------------------------------------------------
+	This demo uses DataFormsJS Web Components to display data from a JSON Service.
+	Web Components work in modern browsers and a polyfill that uses the DataFormsJS
+	Framework can be used for users with older browsers.
+---------------------------------------------------------------------------------------->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Site do Code Playground - Web Components</title>
+        <link rel="stylesheet" href="site.css">
+        <link rel="shortcut icon" href="../../favicon.ico" />
+        <style>
+            /* Prevent custom web components from appearing during rendering include the following CSS */
+            json-data:not(:defined),
+            is-loading:not(:defined),
+            has-error:not(:defined),
+            is-loaded:not(:defined) { display:none; }
+        </style>
+        <script nomodule>
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'site-ie.css';
+            document.head.appendChild(link);
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a class="active" href="#/">Home</a>
+                <a href="#/calc">Calculator</a>
+                <a href="#/data">Data Example</a>
+                <a href="#/demos">Other Demos</a>
+            </nav>
+        </header>
+
+        <main id="view" class="container"></main>
+
+        <template id="loading-screen">
+            <h3 class="loading">Loading...</h3>
+        </template>
+
+        <footer>
+            <p class="year"></p>
+            <p class="now"></p>
+        </footer>
+
+        <url-router view-selector="#view">
+            <url-route path="/">
+                <template>
+                    <h1>Hello World</h1>
+                    <div class="home-page-animation">
+                        <img src="sun.svg" class="sun">
+                        <div class="orbit">
+                            <img src="planet.svg" class="planet">
+                            <img src="moon.svg" class="moon">
+                        </div>
+                    </div>
+                </template>
+            </url-route>
+
+            <url-route path="/calc"
+                src="calc-web.htm"
+                lazy-load="calc_page, data_list"
+                onload="setupCalcPage()">
+            </url-route>
+
+            <url-route path="/data"
+                src="data-web.htm"
+                lazy-load="data_table, json_data, input_filter, sortable_table, flags">
+            </url-route>
+
+            <url-route path="/demos">
+                <template>
+                    <h1>Other Demos</h1>
+                    <ul class="demos">
+                        <li><a href="app.htm">Handlebars</a></li>
+                        <li><a href="app-vue.htm">Vue + GraphQL</a></li>
+                        <li><a href="app-react.htm">React</a></li>
+                    </ul>
+                </template>
+            </url-route>
+        </url-router>
+
+        <!--
+            DataFormsJS Web Components
+            https://www.dataformsjs.com
+        -->
+        <script type="module" src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/web-components/url-router.min.js"></script>
+		<script type="module" src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/web-components/spa-links.min.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/web-components/polyfill.min.js"></script>
+        <script>
+            window.lazyLoad = {
+                calc_page: 'calc-page-web.js',
+                data_list: {
+                    // <data-list> is accessed directly in API without a JSON service so due to timing
+                    // of how the API is called the [nomodule] version is specified here. For most
+                    // apps the [nomodule] version would not need to be included.
+                    module: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/web-components/data-list.min.js',
+                    nomodule: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/controls/data-list.min.js',
+                },
+                data_table: { module: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/web-components/data-table.min.js' },
+                json_data: { module: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/web-components/json-data.min.js' },
+                input_filter: { module: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/web-components/input-filter.min.js' },
+                sortable_table: { module: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/web-components/sortable-table.min.js' },
+                flags: 'https://cdn.jsdelivr.net/npm/semantic-ui-flag@2.4.0/flag.min.css',
+            };
+        </script>
+
+        <!-- Optional - Show a warning for Older browsers (IE, Older Mobile Devices, etc) -->
+        <!--
+        <script nomodule src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/web-components/old-browser-warning.min.js"></script>
+        -->
+
+        <!-- Update content when page is loaded or changed -->
+        <script>
+            'use strict';
+
+            function updateFooter() {
+                const now = new Date();
+                document.querySelector('footer .year').textContent = now.getFullYear();
+                document.querySelector('footer .now').textContent = now;
+            }
+
+            // Handle routing changes from <url-router>
+            document.addEventListener('app:routeChanged', function() {
+                updateFooter();
+            });
+        </script>
+    </body>
+</html>

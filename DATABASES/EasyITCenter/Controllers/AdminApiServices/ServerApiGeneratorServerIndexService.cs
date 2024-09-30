@@ -11,7 +11,6 @@ using Markdown = Westwind.AspNetCore.Markdown.Markdown;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using System.Data.Entity.Core.Metadata.Edm;
 using DocumentFormat.OpenXml.Packaging;
-using Eaf.Middleware.Authorization.Roles;
 using CsvHelper.Configuration;
 using ServiceStack.Host;
 using EasyITCenter.DBModel;
@@ -19,7 +18,7 @@ using OpenGraphNet;
 
 
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
 
     /// <summary>

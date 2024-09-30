@@ -1,0 +1,17 @@
+<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> <span class="pl-smi">context</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">ScriptContext</span> {
+    <span class="pl-smi">PageFormats</span> <span class="pl-k">=</span> { <span class="pl-k">new</span> <span class="pl-en">MarkdownPageFormat</span>() }
+}.<span class="pl-en">Init</span>();
+
+<span class="pl-smi">context</span>.<span class="pl-smi">VirtualFiles</span>.<span class="pl-en">WriteFile</span>(<span class="pl-s"><span class="pl-pds">"</span>_layout.html<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">@"</span></span>
+<span class="pl-s">&lt;html&gt;</span>
+<span class="pl-s">  &lt;title&gt;{{ title }}&lt;/title&gt;</span>
+<span class="pl-s">&lt;/head&gt;</span>
+<span class="pl-s">&lt;body&gt;</span>
+<span class="pl-s">  {{ page }}</span>
+<span class="pl-s">&lt;/body&gt;<span class="pl-pds">"</span></span>);
+
+<span class="pl-smi">context</span>.<span class="pl-smi">VirtualFiles</span>.<span class="pl-en">WriteFile</span>(<span class="pl-s"><span class="pl-pds">"</span>page.md<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">@"</span></span>
+<span class="pl-s">## Transformers</span>
+<span class="pl-s"></span>
+<span class="pl-s">The Content<span class="pl-pds">"</span></span>);</pre></div>
+</div>

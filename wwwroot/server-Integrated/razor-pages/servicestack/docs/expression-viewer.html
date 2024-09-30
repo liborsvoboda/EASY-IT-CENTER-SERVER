@@ -1,0 +1,193 @@
+<!--
+title: JS Expression Viewer
+order: 29
+-->
+
+{{#raw}}
+<style>
+    textarea {
+        height: 3.75em;
+        width: 100%;
+        overflow:hidden;
+        padding:10px;
+        font-family: Monaco, Consolas;
+    }
+    #tree {
+        min-height: 500px;
+    }
+    h5 {
+        margin: 15px 0 10px 0;
+    }
+    .expression .output {
+        width: 100%;
+    }
+    .error .output {
+        border: none;
+    }
+    .error #tree-row {
+        display: none;
+    }
+</style>
+{{/raw}}
+
+<div class="container expression">
+    <div class="row">
+        <div class="col">
+            <h5>Expression</h5>
+            <textarea id="txtExpression" placeholder="JavaScript Expression, e.g: 1 + 2 + a" 
+                autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control"></textarea>
+        </div>
+        <div class="col">
+            <h5>Arguments</h5>
+            <textarea id="txtArgs" placeholder="Arguments used in Expression, e.g: a = 1;" 
+                autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control"></textarea>
+                
+            <div style="position:absolute;right:15px;margin: 3px 0 0 0; z-index: 1;">
+                <select id="expressions" class="form-control">
+                    <option value="">[ Examples ]</option>
+                    <option value="#expression=1%20-%202%20%2B%203%20*%204%20%2F%205">1 - 2 + 3 * 4 / 5</option>
+                    <option value="#expression=1%20<%202%20%26%26%20(t%20%7C%7C%203%20>%204)%20%26%26%20f&t=true&f=false">1 < 2 && (t || 3 > 4) && f</option>
+                    <option value="#expression=a%20>%20(c%20%3F%3F%20b)%20%3F%20a%20%3A%20b&a=1&b=2">a > (c ?? b) ? a : b</option>
+                    <option value="#expression=map(range(1%2Ccount)%2C%20x%20%3D>%20x%20*%20x)&count=5">map(range(1,count), x => x * x)</option>
+                    <option value="#expression=1.range(count).map(x%20%3D>%20x%20*%20x)&count=5">1.range(count).map(x => x * x)</option>
+                    <option value="#expression=%60Hello%2C%20%24%7Bname%7D!%20%24%7Ba%20%3F%20pow(1%2B2%2Ca)%20%3A%20''%7D%60&name='World'&a=3">`Hello, ${name}! ${a ? pow(1+2,a) : ''}`</option>
+                    <option value="#expression=keys(%7B%20...a%2C%20c%3A3%2C%20...%7Bd%3A%204%7D%20%7D)&a=%7B%20b%3A%202%20%7D">keys({ ...a, c:3, ...{d: 4} })</option>
+                    <option value="#expression=%5B1%2C%20...%5Brange(2%2Cpow(...%5B3%2Ce%5D))%5D%2C%201%5D&e=2">[1, ...[range(2,pow(...[3,e]))], 1]</option>
+                    <option value="#expression=%5B3%251%2C%203%261%2C%203%7C1%2C%203%5E1%2C%203<<1%2C%203%20>>%201%2C%20~1%5D&e=2">[3%1, 3&1, 3|1, 3^1, 3<<1, 3 >> 1, ~1]</option>
+                    <option value="#expression=var%20a%3D1%2C%20b%20%3D%201%20%2B%202%2C%20c%2C%20d%3D'A'">var a=1, b = 1 + 2, c, d='A'</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h5>Result</h5>
+            <div id="result" class="output"></div>
+        </div>
+    </div>
+    <div id="tree-row" class="row">
+        <div class="col">
+            <h5>Tree</h5>
+            <textarea id="tree" class="form-control" readonly></textarea>
+        </div>
+    </div>
+</div>
+
+{{#raw}}
+<script>
+var txtExpression = document.getElementById('txtExpression'), 
+    txtArgs = document.getElementById('txtArgs'),
+    result = document.getElementById('result'),
+    tree = document.getElementById('tree'),
+    expressions = document.getElementById('expressions');
+
+var textAreas = document.querySelectorAll('textarea');
+for (var i = 0; i < textAreas.length; i++) {
+    textAreas[i].addEventListener('input', handleInput);
+}
+expressions.addEventListener('change', function(){
+    if (!this.value) {
+        txtExpression.value = txtArgs.value = tree.value = result.innerHTML = '';
+        return;
+    }
+    location.href = this.value;
+    loadHash(location.hash);
+});
+
+function autosize(){
+  var el = this;
+  setTimeout(function(){
+    el.style.cssText = 'height:auto; padding:0';
+    el.style.cssText = 'height:' + (el.scrollHeight + 20) + 'px';
+  },0);
+}
+function splitOnFirst(s, c) {
+    if (!s) return [s];
+    var pos = s.indexOf(c);
+    return pos >= 0 ? [s.substring(0, pos), s.substring(pos + 1)] : [s];
+}
+function getUrlArgs() {
+    var url = "expression=" + encodeURIComponent(txtExpression.value.trim());
+    var args = txtArgs.value.trim().split(/\r?\n/);
+    for (var i=0; i<args.length; i++) {
+        var assignExpr = splitOnFirst(args[i], '=');
+        if (assignExpr.length != 2) continue;
+        
+        var name = assignExpr[0].trim();
+        if (name.indexOf('var ') === 0 || name.indexOf('let ') === 0) 
+            name = name.substring(4).trim();
+
+        if (!(name && name.match(/^[a-z0-9]+$/i) && isNaN(name[0]))) 
+            continue;
+
+        var valueExpr = assignExpr[1].trim();
+        if (valueExpr.indexOf(';', valueExpr.length - 1) !== -1)
+            valueExpr = valueExpr.substring(0, valueExpr.length - 1).trim();
+
+        if (!valueExpr)
+            continue;
+
+        url += ("&" + name + "=" + encodeURIComponent(valueExpr));
+    }
+    return url;
+}
+function handleInput() {
+    autosize.call(this);
+    send();
+}
+function send() {
+    if (!txtExpression.value.trim()) 
+        return;
+
+    var state = getUrlArgs();
+    var url = "/expression/eval?" + state;
+    $.getJSON(url)
+        .done(function(r) {
+            $(".expression").removeClass('error');
+            result.innerHTML = r.result != null ? r.result : null;
+            tree.value = r.tree;
+            autosize.call(tree);
+            location.href = '#' + state;
+        })
+        .fail(function(jqxhr){ 
+            handleError($(".expression"), jqxhr);
+        });
+}
+
+function loadHash(hash)
+{
+    if (hash) {
+        var kvps = hash.substring(1).split('&');
+        var args = {};
+        for (var i = 0; i < kvps.length; i++) {
+            var kvp = splitOnFirst(kvps[i], '=');
+            if (kvp.length != 2) continue;
+            args[kvp[0]] = decodeURIComponent(kvp[1]);
+        }
+        var expr = args.expression;
+        args['expression'] = null;
+        var argsString = '';
+        for (var name in args) {
+            var value = args[name];
+            if (!value) continue;
+            if (argsString)
+                argsString += '\n';
+            argsString += name + ' = ' + value;
+        }
+
+        if (expr) {
+            setTimeout(function(){
+                txtArgs.value = argsString;
+                txtExpression.value = expr;
+                send();
+            }, 0);
+        }
+    }
+}
+
+loadHash(location.hash);
+
+</script>
+{{/raw}}
+
+{{ "doc-links" |> partial({ order }) }}

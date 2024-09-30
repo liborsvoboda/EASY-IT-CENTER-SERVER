@@ -1,0 +1,100 @@
+<!doctype html>
+<html
+    lang="en"
+    data-show-errors>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>[[i18n tmpl_js_title]]</title>
+        <link rel="stylesheet" href="https://d2xbd92kui7v97.cloudfront.net/site/css/getting-started.css">
+        <script nomodule>
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://d2xbd92kui7v97.cloudfront.net/site/css/getting-started-ie.css';
+            document.head.appendChild(link);
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a class="active" href="#/">[[i18n Home]]</a>
+                <a href="#/data">[[i18n data_example]]</a>
+            </nav>
+        </header>
+
+        <main id="view" class="container"></main>
+
+        <template id="loading-screen">
+            <h3 class="loading">[[i18n Loading...]]</h3>
+        </template>
+
+        <template id="error-screen">
+            <h3 class="error" data-bind="errorMessage"></h3>
+        </template>
+
+        <template data-route="/">
+            <h1>[[i18n tmpl_js_title]]</h1>
+        </template>
+
+        <template
+            data-route="/data"
+            data-page="jsonData"
+            data-url="https://www.dataformsjs.com/data/geonames/countries"
+            data-load-only-once
+            data-lazy-load="jsonData, filter, sort, data_table, clickToHighlight, dataBind, format, jsTemplate">
+
+            <div class="is-loading" data-template-id="loading-screen"></div>
+            <div class="has-error" data-template-id="error-screen"></div>
+            <div class="is-loaded">
+                <h1>[[i18n Countries]]</h1>
+
+                <input
+                    data-filter-selector="table"
+                    data-filter-results-text-selector="h1"
+                    data-filter-results-text-all="[[i18n countries_all]]"
+                    data-filter-results-text-filtered="[[i18n countries_filtered]]"
+                    placeholder="[[i18n countries_enter_filer]]">
+                
+                <data-table 
+                    data-bind="countries"
+                    data-labels="[[i18n countries_field_list]]"
+                    data-col-class="2=text-right, 3=text-right"
+                    data-table-attr="
+                        class=click-to-highlight,
+                        data-sort
+                        data-sort-class-odd=row-odd,
+                        data-sort-class-even=row-even">
+                    <script type="text/x-template">
+                        <tr>
+                            <td>${iso}</td>
+                            <td>${country}</td>
+                            <td class="text-right" data-value="${area_km}">${format.number(area_km)}</td>
+                            <td class="text-right" data-value="${population}">${format.number(population)}</td>
+                            <td>${continent}</td>
+                        </tr>
+                    </script>
+                </data-table>
+            </div>
+        </template>
+
+        <!--
+            DataFormsJS
+            https://www.dataformsjs.com
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/DataFormsJS.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/plugins/navLinks.min.js"></script>
+        <script>
+            app.lazyLoad = {
+                jsonData: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/pages/jsonData.min.js',
+                filter: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/plugins/filter.min.js',
+                sort: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/plugins/sort.min.js',
+                data_table: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/controls/data-table.min.js',
+                clickToHighlight: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/plugins/clickToHighlight.min.js',
+                dataBind: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/plugins/dataBind.min.js',
+                format: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/extensions/format.min.js',
+                jsTemplate: 'https://cdn.jsdelivr.net/npm/dataformsjs@5/js/extensions/jsTemplate.min.js',
+            };
+            app.settings.lazyTemplateSelector = '#loading-screen';
+        </script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">using</span> <span class="pl-en">System</span>.<span class="pl-en">Linq</span>;
+<span class="pl-k">using</span> <span class="pl-en">System</span>.<span class="pl-en">Collections</span>.<span class="pl-en">Generic</span>;
+<span class="pl-k">using</span> <span class="pl-en">ServiceStack</span>;
+<span class="pl-k">using</span> <span class="pl-en">ServiceStack</span>.<span class="pl-en">Script</span>;
+
+<span class="pl-k">namespace</span> <span class="pl-en">SharpScript</span>
+{
+    [<span class="pl-en">Page</span>(<span class="pl-s"><span class="pl-pds">"</span>navLinks<span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NavLinksPartial</span> : <span class="pl-en">ServiceStackCodePage</span>
+    {
+        <span class="pl-k">string</span> <span class="pl-en">render</span>(<span class="pl-en">Dictionary</span>&lt;<span class="pl-k">string</span>, <span class="pl-k">object</span>&gt; <span class="pl-smi">links</span>) <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">$@"</span></span>
+<span class="pl-s">        &lt;ul&gt;</span>
+<span class="pl-s">            {<span class="pl-smi">links</span>.<span class="pl-en">Map</span>(<span class="pl-smi">entry</span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">$@"</span>&lt;li class='{<span class="pl-en">GetClass</span>(<span class="pl-smi">entry</span>.<span class="pl-smi">Key</span>)}'&gt;</span></span>
+<span class="pl-s"><span class="pl-s">                &lt;a href='{<span class="pl-smi">entry</span>.<span class="pl-smi">Key</span>}'&gt;{<span class="pl-smi">entry</span>.<span class="pl-smi">Value</span>}&lt;/a&gt;</span></span>
+<span class="pl-s"><span class="pl-s">            &lt;/li&gt;<span class="pl-pds">"</span></span>).<span class="pl-en">Join</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>)}</span>
+<span class="pl-s">        &lt;/ul&gt;<span class="pl-pds">"</span></span>;
+
+        <span class="pl-k">string</span> <span class="pl-en">GetClass</span>(<span class="pl-k">string</span> <span class="pl-smi">url</span>) <span class="pl-k">=&gt;</span> <span class="pl-smi">url</span> <span class="pl-k">==</span> <span class="pl-smi">Request</span>.<span class="pl-smi">PathInfo</span> <span class="pl-k">?</span> <span class="pl-s"><span class="pl-pds">"</span>active<span class="pl-pds">"</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>; 
+    }
+
+    [<span class="pl-en">Page</span>(<span class="pl-s"><span class="pl-pds">"</span>customerCard<span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">CustomerCardPartial</span> : <span class="pl-en">ServiceStackCodePage</span>
+    {
+        <span class="pl-k">string</span> <span class="pl-en">render</span>(<span class="pl-k">string</span> <span class="pl-smi">customerId</span>) <span class="pl-k">=&gt;</span> <span class="pl-en">renderCustomer</span>(<span class="pl-smi">Db</span>.<span class="pl-en">SingleById</span>&lt;<span class="pl-en">Customer</span>&gt;(<span class="pl-smi">customerId</span>));
+
+        <span class="pl-k">string</span> <span class="pl-en">renderCustomer</span>(<span class="pl-en">Customer</span> <span class="pl-smi">customer</span>) <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">$@"</span></span>
+<span class="pl-s">        &lt;table class='table table-bordered'&gt;</span>
+<span class="pl-s">            &lt;caption&gt;{<span class="pl-smi">customer</span>.<span class="pl-smi">CompanyName</span>}&lt;/caption&gt;</span>
+<span class="pl-s">            &lt;thead class='thead-inverse'&gt;</span>
+<span class="pl-s">                &lt;tr&gt;</span>
+<span class="pl-s">                    &lt;th&gt;Address&lt;/th&gt;</span>
+<span class="pl-s">                    &lt;th&gt;Phone&lt;/th&gt;</span>
+<span class="pl-s">                    &lt;th&gt;Fax&lt;/th&gt;</span>
+<span class="pl-s">                &lt;/tr&gt;</span>
+<span class="pl-s">            &lt;/thead&gt;</span>
+<span class="pl-s">            &lt;tr&gt;</span>
+<span class="pl-s">                &lt;td&gt;</span>
+<span class="pl-s">                    {<span class="pl-smi">customer</span>.<span class="pl-smi">Address</span>} </span>
+<span class="pl-s">                    {<span class="pl-smi">customer</span>.<span class="pl-smi">City</span>}, {<span class="pl-smi">customer</span>.<span class="pl-smi">PostalCode</span>}, {<span class="pl-smi">customer</span>.<span class="pl-smi">Country</span>}</span>
+<span class="pl-s">                &lt;/td&gt;</span>
+<span class="pl-s">                &lt;td&gt;{<span class="pl-smi">customer</span>.<span class="pl-smi">Phone</span>}&lt;/td&gt;</span>
+<span class="pl-s">                &lt;td&gt;{<span class="pl-smi">customer</span>.<span class="pl-smi">Fax</span>}&lt;/td&gt;</span>
+<span class="pl-s">            &lt;/tr&gt;</span>
+<span class="pl-s">        &lt;/table&gt;<span class="pl-pds">"</span></span>;
+    }
+}</pre></div>
+</div>

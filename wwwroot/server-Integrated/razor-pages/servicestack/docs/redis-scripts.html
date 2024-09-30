@@ -1,0 +1,160 @@
+<!--
+title: Redis Scripts
+order: 16
+-->
+
+<p>
+    The Redis Scripts provide connectivity with a <a href="https://redis.io">Redis</a> Server instance using the 
+    <a href="https://github.com/ServiceStack/ServiceStack.Redis">ServiceStack.Redis</a> library. To enable, install 
+    the <a href="https://www.nuget.org/packages/ServiceStack.Redis/">ServiceStack.Redis</a> NuGet Package, then 
+    register a <a href="https://github.com/ServiceStack/ServiceStack.Redis#redis-client-managers">Redis Client Manager</a>
+    in the IOC:
+</p>
+
+{{ 'gfm/redis-scripts/01.md' |> githubMarkdown }}
+
+<p>
+    Then to enable in your scripts register 
+    <a href="https://github.com/ServiceStack/ServiceStack.Redis/blob/master/src/ServiceStack.Redis/RedisScripts.cs">RedisScripts</a>:
+</p>
+
+{{ 'gfm/redis-scripts/02.md' |> githubMarkdown }}
+
+<p>
+    Your scripts are now able to use the <a href="/docs/scripts-reference?tab=redis-scripts">available Redis Scripts</a>.
+</p>
+
+<h4 id="redisCall">redisCall</h4>
+
+<p>
+    This is your main interface into Redis which utilizes the 
+    <a href="https://github.com/ServiceStack/ServiceStack.Redis#generic-apis-for-calling-custom-redis-commands">Custom Commands API</a>
+    to be able to execute any arbitrary Redis command. It can either be called with a string similar to commands sent 
+    with <a href="https://redis.io/topics/rediscli">redis-cli</a>, e.g:
+</p>
+
+<pre class="cs"><code>{{ pass: 'GET foo' |> redisCall }}</code></pre>
+
+<p>
+    This works for most Redis commands but uses internal heuristics to determine where to split the command into the multiple arguments that 
+    redis-server natively understands. A more deterministic usage which doesn't rely on any heuristics is to pass an array of arguments:
+</p>
+
+<pre class="cs"><code>{{ pass: ['GET', 'foo'] |> redisCall }}</code></pre>
+
+<p>
+    <em>redisCall</em> returns either a single <em>object</em> for redis commands returning single values or a List or nested List of
+    objects for Redis commands returning <a href="https://redis.io/topics/protocol">complex Responses</a>.
+</p>
+
+<h4 id="redisInfo">redisInfo</h4>
+
+<p>
+    Returns the Redis Server Info from <a href="https://redis.io/commands/info">Redis Info</a> command in a String Dictionary.
+</p>
+
+<h4 id="redisSearchKeys">redisSearchKeys</h4>
+
+<p>
+    Provides an efficient API for searching Redis Keys by utilizing 
+    <a href="https://redis.io/commands/scan">Redis's non-blocking SCAN</a> command, to fetch results and a server-side LUA script
+    to populate the results with metadata. Results are returned in a typed <em>List&lt;RedisSearchResult&gt;</em>:
+</p>
+
+{{ 'gfm/redis-scripts/03.md' |> githubMarkdown }}
+
+<h4 id="redisSearchKeysAsJson">redisSearchKeysAsJson</h4>
+
+<p>
+    If preferred, you can access the search results as JSON and parse it on the client instead.
+</p>
+
+<h4 id="redisConnection">redisConnection</h4>
+
+<p>
+    Returns the current Connection Info in an Object Dictionary containing: <em>{{ pass: host, port, db }}</em>
+</p>
+
+<h4 id="redisToConnectionString">redisToConnectionString</h4>
+
+<p>
+    Converts an <em>redisConnection</em> Object Dictionary into a 
+    <a href="https://github.com/ServiceStack/ServiceStack.Redis#redis-connection-strings">Redis Connection String</a>.
+</p>
+
+<h3>Redis App Examples</h3>
+
+<p>
+    The Sharp Apps below utilize Redis Scripts for all their Redis functionality:
+</p>
+
+<h4>Redis Vue</h4>
+<p>
+    <a href="http://redis.web-app.io">redis.web-app.io</a> is a generic Redis Database Viewer that provides a human-friendly view
+    of any Redis data Type, including a dedicated UI to create and populate any Redis data type which just utilizes the above Redis Scripts
+    and a single Vue <a href="https://github.com/sharp-apps/redis/blob/master/index.html">index.html</a> App to power the Redis UI:
+</p>
+
+<p>
+    <a href="http://redis.web-app.io"><img src="https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/redis-netcore/redis-netcore.png" 
+        style="max-width:850px" alt=".NET Core Redis Viewer"></a>
+</p>
+
+<h4>Redis HTML</h4>
+
+<p>
+    <a href="http://redis-html.web-app.io">redis-html.web-app.io</a> is a version of Redis UI built using just #Script and Redis
+    methods where all functionality is maintained in a single <a href="https://github.com/sharp-apps/redis-html/blob/master/index.html">index.html</a>
+    weighing under <b>&lt;200 LOC</b> including HTML and JavaScript. It's a good example of how the declarative style of programming
+    that #Script encourages a highly-readable code-base that packs a lot of functionality in a tiny foot print.
+</p>
+
+<h5>Server Generated HTML</h5>
+
+<p>
+    It's not immediately obvious when running this locally since both #Script and Redis are super fast, but Redis HTML was developed as
+    a traditional Website where all HTML is server-generated and every search box key stroke and click on search results performs 
+    a full-page reload. There's a slight sub-second delay that causes a noticeable flicker when hosted on the Internet due to network lag, but 
+    otherwise server-generated #Script Websites can enable a highly responsive UI (especially in Intranets) with great SEO and deep-linking
+    and back-button support working as expected without the complexity of adopting a client-side JavaScript SPA framework and build-system.
+</p>
+
+<h3>Run against your local Redis instance</h3>
+
+<p>
+    Since <em>redis</em> is published <a href="/docs/gist-desktop-apps">Gist Desktop App</a>, 
+    you can run the above <em>redis</em> SharpApp's against your local redis instance with:
+</p>
+
+<pre class="sh"><code>app open redis</code></pre>
+
+<p>
+    Using <em>open</em> always downloads and runs the latest version, if you don't have an Internet connection you can later run 
+    any previous run Sharp Apps using <em>run</em>:
+</p>
+
+<pre class="sh"><code>app run redis</code></pre>
+
+<p>
+    As both are <a href="/docs/sharp-app">Sharp Apps</a> it doesn't need any compilation so after 
+    <a href="https://github.com/sharp-apps/redis">running the Redis Web App</a> locally
+    you can modify the source code and see changes in real-time thanks to its built-in <a href="/docs/hot-reloading">Hot Reloading</a> support.
+</p>
+
+<h5>Populate redis with the Northwind database</h5>
+
+<p>
+    You can use the
+    <a href="https://github.com/ServiceStack/dotnet-app/tree/master/src/support/northwind-data">northwind-data</a> 
+    project to populate a Redis instance with Northwind test data by running:
+</p>
+
+<pre class="sh"><code>dotnet run redis localhost:6379</code></pre>
+
+<p>
+    See the Scripts API Reference for the 
+    <a href="/docs/scripts-reference?tab=redis-scripts">full list of Redis scripts available</a>.
+</p>
+
+
+{{ "doc-links" |> partial({ order }) }}

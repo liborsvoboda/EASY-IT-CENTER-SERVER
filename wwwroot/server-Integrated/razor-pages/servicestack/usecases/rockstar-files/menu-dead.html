@@ -1,0 +1,15 @@
+{{ {
+    "/usecases/rockstar-files/dead/cobain/": "Kurt Cobain",
+    "/usecases/rockstar-files/dead/hendrix/": "Jimi Hendrix",
+    "/usecases/rockstar-files/dead/jackson/": "Michael Jackson",
+    "/usecases/rockstar-files/dead/joplin/": "Janis Joplin",
+    "/usecases/rockstar-files/dead/presley/": "Elvis Presley"
+} |> to => links }}
+
+<div class="menu">
+    <ul>
+        <li class="label"><b>Past Rockstars:</b></li>
+        {{ links |> toList 
+           |> select: <li class="{ 'active' |> ifMatchesPathInfo(it.Key) }"><a href="{ it.Key }">{ it.Value }</a></li> }}
+    </ul>                
+</div>

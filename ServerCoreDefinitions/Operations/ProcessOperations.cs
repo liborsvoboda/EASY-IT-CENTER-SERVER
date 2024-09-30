@@ -1,4 +1,4 @@
-﻿using EasyITCenter.ServerCoreWebPages;
+﻿using ServerCorePages;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;

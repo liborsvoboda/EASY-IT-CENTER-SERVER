@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Handlebars Testing</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/plain" rel="author" href="humans.txt">
+
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="components/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand">Handlebars</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1>{{ Hello, world! }}</h1>
+      <p>Who wants to ride on my handlebars!?</p>
+      <p><a href="http://handlebarsjs.com/" target="_blank" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h3>What is all this?</h3>
+        <p>This is meant to be an example of how you can use Handlebars.js on the client side to handle dynamically sent conent <em>and</em> content and render it in real-time as well as store that content for reload and only getting new content when needed.</p>
+        <p>You can checkout the code for this project at our <a href="http://github.com/niczak/Handlebars"><i class="fa fa-github"></i> github repo</a>. Feel free to fork it and play with it and do whatever yout want with it, especially if you can make it better!</p>
+      </div>
+      <div class="col-md-6">
+        <h3>Why would I want that?</h3>
+        <p>To put it simply, we envision a situation where you'd want to present a user with something on pageload without having to wait for an ajax request to finish. What we're proposing here is that you make a full call for the first load so that you're then able to display something to the user right away on subsequent vists while requesting new information in the background. This should make everything feel a lot snappier for the end user and result in a better user experience overall, especially on mobile devices.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h3 id="welcomeHeader">Ready to see it in action?</h3>
+        <p id="welcomeMessage">To make all the magic happen, click Go button:</p>
+        <p><button id="mainBtn" class="btn btn-primary">GO!</button></p>
+        <p><button class="button btn btn-warning" id="toggleBtn" style="display:none">Toggle Examples</button></p>
+        <p><button class="button btn btn-danger" id="clearBtn" style="display:none">Clear Local Storage</button></p>
+
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2>{{heading}}</h2>
+        <p>{{paragraph}}</p>
+        <h3>Example of Handlbars Syntax</h3>
+        <p>This is what Handlebars syntax looks like. It's pretty straight forward templating. When you click the button above you will see the three example placeholders be replaced with rendered content returned from an ajax request to the server that contains both the data and the template together. It's pretty slick.</p>
+        <p>In the real world, you'd not have any of the Handlebar syntax actually showing, it would be seemless and just work.</p>
+        <p>Below you'll see the template syntax that will be rendered from the server when you click the button above.</p>
+      </div>
+    </div>
+
+    <div id="widgetContainer" style="display:none">
+    </div>
+
+    <div id="examples" class="row">
+      <div class="col-md-4">
+        <h2>{{ buttonSyntax }}</h2>
+<pre>&lt;h2&gt;{{buttonsWidgetHeading}}&lt;/h2&gt;
+&lt;div class='btn-group btn-group-justified'&gt;
+  {#each buttonWidgetButtons}}
+    &lt;div class='btn-group'&gt;
+      &lt;button onclick=&quot;window.open('//{{link}}', '_blank');&quot; type='button' class='btn {{style}}'&gt;
+        {{#if icon}}&lt;i class='fa {{icon}}'&gt;&lt;/i&gt; {{/if}}{{buttonName}}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  {{/each}}
+&lt;/div&gt;</pre>
+      </div>
+      <div class="col-md-4">
+        <h2>{{ feedSyntax }}</h2>
+<pre>&lt;h2&gt;{{feedWidgetHeading}}&lt;/h2&gt;
+{{#each feedItems}}
+  &lt;div class='panel panel-default'&gt;
+    &lt;div class='panel-heading'&gt;{{feedTitle}}&lt;/div&gt;
+    &lt;div class='panel-body'&gt;
+      &lt;p&gt;{{feedMessage}}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class='panel-footer text-muted'&gt;
+      &lt;small&gt;{{feedDate}}&lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+{{/each}}</pre>
+      </div>
+      <div class="col-md-4">
+        <h2>{{ articleSyntax }}</h2>
+<pre>&lt;h2&gt;{{articleWidgetHeading}}&lt;/h2&gt;
+{{#each articleWidgetParagraph}}
+  &lt;p&gt;{{this}}&lt;/p&gt;
+{{/each}}</pre>
+      </div>
+    </div>
+
+    <hr>
+
+    <footer>
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            Made With <span class="text-muted"><i class="fa fa-heart"></i> Love <i class="fa fa-heart"></i></span> By: <a href="http://twitter.com/niczak" target="_blank"><i class="fa fa-twitter-square"></i> Nicholas Kreidberg</a> &amp; <a href="http://twitter.com/fskirschbaum" target="_blank"><i class="fa fa-twitter-square"></i> F. Stephen Kirschbaum</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- /container -->
+
+  <script src="components/jquery/dist/jquery.min.js"></script>
+  <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="components/modernizr/modernizr.js"></script>
+  <script src="components/handlebars/handlebars.min.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>

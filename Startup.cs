@@ -1,12 +1,12 @@
 ﻿using EasyITCenter.ServerCoreStructure;
-using EasyITCenter.ServerCoreWebPages;
+using ServerCorePages;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
-using ServerCorePages;
+
 using System.Diagnostics.Metrics;
 using System.Linq;
 using EasyData.Services;
@@ -21,6 +21,9 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using HandlebarsDotNet;
+using EasyITCenter.SharpScript;
+using ServiceStack;
 
 
 
@@ -40,6 +43,8 @@ namespace EasyITCenter {
         /// <param name="services"></param>
         /// <returns>void.</returns>
         public void ConfigureServices(IServiceCollection services) {
+
+            ServerConfigurationServices.ConfigureCentralServicesProviders(ref services);
 
             #region Server Data Segment
             //DB first for Configuration
@@ -103,14 +108,13 @@ namespace EasyITCenter {
             ServerConfigurationServices.AutoRegisterClassServices(ref services);
             ServerConfigurationServices.ConfigureTransient(ref services);
             ServerConfigurationServices.ConfigureSingletons(ref services);
-            ServerConfigurationServices.ConfigureCentralServicesProviders(ref services);
             ServerConfigurationServices.ConfigureIdentityServer(ref services);
 
             //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/signalr/dotnet-client/sample/SignalRChatClient/MainWindow.xaml.cs
             //primi chat s aplikaci
             //services.AddSignalR();
             //services.AddServerSideBlazor();
-
+                 
         }
 
 
@@ -119,7 +123,11 @@ namespace EasyITCenter {
         /// </summary>
         /// <param name="app">           </param>
         /// <param name="serverLifetime"></param>
-        public void Configure(IApplicationBuilder app, IHostApplicationLifetime serverLifetime, IActionDescriptorCollectionProvider routerActionProvider) {
+        public async void Configure(IApplicationBuilder app, IHostApplicationLifetime serverLifetime, IActionDescriptorCollectionProvider routerActionProvider) {
+
+            //using var scope = app.ApplicationServices.CreateScope();
+            //WebHostingDbContext? context = scope.ServiceProvider.GetRequiredService<WebHostingDbContext>();
+            //await WebHostingDbInitialize.Initialize(context);
 
             SrvRuntime.ActionRouterProvider = routerActionProvider;
             serverLifetime.ApplicationStarted.Register(ServerOnStarted); serverLifetime.ApplicationStopping.Register(ServerOnStopping); serverLifetime.ApplicationStopped.Register(ServerOnStopped);
@@ -290,6 +298,7 @@ namespace EasyITCenter {
             if (SrvConfig.WebBrowserContentEnabled) { //Browsable Path Definitions
                 List<ServerStaticOrMvcDefPathList> data;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().ServerStaticOrMvcDefPathLists.Where(a => a.IsBrowsable && a.Active).ToList(); }
+
                 data.ForEach(path => {
                     try {
                         app.UseFileServer(new FileServerOptions {
@@ -309,6 +318,7 @@ namespace EasyITCenter {
             if (SrvConfig.BrowserLinkEnabled) { app.UseBrowserLink(); }
             if (SrvConfig.ModuleWebDataManagerEnabled) { app.UseEasyData(); }
 
+            app.UseServiceStack(new AppHost());
 
             //Load registered routes List To Runtime
             CoreOperations.GetServerRegisteredRoutesList("",true);

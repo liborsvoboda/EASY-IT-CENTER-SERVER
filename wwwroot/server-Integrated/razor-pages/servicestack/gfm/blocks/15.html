@@ -1,0 +1,9 @@
+<div class="gfm"><div class="highlight highlight-text-html-handlebars"><pre><span class="pl-c1">{{</span><span class="pl-c1">#capture</span> <span class="pl-v">todoMarkdown</span> { <span class="pl-e"><span class="pl-v">items</span></span>:[<span class="pl-e"><span class="pl-v">1</span></span>,<span class="pl-e"><span class="pl-v">2</span></span>,<span class="pl-e"><span class="pl-v">3</span></span>] } <span class="pl-c1">}}</span>
+## TODO List
+<span class="pl-c1">{{</span><span class="pl-c1">#each</span> <span class="pl-v">items</span><span class="pl-c1">}}</span>
+  - Item <span class="pl-c1">{{</span><span class="pl-v">it</span><span class="pl-c1">}}</span>
+<span class="pl-c1">{{</span><span class="pl-c1">/each</span><span class="pl-c1">}}</span>
+<span class="pl-c1">{{</span><span class="pl-c1">/capture</span><span class="pl-c1">}}</span>
+
+<span class="pl-c1">{{</span><span class="pl-v">todoMarkdown</span> |&gt; <span class="pl-e"><span class="pl-v">markdown</span></span><span class="pl-c1">}}</span></pre></div>
+</div>

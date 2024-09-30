@@ -2,11 +2,30 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, Westwind.AspNetCore
 @addTagHelper *, Westwind.AspNetCore.Markdown
-@namespace ServerCorePages
+@addTagHelper *, Vereyon.Web.FlashMessage
 
+
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Html
 @using Microsoft.AspNetCore.Identity
-@using ServerCorePages
-@using EasyITCenter
-@using EasyITCenter.ServerPortal
-@using EasyITCenter.Managers
+@using Microsoft.AspNetCore.Mvc.RazorPages
 
+@using Westwind.AspNetCore.Markdown
+
+@using System.IO
+@using System.Linq
+@using System.Collections
+@using System.Collections.Generic
+@using System.Text.RegularExpressions
+@using System.Security.Claims
+@using System.Threading.Tasks
+
+@using EasyITCenter
+@using EasyITCenter.DBModel
+@using EasyITCenter.Managers
+@using EasyITCenter.WebClasses
+@using EasyITCenter.WebModel
+@using EasyITCenter.WebDBModel
+@using EasyITCenter.WebControllers
+@using EasyITCenter.ServerCoreStructure
+@using EasyITCenter.ServerCorePages

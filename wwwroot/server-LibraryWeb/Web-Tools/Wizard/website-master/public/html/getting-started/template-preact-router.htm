@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>[[i18n tmpl_preact_title]]</title>
+        <link rel="stylesheet" href="https://d2xbd92kui7v97.cloudfront.net/site/css/getting-started.css">
+        <script nomodule>
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://d2xbd92kui7v97.cloudfront.net/site/css/getting-started-ie.css';
+            document.head.appendChild(link);
+        </script>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <!--
+            DataFormsJS JSX Loader
+            https://www.dataformsjs.com/
+            https://github.com/dataformsjs/dataformsjs/blob/master/docs/jsx-loader.md
+
+            [[i18n jsxloader_line_1]]
+            [[i18n jsxloader_line_2]]
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/react/jsxLoader.min.js"></script>
+        <script>
+            // If using <Link> from [preact-router/match.js] call `addBabelPolyfills() before
+            // the [match.js] script is loaded. An alternative option is also documented later
+            // in the code. If using <Link> from [preact-router.js] then the following is not
+            // required and [jsxLoader.js] can be loaded after Preact.
+            //
+            // jsxLoader.addBabelPolyfills();
+        </script>
+
+        <!--
+            Preact and Preact Router
+            https://preactjs.com
+			https://github.com/preactjs/preact-router
+			https://github.com/ReactTraining/history
+			* npm package [history] is required for #hash URL's with Preact Router
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/preact@10.5.7/dist/preact.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/preact-router@3.2.1/dist/preact-router.js"></script>
+        <script>
+            // Either the above `jsxLoader.addBabelPolyfills()` or this code
+            // is required for the current build of [preact-router/match.js]
+            // so that the [activeClassName] prop can be supported on <Link>.
+            // A <Link> Component exists in the core [preact-router.js] however it
+            // doesn't include support for [activeClassName]. In this template
+            // different API is used so that [preact-router/match.js] is not needed.
+            /*
+            window.exports = window;
+            window.require = function(module) {
+                switch (module) {
+                    case 'preact':
+                        return window.preact;
+                    case 'preact-router':
+                        return window.preactRouter;
+                    default:
+                        console.error('Unhandled module: ' + module);
+                }
+            };
+            */
+        </script>
+        <!--
+        <script src="https://cdn.jsdelivr.net/npm/preact-router@3.2.1/match.js"></script>
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/history@5.0.0/umd/history.production.min.js"></script>
+
+        <!--
+            For testing with Preact DevTools include the following:
+            https://preactjs.github.io/preact-devtools/
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/preact@10.5.7/debug/dist/debug.umd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/preact@10.5.7/devtools/dist/devtools.umd.js"></script>
+
+        <!--
+            DataFormsJS React Components
+
+            The core [DataFormsJS.min.js] file includes DataFormsJS React Components
+            [JsonData, ErrorBoundary, LazyLoad, InputFilter, SortableTable] and Classes
+            [Cache, CssVars, Format]. All React Components are also compatible with Preact
+            when using jsxLoader.
+
+            Additional Components [ImageGallery, LeafletMap] and Class [I18n]
+            need to be included separately.
+        -->
+        <script>
+            // Required before loading [DataFormsJS.min.js] or another option
+            // would be to simply set `window.React = window.preact`, however
+            // `usePreact()` provides additional functionally for converting
+            // existing React Components and handling React in the JSX.
+            jsxLoader.usePreact();
+        </script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/react/es6/DataFormsJS.min.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/react/es5/DataFormsJS.min.js"></script>
+        <!--
+        <script type="module" src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/react/es6/I18n.min.js"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/react/es6/ImageGallery.min.js"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/react/es6/LeafletMap.min.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/react/es5/I18n.min.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/react/es5/ImageGallery.min.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/dataformsjs@5/js/react/es5/LeafletMap.min.js"></script>
+        -->
+
+        <script type="text/babel">
+            const Router = window.preactRouter.Router;
+            const Link = window.preactRouter.Link;
+            const createHashHistory = window.HistoryLibrary.createHashHistory;
+
+            const format = new Format();
+
+            function ShowLoading() {
+                return <h3 className="loading">[[i18n Loading...]]</h3>;
+            }
+
+            function ShowError(props) {
+                return <p className="error">{props.error}</p>;
+            }
+
+            function HomePage() {
+                return <h1>DataFormsJS Preact Template using Preact Router</h1>;
+            }
+
+            function ShowCountries(props) {
+                return (
+                    <>
+                        <h1></h1>
+
+                        <InputFilter
+                            filter-selector="table"
+                            filter-results-selector="h1"
+                            filter-results-text-all="[[i18n countries_all]]"
+                            filter-results-text-filtered="[[i18n countries_filtered]]"
+                            placeholder="[[i18n countries_enter_filer]]" />
+
+                        <SortableTable
+                            data-sort-class-odd="row-odd"
+                            data-sort-class-even="row-even">
+                            <thead>
+                                <tr>
+                                    <th>[[i18n country_code]]</th>
+                                    <th>[[i18n country_name]]</th>
+                                    <th>[[i18n country_size]]</th>
+                                    <th>[[i18n country_pop]]</th>
+                                    <th>[[i18n country_continent]]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {props.data && props.data.countries && props.data.countries.map(country => {
+                                    return (
+                                        <tr key={country.iso}>
+                                            <td>{country.iso}</td>
+                                            <td>{country.country}</td>
+                                            <td className="text-right" data-value={country.area_km}>{format.number(country.area_km)}</td>
+                                            <td className="text-right" data-value={country.population}>{format.number(country.population)}</td>
+                                            <td>{country.continent}</td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </SortableTable>
+                    </>
+                )
+            }
+
+            function DataPage() {
+                return (
+                    <JsonData
+                        url="https://www.dataformsjs.com/data/geonames/countries"
+                        isLoading={<ShowLoading />}
+                        hasError={<ShowError />}
+                        isLoaded={<ShowCountries />}
+                        loadOnlyOnce={true} />
+                );
+            }
+
+            class App extends preact.Component {
+                render() {
+                    return (
+                        <ErrorBoundary>
+                            <header>
+                                <nav>
+                                    <Link href="/" activeClassName="active">[[i18n Home]]</Link>
+                                    <Link href="/data" activeClassName="active">[[i18n data_example]]</Link>
+                                </nav>
+                            </header>
+                            <main id="view" className="container">
+	                            <Router history={createHashHistory()} onChange={(e) => console.log(e)}>
+                                    <HomePage path="/" />
+                                    <DataPage path="/data" />
+                                </Router>
+                            </main>
+                        </ErrorBoundary>
+                    )
+                }
+            }
+
+            preact.render(
+                <App />,
+                document.getElementById('root')
+            );
+
+            // The current version of Preact Router will not set the [activeClassName]
+            // for <Link> on page load (see comments near the top of the JavaScript code).
+            // An alternative option is used for this page where [preactRouter] API
+            // is used instead.
+            function setActiveNavLink() {
+                const links = document.querySelectorAll('nav a');
+                const path = window.location.hash.substring(1);
+                let linkWasFound = false;
+                Array.prototype.forEach.call(links, function(link) {
+                    if (link.getAttribute('href') === path) {
+                        link.classList.add('active');
+                        linkWasFound = true;
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+                if (!linkWasFound && links.length > 0) {
+                    links[0].className = 'active';
+                }
+            }
+
+            // This only happens when the user changes the route.
+            window.preactRouter.subscribers.push(setActiveNavLink);
+
+            // Set on first load by assuming `preact.render` runs in 1/10 of a second.
+            // If needed `window.setInterval` could be used to make sure nav links are defined.
+            window.setTimeout(setActiveNavLink, 100);
+        </script>
+    </body>
+</html>

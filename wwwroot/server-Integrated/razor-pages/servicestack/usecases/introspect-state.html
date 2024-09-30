@@ -1,0 +1,95 @@
+<!--
+title: Introspect State
+order: 5
+-->
+
+<p>
+    Since #Script's are executable at runtime without precompilation it's a great tool for running 
+    live queries to inspect the state of a running .NET App within a controlled window sandbox. 
+    Here's an example of querying a Server's state:
+</p>
+
+<style>
+    form textarea {
+        padding: 10px;
+        width: 100%;
+        height: 600px;
+    }
+</style>
+
+<form action="/introspect/state">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#process-template" role="tab">process</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="process-template" role="tabpanel">
+            <textarea name="Page"
+             autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">{{ 'examples/introspect.html' |> includeFile }}</textarea>
+        </div>
+    </div>
+</form>
+
+<hr style="margin:20px 0">
+
+<div id="output"></div>
+
+{{ `<script>
+$('form').ajaxPreview({ 
+    dataType: 'html',
+    success: function(r) {
+        $("#output").html(r);
+    } 
+})
+</script>` |> raw |> to => scripts }}
+
+<hr style="margin:20px 0">
+
+<h4>Implementation</h4>
+
+<p>
+    To implement <a href="https://github.com/ServiceStack/sharpscript/blob/master/src/IntrospectStateServices.cs">IntrospectStateServices.cs</a>
+    we created a separate Service using a new <em>ScriptContext</em> instance with a custom set of filters which just exposes the APIs 
+    we want to be able to query:
+</p>
+
+<h4><a href="https://github.com/ServiceStack/sharpscript/blob/master/src/IntrospectStateServices.cs">IntrospectStateServices.cs</a></h4>
+
+{{ 'gfm/introspect-state/01.md' |> githubMarkdown }}
+
+<h4 id="client-ui">Client UI</h4>
+
+<p>
+    Then to implement the 
+    <a href="https://github.com/ServiceStack/sharpscript/blob/master/src/wwwroot/usecases/introspect-state.html">Client UI</a>
+    we just used a FORM containing Bootstrap Tabs that only uses this custom javascript:
+</p>
+
+{{ 'gfm/introspect-state/02.md' |> githubMarkdown }}
+
+<p>
+    Which calls the generic <em>ajaxPreview</em> jQuery plugin in 
+    <a href="https://github.com/ServiceStack/sharpscript/blob/master/src/wwwroot/assets/js/default.js">default.js</a>
+    to make an ajax request on every text box change.
+</p>
+
+<h3>Debug Inspector</h3>
+
+<p>
+    As this feature is an extremely useful way to inspect the state of a remote .NET or .NET Core App it's an embedded feature in
+    ServiceStack which is automatically registered in <a href="https://docs.servicestack.net/debugging#debugmode">DebugMode</a>
+    which can optionally be made available to everyone with:
+</p>
+
+{{ 'gfm/introspect-state/03.md' |> githubMarkdown }}
+
+<p>
+    Which we've done in this App so you can inspect this Servers State from:
+</p>
+
+<h4><a href="/metadata/debug">/metadata/debug</a></h4>
+
+
+{{ "usecase-links" |> partial({ order }) }}

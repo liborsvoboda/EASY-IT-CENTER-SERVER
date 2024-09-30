@@ -128,6 +128,7 @@ function GetMessages() {
     });
 }
 
+
 //Get NewsList
 function GetNewsList() {
 	if (Metro.storage.getItem('NewsList', null) == null) {

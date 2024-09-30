@@ -1,0 +1,62 @@
+<!--
+title: Model View Controller
+order: 25
+-->
+
+<p>
+    Simplicity is a driving goal behind the design of #Script where in its simplest form it's usable by non-programmers who just
+    know HTML as they're able to embed dynamic content in their HTML pages using intuitive Mustache syntax and with the 
+    intuitive way in how <a href="/docs/sharp-pages">#Script Pages</a> works they're able to develop entire content-heavy websites 
+    without needing to write any code.
+</p>
+
+<p>
+    As requirements become more demanding you can use progressively advanced features to enable greater flexibility and 
+    functionality whilst still retaining using scripts to generate the HTML view with access to existing layouts and partials.
+</p>
+
+<p>
+    The first option to enable functionality is to reuse the rich functionality available in Services to populate the data
+    required by your view. To do this in ServiceStack add a reference to the <em>ISharpPages</em> dependency which was registered 
+    by <em>ScriptContext</em>, then return a <em>PageResult</em> containing the <em>.html</em> page you want to 
+    render as well as any additional arguments you want available in the page:    
+</p>
+
+<h4><a href="https://github.com/ServiceStack/sharpscript/blob/master/src/CustomerServices.cs">CustomerServices.cs</a></h4>
+
+{{ 'gfm/model-view-controller/01.md' |> githubMarkdown }}
+
+<p>
+    The above can Service can also be made slightly shorter by using the <em>Request.GetPage()</em> extension method, e.g:
+</p>
+
+{{ 'gfm/model-view-controller/02.md' |> githubMarkdown }}
+
+<h4 id="model-property">Model PageResult Property</h4>
+
+<p>
+    The <em>Model</em> property is a special argument that automatically registers all its <b>public properties</b> as arguments 
+    as well as registering itself in the <b>model</b> argument, this lets views reference model properties directly like
+    <em>{{ pass: CustomerId }}</em> instead of the more verbose <em>{{ pass: model.CustomerId }}</em> as used in:
+</p>
+
+<h4><a href="https://github.com/ServiceStack/sharpscript/blob/master/src/wwwroot/examples/customer.html">examples/customer.html</a></h4>
+
+{{ 'gfm/model-view-controller/03.md' |> githubMarkdown }}
+
+<p>
+    Now that we have the Service handling the Request and populating the Model for our page we can use it to view each Customer
+    in a nice detail page:
+</p>
+
+<div class="linq-preview">
+    <div class="template">
+        <textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control" 
+            rows="4">{{ "examples/select-customers.txt" |> includeFile }}</textarea>
+    </div>
+    <div class="result">
+        <div class="output"></div>
+    </div>
+</div> 
+
+{{ "doc-links" |> partial({ order }) }}

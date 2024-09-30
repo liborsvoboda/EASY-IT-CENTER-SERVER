@@ -1,4 +1,6 @@
-﻿namespace EasyITCenter.ServerCoreDBSettings {
+﻿using ServerCorePages;
+
+namespace EasyITCenter.ServerCoreDBSettings {
 
     [ApiController]
     [Route("/WebApi/ClientUsers")]

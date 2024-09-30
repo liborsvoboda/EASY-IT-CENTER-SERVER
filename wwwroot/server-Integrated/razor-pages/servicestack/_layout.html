@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{ title ?? "Script" }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/gfm.css">
+    <link rel="stylesheet" href="/assets/css/default.css">
+</head>
+
+<body>
+    <i hidden>{{ '/js/hot-loader.js' |> ifDebugIncludeScript }}</i>
+
+    <nav id="topnav" class="navbar navbar-light bg-faded">
+        <a title="#Script" class="navbar-brand" href="/" style="width:220px;">
+            <img src="/assets/img/logo.svg" width="32" height="32" class="d-inline-block align-top" alt="" style="float:left;margin:3px 3px 0 0">
+            <h2 style="color:#000">Script</h2>
+        </a>
+        <button id="sidebar-toggle" class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <div id="scroll-screen"></div>
+    
+    <div id="body">
+
+        {{ "sidebar" |> partial }}
+
+        <div id="content">
+            <h1>{{ title }}</h1>
+            {{ page }}
+        </div>
+
+    </div>
+
+    <div id="sig"><p>made with <span>&#10084;</span> by <a target="_blank" href="https://servicestack.net" title="ServiceStack">ServiceStack</a></p></div>
+
+    <script src="/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/default.js"></script>
+
+    <script>
+        var pathinfo = location.pathname + location.hash;
+        if (pathinfo != "/")
+        {
+            var scrollItem = $("#sidebar").find("a[href='" + pathinfo + "']")
+                .parents().filter("div>ul>li")[0];
+        
+            if (scrollItem) {
+                scrollItem.scrollIntoView({
+                    block: "start"
+                });
+            }
+        }
+        $("#sidebar-toggle").click(function(){
+            $("#sidebar").fadeToggle()
+        })
+    </script>
+            
+    {{ scripts |> raw }}
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-7722718-15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-7722718-15');
+</script>
+
+    
+</body>
+</html>

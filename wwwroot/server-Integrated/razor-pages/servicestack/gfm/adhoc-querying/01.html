@@ -1,0 +1,9 @@
+<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> <span class="pl-smi">context</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">ScriptContext</span> {
+    <span class="pl-smi">ScriptMethods</span> <span class="pl-k">=</span> {
+        <span class="pl-k">new</span> <span class="pl-en">DbScriptsAsync</span>(),
+    }
+};
+<span class="pl-smi">context</span>.<span class="pl-smi">Container</span>.<span class="pl-en">AddSingleton</span>&lt;<span class="pl-en">IDbConnectionFactory</span>&gt;(() <span class="pl-k">=&gt;</span> <span class="pl-k">new</span> <span class="pl-en">OrmLiteConnectionFactory</span>(
+    <span class="pl-smi">connectionString</span>, <span class="pl-smi">SqlServer2012Dialect</span>.<span class="pl-smi">Provider</span>));
+<span class="pl-smi">context</span>.<span class="pl-en">Init</span>();</pre></div>
+</div>

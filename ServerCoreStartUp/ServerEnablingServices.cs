@@ -1,4 +1,5 @@
 ﻿using EasyData.Services;
+using Korzh.DbUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.FileProviders;
 using MirrorSharp;
@@ -104,8 +105,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                 if (SrvConfig.WebRazorPagesEngineEnabled) {
                     endpoints.MapRazorPages();
-                    endpoints.MapControllerRoute(name: "DevPortal", pattern: "{controller=DevPortal}/{action=Index}/{id?}");
-                    endpoints.MapControllerRoute(name: "WebAdmin",pattern: "{controller=WebAdmin}/{action=Index}/{id?}");
+                    //endpoints.MapControllerRoute(name: "DevPortal", pattern: "{controller=DevPortal}/{action=Index}/{id?}");
+                    //endpoints.MapControllerRoute(name: "WebAdmin",pattern: "{controller=WebAdmin}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute(name: "RazorPages", pattern: "{controller=ServerCorePages}/{action=Index}/{id?}");
                 }
 
@@ -180,10 +181,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     var rootPath = Path.Combine(AppContext.BaseDirectory);
                     var assemblyPath = Path.Combine(rootPath, name + ".dll");
                     var documentationPath = Path.Combine(rootPath, name + ".xml");
-
-                    return MetadataReference.CreateFromFile(
-                        assemblyPath, documentation: null
-                    );
+                    return MetadataReference.CreateFromFile(assemblyPath, documentation: null);
                 }
             });
             
@@ -201,7 +199,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 });
             }
 
-            
+          
         }
     }
 }

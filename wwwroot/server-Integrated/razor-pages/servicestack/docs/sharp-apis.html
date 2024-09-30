@@ -1,0 +1,213 @@
+<!--
+title: Sharp APIs
+order: 21
+-->
+
+<p>
+    In addition to being productive high-level .NET scripting language for generating dynamic HTML pages, #Script can also 
+    be used to rapidly develop Web APIs which can take advantage of the new support for 
+    <a href="/docs/sharp-pages#dynamic-page-routes">Dynamic Page Based Routes</a>
+    to rapidly develop data-driven JSON APIs and make them available under the ideal "pretty" URLs whilst utilizing the same Live Development workflow 
+    that doesn't need to define any C# Types or execute any builds - as all development can happen in real-time whilst the App is running,
+    enabling the fastest way to develop Web APIs in .NET!    
+</p>
+
+<h2 id="dynamic-sharp-apis">Dynamic Sharp APIs</h2>
+
+<p>
+    The only difference between a Sharp Page that <b>generates HTML</b> or a Sharp Page that <b>returns an API Response</b> is that Sharp APIs 
+    return a value using the <em>return</em> method. 
+</p>
+
+<p>
+    For comparison, to create a <b>Hello World</b> C# ServiceStack Service you would typically create a Request DTO, Response DTO and a Service implementation:
+</p>
+
+{{ 'gfm/sharp-apis/04.md' |> githubMarkdown }}
+
+<h3 id="dedicated-sharp-apis">Dedicated Sharp APIs</h3>
+
+<p>
+    Dedicated Sharp APIs lets you specify a path where your "Sharp API" are located when registering <em>SharpPagesFeature</em>:
+</p>
+
+{{ 'gfm/sharp-apis/01.md' |> githubMarkdown }}
+
+<p>
+    All pages within the <b>/api</b> folder are also treated like "Sharp API" for creating Web APIs where instead of writing their response to the 
+    Output Stream, their return value is serialized in the requested Content-Type using the <em>return</em> method:
+</p>
+
+<pre class="cs"><code>{{#raw}}{{ response |> return }}
+{{ response |> return({ ... }) }}
+{{ httpResult({ ... }) |> return }}
+{{/raw}}</code></pre>
+
+<p>
+    The route for the dedicated API page starts the same as the filename and one advantage over Dynamic Sharp APIs above is that a single Page
+    can handle multiple requests with different routes, e.g:
+</p>
+
+<pre>
+/api/customers                // PathArgs = []
+/api/customers/1              // PathArgs = ['1']
+/api/customers/by-name/Name   // PathArgs = ['by-name','Name']
+</pre>
+
+<h3>API Page Examples</h3>
+
+<p>
+    To demonstrate Sharp APIs in action we've added Web APIs equivalents for Rockwind's 
+    <a href="http://rockwind-sqlite.web-app.io/northwind/customers">customers</a> and
+    <a href="http://rockwind-sqlite.web-app.io/northwind/products">products</a> HTML pages with the implementation below:
+</p>
+
+<style>
+    th:first-child {
+        text-align: right;
+    }
+</style>
+
+<h4><a href="http://rockwind-sqlite.web-app.io/api/customers">/api/customers</a></h4>
+
+<p>
+    The entire implementation of the customers API is below:
+</p>
+
+{{ 'gfm/sharp-apis/02.md' |> githubMarkdown }}
+
+<p>
+    These are some of the API's that are made available with the above implementation:
+</p>
+
+<table class="table table-striped">
+    <tr class="bg-success">
+        <td colspan="2" style="text-align:center;color:#fff;font-size:1.5rem">/customers API</td>
+    </tr>
+    <tr>
+        <th>All Customers</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers">/api/customers</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers.csv">/api/customers.csv</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers.html">/api/customers.html</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers?format=html">/api/customers?format=html</a></div>
+            <div style="margin:5px 0 0 0;color:#888;font-size:13px"><b>Accept</b> HTTP Header also supported</div>
+        </td>
+    </tr>
+    <tr>
+        <th>Alfreds Futterkiste Details</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers/ALFKI">/api/customers/ALFKI</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers/ALFKI.csv">/api/customers/ALFKI.csv</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers/ALFKI.html">/api/customers/ALFKI.html</a></div>
+        </td>
+    </tr>
+    <tr>
+        <th>As List</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers?id=ALFKI">/api/customers?id=ALFKI</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers.csv?id=ALFKI">/api/customers.csv?id=ALFKI</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers.html?id=ALFKI">/api/customers.html?id=ALFKI</a></div>
+        </td>
+    </tr>
+    <tr>
+        <th>Customers in Germany</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers?country=Germany">/api/customers?country=Germany</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers.csv?country=Germany">/api/customers.csv?country=Germany</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers.html?country=Germany">/api/customers.html?country=Germany</a></div>
+        </td>
+    </tr>
+    <tr>
+        <th>Customers in London</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers?city=London">/api/customers?city=London</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers.csv?city=London">/api/customers.csv?city=London</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/customers.html?city=London">/api/customers.html?city=London</a></div>
+        </td>
+    </tr>    
+    <tr>
+        <th>Combination Query</th>
+        <td>
+            <a href="http://rockwind-sqlite.web-app.io/api/customers?city=London&amp;country=UK&amp;limit=3">/api/customers?city=London&amp;country=UK&amp;limit=3</a>
+        </td>
+    </tr>
+</table>
+
+<h4><a href="http://rockwind-sqlite.web-app.io/api/products">/api/products</a></h4>
+
+<p>
+    The Products API is an example of a more complex API where data is sourced from multiple tables:
+</p>
+
+{{ 'gfm/sharp-apis/03.md' |> githubMarkdown }}
+
+<p>
+    Some API examples using the above implementation:
+</p>
+
+<table class="table table-striped">
+    <tr class="bg-success">
+        <td colspan="2" style="text-align:center;color:#fff;font-size:1.5rem">/products API</td>
+    </tr>
+    <tr>
+        <th>All Products</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products">/api/products</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.csv">/api/products.csv</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.html">/api/products.html</a></div>
+        </td>
+    </tr>
+    <tr>
+        <th>Chai Product Details</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products/1">/api/products/1</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products/1.csv">/api/products/1.csv</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products/1.html">/api/products/1.html</a></div>
+        </td>
+    </tr>
+    <tr>
+        <th>As List</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products?id=1">/api/products?id=1</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.csv?id=1">/api/products.csv?id=1</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.html?id=1">/api/products.html?id=1</a></div>
+        </td>
+    </tr>
+    <tr>
+        <th>Beverage Products</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products?category=Beverages">/api/products?category=Beverages</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.csv?category=Beverages">/api/products.csv?category=Beverages</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.html?category=Beverages">/api/products.html?category=Beverages</a></div>
+        </td>
+    </tr>
+    <tr>
+        <th>Bigfoot Breweries Products</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products?supplier=Bigfoot+Breweries">/api/products?supplier=Bigfoot+Breweries</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.csv?supplier=Bigfoot+Breweries">/api/products.csv?supplier=Bigfoot+Breweries</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.html?supplier=Bigfoot+Breweries">/api/products.html?supplier=Bigfoot+Breweries</a></div>
+        </td>
+    </tr>
+    <tr>
+        <th>Products containing Tofu</th>
+        <td>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products?nameContains=Tofu">/api/products?nameContains=Tofu</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.csv?nameContains=Tofu">/api/products.csv?nameContains=Tofu</a></div>
+            <div><a href="http://rockwind-sqlite.web-app.io/api/products.html?nameContains=Tofu">/api/products.html?nameContains=Tofu</a></div>
+        </td>
+    </tr>
+</table>
+
+<h2>Untyped APIs</h2>
+
+<p>
+    As these APIs don't have a Typed Schema they don't benefit from any of ServiceStack's metadata Services, i.e.
+    they're not listed in <a href="https://docs.servicestack.net/metadata-page">Metadata pages</a>, included in
+    <a href="https://docs.servicestack.net/openapi">Open API</a> or have Typed APIs generated using
+    <a href="https://docs.servicestack.net/add-servicestack-reference">Add ServiceStack Reference</a>.
+</p>
+
+
+{{ "doc-links" |> partial({ order }) }}

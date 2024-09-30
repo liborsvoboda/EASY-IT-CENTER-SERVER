@@ -1,0 +1,252 @@
+<!--
+title: API Reference
+order: 27
+-->
+
+<h3 class="plugins">Plugins</h3>
+
+{{#markdown}}
+Plugins are a nice way to extend templates with customized functionality which can encapsulate any number of blocks, filters, 
+preferred configuration and dependencies by implementing the `IScriptPlugin` interface. 
+
+The [MarkdownScriptPlugin](https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/MarkdownScriptPlugin.cs)
+is a good example of this which registers a markdown 
+[Page format](/docs/page-formats), [Script Methods](/docs/methods), [Filter Transformer](/docs/transformers) and 
+[markdown Block](/docs/blocks#markdown):
+{{/markdown}}
+
+{{ 'gfm/api-reference/03.md' |> githubMarkdown }}
+
+{{#markdown}}
+#### Removing Plugins
+
+When needed any default plugins can be removed with the `RemovePlugins()` API:
+{{/markdown}}
+
+{{ 'gfm/blocks/20.md' |> githubMarkdown }}
+
+{{#markdown}}
+#### Advanced plugin registration
+
+For greater control over the registration and execution of plugins, they can implement `IScriptPluginBefore` to have custom logic
+executed before plugins are registered or implement `IScriptPluginAfter` for executing any logic after.
+{{/markdown}}
+
+<h3 id="ScriptContext">ScriptContext</h3>
+
+<p>
+    The <em>ScriptContext</em> is the sandbox where all templates are executed within that can be customized with the 
+    available APIs below:
+</p>
+
+<h4>Preconfigured defaults</h4>
+
+<p>
+    Some <a href="/docs/default-scripts">default scripts</a> when called without arguments will use the default configuration 
+    shown below that can be overridden by replacing their default value in the ScriptContext's <em>Args</em> collection:
+</p>
+
+{{ 'gfm/api-reference/01.md' |> githubMarkdown }}
+
+<h4>Args</h4>
+
+<p>
+    <a href="/docs/arguments">ScriptContext Arguments</a> can be used to define global variables available to every template, partial, filter, etc:
+</p>
+
+<h4>Virtual Files</h4>
+
+<p>
+    Templates only have access to Pages available from its configured VirtualFiles which uses an empty <em>MemoryVirtualFiles</em>.
+    To make pages available to your <em>ScriptContext</em> instance you can choose to either programatically populate the 
+    <em>VirtualFiles</em> collection from an external source, e.g:
+</p>
+
+{{ 'gfm/api-reference/02.md' |> githubMarkdown }}
+
+<p>
+    Alternatively if you want to enable access to an entire sub directory you can replace the Virtual Files with a 
+    FileSystem VFS at the directory you want to make the root directory:
+</p>
+
+<pre class="cs"><code>context.VirtualFiles = new FileSystemVirtualFiles("~/template-files".MapProjectPath());</code></pre>
+
+<h4>DebugMode</h4>
+
+<p>
+    <em>DebugMode</em> is used to control whether full Exception details like <em>StackTrace</em> is displayed. In 
+    <em>SharpPagesFeature</em> it defaults to the AppHost DebugMode, otherwise it's <b>true</b> by default.
+</p>
+
+<h4>ScanTypes</h4>
+
+<p>
+    Specify a <em>ScriptMethods</em> or <em>SharpCodePage</em> to auto register.
+</p>
+
+<h4>ScanAssemblies</h4>
+
+<p>
+    Specify assemblies that should be scanned to find ScriptMethods's and SharpCodePage's to auto register. 
+    In <em>SharpPagesFeature</em> the AppHost's Service Assemblies are included by default.
+</p>
+
+<h4>ScriptMethods</h4>
+
+<p>
+    Register additional instances of filters you want templates to have access to.
+</p>
+
+<h4>CodePages</h4>
+
+<p>
+    Register instances of code pages you want templates to have access to.
+</p>
+
+<h4>Container</h4>
+
+<p>
+    The IOC Container used by the <em>ScriptContext</em> to register and resolve dependencies, filters and Code Pages.
+    Uses <em>SimpleContainer</em> by default.
+</p>
+
+<h4>AppSettings</h4>
+
+<p>
+    Specify an optional 
+    <a href="https://docs.servicestack.net/appsettings">App Settings provider</a> that templates can access with the 
+    <em>{{#raw}}{{ key | appSetting }}{{/raw}}</em>
+    default filter.
+</p>
+
+<h4>CheckForModifiedPages</h4>
+
+<p>
+    Whether to check for modified pages by default when not in DebugMode, defaults to <em>true</em>.
+    Note: if <b>DebugMode</b> is <em>true</em> it will always check for changes.
+</p>
+
+<h4>CheckForModifiedPagesAfter</h4>
+
+<p>
+    If provided will specify how long to wait before checking if backing files of pages have changed and to reload them if they have.
+    Note: if <b>DebugMode</b> is <em>true</em> it will always check for changes.
+</p>
+
+<h4>RenderExpressionExceptions</h4>
+
+<p>
+    Whether to Render Expression Exceptions in-line (default = false).
+</p>
+
+<h3 class="ref">PageResult</h3>
+
+<p>
+    The <em>PageResult</em> is the rendering context used to render templates whose output can be customized with the APIs below:
+</p>
+
+<h4>Layout</h4>
+
+<p>
+    Override the layout used for the page by specifying a layout name:
+</p>
+
+<pre class="cs"><code>new PageResult(page) { Layout = "custom-layout" }</code></pre>
+
+<h4>LayoutPage</h4>
+
+<p>
+    Override the layout used for the page by specifying a Layout page:
+</p>
+
+<pre class="cs"><code>new PageResult(page) { LayoutPage = Request.GetPage("custom-layout") }</code></pre>
+
+<h4>Args</h4>
+
+<p>
+    Override existing or specify additional arguments in the Template's scope:
+</p>
+
+<pre class="cs"><code>new PageResult(page) { 
+    Args = { 
+        ["myArg"] = "argValue",
+    }
+}</code></pre>
+
+<h4>ScriptMethods</h4>
+
+<p>
+    Make additional filters available to the Template:
+</p>
+
+<pre class="cs"><code>new PageResult(page) { 
+    ScriptMethods = { new MyScriptMethods() }
+}</code></pre>
+
+<h4>OutputTransformers</h4>
+
+<p>
+    <a href="/transformers#output-transformers">Transform the entire Template's Output</a> before rendering to the OutputStream:
+</p>
+
+<pre class="cs"><code>new PageResult(page) {
+    ContentType = MimeTypes.Html,
+    OutputTransformers = { MarkdownPageFormat.TransformToHtml },
+}</code></pre>
+
+<h4>PageTransformers</h4>
+
+<p>
+    <a href="/docs/transformers#page-transformers">Transform just the Page's Output</a> before rendering to the OutputStream:
+</p>
+
+<pre class="cs"><code>new PageResult(page) {
+    ContentType = MimeTypes.Html,
+    PageTransformers = { MarkdownPageFormat.TransformToHtml },
+}</code></pre>
+
+<h4>FilterTransformers</h4>
+
+<p>
+    Specify additional <a href="/docs/transformers#filter-transformers">Filter Transformers</a> available to the Template:
+</p>
+
+<pre class="cs"><code>new PageResult(page) {
+    FilterTransformers = {
+        ["markdown"] = MarkdownPageFormat.TransformToHtml
+    }
+}</code></pre>
+
+<h4>ExcludeFiltersNamed</h4>
+
+<p>
+   <a href="/docs/sandbox#disable-filters">Disable access</a> to the specified registered filters:
+</p>
+
+<pre class="cs"><code>new PageResult(page) {
+    ExcludeFiltersNamed = { "partial", "selectPartial" }
+}</code></pre>
+
+<h4>Options</h4>
+
+<p>
+    Return additional HTTP Response Headers when rendering to a HTTP Response:
+</p>
+
+<pre class="cs"><code>new PageResult(page) {
+    Options = { 
+        ["X-Powered-By"] = "#Script"
+    }
+}</code></pre>
+
+<h4>ContentType</h4>
+
+<p>
+    Specify the HTTP Content-Type when rendering to a HTTP Response:
+</p>
+
+<pre class="cs"><code>new PageResult(page) {
+    ContentType = "text/plain"
+}</code></pre>
+
+{{ "doc-links" |> partial({ order }) }}

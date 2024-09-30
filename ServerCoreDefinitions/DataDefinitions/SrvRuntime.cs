@@ -1,5 +1,4 @@
-﻿using Eaf.Middleware.Identity;
-using FubarDev.FtpServer;
+﻿using FubarDev.FtpServer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -163,7 +162,13 @@ namespace EasyITCenter.ServerCoreStructure {
         /// Identity Server Management Extension
         /// </summary>
         public static UserManagement UserManagement = new();
-        
+
+
+        /// <summary>
+        /// Connected Databases Contexts For 
+        /// Central Point Using
+        /// </summary>
+        //public static List<object> ConnectedDatabases = new List<object>();
 
         //Generic Complicated Example
         //public static List<Tuple<string, T>>? ServerHostedServicesContollerList = new List<Tuple<string, T>>();

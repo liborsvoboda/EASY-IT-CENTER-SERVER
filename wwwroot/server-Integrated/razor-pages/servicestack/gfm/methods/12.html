@@ -1,0 +1,12 @@
+<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">async</span> <span class="pl-en">Task</span> <span class="pl-en">includeFile</span>(<span class="pl-en">ScriptScopeContext</span> <span class="pl-smi">scope</span>, <span class="pl-k">string</span> <span class="pl-smi">virtualPath</span>)
+{
+    <span class="pl-k">var</span> <span class="pl-smi">file</span> <span class="pl-k">=</span> <span class="pl-smi">scope</span>.<span class="pl-smi">Context</span>.<span class="pl-smi">VirtualFiles</span>.<span class="pl-en">GetFile</span>(<span class="pl-smi">virtualPath</span>);
+    <span class="pl-k">if</span> (<span class="pl-smi">file</span> <span class="pl-k">==</span> <span class="pl-c1">null</span>)
+        <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">FileNotFoundException</span>(<span class="pl-s"><span class="pl-pds">$"</span>includeFile '{<span class="pl-smi">virtualPath</span>}' was not found<span class="pl-pds">"</span></span>);
+
+    <span class="pl-k">using</span> (<span class="pl-k">var</span> <span class="pl-smi">reader</span> <span class="pl-k">=</span> <span class="pl-smi">file</span>.<span class="pl-en">OpenRead</span>())
+    {
+        <span class="pl-k">await</span> <span class="pl-smi">reader</span>.<span class="pl-en">CopyToAsync</span>(<span class="pl-smi">scope</span>.<span class="pl-smi">OutputStream</span>);
+    }
+}</pre></div>
+</div>

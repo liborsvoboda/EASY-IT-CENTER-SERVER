@@ -1,10 +1,17 @@
-﻿namespace EasyITCenter.DBModel {
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
+namespace EasyITCenter.DBModel
+{
     [Table("BasicUnitList")]
     [Index("Name", Name = "IX_UnitList", IsUnique = true)]
-    public partial class BasicUnitList {
-
-        public BasicUnitList() {
+    public partial class BasicUnitList
+    {
+        public BasicUnitList()
+        {
             BasicItemLists = new HashSet<BasicItemList>();
             BusinessCreditNoteSupportLists = new HashSet<BusinessCreditNoteSupportList>();
             BusinessIncomingInvoiceSupportLists = new HashSet<BusinessIncomingInvoiceSupportList>();
@@ -16,14 +23,11 @@
 
         [Key]
         public int Id { get; set; }
-
         [StringLength(10)]
         [Unicode(false)]
         public string Name { get; set; } = null!;
-
-        [Column(TypeName = "text")]
+        [Unicode(false)]
         public string? Description { get; set; }
-
         public int UserId { get; set; }
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
@@ -32,7 +36,6 @@
         [ForeignKey("UserId")]
         [InverseProperty("BasicUnitLists")]
         public virtual SolutionUserList User { get; set; } = null!;
-
         public virtual ICollection<BasicItemList> BasicItemLists { get; set; }
         public virtual ICollection<BusinessCreditNoteSupportList> BusinessCreditNoteSupportLists { get; set; }
         public virtual ICollection<BusinessIncomingInvoiceSupportList> BusinessIncomingInvoiceSupportLists { get; set; }

@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+<script src="timeliner_gui.js"></script>
+<script>
+
+
+Controller = function ControllerInterface() {
+
+	this._time = 0;
+	this._timeliner = null;
+	this._channelKeyTimes = {};
+
+};
+
+Controller.prototype = {
+
+	constructor: Controller,
+
+	init: function( timeliner ) {
+
+		this._timeliner = timeliner;
+
+		this._channelKeyTimes[ 'test1' ] = [];
+		this._channelKeyTimes[ 'test2' ] = [];
+
+	},
+
+	serialize: function() {
+
+		return this._channelKeyTimes;
+
+	},
+
+	deserialize: function(structs) {
+
+		this._channelKeyTimes = structs;
+
+	},
+
+	setDisplayTime: function( time ) {
+
+		//console.log( "setDisplayTime(%f)", time );
+		this._time = time;
+
+	},
+
+	setDuration: function( duration ) {
+
+		console.log( "setDuration(%f)", duration );
+
+	},
+
+	getChannelNames: function() {
+
+		return Object.keys( this._channelKeyTimes );
+
+	},
+
+	getChannelKeyTimes: function( channelName ) {
+
+		return this._channelKeyTimes[ channelName ];
+
+	},
+
+	setKeyframe: function( channelName, time ) {
+
+		console.log( "setKeyframe('%s',%f)", channelName, time );
+
+		var keyTimes = this._channelKeyTimes[ channelName ],
+			index = Timeliner.binarySearch( keyTimes, time );
+
+		if ( index < 0 ) {
+
+			// Note: Can use ~index to insert - we simply push & sort
+
+			keyTimes.push( time );
+			keyTimes.sort( Controller._compare );
+
+		}
+
+	},
+
+	delKeyframe: function( channelName, time ) {
+
+		console.log( "delKeyframe('%s',%f)", channelName, time );
+
+		var keyTimes = this._channelKeyTimes[ channelName ],
+			index = Timeliner.binarySearch( keyTimes, time );
+
+		if ( index >= 0 ) {
+
+			keyTimes[ index ] = keyTimes[ keyTimes.length - 1 ];
+			keyTimes.pop();
+			keyTimes.sort( Controller._compare );
+
+		}
+
+	},
+
+	moveKeyframe: function( channelName, time, delta, moveRemaining ) {
+
+		var keyTimes = this._channelKeyTimes[ channelName ],
+			index = Timeliner.binarySearch( keyTimes, time );
+
+		if ( index >= 0 ) {
+
+			var endAt = moveRemaining ? keyTimes.length : index + 1;
+			while ( index !== endAt ) keyTimes[ index ++ ] += delta;
+			keyTimes.sort( Controller._compare );
+
+		}
+
+	}
+
+};
+
+Controller._compare = function( a, b ) { return a - b; };
+
+var timeliner = new Timeliner( new Controller() );
+
+
+</script>
+</body>
+</html>

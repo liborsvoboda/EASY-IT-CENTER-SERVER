@@ -20,7 +20,7 @@ namespace EasyITCenter.DBModel
         [StringLength(150)]
         [Unicode(false)]
         public string? Name { get; set; }
-        [Column(TypeName = "text")]
+        [Unicode(false)]
         public string? Description { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime TimeStamp { get; set; }

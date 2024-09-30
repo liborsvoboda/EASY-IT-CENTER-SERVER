@@ -1,0 +1,38 @@
+<!--
+title: App - ServiceStack Studio
+order: 11
+-->
+
+<div class="source">
+    <a href="app://studio">app://studio</a> -
+    <a href="https://github.com/ServiceStack/Studio">ServiceStack/Studio</a>
+</div>
+
+{{#markdown}}
+**[ServiceStack Studio](https://github.com/ServiceStack/Studio)**  is a capability-based UI to manage multiple remote ServiceStack instances from 
+either a Chromium Desktop App or cross-platform .NET Core Web App. 
+
+The richer metadata in ServiceStack Services allows Studio to logically group Services around Data Models, enabling its high-level semantic features 
+like its native data-grid like UX over all AutoQuery Services to quickly discover, search, create, update and delete entities based on the available 
+AutoQuery APIs and whether Authenticated Users have access to them.
+
+> YouTube: [youtu.be/2FFRLxs7orU](https://youtu.be/2FFRLxs7orU)
+
+[![](https://raw.githubusercontent.com/ServiceStack/docs/master/docs/images/release-notes/v5.9/studio-home.png)](https://youtu.be/2FFRLxs7orU)
+
+You can run this Gist Desktop App via URL Scheme from (Windows Desktop App):
+
+<strong><a name="app://studio">app://studio</a></strong>
+
+Or via command-line:
+
+    $ app open studio
+
+Cross platform (Default Browser):
+
+    $ x open studio
+
+Checkout the [github.com/ServiceStack/Studio](https://github.com/ServiceStack/Studio) GitHub project to learn more about ServiceStack Studio.
+{{/markdown}}
+
+{{ "apps-links" |> partial({ order }) }}

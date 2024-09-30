@@ -1,21 +1,24 @@
-﻿namespace EasyITCenter.DBModel {
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
+namespace EasyITCenter.DBModel
+{
     [Table("ProviderGeneratedToolList")]
     [Index("Name", "UserId", Name = "IX_GeneratedToolList")]
     [Index("Name", Name = "IX_GeneratedToolList_1")]
     [Index("UserId", Name = "IX_GeneratedToolList_2")]
-    public partial class ProviderGeneratedToolList {
-
+    public partial class ProviderGeneratedToolList
+    {
         [Key]
         public int Id { get; set; }
-
         [StringLength(50)]
         [Unicode(false)]
         public string Name { get; set; } = null!;
-
-        [Column(TypeName = "text")]
+        [Unicode(false)]
         public string? Description { get; set; }
-
         public int UserId { get; set; }
         public int? Rating { get; set; }
         public bool DescActive { get; set; }

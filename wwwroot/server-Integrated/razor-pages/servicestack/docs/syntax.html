@@ -1,0 +1,585 @@
+<!--
+title: Syntax
+order: 3
+-->
+
+<p>
+    <em>#Script</em> aims to be a familiar and expressive dynamic language for scripting .NET Apps, that is optimal 
+    at generating text, especially HTML where it's pre-configured with the
+    <a href="/docs/page-formats">HTML Page Format</a> and <a href="/docs/html-scripts">HTML Scripts</a> but
+    unlike C#'s Razor can support multiple pluggable page formats which can be used for generating any kind of text.
+</p>
+
+<p>
+    For maximum familiarity #Script uses <a href="/docs/expression-viewer">JavaScript Expressions</a> 
+    that for increased readability and expressiveness supports being used within Template Expressions
+    which like <a href="https://vuejs.org/v2/guide/syntax.html#Filters">Vue.js filters</a>,
+    and <a href="https://angular.io/guide/template-syntax#template-expression-operators">Angular's Template Expressions</a>
+    lets you use the <em>|</em> pipe operator to chain the return values of methods into subsequent methods from left-to-right.
+    For statements #Script adopts the familiar Handlebars-like
+    <a href="/docs/blocks">Script Blocks</a> that is also popular among HTML templating engines.
+</p>
+
+<p>
+    Effectively #Script lets you use the same familiar JS language for server HTML rendering as you would do
+    in client-side rendering of Single Page Apps despite it binding natively to C# objects and calling C# methods behind-the-scenes.
+</p>
+
+<h4>Mustache expressions</h4>
+
+<p>
+    Like Vue/Angular Templates, only expressions inside mustaches are evaluated, whilst everything outside are emitted as-is:
+</p>
+
+{{ 'live-template' |> partial({ template: "outside <i>{{ 'shout' |> upper }}</i> text" }) }}
+
+<p>
+    Which calls the <em>upper</em> default script method where the argument on the left-side of the "pipe" symbol is 
+    passed as the first argument to the upper method which is implemented as:
+</p>
+
+{{ 'gfm/syntax/01.md' |> githubMarkdown }}
+
+<p>
+    This can be rewritten without the "pipe forward" operator by calling it as a method or an extension method instead:
+</p>
+
+{{ 'live-template' |> partial({ template: "outside <i>{{ upper('shout') }}</i> or <u>{{ 'shout'.upper() }}</u> text" }) }}
+
+<h4>Methods can be chained</h4>
+
+<p>
+    Methods are chained from left-to-right where the value on the left side of the "pipe" symbol is passed as the first 
+    argument in the method on the right and the output of that is passed as the input of the next method in the chain and so on:
+</p>
+
+{{ 'live-template' |> partial({ template: "{{ 'shout' |> upper |> substring(2) |> padRight(6, '_') |> repeat(3) }}" }) }}
+
+<p>
+    Methods can also accept additional arguments which are passed starting from the 2nd argument since the first 
+    argument is the value the method is called with. E.g. here are the implementations for the <em>substring</em> and 
+    <em>padRight</em> default scripts:
+</p>
+
+{{ 'gfm/syntax/02.md' |> githubMarkdown }}
+
+<h4 id="javascript-literals">JavaScript literal notation</h4>
+
+<p>
+    You can use the same literal syntax used to define numbers, strings, booleans, null, Objects and Arrays in JavaScript
+    within templates and it will get converted into the most appropriate .NET Type, e.g:
+</p>
+
+{{ 'live-template' |> partial({ rows: 8, template: "{{ null               |> typeName }}
+{{ true               |> typeName }}
+{{ 1                  |> typeName }}
+{{ 1.1                |> typeName }}
+{{ 'string'           |> typeName }}
+{{ ['array', 'items'] |> typeName }}
+{{ { key: 'value' }   |> typeName }}
+" }) }}
+
+<p>
+    ES6 Shorthand notation is also supported where you can use the argument name as its property name in a Dictionary:
+</p>
+
+{{ 'live-template' |> partial({ template: "{{ var bar = 'foo'   }}
+{{ var obj = { bar } }}
+{{ obj['bar']        }}" }) }}
+
+<h4>Local Variables</h4>
+
+<p>
+    Like JavaScript you can declare a locally scoped variable with <em>var</em>:
+</p>
+
+<pre><code>var sliders = dirFiles('img/sliders')</code></pre>
+
+<p>
+    Like JS you can use either <em>var</em>, <em>let</em> or <em>const</em> but they all behave like let and assign a locally scoped variable 
+    at the time the expression is executed. Also like JS the semicolon is optional and you can assign multiple variables in a single expression:
+</p>
+
+<pre><code>let a = 1 + 2, b = 3 * 4, c, d = 'D';</code></pre>
+
+<h4>Global Variables</h4>
+
+<p>
+    Global Variables in <em>#Script</em> are maintained in the <em>PageResult.Args</em> dictionary which you could previously assign to using the 
+    <em>toGlobal</em> script method where it’s accessible to all scripts rendered within that <em>PageResult</em>.
+</p>
+
+<p>
+    <em>#Script</em> now mimics JS's behavior to allow assignment expressions to assign global variables where **Assignment Expressions** on 
+    undeclared variables (i.e. where no locally scoped variable exists) will assign a global variable:
+</p>
+
+<pre><code>a = 1</code></pre>
+
+<p>
+    A more descriptive syntax available to declare a global variable is to assign it to the <em>global</em> object (inspired by node’s global) 
+    which is an alias to the <em>PageResult.Args</em> dictionary:
+</p>
+
+<pre><code>global.a = 1</code></pre>
+
+<h4>Assignment Expressions</h4>
+
+<p>
+    In addition to declaring and assigning variables, there’s also support for using assignment expressions to assign and mutate Collections and 
+    Type Properties using either Member Expression or Index expression syntax, e.g:
+</p>
+
+{{ 'gfm/syntax/11.md' |> githubMarkdown }}
+
+<h4>Quotes</h4>
+
+<p>
+    Strings can be defined using single quotes, double quotes, prime quotes or backticks:
+</p>
+
+{{ 'live-template' |> partial({ rows:4, template: "{{ \"double quotes\" }}
+{{ 'single quotes' }}
+{{ ′prime quotes′ }}
+{{ `backticks` }}" }) }}
+
+<blockquote>
+    Strings can also span multiple lines.
+</blockquote>
+
+<h4>Template Literals</h4>
+
+Backticks strings implement <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">JavaScript's Template literals</a>
+which can be be used to embed expressions:
+
+{{ 'live-template' |> partial({ rows:4, template: "{{ `Time is ${now}, expr= ${true ? pow(1+2,3) : ''}` }}
+Prime Quotes     {{ now.TimeOfDay |> timeFormat(′h\\:mm\\:ss′) }}
+Template Literal {{ now.TimeOfDay |> timeFormat(`h\\\\:mm\\\\:ss`) }}" }) }}
+
+The example above also shows the difference in escaping where Template literals evaluate escaped characters whilst normal strings 
+leave <em>\</em> backspaces unescaped.
+
+<h4>Shorthand arrow expression syntax</h4>
+
+<p>
+    #Script Expressions have full support for JavaScript expressions but doesn't support statements or function declarations although it 
+    does support JavaScript's arrow function expressions which can be used in functional methods to enable LINQ-like queries.
+    You can use fat arrows <em>=></em> immediately after methods to define lambda's with an implicit <em>(it => ...)</em> binding, e.g:
+</p>
+
+{{ 'live-template' |> partial({ template: ′{{ [0,1,2,3,4,5]
+   |> where => it >= 3
+   |> map => it + 10 |> join(`\n`) }}′ }) }}
+
+<p>
+    This is a shorthand for declaring lambda expressions with normal arrow expression syntax:
+</p>
+
+{{ 'live-template' |> partial({ template: ′{{ [0,1,2,3,4,5]
+    |> where(it => it >= 3)
+    |> map(x => x + 10) |> join(`\n`) }}′ }) }}
+ 
+<p>
+    Using normal lambda expression syntax lets you rename lambda parameters as seen in the <em>map(x => ...)</em> example.
+</p>
+
+<h4>Special string argument syntax</h4>
+
+<p>
+    As string expressions are a prevalent in <em>#Script</em>, we've also given them special wrist-friendly syntax where you
+    can add a colon at the end of the method name which says to treat the following characters up until the end of the
+    line or mustache expression as a string, trim it and convert '{' and '}' chars into mustaches. With this syntax
+    you can write:
+</p>
+
+{{ 'live-template' |> partial({ template: "{{ [3,4,5] |> select: { it |> incrBy(10) }\\n }}" }) }}
+
+<p>
+    and it will be rewritten into its equivalent and more verbose form of:
+</p>
+
+{{ 'live-template' |> partial({ template: "{{ [3,4,5] |> select(′{{ it |> incrBy(10) }}\\n′) }}" 
+}) }}
+
+<h4>SQL-like Boolean Expressions</h4>
+
+<p>
+    To maximize readability and intuitiveness for non-programmers, boolean expressions can also adopt an SQL-like syntax where
+    instead of using <em>&amp;&amp;</em> or <em>||</em> operator syntax to define boolean expressions you can also
+    use the more human-friendly <em>and</em> and <em>or</em> alternatives:
+</p>
+
+{{ 'live-template' |> partial({ template: "{{ [0,1,2,3,4,5] 
+   |> where => it.isOdd() and it == 3
+   |> join }}" }) }}
+
+<h4>Include Raw Content Verbatim</h4>
+
+Use <em>#raw</em> blocks to ignore evaluating expressions and emit content verbatim. This is useful when using a
+client Handlebars-like templating solution like Vue or Angular templates where expressions need to be evaluated 
+with JavaScript in the browser instead of on the Server with Templates:
+
+{{ 'live-template' |> partial({ rows: 4, template: "{{#raw}}Hi {{ person.name }}, Welcome to {{ site.name }}!{{/raw}}
+
+{{#raw template}}Assign contents with {{ expressions }} into 'template' argument{{/raw}}
+Captured Argument: {{template}}" 
+ }) }}
+
+<h4>Multi-line Comments</h4>
+
+<p>
+    Any text within <em>{{#raw}}{{#noop}} ... {{/noop}}{{/raw}}</em> block statements are ignored and can be used for temporarily removing
+    sections from pages without needing to delete it.
+</p>
+
+<p>
+    Everything within multi-line comments <em>{{#raw}}{{&zwnj;*</em> and <em>*&zwnj;}}{{/raw}}</em> is ignored and removed from the page.
+</p>
+
+<p>
+    An alternative way to temporarily disable an expression is to prefix the expression with the <em>end</em> method to 
+    immediately short-circuit evaluation, e.g: <em>{{#raw}}{{ end |> now |> dateFormat }}{{/raw}}</em>
+</p>
+
+<p>
+    See <a href="/docs/sharp-pages#ignoring-pages">Ignoring Pages</a> for different options for ignoring entire pages and 
+    layout templates.
+</p>
+
+<a name="extension-methods"></a>
+{{#markdown}}
+
+### Script Methods can be used as Extension Methods
+
+A core feature of `#Script` is that it runs in a [sandbox](/sandbox) and only has access to functionality that's configured in its `ScriptContext`
+that it runs in, so by design `#Script` is prohibited from calling instance methods so they only have a read-only view of your objects
+unless you explicitly register `ScriptMethods` that allows them to change them. 
+
+This frees up the `instance.method()` syntax to be put to other use which can now be used to call every script method as an extension method.
+This can greatly improve the readability and execution flow of code, e,g. we can rewrite our previous 
+[JS Utils Eval](https://docs.servicestack.net/js-utils#eval) example:
+
+    itemsOf(3, padRight(reverse(arg), 8, '_'))
+
+into the more readable form using the same methods as extension methods off the first argument, e.g:
+
+    3.itemsOf(arg.reverse().padRight(8, '_'))
+
+{{/markdown}}
+
+{{ 'gfm/syntax/04.md' |> githubMarkdown }}
+
+{{#markdown}}
+
+### JavaScript Array Support
+
+We can use extension methods to define instance methods that can be called on any object to implement JS Array methods support 
+to further improve `#Script` source compatibility with JavaScript. 
+
+Here are [Mozilla's Array examples](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) in `#Script`
+utilizing its [Code Blocks](#code-blocks) feature to reduce the amount of boilerplate required:
+
+{{/markdown}}
+
+{{ 'gfm/syntax/03.md' | githubMarkdown | convertScriptToCodeBlocks }}
+
+{{#markdown}}
+
+Which can be run with `x run {script}.ss` to view its expected output:
+
+    Create an Array
+    2
+
+    Access (index into) an Array Item
+    Apple
+
+    Loop over an Array
+    Apple, 0
+    Banana, 1
+
+    Apple, 0
+    Banana, 1
+
+    Add to the end of an Array
+    3
+
+    Remove from the end of an Array
+    Orange
+
+    Remove from the front of an Array
+    Apple
+
+    Add to the front of an Array
+    2
+
+    Find the index of an item in the Array
+    1
+
+    Remove an item by index position
+    Banana
+    Strawberry,Mango
+
+    Remove items from an index position
+    Cabbage,Turnip,Radish,Carrot
+    Cabbage,Carrot
+    Turnip,Radish
+
+    Copy an Array
+    Strawberry,Mango
+
+Most JS Array methods are supported, including the latest additions from ES2019:
+
+ - `concat`
+ - `every`
+ - `filter`
+ - `find`
+ - `findIndex`
+ - `flat`
+ - `flatMap`
+ - `forEach`
+ - `includes`
+ - `indexOf`
+ - `join`
+ - `keys`
+ - `lastIndexOf`
+ - `map`
+ - `pop`
+ - `push`
+ - `reduce`
+ - `reverse`
+ - `shift`
+ - `slice`
+ - `some`
+ - `sort`
+ - `splice`
+ - `toString`
+ - `unshift`
+ - `values`
+
+
+<a name="lang-blocks"></a>
+## Language Blocks and Expressions
+
+We've caught a glimpse using language blocks with the `code` JavaScript Array Example above which allows us to invert `#Script` from **"Template Mode"**
+where all text is emitted as-is with only code within Template Expressions `{{ ... }}` are evaluated and changed it to **"Code Mode"** where all code
+is evaluated a code expression.
+
+This is akin to Razor's statement blocks which inverts Razor's **mode** of emitting text to treating text inside statement blocks as code, e.g:
+
+{{/markdown}}
+
+{{ 'gfm/syntax/05.md' | githubMarkdown | convertScriptToCodeBlocks }}
+
+{{#markdown}}
+
+Which is useful in reducing boilerplate when you need to evaluate code blocks with 2+ or more lines without the distracting boilerplate of wrapping
+each expression within a `{{ ... }}` Template Expression.
+
+### Languages
+
+Refer to the languages page to learn about alternative languages you can use within Language Blocks and Expressions:
+
+ - [#Script Code](/scode/) - use `code` language identifier
+ - [#Script Lisp](/lisp/) - use `lisp` language identifier
+
+### Language Blocks
+
+`code` fragments are executed using `#Script` language blocks in the format:
+
+    ```<lang>
+
+    ```
+
+Where `#Script` will parse the statement body with the language registered in its ScriptContext's `ScriptLanguages` collection that's pre-registered
+with `ScriptCode.Language` which is used to process `code` block statements, e.g:
+
+{{/markdown}}
+
+{{ 'gfm/syntax/07.md' | githubMarkdown | convertScriptToCodeBlocks }}
+
+<p>
+    Code Statement Blocks are evaluated within the same scope so any arguments that are assigned are also accessible within the containing page
+    as seen above.
+</p>
+    
+<h4 id="lisp-language">Evaluate Lisp</h4>
+
+<p>
+    You can use language blocks to embed and evaluate any of the languages registered in your <em>ScriptContext</em>, e,g. to evaluate
+    <a href="/lisp">#Script Lisp</a> register it in your <em>ScriptContext</em> or <em>SharpPagesFeature</em>:
+</p>
+
+{{ 'gfm/lisp/01.md' |> githubMarkdown }}
+    
+<p>
+    Where it will let you use Language Blocks to evaluate LISP code within <em>#Script</em>:
+</p>
+
+{{ 'gfm/syntax/08.md' | githubMarkdown | convertScriptToLispBlocks }}
+
+{{#markdown}}
+
+Unlike `code` blocks, Lisp evaluates its code using its own Symbols table, it's able to reference arguments not in its Global symbols 
+by resolving them from the containing scope, but in order for the outer `#Script` to access its local bindings they need
+to be exported as seen above which registers the value of its `local-arg` value into the `result` argument. 
+    
+#### Language Block Modifiers
+
+You can provide any additional modifiers to language blocks by specifying them after them after the `|` operator, languages
+can use these modifiers to change how it evaluates the script. By default the only modifiers the built-in languages support are `|quiet`
+and its shorter `|mute` and `|q` aliases which you can use to discard any output from being rendered within the page.
+    
+If you use Lisp's [setq special form](http://www.lispworks.com/documentation/HyperSpec/Body/s_setq.htm) to assign a variable, 
+that value is also returned which would be rendered in the page, you can ignore this output by using one of the above modifiers, e.g:
+    
+{{/markdown}}
+
+{{ 'gfm/syntax/09.md' | githubMarkdown | convertScriptToLispBlocks }}
+
+{{#markdown}}
+### Language Expressions
+    
+If you wanted to instead embed an expression in a different language instead of executing an entire statement block,
+you can embed them within Language Expressions `{|<lang> ... |}`, e.g:
+{{/markdown}}
+
+{{ 'gfm/syntax/10.md' |> githubMarkdown }}
+
+{{#markdown}}
+You could also use them to evaluate `code` expressions, e.g. `{|code 1 + 2 |}`, but that's also how `#Script`
+more concise Template Expressions are evaluated `{{ 1 + 2 }}`.   
+
+### Multi-language support
+
+Despite being implemented in different languages a `#Script` page containing multiple languages, e.g:
+
+{{/markdown}}
+
+{{ "linq-preview" |> partial({ rows:11, example: "linq01-langs", lang: 'template' }) }}
+
+{{#markdown}}
+
+Still only produces a **single page AST**, where when first loaded `#Script` parses the page contents as a contiguous
+`ReadOnlyMemory<char>` where page slices of any [Language Blocks and Expressions](/docs/syntax#language-blocks-and-expressions) 
+on the page are delegated to the `ScriptContext` registered `ScriptLanguages` for parsing which returns a fragment which is
+added to the pages AST:
+
+[![](/assets/img/multi-langs.svg)](/assets/img/multi-langs.svg)
+
+When executing the page, each language is responsible for rendering its own fragments which all write directly to the pages `OutputStream`
+to generate the pages output.
+
+The multi-languages support in `#Script` is designed to be extensible where everything about the language is encapsulated within its
+`ScriptLanguage` implementation so that if you omit its registration:
+
+    var context = new ScriptContext {
+    //    ScriptLanguages = { ScriptLisp.Language }
+    }.Init();
+
+Any language expressions and language blocks referencing it become inert and its source code emitted as plain-text.
+
+### Language Comparisons
+
+Whilst all languages have access to the same [Script Methods](/docs/methods) and [.NET Scripting interop](/docs/script-net), they all have 
+unique characteristics that make them suitable for different use-cases. The default template syntax is ideal for generating text output where 
+you need to embed logic when generating text output, [#Script Code](/scode/) is ideal when logic is more important then the text output like in 
+[Sharp Scripts](/docs/sharp-scripts), whilst [#Script Lisp](/lisp/) is ideal for defining algorithms or for developers who prefer Lisp syntax 
+or for devs who prefer development in a functional style.
+
+A good comparison showing the differences, strengths and weaknesses of each language can be seen with the implementation of FizzBuzz in each language:
+
+{{/markdown}}
+
+{{#raw template}}
+Template:
+{{#each range(1,15) }}
+{{#if it % 3 == 0 && it % 5 == 0}}
+  FizzBuzz
+{{else if it % 3 == 0}}
+  Fizz
+{{else if it % 5 == 0}}
+  Buzz
+{{else}}
+  {{it}}
+{{/if}}
+{{/each}}
+
+Code:
+```code
+#each range(1,15)
+    #if it % 3 == 0 && it % 5 == 0
+        "FizzBuzz"
+    else if it % 3 == 0
+        "Fizz"
+    else if it % 5 == 0
+        "Buzz"
+    else
+        it
+    /if
+/each
+```
+
+Lisp:
+```lisp
+(defn fizzbuzz [i]
+    (cond ((and (zero? (mod i 3)) 
+                (zero? (mod i 5))) "FizzBuzz")
+          ((zero? (mod i 3))       "Fizz")
+          ((zero? (mod i 5))       "Buzz")
+          (t i)))
+
+(dorun println (map fizzbuzz (range 1 16)))
+```{{/raw}}
+
+{{ 'live-template' |> partial({ rows:39, template }) }}
+
+{{#markdown}}
+
+#### Template
+
+`#Script` is a **"template-first"** language where only expressions within `{{ ... }}` literals are evaluated, everything outside 
+it is emitted verbatim, as consequence it's white-space sensitive where the indention of logic blocks affect its output as 
+seen above where all lines are indented with the same 2 spaces as its free-text contents.
+
+#### Code
+
+By contrast [#Script Code](/scode/) is an inverted Templates where it's a **"code-first"** language where all statements are treated as code blocks
+so statements don't require the `{{ ... }}` boilerplate and are not white-space sensitive. Like Templates each content block 
+still generates output (unless its suppressed with the [quiet modifier](/docs/syntax#language-block-modifiers)) but needs to be a valid expression
+like a string literal, argument or expression as seen in the **code** example above.
+
+#### Lisp
+
+[#Script Lisp](/lisp/) lets you use the venerable and highly dynamic and functional [Lisp language](https://en.wikipedia.org/wiki/Lisp_%28programming_language%29)
+that's particularly strong at capturing algorithms and composing functions, although FizzBuzz isn't a particularly
+good showcase of either of its dynamism of functional strengths, the last line shows a glimpse of its natural functional composition.
+
+### Combine strengths of all Languages
+
+As all languages compile down into the same AST block we can freely use all languages within the same Script block to take advantage
+of the strengths of each, e.g. **Template** is great at generating text and **Lisp** excels at algorithms which make a great combination if you
+ever need to combine the 2, so you could easily for example use the [defn Script Block](/docs/blocks#defn) to define a function
+in Lisp, compiled to a .NET delegate so its invocable as a regular function inside a Template Block that generates markdown 
+captured by the [capture Script Block](/docs/blocks#capture) and converted to HTML using the [markdown filter transformer](/docs/sharp-pages#markdown):
+{{/markdown}}
+
+{{#raw template}}
+{{#defn fizzbuzz [i] }}
+    (cond ((and (zero? (mod i 3)) 
+                (zero? (mod i 5))) "FizzBuzz")
+          ((zero? (mod i 3))       "Fizz")
+          ((zero? (mod i 5))       "Buzz")
+          (t i))
+{{/defn}}
+
+{{#capture md}}
+## FizzBuzz
+{{#each range(1,15) }}
+  - {{ fizzbuzz(it) }}
+{{/each}}
+{{/capture}}
+{{ md |> markdown }}{{/raw}}
+
+{{ 'live-template' |> partial({ output:'html-md no-pre', rows:15, template }) }}
+
+{{ "doc-links" |> partial({ order }) }}

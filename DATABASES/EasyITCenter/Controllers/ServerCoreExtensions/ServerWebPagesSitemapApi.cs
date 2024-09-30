@@ -163,7 +163,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
         /// <summary>
         /// Get All Images From Static Documentation 
-        /// In EIC & ESB Nodes
+        /// In EIC&ESB Nodes
         /// </summary>
         /// <returns></returns>
         [Route("Images")]

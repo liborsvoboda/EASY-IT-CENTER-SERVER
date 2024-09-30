@@ -3,15 +3,31 @@
 @addTagHelper *, Westwind.AspNetCore
 @addTagHelper *, Westwind.AspNetCore.Markdown
 
-@using ServerCorePages
-@using EasyITCenter.DBModel
-@using EasyITCenter.ServerCoreStructure
-@using EasyITCenter.ServerCoreWebPages
-@using Westwind.AspNetCore.Markdown
+@using Microsoft.AspNetCore.Mvc
 @using Microsoft.AspNetCore.Html
-@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.RazorPages
 
-@namespace ServerCorePages
+@using Westwind.AspNetCore.Markdown
+
+@using System.IO
+@using System.Linq
+@using System.Collections
+@using System.Collections.Generic
+@using System.Text.RegularExpressions
+@using System.Security.Claims
+@using System.Threading.Tasks
+
+@using EasyITCenter
+@using EasyITCenter.DBModel
+@using EasyITCenter.Managers
+@using EasyITCenter.WebClasses
+@using EasyITCenter.WebModel
+@using EasyITCenter.WebDBModel
+@using EasyITCenter.WebControllers
+@using EasyITCenter.ServerCoreStructure
+@using EasyITCenter.ServerCorePages
+
 @{
 
     //Load Result From Url Checker
@@ -23,7 +39,7 @@
     string? FileValidUrl = "";
     try { FileValidUrl = ((string?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value); } catch { }
 
-    ServerModuleAndServiceList? systemModule = null; ServerModuleAndServiceList? loginModule = null; ServerWebPagesToken? webpagestoken = null; string? portalRedirect = null;
+    ServerModuleAndServiceList? systemModule = null; ServerModuleAndServiceList? loginModule = null; EasyITCenter.WebClasses.ServerWebPagesToken? webpagestoken = null; string? portalRedirect = null;
     try { systemModule = ((ServerModuleAndServiceList?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "SystemModule").Value); } catch { }
     try { loginModule = ((ServerModuleAndServiceList?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "LoginModule").Value); } catch { }
     try { webpagestoken = ((ServerWebPagesToken?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "ServerWebPagesToken").Value); } catch { }

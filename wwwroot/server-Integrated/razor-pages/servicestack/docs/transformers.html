@@ -1,0 +1,103 @@
+<!--
+title: Transformers
+order: 18
+-->
+
+<p>
+    You can apply a chain of multiple Stream transformations to transform output using Transformers which are just functions that
+    accept an Input Stream and return a modified Output Stream. The MarkdownPageFormat's <em>TransformToHtml</em> shows an example
+    of a Transformer which converts Markdown Input and returns a Stream of HTML output:
+</p>
+
+{{ 'gfm/transformers/01.md' |> githubMarkdown }}
+
+<h4 id="output-transformers">Output Transformers</h4>
+
+<p>
+    You can transform the entire output of a Script with Output Transformers which you would do if both your <b>_layout</b>
+    and <b>page</b> both contain markdown, e.g:
+</p>
+
+{{ 'gfm/transformers/02.md' |> githubMarkdown }}
+
+<h5>PageResult with Output Transformer</h5>
+
+{{ 'gfm/transformers/03.md' |> githubMarkdown }}
+
+<p>
+    After the Script is evaluated it's entire output gets passed into the chain of OutputTransformers defined, which in this case will
+    send a MemoryStream of the generated Markdown Output into the <em>MarkdownPageFormat.TransformToHtml</em> transformer which returns
+    a Stream of converted HTML which is what's written to the OutputStream.
+</p>
+
+<h4 id="page-transformers">Page Transformers</h4>
+
+<p>
+    You can also apply Transformations to only the Page's output using Page Transformers which you would do if only the <b>page</b> was in 
+    Markdown and the <b>_layout</b> was already in HTML, e.g:
+</p>
+
+{{ 'gfm/transformers/04.md' |> githubMarkdown }}
+
+<h5>PageResult with Page Transformer</h5>
+
+{{ 'gfm/transformers/05.md' |> githubMarkdown }}
+
+<h4 id="filter-transformers">Filter Transformers</h4>
+
+<p>
+    Filter Transformers are used to apply Stream Transformations to <a href="/docs/methods#block-methods">Block Methods</a> which you 
+    could use if you only wanted to convert an embedded Markdown file inside a Page to HTML. You can register Filter Transformers 
+    in either the ScriptContext's or PageResult's <em>FilterTransformers</em> Dictionary by assigning it the name you want it available in
+    your Scripts under, e.g:
+</p>
+
+{{ 'gfm/transformers/06.md' |> githubMarkdown }}
+
+<h5>PageResult with Filter Transformer</h5>
+
+{{ 'gfm/transformers/07.md' |> githubMarkdown }}
+
+<h4 id="htmlencode">htmlencode</h4>
+
+<p>
+    The <em>htmlencode</em> Filter Transformer is pre-registered in ScriptContext which lets you encode Block Method outputs
+    which is useful when you want to HTML Encode a text file before embedding it in the page, e.g:
+</p>
+
+<pre class="cs"><code>{{ pass: "page.txt" |> includeFile |> htmlencode }}</code></pre>
+
+<h4 id="preprocessors">Preprocessor Code Transformations</h4>
+
+{{#markdown}}
+Preprocessors allows you to perform source-code transformations before `#Script` evaluates it which is useful when you want to 
+convert any placeholder markers into HTML or `#Script` code at runtime, e.g. this feature could be used to replace translated text with the
+language that the App's configured with to use on Startup. 
+
+With this feature we can also change how [#Script's Language Block Feature](/docs/syntax#language-blocks-and-expressions) is implemented where
+we could instead use a [simple TransformCodeBlocks PreProcessor](https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Common/Script/ScriptPreprocessors.cs) 
+to process any `code` bocks by registering in the `Preprocessors` list:
+
+    var context = new ScriptContext {
+        Preprocessors = { ScriptPreprocessors.TransformCodeBlocks }
+    }.Init();
+
+There by overriding the existing implementation with the code transformation below:
+
+#### Code Transformation
+
+This preprocessor performs a basic transformation that assumes every statement is an expression and wraps them in an `{{...}}` 
+expression block, the exception are expressions which are already within an expression block which are ignored and you still
+need to use to wrap multi-line expressions in `code` blocks.
+
+The other transformation `code` blocks perform is collapsing new lines and trimming each line, this is so scripts which are primarily 
+structured and indented for readability aren't reflected in its text output. 
+
+We can see an example of how `code` blocks work from the example below:
+{{/markdown}}
+
+{{ 'gfm/syntax/06.md' | githubMarkdown | convertScriptToCodeBlocks }}
+
+
+
+{{ "doc-links" |> partial({ order }) }}

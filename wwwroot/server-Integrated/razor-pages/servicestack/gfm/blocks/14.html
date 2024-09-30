@@ -1,0 +1,83 @@
+<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-c"><span class="pl-c">///</span> &lt;<span class="pl-ent"><span class="pl-ent">summary</span></span>&gt;</span>
+<span class="pl-c"><span class="pl-c">///</span> Captures the output and assigns it to the specified variable.</span>
+<span class="pl-c"><span class="pl-c">///</span> Accepts an optional Object Dictionary as scope arguments when evaluating body.</span>
+<span class="pl-c"><span class="pl-c">///</span></span>
+<span class="pl-c"><span class="pl-c">///</span> Usages: {{#capture output}} {{#each args}} - [{{it}}](/path?arg={{it}}) {{/each}} {{/capture}}</span>
+<span class="pl-c"><span class="pl-c">///</span>         {{#capture output {nums:[1,2,3]} }} {{#each nums}} {{it}} {{/each}} {{/capture}}</span>
+<span class="pl-c"><span class="pl-c">///</span>         {{#capture appendTo output {nums:[1,2,3]} }} {{#each nums}} {{it}} {{/each}} {{/capture}}</span>
+<span class="pl-c"><span class="pl-c">///</span> &lt;/<span class="pl-ent"><span class="pl-ent">summary</span></span>&gt;</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">CaptureScriptBlock</span> : <span class="pl-en">ScriptBlock</span>
+{
+    <span class="pl-k">public</span> <span class="pl-k">override</span> <span class="pl-k">string</span> <span class="pl-smi">Name</span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>capture<span class="pl-pds">"</span></span>;
+
+    <span class="pl-k">public</span> <span class="pl-k">override</span> <span class="pl-en">ScriptLanguage</span> <span class="pl-smi">Body</span> <span class="pl-k">=&gt;</span> <span class="pl-smi">ScriptTemplate</span>.<span class="pl-smi">Language</span>;
+
+    <span class="pl-k">internal</span> <span class="pl-k">struct</span> <span class="pl-en">Tuple</span>
+    {
+        <span class="pl-k">internal</span> <span class="pl-k">string</span> <span class="pl-smi">name</span>;
+        <span class="pl-k">internal</span> <span class="pl-en">Dictionary</span>&lt;<span class="pl-k">string</span>, <span class="pl-k">object</span>&gt; <span class="pl-smi">scopeArgs</span>;
+        <span class="pl-k">internal</span> <span class="pl-k">bool</span> <span class="pl-smi">appendTo</span>;
+        <span class="pl-k">internal</span> <span class="pl-en">Tuple</span>(<span class="pl-k">string</span> <span class="pl-smi">name</span>, <span class="pl-en">Dictionary</span>&lt;<span class="pl-k">string</span>, <span class="pl-k">object</span>&gt; <span class="pl-smi">scopeArgs</span>, <span class="pl-k">bool</span> <span class="pl-smi">appendTo</span>)
+        {
+            <span class="pl-k">this</span>.<span class="pl-smi">name</span> <span class="pl-k">=</span> <span class="pl-smi">name</span>;
+            <span class="pl-k">this</span>.<span class="pl-smi">scopeArgs</span> <span class="pl-k">=</span> <span class="pl-smi">scopeArgs</span>;
+            <span class="pl-k">this</span>.<span class="pl-smi">appendTo</span> <span class="pl-k">=</span> <span class="pl-smi">appendTo</span>;
+        }
+    }
+
+    <span class="pl-k">public</span> <span class="pl-k">override</span> <span class="pl-k">async</span> <span class="pl-en">Task</span> <span class="pl-en">WriteAsync</span>(
+        <span class="pl-en">ScriptScopeContext</span> <span class="pl-smi">scope</span>, <span class="pl-en">PageBlockFragment</span> <span class="pl-smi">block</span>, <span class="pl-en">CancellationToken</span> <span class="pl-smi">token</span>)
+    {
+        <span class="pl-k">var</span> <span class="pl-smi">tuple</span> <span class="pl-k">=</span> <span class="pl-en">Parse</span>(<span class="pl-smi">scope</span>, <span class="pl-smi">block</span>);
+        <span class="pl-k">var</span> <span class="pl-smi">name</span> <span class="pl-k">=</span> <span class="pl-smi">tuple</span>.<span class="pl-smi">name</span>;
+
+        <span class="pl-k">using</span> (<span class="pl-k">var</span> <span class="pl-smi">ms</span> <span class="pl-k">=</span> <span class="pl-smi">MemoryStreamFactory</span>.<span class="pl-en">GetStream</span>())
+        {
+            <span class="pl-k">var</span> <span class="pl-smi">useScope</span> <span class="pl-k">=</span> <span class="pl-smi">scope</span>.<span class="pl-en">ScopeWith</span>(<span class="pl-smi">tuple</span>.<span class="pl-smi">scopeArgs</span>, <span class="pl-smi">ms</span>);
+
+            <span class="pl-k">await</span> <span class="pl-en">WriteBodyAsync</span>(<span class="pl-smi">useScope</span>, <span class="pl-smi">block</span>, <span class="pl-smi">token</span>);
+
+            <span class="pl-k">var</span> <span class="pl-smi">capturedOutput</span> <span class="pl-k">=</span> <span class="pl-smi">ms</span>.<span class="pl-en">ReadToEnd</span>();
+
+            <span class="pl-k">if</span> (<span class="pl-smi">tuple</span>.<span class="pl-smi">appendTo</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-smi">scope</span>.<span class="pl-smi">PageResult</span>.<span class="pl-smi">Args</span>.<span class="pl-en">TryGetValue</span>(<span class="pl-smi">name</span>, <span class="pl-k">out</span> <span class="pl-k">var</span> <span class="pl-smi">oVar</span>)
+                         <span class="pl-k">&amp;&amp;</span> <span class="pl-smi">oVar</span> <span class="pl-k">is</span> <span class="pl-k">string</span> <span class="pl-smi">existingString</span>)
+            {
+                <span class="pl-smi">scope</span>.<span class="pl-smi">PageResult</span>.<span class="pl-smi">Args</span>[<span class="pl-smi">name</span>] <span class="pl-k">=</span> <span class="pl-smi">existingString</span> <span class="pl-k">+</span> <span class="pl-smi">capturedOutput</span>;
+                <span class="pl-k">return</span>;
+            }
+        
+            <span class="pl-smi">scope</span>.<span class="pl-smi">PageResult</span>.<span class="pl-smi">Args</span>[<span class="pl-smi">name</span>] <span class="pl-k">=</span> <span class="pl-smi">capturedOutput</span>;
+        }
+    }
+
+    <span class="pl-c"><span class="pl-c">//</span>Extract usages of Span outside of async method </span>
+    <span class="pl-k">private</span> <span class="pl-en">Tuple</span> <span class="pl-en">Parse</span>(<span class="pl-en">ScriptScopeContext</span> <span class="pl-smi">scope</span>, <span class="pl-en">PageBlockFragment</span> <span class="pl-smi">block</span>)
+    {
+        <span class="pl-k">if</span> (<span class="pl-smi">block</span>.<span class="pl-smi">Argument</span>.<span class="pl-en">IsNullOrWhiteSpace</span>())
+            <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">NotSupportedException</span>(<span class="pl-s"><span class="pl-pds">"</span>'capture' block is missing variable name to assign output to<span class="pl-pds">"</span></span>);
+        
+        <span class="pl-k">var</span> <span class="pl-smi">literal</span> <span class="pl-k">=</span> <span class="pl-smi">block</span>.<span class="pl-smi">Argument</span>.<span class="pl-en">AdvancePastWhitespace</span>();
+        <span class="pl-k">bool</span> <span class="pl-smi">appendTo</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>;
+        <span class="pl-k">if</span> (<span class="pl-smi">literal</span>.<span class="pl-en">StartsWith</span>(<span class="pl-s"><span class="pl-pds">"</span>appendTo <span class="pl-pds">"</span></span>))
+        {
+            <span class="pl-smi">appendTo</span> <span class="pl-k">=</span> <span class="pl-c1">true</span>;
+            <span class="pl-smi">literal</span> <span class="pl-k">=</span> <span class="pl-smi">literal</span>.<span class="pl-en">Advance</span>(<span class="pl-s"><span class="pl-pds">"</span>appendTo <span class="pl-pds">"</span></span>.<span class="pl-smi">Length</span>);
+        }
+            
+        <span class="pl-smi">literal</span> <span class="pl-k">=</span> <span class="pl-smi">literal</span>.<span class="pl-en">ParseVarName</span>(<span class="pl-k">out</span> <span class="pl-k">var</span> <span class="pl-smi">name</span>);
+        <span class="pl-k">if</span> (<span class="pl-smi">name</span>.<span class="pl-en">IsNullOrEmpty</span>())
+            <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">NotSupportedException</span>(<span class="pl-s"><span class="pl-pds">"</span>'capture' block is missing variable name to assign output to<span class="pl-pds">"</span></span>);
+
+        <span class="pl-smi">literal</span> <span class="pl-k">=</span> <span class="pl-smi">literal</span>.<span class="pl-en">AdvancePastWhitespace</span>();
+
+        <span class="pl-k">var</span> <span class="pl-smi">argValue</span> <span class="pl-k">=</span> <span class="pl-smi">literal</span>.<span class="pl-en">GetJsExpressionAndEvaluate</span>(<span class="pl-smi">scope</span>);
+
+        <span class="pl-k">var</span> <span class="pl-smi">scopeArgs</span> <span class="pl-k">=</span> <span class="pl-smi">argValue</span> <span class="pl-k">as</span> <span class="pl-en">Dictionary</span>&lt;<span class="pl-k">string</span>, <span class="pl-k">object</span>&gt;;
+
+        <span class="pl-k">if</span> (<span class="pl-smi">argValue</span> <span class="pl-k">!=</span> <span class="pl-c1">null</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-smi">scopeArgs</span> <span class="pl-k">==</span> <span class="pl-c1">null</span>)
+            <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">NotSupportedException</span>(<span class="pl-s"><span class="pl-pds">"</span>Any 'capture' argument must be an Object Dictionary<span class="pl-pds">"</span></span>);
+
+        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-en">Tuple</span>(<span class="pl-smi">name</span>.<span class="pl-en">ToString</span>(), <span class="pl-smi">scopeArgs</span>, <span class="pl-smi">appendTo</span>);
+    }
+}</pre></div>
+</div>

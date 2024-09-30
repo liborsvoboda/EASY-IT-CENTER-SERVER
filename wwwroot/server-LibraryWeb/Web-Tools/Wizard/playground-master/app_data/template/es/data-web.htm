@@ -1,0 +1,48 @@
+<!--
+	Plantilla HTML para la página de datos en la demostración [app-web.htm].
+-->
+
+<h1>Países</h1>
+
+<json-data
+    url="https://www.dataformsjs.com/data/geonames/countries"
+    load-only-once
+    class="mw-100pct">
+    <is-loading>
+        <span class="loading">Cargando...</span>
+    </is-loading>
+    <has-error>
+        <span class="error" data-bind="errorMessage"></span>
+    </has-error>
+    <is-loaded>
+        <input
+            is="input-filter"
+            filter-selector="table"
+            filter-results-selector="h1"
+            filter-results-text-all="{totalCount} Países"
+            filter-results-text-filtered="Mostrando {displayCount} de {totalCount} países"
+            placeholder="Introduzca filtro, ejemplo 'South America'">
+
+        <data-table
+            data-bind="countries"
+            highlight-class="highlight"
+            labels="Código, Nombre, Tamaño (KM), Población, Continente"
+            col-class="2=text-right, 3=text-right"
+            table-attr="is=sortable-table,
+                        data-sort-class-odd=row-odd,
+                        data-sort-class-even=row-even">
+            <script type="text/x-template">
+                <tr>
+                    <td>${iso}</td>
+                    <td>
+                        <i class="${iso.toLowerCase()} flag"></i>
+                        ${country}
+                    </td>
+                    <td class="text-right" data-value="${area_km}">${format.number(area_km)}</td>
+                    <td class="text-right" data-value="${population}">${format.number(population)}</td>
+                    <td>${continent}</td>
+                </tr>
+            </script>
+        </data-table>
+    </is-loaded>
+</json-data>

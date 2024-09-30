@@ -1,0 +1,72 @@
+<!--
+title: Adhoc Querying
+order: 6
+--> 
+
+<p>  
+    The same qualities that make #Script great at   
+    <a href="/usecases/introspect-state">querying State of a running .NET App</a>  
+    also makes it excel at executing adhoc queries against providers which allow free text queries like 
+    OrmLite's <a href="/docs/db-scripts">Database Scripts</a> which enables access to its
+    <a href="https://github.com/ServiceStack/ServiceStack.OrmLite#dynamic-result-sets">Dynamic Result Set APIs</a>:
+</p>
+
+<style> 
+.live-template .output {
+    max-height: 1500px;
+}
+</style>
+
+{{ 'examples/adhoc-query-db.html' |> includeFile |> to => template }}
+
+{{ "live-template" |> partial({ rows:15, template }) }}
+
+<blockquote>
+    Tip: <em>textDump</em> generates <a href="https://help.github.com/en/articles/organizing-information-with-tables">GitHub Flavored Markdown tables</a>
+    which can be embedded in Markdown to generate HTML tables or you can use <em>htmlDump</em> instead to generate HTML tables directly.    
+</blockquote>
+
+<hr style="margin:20px 0">
+
+<h4>Register DB Scripts</h4>
+
+<p>
+    To access OrmLite's <a href="/docs/db-scripts">Database Scripts</a> install the 
+    <a href="https://github.com/ServiceStack/ServiceStack.OrmLite#download">OrmLite NuGet package for your RDBMS</a> then add the 
+    <a href="https://github.com/ServiceStack/ServiceStack.OrmLite/blob/master/src/ServiceStack.OrmLite/DbScriptsAsync.cs">DbScriptsAsync</a>
+    to your <em>ScriptContext</em> and register its required <em>IDbConnectionFactory</em> dependency in its IOC, e.g. for SQL Server:
+</p>
+
+{{ 'gfm/adhoc-querying/01.md' |> githubMarkdown }}
+
+<blockquote>
+    If using ServiceStack's <em>SharpPagesFeature</em> it's Container has already been reassigned to use 
+    <a href="https://docs.servicestack.net/ioc">ServiceStack's Funq IOC</a> so it only needs to be registered once in ServiceStack's IOC.
+</blockquote>
+
+<h4>Always protect free text APIs</h4>
+
+<p>
+    If you're exposing script methods enabling a free text API against a production database it should never be accessible by untrusted parties 
+    so you'll want to at a minimum ensure Services are protected with the <em>[Authenticate]</em> attribute so it's only available to
+    <a href="https://docs.servicestack.net/authentication-and-authorization">Authenticated Users</a> and
+    ideally configure it to use a <b>Read Only</b> connection, e.g. for SQLite:
+</p>
+
+{{ 'gfm/adhoc-querying/02.md' |> githubMarkdown }}
+
+<h4>Populating the database</h4>
+
+<p>
+    The database queried above was populated in the 
+    <a href="https://github.com/ServiceStack/sharpscript/blob/master/src/AppHost.cs">AppHost</a>
+    where it re-uses the LINQ data sources to create and populate an In Memory SQLite database on Startup:
+</p>
+
+{{ 'gfm/adhoc-querying/03.md' |> githubMarkdown }}
+
+<h4 id="order-report-example">Order Report Example</h4>
+
+{{ 'gfm/adhoc-querying/04.md' |> githubMarkdown }}
+
+{{ "usecase-links" |> partial({ order }) }}

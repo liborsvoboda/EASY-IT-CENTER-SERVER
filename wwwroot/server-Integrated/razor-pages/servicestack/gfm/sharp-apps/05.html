@@ -1,0 +1,25 @@
+<div class="gfm"><div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">CustomPlugin</span> : <span class="pl-en">IPlugin</span>
+{
+    <span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">ShowDrivesLinks</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; } <span class="pl-k">=</span> <span class="pl-c1">true</span>;
+    
+    <span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">ShowProcessLinks</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
+
+    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">Register</span>(<span class="pl-en">IAppHost</span> <span class="pl-smi">appHost</span>)
+    {
+        <span class="pl-k">if</span> (<span class="pl-smi">ShowDrivesLinks</span>)
+        {
+            <span class="pl-k">var</span> <span class="pl-smi">diskFormat</span> <span class="pl-k">=</span> <span class="pl-smi">Env</span>.<span class="pl-smi">IsWindows</span> <span class="pl-k">?</span> <span class="pl-s"><span class="pl-pds">"</span>NTFS<span class="pl-pds">"</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>ext2<span class="pl-pds">"</span></span>;
+            <span class="pl-smi">appHost</span>.<span class="pl-en">GetPlugin</span>&lt;<span class="pl-en">MetadataFeature</span>&gt;()
+                .<span class="pl-en">AddPluginLink</span>(<span class="pl-s"><span class="pl-pds">"</span>/drives<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>All Disks<span class="pl-pds">"</span></span>)
+                .<span class="pl-en">AddPluginLink</span>(<span class="pl-s"><span class="pl-pds">$"</span>/drives?DriveFormatIn={<span class="pl-smi">diskFormat</span>}<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">$"</span>{<span class="pl-smi">diskFormat</span>} Disks<span class="pl-pds">"</span></span>);
+        }
+
+        <span class="pl-k">if</span> (<span class="pl-smi">ShowProcessLinks</span>)
+        {
+            <span class="pl-smi">appHost</span>.<span class="pl-en">GetPlugin</span>&lt;<span class="pl-en">MetadataFeature</span>&gt;()
+                .<span class="pl-en">AddPluginLink</span>(<span class="pl-s"><span class="pl-pds">"</span>/processes<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>All Processes<span class="pl-pds">"</span></span>)
+                .<span class="pl-en">AddPluginLink</span>(<span class="pl-s"><span class="pl-pds">"</span>/process/current<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Current Process<span class="pl-pds">"</span></span>);
+        }
+    }
+}</pre></div>
+</div>

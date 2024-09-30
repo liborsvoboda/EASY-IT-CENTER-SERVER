@@ -1,5 +1,6 @@
 ﻿using IdentityModel.OidcClient;
 using Microsoft.AspNetCore.Http;
+using ServerCorePages;
 using System.Linq;
 using System.Xml.Serialization;
 

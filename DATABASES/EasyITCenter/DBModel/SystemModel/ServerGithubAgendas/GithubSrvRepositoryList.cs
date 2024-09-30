@@ -23,7 +23,7 @@ namespace EasyITCenter.DBModel
         [StringLength(150)]
         [Unicode(false)]
         public string? Name { get; set; }
-        [Column(TypeName = "text")]
+        [Unicode(false)]
         public string? Description { get; set; }
         [StringLength(1024)]
         [Unicode(false)]

@@ -14,7 +14,6 @@ using Prometheus;
 using System.Data.Entity.Core.Metadata.Edm;
 using MongoDB.Bson.IO;
 using DocumentFormat.OpenXml.Packaging;
-using Eaf.Middleware.Authorization.Roles;
 using CsvHelper.Configuration;
 using MassTransit.SagaStateMachine;
 using PuppeteerExtraSharp.Plugins.ExtraStealth.Evasions;
