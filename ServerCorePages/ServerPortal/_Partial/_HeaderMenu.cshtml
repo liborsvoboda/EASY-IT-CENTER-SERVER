@@ -1,0 +1,107 @@
+﻿@* @addTagHelper *, WebOptimizer.Core *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Westwind.AspNetCore
+@addTagHelper *, Westwind.AspNetCore.Markdown
+
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
+@using Westwind.AspNetCore.Markdown
+
+@using System.IO
+@using System.Linq
+@using System.Collections
+@using System.Collections.Generic
+@using System.Text.RegularExpressions
+@using System.Security.Claims
+@using System.Threading.Tasks
+
+@using EasyITCenter
+@using EasyITCenter.DBModel
+@using EasyITCenter.Managers
+@using EasyITCenter.WebClasses
+@using EasyITCenter.WebModel
+@using EasyITCenter.WebDBModel
+@using EasyITCenter.WebControllers
+@using EasyITCenter.ServerCoreStructure
+@using EasyITCenter.ServerCorePages
+
+@namespace ServerCorePages
+@model ServerCorePages.ServerPortalModel
+
+@* https://docs.metroui.org.ua/ *@
+
+@{
+    string path = this.Context.Request.Path.ToString().ToLower();
+    string? role = this.Context.User.Claims.Where(a => a.Type == ClaimTypes.Role).FirstOrDefault()?.Value;
+    string? name = this.Context.User.Claims.Where(a => a.Type == ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
+}
+
+
+<div data-role="appbar" class="pos-absolute bg-darkCyan fg-white">
+
+    <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
+
+    <div class="app-bar-container ml-left">
+        <a href="#" class="app-bar-item" title="Help Center">
+            <span class="mif-info"></span>
+            <span class="ml-2 app-bar-name">Any Question?</span>
+        </a>
+        <a href="#" class="app-bar-item" title="Auto Language Control" onclick=ShowToolPanel(); >
+            <span class="mif-language"></span>
+            <span class="ml-2 app-bar-name">Auto Language</span>
+        </a>
+    </div>
+
+    <div id="OpenWindow" class="app-bar-container ml-auto">
+        <a href="#" class="app-bar-item" title="Rezervace Online">
+            <span class="mif-contacts-dialer"></span>
+            <span class="ml-2 app-bar-name">Reservation Online</span>
+        </a>
+    </div>
+
+
+
+    <div class="app-bar-container ml-auto">
+
+        <a href="#" class="app-bar-item">
+            <span class="mif-envelop"></span>
+            <span class="badge bg-green fg-white mt-2 mr-1">4</span>
+        </a>
+        <a href="#" class="app-bar-item">
+            <span class="mif-bell"></span>
+            <span class="badge bg-orange fg-white mt-2 mr-1">10</span>
+        </a>
+        <a href="#" class="app-bar-item">
+            <span class="mif-flag"></span>
+            <span class="badge bg-red fg-white mt-2 mr-1">9</span>
+        </a>
+        <div class="app-bar-container">
+            <a href="#" class="app-bar-item">
+                <img src="/server-Integrated/razor-pages/serverportal/images/jek_vorobey.jpg" class="avatar">
+                <span class="ml-2 app-bar-name">Jack Sparrow</span>
+            </a>
+            <div class="user-block shadow-1" data-role="collapse" data-collapsed="true">
+                <div class="bg-darkCyan fg-white p-2 text-center">
+                    <img src="/server-Integrated/razor-pages/serverportal/images/jek_vorobey.jpg" class="avatar">
+                    <div class="h4 mb-0">Jack Sparrow</div>
+                    <div>Pirate captain</div>
+                </div>
+                <div class="bg-white d-flex flex-justify-between flex-equal-items p-2">
+                    <button class="button flat-button">Followers</button>
+                    <button class="button flat-button">Sales</button>
+                    <button class="button flat-button">Friends</button>
+                </div>
+                <div class="bg-white d-flex flex-justify-between flex-equal-items p-2 bg-light">
+                    <button class="button mr-1">Profile</button>
+                    <button class="button ml-1">Sign out</button>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="app-bar-item">
+            <span class="mif-cogs"></span>
+        </a>
+    </div>
+</div>

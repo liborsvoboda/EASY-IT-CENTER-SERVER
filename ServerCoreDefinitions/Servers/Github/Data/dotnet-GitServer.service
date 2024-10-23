@@ -1,0 +1,19 @@
+﻿[Unit]  
+Description=Dotnet GitServer  
+  
+[Service]  
+ExecStart=dotnet /var/www/GitServer/ProjectManagement.dll "protocol:http" 
+WorkingDirectory=/var/www/GitServer/ 
+User=root  
+Group=root  
+Restart=always
+RestartSec=5  
+SyslogIdentifier=dotnet-GitServer  
+PrivateTemp=true  
+Environment=ASPNETCORE_ENVIRONMENT=Development
+KillSignal=SIGINT
+StandardOutput=file:/var/www/GitServer/Log/standardOutput.log
+StandardError=file:/var/www/GitServer/Log/standardError.log
+
+[Install]  
+WantedBy=multi-user.target  

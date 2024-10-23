@@ -1,0 +1,84 @@
+﻿@page "/ToolViewer"
+@{ Layout = "/ServerCorePages/Shared/ToolViewerLayout.cshtml"; }
+
+@* @addTagHelper *, WebOptimizer.Core *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using ServerCorePages
+@using Microsoft.AspNetCore.Html
+@using EasyITCenter.DBModel
+
+@using EasyITCenter.ServerCoreStructure
+@using System.Security.Claims
+@model ServerCorePages.ToolViewerModel
+
+
+
+@namespace ServerCorePages
+@{
+    ViewData["Title"] = "Tool Viewer";
+
+  
+    
+    string token = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key == "ApiToken").Value;
+    if (token == null && HttpContext.Request.Headers.Authorization.ToString().Length > 0) { token = HttpContext.Request.Headers.Authorization.ToString().Substring(7); }
+    ServerWebPagesToken? srvWebPagesToken = null;
+    if (token != null) { srvWebPagesToken = CoreOperations.CheckTokenValidityFromString(token); }
+
+
+    <div id="TopPanel" ></div>
+    <div id="ToolsLibrary" class="row w-100 p-0" style="margin-top:60px;">
+        <div class="d-inline-flex w-15 drop-shadow">
+            <div id="ToolList" class="w-100 h-100">
+            <ul id="TreeView" data-role="treeview" class="border">
+                <li data-caption="Web"></li>
+            </ul>
+            </div>
+        </div>
+        <div class="d-inline-flex w-85 drop-shadow">
+            <iframe id="ToolView" src="" width="100%" height="600" frameborder="0" scrolling="yes" width="100%"></iframe>
+        </div>
+    </div>
+
+
+    <script>
+        function ChangeView(selection){
+            let html = "";
+
+            if(selection == "integrated"){
+                integrated.forEach( link =>{
+                    let length = link.split("/");
+                    let desc = length[length.length -1].toLowerCase() == "index.html" || length[length.length -1].toLowerCase() == "readme.md"
+                            ? length[length.length - 2]
+                            : length[length.length - 1].replace(".html","").replace(".md","");
+
+                    html += "<li data-caption='";
+                    html += desc
+                    html += "' class='c-pointer' onclick=LoadPage('" + link + "'); ><a><span class='caption'>" + desc + "</span></a></li>";
+                });
+            }
+            console.log("data",html);
+            let treeView = $('#TreeView').html(html);
+        }    
+
+     
+        function CalcHeight(iframeElement){
+            iframeElement.height=2000;
+        }
+
+        $(document).ready(function () { 
+            $("#TopPanel").html(CreateToolPanel());
+            CalcHeight(document.getElementById("ToolView"));
+            GoogleTranslateElementInit(); 
+            ChangeView("integrated");
+        });
+
+        function LoadPage(url) {
+            document.getElementById("ToolView").src = url;
+        }
+    </script>
+    
+ 
+}
+     
+

@@ -1,0 +1,65 @@
+﻿@page "/ServerPortal"
+@{
+    Layout = "/ServerCorePages/Shared/ServerPortalLayout.cshtml";
+}
+@* @addTagHelper *, WebOptimizer.Core *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Westwind.AspNetCore
+@addTagHelper *, Westwind.AspNetCore.Markdown
+
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
+@using Westwind.AspNetCore.Markdown
+
+@using System.IO
+@using System.Linq
+@using System.Collections
+@using System.Collections.Generic
+@using System.Text.RegularExpressions
+@using System.Security.Claims
+@using System.Threading.Tasks
+
+@using EasyITCenter
+@using EasyITCenter.DBModel
+@using EasyITCenter.Managers
+@using EasyITCenter.WebClasses
+@using EasyITCenter.WebModel
+@using EasyITCenter.WebDBModel
+@using EasyITCenter.WebControllers
+@using EasyITCenter.ServerCoreStructure
+@using EasyITCenter.ServerCorePages
+
+
+@namespace ServerCorePages
+@model ServerCorePages.ServerPortalModel
+
+@{
+    ViewData["Title"] = "EIC&ESB ONLINE Portal";
+ }
+
+
+ 
+ @* https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/MarkdownScriptPlugin.cs *@
+
+@{
+    string path = HttpContext.Request.Path.ToString().ToLower();
+    string? role = HttpContext.User.Claims.Where(a => a.Type == ClaimTypes.Role).FirstOrDefault()?.Value;
+    string? name = HttpContext.User.Claims.Where(a => a.Type == ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
+
+
+}
+
+
+ 
+<div id="content-wrapper" class="content-inner mt-10 h-100" style="overflow-y: auto">
+
+
+
+
+
+</div>
+
+
