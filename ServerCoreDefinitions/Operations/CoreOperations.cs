@@ -199,7 +199,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 else {
                     if (SrvConfig.ConfigLogWarnPlusToDbEnabled && mailRequest.Content != null &&
                         !SrvRuntime.SrvRestartReq && SrvRuntime.ServerCoreStatus == ServerStatusTypes.Running.ToString()) {
-                        SolutionFailList SolutionFailList = new SolutionFailList() { UserId = null, Source = "PrimaryServer", Message = mailRequest.Content, LogLevel = null, UserName = null };
+                        SolutionFailList SolutionFailList = new SolutionFailList() { UserId = null, InheritedLogMonitorType = "PrimaryServer", Message = mailRequest.Content, LogLevel = null, UserName = null };
                         new EasyITCenterContext().SolutionFailLists.Add(SolutionFailList).Context.SaveChanges();
                         Console.WriteLine(mailRequest.Content); Debug.WriteLine(mailRequest.Content);
                     }
@@ -380,7 +380,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public static bool GetServerRegisteredRoutesList(string patchForCheck, bool updateList = false) {
             try {
                 if (updateList || SrvRuntime.SrvRegisteredRoutesList == null) { //a=>a.AttributeRouteInfo.Name action
-                    var RouteGroups = ((IReadOnlyList<ActionDescriptor>)SrvRuntime.ActionRouterProvider.ActionDescriptors.Items).GroupBy(a => a.AttributeRouteInfo?.Template).ToJson();
+                    var RouteGroups = ((IReadOnlyList<ActionDescriptor>)SrvRuntime.ActionRouterProvider.ActionDescriptors.Items).GroupBy(a => a.AttributeRouteInfo?.Template).ObjectToJson();
 
                     
                     SrvRuntime.SrvRegisteredRoutesList = SrvRuntime.ActionRouterProvider.ActionDescriptors.Items.ToArray().ToList();

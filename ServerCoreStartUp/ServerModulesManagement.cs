@@ -12,7 +12,6 @@ using Docfx.MarkdigEngine.Extensions;
 using Markdig.Prism;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
-using ServiceStack;
 using Fawdlstty.GitServerCore;
 
 

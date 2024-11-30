@@ -1,4 +1,12 @@
-﻿
+﻿# MICROSOFT LIST Available Library
+
+[Net API Catalog](https://apisof.net/catalog)
+https://source.dot.net/
+https://referencesource.microsoft.com/
+https://learn.microsoft.com/cs-cz/dotnet/api/
+
+
+
 # NWAMP registrace vlastnich funkci a procedur n signalr
 
 

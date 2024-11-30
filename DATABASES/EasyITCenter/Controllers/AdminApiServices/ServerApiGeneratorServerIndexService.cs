@@ -12,7 +12,6 @@ using DocumentFormat.OpenXml.Drawing.Diagrams;
 using System.Data.Entity.Core.Metadata.Edm;
 using DocumentFormat.OpenXml.Packaging;
 using CsvHelper.Configuration;
-using ServiceStack.Host;
 using EasyITCenter.DBModel;
 using OpenGraphNet;
 

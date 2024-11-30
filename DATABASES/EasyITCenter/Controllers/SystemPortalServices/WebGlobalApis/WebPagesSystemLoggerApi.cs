@@ -11,7 +11,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> SetWebLogMessage([FromBody] WebSystemLogMessage record) {
             try {
                 SolutionFailList solutionFailList = new SolutionFailList() {
-                    Source = "SystemPortal",
+                    InheritedLogMonitorType = "SystemPortal",
                     LogLevel = record.LogLevel,
                     Message = record.Message,
                     UserId = record.UserId,

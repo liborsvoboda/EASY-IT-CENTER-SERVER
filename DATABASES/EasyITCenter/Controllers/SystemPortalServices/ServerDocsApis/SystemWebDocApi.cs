@@ -1,4 +1,6 @@
-﻿namespace EasyITCenter.Controllers {
+﻿using RedirectResult = Microsoft.AspNetCore.Mvc.RedirectResult;
+
+namespace EasyITCenter.Controllers {
 
     [ApiController]
     [Route("/WebApi/WebDocumentation")]

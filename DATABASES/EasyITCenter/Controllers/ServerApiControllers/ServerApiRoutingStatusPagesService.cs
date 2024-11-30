@@ -1,4 +1,6 @@
-﻿namespace EasyITCenter.ServerCoreDBSettings {
+﻿using RedirectResult = Microsoft.AspNetCore.Mvc.RedirectResult;
+
+namespace EasyITCenter.ServerCoreDBSettings {
 
     /// <summary>
     /// Server Routing Rulles

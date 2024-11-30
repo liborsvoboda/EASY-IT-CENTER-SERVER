@@ -50,7 +50,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<DocSrvDocumentationCodeLibraryList> DocSrvDocumentationCodeLibraryLists { get; set; } = null!;
         public virtual DbSet<DocSrvDocumentationGroupList> DocSrvDocumentationGroupLists { get; set; } = null!;
         public virtual DbSet<DocSrvDocumentationList> DocSrvDocumentationLists { get; set; } = null!;
-        public virtual DbSet<GetNewId> GetNewIds { get; set; } = null!;
         public virtual DbSet<GithubSrvAuthLogList> GithubSrvAuthLogLists { get; set; } = null!;
         public virtual DbSet<GithubSrvRepositoryList> GithubSrvRepositoryLists { get; set; } = null!;
         public virtual DbSet<GithubSrvSshKeyList> GithubSrvSshKeyLists { get; set; } = null!;
@@ -681,11 +680,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DocumentationList_UserList");
-            });
-
-            modelBuilder.Entity<GetNewId>(entity =>
-            {
-                entity.ToView("getNewID");
             });
 
             modelBuilder.Entity<GithubSrvAuthLogList>(entity =>

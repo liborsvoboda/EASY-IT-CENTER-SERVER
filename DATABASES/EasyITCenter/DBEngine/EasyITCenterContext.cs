@@ -45,7 +45,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                         builder.SetMinimumLevel(LogLevel.Warning).AddEventLog();
                     })).EnableSensitiveDataLogging(false).LogTo(message => {
                         SolutionFailList SolutionFailList = new SolutionFailList() 
-                        { UserId = null, Source = "PrimaryServer", Message = message, LogLevel = null, UserName = null };
+                        { UserId = null, InheritedLogMonitorType = "PrimaryServer", Message = message, LogLevel = null, UserName = null };
                         new EasyITCenterContext().SolutionFailLists.Add(SolutionFailList).Context.SaveChanges();
                     }, LogLevel.Warning);
                 }

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 using NUglify.Helpers;
-using ServiceStack;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
@@ -118,7 +117,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 using (PowerShell ps = PowerShell.Create()) {
                     Collection<PSObject>? results = ps.AddScript(script).Invoke();
                     ps.Commands.Clear();
-                    return results.AsEnumerable().ToList().ToJson();
+                    return results.AsEnumerable().ToList().ObjectToJson();
                 }
             } catch (Exception ex) {
                 string err = DataOperations.GetErrMsg(ex);

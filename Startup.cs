@@ -21,9 +21,7 @@ using Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using HandlebarsDotNet;
-using ServiceStack;
 using FluentAssertions.Common;
-using ResponsiveFileManager;
 using Pchp.Core;
 
 
@@ -113,13 +111,7 @@ namespace EasyITCenter {
             //primi chat s aplikaci
 
             services.AddSignalR();
-            services.AddResponsiveFileManager( cfg=> { 
-                cfg.CurrentPath = SrvRuntime.WebRoot_path; 
-                cfg.UploadDirectory = SrvRuntime.WebRoot_path;
-                cfg.ThumbsBasePath = Path.Combine(SrvRuntime.SrvSharedPath,"thumb");
-                cfg.MaxSizeUpload = 500;
-            });
-            services.AddPhp(cfg => { cfg.RootPath = Path.Combine(SrvRuntime.SrvOtherLanguagesPath, "PHP"); });
+            //services.AddPhp(cfg => { cfg.RootPath = Path.Combine(SrvRuntime.SrvOtherLanguagesPath, "PHP"); });
             //services.AddServerSideBlazor();
 
 
@@ -280,22 +272,6 @@ namespace EasyITCenter {
 
             app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, /*OnPrepareResponse = */ });
 
-
-            ResponsiveFileManagerOptions? rfmOptions = new ResponsiveFileManagerOptions();
-            //Configuration.GetSection("ResponsiveFileManagerOptions").Bind(rfmOptions);
-            app.UseStaticFiles(new StaticFileOptions {
-                RequestPath = new PathString("/filemanager"),
-                FileProvider = new PhysicalFileProvider(Path.GetFullPath(Path.Combine(Assembly.GetEntryAssembly().Location, "../filemanager"))),
-            });
-
-            app.UsePhp(new PhpRequestOptions(scriptAssemblyName: "ResponsiveFileManager") {
-                BeforeRequest = (Pchp.Core.Context ctx) =>
-                {
-                    ctx.Globals["rfm_options"] = PhpValue.FromClass(rfmOptions);
-                }
-            });
-
-
             app.UseCookiePolicy();
             app.UseSession();
             app.UseResponseCaching();
@@ -349,16 +325,6 @@ namespace EasyITCenter {
             if (SrvConfig.BrowserLinkEnabled) { app.UseBrowserLink(); }
             if (SrvConfig.ModuleWebDataManagerEnabled) { app.UseEasyData(); }
 
-            //var host = new AppHost();
-            //Exception ex = new();//host.UseException(ex);
-            //ServiceStackHost? appHost = host.Init(); host.Start("http://*:5001");
-            ////appHost.Start(SrvConfig.ConfigServerStartupOnHttps ? $"https://*:{SrvConfig.ConfigServerStartupHttpsPort}" : $"http://*:{SrvConfig.ConfigServerStartupHttpPort}");
-            //appHost.Start(SrvConfig.ConfigServerStartupOnHttps ? $"https://*:{SrvConfig.ConfigServerStartupHttpsPort}" : $"http://*:5001");
-            //SrvRuntime.ServerAppHosts.Add(new Tuple<string, ServiceStackHost>("admin",appHost));
-            //app.UseServiceStack(host);
-
-
-            app.UseResponsiveFileManager();
 
             //Load registered routes List To Runtime
             CoreOperations.GetServerRegisteredRoutesList("",true);

@@ -1,4 +1,6 @@
 ﻿
+using RedirectResult = Microsoft.AspNetCore.Mvc.RedirectResult;
+
 namespace EasyITCenter.Controllers {
 
     [Authorize]

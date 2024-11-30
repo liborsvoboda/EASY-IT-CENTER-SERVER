@@ -30,7 +30,6 @@ using FileContextCore.FileManager;
 using FileContextCore.Serializer;
 using Microsoft.Extensions.DependencyInjection;
 using PuppeteerExtraSharp.Plugins.Recaptcha;
-using Codeuctivity.OpenXmlPowerTools;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using IdentityModel;
 using Korzh.DbUtils;
@@ -408,11 +407,13 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services"></param>
         internal static void ConfigureIdentityServer(ref IServiceCollection services) {
             if (SrvConfig.EnableIdentityServer) {
-                services.AddIdentityServer(options => {
-                    options.UserInteraction.LoginUrl = "";
-                }).AddCoreServices().AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
+                /*
+                services.AddIdentityServer(options => { options.UserInteraction.LoginUrl = "";})
+                .AddCoreServices().AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
                 .AddInMemoryClients(new List<IdentityServer4.Models.Client>())
-                .AddInMemoryCaching().AddResponseGenerators().AddValidators()
+                .AddInMemoryCaching().AddResponseGenerators().AddValidators();
+                */
+
                     //.AddUserStore<ApplicationUser>()
                     //.AddInMemoryIdentityResources(new List<IdentityServer4.Models.IdentityResource>())
                 //.AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
@@ -421,7 +422,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 //.AddCoreServices().AddInMemoryPersistedGrants()//.AddPluggableServices()
                 //.AddJwtBearerClientAuthentication().AddCookieAuthentication()
                 //.AddResponseGenerators().AddDeveloperSigningCredential();
-                ;
+                
                 services.Configure<IdentityOptions>(options => {
                     options.Password.RequireDigit = true;
                     options.Password.RequireLowercase = true;

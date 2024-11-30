@@ -60,7 +60,7 @@ namespace EasyITCenter.GitServer.Extensions
 
 		public static string UnencodedRouteLink(this IUrlHelper helper, string routeName, object routeValues)
 		{
-			return WebUtility.UrlDecode(helper.RouteUrl(routeName, routeValues));
+			return System.WebUtility.UrlDecode(helper.RouteUrl(routeName, routeValues));
 		}
 	}
 }

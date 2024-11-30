@@ -1,10 +1,8 @@
-﻿using EasyITCenter.SharpScript;
-using FubarDev.FtpServer;
+﻿using FubarDev.FtpServer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Quartz;
-using ServiceStack;
 
 namespace EasyITCenter.ServerCoreStructure {
 
@@ -179,13 +177,6 @@ namespace EasyITCenter.ServerCoreStructure {
         /// Identity Server Management Extension
         /// </summary>
         public static UserManagement UserManagement = new();
-
-
-        /// <summary>
-        /// Server App Host Controller
-        /// 
-        /// </summary>
-        public static List<Tuple<string,ServiceStackHost>> ServerAppHosts = new ();
 
 
         /// <summary>

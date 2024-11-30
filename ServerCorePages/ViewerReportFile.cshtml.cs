@@ -2,7 +2,6 @@
 using FastReport;
 using FastReport.Web;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ServiceStack;
 using static ServerCorePages.ViewerReportFileModel;
 namespace ServerCorePages {
 

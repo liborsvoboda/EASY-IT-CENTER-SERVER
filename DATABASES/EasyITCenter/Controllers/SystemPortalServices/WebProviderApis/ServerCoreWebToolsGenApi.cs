@@ -25,64 +25,7 @@ namespace EasyITCenter.ControllersExtensions {
             return JsonSerializer.Serialize(data);
         }
 
-
-        [HttpGet("/Generators/GetGeneratedToolCount")]
-        [Consumes("application/json")]
-        public IActionResult GetGeneratedToolCount() {
-            try {
-                int data;
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
-                    data = new EasyITCenterContext().ProviderGeneratedToolLists.Count();
-                }
-                return Ok(new { ToolCounter = data });
-            } catch { }
-            return BadRequest();
-        }
-
-        [HttpGet("/Generators/GetGeneratedToolRatingList")]
-        public async Task<string> GetGeneratedToolRatingList() {
-            List<ProviderGeneratedToolList> data = new();
-            try {
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
-                    IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
-                })) {
-                    data = new EasyITCenterContext().ProviderGeneratedToolLists.ToList();
-                }
-            } catch { }
-            return JsonSerializer.Serialize(data);
-        }
-
-        [Authorize]
-        [HttpGet("/Generators/SetGeneratedToolRatingList/{recordId}/{rating}")]
-        public async Task<IActionResult> SetGeneratedToolRatingList(int recordId, int rating) {
-            ProviderGeneratedToolList data = new();
-            try {
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
-                    IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
-                })) {
-                    data = new EasyITCenterContext().ProviderGeneratedToolLists.Where(a => a.Id == recordId).First();
-                }
-                data.Rating = rating;
-                var saveRating = new EasyITCenterContext().ProviderGeneratedToolLists.Update(data);
-                await saveRating.Context.SaveChangesAsync();
-
-                return Ok(new string(DbOperations.DBTranslate("ProcessSucessfullyCompleted")) );
-            } catch { }
-            return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
-        }
-
-        [Authorize]
-        [HttpGet("/Generators/SetGeneratedToolRatingName/{name}/{rating}")]
-        public async Task<IActionResult> SetGeneratedToolRatingName(string name, int rating) {
-            ProviderGeneratedToolList data = new() { Name = name, Rating = rating, UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
-            try {
-                var saveRating = new EasyITCenterContext().ProviderGeneratedToolLists.Update(data);
-                await saveRating.Context.SaveChangesAsync();
-
-                return Ok(new string(DbOperations.DBTranslate("ProcessSucessfullyCompleted")));
-            } catch { }
-            return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
-        }
+       
 
         /// <summary>
         /// Easy Image Gallery Generator
@@ -111,11 +54,11 @@ namespace EasyITCenter.ControllersExtensions {
                 System.IO.File.WriteAllText(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "EasyGallery", "index.html"), indexFile);
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "EasyGallery"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "EasyGallery.zip"));
 
-                var genRecord = new ProviderGeneratedToolList() { Name = "EasyGallery", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
-                var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
-                saveGen.Context.SaveChanges();
+                //var genRecord = new ProviderGeneratedToolList() { Name = "EasyGallery", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
+                //var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
+                //saveGen.Context.SaveChanges();
 
-                return Ok(new { genRecord = genRecord.Id, message = DbOperations.DBTranslate("EASYGalleryWasGenerated", "en") });
+                return Ok(new { genRecord = 0, message = DbOperations.DBTranslate("EASYGalleryWasGenerated", "en") });
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
         }
@@ -158,11 +101,11 @@ namespace EasyITCenter.ControllersExtensions {
                 System.IO.File.WriteAllText(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselGallery", "index.html"), indexFile);
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselGallery"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselGallery.zip"));
 
-                var genRecord = new ProviderGeneratedToolList() { Name = "CarouselGallery", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
-                var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
-                saveGen.Context.SaveChanges();
+                //var genRecord = new ProviderGeneratedToolList() { Name = "CarouselGallery", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
+                //var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
+                //saveGen.Context.SaveChanges();
 
-                return Ok(new { genRecord = genRecord.Id, message = DbOperations.DBTranslate("CarouselGalleryWasGenerated", "en") });
+                return Ok(new { genRecord = 0, message = DbOperations.DBTranslate("CarouselGalleryWasGenerated", "en") });
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
         }
@@ -205,11 +148,11 @@ namespace EasyITCenter.ControllersExtensions {
                 System.IO.File.WriteAllText(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselVideoGallery", "index.html"), indexFile);
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselVideoGallery"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselVideoGallery.zip"));
 
-                var genRecord = new ProviderGeneratedToolList() { Name = "CarouselVideoGallery", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
-                var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
-                saveGen.Context.SaveChanges();
+                //var genRecord = new ProviderGeneratedToolList() { Name = "CarouselVideoGallery", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
+                //var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
+                //saveGen.Context.SaveChanges();
 
-                return Ok(new { genRecord = genRecord.Id, message = DbOperations.DBTranslate("CarouselVideoGalleryWasGenerated", "en") });
+                return Ok(new { genRecord = 0, message = DbOperations.DBTranslate("CarouselVideoGalleryWasGenerated", "en") });
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
         }
@@ -255,11 +198,7 @@ namespace EasyITCenter.ControllersExtensions {
                 System.IO.File.WriteAllText(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "VideoPlayList", "index.html"), indexFile);
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "VideoPlayList"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "VideoPlayList.zip"));
 
-                var genRecord = new ProviderGeneratedToolList() { Name = "VideoPlayList", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
-                var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
-                saveGen.Context.SaveChanges();
-
-                return Ok(new { genRecord = genRecord.Id, message = DbOperations.DBTranslate("VideoPlayListWasGenerated", "en") });
+                return Ok(new { genRecord = 0, message = DbOperations.DBTranslate("VideoPlayListWasGenerated", "en") });
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
         }
@@ -305,11 +244,7 @@ namespace EasyITCenter.ControllersExtensions {
 
                     ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd", "XmlToMd"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MarkDownDocumentation.zip"));
 
-                    var genRecord = new ProviderGeneratedToolList() { Name = "XmlToMd", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
-                    var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
-                    saveGen.Context.SaveChanges();
-
-                    return Ok(new { genRecord = genRecord.Id, message = DbOperations.DBTranslate("XmlToMdWasGenerated", "en") });
+                    return Ok(new { genRecord = 0, message = DbOperations.DBTranslate("XmlToMdWasGenerated", "en") });
                 }
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
@@ -357,11 +292,9 @@ namespace EasyITCenter.ControllersExtensions {
 
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "book"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdBook.zip"));
 
-                var genRecord = new ProviderGeneratedToolList() { Name = "MdToMdBook", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
-                var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
-                saveGen.Context.SaveChanges();
 
-                return Ok(new { genRecord = genRecord.Id, message = DbOperations.DBTranslate("MdToMdBookWasGenerated", "en") });
+
+                return Ok(new { genRecord = 0, message = DbOperations.DBTranslate("MdToMdBookWasGenerated", "en") });
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
         }
@@ -404,11 +337,7 @@ namespace EasyITCenter.ControllersExtensions {
                 System.IO.File.WriteAllText(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "ImageBook", "index.html"), indexFile);
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "ImageBook"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "ImageBook.zip"));
 
-                var genRecord = new ProviderGeneratedToolList() { Name = "ImageBook", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
-                var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
-                saveGen.Context.SaveChanges();
-
-                return Ok(new { genRecord = genRecord.Id, message = DbOperations.DBTranslate("ImageBookWasGenerated", "en") });
+                return Ok(new { genRecord = 0, message = DbOperations.DBTranslate("ImageBookWasGenerated", "en") });
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
         }
@@ -451,11 +380,8 @@ namespace EasyITCenter.ControllersExtensions {
                 System.IO.File.WriteAllText(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MedialPresentation", "index.html"), indexFile);
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MedialPresentation"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MedialPresentation.zip"));
 
-                var genRecord = new ProviderGeneratedToolList() { Name = "MedialPresentation", UserId = int.Parse(User.Claims.First(a => a.Issuer != null).Value), Rating = null, DescActive = false, Description = null, TimeStamp = DateTimeOffset.Now.DateTime };
-                var saveGen = new EasyITCenterContext().ProviderGeneratedToolLists.Add(genRecord);
-                saveGen.Context.SaveChanges();
 
-                return Ok(new { genRecord = genRecord.Id, message = DbOperations.DBTranslate("MedialPresentationWasGenerated", "en") });
+                return Ok(new { genRecord = 0, message = DbOperations.DBTranslate("MedialPresentationWasGenerated", "en") });
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
         }
