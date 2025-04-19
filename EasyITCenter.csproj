@@ -535,7 +535,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.DirectoryServices" Version="6.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.5" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.0" />
     <PackageReference Include="System.Management.Automation" Version="7.2.23" />
     <PackageReference Include="System.Net.Http.WinHttpHandler" Version="6.0.1" />
     <PackageReference Include="System.Reactive" Version="6.0.0" />
@@ -618,6 +618,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   <ItemGroup>
     <Folder Include="Data\certificates\" />
     <Folder Include="ServerCoreDefinitions\Generators\" />
+    <Folder Include="ServerCoreDefinitions\ServerPortalExtensions\" />
   </ItemGroup>
   
  

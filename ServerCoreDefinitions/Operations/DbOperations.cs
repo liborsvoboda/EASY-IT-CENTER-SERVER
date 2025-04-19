@@ -53,6 +53,11 @@ namespace EasyITCenter.ServerCoreStructure {
                                 int sasIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == sasDataLL.GetType());
                                 if (sasIndexLL >= 0) SrvRuntime.LocalDBTableList[sasIndexLL] = sasDataLL; else SrvRuntime.LocalDBTableList.Add(sasDataLL);
                                 break;
+                            case "ServerParameterLists":
+                                List<ServerParameterList>? spsDataLL = new EasyITCenterContext().ServerParameterLists.ToList();
+                                int spsIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == spsDataLL.GetType());
+                                if (spsIndexLL >= 0) SrvRuntime.LocalDBTableList[spsIndexLL] = spsDataLL; else SrvRuntime.LocalDBTableList.Add(spsDataLL);
+                                break;
 
                             default: break;
                         }

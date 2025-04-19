@@ -68,8 +68,10 @@
         ServerApiSecurityLists,
         SystemTranslationLists,
         ServerModuleAndServiceLists,
+        ServerParameterLists,
         ServerStaticOrMvcDefPathLists,
         WebCoreFileLists,
-        WebGlobalPageBlockLists,
+        WebGlobalPageBlockLists
+        
     }
 }
