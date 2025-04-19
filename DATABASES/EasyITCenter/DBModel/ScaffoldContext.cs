@@ -116,7 +116,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionUserRoleList> SolutionUserRoleLists { get; set; } = null!;
         public virtual DbSet<SystemCustomPageList> SystemCustomPageLists { get; set; } = null!;
         public virtual DbSet<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; } = null!;
-        public virtual DbSet<SystemDocumentTypeList> SystemDocumentTypeLists { get; set; } = null!;
         public virtual DbSet<SystemGroupMenuList> SystemGroupMenuLists { get; set; } = null!;
         public virtual DbSet<SystemIgnoredExceptionList> SystemIgnoredExceptionLists { get; set; } = null!;
         public virtual DbSet<SystemLoginHistoryList> SystemLoginHistoryLists { get; set; } = null!;
@@ -1553,10 +1552,10 @@ namespace EasyITCenter.DBModel
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemCustomPageList_SolutionMixedEnumList");
 
-                entity.HasOne(d => d.InheritedHelpTabSourceTypeNavigation)
-                    .WithMany(p => p.SystemCustomPageListInheritedHelpTabSourceTypeNavigations)
+                entity.HasOne(d => d.InheritedSystemApiCallTypeNavigation)
+                    .WithMany(p => p.SystemCustomPageListInheritedSystemApiCallTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedHelpTabSourceType)
+                    .HasForeignKey(d => d.InheritedSystemApiCallType)
                     .HasConstraintName("FK_SystemCustomPageList_SolutionMixedEnumList1");
 
                 entity.HasOne(d => d.User)
@@ -1581,27 +1580,11 @@ namespace EasyITCenter.DBModel
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemDocumentAdviceList_SolutionMixedEnumList");
 
-                entity.HasOne(d => d.InheritedDocumentType1)
-                    .WithMany(p => p.SystemDocumentAdviceLists)
-                    .HasPrincipalKey(p => p.SystemName)
-                    .HasForeignKey(d => d.InheritedDocumentType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DocumentAdviceList_DocumentTypeList");
-
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemDocumentAdviceLists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DocumentAdvice_UserList");
-            });
-
-            modelBuilder.Entity<SystemDocumentTypeList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SystemDocumentTypeLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DocumentTypeList_UserList");
             });
 
             modelBuilder.Entity<SystemGroupMenuList>(entity =>

@@ -105,7 +105,6 @@ namespace EasyITCenter.DBModel
             SolutionTaskLists = new HashSet<SolutionTaskList>();
             SystemCustomPageLists = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
-            SystemDocumentTypeLists = new HashSet<SystemDocumentTypeList>();
             SystemGroupMenuLists = new HashSet<SystemGroupMenuList>();
             SystemIgnoredExceptionLists = new HashSet<SystemIgnoredExceptionList>();
             SystemMenuLists = new HashSet<SystemMenuList>();
@@ -356,8 +355,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SystemCustomPageList> SystemCustomPageLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<SystemDocumentTypeList> SystemDocumentTypeLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SystemGroupMenuList> SystemGroupMenuLists { get; set; }
         [InverseProperty("User")]

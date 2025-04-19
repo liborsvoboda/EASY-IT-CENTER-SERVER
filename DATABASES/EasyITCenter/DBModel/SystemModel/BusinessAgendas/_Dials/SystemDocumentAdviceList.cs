@@ -33,7 +33,6 @@ namespace EasyITCenter.DBModel
         [ForeignKey("BranchId")]
         [InverseProperty("SystemDocumentAdviceLists")]
         public virtual BusinessBranchList Branch { get; set; } = null!;
-        public virtual SystemDocumentTypeList InheritedDocumentType1 { get; set; } = null!;
         public virtual SolutionMixedEnumList InheritedDocumentTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("SystemDocumentAdviceLists")]

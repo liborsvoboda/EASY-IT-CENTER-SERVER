@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.DBModel
 {
-    
     public partial class BasicViewAttachmentList
     {
         public int Id { get; set; }

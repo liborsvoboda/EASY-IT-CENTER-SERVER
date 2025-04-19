@@ -29,7 +29,7 @@ namespace EasyITCenter.DBModel
         public bool HelpTabShowOnly { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string? InheritedHelpTabSourceType { get; set; }
+        public string? InheritedSystemApiCallType { get; set; }
         [StringLength(512)]
         [Unicode(false)]
         public string StartupUrl { get; set; } = null!;
@@ -68,7 +68,7 @@ namespace EasyITCenter.DBModel
         public DateTime TimeStamp { get; set; }
 
         public virtual SolutionMixedEnumList InheritedFormTypeNavigation { get; set; } = null!;
-        public virtual SolutionMixedEnumList? InheritedHelpTabSourceTypeNavigation { get; set; }
+        public virtual SolutionMixedEnumList? InheritedSystemApiCallTypeNavigation { get; set; }
         [ForeignKey("UserId")]
         [InverseProperty("SystemCustomPageLists")]
         public virtual SolutionUserList User { get; set; } = null!;
