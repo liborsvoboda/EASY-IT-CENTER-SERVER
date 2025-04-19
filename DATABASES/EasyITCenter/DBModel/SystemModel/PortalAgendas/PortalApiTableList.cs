@@ -9,11 +9,12 @@ namespace EasyITCenter.DBModel
     [Table("PortalApiTableList")]
     [Index("UserPrefix", "Name", Name = "IX_PortalApiTableList", IsUnique = true)]
     [Index("UserPrefix", Name = "IX_PortalApiTableList_1")]
-    [Index("Name", Name = "IX_PortalApiTableList_2")]
+    [Index("Name", Name = "IX_PortalApiTableList_2", IsUnique = true)]
     public partial class PortalApiTableList
     {
         public PortalApiTableList()
         {
+            PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableColumnLists = new HashSet<PortalApiTableColumnList>();
             PortalDataHistoryLists = new HashSet<PortalDataHistoryList>();
         }
@@ -36,10 +37,12 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public virtual SolutionTableTypeList TableTypeNavigation { get; set; } = null!;
+        public virtual PortalApiTableTypeList TableTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
-        [InverseProperty("PortalApiTableLists")]
+        [InverseProperty("PortalApiTableListUsers")]
         public virtual SolutionUserList User { get; set; } = null!;
+        public virtual SolutionUserList UserPrefixNavigation { get; set; } = null!;
+        public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; }
         public virtual ICollection<PortalDataHistoryList> PortalDataHistoryLists { get; set; }
     }

@@ -64,6 +64,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableList> PortalApiTableLists { get; set; } = null!;
+        public virtual DbSet<PortalApiTableTypeList> PortalApiTableTypeLists { get; set; } = null!;
         public virtual DbSet<PortalDataHistoryList> PortalDataHistoryLists { get; set; } = null!;
         public virtual DbSet<PortalDataTypeList> PortalDataTypeLists { get; set; } = null!;
         public virtual DbSet<PortalGeneratedDataList> PortalGeneratedDataLists { get; set; } = null!;
@@ -75,6 +76,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<PortalHelpGroupList> PortalHelpGroupLists { get; set; } = null!;
         public virtual DbSet<PortalInjectGroupList> PortalInjectGroupLists { get; set; } = null!;
         public virtual DbSet<PortalInjectPageCodeList> PortalInjectPageCodeLists { get; set; } = null!;
+        public virtual DbSet<PortalPluginList> PortalPluginLists { get; set; } = null!;
         public virtual DbSet<PortalTemplateTypeList> PortalTemplateTypeLists { get; set; } = null!;
         public virtual DbSet<PortalUserCommentList> PortalUserCommentLists { get; set; } = null!;
         public virtual DbSet<PortalUserPageList> PortalUserPageLists { get; set; } = null!;
@@ -84,9 +86,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ProdGuidPartList> ProdGuidPartLists { get; set; } = null!;
         public virtual DbSet<ProdGuidPersonList> ProdGuidPersonLists { get; set; } = null!;
         public virtual DbSet<ProdGuidWorkList> ProdGuidWorkLists { get; set; } = null!;
-        public virtual DbSet<ProviderAutoGenServerReqList> ProviderAutoGenServerReqLists { get; set; } = null!;
-        public virtual DbSet<ProviderGeneratedLicenseList> ProviderGeneratedLicenseLists { get; set; } = null!;
-        public virtual DbSet<ProviderViewGeneratedToolRatingList> ProviderViewGeneratedToolRatingLists { get; set; } = null!;
         public virtual DbSet<ServerApiSecurityList> ServerApiSecurityLists { get; set; } = null!;
         public virtual DbSet<ServerCorsDefAllowedOriginList> ServerCorsDefAllowedOriginLists { get; set; } = null!;
         public virtual DbSet<ServerHealthCheckTaskList> ServerHealthCheckTaskLists { get; set; } = null!;
@@ -98,7 +97,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ServerPathTypeList> ServerPathTypeLists { get; set; } = null!;
         public virtual DbSet<ServerProcessList> ServerProcessLists { get; set; } = null!;
         public virtual DbSet<ServerSettingList> ServerSettingLists { get; set; } = null!;
-        public virtual DbSet<ServerSharedUrlList> ServerSharedUrlLists { get; set; } = null!;
         public virtual DbSet<ServerStaticOrMvcDefPathList> ServerStaticOrMvcDefPathLists { get; set; } = null!;
         public virtual DbSet<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; } = null!;
         public virtual DbSet<ServerToolTypeList> ServerToolTypeLists { get; set; } = null!;
@@ -115,7 +113,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionSchedulerProcessList> SolutionSchedulerProcessLists { get; set; } = null!;
         public virtual DbSet<SolutionStaticFileList> SolutionStaticFileLists { get; set; } = null!;
         public virtual DbSet<SolutionStaticFilePathList> SolutionStaticFilePathLists { get; set; } = null!;
-        public virtual DbSet<SolutionTableTypeList> SolutionTableTypeLists { get; set; } = null!;
         public virtual DbSet<SolutionTaskList> SolutionTaskLists { get; set; } = null!;
         public virtual DbSet<SolutionUserList> SolutionUserLists { get; set; } = null!;
         public virtual DbSet<SolutionUserRoleList> SolutionUserRoleLists { get; set; } = null!;
@@ -134,6 +131,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SystemTranslationList> SystemTranslationLists { get; set; } = null!;
         public virtual DbSet<TemplateList> TemplateLists { get; set; } = null!;
         public virtual DbSet<UserAccessKeyList> UserAccessKeyLists { get; set; } = null!;
+        public virtual DbSet<UserDbManagementList> UserDbManagementLists { get; set; } = null!;
         public virtual DbSet<UserImageGalleryList> UserImageGalleryLists { get; set; } = null!;
         public virtual DbSet<UserParameterList> UserParameterLists { get; set; } = null!;
         public virtual DbSet<WebBannedIpAddressList> WebBannedIpAddressLists { get; set; } = null!;
@@ -789,27 +787,53 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<PortalApiTableColumnDataList>(entity =>
             {
-                entity.HasOne(d => d.User)
+                entity.HasOne(d => d.ApiTableNavigation)
                     .WithMany(p => p.PortalApiTableColumnDataLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.ApiTable)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalApiTableColumnDataList_PortalApiTableList");
+
+                entity.HasOne(d => d.ApiTableColumnNavigation)
+                    .WithMany(p => p.PortalApiTableColumnDataListApiTableColumnNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.ApiTableColumn)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalApiTableColumnDataList_PortalApiTableColumnList1");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PortalApiTableColumnDataListUsers)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableColumnDataList_SolutionUserList");
 
+                entity.HasOne(d => d.UserPrefixNavigation)
+                    .WithMany(p => p.PortalApiTableColumnDataListUserPrefixNavigations)
+                    .HasPrincipalKey(p => p.UserDbPreffix)
+                    .HasForeignKey(d => d.UserPrefix)
+                    .HasConstraintName("FK_PortalApiTableColumnDataList_SolutionUserList1");
+
                 entity.HasOne(d => d.PortalApiTableColumnList)
-                    .WithMany(p => p.PortalApiTableColumnDataLists)
+                    .WithMany(p => p.PortalApiTableColumnDataListPortalApiTableColumnLists)
                     .HasPrincipalKey(p => new { p.UserPrefix, p.ApiTable, p.Name })
                     .HasForeignKey(d => new { d.UserPrefix, d.ApiTable, d.ApiTableColumn })
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableColumnDataList_PortalApiTableColumnList");
             });
 
             modelBuilder.Entity<PortalApiTableColumnList>(entity =>
             {
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalApiTableColumnLists)
+                    .WithMany(p => p.PortalApiTableColumnListUsers)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableColumnList_SolutionUserList");
+
+                entity.HasOne(d => d.UserPrefixNavigation)
+                    .WithMany(p => p.PortalApiTableColumnListUserPrefixNavigations)
+                    .HasPrincipalKey(p => p.UserDbPreffix)
+                    .HasForeignKey(d => d.UserPrefix)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalApiTableColumnList_SolutionUserList1");
 
                 entity.HasOne(d => d.PortalApiTableList)
                     .WithMany(p => p.PortalApiTableColumnLists)
@@ -826,13 +850,29 @@ namespace EasyITCenter.DBModel
                     .HasPrincipalKey(p => p.Name)
                     .HasForeignKey(d => d.TableType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalApiTableList_SolutionTableTypeList");
+                    .HasConstraintName("FK_PortalApiTableList_PortalApiTableTypeList");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalApiTableLists)
+                    .WithMany(p => p.PortalApiTableListUsers)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableList_SolutionUserList");
+
+                entity.HasOne(d => d.UserPrefixNavigation)
+                    .WithMany(p => p.PortalApiTableListUserPrefixNavigations)
+                    .HasPrincipalKey(p => p.UserDbPreffix)
+                    .HasForeignKey(d => d.UserPrefix)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalApiTableList_SolutionUserList1");
+            });
+
+            modelBuilder.Entity<PortalApiTableTypeList>(entity =>
+            {
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PortalApiTableTypeLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalApiTableTypeList_SolutionUserList");
             });
 
             modelBuilder.Entity<PortalDataHistoryList>(entity =>
@@ -1006,6 +1046,36 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_PortalInjectMarkList_SolutionUserList");
             });
 
+            modelBuilder.Entity<PortalPluginList>(entity =>
+            {
+                entity.HasOne(d => d.InheritedCodeTypeNavigation)
+                    .WithMany(p => p.PortalPluginListInheritedCodeTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedCodeType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalPluginList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.InheritedPluginTypeNavigation)
+                    .WithMany(p => p.PortalPluginListInheritedPluginTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedPluginType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalPluginList_SolutionMixedEnumList1");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PortalPluginListUsers)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalPluginList_UserList");
+
+                entity.HasOne(d => d.UserPrefixNavigation)
+                    .WithMany(p => p.PortalPluginListUserPrefixNavigations)
+                    .HasPrincipalKey(p => p.UserDbPreffix)
+                    .HasForeignKey(d => d.UserPrefix)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalPluginList_SolutionUserList");
+            });
+
             modelBuilder.Entity<PortalTemplateTypeList>(entity =>
             {
                 entity.HasOne(d => d.User)
@@ -1074,28 +1144,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ProdGuidWorkList_UserList");
-            });
-
-            modelBuilder.Entity<ProviderAutoGenServerReqList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.ProviderAutoGenServerReqLists)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_ProviderAutoGenServerCreateRequest_UserList");
-            });
-
-            modelBuilder.Entity<ProviderGeneratedLicenseList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.ProviderGeneratedLicenseLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProviderGeneratedLicenseList_UserList");
-            });
-
-            modelBuilder.Entity<ProviderViewGeneratedToolRatingList>(entity =>
-            {
-                entity.ToView("ProviderViewGeneratedToolRatingList");
             });
 
             modelBuilder.Entity<ServerApiSecurityList>(entity =>
@@ -1200,22 +1248,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerSettingList_SolutionUserList");
-            });
-
-            modelBuilder.Entity<ServerSharedUrlList>(entity =>
-            {
-                entity.HasOne(d => d.ServerPathTypeNavigation)
-                    .WithMany(p => p.ServerSharedUrlLists)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.ServerPathType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerSharedUrlList_ServerPathTypeList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.ServerSharedUrlLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerSharedUrlList_SolutionUserList");
             });
 
             modelBuilder.Entity<ServerStaticOrMvcDefPathList>(entity =>
@@ -1406,15 +1438,6 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_SolutionStaticFilePathList_SolutionWebsiteList");
             });
 
-            modelBuilder.Entity<SolutionTableTypeList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SolutionTableTypeLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionTableTypeList_SolutionUserList");
-            });
-
             modelBuilder.Entity<SolutionTaskList>(entity =>
             {
                 entity.HasOne(d => d.User)
@@ -1578,6 +1601,29 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserAccessKeyList_SolutionUserList");
+            });
+
+            modelBuilder.Entity<UserDbManagementList>(entity =>
+            {
+                entity.HasOne(d => d.InheritedDbTypeNavigation)
+                    .WithMany(p => p.UserDbManagementLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedDbType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserDbManagementList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserDbManagementListUsers)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserDbManagementList_UserList");
+
+                entity.HasOne(d => d.UserPrefixNavigation)
+                    .WithMany(p => p.UserDbManagementListUserPrefixNavigations)
+                    .HasPrincipalKey(p => p.UserDbPreffix)
+                    .HasForeignKey(d => d.UserPrefix)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserDbManagementList_SolutionUserList");
             });
 
             modelBuilder.Entity<UserImageGalleryList>(entity =>

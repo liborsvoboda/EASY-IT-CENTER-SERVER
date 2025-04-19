@@ -2,14 +2,6 @@
 
 namespace EasyITCenter.ServerCoreStructure {
 
-    /// <summary>
-    /// Server User Management Definition
-    /// </summary>
-    public class UserManagement {
-        public UserManager<ApplicationUser> UserManager { get; set; }
-        public SignInManager<ApplicationUser> SignInManager { get; set; }
-    }
-
 
     /// <summary>
     /// Class Definition for Server Emailer In List of this claas you can use Mass Emailer

@@ -1,4 +1,6 @@
-﻿namespace EasyITCenter.Controllers {
+﻿
+
+namespace EasyITCenter.Controllers {
 
     [Authorize]
     [ApiController]

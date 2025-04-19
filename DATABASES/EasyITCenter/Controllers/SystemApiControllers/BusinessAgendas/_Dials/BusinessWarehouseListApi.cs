@@ -1,4 +1,6 @@
-﻿namespace EasyITCenter.Controllers {
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace EasyITCenter.Controllers {
 
     [Authorize]
     [ApiController]

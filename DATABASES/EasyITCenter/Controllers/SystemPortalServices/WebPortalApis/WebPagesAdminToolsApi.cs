@@ -1,4 +1,5 @@
-﻿using ServerCorePages;
+﻿using Microsoft.EntityFrameworkCore;
+using ServerCorePages;
 
 namespace EasyITCenter.Controllers {
 

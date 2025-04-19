@@ -8,7 +8,6 @@ global using EasyITCenter.ServerCoreServers;
 global using EasyITCenter.ServerCoreStructure;
 global using EasyITCenter.WebClasses;
 global using EasyITCenter.WebModel;
-global using EasyITCenter.WebDBModel;
 global using EasyITCenter.WebControllers;
 global using EasyITCenter.ServerCorePages;
 global using HealthChecks.UI.Client;

@@ -13,7 +13,7 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(20)]
         [Unicode(false)]
-        public string UserPrefix { get; set; } = null!;
+        public string? UserPrefix { get; set; }
         [StringLength(50)]
         [Unicode(false)]
         public string ApiTable { get; set; } = null!;
@@ -29,9 +29,12 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public virtual PortalApiTableColumnList PortalApiTableColumnList { get; set; } = null!;
+        public virtual PortalApiTableColumnList ApiTableColumnNavigation { get; set; } = null!;
+        public virtual PortalApiTableList ApiTableNavigation { get; set; } = null!;
+        public virtual PortalApiTableColumnList? PortalApiTableColumnList { get; set; }
         [ForeignKey("UserId")]
-        [InverseProperty("PortalApiTableColumnDataLists")]
+        [InverseProperty("PortalApiTableColumnDataListUsers")]
         public virtual SolutionUserList User { get; set; } = null!;
+        public virtual SolutionUserList? UserPrefixNavigation { get; set; }
     }
 }

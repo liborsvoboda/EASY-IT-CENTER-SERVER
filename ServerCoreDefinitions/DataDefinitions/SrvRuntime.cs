@@ -174,12 +174,6 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
         /// <summary>
-        /// Identity Server Management Extension
-        /// </summary>
-        public static UserManagement UserManagement = new();
-
-
-        /// <summary>
         /// Server Process Manager
         /// </summary>
         public static List<Tuple<string,Process>> SrvProcessManager = new ();

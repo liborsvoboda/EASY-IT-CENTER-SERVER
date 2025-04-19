@@ -1,5 +1,5 @@
 ﻿namespace EasyITCenter.Controllers {
-
+/*
     [Authorize]
     [ApiController]
     [Route("EasyITCenterSolutionMixedEnumList")]
@@ -94,4 +94,5 @@
             }
         }
     }
+*/
 }

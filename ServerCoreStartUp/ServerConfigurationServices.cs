@@ -34,6 +34,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using IdentityModel;
 using Korzh.DbUtils;
 using Google.Apis.Translate.v3;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace EasyITCenter.ServerCoreConfiguration {

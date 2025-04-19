@@ -53,9 +53,13 @@ namespace EasyITCenter.DBModel
             LicSrvLicenseAlgorithmLists = new HashSet<LicSrvLicenseAlgorithmList>();
             PortalActionHistoryLists = new HashSet<PortalActionHistoryList>();
             PortalActionTypeLists = new HashSet<PortalActionTypeList>();
-            PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
-            PortalApiTableColumnLists = new HashSet<PortalApiTableColumnList>();
-            PortalApiTableLists = new HashSet<PortalApiTableList>();
+            PortalApiTableColumnDataListUserPrefixNavigations = new HashSet<PortalApiTableColumnDataList>();
+            PortalApiTableColumnDataListUsers = new HashSet<PortalApiTableColumnDataList>();
+            PortalApiTableColumnListUserPrefixNavigations = new HashSet<PortalApiTableColumnList>();
+            PortalApiTableColumnListUsers = new HashSet<PortalApiTableColumnList>();
+            PortalApiTableListUserPrefixNavigations = new HashSet<PortalApiTableList>();
+            PortalApiTableListUsers = new HashSet<PortalApiTableList>();
+            PortalApiTableTypeLists = new HashSet<PortalApiTableTypeList>();
             PortalDataHistoryLists = new HashSet<PortalDataHistoryList>();
             PortalDataTypeLists = new HashSet<PortalDataTypeList>();
             PortalGeneratedDataLists = new HashSet<PortalGeneratedDataList>();
@@ -65,6 +69,8 @@ namespace EasyITCenter.DBModel
             PortalHelpGroupLists = new HashSet<PortalHelpGroupList>();
             PortalInjectGroupLists = new HashSet<PortalInjectGroupList>();
             PortalInjectPageCodeLists = new HashSet<PortalInjectPageCodeList>();
+            PortalPluginListUserPrefixNavigations = new HashSet<PortalPluginList>();
+            PortalPluginListUsers = new HashSet<PortalPluginList>();
             PortalTemplateTypeLists = new HashSet<PortalTemplateTypeList>();
             PortalUserCommentLists = new HashSet<PortalUserCommentList>();
             ProdGuidGroupLists = new HashSet<ProdGuidGroupList>();
@@ -72,8 +78,6 @@ namespace EasyITCenter.DBModel
             ProdGuidPartLists = new HashSet<ProdGuidPartList>();
             ProdGuidPersonLists = new HashSet<ProdGuidPersonList>();
             ProdGuidWorkLists = new HashSet<ProdGuidWorkList>();
-            ProviderAutoGenServerReqLists = new HashSet<ProviderAutoGenServerReqList>();
-            ProviderGeneratedLicenseLists = new HashSet<ProviderGeneratedLicenseList>();
             ServerApiSecurityLists = new HashSet<ServerApiSecurityList>();
             ServerCorsDefAllowedOriginLists = new HashSet<ServerCorsDefAllowedOriginList>();
             ServerHealthCheckTaskLists = new HashSet<ServerHealthCheckTaskList>();
@@ -83,7 +87,6 @@ namespace EasyITCenter.DBModel
             ServerPathTypeLists = new HashSet<ServerPathTypeList>();
             ServerProcessLists = new HashSet<ServerProcessList>();
             ServerSettingLists = new HashSet<ServerSettingList>();
-            ServerSharedUrlLists = new HashSet<ServerSharedUrlList>();
             ServerStaticOrMvcDefPathLists = new HashSet<ServerStaticOrMvcDefPathList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             ServerToolTypeLists = new HashSet<ServerToolTypeList>();
@@ -99,7 +102,6 @@ namespace EasyITCenter.DBModel
             SolutionSchedulerLists = new HashSet<SolutionSchedulerList>();
             SolutionStaticFileLists = new HashSet<SolutionStaticFileList>();
             SolutionStaticFilePathLists = new HashSet<SolutionStaticFilePathList>();
-            SolutionTableTypeLists = new HashSet<SolutionTableTypeList>();
             SolutionTaskLists = new HashSet<SolutionTaskList>();
             SolutionWebsiteLists = new HashSet<SolutionWebsiteList>();
             SystemCustomPageLists = new HashSet<SystemCustomPageList>();
@@ -114,6 +116,8 @@ namespace EasyITCenter.DBModel
             SystemTranslationLists = new HashSet<SystemTranslationList>();
             TemplateLists = new HashSet<TemplateList>();
             UserAccessKeyLists = new HashSet<UserAccessKeyList>();
+            UserDbManagementListUserPrefixNavigations = new HashSet<UserDbManagementList>();
+            UserDbManagementListUsers = new HashSet<UserDbManagementList>();
             UserImageGalleryLists = new HashSet<UserImageGalleryList>();
             UserParameterLists = new HashSet<UserParameterList>();
             WebBannedIpAddressLists = new HashSet<WebBannedIpAddressList>();
@@ -167,7 +171,7 @@ namespace EasyITCenter.DBModel
         public bool PhoneConfirmed { get; set; }
         [StringLength(20)]
         [Unicode(false)]
-        public string? UserDbPreffix { get; set; }
+        public string UserDbPreffix { get; set; } = null!;
 
         [ForeignKey("RoleId")]
         [InverseProperty("SolutionUserListRoles")]
@@ -253,12 +257,17 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<PortalActionHistoryList> PortalActionHistoryLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalActionTypeList> PortalActionTypeLists { get; set; }
+        public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
+        public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataListUsers { get; set; }
+        public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; }
+        public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnListUsers { get; set; }
+        public virtual ICollection<PortalApiTableList> PortalApiTableListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }
+        public virtual ICollection<PortalApiTableList> PortalApiTableListUsers { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<PortalApiTableTypeList> PortalApiTableTypeLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalDataHistoryList> PortalDataHistoryLists { get; set; }
         [InverseProperty("User")]
@@ -277,6 +286,9 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<PortalInjectGroupList> PortalInjectGroupLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalInjectPageCodeList> PortalInjectPageCodeLists { get; set; }
+        public virtual ICollection<PortalPluginList> PortalPluginListUserPrefixNavigations { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<PortalPluginList> PortalPluginListUsers { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalTemplateTypeList> PortalTemplateTypeLists { get; set; }
         [InverseProperty("User")]
@@ -291,10 +303,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ProdGuidPersonList> ProdGuidPersonLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ProdGuidWorkList> ProdGuidWorkLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<ProviderAutoGenServerReqList> ProviderAutoGenServerReqLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<ProviderGeneratedLicenseList> ProviderGeneratedLicenseLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerApiSecurityList> ServerApiSecurityLists { get; set; }
         [InverseProperty("User")]
@@ -313,8 +321,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerProcessList> ServerProcessLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerSettingList> ServerSettingLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<ServerSharedUrlList> ServerSharedUrlLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerStaticOrMvcDefPathList> ServerStaticOrMvcDefPathLists { get; set; }
         [InverseProperty("User")]
@@ -346,8 +352,6 @@ namespace EasyITCenter.DBModel
         [InverseProperty("User")]
         public virtual ICollection<SolutionStaticFilePathList> SolutionStaticFilePathLists { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<SolutionTableTypeList> SolutionTableTypeLists { get; set; }
-        [InverseProperty("User")]
         public virtual ICollection<SolutionTaskList> SolutionTaskLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionWebsiteList> SolutionWebsiteLists { get; set; }
@@ -375,6 +379,9 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<TemplateList> TemplateLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<UserAccessKeyList> UserAccessKeyLists { get; set; }
+        public virtual ICollection<UserDbManagementList> UserDbManagementListUserPrefixNavigations { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<UserDbManagementList> UserDbManagementListUsers { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<UserImageGalleryList> UserImageGalleryLists { get; set; }
         [InverseProperty("User")]

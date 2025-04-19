@@ -1,4 +1,5 @@
 ﻿using LicenseGenerator;
+using Microsoft.EntityFrameworkCore;
 using System.IO.Compression;
 
 namespace EasyITCenter.ControllersExtensions {

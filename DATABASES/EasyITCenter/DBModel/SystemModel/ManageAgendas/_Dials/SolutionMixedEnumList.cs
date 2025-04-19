@@ -15,11 +15,14 @@ namespace EasyITCenter.DBModel
         public SolutionMixedEnumList()
         {
             PortalGeneratorActionLists = new HashSet<PortalGeneratorActionList>();
+            PortalPluginListInheritedCodeTypeNavigations = new HashSet<PortalPluginList>();
+            PortalPluginListInheritedPluginTypeNavigations = new HashSet<PortalPluginList>();
             ServerProcessListInheritedCommandTypeNavigations = new HashSet<ServerProcessList>();
             ServerProcessListInheritedProcessTypeNavigations = new HashSet<ServerProcessList>();
             ServerSettingLists = new HashSet<ServerSettingList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
+            UserDbManagementLists = new HashSet<UserDbManagementList>();
         }
 
         [Key]
@@ -40,10 +43,13 @@ namespace EasyITCenter.DBModel
         [InverseProperty("SolutionMixedEnumLists")]
         public virtual SolutionUserList User { get; set; } = null!;
         public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionLists { get; set; }
+        public virtual ICollection<PortalPluginList> PortalPluginListInheritedCodeTypeNavigations { get; set; }
+        public virtual ICollection<PortalPluginList> PortalPluginListInheritedPluginTypeNavigations { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedCommandTypeNavigations { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedProcessTypeNavigations { get; set; }
         public virtual ICollection<ServerSettingList> ServerSettingLists { get; set; }
         public virtual ICollection<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; }
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
+        public virtual ICollection<UserDbManagementList> UserDbManagementLists { get; set; }
     }
 }

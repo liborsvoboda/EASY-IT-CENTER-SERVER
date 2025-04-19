@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.DBModel
 {
@@ -12,7 +11,7 @@ namespace EasyITCenter.DBModel
     {
         public ServerPathTypeList()
         {
-            ServerSharedUrlLists = new HashSet<ServerSharedUrlList>();
+            //ServerSharedUrlLists = new HashSet<ServerSharedUrlList>();
         }
 
         [Key]
@@ -34,6 +33,6 @@ namespace EasyITCenter.DBModel
         [ForeignKey("UserId")]
         [InverseProperty("ServerPathTypeLists")]
         public virtual SolutionUserList User { get; set; } = null!;
-        public virtual ICollection<ServerSharedUrlList> ServerSharedUrlLists { get; set; }
+        //public virtual ICollection<ServerSharedUrlList> ServerSharedUrlLists { get; set; }
     }
 }
