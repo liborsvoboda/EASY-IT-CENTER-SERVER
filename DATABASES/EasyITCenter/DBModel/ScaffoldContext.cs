@@ -93,8 +93,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ServerModuleAndServiceList> ServerModuleAndServiceLists { get; set; } = null!;
         public virtual DbSet<ServerNugetList> ServerNugetLists { get; set; } = null!;
         public virtual DbSet<ServerParameterList> ServerParameterLists { get; set; } = null!;
-        public virtual DbSet<ServerPathList> ServerPathLists { get; set; } = null!;
-        public virtual DbSet<ServerPathTypeList> ServerPathTypeLists { get; set; } = null!;
         public virtual DbSet<ServerProcessList> ServerProcessLists { get; set; } = null!;
         public virtual DbSet<ServerSettingList> ServerSettingLists { get; set; } = null!;
         public virtual DbSet<ServerStaticOrMvcDefPathList> ServerStaticOrMvcDefPathLists { get; set; } = null!;
@@ -1198,15 +1196,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerParameterList_SolutionUserList");
-            });
-
-            modelBuilder.Entity<ServerPathTypeList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.ServerPathTypeLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerPathTypeList_SolutionUserList");
             });
 
             modelBuilder.Entity<ServerProcessList>(entity =>

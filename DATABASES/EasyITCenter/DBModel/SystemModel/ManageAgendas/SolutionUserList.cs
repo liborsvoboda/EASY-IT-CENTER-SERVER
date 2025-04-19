@@ -84,7 +84,6 @@ namespace EasyITCenter.DBModel
             ServerLiveDataMonitorLists = new HashSet<ServerLiveDataMonitorList>();
             ServerModuleAndServiceLists = new HashSet<ServerModuleAndServiceList>();
             ServerParameterLists = new HashSet<ServerParameterList>();
-            ServerPathTypeLists = new HashSet<ServerPathTypeList>();
             ServerProcessLists = new HashSet<ServerProcessList>();
             ServerSettingLists = new HashSet<ServerSettingList>();
             ServerStaticOrMvcDefPathLists = new HashSet<ServerStaticOrMvcDefPathList>();
@@ -315,8 +314,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerModuleAndServiceList> ServerModuleAndServiceLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerParameterList> ServerParameterLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<ServerPathTypeList> ServerPathTypeLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerProcessList> ServerProcessLists { get; set; }
         [InverseProperty("User")]
