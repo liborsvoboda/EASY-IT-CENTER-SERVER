@@ -35,7 +35,7 @@
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted
             })) {
-                data = new EasyITCenterContext().SystemDocumentAdviceLists.Where(a => a.DocumentType == documentType && a.Active == true && a.BranchId == branchId &&
+                data = new EasyITCenterContext().SystemDocumentAdviceLists.Where(a => a.InheritedDocumentType == documentType && a.Active == true && a.BranchId == branchId &&
                 (a.StartDate == null || a.StartDate <= DateTime.UtcNow.Date) && (a.EndDate == null || a.EndDate >= DateTime.UtcNow.Date)).FirstOrDefault();
             }
 

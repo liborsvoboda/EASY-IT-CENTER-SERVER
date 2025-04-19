@@ -14,7 +14,7 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string ModuleType { get; set; } = null!;
+        public string InheritedModuleType { get; set; } = null!;
         [StringLength(255)]
         [Unicode(false)]
         public string Name { get; set; } = null!;
@@ -44,6 +44,7 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedModuleTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("SystemModuleLists")]
         public virtual SolutionUserList User { get; set; } = null!;

@@ -25,10 +25,10 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 if (ServerApiServiceExtension.IsAdmin()) {
                     WebCoreFileList data = new();
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
-                        data = new EasyITCenterContext().WebCoreFileLists.Where(a => a.FileName == rec.FileName && a.SpecificationType == rec.SpecificationType).First(); }
+                        data = new EasyITCenterContext().WebCoreFileLists.Where(a => a.FileName == rec.FileName && a.InheritedJsCssDefinitionType == rec.SpecificationType).First(); }
 
                     if (data != null) {
-                        WebCoreFileList minFile = new() { FileName = data.FileName, Sequence = data.Sequence, SpecificationType = data.SpecificationType, MetroPath = data.MetroPath };
+                        WebCoreFileList minFile = new() { FileName = data.FileName, Sequence = data.Sequence, InheritedJsCssDefinitionType = data.InheritedJsCssDefinitionType, MetroPath = data.MetroPath };
                         
                         if (ServerPortalOperations.SaveWebSourceFile(ref _hostingEnvironment, ref minFile)) {
                             var resData = new EasyITCenterContext().WebCoreFileLists.Update(data);

@@ -35,6 +35,8 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedStatusTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedTargetTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("SolutionTaskLists")]
         public virtual SolutionUserList User { get; set; } = null!;

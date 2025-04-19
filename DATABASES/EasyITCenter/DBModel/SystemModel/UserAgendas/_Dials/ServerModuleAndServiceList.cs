@@ -21,7 +21,7 @@ namespace EasyITCenter.DBModel
         public string Name { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
-        public string? InheritedLayoutType { get; set; }
+        public string InheritedLayoutType { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
         [StringLength(100)]
@@ -48,6 +48,8 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedLayoutTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedPageTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("ServerModuleAndServiceLists")]
         public virtual SolutionUserList User { get; set; } = null!;

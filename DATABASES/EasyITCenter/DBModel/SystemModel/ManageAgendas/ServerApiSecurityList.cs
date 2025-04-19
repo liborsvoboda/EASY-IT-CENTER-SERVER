@@ -39,6 +39,7 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedApiTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("ServerApiSecurityLists")]
         public virtual SolutionUserList User { get; set; } = null!;

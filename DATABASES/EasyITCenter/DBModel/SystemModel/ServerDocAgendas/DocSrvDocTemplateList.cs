@@ -30,6 +30,7 @@ namespace EasyITCenter.DBModel
         [ForeignKey("GroupId")]
         [InverseProperty("DocSrvDocTemplateLists")]
         public virtual DocSrvDocumentationGroupList Group { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedCodeTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("DocSrvDocTemplateLists")]
         public virtual SolutionUserList User { get; set; } = null!;

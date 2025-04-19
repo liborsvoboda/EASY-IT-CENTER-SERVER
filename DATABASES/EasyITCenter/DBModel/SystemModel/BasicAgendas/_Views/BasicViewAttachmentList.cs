@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using FrameworkCore = Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.DBModel
 {
@@ -9,10 +11,10 @@ namespace EasyITCenter.DBModel
     {
         public int Id { get; set; }
         [StringLength(150)]
-        [FrameworkCore.Unicode(false)]
+        [Unicode(false)]
         public string FileName { get; set; } = null!;
         [StringLength(50)]
-        [FrameworkCore.Unicode(false)]
+        [Unicode(false)]
         public string? PartNumber { get; set; }
         public DateTime TimeStamp { get; set; }
     }

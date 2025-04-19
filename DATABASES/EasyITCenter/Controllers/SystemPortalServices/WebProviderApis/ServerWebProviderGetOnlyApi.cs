@@ -46,7 +46,7 @@
             try {
                 List<WebCoreFileList> data = new();
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
-                    data = new EasyITCenterContext().WebCoreFileLists.OrderBy(a=>a.SpecificationType).ThenBy(a => a.FileName).ToList();
+                    data = new EasyITCenterContext().WebCoreFileLists.OrderBy(a=>a.InheritedJsCssDefinitionType).ThenBy(a => a.FileName).ToList();
                 }
 
                 return JsonSerializer.Serialize(data, new JsonSerializerOptions() {

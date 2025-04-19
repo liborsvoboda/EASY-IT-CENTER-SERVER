@@ -69,15 +69,20 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="DATABASES\EasyITCenter\NewEntities\**" />
 	<Compile Remove="wwwroot\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="DATABASES\EasyITCenter\NewEntities\**" />
 	<EmbeddedResource Remove="wwwroot\**" />
     <None Remove="bin\**" />
+    <None Remove="DATABASES\EasyITCenter\NewEntities\**" />
 	<None Remove="wwwroot\**" />
     <TypeScriptCompile Remove="*" />
     <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
+    <Content Remove="DATABASES\EasyITCenter\NewEntities\**" />
 	<Content Remove="wwwroot\**" />
+	<EntityDeploy Remove="DATABASES\EasyITCenter\NewEntities\**" />
   </ItemGroup>
 
   <ItemGroup>

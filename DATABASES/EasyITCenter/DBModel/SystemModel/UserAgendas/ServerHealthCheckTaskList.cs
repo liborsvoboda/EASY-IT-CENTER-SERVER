@@ -17,7 +17,7 @@ namespace EasyITCenter.DBModel
         public string TaskName { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
-        public string Type { get; set; } = null!;
+        public string InheritedCheckType { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
         public string? ServerDrive { get; set; }
@@ -43,6 +43,7 @@ namespace EasyITCenter.DBModel
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedCheckTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("ServerHealthCheckTaskLists")]
         public virtual SolutionUserList User { get; set; } = null!;

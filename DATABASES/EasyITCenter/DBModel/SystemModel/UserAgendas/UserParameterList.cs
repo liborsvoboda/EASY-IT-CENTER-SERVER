@@ -25,6 +25,7 @@ namespace EasyITCenter.DBModel
         public string? Description { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedDataTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("UserParameterLists")]
         public virtual SolutionUserList? User { get; set; }

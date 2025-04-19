@@ -24,7 +24,7 @@
         public IActionResult GetFiles([FromBody] StaticFilesRequest request) {
             try {
                 DirectoryContents? result = null;
-                var all = new EasyITCenterContext().SolutionStaticFilePathLists.Where(o => o.Website.WebsiteName == request.Website && o.Path.StartsWith(request.Path) && o.Path != request.Path);
+                var all = new EasyITCenterContext().SolutionStaticFilePathLists.Where(o => o.StaticWeb.WebsiteName == request.Website && o.Path.StartsWith(request.Path) && o.Path != request.Path);
                 if (!request.Recursive) { result = new DirectoryContents(all.Where(o => !o.Path.Substring(request.Path.Length + 1).Contains("/")).ToArray()); }
                 else { result = new DirectoryContents(all.ToArray()); }
                 return Ok(new { result });

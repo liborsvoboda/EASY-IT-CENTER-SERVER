@@ -101,8 +101,8 @@ namespace EasyITCenter.DBModel
             SolutionSchedulerLists = new HashSet<SolutionSchedulerList>();
             SolutionStaticFileLists = new HashSet<SolutionStaticFileList>();
             SolutionStaticFilePathLists = new HashSet<SolutionStaticFilePathList>();
+            SolutionStaticWebLists = new HashSet<SolutionStaticWebList>();
             SolutionTaskLists = new HashSet<SolutionTaskList>();
-            SolutionWebsiteLists = new HashSet<SolutionWebsiteList>();
             SystemCustomPageLists = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
             SystemDocumentTypeLists = new HashSet<SystemDocumentTypeList>();
@@ -349,9 +349,9 @@ namespace EasyITCenter.DBModel
         [InverseProperty("User")]
         public virtual ICollection<SolutionStaticFilePathList> SolutionStaticFilePathLists { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<SolutionTaskList> SolutionTaskLists { get; set; }
+        public virtual ICollection<SolutionStaticWebList> SolutionStaticWebLists { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<SolutionWebsiteList> SolutionWebsiteLists { get; set; }
+        public virtual ICollection<SolutionTaskList> SolutionTaskLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SystemCustomPageList> SystemCustomPageLists { get; set; }
         [InverseProperty("User")]

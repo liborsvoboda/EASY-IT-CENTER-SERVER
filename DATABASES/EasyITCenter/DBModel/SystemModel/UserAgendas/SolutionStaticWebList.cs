@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.DBModel
 {
-    [Table("SolutionWebsiteList")]
-    [Index("WebsiteName", Name = "IX_SolutionWebsiteList", IsUnique = true)]
-    public partial class SolutionWebsiteList
+    [Table("SolutionStaticWebList")]
+    [Index("WebsiteName", Name = "IX_SolutionStaticWebList", IsUnique = true)]
+    public partial class SolutionStaticWebList
     {
-        public SolutionWebsiteList()
+        public SolutionStaticWebList()
         {
             SolutionStaticFileLists = new HashSet<SolutionStaticFileList>();
             SolutionStaticFilePathLists = new HashSet<SolutionStaticFilePathList>();
@@ -30,11 +30,11 @@ namespace EasyITCenter.DBModel
         public DateTime TimeStamp { get; set; }
 
         [ForeignKey("UserId")]
-        [InverseProperty("SolutionWebsiteLists")]
+        [InverseProperty("SolutionStaticWebLists")]
         public virtual SolutionUserList User { get; set; } = null!;
-        [InverseProperty("Website")]
+        [InverseProperty("StaticWeb")]
         public virtual ICollection<SolutionStaticFileList> SolutionStaticFileLists { get; set; }
-        [InverseProperty("Website")]
+        [InverseProperty("StaticWeb")]
         public virtual ICollection<SolutionStaticFilePathList> SolutionStaticFilePathLists { get; set; }
     }
 }

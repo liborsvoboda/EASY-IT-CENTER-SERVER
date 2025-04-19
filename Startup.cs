@@ -263,9 +263,9 @@ namespace EasyITCenter {
             //app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html" });
 
             //TODO Websites and subdomains
-            List<SolutionWebsiteList> websites;
+            List<SolutionStaticWebList> websites;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
-                websites = new EasyITCenterContext().SolutionWebsiteLists.Where(a => a.Active).ToList();
+                websites = new EasyITCenterContext().SolutionStaticWebLists.Where(a => a.Active).ToList();
             }
 
             

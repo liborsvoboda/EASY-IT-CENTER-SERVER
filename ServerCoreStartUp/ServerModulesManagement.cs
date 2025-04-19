@@ -159,7 +159,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                 foreach (var item in data) {
                     try {
-                        switch (item.Type) {
+                        switch (item.InheritedCheckType) {
                             case "driveSize":
                                 services.AddHealthChecks().AddDiskStorageHealthCheck(diskOptions => { diskOptions.AddDrive(driveName: item.ServerDrive, item.SizeMb.Value); }, item.TaskName);
                                 break;

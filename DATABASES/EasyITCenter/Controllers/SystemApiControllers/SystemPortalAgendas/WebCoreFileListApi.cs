@@ -17,7 +17,7 @@
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
                 data = new EasyITCenterContext().WebCoreFileLists
-                    .OrderBy(a => a.SpecificationType).ThenBy(a => a.Sequence)
+                    .OrderBy(a => a.InheritedJsCssDefinitionType).ThenBy(a => a.Sequence)
                     .ToList();
             }
 

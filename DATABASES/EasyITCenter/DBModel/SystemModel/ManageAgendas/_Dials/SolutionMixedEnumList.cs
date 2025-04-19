@@ -14,15 +14,37 @@ namespace EasyITCenter.DBModel
     {
         public SolutionMixedEnumList()
         {
+            DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
             PortalGeneratorActionLists = new HashSet<PortalGeneratorActionList>();
             PortalPluginListInheritedCodeTypeNavigations = new HashSet<PortalPluginList>();
             PortalPluginListInheritedPluginTypeNavigations = new HashSet<PortalPluginList>();
+            ServerApiSecurityLists = new HashSet<ServerApiSecurityList>();
+            ServerHealthCheckTaskLists = new HashSet<ServerHealthCheckTaskList>();
+            ServerModuleAndServiceListInheritedLayoutTypeNavigations = new HashSet<ServerModuleAndServiceList>();
+            ServerModuleAndServiceListInheritedPageTypeNavigations = new HashSet<ServerModuleAndServiceList>();
+            ServerParameterLists = new HashSet<ServerParameterList>();
             ServerProcessListInheritedCommandTypeNavigations = new HashSet<ServerProcessList>();
             ServerProcessListInheritedProcessTypeNavigations = new HashSet<ServerProcessList>();
             ServerSettingLists = new HashSet<ServerSettingList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
+            SolutionOperationListInheritedApiResultTypeNavigations = new HashSet<SolutionOperationList>();
+            SolutionOperationListInheritedOperationTypeNavigations = new HashSet<SolutionOperationList>();
+            SolutionSchedulerListInheritedGroupNameNavigations = new HashSet<SolutionSchedulerList>();
+            SolutionSchedulerListInheritedIntervalTypeNavigations = new HashSet<SolutionSchedulerList>();
+            SolutionTaskListInheritedStatusTypeNavigations = new HashSet<SolutionTaskList>();
+            SolutionTaskListInheritedTargetTypeNavigations = new HashSet<SolutionTaskList>();
+            SystemCustomPageListInheritedFormTypeNavigations = new HashSet<SystemCustomPageList>();
+            SystemCustomPageListInheritedHelpTabSourceTypeNavigations = new HashSet<SystemCustomPageList>();
+            SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
+            SystemMenuLists = new HashSet<SystemMenuList>();
+            SystemModuleLists = new HashSet<SystemModuleList>();
+            UserAccessKeyLists = new HashSet<UserAccessKeyList>();
             UserDbManagementLists = new HashSet<UserDbManagementList>();
+            UserParameterLists = new HashSet<UserParameterList>();
+            WebCodeLibraryLists = new HashSet<WebCodeLibraryList>();
+            WebCoreFileLists = new HashSet<WebCoreFileList>();
+            WebGlobalPageBlockLists = new HashSet<WebGlobalPageBlockList>();
         }
 
         [Key]
@@ -42,14 +64,36 @@ namespace EasyITCenter.DBModel
         [ForeignKey("UserId")]
         [InverseProperty("SolutionMixedEnumLists")]
         public virtual SolutionUserList User { get; set; } = null!;
+        public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
         public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionLists { get; set; }
         public virtual ICollection<PortalPluginList> PortalPluginListInheritedCodeTypeNavigations { get; set; }
         public virtual ICollection<PortalPluginList> PortalPluginListInheritedPluginTypeNavigations { get; set; }
+        public virtual ICollection<ServerApiSecurityList> ServerApiSecurityLists { get; set; }
+        public virtual ICollection<ServerHealthCheckTaskList> ServerHealthCheckTaskLists { get; set; }
+        public virtual ICollection<ServerModuleAndServiceList> ServerModuleAndServiceListInheritedLayoutTypeNavigations { get; set; }
+        public virtual ICollection<ServerModuleAndServiceList> ServerModuleAndServiceListInheritedPageTypeNavigations { get; set; }
+        public virtual ICollection<ServerParameterList> ServerParameterLists { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedCommandTypeNavigations { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedProcessTypeNavigations { get; set; }
         public virtual ICollection<ServerSettingList> ServerSettingLists { get; set; }
         public virtual ICollection<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; }
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
+        public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedApiResultTypeNavigations { get; set; }
+        public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedOperationTypeNavigations { get; set; }
+        public virtual ICollection<SolutionSchedulerList> SolutionSchedulerListInheritedGroupNameNavigations { get; set; }
+        public virtual ICollection<SolutionSchedulerList> SolutionSchedulerListInheritedIntervalTypeNavigations { get; set; }
+        public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedStatusTypeNavigations { get; set; }
+        public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedTargetTypeNavigations { get; set; }
+        public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedFormTypeNavigations { get; set; }
+        public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedHelpTabSourceTypeNavigations { get; set; }
+        public virtual ICollection<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; }
+        public virtual ICollection<SystemMenuList> SystemMenuLists { get; set; }
+        public virtual ICollection<SystemModuleList> SystemModuleLists { get; set; }
+        public virtual ICollection<UserAccessKeyList> UserAccessKeyLists { get; set; }
         public virtual ICollection<UserDbManagementList> UserDbManagementLists { get; set; }
+        public virtual ICollection<UserParameterList> UserParameterLists { get; set; }
+        public virtual ICollection<WebCodeLibraryList> WebCodeLibraryLists { get; set; }
+        public virtual ICollection<WebCoreFileList> WebCoreFileLists { get; set; }
+        public virtual ICollection<WebGlobalPageBlockList> WebGlobalPageBlockLists { get; set; }
     }
 }

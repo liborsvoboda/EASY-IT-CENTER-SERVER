@@ -67,6 +67,8 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedFormTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList? InheritedHelpTabSourceTypeNavigation { get; set; }
         [ForeignKey("UserId")]
         [InverseProperty("SystemCustomPageLists")]
         public virtual SolutionUserList User { get; set; } = null!;

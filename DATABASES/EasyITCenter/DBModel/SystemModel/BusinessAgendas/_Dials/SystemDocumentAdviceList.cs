@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("SystemDocumentAdviceList")]
-    [Index("BranchId", "DocumentType", Name = "IX_DocumentAdviceList")]
+    [Index("BranchId", "InheritedDocumentType", Name = "IX_DocumentAdviceList")]
     public partial class SystemDocumentAdviceList
     {
         [Key]
@@ -15,7 +15,7 @@ namespace EasyITCenter.DBModel
         public int BranchId { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string DocumentType { get; set; } = null!;
+        public string InheritedDocumentType { get; set; } = null!;
         [StringLength(10)]
         [Unicode(false)]
         public string Prefix { get; set; } = null!;
@@ -33,7 +33,8 @@ namespace EasyITCenter.DBModel
         [ForeignKey("BranchId")]
         [InverseProperty("SystemDocumentAdviceLists")]
         public virtual BusinessBranchList Branch { get; set; } = null!;
-        public virtual SystemDocumentTypeList DocumentTypeNavigation { get; set; } = null!;
+        public virtual SystemDocumentTypeList InheritedDocumentType1 { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedDocumentTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("SystemDocumentAdviceLists")]
         public virtual SolutionUserList User { get; set; } = null!;

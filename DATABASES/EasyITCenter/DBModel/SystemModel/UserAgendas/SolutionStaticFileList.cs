@@ -12,7 +12,7 @@ namespace EasyITCenter.DBModel
     {
         [Key]
         public int Id { get; set; }
-        public int WebsiteId { get; set; }
+        public int StaticWebId { get; set; }
         public int StaticPathId { get; set; }
         [StringLength(512)]
         [Unicode(false)]
@@ -28,11 +28,11 @@ namespace EasyITCenter.DBModel
         [ForeignKey("StaticPathId")]
         [InverseProperty("SolutionStaticFileLists")]
         public virtual SolutionStaticFilePathList StaticPath { get; set; } = null!;
+        [ForeignKey("StaticWebId")]
+        [InverseProperty("SolutionStaticFileLists")]
+        public virtual SolutionStaticWebList StaticWeb { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("SolutionStaticFileLists")]
         public virtual SolutionUserList? User { get; set; }
-        [ForeignKey("WebsiteId")]
-        [InverseProperty("SolutionStaticFileLists")]
-        public virtual SolutionWebsiteList Website { get; set; } = null!;
     }
 }

@@ -18,7 +18,7 @@ namespace EasyITCenter.ControllersExtensions {
             try {
                
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
-                    data = new EasyITCenterContext().SystemModuleLists.OrderBy(a => a.ModuleType).ThenBy(a => a.Name).ToList();
+                    data = new EasyITCenterContext().SystemModuleLists.OrderBy(a => a.InheritedModuleType).ThenBy(a => a.Name).ToList();
                 }
                 
             } catch { }

@@ -14,7 +14,7 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string InheritedOperationTypes { get; set; } = null!;
+        public string InheritedOperationType { get; set; } = null!;
         [StringLength(255)]
         [Unicode(false)]
         public string Name { get; set; } = null!;
@@ -22,13 +22,15 @@ namespace EasyITCenter.DBModel
         public string InputData { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
-        public string InheritedApiResultTypes { get; set; } = null!;
+        public string InheritedApiResultType { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
         public int UserId { get; set; }
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedApiResultTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedOperationTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("SolutionOperationLists")]
         public virtual SolutionUserList User { get; set; } = null!;

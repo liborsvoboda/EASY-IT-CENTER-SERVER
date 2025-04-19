@@ -42,6 +42,8 @@ namespace EasyITCenter.DBModel
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedGroupNameNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedIntervalTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("SolutionSchedulerLists")]
         public virtual SolutionUserList User { get; set; } = null!;

@@ -7,14 +7,14 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("WebCoreFileList")]
-    [Index("FileName", "SpecificationType", Name = "IX_WebCoreFileList", IsUnique = true)]
+    [Index("FileName", "InheritedJsCssDefinitionType", Name = "IX_WebCoreFileList", IsUnique = true)]
     public partial class WebCoreFileList
     {
         [Key]
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string SpecificationType { get; set; } = null!;
+        public string InheritedJsCssDefinitionType { get; set; } = null!;
         public int Sequence { get; set; }
         [StringLength(100)]
         [Unicode(false)]
@@ -39,6 +39,7 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedJsCssDefinitionTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("WebCoreFileLists")]
         public virtual SolutionUserList User { get; set; } = null!;

@@ -161,7 +161,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <returns></returns>
         private static List<WebGlobalPageBlockList>? GetWebGlobalPageBlockListsOffline(string pagePartType) {
             int index = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == new List<WebGlobalPageBlockList>().GetType());
-            return ((List<WebGlobalPageBlockList>)SrvRuntime.LocalDBTableList[index]).Where(a => a.Active && a.PagePartType.ToLower() == pagePartType.ToLower()).ToList();
+            return ((List<WebGlobalPageBlockList>)SrvRuntime.LocalDBTableList[index]).Where(a => a.Active && a.InheritedPagePartType.ToLower() == pagePartType.ToLower()).ToList();
         }
 
 
@@ -172,7 +172,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="pagePartType"></param>
         /// <returns></returns>
         private static List<WebGlobalPageBlockList>? GetWebGlobalPageBlockListsOnline(string pagePartType) {
-            return new EasyITCenterContext().WebGlobalPageBlockLists.Where(a => a.Active && a.PagePartType.ToLower() == pagePartType.ToLower()).ToList();
+            return new EasyITCenterContext().WebGlobalPageBlockLists.Where(a => a.Active && a.InheritedPagePartType.ToLower() == pagePartType.ToLower()).ToList();
         }
 
 
@@ -187,17 +187,17 @@ namespace EasyITCenter.ServerCoreStructure {
             int index = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == new List<WebCoreFileList>().GetType());
 
             if (fileName == null && specType.ToLower() == ".css") {
-                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => (a.SpecificationType.ToLower() == specType.ToLower() || a.SpecificationType.ToLower() == ".min.css") && a.Active).ToList();
+                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => (a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() || a.InheritedJsCssDefinitionType.ToLower() == ".min.css") && a.Active).ToList();
             } else if(fileName == null && specType.ToLower() == ".js") {
-                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => (a.SpecificationType.ToLower() == specType.ToLower() || a.SpecificationType.ToLower() == ".min.js") && a.Active).ToList();
+                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => (a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() || a.InheritedJsCssDefinitionType.ToLower() == ".min.js") && a.Active).ToList();
             } else if(specType.ToLower() == ".css") {
-                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => (a.SpecificationType.ToLower() == specType.ToLower() || a.SpecificationType.ToLower() == ".min.css") && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
+                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => (a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() || a.InheritedJsCssDefinitionType.ToLower() == ".min.css") && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
             } else if (specType.ToLower() == ".js") {
-                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => (a.SpecificationType.ToLower() == specType.ToLower() || a.SpecificationType.ToLower() == ".min.js") && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
+                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => (a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() || a.InheritedJsCssDefinitionType.ToLower() == ".min.js") && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
             } else if (specType.ToLower() == "cssfiles") {
-                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => a.SpecificationType.ToLower() == specType.ToLower() && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
+                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
             } else if (specType.ToLower() == "jsfiles") {
-                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => a.SpecificationType.ToLower() == specType.ToLower() && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
+                return ((List<WebCoreFileList>)SrvRuntime.LocalDBTableList[index]).Where(a => a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
             }
             return new List<WebCoreFileList>();
         }
@@ -214,22 +214,22 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <returns></returns>
         private static List<WebCoreFileList>? GetWebPortalJsCssScriptsOnline(string specType, string? fileName) {
             if (fileName == null && specType.ToLower() == ".css") {
-                return new EasyITCenterContext().WebCoreFileLists.Where(a => (a.SpecificationType.ToLower() == specType.ToLower() || a.SpecificationType.ToLower() == ".min.css") && a.Active).ToList();
+                return new EasyITCenterContext().WebCoreFileLists.Where(a => (a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() || a.InheritedJsCssDefinitionType.ToLower() == ".min.css") && a.Active).ToList();
             }
             else if (fileName == null && specType.ToLower() == ".js") {
-                return new EasyITCenterContext().WebCoreFileLists.Where(a => (a.SpecificationType.ToLower() == specType.ToLower() || a.SpecificationType.ToLower() == ".min.js") && a.Active).ToList();
+                return new EasyITCenterContext().WebCoreFileLists.Where(a => (a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() || a.InheritedJsCssDefinitionType.ToLower() == ".min.js") && a.Active).ToList();
             }
             else if (specType.ToLower() == ".css") {
-                return new EasyITCenterContext().WebCoreFileLists.Where(a => (a.SpecificationType.ToLower() == specType.ToLower() || a.SpecificationType.ToLower() == ".min.css") && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
+                return new EasyITCenterContext().WebCoreFileLists.Where(a => (a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() || a.InheritedJsCssDefinitionType.ToLower() == ".min.css") && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
             }
             else if (specType.ToLower() == ".js") {
-                return new EasyITCenterContext().WebCoreFileLists.Where(a => (a.SpecificationType.ToLower() == specType.ToLower() || a.SpecificationType.ToLower() == ".min.js") && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
+                return new EasyITCenterContext().WebCoreFileLists.Where(a => (a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() || a.InheritedJsCssDefinitionType.ToLower() == ".min.js") && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
             }
             else if (specType.ToLower() == "cssfiles") {
-                return new EasyITCenterContext().WebCoreFileLists.Where(a => a.SpecificationType.ToLower() == specType.ToLower() && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
+                return new EasyITCenterContext().WebCoreFileLists.Where(a => a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
             }
             else if (specType.ToLower() == "jsfiles") {
-                return new EasyITCenterContext().WebCoreFileLists.Where(a => a.SpecificationType.ToLower() == specType.ToLower() && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
+                return new EasyITCenterContext().WebCoreFileLists.Where(a => a.InheritedJsCssDefinitionType.ToLower() == specType.ToLower() && a.FileName.StartsWith(fileName.ToLower()) && a.Active).ToList();
             }
             return new List<WebCoreFileList>();
         }

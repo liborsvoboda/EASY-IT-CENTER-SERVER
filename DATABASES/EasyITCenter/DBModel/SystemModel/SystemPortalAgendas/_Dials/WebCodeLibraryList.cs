@@ -14,7 +14,7 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string? InheritedCodeType { get; set; }
+        public string InheritedCodeType { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
         public string Name { get; set; } = null!;
@@ -27,6 +27,7 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedCodeTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("WebCodeLibraryLists")]
         public virtual SolutionUserList User { get; set; } = null!;

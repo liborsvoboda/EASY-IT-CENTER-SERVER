@@ -91,7 +91,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ServerHealthCheckTaskList> ServerHealthCheckTaskLists { get; set; } = null!;
         public virtual DbSet<ServerLiveDataMonitorList> ServerLiveDataMonitorLists { get; set; } = null!;
         public virtual DbSet<ServerModuleAndServiceList> ServerModuleAndServiceLists { get; set; } = null!;
-        public virtual DbSet<ServerNugetList> ServerNugetLists { get; set; } = null!;
         public virtual DbSet<ServerParameterList> ServerParameterLists { get; set; } = null!;
         public virtual DbSet<ServerProcessList> ServerProcessLists { get; set; } = null!;
         public virtual DbSet<ServerSettingList> ServerSettingLists { get; set; } = null!;
@@ -111,10 +110,10 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionSchedulerProcessList> SolutionSchedulerProcessLists { get; set; } = null!;
         public virtual DbSet<SolutionStaticFileList> SolutionStaticFileLists { get; set; } = null!;
         public virtual DbSet<SolutionStaticFilePathList> SolutionStaticFilePathLists { get; set; } = null!;
+        public virtual DbSet<SolutionStaticWebList> SolutionStaticWebLists { get; set; } = null!;
         public virtual DbSet<SolutionTaskList> SolutionTaskLists { get; set; } = null!;
         public virtual DbSet<SolutionUserList> SolutionUserLists { get; set; } = null!;
         public virtual DbSet<SolutionUserRoleList> SolutionUserRoleLists { get; set; } = null!;
-        public virtual DbSet<SolutionWebsiteList> SolutionWebsiteLists { get; set; } = null!;
         public virtual DbSet<SystemCustomPageList> SystemCustomPageLists { get; set; } = null!;
         public virtual DbSet<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; } = null!;
         public virtual DbSet<SystemDocumentTypeList> SystemDocumentTypeLists { get; set; } = null!;
@@ -638,6 +637,13 @@ namespace EasyITCenter.DBModel
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DocSrvDocTemplateList_DocSrvDocumentationGroupList");
 
+                entity.HasOne(d => d.InheritedCodeTypeNavigation)
+                    .WithMany(p => p.DocSrvDocTemplateLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedCodeType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DocSrvDocTemplateList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.DocSrvDocTemplateLists)
                     .HasForeignKey(d => d.UserId)
@@ -1146,6 +1152,13 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerApiSecurityList>(entity =>
             {
+                entity.HasOne(d => d.InheritedApiTypeNavigation)
+                    .WithMany(p => p.ServerApiSecurityLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedApiType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerApiSecurityList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerApiSecurityLists)
                     .HasForeignKey(d => d.UserId)
@@ -1164,6 +1177,13 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerHealthCheckTaskList>(entity =>
             {
+                entity.HasOne(d => d.InheritedCheckTypeNavigation)
+                    .WithMany(p => p.ServerHealthCheckTaskLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedCheckType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerHealthCheckTaskList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerHealthCheckTaskLists)
                     .HasForeignKey(d => d.UserId)
@@ -1182,6 +1202,20 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerModuleAndServiceList>(entity =>
             {
+                entity.HasOne(d => d.InheritedLayoutTypeNavigation)
+                    .WithMany(p => p.ServerModuleAndServiceListInheritedLayoutTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedLayoutType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerModuleAndServiceList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.InheritedPageTypeNavigation)
+                    .WithMany(p => p.ServerModuleAndServiceListInheritedPageTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedPageType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerModuleAndServiceList_SolutionMixedEnumList1");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerModuleAndServiceLists)
                     .HasForeignKey(d => d.UserId)
@@ -1191,6 +1225,13 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerParameterList>(entity =>
             {
+                entity.HasOne(d => d.InheritedDataTypeNavigation)
+                    .WithMany(p => p.ServerParameterLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedDataType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerParameterList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerParameterLists)
                     .HasForeignKey(d => d.UserId)
@@ -1371,6 +1412,20 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionOperationList>(entity =>
             {
+                entity.HasOne(d => d.InheritedApiResultTypeNavigation)
+                    .WithMany(p => p.SolutionOperationListInheritedApiResultTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedApiResultType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionOperationList_SolutionMixedEnumList1");
+
+                entity.HasOne(d => d.InheritedOperationTypeNavigation)
+                    .WithMany(p => p.SolutionOperationListInheritedOperationTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedOperationType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionOperationList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionOperationLists)
                     .HasForeignKey(d => d.UserId)
@@ -1380,6 +1435,20 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionSchedulerList>(entity =>
             {
+                entity.HasOne(d => d.InheritedGroupNameNavigation)
+                    .WithMany(p => p.SolutionSchedulerListInheritedGroupNameNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedGroupName)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionSchedulerList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.InheritedIntervalTypeNavigation)
+                    .WithMany(p => p.SolutionSchedulerListInheritedIntervalTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedIntervalType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionSchedulerList_SolutionMixedEnumList1");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionSchedulerLists)
                     .HasForeignKey(d => d.UserId)
@@ -1402,33 +1471,57 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.StaticPathId)
                     .HasConstraintName("FK_SolutionStaticFileList_SolutionStaticFilePathList");
 
+                entity.HasOne(d => d.StaticWeb)
+                    .WithMany(p => p.SolutionStaticFileLists)
+                    .HasForeignKey(d => d.StaticWebId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionStaticFileList_SolutionStaticWebList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionStaticFileLists)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_SolutionStaticFileList_UserList");
-
-                entity.HasOne(d => d.Website)
-                    .WithMany(p => p.SolutionStaticFileLists)
-                    .HasForeignKey(d => d.WebsiteId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionStaticFileList_SolutionWebsiteList");
             });
 
             modelBuilder.Entity<SolutionStaticFilePathList>(entity =>
             {
+                entity.HasOne(d => d.StaticWeb)
+                    .WithMany(p => p.SolutionStaticFilePathLists)
+                    .HasForeignKey(d => d.StaticWebId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionStaticFilePathList_SolutionStaticWebList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionStaticFilePathLists)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_SolutionStaticFilePathList_UserList");
+            });
 
-                entity.HasOne(d => d.Website)
-                    .WithMany(p => p.SolutionStaticFilePathLists)
-                    .HasForeignKey(d => d.WebsiteId)
-                    .HasConstraintName("FK_SolutionStaticFilePathList_SolutionWebsiteList");
+            modelBuilder.Entity<SolutionStaticWebList>(entity =>
+            {
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SolutionStaticWebLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionStaticWebList_UserList");
             });
 
             modelBuilder.Entity<SolutionTaskList>(entity =>
             {
+                entity.HasOne(d => d.InheritedStatusTypeNavigation)
+                    .WithMany(p => p.SolutionTaskListInheritedStatusTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedStatusType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionTaskList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.InheritedTargetTypeNavigation)
+                    .WithMany(p => p.SolutionTaskListInheritedTargetTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedTargetType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionTaskList_SolutionMixedEnumList1");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionTaskLists)
                     .HasForeignKey(d => d.UserId)
@@ -1451,17 +1544,21 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_UserList_UserRoleList");
             });
 
-            modelBuilder.Entity<SolutionWebsiteList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SolutionWebsiteLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionWebsiteList_UserList");
-            });
-
             modelBuilder.Entity<SystemCustomPageList>(entity =>
             {
+                entity.HasOne(d => d.InheritedFormTypeNavigation)
+                    .WithMany(p => p.SystemCustomPageListInheritedFormTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedFormType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SystemCustomPageList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.InheritedHelpTabSourceTypeNavigation)
+                    .WithMany(p => p.SystemCustomPageListInheritedHelpTabSourceTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedHelpTabSourceType)
+                    .HasConstraintName("FK_SystemCustomPageList_SolutionMixedEnumList1");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemCustomPageLists)
                     .HasForeignKey(d => d.UserId)
@@ -1477,10 +1574,17 @@ namespace EasyITCenter.DBModel
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DocumentAdviceList_BranchList");
 
-                entity.HasOne(d => d.DocumentTypeNavigation)
+                entity.HasOne(d => d.InheritedDocumentTypeNavigation)
+                    .WithMany(p => p.SystemDocumentAdviceLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedDocumentType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SystemDocumentAdviceList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.InheritedDocumentType1)
                     .WithMany(p => p.SystemDocumentAdviceLists)
                     .HasPrincipalKey(p => p.SystemName)
-                    .HasForeignKey(d => d.DocumentType)
+                    .HasForeignKey(d => d.InheritedDocumentType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DocumentAdviceList_DocumentTypeList");
 
@@ -1526,6 +1630,13 @@ namespace EasyITCenter.DBModel
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemMenuList_SystemGroupMenuList");
 
+                entity.HasOne(d => d.InheritedMenuTypeNavigation)
+                    .WithMany(p => p.SystemMenuLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedMenuType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SystemMenuList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemMenuLists)
                     .HasForeignKey(d => d.UserId)
@@ -1535,6 +1646,13 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SystemModuleList>(entity =>
             {
+                entity.HasOne(d => d.InheritedModuleTypeNavigation)
+                    .WithMany(p => p.SystemModuleLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedModuleType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SystemModuleList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemModuleLists)
                     .HasForeignKey(d => d.UserId)
@@ -1585,6 +1703,12 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<UserAccessKeyList>(entity =>
             {
+                entity.HasOne(d => d.InheritedClientTypeNavigation)
+                    .WithMany(p => p.UserAccessKeyLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedClientType)
+                    .HasConstraintName("FK_UserAccessKeyList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserAccessKeyLists)
                     .HasForeignKey(d => d.UserId)
@@ -1626,6 +1750,13 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<UserParameterList>(entity =>
             {
+                entity.HasOne(d => d.InheritedDataTypeNavigation)
+                    .WithMany(p => p.UserParameterLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedDataType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserParameterList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserParameterLists)
                     .HasForeignKey(d => d.UserId)
@@ -1644,6 +1775,13 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebCodeLibraryList>(entity =>
             {
+                entity.HasOne(d => d.InheritedCodeTypeNavigation)
+                    .WithMany(p => p.WebCodeLibraryLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedCodeType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_WebCodeLibraryList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebCodeLibraryLists)
                     .HasForeignKey(d => d.UserId)
@@ -1662,6 +1800,13 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebCoreFileList>(entity =>
             {
+                entity.HasOne(d => d.InheritedJsCssDefinitionTypeNavigation)
+                    .WithMany(p => p.WebCoreFileLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedJsCssDefinitionType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_WebCoreFileList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebCoreFileLists)
                     .HasForeignKey(d => d.UserId)
@@ -1698,6 +1843,13 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebGlobalPageBlockList>(entity =>
             {
+                entity.HasOne(d => d.InheritedPagePartTypeNavigation)
+                    .WithMany(p => p.WebGlobalPageBlockLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedPagePartType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_WebGlobalPageBlockList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebGlobalPageBlockLists)
                     .HasForeignKey(d => d.UserId)
