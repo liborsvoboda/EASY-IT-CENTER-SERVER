@@ -35,6 +35,7 @@ using IdentityModel;
 using Korzh.DbUtils;
 using Google.Apis.Translate.v3;
 using Microsoft.EntityFrameworkCore;
+using BaGet;
 
 
 namespace EasyITCenter.ServerCoreConfiguration {
@@ -57,6 +58,12 @@ namespace EasyITCenter.ServerCoreConfiguration {
             */
 
         }
+
+
+
+
+
+
 
 
         /// <summary>
@@ -148,7 +155,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 x.JsonSerializerOptions.WriteIndented = true;
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                //x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
             });
         }
 
@@ -166,7 +173,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
             }
             services.AddHttpLogging(logging => {
                 logging.LoggingFields = HttpLoggingFields.All;
-                logging.RequestHeaders.Add("sec-ch-ua"); logging.ResponseHeaders.Add("RequestJsonFormatNotCorrectly");
+                logging.RequestHeaders.Add("sec-ch-ua"); 
+                logging.ResponseHeaders.Add("RequestJsonFormatNotCorrectly");
                 logging.MediaTypeOptions.AddText("application/javascript");
                 logging.RequestBodyLogLimit = logging.ResponseBodyLogLimit = 4096;
             });
@@ -194,19 +202,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                         /*
                         opt.Conventions.AllowAnonymousToPage("/DevPortal/Error");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/AccessDenied");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ConfirmEmail");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ExternalLogin");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ForgotPassword");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ForgotPasswordConfirm");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Lockout");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Login");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Login2fa");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/LoginWithRecoveryCode");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Register");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ResetPassword");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/ResetPasswordConfirm");
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/SignedOut");
                         */
 
                         //TODO SEMDAT TY MODULY
@@ -349,15 +344,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
             try {
                 //EIC&ESB MAIN DB
                 services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(SrvConfig.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-
-
-                //services.AddDbContext<WebHostingDbContext>((p, o) => o.UseSqlServer($"Data Source={SrvConfig.WebHostingDBConnString};AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30",
-                //    x => x.UseNetTopologySuite())
-                //.UseInternalServiceProvider(p));
-                //services.AddDbContext<WebHostingDbContext>( (provider, cfg) => cfg.UseSqlServer($"Data Source={SrvConfig.WebHostingDBConnString};Initial Catalog=EICWebHostingDb")
-                //.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-                //.UseApplicationServiceProvider(provider).UseSqlServer($"Data Source={SrvConfig.WebHostingDBConnString};Initial Catalog=EICWebHostingDb")
-                //);
 
                 //WEBHOSTING DB
                 // Database File Example

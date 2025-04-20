@@ -15,13 +15,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Fawdlstty.GitServerCore;
 
 
-
 namespace EasyITCenter.ServerCoreConfiguration {
    
     /// <summary>
     /// Configure Server Ad-dons and Modules
     /// </summary>
     public class ServerModules {
+
+
+
+
 
         /// <summary>
         /// Server Module: GitServer Startup Configuration

@@ -59,6 +59,10 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<LicSrvLicenseActivationFailList> LicSrvLicenseActivationFailLists { get; set; } = null!;
         public virtual DbSet<LicSrvLicenseAlgorithmList> LicSrvLicenseAlgorithmLists { get; set; } = null!;
         public virtual DbSet<LicSrvUsedLicenseList> LicSrvUsedLicenseLists { get; set; } = null!;
+        public virtual DbSet<NugetPackageDependenciesList> NugetPackageDependenciesLists { get; set; } = null!;
+        public virtual DbSet<NugetPackageTypesList> NugetPackageTypesLists { get; set; } = null!;
+        public virtual DbSet<NugetPackagesList> NugetPackagesLists { get; set; } = null!;
+        public virtual DbSet<NugetTargetFrameworksList> NugetTargetFrameworksLists { get; set; } = null!;
         public virtual DbSet<PortalActionHistoryList> PortalActionHistoryLists { get; set; } = null!;
         public virtual DbSet<PortalActionTypeList> PortalActionTypeLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; } = null!;
@@ -768,6 +772,37 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.ItemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsedLicenseList_ItemList");
+            });
+
+            modelBuilder.Entity<NugetPackageDependenciesList>(entity =>
+            {
+                entity.HasOne(d => d.PackageKeyNavigation)
+                    .WithMany(p => p.NugetPackageDependenciesLists)
+                    .HasForeignKey(d => d.PackageKey)
+                    .HasConstraintName("FK_NugetPackageDependenciesList_Packages_PackageKey");
+            });
+
+            modelBuilder.Entity<NugetPackageTypesList>(entity =>
+            {
+                entity.HasOne(d => d.PackageKeyNavigation)
+                    .WithMany(p => p.NugetPackageTypesLists)
+                    .HasForeignKey(d => d.PackageKey)
+                    .HasConstraintName("FK_NugetPackageTypesList_Packages_PackageKey");
+            });
+
+            modelBuilder.Entity<NugetPackagesList>(entity =>
+            {
+                entity.Property(e => e.RowVersion)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+            });
+
+            modelBuilder.Entity<NugetTargetFrameworksList>(entity =>
+            {
+                entity.HasOne(d => d.PackageKeyNavigation)
+                    .WithMany(p => p.NugetTargetFrameworksLists)
+                    .HasForeignKey(d => d.PackageKey)
+                    .HasConstraintName("FK_NugetTargetFrameworksList_Packages_PackageKey");
             });
 
             modelBuilder.Entity<PortalActionHistoryList>(entity =>

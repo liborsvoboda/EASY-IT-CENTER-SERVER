@@ -396,6 +396,12 @@
         /// </summary>
         public static bool EnableIdentityServer { get; set; } = false;
 
+
+        /// <summary>
+        /// Enable Nuget Server
+        /// </summary>
+        public static bool EnableNugetServer { get; set; } = false;
+
         #endregion Server Modules
 
         #region Server Web Portal
