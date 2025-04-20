@@ -15,7 +15,6 @@ using EasyITCenter.GitServer.Models;
 using EasyITCenter.GitServer.Controllers;
 using RefactorWebSites;
 using Westwind.AspNetCore.Markdown;
-
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Authentication.Facebook;
@@ -35,7 +34,7 @@ using IdentityModel;
 using Korzh.DbUtils;
 using Google.Apis.Translate.v3;
 using Microsoft.EntityFrameworkCore;
-using BaGet;
+
 
 
 namespace EasyITCenter.ServerCoreConfiguration {
@@ -155,7 +154,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 x.JsonSerializerOptions.WriteIndented = true;
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                //x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
             });
         }
 
@@ -323,7 +322,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
             services.AddScoped(typeof(IGenericApiServiceAsync<,>), typeof(GenericApiServiceAsync<,>));
             services.AddScoped(typeof(IGenericApiService<,>), typeof(GenericApiService<,>));
             services.AddScoped<StaticFileDbService>();
-            services.AddScoped<TranslateService>();
         }
 
         /// <summary>
@@ -363,69 +361,31 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services"></param>
         internal static void ConfigureDefaultAuthentication(ref IServiceCollection services) {
 
-            if (!SrvConfig.EnableIdentityServer) {
-                services.AddAuthentication(x => {
-                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-                }).AddJwtBearer(x => {
-                    x.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = CoreOperations.ValidAndGetTokenParameters();
-                    x.ForwardSignIn = new EasyITCenterContext().ServerModuleAndServiceLists.Where(a => a.IsLoginModule).FirstOrDefault()?.UrlSubPath;
-                    if (SrvConfig.ConfigTimeTokenValidationEnabled) { x.TokenValidationParameters.LifetimeValidator = EasyITCenterAuthenticationApi.TokenLifetimeValidator; }
-                    x.Events = new JwtBearerEvents {
-                        OnAuthenticationFailed = context => {
-                            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException)) {
-                                context.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
-                            }
-                            return Task.CompletedTask;
+            services.AddAuthentication(x => {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x => {
+                x.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = CoreOperations.ValidAndGetTokenParameters();
+                x.ForwardSignIn = new EasyITCenterContext().ServerModuleAndServiceLists.Where(a => a.IsLoginModule).FirstOrDefault()?.UrlSubPath;
+                if (SrvConfig.ConfigTimeTokenValidationEnabled) { x.TokenValidationParameters.LifetimeValidator = EasyITCenterAuthenticationApi.TokenLifetimeValidator; }
+                x.Events = new JwtBearerEvents {
+                    OnAuthenticationFailed = context => {
+                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException)) {
+                            context.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
                         }
-                    };
-                });
-            }
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+            
         }
 
-        /// <summary>
-        /// Configure Identity Server Management
-        /// </summary>
-        /// <param name="services"></param>
-        internal static void ConfigureIdentityServer(ref IServiceCollection services) {
-            if (SrvConfig.EnableIdentityServer) {
-                /*
-                services.AddIdentityServer(options => { options.UserInteraction.LoginUrl = "";})
-                .AddCoreServices().AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
-                .AddInMemoryClients(new List<IdentityServer4.Models.Client>())
-                .AddInMemoryCaching().AddResponseGenerators().AddValidators();
-                */
-
-                    //.AddUserStore<ApplicationUser>()
-                    //.AddInMemoryIdentityResources(new List<IdentityServer4.Models.IdentityResource>())
-                //.AddInMemoryApiResources(new List<IdentityServer4.Models.ApiResource>())
-                //.AddInMemoryClients(new List<IdentityServer4.Models.Client>())
-                //.AddInMemoryApiScopes(new List<IdentityServer4.Models.ApiScope>())
-                //.AddCoreServices().AddInMemoryPersistedGrants()//.AddPluggableServices()
-                //.AddJwtBearerClientAuthentication().AddCookieAuthentication()
-                //.AddResponseGenerators().AddDeveloperSigningCredential();
-                
-                services.Configure<IdentityOptions>(options => {
-                    options.Password.RequireDigit = true;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireNonAlphanumeric = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequiredLength = 6;
-                    options.Password.RequiredUniqueChars = 1;
-                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                    options.Lockout.MaxFailedAccessAttempts = 5;
-                    options.Lockout.AllowedForNewUsers = true;
-                    options.User.AllowedUserNameCharacters =
-                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                    options.User.RequireUniqueEmail = true;
-                });
-               
-
+   
 
                 /*
                 services.AddAuthentication().AddGoogle(options => { 
@@ -445,7 +405,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     twitterOptions.RetrieveUserDetails = true;
                 });
                 */
-            }
-        }
+     
     }
 }

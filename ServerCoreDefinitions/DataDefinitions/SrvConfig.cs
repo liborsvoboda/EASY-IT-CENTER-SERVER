@@ -389,19 +389,6 @@
         /// </summary>
         public static bool ModuleCSharpCodeBuilder { get; set; } = true;
 
-
-        /// <summary>
-        /// Enable Identity Sever Administration, 
-        /// disable Default Basic/JWT Authentication
-        /// </summary>
-        public static bool EnableIdentityServer { get; set; } = false;
-
-
-        /// <summary>
-        /// Enable Nuget Server
-        /// </summary>
-        public static bool EnableNugetServer { get; set; } = false;
-
         #endregion Server Modules
 
         #region Server Web Portal

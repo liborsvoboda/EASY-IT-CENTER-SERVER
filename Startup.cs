@@ -105,7 +105,6 @@ namespace EasyITCenter {
             ServerConfigurationServices.AutoRegisterClassServices(ref services);
             ServerConfigurationServices.ConfigureTransient(ref services);
             ServerConfigurationServices.ConfigureSingletons(ref services);
-            ServerConfigurationServices.ConfigureIdentityServer(ref services);
 
             //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/signalr/dotnet-client/sample/SignalRChatClient/MainWindow.xaml.cs
             //primi chat s aplikaci
