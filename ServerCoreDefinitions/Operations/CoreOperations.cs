@@ -74,8 +74,8 @@ namespace EasyITCenter.ServerCoreStructure {
                 #region Solve Controlled Static Files
                 //Startup Redirect To Static File
                 if (validPath == null && context.Response.StatusCode == StatusCodes.Status200OK && routePath == "/"
-                    && routePath != SrvConfig.RedirectPath && SrvConfig.RedirectOnPageNotFound && SrvConfig.RedirectPath.ToLower() != "/systemportal") {
-                    routeLayout = RouteLayoutTypes.StaticFileLayout; /*enable change for md */ routePath = SrvConfig.RedirectPath; routingResult = RoutingActionTypes.Next;
+                    && routePath != DbOperations.GetServerParameterLists("RedirectPath").Value && bool.Parse(DbOperations.GetServerParameterLists("RedirectOnPageNotFound").Value) && DbOperations.GetServerParameterLists("RedirectPath").Value.ToLower() != "/systemportal") {
+                    routeLayout = RouteLayoutTypes.StaticFileLayout; /*enable change for md */ routePath = DbOperations.GetServerParameterLists("RedirectPath").Value; routingResult = RoutingActionTypes.Next;
                 }
 
 
@@ -83,9 +83,9 @@ namespace EasyITCenter.ServerCoreStructure {
                 try {
                     int webMenuId = 0; webMenuId = int.TryParse(routePath.Split("/").Last().Split("-")[0], out int checkInt) ? checkInt : 0;
                     if (
-                        /*Portal started*/ (routePath == "/" && SrvConfig.RedirectOnPageNotFound && SrvConfig.RedirectPath.ToLower() == "/systemportal" ) || routePath == "/systemportal" ||
+                        /*Portal started*/ (routePath == "/" && bool.Parse(DbOperations.GetServerParameterLists("RedirectOnPageNotFound").Value) && DbOperations.GetServerParameterLists("RedirectPath").Value.ToLower() == "/systemportal" ) || routePath == "/systemportal" ||
                         /*Portal run*/ (new EasyITCenterContext().WebMenuLists.Where(a => a.Id == webMenuId || a.Name.ToLower() == routePath.Substring(1)).Any())
-                    ) { routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = SrvConfig.RedirectPath; routingResult = RoutingActionTypes.Next; }
+                    ) { routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = DbOperations.GetServerParameterLists("RedirectPath").Value; routingResult = RoutingActionTypes.Next; }
                 } catch { }
                 #endregion
 
@@ -100,7 +100,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
                 //Check MarkDown Type missing .md for Show in Markdown Layout
-                if (SrvConfig.EnableAutoShowStaticMdAsHtml) {
+                if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoShowStaticMdAsHtml").Value)) {
                     if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + ".md")) 
                         { validPath = routePath; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
                     else if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/index.md")) 
@@ -175,29 +175,29 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="sendImmediately"></param>
         public static string SendEmail(SendMailRequest mailRequest, bool sendImmediately = false) {
             try {
-                if ((!SrvRuntime.DebugMode && !SrvConfig.ConfigLogWarnPlusToDbEnabled) || sendImmediately) {
-                    if (SrvConfig.ServiceCoreCheckerEmailSenderActive || sendImmediately) {
-                        MailMessage Email = new() { From = new MailAddress(mailRequest.Sender ?? SrvConfig.EmailerSMTPLoginUsername) };
+                if ((!SrvRuntime.DebugMode && !bool.Parse(DbOperations.GetServerParameterLists("ConfigLogWarnPlusToDbEnabled").Value)) || sendImmediately) {
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServiceCoreCheckerEmailSenderActive").Value) || sendImmediately) {
+                        MailMessage Email = new() { From = new MailAddress(mailRequest.Sender ?? DbOperations.GetServerParameterLists("EmailerSMTPLoginUsername").Value) };
 
                         if (mailRequest.Recipients != null && mailRequest.Recipients.Any()) { mailRequest.Recipients.ForEach(email => { Email.To.Add(email); }); }
-                        else { Email.To.Add(SrvConfig.EmailerServiceEmailAddress); }
+                        else { Email.To.Add(DbOperations.GetServerParameterLists("EmailerServiceEmailAddress").Value); }
 
-                        Email.Subject = mailRequest.Subject ?? SrvConfig.ConfigCoreServerRegisteredName;
+                        Email.Subject = mailRequest.Subject ?? DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value;
                         Email.Body = mailRequest.Content;
                         Email.IsBodyHtml = true;
 
-                        SmtpClient MailClient = new(SrvConfig.EmailerSMTPServerAddress, SrvConfig.EmailerSMTPPort) {
-                            Credentials = new NetworkCredential(SrvConfig.EmailerSMTPLoginUsername, SrvConfig.EmailerSMTPLoginPassword),
-                            EnableSsl = SrvConfig.EmailerSMTPSslIsEnabled,
-                            Host = SrvConfig.EmailerSMTPServerAddress,
-                            Port = SrvConfig.EmailerSMTPPort
+                        SmtpClient MailClient = new(DbOperations.GetServerParameterLists("EmailerSMTPServerAddress").Value, int.Parse(DbOperations.GetServerParameterLists("EmailerSMTPPort").Value)) {
+                            Credentials = new NetworkCredential(DbOperations.GetServerParameterLists("EmailerSMTPLoginUsername").Value, DbOperations.GetServerParameterLists("EmailerSMTPLoginPassword").Value),
+                            EnableSsl = bool.Parse(DbOperations.GetServerParameterLists("EmailerSMTPSslIsEnabled").Value),
+                            Host = DbOperations.GetServerParameterLists("EmailerSMTPServerAddress").Value,
+                            Port = int.Parse(DbOperations.GetServerParameterLists("EmailerSMTPPort").Value)
                         };
                         MailClient.Timeout = 5000;
                         MailClient.SendAsync(Email, Guid.NewGuid().ToString());
                     }
                 }
                 else {
-                    if (SrvConfig.ConfigLogWarnPlusToDbEnabled && mailRequest.Content != null &&
+                    if (DBConn.DatabaseLogWarnToDbEnabled && mailRequest.Content != null &&
                         !SrvRuntime.SrvRestartReq && SrvRuntime.ServerCoreStatus == ServerStatusTypes.Running.ToString()) {
                         SolutionFailList SolutionFailList = new SolutionFailList() { UserId = null, InheritedLogMonitorType = "PrimaryServer", Message = mailRequest.Content, LogLevel = null, UserName = null };
                         new EasyITCenterContext().SolutionFailLists.Add(SolutionFailList).Context.SaveChanges();
@@ -216,7 +216,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="password">The password.</param>
         /// <returns></returns>
         public static X509Certificate2 GetSelfSignedCertificate(string password) {
-            var commonName = SrvConfig.ConfigCertificateDomain;
+            var commonName = DbOperations.GetServerParameterLists("ConfigCertificateDomain").Value;
             var rsaKeySize = 2048;
             var years = 10;
             var hashAlgorithm = HashAlgorithmName.SHA256;
@@ -261,10 +261,10 @@ namespace EasyITCenter.ServerCoreStructure {
             string? password = null;
             try {
                 certificate = File.ReadAllBytes(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath, FileNameFromDataPath));
-                password = SrvConfig.ConfigCertificatePassword;
+                password = DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value;
                 return new X509Certificate2(certificate, password);
             } catch (Exception Ex) { SendEmail(new SendMailRequest() { Content = "Incorrect Certificate Path or Password, " + DataOperations.GetErrMsg(Ex) }); }
-            return GetSelfSignedCertificate(SrvConfig.ConfigCertificatePassword);
+            return GetSelfSignedCertificate(DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value);
         }
 
         /// <summary>
@@ -336,11 +336,11 @@ namespace EasyITCenter.ServerCoreStructure {
         public static TokenValidationParameters ValidAndGetTokenParameters() {
             return new TokenValidationParameters {
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SrvConfig.ConfigJwtLocalKey)),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(DbOperations.GetServerParameterLists("ConfigJwtLocalKey").Value)),
                 ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateLifetime = SrvConfig.ConfigTimeTokenValidationEnabled,
-                ClockSkew = TimeSpan.FromMinutes(SrvConfig.ConfigApiTokenTimeoutMin),
+                ValidateAudience = false, 
+                ValidateLifetime = bool.Parse(DbOperations.GetServerParameterLists("ConfigTimeTokenValidationEnabled").Value),
+                ClockSkew = TimeSpan.FromMinutes(double.Parse(DbOperations.GetServerParameterLists("ConfigApiTokenTimeoutMin").Value)),
             };
         }
 

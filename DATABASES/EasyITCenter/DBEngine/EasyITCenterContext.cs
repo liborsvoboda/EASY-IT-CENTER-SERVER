@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EasyITCenter.ServerCoreStructure;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Data.Common;
 
@@ -27,13 +28,13 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             if (!optionsBuilder.IsConfigured) {
-                optionsBuilder.ConfigureLoggingCacheTime(TimeSpan.FromMinutes(SrvConfig.DatabaseInternalCacheTimeoutMin));
-                optionsBuilder.EnableServiceProviderCaching(SrvConfig.DatabaseInternalCachingEnabled);
+                optionsBuilder.ConfigureLoggingCacheTime(TimeSpan.FromMinutes(DBConn.DatabaseInternalCacheTimeoutMin));
+                optionsBuilder.EnableServiceProviderCaching(DBConn.DatabaseInternalCachingEnabled);
                 optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                 optionsBuilder.EnableSensitiveDataLogging(false); //everytime must be disabled other problem on release
 
-                optionsBuilder.UseSqlServer(SrvConfig.DatabaseConnectionString,
-                      x => x.MigrationsHistoryTable("MigrationsHistory", "dbo"));
+                optionsBuilder.UseSqlServer(DBConn.DatabaseConnectionString,
+                      x => x.MigrationsHistoryTable("_MigrationsHistory", "dbo"));
 
                 if (SrvRuntime.DebugMode) {
                     optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => {
@@ -41,7 +42,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     }
                     )).LogTo(message => { Debug.WriteLine(message); }).LogTo(Console.WriteLine);
                 }
-                else if (SrvConfig.ConfigLogWarnPlusToDbEnabled) {
+                else if (DBConn.DatabaseLogWarnToDbEnabled) {
                     optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => {
                         builder.SetMinimumLevel(LogLevel.Warning).AddEventLog();
                     })).EnableSensitiveDataLogging(false).LogTo(message => {

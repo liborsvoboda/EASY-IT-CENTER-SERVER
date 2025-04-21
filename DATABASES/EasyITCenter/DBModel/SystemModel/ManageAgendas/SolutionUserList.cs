@@ -85,7 +85,6 @@ namespace EasyITCenter.DBModel
             ServerModuleAndServiceLists = new HashSet<ServerModuleAndServiceList>();
             ServerParameterLists = new HashSet<ServerParameterList>();
             ServerProcessLists = new HashSet<ServerProcessList>();
-            ServerSettingLists = new HashSet<ServerSettingList>();
             ServerStaticOrMvcDefPathLists = new HashSet<ServerStaticOrMvcDefPathList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             ServerToolTypeLists = new HashSet<ServerToolTypeList>();
@@ -315,8 +314,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerParameterList> ServerParameterLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerProcessList> ServerProcessLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<ServerSettingList> ServerSettingLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerStaticOrMvcDefPathList> ServerStaticOrMvcDefPathLists { get; set; }
         [InverseProperty("User")]

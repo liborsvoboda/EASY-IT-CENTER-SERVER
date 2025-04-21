@@ -93,7 +93,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ServerModuleAndServiceList> ServerModuleAndServiceLists { get; set; } = null!;
         public virtual DbSet<ServerParameterList> ServerParameterLists { get; set; } = null!;
         public virtual DbSet<ServerProcessList> ServerProcessLists { get; set; } = null!;
-        public virtual DbSet<ServerSettingList> ServerSettingLists { get; set; } = null!;
         public virtual DbSet<ServerStaticOrMvcDefPathList> ServerStaticOrMvcDefPathLists { get; set; } = null!;
         public virtual DbSet<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; } = null!;
         public virtual DbSet<ServerToolTypeList> ServerToolTypeLists { get; set; } = null!;
@@ -1225,11 +1224,18 @@ namespace EasyITCenter.DBModel
             modelBuilder.Entity<ServerParameterList>(entity =>
             {
                 entity.HasOne(d => d.InheritedDataTypeNavigation)
-                    .WithMany(p => p.ServerParameterLists)
+                    .WithMany(p => p.ServerParameterListInheritedDataTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
                     .HasForeignKey(d => d.InheritedDataType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerParameterList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.InheritedServerParamTypeNavigation)
+                    .WithMany(p => p.ServerParameterListInheritedServerParamTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedServerParamType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerParameterList_SolutionMixedEnumList1");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerParameterLists)
@@ -1261,22 +1267,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerProcessList_UserList");
-            });
-
-            modelBuilder.Entity<ServerSettingList>(entity =>
-            {
-                entity.HasOne(d => d.InheritedSrvConfigTypeNavigation)
-                    .WithMany(p => p.ServerSettingLists)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedSrvConfigType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerSettingList_SolutionMixedEnumList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.ServerSettingLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerSettingList_SolutionUserList");
             });
 
             modelBuilder.Entity<ServerStaticOrMvcDefPathList>(entity =>

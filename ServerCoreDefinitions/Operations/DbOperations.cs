@@ -19,50 +19,48 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="onlyThis"></param>
         public static void LoadOrRefreshStaticDbDials(ServerLocalDbDialsTypes? onlyThis = null) {
-            if (SrvConfig.ServiceUseDbLocalAutoupdatedDials) {
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.ReadUncommitted })) {
-                    foreach (ServerLocalDbDialsTypes dbTable in (ServerLocalDbDialsTypes[])Enum.GetValues(typeof(ServerLocalDbDialsTypes))) {
-                        switch (onlyThis != null ? onlyThis.ToString() : dbTable.ToString()) {
-                            case "SystemTranslationLists":
-                                List<SystemTranslationList>? stlDataLL = new EasyITCenterContext().SystemTranslationLists.ToList();
-                                int stlIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == stlDataLL.GetType());
-                                if (stlIndexLL >= 0) SrvRuntime.LocalDBTableList[stlIndexLL] = stlDataLL; else SrvRuntime.LocalDBTableList.Add(stlDataLL);
-                                break;
-                            case "ServerModuleAndServiceLists":
-                                List<ServerModuleAndServiceList>? smlDataLL = new EasyITCenterContext().ServerModuleAndServiceLists.ToList();
-                                int smlIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == smlDataLL.GetType());
-                                if (smlIndexLL >= 0) SrvRuntime.LocalDBTableList[smlIndexLL] = smlDataLL; else SrvRuntime.LocalDBTableList.Add(smlDataLL);
-                                break;
-                            case "WebCoreFileLists":
-                                List<WebCoreFileList>? wcDataLL = new EasyITCenterContext().WebCoreFileLists.ToList();
-                                int wcIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == wcDataLL.GetType());
-                                if (wcIndexLL >= 0) SrvRuntime.LocalDBTableList[wcIndexLL] = wcDataLL; else SrvRuntime.LocalDBTableList.Add(wcDataLL);
-                                break;
-                            case "WebGlobalPageBlockLists":
-                                List<WebGlobalPageBlockList>? wgDataLL = new EasyITCenterContext().WebGlobalPageBlockLists.ToList();
-                                int wgIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == wgDataLL.GetType());
-                                if (wgIndexLL >= 0) SrvRuntime.LocalDBTableList[wgIndexLL] = wgDataLL; else SrvRuntime.LocalDBTableList.Add(wgDataLL);
-                                break;
-                            case "ServerStaticOrMvcDefPathLists":
-                                List<ServerStaticOrMvcDefPathList>? ssmDataLL = new EasyITCenterContext().ServerStaticOrMvcDefPathLists.ToList();
-                                int ssmIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == ssmDataLL.GetType());
-                                if (ssmIndexLL >= 0) SrvRuntime.LocalDBTableList[ssmIndexLL] = ssmDataLL; else SrvRuntime.LocalDBTableList.Add(ssmDataLL);
-                                break;
-                            case "ServerApiSecurityLists":
-                                List<ServerApiSecurityList>? sasDataLL = new EasyITCenterContext().ServerApiSecurityLists.ToList();
-                                int sasIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == sasDataLL.GetType());
-                                if (sasIndexLL >= 0) SrvRuntime.LocalDBTableList[sasIndexLL] = sasDataLL; else SrvRuntime.LocalDBTableList.Add(sasDataLL);
-                                break;
-                            case "ServerParameterLists":
-                                List<ServerParameterList>? spsDataLL = new EasyITCenterContext().ServerParameterLists.ToList();
-                                int spsIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == spsDataLL.GetType());
-                                if (spsIndexLL >= 0) SrvRuntime.LocalDBTableList[spsIndexLL] = spsDataLL; else SrvRuntime.LocalDBTableList.Add(spsDataLL);
-                                break;
+            using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.ReadUncommitted })) {
+                foreach (ServerLocalDbDialsTypes dbTable in (ServerLocalDbDialsTypes[])Enum.GetValues(typeof(ServerLocalDbDialsTypes))) {
+                    switch (onlyThis != null ? onlyThis.ToString() : dbTable.ToString()) {
+                        case "SystemTranslationLists":
+                            List<SystemTranslationList>? stlDataLL = new EasyITCenterContext().SystemTranslationLists.ToList();
+                            int stlIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == stlDataLL.GetType());
+                            if (stlIndexLL >= 0) SrvRuntime.LocalDBTableList[stlIndexLL] = stlDataLL; else SrvRuntime.LocalDBTableList.Add(stlDataLL);
+                            break;
+                        case "ServerModuleAndServiceLists":
+                            List<ServerModuleAndServiceList>? smlDataLL = new EasyITCenterContext().ServerModuleAndServiceLists.ToList();
+                            int smlIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == smlDataLL.GetType());
+                            if (smlIndexLL >= 0) SrvRuntime.LocalDBTableList[smlIndexLL] = smlDataLL; else SrvRuntime.LocalDBTableList.Add(smlDataLL);
+                            break;
+                        case "WebCoreFileLists":
+                            List<WebCoreFileList>? wcDataLL = new EasyITCenterContext().WebCoreFileLists.ToList();
+                            int wcIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == wcDataLL.GetType());
+                            if (wcIndexLL >= 0) SrvRuntime.LocalDBTableList[wcIndexLL] = wcDataLL; else SrvRuntime.LocalDBTableList.Add(wcDataLL);
+                            break;
+                        case "WebGlobalPageBlockLists":
+                            List<WebGlobalPageBlockList>? wgDataLL = new EasyITCenterContext().WebGlobalPageBlockLists.ToList();
+                            int wgIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == wgDataLL.GetType());
+                            if (wgIndexLL >= 0) SrvRuntime.LocalDBTableList[wgIndexLL] = wgDataLL; else SrvRuntime.LocalDBTableList.Add(wgDataLL);
+                            break;
+                        case "ServerStaticOrMvcDefPathLists":
+                            List<ServerStaticOrMvcDefPathList>? ssmDataLL = new EasyITCenterContext().ServerStaticOrMvcDefPathLists.ToList();
+                            int ssmIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == ssmDataLL.GetType());
+                            if (ssmIndexLL >= 0) SrvRuntime.LocalDBTableList[ssmIndexLL] = ssmDataLL; else SrvRuntime.LocalDBTableList.Add(ssmDataLL);
+                            break;
+                        case "ServerApiSecurityLists":
+                            List<ServerApiSecurityList>? sasDataLL = new EasyITCenterContext().ServerApiSecurityLists.ToList();
+                            int sasIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == sasDataLL.GetType());
+                            if (sasIndexLL >= 0) SrvRuntime.LocalDBTableList[sasIndexLL] = sasDataLL; else SrvRuntime.LocalDBTableList.Add(sasDataLL);
+                            break;
+                        case "ServerParameterLists":
+                            List<ServerParameterList>? spsDataLL = new EasyITCenterContext().ServerParameterLists.ToList();
+                            int spsIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == spsDataLL.GetType());
+                            if (spsIndexLL >= 0) SrvRuntime.LocalDBTableList[spsIndexLL] = spsDataLL; else SrvRuntime.LocalDBTableList.Add(spsDataLL);
+                            break;
 
-                            default: break;
-                        }
-                        if (onlyThis != null) break;
+                        default: break;
                     }
+                    if (onlyThis != null) break;
                 }
             }
         }
@@ -79,8 +77,8 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="language"></param>
         /// <returns></returns>
         public static string DBTranslate(string word, string? language = null) {
-            if (string.IsNullOrEmpty(language)) { language = SrvConfig.ServiceServerLanguage; }
-            return !SrvConfig.ServiceUseDbLocalAutoupdatedDials ? DBTranslateOffline(word, language) : DBTranslateOnline(word, language);
+            if (string.IsNullOrEmpty(language)) { language = DbOperations.GetServerParameterLists("ServiceServerLanguage").Value; }
+            return DBTranslateOffline(word, language);//: DBTranslateOnline(word, language);
         }
 
 
@@ -91,7 +89,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="modulePath"></param>
         /// <returns></returns>
         public static ServerModuleAndServiceList? CheckDefinedWebPageExists(string modulePath) {
-            return  !SrvConfig.ServiceUseDbLocalAutoupdatedDials ? CheckDefinedWebPageOffline(modulePath) : CheckDefinedWebPageOnline(modulePath);
+            return CheckDefinedWebPageOffline(modulePath);// : CheckDefinedWebPageOnline(modulePath);
         }
 
 
@@ -102,7 +100,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="serverPath"></param>
         /// <returns></returns>
         public static List<ServerStaticOrMvcDefPathList>? CheckDBServerApiRule(string serverPath) {
-            return !SrvConfig.ServiceUseDbLocalAutoupdatedDials ? CheckDBServerApiRuleOffline(serverPath) : CheckDBServerApiRuleOnline(serverPath);
+            return CheckDBServerApiRuleOffline(serverPath);// : CheckDBServerApiRuleOnline(serverPath);
         }
 
 
@@ -115,12 +113,12 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="fileName"></param>
         /// <returns></returns>
         public static List<WebCoreFileList>? GetWebPortalJsCssScripts(string specType, string? fileName) {
-            return !SrvConfig.ServiceUseDbLocalAutoupdatedDials ? GetWebPortalJsCssScriptsOffline(specType, fileName) : GetWebPortalJsCssScriptsOnline(specType, fileName);
+            return GetWebPortalJsCssScriptsOffline(specType, fileName);// : GetWebPortalJsCssScriptsOnline(specType, fileName);
         }
 
 
         public static ServerApiSecurityList? GetServerApiSecurity(string apiPath) {
-            return  !SrvConfig.ServiceUseDbLocalAutoupdatedDials ? GetServerApiSecurityOffline(apiPath) : GetServerApiSecurityOnline(apiPath);
+            return GetServerApiSecurityOffline(apiPath);// : GetServerApiSecurityOnline(apiPath);
         }
 
         /// <summary>
@@ -130,12 +128,31 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="pagePartType"></param>
         /// <returns></returns>
         public static List<WebGlobalPageBlockList>? GetWebGlobalPageBlockLists(string pagePartType) {
-            return !SrvConfig.ServiceUseDbLocalAutoupdatedDials ? GetWebGlobalPageBlockListsOffline(pagePartType) : GetWebGlobalPageBlockListsOnline(pagePartType);
+            return GetWebGlobalPageBlockListsOffline(pagePartType);// : GetWebGlobalPageBlockListsOnline(pagePartType);
         }
+
+
+        public static ServerParameterList? GetServerParameterLists(string paramKey) {
+            return GetServerParameterListsOffline(paramKey);// : GetServerParameterListsOnline(paramKey);
+        }
+
 
         #endregion Public definitions for standard using
 
         #region Private or On-line/Off-line Definitions
+
+
+        private static ServerParameterList? GetServerParameterListsOffline(string paramKey) {
+            int index = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == new List<ServerParameterList>().GetType());
+
+            return ( (List<ServerParameterList>)SrvRuntime.LocalDBTableList[index] ).Where(a => a.Key?.ToLower() == paramKey.ToLower() && a.Active).FirstOrDefault();
+        }
+
+
+        private static ServerParameterList? GetServerParameterListsOnline(string paramKey) {
+            return new EasyITCenterContext().ServerParameterLists.Where(a => a.Key.ToLower() == paramKey.ToLower() && a.Active).FirstOrDefault();
+        }
+
 
 
         /// <summary>
@@ -301,7 +318,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="language"></param>
         /// <returns></returns>
         private static string DBTranslateOffline(string word, string? language = null) {
-            if (string.IsNullOrEmpty(language)) { language = SrvConfig.ServiceServerLanguage; }
+            if (string.IsNullOrEmpty(language)) { language = DbOperations.GetServerParameterLists("ServiceServerLanguage").Value; }
             string result;
             int index = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == new List<SystemTranslationList>().GetType());
 
@@ -331,7 +348,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="language"></param>
         /// <returns></returns>
         private static string DBTranslateOnline(string word, string? language = null) {
-            if (string.IsNullOrEmpty(language)) { language = SrvConfig.ServiceServerLanguage; }
+            if (string.IsNullOrEmpty(language)) { language = DbOperations.GetServerParameterLists("ServiceServerLanguage").Value; }
             string result;
 
             //Check Exist AND Insert New

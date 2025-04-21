@@ -36,38 +36,38 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <summary>
         /// Gets or Sets the startup_path.
         /// </summary>
-        public static string WebRoot_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder);
+        public static string WebRoot_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot");
 
 
 
 
-        public static string SrvAdmin_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-admin");
-        public static string SrvPrivate_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-private");
-        public static string SrvIntegrated_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-Integrated");
-        public static string SrvGenerators_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-Generators");
-        public static string SrvWebPagesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-PagesWeb");
-        public static string SrvHelpPagesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-PagesHelp");
-        public static string SysPortalPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "system-Portal");
-        public static string SrvSharedPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-shared");
-        public static string SrvTemplatesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-Templates");
+        public static string SrvAdmin_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-admin");
+        public static string SrvPrivate_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-private");
+        public static string SrvIntegrated_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-Integrated");
+        public static string SrvGenerators_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-Generators");
+        public static string SrvWebPagesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-PagesWeb");
+        public static string SrvHelpPagesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-PagesHelp");
+        public static string SysPortalPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "system-Portal");
+        public static string SrvSharedPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-shared");
+        public static string SrvTemplatesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-Templates");
 
-        public static string SrvOtherLanguagesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-otherlangs");
+        public static string SrvOtherLanguagesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-otherlangs");
 
 
         /// <summary>
         /// Users Storages Path
         /// </summary>
-        public static string UserPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-users");
+        public static string UserPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-users");
 
         /// <summary>
         /// GIT SubServer Path Definition
         /// </summary>
-        public static string GitServerPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-users");
+        public static string GitServerPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-users");
 
         /// <summary>
         /// FTP SubServer Path Definition
         /// </summary>
-        public static string FTPServerPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SrvConfig.DefaultStaticWebFilesFolder, "server-users");
+        public static string FTPServerPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-users");
 
 
         /// <summary>

@@ -138,7 +138,7 @@ namespace EasyITCenter.Services {
                             try {
                                 IDictionary<string, string> maildata = JsonSerializer.Deserialize<IDictionary<string, string>>(data);
                                 CoreOperations.SendEmail(new SendMailRequest() {
-                                    Sender = SrvConfig.ConfigManagerEmailAddress,
+                                    Sender = DbOperations.GetServerParameterLists("ConfigManagerEmailAddress").Value,
                                     Recipients = jobData.First(a => a.Key.ToLower() == "email").Value?.ToString()?.Split(";").ToList(),
                                     Subject = maildata?.First(a => a.Key.ToLower() == "subject").Value.ToString(),
                                     Content = maildata?.First(a => a.Key.ToLower() == "content").Value.ToString()
@@ -150,7 +150,7 @@ namespace EasyITCenter.Services {
                                 if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin") {
                                     IDictionary<string, string> sqlmaildata = JsonSerializer.Deserialize<IDictionary<string, string>>(data);
                                     CoreOperations.SendEmail(new SendMailRequest() {
-                                        Sender = SrvConfig.ConfigManagerEmailAddress,
+                                        Sender = DbOperations.GetServerParameterLists("ConfigManagerEmailAddress").Value,
                                         Recipients = jobData.First(a => a.Key.ToLower() == "email").Value?.ToString()?.Split(";").ToList(),
                                         Subject = sqlmaildata?.First(a => a.Key.ToLower() == "subject").Value.ToString(),
                                         Content = sqlmaildata?.First(a => a.Key.ToLower() == "content").Value.ToString()
@@ -184,7 +184,7 @@ namespace EasyITCenter.Services {
                         }
                         else if (jobType == "websocketnotify") {
                             try {
-                                Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(SrvConfig.WebSocketGlobalNotifyPath, data);
+                                Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(DbOperations.GetServerParameterLists("WebSocketGlobalNotifyPath").Value, data);
 
                             } catch (Exception ex) { taskResult.ProcessCrashed = true; taskResult.ProcessLog = DataOperations.GetErrMsg(ex); CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }); }
                         }
@@ -192,7 +192,7 @@ namespace EasyITCenter.Services {
                             try {
                                 if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin") {
                                     string? result = new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>($"EXEC {data};").ToString();
-                                    Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(SrvConfig.WebSocketGlobalNotifyPath, result);
+                                    Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(DbOperations.GetServerParameterLists("WebSocketGlobalNotifyPath").Value, result);
                                 }
 
                             } catch (Exception ex) { taskResult.ProcessCrashed = true; taskResult.ProcessLog = DataOperations.GetErrMsg(ex); CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }); }

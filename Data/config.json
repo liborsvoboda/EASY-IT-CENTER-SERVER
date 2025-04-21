@@ -1,3 +1,7 @@
-{
-  "DatabaseConnectionString": "Server=127.0.0.1;Database=EasyITCenter;Trusted_Connection=True;TrustServerCertificate=True"
+﻿{
+  "DatabaseConnectionString": "Server=127.0.0.1;Database=EasyITCenter;Trusted_Connection=True;TrustServerCertificate=True",
+  "DatabaseInternalCachingEnabled": false,
+  "DatabaseInternalCacheTimeoutMin": 30,
+  "DatabaseMigrationEnabled": false,
+  "DatabaseLogWarnToDbEnabled": true
 }

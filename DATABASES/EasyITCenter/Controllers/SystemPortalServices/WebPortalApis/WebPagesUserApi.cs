@@ -52,9 +52,9 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
                     if (result == DBResult.success.ToString()) { return Ok(JsonSerializer.Serialize(new { verifyCode = verifyCode })); } else { return BadRequest(JsonSerializer.Serialize(result)); }
                 }
-                else { return BadRequest(new { message = DbOperations.DBTranslate("EmailAddressIsNotValid", SrvConfig.ServiceServerLanguage) }); }
+                else { return BadRequest(new { message = DbOperations.DBTranslate("EmailAddressIsNotValid", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value) }); }
             } catch { }
-            return BadRequest(new { message = DbOperations.DBTranslate("EmailCannotBeSend", SrvConfig.ServiceServerLanguage) });
+            return BadRequest(new { message = DbOperations.DBTranslate("EmailCannotBeSend", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value) });
         }
 
         [HttpPost("/WebApi/ClientUsers/Registration")]
@@ -115,7 +115,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 if (result > 0) return JsonSerializer.Serialize(new ResMsg() { InsertedId = origUser.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.loginInfoSentToEmail.ToString(), record.Language) });
                 else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
             } catch { }
-            return JsonSerializer.Serialize(new { message = DbOperations.DBTranslate("EmailCannotBeSend", SrvConfig.ServiceServerLanguage) });
+            return JsonSerializer.Serialize(new { message = DbOperations.DBTranslate("EmailCannotBeSend", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value) });
         }
 
         [HttpPost("/WebApi/ClientUsers/ResetPassword")]

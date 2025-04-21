@@ -18,7 +18,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         public ActionResult Index() {
             try {
                 string data = "";
-                if (SrvConfig.WebRobotTxtFileEnabled) {
+                if (bool.Parse(DbOperations.GetServerParameterLists("WebRobotTxtFileEnabled").Value)) {
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                         IsolationLevel = IsolationLevel.ReadUncommitted
                     })) { data = new EasyITCenterContext().WebSettingLists.Where(a => a.Key == "WebRobotTxtFile").First().Value; }
@@ -54,7 +54,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         public ActionResult Index() {
             return sitemapProvider.CreateSitemapIndex(new SitemapIndexModel(new List<SitemapIndexNode>
             {
-                !SrvConfig.WebSitemapFileEnabled ? null : 
+                !bool.Parse(DbOperations.GetServerParameterLists("WebSitemapFileEnabled").Value) ? null : 
 
                 new SitemapIndexNode(Url.Action("WebDocPortals")),
                 new SitemapIndexNode(Url.Action("DeveloperNews")),
@@ -87,8 +87,8 @@ namespace EasyITCenter.ServerCoreDBSettings {
             List<SitemapNode> webpagesUrls = new();
 
             data.ForEach(webMenu => { webpagesUrls.Add(
-                new SitemapNode(SrvConfig.ServerPublicUrl + "/" + webMenu.Id + "-" + webMenu.Name.Replace(" ", string.Empty)) { LastModificationDate = DateTime.UtcNow.ToLocalTime(),
-                Url = SrvConfig.ServerPublicUrl + "/" + webMenu.Id + "-" + webMenu.Name.Replace(" ", string.Empty), ChangeFrequency = ChangeFrequency.Weekly, Priority = 0.8M }); });
+                new SitemapNode(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/" + webMenu.Id + "-" + webMenu.Name.Replace(" ", string.Empty)) { LastModificationDate = DateTime.UtcNow.ToLocalTime(),
+                Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/" + webMenu.Id + "-" + webMenu.Name.Replace(" ", string.Empty), ChangeFrequency = ChangeFrequency.Weekly, Priority = 0.8M }); });
 
             return sitemapProvider.CreateSitemap(new SitemapModel(webpagesUrls));
         }
@@ -105,7 +105,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
             webpagesUrls.Add(
                 new SitemapNode("EIC&ESB Solution Documentation Portal") {
                     LastModificationDate = DateTime.UtcNow.ToLocalTime(),
-                    Url = SrvConfig.ServerPublicUrl + "/EIC&ESBdocs/CodeDocs/",
+                    Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/CodeDocs/",
                     News = new SitemapNews(new NewsPublication("EIC&ESB IT Groupware Solution Documentation Portal", "en"), DateTimeOffset.UtcNow.DateTime, "EasyITcenter & EasySYSTEMbuilder IT Groupware Solution Documentation Portal"),
 
                     ChangeFrequency = ChangeFrequency.Weekly,
@@ -114,7 +114,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
             webpagesUrls.Add(
                 new SitemapNode("EIC&ESB Inteligentni Web Dokumentace") {
                     LastModificationDate = DateTime.UtcNow.ToLocalTime(),
-                    Url = SrvConfig.ServerPublicUrl + "/server-doc/md-book/book/",
+                    Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/server-doc/md-book/book/",
                     News = new SitemapNews(new NewsPublication("EIC&ESB Inteligentni Web Dokumentace", "cs"), DateTimeOffset.UtcNow.DateTime, "EasyITcenter & EasySYSTEMbuilder Inteligentni Web Dokumentace"),
                     ChangeFrequency = ChangeFrequency.Weekly,
                     Priority = 0.8M
@@ -123,7 +123,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
             webpagesUrls.Add(
                 new SitemapNode("EIC&ESB Visual Studio Online Code Browser") {
                     LastModificationDate = DateTime.UtcNow.ToLocalTime(),
-                    Url = SrvConfig.ServerPublicUrl + "/EiC&ESBCodeBrowser/index/index.html",
+                    Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EiC&ESBCodeBrowser/index/index.html",
                     News = new SitemapNews(new NewsPublication("EIC&ESB Visual Studio Online Code Browser", "en"), DateTimeOffset.UtcNow.DateTime, "EasyITcenter & EasySYSTEMbuilder Visual Studio Online Code Browser"),
                     ChangeFrequency = ChangeFrequency.Weekly,
                     Priority = 0.8M
@@ -132,7 +132,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
             webpagesUrls.Add(
                 new SitemapNode("EIC&ESB Solution Docs") {
                 LastModificationDate = DateTime.UtcNow.ToLocalTime(),
-                Url = SrvConfig.ServerPublicUrl + "/Docs",
+                Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/Docs",
                 News = new SitemapNews(new NewsPublication("Easy List Viewer Documentation EIC&ESB Solution", "cs"), DateTimeOffset.UtcNow.DateTime, "Easy List Viewer Documentation EasyITcenter & EasySYSTEMbuilder Solution"),
                 ChangeFrequency = ChangeFrequency.Weekly,
                 Priority = 0.8M
@@ -174,15 +174,15 @@ namespace EasyITCenter.ServerCoreDBSettings {
             List<string> staticImages = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl("/EIC&ESBdocs/EIC-Gallery/img"), "*.png", SearchOption.TopDirectoryOnly);
             staticImages.ForEach(image => {
                 imageList.Add(
-                    new SitemapImage(SrvConfig.ServerPublicUrl + "/EIC&ESBdocs/EIC-Gallery/img/" + Path.GetFileName(image)) {
+                    new SitemapImage(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/EIC-Gallery/img/" + Path.GetFileName(image)) {
                         Caption = "EasyITCenter Solution", Location = "Solution Server Online", Title = Path.GetFileName(image),
-                        Url = SrvConfig.ServerPublicUrl + "/EIC&ESBdocs/EIC-Gallery/img/" + Path.GetFileName(image)
+                        Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/EIC-Gallery/img/" + Path.GetFileName(image)
                     });
             });
 
 
-            imageNodes.Add(new SitemapNode(SrvConfig.ServerPublicUrl + "/EIC&ESBdocs/EIC-Gallery/") { 
-                Images = imageList, Url = SrvConfig.ServerPublicUrl + "/EIC&ESBdocs/EIC-Gallery/", 
+            imageNodes.Add(new SitemapNode(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/EIC-Gallery/") { 
+                Images = imageList, Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/EIC-Gallery/", 
                 ChangeFrequency = ChangeFrequency.Weekly,Priority = 0.8M
             });
 
@@ -190,15 +190,15 @@ namespace EasyITCenter.ServerCoreDBSettings {
             staticImages = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl("/EIC&ESBdocs/ESB-Gallery/img"), "*.png", SearchOption.TopDirectoryOnly);
             staticImages.ForEach(image => {
                 imageList.Add(
-                    new SitemapImage(SrvConfig.ServerPublicUrl + "/EIC&ESBdocs/ESB-Gallery/img/" + Path.GetFileName(image)) {
+                    new SitemapImage(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/ESB-Gallery/img/" + Path.GetFileName(image)) {
                         Caption = "EasySYSTEMBuilder Solution", Location = "Solution Server Online", Title = Path.GetFileName(image),
-                        Url = SrvConfig.ServerPublicUrl + "/EIC&ESBdocs/ESB-Gallery/img/" + Path.GetFileName(image)
+                        Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/ESB-Gallery/img/" + Path.GetFileName(image)
                     });
             });
 
-            imageNodes.Add(new SitemapNode(SrvConfig.ServerPublicUrl + "/EIC&ESBdocs/ESB-Gallery/") {
+            imageNodes.Add(new SitemapNode(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/ESB-Gallery/") {
                 Images = imageList,
-                Url = SrvConfig.ServerPublicUrl + "/EIC&ESBdocs/ESB-Gallery/",
+                Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/ESB-Gallery/",
                 ChangeFrequency = ChangeFrequency.Weekly,
                 Priority = 0.8M
             });
@@ -223,15 +223,15 @@ namespace EasyITCenter.ServerCoreDBSettings {
             List<SitemapNode> newsList = new();
 
             List<WebDeveloperNewsList> data = new();
-            if (SrvConfig.WebRobotTxtFileEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("WebRobotTxtFileEnabled").Value)) {
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                     IsolationLevel = IsolationLevel.ReadUncommitted
                 })) { data = new EasyITCenterContext().WebDeveloperNewsLists.Where(a => a.Active).OrderByDescending(a => a.TimeStamp).ToList(); }
             }
 
             data.ForEach(news => {
-                newsList.Add(new SitemapNode(SrvConfig.ServerPublicUrl + "/DeveloperNews") {
-                    Url = SrvConfig.ServerPublicUrl + "/DeveloperNews",
+                newsList.Add(new SitemapNode(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/DeveloperNews") {
+                    Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/DeveloperNews",
                     LastModificationDate = news.TimeStamp,
                     News = new SitemapNews(new NewsPublication(news.Title, "cs"), news.TimeStamp, news.Title) {
                         PublicationDate = news.TimeStamp,
@@ -253,15 +253,15 @@ namespace EasyITCenter.ServerCoreDBSettings {
             List<SitemapNode> newsList = new();
 
             List<SolutionMessageModuleList> data = new();
-            if (SrvConfig.WebRobotTxtFileEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("WebRobotTxtFileEnabled").Value)) {
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                     IsolationLevel = IsolationLevel.ReadUncommitted
                 })) { data = new EasyITCenterContext().SolutionMessageModuleLists.Where(a => a.MessageType.Name == "newsletter" && a.Published && !a.Archived).OrderByDescending(a => a.TimeStamp).ToList(); }
             }
 
             data.ForEach(news => {
-                newsList.Add(new SitemapNode(SrvConfig.ServerPublicUrl + "/CommercialNews") {
-                    Url = SrvConfig.ServerPublicUrl + "/CommercialNews",
+                newsList.Add(new SitemapNode(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/CommercialNews") {
+                    Url = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/CommercialNews",
                     LastModificationDate = news.TimeStamp,
                     News = new SitemapNews(new NewsPublication(news.Subject, "cs"), news.TimeStamp, news.Subject) {
                         PublicationDate = news.TimeStamp,

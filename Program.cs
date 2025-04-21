@@ -11,14 +11,14 @@ namespace EasyITCenter {
     /// Server Main Definition Starting Point Of Project
     /// </summary>
     public class EICServer {
-        private static SrvConfig _srvConfig = new();
+        private static readonly DBConn _srvDBConn = new();
         private static readonly SrvRuntime _srvRuntime = new();
         internal static readonly string SwaggerDesc = "Full Backend Server DB & API & WebSocket model";
 
         /// <summary>
-        /// Startup Server Initialization Server Setting Data
+        /// Initialize DB Connection from config File
         /// </summary>
-        public static readonly SrvConfig SrvConfig = _srvConfig;
+        public static readonly DBConn SrvDBConn = _srvDBConn;
 
         /// <summary>
         /// Startup Server Initialization Server Runtime Data
@@ -62,7 +62,7 @@ namespace EasyITCenter {
                 IHostBuilder? hostBuilder = BuildWebHost(SrvRuntime.ServerArgs);
                 if (CoreOperations.SrvOStype.IsWindows()) {
                     hostBuilder.UseWindowsService(options => {
-                        options.ServiceName = SrvConfig.ConfigCoreServerRegisteredName;
+                        options.ServiceName = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value;
                     });
                 }
 
@@ -70,17 +70,12 @@ namespace EasyITCenter {
                 IHost? Ihost = hostBuilder.Build();
 
                 //Databse Migration Control
-
-                /*
-                if (SrvConfig.DatabaseMigrationEnabled) {
+                if (DBConn.DatabaseMigrationEnabled) {
                     using (IServiceScope? scope = Ihost.Services.CreateScope()) {
                         EasyITCenterContext? myDbContext = scope.ServiceProvider.GetRequiredService<EasyITCenterContext>();
                         await myDbContext.Database.MigrateAsync();
                     }
-                }*/
-
-                //Load DB Local AutoUpdate Dials Tables to Memory
-                if (SrvConfig.ServiceUseDbLocalAutoupdatedDials) { ServerStartupDbDataLoading(); }
+                }
 
                 //Start Server
                 await Ihost.RunAsync(SrvRuntime.ServerCancelToken.Token);
@@ -99,21 +94,22 @@ namespace EasyITCenter {
         /// <returns></returns>
         private static IHostBuilder BuildWebHost(string[] args) {
 
-            LoadConfigurationFromFile();LoadConfigurationFromDb();
-            
+            LoadConfigurationFromFile();
+            DbOperations.LoadOrRefreshStaticDbDials();
+
             return Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder => {
-                if (SrvConfig.ConfigServerStartupOnHttps || SrvConfig.ConfigServerStartupHTTPAndHTTPS) {
+                if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value) || bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupHTTPAndHTTPS").Value)) {
                     webBuilder.ConfigureKestrel(options => {
                         options.AddServerHeader = true;
-                        options.ListenAnyIP(SrvConfig.ConfigServerStartupHttpsPort, opt => {
+                        options.ListenAnyIP(int.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupHttpsPort").Value), opt => {
                             opt.Protocols = HttpProtocols.Http1AndHttp2;
                             opt.KestrelServerOptions.AllowAlternateSchemes = true;
 
-                            if (!SrvConfig.ConfigServerGetLetsEncrypt) {
-                                opt.UseHttps(SrvConfig.ConfigCertificatePath.Length > 0
-                                    ? CoreOperations.GetSelfSignedCertificateFromFile(SrvConfig.ConfigCertificatePath)
-                                        : CoreOperations.GetSelfSignedCertificate(SrvConfig.ConfigCertificatePassword),
+                            if (!bool.Parse(DbOperations.GetServerParameterLists("ConfigServerGetLetsEncrypt").Value)) {
+                                opt.UseHttps(DbOperations.GetServerParameterLists("ConfigCertificatePath").Value.Length > 0
+                                    ? CoreOperations.GetSelfSignedCertificateFromFile(DbOperations.GetServerParameterLists("ConfigCertificatePath").Value)
+                                        : CoreOperations.GetSelfSignedCertificate(DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value),
                                       cfg => {
                                           cfg.SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
                                           cfg.ClientCertificateMode = ClientCertificateMode.NoCertificate;
@@ -125,7 +121,7 @@ namespace EasyITCenter {
                 }
 
                 //Lets Encrypt
-                if (SrvConfig.ConfigServerStartupOnHttps && SrvConfig.ConfigServerGetLetsEncrypt) {
+                if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value) && bool.Parse(DbOperations.GetServerParameterLists("ConfigServerGetLetsEncrypt").Value)) {
                     webBuilder.UseKestrel(options => { 
                         IServiceProvider? appServices = options.ApplicationServices;
                         options.ConfigureHttpsDefaults(h => {
@@ -137,16 +133,11 @@ namespace EasyITCenter {
                 }
 
 
-                //udelat seznam naslouchani na urcitych portech portal=1,moduly=2 udelat v tom poradek
-                //webBuilder.UseUrls(new string[] { "http://*:5000", "https://*:5001" });
-
-                if (SrvConfig.ConfigServerStartupHTTPAndHTTPS) {
-                    webBuilder.UseUrls($"https://*:{SrvConfig.ConfigServerStartupHttpsPort}",$"http://*:{SrvConfig.ConfigServerStartupHttpPort}");
+                if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupHTTPAndHTTPS").Value)) {
+                    webBuilder.UseUrls($"https://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpsPort").Value}",$"http://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpPort").Value}");
                 } else {
-                    webBuilder.UseUrls(SrvConfig.ConfigServerStartupOnHttps ? $"https://*:{SrvConfig.ConfigServerStartupHttpsPort}" : $"http://*:{SrvConfig.ConfigServerStartupHttpPort}");
+                    webBuilder.UseUrls(bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value) ? $"https://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpsPort").Value}" : $"http://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpPort").Value}");
                 }
-
-                //webBuilder.UseModularStartup<AppHost>();
 
                 webBuilder.UseStartup<Startup>();
                 webBuilder.UseWebRoot(SrvRuntime.WebRoot_path);
@@ -156,12 +147,6 @@ namespace EasyITCenter {
             });
         }
 
-        /// <summary>
-        /// Server Startup DB Data loading for minimize DB Connect TO Frequency Dials Without
-        /// Changes With Full Auto Filling Non Exist Records
-        /// Example: LanguageList
-        /// </summary>
-        private static void ServerStartupDbDataLoading() { DbOperations.LoadOrRefreshStaticDbDials(); }
 
         /// <summary>
         /// Checking Valid License on StartUp
@@ -193,11 +178,13 @@ namespace EasyITCenter {
                 exportServerSettingList.AddRange(JsonSerializer.Deserialize<Dictionary<string, object>>(json).ToList());
 
                 exportServerSettingList.ToList().ForEach(configItem => {
-                    foreach (PropertyInfo property in _srvConfig.GetType().GetProperties()) {
+                    //DBConn.DatabaseConnectionString = configItem.Value.ToString();
+                    foreach (PropertyInfo property in _srvDBConn.GetType().GetProperties()) {
                         if (configItem.Key == property.Name) {
-                            try { property.SetValue(_srvConfig, Convert.ChangeType(configItem.Value.ToString(), property.GetValue(SrvConfig).GetType())); } catch { }
+                            try { property.SetValue(_srvDBConn, Convert.ChangeType(configItem.Value.ToString(), property.PropertyType)); } catch { }
                         }
                     }
+                    
                 });
             } catch (Exception ex) {
                 CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }, true);
@@ -206,6 +193,7 @@ namespace EasyITCenter {
             }
         }
 
+        /*
         /// <summary>
         /// Server Core: Load Configuration From Database First Must be From File With DB
         /// Connection, Others File Settings than DB connection is Optional
@@ -229,5 +217,6 @@ namespace EasyITCenter {
                 Environment.Exit(20);
             }
         }
+        */
     }
 }

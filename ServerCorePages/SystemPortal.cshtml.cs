@@ -52,7 +52,7 @@ namespace ServerCorePages {
                 string? authRole = User.FindFirstValue(ClaimTypes.Role.ToString())?.ToLower();
 
                 if (managedFile.RewriteLowerLevel) {
-                    if (SrvConfig.ServerProviderModeEnabled && managedFile.ProviderContent?.Length > 0) { html += "<link rel=\"stylesheet\" href=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "provider." + fileExt) + "\" />" + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && managedFile.ProviderContent?.Length > 0) { html += "<link rel=\"stylesheet\" href=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "provider." + fileExt) + "\" />" + Environment.NewLine; }
 
                     if (authRole == "admin" && managedFile.AdminFileContent?.Length > 0) { insertedPart += "<link rel=\"stylesheet\" href=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "admin." + fileExt) + "\" />" + Environment.NewLine; }
                     else if ((authRole == "webuser" || authRole == "admin" && managedFile.UserFileContent?.Length > 0) && managedFile.UserFileContent?.Length > 0) { insertedPart += "<link rel=\"stylesheet\" href=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "user." + fileExt) + "\" />" + Environment.NewLine; }
@@ -65,7 +65,7 @@ namespace ServerCorePages {
                     if (authRole == "webuser" && managedFile.UserFileContent?.Length > 0) { insertedPart += "<link rel=\"stylesheet\" href=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "user." + fileExt) + "\" />" + Environment.NewLine; }
                     else if (authRole == "admin" && managedFile.AdminFileContent?.Length > 0) { insertedPart += "<link rel=\"stylesheet\" href=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "admin." + fileExt) + "\" />" + Environment.NewLine; }
 
-                    if (SrvConfig.ServerProviderModeEnabled && managedFile.ProviderContent?.Length > 0) { insertedPart += "<link rel=\"stylesheet\" href=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "provider." + fileExt) + "\" />" + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && managedFile.ProviderContent?.Length > 0) { insertedPart += "<link rel=\"stylesheet\" href=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "provider." + fileExt) + "\" />" + Environment.NewLine; }
                 }
                 html += insertedPart;
             });
@@ -91,7 +91,7 @@ namespace ServerCorePages {
                 insertedPart = ""; string fileExt = managedFile.FileName.Split(".").Last();
 
                 if (managedFile.RewriteLowerLevel) {
-                    if (SrvConfig.ServerProviderModeEnabled && managedFile.ProviderContent?.Length > 0) { html += "<script type=\"text/javascript\" src=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "provider." + fileExt) + "\" ></script>" + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && managedFile.ProviderContent?.Length > 0) { html += "<script type=\"text/javascript\" src=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "provider." + fileExt) + "\" ></script>" + Environment.NewLine; }
 
                     if (authRole == "admin" && managedFile.AdminFileContent?.Length > 0) { insertedPart += "<script type=\"text/javascript\" src=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "admin." + fileExt) + "\" ></script>" + Environment.NewLine; }
                     else if ((authRole == "webuser" || authRole == "admin") && managedFile.UserFileContent?.Length > 0) { insertedPart += "<script type=\"text/javascript\" src=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "user." + fileExt) + "\" ></script>" + Environment.NewLine; }
@@ -103,7 +103,7 @@ namespace ServerCorePages {
 
                     if (authRole == "webuser" && managedFile.UserFileContent?.Length > 0) { insertedPart += "<script type=\"text/javascript\" src=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "user." + fileExt) + "\" ></script>" + Environment.NewLine; }
                     else if (authRole == "admin" && managedFile.AdminFileContent?.Length > 0) { insertedPart += "<script type=\"text/javascript\" src=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "admin." + fileExt) + "\" ></script>" + Environment.NewLine; }
-                    if (SrvConfig.ServerProviderModeEnabled && managedFile.ProviderContent?.Length > 0) { insertedPart += "<script type=\"text/javascript\" src=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "provider." + fileExt) + "\" ></script>" + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && managedFile.ProviderContent?.Length > 0) { insertedPart += "<script type=\"text/javascript\" src=\"../../metro/" + managedFile.MetroPath + "/" + managedFile.FileName.Replace(fileExt, "provider." + fileExt) + "\" ></script>" + Environment.NewLine; }
                 }
                 html += insertedPart;
             });
@@ -130,7 +130,7 @@ namespace ServerCorePages {
                 insertedPart = "";
 
                 if (pagePart.RewriteLowerLevel) {
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
 
                     if (authRole == "admin" && pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     else if ((authRole == "webuser" || authRole == "admin") && pagePart.UserHtmlContent?.Length > 0) { insertedPart += pagePart.UserHtmlContent + Environment.NewLine; }
@@ -144,7 +144,7 @@ namespace ServerCorePages {
                         if (pagePart.UserHtmlContent?.Length > 0) { insertedPart += pagePart.UserHtmlContent + Environment.NewLine; }
                         if (pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     }
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
                 }
                 html += insertedPart;
             });
@@ -168,7 +168,7 @@ namespace ServerCorePages {
                 insertedPart = "";
 
                 if (pagePart.RewriteLowerLevel) {
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
 
                     if (authRole == "admin" && pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     else if ((authRole == "webuser" || authRole == "admin") && pagePart.UserHtmlContent?.Length > 0) { insertedPart += pagePart.UserHtmlContent + Environment.NewLine; }
@@ -183,7 +183,7 @@ namespace ServerCorePages {
                         if (pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     }
 
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
                 }
                 html += insertedPart;
             });
@@ -207,7 +207,7 @@ namespace ServerCorePages {
                 insertedPart = "";
 
                 if (pagePart.RewriteLowerLevel) {
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
 
                     if (authRole == "admin" && pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     else if ((authRole == "webuser" || authRole == "admin") && pagePart.UserHtmlContent?.Length > 0) { insertedPart += pagePart.UserHtmlContent + Environment.NewLine; }
@@ -222,7 +222,7 @@ namespace ServerCorePages {
                         if (pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     }
 
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
                 }
                 html += insertedPart;
             });
@@ -247,7 +247,7 @@ namespace ServerCorePages {
                 insertedPart = "";
 
                 if (pagePart.RewriteLowerLevel) {
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
 
                     if (authRole == "admin" && pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     else if ((authRole == "webuser" || authRole == "admin") && pagePart.UserHtmlContent?.Length > 0) { insertedPart += pagePart.UserHtmlContent + Environment.NewLine; }
@@ -262,7 +262,7 @@ namespace ServerCorePages {
                         if (pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     }
 
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
                 }
                 html += insertedPart;
             });
@@ -287,7 +287,7 @@ namespace ServerCorePages {
                 insertedPart = "";
 
                 if (pagePart.RewriteLowerLevel) {
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
                     if (authRole == "admin" && pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     else if ((authRole == "webuser" || authRole == "admin") && pagePart.UserHtmlContent?.Length > 0) { insertedPart += pagePart.UserHtmlContent + Environment.NewLine; }
                     else if (pagePart.GuestHtmlContent?.Length > 0) { insertedPart += pagePart.GuestHtmlContent + Environment.NewLine; }
@@ -301,7 +301,7 @@ namespace ServerCorePages {
                         if (pagePart.AdminHtmlContent?.Length > 0) { insertedPart += pagePart.AdminHtmlContent + Environment.NewLine; }
                     }
 
-                    if (SrvConfig.ServerProviderModeEnabled && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ServerProviderModeEnabled").Value) && pagePart.ProviderHtmlContent?.Length > 0) { insertedPart += pagePart.ProviderHtmlContent + Environment.NewLine; }
                 }
                 html += insertedPart;
             });

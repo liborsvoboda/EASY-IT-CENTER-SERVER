@@ -16,9 +16,9 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// <returns></returns>
         [HttpGet("/")]
         public IActionResult Index() {
-            return SrvConfig.RedirectOnPageNotFound ?
-                new RedirectResult(SrvConfig.RedirectPath) : 
-                new RedirectResult(SrvConfig.RedirectPath.StartsWith("/") ? SrvConfig.RedirectPath : "/" + SrvConfig.RedirectPath);
+            return bool.Parse(DbOperations.GetServerParameterLists("RedirectOnPageNotFound").Value) ?
+                new RedirectResult(DbOperations.GetServerParameterLists("RedirectPath").Value) : 
+                new RedirectResult(DbOperations.GetServerParameterLists("RedirectPath").Value.StartsWith("/") ? DbOperations.GetServerParameterLists("RedirectPath").Value : "/" + DbOperations.GetServerParameterLists("RedirectPath").Value);
         }
 
 

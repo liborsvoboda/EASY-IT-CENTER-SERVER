@@ -106,14 +106,14 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 FileOperations.CreatePath(Path.Combine(SrvRuntime.Startup_path, "Export"));
                 FileOperations.ClearFolder(Path.Combine(SrvRuntime.Startup_path, "Export"));
                 FileOperations.CreatePath(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage"));
-                FileOperations.CopyDirectory(Path.Combine(SrvRuntime.Startup_path, SrvConfig.DefaultStaticWebFilesFolder, "metro", "managed", "storage"), Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage"));
+                FileOperations.CopyDirectory(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, "metro", "managed", "storage"), Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage"));
 
                 string json = System.IO.File.ReadAllText(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"));
-                FileOperations.WriteToFile(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"), json.Replace("window.location.origin",SrvConfig.ServerPublicUrl));
+                FileOperations.WriteToFile(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"), json.Replace("window.location.origin", DbOperations.GetServerParameterLists("ServerPublicUrl").Value));
 
                 HtmlWeb hw = new HtmlWeb();
                 HtmlDocument doc = hw.Load((Request.IsHttps ? "https" : "http") + "://" + Request.Host + "/Portal");
-                string index = doc.Text.Replace("../..", SrvConfig.ServerPublicUrl);
+                string index = doc.Text.Replace("../..", DbOperations.GetServerParameterLists("ServerPublicUrl").Value);
                 System.IO.File.WriteAllText(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "Index.html"), index);
 
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages"), Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages.zip"));
@@ -130,7 +130,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// <returns></returns>
         [HttpGet("/ServerApi/ExportServices/DgmlDatabaseSchema")]
         public IActionResult GetDgml() {
-            if (SrvConfig.ModuleDbDiagramGeneratorEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDbDiagramGeneratorEnabled").Value)) {
                 var response = File(Encoding.UTF8.GetBytes(new EasyITCenterContext().AsDgml()), MimeTypes.GetMimeType("DBschema.dgml"), "DBschema.dgml");
                 return response;
             }
@@ -144,7 +144,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// <returns></returns>
         [HttpGet("/ServerApi/ExportServices/SqlDatabaseSchema")]
         public IActionResult Get() {
-            if (SrvConfig.ModuleDbDiagramGeneratorEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDbDiagramGeneratorEnabled").Value)) {
                 var response = File(Encoding.UTF8.GetBytes(Context.AsSqlScript()), MimeTypes.GetMimeType("DBschema.sql"), "DBschema.sql");
                 return response;
             }

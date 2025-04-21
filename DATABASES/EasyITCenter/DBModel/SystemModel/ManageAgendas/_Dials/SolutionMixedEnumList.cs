@@ -22,10 +22,10 @@ namespace EasyITCenter.DBModel
             ServerHealthCheckTaskLists = new HashSet<ServerHealthCheckTaskList>();
             ServerModuleAndServiceListInheritedLayoutTypeNavigations = new HashSet<ServerModuleAndServiceList>();
             ServerModuleAndServiceListInheritedPageTypeNavigations = new HashSet<ServerModuleAndServiceList>();
-            ServerParameterLists = new HashSet<ServerParameterList>();
+            ServerParameterListInheritedDataTypeNavigations = new HashSet<ServerParameterList>();
+            ServerParameterListInheritedServerParamTypeNavigations = new HashSet<ServerParameterList>();
             ServerProcessListInheritedCommandTypeNavigations = new HashSet<ServerProcessList>();
             ServerProcessListInheritedProcessTypeNavigations = new HashSet<ServerProcessList>();
-            ServerSettingLists = new HashSet<ServerSettingList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
             SolutionOperationListInheritedApiResultTypeNavigations = new HashSet<SolutionOperationList>();
@@ -72,10 +72,10 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerHealthCheckTaskList> ServerHealthCheckTaskLists { get; set; }
         public virtual ICollection<ServerModuleAndServiceList> ServerModuleAndServiceListInheritedLayoutTypeNavigations { get; set; }
         public virtual ICollection<ServerModuleAndServiceList> ServerModuleAndServiceListInheritedPageTypeNavigations { get; set; }
-        public virtual ICollection<ServerParameterList> ServerParameterLists { get; set; }
+        public virtual ICollection<ServerParameterList> ServerParameterListInheritedDataTypeNavigations { get; set; }
+        public virtual ICollection<ServerParameterList> ServerParameterListInheritedServerParamTypeNavigations { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedCommandTypeNavigations { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedProcessTypeNavigations { get; set; }
-        public virtual ICollection<ServerSettingList> ServerSettingLists { get; set; }
         public virtual ICollection<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; }
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
         public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedApiResultTypeNavigations { get; set; }

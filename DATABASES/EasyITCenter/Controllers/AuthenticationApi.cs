@@ -15,7 +15,7 @@ namespace EasyITCenter.ControllersExtensions {
             AuthenticateResponse? user = Authenticate(username, password);
             
             if (!string.IsNullOrWhiteSpace(user?.Message)) { return Ok(JsonSerializer.Serialize(user)); 
-            } else if (user == null) { { return BadRequest(new { message = DbOperations.DBTranslate("UsernameOrPasswordIncorrect", SrvConfig.ServiceServerLanguage) }); }; }
+            } else if (user == null) { { return BadRequest(new { message = DbOperations.DBTranslate("UsernameOrPasswordIncorrect", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value) }); }; }
 
             try { if (HttpContext.Connection.RemoteIpAddress != null && user != null) {
                     string clientIPAddr = Dns.GetHostEntry(HttpContext.Connection.RemoteIpAddress).AddressList.First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
@@ -24,10 +24,10 @@ namespace EasyITCenter.ControllersExtensions {
             } catch { }
 
             
-            if (!SrvConfig.ConfigTimeTokenValidationEnabled) { user.Expiration = null; }
+            if (!bool.Parse(DbOperations.GetServerParameterLists("ConfigTimeTokenValidationEnabled").Value)) { user.Expiration = null; }
 
             RefreshUserToken(username, user);
-            UserStorageOperations.CreateUserStorage(username);
+            StripeModel.CreateUserStorage(username);
 
             return Ok(JsonSerializer.Serialize(user));
         }
@@ -58,7 +58,7 @@ namespace EasyITCenter.ControllersExtensions {
         public static AuthenticateResponse? Authenticate(string? username, string? password) {
             SecurityToken? token = null; string? errorMessage = null;
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(SrvConfig.ConfigJwtLocalKey);
+            var key = Encoding.ASCII.GetBytes(DbOperations.GetServerParameterLists("ConfigJwtLocalKey").Value);
 
 
             if (username == null) { return null; }
@@ -74,31 +74,30 @@ namespace EasyITCenter.ControllersExtensions {
                     new Claim(ClaimTypes.PrimarySid, user.Id.ToString()),
                     new Claim(ClaimTypes.NameIdentifier, user.UserName),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Role.SystemName.ToLower()),
-                    new Claim(ClaimTypes.Dns, SrvConfig.ConfigCertificateDomain)
+                    new Claim(ClaimTypes.Role, user.Role.SystemName.ToLower())
                 }),
                     CompressionAlgorithm = CompressionAlgorithms.Deflate,
                     Issuer = user.UserName,
                     TokenType = "JWT",
                     IssuedAt = DateTimeOffset.Now.DateTime,
                     NotBefore = DateTimeOffset.Now.DateTime,
-                    Expires = DateTimeOffset.Now.AddMinutes(SrvConfig.ConfigApiTokenTimeoutMin).DateTime,
+                    Expires = DateTimeOffset.Now.AddMinutes(double.Parse(DbOperations.GetServerParameterLists("ConfigApiTokenTimeoutMin").Value)).DateTime,
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), 
                     (
-                        SrvConfig.ConfigTokenEncryption == "Aes256Encryption" ? SecurityAlgorithms.Aes256Encryption :
-                        SrvConfig.ConfigTokenEncryption == "Aes256Gcm" ? SecurityAlgorithms.Aes256Gcm :
-                        SrvConfig.ConfigTokenEncryption == "EcdsaSha256" ? SecurityAlgorithms.EcdsaSha256 :
-                        SrvConfig.ConfigTokenEncryption == "EcdsaSha512" ? SecurityAlgorithms.EcdsaSha512 :
-                        SrvConfig.ConfigTokenEncryption == "HmacSha256" ? SecurityAlgorithms.HmacSha256 :
-                        SrvConfig.ConfigTokenEncryption == "HmacSha384" ? SecurityAlgorithms.HmacSha384 :
-                        SrvConfig.ConfigTokenEncryption == "HmacSha512" ? SecurityAlgorithms.HmacSha512 :
-                        SrvConfig.ConfigTokenEncryption == "RsaOAEP" ? SecurityAlgorithms.RsaOAEP :
-                        SrvConfig.ConfigTokenEncryption == "RsaPKCS1" ? SecurityAlgorithms.RsaPKCS1 :
-                        SrvConfig.ConfigTokenEncryption == "RsaSha256" ? SecurityAlgorithms.RsaSha256 :
-                        SrvConfig.ConfigTokenEncryption == "RsaSha512" ? SecurityAlgorithms.RsaSha512 :
-                        SrvConfig.ConfigTokenEncryption == "RsaV15KeyWrap" ? SecurityAlgorithms.RsaV15KeyWrap :
-                        SrvConfig.ConfigTokenEncryption == "Sha256" ? SecurityAlgorithms.Sha256 :
-                        SrvConfig.ConfigTokenEncryption == "Sha512" ? SecurityAlgorithms.Sha512 : SecurityAlgorithms.RsaSha512
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "Aes256Encryption" ? SecurityAlgorithms.Aes256Encryption :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "Aes256Gcm" ? SecurityAlgorithms.Aes256Gcm :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "EcdsaSha256" ? SecurityAlgorithms.EcdsaSha256 :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "EcdsaSha512" ? SecurityAlgorithms.EcdsaSha512 :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "HmacSha256" ? SecurityAlgorithms.HmacSha256 :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "HmacSha384" ? SecurityAlgorithms.HmacSha384 :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "HmacSha512" ? SecurityAlgorithms.HmacSha512 :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "RsaOAEP" ? SecurityAlgorithms.RsaOAEP :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "RsaPKCS1" ? SecurityAlgorithms.RsaPKCS1 :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "RsaSha256" ? SecurityAlgorithms.RsaSha256 :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "RsaSha512" ? SecurityAlgorithms.RsaSha512 :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "RsaV15KeyWrap" ? SecurityAlgorithms.RsaV15KeyWrap :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "Sha256" ? SecurityAlgorithms.Sha256 :
+                        DbOperations.GetServerParameterLists("ConfigTokenEncryption").Value == "Sha512" ? SecurityAlgorithms.Sha512 : SecurityAlgorithms.RsaSha512
                     ))
                 };                token = tokenHandler.CreateToken(tokenDescriptor);
             } catch (Exception ex) { errorMessage = DataOperations.GetErrMsg(ex); }
@@ -146,7 +145,7 @@ namespace EasyITCenter.ControllersExtensions {
         internal static bool TokenLifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken token, TokenValidationParameters @params) {
             if (RefreshUserToken(token.Issuer, new AuthenticateResponse() {
                 Token = ((JwtSecurityToken)token).RawData.ToString(),
-                Expiration = DateTimeOffset.Now.AddMinutes(SrvConfig.ConfigApiTokenTimeoutMin).DateTime
+                Expiration = DateTimeOffset.Now.AddMinutes(double.Parse(DbOperations.GetServerParameterLists("ConfigApiTokenTimeoutMin").Value)).DateTime
             })) { return true; } else { return false; }
         }
     }

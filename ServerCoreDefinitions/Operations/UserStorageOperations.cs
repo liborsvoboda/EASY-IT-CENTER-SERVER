@@ -9,7 +9,7 @@ namespace EasyITCenter.ServerCoreStructure {
     /// <summary>
     /// User Storage Operations
     /// </summary>
-    public static class UserStorageOperations {
+    public static class StripeModel {
 
 
         public static bool CreateUserStorage(string username) {

@@ -14,6 +14,9 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
+        public string InheritedServerParamType { get; set; } = null!;
+        [StringLength(50)]
+        [Unicode(false)]
         public string InheritedDataType { get; set; } = null!;
         [StringLength(150)]
         public string Key { get; set; } = null!;
@@ -24,11 +27,15 @@ namespace EasyITCenter.DBModel
         [StringLength(1024)]
         [Unicode(false)]
         public string? Link { get; set; }
+        [StringLength(1024)]
+        [Unicode(false)]
+        public string? HelpUrl { get; set; }
         public int UserId { get; set; }
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public virtual SolutionMixedEnumList InheritedDataTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedServerParamTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("ServerParameterLists")]
         public virtual SolutionUserList User { get; set; } = null!;

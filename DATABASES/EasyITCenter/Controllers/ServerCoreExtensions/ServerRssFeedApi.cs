@@ -29,13 +29,13 @@ namespace EasyITCenter.ServerCoreDBSettings {
             IList<RSSItem> syndicationList = new List<RSSItem>();
             var synd1 = new RSSItem() {
                 Title = DataOperations.RemoveDiacritism("IT Řešení v nejmodenější podobě jaké jinde Nenajdete"),
-                PermaLink = new Uri(SrvConfig.ServerPublicUrl),
-                LinkUri = new Uri(SrvConfig.ServerPublicUrl),
+                PermaLink = new Uri(DbOperations.GetServerParameterLists("ServerPublicUrl").Value),
+                LinkUri = new Uri(DbOperations.GetServerParameterLists("ServerPublicUrl").Value),
                 LastUpdated = DateTime.Now,
                 PublishDate = DateTime.Now,
-                CommentsUri = new Uri(SrvConfig.ServerPublicUrl),
+                CommentsUri = new Uri(DbOperations.GetServerParameterLists("ServerPublicUrl").Value),
                 Content = "Novinky",
-                FeaturedImage = new Uri(SrvConfig.ServerPublicUrl + "/logo")
+                FeaturedImage = new Uri(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/logo")
             };
             syndicationList.Add(synd1);
             return Task.FromResult(syndicationList);
@@ -57,8 +57,8 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
         public ActionResult Index() {
             try {
-                if (SrvConfig.WebRSSFeedsEnabled) {
-                    var feed = new SyndicationFeed("Nazev", "Popisek", new Uri(SrvConfig.ServerPublicUrl), "RSSUrl", DateTime.Now);
+                if (bool.Parse(DbOperations.GetServerParameterLists("WebRSSFeedsEnabled").Value)) {
+                    var feed = new SyndicationFeed("Nazev", "Popisek", new Uri(DbOperations.GetServerParameterLists("ServerPublicUrl").Value), "RSSUrl", DateTime.Now);
                     feed.Copyright = new TextSyndicationContent($"{DateTime.Now.Year} Libor Svoboda");
                     var items = new List<SyndicationItem>();
                     var postings = ServerModulesExtensions.GetItemRssList();

@@ -13,6 +13,7 @@ using Markdig.Prism;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using Fawdlstty.GitServerCore;
+using EasyITCenter.ServerCoreStructure;
 
 
 namespace EasyITCenter.ServerCoreConfiguration {
@@ -31,7 +32,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureGitServer(ref IServiceCollection services) {
-            if (SrvConfig.GitServerEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("GitServerEnabled").Value)) {
                 services.Configure<GitSettings>(options => {
                     options.BasePath = SrvRuntime.GitServerPath;
                     options.GitPath = "Git";
@@ -53,7 +54,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureMarkdownAsHtmlFiles(ref IServiceCollection services) {
-            if (SrvConfig.EnableAutoShowStaticMdAsHtml)
+            if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoShowStaticMdAsHtml").Value))
             {
                 services.AddMarkdown(config =>
                 {
@@ -81,7 +82,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureScheduler(ref IServiceCollection services) {
-            if (SrvConfig.ModuleAutoSchedulerEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleAutoSchedulerEnabled").Value)) {
                 services.AddSingleton<IJobFactory, JobFactory>();
                 var scheduler = new StdSchedulerFactory().GetScheduler().ConfigureAwait(false).GetAwaiter().GetResult();
                 services.AddSingleton(provider => { scheduler.JobFactory = provider.GetService<IJobFactory>(); return scheduler; });
@@ -98,7 +99,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureDocumentation(ref IServiceCollection services) {
-            if (SrvConfig.ModuleMdDocumentationEnabled) { services.AddDocumentation(); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleMdDocumentationEnabled").Value)) { services.AddDocumentation(); }
         }
 
 
@@ -107,7 +108,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureDBEntitySchema(ref IServiceCollection services) {
-            if (SrvConfig.ModuleDBEntitySchemaEnabled) { services.AddDBEntitySchema(SrvConfig.DatabaseConnectionString); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDBEntitySchemaEnabled").Value)) { services.AddDBEntitySchema(DBConn.DatabaseConnectionString); }
         }
 
 
@@ -118,7 +119,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureLiveDataMonitor(ref IServiceCollection services) {
-            if (SrvConfig.WebLiveDataMonitorEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("WebLiveDataMonitorEnabled").Value)) {
                 try {
                     List<ServerLiveDataMonitorList> data;
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
@@ -128,13 +129,13 @@ namespace EasyITCenter.ServerCoreConfiguration {
                         foreach (ServerLiveDataMonitorList monitor in data) {
                             services.AddLiveReload(config => {
                                 try {
-                                    if (FileOperations.CheckDirectory(Path.Combine(SrvRuntime.Startup_path,SrvConfig.DefaultStaticWebFilesFolder) + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath))) {
+                                    if (FileOperations.CheckDirectory(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value) + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath))) {
                                         config.LiveReloadEnabled = true;
                                         config.ServerRefreshTimeout = 10000;
-                                        config.FolderToMonitor = Path.Combine(SrvRuntime.Startup_path, SrvConfig.DefaultStaticWebFilesFolder) + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath);
+                                        config.FolderToMonitor = Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value) + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath);
                                         if (monitor.FileExtensions.Length > 0) { config.ClientFileExtensions = monitor.FileExtensions; }
                                     }
-                                    else { CoreOperations.SendEmail(new SendMailRequest() { Content = "Path For Live Data Monitoring not Exist" + System.IO.Path.Combine(SrvRuntime.Startup_path, SrvConfig.DefaultStaticWebFilesFolder) + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath) }); }
+                                    else { CoreOperations.SendEmail(new SendMailRequest() { Content = "Path For Live Data Monitoring not Exist" + System.IO.Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value) + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath) }); }
                                 } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
                             });
                         }
@@ -149,10 +150,10 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureHealthCheck(ref IServiceCollection services) {
-            if (SrvConfig.ModuleHealthServiceEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleHealthServiceEnabled").Value)) {
                 services.AddHealthChecks()
                 .AddCheck<ServerCycleTaskListHealthCheck>("Server Cycle tasks")
-                .AddSqlServer(SrvConfig.DatabaseConnectionString, null, "Kontrola připojení k DB ")
+                .AddSqlServer(DBConn.DatabaseConnectionString, null, "Kontrola připojení k DB ")
                 .AddDbContextCheck<EasyITCenterContext>("Importované DB Schema");
 
                 List<ServerHealthCheckTaskList> data;
@@ -190,8 +191,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
                                 break;
 
                             case "serverUrlPath":
-                                services.AddHealthChecks().AddUrlGroup(new Uri(SrvConfig.ConfigServerStartupOnHttps ? $"https://localhost:{SrvConfig.ConfigServerStartupHttpsPort}" + item.ServerUrlPath : $"http://localhost:{SrvConfig.ConfigServerStartupHttpPort}" + item.ServerUrlPath), item.TaskName);
-                                if (SrvConfig.ConfigServerStartupHTTPAndHTTPS) { services.AddHealthChecks().AddUrlGroup(new Uri($"http://localhost:{SrvConfig.ConfigServerStartupHttpPort}" + item.ServerUrlPath), item.TaskName + "_HTTP"); }
+                                services.AddHealthChecks().AddUrlGroup(new Uri(bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value) ? $"https://localhost:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpsPort").Value}" + item.ServerUrlPath : $"http://localhost:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpPort").Value}" + item.ServerUrlPath), item.TaskName);
+                                if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupHTTPAndHTTPS").Value)) { services.AddHealthChecks().AddUrlGroup(new Uri($"http://localhost:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpPort").Value}" + item.ServerUrlPath), item.TaskName + "_HTTP"); }
                                 break;
 
                             case "urlPath":
@@ -218,13 +219,13 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 };
                 
                 services.AddHealthChecksUI(setup => {
-                    
-                    setup.SetHeaderText(SrvConfig.ConfigCoreServerRegisteredName + "IT Dohledové Centrum");
-                    setup.AddHealthCheckEndpoint("IT:  NET | HW | SW | OS | DB  Monitoring", SrvConfig.ConfigServerStartupOnHttps ? $"https://localhost:{SrvConfig.ConfigServerStartupHttpsPort}" + "/HealthResultService" : $"http://localhost:{SrvConfig.ConfigServerStartupHttpPort}" + "/HealthResultService");
+
+                    setup.SetHeaderText(DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value + " IT Dohledové Centrum");
+                    setup.AddHealthCheckEndpoint("IT:  NET | HW | SW | OS | DB  Monitoring", bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value) ? $"https://localhost:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpsPort").Value}" + "/HealthResultService" : $"http://localhost:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpPort").Value}" + "/HealthResultService");
                     setup.DisableDatabaseMigrations();
                     setup.SetApiMaxActiveRequests(200);
                     setup.SetMinimumSecondsBetweenFailureNotifications(10);
-                    setup.SetEvaluationTimeInSeconds(SrvConfig.ModuleHealthServiceRefreshIntervalSec);
+                    setup.SetEvaluationTimeInSeconds(int.Parse(DbOperations.GetServerParameterLists("ModuleHealthServiceRefreshIntervalSec").Value));
                     setup.MaximumHistoryEntriesPerEndpoint(10);
                 }).AddInMemoryStorage(optionsBuilder => { optionsBuilder.EnableSensitiveDataLogging(false); });
             }
@@ -237,7 +238,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureSwagger(ref IServiceCollection services) {
-            if (SrvConfig.ModuleSwaggerApiDocEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleSwaggerApiDocEnabled").Value)) {
                 //services.AddSwaggerSchemaBuilder(c => c.CamelCase = true);
                 
                  services.AddSwaggerGen(c => {
@@ -250,12 +251,12 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                      c.SchemaGeneratorOptions = new SchemaGeneratorOptions { SchemaIdSelector = type => type.FullName };
                      c.SwaggerDoc(Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(), new OpenApiInfo {
-                         Title = SrvConfig.ConfigCoreServerRegisteredName + " Server API",
+                         Title = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value + " Server API",
                          Version = Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(),
-                         TermsOfService = new Uri(SrvConfig.ServerPublicUrl),
+                         TermsOfService = new Uri(DbOperations.GetServerParameterLists("ServerPublicUrl").Value),
                          Description = EICServer.SwaggerDesc,
-                         Contact = new OpenApiContact { Name = "Libor Svoboda", Email = SrvConfig.EmailerServiceEmailAddress, Url = new Uri("https://groupware-solution.eu/contactus") },
-                         License = new OpenApiLicense { Name = SrvConfig.ConfigCoreServerRegisteredName + " Server License", Url = new Uri("https://www.groupware-solution.eu/") }
+                         Contact = new OpenApiContact { Name = "Libor Svoboda", Email = DbOperations.GetServerParameterLists("EmailerServiceEmailAddress").Value, Url = new Uri("https://groupware-solution.eu/contactus") },
+                         License = new OpenApiLicense { Name = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value + " Server License", Url = new Uri("https://www.groupware-solution.eu/") }
                      });
 
                      var xmlFile = Path.Combine(SrvRuntime.Startup_path, $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml");
@@ -293,7 +294,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="app"></param>
         internal static void EnableMarkdownAsHtmlFiles(ref IApplicationBuilder app) {
-            if (SrvConfig.EnableAutoShowStaticMdAsHtml) { app.UseMarkdown(); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoShowStaticMdAsHtml").Value)) { app.UseMarkdown(); }
         }
 
 
@@ -301,7 +302,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// Server Module: Enable Generated Developer Documentation
         /// </summary>
         internal static void EnableDocumentation(ref IApplicationBuilder app) {
-            if (SrvConfig.ModuleMdDocumentationEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleMdDocumentationEnabled").Value)) {
                 app.UseDocumentation(builder => {
                     builder.HighlightJsStyle = SrvRuntime.SrvIntegrated_path + "/server-modules/Docs/material-darker.css";
                     builder.GetMdlStyle = SrvRuntime.SrvIntegrated_path + "/server-modules/Docs/material.min.css";
@@ -332,10 +333,10 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// Server Module: Enable Swagger Api Doc Generator And Online Tester
         /// </summary>
         internal static void EnableSwagger(ref IApplicationBuilder app) {
-            if (SrvConfig.ModuleSwaggerApiDocEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleSwaggerApiDocEnabled").Value)) {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => {
-                    c.RoutePrefix = SrvConfig.ModuleSwaggerApiDocPath.StartsWith("/") ? SrvConfig.ModuleSwaggerApiDocPath.Substring(1) : SrvConfig.ModuleSwaggerApiDocPath;
+                    c.RoutePrefix = DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value.StartsWith("/") ? DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value.Substring(1) : DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value;
                     c.DocumentTitle = EICServer.SwaggerDesc;
                     c.SwaggerEndpoint(SrvRuntime.OpenApiDescriptionFile, "Server API version " + Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString());
                     c.DocExpansion(DocExpansion.None);
@@ -361,7 +362,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <summary>
         /// Server Module: Enable Live Data Monitor
         /// </summary>
-        internal static void EnableLiveDataMonitor(ref IApplicationBuilder app) { if (SrvConfig.WebLiveDataMonitorEnabled) { app.UseLiveReload(); } }
+        internal static void EnableLiveDataMonitor(ref IApplicationBuilder app) { if (bool.Parse(DbOperations.GetServerParameterLists("WebLiveDataMonitorEnabled").Value)) { app.UseLiveReload(); } }
 
 
         /// <summary>
@@ -375,12 +376,12 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// Server Module: Enable DBEntitySchema Web Page
         /// </summary>
         internal static void EnableDBEntitySchema(ref IApplicationBuilder app) {
-            if (SrvConfig.ModuleDBEntitySchemaEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDBEntitySchemaEnabled").Value)) {
                 app.UseDBEntitySchema(cfg =>
                 {
-                    cfg.PathMatch = SrvConfig.ModuleDBEntitySchemaPath.StartsWith("/")
-                        ? SrvConfig.ModuleDBEntitySchemaPath
-                        : "/" + SrvConfig.ModuleDBEntitySchemaPath;
+                    cfg.PathMatch = DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value.StartsWith("/")
+                        ? DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value
+                        : "/" + DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value;
                 });
             }
         }
@@ -391,7 +392,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="app"></param>
         internal static void EnableGitServer(ref IApplicationBuilder app) {
-            if (SrvConfig.GitServerEnabled) { app.UseGitServerCore(); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("GitServerEnabled").Value)) { app.UseGitServerCore(); }
         }
 
 

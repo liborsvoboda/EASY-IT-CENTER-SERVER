@@ -39,7 +39,7 @@ namespace EasyITCenter.ServerCoreServers {
         /// <param name="password">The password.</param>
         /// <returns></returns>
         public MemberValidationResult ValidateUser(string username, string password) {
-            if (!SrvConfig.ServerFtpSecurityEnabled) {
+            if (!bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value)) {
                 return new MemberValidationResult(MemberValidationStatus.Anonymous, new CustomFtpUser("anonymous"));
             }
             else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) {
@@ -58,7 +58,7 @@ namespace EasyITCenter.ServerCoreServers {
         /// <param name="password">The password.</param>
         /// <returns>The result of the validation.</returns>
         public async Task<MemberValidationResult> ValidateUserAsync(string username, string password) {
-            if (!SrvConfig.ServerFtpSecurityEnabled) {
+            if (!bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value)) {
                 return new MemberValidationResult(MemberValidationStatus.Anonymous, new CustomFtpUser("anonymous"));
             }
             else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) {

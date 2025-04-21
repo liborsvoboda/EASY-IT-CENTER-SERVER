@@ -1,5 +1,7 @@
 ﻿
 
+using Tweetinvi.Core.Events;
+
 namespace EasyITCenter.Managers {
 
     /// <summary>
@@ -27,7 +29,7 @@ namespace EasyITCenter.Managers {
         /// <param name="socketAPIPath"></param>
         /// <returns></returns>
         public static async Task ListenClientWebSocketMessages(WebSocket webSocket, string socketAPIPath) {
-            var buffer = new byte[1024 * SrvConfig.WebSocketMaxBufferSizeKb];
+            var buffer = new byte[1024 * int.Parse(DbOperations.GetServerParameterLists("WebSocketMaxBufferSizeKb").Value)];
             var receiveResult = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
             while (!receiveResult.CloseStatus.HasValue) {
@@ -48,12 +50,12 @@ namespace EasyITCenter.Managers {
             try {
                 SrvRuntime.CentralWebSocketList.Add(new Tuple<WebSocket, WebSocketLocation>(newWebSocket, new WebSocketLocation() {
                     socketAPIPath = socketAPIPath,
-                    SocketTimeout = DateTimeOffset.UtcNow.AddMinutes(SrvConfig.WebSocketTimeoutMin)
+                    SocketTimeout = DateTimeOffset.UtcNow.AddMinutes(double.Parse(DbOperations.GetServerParameterLists("WebSocketTimeoutMin").Value))
                 }));
             } catch { }
 
             //welcome message
-            await SendMessageToClientSocket(newWebSocket, SrvConfig.ConfigCoreServerRegisteredName + " " + DbOperations.DBTranslate("welcome"));
+            await SendMessageToClientSocket(newWebSocket, DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value + " " + DbOperations.DBTranslate("welcome"));
         }
 
 
@@ -69,7 +71,7 @@ namespace EasyITCenter.Managers {
                 foreach (Tuple<WebSocket, WebSocketLocation> socket in SrvRuntime.CentralWebSocketList) {
                     if (socket.Item2.socketAPIPath == socketAPIPath) {
                         await SendMessageToClientSocket(socket.Item1, message);
-                        socket.Item2.SocketTimeout = DateTimeOffset.UtcNow.AddMinutes(SrvConfig.WebSocketTimeoutMin);
+                        socket.Item2.SocketTimeout = DateTimeOffset.UtcNow.AddMinutes(double.Parse(DbOperations.GetServerParameterLists("WebSocketTimeoutMin").Value));
                     }
                 }
             } catch { }

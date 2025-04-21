@@ -13,6 +13,6 @@
         /// </summary>
         /// <returns></returns>
         [HttpGet("/EasyITCenterBackendCheck")]
-        public Task<string> GetBackendCheckApi() { return Task.FromResult(DbOperations.DBTranslate("ServerRunning", SrvConfig.ServiceServerLanguage)); }
+        public Task<string> GetBackendCheckApi() { return Task.FromResult(DbOperations.DBTranslate("ServerRunning", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value)); }
     }
 }

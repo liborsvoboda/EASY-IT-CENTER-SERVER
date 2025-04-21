@@ -155,7 +155,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     .UseGridTables().UseGlobalization().UseGenericAttributes().UseFootnotes().UseFooters().UseSyntaxHighlighting().UseFigures().Build();
                 }
 
-                string resultMessage = DbOperations.DBTranslate("ProcessSuccessfullyCompleted", SrvConfig.ServiceServerLanguage);
+                string resultMessage = DbOperations.DBTranslate("ProcessSuccessfullyCompleted", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value);
                 bool processInterrupted = false;
                 List<string> indexRootList = new List<string>(); int docCounter = 0; bool mdBookPrepared = false;
 
@@ -253,7 +253,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 //var zipData = await System.IO.File.ReadAllBytesAsync(Path.Combine(ServerRuntimeData.Startup_path, "Export", "Webpages.zip"));
                 //if (data != null) { return File(zipData, "application/x-zip-compressed", "Webpages.zip"); }
                 //else { return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") }); }
-                if (resultMessage == DbOperations.DBTranslate("ProcessSucessfullyCompleted", SrvConfig.ServiceServerLanguage)) {
+                if (resultMessage == DbOperations.DBTranslate("ProcessSucessfullyCompleted", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value)) {
                     return new ContentResult() { Content = resultMessage, StatusCode = StatusCodes.Status200OK };
                 }
                 else { return new ContentResult() { Content = resultMessage, StatusCode = StatusCodes.Status200OK }; }

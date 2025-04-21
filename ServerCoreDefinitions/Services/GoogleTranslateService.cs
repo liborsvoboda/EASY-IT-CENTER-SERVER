@@ -11,8 +11,7 @@ namespace EasyITCenter.Services {
 	public class GoogleTranslateService {
 		private const string RequestUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0";
 		//private const string RequestGoogleTranslatorUrl =  "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl={0}&hl={1}&dt=t&dt=bd&dj=1&source=bubble&q={2}";
-		private static readonly int index = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == new List<ServerParameterList>().GetType());
-		private static readonly string RequestGoogleTranslatorUrl = ( (List<ServerParameterList>)SrvRuntime.LocalDBTableList[index] ).Where(a => a.Key == "TranslatorApi").Select(a => a.Value).FirstOrDefault();
+		private static readonly string RequestGoogleTranslatorUrl = DbOperations.GetServerParameterLists("TranslatorApi").Value;
 
         public delegate void TranslateCallBack(bool succeed, string result);
 		public static void TranslateAsync(

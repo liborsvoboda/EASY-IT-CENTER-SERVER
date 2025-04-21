@@ -286,7 +286,7 @@ namespace EasyITCenter.Controllers {
                             if (loadFiles == null) {
                                 loadFiles = FileOperations.GetPathFiles(path, "readme.md", SearchOption.AllDirectories);
                             }
-                            loadFiles.ForEach(filePath => { loadedFiles.Add(filePath.Split(SrvConfig.DefaultStaticWebFilesFolder)[1].Replace(Path.DirectorySeparatorChar, '/')); });
+                            loadFiles.ForEach(filePath => { loadedFiles.Add(filePath.Split(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)[1].Replace(Path.DirectorySeparatorChar, '/')); });
                         });
                     } else {
                         loadedRootFolders.ForEach(path => {
@@ -294,7 +294,7 @@ namespace EasyITCenter.Controllers {
                             if (loadFiles == null) {
                                 loadFiles = FileOperations.GetPathFiles(path, "*.md", SearchOption.AllDirectories);
                             }
-                            loadFiles.ForEach(filePath => { loadedFiles.Add(filePath.Split(SrvConfig.DefaultStaticWebFilesFolder)[1].Replace(Path.DirectorySeparatorChar, '/')); });
+                            loadFiles.ForEach(filePath => { loadedFiles.Add(filePath.Split(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)[1].Replace(Path.DirectorySeparatorChar, '/')); });
                         });
                     }
 

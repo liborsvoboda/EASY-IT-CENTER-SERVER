@@ -14,8 +14,8 @@
         /// <returns></returns>
         public Task PublishAsync(HealthReport report, CancellationToken cancellationToken) {
             if ((report.Status == HealthStatus.Degraded || report.Status == HealthStatus.Unhealthy) &&
-            SrvConfig.ServiceCoreCheckerEmailSenderActive &&
-            ((SrvConfig.ModuleHealthServiceMessageOnChangeOnly && _prevStatus?.Status == HealthStatus.Healthy) || !SrvConfig.ModuleHealthServiceMessageOnChangeOnly)) {
+            bool.Parse(DbOperations.GetServerParameterLists("ServiceCoreCheckerEmailSenderActive").Value) &&
+            (( bool.Parse(DbOperations.GetServerParameterLists("ModuleHealthServiceMessageOnChangeOnly").Value) && _prevStatus?.Status == HealthStatus.Healthy) || !bool.Parse(DbOperations.GetServerParameterLists("ModuleHealthServiceMessageOnChangeOnly").Value))) {
                 string message = "";
                 report.Entries.ToList().ForEach(monit => {
                     if (monit.Value.Status == HealthStatus.Degraded || monit.Value.Status == HealthStatus.Unhealthy) {

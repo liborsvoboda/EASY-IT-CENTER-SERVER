@@ -35,7 +35,7 @@
         [Consumes("application/json")]
         public async Task<string> PostMassMesseger([FromBody] List<SendMailRequest> messages) {
             try {
-                if (SrvConfig.ServiceEnableMassEmail) {
+                if (bool.Parse(DbOperations.GetServerParameterLists("ServiceEnableMassEmail").Value)) {
                     CoreOperations.SendMassEmail(messages);
                     return JsonSerializer.Serialize(new ResMsg() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("emailsSent") });
                 }

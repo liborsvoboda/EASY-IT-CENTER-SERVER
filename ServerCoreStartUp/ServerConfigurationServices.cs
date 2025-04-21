@@ -34,6 +34,8 @@ using IdentityModel;
 using Korzh.DbUtils;
 using Google.Apis.Translate.v3;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
+using EasyITCenter.ServerCoreStructure;
 
 
 
@@ -70,7 +72,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureAutoMinify(ref IServiceCollection services) {
-            if (SrvConfig.EnableAutoMinify) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoMinify").Value)) {
                 services.AddWebOptimizer(cfg => {
                     cfg.MinifyCssFiles(); cfg.MinifyJsFiles();/*cfg.MinifyHtmlFiles();*/
                 }, option => {  
@@ -85,16 +87,16 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureFTPServer(ref IServiceCollection services) {
-            if (SrvConfig.ServerFtpEngineEnabled) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ServerFtpEngineEnabled").Value)) {
                 services.AddFtpServer(
                     builder => {
-                        if (!SrvConfig.ServerFtpSecurityEnabled) { 
+                        if (!bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value)) { 
                             builder.UseDotNetFileSystem().DisableChecks().UseSingleRoot().EnableAnonymousAuthentication(); } else { builder.UseDotNetFileSystem().DisableChecks().UseRootPerUser(); 
                         }
                     });
                 services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "127.0.0.1"; /*opt.Port*/ });
                 services.Configure<DotNetFileSystemOptions>(opt => {
-                    opt.RootPath = !SrvConfig.ServerFtpSecurityEnabled ? Path.Combine(SrvRuntime.FTPServerPath,"guest") : SrvRuntime.FTPServerPath;
+                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.FTPServerPath,"guest") : SrvRuntime.FTPServerPath;
                     opt.AllowNonEmptyDirectoryDelete = true;
                 });
                 services.AddSingleton<IMembershipProvider, HostedFtpServerMembershipProvider>();
@@ -121,7 +123,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 options.SlidingExpiration = true;
             });
             services.Configure<CookiePolicyOptions>(opt => {
-                opt.ConsentCookie.Name = SrvConfig.ConfigCoreServerRegisteredName;
+                opt.ConsentCookie.Name = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value;
                 opt.CheckConsentNeeded = context => false;
                 opt.MinimumSameSitePolicy = SameSiteMode.Lax;
                 opt.Secure = CookieSecurePolicy.Always;
@@ -185,8 +187,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureServerWebPages(ref IServiceCollection services) {
-            if (SrvConfig.WebRazorPagesEngineEnabled) {
-                if (SrvConfig.WebRazorPagesCompileOnRuntime) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("WebRazorPagesEngineEnabled").Value)) {
+                if (bool.Parse(DbOperations.GetServerParameterLists("WebRazorPagesCompileOnRuntime").Value)) {
                     services.AddMvc(options => {
                         options.CacheProfiles.Add("Default30", new CacheProfile() { Duration = 30 });
                         options.AllowEmptyInputInBodyModelBinding = true;
@@ -228,8 +230,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 }
             }
 
-            if (SrvConfig.WebMvcPagesEngineEnabled) {
-                if (SrvConfig.WebRazorPagesCompileOnRuntime) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("WebMvcPagesEngineEnabled").Value)) {
+                if (bool.Parse(DbOperations.GetServerParameterLists("WebRazorPagesCompileOnRuntime").Value)) {
                     services.AddMvc(options => {
                         options.EnableEndpointRouting = false;
                         options.AllowEmptyInputInBodyModelBinding = true;
@@ -248,25 +250,25 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureLetsEncrypt(ref IServiceCollection services) {
-            if (SrvConfig.ConfigServerGetLetsEncrypt) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerGetLetsEncrypt").Value)) {
                 services.AddLettuceEncrypt(option => {
-                    List<string> domainList = SrvConfig.ConfigCertificateDomain.Contains(',')
-                    ? SrvConfig.ConfigCertificateDomain.Split(',').ToList()
-                    : SrvConfig.ConfigCertificateDomain.Split(';').ToList();
+                    List<string> domainList = DbOperations.GetServerParameterLists("ConfigCertificateDomain").Value.Contains(',')
+                    ? DbOperations.GetServerParameterLists("ConfigCertificateDomain").Value.Split(',').ToList()
+                    : DbOperations.GetServerParameterLists("ConfigCertificateDomain").Value.Split(';').ToList();
 
                     domainList.ForEach(domain => { if (string.IsNullOrWhiteSpace(domain)) domainList.Remove(domain); });
                     option.DomainNames = domainList.ToArray();
-                    option.EmailAddress = SrvConfig.EmailerServiceEmailAddress;
+                    option.EmailAddress = DbOperations.GetServerParameterLists("EmailerServiceEmailAddress").Value;
                     option.AcceptTermsOfService = true;
                     option.RenewDaysInAdvance = new TimeSpan(10, 0, 0, 0);
                     option.RenewalCheckPeriod = new TimeSpan(1, 0, 0, 0);
-                }).PersistDataToDirectory(new DirectoryInfo(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath)), SrvConfig.ConfigCertificatePassword);
+                }).PersistDataToDirectory(new DirectoryInfo(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath)), DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value);
             }
         }
 
 
         internal static void ConfigureRssFeed(ref IServiceCollection services) {
-            if (SrvConfig.WebRSSFeedsEnabled) { services.AddRSSFeed<SomeRSSProvider>(); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("WebRSSFeedsEnabled").Value)) { services.AddRSSFeed<SomeRSSProvider>(); }
         }
 
         /// <summary>
@@ -276,7 +278,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureWebSocketLoggerMonitor(ref IServiceCollection services) {
-            if (SrvConfig.WebSocketServerMonitorEnabled) { services.AddSingleton<ILoggerProvider, ServerWebSockeMonitorService>(); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("WebSocketServerMonitorEnabled").Value)) { services.AddSingleton<ILoggerProvider, ServerWebSockeMonitorService>(); }
         }
 
         /// <summary>
@@ -322,6 +324,12 @@ namespace EasyITCenter.ServerCoreConfiguration {
             services.AddScoped(typeof(IGenericApiServiceAsync<,>), typeof(GenericApiServiceAsync<,>));
             services.AddScoped(typeof(IGenericApiService<,>), typeof(GenericApiService<,>));
             services.AddScoped<StaticFileDbService>();
+
+            //Stripe    
+            StripeConfiguration.ApiKey = "SecretKey";
+            services.AddScoped<CustomerService>().AddScoped<ChargeService>()
+            .AddScoped<TokenService>().AddScoped<IStripeService, StripeService>();
+
         }
 
         /// <summary>
@@ -341,7 +349,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             if (SrvRuntime.DebugMode) { services.AddDatabaseDeveloperPageExceptionFilter(); }
             try {
                 //EIC&ESB MAIN DB
-                services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(SrvConfig.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+                services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(DBConn.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
                 //WEBHOSTING DB
                 // Database File Example
@@ -372,7 +380,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 x.SaveToken = true;
                 x.TokenValidationParameters = CoreOperations.ValidAndGetTokenParameters();
                 x.ForwardSignIn = new EasyITCenterContext().ServerModuleAndServiceLists.Where(a => a.IsLoginModule).FirstOrDefault()?.UrlSubPath;
-                if (SrvConfig.ConfigTimeTokenValidationEnabled) { x.TokenValidationParameters.LifetimeValidator = EasyITCenterAuthenticationApi.TokenLifetimeValidator; }
+                if (bool.Parse(DbOperations.GetServerParameterLists("ConfigTimeTokenValidationEnabled").Value)) { x.TokenValidationParameters.LifetimeValidator = EasyITCenterAuthenticationApi.TokenLifetimeValidator; }
                 x.Events = new JwtBearerEvents {
                     OnAuthenticationFailed = context => {
                         if (context.Exception.GetType() == typeof(SecurityTokenExpiredException)) {

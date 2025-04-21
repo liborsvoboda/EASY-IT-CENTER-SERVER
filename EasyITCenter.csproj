@@ -69,20 +69,15 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
 
   <ItemGroup>
     <Compile Remove="bin\**" />
-    <Compile Remove="DATABASES\EasyITCenter\NewEntities\**" />
 	<Compile Remove="wwwroot\**" />
     <EmbeddedResource Remove="bin\**" />
-    <EmbeddedResource Remove="DATABASES\EasyITCenter\NewEntities\**" />
 	<EmbeddedResource Remove="wwwroot\**" />
     <None Remove="bin\**" />
-    <None Remove="DATABASES\EasyITCenter\NewEntities\**" />
 	<None Remove="wwwroot\**" />
     <TypeScriptCompile Remove="*" />
     <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
-    <Content Remove="DATABASES\EasyITCenter\NewEntities\**" />
 	<Content Remove="wwwroot\**" />
-	<EntityDeploy Remove="DATABASES\EasyITCenter\NewEntities\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -517,6 +512,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="StackExchange.Redis.Extensions.Newtonsoft" Version="10.2.0" />
     <PackageReference Include="StackExchange.Redis.Extensions.Protobuf" Version="10.2.0" />
     <PackageReference Include="Streamx.Linq.SQL.EFCore" Version="6.0.1" />
+    <PackageReference Include="Stripe.net" Version="48.0.2" />
     <PackageReference Include="SuperSimpleTcp" Version="3.0.14" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.8.0" />
@@ -618,7 +614,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   <ItemGroup>
     <Folder Include="Data\certificates\" />
     <Folder Include="ServerCoreDefinitions\Generators\" />
-    <Folder Include="ServerCoreDefinitions\ServerPortalExtensions\" />
   </ItemGroup>
   
  

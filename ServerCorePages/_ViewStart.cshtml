@@ -23,7 +23,6 @@
 @using EasyITCenter.Managers
 @using EasyITCenter.WebClasses
 @using EasyITCenter.WebModel
-@using EasyITCenter.WebDBModel
 @using EasyITCenter.WebControllers
 @using EasyITCenter.ServerCoreStructure
 @using EasyITCenter.ServerCorePages
@@ -53,7 +52,7 @@
 
         }
 
-        if (systemModule == null && !System.IO.File.Exists(filePath)) { filePath = System.IO.Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(SrvConfig.RedirectPath); }
+        if (systemModule == null && !System.IO.File.Exists(filePath)) { filePath = System.IO.Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(DbOperations.GetServerParameterLists("RedirectPath").Value); }
         if (systemModule == null && !System.IO.File.Exists(filePath)) {
             if (!filePath.ToLower().EndsWith(".md")) { fileContent = System.IO.File.ReadAllText(filePath); } else { fileContent = Markdown.ParseHtmlString(fileContent)?.Value?.ToString(); }
             this.Html.Raw(fileContent);

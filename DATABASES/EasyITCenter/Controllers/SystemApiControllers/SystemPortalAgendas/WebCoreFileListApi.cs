@@ -52,7 +52,7 @@
         [Consumes("application/json")]
         public async Task<string> InsertWebCoreFileList([FromBody] WebCoreFileList record) {
             try {
-                if (ServerPortalOperations.SaveWebSourceFile(ref _hostingEnvironment, ref record)) {
+                if (SystemPortalOperations.SaveWebSourceFile(ref _hostingEnvironment, ref record)) {
                     var data = new EasyITCenterContext().WebCoreFileLists.Add(record);
                     int result = await data.Context.SaveChangesAsync();
 
@@ -72,7 +72,7 @@
         [Consumes("application/json")]
         public async Task<string> UpdateWebCoreFileList([FromBody] WebCoreFileList record) {
             try {
-                if (ServerPortalOperations.SaveWebSourceFile(ref _hostingEnvironment, ref record)) {
+                if (SystemPortalOperations.SaveWebSourceFile(ref _hostingEnvironment, ref record)) {
                     var data = new EasyITCenterContext().WebCoreFileLists.Update(record);
                     int result = await data.Context.SaveChangesAsync();
 
@@ -94,7 +94,7 @@
 
                 WebCoreFileList origRec = new EasyITCenterContext().WebCoreFileLists.Where(a => a.Id == int.Parse(id)).First();
 
-                if (ServerPortalOperations.DeleteWebSourceFile(ref _hostingEnvironment, ref origRec)) {
+                if (SystemPortalOperations.DeleteWebSourceFile(ref _hostingEnvironment, ref origRec)) {
                     var data = new EasyITCenterContext().WebCoreFileLists.Remove(origRec);
                     int result = await data.Context.SaveChangesAsync();
 
