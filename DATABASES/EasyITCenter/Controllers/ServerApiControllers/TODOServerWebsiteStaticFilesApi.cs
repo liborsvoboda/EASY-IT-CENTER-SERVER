@@ -19,7 +19,7 @@
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("/ServerApi/StaticFilesServices/GetFiles")]
+        [HttpPost("/ServerApi/StaticFilesServices/GetFiles"), DisableRequestSizeLimit]
         [Consumes("application/json")]
         public IActionResult GetFiles([FromBody] StaticFilesRequest request) {
             try {

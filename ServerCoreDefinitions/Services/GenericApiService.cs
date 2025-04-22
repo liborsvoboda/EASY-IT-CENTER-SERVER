@@ -3,6 +3,37 @@ using System.Linq.Expressions;
 
 namespace EasyITCenter.Services {
 
+
+    // Generic Repository interface takes two generic paremeters DbContext and model class type
+    public interface IGenericApiService<DbEntity, Tentity> : IDisposable where DbEntity : EasyITCenterContext where Tentity : class {
+
+        Tentity GetById(int id);
+
+        Tentity Get(Expression<Func<Tentity, bool>> predicate);
+
+        EntityEntry<Tentity> Add(Tentity entity);
+
+        EntityEntry<Tentity> Update(Tentity entityToUpdate);
+
+        EntityEntry<Tentity> Delete(int id);
+
+        EntityEntry<Tentity> Delete(Tentity entityToDelete);
+
+        void SaveChanges();
+
+        int Total(Expression<Func<Tentity, bool>> predicate);
+
+        bool Exist(Expression<Func<Tentity, bool>> predicate);
+
+        List<Tentity> GetList(
+           Expression<Func<Tentity, bool>>? filter = null,
+           Func<IQueryable<Tentity>, IOrderedQueryable<Tentity>>? orderBy = null,
+           string includeProperties = "", int PageNo = 0, int PageSize = 0);
+
+        List<Tentity> GetFromSql(string Sql);
+    }
+
+
     // Generic Repository implementing generic interface takes two generic parameters DbContext and
     // model class type
     public class GenericApiService<DbEntity, Tentity> : IGenericApiService<DbEntity, Tentity> where DbEntity : EasyITCenterContext where Tentity : class {
