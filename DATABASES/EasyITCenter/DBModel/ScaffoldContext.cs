@@ -59,6 +59,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<LicSrvLicenseActivationFailList> LicSrvLicenseActivationFailLists { get; set; } = null!;
         public virtual DbSet<LicSrvLicenseAlgorithmList> LicSrvLicenseAlgorithmLists { get; set; } = null!;
         public virtual DbSet<LicSrvUsedLicenseList> LicSrvUsedLicenseLists { get; set; } = null!;
+        public virtual DbSet<MigrationsHistoryList> MigrationsHistoryLists { get; set; } = null!;
         public virtual DbSet<PortalActionHistoryList> PortalActionHistoryLists { get; set; } = null!;
         public virtual DbSet<PortalActionTypeList> PortalActionTypeLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; } = null!;
@@ -767,6 +768,12 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.ItemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsedLicenseList_ItemList");
+            });
+
+            modelBuilder.Entity<MigrationsHistoryList>(entity =>
+            {
+                entity.HasKey(e => e.MigrationId)
+                    .HasName("PK_MigrationsHistory");
             });
 
             modelBuilder.Entity<PortalActionHistoryList>(entity =>

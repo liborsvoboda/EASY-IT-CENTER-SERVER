@@ -34,7 +34,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 optionsBuilder.EnableSensitiveDataLogging(false); //everytime must be disabled other problem on release
 
                 optionsBuilder.UseSqlServer(DBConn.DatabaseConnectionString,
-                      x => x.MigrationsHistoryTable("_MigrationsHistory", "dbo"));
+                      x => x.MigrationsHistoryTable("MigrationsHistoryList", "dbo"));
 
                 if (SrvRuntime.DebugMode) {
                     optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => {
