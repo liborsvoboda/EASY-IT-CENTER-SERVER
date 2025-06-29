@@ -220,21 +220,27 @@ namespace EasyITCenter {
                     if (!redirected && routeLayout == RouteLayoutTypes.ViewerMarkDownFileLayout) { redirected = true; context.Request.Path = "/ViewerMarkDownFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
                     //Show Report File in Layout by .frx extension
                     else if (!redirected && routeLayout == RouteLayoutTypes.ViewerReportFileLayout) { redirected = true; context.Request.Path = "/ReportViewer/ViewerReportFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
-                    //Show Portal in Layout
+
+                    else if (!redirected && routeLayout == RouteLayoutTypes.ServerPortalLayout) { redirected = true; return; } 
                     else if (!redirected && routeLayout == RouteLayoutTypes.SystemPortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemPortal"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
-                    //Show SystemModules
                     else if (!redirected && routeLayout == RouteLayoutTypes.SystemModulesLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemModules"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
 
 
 
                     //Check If existing route Url and Allow Auto Process 
                     else if (CoreOperations.GetServerRegisteredRoutesList(requestPath, false)) { return; }
+
+                    //Ignore livereload
+                    else if (requestPath.ToLower() == "/__livereload") { return; }
                     //Others Type Detected
                     else if (!redirected && requestPath.ToLower() != fileValidUrl
-                    && ( context.Response.StatusCode != StatusCodes.Status200OK && context.Response.StatusCode != StatusCodes.Status301MovedPermanently && context.Response.StatusCode != StatusCodes.Status302Found )) { redirected = true; context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
+                    && ( context.Response.StatusCode != StatusCodes.Status200OK && context.Response.StatusCode != StatusCodes.Status301MovedPermanently && context.Response.StatusCode != StatusCodes.Status302Found )
+                    ) { redirected = true; context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
 
 
-                    if (!redirected && commandType == RoutingActionTypes.Return) { return; } else if (!redirected && commandType == RoutingActionTypes.Next) { context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } else if (!redirected && commandType == RoutingActionTypes.Next && context.Request.Path.ToString().ToLower() == fileValidUrl) { return; }
+                    if (!redirected && commandType == RoutingActionTypes.Return) { return; } 
+                    else if (!redirected && commandType == RoutingActionTypes.Next) { context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } 
+                    else if (!redirected && commandType == RoutingActionTypes.Next && context.Request.Path.ToString().ToLower() == fileValidUrl) { return; }
                 }
             });
 

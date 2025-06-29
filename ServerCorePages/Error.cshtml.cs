@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -19,9 +20,26 @@ namespace ServerCorePages
         private readonly ILogger<ErrorModel> _logger;
         public ErrorModel(ILogger<ErrorModel> logger) { _logger = logger; 
         }
-        public void OnGet()
-        {
+
+        public string? ExceptionMessage { get; set; }
+
+        public void OnGet() {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+
+            IExceptionHandlerPathFeature? exceptionHandlerPathFeature =
+                HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            
+            if (exceptionHandlerPathFeature?.Error is FileNotFoundException) {
+                ExceptionMessage = exceptionHandlerPathFeature.Error.StackTrace + Environment.NewLine + exceptionHandlerPathFeature.Error.Message;
+            }
+
+            if (exceptionHandlerPathFeature?.Path == "/") {
+                ExceptionMessage ??= string.Empty;
+                ExceptionMessage += " Page: Home.";
+            }
         }
+
+
+
     }
 }

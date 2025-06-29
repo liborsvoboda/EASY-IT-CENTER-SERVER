@@ -55,10 +55,10 @@ namespace EasyITCenter.Services {
 
     public static class StartupTaskWebHostExtensions {
         public static async Task RunWithTasksAsync(this IWebHost webHost, CancellationToken cancellationToken = default) {
-            var startupTasks = webHost.Services.GetServices<IStartupTask>();
+            IEnumerable<IStartupTask>? startupTasks = webHost.Services.GetServices<IStartupTask>();
 
             // Execute all the tasks
-            foreach (var startupTask in startupTasks) {
+            foreach (IStartupTask startupTask in startupTasks) {
                 await startupTask.ExecuteAsync(cancellationToken);
             }
 

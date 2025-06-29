@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("PortalApiTableColumnDataList")]
+    [Index("RecId", Name = "IX_PortalApiTableColumnDataList")]
     public partial class PortalApiTableColumnDataList
     {
         [Key]

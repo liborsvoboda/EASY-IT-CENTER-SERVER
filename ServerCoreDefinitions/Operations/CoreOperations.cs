@@ -94,9 +94,10 @@ namespace EasyITCenter.ServerCoreStructure {
                 if (validPath == null && routePath.StartsWith("/toolviewer", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.ToolViewerLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
                 if (validPath == null && routePath.StartsWith("/github", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.GitHubLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
                 if (validPath == null && routePath.StartsWith("/easydata", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.MetroLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
+                if (validPath == null && routePath.StartsWith("/serverportal", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.ServerPortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
 
 
-              
+
 
 
                 //Check MarkDown Type missing .md for Show in Markdown Layout

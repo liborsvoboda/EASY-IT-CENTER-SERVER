@@ -22,7 +22,6 @@
 @using EasyITCenter.DBModel
 @using EasyITCenter.Managers
 @using EasyITCenter.WebClasses
-@using EasyITCenter.WebModel
 @using EasyITCenter.WebControllers
 @using EasyITCenter.ServerCoreStructure
 @using EasyITCenter.ServerCorePages
@@ -65,12 +64,14 @@
 
     <script type="text/javascript" src="/server-portal/AddOns/jquery/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="/server-portal/metro/js/metro.min.js"></script>
-    <script type="text/javascript" src="/server-portal/Manage/js/global-storage.js"></script>
-    <script type="text/javascript" src="/server-portal/Manage/js/global.js"></script>
-    <script type="text/javascript" src="/server-portal/Manage/js/js.cookie.min.js"></script>
-    <script type="text/javascript" src="/server-portal/Manage/js/history.min.js"></script>
-    <script type="text/javascript" src="/server-portal/Manage/js/jspdf.js"></script>
-    <script type="text/javascript" src="/server-portal/Manage/js/json-to-table.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-behavior.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-storage.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-object.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-functions.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-api.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/jspdf.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/json-to-table.js"></script>
 
      @* Google Translation *@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -169,5 +170,8 @@
         $('.sidebar-menu').tree()
     })
     */
+
+   RunServerGetApi(false, "GetApiTableData/PortalMenu", "portalMenu")
+
 </script>
 </html>

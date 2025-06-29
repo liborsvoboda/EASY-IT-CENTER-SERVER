@@ -831,6 +831,12 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<PortalApiTableColumnList>(entity =>
             {
+                entity.HasOne(d => d.InheritedDataTypeNavigation)
+                    .WithMany(p => p.PortalApiTableColumnLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedDataType)
+                    .HasConstraintName("FK_PortalApiTableColumnList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.PortalApiTableColumnListUsers)
                     .HasForeignKey(d => d.UserId)

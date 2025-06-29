@@ -8,7 +8,7 @@ let ApiList = [
 function RunServerPostApi(authRequired, apiPath, jsonData) {
     showPageLoading();
     var def = $.ajax({
-        global: false, type: "POST", url: Metro.storage.getItem('ApiOriginSuffix', null) + apiUrl, dataType: 'json',
+        global: false, type: "POST", url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
         headers: authRequired ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null) } : { 'Content-type': 'application/json' },
         data: JSON.stringify(jsonData)
     });

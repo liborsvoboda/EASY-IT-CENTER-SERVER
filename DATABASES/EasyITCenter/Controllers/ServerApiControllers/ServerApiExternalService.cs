@@ -9,9 +9,9 @@ namespace EasyITCenter.ServerCoreDBSettings {
     [ApiController]
     [Route("ServerApi")]
      //[ApiExplorerSettings(IgnoreApi = true)]
-    public class ServerApiTranslateService : ControllerBase {
+    public class ServerApiExternalService : ControllerBase {
 
-        [HttpGet("/ServerApi/TranslateService/{destLang}/{origText}")]
+        [HttpGet("/ServerApi/ExternalService/{destLang}/{origText}")]
         public async Task<string> Translate(string destLang, string origText) {
             try {
 

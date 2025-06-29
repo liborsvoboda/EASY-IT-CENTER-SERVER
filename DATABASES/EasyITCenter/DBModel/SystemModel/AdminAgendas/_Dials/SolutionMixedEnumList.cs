@@ -15,6 +15,7 @@ namespace EasyITCenter.DBModel
         public SolutionMixedEnumList()
         {
             DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
+            PortalApiTableColumnLists = new HashSet<PortalApiTableColumnList>();
             PortalGeneratorActionLists = new HashSet<PortalGeneratorActionList>();
             PortalPluginListInheritedCodeTypeNavigations = new HashSet<PortalPluginList>();
             PortalPluginListInheritedPluginTypeNavigations = new HashSet<PortalPluginList>();
@@ -65,6 +66,7 @@ namespace EasyITCenter.DBModel
         [InverseProperty("SolutionMixedEnumLists")]
         public virtual SolutionUserList User { get; set; } = null!;
         public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
+        public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; }
         public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionLists { get; set; }
         public virtual ICollection<PortalPluginList> PortalPluginListInheritedCodeTypeNavigations { get; set; }
         public virtual ICollection<PortalPluginList> PortalPluginListInheritedPluginTypeNavigations { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StripeAPI.Controllers
 {
-    [Route("PortalApi/[controller]")]
+    [Route("ServerPortalApi/[controller]")]
     [ApiController]
     public class PortalStripeService : ControllerBase
     {

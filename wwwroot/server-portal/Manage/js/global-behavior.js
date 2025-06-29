@@ -1,4 +1,20 @@
-﻿
+﻿// STARTUP Temp Variables Definitions
+let pageLoader;
+
+
+/*Start of Global Loading Indicator for All Pages*/
+function hidePageLoading() { Metro.activity.close(pageLoader); }
+function showPageLoading() {
+    if (pageLoader != undefined) {
+        if (pageLoader[0]["DATASET:UID:M4Q"] == undefined) { pageLoader = null; }
+        else {
+            try { Metro.activity.close(pageLoader); } catch {
+                try { pageLoader.close(); } catch { pageLoader = pageLoader[0]["DATASET:UID:M4Q"].dialog; pageLoader.close(); }; pageLoader = null;
+            }
+        }
+    }
+    pageLoader = Metro.activity.open({ type: 'atom', style: 'dark', overlayClickClose: true, /*overlayColor: '#fff', overlayAlpha: 1*/ });
+}
 
 function UserChangeTranslateSetting() {
     Metro.storage.setItem('UserAutomaticTranslate', $("#UserAutomaticTranslate").val('checked')[0].checked);
@@ -77,24 +93,6 @@ function CancelTranslation() {
 }
 
 
-//TODO Create header menu Info with link About News
-//Control Header Menu WebPage Mottos Cycling
-function ShowHotInfoLink() {
-    setTimeout(function () {
-        try {
-            let data = Metro.storage.getItem('HotInfoLink', null); let setNext = false; let setted = false; var BreakException = {};
-            try {
-                data.forEach((motto, index) => {
-                    if (Metro.storage.getItem('LastMottoId', null) == null || setNext) { Metro.storage.setItem('LastMottoId', motto.id); $("#HotInfoLink").html(motto.systemName); setted = true; throw BreakException; }
-                    if (Metro.storage.getItem('LastMottoId', motto.id) == motto.id) { setNext = true; }
-                    if (data.length - 1 == index && !setted) { Metro.storage.setItem('LastMottoId', data[0].id); $("#HotInfoLink").html(data[0].systemName); }
-                });
-            } catch (e) { if (e !== BreakException) throw e; }
-            setTimeout(function () { ShowHotInfoLink(); }, 10000);
-        } catch { }
-    }, 10000);
-
-}
 
 
 function ScrollToTop() { window.scrollTo(0, 0); }

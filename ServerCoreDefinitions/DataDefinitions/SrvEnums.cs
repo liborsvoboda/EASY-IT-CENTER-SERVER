@@ -25,8 +25,10 @@
         MultiLangLayout,
         
         RazorTemplateLayout,
+        ServerPortalLayout,
         SystemPortalLayout,
         SystemModulesLayout,
+
 
         StaticFileLayout,
         ToolViewerLayout,

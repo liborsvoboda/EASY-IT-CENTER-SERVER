@@ -4,8 +4,6 @@
 // CZECH DISTRIBUTION GroupWare-Solution.Eu && KlikneteZde.CZ
 // STORAGE LOAD FIRST
 
-let pageLoader;
-
 let apiMessages = [{
      apiSaveSuccess: "Saving Data was Saved Sucessfully" ,
      apiSaveFail: "Saving Data was Failed" ,
@@ -32,7 +30,7 @@ if (Metro.storage.getItem('WebScheme', null) == null) {
 
 
 /*Start Set Global Constants*/
-Metro.storage.setItem('ApiOriginSuffix', Metro.storage.getItem('BackendServerAddress', null) + "/WebApi");
+Metro.storage.setItem('ApiOriginSuffix', Metro.storage.getItem('BackendServerAddress', null) + "/ServerPortalApi/");
 Metro.storage.setItem('DefaultPath', Metro.storage.getItem('DefaultPath', null) == null ? window.location.href : Metro.storage.getItem('DefaultPath', null));
 
 
