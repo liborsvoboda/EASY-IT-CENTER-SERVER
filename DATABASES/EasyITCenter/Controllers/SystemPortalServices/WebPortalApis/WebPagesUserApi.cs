@@ -25,7 +25,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                         count = new EasyITCenterContext().SolutionUserLists.Where(a => a.UserName == record.EmailAddress && a.Active).Count();
                     }
                     if (count > 0) {
-                        return BadRequest(JsonSerializer.Serialize(new ResMsg() {
+                        return BadRequest(JsonSerializer.Serialize(new ResultMessage() {
                             Status = DBWebApiResponses.emailExist.ToString(),
                             ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.emailExist.ToString(), record.Language)
                         }));
@@ -67,7 +67,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     count = new EasyITCenterContext().SolutionUserLists.Where(a => a.UserName == record.EmailAddress && a.Active).Count();
                 }
                 if (count > 0) {
-                    return JsonSerializer.Serialize(new ResMsg() {
+                    return JsonSerializer.Serialize(new ResultMessage() {
                         Status = DBWebApiResponses.emailExist.ToString(),
                         ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.emailExist.ToString(), record.Language)
                     });
@@ -112,8 +112,8 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     };
                 }
                 CoreOperations.SendEmail(mailRequest, true);
-                if (result > 0) return JsonSerializer.Serialize(new ResMsg() { InsertedId = origUser.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.loginInfoSentToEmail.ToString(), record.Language) });
-                else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
+                if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = origUser.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.loginInfoSentToEmail.ToString(), record.Language) });
+                else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
             } catch { }
             return JsonSerializer.Serialize(new { message = DbOperations.DBTranslate("EmailCannotBeSend", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value) });
         }
@@ -131,7 +131,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                         data = new EasyITCenterContext().SolutionUserLists.Where(a => a.UserName == record.EmailAddress && a.Active).FirstOrDefault();
                     }
                     if (data == null) {
-                        return BadRequest(JsonSerializer.Serialize(new ResMsg() {
+                        return BadRequest(JsonSerializer.Serialize(new ResultMessage() {
                             Status = DBWebApiResponses.emailNotExist.ToString(),
                             ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.emailNotExist.ToString(), record.Language)
                         }));
@@ -185,11 +185,11 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
                     var data = new EasyITCenterContext().SolutionUserLists.Update(user);
                     int result = await data.Context.SaveChangesAsync();
-                    if (result > 0) return JsonSerializer.Serialize(new ResMsg() { InsertedId = user.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DBWebApiResponses.loginInfoSentToEmail.ToString() });
-                    else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
+                    if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = user.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DBWebApiResponses.loginInfoSentToEmail.ToString() });
+                    else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                 }
-                else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
         [Authorize]
@@ -208,7 +208,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                     DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
     }
 }

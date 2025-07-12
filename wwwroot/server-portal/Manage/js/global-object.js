@@ -9,7 +9,7 @@ var notify = Metro.notify; notify.setup({
 
 //Global Tool Panel
 function CreateToolPanel() {
-    let html = '<div id="toolPanel" data-role="bottom-sheet" class="bottom-sheet pos-fixed list-list grid-style opened" style="top: 0px; left: 90%; z-index:10000;min-width: 430px;">';
+    let html = '<div id="ToolPanel" data-role="bottom-sheet" class="bottom-sheet pos-fixed list-list grid-style opened" style="top: 0px; left: 90%; z-index:10000;min-width: 430px;">';
     html += '<div class="c-pointer mif-cancel mif-1x icon pos-absolute fg-red" style="top:5px;right:5px;" onclick=ShowToolPanel(); ></div>';
     html += '<div class="w-100 text-left"> <audio id="radio" class="light bg-transparent" data-role="audio-player" data-src="/server-integrated/razor-pages/serverportal/media/hotel_california.mp3" data-volume=".5"></audio> </div>';
     html += '<div class="w-100 text-left" style="z-index: 1000000;"><div id="google_translate_element"></div></div>';
@@ -54,3 +54,60 @@ function ShowUnAuthMessage() {
 
 
 
+function generateMenu() {
+    let htmlContent = '<li class="item-header">Portal MENU</li>';
+
+    let lastGuid = null, menuItem = {};
+    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)))
+    menu.forEach((mItem,index,arr) => {
+       
+        console.log(index, arr.length);
+    
+        switch (mItem.apiTableColumnName) {
+            case "ParentGuid":
+                menuItem.ParentGuid = mItem.value;
+                break;
+            case "Sequence":
+                menuItem.Sequence = parseInt(mItem.value);
+                break;
+            case "Name":
+                menuItem.Name = mItem.value;
+                break;
+            case "Timestamp":
+                menuItem.Timestamp = new Date(mItem.value);
+                break;
+            case "Icon":
+                menuItem.Icon = mItem.value;
+                break;
+            case "Type":
+                menuItem.Type = mItem.value;
+                break;
+            case "Content":
+                menuItem.Content = mItem.value;
+                break;
+            default:
+              
+        }
+
+        
+
+        if (lastGuid != null && (lastGuid != mItem.recGuid || index + 1 == arr.length)) {
+            if (menuItem.Type == "menu") {
+                htmlContent += '<li ><a href="#" class="dropdown-toggle"><span class="icon"><span class="' + menuItem.Icon + '"></span></span><span class="caption">' + menuItem.Name + '</span></a>';
+                htmlContent += '<ul id = ' + menuItem.Name + ' class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + menuItem.Name + '</li> ';
+                htmlContent += '</li>';
+            }
+            else if (menuItem.Type == "link") { }
+            else if (menuItem.Type == "content") { }
+        }
+
+        lastGuid = mItem.recGuid;
+    });
+
+    console.log(htmlContent);
+
+
+    document.getElementById("PortalMenu").innerHTML = htmlContent + document.getElementById("PortalMenu").innerHTML;
+
+
+}

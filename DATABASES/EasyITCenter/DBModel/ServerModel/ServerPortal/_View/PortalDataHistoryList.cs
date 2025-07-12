@@ -25,8 +25,6 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public virtual PortalDataTypeList DataTypeNavigation { get; set; } = null!;
-        public virtual PortalApiTableList PortalApiTableList { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("PortalDataHistoryLists")]
         public virtual SolutionUserList User { get; set; } = null!;

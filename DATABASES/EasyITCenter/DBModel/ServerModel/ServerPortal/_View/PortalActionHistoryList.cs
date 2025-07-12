@@ -14,12 +14,15 @@ namespace EasyITCenter.DBModel
         [StringLength(50)]
         [Unicode(false)]
         public string ActionType { get; set; } = null!;
-        [StringLength(100)]
-        public string? DataType { get; set; }
+        [StringLength(50)]
+        [Unicode(false)]
+        public string DataType { get; set; } = null!;
         public string Value { get; set; } = null!;
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual PortalActionTypeList ActionTypeNavigation { get; set; } = null!;
+        public virtual PortalDataTypeList DataTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("PortalActionHistoryLists")]
         public virtual SolutionUserList User { get; set; } = null!;

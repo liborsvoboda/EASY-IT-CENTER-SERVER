@@ -44,11 +44,11 @@ namespace EasyITCenter.Controllers {
                     });
                 }
                 else {
-                    return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
                 }
             }
             else {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") });
             }
         }
 
@@ -87,7 +87,7 @@ namespace EasyITCenter.Controllers {
                 });
             }
             else {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
             }
         }
 
@@ -132,7 +132,7 @@ namespace EasyITCenter.Controllers {
                 });
             }
             else {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
             }
         }
 
@@ -169,7 +169,7 @@ namespace EasyITCenter.Controllers {
                 });
             }
             else {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
             }
         }
 
@@ -210,7 +210,7 @@ namespace EasyITCenter.Controllers {
                 });
             }
             else {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("IpAddressIsBlocked") });
             }
         }
     }

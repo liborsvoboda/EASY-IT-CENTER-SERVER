@@ -32,9 +32,9 @@ function ChangeSchemeTo(n) {
 
 function ShowToolPanel(close) {
     $("#UserAutomaticTranslate").val('checked')[0].checked = Metro.storage.getItem('UserAutomaticTranslate', null);
-    if (close) { Metro.bottomsheet.close($('#toolPanel')); } else {
-        if (Metro.bottomsheet.isOpen($('#toolPanel'))) { Metro.bottomsheet.close($('#toolPanel')); }
-        else { Metro.bottomsheet.open($('#toolPanel')); }
+    if (close) { Metro.bottomsheet.close($('#ToolPanel')); } else {
+        if (Metro.bottomsheet.isOpen($('#ToolPanel'))) { Metro.bottomsheet.close($('#ToolPanel')); }
+        else { Metro.bottomsheet.open($('#ToolPanel')); }
     }
 }
 
@@ -104,27 +104,8 @@ function disableScroll() {
 }
 
 
-function PrintElement(elementId) {
-    try { $("#" + elementId).printElement({ pageTitle: elementId.split("_")[1] + ".html", printMode: "popup" }); } catch (t) { }
-}
-
-function DownloadHtmlElement(elementId) {
-    try { var t = document.body.appendChild(document.createElement("a")); t.download = elementId + ".html"; t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.getElementById(elementId).innerHTML); t.click(); } catch (i) { }
-}
-
-async function CopyElement(elementId) {
-    try { let t = document.getElementById(elementId).innerHTML; await navigator.clipboard.writeText(t); } catch (t) { }
-}
-
-function ImageFromElement(elementId) {
-    try {
-        $("document").ready(function () {
-            html2canvas($("#" + elementId), {
-                onrendered: function (t) {
-                    $("#previewImage").append(t);
-                    var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a")); i.download = elementId + ".png"; i.href = u; i.click()
-                }
-            })
-        })
-    } catch (t) { }
+function portalStartup() {
+    CreateToolPanel();
+    RunServerGetApi(false, "ServerPortalApi/GetApiTableData/PortalMenu", "PortalMenu");
+    generateMenu();
 }

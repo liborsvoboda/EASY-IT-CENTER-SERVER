@@ -12,7 +12,7 @@ namespace EasyITCenter.DBModel
     {
         public PortalDataTypeList()
         {
-            PortalDataHistoryLists = new HashSet<PortalDataHistoryList>();
+            PortalActionHistoryLists = new HashSet<PortalActionHistoryList>();
             PortalHelpGroupLists = new HashSet<PortalHelpGroupList>();
         }
 
@@ -31,7 +31,7 @@ namespace EasyITCenter.DBModel
         [ForeignKey("UserId")]
         [InverseProperty("PortalDataTypeLists")]
         public virtual SolutionUserList User { get; set; } = null!;
-        public virtual ICollection<PortalDataHistoryList> PortalDataHistoryLists { get; set; }
+        public virtual ICollection<PortalActionHistoryList> PortalActionHistoryLists { get; set; }
         public virtual ICollection<PortalHelpGroupList> PortalHelpGroupLists { get; set; }
     }
 }

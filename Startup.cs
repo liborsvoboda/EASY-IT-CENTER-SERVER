@@ -32,6 +32,9 @@ namespace EasyITCenter {
     /// </summary>
     public class Startup {
 
+        //https://github.com/fawdlstty/SimpleMS
+
+
         //GIT SERVER
         //https://git-scm.com/downloads
         //https://github.com/fawdlstty/GitServerCore

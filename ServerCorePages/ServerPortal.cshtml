@@ -47,12 +47,11 @@
     string? role = HttpContext.User.Claims.Where(a => a.Type == ClaimTypes.Role).FirstOrDefault()?.Value;
     string? name = HttpContext.User.Claims.Where(a => a.Type == ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
 
-
 }
 
 
  
-<div id="content-wrapper" class="content-inner mt-10 h-100" style="overflow-y: auto">
+<div id="FrameWindow" class="content-inner mt-10 h-100" style="overflow-y: auto">
 
 
 

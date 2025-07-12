@@ -15,6 +15,7 @@ namespace EasyITCenter.DBModel
         public SolutionMixedEnumList()
         {
             DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
+            PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableColumnLists = new HashSet<PortalApiTableColumnList>();
             PortalGeneratorActionLists = new HashSet<PortalGeneratorActionList>();
             PortalPluginListInheritedCodeTypeNavigations = new HashSet<PortalPluginList>();
@@ -27,6 +28,7 @@ namespace EasyITCenter.DBModel
             ServerParameterListInheritedServerParamTypeNavigations = new HashSet<ServerParameterList>();
             ServerProcessListInheritedCommandTypeNavigations = new HashSet<ServerProcessList>();
             ServerProcessListInheritedProcessTypeNavigations = new HashSet<ServerProcessList>();
+            ServerScriptLists = new HashSet<ServerScriptList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
             SolutionOperationListInheritedApiResultTypeNavigations = new HashSet<SolutionOperationList>();
@@ -66,6 +68,7 @@ namespace EasyITCenter.DBModel
         [InverseProperty("SolutionMixedEnumLists")]
         public virtual SolutionUserList User { get; set; } = null!;
         public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
+        public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; }
         public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionLists { get; set; }
         public virtual ICollection<PortalPluginList> PortalPluginListInheritedCodeTypeNavigations { get; set; }
@@ -78,6 +81,7 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerParameterList> ServerParameterListInheritedServerParamTypeNavigations { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedCommandTypeNavigations { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedProcessTypeNavigations { get; set; }
+        public virtual ICollection<ServerScriptList> ServerScriptLists { get; set; }
         public virtual ICollection<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; }
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
         public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedApiResultTypeNavigations { get; set; }

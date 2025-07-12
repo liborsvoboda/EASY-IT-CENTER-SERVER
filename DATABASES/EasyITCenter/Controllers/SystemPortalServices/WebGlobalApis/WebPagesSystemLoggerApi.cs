@@ -25,9 +25,9 @@ namespace EasyITCenter.Controllers {
                 var data = new EasyITCenterContext().SolutionFailLists.Add(solutionFailList);
                 int result = await data.Context.SaveChangesAsync();
 
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty });
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
     }

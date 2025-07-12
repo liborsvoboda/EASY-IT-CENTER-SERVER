@@ -35,6 +35,7 @@
     string path = this.Context.Request.Path.ToString().ToLower();
     string? role = this.Context.User.Claims.Where(a => a.Type == ClaimTypes.Role).FirstOrDefault()?.Value;
     string? name = this.Context.User.Claims.Where(a => a.Type == ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
+    string? userPrefix = this.Context.User.Claims.Where(a => a.Type == ClaimTypes.Sid).FirstOrDefault()?.Value;
 }
 
 

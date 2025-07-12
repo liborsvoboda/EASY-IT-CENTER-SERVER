@@ -106,5 +106,18 @@
                 if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Email.ToString())?.Value; } else return null;
             } catch { return null; }
         }
+
+
+        /// <summary>
+        /// Get UserName
+        /// </summary>
+        /// <returns></returns>
+        public static string? GetUserPrefix() {
+            try {
+                var context = _accessor?.HttpContext;
+                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Sid.ToString())?.Value; } else return null;
+            } catch { return null; }
+        }
+
     }
 }

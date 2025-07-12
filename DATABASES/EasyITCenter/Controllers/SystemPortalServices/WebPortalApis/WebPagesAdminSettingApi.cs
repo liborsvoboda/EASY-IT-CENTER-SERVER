@@ -31,19 +31,19 @@ namespace EasyITCenter.Controllers {
                     });
 
                     return Ok(JsonSerializer.Serialize(
-                    new ResMsg() {
+                    new ResultMessage() {
                         Status = DBResult.success.ToString(),
                         ErrorMessage = string.Empty
                     }));
                 }
                 else {
-                    return BadRequest(new ResMsg() {
+                    return BadRequest(new ResultMessage() {
                         Status = DBResult.error.ToString(),
                         ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights")
                     });
                 }
             } catch (Exception ex) {
-                return BadRequest(new ResMsg() {
+                return BadRequest(new ResultMessage() {
                     Status = DBResult.error.ToString(),
                     ErrorMessage = DataOperations.GetUserApiErrMessage(ex)
                 });

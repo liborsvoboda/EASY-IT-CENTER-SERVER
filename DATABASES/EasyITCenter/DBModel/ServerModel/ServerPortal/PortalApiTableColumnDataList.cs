@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("PortalApiTableColumnDataList")]
-    [Index("RecId", Name = "IX_PortalApiTableColumnDataList")]
+    [Index("RecGuid", Name = "IX_PortalApiTableColumnDataList")]
     public partial class PortalApiTableColumnDataList
     {
         [Key]
@@ -17,13 +17,16 @@ namespace EasyITCenter.DBModel
         public string? UserPrefix { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string ApiTable { get; set; } = null!;
+        public string ApiTableName { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
-        public string ApiTableColumn { get; set; } = null!;
+        public string ApiTableColumnName { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
-        public string RecId { get; set; } = null!;
+        public string RecGuid { get; set; } = null!;
+        [StringLength(50)]
+        [Unicode(false)]
+        public string InheritedDataType { get; set; } = null!;
         [Unicode(false)]
         public string? Value { get; set; }
         [Unicode(false)]
@@ -33,8 +36,8 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public virtual PortalApiTableColumnList ApiTableColumnNavigation { get; set; } = null!;
-        public virtual PortalApiTableList ApiTableNavigation { get; set; } = null!;
+        public virtual PortalApiTableList ApiTableNameNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedDataTypeNavigation { get; set; } = null!;
         public virtual PortalApiTableColumnList? PortalApiTableColumnList { get; set; }
         [ForeignKey("UserId")]
         [InverseProperty("PortalApiTableColumnDataListUsers")]

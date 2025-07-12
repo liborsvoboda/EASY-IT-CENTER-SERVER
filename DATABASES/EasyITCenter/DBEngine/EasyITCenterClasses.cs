@@ -14,7 +14,7 @@
     /// <summary>
     /// The DB result message.
     /// </summary>
-    public class ResMsg {
+    public class ResultMessage {
 
         public int InsertedId { get; set; } = 0;
         public string Status { get; set; }

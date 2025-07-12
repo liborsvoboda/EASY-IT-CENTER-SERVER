@@ -10,6 +10,11 @@ namespace EasyITCenter.DBModel
     [Index("Name", Name = "IX_PortalActionTypeList", IsUnique = true)]
     public partial class PortalActionTypeList
     {
+        public PortalActionTypeList()
+        {
+            PortalActionHistoryLists = new HashSet<PortalActionHistoryList>();
+        }
+
         [Key]
         public int Id { get; set; }
         [StringLength(50)]
@@ -29,5 +34,6 @@ namespace EasyITCenter.DBModel
         [ForeignKey("UserId")]
         [InverseProperty("PortalActionTypeLists")]
         public virtual SolutionUserList User { get; set; } = null!;
+        public virtual ICollection<PortalActionHistoryList> PortalActionHistoryLists { get; set; }
     }
 }

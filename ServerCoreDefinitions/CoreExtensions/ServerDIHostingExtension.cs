@@ -69,4 +69,24 @@ namespace EasyITCenter.Services {
 
 
 
+
+
+
+    //public hanHttpServer(params ushort[] ports) {
+    //    m_listener = new HttpListener();
+    //    m_listener.AuthenticationSchemes = AuthenticationSchemes.Anonymous;
+    //    try {
+    //        foreach (var port in ports)
+    //            m_listener.Prefixes.Add($"http://*:{port}/");
+    //        m_listener.Start();
+    //    } catch (System.Net.HttpListenerException) {
+    //        m_listener.Close();
+    //        m_listener = new HttpListener();
+    //        m_listener.AuthenticationSchemes = AuthenticationSchemes.Anonymous;
+    //        foreach (var port in ports)
+    //            m_listener.Prefixes.Add($"http://127.0.0.1:{port}/");
+    //        m_listener.Start();
+    //    }
+    //}
+
 }

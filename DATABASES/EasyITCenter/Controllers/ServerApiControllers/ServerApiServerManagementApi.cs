@@ -25,10 +25,10 @@ namespace EasyITCenter.ServerCoreDBSettings {
             try {
                 if (ServerApiServiceExtension.IsAdmin()) {
                     if (SrvRuntime.SrvScheduler != null) { await SrvRuntime.SrvScheduler.ResumeAll(); }
-                    return Ok(JsonSerializer.Serialize(new ResMsg() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty }));
+                    return Ok(JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty }));
                 }
-                else { return BadRequest(new ResMsg() { Status = DBResult.error.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
-            } catch (Exception ex) { return BadRequest(new ResMsg() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                else { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
+            } catch (Exception ex) { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
         /// <summary>
@@ -41,10 +41,10 @@ namespace EasyITCenter.ServerCoreDBSettings {
             try {
                 if (ServerApiServiceExtension.IsAdmin()) {
                     if (SrvRuntime.SrvScheduler != null) { await SrvRuntime.SrvScheduler.PauseAll(); }
-                    return Ok(JsonSerializer.Serialize(new ResMsg() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty }));
+                    return Ok(JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty }));
                 }
-                else { return BadRequest(new ResMsg() { Status = DBResult.error.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
-            } catch (Exception ex) { return BadRequest(new ResMsg() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                else { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
+            } catch (Exception ex) { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
         /// <summary>
@@ -56,12 +56,12 @@ namespace EasyITCenter.ServerCoreDBSettings {
         public async Task<IActionResult> ServerSchedulerStatus() {
             try {
                 if (ServerApiServiceExtension.IsAdmin()) {
-                    return Ok(JsonSerializer.Serialize(new ResMsg() { 
+                    return Ok(JsonSerializer.Serialize(new ResultMessage() { 
                         Status = (SrvRuntime.SrvScheduler == null || await SrvRuntime.SrvScheduler.IsTriggerGroupPaused("AutoScheduler"))
                         ? ServerStatusTypes.Stopped.ToString() : ServerStatusTypes.Running.ToString(), ErrorMessage = string.Empty }));
                 }
-                else { return BadRequest(new ResMsg() { Status = DBResult.error.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
-            } catch (Exception ex) { return BadRequest(new ResMsg() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                else { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
+            } catch (Exception ex) { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
 
@@ -76,10 +76,10 @@ namespace EasyITCenter.ServerCoreDBSettings {
                 if (ServerApiServiceExtension.IsAdmin()) {
                     EICServer.RestartServer();
 
-                    return JsonSerializer.Serialize(new ResMsg() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("serverRestarting") });
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("serverRestarting") });
                 }
-                else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate(DBResult.DeniedYouAreNotAdmin.ToString()) });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate(DBResult.DeniedYouAreNotAdmin.ToString()) });
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
 
@@ -97,10 +97,10 @@ namespace EasyITCenter.ServerCoreDBSettings {
                         await SrvRuntime.ServerFTPProvider.StartAsync(); 
                     }
 
-                    return JsonSerializer.Serialize(new ResMsg() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("serverRestarting") });
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("serverRestarting") });
                 }
-                else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate(DBResult.DeniedYouAreNotAdmin.ToString()) });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate(DBResult.DeniedYouAreNotAdmin.ToString()) });
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
         /// <summary>
@@ -117,10 +117,10 @@ namespace EasyITCenter.ServerCoreDBSettings {
                         await SrvRuntime.ServerFTPProvider.StopAsync();
                     }
 
-                    return JsonSerializer.Serialize(new ResMsg() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("serverRestarting") });
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("serverRestarting") });
                 }
-                else return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate(DBResult.DeniedYouAreNotAdmin.ToString()) });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate(DBResult.DeniedYouAreNotAdmin.ToString()) });
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
 
@@ -133,8 +133,8 @@ namespace EasyITCenter.ServerCoreDBSettings {
         [HttpGet("/ServerApi/ManagementServices/FtpServerStatus")]
         public async Task<IActionResult> FtpServerStatus() {
             try {
-                return Ok(JsonSerializer.Serialize(new ResMsg() { Status = !SrvRuntime.FTPSrvStatus ? ServerStatusTypes.Stopped.ToString() : ServerStatusTypes.Running.ToString(), ErrorMessage = string.Empty }));
-            } catch (Exception ex) { return BadRequest(new ResMsg() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                return Ok(JsonSerializer.Serialize(new ResultMessage() { Status = !SrvRuntime.FTPSrvStatus ? ServerStatusTypes.Stopped.ToString() : ServerStatusTypes.Running.ToString(), ErrorMessage = string.Empty }));
+            } catch (Exception ex) { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
     }

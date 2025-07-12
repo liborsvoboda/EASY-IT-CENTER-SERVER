@@ -33,11 +33,17 @@
     string path = this.Context.Request.Path.ToString().ToLower();
     string? role = this.Context.User.Claims.Where(a => a.Type == ClaimTypes.Role).FirstOrDefault()?.Value;
     string? name = this.Context.User.Claims.Where(a => a.Type == ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
+    string? userPrefix = this.Context.User.Claims.Where(a => a.Type == ClaimTypes.Sid).FirstOrDefault()?.Value;
 }
 
+@* https://v5.metroui.org.ua/overview/ *@
+@* https://panda.metroui.org.ua/mif/core-pack *@
 
-<ul class="navview-menu mt-4" id="side-menu">
-    <li class="item-header">MAIN NAVIGATION</li>
+
+<ul class="navview-menu mt-4" id="PortalMenu">
+    
+
+ 
     <li>
         <a href="#dashboard">
             <span class="icon"><span class="mif-meter"></span></span>
@@ -429,5 +435,5 @@
             <span class="icon"><span class="mif-brightness-auto fg-red"></span></span>
             <span class="caption">Metro 4</span>
         </a>
-    </li>
+    </li> 
 </ul>

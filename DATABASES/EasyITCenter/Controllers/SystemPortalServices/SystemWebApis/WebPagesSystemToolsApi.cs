@@ -34,11 +34,11 @@ namespace EasyITCenter.ServerCoreDBSettings {
                             var resData = new EasyITCenterContext().WebCoreFileLists.Update(data);
                             int result = await resData.Context.SaveChangesAsync();
                         }
-                        return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                        return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
                     }
                 }
-            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetErrMsg(ex) }); }
-            return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DBResult.UnauthorizedRequest.ToString() });
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetErrMsg(ex) }); }
+            return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DBResult.UnauthorizedRequest.ToString() });
         }
 
 

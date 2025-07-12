@@ -19,18 +19,22 @@
 @* TODO PLNE PREVEST TENTO OBSAH DO AGENDY DYNAMICKE STRANKY  *@
 @* MOZNOST UDELAT DESKTOP ALA UZIVATEL  DASHBOARD UZIVATELE *@
 @namespace ServerCorePages
+
+@{
+    string path = HttpContext.Request.Path.ToString().ToLower();
+    string? role = HttpContext.User.Claims.Where(a => a.Type == ClaimTypes.Role).FirstOrDefault()?.Value;
+    string? name = HttpContext.User.Claims.Where(a => a.Type == ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
+}
+
+
 @{
     ViewData["Title"] = "EIC Database Manager";
 
   
     @* https://github.com/KorzhCom/EasyData/blob/master/easydata.net/src/EasyData.Exporters.Default/Html/HtmlDataExporter.cs  *@
-    string token = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key == "ApiToken").Value;
-    if (token == null && HttpContext.Request.Headers.Authorization.ToString().Length > 0) { token = HttpContext.Request.Headers.Authorization.ToString().Substring(7); }
-    ServerWebPagesToken? srvWebPagesToken = null;
-    if (token != null) { srvWebPagesToken = CoreOperations.CheckTokenValidityFromString(token); }
+   
 
-
-    if (srvWebPagesToken != null && srvWebPagesToken.IsValid && srvWebPagesToken.UserClaims.FindFirstValue(ClaimTypes.Role.ToString()) == "admin") { 
+    if (role == "admin") { 
         <link rel="stylesheet" href="~/server-integrated/server-modules/easydata/css/easydata.min.css" inline />
         <script type="text/javascript" src="~/server-integrated/server-modules/easydata/js/easydata.min.js" /></script>
             <div class="container text-center pt-5 mb-2">

@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using Fawdlstty.GitServerCore;
 using EasyITCenter.ServerCoreStructure;
+using Fawdlstty.GitServerCore.internals;
 
 
 namespace EasyITCenter.ServerCoreConfiguration {
@@ -36,8 +37,28 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 services.Configure<GitSettings>(options => {
                     options.BasePath = SrvRuntime.GitServerPath;
                     options.GitPath = "Git";
-                }).AddGitServerCore(opt => { opt.GitRepoExtractDir = "GitExtract"; });
+                }).AddGitServerCore(opt => {
+                    opt.GitUrlRegex = "^/(\\S*)\\.git$";
+                    opt.GitUrlSimplize = _url => _url[1..^4];
+                    opt.GitRepoBareDir = "/data/repo_bare";
+                    opt.GitRepoExtractDir = "/data/repo_extract";
+                    opt.CheckAllowAsync = async (_path, _oper, _username, _password) => {
+                        if (string.IsNullOrEmpty(_username)) {
+                            // If the user name is empty, it is mandatory to enter the user name
+                            return GitOperReturnType.NeedAuth;
+                        } else if (_username == "hello" && _password == "world") {
+                            // The username and password are verified
+                            return GitOperReturnType.Allow;
+                        } else {
+                            // Denied this visit
+                            return GitOperReturnType.Block;
+                        }
+                    };
+                    opt.HasBeenOperationAsync = async (_path, _oper, _username) => await Task.Yield();
+                });
             }
+
+            
         }
 
 

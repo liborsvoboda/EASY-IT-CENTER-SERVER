@@ -11,7 +11,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
      //[ApiExplorerSettings(IgnoreApi = true)]
     public class ServerApiExternalService : ControllerBase {
 
-        [HttpGet("/ServerApi/ExternalService/{destLang}/{origText}")]
+        [HttpGet("/ServerApi/ExternalService/Translator/{destLang}/{origText}")]
         public async Task<string> Translate(string destLang, string origText) {
             try {
 
@@ -39,7 +39,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
                         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                     });
                 }
-            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
     }

@@ -83,16 +83,16 @@ namespace EasyITCenter.Controllers {
 
                 data = new EasyITCenterContext().EasyITCenterCollectionFromSql<CustomMessageList>($"EXEC {procedureName} {parameters};");
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(new ResMsg() 
+                return JsonSerializer.Serialize(new ResultMessage() 
                 { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
 
             
             if (data == succesData) {
-                return JsonSerializer.Serialize(new ResMsg() 
+                return JsonSerializer.Serialize(new ResultMessage() 
                 { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = null });
             } else {
-                return JsonSerializer.Serialize(new ResMsg() 
+                return JsonSerializer.Serialize(new ResultMessage() 
                 { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = data[0].MessageList });
             }
         }
@@ -135,7 +135,7 @@ namespace EasyITCenter.Controllers {
                 data = new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>($"EXEC SpGetTableSchema @tableName = N'{tableName}';");
                 return JsonSerializer.Serialize(data, new JsonSerializerOptions() {ReferenceHandler = ReferenceHandler.IgnoreCycles,WriteIndented = true,DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
 
@@ -152,7 +152,7 @@ namespace EasyITCenter.Controllers {
                 data = new EasyITCenterContext().ExecuteReader($"EXEC SpGetProcedureParams @procedureName = N'{procedureName}';");
                 return JsonSerializer.Serialize(data.ObjectToJson(), new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
 
@@ -167,7 +167,7 @@ namespace EasyITCenter.Controllers {
                 data = new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>("EXEC SpGetTableList;");
                 return JsonSerializer.Serialize(data, new JsonSerializerOptions() {ReferenceHandler = ReferenceHandler.IgnoreCycles,WriteIndented = true,DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
 
@@ -182,7 +182,7 @@ namespace EasyITCenter.Controllers {
                 data = new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>("EXEC SpGetSystemPageList;");
                 return JsonSerializer.Serialize(data, new JsonSerializerOptions() {ReferenceHandler = ReferenceHandler.IgnoreCycles,WriteIndented = true,DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
 
@@ -198,7 +198,7 @@ namespace EasyITCenter.Controllers {
                 data = new EasyITCenterContext().EasyITCenterCollectionFromSql<SpUserMenuList>("EXEC SpGetUserMenuList @userRole = N'" + User.FindFirst(ClaimTypes.Role.ToString())?.Value + "';");
                 return JsonSerializer.Serialize(data, new JsonSerializerOptions() {ReferenceHandler = ReferenceHandler.IgnoreCycles,WriteIndented = true,DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
     }

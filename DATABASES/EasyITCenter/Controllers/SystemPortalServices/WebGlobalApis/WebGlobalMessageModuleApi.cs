@@ -33,7 +33,7 @@ namespace EasyITCenter.Controllers {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
 
-            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace EasyITCenter.Controllers {
 
                 System.IO.File.WriteAllText(Path.Combine(SrvRuntime.Startup_path, "wwwroot", "ServerCoreTools","systemTools", "newsletter-preview", "index.html"), data);
                 System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, "ServerCoreTools", "systemTools", "newsletter-preview", "index.html"), data);
-                return JsonSerializer.Serialize(new ResMsg() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
-            } catch (Exception ex) { return JsonSerializer.Serialize(new ResMsg() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+                return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
 

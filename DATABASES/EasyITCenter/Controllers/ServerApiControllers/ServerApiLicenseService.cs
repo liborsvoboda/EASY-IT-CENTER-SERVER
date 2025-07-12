@@ -8,6 +8,8 @@ namespace EasyITCenter.ControllersExtensions {
     [Route("ServerApi")]
     public class ServerApiLicenseService : ControllerBase {
 
+
+
         [AllowAnonymous]
         [HttpGet("/ServerApi/LicenseService/OnlineActivation/{UnlockCode}/{PartNumber}")]
         public async Task<string> GetLicenseActivator(string unlockCode, string partNumber) {
@@ -41,6 +43,8 @@ namespace EasyITCenter.ControllersExtensions {
             } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return JsonSerializer.Serialize(allowed);
         }
+
+
 
         [AllowAnonymous]
         [HttpPost("/ServerApi/LicenseService/OnlineActivation")]
@@ -78,6 +82,8 @@ namespace EasyITCenter.ControllersExtensions {
         }
 
 
+
+
         [Authorize]
         [HttpGet("/ServerApi/LicenseService/OfflineActivation/Trial/{product}")]
         public async Task<IActionResult> TrialLicenseGenerator(string product) {
@@ -98,6 +104,8 @@ namespace EasyITCenter.ControllersExtensions {
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
         }
+
+
 
 
         //[HttpGet("/ServerApi/LicenseService/OfflineActivation/FullVersion/{product}")]

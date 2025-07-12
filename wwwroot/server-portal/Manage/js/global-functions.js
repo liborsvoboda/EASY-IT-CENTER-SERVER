@@ -1,5 +1,17 @@
 ﻿
+function htmlDecode(input) {
+    var doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent;
+}
 
+
+function str2bytes(str) {
+    var bytes = new Uint8Array(str.length);
+    for (var i = 0; i < str.length; i++) {
+        bytes[i] = str.charCodeAt(i);
+    }
+    return bytes;
+}
 
 function PreloadImage(src) {
     var img = new Image();
@@ -81,3 +93,76 @@ function GenerateTagList(values, tagName, className) {
 
 //Function for Highlighting Code Segments
 //function HighlightCode() { document.querySelectorAll('div.code').forEach(el => { hljs.highlightElement(el); }); }
+
+
+function showSource() {
+    var source = "<html>";
+    source += document.getElementsByTagName('html')[0].innerHTML;
+    source += "</html>";
+    source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    source = "<pre>" + source + "</pre>";
+    sourceWindow = window.open('', 'Source of page', 'height=800,width=800,scrollbars=1,resizable=1');
+    sourceWindow.document.write(source);
+    sourceWindow.document.close();
+    if (window.focus) sourceWindow.focus();
+}
+
+
+
+function PrintElement(elementId) {
+    try { $("#" + elementId).printElement({ pageTitle: elementId.split("_")[1] + ".html", printMode: "popup" }); } catch (t) { }
+}
+
+function DownloadHtmlElement(elementId) {
+    try { var t = document.body.appendChild(document.createElement("a")); t.download = elementId + ".html"; t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.getElementById(elementId).innerHTML); t.click(); } catch (i) { }
+}
+
+async function CopyElement(elementId) {
+    try { let t = document.getElementById(elementId).innerHTML; await navigator.clipboard.writeText(t); } catch (t) { }
+}
+
+function ImageFromElement(elementId) {
+    try {
+        $("document").ready(function () {
+            html2canvas($("#" + elementId), {
+                onrendered: function (t) {
+                    $("#previewImage").append(t);
+                    var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a")); i.download = elementId + ".png"; i.href = u; i.click()
+                }
+            })
+        })
+    } catch (t) { }
+}
+
+function PrintFrameElement() {
+    try {
+        window.frames['FrameWindow'].contentWindow.printElement({ pageTitle: "KlikneteZdeCz.html", printMode: "popup" });
+    } catch (t) { }
+}
+
+
+function DownloadFrameHtmlElement() {
+    try {
+        var t = document.body.appendChild(document.createElement("a")); t.download = "KlikneteZde" + ".html"; t.href = "data:text/html;charset=utf-8," + encodeURIComponent(window.frames['FrameWindow'].contentWindow.document.body.innerHTML); t.click();
+    } catch (i) { }
+}
+
+async function CopyFrameElement() {
+    try {
+        let t = window.frames['FrameWindow'].contentWindow.document.body.innerHTML; await navigator.clipboard.writeText(t);
+    } catch (t) { }
+}
+
+
+function ImageFromFrameElement() {
+    try {
+        $("document").ready(function () {
+            html2canvas(window.frames['FrameWindow'].contentWindow.document.body, {
+                onrendered: function (t) {
+                    $("#previewImage").append(t);
+                    var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a")); i.download = "KlikneteZdeCz.png"; i.href = u; i.click();
+                }
+            });
+        });
+    } catch (t) { }
+}
