@@ -123,3 +123,12 @@ function SetExternalLink(content) {
 function SetContent(content) {
     document.getElementById("FrameWindow").innerHTML = content;
 }
+
+
+function ShowMessagePanel(close) {
+    OpenCharm(0);
+    charms = Metro.getPlugin($("#charmPanel"), 'charms');
+    if (close) {
+        charms.close();
+    } else { charms.toggle(); }
+}

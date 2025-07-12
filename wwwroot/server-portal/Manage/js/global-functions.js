@@ -128,6 +128,14 @@ function ShowFrameSource() {
 }
 
 
+function ScrollToTop() { window.scrollTo(0, 0); }
+function enableScroll() { window.onscroll = function () { }; }
+function disableScroll() {
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        window.onscroll = function () { window.scrollTo(scrollLeft, scrollTop); };
+}
+
 function PrintElement(elementId) {
     try { $("#" + elementId).printElement({ pageTitle: elementId.split("_")[1] + ".html", printMode: "popup" }); } catch (t) { }
 }
@@ -187,8 +195,23 @@ function ImageFromFrameElement() {
 }
 
 
-function CalcHeight(iframeElement) {
-    iframeElement.height = 2000;
+function SaveToFavorites(title, url) {
+    if (window.sidebar) {
+        // Firefox
+        window.sidebar.addPanel(title, url, '');
+    }
+    else if (window.opera && window.print) {
+        // Opera
+        var elem = document.createElement('a');
+        elem.setAttribute('href', url);
+        elem.setAttribute('title', title);
+        elem.setAttribute('rel', 'sidebar');
+        elem.click(); //this.title=document.title;
+    }
+    else if (document.all) {
+        // ie
+        window.external.AddFavorite(url, title);
+    }
 }
 
 async function LoadMetro() {
