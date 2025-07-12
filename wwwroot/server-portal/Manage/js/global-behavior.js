@@ -104,8 +104,22 @@ function disableScroll() {
 }
 
 
-function portalStartup() {
+function PortalStartup() {
     CreateToolPanel();
+
     RunServerGetApi(false, "ServerPortalApi/GetApiTableData/PortalMenu", "PortalMenu");
-    generateMenu();
+    GenerateMenu();
+}
+
+
+function SetLink(content) {
+    $("#FrameWindow").load(Metro.storage.getItem('BackendServerAddress', null) + "/" + content)
+}
+
+function SetExternalLink(content) {
+    document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + Metro.storage.getItem('BackendServerAddress', null) + "/" + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
+}
+
+function SetContent(content) {
+    document.getElementById("FrameWindow").innerHTML = content;
 }

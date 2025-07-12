@@ -46,10 +46,6 @@ namespace EasyITCenter.DBModel
             DocSrvDocumentationCodeLibraryLists = new HashSet<DocSrvDocumentationCodeLibraryList>();
             DocSrvDocumentationGroupLists = new HashSet<DocSrvDocumentationGroupList>();
             DocSrvDocumentationLists = new HashSet<DocSrvDocumentationList>();
-            GithubSrvAuthLogLists = new HashSet<GithubSrvAuthLogList>();
-            GithubSrvRepositoryLists = new HashSet<GithubSrvRepositoryList>();
-            GithubSrvSshKeyLists = new HashSet<GithubSrvSshKeyList>();
-            GithubSrvUserTeamRoleLists = new HashSet<GithubSrvUserTeamRoleList>();
             LicSrvLicenseAlgorithmLists = new HashSet<LicSrvLicenseAlgorithmList>();
             PortalActionHistoryLists = new HashSet<PortalActionHistoryList>();
             PortalActionTypeLists = new HashSet<PortalActionTypeList>();
@@ -241,14 +237,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<DocSrvDocumentationGroupList> DocSrvDocumentationGroupLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<DocSrvDocumentationList> DocSrvDocumentationLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<GithubSrvAuthLogList> GithubSrvAuthLogLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<GithubSrvRepositoryList> GithubSrvRepositoryLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<GithubSrvSshKeyList> GithubSrvSshKeyLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<GithubSrvUserTeamRoleList> GithubSrvUserTeamRoleLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<LicSrvLicenseAlgorithmList> LicSrvLicenseAlgorithmLists { get; set; }
         [InverseProperty("User")]

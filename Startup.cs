@@ -35,9 +35,6 @@ namespace EasyITCenter {
         //https://github.com/fawdlstty/SimpleMS
 
 
-        //GIT SERVER
-        //https://git-scm.com/downloads
-        //https://github.com/fawdlstty/GitServerCore
         /// <summary>
         /// Server Core: Main Configure of Server Services, Technologies, Modules, etc..
         /// </summary>

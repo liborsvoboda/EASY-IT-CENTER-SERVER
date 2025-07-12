@@ -8,11 +8,6 @@ using Newtonsoft.Json.Serialization;
 using Quartz;
 using SimpleMvcSitemap;
 using Microsoft.AspNetCore.Mvc.Razor;
-using EasyITCenter.GitServer.Services;
-using EasyITCenter.GitServer.Repositorys;
-using EasyITCenter.GitServer.Interfaces;
-using EasyITCenter.GitServer.Models;
-using EasyITCenter.GitServer.Controllers;
 using RefactorWebSites;
 using Westwind.AspNetCore.Markdown;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -297,10 +292,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureTransient(ref IServiceCollection services) {
-            services.AddTransient<GitRepositoryService>();
-            services.AddTransient<GitFileService>();
-            //services.AddTransient<GithubUserController>();
-            //services.AddTransient<GitAuthenticationService>();//, GitRepository<SolutionUserList>>();
+
         }
 
 
@@ -327,8 +319,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
             //Stripe    
             StripeConfiguration.ApiKey = "SecretKey";
-            services.AddScoped<CustomerService>().AddScoped<ChargeService>()
-            .AddScoped<TokenService>().AddScoped<IStripeService, StripeService>();
+            services.AddScoped<CustomerService>().AddScoped<ChargeService>();
+            services.AddScoped<TokenService>(); 
+            services.AddScoped<IStripeService, StripeService>();
 
         }
 

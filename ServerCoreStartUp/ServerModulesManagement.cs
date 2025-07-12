@@ -1,5 +1,4 @@
 ﻿using DBEntitySchema.Core;
-using EasyITCenter.GitServer.Settings;
 using Markdig.Extensions.AutoIdentifiers;
 using Markdig;
 using MarkdownDocumenting.Extensions;
@@ -27,17 +26,16 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
 
 
-
+        //GIT SERVER
+        //https://git-scm.com/downloads
+        //https://github.com/fawdlstty/GitServerCore
         /// <summary>
         /// Server Module: GitServer Startup Configuration
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureGitServer(ref IServiceCollection services) {
             if (bool.Parse(DbOperations.GetServerParameterLists("GitServerEnabled").Value)) {
-                services.Configure<GitSettings>(options => {
-                    options.BasePath = SrvRuntime.GitServerPath;
-                    options.GitPath = "Git";
-                }).AddGitServerCore(opt => {
+                services.AddGitServerCore(opt => {
                     opt.GitUrlRegex = "^/(\\S*)\\.git$";
                     opt.GitUrlSimplize = _url => _url[1..^4];
                     opt.GitRepoBareDir = "/data/repo_bare";

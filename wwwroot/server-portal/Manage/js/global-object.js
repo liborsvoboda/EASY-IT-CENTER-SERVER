@@ -11,7 +11,7 @@ var notify = Metro.notify; notify.setup({
 function CreateToolPanel() {
     let html = '<div id="ToolPanel" data-role="bottom-sheet" class="bottom-sheet pos-fixed list-list grid-style opened" style="top: 0px; left: 90%; z-index:10000;min-width: 430px;">';
     html += '<div class="c-pointer mif-cancel mif-1x icon pos-absolute fg-red" style="top:5px;right:5px;" onclick=ShowToolPanel(); ></div>';
-    html += '<div class="w-100 text-left"> <audio id="radio" class="light bg-transparent" data-role="audio-player" data-src="/server-integrated/razor-pages/serverportal/media/hotel_california.mp3" data-volume=".5"></audio> </div>';
+    //html += '<div class="w-100 text-left"> <audio id="radio" class="light bg-transparent" data-role="audio-player" data-src="/server-integrated/razor-pages/serverportal/media/hotel_california.mp3" data-volume=".5"></audio> </div>';
     html += '<div class="w-100 text-left" style="z-index: 1000000;"><div id="google_translate_element"></div></div>';
     html += '<div class="w-100 d-inline-flex"><div class="w-75 text-left">';
     html += '<input id="UserAutomaticTranslate" type="checkbox" data-role="checkbox" data-cls-caption="fg-cyan text-bold" data-caption="Auto Translate" onchange=UserChangeTranslateSetting(); checked >';
@@ -54,18 +54,18 @@ function ShowUnAuthMessage() {
 
 
 
-function generateMenu() {
-    let htmlContent = '<li class="item-header">Portal MENU</li>';
+function GenerateMenu() {
+    let htmlContent = "";// '<li class="item-header">Portal MENU</li>';
+    let origMenu = document.getElementById("PortalMenu").innerHTML;
 
-    let lastGuid = null, menuItem = {};
+    let lastGuid = null, menuItem = {}, portalMenu = [];
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)))
-    menu.forEach((mItem,index,arr) => {
-       
-        console.log(index, arr.length);
-    
+    menu.forEach((mItem, index, arr) => {
+
         switch (mItem.apiTableColumnName) {
             case "ParentGuid":
                 menuItem.ParentGuid = mItem.value;
+                menuItem.RecGuid = mItem.recGuid;
                 break;
             case "Sequence":
                 menuItem.Sequence = parseInt(mItem.value);
@@ -86,28 +86,43 @@ function generateMenu() {
                 menuItem.Content = mItem.value;
                 break;
             default:
-              
+
         }
 
-        
-
-        if (lastGuid != null && (lastGuid != mItem.recGuid || index + 1 == arr.length)) {
-            if (menuItem.Type == "menu") {
-                htmlContent += '<li ><a href="#" class="dropdown-toggle"><span class="icon"><span class="' + menuItem.Icon + '"></span></span><span class="caption">' + menuItem.Name + '</span></a>';
-                htmlContent += '<ul id = ' + menuItem.Name + ' class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + menuItem.Name + '</li> ';
-                htmlContent += '</li>';
-            }
-            else if (menuItem.Type == "link") { }
-            else if (menuItem.Type == "content") { }
+        if (lastGuid != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != mItem.recGuid)) {
+            portalMenu.push(menuItem);
+            menuItem = {};
         }
 
         lastGuid = mItem.recGuid;
     });
+    portalMenu.sort((a, b) => a.Sequence > b.Sequence ? 1 : -1);
 
-    console.log(htmlContent);
+    portalMenu.forEach((mItem, index, arr) => {
+        if (mItem.Type == "menu") {
+            htmlContent += '<li id= ' + mItem.Sequence + ' ><a href="#" class="dropdown-toggle"><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a>';
+            htmlContent += '<ul id = ' + mItem.RecGuid + ' class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + mItem.Name + '</li></ul>';
+            htmlContent += '</li>';
+        }
+        document.getElementById("PortalMenu").innerHTML = htmlContent + origMenu;
+    });
 
+    portalMenu.forEach((mItem, index, arr) => {
+        if (mItem.Type == "link") {
+            htmlContent = '<li onclick=SetLink("' + mItem.Content + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
-    document.getElementById("PortalMenu").innerHTML = htmlContent + document.getElementById("PortalMenu").innerHTML;
+        } else if (mItem.Type == "externalLink") {
+            htmlContent = '<li onclick=SetExternalLink("' + mItem.Content + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
+
+        }
+
+        else if (mItem.Type == "content") {
+            htmlContent = '<li onclick=SetContent("' + mItem.Content + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
+        }
+    });
 
 
 }

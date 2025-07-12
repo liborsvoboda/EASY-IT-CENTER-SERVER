@@ -32,8 +32,6 @@ namespace EasyITCenter.DBModel
         public string Name { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
-        public bool Public { get; set; }
-        public bool Active { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 

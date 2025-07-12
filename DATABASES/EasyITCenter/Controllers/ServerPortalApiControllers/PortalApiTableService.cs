@@ -42,6 +42,56 @@ namespace StripeAPI.Controllers
         }
 
 
+        [Authorize]
+        [HttpGet("/ServerPortalApi/GetApiTableList")]
+        public async Task<string> GetApiTableList() {
+            List<PortalApiTableList> data = new();
+            try {
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
+                    IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
+                })) {
+
+                    if (!ServerApiServiceExtension.IsLogged()) {
+                        data = await new EasyITCenterContext().PortalApiTableLists
+                       .Where(a => ( a.UserPrefix == null && ServerApiServiceExtension.IsAdmin()) || a.UserPrefix == ServerApiServiceExtension.GetUserPrefix() )
+                       .OrderBy(a => a.Name).ToListAsync();
+
+                    }
+                }
+            } catch (Exception ex) { }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                WriteIndented = true,
+                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+        }
+
+
+        [Authorize]
+        [HttpGet("/ServerPortalApi/GetApiTableColumnList")]
+        public async Task<string> GetApiTableColumnList(string tablename) {
+            List<PortalApiTableColumnList> data = new();
+            try {
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
+                    IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
+                })) {
+
+                    if (!ServerApiServiceExtension.IsLogged()) {
+                        data = await new EasyITCenterContext().PortalApiTableColumnLists
+                       .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && ( a.UserPrefix == null && ServerApiServiceExtension.IsAdmin() ) || a.UserPrefix == ServerApiServiceExtension.GetUserPrefix())
+                       .OrderBy(a => a.Name).ToListAsync();
+
+                    }
+                }
+            } catch (Exception ex) { }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                WriteIndented = true,
+                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+        }
 
     }
 }

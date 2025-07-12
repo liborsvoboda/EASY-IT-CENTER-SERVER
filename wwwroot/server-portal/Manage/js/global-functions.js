@@ -4,6 +4,13 @@ function htmlDecode(input) {
     return doc.documentElement.textContent;
 }
 
+async function FileReaderToImageData(n) {
+    const t = new FileReader; return await new Promise((t, i) => {
+        const r = new FileReader; r.onloadend = () => t(r.result); r.onerror = i;
+        console.log("files", JSON.parse(JSON.stringify(files)));
+        r.readAsDataURL(n[0])
+    })
+}
 
 function str2bytes(str) {
     var bytes = new Uint8Array(str.length);
@@ -108,6 +115,18 @@ function showSource() {
 }
 
 
+function ShowFrameSource() {
+    var source = "<html>";
+    source += window.frames['FrameWindow'].contentWindow.document.body.innerHTML;
+    source += "</html>";
+    source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    source = "<pre>" + source + "</pre>";
+    sourceWindow = window.open('', 'Interaktnivní Kód', 'height=800,width=800,scrollbars=1,resizable=1');
+    sourceWindow.document.write(source);
+    sourceWindow.document.close();
+    if (window.focus) sourceWindow.focus();
+}
+
 
 function PrintElement(elementId) {
     try { $("#" + elementId).printElement({ pageTitle: elementId.split("_")[1] + ".html", printMode: "popup" }); } catch (t) { }
@@ -165,4 +184,48 @@ function ImageFromFrameElement() {
             });
         });
     } catch (t) { }
+}
+
+
+function CalcHeight(iframeElement) {
+    iframeElement.height = 2000;
+}
+
+async function LoadMetro() {
+    const pathCss = './metro/css/metro-all.min.css';
+    const pathThemeCss = './metro/css/schemes/sky-net.css';
+    const pathJs = './metro/js/metro.4.5.2.min.js?v=4.5.2';
+
+    const dataCss = await fetch(pathCss).then((r) => r.text());
+    const dataThemeCss = await fetch(pathThemeCss).then((r) => r.text());
+
+    const myFont = new FontFace('metro', "url('./metro/mif/metro.svg') format('svg'), url('./metro/mif/metro.woff') format('woff'), url('./metro/mif/metro.ttf') format('truetype')");
+    await myFont.load(); document.fonts.add(myFont);
+
+    const dataJs = await fetch(pathJs).then((r) => r.text())
+
+    const style = document.createElement("style")
+    style.textContent = dataCss
+    document.querySelector("head").appendChild(style)
+
+    style.textContent = dataThemeCss
+    document.querySelector("head").appendChild(style)
+
+    new Function(dataJs)();
+    Metro.init();
+    Metro.toast.create("Metro 4 did loaded successful!", { showTop: true, clsToast: "success" });
+    $("#a1").accordion()
+}
+
+
+function UnloadMetro() {
+    delete Metro;
+}
+
+function loadPage(url) {
+    $.ajax({
+        url: url
+    }).done(function (data) {
+        $('#frameWindow').html(data);
+    });
 }

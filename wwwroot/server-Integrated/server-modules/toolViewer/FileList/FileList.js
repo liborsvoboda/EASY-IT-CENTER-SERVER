@@ -1,4 +1,4 @@
-let integrated = [
+﻿let integrated = [
 "/server-integrated/code-compiler/anycodecompiler/index.html",
 "/server-integrated/code-compiler/codeconvertonline.html",
 "/server-integrated/code-compiler/csharponline.html",
@@ -55,7 +55,7 @@ let integrated = [
 "/server-integrated/web-designer/WebDesigner/dist/index.html",
 "/server-integrated/web-designer/WebDesigner/index.html",
 "/server-integrated/webapp-studio/EasyAppBuilder/index.html",
-"/server-integrated/webapp-studio/MikroAppCreator/index.html",
+"/server-integrated/webapp-studio/UniAppCreator/index.html",
 "/server-integrated/webapp-studio/PlaygroundStudio/index.html",
 "/server-integrated/webapp-studio/StaticWebStudio/about.html",
 "/server-integrated/webapp-studio/StaticWebStudio/index.html",

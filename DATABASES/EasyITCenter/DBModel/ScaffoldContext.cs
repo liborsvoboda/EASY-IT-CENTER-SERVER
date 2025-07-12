@@ -50,12 +50,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<DocSrvDocumentationCodeLibraryList> DocSrvDocumentationCodeLibraryLists { get; set; } = null!;
         public virtual DbSet<DocSrvDocumentationGroupList> DocSrvDocumentationGroupLists { get; set; } = null!;
         public virtual DbSet<DocSrvDocumentationList> DocSrvDocumentationLists { get; set; } = null!;
-        public virtual DbSet<GithubSrvAuthLogList> GithubSrvAuthLogLists { get; set; } = null!;
-        public virtual DbSet<GithubSrvRepositoryList> GithubSrvRepositoryLists { get; set; } = null!;
-        public virtual DbSet<GithubSrvSshKeyList> GithubSrvSshKeyLists { get; set; } = null!;
-        public virtual DbSet<GithubSrvTeamList> GithubSrvTeamLists { get; set; } = null!;
-        public virtual DbSet<GithubSrvTeamRepositoryRoleList> GithubSrvTeamRepositoryRoleLists { get; set; } = null!;
-        public virtual DbSet<GithubSrvUserTeamRoleList> GithubSrvUserTeamRoleLists { get; set; } = null!;
         public virtual DbSet<LicSrvLicenseActivationFailList> LicSrvLicenseActivationFailLists { get; set; } = null!;
         public virtual DbSet<LicSrvLicenseAlgorithmList> LicSrvLicenseAlgorithmLists { get; set; } = null!;
         public virtual DbSet<LicSrvUsedLicenseList> LicSrvUsedLicenseLists { get; set; } = null!;
@@ -682,57 +676,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DocumentationList_UserList");
-            });
-
-            modelBuilder.Entity<GithubSrvAuthLogList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.GithubSrvAuthLogLists)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_GithubSrvAuthLogList_UserId");
-            });
-
-            modelBuilder.Entity<GithubSrvRepositoryList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.GithubSrvRepositoryLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GithubSrvRepositoryList_SolutionUserList");
-            });
-
-            modelBuilder.Entity<GithubSrvSshKeyList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.GithubSrvSshKeyLists)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_GithubSrvSshKeyList_UserId");
-            });
-
-            modelBuilder.Entity<GithubSrvTeamRepositoryRoleList>(entity =>
-            {
-                entity.HasOne(d => d.Repository)
-                    .WithMany(p => p.GithubSrvTeamRepositoryRoleLists)
-                    .HasForeignKey(d => d.RepositoryId)
-                    .HasConstraintName("FK_GithubSrvTeamRepositoryRoleList_RepositoryId");
-
-                entity.HasOne(d => d.Team)
-                    .WithMany(p => p.GithubSrvTeamRepositoryRoleLists)
-                    .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK_GithubSrvTeamRepositoryRoleList_TeamId");
-            });
-
-            modelBuilder.Entity<GithubSrvUserTeamRoleList>(entity =>
-            {
-                entity.HasOne(d => d.Team)
-                    .WithMany(p => p.GithubSrvUserTeamRoleLists)
-                    .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK_GithubSrvUserTeamRoleList_TeamId");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.GithubSrvUserTeamRoleLists)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_GithubSrvUserTeamRoleList_UserId");
             });
 
             modelBuilder.Entity<LicSrvLicenseAlgorithmList>(entity =>
