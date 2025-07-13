@@ -55,20 +55,13 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<LicSrvUsedLicenseList> LicSrvUsedLicenseLists { get; set; } = null!;
         public virtual DbSet<MigrationsHistoryList> MigrationsHistoryLists { get; set; } = null!;
         public virtual DbSet<PortalActionHistoryList> PortalActionHistoryLists { get; set; } = null!;
-        public virtual DbSet<PortalActionTypeList> PortalActionTypeLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableList> PortalApiTableLists { get; set; } = null!;
-        public virtual DbSet<PortalDataHistoryList> PortalDataHistoryLists { get; set; } = null!;
-        public virtual DbSet<PortalDataTypeList> PortalDataTypeLists { get; set; } = null!;
         public virtual DbSet<PortalGeneratedDataList> PortalGeneratedDataLists { get; set; } = null!;
         public virtual DbSet<PortalGeneratorActionList> PortalGeneratorActionLists { get; set; } = null!;
         public virtual DbSet<PortalGeneratorList> PortalGeneratorLists { get; set; } = null!;
         public virtual DbSet<PortalGeneratorTemplateList> PortalGeneratorTemplateLists { get; set; } = null!;
-        public virtual DbSet<PortalHelpDataList> PortalHelpDataLists { get; set; } = null!;
-        public virtual DbSet<PortalHelpGroupList> PortalHelpGroupLists { get; set; } = null!;
-        public virtual DbSet<PortalInjectGroupList> PortalInjectGroupLists { get; set; } = null!;
-        public virtual DbSet<PortalInjectPageCodeList> PortalInjectPageCodeLists { get; set; } = null!;
         public virtual DbSet<PortalPluginList> PortalPluginLists { get; set; } = null!;
         public virtual DbSet<PortalUserCommentList> PortalUserCommentLists { get; set; } = null!;
         public virtual DbSet<PortalUserPageList> PortalUserPageLists { get; set; } = null!;
@@ -726,34 +719,31 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<PortalActionHistoryList>(entity =>
             {
-                entity.HasOne(d => d.ActionTypeNavigation)
-                    .WithMany(p => p.PortalActionHistoryLists)
+                entity.HasOne(d => d.InheritedActionTypeNavigation)
+                    .WithMany(p => p.PortalActionHistoryListInheritedActionTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.ActionType)
+                    .HasForeignKey(d => d.InheritedActionType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalActionHistoryList_PortalActionTypeList");
 
-                entity.HasOne(d => d.DataTypeNavigation)
-                    .WithMany(p => p.PortalActionHistoryLists)
+                entity.HasOne(d => d.InheritedDataTypeNavigation)
+                    .WithMany(p => p.PortalActionHistoryListInheritedDataTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.DataType)
+                    .HasForeignKey(d => d.InheritedDataType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalActionHistoryList_PortalDataTypeList");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalActionHistoryLists)
+                    .WithMany(p => p.PortalActionHistoryListUsers)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalActionHistoryList_SolutionUserList");
-            });
 
-            modelBuilder.Entity<PortalActionTypeList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalActionTypeLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalActionTypeList_SolutionUserList");
+                entity.HasOne(d => d.UserPrefixNavigation)
+                    .WithMany(p => p.PortalActionHistoryListUserPrefixNavigations)
+                    .HasPrincipalKey(p => p.UserDbPreffix)
+                    .HasForeignKey(d => d.UserPrefix)
+                    .HasConstraintName("FK_PortalActionHistoryList_SolutionUserList1");
             });
 
             modelBuilder.Entity<PortalApiTableColumnDataList>(entity =>
@@ -842,24 +832,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserPrefix)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableList_SolutionUserList1");
-            });
-
-            modelBuilder.Entity<PortalDataHistoryList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalDataHistoryLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalDataHistoryList_SolutionUserList");
-            });
-
-            modelBuilder.Entity<PortalDataTypeList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalDataTypeLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalDataTypeList_SolutionUserList");
             });
 
             modelBuilder.Entity<PortalGeneratedDataList>(entity =>
@@ -986,62 +958,6 @@ namespace EasyITCenter.DBModel
                     .HasPrincipalKey(p => p.UserDbPreffix)
                     .HasForeignKey(d => d.UserPrefix)
                     .HasConstraintName("FK_PortalGeneratorTemplateList_SolutionUserList1");
-            });
-
-            modelBuilder.Entity<PortalHelpDataList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalHelpDataLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalHelpDataList_SolutionUserList");
-
-                entity.HasOne(d => d.PortalHelpGroupList)
-                    .WithMany(p => p.PortalHelpDataLists)
-                    .HasPrincipalKey(p => new { p.UserPreffix, p.DataType, p.Name })
-                    .HasForeignKey(d => new { d.UserPrefix, d.DataType, d.HelpGroupType })
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalHelpDataList_PortalHelpGroupList");
-            });
-
-            modelBuilder.Entity<PortalHelpGroupList>(entity =>
-            {
-                entity.HasOne(d => d.DataTypeNavigation)
-                    .WithMany(p => p.PortalHelpGroupLists)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.DataType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalHelpGroupList_PortalDataTypeList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalHelpGroupLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalHelpGroupList_SolutionUserList");
-            });
-
-            modelBuilder.Entity<PortalInjectGroupList>(entity =>
-            {
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalInjectGroupLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalInjectGroupList_SolutionUserList");
-            });
-
-            modelBuilder.Entity<PortalInjectPageCodeList>(entity =>
-            {
-                entity.HasOne(d => d.InjectGroup)
-                    .WithMany(p => p.PortalInjectPageCodeLists)
-                    .HasForeignKey(d => d.InjectGroupId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalInjectPageCodeList_PortalInjectGroupList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalInjectPageCodeLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalInjectMarkList_SolutionUserList");
             });
 
             modelBuilder.Entity<PortalPluginList>(entity =>

@@ -1,6 +1,14 @@
 ﻿// STARTUP Temp Variables Definitions
 let pageLoader;
 
+function PortalStartup() {
+    CreateToolPanel();
+
+    RunServerGetApi(false, "ServerPortalApi/GetApiTableDataList/PortalMenu", "PortalMenu");
+    GenerateMenu();
+
+
+}
 
 /*Start of Global Loading Indicator for All Pages*/
 function hidePageLoading() { Metro.activity.close(pageLoader); }
@@ -104,13 +112,6 @@ function disableScroll() {
 }
 
 
-function PortalStartup() {
-    CreateToolPanel();
-
-    RunServerGetApi(false, "ServerPortalApi/GetApiTableData/PortalMenu", "PortalMenu");
-    GenerateMenu();
-}
-
 
 function SetLink(content) {
     $("#FrameWindow").load(Metro.storage.getItem('BackendServerAddress', null) + "/" + content)
@@ -120,8 +121,11 @@ function SetExternalLink(content) {
     document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + Metro.storage.getItem('BackendServerAddress', null) + "/" + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
 }
 
-function SetContent(content) {
-    document.getElementById("FrameWindow").innerHTML = content;
+function SetContent(htmlContentId, jsContentId) {
+    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
+    document.getElementById("FrameWindow").innerHTML = menu.filter(menuItem => { return menuItem.id == htmlContentId })[0].value;
+    var script = "<script type='text/javascript'> " + menu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";
+    $('body').append(script);
 }
 
 

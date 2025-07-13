@@ -11,8 +11,8 @@ namespace StripeAPI.Controllers
 
         //[AllowAnonymous]
         //[Authorize]
-        [HttpGet("/ServerPortalApi/GetApiTableData/{tablename}")]
-        public async Task<string> GetApiTableData(string tablename) {
+        [HttpGet("/ServerPortalApi/GetApiTableDataList/{tablename}")]
+        public async Task<string> GetApiTableDataList(string tablename) {
             List<PortalApiTableColumnDataList> data = new();
             try {
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {

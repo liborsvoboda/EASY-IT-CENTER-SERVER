@@ -63,7 +63,7 @@ namespace EasyITCenter.ControllersExtensions {
 
             if (username == null) { return null; }
             var user = new EasyITCenterContext().SolutionUserLists.Include(a => a.Role)
-                .Where(a => a.Active == true && a.UserName == username && a.Password == password).First();
+                .Where(a => a.Active == true && a.UserName == username && a.Password == password).FirstOrDefault();
             if (user == null) { return null; }
                 
             try {
@@ -120,8 +120,8 @@ namespace EasyITCenter.ControllersExtensions {
         /// <returns></returns>
         public static bool RefreshUserToken(string username, AuthenticateResponse token) {
             try {
-                var dbUser = new EasyITCenterContext().SolutionUserLists
-                    .Where(a => a.Active == true && a.UserName == username).First();
+                SolutionUserList? dbUser = new EasyITCenterContext().SolutionUserLists
+                    .Where(a => a.Active == true && a.UserName == username).FirstOrDefault();
                 if (dbUser == null || dbUser.AccessToken == token.Token && dbUser.Expiration < DateTimeOffset.Now) { return false; }
 
                 dbUser.AccessToken = token.Token; dbUser.Expiration = token.Expiration;

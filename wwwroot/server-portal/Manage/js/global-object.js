@@ -1,10 +1,4 @@
 ﻿
-//Global Notify Setting
-var notify = Metro.notify; notify.setup({
-    width: defaultSetting[0].notifyWidth,
-    duration: defaultSetting[0].notifyDuration,
-    animation: defaultSetting[0].notifyAnimation
-});
 
 
 //Global Tool Panel
@@ -59,7 +53,8 @@ function GenerateMenu() {
     let origMenu = document.getElementById("PortalMenu").innerHTML;
 
     let lastGuid = null, menuItem = {}, portalMenu = [];
-    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)))
+    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
+ 
     menu.forEach((mItem, index, arr) => {
 
         switch (mItem.apiTableColumnName) {
@@ -82,11 +77,15 @@ function GenerateMenu() {
             case "Type":
                 menuItem.Type = mItem.value;
                 break;
-            case "Content":
-                menuItem.Content = mItem.value;
+            case "HtmlContent":
+                menuItem.HtmlContent = mItem.value;
+                menuItem.HtmlContentId = mItem.id;
+                break;
+            case "JsContent":
+                menuItem.JsContent = mItem.value;
+                menuItem.JsContentId = mItem.id;
                 break;
             default:
-
         }
 
         if (lastGuid != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != mItem.recGuid)) {
@@ -97,6 +96,9 @@ function GenerateMenu() {
         lastGuid = mItem.recGuid;
     });
     portalMenu.sort((a, b) => a.Sequence > b.Sequence ? 1 : -1);
+    //console.log(portalMenu);
+
+    Metro.storage.setItem('PortalMenu', portalMenu);
 
     portalMenu.forEach((mItem, index, arr) => {
         if (mItem.Type == "menu") {
@@ -106,23 +108,33 @@ function GenerateMenu() {
         }
         document.getElementById("PortalMenu").innerHTML = htmlContent + origMenu;
     });
-
+    
     portalMenu.forEach((mItem, index, arr) => {
         if (mItem.Type == "link") {
             htmlContent = '<li onclick=SetLink("' + mItem.Content + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         } else if (mItem.Type == "externalLink") {
-            htmlContent = '<li onclick=SetExternalLink("' + mItem.Content + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=SetExternalLink("' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         }
 
         else if (mItem.Type == "content") {
-            htmlContent = '<li onclick=SetContent("' + mItem.Content + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
     });
+}
 
 
+
+function ShowLoginPage() {
+    let htnlContent = '<DIV class=text-center><WINDOW><DIV class="hero hero-bg 1bg-brand-secondary add-neb"><DIV class=container><DIV class=row>';
+    htnlContent += '<FORM id=loginform class="login-form bg-white fg-darkBlue p-6 mx-auto border bd-default win-shadow" method=post action=javascript: data-role="validator" data-on-validate-form="validateForm" data-on-error-form="invalidForm" data-clear-invalid="2000"><SPAN class="mif-vpn-lock mif-4x place-right" style="MARGIN-TOP: -10px"></SPAN>';
+    htnlContent += '<H2 class=text-light>EIC&ESB Portal</H2>'
+    htnlContent += '<DIV class=form-group><INPUT id=usernameId class=input style="HEIGHT: auto" maxLength=50 data-role="input" data-validate="required" placeholder="Vložte email..." data-prepend="<span class=\'mif-envelop\'>"> </DIV>';
+    htnlContent += '<DIV class=form-group><INPUT id=passwordId type=password data-role="input" data-validate="required minlength=6" placeholder="Vložte heslo..." data-prepend="<span class=\'mif-key\'>"> </DIV>';
+    htnlContent += '<DIV class="form-group mt-10"><INPUT class=place-right type=checkbox data-role="checkbox" data-caption="Zapamatovat"><BUTTON class="button shadowed">Přihlásit</BUTTON> </DIV></FORM></DIV></DIV></DIV></WINDOW></DIV>';
+    document.getElementById("FrameWindow").innerHTML = htnlContent;
 }

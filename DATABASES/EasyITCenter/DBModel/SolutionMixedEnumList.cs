@@ -16,6 +16,8 @@ namespace EasyITCenter.DBModel
         {
             BasicAttachmentLists = new HashSet<BasicAttachmentList>();
             DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
+            PortalActionHistoryListInheritedActionTypeNavigations = new HashSet<PortalActionHistoryList>();
+            PortalActionHistoryListInheritedDataTypeNavigations = new HashSet<PortalActionHistoryList>();
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableColumnLists = new HashSet<PortalApiTableColumnList>();
             PortalApiTableLists = new HashSet<PortalApiTableList>();
@@ -77,6 +79,8 @@ namespace EasyITCenter.DBModel
         public virtual SolutionUserList User { get; set; } = null!;
         public virtual ICollection<BasicAttachmentList> BasicAttachmentLists { get; set; }
         public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
+        public virtual ICollection<PortalActionHistoryList> PortalActionHistoryListInheritedActionTypeNavigations { get; set; }
+        public virtual ICollection<PortalActionHistoryList> PortalActionHistoryListInheritedDataTypeNavigations { get; set; }
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; }
         public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }

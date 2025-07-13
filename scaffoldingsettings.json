@@ -2,7 +2,7 @@
   "DataSource": "Data Source=localhost,1433; Initial Catalog=EasyITCenter; User ID=easyitcenter;Password=easyitcenter;TrustServerCertificate=True;command timeout=300;",
   "Provider": "Microsoft.EntityFrameworkCore.SqlServer",
   "ContextName": "ScaffoldContext",
-  "ContextDirectory": "DATABASES/EasyITCenter/DBModel",
+  "ContextDirectory": "DATABASES/EasyITCenter/DBEngine",
   "OutputDirectory": "DATABASES/EasyITCenter/DBModel",
   "ContextNamespace": "EasyITCenter.DBModel",
   "Namespace": "EasyITCenter.DBModel",

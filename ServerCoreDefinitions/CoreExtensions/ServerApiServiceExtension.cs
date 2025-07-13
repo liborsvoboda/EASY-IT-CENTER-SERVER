@@ -63,13 +63,13 @@
         }
 
         /// <summary>
-        /// Check HTTP if is the Request Logged
+        /// Check HTTP if is the Request is Logged
         /// </summary>
         /// <returns></returns>
         public static bool IsLogged() {
             try {
                 var context = _accessor?.HttpContext;
-                if (context != null && context.User != null && context.User.FindFirst(ClaimTypes.NameIdentifier.ToString())?.Value != null) { return false; } else return true;
+                if (context == null || (context != null && (context.User == null || (context.User != null && context.User.FindFirst(ClaimTypes.NameIdentifier.ToString())?.Value == null)))) { return false; } else return true;
             } catch { return false; }
         }
 
@@ -119,7 +119,7 @@
 
 
         /// <summary>
-        /// Get UserName
+        /// Get UserDBPrefix
         /// </summary>
         /// <returns></returns>
         public static string? GetUserPrefix() {

@@ -18,6 +18,14 @@ let defaultSetting = [{
 }];
 
 
+//Global Notify Setting
+var notify = Metro.notify; notify.setup({
+    width: defaultSetting[0].notifyWidth,
+    duration: defaultSetting[0].notifyDuration,
+    animation: defaultSetting[0].notifyAnimation
+});
+
+
 
 //Set Default Storage Values
 Metro.storage.setItem('BackendServerAddress', window.location.origin);

@@ -237,7 +237,7 @@ async function LoadMetro() {
     new Function(dataJs)();
     Metro.init();
     Metro.toast.create("Metro 4 did loaded successful!", { showTop: true, clsToast: "success" });
-    $("#a1").accordion()
+    //$("#a1").accordion()
 }
 
 
