@@ -14,10 +14,18 @@ namespace EasyITCenter.DBModel
     {
         public SolutionMixedEnumList()
         {
+            BasicAttachmentLists = new HashSet<BasicAttachmentList>();
             DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableColumnLists = new HashSet<PortalApiTableColumnList>();
-            PortalGeneratorActionLists = new HashSet<PortalGeneratorActionList>();
+            PortalApiTableLists = new HashSet<PortalApiTableList>();
+            PortalGeneratedDataLists = new HashSet<PortalGeneratedDataList>();
+            PortalGeneratorActionListInheritedCommandTypeNavigations = new HashSet<PortalGeneratorActionList>();
+            PortalGeneratorActionListInheritedGeneratorTypeNavigations = new HashSet<PortalGeneratorActionList>();
+            PortalGeneratorActionListInheritedTemplateTypeNavigations = new HashSet<PortalGeneratorActionList>();
+            PortalGeneratorLists = new HashSet<PortalGeneratorList>();
+            PortalGeneratorTemplateListInheritedCommandTypeNavigations = new HashSet<PortalGeneratorTemplateList>();
+            PortalGeneratorTemplateListInheritedTemplateTypeNavigations = new HashSet<PortalGeneratorTemplateList>();
             PortalPluginListInheritedCodeTypeNavigations = new HashSet<PortalPluginList>();
             PortalPluginListInheritedPluginTypeNavigations = new HashSet<PortalPluginList>();
             ServerApiSecurityLists = new HashSet<ServerApiSecurityList>();
@@ -67,10 +75,18 @@ namespace EasyITCenter.DBModel
         [ForeignKey("UserId")]
         [InverseProperty("SolutionMixedEnumLists")]
         public virtual SolutionUserList User { get; set; } = null!;
+        public virtual ICollection<BasicAttachmentList> BasicAttachmentLists { get; set; }
         public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; }
-        public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionLists { get; set; }
+        public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }
+        public virtual ICollection<PortalGeneratedDataList> PortalGeneratedDataLists { get; set; }
+        public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionListInheritedCommandTypeNavigations { get; set; }
+        public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionListInheritedGeneratorTypeNavigations { get; set; }
+        public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionListInheritedTemplateTypeNavigations { get; set; }
+        public virtual ICollection<PortalGeneratorList> PortalGeneratorLists { get; set; }
+        public virtual ICollection<PortalGeneratorTemplateList> PortalGeneratorTemplateListInheritedCommandTypeNavigations { get; set; }
+        public virtual ICollection<PortalGeneratorTemplateList> PortalGeneratorTemplateListInheritedTemplateTypeNavigations { get; set; }
         public virtual ICollection<PortalPluginList> PortalPluginListInheritedCodeTypeNavigations { get; set; }
         public virtual ICollection<PortalPluginList> PortalPluginListInheritedPluginTypeNavigations { get; set; }
         public virtual ICollection<ServerApiSecurityList> ServerApiSecurityLists { get; set; }

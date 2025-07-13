@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("PortalGeneratorActionList")]
-    [Index("UserPrefix", "GeneratorType", "GeneratorId", "Name", Name = "IX_PortalGeneratorActionList", IsUnique = true)]
+    [Index("UserPrefix", "InheritedGeneratorType", "GeneratorId", "Name", Name = "IX_PortalGeneratorActionList", IsUnique = true)]
     [Index("UserPrefix", "GeneratorId", "Sequence", Name = "IX_PortalGeneratorActionList_1")]
     public partial class PortalGeneratorActionList
     {
@@ -15,12 +15,14 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(20)]
         [Unicode(false)]
-        public string UserPrefix { get; set; } = null!;
+        public string? UserPrefix { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string GeneratorType { get; set; } = null!;
+        public string InheritedGeneratorType { get; set; } = null!;
         public int GeneratorId { get; set; }
-        public int? TemplateTypeId { get; set; }
+        [StringLength(50)]
+        [Unicode(false)]
+        public string InheritedTemplateType { get; set; } = null!;
         public int Sequence { get; set; }
         [StringLength(50)]
         [Unicode(false)]
@@ -28,9 +30,10 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Description { get; set; }
         [Unicode(false)]
-        public string? CodeTemplate { get; set; }
+        public string? CodeContent { get; set; }
+        [Column("ReadmeMDContent")]
         [Unicode(false)]
-        public string? Readme { get; set; }
+        public string? ReadmeMdcontent { get; set; }
         [StringLength(900)]
         [Unicode(false)]
         public string? SourceUrl { get; set; }
@@ -51,9 +54,11 @@ namespace EasyITCenter.DBModel
         [InverseProperty("PortalGeneratorActionLists")]
         public virtual PortalGeneratorList Generator { get; set; } = null!;
         public virtual SolutionMixedEnumList? InheritedCommandTypeNavigation { get; set; }
-        public virtual PortalGeneratorTypeList PortalGeneratorTypeList { get; set; } = null!;
-        [ForeignKey("TemplateTypeId")]
-        [InverseProperty("PortalGeneratorActionLists")]
-        public virtual PortalTemplateTypeList? TemplateType { get; set; }
+        public virtual SolutionMixedEnumList InheritedGeneratorTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedTemplateTypeNavigation { get; set; } = null!;
+        [ForeignKey("UserId")]
+        [InverseProperty("PortalGeneratorActionListUsers")]
+        public virtual SolutionUserList User { get; set; } = null!;
+        public virtual SolutionUserList? UserPrefixNavigation { get; set; }
     }
 }

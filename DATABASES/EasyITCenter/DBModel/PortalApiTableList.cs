@@ -25,7 +25,7 @@ namespace EasyITCenter.DBModel
         public string UserPrefix { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
-        public string TableType { get; set; } = null!;
+        public string InheritedTableType { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
         public string Name { get; set; } = null!;
@@ -36,7 +36,7 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public virtual PortalApiTableTypeList TableTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedTableTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("PortalApiTableListUsers")]
         public virtual SolutionUserList User { get; set; } = null!;

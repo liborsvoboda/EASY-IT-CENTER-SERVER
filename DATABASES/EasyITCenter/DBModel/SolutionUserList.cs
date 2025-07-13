@@ -55,19 +55,22 @@ namespace EasyITCenter.DBModel
             PortalApiTableColumnListUsers = new HashSet<PortalApiTableColumnList>();
             PortalApiTableListUserPrefixNavigations = new HashSet<PortalApiTableList>();
             PortalApiTableListUsers = new HashSet<PortalApiTableList>();
-            PortalApiTableTypeLists = new HashSet<PortalApiTableTypeList>();
             PortalDataHistoryLists = new HashSet<PortalDataHistoryList>();
             PortalDataTypeLists = new HashSet<PortalDataTypeList>();
-            PortalGeneratedDataLists = new HashSet<PortalGeneratedDataList>();
-            PortalGeneratorLists = new HashSet<PortalGeneratorList>();
-            PortalGeneratorTypeLists = new HashSet<PortalGeneratorTypeList>();
+            PortalGeneratedDataListUserPrefixNavigations = new HashSet<PortalGeneratedDataList>();
+            PortalGeneratedDataListUsers = new HashSet<PortalGeneratedDataList>();
+            PortalGeneratorActionListUserPrefixNavigations = new HashSet<PortalGeneratorActionList>();
+            PortalGeneratorActionListUsers = new HashSet<PortalGeneratorActionList>();
+            PortalGeneratorListUserPrefixNavigations = new HashSet<PortalGeneratorList>();
+            PortalGeneratorListUsers = new HashSet<PortalGeneratorList>();
+            PortalGeneratorTemplateListUserPrefixNavigations = new HashSet<PortalGeneratorTemplateList>();
+            PortalGeneratorTemplateListUsers = new HashSet<PortalGeneratorTemplateList>();
             PortalHelpDataLists = new HashSet<PortalHelpDataList>();
             PortalHelpGroupLists = new HashSet<PortalHelpGroupList>();
             PortalInjectGroupLists = new HashSet<PortalInjectGroupList>();
             PortalInjectPageCodeLists = new HashSet<PortalInjectPageCodeList>();
             PortalPluginListUserPrefixNavigations = new HashSet<PortalPluginList>();
             PortalPluginListUsers = new HashSet<PortalPluginList>();
-            PortalTemplateTypeLists = new HashSet<PortalTemplateTypeList>();
             PortalUserCommentLists = new HashSet<PortalUserCommentList>();
             ProdGuidGroupLists = new HashSet<ProdGuidGroupList>();
             ProdGuidOperationLists = new HashSet<ProdGuidOperationList>();
@@ -253,17 +256,21 @@ namespace EasyITCenter.DBModel
         [InverseProperty("User")]
         public virtual ICollection<PortalApiTableList> PortalApiTableListUsers { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<PortalApiTableTypeList> PortalApiTableTypeLists { get; set; }
-        [InverseProperty("User")]
         public virtual ICollection<PortalDataHistoryList> PortalDataHistoryLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalDataTypeList> PortalDataTypeLists { get; set; }
+        public virtual ICollection<PortalGeneratedDataList> PortalGeneratedDataListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<PortalGeneratedDataList> PortalGeneratedDataLists { get; set; }
+        public virtual ICollection<PortalGeneratedDataList> PortalGeneratedDataListUsers { get; set; }
+        public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<PortalGeneratorList> PortalGeneratorLists { get; set; }
+        public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionListUsers { get; set; }
+        public virtual ICollection<PortalGeneratorList> PortalGeneratorListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<PortalGeneratorTypeList> PortalGeneratorTypeLists { get; set; }
+        public virtual ICollection<PortalGeneratorList> PortalGeneratorListUsers { get; set; }
+        public virtual ICollection<PortalGeneratorTemplateList> PortalGeneratorTemplateListUserPrefixNavigations { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<PortalGeneratorTemplateList> PortalGeneratorTemplateListUsers { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalHelpDataList> PortalHelpDataLists { get; set; }
         [InverseProperty("User")]
@@ -275,8 +282,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<PortalPluginList> PortalPluginListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalPluginList> PortalPluginListUsers { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<PortalTemplateTypeList> PortalTemplateTypeLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalUserCommentList> PortalUserCommentLists { get; set; }
         [InverseProperty("User")]

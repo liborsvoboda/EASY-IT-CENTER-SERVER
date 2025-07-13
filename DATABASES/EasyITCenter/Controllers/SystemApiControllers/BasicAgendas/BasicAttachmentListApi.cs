@@ -35,10 +35,10 @@
             return JsonSerializer.Serialize(data);
         }
 
-        [HttpGet("/EasyITCenterBasicAttachmentList/{type}/{parentId}")]
-        public async Task<string> GetBasicAttachmentListKey(string type, int parentId) {
+        [HttpGet("/EasyITCenterBasicAttachmentList/{inheritedParentRecordType}/{parentId}")]
+        public async Task<string> GetBasicAttachmentListKey(string inheritedParentRecordType, int parentId) {
             List<BasicAttachmentList> data;
-            using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().BasicAttachmentLists.Where(a => a.ParentType == type && a.ParentId == parentId).ToList(); }
+            using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().BasicAttachmentLists.Where(a => a.InheritedParentRecordType == inheritedParentRecordType && a.ParentId == parentId).ToList(); }
 
             return JsonSerializer.Serialize(data);
         }
@@ -58,12 +58,13 @@
             }
         }
 
-        [HttpDelete("/EasyITCenterBasicAttachmentList/{type}/{parentId}")]
+        [HttpDelete("/EasyITCenterBasicAttachmentList/{inheritedParentRecordType}/{parentId}")]
         [Consumes("application/json")]
-        public async Task<string> DeleteItemList(string type, int parentId) {
+        public async Task<string> DeleteItemList(string inheritedParentRecordType, int parentId) {
             try {
                 List<BasicAttachmentList> data;
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().BasicAttachmentLists.Where(a => a.ParentType == type && a.ParentId == parentId).ToList(); }
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { 
+                    data = new EasyITCenterContext().BasicAttachmentLists.Where(a => a.InheritedParentRecordType == inheritedParentRecordType && a.ParentId == parentId).ToList(); }
 
                 EasyITCenterContext data1 = new EasyITCenterContext(); data1.BasicAttachmentLists.RemoveRange(data);
                 int result = data1.SaveChanges();

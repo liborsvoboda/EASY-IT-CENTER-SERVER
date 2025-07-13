@@ -8,18 +8,18 @@ namespace EasyITCenter.DBModel
 {
     [Table("PortalGeneratedDataList")]
     [Index("UserPrefix", "GeneratorId", "Sequence", Name = "IX_PortalGeneratedDataList")]
-    [Index("GeneratorType", "GeneratorId", Name = "IX_PortalGeneratedDataList_1")]
-    [Index("GeneratorType", Name = "IX_PortalGeneratedDataList_2")]
+    [Index("InheritedGeneratorType", "GeneratorId", Name = "IX_PortalGeneratedDataList_1")]
+    [Index("InheritedGeneratorType", Name = "IX_PortalGeneratedDataList_2")]
     public partial class PortalGeneratedDataList
     {
         [Key]
         public int Id { get; set; }
         [StringLength(20)]
         [Unicode(false)]
-        public string UserPrefix { get; set; } = null!;
+        public string? UserPrefix { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string GeneratorType { get; set; } = null!;
+        public string InheritedGeneratorType { get; set; } = null!;
         public int GeneratorId { get; set; }
         public int Sequence { get; set; }
         [Unicode(false)]
@@ -29,21 +29,25 @@ namespace EasyITCenter.DBModel
         [StringLength(900)]
         [Unicode(false)]
         public string? TargetUrl { get; set; }
-        public bool Public { get; set; }
         [Unicode(false)]
-        public string? Script { get; set; }
+        public string? ScriptContent { get; set; }
         [Unicode(false)]
-        public string? CodeTemplate { get; set; }
+        public string? CodeContent { get; set; }
         [StringLength(4000)]
         [Unicode(false)]
         public string? Command { get; set; }
+        public bool Public { get; set; }
         public int UserId { get; set; }
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public virtual PortalGeneratorTypeList PortalGeneratorTypeList { get; set; } = null!;
-        [ForeignKey("UserId")]
+        [ForeignKey("GeneratorId")]
         [InverseProperty("PortalGeneratedDataLists")]
+        public virtual PortalGeneratorList Generator { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedGeneratorTypeNavigation { get; set; } = null!;
+        [ForeignKey("UserId")]
+        [InverseProperty("PortalGeneratedDataListUsers")]
         public virtual SolutionUserList User { get; set; } = null!;
+        public virtual SolutionUserList? UserPrefixNavigation { get; set; }
     }
 }

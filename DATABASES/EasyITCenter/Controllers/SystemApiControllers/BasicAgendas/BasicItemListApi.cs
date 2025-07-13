@@ -66,20 +66,20 @@
             } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
-        [HttpDelete("/EasyITCenterBasicItemList/{id}")]
+        [HttpDelete("/EasyITCenterBasicItemList/{inheritedParentRecordType}/{parentId}")]
         [Consumes("application/json")]
-        public async Task<string> DeleteBasicItemList(string id) {
+        public async Task<string> DeleteBasicItemList(string inheritedParentRecordType, string parentId) {
             try {
-                if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
+                if (!int.TryParse(parentId, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
-                BasicItemList record = new() { Id = int.Parse(id) };
+                BasicItemList record = new() { Id = int.Parse(parentId) };
 
                 var data = new EasyITCenterContext().BasicItemLists.Remove(record);
                 int result = await data.Context.SaveChangesAsync();
 
                 //Remove Item Attachments Previous delete Item HERE is not deleted BY foreign key
                 List<BasicAttachmentList> Attachmentdata;
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { Attachmentdata = new EasyITCenterContext().BasicAttachmentLists.Where(a => a.ParentType == "ITEM" && a.ParentId == int.Parse(id)).ToList(); }
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { Attachmentdata = new EasyITCenterContext().BasicAttachmentLists.Where(a => a.InheritedParentRecordType == inheritedParentRecordType && a.ParentId == int.Parse(parentId)).ToList(); }
                 EasyITCenterContext itemData = new EasyITCenterContext(); itemData.BasicAttachmentLists.RemoveRange(Attachmentdata);
                 itemData.SaveChanges();
 

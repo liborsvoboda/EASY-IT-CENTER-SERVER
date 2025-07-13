@@ -43,6 +43,16 @@
         }
 
         /// <summary>
+        /// Extension for check webAdmin Role
+        /// </summary>
+        public static bool IsWebAdmin() {
+            try {
+                var context = _accessor?.HttpContext;
+                if (context != null && context.User != null && !context.User.IsInRole("webadmin")) { return false; } else return true;
+            } catch { return false; }
+        }
+
+        /// <summary>
         /// Extension for check webUser Role
         /// </summary>
         public static bool IsWebUser() {
@@ -70,7 +80,7 @@
         public static string? GetUserRole() {
             try {
                 var context = _accessor?.HttpContext;
-                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Role.ToString())?.Value; } else return null;
+                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Role.ToString())?.Value.ToLower(); } else return null;
             } catch { return null; }
         }
 
@@ -115,7 +125,7 @@
         public static string? GetUserPrefix() {
             try {
                 var context = _accessor?.HttpContext;
-                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Sid.ToString())?.Value; } else return null;
+                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Sid.ToString())?.Value?.ToUpper(); } else return null;
             } catch { return null; }
         }
 

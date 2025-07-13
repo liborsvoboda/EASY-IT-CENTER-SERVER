@@ -56,11 +56,11 @@ namespace EasyITCenter.ServerCoreDBSettings {
             {
                 !bool.Parse(DbOperations.GetServerParameterLists("WebSitemapFileEnabled").Value) ? null : 
 
-                new SitemapIndexNode(Url.Action("WebDocPortals")),
-                new SitemapIndexNode(Url.Action("DeveloperNews")),
-                new SitemapIndexNode(Url.Action("News")),
-                new SitemapIndexNode(Url.Action("Images")),
-                new SitemapIndexNode(Url.Action("WebPortal")),
+                new SitemapIndexNode(Url.Action("sitemap/WebDocPortals")),
+                new SitemapIndexNode(Url.Action("sitemap/DeveloperNews")),
+                new SitemapIndexNode(Url.Action("sitemap/News")),
+                new SitemapIndexNode(Url.Action("sitemap/Images")),
+                new SitemapIndexNode(Url.Action("sitemap/WebPortal")),
 
                 //TODO Links - Tools
                 //TODO Modules

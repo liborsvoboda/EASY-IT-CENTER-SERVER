@@ -3,7 +3,7 @@
   "Provider": "Microsoft.EntityFrameworkCore.SqlServer",
   "ContextName": "ScaffoldContext",
   "ContextDirectory": "DATABASES/EasyITCenter/DBModel",
-  "OutputDirectory": "DATABASES/EasyITCenter/NewEntities",
+  "OutputDirectory": "DATABASES/EasyITCenter/DBModel",
   "ContextNamespace": "EasyITCenter.DBModel",
   "Namespace": "EasyITCenter.DBModel",
   "Schemas": null,
