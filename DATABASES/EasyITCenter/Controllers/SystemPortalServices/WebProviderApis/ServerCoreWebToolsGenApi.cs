@@ -240,7 +240,7 @@ namespace EasyITCenter.ControllersExtensions {
                         Command = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd", "GenerateDocs.bat"),
                         WorkingDirectory = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd")
                     };
-                    CoreOperations.RunSystemProcess(process);
+                    ProcessOperations.RunSystemProcess(process);
 
                     ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd", "XmlToMd"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MarkDownDocumentation.zip"));
 
@@ -288,7 +288,7 @@ namespace EasyITCenter.ControllersExtensions {
                     Command = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "GenerateMdBook.bat"),
                     WorkingDirectory = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook")
                 };
-                await CoreOperations.RunSystemProcess(process);
+                await ProcessOperations.RunSystemProcess(process);
 
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "book"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdBook.zip"));
 

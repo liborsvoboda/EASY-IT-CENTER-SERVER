@@ -168,7 +168,7 @@ namespace EasyITCenter.Services {
                                         Command = "cmd.exe", Arguments = parseData?.First(a => a.Key.ToLower() == "command").Value.ToString(),
                                         WorkingDirectory = parseData?.First(a => a.Key.ToLower() == "startupdirectory").Value.ToString() 
                                     };
-                                    taskResult.ProcessLog = await CoreOperations.RunSystemProcess(process);
+                                    taskResult.ProcessLog = await ProcessOperations.RunSystemProcess(process);
                                 }
                             } catch (Exception ex) { taskResult.ProcessCrashed = true; taskResult.ProcessLog = DataOperations.GetErrMsg(ex); CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }); }
 

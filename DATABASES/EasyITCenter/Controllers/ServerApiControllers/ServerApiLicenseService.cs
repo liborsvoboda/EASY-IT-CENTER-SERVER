@@ -1,4 +1,4 @@
-﻿using LicenseGenerator;
+﻿//using LicenseGenerator;
 using Microsoft.EntityFrameworkCore;
 using System.IO.Compression;
 
@@ -83,7 +83,7 @@ namespace EasyITCenter.ControllersExtensions {
 
 
 
-
+        /*
         [Authorize]
         [HttpGet("/ServerApi/LicenseService/OfflineActivation/Trial/{product}")]
         public async Task<IActionResult> TrialLicenseGenerator(string product) {
@@ -104,7 +104,7 @@ namespace EasyITCenter.ControllersExtensions {
             } catch { }
             return BadRequest(new { message = DbOperations.DBTranslate("BadRequest", "en") });
         }
-
+        */
 
 
 

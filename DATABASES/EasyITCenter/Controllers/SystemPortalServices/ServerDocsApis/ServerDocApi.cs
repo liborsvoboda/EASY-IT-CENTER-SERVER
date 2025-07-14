@@ -93,7 +93,7 @@ namespace EasyITCenter.Controllers {
                                 Command = Path.Combine(SrvRuntime.WebRoot_path, "server-doc", "md-book", "generate-mdbook.cmd"), 
                                 Arguments = "", WorkingDirectory = Path.Combine(SrvRuntime.WebRoot_path, "server-doc", "md-book") 
                             };
-                            //process = new RunProcessRequest() { Command = Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book", "generate-mdbook.cmd"), Arguments = "", WorkingDirectory = Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book") };
+                        //process = new RunProcessRequest() { Command = Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book", "generate-mdbook.cmd"), Arguments = "", WorkingDirectory = Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book") };
                         /*
                         } else {
                             process = new RunProcessRequest() { Command = "/bin/bash", Arguments = string.Format(" \"{0}\"", Path.Combine(ServerRuntimeData.Startup_path, ServerConfigSettings.DefaultStaticWebFilesFolder, "server-doc", "md-book", "generate-mdbook.sh")) };
@@ -101,7 +101,7 @@ namespace EasyITCenter.Controllers {
                         }
                         */
 
-                        CoreOperations.RunSystemProcess(process);
+                        ProcessOperations.RunSystemProcess(process);
                     }
                 }
                 return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });

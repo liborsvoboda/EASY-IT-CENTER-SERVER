@@ -1,4 +1,4 @@
-﻿using LicenseVerify;
+﻿//using LicenseVerify;
 using Microsoft.AspNetCore;
 using NuGet.Packaging;
 using System.Runtime.InteropServices;
@@ -152,12 +152,12 @@ namespace EasyITCenter {
         /// Checking Valid License on StartUp
         /// </summary>
         private static void CheckLicense() {
-            bool licenseStatus = LicenseControlller.VerifyLicense(out LicenseData licenseModel, true);
-            if (string.IsNullOrEmpty(licenseModel.Status)) { Console.WriteLine("Missing License file in \"Data\" folder"); }
-            Console.WriteLine("License Info: " + JsonSerializer.Serialize(licenseModel));
-            if (!licenseStatus) { Console.WriteLine("Server will be in 30 second ShutDown"); Thread.Sleep(30 * 1000); 
-                Environment.Exit(5); 
-            }
+            //bool licenseStatus = LicenseControlller.VerifyLicense(out LicenseData licenseModel, true);
+            //if (string.IsNullOrEmpty(licenseModel.Status)) { Console.WriteLine("Missing License file in \"Data\" folder"); }
+            //Console.WriteLine("License Info: " + JsonSerializer.Serialize(licenseModel));
+            //if (!licenseStatus) { Console.WriteLine("Server will be in 30 second ShutDown"); Thread.Sleep(30 * 1000); 
+            //    Environment.Exit(5); 
+            //}
         }
 
         /// <summary>
@@ -178,7 +178,6 @@ namespace EasyITCenter {
                 exportServerSettingList.AddRange(JsonSerializer.Deserialize<Dictionary<string, object>>(json).ToList());
 
                 exportServerSettingList.ToList().ForEach(configItem => {
-                    //DBConn.DatabaseConnectionString = configItem.Value.ToString();
                     foreach (PropertyInfo property in _srvDBConn.GetType().GetProperties()) {
                         if (configItem.Key == property.Name) {
                             try { property.SetValue(_srvDBConn, Convert.ChangeType(configItem.Value.ToString(), property.PropertyType)); } catch { }
@@ -193,30 +192,5 @@ namespace EasyITCenter {
             }
         }
 
-        /*
-        /// <summary>
-        /// Server Core: Load Configuration From Database First Must be From File With DB
-        /// Connection, Others File Settings than DB connection is Optional
-        /// </summary>
-        private static void LoadConfigurationFromDb() {
-            try {
-                //Load Configuration From Database
-                List<ServerSettingList> ConfigData = new EasyITCenterContext().ServerSettingLists.ToList();
-                foreach (PropertyInfo property in _srvConfig.GetType().GetProperties()) {
-                    if (ConfigData.FirstOrDefault(a => a.Key == property.Name) != null) {
-                        property.SetValue(_srvConfig, Convert.ChangeType(ConfigData.First(a => a.Key == property.Name).Value, property.PropertyType), null);
-                    }
-                }
-            } catch (Exception ex) {
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
-                Console.WriteLine("LoadConfigurationFromDb Error: " + Environment.NewLine
-                    + "Config File from Folder: "
-                    + (CoreOperations.SrvOStype.IsWindows() ? Path.Combine(SrvRuntime.Setting_folder, SrvRuntime.ConfigFile) : Path.Combine(SrvRuntime.Startup_path, "Data", SrvRuntime.ConfigFile))
-                    + "With ConnectionString: " + SrvConfig.DatabaseConnectionString + Environment.NewLine 
-                    + "Has Error: " + DataOperations.GetErrMsg(ex));
-                Environment.Exit(20);
-            }
-        }
-        */
     }
 }

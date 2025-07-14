@@ -30,20 +30,81 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="processDefinition">The process definition.</param>
         /// <returns></returns>
+        public async static Task<string> RunSystemProcess(RunProcessRequest processDefinition)
+        {
+            string resultOutput = "", resultError = "";
+
+            try
+            {
+                using (Process proc = new Process())
+                {
+
+                    if (CoreOperations.SrvOStype.IsWindows())
+                    {
+                        proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".bat");
+                        proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
+                        proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
+                    }
+                    else
+                    {
+                        proc.StartInfo.FileName = "/bin/bash";
+                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command.Replace(".bat", ".sh"));
+                    }
+
+
+                    //proc.StartInfo.LoadUserProfile = false;
+                    proc.StartInfo.CreateNoWindow = true;
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    proc.StartInfo.RedirectStandardOutput = true;
+                    proc.StartInfo.RedirectStandardError = true;
+                    proc.StartInfo.Verb = (Environment.OSVersion.Version.Major >= 6) ? "runas" : "";
+                    proc.Start();
+
+                    resultOutput += proc.StandardOutput.ReadToEndAsync();
+                    resultError += proc.StandardError.ReadToEndAsync();
+
+                    if (processDefinition.WaitForExit) {
+                        await proc.WaitForExitAsync();
+                        return resultOutput + Environment.NewLine + resultError;
+                    }
+                    else { return resultOutput + Environment.NewLine + resultError; }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                resultError += ex.StackTrace + Environment.NewLine + ex.Message;
+                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
+            }
+            return resultOutput + Environment.NewLine + resultError;
+        }
+
+
+
+
+
+        /// <summary>
+        /// https://stackoverflow.com/questions/2035193/how-to-run-a-powershell-script
+        ///SHELL FROM CMD:   Powershell.exe -File C:\Install\script.ps1
+        /// Server Function For Running External Processes,
+        /// Solved Windows/Linux processing,
+        /// startup script name is automatically corrected from .bat to .sh with same name,
+        /// </summary>
+        /// <param name="processDefinition">The process definition.</param>
+        /// <returns></returns>
         public async static Task<string> ServerProcessStart(RunProcessRequest processDefinition) {
             string resultOutput = "", resultError = "";
 
             try {
-
                 Process proc = new();
-
                 if (CoreOperations.SrvOStype.IsWindows()) {
-                    proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".cmd");
+                    proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".cmd").Replace(".sh", ".bat");
                     proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
                     proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
                 } else {
                     proc.StartInfo.FileName = "/bin/bash";
-                    proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command.Replace(".cmd", ".sh"));
+                    proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command.Replace(".cmd", ".sh").Replace(".bat", ".sh"));
                 }
 
                 //proc.StartInfo.LoadUserProfile = false;
@@ -67,7 +128,6 @@ namespace EasyITCenter.ServerCoreStructure {
                     return resultOutput + Environment.NewLine + resultError;
                 } else { return resultOutput + Environment.NewLine + resultError; }
 
-
             } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
                 CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
             }
@@ -82,7 +142,8 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="e"></param>
         private static void ServerProcessFinished(object? sender, EventArgs e) {
             try {
-                SrvRuntime.SrvProcessManager.Where(a => a.Item2 == (Process)sender).First();
+                var process = SrvRuntime.SrvProcessManager.Where(a => a.Item2 == (Process)sender).FirstOrDefault();
+                if (process != null) { SrvRuntime.SrvProcessManager.Remove(process); }
             } catch (Exception ex) {
                 CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
             }
@@ -108,6 +169,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
         /// <summary>
+        /// https://stackoverflow.com/questions/2035193/how-to-run-a-powershell-script
         /// PowerShell Script Runner
         /// </summary>
         /// <param name="script"></param>

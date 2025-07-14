@@ -279,55 +279,7 @@ namespace EasyITCenter.ServerCoreStructure {
         }
 
 
-        /// <summary>
-        /// Server Function For Running External Processes,
-        /// Solved Windows/Linux processing,
-        /// startup script name is automatically corrected from .bat to .sh with same name,
-        /// </summary>
-        /// <param name="processDefinition">The process definition.</param>
-        /// <returns></returns>
-        public async static Task<string> RunSystemProcess(RunProcessRequest processDefinition) {
-            string resultOutput = "", resultError = "";
-
-            try {
-                using (Process proc = new Process()) {
-                   
-                    if (CoreOperations.SrvOStype.IsWindows()) {
-                        proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".bat");
-                        proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
-                        proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
-                    } else {
-                        proc.StartInfo.FileName = "/bin/bash";
-                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command.Replace(".bat",".sh"));
-                    }
-
-                   
-                    //proc.StartInfo.LoadUserProfile = false;
-                    proc.StartInfo.CreateNoWindow = true;
-                    proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    proc.StartInfo.RedirectStandardOutput = true;
-                    proc.StartInfo.RedirectStandardError = true;
-                    proc.StartInfo.Verb = (Environment.OSVersion.Version.Major >= 6) ? "runas" : "";
-                    proc.Start();
-
-                    resultOutput += proc.StandardOutput.ReadToEndAsync();
-                    resultError += proc.StandardError.ReadToEndAsync();
-
-                    if (processDefinition.WaitForExit) {
-                        await proc.WaitForExitAsync();
-                        return resultOutput + Environment.NewLine + resultError;
-                    }
-                    else { return resultOutput + Environment.NewLine + resultError; }
-                }
-
-            } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
-            }
-            return resultOutput + Environment.NewLine + resultError;
-        }
-
-
+       
        
 
         /// <summary>
@@ -382,11 +334,7 @@ namespace EasyITCenter.ServerCoreStructure {
             try {
                 if (updateList || SrvRuntime.SrvRegisteredRoutesList == null) { //a=>a.AttributeRouteInfo.Name action
                     var RouteGroups = ((IReadOnlyList<ActionDescriptor>)SrvRuntime.ActionRouterProvider.ActionDescriptors.Items).GroupBy(a => a.AttributeRouteInfo?.Template).ObjectToJson();
-
-                    
                     SrvRuntime.SrvRegisteredRoutesList = SrvRuntime.ActionRouterProvider.ActionDescriptors.Items.ToArray().ToList();
-                    //.Select(a => a.JoinAsString("/")).ToList();
-
                     return RouteGroups.Contains(patchForCheck);
                 }
             } catch { }

@@ -1,4 +1,4 @@
-﻿using DBEntitySchema.Core;
+﻿//using DBEntitySchema.Core;
 using Markdig.Extensions.AutoIdentifiers;
 using Markdig;
 using MarkdownDocumenting.Extensions;
@@ -65,10 +65,10 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureReportDesigner(ref IServiceCollection services) {
-            services.AddFastReport(cfg => {
-                cfg.AllowCustomSqlQueries = true;
-                cfg.EnableOnlineDesignerIntelliSense = true;
-                });
+            //services.AddFastReport(cfg => {
+            //    cfg.AllowCustomSqlQueries = true;
+            //    cfg.EnableOnlineDesignerIntelliSense = true;
+            //    });
         }
         
 
@@ -132,7 +132,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureDBEntitySchema(ref IServiceCollection services) {
-            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDBEntitySchemaEnabled").Value)) { services.AddDBEntitySchema(DBConn.DatabaseConnectionString); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDBEntitySchemaEnabled").Value)) { /*services.AddDBEntitySchema(DBConn.DatabaseConnectionString);*/ }
         }
 
 
@@ -401,12 +401,12 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         internal static void EnableDBEntitySchema(ref IApplicationBuilder app) {
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDBEntitySchemaEnabled").Value)) {
-                app.UseDBEntitySchema(cfg =>
-                {
-                    cfg.PathMatch = DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value.StartsWith("/")
-                        ? DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value
-                        : "/" + DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value;
-                });
+                //app.UseDBEntitySchema(cfg =>
+                //{
+                //    cfg.PathMatch = DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value.StartsWith("/")
+                //        ? DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value
+                //        : "/" + DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value;
+                //});
             }
         }
 
