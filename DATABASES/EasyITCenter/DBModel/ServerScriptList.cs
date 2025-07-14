@@ -14,6 +14,9 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
+        public string InheritedOsType { get; set; } = null!;
+        [StringLength(50)]
+        [Unicode(false)]
         public string InheritedScriptType { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
@@ -29,6 +32,7 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime Timestamp { get; set; }
 
+        public virtual SolutionMixedEnumList InheritedOsTypeNavigation { get; set; } = null!;
         public virtual SolutionMixedEnumList InheritedScriptTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("ServerScriptLists")]

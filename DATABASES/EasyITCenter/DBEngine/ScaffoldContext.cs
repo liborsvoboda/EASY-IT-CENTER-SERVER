@@ -1174,12 +1174,19 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerScriptList>(entity =>
             {
+                entity.HasOne(d => d.InheritedOsTypeNavigation)
+                    .WithMany(p => p.ServerScriptListInheritedOsTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedOsType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerScriptList_SolutionMixedEnumList");
+
                 entity.HasOne(d => d.InheritedScriptTypeNavigation)
-                    .WithMany(p => p.ServerScriptLists)
+                    .WithMany(p => p.ServerScriptListInheritedScriptTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
                     .HasForeignKey(d => d.InheritedScriptType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerScriptList_SolutionMixedEnumList");
+                    .HasConstraintName("FK_ServerScriptList_SolutionMixedEnumList1");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerScriptLists)

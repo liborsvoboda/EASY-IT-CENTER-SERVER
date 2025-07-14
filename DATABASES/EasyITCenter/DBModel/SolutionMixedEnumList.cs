@@ -38,7 +38,8 @@ namespace EasyITCenter.DBModel
             ServerParameterListInheritedServerParamTypeNavigations = new HashSet<ServerParameterList>();
             ServerProcessListInheritedCommandTypeNavigations = new HashSet<ServerProcessList>();
             ServerProcessListInheritedProcessTypeNavigations = new HashSet<ServerProcessList>();
-            ServerScriptLists = new HashSet<ServerScriptList>();
+            ServerScriptListInheritedOsTypeNavigations = new HashSet<ServerScriptList>();
+            ServerScriptListInheritedScriptTypeNavigations = new HashSet<ServerScriptList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
             SolutionOperationListInheritedApiResultTypeNavigations = new HashSet<SolutionOperationList>();
@@ -101,7 +102,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerParameterList> ServerParameterListInheritedServerParamTypeNavigations { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedCommandTypeNavigations { get; set; }
         public virtual ICollection<ServerProcessList> ServerProcessListInheritedProcessTypeNavigations { get; set; }
-        public virtual ICollection<ServerScriptList> ServerScriptLists { get; set; }
+        public virtual ICollection<ServerScriptList> ServerScriptListInheritedOsTypeNavigations { get; set; }
+        public virtual ICollection<ServerScriptList> ServerScriptListInheritedScriptTypeNavigations { get; set; }
         public virtual ICollection<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; }
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
         public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedApiResultTypeNavigations { get; set; }
