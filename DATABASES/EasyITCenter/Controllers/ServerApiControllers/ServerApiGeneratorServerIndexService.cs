@@ -168,7 +168,8 @@ namespace EasyITCenter.Controllers {
                                     } else {
                                         try {
                                             object exportedFile = Markdig.Markdown.Convert(System.IO.File.ReadAllText(file), renderer, pipeline);
-                                            ( (DocxDocumentRenderer)exportedFile ).Document.SaveAs(Path.Combine(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"));
+                                            ((DocxDocumentRenderer)exportedFile).Document.Save();
+                                            //((DocxDocumentRenderer)exportedFile).Document.SaveAs(Path.Combine(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"));
                                         } catch { }
                                     }
                                 });
