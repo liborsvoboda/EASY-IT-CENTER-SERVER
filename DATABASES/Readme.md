@@ -103,6 +103,4 @@ dotnet ef migrations script
 
 [Migrations](https://github.com/zzzprojects/docs/blob/master/learnentityframeworkcore.com/pages/migrations/index.md)   
 
-# NoSQL alternative Database Solution RavenDB   
-
-[github Repo](https://github.com/rflechner/ravendb-fork)     
+ 

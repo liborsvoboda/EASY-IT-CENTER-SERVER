@@ -64,7 +64,12 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// Server Module: Configure Report Designer Module
         /// </summary>
         /// <param name="services"></param>
-        internal static void ConfigureReportDesigner(ref IServiceCollection services) => services.AddFastReport();
+        internal static void ConfigureReportDesigner(ref IServiceCollection services) {
+            services.AddFastReport(cfg => {
+                cfg.AllowCustomSqlQueries = true;
+                cfg.EnableOnlineDesignerIntelliSense = true;
+                });
+        }
         
 
 
