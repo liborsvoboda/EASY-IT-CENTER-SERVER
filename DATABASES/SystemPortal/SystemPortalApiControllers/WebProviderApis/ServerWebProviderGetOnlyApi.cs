@@ -1,4 +1,4 @@
-﻿namespace EasyITCenter.ServerCoreDBSettings {
+﻿namespace EasyITCenter.Controllers {
 
     /// <summary>
     /// Server Root Controller

@@ -3,7 +3,7 @@ using Snickler.RSSCore.Providers;
 using System.ServiceModel.Syndication;
 using System.Xml;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     internal static class RSSLoad {
 

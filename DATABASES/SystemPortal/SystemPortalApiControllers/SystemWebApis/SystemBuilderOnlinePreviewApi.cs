@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     [ApiController]
     [Route("WebApi")]

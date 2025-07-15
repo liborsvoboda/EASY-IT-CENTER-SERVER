@@ -19,7 +19,6 @@
         DevPortalLayout,
         EasyDataLayout,
         EmptyLayout,
-        GitHubLayout,
         GlobalLayout,
         MetroLayout,
         MultiLangLayout,

@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authentication.Facebook;
 using Snickler.RSSCore.Extensions;
 using FileContextCore;
 using Microsoft.AspNetCore.Identity;
-using EasyITCenter.ServerCoreDBSettings;
+using EasyITCenter.Controllers;
 using ServiceAutoRegistration;
 using ServiceAutoRegistration.Providers;
 using LinqToDB;
@@ -31,6 +31,7 @@ using Google.Apis.Translate.v3;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
 using EasyITCenter.ServerCoreStructure;
+using EasyITCenter.ServerCoreServers;
 
 
 
@@ -373,7 +374,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 x.SaveToken = true;
                 x.TokenValidationParameters = CoreOperations.ValidAndGetTokenParameters();
                 x.ForwardSignIn = new EasyITCenterContext().ServerModuleAndServiceLists.Where(a => a.IsLoginModule).FirstOrDefault()?.UrlSubPath;
-                if (bool.Parse(DbOperations.GetServerParameterLists("ConfigTimeTokenValidationEnabled").Value)) { x.TokenValidationParameters.LifetimeValidator = EasyITCenterAuthenticationApi.TokenLifetimeValidator; }
+                if (bool.Parse(DbOperations.GetServerParameterLists("ConfigTimeTokenValidationEnabled").Value)) { x.TokenValidationParameters.LifetimeValidator = AuthenticationService.TokenLifetimeValidator; }
                 x.Events = new JwtBearerEvents {
                     OnAuthenticationFailed = context => {
                         if (context.Exception.GetType() == typeof(SecurityTokenExpiredException)) {

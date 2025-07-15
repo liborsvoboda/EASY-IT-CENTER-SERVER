@@ -10,7 +10,7 @@ using Octokit;
 using ScrapySharp.Network;
 
 
-namespace EasyITCenter.WebControllers {
+namespace EasyITCenter.Controllers {
 
     public enum DocsType {
         Html,
@@ -33,8 +33,8 @@ namespace EasyITCenter.WebControllers {
 
 
     [Authorize]
-    [Route("/HostingApi")]
-    public class HostingApiInternetService : Controller {
+    [Route("/GithubService")]
+    public class GithubService : Controller {
 
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace EasyITCenter.WebControllers {
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns></returns>
-        [HttpPost("/HostingApi/DownloadService/GetGitHubReposList")]
+        [HttpPost("/GithubService/GetGitHubReposList")]
         [Consumes("application/json")]
         public async Task<IActionResult> GetGitHubReposList([FromBody] GithubSearchRequest searchRequest) {
             try {
@@ -63,7 +63,7 @@ namespace EasyITCenter.WebControllers {
         /// </summary>
         /// <param name="downloadRequest"></param>
         /// <returns></returns>
-        [HttpPost("/HostingApi/DownloadService/DownloadGitHubRepoReadme")]
+        [HttpPost("/GithubService/DownloadGitHubRepoReadme")]
         [Consumes("application/json")]
         public async Task<IActionResult> DownloadGitHubRepoReadme([FromBody] GithubDownloadRequest downloadRequest) {
             try {
@@ -89,7 +89,7 @@ namespace EasyITCenter.WebControllers {
         /// </summary>
         /// <param name="repoUrl"></param>
         /// <returns></returns>
-        [HttpPost("/HostingApi/DownloadService/DownloadGitRepo")]
+        [HttpPost("/GithubService/DownloadGitRepo")]
         [Consumes("application/json")]
         public async Task<IActionResult> DownloadGitRepo([FromBody] GithubDownloadRequest downloadRequest) {
             try {
@@ -102,24 +102,5 @@ namespace EasyITCenter.WebControllers {
             }
         }
 
-
-        /// <summary>
-        /// Html From URL Downloader Return InnerHtml
-        /// 
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        [HttpPost("/HostingApi/DownloadService/DownloadHtmlPage")]
-        [Consumes("application/json")]
-        public async Task<IActionResult> DownloadHtmlPage([FromBody] string url) {
-
-            ScrapingBrowser? browser = new ScrapingBrowser();
-            WebPage? resultsPage = await browser.NavigateToPageAsync(new Uri(url));
-
-            return Json(new HandlerResult() { Result = new { resultsPage.Html.InnerHtml }, Success = true });
-        }
-
-
-      
     }
 }

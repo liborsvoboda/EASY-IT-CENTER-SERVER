@@ -1,4 +1,4 @@
-﻿namespace EasyITCenter.ControllersExtensions {
+﻿namespace EasyITCenter.Controllers {
 
     /// <summary>
     /// Simple Api for Checking Avaiability

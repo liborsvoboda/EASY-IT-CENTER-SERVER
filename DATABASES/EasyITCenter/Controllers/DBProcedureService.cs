@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Common;
-using EasyITCenter.ServerCoreDBSettings;
+using EasyITCenter.Controllers;
 using System.Xml;
 
 

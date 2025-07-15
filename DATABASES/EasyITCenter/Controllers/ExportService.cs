@@ -1,7 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System.IO.Compression;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
  
     [ApiController]

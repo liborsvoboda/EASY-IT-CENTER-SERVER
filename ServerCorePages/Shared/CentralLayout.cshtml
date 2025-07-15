@@ -3,18 +3,16 @@
 @* @addTagHelper *, WebOptimizer.Core *@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@using Microsoft.AspNetCore.Html
-@using ServerCorePages
-@using EasyITCenter.DBModel
-
 @using System.Security.Claims
 @using System.Text.RegularExpressions
+@using EasyITCenter.Controllers
 
+@using EasyITCenter.Classes
+@using EasyITCenter.DBModel
+@using Microsoft.AspNetCore.Html
+@using ServerCorePages
 
-
-@namespace ServerCorePages
 @{
-
     ServerModuleAndServiceList? systemModule = null; ServerModuleAndServiceList? loginModule = null; ServerWebPagesToken? webpagestoken = null;
     try { systemModule = ((ServerModuleAndServiceList?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "SystemModule").Value); } catch { }
     try { loginModule = ((ServerModuleAndServiceList?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "LoginModule").Value); } catch { }

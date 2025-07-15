@@ -17,8 +17,8 @@ using System.Threading.Tasks;
 
 using EasyITCenter;
 using EasyITCenter.Managers;
-using EasyITCenter.WebClasses;
-using EasyITCenter.WebControllers;
+using EasyITCenter.Classes;
+using EasyITCenter.Controllers;
 using EasyITCenter.ServerCoreStructure;
 using Humanizer;
 

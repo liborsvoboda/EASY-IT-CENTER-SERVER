@@ -1,13 +1,10 @@
-﻿global using EasyITCenter.ControllersExtensions;
-global using EasyITCenter.DBModel;
+﻿global using EasyITCenter.DBModel;
 global using EasyITCenter.Managers;
 global using EasyITCenter.Services;
 global using EasyITCenter.ServerCoreConfiguration;
-global using EasyITCenter.ServerCoreDBSettings;
-global using EasyITCenter.ServerCoreServers;
+global using EasyITCenter.Controllers;
 global using EasyITCenter.ServerCoreStructure;
-global using EasyITCenter.WebClasses;
-global using EasyITCenter.WebControllers;
+global using EasyITCenter.Classes;
 global using EasyITCenter.ServerCorePages;
 global using HealthChecks.UI.Client;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;

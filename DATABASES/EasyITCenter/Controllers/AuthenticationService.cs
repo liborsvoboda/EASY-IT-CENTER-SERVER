@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace EasyITCenter.ControllersExtensions {
+namespace EasyITCenter.Controllers {
 
     [ApiController]
     [Route("AuthenticationService")]

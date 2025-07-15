@@ -1,6 +1,6 @@
 ﻿using Humanizer;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     [ApiController]
     [Route("WebApi/WebPages")]

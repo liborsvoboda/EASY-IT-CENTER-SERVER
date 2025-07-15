@@ -92,9 +92,9 @@ namespace EasyITCenter.ServerCoreStructure {
                 //Check Server Defined Modules
                 //TODO vytvořit agendu nastroju a k nim templaty v ni budou i editory a nastroje Kazdy Layout bude mit svoji Page
                 if (validPath == null && routePath.StartsWith("/toolviewer", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.ToolViewerLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
-                if (validPath == null && routePath.StartsWith("/github", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.GitHubLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
                 if (validPath == null && routePath.StartsWith("/easydata", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.MetroLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
                 if (validPath == null && routePath.StartsWith("/serverportal", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.ServerPortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
+                if (validPath == null && routePath.StartsWith("/systemportal", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
 
 
 

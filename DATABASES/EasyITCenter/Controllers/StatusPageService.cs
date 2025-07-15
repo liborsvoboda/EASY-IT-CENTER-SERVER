@@ -1,6 +1,6 @@
 ﻿using RedirectResult = Microsoft.AspNetCore.Mvc.RedirectResult;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     /// <summary>
     /// Server Routing Rulles

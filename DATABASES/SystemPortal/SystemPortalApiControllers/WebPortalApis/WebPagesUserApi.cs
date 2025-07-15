@@ -1,6 +1,6 @@
 ﻿using ServerCorePages;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     [ApiController]
     [Route("/WebApi/ClientUsers")]

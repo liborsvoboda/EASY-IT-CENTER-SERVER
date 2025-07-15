@@ -1,7 +1,7 @@
 ﻿using Quartz;
 using System.Threading;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     /// <summary>
     /// Server Services Remote Control

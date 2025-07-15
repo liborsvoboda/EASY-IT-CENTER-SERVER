@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.IO.Compression;
 
-namespace EasyITCenter.ControllersExtensions {
+namespace EasyITCenter.Controllers {
 
     [ApiController]
     [Route("LicenseService")]

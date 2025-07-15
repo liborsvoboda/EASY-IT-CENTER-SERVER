@@ -3,7 +3,7 @@ using DocumentFormat.OpenXml.Office2010.Ink;
 using OneOf.Types;
 using Wmhelp.XPath2.AST;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
 
     [ApiController]

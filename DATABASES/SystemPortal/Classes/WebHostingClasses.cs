@@ -1,6 +1,6 @@
 ﻿using DataType = System.ComponentModel.DataAnnotations.DataType;
 
-namespace EasyITCenter.WebClasses {
+namespace EasyITCenter.Classes {
 
     public enum Color {
         Primary,

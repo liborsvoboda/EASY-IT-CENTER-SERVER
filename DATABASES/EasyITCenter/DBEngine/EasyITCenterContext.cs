@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Common;
 
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     /// <summary>
     /// Server Main Database Settings Here is Included ScaffoldContext which is connected via Visual

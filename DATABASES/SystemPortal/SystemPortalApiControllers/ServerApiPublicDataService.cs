@@ -9,7 +9,7 @@ using Westwind.AspNetCore.Markdown;
 using Pek.Markdig.HighlightJs;
 using Markdown = Westwind.AspNetCore.Markdown.Markdown;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
 
     /// <summary>

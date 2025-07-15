@@ -1,4 +1,4 @@
-﻿namespace EasyITCenter.ServerCoreDBSettings {
+﻿namespace EasyITCenter.Controllers {
 
     /// <summary>
     /// WEBSocket Template still not used Ideal for Terminal Panels, chat, controlling services

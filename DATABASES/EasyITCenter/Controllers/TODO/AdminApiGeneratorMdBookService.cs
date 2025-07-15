@@ -19,7 +19,7 @@ using MassTransit.SagaStateMachine;
 using PuppeteerExtraSharp.Plugins.ExtraStealth.Evasions;
 
 //TODO REFACTOR NEEDED  convert to simple more CALLS
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     /// <summary>
     /// Pathname of Request, UpdateOnly without 

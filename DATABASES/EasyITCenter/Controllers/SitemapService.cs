@@ -4,7 +4,7 @@ using SimpleMvcSitemap.Images;
 using SimpleMvcSitemap.News;
 using System.Collections.Generic;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     /// <summary>
     /// robots.txt routing

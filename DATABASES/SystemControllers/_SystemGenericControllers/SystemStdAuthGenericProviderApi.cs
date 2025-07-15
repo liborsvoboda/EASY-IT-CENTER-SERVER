@@ -1,6 +1,6 @@
 ﻿using EasyITCenter.Services;
 
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     /// <summary>
     /// </summary>

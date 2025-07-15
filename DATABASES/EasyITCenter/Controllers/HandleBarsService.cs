@@ -11,7 +11,7 @@ using Octokit;
 using ScrapySharp.Network;
 
 
-namespace EasyITCenter.WebControllers {
+namespace EasyITCenter.Controllers {
 
     public class DataToTemplateRequest {
         public string Template { get; set; }
@@ -23,11 +23,11 @@ namespace EasyITCenter.WebControllers {
 
 
     [Authorize]
-    [Route("/HostingApi")]
-    public class HostingApiCodeGenService : Controller {
+    [Route("/HandleBarsService")]
+    public class HandleBarsService : Controller {
 
         private readonly Microsoft.AspNetCore.Hosting.IWebHostEnvironment _hostingEnvironment;
-        public HostingApiCodeGenService(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment) {
+        public HandleBarsService(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment) {
             _hostingEnvironment = hostingEnvironment;
         }
 
@@ -39,7 +39,7 @@ namespace EasyITCenter.WebControllers {
         /// </summary>
         /// <param name="codegenRequest"></param>
         /// <returns></returns>
-        [HttpPost("/HostingApi/CodeGenService/GetTemplateCode")]
+        [HttpPost("/HandleBarsService/GetTemplateCode")]
         [Consumes("application/json")]
         public async Task<IActionResult> GetTemplateCode([FromBody] DataToTemplateRequest codegenRequest) {
             try {

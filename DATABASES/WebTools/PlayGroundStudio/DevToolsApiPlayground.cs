@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 
 
-namespace EasyITCenter.WebControllers {
+namespace EasyITCenter.Controllers {
 
 
     //[Authorize]

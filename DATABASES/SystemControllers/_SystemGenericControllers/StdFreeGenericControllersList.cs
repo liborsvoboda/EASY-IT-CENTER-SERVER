@@ -1,5 +1,5 @@
 //System Controllers Definitions
-namespace EasyITCenter.ServerCoreDBSettings {
+namespace EasyITCenter.Controllers {
 
     /* Example
     API URLis: http://localhost:8000/ServerGenericAuthApi/SystemParameterList
