@@ -7,7 +7,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
     /// </summary>
     [AllowAnonymous]
     //[ApiExplorerSettings(IgnoreApi = true)]
-    public class StatusPagesService : ControllerBase {
+    public class StatusPageService : ControllerBase {
 
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
 
 
-        [HttpGet("/StatusPagesService/404NonExistPage")]
+        [HttpGet("/StatusPageService/404NonExistPage")]
         public ContentResult NonExistPage() {
 
             string? nonExistPageFinal = new EasyITCenterContext().ServerModuleAndServiceLists.
@@ -37,7 +37,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
             }
         }
 
-        [HttpGet("/StatusPagesService/401UnauthorizedPage")]
+        [HttpGet("/StatusPageService/401UnauthorizedPage")]
         public ContentResult UnauthorizedPage() {
 
             string? nonExistPageFinal = new EasyITCenterContext().ServerModuleAndServiceLists.

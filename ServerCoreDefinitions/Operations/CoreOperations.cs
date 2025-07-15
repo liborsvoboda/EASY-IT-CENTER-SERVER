@@ -139,8 +139,8 @@ namespace EasyITCenter.ServerCoreStructure {
 
                 //Any Validation Founded
                 if (validPath == null && context.Items.FirstOrDefault(a => a.Key.ToString() == "CommandType").Value == null) {
-                    routeLayout = DataOperations.GenericToEnum<RouteLayoutTypes>(DbOperations.CheckDefinedWebPageExists("/DefaultWebPages/404NonExistPage").InheritedLayoutType);
-                    validPath = "/ServerControls/404NonExistPage"; routingResult = RoutingActionTypes.Next;
+                    routeLayout = DataOperations.GenericToEnum<RouteLayoutTypes>(DbOperations.CheckDefinedWebPageExists("/StatusPageService/404NonExistPage").InheritedLayoutType);
+                    validPath = "/StatusPageService/404NonExistPage"; routingResult = RoutingActionTypes.Next;
                 }
             } catch (Exception Ex) {
                 routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return;
