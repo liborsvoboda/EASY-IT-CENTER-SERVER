@@ -22,6 +22,8 @@
 @using Microsoft.AspNetCore.Mvc
 @using Microsoft.AspNetCore.Mvc.RazorPages
 @using Westwind.AspNetCore.Markdown
+
+@{
   Context.Items = CoreOperations.ChechUrlRequestValidOrAuthorized(Context).Items;
 
 
@@ -30,7 +32,7 @@
     string? FileValidUrl = "";
     try { FileValidUrl = ((string?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value); } catch { }
 
-    ServerModuleAndServiceList? systemModule = null; ServerModuleAndServiceList? loginModule = null; EasyITCenter.WebClasses.ServerWebPagesToken? webpagestoken = null; string? portalRedirect = null;
+    ServerModuleAndServiceList? systemModule = null; ServerModuleAndServiceList? loginModule = null; ServerWebPagesToken? webpagestoken = null; string? portalRedirect = null;
     try { systemModule = ((ServerModuleAndServiceList?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "SystemModule").Value); } catch { }
     try { loginModule = ((ServerModuleAndServiceList?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "LoginModule").Value); } catch { }
     try { webpagestoken = ((ServerWebPagesToken?)Context.Items.FirstOrDefault(a => a.Key.ToString() == "ServerWebPagesToken").Value); } catch { }

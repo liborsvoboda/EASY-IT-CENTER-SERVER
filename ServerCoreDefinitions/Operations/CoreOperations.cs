@@ -94,7 +94,8 @@ namespace EasyITCenter.ServerCoreStructure {
                 if (validPath == null && routePath.StartsWith("/toolviewer", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.ToolViewerLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
                 if (validPath == null && routePath.StartsWith("/easydata", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.MetroLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
                 if (validPath == null && routePath.StartsWith("/serverportal", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.ServerPortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
-                if (validPath == null && routePath.StartsWith("/systemportal", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
+                if (validPath == null && routePath.StartsWith("/razortemplate", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.RazorTemplateLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
+                //if (validPath == null && routePath.StartsWith("/systemportal", StringComparison.OrdinalIgnoreCase)) { routeLayout = RouteLayoutTypes.SystemPortalLayout; validPath = routePath; routingResult = RoutingActionTypes.Return; }
 
 
 
