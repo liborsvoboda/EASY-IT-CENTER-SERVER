@@ -5,13 +5,13 @@ using System.IO.Compression;
 namespace EasyITCenter.ControllersExtensions {
 
     [ApiController]
-    [Route("ServerApi")]
-    public class ServerApiLicenseService : ControllerBase {
+    [Route("LicenseService")]
+    public class LicenseService : ControllerBase {
 
 
 
         [AllowAnonymous]
-        [HttpGet("/ServerApi/LicenseService/OnlineActivation/{UnlockCode}/{PartNumber}")]
+        [HttpGet("/LicenseService/OnlineActivation/{UnlockCode}/{PartNumber}")]
         public async Task<string> GetLicenseActivator(string unlockCode, string partNumber) {
             string data = string.Empty; List<SqlParameter> parameters = new(); bool allowed = false; bool catched = false;
             try {
@@ -47,7 +47,7 @@ namespace EasyITCenter.ControllersExtensions {
 
 
         [AllowAnonymous]
-        [HttpPost("/ServerApi/LicenseService/OnlineActivation")]
+        [HttpPost("/LicenseService/OnlineActivation")]
         [Consumes("application/json")]
         public async Task<string> PostLicenseActivator([FromBody] LicenseCheckRequest record) {
             string data = string.Empty; List<SqlParameter> parameters = new(); bool allowed = false; bool catched = false;
@@ -85,7 +85,7 @@ namespace EasyITCenter.ControllersExtensions {
 
         /*
         [Authorize]
-        [HttpGet("/ServerApi/LicenseService/OfflineActivation/Trial/{product}")]
+        [HttpGet("/LicenseService/OfflineActivation/Trial/{product}")]
         public async Task<IActionResult> TrialLicenseGenerator(string product) {
             try {
                 string authId = User.FindFirst(ClaimTypes.PrimarySid.ToString()).Value;
@@ -108,7 +108,7 @@ namespace EasyITCenter.ControllersExtensions {
 
 
 
-        //[HttpGet("/ServerApi/LicenseService/OfflineActivation/FullVersion/{product}")]
+        //[HttpGet("/LicenseService/OfflineActivation/FullVersion/{product}")]
         //public async Task<IActionResult> FullVersionLicenseGenerator(string product) {
         //    try {
         //        string authId = User.FindFirst(ClaimTypes.PrimarySid.ToString()).Value;

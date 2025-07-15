@@ -5,12 +5,12 @@
     /// </summary>
     [AllowAnonymous]
     [ApiController]
-    [Route("ServerApi")]
+    [Route("WebSocketService")]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class ServerApiWebSocketService : ControllerBase {
-        private static ILogger<ServerApiWebSocketService> _logger;
+    public class WebSocketService : ControllerBase {
+        private static ILogger<WebSocketService> _logger;
 
-        public ServerApiWebSocketService(ILogger<ServerApiWebSocketService> logger) => _logger = logger;
+        public WebSocketService(ILogger<WebSocketService> logger) => _logger = logger;
 
         /// <summary>
         /// Universal WebSocket API Definitions for Connection Paths and Registering To Server
@@ -18,7 +18,7 @@
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("/ServerApi/WebSocketServices/{socketAPIPath}")]
+        [HttpGet("/WebSocketService/{socketAPIPath}")]
         public async Task GetBySocketAPIPath(string socketAPIPath) {
             if (HttpContext.WebSockets.IsWebSocketRequest) {
                 using WebSocket? webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
@@ -34,7 +34,7 @@
         /// WebSocket Registration Connection API Example
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/WebSocketServices")]
+        [HttpGet("/WebSocketService")]
         public async Task Get() {
             if (HttpContext.WebSockets.IsWebSocketRequest) {
                 using var webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();

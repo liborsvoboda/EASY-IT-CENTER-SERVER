@@ -2,6 +2,7 @@
 using MimeKit;
 
 namespace EasyITCenter.Controllers {
+
     [ApiController]
     [Route("EasyITCenterTemplateImageApi/Image")]
     public class EasyITCenterTemplateImageApi : ControllerBase {

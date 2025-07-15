@@ -56,7 +56,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
             {
                 !bool.Parse(DbOperations.GetServerParameterLists("WebSitemapFileEnabled").Value) ? null : 
 
-                new SitemapIndexNode(Url.Action("sitemap/WebDocPortals")),
+                new SitemapIndexNode(Url.Action("sitemap/WebDocPortal")),
                 new SitemapIndexNode(Url.Action("sitemap/DeveloperNews")),
                 new SitemapIndexNode(Url.Action("sitemap/News")),
                 new SitemapIndexNode(Url.Action("sitemap/Images")),
@@ -98,7 +98,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// Web Portals 
         /// </summary>
         /// <returns></returns>
-        [Route("WebDocPortals")]
+        [Route("WebDocPortal")]
         public ActionResult WebDocPortals() {
             List<SitemapNode> webpagesUrls = new();
 

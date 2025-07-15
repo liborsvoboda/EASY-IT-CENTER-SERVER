@@ -1,106 +1,64 @@
-﻿# MICROSOFT LIST Available Library
+﻿# Definice Databází   
 
-[Net API Catalog](https://apisof.net/catalog)
-https://source.dot.net/
-https://referencesource.microsoft.com/
-https://learn.microsoft.com/cs-cz/dotnet/api/
+Je použit Entity Framework 6, tím jsou tedy podporovány všechny standardní Typy Databází   
 
+**Jasná a Jednoduchá Globální Struktura**    
+Api se nabízí jako Služby, plánované úlohy, Procesy, Operace, Generátory, Exporty   
 
+- GlobalApi: Api Definované Pro Uživatele
+- Server Api: Je Serverová Unikátní API
+- SystemApi: Jsou Api využité Systémem
+- WebApi: Jsou unikátní Api pro centrální Ovládání WebServeru
 
-# NWAMP registrace vlastnich funkci a procedur n signalr
-
-
-# CakeScript 
-C# builder system with api scripts ETC
-viz FastReport
-
-# NUGET restsharp
-for clients, auto convert, google drive, etc..
-
-# ADD LING REPORT BUILDER/designer/editor
+**Uživatel**
+Každý Uživatel může mít svo vlastní SQLServer  Databázi a SQLFile Databázi pro testování    
+Může vyvíjet svůj vlastní SubServer a SubSystém odvozené z řešení EIC & ESB  
 
 
 
-# Problem 
-FastReport.Compat
 
-# Primary HELP PAGES
-https://github.com/dotnet
+# TODO
 
-# Primary HOW TO
-https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host?tabs=appbuilder
-https://learn.microsoft.com/en-us/dotnet/fundamentals/
+1] Přesunout datové Definice dio lok8ln9 tabulky a agendy Dynamické Datové Definice
+a z tama je používat jak na serveru tak v systému - převádět je viz JsonSerialize: Typická Tabulka
 
-# Templates 
-https://github.com/Shopify/liquid
+GenericTable ConvertGenericClassToStandard
 
-# Extension JS access from C#
+2] vytvořit proceduru na hromadné změny v tabulkách 
 
-C# object are accessible from JS
-https://github.com/danielgolabek/BlendedJint
-
-# User Help NodeJs
-https://nodejs.org/api/sqlite.html
+jako přidání sloupce, změna typu, nahrazení stringu
 
 
+---   
+# TODO DATABASE MANAGEMENT   
 
-# GENHTTP 
-jeste dohrat dalsi knihovny
+*   MassInsert: db.BulkInsertAsync/Update/Delete/ 
+*   Clear cache by EasyITCenterContext.RefreshModel()
+*   New Table by EasyITCenterContext.Attach()
+*   Testing and Commit/rollback EasyITCenterContext.GetDbTransaction().Save/Release/Rollback 
+*   EasyITCenterContext.GetDbTransaction(). + next can be solution for Selection
+*   a.Model. -get procedures/function,schema,views,
+*   a.Database.AutoTransactionsEnabled = true, a.Database.beginTransaction/close,commit
+*   createDB a.Database.EnsureCreated
+*   Script For Create All Tables a.Database.GenerateCreateScript()
+*   a.Database.GetDbConnection().ChangeDatabase(dbName)
+*   a.Database.GetDbConnection().GetSchema()
+*   CONTEXT TO DB a.Database.Migrate()
+*   Open custom connect a.Database.OpenConnection() a.Database.UseTransaction() 
+*   a.Database.SetConnectionString() a.Database.RollbackTransaction()
+*   a.Database.ExecuteSqlRaw - Original executing, delete DB a.Database.EnsureDeleted/Created
+*   a.Database.GetMigrations 
+*   Connect NEW DB a.Database.GetInfrastructure().CreateScope
+*   a.Model.GetDefaultSchema a.Model.GetDbFunctions
+*   a.GetDto().ToCsv a.GetDto().ToJson/xml 
+*   copy context EasyITCenterContext.CreateCopy()
+*   TODO Integrity Operations db.Merge, 
 
 
 
-# Update EntityFramework Scaffold Tool   
+#   Scaffold Command
 
-`````         
-dotnet tool update --global dotnet-ef --version 6.0.33   
-`````        
-
-# Managing AND Scaffolding SQLLocalDB 
-
-- Database can Be Managed By MS Management Studio
-- can be connected from file with Connection String
-
-````        
-'Data Source=Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\server-private\\databases\\EICwebHosting.mdf;Integrated Security=True;Connect Timeout=30'
-
-````        
-
-- LocalDB must be connected to '(localdb)\MSSQLLocalDB'   
-- By MSSQL connection can be scaffolded [Generate Model & DBContext] to Project Code
-- Scaffold LocalDB From direct file is not possible    
-
-`````    
-dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EICWebHostingDb" Microsoft.EntityFrameworkCore.SqlServer    
-Scaffold-DbContext 'Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=EICWebHostingDb;Integrated Security=True;Connect Timeout=30' Microsoft.EntityFrameworkCore.SqlServer -ContextName EICWebHostingDbContext -Namespace EasyITCenter.WebDBModel -OutputDir DATABASES/WebHosting/WebHostingModel -ContextDir DATABASES/WebHosting -force    
-
-`````        
-# Possible Scaffold Parameters    
-
-`````    
-dotnet ef dbcontext scaffold ... --table Artist --table Album    
-dotnet ef dbcontext scaffold ... --schema Customer --schema Contractor    
-dotnet ef dbcontext scaffold ... --table Customer.Purchases --table Contractor.Accounts --table Contractor.Contracts   
-dotnet ef dbcontext scaffold ... --context-dir Data --output-dir Models --namespace Your.Namespace --context-namespace Your.DbContext.Namespace --force   
-dotnet ef dbcontext scaffold ... --force   
-
-`````    
-# Managing SQL Scripts nad Migrations commands    
-
-`````     
-Command Line	Description    
-dotnet ef migrations add [name]	Create a new migration with the specific migration name.   
-dotnet ef migrations remove	Remove the latest migration.   
-dotnet ef database update	Update the database to the latest migration.   
-dotnet ef database update [name]	Update the database to a specific migration name point.   
-dotnet ef migrations list	Lists all available migrations.   
-dotnet ef migrations script	Generates a SQL script for all migrations.   
-dotnet ef migrations has-pending-model-changes	Check if there is any model changes since the last migration.   
-dotnet ef database drop	Drop the database.   
-dotnet ef migrations script   
-`````    
-
-# Documentation For EntityFramework, Migrations, Scaffolding     
-
-[Migrations](https://github.com/zzzprojects/docs/blob/master/learnentityframeworkcore.com/pages/migrations/index.md)   
-
- 
+dotnet ef dbcontext scaffold "Data Source=192.168.1.141,1433; Initial Catalog=EasyITCenter; User ID=easyitcenter;\
+Password=easyitcenter;TrustServerCertificate=True;command timeout=300;" Microsoft.EntityFrameworkCore.SqlServer --context ScaffoldContext
+--context-dir DATABASES/EasyITCenter/DBModel --output-dir DATABASES/EasyITCenter/NewEntities --context-namespace EasyITCenter.DBModel
+--namespace EasyITCenter.DBModel --data-annotations --no-onconfiguring --force --no-build --verbose

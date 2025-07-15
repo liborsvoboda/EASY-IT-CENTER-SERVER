@@ -91,6 +91,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureFieldApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAuthApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
+    <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateListApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
   </ItemGroup>  
@@ -100,6 +101,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureFieldApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAuthApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
+     <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateListApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
      <Content Include="Data\favicon.ico" />

@@ -17,8 +17,8 @@ namespace EasyITCenter.Controllers {
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase"/>
     [Authorize]
     [ApiController]
-    [Route("ServerApi")]
-    public class ServerApiDBProcedureService : ControllerBase {
+    [Route("DBProcedureService")]
+    public class DBProcedureService : ControllerBase {
 
         //TODO GENERIC API 
         //new EasyITCenterContext().Entry(data.GetType()).Context.Model.GetDbFunctions
@@ -33,7 +33,7 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <param name="dataset"></param>
         /// <returns></returns>
-        [HttpPost("/ServerApi/DatabaseServices/SpProcedure/GetGenericDataListByParams")]
+        [HttpPost("/DBProcedureService/SpProcedure/GetGenericDataListByParams")]
         [Consumes("application/json")]
         public async Task<string> GetSystemOperationsList(List<Dictionary<string, string>> dataset) {
             string procedureName = ""; string parameters = ""; string EntityTypeName = "";
@@ -65,7 +65,7 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <param name="dataset"></param>
         /// <returns></returns>
-        [HttpPost("/ServerApi/DatabaseServices/SpProcedure/SetGenericDataListByParams")]
+        [HttpPost("/DBProcedureService/SpProcedure/SetGenericDataListByParams")]
         [Consumes("application/json")]
         public async Task<string> SetGenericDataListByParams(List<Dictionary<string, string>> dataset) {
             string procedureName = ""; string parameters = ""; string EntityTypeName = ""; List<CustomMessageList>? data = null;
@@ -103,7 +103,7 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <param name="procedureName"></param>
         /// <returns></returns>
-        [HttpGet("/ServerApi/DatabaseServices/SpProcedure/Message/{procedureName}")]
+        [HttpGet("/DBProcedureService/SpProcedure/Message/{procedureName}")]
         public async Task<string> GetSystemOperationsList(string procedureName) {
             List<CustomMessageList> data = new List<CustomMessageList>();
             data = new EasyITCenterContext().EasyITCenterCollectionFromSql<CustomMessageList>($"EXEC {procedureName};");
@@ -115,7 +115,7 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <param name="procedureName"></param>
         /// <returns></returns>
-        [HttpGet("/ServerApi/DatabaseServices/SpProcedure/File/{procedureName}")]
+        [HttpGet("/DBProcedureService/SpProcedure/File/{procedureName}")]
         public async Task<string> GetSystemOperationsListJson(string procedureName) {
             List<DBJsonFile>? data = null;
             data = new EasyITCenterContext().EasyITCenterCollectionFromSql<DBJsonFile>($"EXEC {procedureName};");
@@ -128,7 +128,7 @@ namespace EasyITCenter.Controllers {
         /// TODO takova bude genericka procedura
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/DatabaseServices/SpGetTableSchema/{tableName}")]
+        [HttpGet("/DBProcedureService/SpGetTableSchema/{tableName}")]
         public async Task<string> SpGetTableSchema(string tableName) {
             try {
                 List<GenericDataList> data = new List<GenericDataList>();
@@ -145,7 +145,7 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <param name="procedureName"></param>
         /// <returns></returns>
-        [HttpGet("/ServerApi/DatabaseServices/SpGetProcedureParams/{procedureName}")]
+        [HttpGet("/DBProcedureService/SpGetProcedureParams/{procedureName}")]
         public async Task<string> SpGetProcedureParams(string procedureName) {
             try {
                 object? data = new object();
@@ -160,7 +160,7 @@ namespace EasyITCenter.Controllers {
         /// Gets Table List for Reporting
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/DatabaseServices/SpGetTableList")]
+        [HttpGet("/DBProcedureService/SpGetTableList")]
         public async Task<string> SpGetTableList() {
             try {
                 List<GenericDataList> data = new();
@@ -175,7 +175,7 @@ namespace EasyITCenter.Controllers {
         /// Gets Form Agendas Pages List For System Menu Definition.
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/DatabaseServices/SpGetSystemPageList")]
+        [HttpGet("/DBProcedureService/SpGetSystemPageList")]
         public async Task<string> SpGetSystemPageList() {
             try {
                 List<GenericDataList> data = new();
@@ -190,7 +190,7 @@ namespace EasyITCenter.Controllers {
         /// Api For Logged User with Menu Datalist
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/DatabaseServices/SpGetUserMenuList")]
+        [HttpGet("/DBProcedureService/SpGetUserMenuList")]
         public async Task<string> SpGetUserMenuList() {
             try {
                 List<SpUserMenuList> data = new List<SpUserMenuList>();

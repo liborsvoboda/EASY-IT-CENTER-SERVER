@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.ControllersExtensions {
 
     [ApiController]
-    [Route("EasyITCenterAuthentication")]
-    public class EasyITCenterAuthenticationApi : ControllerBase {
+    [Route("AuthenticationService")]
+    public class AuthenticationService : ControllerBase {
         private static Encoding ISO_8859_1_ENCODING = Encoding.GetEncoding("ISO-8859-1");
 
         [AllowAnonymous]
-        [HttpPost("/EasyITCenterAuthentication")]
+        [HttpPost("/AuthenticationService")]
         public IActionResult Authenticate([FromHeader] string Authorization) {
             (string? username, string? password) = GetUsernameAndPasswordFromAuthorizeHeader(Authorization);
             AuthenticateResponse? user = Authenticate(username, password);

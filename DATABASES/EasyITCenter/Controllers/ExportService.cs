@@ -5,20 +5,20 @@ namespace EasyITCenter.ServerCoreDBSettings {
 
  
     [ApiController]
-    [Route("ServerApi")]
+    [Route("ExportService")]
      //[ApiExplorerSettings(IgnoreApi = true)]
-    public class ServerApiExportService : ControllerBase {
+    public class ExportService : ControllerBase {
         private EasyITCenterContext Context { get; }
 
         private readonly Microsoft.AspNetCore.Hosting.IWebHostEnvironment _hostingEnvironment;
-        public ServerApiExportService(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment, EasyITCenterContext context) {
+        public ExportService(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment, EasyITCenterContext context) {
             _hostingEnvironment = hostingEnvironment;
             Context = context;
         }
 
         //TODO MODIFY FOR ANY USER CAN HAVE CUSTOM PORTAL
 
-        //[HttpGet("/ServerApi/Export/ExportWebPortal")]
+        //[HttpGet("/ExportService/ExportWebPortal")]
         //public async Task<IActionResult> ExportWebPortal() {
         //    try {
         //        List<WebMenuList> data;
@@ -49,7 +49,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// Dictionary CZ for System
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/ExportServices/XamlCz")]
+        [HttpGet("/ExportService/XamlCz")]
         public async Task<IActionResult> ExportXamlCz() {
             try {
                 new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>("EXEC SpOperationFillTranslationTableList;");
@@ -73,7 +73,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// Dictionary EN for System
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/ExportServices/XamlEn")]
+        [HttpGet("/ExportService/XamlEn")]
         public async Task<IActionResult> ExportXamlEn() {
             try {
                 new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>("EXEC SpOperationFillTranslationTableList;");
@@ -99,7 +99,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// on every Web servers Without Needs anythink
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/ExportServices/ExportStaticWebPortal")]
+        [HttpGet("/ExportService/ExportStaticWebPortal")]
         public async Task<IActionResult> ExportStaticWebPortal() {
             try {
 
@@ -128,7 +128,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// Database Dgml Schema
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/ExportServices/DgmlDatabaseSchema")]
+        [HttpGet("/ExportService/DgmlDatabaseSchema")]
         public IActionResult GetDgml() {
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDbDiagramGeneratorEnabled").Value)) {
                 var response = File(Encoding.UTF8.GetBytes(new EasyITCenterContext().AsDgml()), MimeTypes.GetMimeType("DBschema.dgml"), "DBschema.dgml");
@@ -142,7 +142,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
         /// Get Full DataBase SQL Script
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/ServerApi/ExportServices/SqlDatabaseSchema")]
+        [HttpGet("/ExportService/SqlDatabaseSchema")]
         public IActionResult Get() {
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDbDiagramGeneratorEnabled").Value)) {
                 var response = File(Encoding.UTF8.GetBytes(Context.AsSqlScript()), MimeTypes.GetMimeType("DBschema.sql"), "DBschema.sql");

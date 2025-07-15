@@ -13,14 +13,14 @@ namespace EasyITCenter.Controllers {
     [ApiController]
     [Route("ServerApi/DevGenHTML")]
     //[ApiExplorerSettings(IgnoreApi = true)]
-    public class ServerApiDevGenHTMLApi : ControllerBase {
+    public class TODOWebFormGenService : ControllerBase {
 
 
         /// <summary>
         /// For wwwroot folder Update with detect changes and modify static pages
         /// </summary>
         private readonly Microsoft.AspNetCore.Hosting.IWebHostEnvironment _hostingEnvironment;
-        public ServerApiDevGenHTMLApi(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment) {
+        public TODOWebFormGenService(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment) {
             _hostingEnvironment = hostingEnvironment;
         }
 

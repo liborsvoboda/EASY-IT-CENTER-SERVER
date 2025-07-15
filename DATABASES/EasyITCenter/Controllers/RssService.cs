@@ -50,10 +50,10 @@ namespace EasyITCenter.ServerCoreDBSettings {
     [Route("rss", Name = "rss")]
     [Route("rss.xml", Name = "rssxml")]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class ServerRssFeedApi : ControllerBase {
+    public class RssService : ControllerBase {
         private readonly ILogger logger;
 
-        public ServerRssFeedApi(ILogger<ServerRssFeedApi> _logger) => logger = _logger;
+        public RssService(ILogger<RssService> _logger) => logger = _logger;
 
         public ActionResult Index() {
             try {
