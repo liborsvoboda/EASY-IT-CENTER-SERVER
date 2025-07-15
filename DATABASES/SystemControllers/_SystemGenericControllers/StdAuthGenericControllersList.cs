@@ -9,7 +9,7 @@ namespace EasyITCenter.ServerCoreDBSettings {
     [Authorize(Roles="members,admin")]
     [Route("ServerApi/AuthServices/[controller]")]
     [ApiController]
-    public class SystemParameterListController : AuthGenericProviderApi<EasyITCenterContext, SystemParameterList, int> {
+    public class SystemParameterListController : SystemStdAuthGenericProviderApi<EasyITCenterContext, SystemParameterList, int> {
         public SystemParameterListController(IRepositoryAsync<EasyITCenterContext, SystemParameterList> repo) : base(repo) { }
     }*/
 
