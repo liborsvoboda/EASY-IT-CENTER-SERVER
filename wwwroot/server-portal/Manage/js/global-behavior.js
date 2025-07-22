@@ -122,15 +122,22 @@ function SetExternalLink(content) {
 }
 
 function SetContent(htmlContentId, jsContentId) {
+    removeElement("InheritScript");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
     document.getElementById("FrameWindow").innerHTML = menu.filter(menuItem => { return menuItem.id == htmlContentId })[0].value;
-    var script = "<script type='text/javascript'> " + menu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";
-    $('body').append(script);
+    console.log(jsContentId);
+
+
+    if (menu.filter(menuItem => { return menuItem.id == jsContentId })[0].value != null) {
+        var script = "<script id='InheritScript' type='text/javascript'> " + menu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";
+        $('body').append(script);
+    }
 }
 
 
+
+
 function ShowMessagePanel(close) {
-    OpenCharm(0);
     charms = Metro.getPlugin($("#charmPanel"), 'charms');
     if (close) {
         charms.close();

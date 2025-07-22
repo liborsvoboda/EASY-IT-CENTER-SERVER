@@ -1,4 +1,11 @@
 ﻿
+
+function removeElement(elementId) {
+    let element = document.getElementById(elementId);
+    if (element != null) { element.remove(); }
+}
+
+
 function htmlDecode(input) {
     var doc = new DOMParser().parseFromString(input, "text/html");
     return doc.documentElement.textContent;

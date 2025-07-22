@@ -10,8 +10,8 @@ namespace EasyITCenter.Controllers {
 
     
 
-        [HttpGet("/WebApi/WebPages/WebAdmin/GetWebMenuList")]
-        public async Task<string> GetTemplateWebMenuList() {
+        [HttpGet("/WebApi/WebPages/GetWebMenuList")]
+        public async Task<string> GetWebMenuList() {
             try {
                 //if (CommunicationController.IsAdmin()) {
                 List<WebMenuList> data;
@@ -31,7 +31,7 @@ namespace EasyITCenter.Controllers {
         }
 
         [Authorize]
-        [HttpPost("/WebApi/WebPages/WebAdmin/SetMenuList")]
+        [HttpPost("/WebApi/WebPages/SetMenuList")]
         [Consumes("application/json")]
         public async Task<string> InsertOrUpdateWebMenuList([FromBody] WebSettingList1 record) {
             try {
@@ -79,7 +79,7 @@ namespace EasyITCenter.Controllers {
         }
 
         [Authorize]
-        [HttpDelete("/WebApi/WebPages/WebAdmin/DeleteWebMenuList/{id}")]
+        [HttpDelete("/WebApi/WebPages/DeleteWebMenuList/{id}")]
         [Consumes("application/json")]
         public async Task<string> DeleteWebMenuList(string id) {
             try {
