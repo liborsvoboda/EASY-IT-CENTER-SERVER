@@ -35,10 +35,11 @@
     ViewData["Title"] = "EIC&ESB ONLINE Portal";
  }
 
-
+@* https://v5.metroui.org.ua/overview/ *@
+@* https://panda.metroui.org.ua/mif/core-pack *@
+@* https://docs.metroui.org.ua/ *@
+@* http://localhost:5000/server-integrated/razor-pages/pandoratemplate *@
  
- @* https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack/MarkdownScriptPlugin.cs *@
-
 @{
     string path = HttpContext.Request.Path.ToString().ToLower();
     string? role = HttpContext.User.Claims.Where(a => a.Type == ClaimTypes.Role).FirstOrDefault()?.Value;
@@ -46,14 +47,7 @@
 
 }
 
-
- 
 <div id="FrameWindow" class="content-inner h-100" style="overflow-y: auto">
-
-
-
-
-
 </div>
 
 

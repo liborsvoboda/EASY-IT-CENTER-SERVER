@@ -48,19 +48,6 @@
         public int RecId { get; set; } = 0;
     }
 
-    /// <summary>
-    /// Custom Class Definition for Filtering by record Id
-    /// </summary>
-    public class IdFilter {
-        public int Id { get; set; }
-    }
-
-    /// <summary>
-    /// Custom Class Definition for Filtering by string
-    /// </summary>
-    public class NameFilter {
-        public string Name { get; set; }
-    }
 
     /// <summary>
     /// Custom Definition for Returning string List from Stored Procedures Named Data = ColumnName

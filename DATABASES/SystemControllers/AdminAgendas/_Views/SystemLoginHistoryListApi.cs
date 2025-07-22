@@ -28,7 +28,7 @@
 
         [HttpPost("/EasyITCenterSystemLoginHistoryList")]
         [Consumes("application/json")] // ([FromBody] int Id) Body is only 17 ([FromBody] IdFilter id) Body is {"Id":17}
-        public async Task<string> GetSystemLoginHistoryListId([FromBody] IdFilter id) {
+        public async Task<string> GetSystemLoginHistoryListId([FromBody] int id) {
             if (!int.TryParse(id.Id.ToString(), out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
             SystemLoginHistoryList data;

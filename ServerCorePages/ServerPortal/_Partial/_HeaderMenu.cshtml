@@ -26,9 +26,6 @@
 @namespace ServerCorePages
 @model ServerCorePages.ServerPortalModel
 
-@* https://docs.metroui.org.ua/ *@
-@* http://localhost:5000/server-integrated/razor-pages/pandoratemplate *@
-
 @{
     string path = this.Context.Request.Path.ToString().ToLower();
     string? role = this.Context.User.Claims.Where(a => a.Type == ClaimTypes.Role).FirstOrDefault()?.Value;
@@ -79,13 +76,13 @@
 
         <div class="app-bar-container">
             <a href="#" class="app-bar-item">
-                <img src="/server-portal/images/logo.png" class="avatar">
+                <img src="/serverportal/images/logo.png" class="avatar">
                 @{ if(name != null) { <span class="ml-2 app-bar-name">@name</span>}
                 else { <span class="ml-2 app-bar-name">Login</span>}}
             </a>
             <div class="user-block shadow-1" data-role="collapse" data-collapsed="true">
                 <div class="bg-darkCyan fg-white p-2 text-center">
-                    <img src="/server-portal/images/logo.png" class="avatar">
+                    <img src="/serverportal/images/logo.png" class="avatar">
                     <div class="h4 mb-0">@name</div>
                     <div class="c-pointer">Why Sign Up</div>
                 </div>
