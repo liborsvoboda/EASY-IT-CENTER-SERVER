@@ -97,8 +97,6 @@ function GenerateMenu() {
         lastGuid = mItem.recGuid;
     });
     portalMenu.sort((a, b) => a.Sequence > b.Sequence ? 1 : -1);
-    //console.log(portalMenu);
-
     Metro.storage.setItem('Menu', portalMenu);
 
     portalMenu.forEach((mItem, index, arr) => {
@@ -112,7 +110,7 @@ function GenerateMenu() {
     
     portalMenu.forEach((mItem, index, arr) => {
         if (mItem.Type == "link") {
-            htmlContent = '<li onclick=SetLink("' + mItem.Content + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=SetLink("' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         } else if (mItem.Type == "externalLink") {
@@ -122,6 +120,11 @@ function GenerateMenu() {
         }
 
         else if (mItem.Type == "content") {
+            htmlContent = '<li onclick=SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
+        }
+
+        else if (mItem.Type == "externalContent") {
             htmlContent = '<li onclick=SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
