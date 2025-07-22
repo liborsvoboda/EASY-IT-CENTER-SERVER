@@ -4,7 +4,7 @@ global using EasyITCenter.Services;
 global using EasyITCenter.ServerCoreConfiguration;
 global using EasyITCenter.Controllers;
 global using EasyITCenter.ServerCoreStructure;
-global using EasyITCenter.Classes;
+global using EasyITCenter.WebClasses;
 global using EasyITCenter.ServerCorePages;
 global using HealthChecks.UI.Client;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;

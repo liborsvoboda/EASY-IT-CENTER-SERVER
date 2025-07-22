@@ -24,7 +24,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationMarkdown>$(MSBuildProjectDirectory)\EasyITCenter.md</DocumentationMarkdown>
     <Platforms>AnyCPU;x64;x86</Platforms>
-    <SignAssembly>False</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <NoWin32Manifest>true</NoWin32Manifest>
     <ApplicationIcon>Data\favicon.ico</ApplicationIcon>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -69,20 +69,15 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
 
   <ItemGroup>
     <Compile Remove="bin\**" />
-    <Compile Remove="ServerCoreDefinitions\Generators\**" />
 	<Compile Remove="wwwroot\**" />
     <EmbeddedResource Remove="bin\**" />
-    <EmbeddedResource Remove="ServerCoreDefinitions\Generators\**" />
 	<EmbeddedResource Remove="wwwroot\**" />
     <None Remove="bin\**" />
-    <None Remove="ServerCoreDefinitions\Generators\**" />
 	<None Remove="wwwroot\**" />
     <TypeScriptCompile Remove="*" />
     <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
-    <Content Remove="ServerCoreDefinitions\Generators\**" />
 	<Content Remove="wwwroot\**" />
-	<EntityDeploy Remove="ServerCoreDefinitions\Generators\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -91,7 +86,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureFieldApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAuthApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
-    <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateListApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
   </ItemGroup>  
@@ -101,7 +95,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureFieldApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAuthApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
-     <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateListApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
      <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
      <Content Include="Data\favicon.ico" />
@@ -128,17 +121,17 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   <ItemGroup>
    
     <PackageReference Include="AngleSharp" Version="1.3.0" />
-   
+
     <PackageReference Include="AngleSharp.Css" Version="0.16.4" />
-   
+
     <PackageReference Include="AngleSharp.Io" Version="1.0.0" />
-   
+
     <PackageReference Include="AngleSharp.Js" Version="0.15.0" />
-   
+
     <PackageReference Include="AngleSharp.Wasm" Version="0.13.0" />
-   
+
     <PackageReference Include="AngleSharp.Xml" Version="1.0.0" />
-   
+
     <PackageReference Include="AngleSharp.XPath" Version="2.0.5" />
    
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.15" />
@@ -221,16 +214,12 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="ErikEJ.EntityFrameworkCore.DgmlBuilder" Version="6.0.0" />
     <PackageReference Include="ExposedObject" Version="2.2.0" />
     <PackageReference Include="ExpressionTree" Version="1.0.2" />
-    <PackageReference Include="FastReport.Compat" Version="2023.3.1" />
+    <PackageReference Include="FastReport.Compat" Version="1.0.0" />
     <PackageReference Include="FastReport.Data.Excel" Version="2025.2.6" />
     <PackageReference Include="FastReport.Data.Json" Version="2023.1.0" />
     <PackageReference Include="FastReport.Data.MsSql" Version="2023.3.0" />
-    <PackageReference Include="FastReport.DataVisualization" Version="2023.3.0" />
-    <PackageReference Include="FastReport.OpenSource" Version="2023.3.1">
-      <NoWarn>NU1904</NoWarn>
-    </PackageReference>
-    <PackageReference Include="FastReport.OpenSource.Web" Version="2023.3.1" />
-    <PackageReference Include="FastReport.ReportBuilder" Version="2021.1.0" />
+    <PackageReference Include="FastReport.OpenSource" Version="1.0.0" />
+    <PackageReference Include="FastReport.OpenSource.Web" Version="1.0.0" />
     <PackageReference Include="Fawdlstty.GitServerCore" Version="0.0.3.1" />
     <PackageReference Include="FileContextCore" Version="3.4.0" />
     <PackageReference Include="FluentAssertions.Autofac" Version="6.5.1" />
@@ -371,6 +360,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.33" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="6.0.33" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.9.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.Razor" Version="6.0.33" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.11" />
@@ -641,7 +632,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Folder Include="Data\certificates\" />
   </ItemGroup>
   
-
+ 
  
  
    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
