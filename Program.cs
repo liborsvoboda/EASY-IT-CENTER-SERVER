@@ -1,4 +1,4 @@
-﻿//using LicenseVerify;
+﻿using EASYTools.LicenseVerify;
 using Microsoft.AspNetCore;
 using NuGet.Packaging;
 using System.Runtime.InteropServices;
@@ -152,12 +152,14 @@ namespace EasyITCenter {
         /// Checking Valid License on StartUp
         /// </summary>
         private static void CheckLicense() {
-            //bool licenseStatus = LicenseControlller.VerifyLicense(out LicenseData licenseModel, true);
-            //if (string.IsNullOrEmpty(licenseModel.Status)) { Console.WriteLine("Missing License file in \"Data\" folder"); }
-            //Console.WriteLine("License Info: " + JsonSerializer.Serialize(licenseModel));
-            //if (!licenseStatus) { Console.WriteLine("Server will be in 30 second ShutDown"); Thread.Sleep(30 * 1000); 
-            //    Environment.Exit(5); 
-            //}
+            bool licenseStatus = LicenseControlller.VerifyLicense(out LicenseData licenseModel, true);
+            if (string.IsNullOrEmpty(licenseModel.Status)) { Console.WriteLine("Missing License file in \"Data\" folder"); }
+            Console.WriteLine("License Info: " + JsonSerializer.Serialize(licenseModel));
+            if (!licenseStatus)
+            {
+                Console.WriteLine("Server will be in 30 second ShutDown"); Thread.Sleep(30 * 1000);
+                Environment.Exit(5);
+            }
         }
 
         /// <summary>

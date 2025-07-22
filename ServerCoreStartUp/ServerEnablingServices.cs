@@ -4,8 +4,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.FileProviders;
 using MirrorSharp;
 using MirrorSharp.AspNetCore;
-//using MonacoProvider;
-//using MonacoProvider.Api;
+using EASYTools.MonacoProvider;
+using EASYTools.MonacoProvider.Api;
 using Snickler.RSSCore.Caching;
 using Snickler.RSSCore.Extensions;
 using Snickler.RSSCore.Models;
@@ -125,7 +125,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                         });
                 }
 
-                /*
+                
                 //Monaco Support
                 endpoints.MapPost("/MonacoCompletion/{0}", async (e) =>
                 {
@@ -155,7 +155,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     }
                     e.Response.StatusCode = 405;
                 });
-                */
+                
 
 
                 //MirrorSharp Support
