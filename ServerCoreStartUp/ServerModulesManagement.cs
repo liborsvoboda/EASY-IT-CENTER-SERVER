@@ -1,4 +1,4 @@
-﻿using DBEntitySchema.Core;
+﻿using EASYTools.DBEntitySchema.Core;
 using Markdig.Extensions.AutoIdentifiers;
 using Markdig;
 using MarkdownDocumenting.Extensions;
@@ -65,7 +65,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureReportDesigner(ref IServiceCollection services) {
-            services.AddFastReport();
+            //services.AddFastReport();
         }
         
 
@@ -390,7 +390,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// Enable Report Designer Module
         /// </summary>
         /// <param name="app"></param>
-        internal static void EnableReportDesigner(ref IApplicationBuilder app) => app.UseFastReport();
+        internal static void EnableReportDesigner(ref IApplicationBuilder app) { /*app.UseFastReport();*/}
 
 
         /// <summary>

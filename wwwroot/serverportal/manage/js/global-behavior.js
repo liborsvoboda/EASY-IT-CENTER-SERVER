@@ -114,10 +114,12 @@ function disableScroll() {
 
 
 function SetLink(content) {
+    removeElement("InheritScript");
     $("#FrameWindow").load(Metro.storage.getItem('BackendServerAddress', null) + "/" + content)
 }
 
 function SetExternalLink(content) {
+    removeElement("InheritScript");
     document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + Metro.storage.getItem('BackendServerAddress', null) + "/" + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
 }
 
@@ -132,6 +134,16 @@ function SetContent(htmlContentId, jsContentId) {
     }
 }
 
+function SetExternalContent(htmlContentId, jsContentId) {
+    removeElement("InheritScript");
+    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
+    document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="data:text/html;charset=utf-8,' + encodeURI(menu.filter(menuItem => { return menuItem.id == htmlContentId })[0].value) + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
+
+    if (menu.filter(menuItem => { return menuItem.id == jsContentId })[0].value != null) {
+        var script = "<script id='InheritScript' type='text/javascript'> " + menu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";
+        $('body').append(script);
+    }
+}
 
 
 
