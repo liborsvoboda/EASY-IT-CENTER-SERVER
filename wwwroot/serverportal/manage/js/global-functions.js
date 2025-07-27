@@ -1,5 +1,5 @@
 ﻿
-function generateUUID() { 
+function GenerateUUID() { 
     var d = new Date().getTime();
     var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -15,11 +15,19 @@ function generateUUID() {
     });
 }
 
-function removeElement(elementId) {
+function RemoveElement(elementId) {
     let element = document.getElementById(elementId);
     if (element != null) { element.remove(); }
 }
 
+
+function AddClass(elementId,clasName) {
+    $("#deleteButton").addClass(clasName); //"disabled"
+}
+
+function RemoveClass(elementId, clasName) {
+    $("#deleteButton").removeClass(clasName); //"disabled"
+}
 
 function htmlDecode(input) {
     var doc = new DOMParser().parseFromString(input, "text/html");
@@ -34,7 +42,7 @@ async function FileReaderToImageData(n) {
     })
 }
 
-function str2bytes(str) {
+function Str2bytes(str) {
     var bytes = new Uint8Array(str.length);
     for (var i = 0; i < str.length; i++) {
         bytes[i] = str.charCodeAt(i);
@@ -124,7 +132,7 @@ function GenerateTagList(values, tagName, className) {
 //function HighlightCode() { document.querySelectorAll('div.code').forEach(el => { hljs.highlightElement(el); }); }
 
 
-function showSource() {
+function ShowSource() {
     var source = "<html>";
     source += document.getElementsByTagName('html')[0].innerHTML;
     source += "</html>";
@@ -149,14 +157,6 @@ function ShowFrameSource() {
     if (window.focus) sourceWindow.focus();
 }
 
-
-function ScrollToTop() { window.scrollTo(0, 0); }
-function enableScroll() { window.onscroll = function () { }; }
-function disableScroll() {
-    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-        window.onscroll = function () { window.scrollTo(scrollLeft, scrollTop); };
-}
 
 function PrintElement(elementId) {
     try { $("#" + elementId).printElement({ pageTitle: elementId.split("_")[1] + ".html", printMode: "popup" }); } catch (t) { }
@@ -267,7 +267,7 @@ function UnloadMetro() {
     delete Metro;
 }
 
-function loadPage(url) {
+function LoadPage(url) {
     $.ajax({
         url: url
     }).done(function (data) {

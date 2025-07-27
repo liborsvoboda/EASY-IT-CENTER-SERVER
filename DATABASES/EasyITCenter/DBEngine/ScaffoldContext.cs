@@ -886,17 +886,18 @@ namespace EasyITCenter.DBModel
                     .HasPrincipalKey(p => p.UserDbPreffix)
                     .HasForeignKey(d => d.UserPrefix)
                     .HasConstraintName("FK_PortalApiTableColumnDataList_SolutionUserList1");
-
-                entity.HasOne(d => d.PortalApiTableColumnList)
-                    .WithMany(p => p.PortalApiTableColumnDataLists)
-                    .HasPrincipalKey(p => new { p.UserPrefix, p.ApiTableName, p.Name })
-                    .HasForeignKey(d => new { d.UserPrefix, d.ApiTableName, d.ApiTableColumnName })
-                    .HasConstraintName("FK_PortalApiTableColumnDataList_PortalApiTableColumnList");
             });
 
             modelBuilder.Entity<PortalApiTableColumnList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.ApiTableNameNavigation)
+                    .WithMany(p => p.PortalApiTableColumnLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.ApiTableName)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalApiTableColumnList_PortalApiTableList");
 
                 entity.HasOne(d => d.InheritedDataTypeNavigation)
                     .WithMany(p => p.PortalApiTableColumnLists)
@@ -915,15 +916,7 @@ namespace EasyITCenter.DBModel
                     .WithMany(p => p.PortalApiTableColumnListUserPrefixNavigations)
                     .HasPrincipalKey(p => p.UserDbPreffix)
                     .HasForeignKey(d => d.UserPrefix)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableColumnList_SolutionUserList1");
-
-                entity.HasOne(d => d.PortalApiTableList)
-                    .WithMany(p => p.PortalApiTableColumnLists)
-                    .HasPrincipalKey(p => new { p.UserPrefix, p.Name })
-                    .HasForeignKey(d => new { d.UserPrefix, d.ApiTableName })
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalApiTableColumnList_PortalApiTableList");
             });
 
             modelBuilder.Entity<PortalApiTableList>(entity =>
@@ -947,7 +940,6 @@ namespace EasyITCenter.DBModel
                     .WithMany(p => p.PortalApiTableListUserPrefixNavigations)
                     .HasPrincipalKey(p => p.UserDbPreffix)
                     .HasForeignKey(d => d.UserPrefix)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableList_SolutionUserList1");
             });
 

@@ -1,12 +1,8 @@
 ﻿
-let ApiList = [
-	
-];
-
 
 //Run POST Api Request FOR set and GET storageName on SET is null
 function RunServerPostApi(apiPath, jsonData, storageName) {
-    showPageLoading();
+    ShowPageLoading();
     var def = $.ajax({
         global: false, type: "POST", url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
         headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
@@ -15,21 +11,21 @@ function RunServerPostApi(apiPath, jsonData, storageName) {
 
     def.fail(function (err) {
         notify.create(apiMessages.apiSaveFail, "Alert", { cls: "alert" }); notify.reset();
-        hidePageLoading();
+        HidePageLoading();
         return false;
     });
 
     def.done(function (apiData) {
         notify.create(apiMessages.apiSaveSuccess, "Info", { cls: "success" }); notify.reset();
         if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
-        hidePageLoading();
+        HidePageLoading();
         return true;
     });
 }
 
 //Run GET Api Request 
 function RunServerGetApi(apiPath, storageName) {
-    showPageLoading();
+    ShowPageLoading();
     $.ajax({
         url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
         type: "GET",
@@ -37,27 +33,27 @@ function RunServerGetApi(apiPath, storageName) {
         success: function (apiData) {
             if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
             notify.create(apiMessages.apiLoadSuccess, "Info", { cls: "success" }); notify.reset();
-            hidePageLoading();
+            HidePageLoading();
             return true;
         },
         error: function (error) {
             Metro.storage.setItem(storageName, null);
             notify.create(apiMessages.apiLoadFail, "Alert", { cls: "alert" }); notify.reset();
-            hidePageLoading();
+            HidePageLoading();
         }
     });
 }
 
 
 
-function invalidForm() {
+function InvalidForm() {
     var form = $(this); form.addClass("ani-ring");
     setTimeout(function () { form.removeClass("ani-ring"); }, 1000);
 }
 
 
-function validateForm() {
-    showPageLoading();
+function ValidateForm() {
+    ShowPageLoading();
     var def = $.ajax({
         global: false, type: "POST", url: Metro.storage.getItem('BackendServerAddress', null) + "/AuthenticationService", dataType: 'json',
         headers: { "Authorization": "Basic " + btoa($("#usernameId").val() + ":" + $("#passwordId").val()) }
@@ -65,12 +61,16 @@ function validateForm() {
 
     def.fail(function (data) {
         notify.create("Incorect Name or Password", "Error", { cls: "alert" }); notify.reset();
-        hidePageLoading();
+        HidePageLoading();
     });
 
     def.done(function (data) {
         Metro.storage.setItem("ApiToken", data);
         window.location.href = Metro.storage.getItem("DefaultPath", null); 
-        hidePageLoading();
+        HidePageLoading();
     });
+}
+
+function IsLogged() {
+    return Metro.storage.getItem("ApiToken", null) == null ? false : true;
 }

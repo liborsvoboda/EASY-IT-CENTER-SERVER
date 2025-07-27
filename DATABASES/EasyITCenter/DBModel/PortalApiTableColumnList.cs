@@ -11,16 +11,11 @@ namespace EasyITCenter.DBModel
     [Index("Name", Name = "IX_PortalApiTableColumnList_1", IsUnique = true)]
     public partial class PortalApiTableColumnList
     {
-        public PortalApiTableColumnList()
-        {
-            PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
-        }
-
         [Key]
         public int Id { get; set; }
         [StringLength(20)]
         [Unicode(false)]
-        public string UserPrefix { get; set; } = null!;
+        public string? UserPrefix { get; set; }
         [StringLength(50)]
         [Unicode(false)]
         public string ApiTableName { get; set; } = null!;
@@ -35,12 +30,11 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public virtual PortalApiTableList ApiTableNameNavigation { get; set; } = null!;
         public virtual SolutionMixedEnumList InheritedDataTypeNavigation { get; set; } = null!;
-        public virtual PortalApiTableList PortalApiTableList { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("PortalApiTableColumnListUsers")]
         public virtual SolutionUserList User { get; set; } = null!;
-        public virtual SolutionUserList UserPrefixNavigation { get; set; } = null!;
-        public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
+        public virtual SolutionUserList? UserPrefixNavigation { get; set; }
     }
 }

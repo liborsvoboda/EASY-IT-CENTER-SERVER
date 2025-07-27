@@ -13,8 +13,8 @@ function PortalStartup() {
 
 
 /*Start of Global Loading Indicator for All Pages*/
-function hidePageLoading() { Metro.activity.close(pageLoader); }
-function showPageLoading() {
+function HidePageLoading() { Metro.activity.close(pageLoader); }
+function ShowPageLoading() {
     if (pageLoader != undefined) {
         if (pageLoader[0]["DATASET:UID:M4Q"] == undefined) { pageLoader = null; }
         else {
@@ -103,11 +103,9 @@ function CancelTranslation() {
 }
 
 
-
-
 function ScrollToTop() { window.scrollTo(0, 0); }
-function enableScroll() { window.onscroll = function () { }; }
-function disableScroll() {
+function EnableScroll() { window.onscroll = function () { }; }
+function DisableScroll() {
     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
         window.onscroll = function () { window.scrollTo(scrollLeft, scrollTop); };
@@ -116,6 +114,7 @@ function disableScroll() {
 
 
 function SetLink(htmlContentId, content) {
+    RemoveElement("InheritScript"); RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
@@ -123,6 +122,7 @@ function SetLink(htmlContentId, content) {
 }
 
 function SetExternalLink(htmlContentId, content) {
+    RemoveElement("InheritScript"); RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
@@ -130,7 +130,7 @@ function SetExternalLink(htmlContentId, content) {
 }
 
 function SetContent(htmlContentId, jsContentId, cssContentId) {
-    removeElement("InheritScript"); removeElement("InheritStyle");
+    RemoveElement("InheritScript"); RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
     document.getElementById("FrameWindow").innerHTML = menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent;
@@ -149,7 +149,7 @@ function SetContent(htmlContentId, jsContentId, cssContentId) {
 
 //TODO to IFRAME
 function SetExternalContent(htmlContentId, jsContentId, cssContentId) {
-    removeElement("InheritScript"); removeElement("InheritStyle");
+    RemoveElement("InheritScript"); RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
