@@ -59,7 +59,12 @@
 
     </style>
 
+<<<<<<< HEAD
+    
+    <script type="text/javascript" src="/serverportal/AddOns/jquery/jquery-3.6.0.min.js"></script>
+=======
     <script type="text/javascript" src="/serverportal/addons/jquery/jquery-3.6.0.min.js"></script>
+>>>>>>> fb39616e2f9ce2db2b1cb4ac5f957ffcfcd95b86
     <script type="text/javascript" src="/serverportal/metro/js/metro.min.js"></script>
     <script type="text/javascript" src="/serverportal/manage/js/global-behavior.js"></script>
     <script type="text/javascript" src="/serverportal/manage/js/global-storage.js"></script>
@@ -71,11 +76,16 @@
     <script type="text/javascript" src="/serverportal/manage/js/json-to-table.js"></script>
 @*     <script type="text/javascript" src="/serverportal/addons/InteliJsEditor/codemirror.js"></script>
     <script type="text/javascript" src="/serverportal/addons/InteliJsEditor/jseditor.js"></script> *@
+<<<<<<< HEAD
 
     <script type="text/javascript" src="/serverportal/manage/js/handlebars.js"></script>
     <script type="text/javascript" src="/serverportal/addons/monaco/js/monaco-editor/min/vs/loader.js"></script>
 
 
+=======
+@*     <script type="text/javascript" src="/serverportal/addons/monaco/js/monaco-editor/min/vs/loader.js"></script>
+    <script type="text/javascript" src="/serverportal/addons/monaco/js/app.js"></script> *@
+>>>>>>> fb39616e2f9ce2db2b1cb4ac5f957ffcfcd95b86
      @* Google Translation *@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>

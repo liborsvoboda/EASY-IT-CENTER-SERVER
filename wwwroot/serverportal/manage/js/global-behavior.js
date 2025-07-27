@@ -148,6 +148,9 @@ function SetExternalContent(htmlContentId, jsContentId, cssContentId) {
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
     document.getElementById("FrameWindow").innerHTML = portalMenu.filter(menuItem => { return menuItem.id == htmlContentId })[0].value;
+        $('body').append(script);
+    }
+}
 
     if (portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value != null) {
         var script = "<script id='InheritScript' type='text/javascript'> " + portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";

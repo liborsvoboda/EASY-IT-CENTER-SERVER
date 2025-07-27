@@ -29,10 +29,10 @@
         [HttpPost("/EasyITCenterSystemLoginHistoryList")]
         [Consumes("application/json")] // ([FromBody] int Id) Body is only 17 ([FromBody] IdFilter id) Body is {"Id":17}
         public async Task<string> GetSystemLoginHistoryListId([FromBody] int id) {
-            if (!int.TryParse(id.Id.ToString(), out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
+            if (!int.TryParse(id.ToString(), out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
             SystemLoginHistoryList data;
-            using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().SystemLoginHistoryLists.Where(a => a.Id == id.Id).First(); }
+            using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().SystemLoginHistoryLists.Where(a => a.Id == id).First(); }
             return JsonSerializer.Serialize(data);
         }
 
