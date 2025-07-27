@@ -86,6 +86,10 @@ function GenerateMenu() {
                 menuItem.JsContent = mItem.value;
                 menuItem.JsContentId = mItem.id;
                 break;
+            case "CSSContent":
+                menuItem.CssContent = mItem.value;
+                menuItem.CssContentId = mItem.id;
+                break;
             default:
         }
 
@@ -110,22 +114,22 @@ function GenerateMenu() {
     
     portalMenu.forEach((mItem, index, arr) => {
         if (mItem.Type == "link") {
-            htmlContent = '<li onclick=SetLink("' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=SetLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         } else if (mItem.Type == "externalLink") {
-            htmlContent = '<li onclick=SetExternalLink("' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=SetExternalLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         }
 
         else if (mItem.Type == "content") {
-            htmlContent = '<li onclick=SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
 
         else if (mItem.Type == "externalContent") {
-            htmlContent = '<li onclick=SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=SetExternalContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
     });

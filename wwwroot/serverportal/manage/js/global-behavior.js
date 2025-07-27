@@ -113,26 +113,47 @@ function disableScroll() {
 
 
 
-function SetLink(content) {
+function SetLink(htmlContentId, content) {
+    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
+    Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
+
     $("#FrameWindow").load(Metro.storage.getItem('BackendServerAddress', null) + "/" + content)
 }
 
-function SetExternalLink(content) {
+function SetExternalLink(htmlContentId, content) {
+    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
+    Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
+
     document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + Metro.storage.getItem('BackendServerAddress', null) + "/" + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
 }
 
-function SetContent(htmlContentId, jsContentId) {
+function SetContent(htmlContentId, jsContentId, cssContentId) {
     removeElement("InheritScript");
-    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
-    document.getElementById("FrameWindow").innerHTML = menu.filter(menuItem => { return menuItem.id == htmlContentId })[0].value;
+    let portalMenu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
+    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
+    Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
-    if (menu.filter(menuItem => { return menuItem.id == jsContentId })[0].value != null) {
-        var script = "<script id='InheritScript' type='text/javascript'> " + menu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";
+    document.getElementById("FrameWindow").innerHTML = portalMenu.filter(menuItem => { return menuItem.id == htmlContentId })[0].value;
+
+    if (portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value != null) {
+        var script = "<script id='InheritScript' type='text/javascript'> " + portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";
         $('body').append(script);
     }
 }
 
+function SetExternalContent(htmlContentId, jsContentId, cssContentId) {
+    removeElement("InheritScript");
+    let portalMenu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
+    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
+    Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
+    document.getElementById("FrameWindow").innerHTML = portalMenu.filter(menuItem => { return menuItem.id == htmlContentId })[0].value;
+
+    if (portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value != null) {
+        var script = "<script id='InheritScript' type='text/javascript'> " + portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";
+        $('body').append(script);
+    }
+}
 
 
 function ShowMessagePanel(close) {
