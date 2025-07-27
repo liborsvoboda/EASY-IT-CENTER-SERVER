@@ -5,11 +5,11 @@ let ApiList = [
 
 
 //Run POST Api Request FOR set and GET storageName on SET is null
-function RunServerPostApi(authRequired, apiPath, jsonData, storageName) {
+function RunServerPostApi(apiPath, jsonData, storageName) {
     showPageLoading();
     var def = $.ajax({
         global: false, type: "POST", url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
-        headers: authRequired ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null) } : { 'Content-type': 'application/json' },
+        headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
         data: JSON.stringify(jsonData)
     });
 
@@ -28,12 +28,12 @@ function RunServerPostApi(authRequired, apiPath, jsonData, storageName) {
 }
 
 //Run GET Api Request 
-function RunServerGetApi(authRequired, apiPath, storageName) {
+function RunServerGetApi(apiPath, storageName) {
     showPageLoading();
     $.ajax({
         url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
         type: "GET",
-        headers: authRequired ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null) } : { 'Content-type': 'application/json' },
+        headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
         success: function (apiData) {
             if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
             notify.create(apiMessages.apiLoadSuccess, "Info", { cls: "success" }); notify.reset();
@@ -55,20 +55,22 @@ function invalidForm() {
     setTimeout(function () { form.removeClass("ani-ring"); }, 1000);
 }
 
+
 function validateForm() {
     showPageLoading();
     var def = $.ajax({
-        global: false, type: "POST", url: Metro.storage.getItem('BackendServerAddress', null) + "/EasyITCenterAuthentication", dataType: 'json',
+        global: false, type: "POST", url: Metro.storage.getItem('BackendServerAddress', null) + "/AuthenticationService", dataType: 'json',
         headers: { "Authorization": "Basic " + btoa($("#usernameId").val() + ":" + $("#passwordId").val()) }
     });
 
     def.fail(function (data) {
-        notify.create("Nesprávné jméno nebo heslo", "Error", { cls: "alert" }); notify.reset();
+        notify.create("Incorect Name or Password", "Error", { cls: "alert" }); notify.reset();
         hidePageLoading();
     });
 
     def.done(function (data) {
-        //AdminLogin(data);
+        Metro.storage.setItem("ApiToken", data);
+        window.location.href = Metro.storage.getItem("DefaultPath", null); 
         hidePageLoading();
     });
 }

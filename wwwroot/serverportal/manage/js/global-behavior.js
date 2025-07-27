@@ -5,8 +5,8 @@ function PortalStartup() {
     CreateToolPanel();
 
     getSpProcedure[1].tableName = "SolutionMixedEnumList";
-    RunServerPostApi(false, "DBProcedureService/SpProcedure/GetGenericDataListByParams", getSpProcedure, "MixedEnumList");
-    RunServerGetApi(false, "ServerPortalApi/GetApiTableDataList/PortalMenu", "PortalMenu");
+    RunServerPostApi("DBProcedureService/SpProcedure/GetGenericDataListByParams", getSpProcedure, "MixedEnumList");
+    RunServerGetApi("ServerPortalApi/GetApiTableDataList/PortalMenu", "PortalMenu");
    
     GenerateMenu();
 }
