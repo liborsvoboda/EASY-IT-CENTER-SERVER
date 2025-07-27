@@ -62,6 +62,9 @@ function GenerateMenu() {
                 menuItem.ParentGuid = mItem.value;
                 menuItem.RecGuid = mItem.recGuid;
                 menuItem.Id = mItem.id;
+                menuItem.Description = mItem.description;
+                menuItem.Public = mItem.public;
+                menuItem.Active = mItem.active;
                 break;
             case "Sequence":
                 menuItem.Sequence = parseInt(mItem.value);

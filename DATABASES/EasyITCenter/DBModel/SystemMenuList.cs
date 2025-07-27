@@ -22,6 +22,12 @@ namespace EasyITCenter.DBModel
         [StringLength(1024)]
         [Unicode(false)]
         public string AccessRole { get; set; } = null!;
+        [StringLength(2048)]
+        [Unicode(false)]
+        public string? AccessUser { get; set; }
+        [StringLength(50)]
+        [Unicode(false)]
+        public string? OrderBy { get; set; }
         [Unicode(false)]
         public string? Description { get; set; }
         public int UserId { get; set; }

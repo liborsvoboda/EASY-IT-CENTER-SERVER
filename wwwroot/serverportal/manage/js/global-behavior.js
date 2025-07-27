@@ -4,9 +4,8 @@ let pageLoader;
 function PortalStartup() {
     CreateToolPanel();
 
-    getSpProcedure.tableName = "SolutionMixedEnumList";
+    getSpProcedure[1].tableName = "SolutionMixedEnumList";
     RunServerPostApi(false, "DBProcedureService/SpProcedure/GetGenericDataListByParams", getSpProcedure, "MixedEnumList");
-     
     RunServerGetApi(false, "ServerPortalApi/GetApiTableDataList/PortalMenu", "PortalMenu");
    
     GenerateMenu();
@@ -131,33 +130,40 @@ function SetExternalLink(htmlContentId, content) {
 }
 
 function SetContent(htmlContentId, jsContentId, cssContentId) {
-    removeElement("InheritScript");
-    let portalMenu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
+    removeElement("InheritScript"); removeElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
+    document.getElementById("FrameWindow").innerHTML = menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent;
 
-    document.getElementById("FrameWindow").innerHTML = portalMenu.filter(menuItem => { return menuItem.id == htmlContentId })[0].value;
-
-    if (portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value != null) {
-        var script = "<script id='InheritScript' type='text/javascript'> " + portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";
+    if (menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent != null) {
+        let script = "<script id='InheritScript' charset='utf-8' type='text/javascript'> " + menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent + " </script>";
         $('body').append(script);
     }
+    if (menu.filter(menuItem => { return menuItem.CssContentId == cssContentId })[0].CssContent != null) {
+        let style = document.createElement('style'); style.id = "InheritStyle";
+        style.innerText = menu.filter(menuItem => { return menuItem.CssContentId == cssContentId })[0].CssContent;
+        document.head.appendChild(style);
+    }
+    
 }
 
+//TODO to IFRAME
 function SetExternalContent(htmlContentId, jsContentId, cssContentId) {
-    removeElement("InheritScript");
-    let portalMenu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
+    removeElement("InheritScript"); removeElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
-    document.getElementById("FrameWindow").innerHTML = portalMenu.filter(menuItem => { return menuItem.id == htmlContentId })[0].value;
-        $('body').append(script);
+    document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
 
-
-
-    if (portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value != null) {
-        var script = "<script id='InheritScript' type='text/javascript'> " + portalMenu.filter(menuItem => { return menuItem.id == jsContentId })[0].value + " </script>";
-        $('body').append(script);
+    if (menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent != null) {
+        let script = "<script id='InheritScript' charset='utf-8' type='text/javascript'> " + menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent + " </script>";
+        $("#IFrameWindow").contents().find("body").append(script)
+    }
+    if (menu.filter(menuItem => { return menuItem.CssContentId == cssContentId })[0].CssContent != null) {
+        let style = document.createElement('style'); style.id = "InheritStyle";
+        style.innerText = menu.filter(menuItem => { return menuItem.CssContentId == cssContentId })[0].CssContent;
+        let iframeHead = document.getElementById('IFrameWindow').contentWindow.document.head;
+        iframeHead.appendChild(style);
     }
 }
 

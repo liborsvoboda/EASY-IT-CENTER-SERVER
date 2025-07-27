@@ -18,7 +18,7 @@ namespace EasyITCenter.Controllers {
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                     IsolationLevel = IsolationLevel.ReadUncommitted
                 })) {
-                    data = new EasyITCenterContext().WebCodeLibraryLists.Where(a => a.Id == id)
+                    data = new EasyITCenterContext().SolutionCodeLibraryLists.Where(a => a.Id == id)
                         .OrderByDescending(a => a.TimeStamp).First().Content;
                 }
 

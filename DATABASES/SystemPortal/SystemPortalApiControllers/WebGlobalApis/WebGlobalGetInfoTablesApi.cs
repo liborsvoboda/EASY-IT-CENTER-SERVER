@@ -35,11 +35,11 @@ namespace EasyITCenter.Controllers {
         public async Task<string> GetWebCodeLibrary() {
             try {
                 //if (CommunicationController.IsAdmin()) {
-                List<WebCodeLibraryList> data;
+                List<SolutionCodeLibraryList> data;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                     IsolationLevel = IsolationLevel.ReadUncommitted
                 })) {
-                    data = new EasyITCenterContext().WebCodeLibraryLists.OrderBy(a => a.Name).ToList();
+                    data = new EasyITCenterContext().SolutionCodeLibraryLists.OrderBy(a => a.Name).ToList();
                 }
 
                 return JsonSerializer.Serialize(data, new JsonSerializerOptions() {

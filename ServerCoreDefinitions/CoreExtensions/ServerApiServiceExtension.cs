@@ -88,10 +88,10 @@
         /// Get UserId
         /// </summary>
         /// <returns></returns>
-        public static string? GetUserId() {
+        public static int? GetUserId() {
             try {
                 var context = _accessor?.HttpContext;
-                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.PrimarySid.ToString())?.Value; } else return null;
+                if (context != null && context.User != null) { return int.Parse(context.User.FindFirst(ClaimTypes.PrimarySid.ToString())?.Value); } else return null;
             } catch { return null; }
         }
 

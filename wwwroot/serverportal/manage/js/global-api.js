@@ -35,7 +35,7 @@ function RunServerGetApi(authRequired, apiPath, storageName) {
         type: "GET",
         headers: authRequired ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null) } : { 'Content-type': 'application/json' },
         success: function (apiData) {
-            Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData)));
+            if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
             notify.create(apiMessages.apiLoadSuccess, "Info", { cls: "success" }); notify.reset();
             hidePageLoading();
             return true;

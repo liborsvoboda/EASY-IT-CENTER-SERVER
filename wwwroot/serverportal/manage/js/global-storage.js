@@ -1,6 +1,9 @@
 ﻿// METRO ENGINE Easy Interactive Solution For SYSTEMS, WEBS, PORTALS, ETC....
 // https://docs.metroui.org.ua/intro.html
 
+let monacoEditorList = [];
+
+
 // CZECH DISTRIBUTION GroupWare-Solution.Eu && KlikneteZde.CZ
 // STORAGE LOAD FIRST
 
@@ -25,20 +28,20 @@ let notify = Metro.notify; notify.setup({
     animation: defaultSetting[0].notifyAnimation
 });
 
-let getSpProcedure = {
-    "SpProcedure": "SpGetTableDataList",
-    "tableName": null,
-    "userRole": "all",
-    "userId": null
-}
+let getSpProcedure = [
+    { SpProcedure: "SpGetTableDataList" },
+    { tableName: null },
+    { userRole: "all" },
+    { userId: null }
+]
 
-let setSpProcedure = {
-    "SpProcedure": "SpSetTableDataRec",
-    "tableName": null,
-    "userRole": "all",
-    "userId": null,
-    "dataRec": null
-}
+let setSpProcedure = [
+    { SpProcedure: "SpSetTableDataRec" },
+    { tableName: null },
+    { userRole: "all" },
+    { userId: null },
+    { dataRec: null }
+]
 
 
 //Set Default Storage Values

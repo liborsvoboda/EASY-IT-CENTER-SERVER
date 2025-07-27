@@ -1,6 +1,6 @@
 ﻿using EasyITCenter.ServerCoreStructure;
-using FastReport;
-using FastReport.Web;
+//using FastReport;
+//using FastReport.Web;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using static ServerCorePages.ViewerReportFileModel;
 namespace ServerCorePages {
@@ -15,13 +15,13 @@ namespace ServerCorePages {
     public class ViewerReportFileModel : PageModel {
         public static ServerWebPagesToken serverWebPagesToken;
         public static string result;
-        public ReportList reportList = new ReportList();
+        //public ReportList reportList = new ReportList();
 
 
-        public class ReportList {
-            public WebReport WebReport { get; set; }
-            public List<string> ReportNameList { get; set; } = new List<string>();
-        }
+        //public class ReportList {
+        //    public WebReport WebReport { get; set; }
+        //    public List<string> ReportNameList { get; set; } = new List<string>();
+        //}
 
 
         public void OnGet() {
@@ -36,12 +36,12 @@ namespace ServerCorePages {
 
 
             //Show Examples OR TODO DB Report
-            string? requestedUrlPath = ""; string fileContent = null;
+            /*string? requestedUrlPath = ""; string fileContent = null;
             try {
                 try { requestedUrlPath = ((string?)this.HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value); } catch { }
-                if (requestedUrlPath != null && requestedUrlPath.ToLower().EndsWith(".frx")) { /*TODO LOAD FROM DB BY UNIQUE NAME AFTER SELECT DELETE FROM DB*/}
+                if (requestedUrlPath != null && requestedUrlPath.ToLower().EndsWith(".frx")) { }
 
-                else {//Show Examples
+                else {
                     var exampleFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvIntegrated_path, "server-modules", "reporting", "reportviewer", "Example"), "*.*", SearchOption.TopDirectoryOnly);
 
                     string param = this.Request.Query.FirstOrDefault(a => a.Key == "ReportId").Value;
@@ -65,6 +65,8 @@ namespace ServerCorePages {
                         reportList.ReportNameList.Add(Path.GetFileName(example)); 
                     });
                 }
+            
+
 
                 //Example Show from File
                 //var webReport = new WebReport();
@@ -77,6 +79,8 @@ namespace ServerCorePages {
                 //using (FileStream file = new FileStream(pathToSave, FileMode.Create)) { reportForSave.CopyToAsync(file); }
 
             } catch { }
+
+            */
         }
 
 

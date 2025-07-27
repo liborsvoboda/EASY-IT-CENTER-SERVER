@@ -3,8 +3,7 @@ require.config({ paths: { 'vs': '/serverportal/addons/monaco/js/monaco-editor/mi
 require(['vs/editor/editor.main'], function () {
 
 
-    var fileCounter = 0;
-    var editorArray = [];
+    let fileCounter = 0;
 
     monaco.editor.defineTheme('myTheme', {
         base: 'vs-dark',
@@ -15,23 +14,17 @@ require(['vs/editor/editor.main'], function () {
     monaco.editor.setTheme('myTheme');
 
 
-    function newEditor(container_id, code, language) {
-        var model = monaco.editor.createModel(code, language);
-        var editor = monaco.editor.create(document.getElementById(container_id), {
+    function newEditor(elementId, container_id, code, language) {
+        let model = monaco.editor.createModel(code, language);
+        let editor = monaco.editor.create(document.getElementById(container_id), {
             model: model,
             suggest: {
                 preview: true, insertMode: "replace"
             },
             automaticLayout: true, fixedOverflowWidgets: true
         });
-        /*
-        require(['vs/editor/editor.main'], function () {
-            monaco.editor.create($("#monacoEditor"), {
-                value: "script", language: 'html', theme: 'vs-dark', automaticLayout: true, fixedOverflowWidgets: true
-            });
-        });
-        */
-        editorArray.push(editor);
+
+        monacoEditorList.push({ elementId: elementId, editor: editor, model: model });
         return editor;
     }
 
@@ -41,13 +34,13 @@ require(['vs/editor/editor.main'], function () {
         new_container.id = "container-" + fileCounter.toString(10);
         new_container.className = "monacocontainer";
         document.getElementById(elementId).appendChild(new_container);
-        newEditor(new_container.id, code, language);
+        newEditor(elementId,new_container.id, code, language);
         fileCounter += 1;
     }
 
-    addNewEditor(JSON.parse(JSON.stringify(Metro.storage.getItem('SelectedMenu', null))).HtmlContent ,"monacoHTML", 'html');
-    addNewEditor(JSON.parse(JSON.stringify(Metro.storage.getItem('SelectedMenu', null))).JsContent, "monacoJS", 'javascript');
-    addNewEditor(JSON.parse(JSON.stringify(Metro.storage.getItem('SelectedMenu', null))).CssContent, "monacoCSS", 'css');
+    addNewEditor("" ,"monacoHTML", 'html');
+    addNewEditor("", "monacoJS", 'javascript');
+    addNewEditor("", "monacoCSS", 'css');
     /*
     var languageSelected = document.querySelector('.language');    
     languageSelected.onchange = function () {
