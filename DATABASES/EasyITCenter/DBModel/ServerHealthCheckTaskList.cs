@@ -40,6 +40,7 @@ namespace EasyITCenter.DBModel
         public int? SizeMb { get; set; }
         public int? Port { get; set; }
         public int UserId { get; set; }
+        [Required]
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 

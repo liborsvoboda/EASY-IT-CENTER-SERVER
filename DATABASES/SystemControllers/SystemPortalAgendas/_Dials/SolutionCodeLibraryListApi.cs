@@ -2,41 +2,41 @@
 
     [Authorize]
     [ApiController]
-    [Route("EasyITCenterWebCodeLibraryList")]
-    public class EasyITCenterWebCodeLibraryListApi : ControllerBase {
+    [Route("EasyITCenterSolutionCodeLibraryList")]
+    public class EasyITCenterSolutionCodeLibraryListApi : ControllerBase {
 
-        [HttpGet("/EasyITCenterWebCodeLibraryList")]
-        public async Task<string> GetWebCodeLibraryList() {
-            List<WebCodeLibraryList> data;
+        [HttpGet("/EasyITCenterSolutionCodeLibraryList")]
+        public async Task<string> GetSolutionCodeLibraryList() {
+            List<SolutionCodeLibraryList> data;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
-                data = new EasyITCenterContext().WebCodeLibraryLists.OrderBy(a => a.Name).ToList();
+                data = new EasyITCenterContext().SolutionCodeLibraryLists.OrderBy(a => a.Name).ToList();
             }
 
             return JsonSerializer.Serialize(data);
         }
 
-        [HttpGet("/EasyITCenterWebCodeLibraryList/Filter/{filter}")]
-        public async Task<string> GetWebCodeLibraryListByFilter(string filter) {
-            List<WebCodeLibraryList> data;
+        [HttpGet("/EasyITCenterSolutionCodeLibraryList/Filter/{filter}")]
+        public async Task<string> GetSolutionCodeLibraryListByFilter(string filter) {
+            List<SolutionCodeLibraryList> data;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
-                data = new EasyITCenterContext().WebCodeLibraryLists.FromSqlRaw("SELECT * FROM WebCodeLibraryList WHERE 1=1 AND " + filter.Replace("+", " ")).AsNoTracking().ToList();
+                data = new EasyITCenterContext().SolutionCodeLibraryLists.FromSqlRaw("SELECT * FROM SolutionCodeLibraryList WHERE 1=1 AND " + filter.Replace("+", " ")).AsNoTracking().ToList();
             }
 
             return JsonSerializer.Serialize(data);
         }
 
 
-        [HttpGet("/EasyITCenterWebCodeLibraryList/ByGroup/{code}")]
-        public async Task<string> GetWebCodeLibraryListGroup(string code) {
-            List<WebCodeLibraryList> data;
+        [HttpGet("/EasyITCenterSolutionCodeLibraryList/ByGroup/{code}")]
+        public async Task<string> GetSolutionCodeLibraryListGroup(string code) {
+            List<SolutionCodeLibraryList> data;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted
             })) {
-                data = new EasyITCenterContext().WebCodeLibraryLists
+                data = new EasyITCenterContext().SolutionCodeLibraryLists
                     .Where(a =>
                     (code.ToLower() == "web" && (a.InheritedCodeType.ToLower() == "html" || a.InheritedCodeType.ToLower() == "javascript" || a.InheritedCodeType.ToLower() == "css")
                     || a.InheritedCodeType.ToLower() == code.ToLower()) && a.IsCompletion).OrderBy(a => a.InheritedCodeType).ThenBy(a=>a.Name).ToList();
@@ -46,23 +46,23 @@
         }
 
 
-        [HttpGet("/EasyITCenterWebCodeLibraryList/{id}")]
-        public async Task<string> GetWebCodeLibraryListKey(int id) {
-            WebCodeLibraryList data;
+        [HttpGet("/EasyITCenterSolutionCodeLibraryList/{id}")]
+        public async Task<string> GetSolutionCodeLibraryListKey(int id) {
+            SolutionCodeLibraryList data;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted
             })) {
-                data = new EasyITCenterContext().WebCodeLibraryLists.Where(a => a.Id == id).First();
+                data = new EasyITCenterContext().SolutionCodeLibraryLists.Where(a => a.Id == id).First();
             }
 
             return JsonSerializer.Serialize(data);
         }
 
-        [HttpPut("/EasyITCenterWebCodeLibraryList")]
+        [HttpPut("/EasyITCenterSolutionCodeLibraryList")]
         [Consumes("application/json")]
-        public async Task<string> InsertWebCodeLibraryList([FromBody] WebCodeLibraryList record) {
+        public async Task<string> InsertSolutionCodeLibraryList([FromBody] SolutionCodeLibraryList record) {
             try {
-                var data = new EasyITCenterContext().WebCodeLibraryLists.Add(record);
+                var data = new EasyITCenterContext().SolutionCodeLibraryLists.Add(record);
                 int result = await data.Context.SaveChangesAsync();
                 if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                 else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -71,26 +71,26 @@
             }
         }
 
-        [HttpPost("/EasyITCenterWebCodeLibraryList")]
+        [HttpPost("/EasyITCenterSolutionCodeLibraryList")]
         [Consumes("application/json")]
-        public async Task<string> UpdateWebCodeLibraryList([FromBody] WebCodeLibraryList record) {
+        public async Task<string> UpdateSolutionCodeLibraryList([FromBody] SolutionCodeLibraryList record) {
             try {
-                var data = new EasyITCenterContext().WebCodeLibraryLists.Update(record);
+                var data = new EasyITCenterContext().SolutionCodeLibraryLists.Update(record);
                 int result = await data.Context.SaveChangesAsync();
                 if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                 else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
             } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
-        [HttpDelete("/EasyITCenterWebCodeLibraryList/{id}")]
+        [HttpDelete("/EasyITCenterSolutionCodeLibraryList/{id}")]
         [Consumes("application/json")]
-        public async Task<string> DeleteWebCodeLibraryList(string id) {
+        public async Task<string> DeleteSolutionCodeLibraryList(string id) {
             try {
                 if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
-                WebCodeLibraryList record = new() { Id = int.Parse(id) };
+                SolutionCodeLibraryList record = new() { Id = int.Parse(id) };
 
-                var data = new EasyITCenterContext().WebCodeLibraryLists.Remove(record);
+                var data = new EasyITCenterContext().SolutionCodeLibraryLists.Remove(record);
                 int result = await data.Context.SaveChangesAsync();
                 if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                 else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });

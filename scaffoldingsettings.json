@@ -1,5 +1,5 @@
 ﻿{
-  "DataSource": "Data Source=localhost,1433; Initial Catalog=EasyITCenter; User ID=easyitcenter;Password=easyitcenter;TrustServerCertificate=True;command timeout=300;",
+  "DataSource": "Server=127.0.0.1;Database=EasyITCenter;Trusted_Connection=True;TrustServerCertificate=True;command timeout=300;",
   "Provider": "Microsoft.EntityFrameworkCore.SqlServer",
   "ContextName": "ScaffoldContext",
   "ContextDirectory": "DATABASES/EasyITCenter/DBEngine",

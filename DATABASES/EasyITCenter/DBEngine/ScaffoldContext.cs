@@ -82,6 +82,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ServerStaticOrMvcDefPathList> ServerStaticOrMvcDefPathLists { get; set; } = null!;
         public virtual DbSet<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; } = null!;
         public virtual DbSet<ServerToolTypeList> ServerToolTypeLists { get; set; } = null!;
+        public virtual DbSet<SolutionCodeLibraryList> SolutionCodeLibraryLists { get; set; } = null!;
         public virtual DbSet<SolutionEmailTemplateList> SolutionEmailTemplateLists { get; set; } = null!;
         public virtual DbSet<SolutionEmailerHistoryList> SolutionEmailerHistoryLists { get; set; } = null!;
         public virtual DbSet<SolutionFailList> SolutionFailLists { get; set; } = null!;
@@ -116,7 +117,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<UserImageGalleryList> UserImageGalleryLists { get; set; } = null!;
         public virtual DbSet<UserParameterList> UserParameterLists { get; set; } = null!;
         public virtual DbSet<WebBannedIpAddressList> WebBannedIpAddressLists { get; set; } = null!;
-        public virtual DbSet<WebCodeLibraryList> WebCodeLibraryLists { get; set; } = null!;
         public virtual DbSet<WebConfiguratorList> WebConfiguratorLists { get; set; } = null!;
         public virtual DbSet<WebCoreFileList> WebCoreFileLists { get; set; } = null!;
         public virtual DbSet<WebDeveloperNewsList> WebDeveloperNewsLists { get; set; } = null!;
@@ -133,6 +133,8 @@ namespace EasyITCenter.DBModel
         {
             modelBuilder.Entity<BasicAttachmentList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedParentRecordTypeNavigation)
                     .WithMany(p => p.BasicAttachmentLists)
                     .HasPrincipalKey(p => p.Name)
@@ -152,6 +154,8 @@ namespace EasyITCenter.DBModel
                 entity.HasKey(e => new { e.UserId, e.Date })
                     .HasName("PK_Calendar");
 
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BasicCalendarLists)
                     .HasForeignKey(d => d.UserId)
@@ -160,6 +164,14 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BasicCurrencyList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ExchangeRate).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Fixed).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BasicCurrencyLists)
                     .HasForeignKey(d => d.UserId)
@@ -169,6 +181,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BasicImageGalleryList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BasicImageGalleryLists)
                     .HasForeignKey(d => d.UserId)
@@ -178,6 +192,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BasicItemList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Currency)
                     .WithMany(p => p.BasicItemLists)
                     .HasForeignKey(d => d.CurrencyId)
@@ -206,6 +224,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BasicUnitList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BasicUnitLists)
                     .HasForeignKey(d => d.UserId)
@@ -215,6 +237,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BasicVatList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BasicVatLists)
                     .HasForeignKey(d => d.UserId)
@@ -229,6 +255,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessAddressList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BusinessAddressLists)
                     .HasForeignKey(d => d.UserId)
@@ -240,6 +270,10 @@ namespace EasyITCenter.DBModel
             {
                 entity.HasComment("");
 
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BusinessBranchLists)
                     .HasForeignKey(d => d.UserId)
@@ -249,6 +283,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessCreditNoteList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InvoiceNumberNavigation)
                     .WithMany(p => p.BusinessCreditNoteLists)
                     .HasPrincipalKey(p => p.DocumentNumber)
@@ -270,6 +306,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessCreditNoteSupportList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.DocumentNumberNavigation)
                     .WithMany(p => p.BusinessCreditNoteSupportLists)
                     .HasPrincipalKey(p => p.DocumentNumber)
@@ -292,6 +330,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessExchangeRateList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Currency)
                     .WithMany(p => p.BusinessExchangeRateLists)
                     .HasForeignKey(d => d.CurrencyId)
@@ -307,6 +349,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessIncomingInvoiceList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Maturity)
                     .WithMany(p => p.BusinessIncomingInvoiceLists)
                     .HasForeignKey(d => d.MaturityId)
@@ -340,6 +384,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessIncomingInvoiceSupportList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.DocumentNumberNavigation)
                     .WithMany(p => p.BusinessIncomingInvoiceSupportLists)
                     .HasPrincipalKey(p => p.DocumentNumber)
@@ -362,6 +408,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessIncomingOrderList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.TotalCurrency)
                     .WithMany(p => p.BusinessIncomingOrderLists)
                     .HasForeignKey(d => d.TotalCurrencyId)
@@ -377,6 +425,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessIncomingOrderSupportList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.DocumentNumberNavigation)
                     .WithMany(p => p.BusinessIncomingOrderSupportLists)
                     .HasPrincipalKey(p => p.DocumentNumber)
@@ -399,6 +449,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessMaturityList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BusinessMaturityLists)
                     .HasForeignKey(d => d.UserId)
@@ -408,6 +462,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessNotesList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BusinessNotesLists)
                     .HasForeignKey(d => d.UserId)
@@ -417,6 +475,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessOfferList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.TotalCurrency)
                     .WithMany(p => p.BusinessOfferLists)
                     .HasForeignKey(d => d.TotalCurrencyId)
@@ -432,6 +492,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessOfferSupportList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.DocumentNumberNavigation)
                     .WithMany(p => p.BusinessOfferSupportLists)
                     .HasPrincipalKey(p => p.DocumentNumber)
@@ -447,6 +509,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessOutgoingInvoiceList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.CreditNote)
                     .WithMany(p => p.BusinessOutgoingInvoiceLists)
                     .HasForeignKey(d => d.CreditNoteId)
@@ -492,6 +556,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessOutgoingInvoiceSupportList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.DocumentNumberNavigation)
                     .WithMany(p => p.BusinessOutgoingInvoiceSupportLists)
                     .HasPrincipalKey(p => p.DocumentNumber)
@@ -514,6 +580,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessOutgoingOrderList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.TotalCurrency)
                     .WithMany(p => p.BusinessOutgoingOrderLists)
                     .HasForeignKey(d => d.TotalCurrencyId)
@@ -529,6 +597,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessOutgoingOrderSupportList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.DocumentNumberNavigation)
                     .WithMany(p => p.BusinessOutgoingOrderSupportLists)
                     .HasPrincipalKey(p => p.DocumentNumber)
@@ -551,6 +621,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessPaymentMethodList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BusinessPaymentMethodLists)
                     .HasForeignKey(d => d.UserId)
@@ -560,6 +634,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessPaymentStatusList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BusinessPaymentStatusLists)
                     .HasForeignKey(d => d.UserId)
@@ -569,6 +647,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessReceiptList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InvoiceNumberNavigation)
                     .WithMany(p => p.BusinessReceiptLists)
                     .HasPrincipalKey(p => p.DocumentNumber)
@@ -591,6 +671,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessReceiptSupportList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.DocumentNumberNavigation)
                     .WithMany(p => p.BusinessReceiptSupportLists)
                     .HasPrincipalKey(p => p.DocumentNumber)
@@ -613,6 +695,12 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<BusinessWarehouseList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.LastStockTaking).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BusinessWarehouseLists)
                     .HasForeignKey(d => d.UserId)
@@ -622,6 +710,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<DocSrvDocTemplateList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Group)
                     .WithMany(p => p.DocSrvDocTemplateLists)
                     .HasForeignKey(d => d.GroupId)
@@ -644,6 +734,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<DocSrvDocumentationCodeLibraryList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.DocSrvDocumentationCodeLibraryLists)
                     .HasForeignKey(d => d.UserId)
@@ -653,6 +745,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<DocSrvDocumentationGroupList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.DocSrvDocumentationGroupLists)
                     .HasForeignKey(d => d.UserId)
@@ -662,6 +758,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<DocSrvDocumentationList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.DocumentationGroup)
                     .WithMany(p => p.DocSrvDocumentationLists)
                     .HasForeignKey(d => d.DocumentationGroupId)
@@ -675,8 +775,15 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_DocumentationList_UserList");
             });
 
+            modelBuilder.Entity<LicSrvLicenseActivationFailList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+            });
+
             modelBuilder.Entity<LicSrvLicenseAlgorithmList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.LicSrvLicenseAlgorithmLists)
                     .HasForeignKey(d => d.AddressId)
@@ -698,6 +805,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<LicSrvUsedLicenseList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.LicSrvUsedLicenseLists)
                     .HasForeignKey(d => d.AddressId)
@@ -748,6 +857,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<PortalApiTableColumnDataList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.ApiTableNameNavigation)
                     .WithMany(p => p.PortalApiTableColumnDataLists)
                     .HasPrincipalKey(p => p.Name)
@@ -783,6 +896,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<PortalApiTableColumnList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedDataTypeNavigation)
                     .WithMany(p => p.PortalApiTableColumnLists)
                     .HasPrincipalKey(p => p.Name)
@@ -813,6 +928,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<PortalApiTableList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedTableTypeNavigation)
                     .WithMany(p => p.PortalApiTableLists)
                     .HasPrincipalKey(p => p.Name)
@@ -962,6 +1079,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<PortalPluginList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedCodeTypeNavigation)
                     .WithMany(p => p.PortalPluginListInheritedCodeTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
@@ -997,6 +1118,11 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalUserCommentList_SolutionUserList");
+            });
+
+            modelBuilder.Entity<PortalUserPageMenuList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
             });
 
             modelBuilder.Entity<ProdGuidGroupList>(entity =>
@@ -1053,6 +1179,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerApiSecurityList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedApiTypeNavigation)
                     .WithMany(p => p.ServerApiSecurityLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1069,6 +1199,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerCorsDefAllowedOriginList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerCorsDefAllowedOriginLists)
                     .HasForeignKey(d => d.UserId)
@@ -1078,6 +1212,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerHealthCheckTaskList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedCheckTypeNavigation)
                     .WithMany(p => p.ServerHealthCheckTaskLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1094,6 +1232,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerLiveDataMonitorList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerLiveDataMonitorLists)
                     .HasForeignKey(d => d.UserId)
@@ -1103,6 +1245,12 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerModuleAndServiceList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.InheritedLayoutType).HasDefaultValueSql("('MultiLangLayout')");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedLayoutTypeNavigation)
                     .WithMany(p => p.ServerModuleAndServiceListInheritedLayoutTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
@@ -1126,6 +1274,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerParameterList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedDataTypeNavigation)
                     .WithMany(p => p.ServerParameterListInheritedDataTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
@@ -1149,6 +1301,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerProcessList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.UserPreffix).IsFixedLength();
 
                 entity.HasOne(d => d.InheritedCommandTypeNavigation)
@@ -1174,6 +1328,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerScriptList>(entity =>
             {
+                entity.Property(e => e.Timestamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedOsTypeNavigation)
                     .WithMany(p => p.ServerScriptListInheritedOsTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
@@ -1197,6 +1353,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerStaticOrMvcDefPathList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerStaticOrMvcDefPathLists)
                     .HasForeignKey(d => d.UserId)
@@ -1206,6 +1364,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerToolPanelDefinitionList>(entity =>
             {
+                entity.Property(e => e.Public).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedToolLinkTypeNavigation)
                     .WithMany(p => p.ServerToolPanelDefinitionLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1228,6 +1390,12 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerToolTypeList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Public).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.ServerToolTypeLists)
                     .HasForeignKey(d => d.UserId)
@@ -1235,8 +1403,28 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_ServerToolTypeList_UserList");
             });
 
+            modelBuilder.Entity<SolutionCodeLibraryList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.InheritedCodeTypeNavigation)
+                    .WithMany(p => p.SolutionCodeLibraryLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedCodeType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_WebCodeLibraryList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SolutionCodeLibraryLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_WebCodeLibraryList_UserList");
+            });
+
             modelBuilder.Entity<SolutionEmailTemplateList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.SystemLanguage)
                     .WithMany(p => p.SolutionEmailTemplateLists)
                     .HasForeignKey(d => d.SystemLanguageId)
@@ -1250,8 +1438,15 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_EmailTemplateList_UserList");
             });
 
+            modelBuilder.Entity<SolutionEmailerHistoryList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+            });
+
             modelBuilder.Entity<SolutionFailList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedLogMonitorTypeNavigation)
                     .WithMany(p => p.SolutionFailLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1267,6 +1462,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionLanguageList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionLanguageLists)
                     .HasForeignKey(d => d.UserId)
@@ -1276,6 +1473,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionMessageModuleList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.FromUser)
                     .WithMany(p => p.SolutionMessageModuleListFromUsers)
                     .HasForeignKey(d => d.FromUserId)
@@ -1300,6 +1499,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionMessageTypeList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionMessageTypeLists)
                     .HasForeignKey(d => d.UserId)
@@ -1309,6 +1510,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionMixedEnumList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionMixedEnumLists)
                     .HasForeignKey(d => d.UserId)
@@ -1318,6 +1523,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionMottoList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.UserId).HasDefaultValueSql("((1))");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionMottoLists)
                     .HasForeignKey(d => d.UserId)
@@ -1327,6 +1536,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionOperationList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedApiResultTypeNavigation)
                     .WithMany(p => p.SolutionOperationListInheritedApiResultTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
@@ -1350,6 +1563,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionSchedulerList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedGroupNameNavigation)
                     .WithMany(p => p.SolutionSchedulerListInheritedGroupNameNavigations)
                     .HasPrincipalKey(p => p.Name)
@@ -1373,6 +1590,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionSchedulerProcessList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.ScheduledTask)
                     .WithMany(p => p.SolutionSchedulerProcessLists)
                     .HasForeignKey(d => d.ScheduledTaskId)
@@ -1381,6 +1600,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionStaticFileList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.StaticPath)
                     .WithMany(p => p.SolutionStaticFileLists)
                     .HasForeignKey(d => d.StaticPathId)
@@ -1400,6 +1623,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionStaticFilePathList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.StaticWeb)
                     .WithMany(p => p.SolutionStaticFilePathLists)
                     .HasForeignKey(d => d.StaticWebId)
@@ -1414,6 +1641,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionStaticWebList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionStaticWebLists)
                     .HasForeignKey(d => d.UserId)
@@ -1423,6 +1654,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionTaskList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedStatusTypeNavigation)
                     .WithMany(p => p.SolutionTaskListInheritedStatusTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
@@ -1446,6 +1679,18 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionUserList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Email).HasDefaultValueSql("('email@address.com')");
+
+                entity.Property(e => e.Phone).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.RoleAccessValue).HasDefaultValueSql("((100))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.UserDbPreffix).HasDefaultValueSql("(newid())");
+
                 entity.HasOne(d => d.RoleAccessValueNavigation)
                     .WithMany(p => p.SolutionUserListRoleAccessValueNavigations)
                     .HasPrincipalKey(p => p.MinimalAccessValue)
@@ -1459,8 +1704,19 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_UserList_UserRoleList");
             });
 
+            modelBuilder.Entity<SolutionUserRoleList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+            });
+
             modelBuilder.Entity<SystemCustomPageList>(entity =>
             {
+                entity.Property(e => e.InheritedFormType).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.StartupUrl).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedFormTypeNavigation)
                     .WithMany(p => p.SystemCustomPageListInheritedFormTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
@@ -1483,6 +1739,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SystemDocumentAdviceList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Branch)
                     .WithMany(p => p.SystemDocumentAdviceLists)
                     .HasForeignKey(d => d.BranchId)
@@ -1505,6 +1765,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SystemGroupMenuList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemGroupMenuLists)
                     .HasForeignKey(d => d.UserId)
@@ -1514,6 +1778,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SystemIgnoredExceptionList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemIgnoredExceptionLists)
                     .HasForeignKey(d => d.UserId)
@@ -1521,8 +1789,17 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_IgnoredExceptionList_UserList");
             });
 
+            modelBuilder.Entity<SystemLoginHistoryList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+            });
+
             modelBuilder.Entity<SystemMenuList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Group)
                     .WithMany(p => p.SystemMenuLists)
                     .HasForeignKey(d => d.GroupId)
@@ -1545,6 +1822,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SystemModuleList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedModuleTypeNavigation)
                     .WithMany(p => p.SystemModuleLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1561,6 +1840,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SystemReportList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemReportLists)
                     .HasForeignKey(d => d.UserId)
@@ -1568,8 +1851,15 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_ReportList_UserList");
             });
 
+            modelBuilder.Entity<SystemReportQueueList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+            });
+
             modelBuilder.Entity<SystemSvgIconList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemSvgIconLists)
                     .HasForeignKey(d => d.UserId)
@@ -1579,6 +1869,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SystemTranslationList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.UserId).HasDefaultValueSql("((0))");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemTranslationLists)
                     .HasForeignKey(d => d.UserId)
@@ -1587,6 +1881,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<TemplateList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Group)
                     .WithMany(p => p.TemplateLists)
                     .HasForeignKey(d => d.GroupId)
@@ -1617,6 +1915,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<UserDbManagementList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedDbTypeNavigation)
                     .WithMany(p => p.UserDbManagementLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1640,6 +1942,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<UserImageGalleryList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserImageGalleryLists)
                     .HasForeignKey(d => d.UserId)
@@ -1649,6 +1953,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<UserParameterList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedDataTypeNavigation)
                     .WithMany(p => p.UserParameterLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1665,6 +1971,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebBannedIpAddressList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebBannedIpAddressLists)
                     .HasForeignKey(d => d.UserId)
@@ -1672,24 +1982,12 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_WebBannedUserList_UserList");
             });
 
-            modelBuilder.Entity<WebCodeLibraryList>(entity =>
-            {
-                entity.HasOne(d => d.InheritedCodeTypeNavigation)
-                    .WithMany(p => p.WebCodeLibraryLists)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedCodeType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WebCodeLibraryList_SolutionMixedEnumList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.WebCodeLibraryLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WebCodeLibraryList_UserList");
-            });
-
             modelBuilder.Entity<WebConfiguratorList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebConfiguratorLists)
                     .HasForeignKey(d => d.UserId)
@@ -1699,6 +1997,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebCoreFileList>(entity =>
             {
+                entity.Property(e => e.MetroPath).HasDefaultValueSql("('')");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedJsCssDefinitionTypeNavigation)
                     .WithMany(p => p.WebCoreFileLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1715,6 +2017,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebDeveloperNewsList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebDeveloperNewsLists)
                     .HasForeignKey(d => d.UserId)
@@ -1724,6 +2030,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebDocumentationCodeLibraryList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebDocumentationCodeLibraryLists)
                     .HasForeignKey(d => d.UserId)
@@ -1733,6 +2041,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebDocumentationList>(entity =>
             {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebDocumentationLists)
                     .HasForeignKey(d => d.UserId)
@@ -1742,6 +2054,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebGlobalPageBlockList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.InheritedPagePartTypeNavigation)
                     .WithMany(p => p.WebGlobalPageBlockLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1758,6 +2072,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebGroupMenuList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebGroupMenuLists)
                     .HasForeignKey(d => d.UserId)
@@ -1767,6 +2083,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebMenuList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Group)
                     .WithMany(p => p.WebMenuLists)
                     .HasForeignKey(d => d.GroupId)
@@ -1782,6 +2100,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebSettingList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebSettingLists)
                     .HasForeignKey(d => d.UserId)
@@ -1790,10 +2110,17 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<WebUserSettingList>(entity =>
             {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.WebUserSettingLists)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_WebUserSettingList_UserList");
+            });
+
+            modelBuilder.Entity<WebVisitIpList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
             });
 
             OnModelCreatingPartial(modelBuilder);

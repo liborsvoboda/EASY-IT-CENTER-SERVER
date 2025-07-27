@@ -4,8 +4,8 @@ let ApiList = [
 ];
 
 
-//Run POST Api Request 
-function RunServerPostApi(authRequired, apiPath, jsonData) {
+//Run POST Api Request FOR set and GET storageName on SET is null
+function RunServerPostApi(authRequired, apiPath, jsonData, storageName) {
     showPageLoading();
     var def = $.ajax({
         global: false, type: "POST", url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
@@ -19,8 +19,9 @@ function RunServerPostApi(authRequired, apiPath, jsonData) {
         return false;
     });
 
-    def.done(function (data) {
+    def.done(function (apiData) {
         notify.create(apiMessages.apiSaveSuccess, "Info", { cls: "success" }); notify.reset();
+        if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
         hidePageLoading();
         return true;
     });

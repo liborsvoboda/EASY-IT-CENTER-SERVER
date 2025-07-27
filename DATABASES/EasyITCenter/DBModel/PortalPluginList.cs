@@ -38,6 +38,7 @@ namespace EasyITCenter.DBModel
         public string? Readme { get; set; }
         public bool IsMultiple { get; set; }
         public bool Public { get; set; }
+        [Required]
         public bool Active { get; set; }
         public int UserId { get; set; }
         [StringLength(50)]

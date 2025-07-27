@@ -40,11 +40,52 @@
         <div id="MessageBox" class="d-block m-0 p-0" style="overflow-y: scroll;max-height: 500px;"></div>
     </div>
 
+    <ul data-role="bottomsheet">
+        <li><span class="icon mif-comment"></span>Message</li>
+        <li><span class="icon mif-location"></span>Location</li>
+        <li><span class="icon mif-keyboard-voice"></span>Voice</li>
+        <li><span class="icon mif-phone"></span>Dialer</li>
+        <li class="divider"></li>
+        <li><span class="icon mif-file-upload"></span>Upload</li>
+    </ul>
 
+    <div id="monacoWeb" class="info-box" data-role="infobox" data-width='80%' data-height='800px' >
+        <span class="button square closer"></span>
+        <div class="info-box-content" style='overflow: auto;height: 750px;'>
 
-    <div id="monacoHTML"></div>
-    <div id="monacoJS"></div>
-    <div id="monacoCSS"></div>
+            <ul data-role="materialtabs" data-expand="sm">
+                <li><a href="#_menuHtml">HTML</a></li>
+                <li><a href="#_menuJs">Javascript</a></li>
+                <li><a href="#_menuCss">CSS</a></li>
+                <li><a href="#_menuPreview">Preview</a></li>
+            </ul>
+
+            <div class="border bd-default no-border-top p-2">
+                <div id="_menuHtml">
+                    <div id="monacoHTML" style='top: -50px;'></div>
+                </div>
+                <div id="_menuJs">
+                    <div id="monacoJS" style='top: -50px;'></div>
+                </div>
+                <div id="_menuCss">
+                    <div id="monacoCSS" style='top: -50px;'></div>
+                </div>
+                 <div id="_menuPreview">
+                    
+                </div>
+            </div>
+           <select class="theme" style='position: absolute;top: 42px;left: 90%;z-index: 2000;top: 40px;left: 90%;'>
+                <option>vs</option>
+                <option>vs-dark</option>
+			    <option>hc-black</option>
+            </select>
+            
+            
+            
+        </div>
+    </div>
+
+   
 
 
 

@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.DBModel
 {
-    [Table("WebCodeLibraryList")]
+    [Table("SolutionCodeLibraryList")]
     [Index("Name", Name = "IX_WebCodeLibraryList", IsUnique = true)]
-    public partial class WebCodeLibraryList
+    public partial class SolutionCodeLibraryList
     {
         [Key]
         public int Id { get; set; }
@@ -29,7 +29,7 @@ namespace EasyITCenter.DBModel
 
         public virtual SolutionMixedEnumList InheritedCodeTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
-        [InverseProperty("WebCodeLibraryLists")]
+        [InverseProperty("SolutionCodeLibraryLists")]
         public virtual SolutionUserList User { get; set; } = null!;
     }
 }

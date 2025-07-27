@@ -82,6 +82,7 @@ namespace EasyITCenter.DBModel
             ServerStaticOrMvcDefPathLists = new HashSet<ServerStaticOrMvcDefPathList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             ServerToolTypeLists = new HashSet<ServerToolTypeList>();
+            SolutionCodeLibraryLists = new HashSet<SolutionCodeLibraryList>();
             SolutionEmailTemplateLists = new HashSet<SolutionEmailTemplateList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
             SolutionLanguageLists = new HashSet<SolutionLanguageList>();
@@ -112,7 +113,6 @@ namespace EasyITCenter.DBModel
             UserImageGalleryLists = new HashSet<UserImageGalleryList>();
             UserParameterLists = new HashSet<UserParameterList>();
             WebBannedIpAddressLists = new HashSet<WebBannedIpAddressList>();
-            WebCodeLibraryLists = new HashSet<WebCodeLibraryList>();
             WebConfiguratorLists = new HashSet<WebConfiguratorList>();
             WebCoreFileLists = new HashSet<WebCoreFileList>();
             WebDeveloperNewsLists = new HashSet<WebDeveloperNewsList>();
@@ -146,6 +146,7 @@ namespace EasyITCenter.DBModel
         public string Email { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
+        [Required]
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
         [Unicode(false)]
@@ -298,6 +299,8 @@ namespace EasyITCenter.DBModel
         [InverseProperty("User")]
         public virtual ICollection<ServerToolTypeList> ServerToolTypeLists { get; set; }
         [InverseProperty("User")]
+        public virtual ICollection<SolutionCodeLibraryList> SolutionCodeLibraryLists { get; set; }
+        [InverseProperty("User")]
         public virtual ICollection<SolutionEmailTemplateList> SolutionEmailTemplateLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
@@ -356,8 +359,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<UserParameterList> UserParameterLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<WebBannedIpAddressList> WebBannedIpAddressLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<WebCodeLibraryList> WebCodeLibraryLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<WebConfiguratorList> WebConfiguratorLists { get; set; }
         [InverseProperty("User")]

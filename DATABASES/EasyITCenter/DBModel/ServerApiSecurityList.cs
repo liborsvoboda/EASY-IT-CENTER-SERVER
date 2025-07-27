@@ -35,6 +35,7 @@ namespace EasyITCenter.DBModel
         [StringLength(100)]
         [Unicode(false)]
         public string? RedirectPathOnError { get; set; }
+        [Required]
         public bool Active { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }

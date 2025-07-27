@@ -75,8 +75,8 @@ function GenerateMenu() {
             case "Icon":
                 menuItem.Icon = mItem.value;
                 break;
-            case "Type":
-                menuItem.Type = mItem.value;
+            case "InheritedMenuType":
+                menuItem.InheritedMenuType = mItem.value;
                 break;
             case "HtmlContent":
                 menuItem.HtmlContent = mItem.value;
@@ -104,7 +104,7 @@ function GenerateMenu() {
     Metro.storage.setItem('Menu', portalMenu);
 
     portalMenu.forEach((mItem, index, arr) => {
-        if (mItem.Type == "menu") {
+        if (mItem.InheritedMenuType == "menu") {
             htmlContent += '<li id= ' + mItem.Sequence + ' ><a href="#" class="dropdown-toggle"><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a>';
             htmlContent += '<ul id = ' + mItem.RecGuid + ' class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + mItem.Name + '</li></ul>';
             htmlContent += '</li>';
@@ -113,22 +113,22 @@ function GenerateMenu() {
     });
     
     portalMenu.forEach((mItem, index, arr) => {
-        if (mItem.Type == "link") {
+        if (mItem.InheritedMenuType == "link") {
             htmlContent = '<li onclick=SetLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
-        } else if (mItem.Type == "externalLink") {
+        } else if (mItem.InheritedMenuType == "externalLink") {
             htmlContent = '<li onclick=SetExternalLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         }
 
-        else if (mItem.Type == "content") {
+        else if (mItem.InheritedMenuType == "content") {
             htmlContent = '<li onclick=SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
 
-        else if (mItem.Type == "externalContent") {
+        else if (mItem.InheritedMenuType == "externalContent") {
             htmlContent = '<li onclick=SetExternalContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }

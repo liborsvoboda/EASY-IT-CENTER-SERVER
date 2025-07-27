@@ -41,6 +41,7 @@ namespace EasyITCenter.DBModel
             ServerScriptListInheritedOsTypeNavigations = new HashSet<ServerScriptList>();
             ServerScriptListInheritedScriptTypeNavigations = new HashSet<ServerScriptList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
+            SolutionCodeLibraryLists = new HashSet<SolutionCodeLibraryList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
             SolutionOperationListInheritedApiResultTypeNavigations = new HashSet<SolutionOperationList>();
             SolutionOperationListInheritedOperationTypeNavigations = new HashSet<SolutionOperationList>();
@@ -56,7 +57,6 @@ namespace EasyITCenter.DBModel
             UserAccessKeyLists = new HashSet<UserAccessKeyList>();
             UserDbManagementLists = new HashSet<UserDbManagementList>();
             UserParameterLists = new HashSet<UserParameterList>();
-            WebCodeLibraryLists = new HashSet<WebCodeLibraryList>();
             WebCoreFileLists = new HashSet<WebCoreFileList>();
             WebGlobalPageBlockLists = new HashSet<WebGlobalPageBlockList>();
         }
@@ -72,6 +72,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Description { get; set; }
         public int UserId { get; set; }
+        [Required]
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
@@ -105,6 +106,7 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerScriptList> ServerScriptListInheritedOsTypeNavigations { get; set; }
         public virtual ICollection<ServerScriptList> ServerScriptListInheritedScriptTypeNavigations { get; set; }
         public virtual ICollection<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; }
+        public virtual ICollection<SolutionCodeLibraryList> SolutionCodeLibraryLists { get; set; }
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
         public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedApiResultTypeNavigations { get; set; }
         public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedOperationTypeNavigations { get; set; }
@@ -120,7 +122,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<UserAccessKeyList> UserAccessKeyLists { get; set; }
         public virtual ICollection<UserDbManagementList> UserDbManagementLists { get; set; }
         public virtual ICollection<UserParameterList> UserParameterLists { get; set; }
-        public virtual ICollection<WebCodeLibraryList> WebCodeLibraryLists { get; set; }
         public virtual ICollection<WebCoreFileList> WebCoreFileLists { get; set; }
         public virtual ICollection<WebGlobalPageBlockList> WebGlobalPageBlockLists { get; set; }
     }

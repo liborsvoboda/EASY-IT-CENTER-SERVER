@@ -25,6 +25,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Description { get; set; }
         public int UserId { get; set; }
+        [Required]
         public bool Active { get; set; }
         public bool Receipt { get; set; }
         public bool CreditNote { get; set; }

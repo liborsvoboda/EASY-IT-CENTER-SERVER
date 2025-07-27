@@ -39,6 +39,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string InheritedIntervalType { get; set; } = null!;
         public int UserId { get; set; }
+        [Required]
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 

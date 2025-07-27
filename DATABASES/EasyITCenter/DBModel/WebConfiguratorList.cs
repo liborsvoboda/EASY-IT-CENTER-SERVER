@@ -35,6 +35,7 @@ namespace EasyITCenter.DBModel
         [StringLength(500)]
         [Unicode(false)]
         public string? IncludedIdList { get; set; }
+        [Required]
         public bool Active { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }

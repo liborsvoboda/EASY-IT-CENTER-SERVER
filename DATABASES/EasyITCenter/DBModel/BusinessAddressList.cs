@@ -52,6 +52,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Dic { get; set; }
         public int UserId { get; set; }
+        [Required]
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 

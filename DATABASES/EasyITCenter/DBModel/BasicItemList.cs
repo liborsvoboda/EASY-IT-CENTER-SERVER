@@ -34,6 +34,7 @@ namespace EasyITCenter.DBModel
         public int VatId { get; set; }
         public int CurrencyId { get; set; }
         public int UserId { get; set; }
+        [Required]
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 

@@ -22,6 +22,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string Path { get; set; } = null!;
         public int Size { get; set; }
+        [Required]
         public bool Active { get; set; }
         public int? UserId { get; set; }
         public DateTime TimeStamp { get; set; }

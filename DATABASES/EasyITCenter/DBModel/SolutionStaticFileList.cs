@@ -21,6 +21,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string MimeType { get; set; } = null!;
         public byte[]? Content { get; set; }
+        [Required]
         public bool Active { get; set; }
         public int? UserId { get; set; }
         public DateTime TimeStamp { get; set; }

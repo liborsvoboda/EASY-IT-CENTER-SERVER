@@ -19,18 +19,32 @@ let defaultSetting = [{
 
 
 //Global Notify Setting
-var notify = Metro.notify; notify.setup({
+let notify = Metro.notify; notify.setup({
     width: defaultSetting[0].notifyWidth,
     duration: defaultSetting[0].notifyDuration,
     animation: defaultSetting[0].notifyAnimation
 });
 
+let getSpProcedure = {
+    "SpProcedure": "SpGetTableDataList",
+    "tableName": null,
+    "userRole": "all",
+    "userId": null
+}
+
+let setSpProcedure = {
+    "SpProcedure": "SpSetTableDataRec",
+    "tableName": null,
+    "userRole": "all",
+    "userId": null,
+    "dataRec": null
+}
 
 
 //Set Default Storage Values
 Metro.storage.setItem('BackendServerAddress', window.location.origin);
 Metro.storage.setItem('DetectedLanguage', (navigator.language || navigator.userLanguage).substring(0, 2));
-if (Metro.storage.getItem('UserAutomaticTranslate', null) == null) { Metro.storage.setItem('UserAutomaticTranslate', true); }
+if (Metro.storage.getItem('UserAutomaticTranslate', null) == null) { Metro.storage.setItem('UserAutomaticTranslate', false); }
 if (Metro.storage.getItem('WebScheme', null) == null) {
     Metro.storage.setItem('WebScheme', "sky-net.css");
     ChangeSchemeTo(Metro.storage.getItem('WebScheme', null));

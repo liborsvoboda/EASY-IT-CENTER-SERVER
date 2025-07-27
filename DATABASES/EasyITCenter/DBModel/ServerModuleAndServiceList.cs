@@ -44,6 +44,7 @@ namespace EasyITCenter.DBModel
         public bool RestrictionSetAllowed { get; set; }
         public bool HtmlSetAllowed { get; set; }
         public bool RedirectSetAllowed { get; set; }
+        [Required]
         public bool Active { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }

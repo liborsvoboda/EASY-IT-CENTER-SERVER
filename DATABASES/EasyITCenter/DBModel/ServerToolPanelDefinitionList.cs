@@ -36,6 +36,7 @@ namespace EasyITCenter.DBModel
         public string BackgroundColor { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
+        [Required]
         public bool Public { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }

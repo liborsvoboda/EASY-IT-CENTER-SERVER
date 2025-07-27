@@ -30,6 +30,7 @@ namespace EasyITCenter.DBModel
         public string? Readme { get; set; }
         public bool Public { get; set; }
         public int UserId { get; set; }
+        [Required]
         public bool Active { get; set; }
         [StringLength(50)]
         [Unicode(false)]

@@ -17,6 +17,7 @@ namespace EasyITCenter.DBModel
         public string ErrorNumber { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
+        [Required]
         public bool Active { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }

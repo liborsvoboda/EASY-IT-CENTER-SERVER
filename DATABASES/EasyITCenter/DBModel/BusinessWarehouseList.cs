@@ -22,6 +22,7 @@ namespace EasyITCenter.DBModel
         public bool Default { get; set; }
         public bool LockedByStockTaking { get; set; }
         public DateTime LastStockTaking { get; set; }
+        [Required]
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 

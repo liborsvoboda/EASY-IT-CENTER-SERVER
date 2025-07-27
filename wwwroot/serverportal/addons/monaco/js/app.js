@@ -5,15 +5,9 @@ require(['vs/editor/editor.main'], function () {
 
     var fileCounter = 0;
     var editorArray = [];
-    var defaultCode = [
-        'function helloWorld() {',
-        '   console.log("Hello world!");',
-        '}'
-    ].join('\n');
-
 
     monaco.editor.defineTheme('myTheme', {
-        base: 'vs',
+        base: 'vs-dark',
         inherit: true,
         rules: [{ background: 'EDF9FA' }],
         // colors: { 'editor.lineHighlightBackground': '#0000FF20' }
@@ -25,6 +19,10 @@ require(['vs/editor/editor.main'], function () {
         var model = monaco.editor.createModel(code, language);
         var editor = monaco.editor.create(document.getElementById(container_id), {
             model: model,
+            suggest: {
+                preview: true, insertMode: "replace"
+            },
+            automaticLayout: true, fixedOverflowWidgets: true
         });
         /*
         require(['vs/editor/editor.main'], function () {
@@ -57,38 +55,32 @@ require(['vs/editor/editor.main'], function () {
     }
     */
 
-   /*
+   
     var themeSelected = document.querySelector('.theme');    
     themeSelected.onchange = function () {
         monaco.editor.setTheme(themeSelected.value)
     }
-    */
+    
+    /*
+    monaco.languages.registerCompletionItemProvider('myCustomLanguage', {
+        provideCompletionItems: function (model, position) {
+            const suggestions = [
+                {
+                    label: 'console',
+                    kind: monaco.languages.CompletionItemKind.Function,
+                    documentation: 'Logs a message to the console.',
+                    insertText: 'console.log()',
+                },
+                {
+                    label: 'setTimeout',
+                    kind: monaco.languages.CompletionItemKind.Function,
+                    documentation: 'Executes a function after a specified time interval.',
+                    insertText: 'setTimeout(() => {\n\n}, 1000)',
+                }
+            ];
 
-   /*
-	var text = document.createElement("DIV");
-    text.id = "show-position";
-    text.innerHTML = "Ln 1, Col 1";
-    var header = document.getElementById("header");
-    header.appendChild(text);
-    */
-   /*
-    var myEditor = editorArray[0];
-    myEditor.onDidChangeCursorPosition((e) => {
-        document.getElementById("show-position").innerHTML = "Ln " + myEditor.getPosition().lineNumber + ", Col " + myEditor.getPosition().column;
-    });	
-	*/
-
-	/*
-	var btn = document.createElement("button");
-    btn.id = "show-content";
-    btn.innerHTML = "Uložit Soubor";
-    var header = document.getElementById("header");
-    header.appendChild(btn);
-    */
-   /*
-    document.getElementById("show-content").addEventListener("click", function () {
-        alert(editorArray[0].getValue());
+            return { suggestions: suggestions };
+        }
     });
-	*/
-
+    */
 });

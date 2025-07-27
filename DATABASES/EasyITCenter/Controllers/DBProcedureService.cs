@@ -15,7 +15,7 @@ namespace EasyITCenter.Controllers {
     /// Stored Procedures Central Library With Return Dynamic DataList
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase"/>
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("DBProcedureService")]
     public class DBProcedureService : ControllerBase {
@@ -33,6 +33,7 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <param name="dataset"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("/DBProcedureService/SpProcedure/GetGenericDataListByParams")]
         [Consumes("application/json")]
         public async Task<string> GetSystemOperationsList(List<Dictionary<string, string>> dataset) {
