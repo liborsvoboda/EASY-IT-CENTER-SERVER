@@ -169,3 +169,7 @@ Gs.Objects.ShowMessagePanel = function (close) {
         charms.close();
     } else { charms.toggle(); }
 }
+
+Gs.Objects.ShowFavorites = function (elementId) {
+    Metro.bottomsheet.toggle("#" + elementId, "grid");
+}

@@ -42,12 +42,12 @@
     <div class="reports">
         <div class="d-block mt-2 text-center bg-cyan">EIC&ESB Webový Prohlížeč Reportů</div>
 
-        @foreach (var item in Model.reportList.ReportNameList.Select((value, i) => new { value, i })) {
+       @*  @foreach (var item in Model.reportList.ReportNameList.Select((value, i) => new { value, i })) {
             <a href="~/ReportViewer/ViewerReportFile?ReportId=@item.i">@item.value</a>
-        }
+        } *@
     </div>
     <div class="webreport">  
-        @await Model.reportList.WebReport.Render()
+       @*  @await Model.reportList.WebReport.Render() *@
     </div>
 
         

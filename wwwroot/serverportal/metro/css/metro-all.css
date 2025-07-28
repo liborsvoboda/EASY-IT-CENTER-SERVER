@@ -21556,14 +21556,14 @@ pre code {
   background-color: #ffffff;
   display: block;
   z-index: 1030;
-  max-width: 360px;
-  left: 50%;
+  max-width: 500px;
+  left: 40%;
   list-style: none inside;
   padding: 0;
   margin: 0 0 0 -50%;
   width: 100%;
   top: 100%;
-  position: fixed;
+  position: sticky;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   -webkit-box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2);

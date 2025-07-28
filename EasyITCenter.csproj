@@ -104,6 +104,10 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
      <Content Include="wwwroot\**" />
   </ItemGroup>  
 
+   <ItemGroup>
+     <Content Remove="wwwroot\serverportal\manage\js\site.js" />
+   </ItemGroup>  
+
 
    <ItemGroup>
      <None Remove="C:\Users\tatka\.nuget\packages\microsoft.applicationinsights.profiler.aspnetcore\2.6.0\contentFiles\any\netstandard2.1\ServiceProfiler\TraceUpload.zip" />
