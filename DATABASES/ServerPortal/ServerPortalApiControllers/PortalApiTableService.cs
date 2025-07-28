@@ -43,14 +43,12 @@ namespace StripeAPI.Controllers
                 })) {
 
                     if (!ServerApiServiceExtension.IsLogged()) {
-
                         data = await new EasyITCenterContext().PortalApiTableColumnDataLists
-                            .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && a.UserPrefix == null && a.Public == true && a.Active == true)
+                            .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && a.Public == true && a.Active == true)
                             .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToListAsync();
-
                     } else {
                         data = await new EasyITCenterContext().PortalApiTableColumnDataLists
-                       .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && ( a.UserPrefix == null || a.UserPrefix == ServerApiServiceExtension.GetUserPrefix() ) && a.Active == true)
+                       .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && ( a.Public == true || ( a.UserPrefix == ServerApiServiceExtension.GetUserPrefix() && a.Public == false)) && a.Active == true)
                        .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToListAsync();
 
                     }
@@ -74,11 +72,8 @@ namespace StripeAPI.Controllers
                     IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
                 })) {
 
-                    if (!ServerApiServiceExtension.IsLogged()) {
-                        data = await new EasyITCenterContext().PortalApiTableLists
-                       .Where(a => ( a.UserPrefix == null && ServerApiServiceExtension.IsAdmin()) || a.UserPrefix == ServerApiServiceExtension.GetUserPrefix() )
-                       .OrderBy(a => a.Name).ToListAsync();
-
+                    if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+                        data = await new EasyITCenterContext().PortalApiTableLists.OrderBy(a => a.Name).ToListAsync();
                     }
                 }
             } catch (Exception ex) { }
@@ -100,9 +95,9 @@ namespace StripeAPI.Controllers
                     IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
                 })) {
 
-                    if (!ServerApiServiceExtension.IsLogged()) {
+                    if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
                         data = await new EasyITCenterContext().PortalApiTableColumnLists
-                       .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && ( a.UserPrefix == null && ServerApiServiceExtension.IsAdmin() ) || a.UserPrefix == ServerApiServiceExtension.GetUserPrefix())
+                       .Where(a => a.ApiTableName.ToLower() == tablename.ToLower())
                        .OrderBy(a => a.Name).ToListAsync();
 
                     }
@@ -140,13 +135,14 @@ namespace StripeAPI.Controllers
                     } else {
                         List<PortalApiTableColumnDataList> original = new();
                         original = await new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == menuData.RecGuid).ToListAsync();
+                        
 
                         List<PortalApiTableColumnDataList> record = new();
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "ParentGuid").Select(a=>a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "ParentGuid", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.ParentGuid, Description = menuData.Description, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "Sequence").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "Sequence", InheritedDataType = "int", RecGuid = menuData.RecGuid, Value = menuData.Sequence.ToString(), Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "Name").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "Name", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Name, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "Icon").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "Icon", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Icon, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "InheritedMenuType").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "InheritedMenuType", InheritedDataType = "string", RecGuid = menuData.InheritedMenuType, Value = menuData.HtmlContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "InheritedMenuType").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "InheritedMenuType", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.InheritedMenuType, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "HtmlContent").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.HtmlContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "JsContent").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "JsContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.JsContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "CSSContent").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "CSSContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.CssContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });

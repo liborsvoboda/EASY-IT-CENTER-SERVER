@@ -57,7 +57,6 @@ Gs.Objects.ShowUnAuthMessage = function () {
 
 Gs.Objects.GenerateMenu = function () {
     let htmlContent = "";// '<li class="item-header">Portal MENU</li>';
-    let origMenu = document.getElementById("PortalMenu").innerHTML;
 
     let lastGuid = null, menuItem = {}, portalMenu = [];
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
@@ -119,7 +118,7 @@ Gs.Objects.GenerateMenu = function () {
             htmlContent += '<ul id = ' + mItem.RecGuid + ' class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + mItem.Name + '</li></ul>';
             htmlContent += '</li>';
         }
-        document.getElementById("PortalMenu").innerHTML = htmlContent + origMenu;
+        document.getElementById("PortalMenu").innerHTML = htmlContent;
     });
     
     portalMenu.forEach((mItem, index, arr) => {
