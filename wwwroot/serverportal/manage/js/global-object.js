@@ -58,10 +58,10 @@ Gs.Objects.ShowUnAuthMessage = function () {
 Gs.Objects.GenerateMenu = function () {
     let htmlContent = "";// '<li class="item-header">Portal MENU</li>';
 
-    let lastGuid = null, menuItem = {}, portalMenu = [];
-    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
+    let lastGuid = null, menuItem = {}, menu = [];
+    let portalMenu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
  
-    menu.forEach((mItem, index, arr) => {
+    portalMenu.forEach((mItem, index, arr) => {
 
         switch (mItem.apiTableColumnName) {
             case "ParentGuid":
@@ -103,16 +103,16 @@ Gs.Objects.GenerateMenu = function () {
         }
 
         if (lastGuid != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != mItem.recGuid)) {
-            portalMenu.push(menuItem);
+            menu.push(menuItem);
             menuItem = {};
         }
 
         lastGuid = mItem.recGuid;
     });
-    portalMenu.sort((a, b) => a.Sequence > b.Sequence ? 1 : -1);
-    Metro.storage.setItem('Menu', portalMenu);
+    menu.sort((a, b) => a.Sequence > b.Sequence ? 1 : -1);
+    Metro.storage.setItem('Menu', menu);
 
-    portalMenu.forEach((mItem, index, arr) => {
+    menu.forEach((mItem, index, arr) => {
         if (mItem.InheritedMenuType == "menu") {
             htmlContent += '<li id= ' + mItem.Sequence + ' ><a href="#" class="dropdown-toggle"><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a>';
             htmlContent += '<ul id = ' + mItem.RecGuid + ' class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + mItem.Name + '</li></ul>';
@@ -121,7 +121,7 @@ Gs.Objects.GenerateMenu = function () {
         document.getElementById("PortalMenu").innerHTML = htmlContent;
     });
     
-    portalMenu.forEach((mItem, index, arr) => {
+    menu.forEach((mItem, index, arr) => {
         if (mItem.InheritedMenuType == "link") {
             htmlContent = '<li onclick=Gs.Behaviors.SetLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
