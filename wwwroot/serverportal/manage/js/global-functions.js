@@ -1,5 +1,5 @@
 ﻿
-function GenerateUUID() { 
+Gs.Functions.GenerateUUID = function () { 
     var d = new Date().getTime();
     var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -15,26 +15,26 @@ function GenerateUUID() {
     });
 }
 
-function RemoveElement(elementId) {
+Gs.Functions.RemoveElement = function (elementId) {
     let element = document.getElementById(elementId);
     if (element != null) { element.remove(); }
 }
 
 
-function AddClass(elementId,clasName) {
+Gs.Functions.AddClass = function (elementId,clasName) {
     $("#deleteButton").addClass(clasName); //"disabled"
 }
 
-function RemoveClass(elementId, clasName) {
+Gs.Functions.RemoveClass = function (elementId, clasName) {
     $("#deleteButton").removeClass(clasName); //"disabled"
 }
 
-function htmlDecode(input) {
+Gs.Functions.HtmlDecode = function (input) {
     var doc = new DOMParser().parseFromString(input, "text/html");
     return doc.documentElement.textContent;
 }
 
-async function FileReaderToImageData(n) {
+Gs.Functions.FileReaderToImageData = async function (n) {
     const t = new FileReader; return await new Promise((t, i) => {
         const r = new FileReader; r.onloadend = () => t(r.result); r.onerror = i;
         console.log("files", JSON.parse(JSON.stringify(files)));
@@ -42,7 +42,7 @@ async function FileReaderToImageData(n) {
     })
 }
 
-function Str2bytes(str) {
+Gs.Functions.Str2bytes = function (str) {
     var bytes = new Uint8Array(str.length);
     for (var i = 0; i < str.length; i++) {
         bytes[i] = str.charCodeAt(i);
@@ -50,12 +50,12 @@ function Str2bytes(str) {
     return bytes;
 }
 
-function PreloadImage(src) {
+Gs.Functions.PreloadImage = function (src) {
     var img = new Image();
     img.src = src;
 }
 
-function BindYouTubePlay(img) {
+Gs.Functions.BindYouTubePlay = function (img) {
     var a = img.parent();
     var p = a.parent();
     if (p[0] && p[0].tagName === 'P') {
@@ -68,30 +68,30 @@ function BindYouTubePlay(img) {
 }
 
 
-function BindYouTubeImages() {
+Gs.Functions.BindYouTubeImages = function () {
     preloadImage('/images/youtube-play-hover.png');
     $("a[href^='https://youtu.be/']>img").each(function () {
         if (this.complete) {
-            bindYouTubePlay($(this));
+            Gs.Functions.BindYouTubePlay($(this));
         } else {
-            this.onload = function () { bindYouTubePlay($(this)); }
+            this.onload = function () { Gs.Functions.BindYouTubePlay($(this)); }
         }
     });
 }
 
-function Video(url) {
+Gs.Functions.Video = function (url) {
     return '<iframe style="width:100%;min-height:585px" src="' + url + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
 }
 
 
-function PlayVideo(el, id) {
+Gs.Functions.PlayVideo = function (el, id) {
     var url = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
     $(el).parent().html(video(url));
 }
 
 
 // Generate Tables
-function PrintTables(tables) {
+Gs.Functions.PrintTables = function (tables) {
     let html = "<thead><tr><th>Table List</th></tr></thead>";
     const rows = tables.map(function (table) {
         return `<tr>
@@ -108,13 +108,13 @@ function PrintTables(tables) {
 
 
 // Code to MarkDown 
-function PrintMarkdown(text) {
+Gs.Functions.PrintMarkdown = function (text) {
     return `<pre>${text}</pre>`;
 }
 
 
 // Generate TagList
-function GenerateTagList(values, tagName, className) {
+Gs.Functions.GenerateTagList = function (values, tagName, className) {
     if (values.length === 0) {
         return "";
     }
@@ -132,7 +132,7 @@ function GenerateTagList(values, tagName, className) {
 //function HighlightCode() { document.querySelectorAll('div.code').forEach(el => { hljs.highlightElement(el); }); }
 
 
-function ShowSource() {
+Gs.Functions.ShowSource = function () {
     var source = "<html>";
     source += document.getElementsByTagName('html')[0].innerHTML;
     source += "</html>";
@@ -145,7 +145,7 @@ function ShowSource() {
 }
 
 
-function ShowFrameSource() {
+Gs.Functions.ShowFrameSource = function () {
     var source = "<html>";
     source += window.frames['FrameWindow'].contentWindow.document.body.innerHTML;
     source += "</html>";
@@ -158,19 +158,19 @@ function ShowFrameSource() {
 }
 
 
-function PrintElement(elementId) {
+Gs.Functions.PrintElement = function (elementId) {
     try { $("#" + elementId).printElement({ pageTitle: elementId.split("_")[1] + ".html", printMode: "popup" }); } catch (t) { }
 }
 
-function DownloadHtmlElement(elementId) {
+Gs.Functions.DownloadHtmlElement = function (elementId) {
     try { var t = document.body.appendChild(document.createElement("a")); t.download = elementId + ".html"; t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.getElementById(elementId).innerHTML); t.click(); } catch (i) { }
 }
 
-async function CopyElement(elementId) {
+Gs.Functions.CopyElement = async function (elementId) {
     try { let t = document.getElementById(elementId).innerHTML; await navigator.clipboard.writeText(t); } catch (t) { }
 }
 
-function ImageFromElement(elementId) {
+Gs.Functions.ImageFromElement = function (elementId) {
     try {
         $("document").ready(function () {
             html2canvas($("#" + elementId), {
@@ -183,27 +183,27 @@ function ImageFromElement(elementId) {
     } catch (t) { }
 }
 
-function PrintFrameElement() {
+Gs.Functions.PrintFrameElement = function () {
     try {
         window.frames['FrameWindow'].contentWindow.printElement({ pageTitle: "KlikneteZdeCz.html", printMode: "popup" });
     } catch (t) { }
 }
 
 
-function DownloadFrameHtmlElement() {
+Gs.Functions.DownloadFrameHtmlElement = function () {
     try {
         var t = document.body.appendChild(document.createElement("a")); t.download = "KlikneteZde" + ".html"; t.href = "data:text/html;charset=utf-8," + encodeURIComponent(window.frames['FrameWindow'].contentWindow.document.body.innerHTML); t.click();
     } catch (i) { }
 }
 
-async function CopyFrameElement() {
+Gs.Functions.CopyFrameElement = async function () {
     try {
         let t = window.frames['FrameWindow'].contentWindow.document.body.innerHTML; await navigator.clipboard.writeText(t);
     } catch (t) { }
 }
 
 
-function ImageFromFrameElement() {
+Gs.Functions.ImageFromFrameElement = function () {
     try {
         $("document").ready(function () {
             html2canvas(window.frames['FrameWindow'].contentWindow.document.body, {
@@ -217,7 +217,7 @@ function ImageFromFrameElement() {
 }
 
 
-function SaveToFavorites(title, url) {
+Gs.Functions.SaveToFavorites = function (title, url) {
     if (window.sidebar) {
         // Firefox
         window.sidebar.addPanel(title, url, '');
@@ -236,7 +236,7 @@ function SaveToFavorites(title, url) {
     }
 }
 
-async function LoadMetro() {
+Gs.Functions.LoadMetro = async function () {
     const pathCss = './metro/css/metro-all.min.css';
     const pathThemeCss = './metro/css/schemes/sky-net.css';
     const pathJs = './metro/js/metro.4.5.2.min.js?v=4.5.2';
@@ -263,14 +263,14 @@ async function LoadMetro() {
 }
 
 
-function UnloadMetro() {
+Gs.Functions.UnloadMetro = function () {
     delete Metro;
 }
 
-function LoadPage(url) {
+Gs.Functions.LoadPage = function (url) {
     $.ajax({
         url: url
     }).done(function (data) {
-        $('#frameWindow').html(data);
+        $('#FrameWindow').html(data);
     });
 }

@@ -24,7 +24,7 @@ require(['vs/editor/editor.main'], function () {
             automaticLayout: true, fixedOverflowWidgets: true
         });
 
-        monacoEditorList.push({ elementId: elementId, editor: editor, model: model });
+        Gs.Variables.monacoEditorList.push({ elementId: elementId, editor: editor, model: model });
         return editor;
     }
 

@@ -1,8 +1,8 @@
 ﻿
 
 //Run POST Api Request FOR set and GET storageName on SET is null
-function RunServerPostApi(apiPath, jsonData, storageName) {
-    ShowPageLoading();
+Gs.Apis.RunServerPostApi = function (apiPath, jsonData, storageName) {
+    Gs.Behaviors.ShowPageLoading();
     var def = $.ajax({
         global: false, type: "POST", url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
         headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
@@ -10,36 +10,36 @@ function RunServerPostApi(apiPath, jsonData, storageName) {
     });
 
     def.fail(function (err) {
-        notify.create(apiMessages.apiSaveFail, "Alert", { cls: "alert" }); notify.reset();
-        HidePageLoading();
+        Gs.Objects.ShowNotify.create(Gs.Variables.apiMessages.apiSaveFail, "Alert", { cls: "alert" }); Gs.Objects.ShowNotify.reset();
+        Gs.Behaviors.HidePageLoading();
         return false;
     });
 
     def.done(function (apiData) {
-        notify.create(apiMessages.apiSaveSuccess, "Info", { cls: "success" }); notify.reset();
+        Gs.Objects.ShowNotify.create(Gs.Variables.apiMessages.apiSaveSuccess, "Info", { cls: "success" }); Gs.Objects.ShowNotify.reset();
         if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
-        HidePageLoading();
+        Gs.Behaviors.HidePageLoading();
         return true;
     });
 }
 
 //Run GET Api Request 
-function RunServerGetApi(apiPath, storageName) {
-    ShowPageLoading();
+Gs.Apis.RunServerGetApi = function (apiPath, storageName) {
+    Gs.Behaviors.ShowPageLoading();
     $.ajax({
         url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
         type: "GET",
         headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
         success: function (apiData) {
             if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
-            notify.create(apiMessages.apiLoadSuccess, "Info", { cls: "success" }); notify.reset();
-            HidePageLoading();
+            Gs.Objects.ShowNotify.create(Gs.Variables.apiMessages.apiLoadSuccess, "Info", { cls: "success" }); Gs.Objects.ShowNotify.reset();
+            Gs.Behaviors.HidePageLoading();
             return true;
         },
         error: function (error) {
             Metro.storage.setItem(storageName, null);
-            notify.create(apiMessages.apiLoadFail, "Alert", { cls: "alert" }); notify.reset();
-            HidePageLoading();
+            Gs.Objects.ShowNotify.create(Gs.Variables.apiMessages.apiLoadFail, "Alert", { cls: "alert" }); Gs.Objects.ShowNotify.reset();
+            Gs.Behaviors.HidePageLoading();
         }
     });
 }
@@ -53,24 +53,25 @@ function InvalidForm() {
 
 
 function ValidateForm() {
-    ShowPageLoading();
+    Gs.Behaviors.ShowPageLoading();
     var def = $.ajax({
         global: false, type: "POST", url: Metro.storage.getItem('BackendServerAddress', null) + "/AuthenticationService", dataType: 'json',
         headers: { "Authorization": "Basic " + btoa($("#usernameId").val() + ":" + $("#passwordId").val()) }
     });
 
     def.fail(function (data) {
-        notify.create("Incorect Name or Password", "Error", { cls: "alert" }); notify.reset();
-        HidePageLoading();
+        ShowNotify.create("Incorect Name or Password", "Error", { cls: "alert" }); ShowNotify.reset();
+        Gs.Behaviors.HidePageLoading();
     });
 
     def.done(function (data) {
         Metro.storage.setItem("ApiToken", data);
         window.location.href = Metro.storage.getItem("DefaultPath", null); 
-        HidePageLoading();
+        Gs.Behaviors.HidePageLoading();
     });
 }
 
-function IsLogged() {
+
+Gs.Apis.IsLogged = function () {
     return Metro.storage.getItem("ApiToken", null) == null ? false : true;
 }

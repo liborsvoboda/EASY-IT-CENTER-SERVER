@@ -1,20 +1,20 @@
 ﻿// STARTUP Temp Variables Definitions
 let pageLoader;
 
-function PortalStartup() {
-    CreateToolPanel();
+Gs.Behaviors.PortalStartup = function () {
+    Gs.Objects.CreateToolPanel();
 
-    getSpProcedure[1].tableName = "SolutionMixedEnumList";
-    RunServerPostApi("DBProcedureService/SpProcedure/GetGenericDataListByParams", getSpProcedure, "MixedEnumList");
-    RunServerGetApi("ServerPortalApi/GetApiTableDataList/PortalMenu", "PortalMenu");
-   
-    GenerateMenu();
+    Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
+    Gs.Apis.RunServerPostApi("DBProcedureService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
+    Gs.Apis.RunServerGetApi("ServerPortalApi/GetApiTableDataList/PortalMenu", "PortalMenu");
+
+    Gs.Objects.GenerateMenu();
 }
 
 
 /*Start of Global Loading Indicator for All Pages*/
-function HidePageLoading() { Metro.activity.close(pageLoader); }
-function ShowPageLoading() {
+Gs.Behaviors.HidePageLoading = function () { Metro.activity.close(pageLoader); }
+Gs.Behaviors.ShowPageLoading = function () {
     if (pageLoader != undefined) {
         if (pageLoader[0]["DATASET:UID:M4Q"] == undefined) { pageLoader = null; }
         else {
@@ -26,35 +26,24 @@ function ShowPageLoading() {
     pageLoader = Metro.activity.open({ type: 'atom', style: 'dark', overlayClickClose: true, /*overlayColor: '#fff', overlayAlpha: 1*/ });
 }
 
-function UserChangeTranslateSetting() {
+Gs.Behaviors.UserChangeTranslateSetting = function () {
     Metro.storage.setItem('UserAutomaticTranslate', $("#UserAutomaticTranslate").val('checked')[0].checked);
-    if ($("#UserAutomaticTranslate").val('checked')[0].checked) { GoogleTranslateElementInit(); } else { CancelTranslation(); }
+    if ($("#UserAutomaticTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
 }
 
 
-function ChangeSchemeTo(n) {
-    $("#AppPanel").css({ backgroundColor: n.split("?")[1] });
-    $("#portal-color-scheme").attr("href", window.location.origin + "/server-integrated/razor-pages/serverportal/metro/css/schemes/" + n.split("?")[0]);
-    $("#scheme-name").html(n.split("?")[0]);
-    Metro.storage.setItem('WebScheme', n.split("?")[0]);
-}
 
 
-function ShowToolPanel(close) {
-    $("#UserAutomaticTranslate").val('checked')[0].checked = Metro.storage.getItem('UserAutomaticTranslate', null);
-    if (close) { Metro.bottomsheet.close($('#ToolPanel')); } else {
-        if (Metro.bottomsheet.isOpen($('#ToolPanel'))) { Metro.bottomsheet.close($('#ToolPanel')); }
-        else { Metro.bottomsheet.open($('#ToolPanel')); }
-    }
-}
 
 
-function GetGoogleOptionLanguageIndex(optionValue) {
+
+
+Gs.Behaviors.GetGoogleOptionLanguageIndex = function (optionValue) {
     let options = Array.from(document.getElementsByClassName("goog-te-combo")[0].options);
     return options.findIndex((opt) => opt.value == optionValue);
 }
 
-function GoogleTranslateElementInit() {
+Gs.Behaviors.GoogleTranslateElementInit = function () {
     $(document).ready(function () {
         new google.translate.TranslateElement({
             pageLanguage: 'en', //includedLanguages: 'en,cs',
@@ -73,27 +62,27 @@ function GoogleTranslateElementInit() {
     });
 }
 
-function CancelTranslation() {
+Gs.Behaviors.CancelTranslation = function () {
     Metro.storage.setItem('UserAutomaticTranslate', false);
     $("#UserAutomaticTranslate")[0].checked = false;
 
     setTimeout(function () {
         let selectElement = document.querySelector('#google_translate_element select');
-        if (GetGoogleOptionLanguageIndex("") == 0) {
-            selectElement.selectedIndex = 0; ShowToolPanel();
-        } else { selectElement.selectedIndex = GetGoogleOptionLanguageIndex("en"); }
+        if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
+            selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
+        } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
         selectElement.dispatchEvent(new Event('change'));
         if (selectElement.value != '') {
             setTimeout(function () {
-                if (GetGoogleOptionLanguageIndex("") == 0) {
-                    selectElement.selectedIndex = 0; ShowToolPanel();
-                } else { selectElement.selectedIndex = GetGoogleOptionLanguageIndex("en"); }
+                if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
+                    selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
+                } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
                 selectElement.dispatchEvent(new Event('change'));
                 if (selectElement.value != '') {
                     setTimeout(function () {
-                        if (GetGoogleOptionLanguageIndex("") == 0) {
-                            selectElement.selectedIndex = 0; ShowToolPanel();
-                        } else { selectElement.selectedIndex = GetGoogleOptionLanguageIndex("en"); }
+                        if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
+                            selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
+                        } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
                         selectElement.dispatchEvent(new Event('change'));
                     }, 2000);
                 }
@@ -103,34 +92,34 @@ function CancelTranslation() {
 }
 
 
-function ScrollToTop() { window.scrollTo(0, 0); }
-function EnableScroll() { window.onscroll = function () { }; }
-function DisableScroll() {
+Gs.Behaviors.ScrollToTop = function () { window.scrollTo(0, 0); }
+Gs.Behaviors.EnableScroll = function () { window.onscroll = function () { }; }
+Gs.Behaviors.DisableScroll = function () {
     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
         window.onscroll = function () { window.scrollTo(scrollLeft, scrollTop); };
 }
 
 
-
-function SetLink(htmlContentId, content) {
-    RemoveElement("InheritScript"); RemoveElement("InheritStyle");
+//Menu Behaviors
+Gs.Behaviors.SetLink = function (htmlContentId, content) {
+    Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
     $("#FrameWindow").load(Metro.storage.getItem('BackendServerAddress', null) + "/" + content)
 }
 
-function SetExternalLink(htmlContentId, content) {
-    RemoveElement("InheritScript"); RemoveElement("InheritStyle");
+Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
+    Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
     document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + Metro.storage.getItem('BackendServerAddress', null) + "/" + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
 }
 
-function SetContent(htmlContentId, jsContentId, cssContentId) {
-    RemoveElement("InheritScript"); RemoveElement("InheritStyle");
+Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
+    Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
     document.getElementById("FrameWindow").innerHTML = menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent;
@@ -148,8 +137,8 @@ function SetContent(htmlContentId, jsContentId, cssContentId) {
 }
 
 //TODO to IFRAME
-function SetExternalContent(htmlContentId, jsContentId, cssContentId) {
-    RemoveElement("InheritScript"); RemoveElement("InheritStyle");
+Gs.Behaviors.SetExternalContent = function (htmlContentId, jsContentId, cssContentId) {
+    Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
@@ -168,9 +157,3 @@ function SetExternalContent(htmlContentId, jsContentId, cssContentId) {
 }
 
 
-function ShowMessagePanel(close) {
-    charms = Metro.getPlugin($("#charmPanel"), 'charms');
-    if (close) {
-        charms.close();
-    } else { charms.toggle(); }
-}
