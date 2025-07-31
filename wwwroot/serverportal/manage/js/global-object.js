@@ -173,3 +173,20 @@ Gs.Objects.ShowMessagePanel = function (close) {
 Gs.Objects.ShowFavorites = function (elementId) {
     Metro.bottomsheet.toggle("#" + elementId, "grid");
 }
+
+
+Gs.Objects.RefreshPreview = function () {
+    Gs.Functions.RemoveElement("PreviewScript"); Gs.Functions.RemoveElement("PreviewStyle");
+    document.getElementById("menuPreview").innerHTML = null;
+    document.getElementById("menuPreview").innerHTML = Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue();
+
+    if (Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model.getValue() != null) {
+        let script = "<script id='PreviewScript' type='text/javascript'> " + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model.getValue();
+        $('body').append(script);
+    }
+    if (Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model.getValue() != null) {
+        let style = document.createElement('style'); style.id = "PreviewStyle";
+        style.innerText = Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model.getValue();
+        document.head.appendChild(style);
+    }
+}
