@@ -122,7 +122,8 @@ Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
-    document.getElementById("FrameWindow").innerHTML = '<div id=WindowId data-role="window" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" class="h-100" data-btn-close="false" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" ><iframe id="IFrameWindow" src="' + content + '" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe></div>';
+    document.getElementById("FrameWindow").innerHTML = '<div id=MainWindow data-role="window" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" class="h-100" data-btn-close="false" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
+    + '<iframe id="IFrameWindow" src="' + content + '" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe></div>';
 }
 
 
@@ -132,7 +133,7 @@ Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
     document.getElementById("FrameWindow").innerHTML =
-        '<div id=WindowId data-role="window" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
+        '<div id=MainWindow data-role="window" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
          + menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent;
 
     if (menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent != null) {

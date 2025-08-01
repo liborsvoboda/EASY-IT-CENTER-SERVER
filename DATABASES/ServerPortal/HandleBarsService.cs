@@ -7,6 +7,7 @@ using HandlebarsDotNet;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Octokit;
 using ScrapySharp.Network;
 
@@ -42,9 +43,8 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<IActionResult> GetTemplateCode([FromBody] DataToTemplateRequest codegenRequest) {
             try {
-
                 var template = Handlebars.Compile(codegenRequest.Template);
-                string? result = template(codegenRequest.Data.ObjectToJson());
+                string? result = template(JsonConvert.DeserializeObject<object>(codegenRequest.Data));
 
                 return Json(new HandlerResult() { Result = result, Success = true });
             } catch (Exception ex) {
