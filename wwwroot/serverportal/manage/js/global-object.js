@@ -178,15 +178,28 @@ Gs.Objects.ShowFavorites = function (elementId) {
 Gs.Objects.RefreshPreview = function () {
     Gs.Functions.RemoveElement("PreviewScript"); Gs.Functions.RemoveElement("PreviewStyle");
     document.getElementById("menuPreview").innerHTML = null;
-    document.getElementById("menuPreview").innerHTML = Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue();
 
-    if (Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model.getValue() != null) {
-        let script = "<script id='PreviewScript' type='text/javascript'> " + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model.getValue();
-        $('body').append(script);
-    }
-    if (Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model.getValue() != null) {
-        let style = document.createElement('style'); style.id = "PreviewStyle";
-        style.innerText = Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model.getValue();
-        document.head.appendChild(style);
+    if ($("#menuType").val() == "link") {
+        $("#menuPreview").load(Metro.storage.getItem('BackendServerAddress', null) + "/" + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue());
+
+    } else if ($("#menuType").val() == "externalLink") {
+        document.getElementById("menuPreview").innerHTML = '<iframe id="PreviewFrameWindow" src="' + Metro.storage.getItem('BackendServerAddress', null) + "/" + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue() + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
+
+    } else if ($("#menuType").val() == "content") {
+        document.getElementById("menuPreview").innerHTML = Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue();
+
+        if (Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model.getValue() != null) {
+            let script = "<script id='PreviewScript' type='text/javascript'> " + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model.getValue();
+            $('body').append(script);
+        }
+        if (Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model.getValue() != null) {
+            let style = document.createElement('style'); style.id = "PreviewStyle";
+            style.innerText = Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model.getValue();
+            document.head.appendChild(style);
+        }
+    } else if ($("#menuType").val() == "externalContent") {
+
+    } else if ($("#menuType").val() == "menu") {
+        document.getElementById("menuPreview").innerHTML ="Menu doesnt have Content"
     }
 }

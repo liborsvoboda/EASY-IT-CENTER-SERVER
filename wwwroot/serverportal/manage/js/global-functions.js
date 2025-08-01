@@ -267,10 +267,10 @@ Gs.Functions.UnloadMetro = function () {
     delete Metro;
 }
 
-Gs.Functions.LoadPage = function (url) {
+Gs.Functions.LoadPage = function (elementId,url) {
     $.ajax({
         url: url
     }).done(function (data) {
-        $('#FrameWindow').html(data);
+        $('#' + elementId).html(data);
     });
 }
