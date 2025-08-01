@@ -12,20 +12,32 @@ Gs.Objects.ShowToolPanel = function (close) {
 Gs.Objects.CreateToolPanel = function () {
     let html = '<div id="ToolPanel" data-role="bottom-sheet" class="bottom-sheet pos-fixed list-list grid-style opened" style="top: 0px; left: 90%; z-index:10000;min-width: 430px;">';
     html += '<div class="c-pointer mif-cancel mif-1x icon pos-absolute fg-red" style="top:5px;right:5px;" onclick=Gs.Objects.ShowToolPanel(); ></div>';
+    html += '<DIV class=d-block><DIV class="d-flex row gutters mr-4" >'
+    html += '<ul data-role="materialtabs" data-expand="true" data-tabs-type="text" data-on-tab="">';
+    html += '<li class="fg-black"><A href="#_toolTranslate">Translate</A> </li>';
+    html += '<li class="fg-black"><A href="#_toolUserSet">User Setting</A> </li>';
+    html += '<li class="fg-black"><A href="#_toolRadio">Radio</A></li>';
+    html += '</ul>';
+    html += '<DIV id=_toolTranslate>';
     //html += '<div class="w-100 text-left"> <audio id="radio" class="light bg-transparent" data-role="audio-player" data-src="/server-integrated/razor-pages/serverportal/media/hotel_california.mp3" data-volume=".5"></audio> </div>';
     html += '<div class="w-100 text-left" style="z-index: 1000000;"><div id="google_translate_element"></div></div>';
     html += '<div class="w-100 d-inline-flex"><div class="w-75 text-left">';
     html += '<input id="UserAutomaticTranslate" type="checkbox" data-role="checkbox" data-cls-caption="fg-cyan text-bold" data-caption="Auto Translate" onchange=Gs.Behaviors.UserChangeTranslateSetting(); checked >';
-    html += '</div><div class="w-25 mt-1 text-right" style="max-width:25% !important;"><button class="button secondary mini" style="max-width:100% !important;" onclick=Gs.Behaviors.CancelTranslation(); >Cancel Translate</button></div>';
-    html += '</div><div class="d-flex w-100" title="Theme">';
-    let themes = [
-        ["#585b5d", "darcula.css?white"], ["#AF0015", "red-alert.css?white"], ["#690012", "red-dark.css?white"], ["#0CA9F2", "sky-net.css?white"],
-        ["#585b5d", "darcula.css?#585b5d"], ["#AF0015", "red-alert.css?#AF0015"], ["#690012", "red-dark.css?#690012"], ["#0CA9F2", "sky-net.css?#0CA9F2"]
-    ];
-    themes.forEach((theme, index) => {
-        html += '<button class="button shadowed w-50px ' + (index < 4 ? "opc-05" : "") + ' mt-1" style="background-color: ' + theme[0] + ';" onclick=Gs.Behaviors.ChangeSchemeTo(\'' + theme[1] + '\'); ></button>';
-        if (index == 3) { html += '</div><div class="d-flex w-100" title="BackGround">'; }
-    });
+    html += '</div><div class="w-25 mt-1 text-right" style="max-width:25% !important;"><button class="button secondary mini" style="max-width:100% !important;" onclick=Gs.Behaviors.CancelTranslation(); >Cancel Translate</button></div></div>';
+    html += '</div>';
+    html += '<DIV id=_toolUserSet></div>'
+    html += '<DIV id=_toolRadio></div>'
+
+    html += '</div></div>'
+    //html += '<div class="d-flex w-100" title="Theme">';
+    //let themes = [
+    //    ["#585b5d", "darcula.css?white"], ["#AF0015", "red-alert.css?white"], ["#690012", "red-dark.css?white"], ["#0CA9F2", "sky-net.css?white"],
+    //    ["#585b5d", "darcula.css?#585b5d"], ["#AF0015", "red-alert.css?#AF0015"], ["#690012", "red-dark.css?#690012"], ["#0CA9F2", "sky-net.css?#0CA9F2"]
+    //];
+    //themes.forEach((theme, index) => {
+    //    html += '<button class="button shadowed w-50px ' + (index < 4 ? "opc-05" : "") + ' mt-1" style="background-color: ' + theme[0] + ';" onclick=Gs.Behaviors.ChangeSchemeTo(\'' + theme[1] + '\'); ></button>';
+    //    if (index == 3) { html += '</div><div class="d-flex w-100" title="BackGround">'; }
+    //});
 
     let injectToolPanel = document.createElement("div");
     injectToolPanel.innerHTML = html;

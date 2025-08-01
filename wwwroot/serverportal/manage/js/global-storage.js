@@ -32,7 +32,10 @@ let Gs = {
             { userRole: "all" },
             { userId: null },
             { dataRec: null }
-        ]
+        ],
+        UserSettingList: [{
+            ShowMultiWindow: true
+        }]
     }
 }
 
@@ -68,6 +71,7 @@ Metro.storage.setItem('DefaultPath', Metro.storage.getItem('DefaultPath', null) 
 
 //Start Set User Default Setting
 if (Metro.storage.getItem('UserAutomaticTranslate', null) == null) { Metro.storage.setItem('UserAutomaticTranslate', false); }
+if (Metro.storage.getItem('UserSettingList', null) == null) { Metro.storage.setItem('UserSettingList', Gs.Variables.UserSettingList); }
 
 
 
