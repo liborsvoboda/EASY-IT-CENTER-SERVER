@@ -115,18 +115,22 @@ Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
-    document.getElementById("FrameWindow").innerHTML = document.getElementById("FrameWindow").innerHTML +
-        JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow ? "<div data-title='" + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + "' data-role='window' data-width='100%' data-height='600' data-draggable='true'> " :""
-        + '<iframe id="IFrameWindow" src="' + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe></div>';
+    document.getElementById("FrameWindow").innerHTML = 
+        JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow == true
+            ? document.getElementById("FrameWindow").innerHTML + "<div data-title='" + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + "' data-role='window' data-width='100%' data-height='600' data-draggable='true'> " : ""
+    + '<iframe id="IFrameWindow" src="' + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
+    + JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow == true ? '</div>' : "";
 }
 
 Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
-    document.getElementById("FrameWindow").innerHTML = document.getElementById("FrameWindow").innerHTML +
-        JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow ? "<div data-title='" + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + "' data-role='window' data-width='100%' data-height='600' data-draggable='true'> " : ""
-        + menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent + "</div>";
+    document.getElementById("FrameWindow").innerHTML = 
+        JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow == true
+            ? document.getElementById("FrameWindow").innerHTML + "<div data-title='" + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + "' data-role='window' data-width='100%' data-height='600' data-draggable='true'> " : ""
+        + menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent
+        + JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow == true ? "</div>" : "";
 
     if (menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent != null) {
         let script = "<script id='InheritScript' charset='utf-8' type='text/javascript'> " + menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent + " </script>";
