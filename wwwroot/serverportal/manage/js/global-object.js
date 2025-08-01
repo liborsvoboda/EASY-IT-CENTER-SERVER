@@ -111,6 +111,9 @@ Gs.Objects.GenerateMenu = function () {
                 menuItem.CssContent = mItem.value;
                 menuItem.CssContentId = mItem.id;
                 break;
+            case "MdHelp":
+                menuItem.MdHelp = mItem.value;
+                break;
             default:
         }
 
@@ -169,11 +172,16 @@ Gs.Objects.ShowLoginPage = function () {
 }
 
 
-Gs.Objects.ShowNotify = Metro.notify; Gs.Objects.ShowNotify.setup({
-    width: Gs.Variables.defaultSetting[0].notifyWidth,
-    duration: Gs.Variables.defaultSetting[0].notifyDuration,
-    animation: Gs.Variables.defaultSetting[0].notifyAnimation
-});
+Gs.Objects.ShowNotify = function (type, message) {
+    try {
+        var notify = Metro.notify; notify.setup({ width: Gs.Variables.defaultSetting[0].notifyWidth, timeout: Metro.storage.getItem('NotifyShowTime', 2000), duration: Gs.Variables.defaultSetting[0].notifyDuration, animation: Gs.Variables.defaultSetting[0].notifyAnimation });
+        if (type == 'error' || type == 'alert') { notify.create(message, "Error", { cls: "alert" }); }
+        else if (type == 'success') { notify.create(message, "Success", { cls: "success" }); }
+        else if (type == 'info') { notify.create(message, "Info"); }
+        notify.reset();
+    } catch { }
+}
+
 
 Gs.Objects.ShowMessagePanel = function (close) {
     charms = Metro.getPlugin($("#charmPanel"), 'charms');

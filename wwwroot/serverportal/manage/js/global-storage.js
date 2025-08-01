@@ -13,7 +13,8 @@ let Gs = {
             apiSaveSuccess: "Saving Data was Saved Sucessfully",
             apiSaveFail: "Saving Data was Failed",
             apiLoadSuccess: "Saving Data was Saved Sucessfully",
-            apiLoadFail: "Saving Data was Failed"
+            apiLoadFail: "Saving Data was Failed",
+            incorectLogin: "Incorect Name or Password"
         }],
         defaultSetting :[{
             notifyWidth: 300,
@@ -33,9 +34,9 @@ let Gs = {
             { userId: null },
             { dataRec: null }
         ],
-        UserSettingList: [{
-            ShowMultiWindow: true
-        }]
+        UserSettingList: {
+            EnableAutoTranslate: false
+        }
     }
 }
 
@@ -70,7 +71,6 @@ Metro.storage.setItem('DefaultPath', Metro.storage.getItem('DefaultPath', null) 
 
 
 //Start Set User Default Setting
-if (Metro.storage.getItem('UserAutomaticTranslate', null) == null) { Metro.storage.setItem('UserAutomaticTranslate', false); }
 if (Metro.storage.getItem('UserSettingList', null) == null) { Metro.storage.setItem('UserSettingList', Gs.Variables.UserSettingList); }
 
 

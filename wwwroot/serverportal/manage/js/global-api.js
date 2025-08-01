@@ -10,13 +10,13 @@ Gs.Apis.RunServerPostApi = function (apiPath, jsonData, storageName) {
     });
 
     def.fail(function (err) {
-        Gs.Objects.ShowNotify.create(Gs.Variables.apiMessages.apiSaveFail, "Alert", { cls: "alert" }); Gs.Objects.ShowNotify.reset();
+        Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiSaveFail);
         Gs.Behaviors.HidePageLoading();
         return false;
     });
 
     def.done(function (apiData) {
-        Gs.Objects.ShowNotify.create(Gs.Variables.apiMessages.apiSaveSuccess, "Info", { cls: "success" }); Gs.Objects.ShowNotify.reset();
+        Gs.Objects.ShowNotify("success", Gs.Variables.apiMessages.apiSaveSuccess);
         if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
         Gs.Behaviors.HidePageLoading();
         return true;
@@ -32,13 +32,13 @@ Gs.Apis.RunServerGetApi = function (apiPath, storageName) {
         headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
         success: function (apiData) {
             if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
-            Gs.Objects.ShowNotify.create(Gs.Variables.apiMessages.apiLoadSuccess, "Info", { cls: "success" }); Gs.Objects.ShowNotify.reset();
+            Gs.Objects.ShowNotify("success", Gs.Variables.apiMessages.apiLoadSuccess);
             Gs.Behaviors.HidePageLoading();
             return true;
         },
         error: function (error) {
             Metro.storage.setItem(storageName, null);
-            Gs.Objects.ShowNotify.create(Gs.Variables.apiMessages.apiLoadFail, "Alert", { cls: "alert" }); Gs.Objects.ShowNotify.reset();
+            Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiLoadFail);
             Gs.Behaviors.HidePageLoading();
         }
     });
@@ -60,7 +60,7 @@ function ValidateForm() {
     });
 
     def.fail(function (data) {
-        ShowNotify.create("Incorect Name or Password", "Error", { cls: "alert" }); ShowNotify.reset();
+        Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.incorectLogin);
         Gs.Behaviors.HidePageLoading();
     });
 

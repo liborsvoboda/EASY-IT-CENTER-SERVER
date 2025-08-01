@@ -1,4 +1,4 @@
-﻿using EASYTools.DBEntitySchema.Core;
+﻿using DBEntitySchema.Core;
 using Markdig.Extensions.AutoIdentifiers;
 using Markdig;
 using MarkdownDocumenting.Extensions;

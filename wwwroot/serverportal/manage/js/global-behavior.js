@@ -27,7 +27,9 @@ Gs.Behaviors.ShowPageLoading = function () {
 }
 
 Gs.Behaviors.UserChangeTranslateSetting = function () {
-    Metro.storage.setItem('UserAutomaticTranslate', $("#UserAutomaticTranslate").val('checked')[0].checked);
+    let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))
+    userSetting.EnableAutoTranslate = $("#UserAutomaticTranslate").val('checked')[0].checked;
+    Metro.storage.setItem('UserSettingList', userSetting);
     if ($("#UserAutomaticTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
 }
 
@@ -51,7 +53,7 @@ Gs.Behaviors.GoogleTranslateElementInit = function () {
             autoDisplay: false
         }, 'google_translate_element');
 
-        let autoTranslateSetting = Metro.storage.getItem('UserAutomaticTranslate', null) == null || Metro.storage.getItem('UserAutomaticTranslate', null) == false ? false : true;
+        let autoTranslateSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null))).EnableAutoTranslate == null || JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null))).EnableAutoTranslate == false ? false : true;
         if (autoTranslateSetting && document.querySelector('#google_translate_element select') != null) {
             setTimeout(function () {
                 let selectElement = document.querySelector('#google_translate_element select');
@@ -63,7 +65,9 @@ Gs.Behaviors.GoogleTranslateElementInit = function () {
 }
 
 Gs.Behaviors.CancelTranslation = function () {
-    Metro.storage.setItem('UserAutomaticTranslate', false);
+    let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)));
+    userSetting.EnableAutoTranslate = false;
+    Metro.storage.setItem('UserSettingList', userSetting);
     $("#UserAutomaticTranslate")[0].checked = false;
 
     setTimeout(function () {
@@ -115,22 +119,14 @@ Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
-    document.getElementById("FrameWindow").innerHTML = 
-        JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow == true
-            ? document.getElementById("FrameWindow").innerHTML + "<div data-title='" + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + "' data-role='window' data-width='100%' data-height='600' data-draggable='true'> " : ""
-    + '<iframe id="IFrameWindow" src="' + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
-    + JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow == true ? '</div>' : "";
+    document.getElementById("FrameWindow").innerHTML = '<div data-role=window ><iframe id="IFrameWindow" src="' + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe></div>';
 }
 
 Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
-    document.getElementById("FrameWindow").innerHTML = 
-        JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow == true
-            ? document.getElementById("FrameWindow").innerHTML + "<div data-title='" + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + "' data-role='window' data-width='100%' data-height='600' data-draggable='true'> " : ""
-        + menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent
-        + JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))[0].ShowMultiWindow == true ? "</div>" : "";
+    document.getElementById("FrameWindow").innerHTML = menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent;
 
     if (menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent != null) {
         let script = "<script id='InheritScript' charset='utf-8' type='text/javascript'> " + menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent + " </script>";
@@ -165,3 +161,41 @@ Gs.Behaviors.SetExternalContent = function (htmlContentId, jsContentId, cssConte
 }
 
 
+Gs.Behaviors.ElementExpand = function (elementId) {
+    try {
+        let el = Metro.getPlugin('#' + elementId, 'collapse');
+        let elStatus = el.isCollapsed();
+        if (elStatus) { el.expand(); } else { el.collapsed(); }
+    } catch { }
+}
+
+
+Gs.Behaviors.ElementShowHide = function (elementId, showOnly = false) {
+    try {
+        let el = Metro.get$el('#' + elementId);
+        if (showOnly) { el.show(); }
+        else if (el.style("display") == "none") { el.show(); } else { el.hide(); }
+    } catch { }
+}
+
+
+Gs.Behaviors.ElementSetCheckBox = function (elementId, val) {
+    try {
+        $('#' + elementId).val('checked')[0].checked = JSON.parse((val.toString().toLowerCase()));
+    } catch { }
+}
+
+
+Gs.Behaviors.ElementSetActive = function (elementId) {
+    try {
+        $('#' + elementId).addClass(" active ");
+    } catch { }
+}
+
+
+Gs.Behaviors.InfoBoxOpenClose = function (elementId) {
+    try {
+        if (Metro.infobox.isOpen('#' + elementId)) { Metro.infobox.close('#' + elementId); }
+        else { Metro.infobox.open('#' + elementId); }
+    } catch { }
+}

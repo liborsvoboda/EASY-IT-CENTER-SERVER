@@ -56,7 +56,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<MigrationsHistoryList> MigrationsHistoryLists { get; set; } = null!;
         public virtual DbSet<PortalActionHistoryList> PortalActionHistoryLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; } = null!;
-        public virtual DbSet<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableList> PortalApiTableLists { get; set; } = null!;
         public virtual DbSet<PortalGeneratedDataList> PortalGeneratedDataLists { get; set; } = null!;
         public virtual DbSet<PortalGeneratorActionList> PortalGeneratorActionLists { get; set; } = null!;
@@ -886,37 +885,6 @@ namespace EasyITCenter.DBModel
                     .HasPrincipalKey(p => p.UserDbPreffix)
                     .HasForeignKey(d => d.UserPrefix)
                     .HasConstraintName("FK_PortalApiTableColumnDataList_SolutionUserList1");
-            });
-
-            modelBuilder.Entity<PortalApiTableColumnList>(entity =>
-            {
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.ApiTableNameNavigation)
-                    .WithMany(p => p.PortalApiTableColumnLists)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.ApiTableName)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalApiTableColumnList_PortalApiTableList");
-
-                entity.HasOne(d => d.InheritedDataTypeNavigation)
-                    .WithMany(p => p.PortalApiTableColumnLists)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedDataType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalApiTableColumnList_SolutionMixedEnumList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalApiTableColumnListUsers)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PortalApiTableColumnList_SolutionUserList");
-
-                entity.HasOne(d => d.UserPrefixNavigation)
-                    .WithMany(p => p.PortalApiTableColumnListUserPrefixNavigations)
-                    .HasPrincipalKey(p => p.UserDbPreffix)
-                    .HasForeignKey(d => d.UserPrefix)
-                    .HasConstraintName("FK_PortalApiTableColumnList_SolutionUserList1");
             });
 
             modelBuilder.Entity<PortalApiTableList>(entity =>
