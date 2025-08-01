@@ -238,9 +238,10 @@ namespace EasyITCenter.ControllersExtensions {
 
                     RunProcessRequest process = new RunProcessRequest() {
                         Command = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd", "GenerateDocs.bat"),
-                        WorkingDirectory = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd")
+                        WorkingDirectory = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd"),
+                        ProcessType = ProcessType.cmd,
                     };
-                    ProcessOperations.RunSystemProcess(process);
+                    ProcessOperations.ServerProcessStart(process);
 
                     ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd", "XmlToMd"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MarkDownDocumentation.zip"));
 
@@ -286,9 +287,10 @@ namespace EasyITCenter.ControllersExtensions {
 
                 RunProcessRequest process = new RunProcessRequest() {
                     Command = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "GenerateMdBook.bat"),
-                    WorkingDirectory = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook")
+                    WorkingDirectory = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook"),
+                    ProcessType = ProcessType.cmd
                 };
-                await ProcessOperations.RunSystemProcess(process);
+                await ProcessOperations.ServerProcessStart(process);
 
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "book"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdBook.zip"));
 

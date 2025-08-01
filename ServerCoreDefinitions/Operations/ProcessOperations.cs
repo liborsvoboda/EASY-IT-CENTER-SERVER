@@ -10,8 +10,31 @@ using System.Linq.Expressions;
 using System.Management.Automation;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
+using Python.Runtime;
 
 namespace EasyITCenter.ServerCoreStructure {
+
+    public enum ProcessType {
+        dotnet,
+        cmd,
+        bat,
+        powershell,
+        py3,
+        sh
+
+    }
+
+    /// <summary>
+    /// Server Process class for running external prrocesses
+    /// </summary>
+    public class RunProcessRequest {
+        public string Command { get; set; }
+        public string? WorkingDirectory { get; set; } = null;
+        public ProcessType ProcessType { get; set; }
+        public string? Arguments { get; set; } = null;
+        public bool WaitForExit = true;
+    }
+
 
     /// <summary>
     /// Server Process Operations
@@ -24,72 +47,12 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
         /// <summary>
-        /// Server Function For Running External Processes,
-        /// Solved Windows/Linux processing,
-        /// startup script name is automatically corrected from .bat to .sh with same name,
-        /// </summary>
-        /// <param name="processDefinition">The process definition.</param>
-        /// <returns></returns>
-        public async static Task<string> RunSystemProcess(RunProcessRequest processDefinition)
-        {
-            string resultOutput = "", resultError = "";
-
-            try
-            {
-                using (Process proc = new Process())
-                {
-
-                    if (CoreOperations.SrvOStype.IsWindows())
-                    {
-                        proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".bat");
-                        proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
-                        proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
-                    }
-                    else
-                    {
-                        proc.StartInfo.FileName = "/bin/bash";
-                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command.Replace(".bat", ".sh"));
-                    }
-
-
-                    //proc.StartInfo.LoadUserProfile = false;
-                    proc.StartInfo.CreateNoWindow = true;
-                    proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    proc.StartInfo.RedirectStandardOutput = true;
-                    proc.StartInfo.RedirectStandardError = true;
-                    proc.StartInfo.Verb = (Environment.OSVersion.Version.Major >= 6) ? "runas" : "";
-                    proc.Start();
-
-                    resultOutput += proc.StandardOutput.ReadToEndAsync();
-                    resultError += proc.StandardError.ReadToEndAsync();
-
-                    if (processDefinition.WaitForExit) {
-                        await proc.WaitForExitAsync();
-                        return resultOutput + Environment.NewLine + resultError;
-                    }
-                    else { return resultOutput + Environment.NewLine + resultError; }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                resultError += ex.StackTrace + Environment.NewLine + ex.Message;
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
-            }
-            return resultOutput + Environment.NewLine + resultError;
-        }
-
-
-
-
-
-        /// <summary>
         /// https://stackoverflow.com/questions/2035193/how-to-run-a-powershell-script
         ///SHELL FROM CMD:   Powershell.exe -File C:\Install\script.ps1
         /// Server Function For Running External Processes,
         /// Solved Windows/Linux processing,
         /// startup script name is automatically corrected from .bat to .sh with same name,
+        /// Arguments dotnet "path\release\PublishOutput\proces.dll"
         /// </summary>
         /// <param name="processDefinition">The process definition.</param>
         /// <returns></returns>
@@ -98,39 +61,47 @@ namespace EasyITCenter.ServerCoreStructure {
 
             try {
                 Process proc = new();
-                if (CoreOperations.SrvOStype.IsWindows()) {
-                    proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".cmd").Replace(".sh", ".bat");
-                    proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
+
+                    if (processDefinition.ProcessType == ProcessType.dotnet) {
+                        proc.StartInfo.FileName = "dotnet";
+                        proc.StartInfo.UseShellExecute = true;
+                        proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
+                    } else if (processDefinition.ProcessType == ProcessType.cmd || processDefinition.ProcessType == ProcessType.bat) {
+                        proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".cmd").Replace(".sh", ".bat");
+                        proc.StartInfo.UseShellExecute = false;
+                        proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
+                    } else if (processDefinition.ProcessType == ProcessType.sh) {
+                        proc.StartInfo.FileName = "/bin/bash";
+                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command.Replace(".cmd", ".sh").Replace(".bat", ".sh"));
+                        proc.StartInfo.UseShellExecute = false;
+                    }
+                    
                     proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
-                } else {
-                    proc.StartInfo.FileName = "/bin/bash";
-                    proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command.Replace(".cmd", ".sh").Replace(".bat", ".sh"));
+                
+
+                    //proc.StartInfo.LoadUserProfile = false;
+                    proc.StartInfo.CreateNoWindow = true;
+                    proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    proc.StartInfo.RedirectStandardOutput = true;
+                    proc.StartInfo.RedirectStandardError = true;
+                    proc.StartInfo.Verb = ( Environment.OSVersion.Version.Major >= 6 ) ? "runas" : "";
+
+                    SrvRuntime.SrvProcessManager.Add(new Tuple<string,Process>(proc.ProcessName ,proc));
+                    proc.Start();
+
+                    //proc.OutputDataReceived +=;
+                    proc.Exited += ServerProcessFinished; 
+                    resultOutput += proc.StandardOutput.ReadToEndAsync();
+                    resultError += proc.StandardError.ReadToEndAsync();
+
+                    if (processDefinition.WaitForExit) {
+                        await proc.WaitForExitAsync();
+                        return resultOutput + Environment.NewLine + resultError;
+                    } else { return resultOutput + Environment.NewLine + resultError; }
+
+                } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
+                    CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
                 }
-
-                //proc.StartInfo.LoadUserProfile = false;
-                proc.StartInfo.CreateNoWindow = true;
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.RedirectStandardError = true;
-                proc.StartInfo.Verb = ( Environment.OSVersion.Version.Major >= 6 ) ? "runas" : "";
-
-                SrvRuntime.SrvProcessManager.Add(new Tuple<string,Process>(proc.ProcessName ,proc));
-                proc.Start();
-
-                //proc.OutputDataReceived +=;
-                proc.Exited += ServerProcessFinished; 
-                resultOutput += proc.StandardOutput.ReadToEndAsync();
-                resultError += proc.StandardError.ReadToEndAsync();
-
-                if (processDefinition.WaitForExit) {
-                    await proc.WaitForExitAsync();
-                    return resultOutput + Environment.NewLine + resultError;
-                } else { return resultOutput + Environment.NewLine + resultError; }
-
-            } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
-                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
-            }
             return resultOutput + Environment.NewLine + resultError;
         }
 
@@ -188,6 +159,7 @@ namespace EasyITCenter.ServerCoreStructure {
             }
 
         }
+
 
     }
 }

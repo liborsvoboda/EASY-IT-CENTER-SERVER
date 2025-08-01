@@ -105,8 +105,9 @@ namespace EasyITCenter.Controllers {
                 //GENERATE MDBOOK
                 RunProcessRequest process = new RunProcessRequest() {
                     Command = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "generate-mdbook.cmd"),
+                    ProcessType = ProcessType.cmd,
                     Arguments = "", WorkingDirectory = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook")
-                }; string result = await ProcessOperations.RunSystemProcess(process);
+                }; string result = await ProcessOperations.ServerProcessStart(process);
 
 
                 //CLEAN MD FILES FROM BOOK
@@ -241,9 +242,10 @@ namespace EasyITCenter.Controllers {
                     //RUN BOOK PROCESS     
                     RunProcessRequest process = new RunProcessRequest() {
                         Command = (SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/" + "generate-mdbook.bat").Replace("/", "\\"),
-                        WorkingDirectory = (SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/").Replace("/", "\\")
+                        WorkingDirectory = (SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/").Replace("/", "\\"),
+                        ProcessType = ProcessType.cmd
                     };
-                    string result = await ProcessOperations.RunSystemProcess(process);
+                    string result = await ProcessOperations.ServerProcessStart(process);
                 }
 
 

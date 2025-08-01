@@ -166,9 +166,10 @@ namespace EasyITCenter.Services {
                                     try { parseData = JsonSerializer.Deserialize<IDictionary<string, string>>(data); } catch { }
                                     RunProcessRequest? process = new RunProcessRequest() {
                                         Command = "cmd.exe", Arguments = parseData?.First(a => a.Key.ToLower() == "command").Value.ToString(),
-                                        WorkingDirectory = parseData?.First(a => a.Key.ToLower() == "startupdirectory").Value.ToString() 
+                                        WorkingDirectory = parseData?.First(a => a.Key.ToLower() == "startupdirectory").Value.ToString(),
+                                        ProcessType = ProcessType.cmd
                                     };
-                                    taskResult.ProcessLog = await ProcessOperations.RunSystemProcess(process);
+                                    taskResult.ProcessLog = await ProcessOperations.ServerProcessStart(process);
                                 }
                             } catch (Exception ex) { taskResult.ProcessCrashed = true; taskResult.ProcessLog = DataOperations.GetErrMsg(ex); CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }); }
 

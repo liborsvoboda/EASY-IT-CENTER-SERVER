@@ -68,15 +68,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public DateTimeOffset? SocketTimeout { get; set; }
     }
 
-    /// <summary>
-    /// Server Process class for running external prrocesses
-    /// </summary>
-    public class RunProcessRequest {
-        public string Command { get; set; }
-        public string? WorkingDirectory { get; set; } = null;
-        public string? Arguments { get; set; } = null;
-        public bool WaitForExit = true;
-    }
+
 
 
 }
