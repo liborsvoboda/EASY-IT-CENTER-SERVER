@@ -147,7 +147,7 @@ Gs.Functions.ShowSource = function () {
 
 Gs.Functions.ShowFrameSource = function () {
     var source = "<html>";
-    source += window.frames['FrameWindow'].contentWindow.document.body.innerHTML;
+    source += window.frames['IFrameWindow'].contentWindow.document.body.innerHTML;
     source += "</html>";
     source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     source = "<pre>" + source + "</pre>";
@@ -267,7 +267,7 @@ Gs.Functions.UnloadMetro = function () {
     delete Metro;
 }
 
-Gs.Functions.LoadPage = function (elementId,url) {
+Gs.Functions.LoadHtmlPage = function (elementId,url) {
     $.ajax({
         url: url
     }).done(function (data) {
