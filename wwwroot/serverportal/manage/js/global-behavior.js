@@ -115,14 +115,14 @@ Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
-    document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
+    document.getElementById("FrameWindow").innerHTML = document.getElementById("FrameWindow").innerHTML + "<div data-role='window' class='p-2'> " + '<iframe id="IFrameWindow" src="' + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe></div>';
 }
 
 Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
-    document.getElementById("FrameWindow").innerHTML = menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent;
+    document.getElementById("FrameWindow").innerHTML = document.getElementById("FrameWindow").innerHTML + "<div data-role='window' class='p-2'> " + menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent + "</div>";
 
     if (menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent != null) {
         let script = "<script id='InheritScript' charset='utf-8' type='text/javascript'> " + menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent + " </script>";

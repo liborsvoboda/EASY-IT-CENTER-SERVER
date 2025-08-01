@@ -32,8 +32,7 @@ namespace StripeAPI.Controllers
     public class PortalApiTableService : ControllerBase
     {
 
-        //[AllowAnonymous]
-        //[Authorize]
+        [AllowAnonymous]
         [HttpGet("/ServerPortalApi/GetApiTableDataList/{tablename}")]
         public async Task<string> GetApiTableDataList(string tablename) {
             List<PortalApiTableColumnDataList> data = new();

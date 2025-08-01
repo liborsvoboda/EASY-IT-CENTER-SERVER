@@ -1,4 +1,4 @@
-﻿using DBEntitySchema.Core;
+﻿using EASYTools.DBEntitySchema.Core;
 using Markdig.Extensions.AutoIdentifiers;
 using Markdig;
 using MarkdownDocumenting.Extensions;
@@ -65,7 +65,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureReportDesigner(ref IServiceCollection services) {
-            //services.AddFastReport();
+            services.AddFastReport();
         }
         
 
@@ -325,10 +325,11 @@ namespace EasyITCenter.ServerCoreConfiguration {
         internal static void EnableDocumentation(ref IApplicationBuilder app) {
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleMdDocumentationEnabled").Value)) {
                 app.UseDocumentation(builder => {
-                    builder.HighlightJsStyle = SrvRuntime.SrvIntegrated_path + "/server-modules/Docs/material-darker.css";
-                    builder.GetMdlStyle = SrvRuntime.SrvIntegrated_path + "/server-modules/Docs/material.min.css";
+                    builder.HighlightJsStyle = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/server-Integrated/server-modules/docs/material-darker.css";
+                    builder.GetMdlStyle = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/server-Integrated/server-modules/docs/material.min.css";
                     builder.NavBarStyle = MarkdownDocumenting.Elements.NavBarStyle.Default;
                     builder.RootPathHandling = HandlingType.HandleWithHighOrder;
+                    builder.RoutePrefix = null;
                     //builder.SetIndexDocument(new EasyITCenterContext().DocSrvDocumentationLists.OrderBy(a => a.DocumentationGroup.Sequence)
                     //.ThenBy(a => a.Sequence).ThenBy(a => a.Name).FirstOrDefault().Name.Replace(" ", ""));
 
@@ -390,7 +391,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// Enable Report Designer Module
         /// </summary>
         /// <param name="app"></param>
-        internal static void EnableReportDesigner(ref IApplicationBuilder app) { /*app.UseFastReport();*/}
+        internal static void EnableReportDesigner(ref IApplicationBuilder app) { app.UseFastReport();}
 
 
         /// <summary>
