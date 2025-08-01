@@ -270,12 +270,14 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="GrobExp.Compiler" Version="1.3.23" />
     <PackageReference Include="GrobExp.Mutators" Version="1.4.16" />
     <PackageReference Include="Handlebars.Net" Version="2.1.6" />
-    <PackageReference Include="Handlebars.Net.Helpers" Version="2.4.5" />
-    <PackageReference Include="Handlebars.Net.Helpers.Core" Version="2.4.5" />
-    <PackageReference Include="Handlebars.Net.Helpers.DynamicLinq" Version="2.4.5" />
-    <PackageReference Include="Handlebars.Net.Helpers.Humanizer" Version="2.4.5" />
-    <PackageReference Include="Handlebars.Net.Helpers.Json" Version="2.4.5" />
-    <PackageReference Include="Handlebars.Net.Helpers.XPath" Version="2.4.5" />
+    <PackageReference Include="Handlebars.Net.Extension.Json" Version="1.0.0" />
+    <PackageReference Include="Handlebars.Net.Extension.NewtonsoftJson" Version="1.0.3" />
+    <PackageReference Include="Handlebars.Net.Helpers" Version="2.5.2" />
+    <PackageReference Include="Handlebars.Net.Helpers.Core" Version="2.5.2" />
+    <PackageReference Include="Handlebars.Net.Helpers.Humanizer" Version="2.5.2" />
+    <PackageReference Include="Handlebars.Net.Helpers.Json" Version="2.5.2" />
+    <PackageReference Include="Handlebars.Net.Helpers.Random" Version="2.5.2" />
+    <PackageReference Include="Handlebars.Net.Helpers.XPath" Version="2.5.2" />
     <PackageReference Include="HdrHistogram" Version="2.5.0" />
     <PackageReference Include="HT.Minify" Version="6.0.11" />
     <PackageReference Include="HTML.Generator.Helper" Version="1.0.0" />

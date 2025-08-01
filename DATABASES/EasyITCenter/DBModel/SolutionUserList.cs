@@ -51,8 +51,6 @@ namespace EasyITCenter.DBModel
             PortalActionHistoryListUsers = new HashSet<PortalActionHistoryList>();
             PortalApiTableColumnDataListUserPrefixNavigations = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableColumnDataListUsers = new HashSet<PortalApiTableColumnDataList>();
-            PortalApiTableColumnListUserPrefixNavigations = new HashSet<PortalApiTableColumnList>();
-            PortalApiTableColumnListUsers = new HashSet<PortalApiTableColumnList>();
             PortalApiTableListUserPrefixNavigations = new HashSet<PortalApiTableList>();
             PortalApiTableListUsers = new HashSet<PortalApiTableList>();
             PortalGeneratedDataListUserPrefixNavigations = new HashSet<PortalGeneratedDataList>();
@@ -243,9 +241,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataListUsers { get; set; }
-        public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnListUserPrefixNavigations { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnListUsers { get; set; }
         public virtual ICollection<PortalApiTableList> PortalApiTableListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalApiTableList> PortalApiTableListUsers { get; set; }

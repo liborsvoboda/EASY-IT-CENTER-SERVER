@@ -4,6 +4,7 @@ require(['vs/editor/editor.main'], function () {
 
 
     let fileCounter = 0;
+    
 
     monaco.editor.defineTheme('myTheme', {
         base: 'vs-dark',
@@ -23,7 +24,7 @@ require(['vs/editor/editor.main'], function () {
             },
             automaticLayout: true, fixedOverflowWidgets: true
         });
-
+        
         Gs.Variables.monacoEditorList.push({ elementId: elementId, editor: editor, model: model });
         return editor;
     }

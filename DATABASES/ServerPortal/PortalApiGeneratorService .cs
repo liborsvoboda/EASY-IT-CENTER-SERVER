@@ -22,12 +22,12 @@ namespace StripeAPI.Controllers
                     if (!ServerApiServiceExtension.IsLogged()) {
 
                         data = await new EasyITCenterContext().PortalGeneratorTemplateLists
-                            .Where(a => a.UserPrefix == null && a.Public == true && a.Active == true)
+                            .Where(a => a.Public == true && a.Active == true)
                             .OrderBy(a => a.InheritedTemplateType).ThenBy(a => a.Name).ToListAsync();
 
                     } else {
                         data = await new EasyITCenterContext().PortalGeneratorTemplateLists
-                       .Where(a => ( a.UserPrefix == null || a.UserPrefix == ServerApiServiceExtension.GetUserPrefix() ) && a.Active == true)
+                       .Where(a => (( a.UserPrefix == ServerApiServiceExtension.GetUserPrefix() && a.Public == false ) || a.Public == true ) && a.Active == true)
                        .OrderBy(a => a.InheritedTemplateType).ThenBy(a => a.Name).ToListAsync();
 
                     }

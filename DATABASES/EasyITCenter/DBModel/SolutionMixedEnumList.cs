@@ -19,7 +19,6 @@ namespace EasyITCenter.DBModel
             PortalActionHistoryListInheritedActionTypeNavigations = new HashSet<PortalActionHistoryList>();
             PortalActionHistoryListInheritedDataTypeNavigations = new HashSet<PortalActionHistoryList>();
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
-            PortalApiTableColumnLists = new HashSet<PortalApiTableColumnList>();
             PortalApiTableLists = new HashSet<PortalApiTableList>();
             PortalGeneratedDataLists = new HashSet<PortalGeneratedDataList>();
             PortalGeneratorActionListInheritedCommandTypeNavigations = new HashSet<PortalGeneratorActionList>();
@@ -84,7 +83,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<PortalActionHistoryList> PortalActionHistoryListInheritedActionTypeNavigations { get; set; }
         public virtual ICollection<PortalActionHistoryList> PortalActionHistoryListInheritedDataTypeNavigations { get; set; }
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
-        public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; }
         public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }
         public virtual ICollection<PortalGeneratedDataList> PortalGeneratedDataLists { get; set; }
         public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionListInheritedCommandTypeNavigations { get; set; }

@@ -15,7 +15,6 @@ namespace EasyITCenter.DBModel
         public PortalApiTableList()
         {
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
-            PortalApiTableColumnLists = new HashSet<PortalApiTableColumnList>();
         }
 
         [Key]
@@ -42,6 +41,5 @@ namespace EasyITCenter.DBModel
         public virtual SolutionUserList User { get; set; } = null!;
         public virtual SolutionUserList? UserPrefixNavigation { get; set; }
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
-        public virtual ICollection<PortalApiTableColumnList> PortalApiTableColumnLists { get; set; }
     }
 }
