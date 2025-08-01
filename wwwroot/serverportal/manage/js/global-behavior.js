@@ -115,7 +115,7 @@ Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
-    document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + Metro.storage.getItem('BackendServerAddress', null) + "/" + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
+    document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + content + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
 }
 
 Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {

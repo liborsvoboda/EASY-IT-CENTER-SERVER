@@ -79,7 +79,7 @@ namespace EasyITCenter.ServerCoreStructure {
                         proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
                         proc.StartInfo.UseShellExecute = false;
                    } else if (processDefinition.ProcessType == ProcessType.powershellScript) {
-                        RunPowerShellProcess(processDefinition.Command);
+                        RunPowerShellProcess(processDefinition);
                     }
 
 
@@ -150,10 +150,11 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="script"></param>
         /// <returns></returns>
-        public async static Task<string> RunPowerShellProcess(string script) {
+        public async static Task<string> RunPowerShellProcess(RunProcessRequest processDefinition) {
             try {
                 using (PowerShell ps = PowerShell.Create()) {
-                    Collection<PSObject>? results = ps.AddScript(script).Invoke();
+                    //ps.AddArgument = processDefinition.WorkingDirectory
+                    Collection<PSObject>? results = ps.AddScript(processDefinition.Command).Invoke();
                     ps.Commands.Clear();
                     return results.AsEnumerable().ToList().ObjectToJson();
                 }

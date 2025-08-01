@@ -183,7 +183,7 @@ Gs.Objects.RefreshPreview = function () {
         $("#menuPreview").load(Metro.storage.getItem('BackendServerAddress', null) + "/" + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue());
 
     } else if ($("#menuType").val() == "externalLink") {
-        document.getElementById("menuPreview").innerHTML = '<iframe id="PreviewFrameWindow" src="' + Metro.storage.getItem('BackendServerAddress', null) + "/" + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue() + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
+        document.getElementById("menuPreview").innerHTML = '<iframe id="PreviewFrameWindow" src="' + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue() + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
 
     } else if ($("#menuType").val() == "content") {
         document.getElementById("menuPreview").innerHTML = Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue();
