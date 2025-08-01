@@ -91,7 +91,7 @@ namespace EasyITCenter.Controllers {
                         //if (CoreOperations.GetOperatingSystemInfo.IsWindows()) {
                             process = new RunProcessRequest() { 
                                 Command = Path.Combine(SrvRuntime.WebRoot_path, "server-doc", "md-book", "generate-mdbook.cmd"), 
-                                Arguments = "", WorkingDirectory = Path.Combine(SrvRuntime.WebRoot_path, "server-doc", "md-book") ,
+                                WorkingDirectory = Path.Combine(SrvRuntime.WebRoot_path, "server-doc", "md-book") ,
                                 ProcessType = ProcessType.cmd,
                             };
                         //process = new RunProcessRequest() { Command = Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book", "generate-mdbook.cmd"), Arguments = "", WorkingDirectory = Path.Combine(_hostingEnvironment.WebRootPath, "server-doc", "md-book") };

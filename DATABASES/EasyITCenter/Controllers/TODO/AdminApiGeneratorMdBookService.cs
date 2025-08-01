@@ -106,7 +106,7 @@ namespace EasyITCenter.Controllers {
                 RunProcessRequest process = new RunProcessRequest() {
                     Command = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "generate-mdbook.cmd"),
                     ProcessType = ProcessType.cmd,
-                    Arguments = "", WorkingDirectory = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook")
+                    WorkingDirectory = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook")
                 }; string result = await ProcessOperations.ServerProcessStart(process);
 
 

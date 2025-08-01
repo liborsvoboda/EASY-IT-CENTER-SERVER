@@ -18,7 +18,8 @@ namespace EasyITCenter.ServerCoreStructure {
         dotnet,
         cmd,
         bat,
-        powershell,
+        powershellFile,
+        powershellScript,
         py3,
         sh
 
@@ -31,7 +32,6 @@ namespace EasyITCenter.ServerCoreStructure {
         public string Command { get; set; }
         public string? WorkingDirectory { get; set; } = null;
         public ProcessType ProcessType { get; set; }
-        public string? Arguments { get; set; } = null;
         public bool WaitForExit = true;
     }
 
@@ -65,20 +65,25 @@ namespace EasyITCenter.ServerCoreStructure {
                     if (processDefinition.ProcessType == ProcessType.dotnet) {
                         proc.StartInfo.FileName = "dotnet";
                         proc.StartInfo.UseShellExecute = true;
-                        proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
+                        proc.StartInfo.Arguments = processDefinition.Command ?? null;
                     } else if (processDefinition.ProcessType == ProcessType.cmd || processDefinition.ProcessType == ProcessType.bat) {
-                        proc.StartInfo.FileName = processDefinition.Command.Replace(".sh", ".cmd").Replace(".sh", ".bat");
+                        proc.StartInfo.FileName = "cmd.exe";
                         proc.StartInfo.UseShellExecute = false;
-                        proc.StartInfo.Arguments = processDefinition.Arguments ?? null;
+                        proc.StartInfo.Arguments = processDefinition.Command ?? null;
                     } else if (processDefinition.ProcessType == ProcessType.sh) {
                         proc.StartInfo.FileName = "/bin/bash";
-                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command.Replace(".cmd", ".sh").Replace(".bat", ".sh"));
+                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
                         proc.StartInfo.UseShellExecute = false;
+                    } else if (processDefinition.ProcessType == ProcessType.powershellFile) {
+                        proc.StartInfo.FileName = "powershell";
+                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
+                        proc.StartInfo.UseShellExecute = false;
+                   } else if (processDefinition.ProcessType == ProcessType.powershellScript) {
+                        RunPowerShellProcess(processDefinition.Command);
                     }
-                    
-                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
-                
 
+
+            proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
                     //proc.StartInfo.LoadUserProfile = false;
                     proc.StartInfo.CreateNoWindow = true;
                     proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;

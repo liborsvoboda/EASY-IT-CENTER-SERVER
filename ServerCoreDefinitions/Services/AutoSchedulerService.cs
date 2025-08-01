@@ -165,9 +165,10 @@ namespace EasyITCenter.Services {
                                     IDictionary<string, string>? parseData = null;
                                     try { parseData = JsonSerializer.Deserialize<IDictionary<string, string>>(data); } catch { }
                                     RunProcessRequest? process = new RunProcessRequest() {
-                                        Command = "cmd.exe", Arguments = parseData?.First(a => a.Key.ToLower() == "command").Value.ToString(),
+                                        Command = parseData?.First(a => a.Key.ToLower() == "command").Value.ToString(),
                                         WorkingDirectory = parseData?.First(a => a.Key.ToLower() == "startupdirectory").Value.ToString(),
-                                        ProcessType = ProcessType.cmd
+                                        ProcessType = Enum.Parse<ProcessType>(parseData?.First(a => a.Key.ToLower() == "processtype").Value.ToString())
+
                                     };
                                     taskResult.ProcessLog = await ProcessOperations.ServerProcessStart(process);
                                 }
