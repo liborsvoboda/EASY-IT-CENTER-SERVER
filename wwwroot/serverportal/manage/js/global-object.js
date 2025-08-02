@@ -25,8 +25,8 @@ Gs.Objects.CreateToolPanel = function () {
     html += '<input id="UserAutomaticTranslate" type="checkbox" data-role="checkbox" data-cls-caption="fg-cyan text-bold" data-caption="Auto Translate" onchange=Gs.Behaviors.UserChangeTranslateSetting(); checked >';
     html += '</div><div class="w-25 mt-1 text-right" style="max-width:25% !important;"><button class="button secondary mini" style="max-width:100% !important;" onclick=Gs.Behaviors.CancelTranslation(); >Cancel Translate</button></div></div>';
     html += '</div>';
-    html += '<DIV id=_toolUserSet></div>'
-    html += '<DIV id=_toolRadio></div>'
+    html += '<DIV id=_toolUserSet><DIV class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"><DIV class="form-group" ><INPUT id=UserSetEnableShowDesc onchange=Gs.Behaviors.UpdateUserSettings()  style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Enable Show Description"> </DIV></DIV></div>';
+    html += '<DIV id=_toolRadio></div>';
 
     html += '</div></div>'
     //html += '<div class="d-flex w-100" title="Theme">';
@@ -129,8 +129,8 @@ Gs.Objects.GenerateMenu = function () {
 
     menu.forEach((mItem, index, arr) => {
         if (mItem.InheritedMenuType == "menu") {
-            htmlContent += '<li id= ' + mItem.Sequence + ' ><a href="#" class="dropdown-toggle"><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a>';
-            htmlContent += '<ul id = ' + mItem.RecGuid + ' class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + mItem.Name + '</li></ul>';
+            htmlContent += '<li id="' + mItem.Sequence + '" ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href="#" class="dropdown-toggle"><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a>';
+            htmlContent += '<ul id ="' + mItem.RecGuid + '" class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + mItem.Name + '</li></ul>';
             htmlContent += '</li>';
         }
         document.getElementById("PortalMenu").innerHTML = htmlContent;
@@ -138,22 +138,22 @@ Gs.Objects.GenerateMenu = function () {
     
     menu.forEach((mItem, index, arr) => {
         if (mItem.InheritedMenuType == "link") {
-            htmlContent = '<li onclick=Gs.Behaviors.SetLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=Gs.Behaviors.SetLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         } else if (mItem.InheritedMenuType == "externalLink") {
-            htmlContent = '<li onclick=Gs.Behaviors.SetExternalLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=Gs.Behaviors.SetExternalLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         }
 
         else if (mItem.InheritedMenuType == "content") {
-            htmlContent = '<li onclick=Gs.Behaviors.SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=Gs.Behaviors.SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
 
         else if (mItem.InheritedMenuType == "externalContent") {
-            htmlContent = '<li onclick=Gs.Behaviors.SetExternalContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li onclick=Gs.Behaviors.SetExternalContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
     });
@@ -174,7 +174,7 @@ Gs.Objects.ShowLoginPage = function () {
 
 Gs.Objects.ShowNotify = function (type, message) {
     try {
-        var notify = Metro.notify; notify.setup({ width: Gs.Variables.defaultSetting[0].notifyWidth, timeout: Metro.storage.getItem('NotifyShowTime', 2000), duration: Gs.Variables.defaultSetting[0].notifyDuration, animation: Gs.Variables.defaultSetting[0].notifyAnimation });
+        var notify = Metro.notify; notify.setup({ width: Gs.Variables.notifySetting.notifyWidth, timeout: Metro.storage.getItem('NotifyShowTime', 2000), duration: Gs.Variables.notifySetting.notifyDuration, animation: Gs.Variables.notifySetting.notifyAnimation });
         if (type == 'error' || type == 'alert') { notify.create(message, "Error", { cls: "alert" }); }
         else if (type == 'success') { notify.create(message, "Success", { cls: "success" }); }
         else if (type == 'info') { notify.create(message, "Info"); }
@@ -191,6 +191,7 @@ Gs.Objects.ShowMessagePanel = function (close) {
 }
 
 Gs.Objects.ShowFavorites = function (elementId) {
+    if (!Metro.bottomsheet.isOpen("#" + elementId)) { Gs.Behaviors.ElementRemoveClass(elementId, "hidden"); } else { Gs.Behaviors.ElementAddClass(elementId, "hidden"); }
     Metro.bottomsheet.toggle("#" + elementId, "grid");
 }
 

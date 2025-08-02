@@ -63,6 +63,34 @@ namespace EasyITCenter.Controllers {
 
 
 
+        public static void RunTransaction(EasyITCenterContext dbContext, Func<IDbContextTransaction, bool> act) {
+            if (dbContext != null && act != null) {
+                var executionStrategy = dbContext.Database.CreateExecutionStrategy();
+
+                executionStrategy.Execute(() => {
+
+                    using var ret = dbContext.Database.BeginTransaction();
+                    if (ret != null) {
+
+                        try {
+                            if (act.Invoke(ret)) {
+                                ret.Commit();
+                            }
+                        } catch (Exception e) {
+                            ret.Rollback();
+                            throw new Exception("Error during transaction, rolling back");
+                        }
+
+                    } else {
+                        throw new Exception("Error while starting transaction");
+                    }
+
+                });
+            }
+        }
+
+
+
         /// <summary>
         /// Trigger User Login History
         /// </summary>

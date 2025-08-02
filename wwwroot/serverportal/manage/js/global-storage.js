@@ -1,6 +1,4 @@
-﻿// METRO ENGINE Easy Interactive Solution For SYSTEMS, WEBS, PORTALS, ETC....
-// https://docs.metroui.org.ua/intro.html
-
+﻿
 //Global Javascript Library
 let Gs = {
     Behaviors: {},
@@ -9,18 +7,21 @@ let Gs = {
     Apis: {},
     Variables: {
         monacoEditorList :[],
-        apiMessages :[{
+        apiMessages :{
             apiSaveSuccess: "Saving Data was Saved Sucessfully",
             apiSaveFail: "Saving Data was Failed",
             apiLoadSuccess: "Saving Data was Saved Sucessfully",
             apiLoadFail: "Saving Data was Failed",
-            incorectLogin: "Incorect Name or Password"
-        }],
-        defaultSetting :[{
+            incorectLogin: "Incorect Name or Password",
+            apiDeleteSuccess: "Data was Deleted",
+            apiDeleteFail: "Data Delete Failed"
+
+        },
+        notifySetting :{
             notifyWidth: 300,
             notifyDuration: 1000,
             notifyAnimation: "easeOutBounce"
-        }],
+        },
         getSpProcedure :[
             { SpProcedure: "SpGetTableDataList" },
             { tableName: null },
@@ -35,7 +36,8 @@ let Gs = {
             { dataRec: null }
         ],
         UserSettingList: {
-            EnableAutoTranslate: false
+            EnableAutoTranslate: false,
+            EnableShowDescription: true
         }
     }
 }
@@ -71,7 +73,7 @@ Metro.storage.setItem('DefaultPath', Metro.storage.getItem('DefaultPath', null) 
 
 
 //Start Set User Default Setting
-if (Metro.storage.getItem('UserSettingList', null) == null) { Metro.storage.setItem('UserSettingList', Gs.Variables.UserSettingList); }
+Metro.storage.setItem('UserSettingList', Gs.Variables.UserSettingList);
 
 
 

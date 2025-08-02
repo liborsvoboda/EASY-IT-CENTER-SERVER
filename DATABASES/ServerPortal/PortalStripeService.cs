@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 
-namespace StripeAPI.Controllers
+namespace EasyITCenter.Controllers
 {
 
     public record AddStripeCard

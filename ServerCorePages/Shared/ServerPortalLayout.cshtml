@@ -40,13 +40,11 @@
     <link rel="icon" href="~/favicon.ico" type="image/x-icon">
     <title>EIC&ESB Server Portal</title>
 
-    <link href="/serverportal/addons/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" charset="utf-8" href="/serverportal/addons/summernote/css/summernote.min.css" />
-
+    <link rel="stylesheet" href="/serverportal/addons/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/serverportal/addons/summernote/css/summernote.min.css" />
     <link rel="stylesheet" href="/serverportal/metro/css/metro-all.css" />
+    <link rel="stylesheet" href="/serverportal/addons/animate/css/animate.css" />
     <link rel="stylesheet" href="/serverportal/manage/css/global.css" />
-    
-
     
     <style>
         .qxCTlb {
@@ -116,20 +114,13 @@
         </div> *@
 
 
-            @await Html.PartialAsync("~/ServerCorePages/ServerPortal/_Partial/_LeftMenu.cshtml")
-
+        @await Html.PartialAsync("~/ServerCorePages/ServerPortal/_Partial/_LeftMenu.cshtml")
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0;min-height:30px !important;height:30px !important">
         </div>
-
     </div>
-
-
     <div class="navview-content h-100">
-            @await Html.PartialAsync("~/ServerCorePages/ServerPortal/_Partial/_HeaderMenu.cshtml")
-        
-            @RenderBody()
-         
-            
+         @await Html.PartialAsync("~/ServerCorePages/ServerPortal/_Partial/_HeaderMenu.cshtml")
+         @RenderBody()
     </div>
 </div>
 @await Html.PartialAsync("~/ServerCorePages/ServerPortal/_Partial/_Modal.cshtml")
@@ -164,5 +155,7 @@
     */
 
    Gs.Behaviors.PortalStartup();
+
+   $(document).ready(function(){ Gs.Behaviors.LoadUserSettings(); }) 
 </script>
 </html>

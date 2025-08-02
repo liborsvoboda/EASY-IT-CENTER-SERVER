@@ -34,7 +34,7 @@
     @* https://github.com/KorzhCom/EasyData/blob/master/easydata.net/src/EasyData.Exporters.Default/Html/HtmlDataExporter.cs  *@
    
 
-    if (role == "admin") { 
+    if (role == "admin" || role == "webadmin") { 
         <link rel="stylesheet" href="~/server-integrated/server-modules/easydata/css/easydata.min.css" inline />
         <script type="text/javascript" src="~/server-integrated/server-modules/easydata/js/easydata.min.js" /></script>
             <div class="container text-center pt-5 mb-2">
@@ -108,7 +108,7 @@
             function validateForm() {
                 showPageLoading();
                 var def = $.ajax({
-                    global: false, type: "POST", url: "/EasyITCenterAuthentication", dataType: 'json',
+                    global: false, type: "POST", url: "/AuthenticationService", dataType: 'json',
                     headers: { "Authorization": "Basic " + btoa($("#usernameId").val() + ":" + $("#passwordId").val()) }
                 });
 
@@ -126,7 +126,7 @@
 
             function Login(data) {
                 Cookies.set('ApiToken', data.Token);
-                Metro.storage.setItem('ApiToken', data.Token);
+                Metro.storage.setItem('ApiToken', data);
                 window.location.href = "/EasyData";
             }
 

@@ -192,7 +192,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             //HeathService Support
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleHealthServiceEnabled").Value)) {
                 app.UseHealthChecks("/HealthResultService");
-                app.UseMiddleware<ServerCycleTaskMiddleware>();
+                //app.UseMiddleware<ServerCycleTaskMiddleware>();
                 app.UseHealthChecksUI(setup => {
                     setup.UIPath = DbOperations.GetServerParameterLists("ModuleHealthServicePath").Value.StartsWith("/") ? DbOperations.GetServerParameterLists("ModuleHealthServicePath").Value : "/" + DbOperations.GetServerParameterLists("ModuleHealthServicePath").Value;
                     setup.AsideMenuOpened = true;

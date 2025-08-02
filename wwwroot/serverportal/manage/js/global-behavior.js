@@ -1,12 +1,12 @@
 ﻿// STARTUP Temp Variables Definitions
 let pageLoader;
 
-Gs.Behaviors.PortalStartup = function () {
+Gs.Behaviors.PortalStartup =async function () {
     Gs.Objects.CreateToolPanel();
 
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
-    Gs.Apis.RunServerPostApi("DBProcedureService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
-    Gs.Apis.RunServerGetApi("ServerPortalApi/GetApiTableDataList/PortalMenu", "PortalMenu");
+    await Gs.Apis.RunServerPostApi("DBProcedureService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
+    await Gs.Apis.RunServerGetApi("ServerPortalApi/GetApiTableDataList/PortalMenu", "PortalMenu");
 
     Gs.Objects.GenerateMenu();
 }
@@ -203,9 +203,34 @@ Gs.Behaviors.ElementSetActive = function (elementId) {
 }
 
 
+Gs.Behaviors.ElementAddClass = function (elementId,className) {
+    try {
+        $('#' + elementId).addClass(" " + className + " ");
+    } catch { }
+}
+
+Gs.Behaviors.ElementRemoveClass = function (elementId, className) {
+    try {
+        $('#' + elementId).removeClass(className);
+    } catch { }
+}
+
 Gs.Behaviors.InfoBoxOpenClose = function (elementId) {
     try {
         if (Metro.infobox.isOpen('#' + elementId)) { Metro.infobox.close('#' + elementId); }
         else { Metro.infobox.open('#' + elementId); }
     } catch { }
+}
+
+
+Gs.Behaviors.UpdateUserSettings = function () {
+    let userSetting = Metro.storage.getItem('UserSettingList', null);
+    userSetting.EnableShowDescription = $("#UserSetEnableShowDesc")[0].checked;
+
+    Metro.storage.setItem('UserSettingList', userSetting);
+}
+
+
+Gs.Behaviors.LoadUserSettings = function () {
+    $("#UserSetEnableShowDesc").val('checked')[0].checked = Gs.Variables.UserSettingList.EnableShowDescription;
 }

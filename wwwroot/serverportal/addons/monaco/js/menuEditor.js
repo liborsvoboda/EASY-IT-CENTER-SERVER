@@ -1,5 +1,4 @@
 ﻿require.config({ paths: { 'vs': '/serverportal/addons/monaco/js/monaco-editor/min/vs' } });
-require.config({ paths: { 'vs': '/serverportal/addons/monaco/js/monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function () {
 
 

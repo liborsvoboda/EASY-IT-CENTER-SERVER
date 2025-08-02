@@ -336,83 +336,83 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="MediaBrowser.Common" Version="4.8.2" />
     <PackageReference Include="MediaBrowser.Server.Core" Version="4.8.2" />
     <PackageReference Include="MermaidNetHtmlBuilder" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.WsFederation" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Forms" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="6.0.33" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.WsFederation" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Forms" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="6.0.36" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="6.0.553" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.HeaderPropagation" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Connections.Client" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Connections.Common" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Metadata" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.33" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="6.0.33" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Razor" Version="6.0.33" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.HeaderPropagation" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Connections.Client" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Connections.Common" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Metadata" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="6.0.36" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Razor" Version="6.0.36" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.11" />
     <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.33" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.33" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.33">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.36">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.DynamicLinq" Version="6.3.14" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.33" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.33" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.33" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="6.0.33" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.33" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="6.0.33" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.33">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.36">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="6.0.33">
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="6.0.36">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.33" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.33" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.33" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Composite" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.36" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.36" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.36" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Composite" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.33" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.36" />
     <PackageReference Include="Microsoft.Graph" Version="5.56.0" />
-    <PackageReference Include="Microsoft.JSInterop" Version="6.0.33" />
-    <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.33" />
+    <PackageReference Include="Microsoft.JSInterop" Version="6.0.36" />
+    <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.36" />
     <PackageReference Include="Microsoft.MarkedNet" Version="1.0.13" />
     <PackageReference Include="Microsoft.ML" Version="3.0.1" />
     <PackageReference Include="Microsoft.ML.AutoML" Version="0.21.1" />
     <PackageReference Include="Microsoft.ML.DataView" Version="3.0.1" />
     <PackageReference Include="Microsoft.ML.FastTree" Version="3.0.1" />
     <PackageReference Include="Microsoft.ML.TensorFlow" Version="3.0.1" />
-    <PackageReference Include="Microsoft.NETCore.DotNetAppHost" Version="6.0.33" />
-    <PackageReference Include="Microsoft.NETCore.DotNetHost" Version="6.0.33" />
-    <PackageReference Include="Microsoft.NETCore.DotNetHostPolicy" Version="6.0.33" />
-    <PackageReference Include="Microsoft.NETCore.DotNetHostResolver" Version="6.0.33" />
+    <PackageReference Include="Microsoft.NETCore.DotNetAppHost" Version="6.0.36" />
+    <PackageReference Include="Microsoft.NETCore.DotNetHost" Version="6.0.36" />
+    <PackageReference Include="Microsoft.NETCore.DotNetHostPolicy" Version="6.0.36" />
+    <PackageReference Include="Microsoft.NETCore.DotNetHostResolver" Version="6.0.36" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.13" />
     <PackageReference Include="Microsoft.Playwright" Version="1.47.0" />
     <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.47.0" />

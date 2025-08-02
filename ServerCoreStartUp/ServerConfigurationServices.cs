@@ -32,7 +32,6 @@ using Microsoft.EntityFrameworkCore;
 using Stripe;
 using EasyITCenter.ServerCoreStructure;
 using EasyITCenter.ServerCoreServers;
-using StripeAPI.Controllers;
 
 
 
@@ -193,25 +192,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     }).AddRazorPagesOptions(opt => {
                         opt.RootDirectory = "/ServerCorePages";
 
-                        //options.Conventions.AuthorizeFolder("/Account/Manage");
-                        //options.Conventions.AuthorizePage("/Account/Logout");
-                        //opt.Conventions.AuthorizeFolder($"/{ServerRuntimeData.ServerPrivate_path}");
-                        //opt.Conventions.AuthorizeFolder($"/{ServerRuntimeData.ServerAdmin_path}");
-
-                        /*
-                        opt.Conventions.AllowAnonymousToPage("/DevPortal/Error");
-                        */
-
-                        //TODO SEMDAT TY MODULY
-                        //options.Conventions.Add(new GlobalTemplatePageRouteModelConvention());
-                        //options.Conventions.AddFolderRouteModelConvention("/OtherPages", model => model.add())
-
 
                         //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/razor-pages-conventions/samples/6.x/SampleApp/Program.cs
                         //https://learn.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-3.1 FULL DOC
-                        //options.Conventions.Add(new GlobalTemplatePageRouteModelConvention());
-                        //VYPADA TO, ZE CONVENTION Obohati vsechny stranky na urovni modelu
-                        // options.Conventions.AddPageRoute("/Contact", "TheContactPage/{text?}"); stranka
 
                     }).AddRazorRuntimeCompilation();
                     //.AddControllersAsServices(); PROBLEM WITH GIT
@@ -321,7 +304,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
             //Stripe    
             StripeConfiguration.ApiKey = "SecretKey";
-            services.AddScoped<CustomerService>().AddScoped<ChargeService>();
+            services.AddScoped<CustomerService>();
+            services.AddScoped<ChargeService>();
             services.AddScoped<TokenService>(); 
             services.AddScoped<IStripeService, StripeService>();
 
@@ -343,7 +327,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
         internal static void ConfigureDatabaseContext(ref IServiceCollection services) {
             if (SrvRuntime.DebugMode) { services.AddDatabaseDeveloperPageExceptionFilter(); }
             try {
-                //EIC&ESB MAIN DB
                 services.AddDbContext<EasyITCenterContext>(opt => opt.UseSqlServer(DBConn.DatabaseConnectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
                 //WEBHOSTING DB

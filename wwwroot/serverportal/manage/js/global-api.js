@@ -1,49 +1,40 @@
 ﻿
 
 //Run POST Api Request FOR set and GET storageName on SET is null
-Gs.Apis.RunServerPostApi = function (apiPath, jsonData, storageName) {
+Gs.Apis.RunServerPostApi =async function (apiPath, jsonData, storageName) {
     Gs.Behaviors.ShowPageLoading();
-    var def = $.ajax({
-        global: false, type: "POST", url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
-        headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
-        data: JSON.stringify(jsonData)
-    });
+    let response = await fetch(Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, {
+        method: 'POST', headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
+        body: JSON.stringify(jsonData)
+    }); let result = await response.json();
+    if (storageName != null) { Metro.storage.setItem(storageName, result); }
+    Gs.Behaviors.HidePageLoading();
 
-    def.fail(function (err) {
-        Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiSaveFail);
-        Gs.Behaviors.HidePageLoading();
-        return false;
-    });
-
-    def.done(function (apiData) {
-        Gs.Objects.ShowNotify("success", Gs.Variables.apiMessages.apiSaveSuccess);
-        if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
-        Gs.Behaviors.HidePageLoading();
-        return true;
-    });
+    if (result.Status == undefined || result.Status == "success") { return true; }
+    else { Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiSaveFail); return false; }
 }
 
 //Run GET Api Request 
-Gs.Apis.RunServerGetApi = function (apiPath, storageName) {
+Gs.Apis.RunServerGetApi = async function (apiPath, storageName) {
     Gs.Behaviors.ShowPageLoading();
-    $.ajax({
-        url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, dataType: 'json',
-        type: "GET",
-        headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
-        success: function (apiData) {
-            if (storageName != null) { Metro.storage.setItem(storageName, JSON.parse(JSON.stringify(apiData))); }
-            Gs.Objects.ShowNotify("success", Gs.Variables.apiMessages.apiLoadSuccess);
-            Gs.Behaviors.HidePageLoading();
-            return true;
-        },
-        error: function (error) {
-            Metro.storage.setItem(storageName, null);
-            Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiLoadFail);
-            Gs.Behaviors.HidePageLoading();
-        }
-    });
+    let response = await fetch(Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, {
+        method: 'GET', headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' }
+    }); let result = await response.json();
+    if (storageName != null) { Metro.storage.setItem(storageName, result); }
+    Gs.Behaviors.HidePageLoading();
+    if (result.Status == undefined || result.Status == "success") { return true; }
+    else { Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiLoadFail); return false; }
 }
 
+
+//Run DELETE Api REquest
+Gs.Apis.RunServerDeleteApi = async function (apiPath) {
+    let response = await fetch(Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, {
+        method: 'DELETE', headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' }
+    }); let result = await response.json();
+    if (result.Status == undefined || result.Status == "success") { return true; }
+    else { Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiDeleteFail); return false; }
+}
 
 
 function InvalidForm() {
@@ -65,6 +56,7 @@ function ValidateForm() {
     });
 
     def.done(function (data) {
+        Cookies.set('ApiToken', data.Token);
         Metro.storage.setItem("ApiToken", data);
         window.location.href = Metro.storage.getItem("DefaultPath", null); 
         Gs.Behaviors.HidePageLoading();

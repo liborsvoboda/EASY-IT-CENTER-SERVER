@@ -7,7 +7,7 @@ using Tensorflow;
 using Tweetinvi.Core.DTO;
 using Tweetinvi.Core.Events;
 
-namespace StripeAPI.Controllers
+namespace EasyITCenter.Controllers
 {
 
     public partial class MenuData {
@@ -88,7 +88,7 @@ namespace StripeAPI.Controllers
 
         [Authorize]
         [HttpPost("/ServerPortalApi/SetApiTableColumnDataList")]
-        public async Task<string> GetApiTableColumnList([FromBody] MenuData menuData) {
+        public async Task<string> SetApiTableColumnDataList([FromBody] MenuData menuData) {
             EasyITCenterContext data = new EasyITCenterContext(); ;
             try {
                 
@@ -105,8 +105,12 @@ namespace StripeAPI.Controllers
                         record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "JsContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.JsContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "CSSContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.CssContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "MdHelp", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdHelp, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        data.PortalApiTableColumnDataLists.AddRange(record);
-
+                        
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.AddRange(record);
+                            data.SaveChanges();
+                            return true;
+                        });
                     } else {
                         List<PortalApiTableColumnDataList> original = new();
                         original = await new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == menuData.RecGuid).ToListAsync();
@@ -121,11 +125,47 @@ namespace StripeAPI.Controllers
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "JsContent").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "JsContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.JsContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "CSSContent").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "CSSContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.CssContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "MdHelp").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "MdHelp", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdHelp, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        data.PortalApiTableColumnDataLists.UpdateRange(record);
+                        
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.UpdateRange(record);
+                            data.SaveChanges();
+                            return true;
+                        });
                     }
-                    data.SaveChangesAsync();
+
+
+
+                    //data.SaveChanges();
 
                     return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 8, ErrorMessage = menuData.RecGuid });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        [Authorize]
+        [HttpDelete("/ServerPortalApi/DeleteApiTableColumnDataList/{menuId}")]
+        public async Task<string> DeleteApiTableColumnDataList(int menuId) {
+            EasyITCenterContext data = new EasyITCenterContext();
+            try {
+
+                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+
+                    List<PortalApiTableColumnDataList> original = new();
+                    string recId = await new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.Id == menuId).Select(a=>a.RecGuid).FirstOrDefaultAsync();
+                    original = await new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == recId).ToListAsync();
+
+                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                        data.PortalApiTableColumnDataLists.DeleteRangeByKey(original);
+                        data.SaveChanges();
+                        return true;
+                    });
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 8, ErrorMessage = string.Empty });
                 } else {
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
                 }

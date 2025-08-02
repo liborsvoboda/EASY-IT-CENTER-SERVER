@@ -1,5 +1,4 @@
 ﻿require.config({ paths: { 'vs': '/serverportal/addons/monaco/js/monaco-editor/min/vs' } });
-require.config({ paths: { 'vs': '/serverportal/addons/monaco/js/monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function () {
 
 
@@ -39,7 +38,8 @@ require(['vs/editor/editor.main'], function () {
         fileCounter += 1;
     }
 
-    addNewEditor("","TemplateEditor", 'html');
+    addNewEditor("", "TemplateEditor", 'html');
+    addNewEditor("", "ResultCodeEditor", 'html');
     /*
     var languageSelected = document.querySelector('.language');    
     languageSelected.onchange = function () {
@@ -48,9 +48,14 @@ require(['vs/editor/editor.main'], function () {
     */
 
    
-    var themeSelected = document.querySelector('.theme');    
-    themeSelected.onchange = function () {
-        monaco.editor.setTheme(themeSelected.value)
+    let templateEditorLang = document.getElementById('TemplateEditorLang');    
+    templateEditorLang.onchange = function () {
+        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "TemplateEditor" })[0].editor._themeService.setTheme(templateEditorLang.value)
+    }
+
+    let resultCodeEditorLang = document.getElementById('ResultCodeEditorLang');
+    resultCodeEditorLang.onchange = function () {
+        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "ResultCodeEditor" })[0].editor._themeService.setTheme(resultCodeEditorLang.value)
     }
     
     /*

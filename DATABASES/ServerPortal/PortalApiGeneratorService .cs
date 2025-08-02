@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace StripeAPI.Controllers
+namespace EasyITCenter.Controllers
 {
     [Route("ServerPortalApi")]
     [ApiController]

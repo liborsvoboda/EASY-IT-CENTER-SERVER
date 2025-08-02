@@ -1,8 +1,13 @@
-﻿body {
+﻿html {
+    height: 100%;
+}
+
+body {
     background-color: #ECF0F5;
     top: 0px !important;
     font-family: "Source Han Sans", "San Francisco", "PingFang SC", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
     transition: background-color .2s;
+    min-height: 100%;
 }
 
 .navview .navview-pane {

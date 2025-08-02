@@ -173,7 +173,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         internal static void ConfigureHealthCheck(ref IServiceCollection services) {
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleHealthServiceEnabled").Value)) {
                 services.AddHealthChecks()
-                .AddCheck<ServerCycleTaskListHealthCheck>("Server Cycle tasks")
+                //.AddCheck<ServerCycleTaskListHealthCheck>("Server Cycle tasks")
                 .AddSqlServer(DBConn.DatabaseConnectionString, null, "Kontrola připojení k DB ")
                 .AddDbContextCheck<EasyITCenterContext>("Importované DB Schema");
 
@@ -182,7 +182,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     data = new EasyITCenterContext().ServerHealthCheckTaskLists.Where(a => a.Active).ToList();
                 }
 
-                foreach (var item in data) {
+                foreach (ServerHealthCheckTaskList item in data) {
                     try {
                         switch (item.InheritedCheckType) {
                             case "driveSize":

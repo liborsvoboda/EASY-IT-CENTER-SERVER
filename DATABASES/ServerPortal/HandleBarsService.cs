@@ -19,10 +19,6 @@ namespace EasyITCenter.Controllers {
         public string Data { get; set; }
     }
 
-    //githubRepo
-    //https://github.com/Handlebars-Net/Handlebars.Net
-
-
     [AllowAnonymous]
     [Route("/ServerPortalApi")]
     public class HandleBarsService : Controller {
