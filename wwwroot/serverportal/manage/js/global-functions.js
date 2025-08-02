@@ -274,3 +274,10 @@ Gs.Functions.LoadHtmlPage = function (elementId,url) {
         $('#' + elementId).html(data);
     });
 }
+
+Gs.Functions.LoadHtmlPageToFrame = function (elementId, url) {
+    let frame = '<div id=MainWindow data-role="window" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
+        + '<iframe id="IFrameWindow" src="' + url + '" width="100%" height="700" frameborder="0" scrolling="yes" style="width: 100%; height: 100%;" ></iframe>';
+    $('#' + elementId).html(frame);
+  
+}

@@ -7,7 +7,7 @@ function ChangeSource(url) {
     ScrollToTop();
 }
 
-
+function ScrollToTop() { window.scrollTo(0, 0); }
 
 function str2bytes(str) {
     var bytes = new Uint8Array(str.length);

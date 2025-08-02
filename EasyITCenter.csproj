@@ -211,17 +211,16 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="EasyData.Exporters.ClosedXML" Version="1.5.2" />
     <PackageReference Include="EasyData.Exporters.Default" Version="1.5.2" />
     <PackageReference Include="EasyData.Exporters.PdfSharp" Version="1.5.2" />
-    <PackageReference Include="EASYTools.DBEntitySchema" Version="2.1.6" />
-    <PackageReference Include="EASYTools.LicenseGenerator" Version="1.0.0" />
-    <PackageReference Include="EASYTools.LicenseVerify" Version="1.0.0" />
-    <PackageReference Include="EASYTools.MonacoProvider" Version="0.2.2" />
+    <PackageReference Include="EASYTools.DBEntitySchema" Version="2.1.7" />
+    <PackageReference Include="EASYTools.LicenseGenerator" Version="1.0.1" />
+    <PackageReference Include="EASYTools.LicenseVerify" Version="1.0.1" />
+    <PackageReference Include="EASYTools.MonacoProvider" Version="0.2.4" />
     <PackageReference Include="EASYTools.SUMMARY" Version="1.0.0" />
     <PackageReference Include="ErikEJ.EntityFrameworkCore.DgmlBuilder" Version="6.0.0" />
     <PackageReference Include="ExposedObject" Version="2.2.0" />
     <PackageReference Include="ExpressionTree" Version="1.0.2" />
-    <PackageReference Include="FastReport.Compat" Version="1.0.1" />
-    <PackageReference Include="FastReport.OpenSource" Version="1.0.1" />
-    <PackageReference Include="FastReport.OpenSource.Web" Version="1.0.1" />
+    <PackageReference Include="FastReport.OpenSource" Version="2025.2.8" />
+    <PackageReference Include="FastReport.OpenSource.Web" Version="2025.2.8" />
     <PackageReference Include="Fawdlstty.GitServerCore" Version="0.0.3.1" />
     <PackageReference Include="FileContextCore" Version="3.4.0" />
     <PackageReference Include="FluentAssertions.Autofac" Version="6.5.1" />
@@ -419,7 +418,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.SourceLink.Tools" Version="1.1.1" />
     <PackageReference Include="Microsoft.SQL.Server.2016.LocalDB" Version="13.1.4001" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.17" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
     <PackageReference Include="Microsoft.WSMan.Management" Version="7.2.23" />
     <PackageReference Include="Microsoft.WSMan.Runtime" Version="7.2.23" />

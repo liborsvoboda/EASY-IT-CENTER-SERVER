@@ -43,13 +43,13 @@ namespace EasyITCenter.Controllers
                 })) {
 
                     if (!ServerApiServiceExtension.IsLogged()) {
-                        data = await new EasyITCenterContext().PortalApiTableColumnDataLists
+                        data = new EasyITCenterContext().PortalApiTableColumnDataLists
                             .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && a.Public == true && a.Active == true)
-                            .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToListAsync();
+                            .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
                     } else {
-                        data = await new EasyITCenterContext().PortalApiTableColumnDataLists
+                        data = new EasyITCenterContext().PortalApiTableColumnDataLists
                        .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && ( a.Public == true || ( a.UserPrefix == ServerApiServiceExtension.GetUserPrefix() && a.Public == false)) && a.Active == true)
-                       .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToListAsync();
+                       .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
 
                     }
                 }
@@ -73,7 +73,7 @@ namespace EasyITCenter.Controllers
                 })) {
 
                     if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
-                        data = await new EasyITCenterContext().PortalApiTableLists.OrderBy(a => a.Name).ToListAsync();
+                        data = new EasyITCenterContext().PortalApiTableLists.OrderBy(a => a.Name).ToList();
                     }
                 }
             } catch (Exception ex) { }
@@ -113,7 +113,7 @@ namespace EasyITCenter.Controllers
                         });
                     } else {
                         List<PortalApiTableColumnDataList> original = new();
-                        original = await new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == menuData.RecGuid).ToListAsync();
+                        original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == menuData.RecGuid).ToList();
                         
                         List<PortalApiTableColumnDataList> record = new();
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "ParentGuid").Select(a=>a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "ParentGuid", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.ParentGuid, Description = menuData.Description, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
@@ -156,8 +156,8 @@ namespace EasyITCenter.Controllers
                 if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
 
                     List<PortalApiTableColumnDataList> original = new();
-                    string recId = await new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.Id == menuId).Select(a=>a.RecGuid).FirstOrDefaultAsync();
-                    original = await new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == recId).ToListAsync();
+                    string recId = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.Id == menuId).Select(a=>a.RecGuid).FirstOrDefault();
+                    original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == recId).ToList();
 
                     DatabaseContextExtensions.RunTransaction(data, (trans) => {
                         data.PortalApiTableColumnDataLists.DeleteRangeByKey(original);
