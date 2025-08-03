@@ -63,7 +63,7 @@ namespace EasyITCenter.Controllers
         }
 
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet("/ServerPortalApi/GetApiTableList")]
         public async Task<string> GetApiTableList() {
             List<PortalApiTableList> data = new();
@@ -86,7 +86,7 @@ namespace EasyITCenter.Controllers
         }
 
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpPost("/ServerPortalApi/SetApiTableColumnDataList")]
         public async Task<string> SetApiTableColumnDataList([FromBody] MenuData menuData) {
             EasyITCenterContext data = new EasyITCenterContext(); ;
@@ -147,7 +147,7 @@ namespace EasyITCenter.Controllers
         }
 
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpDelete("/ServerPortalApi/DeleteApiTableColumnDataList/{menuId}")]
         public async Task<string> DeleteApiTableColumnDataList(int menuId) {
             EasyITCenterContext data = new EasyITCenterContext();

@@ -20,7 +20,7 @@ namespace EasyITCenter.Controllers {
     }
 
     [AllowAnonymous]
-    [Route("/ServerPortalApi")]
+    [Route("/HandleBarsService")]
     public class HandleBarsService : Controller {
 
         private readonly Microsoft.AspNetCore.Hosting.IWebHostEnvironment _hostingEnvironment;
@@ -35,7 +35,7 @@ namespace EasyITCenter.Controllers {
         /// <param name="codegenRequest"></param>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpPost("/ServerPortalApi/HandleBarsService/GetTemplateCode")]
+        [HttpPost("/HandleBarsService/GetTemplateCode")]
         [Consumes("application/json")]
         public async Task<IActionResult> GetTemplateCode([FromBody] DataToTemplateRequest codegenRequest) {
             try {

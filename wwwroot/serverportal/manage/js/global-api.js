@@ -11,7 +11,7 @@ Gs.Apis.RunServerPostApi =async function (apiPath, jsonData, storageName) {
     Gs.Behaviors.HidePageLoading();
 
     if (result.Status == undefined || result.Status == "success") { return true; }
-    else { Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiSaveFail); return false; }
+    else { Gs.Objects.ShowNotify("alert", result.Status + " " + Gs.Variables.apiMessages.apiSaveFail); return false; }
 }
 
 //Run GET Api Request 
@@ -23,7 +23,7 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName) {
     if (storageName != null) { Metro.storage.setItem(storageName, result); }
     Gs.Behaviors.HidePageLoading();
     if (result.Status == undefined || result.Status == "success") { return true; }
-    else { Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiLoadFail); return false; }
+    else { Gs.Objects.ShowNotify("alert", result.Status + " " + Gs.Variables.apiMessages.apiLoadFail); return false; }
 }
 
 
@@ -33,7 +33,7 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath) {
         method: 'DELETE', headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' }
     }); let result = await response.json();
     if (result.Status == undefined || result.Status == "success") { return true; }
-    else { Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.apiDeleteFail); return false; }
+    else { Gs.Objects.ShowNotify("alert", result.Status + " " + Gs.Variables.apiMessages.apiDeleteFail); return false; }
 }
 
 
