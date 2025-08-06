@@ -49,7 +49,7 @@ namespace EasyITCenter.Controllers {
         [AllowAnonymous]
         [HttpPost("/LicenseService/OnlineActivation")]
         [Consumes("application/json")]
-        public async Task<string> PostLicenseActivator(LicenseCheckRequest record) {
+        public async Task<string> PostLicenseActivator([FromBody] LicenseCheckRequest record) {
             string data = string.Empty; List<SqlParameter> parameters = new(); bool allowed = false; bool catched = false;
             try {
                 if (HttpContext.Connection.RemoteIpAddress != null) {

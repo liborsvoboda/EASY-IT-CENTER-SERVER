@@ -38,7 +38,7 @@ namespace EasyITCenter.Controllers {
 
         [HttpPost("/ServerApi/GeneratorServerServices/DownloadMarkdownFromUrlToStatic")]
         [Consumes("application/json")]
-        public async Task<string> DownloadMarkdownFromUrlToStatic(string markdownUrl) {
+        public async Task<string> DownloadMarkdownFromUrlToStatic([FromBody] string markdownUrl) {
 
             string MdAsHtml = await Markdown.ParseFromUrlAsync(markdownUrl, true, false, false);
             return MdAsHtml;

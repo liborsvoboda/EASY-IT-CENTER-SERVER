@@ -94,11 +94,18 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         internal static void EnableEndpoints(ref IApplicationBuilder app) {
 
+
+
             app.UseEndpoints(endpoints => {
 
                 //EasyData Support
-                if (bool.Parse(DbOperations.GetServerParameterLists("ModuleWebDataManagerEnabled").Value)) { endpoints.MapEasyData(options => { options.UseDbContext<EasyITCenterContext>(); }); }
+                if (bool.Parse(DbOperations.GetServerParameterLists("ModuleWebDataManagerEnabled").Value)) { 
+                    endpoints.MapEasyData(options => { options.UseDbContext<EasyITCenterContext>(); }); 
+                }
 
+                //if (bool.Parse(DbOperations.GetServerParameterLists("ModuleSwaggerApiDocEnabled").Value)) {
+                //    endpoints.MapSwagger();
+                //}
 
                 endpoints.MapControllers();
 

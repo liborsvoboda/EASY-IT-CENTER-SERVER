@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HandlebarsDotNet;
+﻿using HandlebarsDotNet;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Octokit;
 using ScrapySharp.Network;
+using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace EasyITCenter.Controllers {
@@ -37,10 +38,10 @@ namespace EasyITCenter.Controllers {
         [AllowAnonymous]
         [HttpPost("/HandleBarsService/GetTemplateCode")]
         [Consumes("application/json")]
-        public async Task<IActionResult> GetTemplateCode(DataToTemplateRequest codegenRequest) {
+        public async Task<IActionResult> GetTemplateCode([FromBody] DataToTemplateRequest codegenRequestBody) {
             try {
-                var template = Handlebars.Compile(codegenRequest.Template);
-                string? result = template(JsonConvert.DeserializeObject<object>(codegenRequest.Data));
+                var template = Handlebars.Compile(codegenRequestBody.Template);
+                string? result = template(JsonConvert.DeserializeObject<object>(codegenRequestBody.Data));
 
                 return Json(new HandlerResult() { Result = result, Success = true });
             } catch (Exception ex) {

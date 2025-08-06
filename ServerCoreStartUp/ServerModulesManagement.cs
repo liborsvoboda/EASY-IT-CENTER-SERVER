@@ -297,7 +297,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     c.CustomSchemaIds(type => type.FullName);
                     c.ResolveConflictingActions(x => x.First());
                 });
-
+                services.AddSwaggerGenNewtonsoftSupport();
             }
         }
 
@@ -351,7 +351,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
             }
         }
 
+
         /// <summary>
+        /// https://github.com/swagger-api/swagger-codegen
         /// Server Module: Enable Swagger Api Doc Generator And Online Tester
         /// </summary>
         internal static void EnableSwagger(ref IApplicationBuilder app) {
@@ -360,7 +362,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 app.UseSwaggerUI(c => {
                     c.RoutePrefix = DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value.StartsWith("/") ? DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value.Substring(1) : DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value;
                     c.DocumentTitle = EICServer.SwaggerDesc;
-                    c.SwaggerEndpoint(SrvRuntime.OpenApiDescriptionFile, "Server API version " + Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString());
+                    //c.InjectJavascript
+                    //c.InjectStylesheets();
                     c.DocExpansion(DocExpansion.None);
                     c.EnableTryItOutByDefault();
                     c.DisplayRequestDuration();
@@ -377,6 +380,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     c.SupportedSubmitMethods(SubmitMethod.Get,SubmitMethod.Put, SubmitMethod.Delete, SubmitMethod.Head, SubmitMethod.Post);
                     c.UseRequestInterceptor("(request) => { return request; }");
                     c.UseResponseInterceptor("(response) => { return response; }");
+                    c.SwaggerEndpoint(SrvRuntime.OpenApiDescriptionFile, "Server API version " + Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString());
                 });
             }
         }

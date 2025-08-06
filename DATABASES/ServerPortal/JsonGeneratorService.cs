@@ -33,7 +33,7 @@ namespace EasyITCenter.Controllers {
             public string WebRootPath { get; set; }
         }
 
-        public class GetFancyTreeJsonData {
+        public class FancyTreeJsonData {
             public string Title { get; set; }
             public bool Folder { get; set; }
             public bool Checkbox { get; set; }
@@ -43,13 +43,13 @@ namespace EasyITCenter.Controllers {
         [AllowAnonymous]
         [HttpPost("/JsonGeneratorService/GetFancyTreeJsonData")]
         [Consumes("application/json")]
-        public async Task<IActionResult> GetFancyTreeJsonData(GetFancyTreeJsonDataRequest jsonDataRequest) {
+        public async Task<IActionResult> GetFancyTreeJsonData([FromBody] GetFancyTreeJsonDataRequest jsonDataRequest) {
             try {
-                List<string>? loadFiles = null; List<GetFancyTreeJsonData> result = new();
+                List<string>? loadFiles = null; List<FancyTreeJsonData> result = new();
                 loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, jsonDataRequest.WebRootPath), "*.html", SearchOption.TopDirectoryOnly);
 
                 loadFiles.ForEach(htmlFile => { 
-                    result.Add(new GetFancyTreeJsonData() { Title = Path.GetFileName(htmlFile), Checkbox = false, Folder = false, Key = htmlFile.Split(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)[1] });
+                    result.Add(new FancyTreeJsonData() { Title = Path.GetFileName(htmlFile), Checkbox = false, Folder = false, Key = htmlFile.Split(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)[1] });
                 });
 
                 return Json(new HandlerResult() { Result = result, Success = true });

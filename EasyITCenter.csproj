@@ -531,13 +531,13 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Streamx.Linq.SQL.EFCore" Version="6.0.1" />
     <PackageReference Include="Stripe.net" Version="48.0.2" />
     <PackageReference Include="SuperSimpleTcp" Version="3.0.14" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.8.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.3.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="7.3.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.SchemaBuilder" Version="1.6.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.8.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.8.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.3.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.3.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.3.2" />
     <PackageReference Include="System.AppContext" Version="4.3.0" />
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
     <PackageReference Include="System.CommandLine.Hosting" Version="0.4.0-alpha.22272.1" />

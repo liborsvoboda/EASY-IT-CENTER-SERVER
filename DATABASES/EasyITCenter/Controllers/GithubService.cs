@@ -44,7 +44,7 @@ namespace EasyITCenter.Controllers {
         /// <returns></returns>
         [HttpPost("/GithubService/GetGitHubReposList")]
         [Consumes("application/json")]
-        public async Task<IActionResult> GetGitHubReposList(GithubSearchRequest searchRequest) {
+        public async Task<IActionResult> GetGitHubReposList([FromBody] GithubSearchRequest searchRequest) {
             try {
                 GitHubClient client = new GitHubClient(new ProductHeaderValue("EIC&ESB_Groupware"));
                 SearchRepositoriesRequest? gitSearchRequest = new SearchRepositoriesRequest() { PerPage = 200, Language = searchRequest.Language };
@@ -65,7 +65,7 @@ namespace EasyITCenter.Controllers {
         /// <returns></returns>
         [HttpPost("/GithubService/DownloadGitHubRepoReadme")]
         [Consumes("application/json")]
-        public async Task<IActionResult> DownloadGitHubRepoReadme(GithubDownloadRequest downloadRequest) {
+        public async Task<IActionResult> DownloadGitHubRepoReadme([FromBody] GithubDownloadRequest downloadRequest) {
             try {
 
 
@@ -91,7 +91,7 @@ namespace EasyITCenter.Controllers {
         /// <returns></returns>
         [HttpPost("/GithubService/DownloadGitRepo")]
         [Consumes("application/json")]
-        public async Task<IActionResult> DownloadGitRepo(GithubDownloadRequest downloadRequest) {
+        public async Task<IActionResult> DownloadGitRepo([FromBody] GithubDownloadRequest downloadRequest) {
             try {
                 GitHubClient client = new GitHubClient(new ProductHeaderValue("EIC&ESB_Groupware"));
                 SearchRepositoriesRequest? gitSearchRequest = new SearchRepositoriesRequest() { };
