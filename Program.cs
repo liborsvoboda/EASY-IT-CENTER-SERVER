@@ -122,7 +122,7 @@ namespace EasyITCenter {
 
                 //Lets Encrypt
                 if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value) && bool.Parse(DbOperations.GetServerParameterLists("ConfigServerGetLetsEncrypt").Value)) {
-                    webBuilder.UseKestrel(options => { 
+                    webBuilder.UseKestrel(options => {
                         IServiceProvider? appServices = options.ApplicationServices;
                         options.ConfigureHttpsDefaults(h => {
                             h.SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
@@ -134,13 +134,13 @@ namespace EasyITCenter {
 
 
                 if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupHTTPAndHTTPS").Value)) {
-                    webBuilder.UseUrls($"https://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpsPort").Value}",$"http://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpPort").Value}");
+                    webBuilder.UseUrls($"https://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpsPort").Value}", $"http://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpPort").Value}");
                 } else {
                     webBuilder.UseUrls(bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value) ? $"https://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpsPort").Value}" : $"http://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpPort").Value}");
                 }
 
                 webBuilder.UseStartup<Startup>();
-                webBuilder.UseWebRoot(SrvRuntime.WebRoot_path);
+                webBuilder.UseWebRoot(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
                 webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
                 webBuilder.UseStaticWebAssets();
 

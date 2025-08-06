@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Octokit;
 using ScrapySharp.Network;
+using Westwind.AspNetCore.Markdown;
 
 
 namespace EasyITCenter.Controllers {
@@ -35,6 +35,14 @@ namespace EasyITCenter.Controllers {
         }
 
 
-      
+
+        [HttpPost("/ServerApi/GeneratorServerServices/DownloadMarkdownFromUrlToStatic")]
+        [Consumes("application/json")]
+        public async Task<string> DownloadMarkdownFromUrlToStatic(string markdownUrl) {
+
+            string MdAsHtml = await Markdown.ParseFromUrlAsync(markdownUrl, true, false, false);
+            return MdAsHtml;
+        }
+
     }
 }

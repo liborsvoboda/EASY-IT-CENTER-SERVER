@@ -22,7 +22,7 @@
 
         [HttpPost("/EmailService/PostMessenger")]
         [Consumes("application/json")]
-        public async Task<string> PostMessenger([FromBody] SendMailRequest message) {
+        public async Task<string> PostMessenger(SendMailRequest message) {
             try {
                 string? result = null;
                 if (!string.IsNullOrWhiteSpace(message.Content)) result = CoreOperations.SendEmail(message, true);
@@ -33,7 +33,7 @@
 
         [HttpPost("/EmailService/PostMassMesseger")]
         [Consumes("application/json")]
-        public async Task<string> PostMassMesseger([FromBody] List<SendMailRequest> messages) {
+        public async Task<string> PostMassMesseger(List<SendMailRequest> messages) {
             try {
                 if (bool.Parse(DbOperations.GetServerParameterLists("ServiceEnableMassEmail").Value)) {
                     CoreOperations.SendMassEmail(messages);

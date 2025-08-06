@@ -19,15 +19,15 @@ namespace EasyITCenter.Controllers {
         /// Scheduler Server Controls
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet("/AdministrationService/SchedulerStart")]
         public async Task<IActionResult> ServerSchedulerStart() {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
                     if (SrvRuntime.SrvScheduler != null) { await SrvRuntime.SrvScheduler.ResumeAll(); }
                     return Ok(JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty }));
                 }
-                else { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
+                else { return BadRequest(new ResultMessage() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
             } catch (Exception ex) { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
@@ -35,15 +35,15 @@ namespace EasyITCenter.Controllers {
         /// Scheduler Server Stop
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet("/AdministrationService/SchedulerStop")]
         public async Task<IActionResult> ServerSchedulerStop() {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
                     if (SrvRuntime.SrvScheduler != null) { await SrvRuntime.SrvScheduler.PauseAll(); }
                     return Ok(JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty }));
                 }
-                else { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
+                else { return BadRequest(new ResultMessage() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
             } catch (Exception ex) { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
@@ -55,12 +55,9 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/AdministrationService/SchedulerStatus")]
         public async Task<IActionResult> ServerSchedulerStatus() {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
-                    return Ok(JsonSerializer.Serialize(new ResultMessage() { 
-                        Status = (SrvRuntime.SrvScheduler == null || await SrvRuntime.SrvScheduler.IsTriggerGroupPaused("AutoScheduler"))
-                        ? ServerStatusTypes.Stopped.ToString() : ServerStatusTypes.Running.ToString(), ErrorMessage = string.Empty }));
-                }
-                else { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DbOperations.DBTranslate("YouDoesNotHaveRights") }); }
+                return Ok(JsonSerializer.Serialize(new ResultMessage() { 
+                    Status = (SrvRuntime.SrvScheduler == null || await SrvRuntime.SrvScheduler.IsTriggerGroupPaused("AutoScheduler"))
+                    ? ServerStatusTypes.Stopped.ToString() : ServerStatusTypes.Running.ToString(), ErrorMessage = string.Empty }));
             } catch (Exception ex) { return BadRequest(new ResultMessage() { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
@@ -69,11 +66,11 @@ namespace EasyITCenter.Controllers {
         /// Core Server Restart Control Api
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet("/AdministrationService/CoreServerRestart")]
         public async Task<string> ServerRestart() {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
                     EICServer.RestartServer();
 
                     return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("serverRestarting") });
@@ -87,11 +84,11 @@ namespace EasyITCenter.Controllers {
         /// FtpServerStart Api
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet("/AdministrationService/FtpServerStart")]
         public async Task<string> FtpServerStart() {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
                     if (SrvRuntime.ServerFTPProvider != null) {
                         SrvRuntime.FTPSrvStatus = true;
                         await SrvRuntime.ServerFTPProvider.StartAsync(); 
@@ -107,11 +104,11 @@ namespace EasyITCenter.Controllers {
         /// FtpServerStop Api
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet("/AdministrationService/FtpServerStop")]
         public async Task<string> FtpServerStop() {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
                     if (SrvRuntime.ServerFTPProvider != null) {
                         SrvRuntime.FTPSrvStatus = false;
                         await SrvRuntime.ServerFTPProvider.StopAsync();

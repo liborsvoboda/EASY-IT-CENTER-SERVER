@@ -1,18 +1,38 @@
-<!DOCTYPE html>
-<html>
+﻿<html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-	<title>Fancytree</title>
-</head>
+	<meta name="robots" content="noindex,follow">
+	<link href="./dist/skin-win8/ui.fancytree.min.css" rel="stylesheet">
 
-<body class="example">
-	<h1>fancytree.js</h1>
-	<ul>
-	<li><a href="demo/index.html">Example Browser</a>
-	<li><a href="doc/jsdoc/index.html">API Documentation</a>
-	<li><a href="https://github.com/mar10/fancytree">Project home</a>
-	<li><a href="test/unit/">Unit tests</a>
-	<li><a href="test/triage">Triage</a>
-	</ul>
+	<script src="../jquery/jquery-3.6.0.min.js"></script>
+	<script src="./jquery.fancytree-all.min.js"></script>
+	<title>Fancytree - Browser</title>
+	<script type="text/javascript">
+		$(function () {
+			$("#tree").fancytree({
+                checkbox: false,
+                source: {
+                    url: "/datatree.json"
+				},
+                activate: function (event, data) {
+                    $("#statusLine").text(event.type + ": " + data.node);
+				},
+                checkbox: function (event, data) {
+                    // Hide checkboxes for folders
+                    return data.node.isFolder() ? false : true;
+				},
+                tooltip: function (event, data) {
+                    // Create dynamic tooltips
+                    return data.node.title + " (" + data.node.key + ")";
+                },
+			  });
+			// Note: Loading and initialization may be asynchronous, so the nodes may not be accessible yet.
+		});
+	</script>
+</head>
+<body>
+	<div id="tree"></div>
+	<div id="FrameWindow"></div>
 </body>
+
 </html>
