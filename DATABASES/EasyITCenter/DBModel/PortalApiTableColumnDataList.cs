@@ -10,6 +10,7 @@ namespace EasyITCenter.DBModel
     [Index("RecGuid", Name = "IX_PortalApiTableColumnDataList")]
     [Index("ApiTableColumnName", "RecGuid", Name = "IX_PortalApiTableColumnDataList_1", IsUnique = true)]
     [Index("ApiTableColumnName", "RecGuid", Name = "IX_PortalApiTableColumnDataList_2")]
+    [Index("ApiTableName", Name = "IX_PortalApiTableColumnDataList_3")]
     public partial class PortalApiTableColumnDataList
     {
         [Key]
