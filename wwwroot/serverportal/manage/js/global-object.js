@@ -1,12 +1,13 @@
 ﻿
 Gs.Objects.ShowToolPanel = function (close) {
-    $("#UserAutomaticTranslate").val('checked')[0].checked = Metro.storage.getItem('UserAutomaticTranslate', null);
+    $("#EnableAutoTranslate").val('checked')[0].checked = Metro.storage.getItem('UserSettingList', null).EnableAutoTranslate;
     if (close) { Metro.bottomsheet.close($('#ToolPanel')); } else {
         if (Metro.bottomsheet.isOpen($('#ToolPanel'))) { Metro.bottomsheet.close($('#ToolPanel')); }
         else { Metro.bottomsheet.open($('#ToolPanel')); }
     }
 }
 
+//TODO udelat menu vypis existujicich id a jejich objekty
 
 //Global Tool Panel
 Gs.Objects.CreateToolPanel = function () {
@@ -17,18 +18,29 @@ Gs.Objects.CreateToolPanel = function () {
     html += '<li class="fg-black"><A href="#_toolTranslate">Translate</A> </li>';
     html += '<li class="fg-black"><A href="#_toolUserSet">User Setting</A> </li>';
     html += '<li class="fg-black"><A href="#_toolRadio">Radio</A></li>';
+    html += '<li class="fg-black"><A href="#_toolVideo">Video</A></li>';
     html += '</ul>';
-    html += '<DIV id=_toolTranslate>';
+    html += '<DIV id=_toolTranslate class="d-contents" style="display: contents !important;">';
     //html += '<div class="w-100 text-left"> <audio id="radio" class="light bg-transparent" data-role="audio-player" data-src="/server-integrated/razor-pages/serverportal/media/hotel_california.mp3" data-volume=".5"></audio> </div>';
     html += '<div class="w-100 text-left" style="z-index: 1000000;"><div id="google_translate_element"></div></div>';
     html += '<div class="w-100 d-inline-flex"><div class="w-75 text-left">';
-    html += '<input id="UserAutomaticTranslate" type="checkbox" data-role="checkbox" data-cls-caption="fg-cyan text-bold" data-caption="Auto Translate" onchange=Gs.Behaviors.UserChangeTranslateSetting(); checked >';
+    html += '<input id="EnableAutoTranslate" type="checkbox" data-role="checkbox" data-cls-caption="fg-cyan text-bold" data-caption="Auto Translate" onchange=Gs.Behaviors.SetUserSettings(); checked >';
     html += '</div><div class="w-25 mt-1 text-right" style="max-width:25% !important;"><button class="button secondary mini" style="max-width:100% !important;" onclick=Gs.Behaviors.CancelTranslation(); >Cancel Translate</button></div></div>';
     html += '</div>';
-    html += '<DIV id=_toolUserSet><DIV class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"><DIV class="form-group" ><INPUT id=UserSetEnableShowDesc onchange=Gs.Behaviors.UpdateUserSettings()  style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Enable Show Description"> </DIV></DIV></div>';
+
+    html += '<DIV id=_toolUserSet>';
+    html += '<DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
+    html += '<DIV class="form-group" > <INPUT id=EnableShowDescription onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Enable Show Description" > </DIV ></DIV > ';
+    html += '<DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
+    html += '<DIV class="form-group" > <INPUT id=RememberLastJson onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Remember Last JSON" > </DIV ></DIV > ';
+    html += '<DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
+    html += '<DIV class="form-group" > <INPUT id=RememberLastHandleBar onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Remember Last HandleBar" > </DIV ></DIV > ';
+
     html += '<DIV id=_toolRadio></div>';
 
-    html += '</div></div>'
+    html += '<DIV id=_toolVideo></div>';
+
+    html += '</div></div>';
     //html += '<div class="d-flex w-100" title="Theme">';
     //let themes = [
     //    ["#585b5d", "darcula.css?white"], ["#AF0015", "red-alert.css?white"], ["#690012", "red-dark.css?white"], ["#0CA9F2", "sky-net.css?white"],
@@ -43,6 +55,16 @@ Gs.Objects.CreateToolPanel = function () {
     injectToolPanel.innerHTML = html;
     document.body.append(injectToolPanel);
 };
+
+Gs.Objects.ShowLoginPage = function () {
+    let htnlContent = '<DIV class=text-center><WINDOW><DIV class="hero hero-bg 1bg-brand-secondary add-neb"><DIV class=container><DIV class=row>';
+    htnlContent += '<FORM id=loginform class="login-form bg-white fg-darkBlue p-6 mx-auto border bd-default win-shadow" method=post action=javascript: data-role="validator" data-on-validate-form="ValidateForm" data-on-error-form="InvalidForm" data-clear-invalid="2000"><SPAN class="mif-vpn-lock mif-4x place-right" style="MARGIN-TOP: -10px"></SPAN>';
+    htnlContent += '<H2 class=text-light>EIC&ESB Portal</H2>'
+    htnlContent += '<DIV class=form-group><INPUT id=usernameId class=input style="HEIGHT: auto" maxLength=50 data-role="input" data-validate="required" placeholder="Insert Username..." data-prepend="<span class=\'mif-envelop\'>"> </DIV>';
+    htnlContent += '<DIV class=form-group><INPUT id=passwordId type=password data-role="input" data-validate="required minlength=6" placeholder="Insert Password..." data-prepend="<span class=\'mif-key\'>"> </DIV>';
+    htnlContent += '<DIV class="form-group mt-10"><INPUT class=place-right type=checkbox data-role="checkbox" data-caption="Remember"><BUTTON class="button shadowed">Přihlásit</BUTTON> </DIV></FORM></DIV></DIV></DIV></WINDOW></DIV>';
+    document.getElementById("FrameWindow").innerHTML = htnlContent;
+}
 
 
 //Blocked IP Info Panel
@@ -159,17 +181,6 @@ Gs.Objects.GenerateMenu = function () {
     });
 }
 
-
-
-Gs.Objects.ShowLoginPage = function () {
-    let htnlContent = '<DIV class=text-center><WINDOW><DIV class="hero hero-bg 1bg-brand-secondary add-neb"><DIV class=container><DIV class=row>';
-    htnlContent += '<FORM id=loginform class="login-form bg-white fg-darkBlue p-6 mx-auto border bd-default win-shadow" method=post action=javascript: data-role="validator" data-on-validate-form="ValidateForm" data-on-error-form="InvalidForm" data-clear-invalid="2000"><SPAN class="mif-vpn-lock mif-4x place-right" style="MARGIN-TOP: -10px"></SPAN>';
-    htnlContent += '<H2 class=text-light>EIC&ESB Portal</H2>'
-    htnlContent += '<DIV class=form-group><INPUT id=usernameId class=input style="HEIGHT: auto" maxLength=50 data-role="input" data-validate="required" placeholder="Insert Username..." data-prepend="<span class=\'mif-envelop\'>"> </DIV>';
-    htnlContent += '<DIV class=form-group><INPUT id=passwordId type=password data-role="input" data-validate="required minlength=6" placeholder="Insert Password..." data-prepend="<span class=\'mif-key\'>"> </DIV>';
-    htnlContent += '<DIV class="form-group mt-10"><INPUT class=place-right type=checkbox data-role="checkbox" data-caption="Remember"><BUTTON class="button shadowed">Přihlásit</BUTTON> </DIV></FORM></DIV></DIV></DIV></WINDOW></DIV>';
-    document.getElementById("FrameWindow").innerHTML = htnlContent;
-}
 
 
 Gs.Objects.ShowNotify = function (type, message) {

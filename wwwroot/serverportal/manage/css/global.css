@@ -650,3 +650,7 @@ body {
     float: right;
     margin-right: 20px;
 }
+
+.d-contents {
+    display: contents !important;
+}

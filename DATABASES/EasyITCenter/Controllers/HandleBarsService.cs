@@ -43,9 +43,9 @@ namespace EasyITCenter.Controllers {
                 var template = Handlebars.Compile(codegenRequestBody.Template);
                 string? result = template(JsonConvert.DeserializeObject<object>(codegenRequestBody.Data));
 
-                return Json(new HandlerResult() { Result = result, Success = true });
+                return base.Json(new WebClasses.JsonResult() { Result = result, Status = DBResult.success.ToString() });
             } catch (Exception ex) {
-                return Json(new HandlerResult() { Result = DataOperations.GetErrMsg(ex), Success = false });
+                return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
             }
         }
 

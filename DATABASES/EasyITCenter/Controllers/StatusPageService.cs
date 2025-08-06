@@ -22,7 +22,10 @@ namespace EasyITCenter.Controllers {
         }
 
 
-
+        /// <summary>
+        /// TODO měli jste na mysli: seznam adres serveru - všech jsou zabezpečené
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("/StatusPageService/404NonExistPage")]
         public ContentResult NonExistPage() {
 
@@ -36,6 +39,8 @@ namespace EasyITCenter.Controllers {
                 return base.Content("Missing \"404NonExistPage\" Template 404 in: Generator Dynamic Wesites.");
             }
         }
+
+
 
         [HttpGet("/StatusPageService/401UnauthorizedPage")]
         public ContentResult UnauthorizedPage() {

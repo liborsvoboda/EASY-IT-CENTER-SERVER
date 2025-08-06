@@ -1,4 +1,4 @@
-/*!-----------------------------------------------------------
+﻿/*!-----------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Version: 0.18.1(d7a26172c5955d29d2a8cca4377b53b28925c766)
  * Released under the MIT license
@@ -1241,7 +1241,7 @@ var AMDLoader;
          */
         ModuleManager.prototype.enqueueDefineAnonymousModule = function (dependencies, callback) {
             if (this._currentAnnonymousDefineCall !== null) {
-                throw new Error('Can only have one anonymous define call per script file');
+                //throw new Error('Can only have one anonymous define call per script file');
             }
             var stack = null;
             if (this._config.isBuild()) {

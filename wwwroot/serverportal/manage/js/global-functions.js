@@ -138,7 +138,7 @@ Gs.Functions.ShowSource = function () {
     source += "</html>";
     source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     source = "<pre>" + source + "</pre>";
-    sourceWindow = window.open('', 'Source of page', 'height=800,width=800,scrollbars=1,resizable=1');
+    sourceWindow = window.open('', 'Sorce code', 'height=800,width=1000,scrollbars=1,resizable=1');
     sourceWindow.document.write(source);
     sourceWindow.document.close();
     if (window.focus) sourceWindow.focus();
@@ -151,7 +151,7 @@ Gs.Functions.ShowFrameSource = function () {
     source += "</html>";
     source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     source = "<pre>" + source + "</pre>";
-    sourceWindow = window.open('', 'Interaktnivní Kód', 'height=800,width=800,scrollbars=1,resizable=1');
+    sourceWindow = window.open('', 'Sorce code', 'height=800,width=1000,scrollbars=1,resizable=1');
     sourceWindow.document.write(source);
     sourceWindow.document.close();
     if (window.focus) sourceWindow.focus();
@@ -276,7 +276,7 @@ Gs.Functions.LoadHtmlPage = function (elementId,url) {
 }
 
 Gs.Functions.LoadHtmlPageToFrame = function (elementId, url) {
-    let frame = '<div id=MainWindow data-role="window" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
+    let frame = '<div id=MainWindow data-role="window" data-custom-buttons="WindowButtons" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
         + '<iframe id="IFrameWindow" src="' + url + '" width="100%" height="700" frameborder="0" scrolling="yes" style="width: 100%; height: 100%;" ></iframe>';
     $('#' + elementId).html(frame);
   

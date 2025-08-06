@@ -1,31 +1,10 @@
 ﻿namespace EasyITCenter.WebClasses {
 
-    public enum Color {
-        Primary,
-        Info,
-        Default,
-        Warning,
-        Danger
-    }
 
-    public enum MenuType {
-        Header,
-        Home,
-        Link,
-        Tree
-    }
-
-    public enum PageAlertType {
-        Error,
-        Info,
-        Warning,
-        Success
-    }
-
-    public class HandlerResult {
-        public bool Success { get; set; }
+    public class JsonResult {
+        public string Status { get; set; }
         public object Result { get; set; }
-        public string Message { get; set; }
+        public string ErrorMessage { get; set; }
     }
 
     /// <summary>

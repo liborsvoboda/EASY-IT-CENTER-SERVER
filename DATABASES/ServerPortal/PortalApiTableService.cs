@@ -28,13 +28,13 @@ namespace EasyITCenter.Controllers
 
 
 
-    [Route("ServerPortalApi")]
+    [Route("PortalApiTableService")]
     [ApiController]
     public class PortalApiTableService : ControllerBase
     {
 
         [AllowAnonymous]
-        [HttpGet("/ServerPortalApi/GetApiTableDataList/{tablename}")]
+        [HttpGet("/PortalApiTableService/GetApiTableDataList/{tablename}")]
         public async Task<string> GetApiTableDataList(string tablename) {
             List<PortalApiTableColumnDataList> data = new();
             try {
@@ -64,7 +64,7 @@ namespace EasyITCenter.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet("/ServerPortalApi/GetApiTableList")]
+        [HttpGet("/PortalApiTableService/GetApiTableList")]
         public async Task<string> GetApiTableList() {
             List<PortalApiTableList> data = new();
             try {
@@ -87,7 +87,7 @@ namespace EasyITCenter.Controllers
 
 
         [AllowAnonymous]
-        [HttpPost("/ServerPortalApi/SetApiTableColumnDataList")]
+        [HttpPost("/PortalApiTableService/SetApiTableColumnDataList")]
         public async Task<string> SetApiTableColumnDataList([FromBody] MenuData menuData) {
             EasyITCenterContext data = new EasyITCenterContext(); ;
             try {
@@ -148,7 +148,7 @@ namespace EasyITCenter.Controllers
 
 
         [AllowAnonymous]
-        [HttpDelete("/ServerPortalApi/DeleteApiTableColumnDataList/{menuId}")]
+        [HttpDelete("/PortalApiTableService/DeleteApiTableColumnDataList/{menuId}")]
         public async Task<string> DeleteApiTableColumnDataList(int menuId) {
             EasyITCenterContext data = new EasyITCenterContext();
             try {

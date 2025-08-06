@@ -7,16 +7,6 @@ let Gs = {
     Apis: {},
     Variables: {
         monacoEditorList :[],
-        apiMessages :{
-            apiSaveSuccess: "Saving Data was Saved Sucessfully",
-            apiSaveFail: "Saving Data was Failed",
-            apiLoadSuccess: "Saving Data was Saved Sucessfully",
-            apiLoadFail: "Saving Data was Failed",
-            incorectLogin: "Incorect Name or Password",
-            apiDeleteSuccess: "Data was Deleted",
-            apiDeleteFail: "Data Delete Failed"
-
-        },
         notifySetting :{
             notifyWidth: 300,
             notifyDuration: 1000,
@@ -37,11 +27,49 @@ let Gs = {
         ],
         UserSettingList: {
             EnableAutoTranslate: false,
-            EnableShowDescription: true
-        }
+            EnableShowDescription: true,
+            RememberLastJson: true,
+            RememberLastHandleBar: true,
+        },
     }
 }
-
+window.WindowButtons = [
+    {
+        html: "<span class='mif-file-code' title='Show Window Code'></span>",
+        cls: "warning",
+        onclick: "Gs.Behaviors.ShowWindowCode()"
+    },
+    {
+        html: "<span class='mif-help' title='Show Menu Help'></span>",
+        cls: "sys-button",
+        onclick: "alert('You press user button')"
+    },
+    {
+        html: "<span class='mif-import-export' title='Export'></span>",
+        cls: "sys-button",
+        onclick: "alert('You press user button')"
+    },
+    {
+        html: "<span class='mif-chat' title='Start Chat'></span>",
+        cls: "sys-button",
+        onclick: "alert('You press user button')"
+    },
+    {
+        html: "<span class='mif-language' title='Translate'></span>",
+        cls: "sys-button",
+        onclick: "alert('You press user button')"
+    },
+    {
+        html: "<span class='mif-search' title='Search'></span>",
+        cls: "sys-button",
+        onclick: "alert('You press user button')"
+    },
+    {
+        html: "<span class='mif-video-camera' title='Record Video'></span>",
+        cls: "sys-button",
+        onclick: "alert('You press user button')"
+    }
+]
 
 
 // CZECH DISTRIBUTION GroupWare-Solution.Eu && KlikneteZde.CZ
@@ -60,7 +88,6 @@ Gs.Behaviors.ChangeSchemeTo = function (n) {
 //Set Default Storage Values
 Metro.storage.setItem('BackendServerAddress', window.location.origin);
 Metro.storage.setItem('DetectedLanguage', (navigator.language || navigator.userLanguage).substring(0, 2));
-if (Metro.storage.getItem('UserAutomaticTranslate', null) == null) { Metro.storage.setItem('UserAutomaticTranslate', false); }
 if (Metro.storage.getItem('WebScheme', null) == null) {
     Metro.storage.setItem('WebScheme', "sky-net.css");
     Gs.Behaviors.ChangeSchemeTo(Metro.storage.getItem('WebScheme', null));

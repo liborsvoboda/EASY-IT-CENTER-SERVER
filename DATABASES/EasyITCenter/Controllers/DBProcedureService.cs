@@ -104,7 +104,7 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <param name="procedureName"></param>
         /// <returns></returns>
-        [HttpGet("/DBProcedureService/SpProcedure/Message/{procedureName}")]
+        [HttpGet("/DBProcedureService/SpProcedure/ErrorMessage/{procedureName}")]
         public async Task<string> GetSystemOperationsList(string procedureName) {
             List<CustomMessageList> data = new List<CustomMessageList>();
             data = new EasyITCenterContext().EasyITCenterCollectionFromSql<CustomMessageList>($"EXEC {procedureName};");

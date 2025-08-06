@@ -56,9 +56,9 @@ namespace EasyITCenter.Controllers {
                     result.Add(new FancyTreeJsonData() { title = Path.GetFileNameWithoutExtension(htmlFile), checkbox = false, folder = false, key = htmlFile.Split(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)[1] });
                 });
 
-                return Json(new HandlerResult() { Result = result, Success = true });
+                return base.Json(new WebClasses.JsonResult() { Result = result, Status = DBResult.success.ToString() });
             } catch (Exception ex) {
-                return Json(new HandlerResult() { Result = DataOperations.GetErrMsg(ex), Success = false });
+                return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
             }
         }
 

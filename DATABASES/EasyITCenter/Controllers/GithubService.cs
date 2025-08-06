@@ -50,9 +50,9 @@ namespace EasyITCenter.Controllers {
                 SearchRepositoriesRequest? gitSearchRequest = new SearchRepositoriesRequest() { PerPage = 200, Language = searchRequest.Language };
                 SearchRepositoryResult? sa = await client.Search.SearchRepo(gitSearchRequest);
 
-                return Json(new HandlerResult() { Result = new { sa.Items }, Success = true });
+                return base.Json(new WebClasses.JsonResult() { Result = new { sa.Items }, Status = DBResult.success.ToString() });
             } catch (Exception ex) {
-                return new ContentResult() { Content = DataOperations.GetErrMsg(ex), StatusCode = StatusCodes.Status200OK };
+                return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
             }
         }
 
@@ -76,9 +76,9 @@ namespace EasyITCenter.Controllers {
                     (await client.Repository.Content.GetReadme(downloadRequest.RepoUrl.ToLower().Split("github.com/")[1].Split("/")[0], downloadRequest.RepoUrl.ToLower().Replace(".git","").Split("/").Last())).Content
                     : await client.Repository.Content.GetReadmeHtml(downloadRequest.RepoUrl.ToLower().Split("github.com/")[1].Split("/")[0], downloadRequest.RepoUrl.ToLower().Replace(".git", "").Split("/").Last());
 
-                return Json(new HandlerResult() { Result = new { sa }, Success = true });
+                return base.Json(new WebClasses.JsonResult() { Result = new { sa }, Status = DBResult.success.ToString() });
             } catch (Exception ex) {
-                return new ContentResult() { Content = DataOperations.GetErrMsg(ex), StatusCode = StatusCodes.Status200OK };
+                return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
             }
         }
 
@@ -97,8 +97,8 @@ namespace EasyITCenter.Controllers {
                 SearchRepositoriesRequest? gitSearchRequest = new SearchRepositoriesRequest() { };
                 byte[]? sa = await client.Repository.Content.GetArchive(downloadRequest.RepoUrl.ToLower().Split("github.com/")[1].Split("/")[0], downloadRequest.RepoUrl.ToLower().Replace(".git", "").Split("/").Last()); 
 
-                return Json(new HandlerResult() { Result = new { sa }, Success = true });
-                } catch (Exception ex) { return new ContentResult() { Content = DataOperations.GetErrMsg(ex), StatusCode = StatusCodes.Status200OK };
+                return base.Json(new WebClasses.JsonResult() { Result = new { sa }, Status = DBResult.success.ToString() });
+                } catch (Exception ex) { return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
             }
         }
 

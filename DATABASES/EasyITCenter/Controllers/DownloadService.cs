@@ -31,7 +31,7 @@ namespace EasyITCenter.Controllers {
             ScrapingBrowser? browser = new ScrapingBrowser();
             WebPage? resultsPage = await browser.NavigateToPageAsync(new Uri(url));
 
-            return Json(new HandlerResult() { Result = new { resultsPage.Html.InnerHtml }, Success = true });
+            return base.Json(new WebClasses.JsonResult() { Result = new { resultsPage.Html.InnerHtml }, Status = DBResult.success.ToString() });
         }
 
 

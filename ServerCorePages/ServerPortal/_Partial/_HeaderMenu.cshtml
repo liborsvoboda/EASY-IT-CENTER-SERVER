@@ -98,15 +98,15 @@
                 </div>
                 <div class="bg-white d-flex flex-justify-between flex-equal-items p-2">
                     <button class="button flat-button">News</button>
-                    <button class="button flat-button">Settings</button>
+                    <button class="button flat-button">Notes</button>
                     <button class="button flat-button">Friends</button>
                 </div>
                 <div class="bg-white d-flex flex-justify-between flex-equal-items p-2 bg-light">
                 @{ if(@name != null) {
                     <button class="button mr-1">Profile</button>
-                    <button class="button ml-1">Sign out</button>
+                    <button class="button ml-1" onclick=Gs.Behaviors.SignOut(); >Sign out</button>
                 } else {
-                    <button class="button mr-1" onclick=Gs.Objects.ShowLoginPage() >Login</button>
+                    <button class="button mr-1" onclick=Gs.Objects.ShowLoginPage(); >Login</button>
                     <button class="button ml-1">Registration</button>
                 }}
                 </div>

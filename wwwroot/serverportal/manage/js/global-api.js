@@ -60,7 +60,7 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName) {
             Gs.Behaviors.HidePageLoading();
 
             if (result.Status == undefined || result.Status == "success") { return true; }
-            else { Gs.Objects.ShowNotify("alert", result.Status + " " + Gs.Variables.apiMessages.apiSaveFail); return false; }
+            else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
         error: function (err) {
             Gs.Behaviors.HidePageLoading();
@@ -90,7 +90,7 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName) {
             Gs.Behaviors.HidePageLoading();
 
             if (result.Status == undefined || result.Status == "success") { return true; }
-            else { Gs.Objects.ShowNotify("alert", result.Status + " " + Gs.Variables.apiMessages.apiLoadFail); return false; }
+            else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
         error: function (err) {
             Gs.Behaviors.HidePageLoading();
@@ -115,7 +115,7 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath) {
             Gs.Behaviors.HidePageLoading();
 
             if (result.Status == undefined || result.Status == "success") { return true; }
-            else { Gs.Objects.ShowNotify("alert", result.Status + " " + Gs.Variables.apiMessages.apiDeleteFail); return false; }
+            else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
         error: function (err) {
             Gs.Behaviors.HidePageLoading();

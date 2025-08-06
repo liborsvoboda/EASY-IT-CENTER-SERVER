@@ -6,9 +6,10 @@ Gs.Behaviors.PortalStartup =async function () {
 
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
     await Gs.Apis.RunServerPostApi("DBProcedureService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
-    await Gs.Apis.RunServerGetApi("ServerPortalApi/GetApiTableDataList/PortalMenu", "PortalMenu");
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenu");
 
     Gs.Objects.GenerateMenu();
+    Gs.Behaviors.LoadUserSettings();
 }
 
 
@@ -24,13 +25,6 @@ Gs.Behaviors.ShowPageLoading = function () {
         }
     }
     pageLoader = Metro.activity.open({ type: 'atom', style: 'dark', overlayClickClose: true, /*overlayColor: '#fff', overlayAlpha: 1*/ });
-}
-
-Gs.Behaviors.UserChangeTranslateSetting = function () {
-    let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))
-    userSetting.EnableAutoTranslate = $("#UserAutomaticTranslate").val('checked')[0].checked;
-    Metro.storage.setItem('UserSettingList', userSetting);
-    if ($("#UserAutomaticTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
 }
 
 
@@ -67,8 +61,9 @@ Gs.Behaviors.GoogleTranslateElementInit = function () {
 Gs.Behaviors.CancelTranslation = function () {
     let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)));
     userSetting.EnableAutoTranslate = false;
+    $("#EnableAutoTranslate")[0].checked = userSetting.EnableAutoTranslate;
     Metro.storage.setItem('UserSettingList', userSetting);
-    $("#UserAutomaticTranslate")[0].checked = false;
+    
 
     setTimeout(function () {
         let selectElement = document.querySelector('#google_translate_element select');
@@ -105,35 +100,55 @@ Gs.Behaviors.DisableScroll = function () {
 }
 
 
-//Menu Behaviors
-Gs.Behaviors.SetLink = function (htmlContentId, content) {
+Gs.Behaviors.LoadUserSettings = function () {
+    Gs.Behaviors.ElementSetCheckBox("#EnableAutoTranslate", Gs.Variables.UserSettingList.EnableAutoTranslate);
+    Gs.Behaviors.ElementSetCheckBox("#EnableShowDescription", Gs.Variables.UserSettingList.EnableShowDescription);
+    Gs.Behaviors.ElementSetCheckBox("#RememberLastHandleBar", Gs.Variables.UserSettingList.RememberLastHandleBar);
+    Gs.Behaviors.ElementSetCheckBox("#RememberLastJson", Gs.Variables.UserSettingList.RememberLastJson);
+}
+
+
+Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Gs.Variables.monacoEditorList = [];
+
+    //set 
+    Gs.Behaviors.LoadUserSettings();
+    //and reset menu data
+    if (!Metro.storage.getItem('UserSettingList', null).RememberLastHandleBar) { Metro.storage.delItem("HandlebarCode"); }
+    if (!Metro.storage.getItem('UserSettingList', null).RememberLastJson) { Metro.storage.delItem("JsonGeneratorService"); }
+    Metro.storage.delItem("SelectedMenuId");
+    Metro.storage.delItem('ApiTableList');
+    Metro.storage.delItem("SelectedMenu");
+    
+
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
+    return menu;
+}
 
-    $("#FrameWindow").load(Metro.storage.getItem('BackendServerAddress', null) + "/" + content)
+
+//Menu Behaviors
+Gs.Behaviors.SetLink = function (htmlContentId, content) {
+    let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
+
+    $("#FrameWindow").load(Metro.storage.getItem('ApiOriginSuffix', null) + content)
 }
 
 
 Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
-    Gs.Variables.monacoEditorList = [];
-    Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
-    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
-    Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
+    let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
 
-    document.getElementById("FrameWindow").innerHTML = '<div id=MainWindow data-role="window" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" class="h-100" data-btn-close="false" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
+    document.getElementById("FrameWindow").innerHTML = '<div id=MainWindow data-role="window" data-custom-buttons="WindowButtons" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" class="h-100" data-btn-close="false" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
     + '<iframe id="IFrameWindow" src="' + content + '" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe></div>';
 }
 
 
 Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
-    Gs.Variables.monacoEditorList = [];
-    Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
-    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
-    Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
+    let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
+
     document.getElementById("FrameWindow").innerHTML =
-        '<div id=MainWindow data-role="window" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
+        '<div id=MainWindow data-role="window" data-custom-buttons="WindowButtons" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
          + menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent;
 
     if (menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent != null) {
@@ -151,16 +166,13 @@ Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
 
 //TODO to IFRAME
 Gs.Behaviors.SetExternalContent = function (htmlContentId, jsContentId, cssContentId) {
-    Gs.Variables.monacoEditorList = [];
-    Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
-    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
-    Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
+    let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
 
     document.getElementById("FrameWindow").innerHTML = '<iframe id="IFrameWindow" src="' + menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';
 
     if (menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent != null) {
         let script = "<script id='InheritScript' charset='utf-8' type='text/javascript'> " + menu.filter(menuItem => { return menuItem.JsContentId == jsContentId })[0].JsContent + " </script>";
-        $("#IFrameWindow").contents().find("body").append(script)
+        $("#IFrameWindow").contents().find("body").append(script);
     }
     if (menu.filter(menuItem => { return menuItem.CssContentId == cssContentId })[0].CssContent != null) {
         let style = document.createElement('style'); style.id = "InheritStyle";
@@ -223,14 +235,31 @@ Gs.Behaviors.InfoBoxOpenClose = function (elementId) {
 }
 
 
-Gs.Behaviors.UpdateUserSettings = function () {
-    let userSetting = Metro.storage.getItem('UserSettingList', null);
+Gs.Behaviors.SetUserSettings = function () {
+    let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))
+    userSetting.EnableAutoTranslate = $("#EnableAutoTranslate").val('checked')[0].checked;
     userSetting.EnableShowDescription = $("#UserSetEnableShowDesc")[0].checked;
+    userSetting.RememberLastHandleBar = $("#RememberLastHandleBar")[0].checked;
+    userSetting.RememberLastJson = $("#RememberLastJson")[0].checked;
+
 
     Metro.storage.setItem('UserSettingList', userSetting);
+    if ($("#EnableAutoTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
 }
 
 
-Gs.Behaviors.LoadUserSettings = function () {
-    $("#UserSetEnableShowDesc").val('checked')[0].checked = Gs.Variables.UserSettingList.EnableShowDescription;
+Gs.Behaviors.SignOut = function () {
+    Metro.storage.delItem('ApiToken');
+    Cookies.set('ApiToken', null);
+    window.location.href = Metro.storage.getItem("DefaultPath", null);
+}
+
+
+Gs.Behaviors.ShowWindowCode = function () {
+    if (document.getElementById("IFrameWindow") == null) {
+        Gs.Functions.ShowSource();
+    } else { Gs.Functions.ShowFrameSource(); }
+
+
+
 }

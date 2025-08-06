@@ -16,19 +16,8 @@ namespace EasyITCenter.DBModel
         {
             BasicAttachmentLists = new HashSet<BasicAttachmentList>();
             DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
-            PortalActionHistoryListInheritedActionTypeNavigations = new HashSet<PortalActionHistoryList>();
-            PortalActionHistoryListInheritedDataTypeNavigations = new HashSet<PortalActionHistoryList>();
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableLists = new HashSet<PortalApiTableList>();
-            PortalGeneratedDataLists = new HashSet<PortalGeneratedDataList>();
-            PortalGeneratorActionListInheritedCommandTypeNavigations = new HashSet<PortalGeneratorActionList>();
-            PortalGeneratorActionListInheritedGeneratorTypeNavigations = new HashSet<PortalGeneratorActionList>();
-            PortalGeneratorActionListInheritedTemplateTypeNavigations = new HashSet<PortalGeneratorActionList>();
-            PortalGeneratorLists = new HashSet<PortalGeneratorList>();
-            PortalGeneratorTemplateListInheritedCommandTypeNavigations = new HashSet<PortalGeneratorTemplateList>();
-            PortalGeneratorTemplateListInheritedTemplateTypeNavigations = new HashSet<PortalGeneratorTemplateList>();
-            PortalPluginListInheritedCodeTypeNavigations = new HashSet<PortalPluginList>();
-            PortalPluginListInheritedPluginTypeNavigations = new HashSet<PortalPluginList>();
             ServerApiSecurityLists = new HashSet<ServerApiSecurityList>();
             ServerHealthCheckTaskLists = new HashSet<ServerHealthCheckTaskList>();
             ServerModuleAndServiceListInheritedLayoutTypeNavigations = new HashSet<ServerModuleAndServiceList>();
@@ -80,19 +69,8 @@ namespace EasyITCenter.DBModel
         public virtual SolutionUserList User { get; set; } = null!;
         public virtual ICollection<BasicAttachmentList> BasicAttachmentLists { get; set; }
         public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
-        public virtual ICollection<PortalActionHistoryList> PortalActionHistoryListInheritedActionTypeNavigations { get; set; }
-        public virtual ICollection<PortalActionHistoryList> PortalActionHistoryListInheritedDataTypeNavigations { get; set; }
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }
-        public virtual ICollection<PortalGeneratedDataList> PortalGeneratedDataLists { get; set; }
-        public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionListInheritedCommandTypeNavigations { get; set; }
-        public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionListInheritedGeneratorTypeNavigations { get; set; }
-        public virtual ICollection<PortalGeneratorActionList> PortalGeneratorActionListInheritedTemplateTypeNavigations { get; set; }
-        public virtual ICollection<PortalGeneratorList> PortalGeneratorLists { get; set; }
-        public virtual ICollection<PortalGeneratorTemplateList> PortalGeneratorTemplateListInheritedCommandTypeNavigations { get; set; }
-        public virtual ICollection<PortalGeneratorTemplateList> PortalGeneratorTemplateListInheritedTemplateTypeNavigations { get; set; }
-        public virtual ICollection<PortalPluginList> PortalPluginListInheritedCodeTypeNavigations { get; set; }
-        public virtual ICollection<PortalPluginList> PortalPluginListInheritedPluginTypeNavigations { get; set; }
         public virtual ICollection<ServerApiSecurityList> ServerApiSecurityLists { get; set; }
         public virtual ICollection<ServerHealthCheckTaskList> ServerHealthCheckTaskLists { get; set; }
         public virtual ICollection<ServerModuleAndServiceList> ServerModuleAndServiceListInheritedLayoutTypeNavigations { get; set; }
