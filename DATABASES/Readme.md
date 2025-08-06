@@ -1,6 +1,14 @@
 ﻿# Definice Databází   
 
-Je použit Entity Framework 6, tím jsou tedy podporovány všechny standardní Typy Databází   
+
+# Class Definiti0on In Controllers
+Must be defined Previous Controllers for Swagger
+
+
+# Entity Framework 6
+Je použit Entity Framework 6, tím jsou tedy podporovány všechny standardní Typy Databází
+
+
 
 **Jasná a Jednoduchá Globální Struktura**    
 Api se nabízí jako Služby, plánované úlohy, Procesy, Operace, Generátory, Exporty   
@@ -9,10 +17,6 @@ Api se nabízí jako Služby, plánované úlohy, Procesy, Operace, Generátory,
 - Server Api: Je Serverová Unikátní API
 - SystemApi: Jsou Api využité Systémem
 - WebApi: Jsou unikátní Api pro centrální Ovládání WebServeru
-
-**Uživatel**
-Každý Uživatel může mít svo vlastní SQLServer  Databázi a SQLFile Databázi pro testování    
-Může vyvíjet svůj vlastní SubServer a SubSystém odvozené z řešení EIC & ESB  
 
 
 

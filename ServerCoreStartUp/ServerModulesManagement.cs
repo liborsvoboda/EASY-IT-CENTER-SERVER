@@ -262,16 +262,16 @@ namespace EasyITCenter.ServerCoreConfiguration {
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleSwaggerApiDocEnabled").Value)) {
                 //services.AddSwaggerSchemaBuilder(c => c.CamelCase = true);
                 
-                 services.AddSwaggerGen(c => {
-                     c.AddSecurityDefinition("Basic", new OpenApiSecurityScheme { Name = "Authorization", Type = SecuritySchemeType.Http, Scheme = "basic", In = ParameterLocation.Header, Description = "Basic Authorization header for getting Bearer Token." });
-                     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                 services.AddSwaggerGen(cfg => {
+                     cfg.AddSecurityDefinition("Basic", new OpenApiSecurityScheme { Name = "Authorization", Type = SecuritySchemeType.Http, Scheme = "basic", In = ParameterLocation.Header, Description = "Basic Authorization header for getting Bearer Token." });
+                     cfg.AddSecurityRequirement(new OpenApiSecurityRequirement
                      { { new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Basic" } }, new List<string>() } });
-                     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme { Description = "JWT Authorization header using the Bearer scheme for All safe APIs.", Name = "Authorization", In = ParameterLocation.Header, Scheme = "bearer", Type = SecuritySchemeType.Http, BearerFormat = "JWT" });
-                     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                     cfg.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme { Description = "JWT Authorization header using the Bearer scheme for All safe APIs.", Name = "Authorization", In = ParameterLocation.Header, Scheme = "bearer", Type = SecuritySchemeType.Http, BearerFormat = "JWT" });
+                     cfg.AddSecurityRequirement(new OpenApiSecurityRequirement
                      { { new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }, new List<string>() } });
 
-                     c.SchemaGeneratorOptions = new SchemaGeneratorOptions { SchemaIdSelector = type => type.FullName };
-                     c.SwaggerDoc(Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(), new OpenApiInfo {
+                     cfg.SchemaGeneratorOptions = new SchemaGeneratorOptions { SchemaIdSelector = type => type.FullName };
+                     cfg.SwaggerDoc(Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(), new OpenApiInfo {
                          Title = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value + " Server API",
                          Version = Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(),
                          TermsOfService = new Uri(DbOperations.GetServerParameterLists("ServerPublicUrl").Value),
@@ -281,21 +281,21 @@ namespace EasyITCenter.ServerCoreConfiguration {
                      });
 
                      var xmlFile = Path.Combine(SrvRuntime.Startup_path, $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml");
-                     if (File.Exists(xmlFile)) { try { c.IncludeXmlComments(xmlFile, true); } catch { } }
-                     try { c.IncludeXmlComments(Assembly.GetExecutingAssembly().Location, true); } catch { }
+                     if (File.Exists(xmlFile)) { try { cfg.IncludeXmlComments(xmlFile, true); } catch { } }
+                     try { cfg.IncludeXmlComments(Assembly.GetExecutingAssembly().Location, true); } catch { }
 
 
-                     //c.InferSecuritySchemes();
-                     c.UseOneOfForPolymorphism();
-                    //c.UseInlineDefinitionsForEnums();
-                    c.DescribeAllParametersInCamelCase();
-                    c.EnableAnnotations(true, true);
-                    c.UseAllOfForInheritance();
-                    c.SupportNonNullableReferenceTypes();
-                    //c.UseAllOfToExtendReferenceSchemas();
-                    c.DocInclusionPredicate((docName, description) => true);
-                    c.CustomSchemaIds(type => type.FullName);
-                    c.ResolveConflictingActions(x => x.First());
+                     //cfg.InferSecuritySchemes();
+                     cfg.UseOneOfForPolymorphism();
+                     //cfg.UseInlineDefinitionsForEnums();
+                     cfg.DescribeAllParametersInCamelCase();
+                     cfg.EnableAnnotations(true, true);
+                     cfg.UseAllOfForInheritance();
+                     cfg.SupportNonNullableReferenceTypes();
+                     //cfg.UseAllOfToExtendReferenceSchemas();
+                     cfg.DocInclusionPredicate((docName, description) => true);
+                     cfg.CustomSchemaIds(type => type.FullName);
+                     cfg.ResolveConflictingActions(x => x.First());
                 });
                 services.AddSwaggerGenNewtonsoftSupport();
             }
@@ -359,28 +359,28 @@ namespace EasyITCenter.ServerCoreConfiguration {
         internal static void EnableSwagger(ref IApplicationBuilder app) {
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleSwaggerApiDocEnabled").Value)) {
                 app.UseSwagger();
-                app.UseSwaggerUI(c => {
-                    c.RoutePrefix = DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value.StartsWith("/") ? DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value.Substring(1) : DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value;
-                    c.DocumentTitle = EICServer.SwaggerDesc;
-                    //c.InjectJavascript
+                app.UseSwaggerUI(cfg => {
+                    cfg.RoutePrefix = DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value.StartsWith("/") ? DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value.Substring(1) : DbOperations.GetServerParameterLists("ModuleSwaggerApiDocPath").Value;
+                    cfg.DocumentTitle = EICServer.SwaggerDesc;
+                    //c.InjectJavascript()
                     //c.InjectStylesheets();
-                    c.DocExpansion(DocExpansion.None);
-                    c.EnableTryItOutByDefault();
-                    c.DisplayRequestDuration();
+                    cfg.DocExpansion(DocExpansion.None);
+                    cfg.EnableTryItOutByDefault();
+                    cfg.DisplayRequestDuration();
                     //c.EnableDeepLinking();
-                    c.EnableFilter();
+                    cfg.EnableFilter();
                     //c.DisplayOperationId();
-                    c.DefaultModelExpandDepth(1);
-                    c.DefaultModelRendering(ModelRendering.Model);
-                    c.DefaultModelsExpandDepth(1);
+                    cfg.DefaultModelExpandDepth(1);
+                    cfg.DefaultModelRendering(ModelRendering.Model);
+                    cfg.DefaultModelsExpandDepth(1);
                     //c.EnablePersistAuthorization();
                     //c.EnableValidator();
                     //c.ShowCommonExtensions();
                     //c.ShowExtensions();
-                    c.SupportedSubmitMethods(SubmitMethod.Get,SubmitMethod.Put, SubmitMethod.Delete, SubmitMethod.Head, SubmitMethod.Post);
-                    c.UseRequestInterceptor("(request) => { return request; }");
-                    c.UseResponseInterceptor("(response) => { return response; }");
-                    c.SwaggerEndpoint(SrvRuntime.OpenApiDescriptionFile, "Server API version " + Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString());
+                    cfg.SupportedSubmitMethods(SubmitMethod.Get,SubmitMethod.Put, SubmitMethod.Delete, SubmitMethod.Head, SubmitMethod.Post);
+                    cfg.UseRequestInterceptor("(request) => { return request; }");
+                    cfg.UseResponseInterceptor("(response) => { return response; }");
+                    cfg.SwaggerEndpoint(SrvRuntime.OpenApiDescriptionFile, "Server API version " + Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString());
                 });
             }
         }

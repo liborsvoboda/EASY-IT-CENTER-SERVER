@@ -3,20 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HandlebarsDotNet;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Octokit;
-using PuppeteerExtraSharp.Plugins.ExtraStealth.Evasions;
-using ScrapySharp.Network;
 
 
 namespace EasyITCenter.Controllers {
 
 
+    public class FancyTreeJsonDataRequest
+    {
+        public string WebRootPath { get; set; }
+        public string FileExtension { get; set; }
+        public bool RootDirectoryOnly { get; set; }
+    }
 
+    public class FancyTreeJsonData
+    {
+        public string title { get; set; }
+        public bool folder { get; set; }
+        public bool checkbox { get; set; }
+        public string key { get; set; }
+    }
 
     [AllowAnonymous]
     [Route("/JsonGeneratorService")]
@@ -29,27 +38,22 @@ namespace EasyITCenter.Controllers {
 
 
 
-        public class GetFancyTreeJsonDataRequest {
-            public string WebRootPath { get; set; }
-        }
 
-        public class FancyTreeJsonData {
-            public string Title { get; set; }
-            public bool Folder { get; set; }
-            public bool Checkbox { get; set; }
-            public string Key { get; set; }
-        }
-
+        /// <summary>
+        /// Must set path with path\\path or path/path
+        /// </summary>
+        /// <param name="jsonDataRequest"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("/JsonGeneratorService/GetFancyTreeJsonData")]
         [Consumes("application/json")]
-        public async Task<IActionResult> GetFancyTreeJsonData([FromBody] GetFancyTreeJsonDataRequest jsonDataRequest) {
+        public async Task<IActionResult> GetFancyTreeJsonData([FromBody] FancyTreeJsonDataRequest jsonDataRequest) {
             try {
                 List<string>? loadFiles = null; List<FancyTreeJsonData> result = new();
-                loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, jsonDataRequest.WebRootPath), "*.html", SearchOption.TopDirectoryOnly);
+                loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, jsonDataRequest.WebRootPath), $"*.{jsonDataRequest.FileExtension}", jsonDataRequest.RootDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
 
                 loadFiles.ForEach(htmlFile => { 
-                    result.Add(new FancyTreeJsonData() { Title = Path.GetFileName(htmlFile), Checkbox = false, Folder = false, Key = htmlFile.Split(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)[1] });
+                    result.Add(new FancyTreeJsonData() { title = Path.GetFileNameWithoutExtension(htmlFile), checkbox = false, folder = false, key = htmlFile.Split(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)[1] });
                 });
 
                 return Json(new HandlerResult() { Result = result, Success = true });

@@ -103,9 +103,10 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     endpoints.MapEasyData(options => { options.UseDbContext<EasyITCenterContext>(); }); 
                 }
 
-                //if (bool.Parse(DbOperations.GetServerParameterLists("ModuleSwaggerApiDocEnabled").Value)) {
-                //    endpoints.MapSwagger();
-                //}
+                if (bool.Parse(DbOperations.GetServerParameterLists("ModuleSwaggerApiDocEnabled").Value))
+                {
+                    endpoints.MapSwagger();
+                }
 
                 endpoints.MapControllers();
 
@@ -113,12 +114,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     endpoints.MapRazorPages();
                     //endpoints.MapControllerRoute(name: "DevPortal", pattern: "{controller=DevPortal}/{action=Index}/{id?}");
                     //endpoints.MapControllerRoute(name: "WebAdmin",pattern: "{controller=WebAdmin}/{action=Index}/{id?}");
-                    endpoints.MapControllerRoute(name: "RazorPages", pattern: "{controller=ServerCorePages}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute(name: "ServerCorePages", pattern: "{controller=ServerCorePages}/{action=Index}/{id?}");
                 }
-
-                
-                //https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0
-                //VYTVORIT AGENDU NA VLASTNI API PO RESETU
 
 
                 //HeathService Support
