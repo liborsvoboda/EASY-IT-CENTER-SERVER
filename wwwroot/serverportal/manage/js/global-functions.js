@@ -22,11 +22,11 @@ Gs.Functions.RemoveElement = function (elementId) {
 
 
 Gs.Functions.AddClass = function (elementId,clasName) {
-    $("#deleteButton").addClass(clasName); //"disabled"
+    $(elementId).addClass(clasName); //"disabled"
 }
 
 Gs.Functions.RemoveClass = function (elementId, clasName) {
-    $("#deleteButton").removeClass(clasName); //"disabled"
+    $(elementId).removeClass(clasName); //"disabled"
 }
 
 Gs.Functions.HtmlDecode = function (input) {
@@ -163,7 +163,12 @@ Gs.Functions.PrintElement = function (elementId) {
 }
 
 Gs.Functions.DownloadHtmlElement = function (elementId) {
-    try { var t = document.body.appendChild(document.createElement("a")); t.download = elementId + ".html"; t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.getElementById(elementId).innerHTML); t.click(); } catch (i) { }
+    try {
+        var t = document.body.appendChild(document.createElement("a"));
+        t.download = elementId + ".html";
+        t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.getElementById(elementId).innerHTML);
+        t.click();
+    } catch (i) { }
 }
 
 Gs.Functions.CopyElement = async function (elementId) {
@@ -176,7 +181,9 @@ Gs.Functions.ImageFromElement = function (elementId) {
             html2canvas($("#" + elementId), {
                 onrendered: function (t) {
                     $("#previewImage").append(t);
-                    var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a")); i.download = elementId + ".png"; i.href = u; i.click()
+                    var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a"));
+                    i.download = elementId + ".png";
+                    i.href = u; i.click()
                 }
             })
         })
@@ -192,13 +199,17 @@ Gs.Functions.PrintFrameElement = function () {
 
 Gs.Functions.DownloadFrameHtmlElement = function () {
     try {
-        var t = document.body.appendChild(document.createElement("a")); t.download = "KlikneteZde" + ".html"; t.href = "data:text/html;charset=utf-8," + encodeURIComponent(window.frames['FrameWindow'].contentWindow.document.body.innerHTML); t.click();
+        var t = document.body.appendChild(document.createElement("a"));
+        t.download = "KlikneteZde" + ".html";
+        t.href = "data:text/html;charset=utf-8," + encodeURIComponent(window.frames['FrameWindow'].contentWindow.document.body.innerHTML);
+        t.click();
     } catch (i) { }
 }
 
 Gs.Functions.CopyFrameElement = async function () {
     try {
-        let t = window.frames['FrameWindow'].contentWindow.document.body.innerHTML; await navigator.clipboard.writeText(t);
+        let t = window.frames['FrameWindow'].contentWindow.document.body.innerHTML;
+        await navigator.clipboard.writeText(t);
     } catch (t) { }
 }
 
@@ -209,7 +220,9 @@ Gs.Functions.ImageFromFrameElement = function () {
             html2canvas(window.frames['FrameWindow'].contentWindow.document.body, {
                 onrendered: function (t) {
                     $("#previewImage").append(t);
-                    var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a")); i.download = "KlikneteZdeCz.png"; i.href = u; i.click();
+                    var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a"));
+                    i.download = "KlikneteZdeCz.png";
+                    i.href = u; i.click();
                 }
             });
         });
@@ -228,11 +241,16 @@ Gs.Functions.SaveToFavorites = function (title, url) {
         elem.setAttribute('href', url);
         elem.setAttribute('title', title);
         elem.setAttribute('rel', 'sidebar');
-        elem.click(); //this.title=document.title;
+        elem.click();
     }
     else if (document.all) {
         // ie
         window.external.AddFavorite(url, title);
+    } else {
+        let createBookmark = browser.bookmarks.create({
+            title: "KlikneteZde.Cz",
+            url: "https://KlikneteZde.Cz",
+        });
     }
 }
 
