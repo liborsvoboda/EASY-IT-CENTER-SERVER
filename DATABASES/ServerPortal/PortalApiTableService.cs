@@ -9,14 +9,6 @@ using Tweetinvi.Core.Events;
 
 namespace EasyITCenter.Controllers
 {
-    public partial class ApiTableData {
-        public int Id { get; set; }
-        public string InheritedTableType { get; set; } = null!;
-        public string Name { get; set; } = null!;
-        public string? Description { get; set; }
-        public bool Public { get; set; }
-        public bool Active { get; set; }
-    }
 
 
     public partial class MenuData {
@@ -27,7 +19,6 @@ namespace EasyITCenter.Controllers
         public string Icon { get; set; } = null;
         public string InheritedMenuType { get; set; } = null;
         public string Description { get; set; } = null;
-        public bool Public { get; set; } = true;
         public bool Active { get; set; } = true;
         public string HtmlContent { get; set; } = null;
         public string JsContent { get; set; } = null;
@@ -50,17 +41,9 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                     IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
                 })) {
-
-                    if (!ServerApiServiceExtension.IsLogged()) {
-                        data = new EasyITCenterContext().PortalApiTableColumnDataLists
-                            .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && a.Public == true && a.Active == true)
-                            .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
-                    } else {
-                        data = new EasyITCenterContext().PortalApiTableColumnDataLists
-                       .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && ( a.Public == true || ( a.UserPrefix == ServerApiServiceExtension.GetUserPrefix() && a.Public == false)) && a.Active == true)
-                       .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
-
-                    }
+                    data = new EasyITCenterContext().PortalApiTableColumnDataLists
+                        .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && a.Active == true)
+                        .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
                 }
             } 
             catch (Exception ex) {  }
@@ -82,15 +65,15 @@ namespace EasyITCenter.Controllers
                     if (menuData.RecGuid == null) {
                         menuData.RecGuid = Guid.NewGuid().ToString().ToUpper();
                         List<PortalApiTableColumnDataList> record = new();
-                        record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "ParentGuid", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.ParentGuid, Description = menuData.Description, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "Sequence", InheritedDataType = "int", RecGuid = menuData.RecGuid, Value = menuData.Sequence.ToString(), Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "Name", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Name, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "Icon", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Icon, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "InheritedMenuType", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.InheritedMenuType, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.HtmlContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "JsContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.JsContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "CSSContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.CssContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "MdHelp", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdHelp, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "ParentGuid", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.ParentGuid, Description = menuData.Description, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "Sequence", InheritedDataType = "int", RecGuid = menuData.RecGuid, Value = menuData.Sequence.ToString(), Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "Name", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Name, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "Icon", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Icon, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "InheritedMenuType", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.InheritedMenuType, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.HtmlContent, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "JsContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.JsContent, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "CSSContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.CssContent, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "MdHelp", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdHelp, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
                             data.PortalApiTableColumnDataLists.AddRange(record);
@@ -102,15 +85,15 @@ namespace EasyITCenter.Controllers
                         original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == menuData.RecGuid).ToList();
                         
                         List<PortalApiTableColumnDataList> record = new();
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "ParentGuid").Select(a=>a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "ParentGuid", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.ParentGuid, Description = menuData.Description, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "Sequence").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "Sequence", InheritedDataType = "int", RecGuid = menuData.RecGuid, Value = menuData.Sequence.ToString(), Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "Name").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "Name", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Name, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "Icon").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "Icon", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Icon, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "InheritedMenuType").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "InheritedMenuType", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.InheritedMenuType, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "HtmlContent").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.HtmlContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "JsContent").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "JsContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.JsContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "CSSContent").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "CSSContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.CssContent, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "MdHelp").Select(a => a.Id).FirstOrDefault(), UserPrefix = ServerApiServiceExtension.GetUserPrefix(), ApiTableName = "PortalMenu", ApiTableColumnName = "MdHelp", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdHelp, Description = null, Public = menuData.Public, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "ParentGuid").Select(a=>a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "ParentGuid", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.ParentGuid, Description = menuData.Description, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "Sequence").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "Sequence", InheritedDataType = "int", RecGuid = menuData.RecGuid, Value = menuData.Sequence.ToString(), Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "Name").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "Name", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Name, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "Icon").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "Icon", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.Icon, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "InheritedMenuType").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "InheritedMenuType", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.InheritedMenuType, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "HtmlContent").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.HtmlContent, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "JsContent").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "JsContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.JsContent, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "CSSContent").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "CSSContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.CssContent, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "MdHelp").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "MdHelp", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdHelp, Description = null, Active = menuData.Active, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
                             data.PortalApiTableColumnDataLists.UpdateRange(record);
