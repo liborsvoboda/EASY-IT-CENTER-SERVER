@@ -78,6 +78,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
 	<Content Remove="wwwroot\**" />
+	<EntityDeploy Remove="wwwroot\server-PagesHelp\examples\**" />
   </ItemGroup>
 
   <ItemGroup>
