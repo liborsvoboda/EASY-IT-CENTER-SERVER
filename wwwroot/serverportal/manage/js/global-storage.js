@@ -42,7 +42,7 @@ window.WindowButtons = [
     {
         html: "<span class='mif-help' title='Show Menu Help'></span>",
         cls: "sys-button",
-        onclick: "alert('You press user button')"
+        onclick: "Gs.Objects.InfoboxCreate('HelpViewer','/serverportal/addons/md-viewer/index.html');"
     },
     {
         html: "<span class='mif-import-export' title='Export'></span>",

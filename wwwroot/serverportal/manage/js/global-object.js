@@ -235,3 +235,16 @@ Gs.Objects.RefreshPreview = function () {
         document.getElementById("menuPreview").innerHTML ="Menu doesnt have Content"
     }
 }
+
+
+Gs.Objects.InfoboxCreate = function (elementId,url) {
+    let infoBox = Metro.infobox.create("<iframe id='" + elementId + "' src='" + url + "'  width='100%' height='880' frameborder='0' scrolling='yes' style='width: 100%; height: 780px;' ></iframe>", "", {
+        closeButton: true,
+        type: "",
+        removeOnClose: true,
+        width: "80%",
+        height: "802",
+        tag: "",
+        id: elementId
+    });
+}
