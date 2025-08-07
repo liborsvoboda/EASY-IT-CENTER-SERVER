@@ -299,3 +299,13 @@ Gs.Functions.LoadHtmlPageToFrame = function (elementId, url) {
     $('#' + elementId).html(frame);
   
 }
+
+
+Gs.Functions.GetFunctionList = function () {
+    let functionList = [];
+    for (var p in Gs.Functions) { if (typeof Gs.Functions[p] === "function") { functionList.push({ title: `Gs.Functions.${p}()`, folder: false, checkbox: false, key: Gs.Functions[p].toString() }); } }
+    for (var p in Gs.Behaviors) { if (typeof Gs.Behaviors[p] === "function") { functionList.push({ title: `Gs.Behaviors.${p}()`, folder: false, checkbox: false, key: Gs.Behaviors[p].toString() }); } }
+    for (var p in Gs.Objects) { if (typeof Gs.Objects[p] === "function") { functionList.push({ title: `Gs.Objects.${p}()`, folder: false, checkbox: false, key: Gs.Objects[p].toString() }); } }
+    for (var p in Gs.Apis) { if (typeof Gs.Apis[p] === "function") { functionList.push({ title: `Gs.Apis.${p}()`, folder: false, checkbox: false, key: Gs.Apis[p].toString() }); } }
+    Metro.storage.setItem('FunctionList', functionList.sort((a, b) => (a.title > b.title) * 2 - 1));
+}

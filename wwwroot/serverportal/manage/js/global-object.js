@@ -237,7 +237,26 @@ Gs.Objects.RefreshPreview = function () {
 }
 
 
-Gs.Objects.InfoboxCreate = function (elementId,url) {
+//Gs.Objects.InfoboxTableCreate = function (elementId) {
+//    let html = "<div class='container'><table id='PreviewTable' class='table striped' data-role='table' data-pagination='true' data-show-all-pages='false' ></div>";
+//    let infoBox = Metro.infobox.create(html, "", {
+//        closeButton: true,
+//        type: "",
+//        removeOnClose: true,
+//        width: "80%",
+//        height: "802",
+//        tag: "",
+//        id: elementId
+//    });
+//    var table = Metro.getPlugin("#PreviewTable", "table");
+//    let data=[];
+//    let functionList = Metro.storage.getItem('FunctionList', null);
+//    functionList.forEach(fn => { data.push([ fn.Group, fn.Label, fn.Path ]); });
+//    table.setItems(data); table.reload();
+//}
+
+
+Gs.Objects.InfoboxFrameCreate = function (elementId,url) {
     let infoBox = Metro.infobox.create("<iframe id='" + elementId + "' src='" + url + "'  width='100%' height='880' frameborder='0' scrolling='yes' style='width: 100%; height: 780px;' ></iframe>", "", {
         closeButton: true,
         type: "",
@@ -248,3 +267,4 @@ Gs.Objects.InfoboxCreate = function (elementId,url) {
         id: elementId
     });
 }
+

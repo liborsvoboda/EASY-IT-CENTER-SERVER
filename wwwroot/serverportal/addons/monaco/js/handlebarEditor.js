@@ -4,7 +4,6 @@ require(['vs/editor/editor.main'], function () {
 
     let fileCounter = 0;
     
-
     monaco.editor.defineTheme('myTheme', {
         base: 'vs-dark',
         inherit: true,
@@ -38,7 +37,7 @@ require(['vs/editor/editor.main'], function () {
         fileCounter += 1;
     }
 
-    addNewEditor("", "TemplateEditor", 'handlebars');
+    addNewEditor("", "TemplateEditor", 'html');
     addNewEditor("", "ResultCodeEditor", 'html');
     /*
     var languageSelected = document.querySelector('.language');    

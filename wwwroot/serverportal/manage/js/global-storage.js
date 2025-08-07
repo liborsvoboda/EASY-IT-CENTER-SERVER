@@ -41,8 +41,13 @@ window.WindowButtons = [
     },
     {
         html: "<span class='mif-help' title='Show Menu Help'></span>",
-        cls: "sys-button",
-        onclick: "Gs.Objects.InfoboxCreate('HelpViewer','/serverportal/addons/md-viewer/index.html');"
+        cls: "warning",
+        onclick: "Gs.Objects.InfoboxFrameCreate('HelpViewer','/serverportal/addons/md-viewer/index.html');"
+    },
+    {
+        html: "<span class='mif-import-contacts' title='Show Function List'></span>",
+        cls: "warning",
+        onclick: "Gs.Objects.InfoboxTableCreate('PreviewFunctionList');"
     },
     {
         html: "<span class='mif-import-export' title='Export'></span>",

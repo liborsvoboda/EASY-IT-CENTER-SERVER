@@ -10,6 +10,11 @@ Gs.Behaviors.PortalStartup =async function () {
 
     Gs.Objects.GenerateMenu();
     Gs.Behaviors.LoadUserSettings();
+
+
+
+    $(document).ready(function () { Gs.Functions.GetFunctionList(); });
+    
 }
 
 
@@ -259,7 +264,6 @@ Gs.Behaviors.ShowWindowCode = function () {
     if (document.getElementById("IFrameWindow") == null) {
         Gs.Functions.ShowSource();
     } else { console.log("iframe"); Gs.Functions.ShowFrameSource(); }
-
-
-
 }
+
+
