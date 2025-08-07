@@ -258,7 +258,7 @@ Gs.Behaviors.SignOut = function () {
 Gs.Behaviors.ShowWindowCode = function () {
     if (document.getElementById("IFrameWindow") == null) {
         Gs.Functions.ShowSource();
-    } else { Gs.Functions.ShowFrameSource(); }
+    } else { console.log("iframe"); Gs.Functions.ShowFrameSource(); }
 
 
 

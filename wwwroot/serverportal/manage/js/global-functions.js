@@ -147,7 +147,7 @@ Gs.Functions.ShowSource = function () {
 
 Gs.Functions.ShowFrameSource = function () {
     var source = "<html>";
-    source += window.frames['IFrameWindow'].contentWindow.document.body.innerHTML;
+    source += document.getElementById('IFrameWindow').contentWindow.document.body.innerHTML;
     source += "</html>";
     source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     source = "<pre>" + source + "</pre>";
