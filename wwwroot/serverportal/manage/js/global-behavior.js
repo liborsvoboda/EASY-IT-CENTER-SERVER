@@ -129,6 +129,7 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
+    Metro.storage.setItem('SelectedMenuId', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Id);
     return menu;
 }
 

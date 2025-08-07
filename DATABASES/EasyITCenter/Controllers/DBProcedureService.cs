@@ -4,6 +4,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Common;
 using EasyITCenter.Controllers;
 using System.Xml;
+using System.Extensions;
 
 
 //BETTER USE DATA TABLE - DIRECT
@@ -38,19 +39,17 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> GetSystemOperationsList(List<Dictionary<string, string>> dataset) {
             string procedureName = ""; string parameters = ""; string EntityTypeName = "";
-            foreach (Dictionary<string, string> param in dataset)
-            {
-                if (param.Where(a => a.Key.ToLower() == "SpProcedure".ToLower()).Any())
-                {
+            foreach (Dictionary<string, string> param in dataset) {
+                if (param.Where(a => a.Key.ToLower() == "SpProcedure".ToLower()).Any()) {
                     procedureName = param.Where(a => a.Key.ToLower() == "SpProcedure".ToLower()).First().Value;
-                }
-                else if (param.Where(a => a.Key.ToLower() == "tableName".ToLower()).Any())
-                {
-                    parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First()}' ";
+                } else if (param.Where(a => a.Key.ToLower() == "tableName".ToLower()).Any()) {
+                    parameters += ( parameters.Length > 0 ? "," : "" ) + $"@{param.Keys.First()} = N'{param.Values.First()}' ";
                     EntityTypeName = param.Values.First();
-                }
-                else { parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First()}' "; }
+                } else { parameters += ( parameters.Length > 0 ? "," : "" ) + $"@{param.Keys.First()} = N'{param.Values.First()}' "; }
             }
+
+            parameters += ServerApiServiceExtension.GetUserRole() == null ? $", @userRole = N'all'" : $", @userRole = N'{ServerApiServiceExtension.GetUserRole()}'";
+            parameters += ServerApiServiceExtension.GetUserId() == null ? $", @userId = N''" : $", @userId = N'{ServerApiServiceExtension.GetUserId()}'";
 
             DataView data = ((DataView)(await new EasyITCenterContext().ExecuteReaderAsync($"EXEC {procedureName} {parameters};")).DefaultView);
             return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented);

@@ -9,6 +9,15 @@ using Tweetinvi.Core.Events;
 
 namespace EasyITCenter.Controllers
 {
+    public partial class ApiTableData {
+        public int Id { get; set; }
+        public string InheritedTableType { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public string? Description { get; set; }
+        public bool Public { get; set; }
+        public bool Active { get; set; }
+    }
+
 
     public partial class MenuData {
         public string ParentGuid { get; set; } = null;
@@ -64,32 +73,9 @@ namespace EasyITCenter.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet("/PortalApiTableService/GetApiTableList")]
-        public async Task<string> GetApiTableList() {
-            List<PortalApiTableList> data = new();
-            try {
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
-                    IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
-                })) {
-
-                    if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
-                        data = new EasyITCenterContext().PortalApiTableLists.OrderBy(a => a.Name).ToList();
-                    }
-                }
-            } catch (Exception ex) { }
-            return JsonSerializer.Serialize(data, new JsonSerializerOptions() {
-                ReferenceHandler = ReferenceHandler.IgnoreCycles,
-                WriteIndented = true,
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
-        }
-
-
-        [AllowAnonymous]
         [HttpPost("/PortalApiTableService/SetApiTableColumnDataList")]
         public async Task<string> SetApiTableColumnDataList([FromBody] MenuData menuData) {
-            EasyITCenterContext data = new EasyITCenterContext(); ;
+            EasyITCenterContext data = new EasyITCenterContext();
             try {
                 
                 if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
@@ -133,10 +119,6 @@ namespace EasyITCenter.Controllers
                         });
                     }
 
-
-
-                    //data.SaveChanges();
-
                     return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 8, ErrorMessage = menuData.RecGuid });
                 } else {
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -148,16 +130,15 @@ namespace EasyITCenter.Controllers
 
 
         [AllowAnonymous]
-        [HttpDelete("/PortalApiTableService/DeleteApiTableColumnDataList/{menuId}")]
-        public async Task<string> DeleteApiTableColumnDataList(int menuId) {
+        [HttpDelete("/PortalApiTableService/DeleteApiTableColumnDataList/{recGuid}")]
+        public async Task<string> DeleteApiTableColumnDataList(string recGuid) {
             EasyITCenterContext data = new EasyITCenterContext();
             try {
 
                 if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
 
                     List<PortalApiTableColumnDataList> original = new();
-                    string recId = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.Id == menuId).Select(a=>a.RecGuid).FirstOrDefault();
-                    original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == recId).ToList();
+                    original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == recGuid).ToList();
 
                     DatabaseContextExtensions.RunTransaction(data, (trans) => {
                         data.PortalApiTableColumnDataLists.DeleteRangeByKey(original);

@@ -14,15 +14,11 @@ let Gs = {
         },
         getSpProcedure :[
             { SpProcedure: "SpGetTableDataList" },
-            { tableName: null },
-            { userRole: "all" },
-            { userId: null }
-        ],
+            { tableName: null }
+         ],
         setSpProcedure :[
             { SpProcedure: "SpSetTableDataRec" },
             { tableName: null },
-            { userRole: "all" },
-            { userId: null },
             { dataRec: null }
         ],
         UserSettingList: {
@@ -47,15 +43,10 @@ window.WindowButtons = [
     {
         html: "<span class='mif-import-contacts' title='Show Function List'></span>",
         cls: "warning",
-        onclick: "Gs.Objects.InfoboxTableCreate('PreviewFunctionList');"
+        onclick: "Gs.Objects.WindowIframeCreate('Function List','/serverportal/addons/fancytree/codepreview.html');"
     },
     {
         html: "<span class='mif-import-export' title='Export'></span>",
-        cls: "sys-button",
-        onclick: "alert('You press user button')"
-    },
-    {
-        html: "<span class='mif-chat' title='Start Chat'></span>",
         cls: "sys-button",
         onclick: "alert('You press user button')"
     },

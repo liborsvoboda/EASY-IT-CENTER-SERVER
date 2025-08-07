@@ -317,16 +317,6 @@ namespace EasyITCenter.Controllers {
                     table.Load(cmd.ExecuteReader());
                     table = (table.DefaultView.Table?.AsDataView()?.Table );
 
-                    //List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-                    //Dictionary<string, object> row;
-
-                    //if (table != null) {
-                    //    foreach (DataRow dr in table.Rows) {
-                    //        row = new Dictionary<string, object>();
-                    //        foreach (DataColumn col in table.Columns) { row.Add(col.ColumnName, dr[col]); }
-                    //        rows.Add(row);
-                    //    }
-                    //}
                     cmd.Connection?.Close();
                     return table;
                   }
@@ -357,16 +347,6 @@ namespace EasyITCenter.Controllers {
                     table.Load(await cmd.ExecuteReaderAsync());
                     table = (table.DefaultView.Table?.AsDataView()?.Table);
 
-                    //List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-                    //Dictionary<string, object> row;
-
-                    //if (table != null) {
-                    //    foreach (DataRow dr in table.Rows) {
-                    //        row = new Dictionary<string, object>();
-                    //        foreach (DataColumn col in table.Columns) { row.Add(col.ColumnName, dr[col]); }
-                    //        rows.Add(row);
-                    //    }
-                    //}
                     cmd.Connection?.Close();
                     return table;
                 }
