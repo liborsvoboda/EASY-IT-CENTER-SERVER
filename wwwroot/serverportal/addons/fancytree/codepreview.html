@@ -40,7 +40,6 @@
 				source: Metro.storage.getItem('FunctionList', null),
 				activate: function (event, data) {
                     Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoPreview" })[0].editor.getModel().setValue(data.node.key);
-
 				},
 				checkbox: function (event, data) {
 					//hide for all
@@ -83,7 +82,7 @@
 			<option>hc-black</option>
 		</select>
 
-		<select class="language" style='position: absolute;left: 90%;z-index: 2000;top: 55px;right: 0px;'>
+		<select class="language" style='position: absolute;left: 90%;z-index: 2000;top: 30px;right: 0px;'>
 			<!-- <option>apex</option> -->
 			<!-- <option>azcli</option> -->
 			<option>bat</option>

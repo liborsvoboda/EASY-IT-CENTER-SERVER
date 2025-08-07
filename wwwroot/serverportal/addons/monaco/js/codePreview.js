@@ -56,8 +56,4 @@ require(['vs/editor/editor.main'], function () {
     themeSelected.onchange = function () {
         monaco.editor.setTheme(themeSelected.value)
     }
-    
-    
-
-    
 });
