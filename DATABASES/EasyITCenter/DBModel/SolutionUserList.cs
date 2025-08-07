@@ -47,10 +47,8 @@ namespace EasyITCenter.DBModel
             DocSrvDocumentationGroupLists = new HashSet<DocSrvDocumentationGroupList>();
             DocSrvDocumentationLists = new HashSet<DocSrvDocumentationList>();
             LicSrvLicenseAlgorithmLists = new HashSet<LicSrvLicenseAlgorithmList>();
-            PortalApiTableColumnDataListUserPrefixNavigations = new HashSet<PortalApiTableColumnDataList>();
-            PortalApiTableColumnDataListUsers = new HashSet<PortalApiTableColumnDataList>();
-            PortalApiTableListUserPrefixNavigations = new HashSet<PortalApiTableList>();
-            PortalApiTableListUsers = new HashSet<PortalApiTableList>();
+            PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
+            PortalApiTableLists = new HashSet<PortalApiTableList>();
             ProdGuidGroupLists = new HashSet<ProdGuidGroupList>();
             ProdGuidOperationLists = new HashSet<ProdGuidOperationList>();
             ProdGuidPartLists = new HashSet<ProdGuidPartList>();
@@ -222,12 +220,10 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<DocSrvDocumentationList> DocSrvDocumentationLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<LicSrvLicenseAlgorithmList> LicSrvLicenseAlgorithmLists { get; set; }
-        public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataListUserPrefixNavigations { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataListUsers { get; set; }
-        public virtual ICollection<PortalApiTableList> PortalApiTableListUserPrefixNavigations { get; set; }
+        public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<PortalApiTableList> PortalApiTableListUsers { get; set; }
+        public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ProdGuidGroupList> ProdGuidGroupLists { get; set; }
         [InverseProperty("User")]

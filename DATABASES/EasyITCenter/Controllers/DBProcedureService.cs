@@ -65,6 +65,7 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <param name="dataset"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("/DBProcedureService/SpProcedure/SetGenericDataListByParams")]
         [Consumes("application/json")]
         public async Task<string> SetGenericDataListByParams(List<Dictionary<string, string>> dataset) {
@@ -80,6 +81,9 @@ namespace EasyITCenter.Controllers {
                         EntityTypeName = param.Values.First();
                     } else { parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First()}' "; }
                 }
+
+                parameters += ServerApiServiceExtension.GetUserRole() == null ? $", @userRole = N'all'" : $", @userRole = N'{ServerApiServiceExtension.GetUserRole()}'";
+                parameters += ServerApiServiceExtension.GetUserId() == null ? $", @userId = N''" : $", @userId = N'{ServerApiServiceExtension.GetUserId()}'";
 
                 data = new EasyITCenterContext().EasyITCenterCollectionFromSql<CustomMessageList>($"EXEC {procedureName} {parameters};");
             } catch (Exception ex) {

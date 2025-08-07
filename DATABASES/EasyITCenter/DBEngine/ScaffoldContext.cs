@@ -837,16 +837,10 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_PortalApiTableColumnDataList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalApiTableColumnDataListUsers)
+                    .WithMany(p => p.PortalApiTableColumnDataLists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableColumnDataList_SolutionUserList");
-
-                entity.HasOne(d => d.UserPrefixNavigation)
-                    .WithMany(p => p.PortalApiTableColumnDataListUserPrefixNavigations)
-                    .HasPrincipalKey(p => p.UserDbPreffix)
-                    .HasForeignKey(d => d.UserPrefix)
-                    .HasConstraintName("FK_PortalApiTableColumnDataList_SolutionUserList1");
             });
 
             modelBuilder.Entity<PortalApiTableList>(entity =>
@@ -861,16 +855,10 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_PortalApiTableList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.PortalApiTableListUsers)
+                    .WithMany(p => p.PortalApiTableLists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableList_SolutionUserList");
-
-                entity.HasOne(d => d.UserPrefixNavigation)
-                    .WithMany(p => p.PortalApiTableListUserPrefixNavigations)
-                    .HasPrincipalKey(p => p.UserDbPreffix)
-                    .HasForeignKey(d => d.UserPrefix)
-                    .HasConstraintName("FK_PortalApiTableList_SolutionUserList1");
             });
 
             modelBuilder.Entity<ProdGuidGroupList>(entity =>
