@@ -25,7 +25,7 @@ namespace EasyITCenter.Controllers {
 
 
 
-        [HttpPost("/OperationService/GenerateChangeLog")]
+        [HttpGet("/OperationService/GenerateChangeLog")]
         [Consumes("application/json")]
         public async Task<IActionResult> GenerateChangeLog() {
 
