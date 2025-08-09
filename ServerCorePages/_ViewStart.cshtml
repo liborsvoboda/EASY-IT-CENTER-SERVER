@@ -68,7 +68,7 @@
     } else if (systemModule != null && systemModule.InheritedLayoutType != null) {
         Layout = "/ServerCorePages/Shared/" + systemModule.InheritedLayoutType + ".cshtml";
     } else if(systemModule != null && systemModule.InheritedLayoutType == null) { //Portal Pages
-        Layout = "/ServerCorePages/Shared/SystemPortalLayout.cshtml";
+        Layout = "/ServerCorePages/Shared/ServerPortalLayout.cshtml";
     }
 
     this.Layout = Layout;

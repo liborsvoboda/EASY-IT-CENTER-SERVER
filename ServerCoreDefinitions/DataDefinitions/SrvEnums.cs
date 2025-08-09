@@ -28,9 +28,7 @@
         SystemPortalLayout,
         SystemModulesLayout,
 
-
         StaticFileLayout,
-        ToolViewerLayout,
 
         ViewerMarkDownFileLayout,
         ViewerReportFileLayout,
