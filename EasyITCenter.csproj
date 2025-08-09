@@ -419,6 +419,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.47.0" />
     <PackageReference Include="Microsoft.SourceLink.Tools" Version="1.1.1" />
     <PackageReference Include="Microsoft.SQL.Server.2016.LocalDB" Version="13.1.4001" />
+    <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
     <PackageReference Include="Microsoft.WSMan.Management" Version="7.2.23" />

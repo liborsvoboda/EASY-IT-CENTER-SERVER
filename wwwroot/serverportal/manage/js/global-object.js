@@ -268,12 +268,13 @@ Gs.Objects.InfoboxFrameCreate = function (elementId,url) {
 }
 
 
-Gs.Objects.WindowIframeCreate = function (title,url) {
+Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
+    if (lastWindow) { ( url = document.getElementById("IFrameWindow") != null ? document.getElementById("IFrameWindow").src : "/") }
     Metro.window.create({
         cls: "p-0", title: title, clsCaption: 'bg-orange',
         btnMin: true, btnMax: true, shadow: true,
-        draggable: true, resizable: true,
-        width:"80%", height:"80%",
+        draggable: false, resizable: true,
+        width:"100%", height:"100%",
         place: 'center',
         clsWindow: "supertop",
         icon: "<span class='mif-hour-glass'></spam>",
@@ -282,3 +283,5 @@ Gs.Objects.WindowIframeCreate = function (title,url) {
         content: "<iframe id=WindowFrame src='" + url + "' width='100%' height='800' frameborder='0' scrolling='yes' style='width: 100%; height: 100 %;'></iframe>"
     });
 }
+
+

@@ -6,7 +6,7 @@ let Gs = {
     Functions: {},
     Apis: {},
     Variables: {
-        monacoEditorList :[],
+        monacoEditorList: [],
         notifySetting :{
             notifyWidth: 300,
             notifyDuration: 1000,
@@ -38,17 +38,17 @@ window.WindowButtons = [
     {
         html: "<span class='mif-help' title='Show Menu Help'></span>",
         cls: "success",
-        onclick: "Gs.Objects.InfoboxFrameCreate('HelpViewer','/serverportal/addons/md-viewer/index.html');"
+        onclick: "Gs.Objects.InfoboxFrameCreate('HelpViewer','/serverportal/addons/md-viewer/index.html', false);"
     },
     {
         html: "<span class='mif-import-contacts' title='Show Function List'></span>",
         cls: "warning",
-        onclick: "Gs.Objects.WindowIframeCreate('Function List','/serverportal/addons/fancytree/codepreview.html');"
+        onclick: "Gs.Objects.WindowIframeCreate('Function List','/serverportal/addons/fancytree/codepreview.html', false);"
     },
     {
-        html: "<span class='mif-import-apps' title='Open in New Window'></span>",
+        html: "<span class='mif-windows' title='Open in New Window'></span>",
         cls: "warning",
-        onclick: "Gs.Objects.WindowIframeCreate('Function List','/serverportal/addons/fancytree/codepreview.html');"
+        onclick: "Gs.Objects.WindowIframeCreate('Open Window','', true);"
     },
     {
         html: "<span class='mif-import-export' title='Export'></span>",
