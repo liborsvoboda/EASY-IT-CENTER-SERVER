@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Playwright;
+using PuppeteerSharp;
 using ScrapySharp.Network;
 using Westwind.AspNetCore.Markdown;
 
@@ -13,7 +15,14 @@ using Westwind.AspNetCore.Markdown;
 namespace EasyITCenter.Controllers {
 
 
-    [Authorize]
+    public class HtmlScreenShotReq {
+        public string Url { get; set; } = null;
+        public string SavePath { get; set; } = null;
+    }
+
+
+
+    [AllowAnonymous]
     [Route("/DownloadService")]
     public class DownloadService : Controller {
 
@@ -36,7 +45,7 @@ namespace EasyITCenter.Controllers {
 
 
 
-        [HttpPost("/ServerApi/GeneratorServerServices/DownloadMarkdownFromUrlToStatic")]
+        [HttpPost("/DownloadService/DownloadMarkdownFromUrlToStatic")]
         [Consumes("application/json")]
         public async Task<string> DownloadMarkdownFromUrlToStatic([FromBody] string markdownUrl) {
 
@@ -44,5 +53,38 @@ namespace EasyITCenter.Controllers {
             return MdAsHtml;
         }
 
+
+
+        [HttpPost("/DownloadService/DownloadHtmlScreenShot")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> DownloadHtmlScreenShot([FromBody] HtmlScreenShotReq htmlScreenShotReq) {
+
+            using var playwright = await Playwright.CreateAsync();
+            await using var browser = await playwright.Chromium.LaunchAsync();
+            var page = await browser.NewPageAsync();
+            await page.GotoAsync(htmlScreenShotReq.Url);
+            await page.ScreenshotAsync(new PageScreenshotOptions() { Path = htmlScreenShotReq.SavePath });
+
+            return base.Json(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.success.ToString() });
+        }
+
+
+
+        [HttpPost("/DownloadService/DownloadPdfScreenShot")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> DownloadPdfScreenShot([FromBody] HtmlScreenShotReq htmlScreenShotReq) {
+
+            var browserFetcher = new BrowserFetcher();
+            await browserFetcher.DownloadAsync();
+            await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+            await using var page = await browser.NewPageAsync();
+            await page.GoToAsync(htmlScreenShotReq.Url);
+
+            // Wait for fonts to be loaded. Omitting this might result in no text rendered in pdf.
+            await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+            await page.PdfAsync(htmlScreenShotReq.SavePath);
+
+            return base.Json(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.success.ToString() });
+        }
     }
 }

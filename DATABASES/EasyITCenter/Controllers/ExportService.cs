@@ -1,5 +1,20 @@
-﻿using HtmlAgilityPack;
+﻿using ChangelogGenerator.Core.Settings;
+using ChangelogGenerator.Core;
+using HtmlAgilityPack;
 using System.IO.Compression;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Playwright;
+using PuppeteerSharp;
+using ScrapySharp.Network;
+using Westwind.AspNetCore.Markdown;
+
 
 namespace EasyITCenter.Controllers {
 
@@ -15,6 +30,8 @@ namespace EasyITCenter.Controllers {
             _hostingEnvironment = hostingEnvironment;
             Context = context;
         }
+
+
 
         /// <summary>
         /// Update Translation Table By All Tables and Field Names For Export Offline Language

@@ -286,6 +286,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="HtmlGenerator" Version="2.0.0" />
     <PackageReference Include="HtmlSharpCore" Version="1.1.3" />
     <PackageReference Include="HtmlWarningsReportGenerator" Version="1.0.5" />
+    <PackageReference Include="igloo15.ChangelogGenerator.Core" Version="1.0.1" />
     <PackageReference Include="Jint" Version="4.0.0" />
     <PackageReference Include="Jint.CommonJS" Version="1.0.14" />
     <PackageReference Include="jose-jwt" Version="5.0.0" />
@@ -474,6 +475,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Peachpie.Runtime" Version="1.1.10" />
     <PackageReference Include="Pek.Markdig.HighlightJs" Version="0.5.1" />
     <PackageReference Include="PivotCore" Version="1.2022.8330.2110" />
+    <PackageReference Include="PlaywrightExtraSharp2" Version="1.0.7.1" />
     <PackageReference Include="Portable.Xaml" Version="0.26.0" />
     <PackageReference Include="PowerBridge" Version="1.3.6326.41344">
       <PrivateAssets>all</PrivateAssets>

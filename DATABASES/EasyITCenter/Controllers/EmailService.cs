@@ -1,6 +1,17 @@
 ﻿namespace EasyITCenter.Controllers {
 
     /// <summary>
+    /// Class Definition for Server Emailer In List of this claas you can use Mass Emailer
+    /// </summary>
+    public class SendMailRequest {
+        public string? Sender { get; set; } = null;
+        public List<string>? Recipients { get; set; } = null;
+        public string? Subject { get; set; } = null;
+        public string? Content { get; set; } = null;
+    }
+
+
+    /// <summary>
     /// Server Email sender Api for logged Communication
     /// </summary>
     /// <seealso cref="ControllerBase"/>

@@ -32,16 +32,21 @@ let Gs = {
 window.WindowButtons = [
     {
         html: "<span class='mif-file-code' title='Show Window Code'></span>",
-        cls: "warning",
+        cls: "alert",
         onclick: "Gs.Behaviors.ShowWindowCode()"
     },
     {
         html: "<span class='mif-help' title='Show Menu Help'></span>",
-        cls: "warning",
+        cls: "success",
         onclick: "Gs.Objects.InfoboxFrameCreate('HelpViewer','/serverportal/addons/md-viewer/index.html');"
     },
     {
         html: "<span class='mif-import-contacts' title='Show Function List'></span>",
+        cls: "warning",
+        onclick: "Gs.Objects.WindowIframeCreate('Function List','/serverportal/addons/fancytree/codepreview.html');"
+    },
+    {
+        html: "<span class='mif-import-apps' title='Open in New Window'></span>",
         cls: "warning",
         onclick: "Gs.Objects.WindowIframeCreate('Function List','/serverportal/addons/fancytree/codepreview.html');"
     },
@@ -52,11 +57,6 @@ window.WindowButtons = [
     },
     {
         html: "<span class='mif-language' title='Translate'></span>",
-        cls: "sys-button",
-        onclick: "alert('You press user button')"
-    },
-    {
-        html: "<span class='mif-search' title='Search'></span>",
         cls: "sys-button",
         onclick: "alert('You press user button')"
     },

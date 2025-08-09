@@ -1,6 +1,5 @@
 ﻿
 Gs.Objects.ShowToolPanel = function (close) {
-    $("#EnableAutoTranslate").val('checked')[0].checked = Metro.storage.getItem('UserSettingList', null).EnableAutoTranslate;
     if (close) { Metro.bottomsheet.close($('#ToolPanel')); } else {
         if (Metro.bottomsheet.isOpen($('#ToolPanel'))) { Metro.bottomsheet.close($('#ToolPanel')); }
         else { Metro.bottomsheet.open($('#ToolPanel')); }
@@ -15,6 +14,8 @@ Gs.Objects.CreateToolPanel = function () {
     html += '<ul data-role="materialtabs" data-expand="true" data-tabs-type="text" data-on-tab="">';
     html += '<li class="fg-black"><A href="#_toolTranslate">Translate</A> </li>';
     html += '<li class="fg-black"><A href="#_toolUserSet">User Setting</A> </li>';
+    html += '<li class="fg-black"><A href="#_toolHelp">Fast Help</A></li>';
+    html += '<li class="fg-black"><A href="#_toolImages">Images</A></li>';
     html += '<li class="fg-black"><A href="#_toolRadio">Radio</A></li>';
     html += '<li class="fg-black"><A href="#_toolVideo">Video</A></li>';
     html += '</ul>';
