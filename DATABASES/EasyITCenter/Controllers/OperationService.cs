@@ -29,7 +29,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<IActionResult> GenerateChangeLog() {
 
-            ChangelogSettings settings = new ChangelogSettings() { };
+            ChangelogSettings settings = new ChangelogSettings() { AllCommits = true };
             ChangelogCore core = new ChangelogCore();
             core.GenerateChangelog(settings);
 
