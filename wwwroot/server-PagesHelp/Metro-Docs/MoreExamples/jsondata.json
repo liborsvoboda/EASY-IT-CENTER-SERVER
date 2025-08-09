@@ -144,6 +144,12 @@
     "key": "\\server-PagesHelp\\\\Metro-Docs\\\\MoreExamples\\examples\\dialogs\\index.html"
   },
   {
+    "title": "fancytreeviewer",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-PagesHelp\\\\Metro-Docs\\\\MoreExamples\\examples\\fancytreeviewer\\index.html"
+  },
+  {
     "title": "forms",
     "folder": false,
     "checkbox": false,
