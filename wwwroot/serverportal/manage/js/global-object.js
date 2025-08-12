@@ -79,7 +79,7 @@ Gs.Objects.ShowBlockedMessage = function () {
 
 //Unauthorized Access Info Panel
 Gs.Objects.ShowUnAuthMessage = function () {
-    Logout();
+    Gs.Behaviors.SignOut();
     var html_content =
         "<h3>Neautorizovaný Přístup</h3>" +
         "<p>Pokoušíte se provést autorizovanou operaci neoprávněně,</p>" +

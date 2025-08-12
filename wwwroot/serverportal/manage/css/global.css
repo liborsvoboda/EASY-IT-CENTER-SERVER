@@ -10,6 +10,16 @@ body {
     min-height: 100%;
 }
 
+
+.qxCTlb {
+    position: fixed !important;
+    top: 40px !important;
+    z-index: 1000 !important;
+    width: 280px !important;
+    background-color: rgb(193 141 46) !important;
+    top: 52px !important;
+}
+
 .navview .navview-pane {
   background-color: #222D32;
   color: #b8c7ce;

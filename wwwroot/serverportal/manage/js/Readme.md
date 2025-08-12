@@ -1,4 +1,4 @@
-# Handlebar.js Code Generator   
+﻿# Handlebar.js Code Generator   
    
 ````   
 var source = "<p>Hello, my name is {{name}}. I am from {{hometown}}. I have " +   
@@ -27,7 +27,26 @@ var result = template(data);
 ````    
   Cookies.set('ApiToken', data.Token);   
   Cookies.remove('ApiToken');    
-  
+  Cookies.get('ApiToken');  
+
 ````    
 
 
+
+# ClipBoard      
+https://clipboardjs.com/     
+
+var clipboard = new ClipboardJS('.btn');
+
+clipboard.on('success', function(e) {
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
+
+    e.clearSelection();
+});
+
+clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+});

@@ -275,7 +275,7 @@ Gs.Behaviors.Logged = function () {
 Gs.Behaviors.ShowWindowCode = function () {
     if (document.getElementById("IFrameWindow") == null) {
         Gs.Functions.ShowSource();
-    } else { console.log("iframe"); Gs.Functions.ShowFrameSource(); }
+    } else { Gs.Functions.ShowFrameSource(); }
 }
 
 
