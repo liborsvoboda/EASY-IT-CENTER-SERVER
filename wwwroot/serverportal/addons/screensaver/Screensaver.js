@@ -1,4 +1,4 @@
-class Screensaver {
+﻿class Screensaver {
   constructor({ secondsInactive, speed, logo, disabledWhenUsingIframes }) {
     this.secondsInactive = secondsInactive
     this.speed = speed
@@ -24,7 +24,8 @@ class Screensaver {
   }
 
   init() {
-    this.container = document.createElement("div")
+      this.container = document.createElement("div")
+      this.container.id = "ScreenSaver"
     this.container.style.position = "fixed"
     this.container.style.left = 0
     this.container.style.right = 0

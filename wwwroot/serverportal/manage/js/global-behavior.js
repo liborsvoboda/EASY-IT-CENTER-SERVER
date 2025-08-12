@@ -8,12 +8,14 @@ Gs.Behaviors.PortalStartup =async function () {
     await Gs.Apis.RunServerPostApi("DBProcedureService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
     await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenu");
 
-    Gs.Objects.GenerateMenu();
-    Gs.Behaviors.LoadUserSettings();
-
-
-
-    $(document).ready(function () { Gs.Functions.GetFunctionList(); });
+    $(document).ready(function () {
+        setTimeout(function () {
+            Gs.Objects.GenerateMenu();
+            Gs.Functions.GetFunctionList();
+            
+            if (!Gs.Behaviors.Logged()) { Gs.Behaviors.LoadUserSettings(); }
+        }, 5000);
+    }); 
     
 }
 
@@ -33,15 +35,11 @@ Gs.Behaviors.ShowPageLoading = function () {
 }
 
 
-
-
-
-
-
-
 Gs.Behaviors.GetGoogleOptionLanguageIndex = function (optionValue) {
-    let options = Array.from(document.getElementsByClassName("goog-te-combo")[0].options);
-    return options.findIndex((opt) => opt.value == optionValue);
+    if (document.querySelector('#google_translate_element select') != null) {
+        let options = Array.from(document.getElementsByClassName("goog-te-combo")[0].options);
+        return options.findIndex((opt) => opt.value == optionValue);
+    } else { return 0; }
 }
 
 Gs.Behaviors.GoogleTranslateElementInit = function () {
@@ -65,34 +63,34 @@ Gs.Behaviors.GoogleTranslateElementInit = function () {
 
 Gs.Behaviors.CancelTranslation = function () {
     let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)));
-    userSetting.EnableAutoTranslate = false;
-    $("#EnableAutoTranslate")[0].checked = userSetting.EnableAutoTranslate;
-    Metro.storage.setItem('UserSettingList', userSetting);
-    
+    userSetting.EnableAutoTranslate = false; Metro.storage.setItem('UserSettingList', userSetting);
+    Gs.Behaviors.ElementSetCheckBox("EnableAutoTranslate", Gs.Variables.UserSettingList.EnableAutoTranslate);
 
-    setTimeout(function () {
-        let selectElement = document.querySelector('#google_translate_element select');
-        if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
-            selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
-        } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
-        selectElement.dispatchEvent(new Event('change'));
-        if (selectElement.value != '') {
-            setTimeout(function () {
-                if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
-                    selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
-                } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
-                selectElement.dispatchEvent(new Event('change'));
-                if (selectElement.value != '') {
-                    setTimeout(function () {
-                        if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
-                            selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
-                        } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
-                        selectElement.dispatchEvent(new Event('change'));
-                    }, 2000);
-                }
-            }, 2000);
-        }
-    }, 1000);
+    if (document.querySelector('#google_translate_element select') != null) {
+        setTimeout(function () {
+            let selectElement = document.querySelector('#google_translate_element select');
+            if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
+                selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
+            } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
+            selectElement.dispatchEvent(new Event('change'));
+            if (selectElement.value != '') {
+                setTimeout(function () {
+                    if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
+                        selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
+                    } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
+                    selectElement.dispatchEvent(new Event('change'));
+                    if (selectElement.value != '') {
+                        setTimeout(function () {
+                            if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
+                                selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
+                            } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
+                            selectElement.dispatchEvent(new Event('change'));
+                        }, 2000);
+                    }
+                }, 2000);
+            }
+        }, 1000);
+    }
 }
 
 
@@ -105,11 +103,36 @@ Gs.Behaviors.DisableScroll = function () {
 }
 
 
+Gs.Behaviors.SetUserSettings = function () {
+    let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))
+    userSetting.EnableAutoTranslate = $("#EnableAutoTranslate").val('checked')[0].checked;
+    userSetting.EnableShowDescription = $("#EnableShowDescription")[0].checked;
+    userSetting.RememberLastHandleBar = $("#RememberLastHandleBar")[0].checked;
+    userSetting.RememberLastJson = $("#RememberLastJson")[0].checked;
+    userSetting.EnableScreenSaver = $("#EnableScreenSaver")[0].checked;
+
+    Metro.storage.setItem('UserSettingList', userSetting);
+    if ($("#EnableAutoTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
+    if ($("#EnableScreenSaver").val('checked')[0].checked && document.getElementById("ScreenSaver") == null) {
+        Gs.Variables.screensaver = new Screensaver({
+            secondsInactive: 60,
+            speed: 1.5,
+            logo: "/serverportal/images/logo.png",
+            disabledWhenUsingIframes: false,
+        });
+    } else if (!$("#EnableScreenSaver").val('checked')[0].checked) { Gs.Variables.screensaver = {}; Gs.Functions.RemoveElement("ScreenSaver"); }
+}
+
+
 Gs.Behaviors.LoadUserSettings = function () {
-    Gs.Behaviors.ElementSetCheckBox("#EnableAutoTranslate", Gs.Variables.UserSettingList.EnableAutoTranslate);
-    Gs.Behaviors.ElementSetCheckBox("#EnableShowDescription", Gs.Variables.UserSettingList.EnableShowDescription);
-    Gs.Behaviors.ElementSetCheckBox("#RememberLastHandleBar", Gs.Variables.UserSettingList.RememberLastHandleBar);
-    Gs.Behaviors.ElementSetCheckBox("#RememberLastJson", Gs.Variables.UserSettingList.RememberLastJson);
+    Gs.Behaviors.ElementSetCheckBox("EnableAutoTranslate", Gs.Variables.UserSettingList.EnableAutoTranslate);
+    Gs.Behaviors.ElementSetCheckBox("EnableShowDescription", Gs.Variables.UserSettingList.EnableShowDescription);
+    Gs.Behaviors.ElementSetCheckBox("RememberLastHandleBar", Gs.Variables.UserSettingList.RememberLastHandleBar);
+    Gs.Behaviors.ElementSetCheckBox("RememberLastJson", Gs.Variables.UserSettingList.RememberLastJson);
+    Gs.Behaviors.ElementSetCheckBox("EnableScreenSaver", Gs.Variables.UserSettingList.EnableScreenSaver);
+
+    //Apply Changes
+    Gs.Behaviors.SetUserSettings();
 }
 
 
@@ -236,23 +259,16 @@ Gs.Behaviors.InfoBoxOpenClose = function (elementId) {
 }
 
 
-Gs.Behaviors.SetUserSettings = function () {
-    let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))
-    userSetting.EnableAutoTranslate = $("#EnableAutoTranslate").val('checked')[0].checked;
-    userSetting.EnableShowDescription = $("#EnableShowDescription")[0].checked;
-    userSetting.RememberLastHandleBar = $("#RememberLastHandleBar")[0].checked;
-    userSetting.RememberLastJson = $("#RememberLastJson")[0].checked;
-
-
-    Metro.storage.setItem('UserSettingList', userSetting);
-    if ($("#EnableAutoTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
+Gs.Behaviors.SignOut = function () {
+    Metro.storage.delItem('ApiToken');
+    Cookies.remove('ApiToken');
+    window.location.href = Metro.storage.getItem("DefaultPath", null);
 }
 
 
-Gs.Behaviors.SignOut = function () {
-    Metro.storage.delItem('ApiToken');
-    Cookies.set('ApiToken', null);
-    window.location.href = Metro.storage.getItem("DefaultPath", null);
+Gs.Behaviors.Logged = function () {
+    //https://github.com/js-cookie/js-cookie
+    if (Cookies.get('ApiToken') == undefined || Cookies.get('ApiToken') == null) { return false } else { return true};
 }
 
 

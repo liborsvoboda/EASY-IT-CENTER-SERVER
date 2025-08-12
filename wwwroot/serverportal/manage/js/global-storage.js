@@ -5,8 +5,10 @@ let Gs = {
     Objects: {},
     Functions: {},
     Apis: {},
+    Media: {},
     Variables: {
         monacoEditorList: [],
+        screensaver: {},
         notifySetting :{
             notifyWidth: 300,
             notifyDuration: 1000,
@@ -21,11 +23,31 @@ let Gs = {
             { tableName: null },
             { dataRec: null }
         ],
+        media: {
+            mediaRecorder: null, //Media Recorder
+            videoRecBlob: [], //Recorder Blob
+            videoCaptureStream: null, //Recording Stream
+            videoMimeType: "video/mp4",
+            imageMimeType: "image/png",
+            elVideoCameraControl: "VideoCameraButton",
+            elImageControl: "ImageButton",
+            videoCaptureOpt: {
+                video: { displaySurface: "browser" }, // "monitor","browser"
+                audio: { suppressLocalAudioPlayback: false },
+                preferCurrentTab: false,
+                systemAudio: "include",
+                selfBrowserSurface: "exclude",
+                surfaceSwitching: "include",
+                monitorTypeSurfaces: "include"
+                //, cursor: 'always'		
+            }
+        },
         UserSettingList: {
             EnableAutoTranslate: false,
             EnableShowDescription: true,
             RememberLastJson: true,
             RememberLastHandleBar: true,
+            EnableScreenSaver: true,
         },
     }
 }
@@ -46,17 +68,22 @@ window.WindowButtons = [
         onclick: "Gs.Objects.WindowIframeCreate('Open Window','', true);"
     },
     {
+        html: "<span class='mif-image' title='Take ScreenShot'></span>",
+        cls: "sys-button",
+        onclick: "Gs.Media.CaptureToImage()"
+    },
+    {
+        html: "<span class='mif-video-camera' title='Record Video'></span>",
+        cls: "sys-button",
+        onclick: "Gs.Media.CaptureScreenToVideo()"
+    },
+    {
         html: "<span class='mif-import-export' title='Export'></span>",
         cls: "sys-button",
         onclick: "alert('You press user button')"
     },
     {
         html: "<span class='mif-language' title='Translate'></span>",
-        cls: "sys-button",
-        onclick: "alert('You press user button')"
-    },
-    {
-        html: "<span class='mif-video-camera' title='Record Video'></span>",
         cls: "sys-button",
         onclick: "alert('You press user button')"
     }

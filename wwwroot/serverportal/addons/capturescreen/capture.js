@@ -1,25 +1,17 @@
+﻿
 
-/*
-* mediaRecorder: Media Recorder
-* videoRecBlob: Recorder Blob
-* videoCaptureStream: Recording Stream
-* capturedVideo: new Blob(recordedBlobs, {type: EicJSscript[0].videoMimeType})
-* preferCurrentTab: Browser Current Tab
-* selfBrowserSurface: "include","exclude" ->Show UserQuestion for Screen fullmonitor/browser
-* monitorTypeSurfaces: "include","exclude" ->Show UserQuestion for Screen fullmonitor/browser
-*/
-window.EicJSscript = [{
+window.EicJSscript = {
 	 mediaRecorder : null, //Media Recorder
 	 videoRecBlob : [], //Recorder Blob
 	 videoCaptureStream: null, //Recording Stream
 	 videoMimeType : "video/mp4",
 	 imageMimeType : "image/png",  
-	 capturedVideo : null,  
+	 capturedVideo: null,  
+	 capturedImage: "ImagePreview",
 	 elVideoCameraControl: "VideoCameraButton",
 	 elVideoScreenControl: "VideoScreenButton",
 	 elVideoPlayer: "VideoPlayer", 
 	 elImageControl: "ImageButton",
-	 elImagePreview: "ImagePreview",
 	 EICconsole: "", 
 	 videoCaptureOpt : {
 		video: { displaySurface: "browser" }, // "monitor","browser"
@@ -31,96 +23,103 @@ window.EicJSscript = [{
 		monitorTypeSurfaces: "include"
 		//, cursor: 'always'		
 	}
-}];
+};
 
 
 //Start Capturing Video
 if(!navigator.getDisplayMedia && !navigator.mediaDevices.getDisplayMedia) {
     var error = 'Your browser does NOT supports getDisplayMedia API.';
-    EicJSscript[0].EICconsole = error + "\r\n" + EicJSscript[0].EICconsole ;
-    document.getElementById(EicJSscript[0].elVideoCameraControl).style.display = 'none';
-	document.getElementById(EicJSscript[0].elVideoScreenControl).style.display = 'none';
-	document.getElementById(EicJSscript[0].elImageControl).style.display = 'none';
+    EicJSscript.EICconsole = error + "\r\n" + EicJSscript.EICconsole ;
+    document.getElementById(EicJSscript.elVideoCameraControl).style.display = 'none';
+	document.getElementById(EicJSscript.elVideoScreenControl).style.display = 'none';
+	document.getElementById(EicJSscript.elImageControl).style.display = 'none';
 }
 
 
 window.EicJSscript.CaptureCameraToVideo = async function() {
-	let tmpVideoCtrl = document.getElementById(EicJSscript[0].elVideoCameraControl);
-	if(tmpVideoCtrl.value ==  "start"){
+	let tmpVideoCtrl = document.getElementById(EicJSscript.elVideoCameraControl);
+	if (tmpVideoCtrl.value == "start" || EicJSscript.mediaRecorder == null){
 		tmpVideoCtrl.value =  "stop";
 		tmpVideoCtrl.innerHTML = tmpVideoCtrl.innerHTML.replace("Start","Stop");
 		try {
-			const stream = await navigator.mediaDevices.getUserMedia(EicJSscript[0].videoCaptureOpt);
-			let tmpVideoPlayer = document.getElementById(EicJSscript[0].elVideoPlayer);
+			const stream = await navigator.mediaDevices.getUserMedia(EicJSscript.videoCaptureOpt);
+			let tmpVideoPlayer = document.getElementById(EicJSscript.elVideoPlayer);
 			tmpVideoPlayer.style.display = "inline";
 			tmpVideoPlayer.src = "";
 			tmpVideoPlayer.srcObject = stream;
 			tmpVideoPlayer.play;
 			EicJSscript.HandleStreamSuccess(stream);
-		} catch (e) { EicJSscript[0].EICconsole = 'navigator.getUserMedia error: ' + e + "\r\n" + EicJSscript[0].EICconsole; }
+		} catch (e) { EicJSscript.EICconsole = 'navigator.getUserMedia error: ' + e + "\r\n" + EicJSscript.EICconsole; }
 	} else{ 
-		EicJSscript[0].mediaRecorder.stop();
-		let tracks = EicJSscript[0].videoCaptureStream.getTracks();
+		EicJSscript.mediaRecorder.stop();
+		let tracks = EicJSscript.videoCaptureStream.getTracks();
 		tracks.forEach(track => {track.stop();});
 	}
 }
 
 window.EicJSscript.CaptureScreenToVideo = async function() {
-	let tmpVideoCtrl = document.getElementById(EicJSscript[0].elVideoScreenControl);
-	if(tmpVideoCtrl.value ==  "start"){
+	let tmpVideoCtrl = document.getElementById(EicJSscript.elVideoScreenControl);
+	if (tmpVideoCtrl.value == "start" || EicJSscript.mediaRecorder == null){
 		tmpVideoCtrl.value =  "stop";
 		tmpVideoCtrl.innerHTML = tmpVideoCtrl.innerHTML.replace("Start","Stop");
 		try {
-			const stream = await navigator.mediaDevices.getDisplayMedia(EicJSscript[0].videoCaptureOpt);
-			let tmpVideoPlayer = document.getElementById(EicJSscript[0].elVideoPlayer);
+			const stream = await navigator.mediaDevices.getDisplayMedia(EicJSscript.videoCaptureOpt);
+			let tmpVideoPlayer = document.getElementById(EicJSscript.elVideoPlayer);
 			tmpVideoPlayer.style.display = "inline";
 			tmpVideoPlayer.src = "";
 			tmpVideoPlayer.srcObject = stream;
 			tmpVideoPlayer.play;
 			EicJSscript.HandleStreamSuccess(stream);
-		} catch (e) { EicJSscript[0].EICconsole = 'navigator.getUserMedia error: ' + e + "\r\n" + EicJSscript[0].EICconsole; }
+		} catch (e) { EicJSscript.EICconsole = 'navigator.getUserMedia error: ' + e + "\r\n" + EicJSscript.EICconsole; }
 	} else{ 
-		EicJSscript[0].mediaRecorder.stop();
-		let tracks = EicJSscript[0].videoCaptureStream.getTracks();
+		EicJSscript.mediaRecorder.stop();
+		let tracks = EicJSscript.videoCaptureStream.getTracks();
 		tracks.forEach(track => {track.stop();});
 	}
 }
 
 
+window.EicJSscript.HandleDataAvailable = function (event) {
+	if (event.data && event.data.size > 0) {
+		EicJSscript.videoRecBlob.push(event.data);
+		EicJSscript.capturedVideo = new Blob(EicJSscript.videoRecBlob, { type: EicJSscript.videoMimeType });
+	}
+}
+
 
 window.EicJSscript.HandleStreamSuccess = function(stream) {
-  EicJSscript[0].videoCaptureStream= stream;
-  window.EicJSscript.StartVideoRecording();
-}
-
-
-window.EicJSscript.StartVideoRecording =async function(){
+	EicJSscript.videoCaptureStream= stream;
 	try {
-		let options = EicJSscript[0].videoMimeType;
-		EicJSscript[0].mediaRecorder = new MediaRecorder(EicJSscript[0].videoCaptureStream, {options});
+		let options = EicJSscript.videoMimeType;
+		EicJSscript.mediaRecorder = new MediaRecorder(EicJSscript.videoCaptureStream, { options });
 	} catch (e) {
-		EicJSscript[0].EICconsole = 'Exception while creating MediaRecorder: ' + e + "\r\n" + EicJSscript[0].EICconsole;
+		EicJSscript.EICconsole = 'Exception while creating MediaRecorder: ' + e + "\r\n" + EicJSscript.EICconsole;
 		return;
 	}
-	EicJSscript[0].mediaRecorder.ondataavailable = EicJSscript.HandleDataAvailable;
-	EicJSscript[0].mediaRecorder.start();
+	EicJSscript.mediaRecorder.ondataavailable = EicJSscript.HandleDataAvailable;
+	EicJSscript.mediaRecorder.start();
 }
 
 
-window.EicJSscript.HandleDataAvailable= function (event) {
-  if (event.data && event.data.size > 0) {
-    EicJSscript[0].videoRecBlob.push(event.data);
-	EicJSscript[0].capturedVideo = new Blob(EicJSscript[0].videoRecBlob, {type: EicJSscript[0].videoMimeType});
-  }
-}
 
 window.EicJSscript.DownloadCapturedVideo = function(){
-	const EICdownloadUrl = window.URL.createObjectURL(EicJSscript[0].capturedVideo);
+	const EICdownloadUrl = window.URL.createObjectURL(EicJSscript.capturedVideo);
 	const a = document.createElement('a');
 	a.style.display = 'none'; a.href = EICdownloadUrl;
-	a.download = a.mimeType = EicJSscript[0].videoMimeType;
+	a.download = a.mimeType = EicJSscript.videoMimeType;
 	document.body.appendChild(a);a.click();
 	setTimeout(() => {document.body.removeChild(a);window.URL.revokeObjectURL(EICdownloadUrl);}, 100);
+}
+
+
+window.EicJSscript.DrawCaptureImage = function (video) {
+	let EICtmpCanvas = document.createElement("canvas");
+	video.width = EICtmpCanvas.width = video.videoWidth;
+	video.height = EICtmpCanvas.height = video.videoHeight;
+	EICtmpCanvas.getContext("2d").drawImage(video, 0, 0);
+	video.srcObject.getTracks().forEach(track => track.stop());
+	video.srcObject = null;
+	return EICtmpCanvas;
 }
 
 
@@ -139,31 +138,22 @@ window.EicJSscript.CaptureToCanvas = async function () {
 	});
 }
 
+
 window.EicJSscript.CaptureToImage = async function() {
 	setTimeout(async () => {
 		let EICvideoCanvas = await EicJSscript.CaptureToCanvas();
-		localStorage.setItem(EicJSscript[0].elImagePreview, EICvideoCanvas.toDataURL("image/png"));
-		document.getElementById(EicJSscript[0].elImagePreview).src = localStorage.getItem(EicJSscript[0].elImagePreview,null);
-		document.getElementById(EicJSscript[0].elVideoPlayer).style.display = "none";
-		document.getElementById(EicJSscript[0].elImagePreview).style.display = "inline";
+		localStorage.setItem(EicJSscript.capturedImage, EICvideoCanvas.toDataURL("image/png"));
+		document.getElementById(EicJSscript.capturedImage).src = localStorage.getItem(EicJSscript.capturedImage,null);
+		document.getElementById(EicJSscript.elVideoPlayer).style.display = "none";
+		document.getElementById(EicJSscript.capturedImage).style.display = "inline";
 	}, 500);
 }
 
 
-window.EicJSscript.DrawCaptureImage = function(video) {
-	let EICtmpCanvas = document.createElement("canvas");
-	video.width = EICtmpCanvas.width = video.videoWidth;
-	video.height = EICtmpCanvas.height = video.videoHeight;
-	EICtmpCanvas.getContext("2d").drawImage(video, 0, 0);
-	video.srcObject.getTracks().forEach(track => track.stop());
-	video.srcObject = null;
-	return EICtmpCanvas;
-}
-
-window.EicJSscript.DownloadCapturedImage= function () {
+window.EicJSscript.DownloadcapturedImage= function () {
     const a = document.createElement('a');
     a.style.display = 'none';
-    a.href = localStorage.getItem(EicJSscript[0].elImagePreview,null);
+    a.href = localStorage.getItem(EicJSscript.capturedImage,null);
     a.download = "ScreenShot.png";
     document.body.appendChild(a);
     a.click();
@@ -173,8 +163,8 @@ window.EicJSscript.DownloadCapturedImage= function () {
 }
 
 
-window.EicJSscript.ClearCapturedImage = function() {
-   localStorage.setItem(EicJSscript[0].elImagePreview,null);
+window.EicJSscript.ClearcapturedImage = function() {
+   localStorage.setItem(EicJSscript.capturedImage,null);
 }
 
 

@@ -20,10 +20,6 @@ for clients, auto convert, google drive, etc..
 # ADD LING REPORT BUILDER/designer/editor
 
 
-
-# Problem 
-FastReport.Compat
-
 # Primary HELP PAGES
 https://github.com/dotnet
 
@@ -31,8 +27,6 @@ https://github.com/dotnet
 https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host?tabs=appbuilder
 https://learn.microsoft.com/en-us/dotnet/fundamentals/
 
-# Templates 
-https://github.com/Shopify/liquid
 
 # Extension JS access from C#
 

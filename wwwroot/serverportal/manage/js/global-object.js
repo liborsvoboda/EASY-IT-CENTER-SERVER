@@ -23,17 +23,19 @@ Gs.Objects.CreateToolPanel = function () {
     //html += '<div class="w-100 text-left"> <audio id="radio" class="light bg-transparent" data-role="audio-player" data-src="/server-integrated/razor-pages/serverportal/media/hotel_california.mp3" data-volume=".5"></audio> </div>';
     html += '<div class="w-100 text-left" style="z-index: 1000000;"><div id="google_translate_element"></div></div>';
     html += '<div class="w-100 d-inline-flex"><div class="w-75 text-left">';
-    html += '<input id="EnableAutoTranslate" type="checkbox" data-role="checkbox" data-cls-caption="fg-cyan text-bold" data-caption="Auto Translate" onchange=Gs.Behaviors.SetUserSettings(); checked >';
+    html += '<input id="EnableAutoTranslate" type="checkbox" data-role="checkbox" data-cls-caption="fg-cyan text-bold" data-caption="Auto Translate" onchange=Gs.Behaviors.SetUserSettings(); >';
     html += '</div><div class="w-25 mt-1 text-right" style="max-width:25% !important;"><button class="button secondary mini" style="max-width:100% !important;" onclick=Gs.Behaviors.CancelTranslation(); >Cancel Translate</button></div></div>';
     html += '</div>';
 
     html += '<DIV id=_toolUserSet>';
     html += '<DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
-    html += '<DIV class="form-group" > <INPUT id=EnableShowDescription onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Enable Show Description" > </DIV ></DIV > ';
+    html += '<DIV class="form-group m-0 p-0" > <INPUT id=EnableShowDescription onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Enable Show Description" > </DIV ></DIV > ';
     html += '<DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
-    html += '<DIV class="form-group" > <INPUT id=RememberLastJson onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Remember Last JSON" > </DIV ></DIV > ';
+    html += '<DIV class="form-group m-0 p-0" > <INPUT id=RememberLastJson onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Remember Last JSON" > </DIV ></DIV > ';
     html += '<DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
-    html += '<DIV class="form-group" > <INPUT id=RememberLastHandleBar onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Remember Last HandleBar" > </DIV ></DIV > ';
+    html += '<DIV class="form-group m-0 p-0" > <INPUT id=RememberLastHandleBar onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Remember Last HandleBar" > </DIV ></DIV > ';
+    html += '<DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
+    html += '<DIV class="form-group m-0 p-0" > <INPUT id=EnableScreenSaver onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Enable ScreenSaver" > </DIV ></DIV > ';
 
     html += '<DIV id=_toolRadio></div>';
 
