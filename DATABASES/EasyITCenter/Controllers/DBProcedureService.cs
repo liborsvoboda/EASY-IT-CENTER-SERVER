@@ -91,8 +91,7 @@ namespace EasyITCenter.Controllers {
                 { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
 
-            
-            if (data == succesData) {
+            if (data[0].MessageList == succesData[0].MessageList) {
                 return JsonSerializer.Serialize(new ResultMessage() 
                 { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = null });
             } else {
@@ -107,7 +106,7 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <param name="procedureName"></param>
         /// <returns></returns>
-        [HttpGet("/DBProcedureService/SpProcedure/ErrorMessage/{procedureName}")]
+        [HttpGet("/DBProcedureService/SpProcedure/Message/{procedureName}")]
         public async Task<string> GetSystemOperationsList(string procedureName) {
             List<CustomMessageList> data = new List<CustomMessageList>();
             data = new EasyITCenterContext().EasyITCenterCollectionFromSql<CustomMessageList>($"EXEC {procedureName};");

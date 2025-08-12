@@ -1,45 +1,8 @@
 ﻿
 
-/*
-Gs.Apis.RunServerPostApi =async function (apiPath, jsonData, storageName) {
-    Gs.Behaviors.ShowPageLoading();
-    let response = await fetch(Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, {
-        method: 'POST', headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json charset=UTF-8', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
-        body: JSON.stringify(jsonData)
-    }); let result = await response.json();
-    if (storageName != null) { Metro.storage.setItem(storageName, result); }
-    Gs.Behaviors.HidePageLoading();
 
-    if (result.Status == undefined || result.Status == "success") { return true; }
-    else { Gs.Objects.ShowNotify("alert", result.Status + " " + Gs.Variables.apiMessages.apiSaveFail); return false; }
-}
-
-
-Gs.Apis.RunServerGetApi = async function (apiPath, storageName) {
-    Gs.Behaviors.ShowPageLoading();
-    let response = await fetch(Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, {
-        method: 'GET', headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json charset=UTF-8', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' }
-    }); let result = await response.json();
-    if (storageName != null) { Metro.storage.setItem(storageName, result); }
-    Gs.Behaviors.HidePageLoading();
-    if (result.Status == undefined || result.Status == "success") { return true; }
-    else { Gs.Objects.ShowNotify("alert", result.Status + " " + Gs.Variables.apiMessages.apiLoadFail); return false; }
-}
-
-
-
-Gs.Apis.RunServerDeleteApi = async function (apiPath) {
-    let response = await fetch(Metro.storage.getItem('ApiOriginSuffix', null) + apiPath, {
-        method: 'DELETE', headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json charset=UTF-8', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' }
-    }); let result = await response.json();
-    if (result.Status == undefined || result.Status == "success") { return true; }
-    else { Gs.Objects.ShowNotify("alert", result.Status + " " + Gs.Variables.apiMessages.apiDeleteFail); return false; }
-}
-
-
-*/
-
-Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName) {
+Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windowFunction = null) {
+    //Window function is Only window.fnName() NOT window.Gs.Apis.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
         global: false,
@@ -57,12 +20,14 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName) {
                     Metro.storage.setItem(storageName, result.Result);
                 } else { Metro.storage.setItem(storageName, result); }
             }
+            if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
 
             if (result.Status == undefined || result.Status == "success") { return true; }
             else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
         error: function (err) {
+            if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
             Gs.Objects.ShowNotify("alert", err); return false;
         }
@@ -70,7 +35,8 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName) {
 }
 
 
-Gs.Apis.RunServerGetApi = async function (apiPath, storageName) {
+Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction = null) {
+    //Window function is Only window.fnName() NOT window.Gs.Apis.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
         global: false,
@@ -87,12 +53,14 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName) {
                     Metro.storage.setItem(storageName, result.Result);
                 } else { Metro.storage.setItem(storageName, result); }
             }
+            if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
 
             if (result.Status == undefined || result.Status == "success") { return true; }
             else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
         error: function (err) {
+            if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
             Gs.Objects.ShowNotify("alert", err); return false;
         }
@@ -100,7 +68,8 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName) {
 }
 
 
-Gs.Apis.RunServerDeleteApi = async function (apiPath) {
+Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
+    //Window function is Only window.fnName() NOT window.Gs.Apis.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
         global: false,
@@ -112,12 +81,14 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
+            if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
 
             if (result.Status == undefined || result.Status == "success") { return true; }
             else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
         error: function (err) {
+            if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
             Gs.Objects.ShowNotify("alert", err); return false;
         }
@@ -143,41 +114,29 @@ function ValidateForm() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            Gs.Behaviors.HidePageLoading();
             Cookies.set('ApiToken', result.Token);
             Metro.storage.setItem("ApiToken", result);
+            Gs.Behaviors.HidePageLoading();
             window.location.href = Metro.storage.getItem("DefaultPath", null);
         },
         error: function (err) {
+            Cookies.remove('ApiToken');
+            Metro.storage.delItem("ApiToken");
             Gs.Behaviors.HidePageLoading();
-            Cookies.set('ApiToken', null);
-            Metro.storage.setItem("ApiToken", null);
             Gs.Objects.ShowNotify("alert", err); return false;
         }
     });
-
-    /*
-    var def = $.ajax({
-        global: false, type: "POST", url: Metro.storage.getItem('BackendServerAddress', null) + "/AuthenticationService", dataType: 'json',
-        headers: { "Authorization": "Basic " + btoa($("#usernameId").val() + ":" + $("#passwordId").val()) }
-    });
-
-    def.fail(function (data) {
-        Gs.Objects.ShowNotify("alert", Gs.Variables.apiMessages.incorectLogin);
-        Gs.Behaviors.HidePageLoading();
-    });
-
-    def.done(function (data) {
-        Cookies.set('ApiToken', data.Token);
-        Metro.storage.setItem("ApiToken", data);
-        window.location.href = Metro.storage.getItem("DefaultPath", null); 
-        Gs.Behaviors.HidePageLoading();
-    });
-    */
 
 }
 
 
 Gs.Apis.IsLogged = function () {
-    return Metro.storage.getItem("ApiToken", null) == null ? false : true;
+    if (Cookies.get('ApiToken') == undefined || Cookies.get('ApiToken') == null) { return false } else { return true};
+}
+
+
+Gs.Apis.SignOut = function () {
+    Cookies.remove('ApiToken');
+    Metro.storage.delItem('ApiToken');
+    window.location.href = Metro.storage.getItem("DefaultPath", null);
 }

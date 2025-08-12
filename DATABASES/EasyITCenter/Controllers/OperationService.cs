@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ChangelogGenerator.Core.Settings;
-using ChangelogGenerator.Core;
+using AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,6 +11,8 @@ using Microsoft.Playwright;
 using PuppeteerSharp;
 using ScrapySharp.Network;
 using Westwind.AspNetCore.Markdown;
+using System.Diagnostics;
+using Octokit;
 
 
 namespace EasyITCenter.Controllers {
@@ -28,10 +29,8 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/OperationService/GenerateChangeLog")]
         [Consumes("application/json")]
         public async Task<IActionResult> GenerateChangeLog() {
+            
 
-            ChangelogSettings settings = new ChangelogSettings() { AllCommits = true };
-            ChangelogCore core = new ChangelogCore();
-            core.GenerateChangelog(settings);
 
             return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
         }

@@ -39,20 +39,20 @@
     <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
 
     <div class="app-bar-container ml-left">
-        <a href="#" class="app-bar-item" title="Help Center">
+        <a href="#" class="app-bar-item shadowed" title="Help Center">
             <span class="mif-info"></span>
             <span class="ml-2 app-bar-name">Any Question?</span>
         </a>
-        <a href="#" class="app-bar-item" title="Portal Tools" onclick=Gs.Objects.ShowToolPanel(); >
+        <a href="#" class="app-bar-item shadowed" title="Portal Tools" onclick=Gs.Objects.ShowToolPanel(); >
             <span class="mif-language"></span>
             <span class="ml-2 app-bar-name">Portal Tools</span>
         </a>
-        <a href="#" class="app-bar-item" title="Favorites" onclick=Gs.Objects.ShowFavorites("BottomSheet");>
+        <a href="#" class="app-bar-item shadowed" title="Favorites" onclick=Gs.Objects.ShowFavorites("Favorites",false); >
             <span class="mif-favorite"></span>
             <span class="ml-2 app-bar-name">Favorites</span>
         </a>
 
-        <a href="#" class="app-bar-item" title="Rezervace Online" onclick=window.open("https://calendar.app.google/7GtS8wkYG9HoUVAB7");>
+        <a href="#" class="app-bar-item shadowed" title="Rezervace Online" onclick=window.open("https://calendar.app.google/7GtS8wkYG9HoUVAB7");>
             <span class="mif-contacts-dialer"></span>
             <span class="ml-2 app-bar-name">Reservation Online</span>
         </a>
@@ -85,7 +85,7 @@
 
 
         <div class="app-bar-container">
-            <a href="#" class="app-bar-item">
+            <a href="#" class="app-bar-item shadowed">
                 <img src="/serverportal/images/logo.png" class="avatar">
                 @{ if(name != null) { <span class="ml-2 app-bar-name">@name</span>}
                 else { <span class="ml-2 app-bar-name">Login</span>}}
@@ -104,7 +104,7 @@
                 <div class="bg-white d-flex flex-justify-between flex-equal-items p-2 bg-light">
                 @{ if(@name != null) {
                     <button class="button mr-1">Profile</button>
-                    <button class="button ml-1" onclick=Gs.Behaviors.SignOut(); >Sign out</button>
+                    <button class="button ml-1" onclick=Gs.Apis.SignOut(); >Sign out</button>
                 } else {
                     <button class="button mr-1" onclick=Gs.Objects.ShowLoginPage(); >Login</button>
                     <button class="button ml-1">Registration</button>
@@ -112,8 +112,12 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="app-bar-item">
+
+        @*
+        <a href="#" class="app-bar-item drop-shadow">
             <span class="mif-cogs" onclick=Gs.Objects.ShowMessagePanel(false) ></span>
         </a>
+        *@
+
     </div>
 </div>

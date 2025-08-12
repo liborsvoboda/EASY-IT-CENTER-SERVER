@@ -42,30 +42,22 @@
                     Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoPreview" })[0].editor.getModel().setValue(data.node.key);
 				},
 				checkbox: function (event, data) {
-					//hide for all
 					return data.node.isFolder() ? false : false;
-
-					// Hide checkboxes for folders
-					//return data.node.isFolder() ? false : true;
-				},
-				//tooltip: function (event, data) {
-				//	// Create dynamic tooltips
-				//	return data.node.title + " (" + data.node.key + ")";
-				//},
+				}
 			});
 		});
 
 		StartUp();
 
-		$(document).ready(function () {
+		//$(document).ready(function () {
           
-			document.getElementById("monacoPreview").style.display = "block";
-			Gs.Functions.AddClass("monacoPreview", "d-inline-flex");
+		//	document.getElementById("monacoPreview").style.display = "block";
+		//	Gs.Functions.AddClass("monacoPreview", "d-inline-flex");
 
-            setTimeout(function () {
-                Gs.Functions.RemoveClass("monacoPreview", "d-inline-flex");
-            }, 2000);
-		}); 
+  //          setTimeout(function () {
+  //              Gs.Functions.RemoveClass("monacoPreview", "d-inline-flex");
+  //          }, 2000);
+		//}); 
 		
 	</script>
 </head>
@@ -83,62 +75,26 @@
 		</select>
 
 		<select class="language" style='position: absolute;left: 90%;z-index: 2000;top: 30px;right: 0px;'>
-			<!-- <option>apex</option> -->
-			<!-- <option>azcli</option> -->
 			<option>bat</option>
-			<!-- <option>c</option> -->
-			<!-- <option>clojure</option> -->
-			<!-- <option>coffeescript</option> -->
-			<!-- <option>cpp</option> -->
 			<option>csharp</option>
-			<!-- <option>csp</option> -->
 			<option>css</option>
-			<!-- <option>dockerfile</option> -->
-			<!-- <option>fsharp</option> -->
-			<!-- <option>go</option> -->
 			<option>graphql</option>
-			<!-- <option>handlebars</option> -->
 			<option>html</option>
-			<!-- <option>ini</option> -->
-			<!-- <option>java</option> -->
 			<option selected>javascript</option>
 			<option>json</option>
-			<!-- <option>kotlin</option> -->
-			<!-- <option>less</option> -->
-			<!-- <option>lua</option> -->
 			<option>markdown</option>
-			<!-- <option>msdax</option> -->
 			<option>mysql</option>
-			<!-- <option>objective-c</option> -->
-			<!-- <option>pascal</option> -->
-			<!-- <option>perl</option> -->
 			<option>pgsql</option>
-			<!-- <option>php</option> -->
-			<!-- <option>plaintext</option> -->
-			<!-- <option>postiats</option> -->
 			<option>powerquery</option>
 			<option>powershell</option>
-			<!-- <option>pug</option> -->
-			<!-- <option>python</option> -->
-			<!-- <option>r</option> -->
 			<option>razor</option>
-			<!-- <option>redis</option> -->
-			<!-- <option>redshift</option> -->
-			<!-- <option>ruby</option> -->
-			<!-- <option>rust</option> -->
-			<!-- <option>sb</option> -->
 			<option>scheme</option>
 			<option>scss</option>
 			<option>shell</option>
-			<!-- <option>sol</option> -->
 			<option>sql</option>
-			<!-- <option>st</option> -->
-			<!-- <option>swift</option> -->
-			<!-- <option>tcl</option> -->
 			<option>typescript</option>
 			<option>vb</option>
 			<option>xml</option>
-			<!-- <option>yaml</option> -->
 		</select>
 	</div>
 </body>

@@ -1,6 +1,6 @@
 ﻿
 //Global Javascript Library
-let Gs = {
+window.Gs = {
     Behaviors: {},
     Objects: {},
     Functions: {},

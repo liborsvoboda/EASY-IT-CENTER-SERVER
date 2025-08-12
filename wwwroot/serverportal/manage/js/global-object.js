@@ -152,7 +152,7 @@ Gs.Objects.GenerateMenu = function () {
 
     menu.forEach((mItem, index, arr) => {
         if (mItem.InheritedMenuType == "menu") {
-            htmlContent += '<li id="' + mItem.Sequence + '" ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href="#" class="dropdown-toggle"><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a>';
+            htmlContent += '<li id="' + mItem.Sequence + '" ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' class="drop-shadow" data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href="#" class="dropdown-toggle"><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a>';
             htmlContent += '<ul id ="' + mItem.RecGuid + '" class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + mItem.Name + '</li></ul>';
             htmlContent += '</li>';
         }
@@ -202,9 +202,14 @@ Gs.Objects.ShowMessagePanel = function (close) {
     } else { charms.toggle(); }
 }
 
-Gs.Objects.ShowFavorites = function (elementId) {
-    if (!Metro.bottomsheet.isOpen("#" + elementId)) { Gs.Behaviors.ElementRemoveClass(elementId, "hidden"); } else { Gs.Behaviors.ElementAddClass(elementId, "hidden"); }
-    Metro.bottomsheet.toggle("#" + elementId, "grid");
+
+Gs.Objects.ShowFavorites = function (elementId, close = false) {
+    if (close || Metro.bottomsheet.isOpen("#" + elementId)) {
+        Gs.Behaviors.ElementAddClass(elementId, "hidden");
+        Metro.bottomsheet.close("#" + elementId);
+        Gs.Behaviors.ElementAddClass(elementId, "hidden");
+    }
+    else { Metro.bottomsheet.open("#" + elementId, "grid"); Gs.Behaviors.ElementRemoveClass(elementId, "hidden"); }
 }
 
 

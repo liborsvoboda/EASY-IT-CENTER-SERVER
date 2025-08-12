@@ -13,7 +13,7 @@ Gs.Behaviors.PortalStartup =async function () {
             Gs.Objects.GenerateMenu();
             Gs.Functions.GetFunctionList();
             
-            if (!Gs.Behaviors.Logged()) { Gs.Behaviors.LoadUserSettings(); }
+            if (!Gs.Apis.IsLogged()) { Gs.Behaviors.LoadUserSettings(); }
         }, 5000);
     }); 
     
@@ -111,6 +111,9 @@ Gs.Behaviors.SetUserSettings = function () {
     userSetting.RememberLastJson = $("#RememberLastJson")[0].checked;
     userSetting.EnableScreenSaver = $("#EnableScreenSaver")[0].checked;
 
+    //Save Logged UserSetting
+    if (Gs.Apis.IsLogged) { }
+
     Metro.storage.setItem('UserSettingList', userSetting);
     if ($("#EnableAutoTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
     if ($("#EnableScreenSaver").val('checked')[0].checked && document.getElementById("ScreenSaver") == null) {
@@ -194,7 +197,6 @@ Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
 }
 
 
-//TODO to IFRAME
 Gs.Behaviors.SetExternalContent = function (htmlContentId, jsContentId, cssContentId) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
 
@@ -256,19 +258,6 @@ Gs.Behaviors.InfoBoxOpenClose = function (elementId) {
         if (Metro.infobox.isOpen('#' + elementId)) { Metro.infobox.close('#' + elementId); }
         else { Metro.infobox.open('#' + elementId); }
     } catch { }
-}
-
-
-Gs.Behaviors.SignOut = function () {
-    Metro.storage.delItem('ApiToken');
-    Cookies.remove('ApiToken');
-    window.location.href = Metro.storage.getItem("DefaultPath", null);
-}
-
-
-Gs.Behaviors.Logged = function () {
-    //https://github.com/js-cookie/js-cookie
-    if (Cookies.get('ApiToken') == undefined || Cookies.get('ApiToken') == null) { return false } else { return true};
 }
 
 

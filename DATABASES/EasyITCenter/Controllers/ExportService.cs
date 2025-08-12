@@ -1,6 +1,4 @@
-﻿using ChangelogGenerator.Core.Settings;
-using ChangelogGenerator.Core;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System.IO.Compression;
 using System;
 using System.Collections;

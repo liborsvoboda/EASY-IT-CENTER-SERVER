@@ -35,7 +35,7 @@
         <div class="row mt-5 mb-5 text-center w-100">
 			<div class="w-50 d-flow text-left">
 				<button class="button success shadowed mr-2" @click=GetData("statuses",true);>Statusy</button>
-				<button class="button success shadowed mr-2" @click=GetData("positions",true);>Pozícia</button>
+				<button class="button success shadowed mr-2" @click=GetData("positions",true);>Pozice</button>
 				<button class="button success shadowed mr-2" @click=GetData("persons",true);>Osoby</button>
 				<button class="button success shadowed mr-2" @click=GetData("projects",true);>Projekty</button>
 				<button class="button success shadowed mr-2" @click=GetData("tasks",true);>Úlohy</button>
@@ -55,7 +55,7 @@
 			<THEAD id="tableHeader">
 				<TR>
 					<TH data-sortable="true">Id</TH>
-					<TH data-sortable="true">Názov</TH>
+					<TH data-sortable="true">Název</TH>
 				</TR>
 			</THEAD>
 		</table>
@@ -95,7 +95,7 @@
 			ShowMessagePanel(); 
             GetMessages();
             googleTranslateElementInit();
-	hidePageLoading();
+		hidePageLoading();
         });
 	</script>
 </body>

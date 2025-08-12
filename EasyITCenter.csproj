@@ -12,7 +12,10 @@
     <TypeScriptSourceMap>False</TypeScriptSourceMap>
   </PropertyGroup>
 
- 
+  <PropertyGroup>
+    <GitVersion>false</GitVersion>
+  </PropertyGroup>
+    
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -46,12 +49,10 @@
     <Company>GroupWare-Solution.eu</Company>
     <Authors>Libor Svoboda</Authors>
     <Copyright>Copyright ©GroupWare-Solution.eu  2022</Copyright>
-    <PackageProjectUrl>https://groupware-solution.eu/contactus</PackageProjectUrl>
+    <PackageProjectUrl>https://kliknetezde.cz</PackageProjectUrl>
     <PackAsTool>False</PackAsTool>
     <PackageIcon>Data\groupware-solution.eu.png</PackageIcon>
-    <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <IsPublishable>False</IsPublishable>
   </PropertyGroup>
 
@@ -78,11 +79,9 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
 	<Content Remove="wwwroot\**" />
-	<EntityDeploy Remove="wwwroot\server-PagesHelp\examples\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="C:\Users\tatka\.nuget\packages\microsoft.sourcelink.tools\1.1.1\contentFiles\cs\net6.0\SourceLinkMap.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureDataListApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureFieldApi.cs" />
     <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAuthApi.cs" />
@@ -105,15 +104,10 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
      <Content Include="wwwroot\**" />
   </ItemGroup>  
 
-   <ItemGroup>
-     <Content Remove="wwwroot\serverportal\manage\js\site.js" />
-   </ItemGroup>  
-
 
    <ItemGroup>
      <None Remove="C:\Users\tatka\.nuget\packages\microsoft.applicationinsights.profiler.aspnetcore\2.6.0\contentFiles\any\netstandard2.1\ServiceProfiler\TraceUpload.zip" />
-     <None Remove="Docs\Readme.md" />
-   </ItemGroup>
+  </ItemGroup>
 
   
   <ItemGroup>
@@ -252,6 +246,15 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="FubarDev.FtpServer" Version="3.1.2" />
     <PackageReference Include="FubarDev.FtpServer.Commands" Version="3.1.2" />
     <PackageReference Include="FubarDev.FtpServer.FileSystem.DotNet" Version="3.1.2" />
+    <PackageReference Include="GitBuildInfo.SourceGenerator" Version="1.0.16">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="GitInfo" Version="3.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="GitVersioner" Version="17.12.29.2" />
     <PackageReference Include="Google.Api.CommonProtos" Version="2.15.0" />
     <PackageReference Include="Google.Apis" Version="1.68.0" />
     <PackageReference Include="Google.Apis.Auth" Version="1.68.0" />
@@ -286,7 +289,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="HtmlGenerator" Version="2.0.0" />
     <PackageReference Include="HtmlSharpCore" Version="1.1.3" />
     <PackageReference Include="HtmlWarningsReportGenerator" Version="1.0.5" />
-    <PackageReference Include="igloo15.ChangelogGenerator.Core" Version="1.0.1" />
+    <PackageReference Include="igloo15.MarkdownApi.Core" Version="1.1.0" />
     <PackageReference Include="Jint" Version="4.0.0" />
     <PackageReference Include="Jint.CommonJS" Version="1.0.14" />
     <PackageReference Include="jose-jwt" Version="5.0.0" />
@@ -295,6 +298,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="JsonDb.Core" Version="0.5.0" />
     <PackageReference Include="JsonSchemaClassGenerator" Version="1.0.0.8" />
     <PackageReference Include="jsurl.TypeScript.DefinitelyTyped" Version="1.2.2.1" />
+    <PackageReference Include="KeywordSearch" Version="3.0.1" />
     <PackageReference Include="Korzh.DbUtils" Version="1.4.1" />
     <PackageReference Include="Korzh.DbUtils.Export" Version="1.4.1" />
     <PackageReference Include="Korzh.DbUtils.Import" Version="1.4.1" />
@@ -328,6 +332,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="MarkdigExtensions.SyntaxHighlighting" Version="1.0.3" />
     <PackageReference Include="MarkdigExtensions.UrlRewriter" Version="1.0.0" />
     <PackageReference Include="MarkDownHtmlGenerator" Version="1.2.0" />
+    <PackageReference Include="MarkdownToPdf.NET" Version="1.4.0" />
     <PackageReference Include="MarkdownWeb" Version="1.5.4" />
     <PackageReference Include="MarkdownWeb.AspNetCore" Version="1.0.8" />
     <PackageReference Include="MarkdownWeb.Git" Version="1.0.19" />
@@ -577,6 +582,10 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Vereyon.Web.FlashMessage" Version="3.0.0" />
     <PackageReference Include="Vereyon.Web.HtmlSanitizer" Version="1.8.0" />
     <PackageReference Include="Verify.Playwright" Version="2.3.0" />
+    <PackageReference Include="VersionInfoGenerator" Version="3.2.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Watson" Version="6.1.1" />
     <PackageReference Include="Watson.Core" Version="6.1.1" />
     <PackageReference Include="WatsonTcp" Version="5.1.7" />
@@ -643,9 +652,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <Exec Command="robocopy &quot;$(ProjectDir)wwwroot&quot; &quot;$(ProjectDir)bin\$(ConfigurationName)\net6.0\wwwroot&quot; /s /e &#xD;&#xA; exit /b 0" />
     <Exec Command="robocopy &quot;$(ProjectDir)Docs&quot; &quot;$(ProjectDir)bin\$(ConfigurationName)\net6.0\Docs&quot; /s /e &#xD;&#xA; exit /b 0" />
   </Target>
-  
 
- 
  
    <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
  </Project>

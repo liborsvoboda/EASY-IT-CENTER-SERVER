@@ -23,7 +23,7 @@ var result = template(data);
 ````   
 
 # Cookie Use for ApiToken    
-
+https://github.com/js-cookie/js-cookie     
 ````    
   Cookies.set('ApiToken', data.Token);   
   Cookies.remove('ApiToken');    
