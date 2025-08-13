@@ -6,36 +6,40 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.DBModel
 {
-    [Table("ServerScriptList")]
-    [Index("Name", Name = "IX_ServerScriptList", IsUnique = true)]
-    public partial class ServerScriptList
+    [Table("ServerStartUpScriptList")]
+    [Index("Name", Name = "IX_ServerStartUpScriptList", IsUnique = true)]
+    public partial class ServerStartUpScriptList
     {
         [Key]
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
+        public string Name { get; set; } = null!;
+        [StringLength(50)]
+        [Unicode(false)]
         public string InheritedOsType { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
-        public string InheritedScriptType { get; set; } = null!;
-        [StringLength(50)]
-        [Unicode(false)]
-        public string Name { get; set; } = null!;
+        public string InheritedProcessType { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
+        [StringLength(2048)]
         [Unicode(false)]
-        public string ScriptContent { get; set; } = null!;
-        [StringLength(1024)]
+        public string? InstallCommand { get; set; }
+        [StringLength(2048)]
         [Unicode(false)]
-        public string? SolutionUrl { get; set; }
+        public string? StartCommand { get; set; }
+        [StringLength(2048)]
+        [Unicode(false)]
+        public string? StopCommand { get; set; }
         public bool Installed { get; set; }
         public int UserId { get; set; }
-        public DateTime Timestamp { get; set; }
+        public DateTime TimeStamp { get; set; }
 
         public virtual SolutionMixedEnumList InheritedOsTypeNavigation { get; set; } = null!;
-        public virtual SolutionMixedEnumList InheritedScriptTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedProcessTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
-        [InverseProperty("ServerScriptLists")]
+        [InverseProperty("ServerStartUpScriptLists")]
         public virtual SolutionUserList User { get; set; } = null!;
     }
 }

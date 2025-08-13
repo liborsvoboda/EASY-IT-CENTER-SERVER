@@ -67,8 +67,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ServerLiveDataMonitorList> ServerLiveDataMonitorLists { get; set; } = null!;
         public virtual DbSet<ServerModuleAndServiceList> ServerModuleAndServiceLists { get; set; } = null!;
         public virtual DbSet<ServerParameterList> ServerParameterLists { get; set; } = null!;
-        public virtual DbSet<ServerProcessList> ServerProcessLists { get; set; } = null!;
-        public virtual DbSet<ServerScriptList> ServerScriptLists { get; set; } = null!;
+        public virtual DbSet<ServerStartUpScriptList> ServerStartUpScriptLists { get; set; } = null!;
         public virtual DbSet<ServerStaticOrMvcDefPathList> ServerStaticOrMvcDefPathLists { get; set; } = null!;
         public virtual DbSet<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; } = null!;
         public virtual DbSet<ServerToolTypeList> ServerToolTypeLists { get; set; } = null!;
@@ -1035,56 +1034,29 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_ServerParameterList_SolutionUserList");
             });
 
-            modelBuilder.Entity<ServerProcessList>(entity =>
+            modelBuilder.Entity<ServerStartUpScriptList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.UserPreffix).IsFixedLength();
-
-                entity.HasOne(d => d.InheritedCommandTypeNavigation)
-                    .WithMany(p => p.ServerProcessListInheritedCommandTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedCommandType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerProcessList_SolutionMixedEnumList1");
-
-                entity.HasOne(d => d.InheritedProcessTypeNavigation)
-                    .WithMany(p => p.ServerProcessListInheritedProcessTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedProcessType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerProcessList_SolutionMixedEnumList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.ServerProcessLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerProcessList_UserList");
-            });
-
-            modelBuilder.Entity<ServerScriptList>(entity =>
-            {
-                entity.Property(e => e.Timestamp).HasDefaultValueSql("(getdate())");
-
                 entity.HasOne(d => d.InheritedOsTypeNavigation)
-                    .WithMany(p => p.ServerScriptListInheritedOsTypeNavigations)
+                    .WithMany(p => p.ServerStartUpScriptListInheritedOsTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
                     .HasForeignKey(d => d.InheritedOsType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerScriptList_SolutionMixedEnumList");
+                    .HasConstraintName("FK_ServerStartUpScriptList_SolutionMixedEnumList");
 
-                entity.HasOne(d => d.InheritedScriptTypeNavigation)
-                    .WithMany(p => p.ServerScriptListInheritedScriptTypeNavigations)
+                entity.HasOne(d => d.InheritedProcessTypeNavigation)
+                    .WithMany(p => p.ServerStartUpScriptListInheritedProcessTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedScriptType)
+                    .HasForeignKey(d => d.InheritedProcessType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerScriptList_SolutionMixedEnumList1");
+                    .HasConstraintName("FK_ServerStartUpScriptList_SolutionMixedEnumList1");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.ServerScriptLists)
+                    .WithMany(p => p.ServerStartUpScriptLists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServerScriptList_SolutionUserList");
+                    .HasConstraintName("FK_ServerStartUpScriptList_SolutionUserList");
             });
 
             modelBuilder.Entity<ServerStaticOrMvcDefPathList>(entity =>

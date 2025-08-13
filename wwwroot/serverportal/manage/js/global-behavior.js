@@ -147,11 +147,13 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     //and reset menu data
     if (!Metro.storage.getItem('UserSettingList', null).RememberLastHandleBar) { Metro.storage.delItem("HandlebarCode"); }
     if (!Metro.storage.getItem('UserSettingList', null).RememberLastJson) { Metro.storage.delItem("JsonGeneratorService"); }
+    //RESET here storage tables from Portal Menu
     Metro.storage.delItem("SelectedMenuId");
     Metro.storage.delItem('ApiTableList');
     Metro.storage.delItem("SelectedMenu");
+    Metro.storage.delItem("ServerStartUpScriptList");
     
-
+    
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);

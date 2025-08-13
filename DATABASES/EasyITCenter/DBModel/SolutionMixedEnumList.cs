@@ -24,10 +24,8 @@ namespace EasyITCenter.DBModel
             ServerModuleAndServiceListInheritedPageTypeNavigations = new HashSet<ServerModuleAndServiceList>();
             ServerParameterListInheritedDataTypeNavigations = new HashSet<ServerParameterList>();
             ServerParameterListInheritedServerParamTypeNavigations = new HashSet<ServerParameterList>();
-            ServerProcessListInheritedCommandTypeNavigations = new HashSet<ServerProcessList>();
-            ServerProcessListInheritedProcessTypeNavigations = new HashSet<ServerProcessList>();
-            ServerScriptListInheritedOsTypeNavigations = new HashSet<ServerScriptList>();
-            ServerScriptListInheritedScriptTypeNavigations = new HashSet<ServerScriptList>();
+            ServerStartUpScriptListInheritedOsTypeNavigations = new HashSet<ServerStartUpScriptList>();
+            ServerStartUpScriptListInheritedProcessTypeNavigations = new HashSet<ServerStartUpScriptList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             SolutionCodeLibraryLists = new HashSet<SolutionCodeLibraryList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
@@ -77,10 +75,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerModuleAndServiceList> ServerModuleAndServiceListInheritedPageTypeNavigations { get; set; }
         public virtual ICollection<ServerParameterList> ServerParameterListInheritedDataTypeNavigations { get; set; }
         public virtual ICollection<ServerParameterList> ServerParameterListInheritedServerParamTypeNavigations { get; set; }
-        public virtual ICollection<ServerProcessList> ServerProcessListInheritedCommandTypeNavigations { get; set; }
-        public virtual ICollection<ServerProcessList> ServerProcessListInheritedProcessTypeNavigations { get; set; }
-        public virtual ICollection<ServerScriptList> ServerScriptListInheritedOsTypeNavigations { get; set; }
-        public virtual ICollection<ServerScriptList> ServerScriptListInheritedScriptTypeNavigations { get; set; }
+        public virtual ICollection<ServerStartUpScriptList> ServerStartUpScriptListInheritedOsTypeNavigations { get; set; }
+        public virtual ICollection<ServerStartUpScriptList> ServerStartUpScriptListInheritedProcessTypeNavigations { get; set; }
         public virtual ICollection<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; }
         public virtual ICollection<SolutionCodeLibraryList> SolutionCodeLibraryLists { get; set; }
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
