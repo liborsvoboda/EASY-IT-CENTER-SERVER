@@ -3,17 +3,7 @@ using EASYTools.LicenseVerify;
 using Microsoft.AspNetCore;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion(ThisAssembly.Git.BaseVersion.Major + "." + ThisAssembly.Git.BaseVersion.Minor + "." + ThisAssembly.Git.BaseVersion.Patch)]
-
-[assembly: AssemblyFileVersion(ThisAssembly.Git.SemVer.Major + "." + ThisAssembly.Git.SemVer.Minor + "." + ThisAssembly.Git.SemVer.Patch)]
-
-[assembly: AssemblyInformationalVersion(
-    ThisAssembly.Git.SemVer.Major + "." +
-    ThisAssembly.Git.SemVer.Minor + "." +
-    ThisAssembly.Git.Commits + "-" +
-    ThisAssembly.Git.Branch + "+" +
-    ThisAssembly.Git.Commit)]
-[assembly: AssemblyVersion("2.0.*" + ThisAssembly.BuildEvn.BuildId)]
+[assembly: AssemblyVersion("2.0.*")]
 namespace EasyITCenter {
 
     /// <summary>

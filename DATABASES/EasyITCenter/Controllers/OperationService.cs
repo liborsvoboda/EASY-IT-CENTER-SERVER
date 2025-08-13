@@ -14,7 +14,6 @@ using Westwind.AspNetCore.Markdown;
 using System.Diagnostics;
 using Octokit;
 
-
 namespace EasyITCenter.Controllers {
 
 
@@ -30,7 +29,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<IActionResult> GenerateChangeLog() {
             
-
+            
 
             return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
         }
