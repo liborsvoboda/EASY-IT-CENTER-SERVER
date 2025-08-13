@@ -23,6 +23,7 @@ using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using HandlebarsDotNet;
 using FluentAssertions.Common;
 using Pchp.Core;
+using AspNetCore.RouteAnalyzer;
 
 
 namespace EasyITCenter {
@@ -102,6 +103,7 @@ namespace EasyITCenter {
             #endregion Server Modules
 
             //REGISTERING SERVICES BY CLASS OR INTERFACE
+            
             ServerConfigurationServices.AutoRegisterClassServices(ref services);
             ServerConfigurationServices.ConfigureTransient(ref services);
             ServerConfigurationServices.ConfigureSingletons(ref services);
