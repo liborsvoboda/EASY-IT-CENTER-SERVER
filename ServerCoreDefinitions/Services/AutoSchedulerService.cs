@@ -168,7 +168,6 @@ namespace EasyITCenter.Services {
                                         Command = parseData?.First(a => a.Key.ToLower() == "command").Value.ToString(),
                                         WorkingDirectory = parseData?.First(a => a.Key.ToLower() == "startupdirectory").Value.ToString(),
                                         ProcessType = Enum.Parse<ProcessType>(parseData?.First(a => a.Key.ToLower() == "processtype").Value.ToString())
-
                                     };
                                     taskResult.ProcessLog = await ProcessOperations.ServerProcessStart(process);
                                 }

@@ -58,10 +58,9 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Generic Procedure Return Full DB Over Params 
-        /// SpProcedure, tableName, userRole, userId 
-        /// in List Dictionary string,string
-        /// Can Provide All PRocedure Datatypes 
+        /// Insert, Update, Delete Procerure For Any Table
+        /// Delete Must be only 1 Column Id
+        /// NUll values must be removed
         /// </summary>
         /// <param name="dataset"></param>
         /// <returns></returns>

@@ -29,9 +29,7 @@ namespace EasyITCenter.DBModel
         [StringLength(2048)]
         [Unicode(false)]
         public string? StartCommand { get; set; }
-        [StringLength(2048)]
-        [Unicode(false)]
-        public string? StopCommand { get; set; }
+        public int? Pid { get; set; }
         public bool Installed { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }

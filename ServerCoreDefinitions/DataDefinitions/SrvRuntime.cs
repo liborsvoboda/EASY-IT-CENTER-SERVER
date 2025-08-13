@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Quartz;
 
+
 namespace EasyITCenter.ServerCoreStructure {
 
     /// <summary>
@@ -175,8 +176,9 @@ namespace EasyITCenter.ServerCoreStructure {
 
         /// <summary>
         /// Server Process Manager
+        /// Pid, processName, Process
         /// </summary>
-        public static List<Tuple<string,Process>> SrvProcessManager = new ();
+        public static List<Tuple<int,string,Process>> SrvProcessManager = new ();
 
         /// <summary>
         /// Connected Databases Contexts For 

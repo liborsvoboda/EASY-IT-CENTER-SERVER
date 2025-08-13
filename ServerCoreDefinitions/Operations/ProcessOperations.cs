@@ -62,25 +62,29 @@ namespace EasyITCenter.ServerCoreStructure {
             try {
                 Process proc = new();
 
-                    if (processDefinition.ProcessType == ProcessType.dotnet) {
-                        proc.StartInfo.FileName = "dotnet";
-                        proc.StartInfo.UseShellExecute = true;
-                        proc.StartInfo.Arguments = processDefinition.Command ?? null;
-                    } else if (processDefinition.ProcessType == ProcessType.cmd || processDefinition.ProcessType == ProcessType.bat) {
-                        proc.StartInfo.FileName = "cmd.exe";
-                        proc.StartInfo.UseShellExecute = false;
-                        proc.StartInfo.Arguments = processDefinition.Command ?? null;
-                    } else if (processDefinition.ProcessType == ProcessType.sh) {
-                        proc.StartInfo.FileName = "/bin/bash";
-                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
-                        proc.StartInfo.UseShellExecute = false;
-                    } else if (processDefinition.ProcessType == ProcessType.powershellFile) {
-                        proc.StartInfo.FileName = "powershell";
-                        proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
-                        proc.StartInfo.UseShellExecute = false;
-                   } else if (processDefinition.ProcessType == ProcessType.powershellScript) {
-                        RunPowerShellProcess(processDefinition);
-                    }
+                if (processDefinition.ProcessType == ProcessType.dotnet) {
+                    proc.StartInfo.FileName = "dotnet";
+                    proc.StartInfo.UseShellExecute = true;
+                    proc.StartInfo.Arguments = processDefinition.Command ?? null;
+                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory;
+                } else if (processDefinition.ProcessType == ProcessType.cmd || processDefinition.ProcessType == ProcessType.bat) {
+                    proc.StartInfo.FileName = "cmd.exe";
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.Arguments = processDefinition.Command ?? null;
+                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory;
+                } else if (processDefinition.ProcessType == ProcessType.sh) {
+                    proc.StartInfo.FileName = "/bin/bash";
+                    proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory;
+                } else if (processDefinition.ProcessType == ProcessType.powershellFile) {
+                    proc.StartInfo.FileName = "powershell";
+                    proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory;
+                } else if (processDefinition.ProcessType == ProcessType.powershellScript) {
+                    RunPowerShellProcess(processDefinition);
+                }
 
 
             proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
@@ -91,9 +95,8 @@ namespace EasyITCenter.ServerCoreStructure {
                     proc.StartInfo.RedirectStandardError = true;
                     proc.StartInfo.Verb = ( Environment.OSVersion.Version.Major >= 6 ) ? "runas" : "";
 
-                    SrvRuntime.SrvProcessManager.Add(new Tuple<string,Process>(proc.ProcessName ,proc));
+                    SrvRuntime.SrvProcessManager.Add(new Tuple<int, string, Process>(proc.Id, proc.ProcessName , proc));
                     proc.Start();
-
                     //proc.OutputDataReceived +=;
                     proc.Exited += ServerProcessFinished; 
                     resultOutput += proc.StandardOutput.ReadToEndAsync();
@@ -101,13 +104,13 @@ namespace EasyITCenter.ServerCoreStructure {
 
                     if (processDefinition.WaitForExit) {
                         await proc.WaitForExitAsync();
-                        return resultOutput + Environment.NewLine + resultError;
-                    } else { return resultOutput + Environment.NewLine + resultError; }
+                        return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError });
+                    } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError }); }
 
                 } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
                     CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
                 }
-            return resultOutput + Environment.NewLine + resultError;
+            return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError });
         }
 
 
@@ -118,7 +121,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="e"></param>
         private static void ServerProcessFinished(object? sender, EventArgs e) {
             try {
-                var process = SrvRuntime.SrvProcessManager.Where(a => a.Item2 == (Process)sender).FirstOrDefault();
+                Tuple<int, string, Process>? process = SrvRuntime.SrvProcessManager.Where(a => a.Item3 == (Process)sender).FirstOrDefault();
                 if (process != null) { SrvRuntime.SrvProcessManager.Remove(process); }
             } catch (Exception ex) {
                 CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
@@ -131,10 +134,10 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="processName"></param>
         /// <returns></returns>
-        public static bool ServerProcessKill(string processName) {
+        public static bool ServerProcessKill(int processId) {
             try {
-                var process = SrvRuntime.SrvProcessManager.Where(a => a.Item1 == processName).FirstOrDefault();
-                process?.Item2.Kill();
+                var process = SrvRuntime.SrvProcessManager.Where(a => a.Item1 == processId).FirstOrDefault();
+                process?.Item3.Kill();
                 if (process != null) { SrvRuntime.SrvProcessManager.Remove(process); }
                 return true;    
             } catch (Exception ex) {
@@ -152,7 +155,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <returns></returns>
         public async static Task<string> RunPowerShellProcess(RunProcessRequest processDefinition) {
             try {
-                using (PowerShell ps = PowerShell.Create()) {
+                    using (PowerShell ps = PowerShell.Create()) {
                     //ps.AddArgument = processDefinition.WorkingDirectory
                     Collection<PSObject>? results = ps.AddScript(processDefinition.Command).Invoke();
                     ps.Commands.Clear();
