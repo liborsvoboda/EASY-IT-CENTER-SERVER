@@ -19,12 +19,12 @@ namespace EasyITCenter.ServerCoreStructure {
         dotnet,
         cmd,
         bat,
+        node,
         powershellFile,
         powershellScript,
-        py
+        py,
         py3,
         sh
-
     }
 
     /// <summary>
@@ -52,45 +52,45 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <summary>
         /// https://stackoverflow.com/questions/2035193/how-to-run-a-powershell-script
         ///SHELL FROM CMD:   Powershell.exe -File C:\Install\script.ps1
-        /// Server Function For Running External Processes,
-        /// Solved Windows/Linux processing,
-        /// startup script name is automatically corrected from .bat to .sh with same name,
-        /// Arguments dotnet "path\release\PublishOutput\proces.dll"
         /// </summary>
         /// <param name="processDefinition">The process definition.</param>
         /// <returns></returns>
-        public async static Task<string> ServerProcessStart(RunProcessRequest processDefinition) {
+        public async static Task<string> ServerProcessStartAsync(RunProcessRequest processDefinition) {
             string resultOutput = "", resultError = "";
 
             try {
                 Process proc = new();
 
-                if (processDefinition.ProcessType == ProcessType.py || processDefinition.ProcessType == ProcessType.py3 {
-                    proc.StartInfo.FileName = CoreOperations.SrvOStype.IsWindows() ? "cmd.exe" : "/bin/bash";
-                    proc.StartInfo.UseShellExecute = true;
+                if (processDefinition.ProcessType == ProcessType.node) {
+                    proc.StartInfo.FileName = "node";
+                    proc.StartInfo.Arguments = processDefinition.Command ?? null;
+                } else if (processDefinition.ProcessType == ProcessType.py) {
+                    proc.StartInfo.FileName = "py";
+                    proc.StartInfo.Arguments = processDefinition.Command ?? null;
+                } else if (processDefinition.ProcessType == ProcessType.py3 ) {
+                    proc.StartInfo.FileName = "py3";
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
                 } else if (processDefinition.ProcessType == ProcessType.dotnet) {
-                    proc.StartInfo.FileName = CoreOperations.SrvOStype.IsWindows() ? "cmd.exe" : "/bin/bash";
-                    proc.StartInfo.UseShellExecute = true;
-                    proc.StartInfo.Arguments = "dotnet " + processDefinition.Command ?? null;
-                } else if (processDefinition.ProcessType == ProcessType.cmd || processDefinition.ProcessType == ProcessType.bat) {
-                    proc.StartInfo.FileName = "cmd.exe";
-                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.FileName = "dotnet";
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
+                } else if (processDefinition.ProcessType == ProcessType.cmd) {
+                    proc.StartInfo.FileName = "cmd.exe";
+                    proc.StartInfo.Arguments = processDefinition.Command ?? null;
+                } else if (processDefinition.ProcessType == ProcessType.bat) {
+                    proc.StartInfo.FileName = processDefinition.Command;
+                    proc.StartInfo.Arguments = null;
                 } else if (processDefinition.ProcessType == ProcessType.sh) {
                     proc.StartInfo.FileName = "/bin/bash";
                     proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
-                    proc.StartInfo.UseShellExecute = false;
                 } else if (processDefinition.ProcessType == ProcessType.powershellFile) {
                     proc.StartInfo.FileName = "powershell";
                     proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
-                    proc.StartInfo.UseShellExecute = false;
                 } else if (processDefinition.ProcessType == ProcessType.powershellScript) {
                     RunPowerShellProcess(processDefinition);
                 }
 
-
-                proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
+                proc.StartInfo.UseShellExecute = false;
+                proc.StartInfo.WorkingDirectory = null;// processDefinition.WorkingDirectory + "\\" ?? null;
                 //proc.StartInfo.LoadUserProfile = false;
                 proc.StartInfo.CreateNoWindow = true;
                 proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -99,8 +99,8 @@ namespace EasyITCenter.ServerCoreStructure {
                 proc.StartInfo.Verb = ( Environment.OSVersion.Version.Major >= 6 ) ? "runas" : "";
                 proc.Start();
 
-                SrvRuntime.SrvProcessManager.Add(new Tuple<int, string, Process>(proc.Id, !string.IsNullOrWhiteSpace(processDefinition.StartupScriptName) ? processDefinition.StartupScriptName : proc.ProcessName, proc));
-                if (!string.IsNullOrWhiteSpace(processDefinition.StartupScriptName)) { ServerStartUpScriptList startupScript = null;
+                ServerStartUpScriptList startupScript = null;
+                if (!string.IsNullOrWhiteSpace(processDefinition.StartupScriptName)) { 
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         startupScript = new EasyITCenterContext().ServerStartUpScriptLists.Where(a => a.Name == processDefinition.StartupScriptName).FirstOrDefault();
                     }
@@ -109,9 +109,11 @@ namespace EasyITCenter.ServerCoreStructure {
                         await data.Context.SaveChangesAsync();
                     }
                 }
-                    
+                SrvRuntime.SrvProcessManager.Add(new Tuple<int, string, string, Process>(proc.Id, !string.IsNullOrWhiteSpace(processDefinition.StartupScriptName) ? processDefinition.StartupScriptName : proc.ProcessName, startupScript.Description, proc));
+
                 //proc.OutputDataReceived +=;
-                proc.Exited += ServerProcessFinished; 
+                proc.Exited += ServerProcessFinishedAsync; 
+                proc.Disposed += ServerProcessFinishedAsync;
                 resultOutput += proc.StandardOutput.ReadToEndAsync();
                 resultError += proc.StandardError.ReadToEndAsync();
 
@@ -132,9 +134,9 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static async void ServerProcessFinished(object? sender, EventArgs e) {
+        private static async void ServerProcessFinishedAsync(object? sender, EventArgs e) {
             try {
-                Tuple<int, string, Process>? process = SrvRuntime.SrvProcessManager.Where(a => a.Item3 == (Process)sender).FirstOrDefault();
+                Tuple<int, string, string, Process>? process = SrvRuntime.SrvProcessManager.Where(a => a.Item4 == (Process)sender).FirstOrDefault();
                 if (process != null) { 
                     SrvRuntime.SrvProcessManager.Remove(process); ServerStartUpScriptList startupScript = null;
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
@@ -159,13 +161,23 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <returns></returns>
         public static async void ServerProcessKill(int processPid) {
             try {
-                var process = SrvRuntime.SrvProcessManager.Where(a => a.Item1 == processPid).FirstOrDefault();
-                process?.Item3.Kill();
-                if (process != null) {
+                Tuple<int, string, string, Process>? process = SrvRuntime.SrvProcessManager.Where(a => a.Item1 == processPid).FirstOrDefault();
+                if (process != null) { 
+                    process.Item4.Kill();
+
                     SrvRuntime.SrvProcessManager.Remove(process); ServerStartUpScriptList startupScript = null;
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         startupScript = new EasyITCenterContext().ServerStartUpScriptLists.Where(a => a.Pid == process.Item1).FirstOrDefault();
                     }
+                    //Process.GetProcesses().Where(pr => pr.StartInfo.Arguments == startupScript.StartCommand.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value))).ToList().ForEach(p => p.Kill());
+                    Process[] processes = Process.GetProcesses();
+                    foreach (Process runprocess in processes) {
+                        if(runprocess.StartInfo.Arguments == startupScript.StartCommand.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value))) {
+                            runprocess.Kill();
+                        }
+                    }
+
+
                     if (!string.IsNullOrWhiteSpace(startupScript.Id.ToString())) {
                         startupScript.Pid = null;
                         EntityEntry<ServerStartUpScriptList>? data = new EasyITCenterContext().ServerStartUpScriptLists.Update(startupScript);

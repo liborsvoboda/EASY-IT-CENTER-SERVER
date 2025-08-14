@@ -176,9 +176,9 @@ namespace EasyITCenter.ServerCoreStructure {
 
         /// <summary>
         /// Server Process Manager
-        /// Pid, processName, Process
+        /// Pid, ProcessName, Description, Process
         /// </summary>
-        public static List<Tuple<int,string,Process>> SrvProcessManager = new ();
+        public static List<Tuple<int,string,string,Process>> SrvProcessManager = new ();
 
         /// <summary>
         /// Connected Databases Contexts For 

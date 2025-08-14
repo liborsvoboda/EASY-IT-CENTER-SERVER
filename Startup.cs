@@ -23,6 +23,8 @@ using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using HandlebarsDotNet;
 using FluentAssertions.Common;
 using Pchp.Core;
+using Tweetinvi.Core.DTO;
+using Stripe;
 
 
 namespace EasyITCenter {
@@ -129,14 +131,32 @@ namespace EasyITCenter {
             serverLifetime.ApplicationStarted.Register(ServerOnStarted); serverLifetime.ApplicationStopping.Register(ServerOnStopping); serverLifetime.ApplicationStopped.Register(ServerOnStopped);
             ServerEnablingServices.EnableLogging(ref app);
 
+            EasyITCenterContext? db = new EasyITCenterContext();
             try {//Generate ALL Registered Databases IF NOT EXIST && FILL DATA
-                EasyITCenterContext? db = new EasyITCenterContext();
                 try { if (db.SolutionUserLists.Count() == 0) { } } catch {
                     db.Database.EnsureCreated();
-                    db.SolutionUserLists.Add(new SolutionUserList() { UserName = "admin", Password = "admin", Name="Admin", SurName="Adminer", Active = true, Email = "", PhoneConfirmed = true, EmailConfirmed = true, TimeStamp = DateTimeOffset.Now.DateTime });
+                    db.SolutionUserLists.Add(new SolutionUserList() { UserName = "admin", Password = "admin", Name = "Admin", SurName = "Adminer", Active = true, Email = "", PhoneConfirmed = true, EmailConfirmed = true, TimeStamp = DateTimeOffset.Now.DateTime });
                     db.SaveChanges();
                 }
             } catch { }
+
+            //RESET DB running Processes
+            List<ServerStartUpScriptList>? runningProcesses = db.ServerStartUpScriptLists.Where(a => a.Pid != null).ToList();
+            runningProcesses.ForEach(item => { item.Pid = null; });
+            if (runningProcesses.Any()) {
+                EasyITCenterContext itemData = new EasyITCenterContext(); itemData.ServerStartUpScriptLists.UpdateRange(runningProcesses);
+                await itemData.SaveChangesAsync();
+            }
+            //RUN Startup Processes
+            runningProcesses = db.ServerStartUpScriptLists.Where(a => a.RunOnServerStartUp == true).ToList();
+            runningProcesses.ForEach(process => {
+                RunProcessRequest startupProcess = new() {
+                    Command = process.StartCommand.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)),
+                    WorkingDirectory = process.WorkingDirectory.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)),
+                    WaitForExit = false,
+                    ProcessType = DataOperations.ParseEnum<ProcessType>(process.InheritedProcessType), StartupScriptName = process.Name
+                }; ProcessOperations.ServerProcessStartAsync(startupProcess);
+            });
 
 
             if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value)) {

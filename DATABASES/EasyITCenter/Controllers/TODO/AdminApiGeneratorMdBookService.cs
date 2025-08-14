@@ -107,7 +107,7 @@ namespace EasyITCenter.Controllers {
                     Command = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "generate-mdbook.cmd"),
                     ProcessType = ProcessType.cmd,
                     WorkingDirectory = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook")
-                }; string result = await ProcessOperations.ServerProcessStart(process);
+                }; string result = await ProcessOperations.ServerProcessStartAsync(process);
 
 
                 //CLEAN MD FILES FROM BOOK
@@ -245,7 +245,7 @@ namespace EasyITCenter.Controllers {
                         WorkingDirectory = (SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/").Replace("/", "\\"),
                         ProcessType = ProcessType.cmd
                     };
-                    string result = await ProcessOperations.ServerProcessStart(process);
+                    string result = await ProcessOperations.ServerProcessStartAsync(process);
                 }
 
 

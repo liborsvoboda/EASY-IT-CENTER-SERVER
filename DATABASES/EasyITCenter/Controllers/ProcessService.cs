@@ -17,26 +17,51 @@ using Octokit;
 namespace EasyITCenter.Controllers {
 
 
-
-
     [AllowAnonymous]
     [Route("/ProcessService")]
     public class ProcessService : Controller {
 
 
-
+        /// <summary>
+        /// wwwroot is replaced with full path
+        /// </summary>
+        /// <param name="processRequest"></param>
+        /// <returns></returns>
         [HttpPost("/ProcessService/StartProcessScript")]
         [Consumes("application/json")]
-        public async Task<IActionResult> StartProcessScript(RunProcessRequest processRequest) {
+        public async Task<IActionResult> StartProcessScript([FromBody] RunProcessRequest processRequest) {
 
             if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
-                ProcessOperations.ServerProcessStart(processRequest);
+                processRequest.Command = processRequest.Command.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
+                processRequest.WorkingDirectory = processRequest.WorkingDirectory.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
+                
+                await ProcessOperations.ServerProcessStartAsync(processRequest);
+                return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
             }
-            return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
+            return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.DeniedYouAreNotAdmin.ToString() });
+
         }
 
 
+        [HttpGet("/ProcessService/KillProcessScript/{processPid}")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> KillProcessScript(int processPid) {
 
-      
+            if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+                ProcessOperations.ServerProcessKill(processPid);
+                return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
+            }
+            return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.DeniedYouAreNotAdmin.ToString() });
+        }
+
+
+        [HttpGet("/ProcessService/GetProcessList")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> GetProcessList() {
+            List<Tuple<int, string, string, string>> processList = new();
+            SrvRuntime.SrvProcessManager.ForEach(process => { processList.Add(new Tuple<int, string, string, string>(process.Item1, process.Item2, process.Item3, ((Process)process.Item4).ProcessName )); });
+            return base.Json(new WebClasses.JsonResult() { Result = processList.ObjectToJson(), Status = DBResult.success.ToString() });
+        }
+
     }
 }

@@ -31,7 +31,7 @@ namespace EasyITCenter.Controllers {
                         WebCoreFileList minFile = new() { FileName = data.FileName, Sequence = data.Sequence, InheritedJsCssDefinitionType = data.InheritedJsCssDefinitionType, MetroPath = data.MetroPath };
                         
                         if (SystemPortalOperations.SaveWebSourceFile(ref _hostingEnvironment, ref minFile)) {
-                            var resData = new EasyITCenterContext().WebCoreFileLists.Update(data);
+                            EntityEntry<WebCoreFileList>? resData = new EasyITCenterContext().WebCoreFileLists.Update(data);
                             int result = await resData.Context.SaveChangesAsync();
                         }
                         return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });

@@ -241,7 +241,7 @@ namespace EasyITCenter.ControllersExtensions {
                         WorkingDirectory = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd"),
                         ProcessType = ProcessType.cmd,
                     };
-                    ProcessOperations.ServerProcessStart(process);
+                    ProcessOperations.ServerProcessStartAsync(process);
 
                     ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd", "XmlToMd"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MarkDownDocumentation.zip"));
 
@@ -290,7 +290,7 @@ namespace EasyITCenter.ControllersExtensions {
                     WorkingDirectory = Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook"),
                     ProcessType = ProcessType.cmd
                 };
-                await ProcessOperations.ServerProcessStart(process);
+                await ProcessOperations.ServerProcessStartAsync(process);
 
                 ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "book"), Path.Combine(SrvRuntime.UserPath, User.Claims.First(a => a.Issuer != null).Value, "MdBook.zip"));
 

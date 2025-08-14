@@ -80,7 +80,7 @@ namespace EasyITCenter.Controllers {
                         }
                         */
 
-                        ProcessOperations.ServerProcessStart(process);
+                        ProcessOperations.ServerProcessStartAsync(process);
                     }
                 
                 return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });

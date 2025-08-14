@@ -1,7 +1,8 @@
 ﻿// STARTUP Temp Variables Definitions
 let pageLoader;
 
-Gs.Behaviors.PortalStartup =async function () {
+Gs.Behaviors.PortalStartup = async function () {
+    if (Metro.storage.getItem("ApiToken", null) != null) { Cookies.set('ApiToken', Metro.storage.getItem("ApiToken", null).Token); }
     Gs.Objects.CreateToolPanel();
 
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";

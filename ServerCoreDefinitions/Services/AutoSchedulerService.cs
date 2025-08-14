@@ -169,7 +169,7 @@ namespace EasyITCenter.Services {
                                         WorkingDirectory = parseData?.First(a => a.Key.ToLower() == "startupdirectory").Value.ToString(),
                                         ProcessType = Enum.Parse<ProcessType>(parseData?.First(a => a.Key.ToLower() == "processtype").Value.ToString())
                                     };
-                                    taskResult.ProcessLog = await ProcessOperations.ServerProcessStart(process);
+                                    taskResult.ProcessLog = await ProcessOperations.ServerProcessStartAsync(process);
                                 }
                             } catch (Exception ex) { taskResult.ProcessCrashed = true; taskResult.ProcessLog = DataOperations.GetErrMsg(ex); CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }); }
 
