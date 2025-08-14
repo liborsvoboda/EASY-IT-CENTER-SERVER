@@ -23,8 +23,6 @@ using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using HandlebarsDotNet;
 using FluentAssertions.Common;
 using Pchp.Core;
-using Tweetinvi.Core.DTO;
-using Stripe;
 
 
 namespace EasyITCenter {
