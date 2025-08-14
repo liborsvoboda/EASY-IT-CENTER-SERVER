@@ -80,7 +80,6 @@ namespace EasyITCenter.Controllers {
             await using var page = await browser.NewPageAsync();
             await page.GoToAsync(htmlScreenShotReq.Url);
 
-            // Wait for fonts to be loaded. Omitting this might result in no text rendered in pdf.
             await page.EvaluateExpressionHandleAsync("document.fonts.ready");
             await page.PdfAsync(htmlScreenShotReq.SavePath);
 

@@ -25,10 +25,14 @@ namespace EasyITCenter.DBModel
         public string? Description { get; set; }
         [StringLength(2048)]
         [Unicode(false)]
+        public string? WorkingDirectory { get; set; }
+        [StringLength(2048)]
+        [Unicode(false)]
         public string? InstallCommand { get; set; }
         [StringLength(2048)]
         [Unicode(false)]
         public string? StartCommand { get; set; }
+        public bool RunOnServerStartUp { get; set; }
         public int? Pid { get; set; }
         public bool Installed { get; set; }
         public int UserId { get; set; }

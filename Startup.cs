@@ -109,7 +109,7 @@ namespace EasyITCenter {
 
             //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/signalr/dotnet-client/sample/SignalRChatClient/MainWindow.xaml.cs
             //primi chat s aplikaci
-
+            
             services.AddSignalR();
             //services.AddPhp(cfg => { cfg.RootPath = Path.Combine(SrvRuntime.SrvOtherLanguagesPath, "PHP"); });
             //services.AddServerSideBlazor();
@@ -125,26 +125,19 @@ namespace EasyITCenter {
         /// <param name="serverLifetime"></param>
         public async void Configure(IApplicationBuilder app, IHostApplicationLifetime serverLifetime, IActionDescriptorCollectionProvider routerActionProvider) {
 
-            //using var scope = app.ApplicationServices.CreateScope();
-            //WebHostingDbContext? context = scope.ServiceProvider.GetRequiredService<WebHostingDbContext>();
-            //await WebHostingDbInitialize.Initialize(context);
-
             SrvRuntime.ActionRouterProvider = routerActionProvider;
             serverLifetime.ApplicationStarted.Register(ServerOnStarted); serverLifetime.ApplicationStopping.Register(ServerOnStopping); serverLifetime.ApplicationStopped.Register(ServerOnStopped);
             ServerEnablingServices.EnableLogging(ref app);
 
-            //Generate ALL Registered Databases IF NOT EXIST && FILL DATA
-            /*
-            try {
-                //TODO ADD TO CYCLE
-                var webHosting = new WebHostingDbContext();
-                try { if (webHosting.Users.Count() == 0) { } } catch {
-                    webHosting.Database.EnsureCreated();
-                    //webHosting.Users.Add(new WebUser() { UserName Name = "admin", Password = "admin", Nickname = "admin", Email = "", WebSite = "", IsSystemAdministrator = true, CreationDate = DateTime.UtcNow });
-                    webHosting.SaveChanges();
+            try {//Generate ALL Registered Databases IF NOT EXIST && FILL DATA
+                EasyITCenterContext? db = new EasyITCenterContext();
+                try { if (db.SolutionUserLists.Count() == 0) { } } catch {
+                    db.Database.EnsureCreated();
+                    db.SolutionUserLists.Add(new SolutionUserList() { UserName = "admin", Password = "admin", Name="Admin", SurName="Adminer", Active = true, Email = "", PhoneConfirmed = true, EmailConfirmed = true, TimeStamp = DateTimeOffset.Now.DateTime });
+                    db.SaveChanges();
                 }
             } catch { }
-            */
+
 
             if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value)) {
                 app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All });
@@ -228,7 +221,7 @@ namespace EasyITCenter {
 
 
 
-                    //Check If existing route Url and Allow Auto Process 
+                    //Check If existing route Url and Allow Auto Process Example API call
                     else if (CoreOperations.GetServerRegisteredRoutesList(requestPath, false)) { return; }
 
                     //Ignore livereload

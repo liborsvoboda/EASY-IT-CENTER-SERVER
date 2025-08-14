@@ -11,6 +11,7 @@ using System.Management.Automation;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
 using Python.Runtime;
+using EasyITCenter.DBModel;
 
 namespace EasyITCenter.ServerCoreStructure {
 
@@ -20,6 +21,7 @@ namespace EasyITCenter.ServerCoreStructure {
         bat,
         powershellFile,
         powershellScript,
+        py
         py3,
         sh
 
@@ -33,6 +35,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public string? WorkingDirectory { get; set; } = null;
         public ProcessType ProcessType { get; set; }
         public bool WaitForExit = true;
+        public string StartupScriptName { get; set; } = null;
     }
 
 
@@ -62,54 +65,64 @@ namespace EasyITCenter.ServerCoreStructure {
             try {
                 Process proc = new();
 
-                if (processDefinition.ProcessType == ProcessType.dotnet) {
-                    proc.StartInfo.FileName = "dotnet";
+                if (processDefinition.ProcessType == ProcessType.py || processDefinition.ProcessType == ProcessType.py3 {
+                    proc.StartInfo.FileName = CoreOperations.SrvOStype.IsWindows() ? "cmd.exe" : "/bin/bash";
                     proc.StartInfo.UseShellExecute = true;
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
-                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory;
+                } else if (processDefinition.ProcessType == ProcessType.dotnet) {
+                    proc.StartInfo.FileName = CoreOperations.SrvOStype.IsWindows() ? "cmd.exe" : "/bin/bash";
+                    proc.StartInfo.UseShellExecute = true;
+                    proc.StartInfo.Arguments = "dotnet " + processDefinition.Command ?? null;
                 } else if (processDefinition.ProcessType == ProcessType.cmd || processDefinition.ProcessType == ProcessType.bat) {
                     proc.StartInfo.FileName = "cmd.exe";
                     proc.StartInfo.UseShellExecute = false;
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
-                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory;
                 } else if (processDefinition.ProcessType == ProcessType.sh) {
                     proc.StartInfo.FileName = "/bin/bash";
                     proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
                     proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory;
                 } else if (processDefinition.ProcessType == ProcessType.powershellFile) {
                     proc.StartInfo.FileName = "powershell";
                     proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
                     proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory;
                 } else if (processDefinition.ProcessType == ProcessType.powershellScript) {
                     RunPowerShellProcess(processDefinition);
                 }
 
 
-            proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
-                    //proc.StartInfo.LoadUserProfile = false;
-                    proc.StartInfo.CreateNoWindow = true;
-                    proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    proc.StartInfo.RedirectStandardOutput = true;
-                    proc.StartInfo.RedirectStandardError = true;
-                    proc.StartInfo.Verb = ( Environment.OSVersion.Version.Major >= 6 ) ? "runas" : "";
+                proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + "\\" ?? null;
+                //proc.StartInfo.LoadUserProfile = false;
+                proc.StartInfo.CreateNoWindow = true;
+                proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.RedirectStandardError = true;
+                proc.StartInfo.Verb = ( Environment.OSVersion.Version.Major >= 6 ) ? "runas" : "";
+                proc.Start();
 
-                    SrvRuntime.SrvProcessManager.Add(new Tuple<int, string, Process>(proc.Id, proc.ProcessName , proc));
-                    proc.Start();
-                    //proc.OutputDataReceived +=;
-                    proc.Exited += ServerProcessFinished; 
-                    resultOutput += proc.StandardOutput.ReadToEndAsync();
-                    resultError += proc.StandardError.ReadToEndAsync();
-
-                    if (processDefinition.WaitForExit) {
-                        await proc.WaitForExitAsync();
-                        return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError });
-                    } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError }); }
-
-                } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
-                    CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
+                SrvRuntime.SrvProcessManager.Add(new Tuple<int, string, Process>(proc.Id, !string.IsNullOrWhiteSpace(processDefinition.StartupScriptName) ? processDefinition.StartupScriptName : proc.ProcessName, proc));
+                if (!string.IsNullOrWhiteSpace(processDefinition.StartupScriptName)) { ServerStartUpScriptList startupScript = null;
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                        startupScript = new EasyITCenterContext().ServerStartUpScriptLists.Where(a => a.Name == processDefinition.StartupScriptName).FirstOrDefault();
+                    }
+                    if (!string.IsNullOrWhiteSpace(startupScript.Id.ToString())) { startupScript.Pid = proc.Id;
+                        EntityEntry<ServerStartUpScriptList>? data = new EasyITCenterContext().ServerStartUpScriptLists.Update(startupScript);
+                        await data.Context.SaveChangesAsync();
+                    }
                 }
+                    
+                //proc.OutputDataReceived +=;
+                proc.Exited += ServerProcessFinished; 
+                resultOutput += proc.StandardOutput.ReadToEndAsync();
+                resultError += proc.StandardError.ReadToEndAsync();
+
+                if (processDefinition.WaitForExit) {
+                    await proc.WaitForExitAsync();
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError }); }
+
+            } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
+                CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
+            }
             return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError });
         }
 
@@ -119,10 +132,20 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void ServerProcessFinished(object? sender, EventArgs e) {
+        private static async void ServerProcessFinished(object? sender, EventArgs e) {
             try {
                 Tuple<int, string, Process>? process = SrvRuntime.SrvProcessManager.Where(a => a.Item3 == (Process)sender).FirstOrDefault();
-                if (process != null) { SrvRuntime.SrvProcessManager.Remove(process); }
+                if (process != null) { 
+                    SrvRuntime.SrvProcessManager.Remove(process); ServerStartUpScriptList startupScript = null;
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                        startupScript = new EasyITCenterContext().ServerStartUpScriptLists.Where(a => a.Pid == process.Item1).FirstOrDefault();
+                    }
+                    if (!string.IsNullOrWhiteSpace(startupScript.Id.ToString())) {
+                        startupScript.Pid = null;
+                        EntityEntry<ServerStartUpScriptList>? data = new EasyITCenterContext().ServerStartUpScriptLists.Update(startupScript);
+                        await data.Context.SaveChangesAsync();
+                    }
+                }
             } catch (Exception ex) {
                 CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
             }
@@ -134,15 +157,23 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="processName"></param>
         /// <returns></returns>
-        public static bool ServerProcessKill(int processId) {
+        public static async void ServerProcessKill(int processPid) {
             try {
-                var process = SrvRuntime.SrvProcessManager.Where(a => a.Item1 == processId).FirstOrDefault();
+                var process = SrvRuntime.SrvProcessManager.Where(a => a.Item1 == processPid).FirstOrDefault();
                 process?.Item3.Kill();
-                if (process != null) { SrvRuntime.SrvProcessManager.Remove(process); }
-                return true;    
+                if (process != null) {
+                    SrvRuntime.SrvProcessManager.Remove(process); ServerStartUpScriptList startupScript = null;
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                        startupScript = new EasyITCenterContext().ServerStartUpScriptLists.Where(a => a.Pid == process.Item1).FirstOrDefault();
+                    }
+                    if (!string.IsNullOrWhiteSpace(startupScript.Id.ToString())) {
+                        startupScript.Pid = null;
+                        EntityEntry<ServerStartUpScriptList>? data = new EasyITCenterContext().ServerStartUpScriptLists.Update(startupScript);
+                        await data.Context.SaveChangesAsync();
+                    }
+                }
             } catch (Exception ex) {
                 CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
-                return false;
             }
         }
 

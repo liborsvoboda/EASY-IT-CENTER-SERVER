@@ -20,17 +20,18 @@ namespace EasyITCenter.Controllers {
 
 
     [AllowAnonymous]
-    [Route("/OperationService")]
-    public class OperationService : Controller {
+    [Route("/ProcessService")]
+    public class ProcessService : Controller {
 
 
 
-        [HttpGet("/OperationService/GenerateChangeLog")]
+        [HttpPost("/ProcessService/StartProcessScript")]
         [Consumes("application/json")]
-        public async Task<IActionResult> GenerateChangeLog() {
-            
-            
+        public async Task<IActionResult> StartProcessScript(RunProcessRequest processRequest) {
 
+            if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+                ProcessOperations.ServerProcessStart(processRequest);
+            }
             return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
         }
 
