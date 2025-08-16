@@ -216,7 +216,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="ExpressionTree" Version="1.0.2" />
     <PackageReference Include="FastReport.OpenSource" Version="2025.2.8" />
     <PackageReference Include="FastReport.OpenSource.Web" Version="2025.2.8" />
-    <PackageReference Include="Fawdlstty.GitServerCore" Version="0.0.3.1" />
     <PackageReference Include="FileContextCore" Version="3.4.0" />
     <PackageReference Include="FluentAssertions.Autofac" Version="6.5.1" />
     <PackageReference Include="FluentEmail.Core" Version="3.0.2" />
@@ -246,7 +245,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="FubarDev.FtpServer" Version="3.1.2" />
     <PackageReference Include="FubarDev.FtpServer.Commands" Version="3.1.2" />
     <PackageReference Include="FubarDev.FtpServer.FileSystem.DotNet" Version="3.1.2" />
-    <PackageReference Include="GithubSharp" Version="0.0.5.1" />
     <PackageReference Include="GitVersioner" Version="17.12.29.2" />
     <PackageReference Include="Google.Api.CommonProtos" Version="2.15.0" />
     <PackageReference Include="Google.Apis" Version="1.68.0" />

@@ -11,9 +11,7 @@ using Docfx.MarkdigEngine.Extensions;
 using Markdig.Prism;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
-using Fawdlstty.GitServerCore;
 using EasyITCenter.ServerCoreStructure;
-using Fawdlstty.GitServerCore.internals;
 
 
 namespace EasyITCenter.ServerCoreConfiguration {
@@ -22,42 +20,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
     /// Configure Server Ad-dons and Modules
     /// </summary>
     public class ServerModules {
-
-
-
-
-        //GIT SERVER
-        //https://git-scm.com/downloads
-        //https://github.com/fawdlstty/GitServerCore
-        /// <summary>
-        /// Server Module: GitServer Startup Configuration
-        /// </summary>
-        /// <param name="services"></param>
-        internal static void ConfigureGitServer(ref IServiceCollection services) {
-            if (bool.Parse(DbOperations.GetServerParameterLists("GitServerEnabled").Value)) {
-                services.AddGitServerCore(opt => {
-                    opt.GitUrlRegex = "^/(\\S*)\\.git$";
-                    opt.GitUrlSimplize = _url => _url[1..^4];
-                    opt.GitRepoBareDir = "/data/repo_bare";
-                    opt.GitRepoExtractDir = "/data/repo_extract";
-                    opt.CheckAllowAsync = async (_path, _oper, _username, _password) => {
-                        if (string.IsNullOrEmpty(_username)) {
-                            // If the user name is empty, it is mandatory to enter the user name
-                            return GitOperReturnType.NeedAuth;
-                        } else if (_username == "hello" && _password == "world") {
-                            // The username and password are verified
-                            return GitOperReturnType.Allow;
-                        } else {
-                            // Denied this visit
-                            return GitOperReturnType.Block;
-                        }
-                    };
-                    opt.HasBeenOperationAsync = async (_path, _oper, _username) => await Task.Yield();
-                });
-            }
-
-            
-        }
 
 
         /// <summary>
@@ -173,9 +135,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
         internal static void ConfigureHealthCheck(ref IServiceCollection services) {
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleHealthServiceEnabled").Value)) {
                 services.AddHealthChecks()
-                //.AddCheck<ServerCycleTaskListHealthCheck>("Server Cycle tasks")
                 .AddSqlServer(DBConn.DatabaseConnectionString, null, "Kontrola připojení k DB ")
-                .AddDbContextCheck<EasyITCenterContext>("Importované DB Schema");
+                .AddDbContextCheck<EasyITCenterContext>("DB Schema");
 
                 List<ServerHealthCheckTaskList> data;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
@@ -388,7 +349,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <summary>
         /// Server Module: Enable Live Data Monitor
         /// </summary>
-        internal static void EnableLiveDataMonitor(ref IApplicationBuilder app) { if (bool.Parse(DbOperations.GetServerParameterLists("WebLiveDataMonitorEnabled").Value)) { app.UseLiveReload(); } }
+        internal static void EnableLiveDataMonitor(ref IApplicationBuilder app) { 
+            if (bool.Parse(DbOperations.GetServerParameterLists("WebLiveDataMonitorEnabled").Value)) { app.UseLiveReload(); } 
+        }
 
 
         /// <summary>
@@ -403,24 +366,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         internal static void EnableDBEntitySchema(ref IApplicationBuilder app) {
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleDBEntitySchemaEnabled").Value)) {
-                app.UseDBEntitySchema(cfg =>
-                {
-                    cfg.PathMatch = DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value.StartsWith("/")
-                        ? DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value
-                        : "/" + DbOperations.GetServerParameterLists("ModuleDBEntitySchemaPath").Value;
-                });
+                app.UseDBEntitySchema(cfg => cfg.PathMatch = "/DBEntitySchema");
             }
         }
-
-
-        /// <summary>
-        /// Server Module Enable Local GitServer
-        /// </summary>
-        /// <param name="app"></param>
-        internal static void EnableGitServer(ref IApplicationBuilder app) {
-            if (bool.Parse(DbOperations.GetServerParameterLists("GitServerEnabled").Value)) { app.UseGitServerCore(); }
-        }
-
 
 
     }

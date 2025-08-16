@@ -124,10 +124,47 @@ namespace EasyITCenter.Controllers
                     original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == recGuid).ToList();
 
                     DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                        data.PortalApiTableColumnDataLists.DeleteRangeByKey(original);
+                        data.PortalApiTableColumnDataLists.RemoveRange(original);
                         data.SaveChanges();
                         return true;
                     });
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 8, ErrorMessage = string.Empty });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        [AllowAnonymous]
+        [HttpDelete("/PortalApiTableService/DeleteApiTableList/{id}")]
+        public async Task<string> DeleteApiTableColumnDataList(int id) {
+            EasyITCenterContext data = new EasyITCenterContext();
+            try {
+
+                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+                    PortalApiTableList original = new EasyITCenterContext().PortalApiTableLists.Where(a => a.Id == id).FirstOrDefault();
+                    List<PortalApiTableColumnDataList> apidata = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.ApiTableName == original.Name).ToList();
+
+                    if (apidata.Any()) {
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.RemoveRange(apidata);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    }
+
+                    if (apidata.Any()) {
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableLists.Remove(original);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    }
+
 
                     return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 8, ErrorMessage = string.Empty });
                 } else {

@@ -126,7 +126,7 @@ namespace EasyITCenter {
                         options.ConfigureHttpsDefaults(h => {
                             h.SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
                             h.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-                            h.UseLettuceEncrypt(appServices);//.UseServerCertificateSelector;
+                            h.UseLettuceEncrypt(appServices);
                         });
                     });
                 }
@@ -138,10 +138,32 @@ namespace EasyITCenter {
                     webBuilder.UseUrls(bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value) ? $"https://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpsPort").Value}" : $"http://*:{DbOperations.GetServerParameterLists("ConfigServerStartupHttpPort").Value}");
                 }
 
+                
                 webBuilder.UseStartup<Startup>();
-                webBuilder.UseWebRoot(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
-                webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
                 webBuilder.UseStaticWebAssets();
+                webBuilder.UseWebRoot(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
+                //webBuilder.UseContentRoot(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
+                webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+
+                //RESET DB running Processes
+                EasyITCenterContext dbcontext = new EasyITCenterContext();
+                List<ServerStartUpScriptList>? runningProcesses = dbcontext.ServerStartUpScriptLists.Where(a => a.Pid != null).ToList();
+                runningProcesses.ForEach(item => { item.Pid = null; });
+                if (runningProcesses.Any()) {
+                    EasyITCenterContext itemData = new EasyITCenterContext(); itemData.ServerStartUpScriptLists.UpdateRange(runningProcesses);
+                    itemData.SaveChanges();
+                }
+                //RUN Startup Processes
+                runningProcesses = dbcontext.ServerStartUpScriptLists.Where(a => a.RunOnServerStartUp == true).ToList();
+                runningProcesses.ForEach(process => {
+                    RunProcessRequest startupProcess = new() {
+                        Command = process.StartCommand.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)),
+                        WorkingDirectory = process.WorkingDirectory.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)),
+                        WaitForExit = false,
+                        ProcessType = DataOperations.ParseEnum<ProcessType>(process.InheritedProcessType), StartupScriptName = process.Name
+                    }; ProcessOperations.ServerProcessStartAsync(startupProcess);
+                });
+
 
             });
         }

@@ -9,11 +9,19 @@ namespace EasyITCenter.ServerCoreStructure {
     /// <summary>
     /// User Storage Operations
     /// </summary>
-    public static class StripeModel {
+    public static class UserStorage {
 
 
+        /// <summary>
+        /// Create User Storage Directory on Authenticated User Login
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public static bool CreateUserStorage(string username) {
-            return FileOperations.CreatePath(Path.Combine(SrvRuntime.UserPath,username));
+            if (!FileOperations.CheckDirectory(Path.Combine(SrvRuntime.UserPath, username))){
+                return FileOperations.CreatePath(Path.Combine(SrvRuntime.UserPath, username));
+            }
+            return true;
         }
         
     }

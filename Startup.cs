@@ -13,7 +13,6 @@ using EasyITCenter.ServerCoreConfiguration;
 using SQLitePCL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Fawdlstty.GitServerCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -95,7 +94,6 @@ namespace EasyITCenter {
             ServerModules.ConfigureDocumentation(ref services);
             ServerModules.ConfigureLiveDataMonitor(ref services);
             ServerModules.ConfigureDBEntitySchema(ref services);
-            ServerModules.ConfigureGitServer(ref services);
             ServerModules.ConfigureMarkdownAsHtmlFiles(ref services);
             ServerModules.ConfigureReportDesigner(ref services);
 
@@ -128,34 +126,6 @@ namespace EasyITCenter {
             SrvRuntime.ActionRouterProvider = routerActionProvider;
             serverLifetime.ApplicationStarted.Register(ServerOnStarted); serverLifetime.ApplicationStopping.Register(ServerOnStopping); serverLifetime.ApplicationStopped.Register(ServerOnStopped);
             ServerEnablingServices.EnableLogging(ref app);
-
-            EasyITCenterContext? db = new EasyITCenterContext();
-            try {//Generate ALL Registered Databases IF NOT EXIST && FILL DATA
-                try { if (db.SolutionUserLists.Count() == 0) { } } catch {
-                    db.Database.EnsureCreated();
-                    db.SolutionUserLists.Add(new SolutionUserList() { UserName = "admin", Password = "admin", Name = "Admin", SurName = "Adminer", Active = true, Email = "", PhoneConfirmed = true, EmailConfirmed = true, TimeStamp = DateTimeOffset.Now.DateTime });
-                    db.SaveChanges();
-                }
-            } catch { }
-
-            //RESET DB running Processes
-            List<ServerStartUpScriptList>? runningProcesses = db.ServerStartUpScriptLists.Where(a => a.Pid != null).ToList();
-            runningProcesses.ForEach(item => { item.Pid = null; });
-            if (runningProcesses.Any()) {
-                EasyITCenterContext itemData = new EasyITCenterContext(); itemData.ServerStartUpScriptLists.UpdateRange(runningProcesses);
-                await itemData.SaveChangesAsync();
-            }
-            //RUN Startup Processes
-            runningProcesses = db.ServerStartUpScriptLists.Where(a => a.RunOnServerStartUp == true).ToList();
-            runningProcesses.ForEach(process => {
-                RunProcessRequest startupProcess = new() {
-                    Command = process.StartCommand.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)),
-                    WorkingDirectory = process.WorkingDirectory.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)),
-                    WaitForExit = false,
-                    ProcessType = DataOperations.ParseEnum<ProcessType>(process.InheritedProcessType), StartupScriptName = process.Name
-                }; ProcessOperations.ServerProcessStartAsync(startupProcess);
-            });
-
 
             if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value)) {
                 app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All });
@@ -265,7 +235,7 @@ namespace EasyITCenter {
             app.UseHsts();
 
             //Allowed File Types For Web TODO define over Administration
-            var staticFilesProvider = new FileExtensionContentTypeProvider();
+            FileExtensionContentTypeProvider? staticFilesProvider = new FileExtensionContentTypeProvider();
             staticFilesProvider.Mappings[".js"] = "text/javascript"; staticFilesProvider.Mappings[".css"] = "text/css";
             staticFilesProvider.Mappings[".json"] = "application/json"; staticFilesProvider.Mappings[".code"] = "text/cs";
             staticFilesProvider.Mappings[".xaml"] = "text/xaml"; staticFilesProvider.Mappings[".zip"] = "application/zip";
@@ -277,17 +247,10 @@ namespace EasyITCenter {
             staticFilesProvider.Mappings[".ts"] = "text/javascript";
 
             if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value)) { app.UseHttpsRedirection(); }
-            //app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html" });
-
-            //TODO Websites and subdomains
-            List<SolutionStaticWebList> websites;
-            using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
-                websites = new EasyITCenterContext().SolutionStaticWebLists.Where(a => a.Active).ToList();
-            }
-
             
-
-            app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, /*OnPrepareResponse = */ });
+            
+            //app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html" });
+            app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true });
 
             app.UseCookiePolicy();
             app.UseSession();
@@ -297,17 +260,6 @@ namespace EasyITCenter {
             app.UseAuthentication();
             app.UseAuthorization();
             ServerEnablingServices.EnableAutoMinify(ref app);
-
-            //Authorized - after Auth INIT for Static Files
-            websites.ForEach(website => {
-                app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true,
-                    FileProvider = new StaticFilesFileProviderService(app.ApplicationServices),
-                    RequestPath = "/server-users/" + website.WebsiteName + ".", HttpsCompression = HttpsCompressionMode.Compress,
-                    DefaultContentType = "text/html", ContentTypeProvider = staticFilesProvider
-                });
-            });
-
-
             ServerModulesEnabling.EnableSwagger(ref app);
             ServerModulesEnabling.EnableLiveDataMonitor(ref app);
             ServerModulesEnabling.EnableDBEntitySchema(ref app);
@@ -317,7 +269,6 @@ namespace EasyITCenter {
             ServerEnablingServices.EnableEndpoints(ref app);
             ServerModulesEnabling.EnableDocumentation(ref app);
             ServerEnablingServices.EnableRssFeed(ref app);
-            ServerModulesEnabling.EnableGitServer(ref app);
 
             if (bool.Parse(DbOperations.GetServerParameterLists("WebBrowserContentEnabled").Value)) { //Browsable Path Definitions
                 List<ServerStaticOrMvcDefPathList> data;
