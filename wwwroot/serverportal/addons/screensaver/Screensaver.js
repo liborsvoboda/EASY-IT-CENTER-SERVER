@@ -31,7 +31,7 @@
     this.container.style.right = 0
     this.container.style.top = 0
     this.container.style.bottom = 0
-    this.container.style.zIndex = 9999
+    this.container.style.zIndex = 10000000
     this.container.style.cursor = "none"
     this.container.style.display = "none"
     this.container.style.outline = "none"

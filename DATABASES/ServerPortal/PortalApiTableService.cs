@@ -35,6 +35,12 @@ namespace EasyITCenter.Controllers
         public bool EnableScreenSaver { get; set; }
     }
 
+    public partial class QuestionRequest {
+        public string RecGuid { get; set; } = null;
+        public string MenuName { get; set; }
+        public string Question { get; set; }
+        public string Response { get; set; } = null;
+    }
 
     [Route("PortalApiTableService")]
     [ApiController]
@@ -236,5 +242,64 @@ namespace EasyITCenter.Controllers
             return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
 
+
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/SetQuestionList")]
+        public async Task<string> SetQuestionList([FromBody] QuestionRequest questionRequest) {
+            EasyITCenterContext data = new EasyITCenterContext();
+            try {
+                if (ServerApiServiceExtension.IsLogged()) {
+                    string recGuid = Guid.NewGuid().ToString().ToUpper();
+                    List<PortalApiTableColumnDataList> record = new();
+                    record.Add(new PortalApiTableColumnDataList() { ApiTableName = "QuestionList", ApiTableColumnName = "MenuName", InheritedDataType = "string", RecGuid = recGuid, Value = questionRequest.MenuName, Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "QuestionList", ApiTableColumnName = "Question", InheritedDataType = "bit", RecGuid = recGuid, Value = questionRequest.Question, Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "QuestionList", ApiTableColumnName = "Response", InheritedDataType = "bit", RecGuid = recGuid, Value = null, Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+
+                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                        data.PortalApiTableColumnDataLists.AddRange(record);
+                        data.SaveChanges();
+                        return true;
+                    });
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 8, ErrorMessage = recGuid });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/GetQuestionListForResponse")]
+        public async Task<string> GetQuestionListForResponse() {
+            List<PortalApiTableColumnDataList> data = new();
+            List<PortalApiTableColumnDataList> result = new();
+            try {
+                if (ServerApiServiceExtension.IsLogged()) {
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                        data = new EasyITCenterContext().PortalApiTableColumnDataLists
+                            .Where(a => a.ApiTableName == "QuestionList" && a.ApiTableColumnName == "Response" && a.Value == null)
+                            .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                    }
+                    if (data.Any()) {
+                        data.ForEach(dataRec => {
+                            List<PortalApiTableColumnDataList>? response = new();
+                            using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                                response = new EasyITCenterContext().PortalApiTableColumnDataLists
+                                    .Where(a => a.RecGuid == dataRec.RecGuid)
+                                    .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                            }
+                            result.AddRange(response);
+                        })
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(result, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            }
+            return JsonSerializer.Serialize(result, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
     }
 }
