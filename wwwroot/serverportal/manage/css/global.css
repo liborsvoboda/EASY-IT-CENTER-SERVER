@@ -10,6 +10,9 @@ body {
     min-height: 100%;
 }
 
+.text-middle {
+    text-align: center !important; 
+}
 
 .qxCTlb {
     position: fixed !important;

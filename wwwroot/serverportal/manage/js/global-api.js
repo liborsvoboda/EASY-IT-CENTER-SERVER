@@ -118,6 +118,7 @@ function ValidateForm() {
             Metro.storage.setItem("ApiToken", result);
             Gs.Behaviors.HidePageLoading();
             window.location.href = Metro.storage.getItem("DefaultPath", null);
+            return true;
         },
         error: function (err) {
             Cookies.remove('ApiToken');
@@ -129,6 +130,64 @@ function ValidateForm() {
 
 }
 
+
+Gs.Apis.GetUserSetting = function () {
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "GET",
+        url: Metro.storage.getItem('BackendServerAddress', null) + "/PortalApiTableService/GetUserSettingList",
+        async: true,
+        cache: false,
+        headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json charset=UTF-8', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            result.forEach(userSetting => {
+                if (userSetting.apiTableColumnName == "EnableAutoTranslate") { Gs.Variables.UserSettingList.EnableAutoTranslate = JSON.parse(userSetting.value.toLowerCase()); }
+                if (userSetting.apiTableColumnName == "EnableShowDescription") { Gs.Variables.UserSettingList.EnableShowDescription = JSON.parse(userSetting.value.toLowerCase()); }
+                if (userSetting.apiTableColumnName == "RememberLastHandleBar") { Gs.Variables.UserSettingList.RememberLastHandleBar = JSON.parse(userSetting.value.toLowerCase()); }
+                if (userSetting.apiTableColumnName == "RememberLastJson") { Gs.Variables.UserSettingList.RememberLastJson = JSON.parse(userSetting.value.toLowerCase()); }
+                if (userSetting.apiTableColumnName == "EnableScreenSaver") { Gs.Variables.UserSettingList.EnableScreenSaver = JSON.parse(userSetting.value.toLowerCase()); }
+            });
+            Metro.storage.setItem("UserSettingList", Gs.Variables.UserSettingList);
+            
+            Gs.Behaviors.LoadUserSettings();
+            Gs.Behaviors.HidePageLoading();
+            return true;
+        },
+        error: function (err) {
+            Metro.storage.delItem("UserSettingList");
+            Gs.Behaviors.HidePageLoading();
+            Gs.Objects.ShowNotify("alert", err); return false;
+        }
+    });
+}
+
+
+Gs.Apis.SetUserSetting = function () {
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "POST",
+        url: Metro.storage.getItem('BackendServerAddress', null) + "/PortalApiTableService/SetUserSettingList",
+        async: true,
+        cache: false,
+        headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json charset=UTF-8', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Metro.storage.getItem("UserSettingList", null)),
+        dataType: "json",
+        success: function (result) {
+            Gs.Behaviors.HidePageLoading();
+            return true;
+        },
+        error: function (err) {
+            Gs.Behaviors.HidePageLoading();
+            Gs.Objects.ShowNotify("alert", err);
+            return false;
+        }
+    });
+}
 
 Gs.Apis.IsLogged = function () {
     if (Cookies.get('ApiToken') == undefined || Cookies.get('ApiToken') == null) { return false } else { return true};

@@ -14,7 +14,7 @@ Gs.Behaviors.PortalStartup = async function () {
             Gs.Objects.GenerateMenu();
             Gs.Functions.GetFunctionList();
             
-            if (!Gs.Apis.IsLogged()) { Gs.Behaviors.LoadUserSettings(); }
+            if (!Gs.Apis.IsLogged()) { Gs.Behaviors.LoadUserSettings(); } else { Gs.Apis.GetUserSetting(); }
         }, 5000);
     }); 
     
@@ -63,9 +63,12 @@ Gs.Behaviors.GoogleTranslateElementInit = function () {
 }
 
 Gs.Behaviors.CancelTranslation = function () {
-    let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)));
-    userSetting.EnableAutoTranslate = false; Metro.storage.setItem('UserSettingList', userSetting);
+    let userSettingList = Metro.storage.getItem('UserSettingList', null);
+    let translateActive = userSettingList.EnableAutoTranslate;
+    userSettingList.EnableAutoTranslate = false;
+    Metro.storage.setItem('UserSettingList', userSettingList);
     Gs.Behaviors.ElementSetCheckBox("EnableAutoTranslate", Gs.Variables.UserSettingList.EnableAutoTranslate);
+    if (translateActive && Gs.Apis.IsLogged()) { Gs.Apis.SetUserSetting(); }
 
     if (document.querySelector('#google_translate_element select') != null) {
         setTimeout(function () {
@@ -111,11 +114,15 @@ Gs.Behaviors.SetUserSettings = function () {
     userSetting.RememberLastHandleBar = $("#RememberLastHandleBar")[0].checked;
     userSetting.RememberLastJson = $("#RememberLastJson")[0].checked;
     userSetting.EnableScreenSaver = $("#EnableScreenSaver")[0].checked;
-
-    //Save Logged UserSetting
-    if (Gs.Apis.IsLogged) { }
-
     Metro.storage.setItem('UserSettingList', userSetting);
+
+    //reset UserSetting Data
+    if (!Metro.storage.getItem('UserSettingList', null).RememberLastHandleBar) { Metro.storage.delItem("HandlebarCode"); }
+    if (!Metro.storage.getItem('UserSettingList', null).RememberLastJson) { Metro.storage.delItem("JsonGeneratorService"); }
+
+    //Save UserSettingList
+    if (Gs.Apis.IsLogged()) { Gs.Apis.SetUserSetting(); }
+
     if ($("#EnableAutoTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
     if ($("#EnableScreenSaver").val('checked')[0].checked && document.getElementById("ScreenSaver") == null) {
         Gs.Variables.screensaver = new Screensaver({
@@ -143,11 +150,9 @@ Gs.Behaviors.LoadUserSettings = function () {
 Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Gs.Variables.monacoEditorList = [];
 
-    //set 
+    //SET UserSetting
     Gs.Behaviors.LoadUserSettings();
-    //and reset menu data
-    if (!Metro.storage.getItem('UserSettingList', null).RememberLastHandleBar) { Metro.storage.delItem("HandlebarCode"); }
-    if (!Metro.storage.getItem('UserSettingList', null).RememberLastJson) { Metro.storage.delItem("JsonGeneratorService"); }
+
     //RESET here storage tables from Portal Menu
     Metro.storage.delItem("SelectedMenuId");
     Metro.storage.delItem('ApiTableList');

@@ -14,10 +14,10 @@ Gs.Objects.CreateToolPanel = function () {
     html += '<ul data-role="materialtabs" data-expand="true" data-tabs-type="text" data-on-tab="">';
     html += '<li class="fg-black"><A href="#_toolTranslate">Translate</A> </li>';
     html += '<li class="fg-black"><A href="#_toolUserSet">User Setting</A> </li>';
-    html += '<li class="fg-black"><A href="#_toolHelp">Fast Help</A></li>';
-    html += '<li class="fg-black"><A href="#_toolImages">Images</A></li>';
-    html += '<li class="fg-black"><A href="#_toolRadio">Radio</A></li>';
-    html += '<li class="fg-black"><A href="#_toolVideo">Video</A></li>';
+    //html += '<li class="fg-black"><A href="#_toolHelp">Fast Help</A></li>';
+    //html += '<li class="fg-black"><A href="#_toolImages">Images</A></li>';
+    //html += '<li class="fg-black"><A href="#_toolRadio">Radio</A></li>';
+    //html += '<li class="fg-black"><A href="#_toolVideo">Video</A></li>';
     html += '</ul>';
     html += '<DIV id=_toolTranslate class="d-contents" style="display: contents !important;">';
     //html += '<div class="w-100 text-left"> <audio id="radio" class="light bg-transparent" data-role="audio-player" data-src="/server-integrated/razor-pages/serverportal/media/hotel_california.mp3" data-volume=".5"></audio> </div>';
