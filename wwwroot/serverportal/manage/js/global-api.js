@@ -144,7 +144,8 @@ function ValidateRegForm() {
         dataType: "json",
         data: JSON.stringify({ FirstName: $("#firstName").val(), Surname: $("#surname").val(), Username: $("#userName").val(), EmailAddress: $("#email").val(), Password: $("#password").val() }),
         success: function (result) {
-            Gs.Objects.ShowNotify("success", result.Status); 
+            if (result.Status != "success") { Gs.Objects.ShowNotify("alert", result.ErrorMessage); }
+            else { Gs.Objects.ShowNotify("success", result.Status); }
             Gs.Behaviors.HidePageLoading();
             return true;
         },

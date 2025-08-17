@@ -74,8 +74,7 @@ namespace EasyITCenter.Controllers {
                     new Claim(ClaimTypes.PrimarySid, user.Id.ToString()),
                     new Claim(ClaimTypes.NameIdentifier, user.UserName),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Role.SystemName.ToLower()),
-                    new Claim(ClaimTypes.Sid, user.UserDbPreffix.ToUpper())
+                    new Claim(ClaimTypes.Role, user.Role.SystemName.ToLower())
                 }),
                     CompressionAlgorithm = CompressionAlgorithms.Deflate,
                     Issuer = user.UserName,

@@ -118,16 +118,16 @@
         }
 
 
-        /// <summary>
-        /// Get UserDBPrefix
-        /// </summary>
-        /// <returns></returns>
-        public static string? GetUserPrefix() {
-            try {
-                var context = _accessor?.HttpContext;
-                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Sid.ToString())?.Value?.ToUpper(); } else return null;
-            } catch { return null; }
-        }
+        ///// <summary>
+        ///// Get UserDBPrefix
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string? GetUserPrefix() {
+        //    try {
+        //        var context = _accessor?.HttpContext;
+        //        if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Sid.ToString())?.Value?.ToUpper(); } else return null;
+        //    } catch { return null; }
+        //}
 
     }
 }

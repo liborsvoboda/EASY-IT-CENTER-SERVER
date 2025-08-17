@@ -1,4 +1,5 @@
 ﻿using ServerCorePages;
+using System.Extensions;
 
 namespace EasyITCenter.Controllers {
 
@@ -118,10 +119,11 @@ namespace EasyITCenter.Controllers {
                     };
                 }
                 CoreOperations.SendEmail(mailRequest, true);
-                if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = origUser.Id, Status = DBWebApiResponses.loginInfoSentToEmail.ToString(), RecordCount = result, ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.loginInfoSentToEmail.ToString()) });
+                if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = origUser.Id, Status = DBWebApiResponses.success.ToString(), RecordCount = result, ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.loginInfoSentToEmail.ToString()) });
                 else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
-            } catch { }
-            return JsonSerializer.Serialize(new { message = DbOperations.DBTranslate("EmailCannotBeSend", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value) });
+            } 
+            catch(Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+            
         }
 
 
@@ -179,10 +181,10 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> UpdateRegistration([FromBody] UserProfile record) {
             try {
-                if (ServerApiServiceExtension.GetUserName.ToLower() == record.Username.ToLower()) {
+                if (ServerApiServiceExtension.GetUserName().ToLower() == record.Username.ToLower()) {
                     SolutionUserList user = new EasyITCenterContext().SolutionUserLists.Where(a => a.Id == ServerApiServiceExtension.GetUserId()).First();
                     if (record.Password != null && record.Password.Length > 0) { user.Password = record.Password; }
-                    user.Name = record.FirstName; user.SurName = record.Surname; user.Email = record.EmailAddress, user.TimeStamp = DateTimeOffset.Now.DateTime;
+                    user.Name = record.FirstName; user.SurName = record.Surname; user.Email = record.EmailAddress; user.TimeStamp = DateTimeOffset.Now.DateTime;
 
                     var data = new EasyITCenterContext().SolutionUserLists.Update(user);
                     int result = await data.Context.SaveChangesAsync();

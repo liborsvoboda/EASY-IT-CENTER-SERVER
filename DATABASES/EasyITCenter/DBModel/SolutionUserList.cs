@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("SolutionUserList")]
-    [Index("UserDbPreffix", Name = "IX_SolutionUserList", IsUnique = true)]
+    [Index("Email", Name = "IX_SolutionUserList_1", IsUnique = true)]
     [Index("UserName", Name = "IX_UserList", IsUnique = true)]
     public partial class SolutionUserList
     {
@@ -87,8 +87,6 @@ namespace EasyITCenter.DBModel
             SystemTranslationLists = new HashSet<SystemTranslationList>();
             TemplateLists = new HashSet<TemplateList>();
             UserAccessKeyLists = new HashSet<UserAccessKeyList>();
-            UserDbManagementListUserPrefixNavigations = new HashSet<UserDbManagementList>();
-            UserDbManagementListUsers = new HashSet<UserDbManagementList>();
             UserImageGalleryLists = new HashSet<UserImageGalleryList>();
             UserParameterLists = new HashSet<UserParameterList>();
             WebBannedIpAddressLists = new HashSet<WebBannedIpAddressList>();
@@ -106,7 +104,6 @@ namespace EasyITCenter.DBModel
         [Key]
         public int Id { get; set; }
         public int RoleId { get; set; }
-        public int RoleAccessValue { get; set; }
         [StringLength(150)]
         [Unicode(false)]
         public string UserName { get; set; } = null!;
@@ -139,14 +136,10 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Phone { get; set; }
         public bool PhoneConfirmed { get; set; }
-        [StringLength(20)]
-        [Unicode(false)]
-        public string UserDbPreffix { get; set; } = null!;
 
         [ForeignKey("RoleId")]
-        [InverseProperty("SolutionUserListRoles")]
+        [InverseProperty("SolutionUserLists")]
         public virtual SolutionUserRoleList Role { get; set; } = null!;
-        public virtual SolutionUserRoleList RoleAccessValueNavigation { get; set; } = null!;
         [InverseProperty("User")]
         public virtual ICollection<BasicAttachmentList> BasicAttachmentLists { get; set; }
         [InverseProperty("User")]
@@ -295,9 +288,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<TemplateList> TemplateLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<UserAccessKeyList> UserAccessKeyLists { get; set; }
-        public virtual ICollection<UserDbManagementList> UserDbManagementListUserPrefixNavigations { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<UserDbManagementList> UserDbManagementListUsers { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<UserImageGalleryList> UserImageGalleryLists { get; set; }
         [InverseProperty("User")]

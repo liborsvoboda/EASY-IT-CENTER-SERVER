@@ -99,7 +99,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SystemTranslationList> SystemTranslationLists { get; set; } = null!;
         public virtual DbSet<TemplateList> TemplateLists { get; set; } = null!;
         public virtual DbSet<UserAccessKeyList> UserAccessKeyLists { get; set; } = null!;
-        public virtual DbSet<UserDbManagementList> UserDbManagementLists { get; set; } = null!;
         public virtual DbSet<UserImageGalleryList> UserImageGalleryLists { get; set; } = null!;
         public virtual DbSet<UserParameterList> UserParameterLists { get; set; } = null!;
         public virtual DbSet<WebBannedIpAddressList> WebBannedIpAddressLists { get; set; } = null!;
@@ -1335,21 +1334,10 @@ namespace EasyITCenter.DBModel
 
                 entity.Property(e => e.Phone).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.RoleAccessValue).HasDefaultValueSql("((100))");
-
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.UserDbPreffix).HasDefaultValueSql("(newid())");
-
-                entity.HasOne(d => d.RoleAccessValueNavigation)
-                    .WithMany(p => p.SolutionUserListRoleAccessValueNavigations)
-                    .HasPrincipalKey(p => p.MinimalAccessValue)
-                    .HasForeignKey(d => d.RoleAccessValue)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionUserList_SolutionUserRoleList");
-
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.SolutionUserListRoles)
+                    .WithMany(p => p.SolutionUserLists)
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("FK_UserList_UserRoleList");
             });
@@ -1561,33 +1549,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserAccessKeyList_SolutionUserList");
-            });
-
-            modelBuilder.Entity<UserDbManagementList>(entity =>
-            {
-                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.InheritedDbTypeNavigation)
-                    .WithMany(p => p.UserDbManagementLists)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedDbType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserDbManagementList_SolutionMixedEnumList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserDbManagementListUsers)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserDbManagementList_UserList");
-
-                entity.HasOne(d => d.UserPrefixNavigation)
-                    .WithMany(p => p.UserDbManagementListUserPrefixNavigations)
-                    .HasPrincipalKey(p => p.UserDbPreffix)
-                    .HasForeignKey(d => d.UserPrefix)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserDbManagementList_SolutionUserList");
             });
 
             modelBuilder.Entity<UserImageGalleryList>(entity =>

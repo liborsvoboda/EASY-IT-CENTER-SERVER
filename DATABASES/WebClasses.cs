@@ -14,18 +14,10 @@
         emailExist,
         emailNotExist,
         loginInfoSentToEmail,
-        userNameExist
+        userNameExist,
+        success
     }
 
-    /// <summary>
-    /// Custom Class For Login over Server Web Pages
-    /// </summary>
-    public class ServerWebPagesLogin {
-        public string? Username { get; set; } = null;
-        public string? Password { get; set; } = null;
-
-        // public string? Role { get; set; } = null;
-    }
 
     /// <summary>
     /// Server WebPages Communication Token Definition for Security content And Load Allowed Content
@@ -79,11 +71,7 @@
         public string Value { get; set; }
     }
 
-    public class MinifiedFile {
-        public string SpecificationType { get; set; }
-        public string FileName { get; set; }
-        public string FileContent { get; set; }
-    }
+
 
 
 

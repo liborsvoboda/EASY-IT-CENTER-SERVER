@@ -2,6 +2,14 @@
 
 namespace EasyITCenter.Controllers {
 
+
+    public class MinifiedFile {
+        public string SpecificationType { get; set; }
+        public string FileName { get; set; }
+        public string FileContent { get; set; }
+    }
+
+
     [ApiController]
     [Route("WebApi/WebPages")]
      //[ApiExplorerSettings(IgnoreApi = true)]

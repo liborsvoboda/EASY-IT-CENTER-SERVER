@@ -41,7 +41,6 @@ namespace EasyITCenter.DBModel
             SystemMenuLists = new HashSet<SystemMenuList>();
             SystemModuleLists = new HashSet<SystemModuleList>();
             UserAccessKeyLists = new HashSet<UserAccessKeyList>();
-            UserDbManagementLists = new HashSet<UserDbManagementList>();
             UserParameterLists = new HashSet<UserParameterList>();
             WebCoreFileLists = new HashSet<WebCoreFileList>();
             WebGlobalPageBlockLists = new HashSet<WebGlobalPageBlockList>();
@@ -92,7 +91,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SystemMenuList> SystemMenuLists { get; set; }
         public virtual ICollection<SystemModuleList> SystemModuleLists { get; set; }
         public virtual ICollection<UserAccessKeyList> UserAccessKeyLists { get; set; }
-        public virtual ICollection<UserDbManagementList> UserDbManagementLists { get; set; }
         public virtual ICollection<UserParameterList> UserParameterLists { get; set; }
         public virtual ICollection<WebCoreFileList> WebCoreFileLists { get; set; }
         public virtual ICollection<WebGlobalPageBlockList> WebGlobalPageBlockLists { get; set; }

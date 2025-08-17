@@ -11,7 +11,7 @@ window.Gs = {
         screensaver: {},
         notifySetting :{
             notifyWidth: 300,
-            notifyDuration: 1000,
+            notifyDuration: 5000,
             notifyAnimation: "easeOutBounce"
         },
         getSpProcedure :[
