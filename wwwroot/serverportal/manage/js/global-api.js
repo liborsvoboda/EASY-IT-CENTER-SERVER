@@ -2,7 +2,7 @@
 
 
 Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windowFunction = null) {
-    //Window function is Only window.fnName() NOT window.Gs.Apis.XXX Use for Reload Table
+    //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
         global: false,
@@ -22,7 +22,7 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
             }
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
-
+            
             if (result.Status == undefined || result.Status == "success") { return true; }
             else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
@@ -36,7 +36,7 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
 
 
 Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction = null) {
-    //Window function is Only window.fnName() NOT window.Gs.Apis.XXX Use for Reload Table
+    //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
         global: false,
@@ -69,7 +69,7 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction =
 
 
 Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
-    //Window function is Only window.fnName() NOT window.Gs.Apis.XXX Use for Reload Table
+    //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
         global: false,
@@ -164,30 +164,6 @@ Gs.Apis.GetUserSetting = function () {
     });
 }
 
-
-Gs.Apis.SetUserSetting = function () {
-    Gs.Behaviors.ShowPageLoading();
-    $.ajax({
-        global: false,
-        type: "POST",
-        url: Metro.storage.getItem('BackendServerAddress', null) + "/PortalApiTableService/SetUserSettingList",
-        async: true,
-        cache: false,
-        headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json charset=UTF-8', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(Metro.storage.getItem("UserSettingList", null)),
-        dataType: "json",
-        success: function (result) {
-            Gs.Behaviors.HidePageLoading();
-            return true;
-        },
-        error: function (err) {
-            Gs.Behaviors.HidePageLoading();
-            Gs.Objects.ShowNotify("alert", err);
-            return false;
-        }
-    });
-}
 
 Gs.Apis.IsLogged = function () {
     if (Cookies.get('ApiToken') == undefined || Cookies.get('ApiToken') == null) { return false } else { return true};

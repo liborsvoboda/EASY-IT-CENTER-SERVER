@@ -38,6 +38,7 @@ require(['vs/editor/editor.main'], function () {
     }
 
     addNewEditor("", "TemplateEditor", 'html');
+    addNewEditor("", "PartialTemplateEditor", 'html');
     addNewEditor("", "ResultCodeEditor", 'html');
     /*
     var languageSelected = document.querySelector('.language');    
@@ -50,6 +51,11 @@ require(['vs/editor/editor.main'], function () {
     let templateEditorLang = document.getElementById('TemplateEditorLang');    
     templateEditorLang.onchange = function () {
         Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "TemplateEditor" })[0].editor._themeService.setTheme(templateEditorLang.value)
+    }
+
+    let partialTemplateEditorLang = document.getElementById('PartialTemplateEditorLang');
+    partialTemplateEditorLang.onchange = function () {
+        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "PartialTemplateEditor" })[0].editor._themeService.setTheme(partialTemplateEditorLang.value)
     }
 
     let resultCodeEditorLang = document.getElementById('ResultCodeEditorLang');

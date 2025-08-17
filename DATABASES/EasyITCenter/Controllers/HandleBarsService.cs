@@ -17,6 +17,7 @@ namespace EasyITCenter.Controllers {
 
     public class DataToTemplateRequest {
         public string Template { get; set; }
+        public string PartialTemplate { get; set; } = null;
         public string Data { get; set; }
     }
 
@@ -40,6 +41,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<IActionResult> GetTemplateCode([FromBody] DataToTemplateRequest codegenRequestBody) {
             try {
+                if (!string.IsNullOrWhiteSpace(codegenRequestBody.PartialTemplate)) { Handlebars.RegisterTemplate(DataOperations.GetHandleBarPartialVariable(codegenRequestBody.PartialTemplate), codegenRequestBody.PartialTemplate); }
                 var template = Handlebars.Compile(codegenRequestBody.Template);
                 string? result = template(JsonConvert.DeserializeObject<object>(codegenRequestBody.Data));
 

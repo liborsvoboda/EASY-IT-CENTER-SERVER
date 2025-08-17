@@ -24,8 +24,8 @@
   }
 
   init() {
-      this.container = document.createElement("div")
-      this.container.id = "ScreenSaver"
+    this.container = document.createElement("div")
+    this.container.id = "ScreenSaver"
     this.container.style.position = "fixed"
     this.container.style.left = 0
     this.container.style.right = 0

@@ -33,9 +33,6 @@
 }
 
 
-    <noscript>Please enable JavaScript in your browser!</noscript>
-
-
     <div id="charmPanel" data-role="charms" style="width:350px !important;height:calc(100% - 45px) !important;" data-position="right" data-opacity=".5">
         <textarea id="NewMessage" data-role="textarea" data-auto-size="true" data-max-height="150" class="primary" placeholder="Zanechte mi Zprávu...."></textarea>
         <button id="SendMessageBtn" class="button success mb-4" onclick="SendMessage()">Save Message</button>
@@ -86,15 +83,16 @@
     </div>
 
 
+    @* Menu Favorites *@
     <ul id="Favorites" data-role="bottomsheet" class="hidden">
-        <li class="shadowed"><span class="icon mif-comment" onclick="Gs.Objects.ShowFavorites('Favorites',true);"></span>Messages</li>
-        <li class="shadowed"><span class="icon mif-chat" onclick="Gs.Objects.ShowFavorites('Favorites',true);"></span>Chat</li>
-        <li class="shadowed"><span class="icon mif-download" onclick="Gs.Objects.ShowFavorites('Favorites',true);"></span>Downloads</li>
+        <li class="shadowed"><span class="icon mif-question" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.GetMyQuestionList();"></span>Questions</li>
+        <li class="shadowed"><span class="icon mif-download" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.InfoboxFrameCreate('Downloads','/server-downloads');"></span>Downloads</li>
         <li class="shadowed"><span class="icon mif-github" onclick="Gs.Objects.ShowFavorites('Favorites',true);"></span>Github</li>
         <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowFavorites('Favorites',true);"></span>Search</li>
         <li class="shadowed"><span class="icon mif-import-contacts" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.WindowIframeCreate('Function List','/serverportal/addons/fancytree/codepreview.html');"></span>Functions</li>
-        <li class="divider"></li>
         <li class="shadowed"><span class="icon mif-import-export" onclick="Gs.Objects.ShowFavorites('Favorites',true);"></span>Export</li>
+        <li class="divider"></li>
+
     </ul>
 
 

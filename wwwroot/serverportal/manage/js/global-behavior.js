@@ -1,6 +1,7 @@
 ﻿// STARTUP Temp Variables Definitions
 let pageLoader;
 
+
 Gs.Behaviors.PortalStartup = async function () {
     if (Metro.storage.getItem("ApiToken", null) != null) { Cookies.set('ApiToken', Metro.storage.getItem("ApiToken", null).Token); }
     Gs.Objects.CreateToolPanel();
@@ -14,14 +15,14 @@ Gs.Behaviors.PortalStartup = async function () {
             Gs.Objects.GenerateMenu();
             Gs.Functions.GetFunctionList();
             
-            if (!Gs.Apis.IsLogged()) { Gs.Behaviors.LoadUserSettings(); } else { Gs.Apis.GetUserSetting(); }
+            if (!Gs.Apis.IsLogged()) { Gs.Behaviors.LoadUserSettings();
+            } else { Gs.Apis.GetUserSetting(); }
         }, 5000);
     }); 
     
 }
 
 
-/*Start of Global Loading Indicator for All Pages*/
 Gs.Behaviors.HidePageLoading = function () { Metro.activity.close(pageLoader); }
 Gs.Behaviors.ShowPageLoading = function () {
     if (pageLoader != undefined) {
@@ -43,6 +44,7 @@ Gs.Behaviors.GetGoogleOptionLanguageIndex = function (optionValue) {
     } else { return 0; }
 }
 
+
 Gs.Behaviors.GoogleTranslateElementInit = function () {
     $(document).ready(function () {
         new google.translate.TranslateElement({
@@ -62,13 +64,16 @@ Gs.Behaviors.GoogleTranslateElementInit = function () {
     });
 }
 
-Gs.Behaviors.CancelTranslation = function () {
+
+Gs.Behaviors.CancelTranslation = async function () {
     let userSettingList = Metro.storage.getItem('UserSettingList', null);
     let translateActive = userSettingList.EnableAutoTranslate;
     userSettingList.EnableAutoTranslate = false;
     Metro.storage.setItem('UserSettingList', userSettingList);
     Gs.Behaviors.ElementSetCheckBox("EnableAutoTranslate", Gs.Variables.UserSettingList.EnableAutoTranslate);
-    if (translateActive && Gs.Apis.IsLogged()) { Gs.Apis.SetUserSetting(); }
+    if (translateActive && Gs.Apis.IsLogged()) {//on disabling translation Save UserSettingList
+        await Gs.Apis.RunServerPostApi("PortalApiTableService/SetUserSettingList", Metro.storage.getItem("UserSettingList", null), null);
+    }
 
     if (document.querySelector('#google_translate_element select') != null) {
         setTimeout(function () {
@@ -107,7 +112,7 @@ Gs.Behaviors.DisableScroll = function () {
 }
 
 
-Gs.Behaviors.SetUserSettings = function () {
+Gs.Behaviors.SetUserSettings = async function () {
     let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))
     userSetting.EnableAutoTranslate = $("#EnableAutoTranslate").val('checked')[0].checked;
     userSetting.EnableShowDescription = $("#EnableShowDescription")[0].checked;
@@ -121,7 +126,9 @@ Gs.Behaviors.SetUserSettings = function () {
     if (!Metro.storage.getItem('UserSettingList', null).RememberLastJson) { Metro.storage.delItem("JsonGeneratorService"); }
 
     //Save UserSettingList
-    if (Gs.Apis.IsLogged()) { Gs.Apis.SetUserSetting(); }
+    if (Gs.Apis.IsLogged()) {
+        await Gs.Apis.RunServerPostApi("PortalApiTableService/SetUserSettingList", Metro.storage.getItem("UserSettingList", null), null);
+    }
 
     if ($("#EnableAutoTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
     if ($("#EnableScreenSaver").val('checked')[0].checked && document.getElementById("ScreenSaver") == null) {
@@ -158,7 +165,11 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem('ApiTableList');
     Metro.storage.delItem("SelectedMenu");
     Metro.storage.delItem("ServerStartUpScriptList");
-    
+    Metro.storage.delItem("FtpServerStatus");
+    Metro.storage.delItem("SchedulerServerStatus");   
+    Metro.storage.delItem("MyQuestionList");
+    Metro.storage.delItem("QuestionForResponseList");
+
     
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
@@ -255,11 +266,13 @@ Gs.Behaviors.ElementAddClass = function (elementId, className) {
     } catch { }
 }
 
+
 Gs.Behaviors.ElementRemoveClass = function (elementId, className) {
     try {
         $('#' + elementId).removeClass(className);
     } catch { }
 }
+
 
 Gs.Behaviors.InfoBoxOpenClose = function (elementId) {
     try {

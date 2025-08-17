@@ -268,7 +268,20 @@ Gs.Objects.InfoboxFrameCreate = function (elementId,url) {
         type: "",
         removeOnClose: true,
         width: "80%",
-        height: "802",
+        height: "800",
+        tag: "",
+        id: elementId
+    });
+}
+
+
+Gs.Objects.InfoboxObjectCreate = function (elementId, html) {
+    let infoBox = Metro.infobox.create(html, "", {
+        closeButton: true,
+        type: "",
+        removeOnClose: true,
+        width: "80%",
+        height: "800",
         tag: "",
         id: elementId
     });
@@ -292,3 +305,41 @@ Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
 }
 
 
+Gs.Objects.GetMyQuestionList = async function () {
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetMyQuestionList", "MyQuestionList");
+    
+    setTimeout(function () {
+        let myQuestionList = []; let group = null; menuItem = {};
+        let origQuestionList = Metro.storage.getItem('MyQuestionList', null);
+        
+        origQuestionList.forEach((item, index, arr) => {
+            switch (item.apiTableColumnName) {
+                case "MenuName":
+                    menuItem.recGuid = item.recGuid;
+                    menuItem.MenuName = item.value;
+                    break;
+                case "Question":
+                    menuItem.Question = item.value;
+                    break;
+                case "Response":
+                    menuItem.Response = item.value;
+                    break;
+            }
+            if (group != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != item.recGuid)) {
+                myQuestionList.push(menuItem);
+                menuItem = {};
+            }
+            group = item.recGuid;
+        });
+
+        let html = '<div data-role="accordion" data-active-heading-class="bg-cyan fg-white" data-active-content-class="fg-cyan" class="pt-5" >';
+        myQuestionList.forEach(item => {
+            html += '<div class="frame"><div class="heading">' + item.MenuName + '</div>';
+            html += '<div class="content"><div class="p-2 fg-green">Question: ' + item.Question + '</div><div class="p-2">Response: ' + item.Response + '</div></div>';
+            html += '</div>';
+        });
+        html += '</div>';
+
+        Gs.Objects.InfoboxObjectCreate("myQuestionList", html);
+    }, 3000);
+}

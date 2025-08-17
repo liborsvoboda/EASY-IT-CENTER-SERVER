@@ -309,5 +309,18 @@ namespace EasyITCenter.ServerCoreStructure {
         public static T ParseEnum<T>(string value) {
             return (T)Enum.Parse(typeof(T), value, true);
         }
+
+
+        /// <summary>
+        /// Get HandleBar Partial Variable
+        /// </summary>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        public static string GetHandleBarPartialVariable(string template) {
+            try {
+                return template.Split("}}")[0].Split("{{")[1].Trim();
+            } catch { return template.Trim(); }
+
+        }
     }
 }
