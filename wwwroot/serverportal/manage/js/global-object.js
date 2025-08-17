@@ -360,7 +360,6 @@ Gs.Objects.ShowRegistrationPage = function () {
     htnlContent += '<input class="mt-4" type="password" data-role="input" placeholder="Retype password" data-append="<span class=\'mif-checkmark\'>" data-validate="required equals=password"><span class="invalid_feedback">Please enter a Password</span></div>';
     htnlContent += '<div class="form-group d-flex flex-align-center flex-justify-between"><input type="checkbox" data-role="checkbox" data-caption="I agree to the <a href=\'#\'>terms</a>"><button class="button primary">Register</button></div>';
     htnlContent += '</form></div></div></div></window></div>';
-
     document.getElementById("FrameWindow").innerHTML = htnlContent;
 }
 

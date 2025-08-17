@@ -16,7 +16,7 @@ namespace EasyITCenter.Controllers {
     /// </summary>
     [Authorize]
     [ApiController]
-    [Route("ServerApi")]
+    [Route("ToolsService")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ServerApiSqLiteInitService : ControllerBase {
 

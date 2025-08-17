@@ -165,7 +165,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 //MirrorSharp Support
                 if (bool.Parse(DbOperations.GetServerParameterLists("ModuleCSharpCodeBuilder").Value)) { endpoints.MapMirrorSharp("/mirrorsharp", new MirrorSharpOptions { SelfDebugEnabled = true, IncludeExceptionDetails = true  }
                 .SetupCSharp(o => {
-                    o.AddMetadataReferencesFromFiles(FileOperations.GetPathFiles(SrvRuntime.Startup_path, "*.dll", SearchOption.TopDirectoryOnly).ToArray());
+                    o.AddMetadataReferencesFromFiles(FileOperations.GetPathFiles(SrvRuntime.StartupPath, "*.dll", SearchOption.TopDirectoryOnly).ToArray());
                     // = ..MetadataReferences = GetAllReferences().ToImmutableList();
                 })); }
 
@@ -201,7 +201,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     setup.UIPath = DbOperations.GetServerParameterLists("ModuleHealthServicePath").Value.StartsWith("/") ? DbOperations.GetServerParameterLists("ModuleHealthServicePath").Value : "/" + DbOperations.GetServerParameterLists("ModuleHealthServicePath").Value;
                     setup.AsideMenuOpened = true;
                     setup.PageTitle = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value;
-                    setup.AddCustomStylesheet(Path.Combine(SrvRuntime.SrvIntegrated_path, "server-modules", "HealthCheck", "HealthChecksUI.css"));
+                    setup.AddCustomStylesheet(Path.Combine(SrvRuntime.SrvModulesPath, "HealthCheck", "HealthChecksUI.css"));
                 });
             }
 

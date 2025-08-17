@@ -14,7 +14,7 @@ namespace EasyITCenter.Controllers {
 
     //[Authorize]
     [ApiController]
-    [Route("DevToolsApi/PlayGroundStudio")]
+    [Route("ToolsService/PlayGroundStudio")]
     public class PlayGroundStudioControllers : Controller {
 
         private RepoMapper mapper;
@@ -30,13 +30,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpGet("/DevToolsApi/PlayGroundStudio/test")]
-        public IActionResult Test() {
-            return Json(new { test = "test" });
-        }
-
-
-        [HttpGet("/DevToolsApi/PlayGroundStudio/output/{id}/{milestone}")]
+        [HttpGet("/ToolsService/PlayGroundStudio/output/{id}/{milestone}")]
         public IActionResult Output(string id, string milestone) {
             var entry = mapper.GetEntry(id);
             if (entry != null)
@@ -74,7 +68,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/DevToolsApi/PlayGroundStudio/newFile")]
+        [HttpPost("/ToolsService/PlayGroundStudio/newFile")]
         public IActionResult NewFile(string description) {
             RepoMapper.Entry entry;
             entry = new RepoMapper.Entry()
@@ -106,7 +100,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpGet("/DevToolsApi/PlayGroundStudio/loadFile")]
+        [HttpGet("/ToolsService/PlayGroundStudio/loadFile")]
         public IActionResult LoadFile(string file, string milestone) {
             var entry = mapper.GetEntry(file);
             if (entry == null)
@@ -179,7 +173,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/DevToolsApi/PlayGroundStudio/saveFile")]
+        [HttpPost("/ToolsService/PlayGroundStudio/saveFile")]
         public IActionResult SaveFile(string name, int milestone, string html, string css, string typescript, string output) {
             if (string.IsNullOrEmpty(name) || name.Contains(".."))
                 return Json(new HandlerResult() { Success = false });
@@ -208,7 +202,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpGet("/DevToolsApi/PlayGroundStudio/listFiles")]
+        [HttpGet("/ToolsService/PlayGroundStudio/listFiles")]
         public IActionResult ListFiles() {
             var entries = mapper.GetEntries().Where(e => !e.IsNew).ToList();
 
@@ -223,7 +217,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/DevToolsApi/PlayGroundStudio/createMilestone")]
+        [HttpPost("/ToolsService/PlayGroundStudio/createMilestone")]
         public IActionResult CreateMileStone(string name, string html, string css, string typescript, string output, string comments) {
 
             var entry = mapper.GetEntry(name);
@@ -253,7 +247,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/DevToolsApi/PlayGroundStudio/deleteMilestone")]
+        [HttpPost("/ToolsService/PlayGroundStudio/deleteMilestone")]
         public IActionResult DeleteMilestone(string name) {
             var entry = mapper.GetEntry(name);
             if (entry == null)
@@ -279,7 +273,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/DevToolsApi/PlayGroundStudio/updateDescription")]
+        [HttpPost("/ToolsService/PlayGroundStudio/updateDescription")]
         public IActionResult UpdateDescription(string name, string description) {
             var entry = mapper.GetEntry(name);
             if (entry == null)

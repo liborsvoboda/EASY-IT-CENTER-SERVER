@@ -2423,7 +2423,7 @@
 
     function RestServices() {
         var self = this;
-        var restBaseUrl = window.location.origin + "/DevToolsApi/PlayGroundStudio/";
+        var restBaseUrl = window.location.origin + "/ToolsService/PlayGroundStudio/";
 
         function newFile() {
             $.post(restBaseUrl + "newFile", function (resp) {

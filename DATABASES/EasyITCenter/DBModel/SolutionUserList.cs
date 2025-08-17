@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("SolutionUserList")]
-    [Index("Email", Name = "IX_SolutionUserList_1", IsUnique = true)]
     [Index("UserName", Name = "IX_UserList", IsUnique = true)]
     public partial class SolutionUserList
     {
@@ -76,6 +75,7 @@ namespace EasyITCenter.DBModel
             SolutionOperationLists = new HashSet<SolutionOperationList>();
             SolutionSchedulerLists = new HashSet<SolutionSchedulerList>();
             SolutionTaskLists = new HashSet<SolutionTaskList>();
+            SolutionUserRoleLists = new HashSet<SolutionUserRoleList>();
             SystemCustomPageLists = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
             SystemGroupMenuLists = new HashSet<SystemGroupMenuList>();
@@ -266,6 +266,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionTaskList> SolutionTaskLists { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<SolutionUserRoleList> SolutionUserRoleLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SystemCustomPageList> SystemCustomPageLists { get; set; }
         [InverseProperty("User")]

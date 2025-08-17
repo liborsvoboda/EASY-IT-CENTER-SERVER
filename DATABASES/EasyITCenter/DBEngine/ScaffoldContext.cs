@@ -1345,6 +1345,11 @@ namespace EasyITCenter.DBModel
             modelBuilder.Entity<SolutionUserRoleList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SolutionUserRoleLists)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_SolutionUserRoleList_SolutionUserList");
             });
 
             modelBuilder.Entity<SystemCustomPageList>(entity =>

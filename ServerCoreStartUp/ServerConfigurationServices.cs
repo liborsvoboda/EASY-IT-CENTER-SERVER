@@ -90,7 +90,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     });
                 services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "127.0.0.1"; /*opt.Port*/ });
                 services.Configure<DotNetFileSystemOptions>(opt => {
-                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.FTPServerPath,"guest") : SrvRuntime.FTPServerPath;
+                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.UserPath, "guest") : SrvRuntime.UserPath;
                     opt.AllowNonEmptyDirectoryDelete = true;
                 });
                 services.AddSingleton<IMembershipProvider, HostedFtpServerMembershipProvider>();
@@ -240,7 +240,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     option.AcceptTermsOfService = true;
                     option.RenewDaysInAdvance = new TimeSpan(10, 0, 0, 0);
                     option.RenewalCheckPeriod = new TimeSpan(1, 0, 0, 0);
-                }).PersistDataToDirectory(new DirectoryInfo(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath)), DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value);
+                }).PersistDataToDirectory(new DirectoryInfo(System.IO.Path.Combine(SrvRuntime.StartupPath, SrvRuntime.DataPath)), DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value);
             }
         }
 

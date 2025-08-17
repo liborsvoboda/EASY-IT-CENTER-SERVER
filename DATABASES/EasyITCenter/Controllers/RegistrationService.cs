@@ -75,6 +75,7 @@ namespace EasyITCenter.Controllers {
         [HttpPost("/RegistrationService/Registration")]
         [Consumes("application/json")]
         public async Task<string> Registration([FromBody] WebRegistration webRegistration) {
+            EasyITCenterContext data = new EasyITCenterContext();
             try { //check email exist
                 int count;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
@@ -91,16 +92,26 @@ namespace EasyITCenter.Controllers {
                 }
                 if (origUser != null) {
                     origUser.Name = webRegistration.FirstName; origUser.SurName = webRegistration.Surname; origUser.UserName = webRegistration.Username; origUser.Password = webRegistration.Password;
-                    origUser.Email = webRegistration.EmailAddress; origUser.Active = true; origUser.TimeStamp = DateTimeOffset.Now.DateTime;
-                    EntityEntry<SolutionUserList>? data = new EasyITCenterContext().SolutionUserLists.Update(origUser);
-                    result = await data.Context.SaveChangesAsync();
+                    origUser.Email = webRegistration.EmailAddress; origUser.Active = true;
+
+                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                        data.SolutionUserLists.Update(origUser);
+                        data.SaveChanges();
+                        return true;
+                    });
+
                 }
                 else {
-                    origUser = new() { 
-                        RoleId = 4, UserName = webRegistration.Username, Password = webRegistration.Password, Name = webRegistration.FirstName, SurName = webRegistration.Surname,
-                        Email = webRegistration.EmailAddress, EmailConfirmed = true, PhoneConfirmed = false,  Active = true, TimeStamp = DateTimeOffset.Now.DateTime };
-                    var data = new EasyITCenterContext().SolutionUserLists.Add(origUser);
-                    result = await data.Context.SaveChangesAsync();
+                    origUser = new() { RoleId = 4, UserName = webRegistration.Username, Password = webRegistration.Password, Name = webRegistration.FirstName, 
+                        SurName = webRegistration.Surname, Email = webRegistration.EmailAddress, EmailConfirmed = true };
+                    
+                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                        data.SolutionUserLists.Add(origUser);
+                        data.SaveChanges();
+                        return true;
+                    });
+
+             
                 }
 
                 //Send Reg Email
@@ -108,9 +119,9 @@ namespace EasyITCenter.Controllers {
                 SendMailRequest mailRequest = new SendMailRequest();
                 if (template != null) {
                     mailRequest = new SendMailRequest() {
-                        Subject = template.Subject.Replace("[email]", webRegistration.EmailAddress).Replace("[password]", webRegistration.Password),
+                        Subject = template.Subject.Replace("[email]", webRegistration.EmailAddress).Replace("[password]", webRegistration.Password).Replace("[username]", webRegistration.Username).Replace("[firstname]", webRegistration.FirstName).Replace("[surname]", webRegistration.Surname),
                         Recipients = new List<string>() { webRegistration.EmailAddress },
-                        Content = template.Email.Replace("[email]", webRegistration.EmailAddress).Replace("[password]", webRegistration.Password),
+                        Content = template.Email.Replace("[email]", webRegistration.EmailAddress).Replace("[password]", webRegistration.Password).Replace("[username]", webRegistration.Username).Replace("[firstname]", webRegistration.FirstName).Replace("[surname]", webRegistration.Surname),
                     };
                 } else {
                     mailRequest = new SendMailRequest() {
@@ -119,8 +130,7 @@ namespace EasyITCenter.Controllers {
                     };
                 }
                 CoreOperations.SendEmail(mailRequest, true);
-                if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = origUser.Id, Status = DBWebApiResponses.success.ToString(), RecordCount = result, ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.loginInfoSentToEmail.ToString()) });
-                else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
+                 return JsonSerializer.Serialize(new ResultMessage() { InsertedId = origUser.Id, Status = DBWebApiResponses.success.ToString(), RecordCount = 1, ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.loginInfoSentToEmail.ToString()) });
             } 
             catch(Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
             

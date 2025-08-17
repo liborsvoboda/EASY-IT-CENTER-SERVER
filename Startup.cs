@@ -277,10 +277,10 @@ namespace EasyITCenter {
                 data.ForEach(path => {
                     try {
                         app.UseFileServer(new FileServerOptions {
-                            FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value) + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath)),
+                            FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath))),
                             RequestPath = path.WebRootSubPath.StartsWith("/") ? path.WebRootSubPath : "/" + path.WebRootSubPath, EnableDirectoryBrowsing = true
                         });
-                        if (!string.IsNullOrWhiteSpace(path.AliasPath)) { app.UseFileServer(new FileServerOptions { FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value) + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath)),
+                        if (!string.IsNullOrWhiteSpace(path.AliasPath)) { app.UseFileServer(new FileServerOptions { FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath))),
                             RequestPath = !string.IsNullOrWhiteSpace(path.AliasPath) ? ( path.AliasPath.StartsWith("/") ? path.AliasPath : "/" + path.AliasPath ) : "", EnableDirectoryBrowsing = true
                         });
                         }

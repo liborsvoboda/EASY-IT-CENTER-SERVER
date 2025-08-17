@@ -25,7 +25,7 @@
     string? requestedUrlPath = ""; string fileContent = null;
     try {
         try { requestedUrlPath = ((string?)this.HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value); } catch { }
-        string? filePath = System.IO.Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(requestedUrlPath);
+        string? filePath = System.IO.Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl(requestedUrlPath);
         fileContent = System.IO.File.ReadAllText(filePath);
     } catch { }
 

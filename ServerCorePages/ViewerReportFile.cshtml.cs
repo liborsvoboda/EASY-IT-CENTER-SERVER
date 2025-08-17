@@ -42,7 +42,7 @@ namespace ServerCorePages {
                 if (requestedUrlPath != null && requestedUrlPath.ToLower().EndsWith(".frx")) { }
 
                 else {
-                    var exampleFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvIntegrated_path, "server-modules", "reporting", "reportviewer", "Example"), "*.*", SearchOption.TopDirectoryOnly);
+                    var exampleFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvModulesPath, "reporting", "reportviewer", "Example"), "*.*", SearchOption.TopDirectoryOnly);
 
                     string param = this.Request.Query.FirstOrDefault(a => a.Key == "ReportId").Value;
                     int? reportId = param != null && int.TryParse(param, out int intParam) ? intParam : null;

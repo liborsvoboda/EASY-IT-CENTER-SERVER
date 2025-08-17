@@ -141,9 +141,8 @@ namespace EasyITCenter {
                 
                 webBuilder.UseStartup<Startup>();
                 webBuilder.UseStaticWebAssets();
-                webBuilder.UseWebRoot(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
-                //webBuilder.UseContentRoot(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
-                webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                webBuilder.UseWebRoot(SrvRuntime.WebRootPath);
+                webBuilder.UseContentRoot(Directory.GetCurrentDirectory()); //GetCurrentDirectory For Use Razor Pages
 
                 //RESET DB running Processes
                 EasyITCenterContext dbcontext = new EasyITCenterContext();
@@ -157,8 +156,8 @@ namespace EasyITCenter {
                 runningProcesses = dbcontext.ServerStartUpScriptLists.Where(a => a.RunOnServerStartUp == true).ToList();
                 runningProcesses.ForEach(process => {
                     RunProcessRequest startupProcess = new() {
-                        Command = process.StartCommand.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)),
-                        WorkingDirectory = process.WorkingDirectory.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value)),
+                        Command = process.StartCommand.Replace("wwwroot", SrvRuntime.WebRootPath),
+                        WorkingDirectory = process.WorkingDirectory.Replace("wwwroot", SrvRuntime.WebRootPath),
                         WaitForExit = false,
                         ProcessType = DataOperations.ParseEnum<ProcessType>(process.InheritedProcessType), StartupScriptName = process.Name
                     }; ProcessOperations.ServerProcessStartAsync(startupProcess);
@@ -193,8 +192,8 @@ namespace EasyITCenter {
             try {
                 //Load From Config File
                 string json = CoreOperations.SrvOStype.IsWindows()
-                    ?  File.ReadAllText(Path.Combine(SrvRuntime.Setting_folder, SrvRuntime.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(SrvRuntime.Setting_folder, SrvRuntime.ConfigFile)))
-                    : File.ReadAllText(Path.Combine(SrvRuntime.Startup_path, "Data", SrvRuntime.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(SrvRuntime.Startup_path, "Data", SrvRuntime.ConfigFile)))
+                    ?  File.ReadAllText(Path.Combine(SrvRuntime.SettingFolder, SrvRuntime.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(SrvRuntime.SettingFolder, SrvRuntime.ConfigFile)))
+                    : File.ReadAllText(Path.Combine(SrvRuntime.StartupPath, "Data", SrvRuntime.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(SrvRuntime.StartupPath, "Data", SrvRuntime.ConfigFile)))
                     ;
 
                 Dictionary<string, object> exportServerSettingList = new Dictionary<string, object>();

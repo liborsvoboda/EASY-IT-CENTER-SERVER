@@ -71,22 +71,22 @@ namespace EasyITCenter.Controllers {
             string summary = null, rootFolder = null;
 
             try {
-                loadFolders = Directory.GetDirectories(Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName)).ToList();
-                loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName), "*.*", SearchOption.TopDirectoryOnly);
+                loadFolders = Directory.GetDirectories(Path.Combine(SrvRuntime.WebRootPath, requestData.PathName)).ToList();
+                loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath, requestData.PathName), "*.*", SearchOption.TopDirectoryOnly);
 
                 if (!requestData.UpdateOnly) {
-                    FileOperations.DeleteDirectory(Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook"));
-                    FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvGenerators_path, "Docs", "MdInteliBook"), Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook"));
+                    FileOperations.DeleteDirectory(Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook"));
+                    FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvGenerators_path, "Docs", "MdInteliBook"), Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook"));
 
-                    loadFolders.ForEach(folder => { FileOperations.MoveDirectory(folder, Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "src", FileOperations.GetLastFolderFromPath(folder))); });
-                    loadFiles.ForEach(file => { FileOperations.MoveFile(file, Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "src", Path.GetFileName(file))); });
+                    loadFolders.ForEach(folder => { FileOperations.MoveDirectory(folder, Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook", "src", FileOperations.GetLastFolderFromPath(folder))); });
+                    loadFiles.ForEach(file => { FileOperations.MoveFile(file, Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook", "src", Path.GetFileName(file))); });
                 } else {
                     loadFolders.ForEach(folder => { if (FileOperations.GetLastFolderFromPath(folder) != "MdInteliBook") { FileOperations.DeleteDirectory(folder); } });
                     loadFiles.ForEach(file => { FileOperations.DeleteFile(file); });
                 }
 
                 //GENERATE SUMMARY FILE
-                rootFolder = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "src");
+                rootFolder = Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook", "src");
                 loadFiles = FileOperations.GetPathFiles(rootFolder, "*.md", SearchOption.TopDirectoryOnly);
                 summary = "" + Environment.NewLine;
 
@@ -104,18 +104,18 @@ namespace EasyITCenter.Controllers {
 
                 //GENERATE MDBOOK
                 RunProcessRequest process = new RunProcessRequest() {
-                    Command = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "generate-mdbook.cmd"),
+                    Command = Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook", "generate-mdbook.cmd"),
                     ProcessType = ProcessType.cmd,
-                    WorkingDirectory = Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook")
+                    WorkingDirectory = Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook")
                 }; string result = await ProcessOperations.ServerProcessStartAsync(process);
 
 
                 //CLEAN MD FILES FROM BOOK
-                loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "book"), "*.md", SearchOption.TopDirectoryOnly);
+                loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook", "book"), "*.md", SearchOption.TopDirectoryOnly);
                 loadFiles.ForEach(file => { FileOperations.DeleteFile(file); });
 
-                FileOperations.CopyDirectory(Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "book"), Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName));
-                FileOperations.DeleteDirectory(Path.Combine(SrvRuntime.WebRoot_path, requestData.PathName, "MdInteliBook", "book"));
+                FileOperations.CopyDirectory(Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook", "book"), Path.Combine(SrvRuntime.WebRootPath, requestData.PathName));
+                FileOperations.DeleteDirectory(Path.Combine(SrvRuntime.WebRootPath, requestData.PathName, "MdInteliBook", "book"));
 
                 return new ContentResult() { Content = DbOperations.DBTranslate("ProcessSucessfullyCompleted"), StatusCode = StatusCodes.Status200OK };
             } catch (Exception ex) { return new ContentResult() { Content = ex.Message, StatusCode = StatusCodes.Status400BadRequest }; }
@@ -162,7 +162,7 @@ namespace EasyITCenter.Controllers {
 
                 //Correction Paths
                 webFilesRequest.WebRootFilePath = !webFilesRequest.WebRootFilePath.EndsWith("/") ? $"{webFilesRequest.WebRootFilePath}/" : webFilesRequest.WebRootFilePath;
-                var folderList = System.IO.Directory.GetDirectories(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath));
+                var folderList = System.IO.Directory.GetDirectories(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath));
                 folderList.ToList().ForEach(folder => indexRootList.Add(System.IO.Path.GetFullPath(folder).Split("\\").Last() + "\\"));
 
                 string generatedFile = Environment.NewLine + (webFilesRequest.CentralIndexOnly ? $"# MD Docs Generated Index    " : $"# MD Docs Generated Library    ") + Environment.NewLine + Environment.NewLine + "[[toc]]" + Environment.NewLine + Environment.NewLine;
@@ -171,24 +171,24 @@ namespace EasyITCenter.Controllers {
                     generatedFile += webFilesRequest.CentralIndexOnly ? $"### {rootFolder}    " + Environment.NewLine + Environment.NewLine
                     : $"    ```   {Environment.NewLine}{Environment.NewLine}  ---    {Environment.NewLine}";
 
-                    List<string> fileList = FileOperations.GetPathFiles(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + rootFolder,
+                    List<string> fileList = FileOperations.GetPathFiles(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + rootFolder,
                         $"*.{(webFilesRequest.LinkAllFileTypes ? "*" : string.IsNullOrWhiteSpace(webFilesRequest.SetLinkFileExtension) ? "md": webFilesRequest.SetLinkFileExtension)}"
                         , webFilesRequest.ProcessRootPathOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
 
                     //PREPARE MD BOOK FOLDER FOR FILES
                     if (!mdBookPrepared && webFilesRequest.MdBookLibrary) {
                         mdBookPrepared = true;
-                        FileOperations.DeleteDirectory(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook");
-                        FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvGenerators_path, "Docs", "MdInteliBook"), SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook");
+                        FileOperations.DeleteDirectory(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook");
+                        FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvGenerators_path, "Docs", "MdInteliBook"), SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook");
                     }
 
-                    fileList.Where(a => !a.Contains(Path.Combine(Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook"))).ToList().ForEach(file => {
+                    fileList.Where(a => !a.Contains(Path.Combine(Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook"))).ToList().ForEach(file => {
                         generatedFile += $"- [{Path.GetFileNameWithoutExtension(file)}](.{(webFilesRequest.CentralIndexOnly ? file.Split(Path.GetDirectoryName(webFilesRequest.WebRootFilePath)?.Split(Path.DirectorySeparatorChar).Last())[1] : "/" + Path.GetFileName(file))})   " + Environment.NewLine + Environment.NewLine;
                     });
 
                     //Generate File With Other File Types 
                     
-                    fileList = FileOperations.GetPathFiles(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + rootFolder, $"*." + (webFilesRequest.LinkAllFileTypes ? $"*" : webFilesRequest.SetLinkFileExtension), SearchOption.AllDirectories);
+                    fileList = FileOperations.GetPathFiles(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + rootFolder, $"*." + (webFilesRequest.LinkAllFileTypes ? $"*" : webFilesRequest.SetLinkFileExtension), SearchOption.AllDirectories);
                     docCounter += 1; string newDoc = $"# List of Founded Other Files {rootFolder}" + Environment.NewLine + Environment.NewLine;
                     
                     string sourceCode = "";
@@ -209,22 +209,22 @@ namespace EasyITCenter.Controllers {
                                 string fileContent = System.IO.File.ReadAllText(file);
                                 sourceCode += $"```{extension}{Environment.NewLine}{new ReverseMarkdown.Converter().Convert(fileContent)}{Environment.NewLine}```   " + Environment.NewLine + Environment.NewLine;
 
-                                FileOperations.WriteToFile(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/src/" + Path.GetFileNameWithoutExtension(file) + ".md"
+                                FileOperations.WriteToFile(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/src/" + Path.GetFileNameWithoutExtension(file) + ".md"
                                     , $"{fileContent}{Environment.NewLine} ");
                                 newDoc += $"   [{Path.GetFileNameWithoutExtension(file)}](.{(webFilesRequest.CentralIndexOnly ? file.Split(Path.GetDirectoryName(webFilesRequest.WebRootFilePath)?.Split(Path.DirectorySeparatorChar).Last())[1].Replace(Path.GetFileNameWithoutExtension(file), solveFilename) + ".md" : "/" + Path.GetFileNameWithoutExtension(file) + ".md")})   " + Environment.NewLine + Environment.NewLine;
                             }
                         }
                     });
                     generatedFile += $"- [{docCounter}](./{docCounter}.md)   " + Environment.NewLine + sourceCode + Environment.NewLine;
-                    FileOperations.WriteToFile(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + $"{(webFilesRequest.MdBookLibrary ? "MdInteliBook/src/" : "")}{docCounter}.md", newDoc);
+                    FileOperations.WriteToFile(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + $"{(webFilesRequest.MdBookLibrary ? "MdInteliBook/src/" : "")}{docCounter}.md", newDoc);
                     
                 });
                 //Save Index File
-                FileOperations.WriteToFile((SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + $"{(webFilesRequest.MdBookLibrary ? "MdInteliBook/src/summary.md" : "index.md")}").Replace("/", "\\"), generatedFile);
+                FileOperations.WriteToFile((SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + $"{(webFilesRequest.MdBookLibrary ? "MdInteliBook/src/summary.md" : "index.md")}").Replace("/", "\\"), generatedFile);
 
                 //COPY MD-BROWSER TOOL AFTER FILE PROCESSES
                 if (!processInterrupted && webFilesRequest.CentralIndexOnly) {
-                    FileOperations.CopyFiles(Path.Combine(SrvRuntime.SrvGenerators_path, "Docs", "MdBrowser"), SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath), webFilesRequest.OveriteExisting);
+                    FileOperations.CopyFiles(Path.Combine(SrvRuntime.SrvGenerators_path, "Docs", "MdBrowser"), SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath), webFilesRequest.OveriteExisting);
                 }
 
                 //SUMMARY MOVE FILES AND CLEAN STRUCTURE
@@ -232,17 +232,17 @@ namespace EasyITCenter.Controllers {
 
                 if (!processInterrupted && webFilesRequest.MdBookLibrary) {
                     indexRootList.ForEach(rootfolder => {
-                        List<string> filelist = FileOperations.GetPathFiles(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + rootfolder, "*.*", webFilesRequest.ProcessRootPathOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
+                        List<string> filelist = FileOperations.GetPathFiles(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + rootfolder, "*.*", webFilesRequest.ProcessRootPathOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
                         filelist.ForEach(file => {
-                            FileOperations.CopyFile(file, SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/src/" + Path.GetFileName(file));
+                            FileOperations.CopyFile(file, SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/src/" + Path.GetFileName(file));
                         });
                         if (webFilesRequest.CleanProcessed && rootfolder.Length > 2) { FileOperations.DeleteDirectory(rootfolder); }
                     });
 
                     //RUN BOOK PROCESS     
                     RunProcessRequest process = new RunProcessRequest() {
-                        Command = (SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/" + "generate-mdbook.bat").Replace("/", "\\"),
-                        WorkingDirectory = (SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/").Replace("/", "\\"),
+                        Command = (SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/" + "generate-mdbook.bat").Replace("/", "\\"),
+                        WorkingDirectory = (SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webFilesRequest.WebRootFilePath) + "MdInteliBook/").Replace("/", "\\"),
                         ProcessType = ProcessType.cmd
                     };
                     string result = await ProcessOperations.ServerProcessStartAsync(process);

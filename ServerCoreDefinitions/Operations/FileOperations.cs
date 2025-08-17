@@ -9,9 +9,9 @@
         /// </summary>
         public static void LoadOrCreateSettings() {
             try {
-                if (!CheckDirectory(SrvRuntime.Setting_folder)) {
-                    CreatePath(SrvRuntime.Setting_folder);
-                    CopyFile(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath, SrvRuntime.ConfigFile), System.IO.Path.Combine(SrvRuntime.Setting_folder, SrvRuntime.ConfigFile));
+                if (!CheckDirectory(SrvRuntime.SettingFolder)) {
+                    CreatePath(SrvRuntime.SettingFolder);
+                    CopyFile(System.IO.Path.Combine(SrvRuntime.StartupPath, SrvRuntime.DataPath, SrvRuntime.ConfigFile), System.IO.Path.Combine(SrvRuntime.SettingFolder, SrvRuntime.ConfigFile));
                 }
                 //if (!CheckDirectory(ServerRuntimeData.UserPath)) { CreatePath(ServerRuntimeData.UserPath); }
             } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }

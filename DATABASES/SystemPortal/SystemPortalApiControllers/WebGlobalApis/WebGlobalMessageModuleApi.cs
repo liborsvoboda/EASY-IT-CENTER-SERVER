@@ -53,7 +53,7 @@ namespace EasyITCenter.Controllers {
                 data = data.Replace("AUTOTITLE", htmlData.Find(a => a.ContainsKey("HtmlTitle")).First().Value);
                 data = data.Replace("AUTOCONTENT", htmlData.Find(a => a.ContainsKey("HtmlContent")).First().Value.Split("<BODY>")[1].Split("</BODY>")[0]);
 
-                System.IO.File.WriteAllText(Path.Combine(SrvRuntime.Startup_path, "wwwroot", "ServerCoreTools","systemTools", "newsletter-preview", "index.html"), data);
+                System.IO.File.WriteAllText(Path.Combine(SrvRuntime.StartupPath, "wwwroot", "ServerCoreTools","systemTools", "newsletter-preview", "index.html"), data);
                 System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, "ServerCoreTools", "systemTools", "newsletter-preview", "index.html"), data);
                 return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
             } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }

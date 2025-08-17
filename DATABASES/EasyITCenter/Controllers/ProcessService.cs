@@ -32,8 +32,8 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> StartProcessScript([FromBody] RunProcessRequest processRequest) {
 
             if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
-                processRequest.Command = processRequest.Command.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
-                processRequest.WorkingDirectory = processRequest.WorkingDirectory.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value));
+                processRequest.Command = processRequest.Command.Replace("wwwroot", SrvRuntime.WebRootPath);
+                processRequest.WorkingDirectory = processRequest.WorkingDirectory.Replace("wwwroot", SrvRuntime.WebRootPath);
                 
                 await ProcessOperations.ServerProcessStartAsync(processRequest);
                 return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });

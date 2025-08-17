@@ -13,7 +13,7 @@ namespace ServerCorePages {
             try {//Standalone Load File From Url Request
 
                 try { requestedUrlPath = ( (string?)HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value ); } catch { }
-                string? filePath = System.IO.Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(requestedUrlPath);
+                string? filePath = System.IO.Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl(requestedUrlPath);
 
                 filePath = FileOperations.CheckFile(filePath) ? filePath : FileOperations.CheckFile($"{filePath}.md") ? $"{filePath}.md" :
                     FileOperations.CheckFile($"{filePath}/readme.md") ? $"{filePath}/readme.md" : FileOperations.CheckFile($"{filePath}/index.md") ?
@@ -25,7 +25,7 @@ namespace ServerCorePages {
             } catch {
 
                 try { requestedUrlPath = ((string?)HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value); } catch { }
-                string? filePath = System.IO.Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(requestedUrlPath);
+                string? filePath = System.IO.Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl(requestedUrlPath);
                 var fileContent = System.IO.File.ReadAllText(filePath);
                 result = fileContent.ToString();
             }

@@ -171,7 +171,7 @@ namespace EasyITCenter.Controllers {
             List<SitemapNode> imageNodes = new();
 
             List<SitemapImage> imageList = new List<SitemapImage>();
-            List<string> staticImages = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl("/EIC&ESBdocs/EIC-Gallery/img"), "*.png", SearchOption.TopDirectoryOnly);
+            List<string> staticImages = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl("/EIC&ESBdocs/EIC-Gallery/img"), "*.png", SearchOption.TopDirectoryOnly);
             staticImages.ForEach(image => {
                 imageList.Add(
                     new SitemapImage(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/EIC-Gallery/img/" + Path.GetFileName(image)) {
@@ -187,7 +187,7 @@ namespace EasyITCenter.Controllers {
             });
 
             imageList = new List<SitemapImage>();
-            staticImages = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl("/EIC&ESBdocs/ESB-Gallery/img"), "*.png", SearchOption.TopDirectoryOnly);
+            staticImages = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl("/EIC&ESBdocs/ESB-Gallery/img"), "*.png", SearchOption.TopDirectoryOnly);
             staticImages.ForEach(image => {
                 imageList.Add(
                     new SitemapImage(DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/EIC&ESBdocs/ESB-Gallery/img/" + Path.GetFileName(image)) {

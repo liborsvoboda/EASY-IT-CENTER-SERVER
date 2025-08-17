@@ -169,11 +169,11 @@ namespace EasyITCenter.ServerCoreStructure {
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         startupScript = new EasyITCenterContext().ServerStartUpScriptLists.Where(a => a.Pid == process.Item1).FirstOrDefault();
                     }
-                    
+
                     /*
                     Process[] processes = Process.GetProcesses();
                     foreach (Process runprocess in processes) {
-                        if(runprocess.StartInfo.Arguments == startupScript.StartCommand.Replace(DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value))) {
+                        if(runprocess.StartInfo.Arguments == startupScript.StartCommand.Replace("wwwroot", SrvRuntime.WebRoot_path)) {
                             runprocess.Kill();
                         }
                     }

@@ -90,21 +90,21 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> ExportStaticSystemPortal() {
             try {
 
-                FileOperations.CreatePath(Path.Combine(SrvRuntime.Startup_path, "Export"));
-                FileOperations.ClearFolder(Path.Combine(SrvRuntime.Startup_path, "Export"));
-                FileOperations.CreatePath(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage"));
-                FileOperations.CopyDirectory(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value, "metro", "managed", "storage"), Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage"));
+                FileOperations.CreatePath(Path.Combine(SrvRuntime.StartupPath, "Export"));
+                FileOperations.ClearFolder(Path.Combine(SrvRuntime.StartupPath, "Export"));
+                FileOperations.CreatePath(Path.Combine(SrvRuntime.StartupPath, "Export", "Webpages", "metro", "managed", "storage"));
+                FileOperations.CopyDirectory(Path.Combine(SrvRuntime.WebRootPath, "metro", "managed", "storage"), Path.Combine(SrvRuntime.StartupPath, "Export", "Webpages", "metro", "managed", "storage"));
 
-                string json = System.IO.File.ReadAllText(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"));
-                FileOperations.WriteToFile(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"), json.Replace("window.location.origin", DbOperations.GetServerParameterLists("ServerPublicUrl").Value));
+                string json = System.IO.File.ReadAllText(Path.Combine(SrvRuntime.StartupPath, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"));
+                FileOperations.WriteToFile(Path.Combine(SrvRuntime.StartupPath, "Export", "Webpages", "metro", "managed", "storage", "globalStorage.js"), json.Replace("window.location.origin", DbOperations.GetServerParameterLists("ServerPublicUrl").Value));
 
                 HtmlWeb hw = new HtmlWeb();
                 HtmlDocument doc = hw.Load((Request.IsHttps ? "https" : "http") + "://" + Request.Host + "/Portal");
                 string index = doc.Text.Replace("../..", DbOperations.GetServerParameterLists("ServerPublicUrl").Value);
-                System.IO.File.WriteAllText(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages", "Index.html"), index);
+                System.IO.File.WriteAllText(Path.Combine(SrvRuntime.StartupPath, "Export", "Webpages", "Index.html"), index);
 
-                ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages"), Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages.zip"));
-                var zipData = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.Startup_path, "Export", "Webpages.zip"));
+                ZipFile.CreateFromDirectory(Path.Combine(SrvRuntime.StartupPath, "Export", "Webpages"), Path.Combine(SrvRuntime.StartupPath, "Export", "Webpages.zip"));
+                var zipData = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.StartupPath, "Export", "Webpages.zip"));
 
                 return File(zipData, "application/x-zip-compressed", "Webpages.zip");
             } catch (Exception ex) { return BadRequest(new { message = DataOperations.GetErrMsg(ex) }); }

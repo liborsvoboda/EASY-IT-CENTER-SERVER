@@ -94,7 +94,7 @@ namespace EasyITCenter.Controllers {
 
                     if (string.IsNullOrWhiteSpace(webfilesrequest.IndexWebRootSubFolderPathName)) { indexRootList.Add("");
                     } else {
-                        var folderList = System.IO.Directory.GetDirectories(Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath));
+                        var folderList = System.IO.Directory.GetDirectories(Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath));
                         folderList.ToList().ForEach(folder => indexRootList.Add(System.IO.Path.GetFullPath(folder).Split("\\").Last() + "\\"));
                     }
 
@@ -102,7 +102,7 @@ namespace EasyITCenter.Controllers {
                     indexRootList.ForEach(rootIndex => {
                         //Modify WebRoot For Each Index
                         webfilesrequest.WebRootFilePath = $"{webfilesrequest.WebRootFilePath.Split(webfilesrequest.IndexWebRootSubFolderPathName)[0]}{webfilesrequest.IndexWebRootSubFolderPathName}{( !string.IsNullOrWhiteSpace(webfilesrequest.IndexWebRootSubFolderPathName) ? "\\" : "" )}" + rootIndex;
-                        List<string> filelist = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath),
+                        List<string> filelist = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath),
                             $"*.{webfilesrequest.FromType.ToString().ToLower()}", webfilesrequest.ScanRootOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories
                         );
 
@@ -130,7 +130,7 @@ namespace EasyITCenter.Controllers {
                                                     */
                                         });
                                     if (webfilesrequest.ToType.ToLower() == SupportGenFileTypes.Md.ToString().ToLower()) { generatedFile = DataOperations.MarkDownLineEndSpacesResolve(generatedFile); }
-                                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"index{webfilesrequest.genHtmlIndexFileSuffix}.{webfilesrequest.ToType.ToString()}"), generatedFile);
+                                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"index{webfilesrequest.genHtmlIndexFileSuffix}.{webfilesrequest.ToType.ToString()}"), generatedFile);
                                 }
 
                             } else if (!webfilesrequest.IndexOnly && webfilesrequest.FromType.ToLower() == SupportGenFileTypes.Md.ToString().ToLower() && webfilesrequest.ToType.ToLower() == SupportGenFileTypes.Html.ToString().ToLower()) {
@@ -139,7 +139,7 @@ namespace EasyITCenter.Controllers {
                                     if (!webfilesrequest.RewriteAllowed && FileOperations.CheckFile(file.Replace(file.Split(".").Last(), $".{webfilesrequest.ToType.ToString()}"))) {
                                         resultMessage = resultMessage == DbOperations.DBTranslate("ProcessSucessfullyCompleted", webfilesrequest.ServerLanguage) ? $"Fail on Exist File {file}" : resultMessage + $"Fail on Exist File {file}";
                                     } else {
-                                        try { FileOperations.WriteToFile(Path.Combine(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"), Markdown.ParseHtmlString(System.IO.File.ReadAllText(file), false, false, false).Value?.ToString()); } catch { }
+                                        try { FileOperations.WriteToFile(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"), Markdown.ParseHtmlString(System.IO.File.ReadAllText(file), false, false, false).Value?.ToString()); } catch { }
                                     }
                                 });
 
@@ -149,7 +149,7 @@ namespace EasyITCenter.Controllers {
                                     if (!webfilesrequest.RewriteAllowed && FileOperations.CheckFile(file.Replace(file.Split(".").Last(), $".{webfilesrequest.ToType.ToString()}"))) {
                                         resultMessage = resultMessage == DbOperations.DBTranslate("ProcessSucessfullyCompleted", webfilesrequest.ServerLanguage) ? $"Fail on Exist File {file}" : resultMessage + $"Fail on Exist File {file}";
                                     } else {
-                                        FileOperations.WriteToFile(Path.Combine(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"), new ReverseMarkdown.Converter().Convert(System.IO.File.ReadAllText(file)));
+                                        FileOperations.WriteToFile(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(webfilesrequest.WebRootFilePath), $"{Path.GetFileNameWithoutExtension(file)}.{webfilesrequest.ToType.ToString()}"), new ReverseMarkdown.Converter().Convert(System.IO.File.ReadAllText(file)));
                                     }
                                 });
                             } else if (!webfilesrequest.IndexOnly && webfilesrequest.FromType.ToLower() == SupportGenFileTypes.Md.ToString().ToLower() && webfilesrequest.ToType.ToLower() == SupportGenFileTypes.Docx.ToString().ToLower()) {

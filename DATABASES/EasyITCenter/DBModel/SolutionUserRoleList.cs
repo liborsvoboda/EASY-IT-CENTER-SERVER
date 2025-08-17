@@ -26,6 +26,9 @@ namespace EasyITCenter.DBModel
         public int? UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        [ForeignKey("UserId")]
+        [InverseProperty("SolutionUserRoleLists")]
+        public virtual SolutionUserList? User { get; set; }
         [InverseProperty("Role")]
         public virtual ICollection<SolutionUserList> SolutionUserLists { get; set; }
         [InverseProperty("Group")]

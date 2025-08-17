@@ -41,12 +41,12 @@
     try
     {
         string? fileContent = "";
-        string? filePath = System.IO.Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(FileValidUrl);
+        string? filePath = System.IO.Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl(FileValidUrl);
         if (systemModule != null) { this.Html.Raw(systemModule.CustomHtmlContent);
 
         }
 
-        if (systemModule == null && !System.IO.File.Exists(filePath)) { filePath = System.IO.Path.Combine(SrvRuntime.WebRoot_path) + FileOperations.ConvertSystemFilePathFromUrl(DbOperations.GetServerParameterLists("RedirectPath").Value); }
+        if (systemModule == null && !System.IO.File.Exists(filePath)) { filePath = System.IO.Path.Combine(SrvRuntime.WebRootPath) + FileOperations.ConvertSystemFilePathFromUrl(DbOperations.GetServerParameterLists("RedirectPath").Value); }
         if (systemModule == null && !System.IO.File.Exists(filePath)) {
             if (!filePath.ToLower().EndsWith(".md")) { fileContent = System.IO.File.ReadAllText(filePath); } else { fileContent = Markdown.ParseHtmlString(fileContent)?.Value?.ToString(); }
             this.Html.Raw(fileContent);

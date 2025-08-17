@@ -102,11 +102,11 @@ namespace EasyITCenter.ServerCoreStructure {
 
                 //Check MarkDown Type missing .md for Show in Markdown Layout
                 if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoShowStaticMdAsHtml").Value)) {
-                    if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + ".md")) 
+                    if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(routePath) + ".md")) 
                         { validPath = routePath; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
-                    else if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/index.md")) 
+                    else if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/index.md")) 
                         { validPath = routePath + "/index"; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; } 
-                    else if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/readme.md")) 
+                    else if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/readme.md")) 
                         { validPath = routePath + "/readme"; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
                 }
 
@@ -122,12 +122,12 @@ namespace EasyITCenter.ServerCoreStructure {
 
                 //Check Index.html & Html file
                 if (validPath == null) {
-                    if (routePath.EndsWith(".html") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath))) {
+                    if (routePath.EndsWith(".html") && File.Exists(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(routePath))) {
                         routeLayout = RouteLayoutTypes.StaticFileLayout; validPath = routePath; routingResult = RoutingActionTypes.Next;
                     }
 
-                    if ((routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "index.html"))
-                        || (!routePath.EndsWith("/") && !context.Request.Path.ToString().Split("/").Last().Contains(".") && File.Exists(SrvRuntime.WebRoot_path + FileOperations.ConvertSystemFilePathFromUrl(routePath) + Path.DirectorySeparatorChar + "index.html"))
+                    if ((routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "index.html"))
+                        || (!routePath.EndsWith("/") && !context.Request.Path.ToString().Split("/").Last().Contains(".") && File.Exists(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(routePath) + Path.DirectorySeparatorChar + "index.html"))
                         ) {
                         if (!routePath.ToLower().EndsWith(".html")) {
                             validPath = !routePath.ToLower().EndsWith(".html") && !routePath.ToLower().EndsWith("index") && !routePath.EndsWith('/')
@@ -245,7 +245,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
                 try { //Saving Autogenerate Certificate
                     byte[] exportedData = certificate.Export(X509ContentType.Pfx, password);
-                    File.WriteAllBytes(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath, "ServerAutoCertificate.pfx"), exportedData);
+                    File.WriteAllBytes(System.IO.Path.Combine(SrvRuntime.StartupPath, SrvRuntime.DataPath, "ServerAutoCertificate.pfx"), exportedData);
                 } catch { }
 
                 return new X509Certificate2(certificate.Export(X509ContentType.Pfx, password), password, X509KeyStorageFlags.Exportable);
@@ -261,7 +261,7 @@ namespace EasyITCenter.ServerCoreStructure {
             byte[]? certificate = null;
             string? password = null;
             try {
-                certificate = File.ReadAllBytes(System.IO.Path.Combine(SrvRuntime.Startup_path, SrvRuntime.DataPath, FileNameFromDataPath));
+                certificate = File.ReadAllBytes(System.IO.Path.Combine(SrvRuntime.StartupPath, SrvRuntime.DataPath, FileNameFromDataPath));
                 password = DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value;
                 return new X509Certificate2(certificate, password);
             } catch (Exception Ex) { SendEmail(new SendMailRequest() { Content = "Incorrect Certificate Path or Password, " + DataOperations.GetErrMsg(Ex) }); }

@@ -112,13 +112,13 @@ namespace EasyITCenter.ServerCoreConfiguration {
                         foreach (ServerLiveDataMonitorList monitor in data) {
                             services.AddLiveReload(config => {
                                 try {
-                                    if (FileOperations.CheckDirectory(Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value) + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath))) {
+                                    if (FileOperations.CheckDirectory(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath)))) {
                                         config.LiveReloadEnabled = true;
                                         config.ServerRefreshTimeout = 10000;
-                                        config.FolderToMonitor = Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value) + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath);
+                                        config.FolderToMonitor = Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath));
                                         if (monitor.FileExtensions.Length > 0) { config.ClientFileExtensions = monitor.FileExtensions; }
                                     }
-                                    else { CoreOperations.SendEmail(new SendMailRequest() { Content = "Path For Live Data Monitoring not Exist" + System.IO.Path.Combine(SrvRuntime.Startup_path, DbOperations.GetServerParameterLists("DefaultStaticWebFilesFolder").Value) + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath) }); }
+                                    else { CoreOperations.SendEmail(new SendMailRequest() { Content = "Path For Live Data Monitoring not Exist" + System.IO.Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(monitor.RootPath))}); }
                                 } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
                             });
                         }
@@ -241,7 +241,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                          License = new OpenApiLicense { Name = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value + " Server License", Url = new Uri("https://www.groupware-solution.eu/") }
                      });
 
-                     var xmlFile = Path.Combine(SrvRuntime.Startup_path, $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml");
+                     var xmlFile = Path.Combine(SrvRuntime.StartupPath, $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml");
                      if (File.Exists(xmlFile)) { try { cfg.IncludeXmlComments(xmlFile, true); } catch { } }
                      try { cfg.IncludeXmlComments(Assembly.GetExecutingAssembly().Location, true); } catch { }
 
@@ -289,7 +289,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     builder.HighlightJsStyle = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/server-Integrated/server-modules/docs/material-darker.css";
                     builder.GetMdlStyle = DbOperations.GetServerParameterLists("ServerPublicUrl").Value + "/server-Integrated/server-modules/docs/material.min.css";
                     builder.NavBarStyle = MarkdownDocumenting.Elements.NavBarStyle.Default;
-                    builder.RootPathHandling = HandlingType.HandleWithHighOrder;
+                    builder.RootPathHandling = HandlingType.Redirect;
                     builder.RoutePrefix = null;
                     //builder.SetIndexDocument(new EasyITCenterContext().DocSrvDocumentationLists.OrderBy(a => a.DocumentationGroup.Sequence)
                     //.ThenBy(a => a.Sequence).ThenBy(a => a.Name).FirstOrDefault().Name.Replace(" ", ""));
