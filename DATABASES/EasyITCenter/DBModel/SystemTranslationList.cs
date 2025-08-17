@@ -21,6 +21,9 @@ namespace EasyITCenter.DBModel
         [StringLength(500)]
         [Unicode(false)]
         public string? DescriptionEn { get; set; }
+        [StringLength(500)]
+        [Unicode(false)]
+        public string? Backup { get; set; }
         public int? UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
