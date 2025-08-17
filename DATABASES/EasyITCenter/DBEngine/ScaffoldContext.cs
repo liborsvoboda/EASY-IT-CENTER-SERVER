@@ -83,9 +83,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionOperationList> SolutionOperationLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerList> SolutionSchedulerLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerProcessList> SolutionSchedulerProcessLists { get; set; } = null!;
-        public virtual DbSet<SolutionStaticFileList> SolutionStaticFileLists { get; set; } = null!;
-        public virtual DbSet<SolutionStaticFilePathList> SolutionStaticFilePathLists { get; set; } = null!;
-        public virtual DbSet<SolutionStaticWebList> SolutionStaticWebLists { get; set; } = null!;
         public virtual DbSet<SolutionTaskList> SolutionTaskLists { get; set; } = null!;
         public virtual DbSet<SolutionUserList> SolutionUserLists { get; set; } = null!;
         public virtual DbSet<SolutionUserRoleList> SolutionUserRoleLists { get; set; } = null!;
@@ -109,7 +106,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<WebConfiguratorList> WebConfiguratorLists { get; set; } = null!;
         public virtual DbSet<WebCoreFileList> WebCoreFileLists { get; set; } = null!;
         public virtual DbSet<WebDeveloperNewsList> WebDeveloperNewsLists { get; set; } = null!;
-        public virtual DbSet<WebDocumentationCodeLibraryList> WebDocumentationCodeLibraryLists { get; set; } = null!;
         public virtual DbSet<WebDocumentationList> WebDocumentationLists { get; set; } = null!;
         public virtual DbSet<WebGlobalPageBlockList> WebGlobalPageBlockLists { get; set; } = null!;
         public virtual DbSet<WebGroupMenuList> WebGroupMenuLists { get; set; } = null!;
@@ -1306,60 +1302,6 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_SolutionSchedulerProcessList_SolutionSchedulerList");
             });
 
-            modelBuilder.Entity<SolutionStaticFileList>(entity =>
-            {
-                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.StaticPath)
-                    .WithMany(p => p.SolutionStaticFileLists)
-                    .HasForeignKey(d => d.StaticPathId)
-                    .HasConstraintName("FK_SolutionStaticFileList_SolutionStaticFilePathList");
-
-                entity.HasOne(d => d.StaticWeb)
-                    .WithMany(p => p.SolutionStaticFileLists)
-                    .HasForeignKey(d => d.StaticWebId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionStaticFileList_SolutionStaticWebList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SolutionStaticFileLists)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_SolutionStaticFileList_UserList");
-            });
-
-            modelBuilder.Entity<SolutionStaticFilePathList>(entity =>
-            {
-                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.StaticWeb)
-                    .WithMany(p => p.SolutionStaticFilePathLists)
-                    .HasForeignKey(d => d.StaticWebId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionStaticFilePathList_SolutionStaticWebList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SolutionStaticFilePathLists)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_SolutionStaticFilePathList_UserList");
-            });
-
-            modelBuilder.Entity<SolutionStaticWebList>(entity =>
-            {
-                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SolutionStaticWebLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionStaticWebList_UserList");
-            });
-
             modelBuilder.Entity<SolutionTaskList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
@@ -1734,17 +1676,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_WebDeveloperNewsList_UserList");
-            });
-
-            modelBuilder.Entity<WebDocumentationCodeLibraryList>(entity =>
-            {
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.WebDocumentationCodeLibraryLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WebDocumentationCodeLibraryList_UserList");
             });
 
             modelBuilder.Entity<WebDocumentationList>(entity =>

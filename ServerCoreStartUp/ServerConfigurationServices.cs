@@ -298,7 +298,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
         internal static void ConfigureScoped(ref IServiceCollection services) {
             services.AddScoped(typeof(IGenericApiServiceAsync<,>), typeof(GenericApiServiceAsync<,>));
             services.AddScoped(typeof(IGenericApiService<,>), typeof(GenericApiService<,>));
-            services.AddScoped<StaticFileDbService>();
 
             //Stripe    
             StripeConfiguration.ApiKey = "SecretKey";

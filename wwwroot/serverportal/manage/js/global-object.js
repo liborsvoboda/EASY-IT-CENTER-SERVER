@@ -293,7 +293,7 @@ Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
     Metro.window.create({
         cls: "p-0", title: title, clsCaption: 'bg-orange',
         btnMin: true, btnMax: true, shadow: true,
-        draggable: false, resizable: true,
+        draggable: true, resizable: true,
         width:"100%", height:"100%",
         place: 'center',
         clsWindow: "supertop",
@@ -332,14 +332,34 @@ Gs.Objects.GetMyQuestionList = async function () {
             group = item.recGuid;
         });
 
+        let scriptCode = "";
         let html = '<div data-role="accordion" data-active-heading-class="bg-cyan fg-white" data-active-content-class="fg-cyan" class="pt-5" >';
-        myQuestionList.forEach(item => {
+        myQuestionList.forEach((item, index, arr) => {
             html += '<div class="frame"><div class="heading">' + item.MenuName + '</div>';
-            html += '<div class="content"><div class="p-2 fg-green">Question: ' + item.Question + '</div><div class="p-2">Response: ' + item.Response + '</div></div>';
+            html += '<div class="content"><div class="p-2 fg-green">Question: ' + item.Question + '</div><div class="p-2">Response:<div id="codeEditor' + index + '"></div></div></div>';
             html += '</div>';
+            scriptCode += '$("#codeEditor' + index + '").summernote({ tabsize: 2, height: 150, maxHeight: 150, lang: "cs-CZ", toolbar: [] }); $("#codeEditor' + index + '").summernote("codeview.activate"); $("#codeEditor' + index + '").summernote("code", ' + decodeURI(item.Response) + ');';
         });
         html += '</div>';
 
         Gs.Objects.InfoboxObjectCreate("myQuestionList", html);
+        Gs.Functions.loadJS("InjectedScript", scriptCode);
     }, 3000);
+}
+
+
+Gs.Objects.ShowRegistrationPage = function () {
+    let htnlContent = '<DIV class=text-center><window><DIV class="hero hero-bg 1bg-brand-secondary add-neb"><DIV class=container><DIV class=row>';
+    htnlContent += '<form class="bg-white p-4 login-form bg-white fg-darkBlue p-6 mx-auto border bd-default win-shadow" action="javascript:" data-role="validator" data-on-validate-form="ValidateRegForm" data-clear-invalid="2000" data-on-error-form="InvalidForm" >';
+    htnlContent += '<img src="/serverportal/images/p-120x120.png" class="place-right mt-4-minus mr-5-minus"><h1 class="mb-0">Register</h1><div class="text-muted mb-4">Register to EIC & ESB Portal</div>'
+    htnlContent += '<div class="form-group"><input type="text" data-role="input" placeholder="First name" data-append="<span class=\'mif-user\'>" data-validate="required"><span class="invalid_feedback">Please enter a valid First Name</span></div>';
+    htnlContent += '<div class="form-group"><input type="text" data-role="input" placeholder="Surname" data-append="<span class=\'mif-user\'>" data-validate="required"><span class="invalid_feedback">Please enter a Surname</span></div>';
+    htnlContent += '<div class="form-group"><input type="text" data-role="input" placeholder="UserName" data-append="<span class=\'mif-user\'>" data-validate="required"><span class="invalid_feedback">Please enter a UserName</span></div>';
+    htnlContent += '<div class="form-group"><input type="text" data-role="input" placeholder="Email" data-append="<span class=\'mif-envelop\'>" data-validate="required"><span class="invalid_feedback">Please enter a valid Email Address</span></div>';
+    htnlContent += '<div class="form-group"><input type="password" data-role="input" placeholder="Password" data-append="<span class=\'mif-key\'>" data-validate="required" name="password"><span class="invalid_feedback">Please enter a Password</span>';
+    htnlContent += '<input class="mt-4" type="password" data-role="input" placeholder="Retype password" data-append="<span class=\'mif-checkmark\'>" data-validate="required equals=password"><span class="invalid_feedback">Please enter a Password</span></div>';
+    htnlContent += '<div class="form-group d-flex flex-align-center flex-justify-between"><input type="checkbox" data-role="checkbox" data-caption="I agree to the <a href=\'#\'>terms</a>"><button class="button primary">Register</button></div>';
+    htnlContent += '</form></div></div></div></window></div>';
+
+    document.getElementById("FrameWindow").innerHTML = htnlContent;
 }

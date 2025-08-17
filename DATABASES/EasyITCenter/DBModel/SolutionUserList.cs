@@ -75,9 +75,6 @@ namespace EasyITCenter.DBModel
             SolutionMottoLists = new HashSet<SolutionMottoList>();
             SolutionOperationLists = new HashSet<SolutionOperationList>();
             SolutionSchedulerLists = new HashSet<SolutionSchedulerList>();
-            SolutionStaticFileLists = new HashSet<SolutionStaticFileList>();
-            SolutionStaticFilePathLists = new HashSet<SolutionStaticFilePathList>();
-            SolutionStaticWebLists = new HashSet<SolutionStaticWebList>();
             SolutionTaskLists = new HashSet<SolutionTaskList>();
             SystemCustomPageLists = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
@@ -98,7 +95,6 @@ namespace EasyITCenter.DBModel
             WebConfiguratorLists = new HashSet<WebConfiguratorList>();
             WebCoreFileLists = new HashSet<WebCoreFileList>();
             WebDeveloperNewsLists = new HashSet<WebDeveloperNewsList>();
-            WebDocumentationCodeLibraryLists = new HashSet<WebDocumentationCodeLibraryList>();
             WebDocumentationLists = new HashSet<WebDocumentationList>();
             WebGlobalPageBlockLists = new HashSet<WebGlobalPageBlockList>();
             WebGroupMenuLists = new HashSet<WebGroupMenuList>();
@@ -276,12 +272,6 @@ namespace EasyITCenter.DBModel
         [InverseProperty("User")]
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerLists { get; set; }
         [InverseProperty("User")]
-        public virtual ICollection<SolutionStaticFileList> SolutionStaticFileLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<SolutionStaticFilePathList> SolutionStaticFilePathLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<SolutionStaticWebList> SolutionStaticWebLists { get; set; }
-        [InverseProperty("User")]
         public virtual ICollection<SolutionTaskList> SolutionTaskLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SystemCustomPageList> SystemCustomPageLists { get; set; }
@@ -320,8 +310,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<WebCoreFileList> WebCoreFileLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<WebDeveloperNewsList> WebDeveloperNewsLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<WebDocumentationCodeLibraryList> WebDocumentationCodeLibraryLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<WebDocumentationList> WebDocumentationLists { get; set; }
         [InverseProperty("User")]

@@ -131,6 +131,33 @@ function ValidateForm() {
 }
 
 
+function ValidateRegForm() {
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "POST",
+        url: Metro.storage.getItem('BackendServerAddress', null) + "/RegistrationService",
+        async: true,
+        cache: false,
+        headers: { "Authorization": "Basic " + btoa($("#usernameId").val() + ":" + $("#passwordId").val()) },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            Cookies.set('ApiToken', result.Token);
+            Metro.storage.setItem("ApiToken", result);
+            Gs.Behaviors.HidePageLoading();
+            window.location.href = Metro.storage.getItem("DefaultPath", null);
+            return true;
+        },
+        error: function (err) {
+            Gs.Behaviors.HidePageLoading();
+            Gs.Objects.ShowNotify("alert", err); return false;
+        }
+    });
+
+}
+
+
 Gs.Apis.GetUserSetting = function () {
     Gs.Behaviors.ShowPageLoading();
     $.ajax({

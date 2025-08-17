@@ -312,19 +312,23 @@ Gs.Functions.GetFunctionList = function () {
 }
 
 
-Gs.Functions.loadCSS = function (data) {
-    if (data) {
+Gs.Functions.loadCSS = function (elementId, code) {
+    if (code) {
+        Gs.Functions.RemoveElement(elementId);
         var style = document.createElement("style");
-        style.innerHTML = data;
+        style.setAttribute("id", elementId);
+        style.innerHTML = code;
         document.head.appendChild(style);
     }
 };
 
 
-Gs.Functions.loadJS = function (data) {
-    if (data) {
+Gs.Functions.loadJS = function (elementId, code) {
+    if (code) {
+        Gs.Functions.RemoveElement(elementId);
         var script = document.createElement("script");
-        script.innerHTML = data;
+        script.setAttribute("id", elementId);
+        script.innerHTML = code;
         document.body.appendChild(script);
     }
 };
