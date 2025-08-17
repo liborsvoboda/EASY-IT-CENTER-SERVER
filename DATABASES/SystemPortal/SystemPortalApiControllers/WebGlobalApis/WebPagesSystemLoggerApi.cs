@@ -1,6 +1,20 @@
 ﻿
 namespace EasyITCenter.Controllers {
 
+
+    public class WebSystemLogMessage {
+        public string? LogLevel { get; set; }
+        public string Message { get; set; }
+        public int? UserId { get; set; }
+        public string? UserName { get; set; }
+        public string? ImageName { get; set; }
+        public byte[]? Image { get; set; }
+        public string? AttachmentName { get; set; }
+        public byte[]? Attachment { get; set; }
+    }
+
+
+
     [AllowAnonymous]
     [ApiController]
     [Route("SystemPortalApi/WebPages")]

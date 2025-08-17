@@ -60,15 +60,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        /// <summary>
-        /// Message Module NewsLetter Preview API
-        /// Redirect todsaved Index.html after POST save
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [HttpGet("/WebApi/MessageModule/NewsletterPreview")]
-        public IActionResult GetNewsletterPreview() { return new RedirectResult("/ServerCoreTools/systemTools/newsletter-preview/index.html"); }
+
 
 
         #endregion NewsLetter

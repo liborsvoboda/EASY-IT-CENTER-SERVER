@@ -136,17 +136,16 @@ function ValidateRegForm() {
     $.ajax({
         global: false,
         type: "POST",
-        url: Metro.storage.getItem('BackendServerAddress', null) + "/RegistrationService",
+        url: Metro.storage.getItem('BackendServerAddress', null) + "/RegistrationService/Registration",
         async: true,
         cache: false,
-        headers: { "Authorization": "Basic " + btoa($("#usernameId").val() + ":" + $("#passwordId").val()) },
+        headers: { 'Content-type': 'application/json' },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        data: JSON.stringify({ FirstName: $("#firstName").val(), Surname: $("#surname").val(), Username: $("#userName").val(), EmailAddress: $("#email").val(), Password: $("#password").val() }),
         success: function (result) {
-            Cookies.set('ApiToken', result.Token);
-            Metro.storage.setItem("ApiToken", result);
+            Gs.Objects.ShowNotify("success", result.Status); 
             Gs.Behaviors.HidePageLoading();
-            window.location.href = Metro.storage.getItem("DefaultPath", null);
             return true;
         },
         error: function (err) {

@@ -6,16 +6,28 @@ using System.Xml.Serialization;
 
 namespace EasyITCenter.ControllersExtensions {
 
+
+    public class WebFileList {
+        public List<WebFile> WebFile { get; set; }
+    }
+
+    public class WebFile {
+        public string WebFileName { get; set; }
+        public string? WebRootPath { get; set; }
+        public string? WebFileContent { get; set; }
+    }
+
+
     /// <summary>
     /// Server Root Controller
     /// </summary>
     [ApiController]
      //[ApiExplorerSettings(IgnoreApi = true)]
     [Route("WebApi")]
-    public class ServerToolsMinifierApi : Controller {
+    public class FileMinifyService : Controller {
 
         private Microsoft.AspNetCore.Hosting.IWebHostEnvironment _hostingEnvironment;
-        public ServerToolsMinifierApi(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment) {
+        public FileMinifyService(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment) {
             _hostingEnvironment = hostingEnvironment;
         }
 
@@ -25,7 +37,7 @@ namespace EasyITCenter.ControllersExtensions {
         /// </summary>
         /// <param name="filelist"></param>
         /// <returns></returns>
-        [HttpGet("/WebApi/ServerToolsMinifier/MinifyAndSaveMinToPath"), DisableRequestSizeLimit]
+        [HttpGet("/FileMinifyService/MinifyAndSaveMinToPath"), DisableRequestSizeLimit]
         public async Task<string> MinifyAndSaveMinToPath(WebFileList filelist) {
             try {
                 filelist.WebFile.ForEach(file => {
@@ -35,9 +47,9 @@ namespace EasyITCenter.ControllersExtensions {
                         file.WebFileContent = NUglify.Uglify.Css(file.WebFileContent).Code;
                     }
 
-                    System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath,
-                        file.WebFileName.ToLower().Contains(".min.") ? file.WebFileNameFullPath : file.WebFileNameFullPath.Replace(file.WebFileNameFullPath.Split(".").Last(), ".min." + file.WebFileNameFullPath.Split(".").Last())),
-                        file.WebFileContent);
+                    System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, file.WebFileName.ToLower().Contains(".min.") 
+                        ? file.WebRootPath : file.WebRootPath.Replace(file.WebRootPath.Split(".").Last(), ".min." + file.WebRootPath.Split(".").Last()))
+                        ,file.WebFileContent);
                 });
 
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = filelist.WebFile.Count(), ErrorMessage = string.Empty });
@@ -51,7 +63,7 @@ namespace EasyITCenter.ControllersExtensions {
         /// </summary>
         /// <param name="filelist"></param>
         /// <returns></returns>
-        [HttpGet("/WebApi/ServerToolsMinifier/MinifyAndReturn"), DisableRequestSizeLimit]
+        [HttpGet("/FileMinifyService/MinifyAndReturn"), DisableRequestSizeLimit]
         public async Task<string> MinifyAndReturn(WebFileList filelist) {
             string mimeType = null; byte[] loadedfile; string minFile = null; byte[] fileByteArray = null;
             try {

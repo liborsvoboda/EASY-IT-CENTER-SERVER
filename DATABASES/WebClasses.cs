@@ -13,7 +13,8 @@
     public enum DBWebApiResponses {
         emailExist,
         emailNotExist,
-        loginInfoSentToEmail
+        loginInfoSentToEmail,
+        userNameExist
     }
 
     /// <summary>
@@ -38,30 +39,6 @@
         public string userRole { get; set; } = null;
     }
 
-    /// <summary>
-    /// WebPages User Verification class
-    /// </summary>
-    public class EmailVerification {
-        public string EmailAddress { get; set; } = null;
-        public string Language { get; set; } = null;
-    }
-
-    /// <summary>
-    /// WebPages User Registration class
-    /// </summary>
-    public class WebRegistration {
-        public string EmailAddress { get; set; } = null;
-        public string Password { get; set; } = null;
-        public string Language { get; set; } = null;
-    }
-
-    public class UserProfile {
-        public string EmailAddress { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string? Password { get; set; }
-        public string Language { get; set; }
-    }
 
     /// <summary>
     /// Custom Class For UserConfig over Server Web Pages
@@ -108,27 +85,10 @@
         public string FileContent { get; set; }
     }
 
-    public class WebFileList {
-        public List<WebFile> WebFile { get; set; }
-    }
-
-    public class WebFile {
-        public string WebFileName { get; set; }
-        public string? WebFileNameFullPath { get; set; }
-        public string? WebFileContent { get; set; }
-    }
 
 
-    public class WebSystemLogMessage {
-        public string? LogLevel { get; set; }
-        public string Message { get; set; }
-        public int? UserId { get; set; }
-        public string? UserName { get; set; }
-        public string? ImageName { get; set; }
-        public byte[]? Image { get; set; }
-        public string? AttachmentName { get; set; }
-        public byte[]? Attachment { get; set; }
-    }
+
+
 
 
     public class SetPasswordInput {
