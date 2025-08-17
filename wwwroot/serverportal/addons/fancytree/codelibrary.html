@@ -18,28 +18,29 @@
 
 	<script type="text/javascript" src="/serverportal/addons/monaco/js/monaco-editor/min/vs/loader.js"></script>
 	<style>
-        .monaco-editor {
-            min-width: 100%;
-            width: 100%;
-            min-height: 100%;
-        }
-
+		.monaco-editor {
+			min-width: 100%;
+			width: 100%;
+			min-height: 100%;
+		}
 	</style>
 
-	<title>Fancytree - Browser</title>
+	<title>Code Library Browser</title>
 	<script type="text/javascript">
 
 		async function StartUp() {
-			const dataJs = await fetch('/serverportal/addons/monaco/js/codepreview.js').then((r) => r.text())
+			const dataJs = await fetch('/serverportal/addons/monaco/js/codePreview.js').then((r) => r.text())
 			new Function(dataJs)();
 		}
 
 		$(function () {
 			$("#tree").fancytree({
 				checkbox: false,
-				source: Metro.storage.getItem('FunctionList', null),
+				source: {
+					url: "/JsonGeneratorService/GetFancyTreeCodeLibrary"
+				},
 				activate: function (event, data) {
-                    Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoPreview" })[0].editor.getModel().setValue(data.node.key);
+					Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoPreview" })[0].editor.getModel().setValue(data.node.key);
 				},
 				checkbox: function (event, data) {
 					return data.node.isFolder() ? false : false;

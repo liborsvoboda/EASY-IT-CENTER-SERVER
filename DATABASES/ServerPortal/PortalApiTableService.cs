@@ -58,9 +58,7 @@ namespace EasyITCenter.Controllers
         public async Task<string> GetApiTableDataList(string tablename) {
             List<PortalApiTableColumnDataList> data = new();
             try {
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
-                    IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
-                })) {
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     data = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && a.Active == true)
                         .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
