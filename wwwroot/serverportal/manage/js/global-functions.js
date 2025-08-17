@@ -334,3 +334,11 @@ Gs.Functions.loadJS = function (elementId, code) {
 };
 
 
+Gs.Functions.ExportTable = function (params) {
+    var options = {
+        tableName: 'TableData',
+        worksheetName: 'Export Table'
+    };
+    $.extend(true, options, params);
+    if (document.getElementById("IFrameWindow") == null) { $('#menuTable').tableExport(options); } 
+}

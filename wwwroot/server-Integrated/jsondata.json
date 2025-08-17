@@ -24,6 +24,12 @@
     "key": "\\server-Integrated/code-compiler\\SharpOnline\\index.html"
   },
   {
+    "title": "mermaid",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-Integrated\\docs-editor\\mermaid\\index.html"
+  },
+  {
     "title": "monaco-csharp",
     "folder": false,
     "checkbox": false,

@@ -363,3 +363,43 @@ Gs.Objects.ShowRegistrationPage = function () {
 
     document.getElementById("FrameWindow").innerHTML = htnlContent;
 }
+
+
+Gs.Objects.ShowExportDialog = function (title) {
+    Metro.dialog.create({
+        title: title,
+        content: "<div>Export Table Data id=menuTable to File</div>",
+        actions: [
+            {
+                caption: "CSV",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'csv' }); }
+            },
+            {
+                caption: "TXT",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'txt' }); }
+            },
+            {
+                caption: "JSON",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'json', escape: 'true' }); }
+            },
+            {
+                caption: "XLS",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'excel' }); }
+            },
+            {
+                caption: "DOC",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'doc' }); }
+            },
+            {
+                caption: "PDF",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'pdf', jspdf: { orientation: 'l', margins: { right: 10, left: 10, top: 40, bottom: 40 }, autotable: { extendWidth: true } } }); }
+            }
+        ]
+    });
+}
