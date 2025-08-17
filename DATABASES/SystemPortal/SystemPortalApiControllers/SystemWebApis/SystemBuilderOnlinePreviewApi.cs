@@ -19,7 +19,7 @@ namespace EasyITCenter.Controllers {
                     IsolationLevel = IsolationLevel.ReadUncommitted
                 })) {
                     data = new EasyITCenterContext().SolutionCodeLibraryLists.Where(a => a.Id == id)
-                        .OrderByDescending(a => a.TimeStamp).First().Content;
+                        .OrderByDescending(a => a.TimeStamp).First().CodeContent;
                 }
 
                 string head;

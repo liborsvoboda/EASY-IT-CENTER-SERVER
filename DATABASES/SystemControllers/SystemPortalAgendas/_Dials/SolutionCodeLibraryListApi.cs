@@ -39,7 +39,7 @@
                 data = new EasyITCenterContext().SolutionCodeLibraryLists
                     .Where(a =>
                     (code.ToLower() == "web" && (a.InheritedCodeType.ToLower() == "html" || a.InheritedCodeType.ToLower() == "javascript" || a.InheritedCodeType.ToLower() == "css")
-                    || a.InheritedCodeType.ToLower() == code.ToLower()) && a.IsCompletion).OrderBy(a => a.InheritedCodeType).ThenBy(a=>a.Name).ToList();
+                    || a.InheritedCodeType.ToLower() == code.ToLower())).OrderBy(a => a.InheritedCodeType).ThenBy(a=>a.Name).ToList();
             }
 
             return JsonSerializer.Serialize(data);

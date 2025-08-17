@@ -37,8 +37,8 @@ require(['vs/editor/editor.main'], function () {
         fileCounter += 1;
     }
 
-    addNewEditor("", "TemplateEditor", 'html');
-    addNewEditor("", "PartialTemplateEditor", 'html');
+    addNewEditor("", "TemplateEditor", 'handlebars');
+    addNewEditor("", "PartialTemplateEditor", 'handlebars');
     addNewEditor("", "ResultCodeEditor", 'html');
     /*
     var languageSelected = document.querySelector('.language');    

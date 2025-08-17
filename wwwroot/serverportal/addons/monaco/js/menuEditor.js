@@ -47,6 +47,7 @@ require(['vs/editor/editor.main'], function () {
     addNewEditor("" ,"monacoHTML", 'html');
     addNewEditor("", "monacoJS", 'javascript');
     addNewEditor("", "monacoCSS", 'css');
+
     /*
     var languageSelected = document.querySelector('.language');    
     languageSelected.onchange = function () {

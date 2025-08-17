@@ -78,7 +78,7 @@ namespace EasyITCenter.Controllers {
                     } else if (param.Where(a => a.Key.ToLower() == "tableName".ToLower()).Any()) {
                         parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First()}' ";
                         EntityTypeName = param.Values.First();
-                    } else { parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First()}' "; }
+                    } else { parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First().Replace("'","`")}' "; }
                 }
 
                 parameters += ServerApiServiceExtension.GetUserRole() == null ? $", @userRole = N'all'" : $", @userRole = N'{ServerApiServiceExtension.GetUserRole()}'";

@@ -22,8 +22,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Description { get; set; }
         [Unicode(false)]
-        public string Content { get; set; } = null!;
-        public bool IsCompletion { get; set; }
+        public string CodeContent { get; set; } = null!;
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 

@@ -46,14 +46,37 @@ require(['vs/editor/editor.main'], function () {
 
     addNewEditor("" ,"monacoPreview", 'javascript');
 
-
     var languageSelected = document.querySelector('.language');    
     languageSelected.onchange = function () {
-        monaco.editor.setModelLanguage(window.monaco.editor.getModels()[0], "javascript")
+        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoPreview" })[0].model, languageSelected.value)
     }
-   
+
     var themeSelected = document.querySelector('.theme');    
     themeSelected.onchange = function () {
         monaco.editor.setTheme(themeSelected.value)
     }
+
+
+    /*
+    monaco.languages.registerCompletionItemProvider('myCustomLanguage', {
+        provideCompletionItems: function (model, position) {
+            const suggestions = [
+                {
+                    label: 'console',
+                    kind: monaco.languages.CompletionItemKind.Function,
+                    documentation: 'Logs a message to the console.',
+                    insertText: 'console.log()',
+                },
+                {
+                    label: 'setTimeout',
+                    kind: monaco.languages.CompletionItemKind.Function,
+                    documentation: 'Executes a function after a specified time interval.',
+                    insertText: 'setTimeout(() => {\n\n}, 1000)',
+                }
+            ];
+
+            return { suggestions: suggestions };
+        }
+    });
+    */
 });
