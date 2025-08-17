@@ -47,7 +47,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<BusinessReceiptSupportList> BusinessReceiptSupportLists { get; set; } = null!;
         public virtual DbSet<BusinessWarehouseList> BusinessWarehouseLists { get; set; } = null!;
         public virtual DbSet<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; } = null!;
-        public virtual DbSet<DocSrvDocumentationCodeLibraryList> DocSrvDocumentationCodeLibraryLists { get; set; } = null!;
         public virtual DbSet<DocSrvDocumentationGroupList> DocSrvDocumentationGroupLists { get; set; } = null!;
         public virtual DbSet<DocSrvDocumentationList> DocSrvDocumentationLists { get; set; } = null!;
         public virtual DbSet<LicSrvLicenseActivationFailList> LicSrvLicenseActivationFailLists { get; set; } = null!;
@@ -714,17 +713,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DocSrvDocTemplateList_UserList");
-            });
-
-            modelBuilder.Entity<DocSrvDocumentationCodeLibraryList>(entity =>
-            {
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.DocSrvDocumentationCodeLibraryLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DocumentationCodeLibraryList_UserList");
             });
 
             modelBuilder.Entity<DocSrvDocumentationGroupList>(entity =>

@@ -79,22 +79,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
 	<EntityDeploy Remove="wwwroot\server-users\server\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureDataListApi.cs" />
-    <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureFieldApi.cs" />
-    <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAuthApi.cs" />
-    <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
-    <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
-    <Compile Remove="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
-  </ItemGroup>  
-
    <ItemGroup>
-     <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureDataListApi.cs" />
-     <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAnySProcedureFieldApi.cs" />
-     <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateAuthApi.cs" />
-     <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateImageApi.cs" />
-     <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateRangeApi.cs" />
-     <Content Include="DATABASES\EasyITCenter\Controllers\_DeveloperTemp\TemplateSubRangeListApi.cs" />
      <Content Include="Data\favicon.ico" />
      <Content Include="Docs\Readme.md">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
