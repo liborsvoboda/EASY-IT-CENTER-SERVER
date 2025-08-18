@@ -10,6 +10,7 @@ using Snickler.RSSCore.Caching;
 using Snickler.RSSCore.Extensions;
 using Snickler.RSSCore.Models;
 using System.Collections.Immutable;
+using SignalRChat.Hubs;
 
 namespace EasyITCenter.ServerCoreConfiguration {
 
@@ -109,6 +110,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 }
 
                 endpoints.MapControllers();
+
+                endpoints.MapHub<ChatHub>("/chatHub");
 
                 if (bool.Parse(DbOperations.GetServerParameterLists("WebRazorPagesEngineEnabled").Value)) {
                     endpoints.MapRazorPages();

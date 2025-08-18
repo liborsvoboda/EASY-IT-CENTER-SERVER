@@ -22,6 +22,8 @@ using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using HandlebarsDotNet;
 using FluentAssertions.Common;
 using Pchp.Core;
+using PlaywrightExtraSharp.Plugins.Recaptcha;
+using SignalRChat.Hubs;
 
 
 namespace EasyITCenter {
@@ -107,7 +109,6 @@ namespace EasyITCenter {
 
             //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/signalr/dotnet-client/sample/SignalRChatClient/MainWindow.xaml.cs
             //primi chat s aplikaci
-            
             services.AddSignalR();
             //services.AddPhp(cfg => { cfg.RootPath = Path.Combine(SrvRuntime.SrvOtherLanguagesPath, "PHP"); });
             //services.AddServerSideBlazor();
@@ -201,28 +202,22 @@ namespace EasyITCenter {
                     //Show MarkDownFile in Layout by missing .md extension
                     if (!redirected && routeLayout == RouteLayoutTypes.ViewerMarkDownFileLayout) { redirected = true; context.Request.Path = "/ViewerMarkDownFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
                     //Show Report File in Layout by .frx extension
-                    else if (!redirected && routeLayout == RouteLayoutTypes.ViewerReportFileLayout) { redirected = true; context.Request.Path = "/ReportViewer/ViewerReportFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
-
-                    else if (!redirected && routeLayout == RouteLayoutTypes.ServerPortalLayout) { redirected = true; return; } 
-                    else if (!redirected && routeLayout == RouteLayoutTypes.SystemPortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemPortal"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
-                    else if (!redirected && routeLayout == RouteLayoutTypes.SystemModulesLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemModules"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
+                    else if (!redirected && routeLayout == RouteLayoutTypes.ViewerReportFileLayout) { redirected = true; context.Request.Path = "/ReportViewer/ViewerReportFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } else if (!redirected && routeLayout == RouteLayoutTypes.ServerPortalLayout) { redirected = true; return; } else if (!redirected && routeLayout == RouteLayoutTypes.SystemPortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemPortal"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } else if (!redirected && routeLayout == RouteLayoutTypes.SystemModulesLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemModules"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
 
 
 
-                    //Check If existing route Url and Allow Auto Process Example API call
-                    else if (CoreOperations.GetServerRegisteredRoutesList(requestPath, false)) { return; }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   //Check If existing route Url and Allow Auto Process Example API call
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   else if (CoreOperations.GetServerRegisteredRoutesList(requestPath, false)) { return; }
 
-                    //Ignore livereload
-                    else if (requestPath.ToLower() == "/__livereload") { return; }
-                    //Others Type Detected
-                    else if (!redirected && requestPath.ToLower() != fileValidUrl
-                    && ( context.Response.StatusCode != StatusCodes.Status200OK && context.Response.StatusCode != StatusCodes.Status301MovedPermanently && context.Response.StatusCode != StatusCodes.Status302Found )
-                    ) { redirected = true; context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   //Ignore livereload
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   else if (requestPath.ToLower() == "/__livereload") { return; }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   //Others Type Detected
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   else if (!redirected && requestPath.ToLower() != fileValidUrl
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   && ( context.Response.StatusCode != StatusCodes.Status200OK && context.Response.StatusCode != StatusCodes.Status301MovedPermanently && context.Response.StatusCode != StatusCodes.Status302Found )
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ) { redirected = true; context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
 
 
-                    if (!redirected && commandType == RoutingActionTypes.Return) { return; } 
-                    else if (!redirected && commandType == RoutingActionTypes.Next) { context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } 
-                    else if (!redirected && commandType == RoutingActionTypes.Next && context.Request.Path.ToString().ToLower() == fileValidUrl) { return; }
+                    if (!redirected && commandType == RoutingActionTypes.Return) { return; } else if (!redirected && commandType == RoutingActionTypes.Next) { context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } else if (!redirected && commandType == RoutingActionTypes.Next && context.Request.Path.ToString().ToLower() == fileValidUrl) { return; }
                 }
             });
 
@@ -233,6 +228,7 @@ namespace EasyITCenter {
             ServerModulesEnabling.EnableMarkdownAsHtmlFiles(ref app);
 
             app.UseHsts();
+
 
             //Allowed File Types For Web TODO define over Administration
             FileExtensionContentTypeProvider? staticFilesProvider = new FileExtensionContentTypeProvider();
