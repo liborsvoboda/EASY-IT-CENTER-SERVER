@@ -3,40 +3,23 @@ const videoElem = document.getElementById("video");
 
 https://www.metered.ca/blog/webrtc-screen-sharing/#webrtc-screen-sharing-example
 
-var displayMediaOptions = {
-	video: {
-		cursor: "always",
-		height: 1000,
-		width: 1200
-	},
-	audio: false
-};
-
-
-async function startCapture() {
+Gs.Media.CaptureScreen = async function () {
+	let mediaStream = null;
 	try {
-		videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-		dumpOptionsInfo();
-	} catch (err) {
-		console.error("Error: " + err);
+		mediaStream = await navigator.mediaDevices.getDisplayMedia({
+			video: {
+				cursor: "always"
+			},
+			audio: false
+		});
+	} catch (ex) {
+		console.log("Error occurred", ex);
 	}
 }
 
-function stopCapture(evt) {
-	let tracks = videoElem.srcObject.getTracks();
-	tracks.forEach(track => track.stop());
-	videoElem.srcObject = null;
-}
-
-function dumpOptionsInfo() {
-	const videoTrack = videoElem.srcObject.getVideoTracks()[0];
-	console.info("Track settings:");
-	console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
-	console.info("Track constraints:");
-	console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
-}
 
 
+////
 
 //Start Capturing Screen Image
 Gs.Media.CaptureToImage = async function () {
