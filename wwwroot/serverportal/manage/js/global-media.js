@@ -1,7 +1,7 @@
-﻿<video id="video" autoplay playsinline muted></video>
-const videoElem = document.getElementById("video");
+﻿//<video id="video" autoplay playsinline muted></video>
+//const videoElem = document.getElementById("video");
 
-https://www.metered.ca/blog/webrtc-screen-sharing/#webrtc-screen-sharing-example
+//https://www.metered.ca/blog/webrtc-screen-sharing/#webrtc-screen-sharing-example
 
 Gs.Media.CaptureScreen = async function () {
 	let mediaStream = null;

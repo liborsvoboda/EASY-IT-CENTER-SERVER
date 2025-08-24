@@ -90,8 +90,8 @@ Gs.Objects.ShowUnAuthMessage = function () {
 
 
 
-function GenerateMenu () {
-    let htmlContent = "";// '<li class="item-header">Portal MENU</li>';
+function GenerateMenu() {
+    let htmlContent = "";
 
     let lastGuid = null, menuItem = {}, menu = [];
     let portalMenu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
@@ -244,7 +244,7 @@ Gs.Objects.RefreshPreview = function () {
 
 
 //Gs.Objects.InfoboxTableCreate = function (elementId) {
-//    let html = "<div class='container'><table id='PreviewTable' class='table striped' data-role='table' data-pagination='true' data-show-all-pages='false' ></div>";
+//    let html = "<div class='container'><table id='MenuTable' class='table striped' data-role='table' data-pagination='true' data-show-all-pages='false' ></div>";
 //    let infoBox = Metro.infobox.create(html, "", {
 //        closeButton: true,
 //        type: "",
