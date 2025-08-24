@@ -20,13 +20,13 @@ Gs.Functions.RemoveElement = function (elementId) {
     if (element != null) { element.remove(); }
 }
 
-
+//TODO odebrat # z elementId
 Gs.Functions.AddClass = function (elementId,clasName) {
-    $(elementId).addClass(clasName); //"disabled"
+    $("#" + elementId).addClass(clasName); //"disabled"
 }
 
 Gs.Functions.RemoveClass = function (elementId, clasName) {
-    $(elementId).removeClass(clasName); //"disabled"
+    $("#" + elementId).removeClass(clasName); //"disabled"
 }
 
 Gs.Functions.HtmlDecode = function (input) {

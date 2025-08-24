@@ -205,11 +205,11 @@ Gs.Objects.ShowMessagePanel = function (close) {
 
 Gs.Objects.ShowFavorites = function (elementId, close = false) {
     if (close || Metro.bottomsheet.isOpen("#" + elementId)) {
-        Gs.Behaviors.ElementAddClass(elementId, "hidden");
+        Gs.Functions.AddClass(elementId, "hidden");
         Metro.bottomsheet.close("#" + elementId);
-        Gs.Behaviors.ElementAddClass(elementId, "hidden");
+        Gs.Functions.AddClass(elementId, "hidden");
     }
-    else { Metro.bottomsheet.open("#" + elementId, "grid"); Gs.Behaviors.ElementRemoveClass(elementId, "hidden"); }
+    else { Metro.bottomsheet.open("#" + elementId, "grid"); Gs.Functions.RemoveClass(elementId, "hidden"); }
 }
 
 

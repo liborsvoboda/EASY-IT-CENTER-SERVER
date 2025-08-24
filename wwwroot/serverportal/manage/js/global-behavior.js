@@ -263,20 +263,6 @@ Gs.Behaviors.ElementSetCheckBox = function (elementId, val) {
 }
 
 
-Gs.Behaviors.ElementAddClass = function (elementId, className) {
-    try {
-        $('#' + elementId).addClass(" " + className + " ");
-    } catch { }
-}
-
-
-Gs.Behaviors.ElementRemoveClass = function (elementId, className) {
-    try {
-        $('#' + elementId).removeClass(className);
-    } catch { }
-}
-
-
 Gs.Behaviors.InfoBoxOpenClose = function (elementId) {
     try {
         if (Metro.infobox.isOpen('#' + elementId)) { Metro.infobox.close('#' + elementId); }
