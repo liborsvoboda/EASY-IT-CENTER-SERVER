@@ -124,9 +124,9 @@ Gs.Functions.GenerateTagList = function (values, tagName, className) {
 }
 
 
-
 //Function for  Mermaid Data to Graphics Conversion
-//async function Mermaid() { try { await mermaid.run({ nodes: document.querySelectorAll('.class-mermaid'), }); } catch (err) { } }
+async function Mermaid() { try { await mermaid.run({ nodes: document.querySelectorAll('.class-mermaid'), }); } catch (err) { } }
+
 
 //Function for Highlighting Code Segments
 //function HighlightCode() { document.querySelectorAll('div.code').forEach(el => { hljs.highlightElement(el); }); }
@@ -277,7 +277,6 @@ Gs.Functions.LoadMetro = async function () {
     new Function(dataJs)();
     Metro.init();
     Metro.toast.create("Metro 4 did loaded successful!", { showTop: true, clsToast: "success" });
-    //$("#a1").accordion()
 }
 
 
