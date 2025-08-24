@@ -1,4 +1,4 @@
-//GITHUB Docs 
+﻿//GITHUB Docs 
 //https://octokit.github.io/rest.js/v21/#repos-list-languages
 
 
@@ -14,7 +14,7 @@ let username="liborsvoboda";
 //const repo = await OctokitClient.rest.search.repos({q});
 const repos = await OctokitClient.rest.repos.listForUser({
     username,
-  });
+});
   
 let html='<ul data-role="treeview" class="fg-white c-pointer">';  
 repos.data.forEach(repo=>{
