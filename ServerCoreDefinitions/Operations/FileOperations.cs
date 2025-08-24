@@ -1,6 +1,9 @@
-﻿namespace EasyITCenter.ServerCoreStructure {
+﻿using CSJsonDB;
+
+namespace EasyITCenter.ServerCoreStructure {
 
     public static class FileOperations {
+
 
         /// <summary>
         /// Server Local Startup Configuration Its Running as First - Load from Congig.Json After DB
@@ -37,6 +40,7 @@
         /// <returns></returns>
         public static bool CheckFile(string file) { return File.Exists(file);}
 
+
         /// <summary>
         /// Prepared Method for Files Copy
         /// </summary>
@@ -51,6 +55,7 @@
                 }
             }
         }
+
 
         /// <summary>
         /// Creates the path recursively.
@@ -77,12 +82,13 @@
             }
         }
 
+
         /// <summary>
         /// Reads the file.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns></returns>
-        public static byte[] ReadFile(string fileName) {
+        public static byte[] ReadBinaryFile(string fileName) {
             FileStream f = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             int size = (int)f.Length;
             byte[] data = new byte[size];
@@ -90,6 +96,21 @@
             f.Close();
             return data;
         }
+
+
+        /// <summary>
+        /// Read File As string
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static string ReadTextFile(string fileName) {
+            try {
+                return File.ReadAllText(fileName, FileOperations.FileDetectEncoding(fileName));
+            } catch (Exception ex) {
+                return string.Empty;
+            }
+        }
+
 
         /// <summary>
         /// Write ByteArray to File
@@ -108,6 +129,7 @@
             }
         }
 
+
         /// <summary>
         /// Prepared Method for Create empty file
         /// </summary>
@@ -117,6 +139,7 @@
             if (!File.Exists(file)) { File.Create(file).Close(); }
             return CheckFile(file);
         }
+
 
         /// <summary>
         /// Write String to File Used for JsonSaving
@@ -133,6 +156,7 @@
                 objWriter.Close();
             }
         }
+
 
         /// <summary>
         /// Prepared Method for Get Information of File encoding UTF8,WIN1250,etc
@@ -162,6 +186,7 @@
             else
                 return Encoding.Default;
         }
+
 
         /// <summary>
         /// Deletes the directory.
@@ -225,11 +250,12 @@
             }
             Directory.CreateDirectory(targetPath);
 
-            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories)) {
+            foreach (string newPath in Directory.GetFiles(sourcePath, "*", SearchOption.AllDirectories)) {
                 File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }
             Directory.Delete(sourcePath, true);
         }
+
 
         /// <summary>
         /// /
@@ -263,6 +289,7 @@
             }
         }
 
+
         /// <summary>
         /// Creates the directory.
         /// </summary>
@@ -271,6 +298,7 @@
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
         }
+
 
         /// <summary>
         /// Deletes the file.
@@ -286,15 +314,21 @@
                 return false;
         }
 
+
         /// <summary>
         /// Full Clear Folder
         /// </summary>
         /// <param name="FolderName">Name of the folder.</param>
         public static void ClearFolder(string FolderName) {
             DirectoryInfo dir = new DirectoryInfo(FolderName);
+
             foreach (System.IO.FileInfo fi in dir.GetFiles()) {
                 fi.Delete();
             }
+
+            dir.GetDirectories().ToList().ForEach(directory => {
+                Directory.Delete(directory.FullName, true);
+            });
         }
 
 

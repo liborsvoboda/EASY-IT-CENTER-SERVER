@@ -27,7 +27,7 @@ namespace EasyITCenter.Controllers {
             if (!bool.Parse(DbOperations.GetServerParameterLists("ConfigTimeTokenValidationEnabled").Value)) { user.Expiration = null; }
 
             RefreshUserToken(username, user);
-            UserStorage.CreateUserStorage(username);
+            UserStorageOperations.CreateUserStorage(username);
 
             return Ok(JsonSerializer.Serialize(user));
         }

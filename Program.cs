@@ -192,9 +192,8 @@ namespace EasyITCenter {
             try {
                 //Load From Config File
                 string json = CoreOperations.SrvOStype.IsWindows()
-                    ?  File.ReadAllText(Path.Combine(SrvRuntime.SettingFolder, SrvRuntime.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(SrvRuntime.SettingFolder, SrvRuntime.ConfigFile)))
-                    : File.ReadAllText(Path.Combine(SrvRuntime.StartupPath, "Data", SrvRuntime.ConfigFile), FileOperations.FileDetectEncoding(Path.Combine(SrvRuntime.StartupPath, "Data", SrvRuntime.ConfigFile)))
-                    ;
+                    ?  FileOperations.ReadTextFile(Path.Combine(SrvRuntime.SettingFolder, SrvRuntime.ConfigFile))
+                    : FileOperations.ReadTextFile(Path.Combine(SrvRuntime.StartupPath, "Data", SrvRuntime.ConfigFile));
 
                 Dictionary<string, object> exportServerSettingList = new Dictionary<string, object>();
                 exportServerSettingList.AddRange(JsonSerializer.Deserialize<Dictionary<string, object>>(json).ToList());

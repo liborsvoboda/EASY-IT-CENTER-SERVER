@@ -15,8 +15,8 @@ https://www.nuget.org/packages
 
 # Repos
 https://github.com/seesharper?tab=repositories  182repos
-
-
+https://github.com/ggoodman?tab=repositories 174 JS Repos
+https://github.com/orgs/google/repositories 2800 Js Repos
 
 # Solution
 https://github.com/orgs/EasyMicroservices

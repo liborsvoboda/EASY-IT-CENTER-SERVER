@@ -24,7 +24,7 @@ Gs.Objects.CreateToolPanel = function () {
     html += '<div class="w-100 text-left" style="z-index: 1000000;"><div id="google_translate_element"></div></div>';
     html += '<div class="w-100 d-inline-flex"><div class="w-75 text-left">';
     html += '<input id="EnableAutoTranslate" type="checkbox" data-role="checkbox" data-cls-caption="fg-cyan text-bold" data-caption="Auto Translate" onchange=Gs.Behaviors.SetUserSettings(); >';
-    html += '</div><div class="w-25 mt-1 text-right" style="max-width:25% !important;"><button class="button secondary mini" style="max-width:100% !important;" onclick=Gs.Behaviors.CancelTranslation(); >Cancel Translate</button></div></div>';
+    html += '</div><div class="w-25 mt-1 text-right" style="max-width:25% !important;"><button class="button secondary mini" style="max-width:100% !important;" onclick=Gs.Behaviors.CancelTranslation(true); >Cancel Translate</button></div></div>';
     html += '</div>';
 
     html += '<DIV id=_toolUserSet>';
@@ -90,7 +90,7 @@ Gs.Objects.ShowUnAuthMessage = function () {
 
 
 
-Gs.Objects.GenerateMenu = function () {
+function GenerateMenu () {
     let htmlContent = "";// '<li class="item-header">Portal MENU</li>';
 
     let lastGuid = null, menuItem = {}, menu = [];
@@ -302,6 +302,12 @@ Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
         btnClose: true,
         content: "<iframe id=WindowFrame src='" + url + "' width='100%' height='800' frameborder='0' scrolling='yes' style='width: 100%; height: 100 %;'></iframe>"
     });
+}
+
+
+Gs.Objects.OpenInExternalWindow = function (title, url, lastWindow = false) {
+    if (lastWindow) { (url = document.getElementById("IFrameWindow") != null ? document.getElementById("IFrameWindow").src : "/") }
+    window.open(url, title);
 }
 
 

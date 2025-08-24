@@ -12,7 +12,7 @@ Gs.Behaviors.PortalStartup = async function () {
 
     $(document).ready(function () {
         setTimeout(function () {
-            Gs.Objects.GenerateMenu();
+            GenerateMenu();
             Gs.Functions.GetFunctionList();
             
             if (!Gs.Apis.IsLogged()) { Gs.Behaviors.LoadUserSettings();
@@ -53,7 +53,7 @@ Gs.Behaviors.GoogleTranslateElementInit = function () {
             autoDisplay: false
         }, 'google_translate_element');
 
-        let autoTranslateSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null))).EnableAutoTranslate == null || JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null))).EnableAutoTranslate == false ? false : true;
+        let autoTranslateSetting = Metro.storage.getItem('UserSettingList', null).EnableAutoTranslate == null || Metro.storage.getItem('UserSettingList', null).EnableAutoTranslate == false ? false : true;
         if (autoTranslateSetting && document.querySelector('#google_translate_element select') != null) {
             setTimeout(function () {
                 let selectElement = document.querySelector('#google_translate_element select');
@@ -65,33 +65,34 @@ Gs.Behaviors.GoogleTranslateElementInit = function () {
 }
 
 
-Gs.Behaviors.CancelTranslation = async function () {
-    let userSettingList = Metro.storage.getItem('UserSettingList', null);
-    let translateActive = userSettingList.EnableAutoTranslate;
-    userSettingList.EnableAutoTranslate = false;
-    Metro.storage.setItem('UserSettingList', userSettingList);
-    Gs.Behaviors.ElementSetCheckBox("EnableAutoTranslate", Gs.Variables.UserSettingList.EnableAutoTranslate);
-    if (translateActive && Gs.Apis.IsLogged()) {//on disabling translation Save UserSettingList
-        await Gs.Apis.RunServerPostApi("PortalApiTableService/SetUserSettingList", Metro.storage.getItem("UserSettingList", null), null);
+Gs.Behaviors.CancelTranslation = async function (cancel) {
+    if (cancel) {
+        let userSettingList = Metro.storage.getItem('UserSettingList', null);
+        let translateActive = userSettingList.EnableAutoTranslate;
+        Gs.Variables.UserSettingList.EnableAutoTranslate = userSettingList.EnableAutoTranslate = false;
+        Metro.storage.setItem('UserSettingList', userSettingList);
+        Gs.Behaviors.ElementSetCheckBox("EnableAutoTranslate", Gs.Variables.UserSettingList.EnableAutoTranslate);
+        if (translateActive && Gs.Apis.IsLogged()) {//on disabling translation Save UserSettingList
+            await Gs.Apis.RunServerPostApi("PortalApiTableService/SetUserSettingList", Metro.storage.getItem("UserSettingList", null), null);
+        }
     }
-
     if (document.querySelector('#google_translate_element select') != null) {
         setTimeout(function () {
             let selectElement = document.querySelector('#google_translate_element select');
             if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
-                selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
+                selectElement.selectedIndex = 0; 
             } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
             selectElement.dispatchEvent(new Event('change'));
             if (selectElement.value != '') {
                 setTimeout(function () {
                     if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
-                        selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
+                        selectElement.selectedIndex = 0; 
                     } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
                     selectElement.dispatchEvent(new Event('change'));
                     if (selectElement.value != '') {
                         setTimeout(function () {
                             if (Gs.Behaviors.GetGoogleOptionLanguageIndex("") == 0) {
-                                selectElement.selectedIndex = 0; Gs.Objects.ShowToolPanel();
+                                selectElement.selectedIndex = 0; 
                             } else { selectElement.selectedIndex = Gs.Behaviors.GetGoogleOptionLanguageIndex("en"); }
                             selectElement.dispatchEvent(new Event('change'));
                         }, 2000);
@@ -114,12 +115,13 @@ Gs.Behaviors.DisableScroll = function () {
 
 Gs.Behaviors.SetUserSettings = async function () {
     let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))
-    userSetting.EnableAutoTranslate = $("#EnableAutoTranslate").val('checked')[0].checked;
+    userSetting.EnableAutoTranslate = $("#EnableAutoTranslate")[0].checked;
     userSetting.EnableShowDescription = $("#EnableShowDescription")[0].checked;
     userSetting.RememberLastHandleBar = $("#RememberLastHandleBar")[0].checked;
     userSetting.RememberLastJson = $("#RememberLastJson")[0].checked;
     userSetting.EnableScreenSaver = $("#EnableScreenSaver")[0].checked;
-    Metro.storage.setItem('UserSettingList', userSetting);
+
+    Metro.storage.setItem('UserSettingList', userSetting);Gs.Variables.UserSettingList = userSetting;
 
     //reset UserSetting Data
     if (!Metro.storage.getItem('UserSettingList', null).RememberLastHandleBar) { Metro.storage.delItem("HandlebarCode"); }
@@ -130,7 +132,7 @@ Gs.Behaviors.SetUserSettings = async function () {
         await Gs.Apis.RunServerPostApi("PortalApiTableService/SetUserSettingList", Metro.storage.getItem("UserSettingList", null), null);
     }
 
-    if ($("#EnableAutoTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(); }
+    if ($("#EnableAutoTranslate").val('checked')[0].checked) { Gs.Behaviors.GoogleTranslateElementInit(); } else { Gs.Behaviors.CancelTranslation(false); }
     if ($("#EnableScreenSaver").val('checked')[0].checked && document.getElementById("ScreenSaver") == null) {
         Gs.Variables.screensaver = new Screensaver({
             secondsInactive: 60,

@@ -24,9 +24,9 @@ window.Gs = {
             { dataRec: null }
         ],
         media: {
-            mediaRecorder: null, //Media Recorder
-            videoRecBlob: [], //Recorder Blob
-            videoCaptureStream: null, //Recording Stream
+            mediaRecorder: null, 
+            videoRecBlob: [], 
+            videoCaptureStream: null, 
             videoMimeType: "video/mp4",
             imageMimeType: "image/png",
             elVideoCameraControl: "VideoCameraButton",
@@ -38,8 +38,8 @@ window.Gs = {
                 systemAudio: "include",
                 selfBrowserSurface: "exclude",
                 surfaceSwitching: "include",
-                monitorTypeSurfaces: "include"
-                //, cursor: 'always'		
+                monitorTypeSurfaces: "include",
+                cursor: 'always'		
             }
         },
         UserSettingList: {
@@ -68,6 +68,11 @@ window.WindowButtons = [
         onclick: "Gs.Objects.WindowIframeCreate('Open Window','', true);"
     },
     {
+        html: "<span class='mif-windows' title='Open in External Window'></span>",
+        cls: "sys-button",
+        onclick: "Gs.Objects.OpenInExternalWindow('External Window','',true);"
+    },
+    {
         html: "<span class='mif-image' title='Take ScreenShot'></span>",
         cls: "sys-button",
         onclick: "Gs.Media.CaptureToImage()"
@@ -76,11 +81,6 @@ window.WindowButtons = [
         html: "<span class='mif-video-camera' title='Record Video'></span>",
         cls: "sys-button",
         onclick: "Gs.Media.CaptureScreenToVideo()"
-    },
-    {
-        html: "<span class='mif-import-export' title='Export'></span>",
-        cls: "sys-button",
-        onclick: "alert('You press user button')"
     },
     {
         html: "<span class='mif-language' title='Translate'></span>",

@@ -191,32 +191,82 @@ namespace EasyITCenter.Controllers
         [AllowAnonymous]
         [HttpPost("/PortalApiTableService/SetUserSettingList")]
         public async Task<string> SetUserSettingList([FromBody] UserSetting userSetting) {
-            EasyITCenterContext data = new EasyITCenterContext();
+            EasyITCenterContext data = new EasyITCenterContext(); List<PortalApiTableColumnDataList> original = new();
             try {
                 if (ServerApiServiceExtension.IsLogged()) {
-                    List<PortalApiTableColumnDataList> original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.ApiTableName == "UserSetting" && a.UserId == (int)ServerApiServiceExtension.GetUserId()).ToList();
-                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                        data.PortalApiTableColumnDataLists.RemoveRange(original);
-                        data.SaveChanges();
-                        return true;
-                    });
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                        original = new EasyITCenterContext().PortalApiTableColumnDataLists
+                            .Where(a => a.ApiTableName == "UserSetting" && a.UserId == ServerApiServiceExtension.GetUserId())
+                            .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                    }
 
-                    string recGuid = Guid.NewGuid().ToString().ToUpper();
-                    List<PortalApiTableColumnDataList> record = new();
-                    record.Add(new PortalApiTableColumnDataList() { ApiTableName = "UserSetting", ApiTableColumnName = "EnableAutoTranslate", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.EnableAutoTranslate.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                    record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "EnableShowDescription", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.EnableShowDescription.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                    record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "RememberLastJson", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.RememberLastJson.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                    record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "RememberLastHandleBar", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.RememberLastHandleBar.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                    record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "EnableScreenSaver", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.EnableScreenSaver.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    if (original.Count == 5) {//UPDATE only
+                        original.ForEach(orig => {
+                            switch (orig.ApiTableColumnName) {
+                                case "EnableAutoTranslate":
+                                    orig.Value = userSetting.EnableAutoTranslate.ToString();
+                                    break;
+                                case "EnableShowDescription":
+                                    orig.Value = userSetting.EnableShowDescription.ToString();
+                                    break;
+                                case "RememberLastJson":
+                                    orig.Value = userSetting.RememberLastJson.ToString();
+                                    break;
+                                case "RememberLastHandleBar":
+                                    orig.Value = userSetting.RememberLastHandleBar.ToString();
+                                    break;
+                                case "EnableScreenSaver":
+                                    orig.Value = userSetting.EnableScreenSaver.ToString();
+                                    break;
+                            }
 
-                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                        data.PortalApiTableColumnDataLists.AddRange(record);
-                        data.SaveChanges();
-                        return true;
-                    });
-                
+                        });
 
-                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 5, ErrorMessage = recGuid });
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.UpdateRange(original);
+                            data.SaveChanges();
+                            return true;
+                        });
+
+                    } else if (original.Any()) {//MODIFY -added NEW
+                        original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.ApiTableName == "UserSetting" && a.UserId == (int)ServerApiServiceExtension.GetUserId()).ToList();
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.RemoveRange(original);
+                            data.SaveChanges();
+                            return true;
+                        });
+
+                        string recGuid = Guid.NewGuid().ToString().ToUpper();
+                        List<PortalApiTableColumnDataList> record = new();
+                        record.Add(new PortalApiTableColumnDataList() { ApiTableName = "UserSetting", ApiTableColumnName = "EnableAutoTranslate", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.EnableAutoTranslate.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "EnableShowDescription", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.EnableShowDescription.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "RememberLastJson", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.RememberLastJson.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "RememberLastHandleBar", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.RememberLastHandleBar.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "EnableScreenSaver", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.EnableScreenSaver.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.AddRange(record);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    } else {//NEW
+                        string recGuid = Guid.NewGuid().ToString().ToUpper();
+                        List<PortalApiTableColumnDataList> record = new();
+                        record.Add(new PortalApiTableColumnDataList() { ApiTableName = "UserSetting", ApiTableColumnName = "EnableAutoTranslate", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.EnableAutoTranslate.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "EnableShowDescription", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.EnableShowDescription.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "RememberLastJson", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.RememberLastJson.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "RememberLastHandleBar", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.RememberLastHandleBar.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "UserSetting", ApiTableColumnName = "EnableScreenSaver", InheritedDataType = "bit", RecGuid = recGuid, Value = userSetting.EnableScreenSaver.ToString(), Description = null, Active = true, UserId = (int)ServerApiServiceExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.AddRange(record);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    }
+
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 5, ErrorMessage = string.Empty });
                 } else {
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
                 }
@@ -241,7 +291,7 @@ namespace EasyITCenter.Controllers
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
                 }
             } catch (Exception ex) {
-                return JsonSerializer.Serialize(data, new JsonSerializerOptions() {ReferenceHandler = ReferenceHandler.IgnoreCycles,WriteIndented = true,DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
             return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }

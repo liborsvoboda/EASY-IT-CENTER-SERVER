@@ -111,7 +111,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                 endpoints.MapControllers();
 
-                endpoints.MapHub<ChatHub>("/chatHub");
+                //endpoints.MapHub<ChatHub>("/chatHub");
 
                 if (bool.Parse(DbOperations.GetServerParameterLists("WebRazorPagesEngineEnabled").Value)) {
                     endpoints.MapRazorPages();
