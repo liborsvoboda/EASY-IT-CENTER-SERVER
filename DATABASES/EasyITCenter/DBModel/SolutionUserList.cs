@@ -89,7 +89,6 @@ namespace EasyITCenter.DBModel
             UserImageGalleryLists = new HashSet<UserImageGalleryList>();
             UserParameterLists = new HashSet<UserParameterList>();
             WebBannedIpAddressLists = new HashSet<WebBannedIpAddressList>();
-            WebConfiguratorLists = new HashSet<WebConfiguratorList>();
             WebCoreFileLists = new HashSet<WebCoreFileList>();
             WebDeveloperNewsLists = new HashSet<WebDeveloperNewsList>();
             WebDocumentationLists = new HashSet<WebDocumentationList>();
@@ -293,8 +292,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<UserParameterList> UserParameterLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<WebBannedIpAddressList> WebBannedIpAddressLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<WebConfiguratorList> WebConfiguratorLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<WebCoreFileList> WebCoreFileLists { get; set; }
         [InverseProperty("User")]

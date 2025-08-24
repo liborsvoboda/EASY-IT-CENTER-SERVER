@@ -129,7 +129,10 @@ async function Mermaid() { try { await mermaid.run({ nodes: document.querySelect
 
 
 //Function for Highlighting Code Segments
-//function HighlightCode() { document.querySelectorAll('div.code').forEach(el => { hljs.highlightElement(el); }); }
+function HighlightCode() {
+    //hljs.highlightAll()
+    document.querySelectorAll('div.code').forEach(el => { hljs.highlightElement(el); });
+}
 
 
 Gs.Functions.ShowSource = function () {
@@ -231,20 +234,17 @@ Gs.Functions.ImageFromFrameElement = function () {
 
 
 Gs.Functions.SaveToFavorites = function (title, url) {
-    if (window.sidebar) {
-        // Firefox
+    if (window.sidebar) { // Firefox
         window.sidebar.addPanel(title, url, '');
     }
-    else if (window.opera && window.print) {
-        // Opera
+    else if (window.opera && window.print) { // Opera
         var elem = document.createElement('a');
         elem.setAttribute('href', url);
         elem.setAttribute('title', title);
         elem.setAttribute('rel', 'sidebar');
         elem.click();
     }
-    else if (document.all) {
-        // ie
+    else if (document.all) { // ie
         window.external.AddFavorite(url, title);
     } else {
         let createBookmark = browser.bookmarks.create({

@@ -101,7 +101,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<UserImageGalleryList> UserImageGalleryLists { get; set; } = null!;
         public virtual DbSet<UserParameterList> UserParameterLists { get; set; } = null!;
         public virtual DbSet<WebBannedIpAddressList> WebBannedIpAddressLists { get; set; } = null!;
-        public virtual DbSet<WebConfiguratorList> WebConfiguratorLists { get; set; } = null!;
         public virtual DbSet<WebCoreFileList> WebCoreFileLists { get; set; } = null!;
         public virtual DbSet<WebDeveloperNewsList> WebDeveloperNewsLists { get; set; } = null!;
         public virtual DbSet<WebDocumentationList> WebDocumentationLists { get; set; } = null!;
@@ -1584,19 +1583,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_WebBannedUserList_UserList");
-            });
-
-            modelBuilder.Entity<WebConfiguratorList>(entity =>
-            {
-                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.WebConfiguratorLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WebConfiguratorList_UserList");
             });
 
             modelBuilder.Entity<WebCoreFileList>(entity =>

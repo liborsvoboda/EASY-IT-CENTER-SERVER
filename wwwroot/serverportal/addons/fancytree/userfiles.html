@@ -1,11 +1,14 @@
-﻿<html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
-    <meta name="robots" content="noindex,follow">
+    <meta name="robots" content="noindex,follow" />
     <meta name="charset" content="utf-8" />
 
-    <link rel="stylesheet" href="/serverportal/addons/fancytree/dist/skin-win8/ui.fancytree.min.css">
-    <link rel="stylesheet" href="/serverportal/addons/fancytree/extensions/contextmenu/jquery.contextMenu.min.css">
+    <link rel="stylesheet" href="/serverportal/addons/fancytree/dist/skin-win8/ui.fancytree.min.css" />
+    <link rel="stylesheet" href="/serverportal/addons/fancytree/extensions/contextmenu/jquery.contextMenu.min.css" />
     <link rel="stylesheet" href="../../metro/css/metro-all.css" />
+
+    <link rel='stylesheet' type='text/css' href='/serverportal/addons/froalaeditor/froala.min.css' />
+    <link rel="stylesheet" type="text/css" href="/serverportal/addons/froalaeditor/plugins/fullscreen.min.css" />
 
     <script type="text/javascript" src="/serverportal/addons/jquery/jquery-3.6.0.min.js"></script>
 
@@ -22,7 +25,16 @@
     <script type="text/javascript" src="/serverportal/manage/js/global-api.js"></script>
 
     <script type="text/javascript" src="/serverportal/manage/js/js.cookie.min.js"></script>
+
+    <!--TOOLS-->
     <script type="text/javascript" src="/serverportal/manage/js/mermaid.min.cdn.js"></script>
+    <script type="text/javascript" src="/serverportal/addons/highlightjs/highlight.min.js"></script>
+
+    <!--FROALA-->
+    <script type='text/javascript' src='/serverportal/addons/froalaeditor/froala.min.js'></script>
+    <script type="text/javascript" src="/serverportal/addons/froalaeditor/plugins/fullscreen.min.js"></script>
+    <script type='text/javascript' src='/serverportal/addons/froalaeditor/languages/cs.js'></script>
+
 
     <!--MONACO-->
     <script type="text/javascript" src="/serverportal/addons/monaco/js/monaco-editor/min/vs/loader.js"></script>
@@ -31,6 +43,7 @@
             min-width: 100%;
             width: 100%;
             min-height: 100%;
+            height: calc(100vh) !important;
         }
     </style>
 
@@ -40,23 +53,23 @@
     <div class="row w-100 h-100 d-inline-flex">
         <div id="DataTree" class="h-100" style="width: 350px; overflow-y: auto; padding-top: 25px;"></div>
         <div id="FrameWindow" class="h-100 row" height="100%" frameborder="0" scrolling="yes" style="width: calc(100% - 350px); height: 100%; position: relative; padding-top: 25px;">
-            <div id="userFilesPreview" class='row' style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>
+            <div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>
         </div>
 
-        <select class="theme" style='position: absolute;left: 90%;z-index: 2000;top: 30px;right: 0px;'>
+        <select id="MonacoTheme" class="theme" style='position: absolute;left: 90%;z-index: 2000;top: 30px;right: 0px;'>
             <option>vs-dark</option>
             <option>vs</option>
             <option>hc-black</option>
         </select>
 
-        <select class="language" style='position: absolute;left: 90%;z-index: 2000;top: 60px;right: 0px;'>
+        <select id="MonacoLanguage" class="language" style='position: absolute;left: 90%;z-index: 2000;top: 60px;right: 0px;'>
             <option>bat</option>
             <option>csharp</option>
             <option>css</option>
             <option>graphql</option>
             <option>handlebars</option>
             <option>html</option>
-            <option selected>javascript</option>
+            <option selected=selected>javascript</option>
             <option>json</option>
             <option>markdown</option>
             <option>mysql</option>
@@ -75,7 +88,7 @@
             <option>xml</option>
         </select>
 
-        <div id="ActionMenu" class="w-100 pos-fixed">
+        <div id="ActionMenu" class="w-100 pos-fixed" style="z-index: 9999999999;">
             <nav data-role="ribbonmenu">
                 <ul class="tabs-holder">
                     <li onclick="ReloadUserStorage();" class=""><a href="#">Reload</a></li>
@@ -86,7 +99,7 @@
                 <div class="content-holder">
                     <div class="section" id="sectionFile">
                         <div class="group">
-                            <button class="ribbon-button">
+                            <button id="SetMonaco" class="ribbon-button disabled" onclick=SetEditor('Monaco');Gs.Functions.RemoveClass('#sectionFile','active');>
                                 <span class="icon">
                                     <span class="mif-codepen"></span>
                                 </span>
@@ -95,13 +108,13 @@
                             <span class="title">Code Editors</span>
                         </div>
                         <div class="group">
-                            <button class="ribbon-button">
+                            <button id="SetTinyMCE" class="ribbon-button" onclick=SetEditor('TinyMCE');Gs.Functions.RemoveClass('#sectionFile','active');>
                                 <span class="icon">
                                     <span class="mif-table"></span>
                                 </span>
                                 <span class="caption">TinyMCE</span>
                             </button>
-                            <button class="ribbon-button">
+                            <button id="SetFroala" class="ribbon-button" onclick=SetEditor('Froala');Gs.Functions.RemoveClass('#sectionFile','active');>
                                 <span class="icon">
                                     <span class="mif-flow-tree"></span>
                                 </span>
@@ -137,8 +150,9 @@
         </div>
     </div>
     <script>
+        let dataJs = null;
         async function StartUp() {
-            const dataJs = await fetch('/serverportal/addons/monaco/js/userFiles.js').then((r) => r.text())
+            dataJs = await fetch('/serverportal/addons/monaco/js/userFiles.js').then((r) => r.text())
             new Function(dataJs)();
             InitiateTree();
         }
@@ -170,18 +184,20 @@
                 contextMenu: {
                     autoFocus: true,
                     menu: function (node) {
-                        if (node.folder) { return {
-                                "createFolder": { "name": "Create Folder", "icon": "add" },"moveFolder": { "name": "Move to Folder", "icon": "edit" },
-                                "copyFolder": { "name": "Copy to Folder", "icon": "copy" },"clearFolder": { "name": "Clear Folder", "icon": "delete" },
+                        if (node.folder) {
+                            return {
+                                "createFolder": { "name": "Create Folder", "icon": "add" }, "moveFolder": { "name": "Move to Folder", "icon": "edit" },
+                                "copyFolder": { "name": "Copy to Folder", "icon": "copy" }, "clearFolder": { "name": "Clear Folder", "icon": "delete" },
                                 "deleteFolder": { "name": "Delete Folder", "icon": "quit" },
                                 "sep1": "---------", "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
-                                "sep2": "---------","createFile": { "name": "Create File", "icon": "add" },
+                                "sep2": "---------", "createFile": { "name": "Create File", "icon": "add" },
                             };
-                        } else { return {
+                        } else {
+                            return {
                                 //"readTextFile": { "name": "Edit Text File", "icon": 'edit' },
-                                "saveFile": { "name": "Save File", "icon": "paste" },"moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
-                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },"deleteFile": { "name": "Delete File", "icon": "delete" },
-                                "sep1": "---------","downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
+                                "saveFile": { "name": "Save File", "icon": "paste" }, "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
+                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" }, "deleteFile": { "name": "Delete File", "icon": "delete" },
+                                "sep1": "---------", "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
                                 //"readBinaryFile": { "name": "Read Binary File", "icon": 'edit' },
                             };
                         }
@@ -189,60 +205,72 @@
                     actions: function (node, action, options) {
                         if (action == "createFolder") {
                             let content = "<div><input id='FolderName' type='text' data-role='input' data-prepend='Folder Name:' ></div>";
-                            let actions = [ { caption: "Create Folder", cls: "js-dialog-close success",
-                                    onclick: async function() {
-                                        if($("#FolderName").val().length > 0) {
-                                                await Gs.Apis.RunServerPostApi("UserStorageService/CreateUserFolder", { Path: $('#DataTree').fancytree("getActiveNode").data.path + "\\" + $("#FolderName").val() }, null, "ReloadUserStorage");
-                                        } else { alert("Name must be Inserted"); }
-                                    }},{caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { }}]
+                            let actions = [{
+                                caption: "Create Folder", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#FolderName").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/CreateUserFolder", { Path: $('#DataTree').fancytree("getActiveNode").data.path + "\\" + $("#FolderName").val() }, null, "ReloadUserStorage");
+                                    } else { alert("Name must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Create Folder", content, actions);
 
                         } else if (action == "moveFolder") {
                             let content = "<div><input id='FolderName' type='text' data-role='input' data-prepend='Target Folder Name: ' ></div>"
-                            let actions = [ { caption: "Move Folder", cls: "js-dialog-close success",
-                                    onclick: async function () {
-                                        if ($("#FolderName").val().length > 0) {
-                                            await Gs.Apis.RunServerPostApi("UserStorageService/MoveUserFolder", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FolderName").val() }, null, "ReloadUserStorage");
-                                        } else { alert("Name must be Inserted"); }
-                                    }},{ caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            let actions = [{
+                                caption: "Move Folder", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#FolderName").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/MoveUserFolder", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FolderName").val() }, null, "ReloadUserStorage");
+                                    } else { alert("Name must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Move Folder", content, actions);
 
-                        } else if(action == "copyFolder") {
+                        } else if (action == "copyFolder") {
                             let content = "<div><input id='FolderName' type='text' data-role='input' data-prepend='Target Folder Name: ' ></div>";
-                            let actions = [ { caption: "Copy Folder", cls: "js-dialog-close success",
+                            let actions = [{
+                                caption: "Copy Folder", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#FolderName").val().length > 0) {
                                         await Gs.Apis.RunServerPostApi("UserStorageService/CopyUserFolder", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FolderName").val() }, null, "ReloadUserStorage");
-                                    } else { alert("Name must be Inserted"); }}
-                                },{ caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                                    } else { alert("Name must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Copy Folder", content, actions);
 
                         } else if (action == "downloadFolder") {
                             Gs.Apis.DownloadApi("UserStorageService/DownloadUserFolder", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), true);
                         } else if (action == "clearFolder") {
                             let content = "<div>Do you want to Clear selected Folder? " + $('#DataTree').fancytree("getActiveNode").data.path + "</div>";
-                            let actions = [ { caption: "Clear Folder", cls: "js-dialog-close success",
-                                    onclick: async function () {
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/ClearUserFolder", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, null, "ReloadUserStorage");
-                                    } }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            let actions = [{
+                                caption: "Clear Folder", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    await Gs.Apis.RunServerPostApi("UserStorageService/ClearUserFolder", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, null, "ReloadUserStorage");
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Clear Folder", content, actions);
 
                         } else if (action == "deleteFolder") {
                             let content = "<div>Do you want to Delete selected Folder? " + $('#DataTree').fancytree("getActiveNode").data.path + "</div>";
-                            let actions = [ { caption: "Delete Folder", cls: "js-dialog-close success",
-                                    onclick: async function () {
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/DeleteUserFolder", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, null, "ReloadUserStorage");
-                                    } }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } } ]
+                            let actions = [{
+                                caption: "Delete Folder", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    await Gs.Apis.RunServerPostApi("UserStorageService/DeleteUserFolder", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, null, "ReloadUserStorage");
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Delete Folder", content, actions);
 
                         } else if (action == "createFile") {
                             let content = "<div><input id='Filename' type='text' data-role='input' data-prepend='Write FileName: ' ></div>";
-                            let actions = [ { caption: "Create File", cls: "js-dialog-close success",
-                                    onclick: async function () {
-                                        if ($("#Filename").val().length > 0) {
-                                            await Gs.Apis.RunServerPostApi("UserStorageService/CreateUserFile", { Path: $('#DataTree').fancytree("getActiveNode").data.path, Filename: "\\" + $("#Filename").val() }, null, "ReloadUserStorage");
-                                        } else { alert("FileName must be Inserted"); }
-                                    } }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } } ]
+                            let actions = [{
+                                caption: "Create File", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#Filename").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/CreateUserFile", { Path: $('#DataTree').fancytree("getActiveNode").data.path, Filename: "\\" + $("#Filename").val() }, null, "ReloadUserStorage");
+                                    } else { alert("FileName must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Create File", content, actions);
 
                         }
@@ -251,36 +279,42 @@
                         //}
                         else if (action == "saveFile") {
                             Gs.Apis.RunServerPostApi("UserStorageService/SetUserTextFile", {
-                                    Path: $('#DataTree').fancytree("getActiveNode").data.path,
-                                    Content: Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue()
-                                    //TODO get From ALL EDITORS
-                                }, null, "ReloadUserStorage");
+                                Path: $('#DataTree').fancytree("getActiveNode").data.path,
+                                Content: Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue()
+                                //TODO get From ALL EDITORS
+                            }, null, "ReloadUserStorage");
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
-                            let actions = [ { caption: "Move File", cls: "js-dialog-close success",
-                                    onclick: async function () {
-                                        if ($("#FileName").val().length > 0) {
-                                            await Gs.Apis.RunServerPostApi("UserStorageService/MoveUserFile", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FileName").val() }, null, "ReloadUserStorage");
-                                        } else { alert("FileName must be Inserted"); }
-                                    } }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } } ]
+                            let actions = [{
+                                caption: "Move File", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#FileName").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/MoveUserFile", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FileName").val() }, null, "ReloadUserStorage");
+                                    } else { alert("FileName must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Move File", content, actions);
 
                         } else if (action == "copyFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
-                            let actions = [{ caption: "Copy File", cls: "js-dialog-close success",
-                                    onclick: async function () {
-                                        if ($("#FileName").val().length > 0) {
-                                            await Gs.Apis.RunServerPostApi("UserStorageService/CopyUserFile", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FileName").val() }, null, "ReloadUserStorage");
-                                        } else { alert("Name must be Inserted"); }
-                                    } }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } } ]
+                            let actions = [{
+                                caption: "Copy File", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#FileName").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/CopyUserFile", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FileName").val() }, null, "ReloadUserStorage");
+                                    } else { alert("Name must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Copy File", content, actions);
 
                         } else if (action == "deleteFile") {
                             let content = "<div>Do you want to Delete selected File? " + $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop() + "</div>";
-                            let actions = [ { caption: "Delete File", cls: "js-dialog-close success",
-                                    onclick: async function () {
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/DeleteUserFile", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, null, "ReloadUserStorage");
-                                    } }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } } ]
+                            let actions = [{
+                                caption: "Delete File", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    await Gs.Apis.RunServerPostApi("UserStorageService/DeleteUserFile", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, null, "ReloadUserStorage");
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Delete File", content, actions);
 
                         } else if (action == "downloadFile") {
@@ -307,13 +341,72 @@
         }
         function GetTextFileFromEditor() {
             Metro.storage.setItem("UserTextFile", Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue());
+        } */
+
+
+
+
+        function SetEditor(editor) {
+            Metro.storage.setItem("SelectedEditor", editor);
+
+            switch (editor) {
+                case "Monaco":
+                    Gs.Functions.AddClass('#SetMonaco', 'disabled'); Gs.Functions.RemoveClass('#SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('#SetFroala', 'disabled');
+                    Gs.Functions.RemoveClass('#FrameWindow', 'fr-fullscreen-wrapper');
+
+                    $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
+                    new Function(dataJs)();
+                    $("#MonacoTheme").show();
+                    $("#MonacoLanguage").show();
+                    setTimeout(function () {
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue($('#DataTree').fancytree("getActiveNode").key); }
+                    }, 1000);
+                    break;
+                case "TinyMCE":
+                    Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    Gs.Functions.AddClass('#SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('#SetMonaco', 'disabled'); Gs.Functions.RemoveClass('#SetFroala', 'disabled');
+                    Gs.Functions.RemoveClass('#FrameWindow', 'fr-fullscreen-wrapper');
+
+                    $("#FrameWindow").html('<textarea id="TinyMCE" class="form-control"></textarea >');
+                    const standardEditor = {
+                        selector: 'textarea#TinyMCE',
+                        skin: 'oxide-dark', content_css: 'dark',
+                        width: window.innerWidth, height: window.innerHeight,
+                        plugins: [
+                            'accordion', 'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
+                            'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
+                            'insertdatetime', 'quickbars', 'media', 'table', 'emoticons', 'help', 'preview'
+                        ],
+                        toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                            'bullist numlist outdent indent | link image | print preview media fullscreen | ' + 'forecolor backcolor emoticons | help',
+                        menu: { menubar: 'favs file edit view insert format tools table help', content_css: 'css/content.css' }
+                    }; tinymce.init(standardEditor);
+                    setTimeout(function () {
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { tinymce.get('TinyMCE').setContent($('#DataTree').fancytree("getActiveNode").key); }
+                    }, 5000);
+                    break;
+                case "Froala":
+                    Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    Gs.Functions.AddClass('#SetFroala', 'disabled'); Gs.Functions.RemoveClass('#SetMonaco', 'disabled'); Gs.Functions.RemoveClass('#SetTinyMCE', 'disabled');
+                    $("#FrameWindow").html('<div id="FroalaEditor" style="height:100%;padding-top: 25px;"></div>');
+                    let editor = new FroalaEditor('#FroalaEditor', { language: 'cs', toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo', 'trackChanges', 'markdown'] }, function () {
+                        if (!editor.fullscreen.isActive()) { editor.fullscreen.toggle() };
+                    });
+                    setTimeout(function () {
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { editor.html.set($('#DataTree').fancytree("getActiveNode").key); }
+                    }, 3000);
+                    break;
+                default:
+            }
+
         }
-        */
+
 
 
     </script>
 
     <!--TYNYMCE-->
     <script type="text/javascript" src="/serverportal/addons/tinymce/tinymce.min.js"></script>
+
 </body>
 </html>
