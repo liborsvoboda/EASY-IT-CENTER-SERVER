@@ -38,6 +38,21 @@ namespace EasyITCenter.Controllers {
         public string TargetPath { get; set; }
     }
 
+    public class UserStorageSunGallery {
+        public string src { get; set; }
+        public string name { get; set; }
+        public string alt { get; set; }
+        public string tag { get; set; }
+    }
+
+
+    public class JsonResultLower
+    {
+        public string status { get; set; }
+        public object result { get; set; }
+        public string errorMessage { get; set; }
+    }
+
 
     [AllowAnonymous]
     [Route("/UserStorageService")]
@@ -437,6 +452,41 @@ namespace EasyITCenter.Controllers {
                 return File(zipPackage, "application/x-zip-compressed", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip");
             } catch (Exception ex) {
                 return BadRequest(new { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// User Storage SUNEditor Galery List
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("/UserStorageService/GetSunImageList")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> GetSunImageList() {
+            string userRootPath = null; List<string> extensionList = new();
+            List<string> images = new(); List<UserStorageSunGallery> result = new();
+            try {
+                if (ServerApiServiceExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.UserPath, ServerApiServiceExtension.GetUserName(), "Images");
+                } else { userRootPath = Path.Combine(SrvRuntime.UserPath, "guest", "Images"); }
+
+                extensionList = DbOperations.GetServerParameterLists("ImageExtensionList").Value.Split(";").ToList();
+                extensionList.ForEach(ext => {
+                    images = FileOperations.GetPathFiles(userRootPath, $"*.{ext}", SearchOption.AllDirectories);
+                    images.ForEach(img => { 
+                        result.Add(new UserStorageSunGallery() {
+                            name = System.IO.Path.GetFileName(img),
+                            alt = System.IO.Path.GetFileNameWithoutExtension(img),
+                            src = img.Replace(SrvRuntime.WebRootPath, "").Replace(System.IO.Path.DirectorySeparatorChar,'/'),
+                            tag = FileOperations.GetLastFolderFromPath(img)
+                        });
+                    });
+                });
+                result = result.OrderBy(a => a.tag).ThenBy(a=>a.name).ToList();
+                return base.Json(new JsonResultLower() { result = result, status = DBResult.success.ToString() }); ;
+            } catch (Exception ex) {
+                return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetUserApiErrMessage(ex), Status = DBResult.error.ToString() }); 
             }
         }
     }

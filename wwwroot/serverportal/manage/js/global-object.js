@@ -415,6 +415,7 @@ Gs.Objects.CreateDialogRequest =async function (title, content, actions) {
         title: title,
         content: content,
         closeButton: true,
-        actions: actions
+        actions: actions,
+        clsDialog: "supertop"
     });
 }

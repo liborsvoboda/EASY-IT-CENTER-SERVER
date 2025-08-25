@@ -10,6 +10,10 @@
     <link rel='stylesheet' type='text/css' href='/serverportal/addons/froalaeditor/froala.min.css' />
     <link rel="stylesheet" type="text/css" href="/serverportal/addons/froalaeditor/plugins/fullscreen.min.css" />
 
+    <link rel="stylesheet" href="/serverportal/addons/suneditor/dist/css/suneditor.min.css" />
+    <link rel="stylesheet" href="/serverportal/addons/suneditor/dist/css/codemirror.min.css" />
+    <link rel="stylesheet" href="/serverportal/addons/suneditor/dist/katex/katex.min.css" />
+
     <script type="text/javascript" src="/serverportal/addons/jquery/jquery-3.6.0.min.js"></script>
 
     <script type="text/javascript" src="/serverportal/addons/fancytree/dist/fancytree-all-deps.js"></script>
@@ -29,6 +33,8 @@
     <!--TOOLS-->
     <script type="text/javascript" src="/serverportal/manage/js/mermaid.min.cdn.js"></script>
     <script type="text/javascript" src="/serverportal/addons/highlightjs/highlight.min.js"></script>
+    <script rel="stylesheet" src="/serverportal/addons/suneditor/dist/codemirror.min.js"></script>
+    <script type="text/javascript" src="/serverportal/addons/suneditor/dist/katex/katex.min.js" ></script>
 
     <!--FROALA-->
     <script type='text/javascript' src='/serverportal/addons/froalaeditor/froala.min.js'></script>
@@ -51,8 +57,8 @@
 </head>
 <body>
     <div class="row w-100 h-100 d-inline-flex">
-        <div id="DataTree" class="h-100" style="width: 350px; overflow-y: auto; padding-top: 25px;"></div>
-        <div id="FrameWindow" class="h-100 row" height="100%" frameborder="0" scrolling="yes" style="width: calc(100% - 350px); height: 100%; position: relative; padding-top: 25px;">
+        <div id="DataTree" class="h-100" style="width: 300px; overflow-y: auto; padding-top: 25px;"></div>
+        <div id="FrameWindow" class="h-100 row" height="100%" frameborder="0" scrolling="yes" style="width: calc(100% - 300px); height: 100%; position: relative; padding-top: 25px;">
             <div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>
         </div>
 
@@ -100,7 +106,7 @@
                 <div class="content-holder">
                     <div class="section" id="sectionFile">
                         <div class="group">
-                            <button id="SetMonaco" class="ribbon-button disabled" onclick=SetEditor('Monaco');Gs.Functions.RemoveClass('#sectionFile','active');>
+                            <button id="SetMonaco" class="ribbon-button disabled" onclick=SetEditor('Monaco');Gs.Functions.RemoveClass('sectionFile','active');>
                                 <span class="icon">
                                     <span class="mif-codepen"></span>
                                 </span>
@@ -109,19 +115,19 @@
                             <span class="title">Code Editors</span>
                         </div>
                         <div class="group">
-                            <button id="SetTinyMCE" class="ribbon-button" onclick=SetEditor('TinyMCE');Gs.Functions.RemoveClass('#sectionFile','active');>
+                            <button id="SetTinyMCE" class="ribbon-button" onclick=SetEditor('TinyMCE');Gs.Functions.RemoveClass('sectionFile','active');>
                                 <span class="icon">
                                     <span class="mif-table"></span>
                                 </span>
                                 <span class="caption">TinyMCE</span>
                             </button>
-                            <button id="SetFroala" class="ribbon-button" onclick=SetEditor('Froala');Gs.Functions.RemoveClass('#sectionFile','active');>
+                            <button id="SetFroala" class="ribbon-button" onclick=SetEditor('Froala');Gs.Functions.RemoveClass('sectionFile','active');>
                                 <span class="icon">
                                     <span class="mif-flow-tree"></span>
                                 </span>
                                 <span class="caption">Froala</span>
                             </button>
-                            <button class="ribbon-button">
+                            <button id="SetSUNEdit" class="ribbon-button" onclick=SetEditor('SUNEdit');Gs.Functions.RemoveClass('sectionFile','active');>
                                 <span class="icon">
                                     <span class="mif-sun3"></span>
                                 </span>
@@ -151,10 +157,14 @@
         </div>
     </div>
     <script>
-        let dataJs = null;
+        //Global Form Variables
+        dataJs = null;
+        EditorInit = null;
+
+
         async function StartUp() {
             dataJs = await fetch('/serverportal/addons/monaco/js/userFiles.js').then((r) => r.text())
-            new Function(dataJs)();
+            new Function(dataJs)(); Metro.storage.setItem("SelectedEditor", "Monaco");
             InitiateTree();
         }
 
@@ -171,7 +181,11 @@
 
                     //Show Text Files ServerParam["TextFilesExtensionList"]
                     if (["js", "md", "html", "css", "txt", "json", "svg"].includes(data.node.data.extension)) {
-                        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data.node.key);
+                        if (Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco") {
+                            Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data.node.key);
+                        } else if (Metro.storage.getItem("SelectedEditor", null) == "TinyMCE") {
+                            tinymce.get('TinyMCE').setContent(data.node.key);
+                        } else if (Metro.storage.getItem("SelectedEditor", null) == "Froala") { EditorInit.html.set(data.node.key); }
                     } //Show Binary Files
                     else if (["stl", "mp4", "avi", "mp3", "jpg", "jpeg", "png", "tiff"].includes(data.node.data.extension)) {
 
@@ -281,8 +295,11 @@
                         else if (action == "saveFile") {
                             Gs.Apis.RunServerPostApi("UserStorageService/SetUserTextFile", {
                                 Path: $('#DataTree').fancytree("getActiveNode").data.path,
-                                Content: Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue()
-                                //TODO get From ALL EDITORS
+                                Content: Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco" ?
+                                    Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue() :
+                                    Metro.storage.getItem("SelectedEditor", null) == "TinyMCE" ? tinyMCE.getContent('TinyMCE') :
+                                        Metro.storage.getItem("SelectedEditor", null) == "Froala" ? EditorInit.html.get() :
+                                            Metro.storage.getItem("SelectedEditor", null) == "SUNEdit" ? EditorInit.getContents() : ""
                             }, null, "ReloadUserStorage");
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
@@ -352,8 +369,8 @@
 
             switch (editor) {
                 case "Monaco":
-                    Gs.Functions.AddClass('#SetMonaco', 'disabled'); Gs.Functions.RemoveClass('#SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('#SetFroala', 'disabled');
-                    Gs.Functions.RemoveClass('#FrameWindow', 'fr-fullscreen-wrapper');
+                    Gs.Functions.AddClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled'); Gs.Functions.RemoveClass('SetSUNEdit', 'disabled');
+                    Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
 
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
                     new Function(dataJs)();
@@ -365,36 +382,58 @@
                     break;
                 case "TinyMCE":
                     Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
-                    Gs.Functions.AddClass('#SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('#SetMonaco', 'disabled'); Gs.Functions.RemoveClass('#SetFroala', 'disabled');
-                    Gs.Functions.RemoveClass('#FrameWindow', 'fr-fullscreen-wrapper');
+                    Gs.Functions.AddClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled'); Gs.Functions.RemoveClass('SetSUNEdit', 'disabled');
+                    Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
 
                     $("#FrameWindow").html('<textarea id="TinyMCE" class="form-control"></textarea >');
                     const standardEditor = {
                         selector: 'textarea#TinyMCE',
                         skin: 'oxide-dark', content_css: 'dark',
                         width: window.innerWidth, height: window.innerHeight,
-                        plugins: [
-                            'accordion', 'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
-                            'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
-                            'insertdatetime', 'quickbars', 'media', 'table', 'emoticons', 'help', 'preview'
-                        ],
+                        plugins: ['accordion', 'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak', 'searchreplace', 'wordcount', 'visualblocks',
+                            'visualchars', 'code', 'fullscreen', 'insertdatetime', 'insertdatetime', 'quickbars', 'media', 'table', 'emoticons', 'help', 'preview'],
                         toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +
                             'bullist numlist outdent indent | link image | print preview media fullscreen | ' + 'forecolor backcolor emoticons | help',
                         menu: { menubar: 'favs file edit view insert format tools table help', content_css: 'css/content.css' }
                     }; tinymce.init(standardEditor);
+
+                    setTimeout(function () { if (document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux") != null) { $("#FrameWindow").append(document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux")); } }, 1000);
                     setTimeout(function () {
+                        if (document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux") != null) { $("#FrameWindow").append(document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux")); }
                         if ($('#DataTree').fancytree("getActiveNode") != null) { tinymce.get('TinyMCE').setContent($('#DataTree').fancytree("getActiveNode").key); }
                     }, 5000);
                     break;
                 case "Froala":
                     Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
-                    Gs.Functions.AddClass('#SetFroala', 'disabled'); Gs.Functions.RemoveClass('#SetMonaco', 'disabled'); Gs.Functions.RemoveClass('#SetTinyMCE', 'disabled');
+                    Gs.Functions.AddClass('SetFroala', 'disabled'); Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetSUNEdit', 'disabled');
                     $("#FrameWindow").html('<div id="FroalaEditor" style="height:100%;padding-top: 25px;"></div>');
-                    let editor = new FroalaEditor('#FroalaEditor', { language: 'cs', toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo', 'trackChanges', 'markdown'] }, function () {
-                        if (!editor.fullscreen.isActive()) { editor.fullscreen.toggle() };
+                    EditorInit = new FroalaEditor('#FroalaEditor', { language: 'cs', toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo', 'trackChanges', 'markdown'] }, function () {
+                        if (!EditorInit.fullscreen.isActive()) { EditorInit.fullscreen.toggle() };
                     });
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { editor.html.set($('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { EditorInit.html.set($('#DataTree').fancytree("getActiveNode").key); }
+                    }, 1000);
+                    break;
+                case "SUNEdit":
+                    Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    Gs.Functions.AddClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('Froala', 'disabled');
+                    $("#FrameWindow").html('<textarea id="SUNEdit" style="display:none;">');
+
+                    EditorInit = SUNEDITOR.create('SUNEdit', {
+                        display: 'block', width: 'calc(100%-300px)', height: 'calc(100vh);',
+                        popupDisplay: 'full', charCounter: true, charCounterLabel: 'Characters :',
+                        imageGalleryUrl: Metro.storage.getItem("ApiOriginSuffix", null) + 'UserStorageService/GetSunImageList',
+                        buttonList: [
+                            ['undo', 'redo'], ['font', 'fontSize', 'formatBlock'], ['paragraphStyle', 'blockquote'],
+                            ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'], ['fontColor', 'hiliteColor', 'textStyle'],
+                            ['removeFormat'], ['outdent', 'indent'], ['align', 'horizontalRule', 'list', 'lineHeight'], ['table', 'link', 'image', 'video', 'audio', 'math'],
+                            ['imageGallery'], ['fullScreen', 'showBlocks', 'codeView'], ['preview', 'print'], ['save', 'template']
+                        ], placeholder: 'Zde vytvořte mediální dokument...',
+                        templates: [{ name: 'Calendar', html: '<div data-role="calendar"></div>' }, { name: 'Donut', html: '<div id="donut3" data-role="donut" data-value="35" data-hole=".6" data-stroke="#f5f5f5" data-fill="#9C27B0" data-animate="10" ></div> ' }],
+                        codeMirror: CodeMirror,katex: katex
+                    });
+                    setTimeout(function () {
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { EditorInit.setContents($('#DataTree').fancytree("getActiveNode").key); }
                     }, 1000);
                     break;
                 default:
@@ -408,6 +447,14 @@
 
     <!--TYNYMCE-->
     <script type="text/javascript" src="/serverportal/addons/tinymce/tinymce.min.js"></script>
+
+    <!--SUNEDITOR-->
+    <script type="text/javascript" src="/serverportal/addons/suneditor/js/common.js"></script>
+    <script type="text/javascript" src="/serverportal/addons/suneditor/cdn/htmlmixed.js"></script>
+    <script type="text/javascript" src="/serverportal/addons/suneditor/cdn/xml.js"></script>
+    <script type="text/javascript" src="/serverportal/addons/suneditor/cdn/css.js"></script>
+    <script type="text/javascript" src="/serverportal/addons/suneditor/cdn/codemirror.min.js"></script>
+    <script type="text/javascript" src="/serverportal/addons/suneditor/dist/suneditor.min.js"></script>
 
 </body>
 </html>
