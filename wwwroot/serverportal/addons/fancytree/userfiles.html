@@ -3,6 +3,9 @@
     <meta name="robots" content="noindex,follow" />
     <meta name="charset" content="utf-8" />
 
+    <link rel="stylesheet" href="/serverportal/addons/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/serverportal/addons/summernote/css/summernote.min.css" />
+
     <link rel="stylesheet" href="/serverportal/addons/fancytree/dist/skin-win8/ui.fancytree.min.css" />
     <link rel="stylesheet" href="/serverportal/addons/fancytree/extensions/contextmenu/jquery.contextMenu.min.css" />
     <link rel="stylesheet" href="../../metro/css/metro-all.css" />
@@ -34,7 +37,11 @@
     <script type="text/javascript" src="/serverportal/manage/js/mermaid.min.cdn.js"></script>
     <script type="text/javascript" src="/serverportal/addons/highlightjs/highlight.min.js"></script>
     <script rel="stylesheet" src="/serverportal/addons/suneditor/dist/codemirror.min.js"></script>
-    <script type="text/javascript" src="/serverportal/addons/suneditor/dist/katex/katex.min.js" ></script>
+    <script type="text/javascript" src="/serverportal/addons/suneditor/dist/katex/katex.min.js"></script>
+
+    <!--SUMMERNOTE-->
+    <script src="/serverportal/addons/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/serverportal/addons/summernote/js/summernote.min.js"></script>
 
     <!--FROALA-->
     <script type='text/javascript' src='/serverportal/addons/froalaeditor/froala.min.js'></script>
@@ -133,6 +140,12 @@
                                 </span>
                                 <span class="caption">Sun</span>
                             </button>
+                            <button id="SetSummer" class="ribbon-button" onclick=SetEditor('Summer');Gs.Functions.RemoveClass('sectionFile','active');>
+                                <span class="icon">
+                                    <span class="mif-sun"></span>
+                                </span>
+                                <span class="caption">Summer</span>
+                            </button>
                             <span class="title">Basic HTML Editors</span>
                         </div>
 
@@ -185,7 +198,14 @@
                             Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data.node.key);
                         } else if (Metro.storage.getItem("SelectedEditor", null) == "TinyMCE") {
                             tinymce.get('TinyMCE').setContent(data.node.key);
-                        } else if (Metro.storage.getItem("SelectedEditor", null) == "Froala") { EditorInit.html.set(data.node.key); }
+                        } else if (Metro.storage.getItem("SelectedEditor", null) == "Froala") {
+                            EditorInit.html.set(data.node.key);
+                        } else if (Metro.storage.getItem("SelectedEditor", null) == "SUNEdit") {
+                            EditorInit.setContents(data.node.key);
+                        } else if (Metro.storage.getItem("SelectedEditor", null) == "Summer") {
+                            $(`#SummerEditor`).summernote(`code`, data.node.key);
+                        }
+
                     } //Show Binary Files
                     else if (["stl", "mp4", "avi", "mp3", "jpg", "jpeg", "png", "tiff"].includes(data.node.data.extension)) {
 
@@ -299,7 +319,8 @@
                                     Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue() :
                                     Metro.storage.getItem("SelectedEditor", null) == "TinyMCE" ? tinyMCE.getContent('TinyMCE') :
                                         Metro.storage.getItem("SelectedEditor", null) == "Froala" ? EditorInit.html.get() :
-                                            Metro.storage.getItem("SelectedEditor", null) == "SUNEdit" ? EditorInit.getContents() : ""
+                                            Metro.storage.getItem("SelectedEditor", null) == "SUNEdit" ? EditorInit.getContents() : 
+                                                Metro.storage.getItem("SelectedEditor", null) == "Summer" ? $(`#SummerEditor`).summernote(`code`,"") : ""
                             }, null, "ReloadUserStorage");
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
@@ -367,10 +388,16 @@
         function SetEditor(editor) {
             Metro.storage.setItem("SelectedEditor", editor);
 
+            //CLEAN EDITOR
+            Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+            Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
+            Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
+            Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
+
+            //SET EDITOR
             switch (editor) {
                 case "Monaco":
-                    Gs.Functions.AddClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled'); Gs.Functions.RemoveClass('SetSUNEdit', 'disabled');
-                    Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
+                    Gs.Functions.AddClass('SetMonaco', 'disabled'); $("#MonacoTheme").show(); $("#MonacoLanguage").show();
 
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
                     new Function(dataJs)();
@@ -381,9 +408,7 @@
                     }, 1000);
                     break;
                 case "TinyMCE":
-                    Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
-                    Gs.Functions.AddClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled'); Gs.Functions.RemoveClass('SetSUNEdit', 'disabled');
-                    Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
+                    Gs.Functions.AddClass('SetTinyMCE', 'disabled'); 
 
                     $("#FrameWindow").html('<textarea id="TinyMCE" class="form-control"></textarea >');
                     const standardEditor = {
@@ -404,8 +429,7 @@
                     }, 5000);
                     break;
                 case "Froala":
-                    Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
-                    Gs.Functions.AddClass('SetFroala', 'disabled'); Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetSUNEdit', 'disabled');
+                    Gs.Functions.AddClass('SetFroala', 'disabled'); 
                     $("#FrameWindow").html('<div id="FroalaEditor" style="height:100%;padding-top: 25px;"></div>');
                     EditorInit = new FroalaEditor('#FroalaEditor', { language: 'cs', toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo', 'trackChanges', 'markdown'] }, function () {
                         if (!EditorInit.fullscreen.isActive()) { EditorInit.fullscreen.toggle() };
@@ -415,8 +439,7 @@
                     }, 1000);
                     break;
                 case "SUNEdit":
-                    Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
-                    Gs.Functions.AddClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('Froala', 'disabled');
+                    Gs.Functions.AddClass('SetSUNEdit', 'disabled'); 
                     $("#FrameWindow").html('<textarea id="SUNEdit" style="display:none;">');
 
                     EditorInit = SUNEDITOR.create('SUNEdit', {
@@ -434,6 +457,20 @@
                     });
                     setTimeout(function () {
                         if ($('#DataTree').fancytree("getActiveNode") != null) { EditorInit.setContents($('#DataTree').fancytree("getActiveNode").key); }
+                    }, 1000);
+                    break;
+                case "Summer":
+                    Gs.Functions.AddClass('Summer', 'disabled'); 
+                    $("#FrameWindow").html('<div id="SummerEditor" style="width: 100%;"></div> ');
+                    $(`#SummerEditor`).summernote({
+                        tabsize: 2, width: 1200, height: 800, maxHeight: 1200, lang: `cs-CZ`,
+                        placeholder: `write Description...`,
+                        toolbar: [[`style`, [`style`]], [`font`, [`bold`, `underline`, `clear`]], [`fontname`, [`fontname`]],
+                        [`fontsize`, [`fontsize`]], [`color`, [`color`]], [`para`, [`ul`, `ol`, `paragraph`]], [`table`, [`table`]],
+                        [`insert`, [`link`, `picture`, `video`]], [`view`, [`fullscreen`, `codeview`, `undo`, `redo`, `help`]]]
+                    });
+                    setTimeout(function () {
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { $(`#SummerEditor`).summernote(`code`, $('#DataTree').fancytree("getActiveNode").key); }
                     }, 1000);
                     break;
                 default:
