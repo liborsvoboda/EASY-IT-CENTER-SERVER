@@ -10,7 +10,9 @@
 @using EasyITCenter.ServerCoreStructure
 @using Microsoft.AspNetCore.Html
 @using ServerCorePages
-{
+@model ServerCorePages.SystemModulesModel
+
+@{
     string? sourcePath = HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "RequestedModulePath").Value?.ToString();
     ServerModuleAndServiceList? systemModule = ((ServerModuleAndServiceList?)HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "SystemModule").Value);
     ServerWebPagesToken? webpagestoken = ((ServerWebPagesToken?)HttpContext.Items.FirstOrDefault(a => a.Key.ToString() == "ServerWebPagesToken").Value);

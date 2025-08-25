@@ -419,3 +419,33 @@ Gs.Objects.CreateDialogRequest =async function (title, content, actions) {
         clsDialog: "supertop"
     });
 }
+
+
+Gs.Objects.ShowPrintExport = function () {
+    Metro.dialog.create({
+        title: "Print & Export",
+        content: "<div>Print & Export Opened Page</div>",
+        actions: [
+            {
+                caption: "Print",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.PrintOrExportWindow("Print"); }
+            },
+            {
+                caption: "Download",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.PrintOrExportWindow("Download"); }
+            },
+            {
+                caption: "Image",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.PrintOrExportWindow("Image"); }
+            },
+            {
+                caption: "Copy",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.PrintOrExportWindow("Copy"); }
+            }
+        ]
+    });
+}

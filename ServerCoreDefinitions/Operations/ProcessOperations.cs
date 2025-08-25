@@ -164,7 +164,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 Tuple<int, string, string, Process>? process = SrvRuntime.SrvProcessManager.Where(a => a.Item1 == processPid).FirstOrDefault();
                 if (process != null) { 
                     process.Item4.Kill();
-
+                    process.Item4.Dispose();
                     SrvRuntime.SrvProcessManager.Remove(process); ServerStartUpScriptList startupScript = null;
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         startupScript = new EasyITCenterContext().ServerStartUpScriptLists.Where(a => a.Pid == process.Item1).FirstOrDefault();

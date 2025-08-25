@@ -38,12 +38,12 @@ Gs.Functions.FileReaderToImageData = async function (n) {
     const t = new FileReader; return await new Promise((t, i) => {
         const r = new FileReader; r.onloadend = () => t(r.result); r.onerror = i;
         console.log("files", JSON.parse(JSON.stringify(files)));
-        r.readAsDataURL(n[0])
+        r.readAsDataURL(n[0]);
     })
 }
 
 Gs.Functions.Str2bytes = function (str) {
-    var bytes = new Uint8Array(str.length);
+    let bytes = new Uint8Array(str.length);
     for (var i = 0; i < str.length; i++) {
         bytes[i] = str.charCodeAt(i);
     }
@@ -51,7 +51,7 @@ Gs.Functions.Str2bytes = function (str) {
 }
 
 Gs.Functions.PreloadImage = function (src) {
-    var img = new Image();
+    let img = new Image();
     img.src = src;
 }
 
@@ -162,8 +162,16 @@ Gs.Functions.ShowFrameSource = function () {
 
 
 Gs.Functions.PrintElement = function (elementId) {
-    try { $("#" + elementId).printElement({ pageTitle: elementId.split("_")[1] + ".html", printMode: "popup" }); } catch (t) { }
+    try {
+        let divElements = document.getElementById(elementId).innerHTML;
+        let oldPage = document.body.innerHTML;
+        document.body.innerHTML =
+            "<html><head>" + document.getElementsByTagName('head')[0].innerHTML + "</head><body>" +  divElements + "</body>";
+        window.print();
+        document.body.innerHTML = oldPage;
+    } catch (t) { }
 }
+
 
 Gs.Functions.DownloadHtmlElement = function (elementId) {
     try {
@@ -193,9 +201,34 @@ Gs.Functions.ImageFromElement = function (elementId) {
     } catch (t) { }
 }
 
+
+Gs.Functions.PrintOrExportWindow = function (command) {
+    let frameExist = document.getElementById("IFrameWindow") != null;
+
+    switch (command) {
+        case "Print":
+            if (frameExist) { Gs.Functions.PrintFrameElement(); }
+            else { Gs.Functions.PrintElement("FrameWindow"); }
+            break;
+        case "Download":
+            if (frameExist) { Gs.Functions.DownloadFrameHtmlElement(); }
+            else { Gs.Functions.DownloadHtmlElement("FrameWindow"); }
+            break;
+        case "Image":
+            if (frameExist) { Gs.Functions.ImageFromFrameElement(); }
+            else { Gs.Functions.ImageFromElement("FrameWindow"); }
+            break;
+        case "Copy":
+            if (frameExist) { Gs.Functions.CopyFrameElement(); }
+            else { Gs.Functions.CopyElement("FrameWindow"); }
+            break;
+    }
+}
+
+
 Gs.Functions.PrintFrameElement = function () {
     try {
-        window.frames['FrameWindow'].contentWindow.printElement({ pageTitle: "KlikneteZdeCz.html", printMode: "popup" });
+        document.getElementById("IFrameWindow").contentWindow.print();
     } catch (t) { }
 }
 
@@ -204,14 +237,14 @@ Gs.Functions.DownloadFrameHtmlElement = function () {
     try {
         var t = document.body.appendChild(document.createElement("a"));
         t.download = "KlikneteZde" + ".html";
-        t.href = "data:text/html;charset=utf-8," + encodeURIComponent(window.frames['FrameWindow'].contentWindow.document.body.innerHTML);
+        t.href = "data:text/html;charset=utf-8," + encodeURIComponent(window.frames['IFrameWindow'].contentWindow.document.body.innerHTML);
         t.click();
     } catch (i) { }
 }
 
 Gs.Functions.CopyFrameElement = async function () {
     try {
-        let t = window.frames['FrameWindow'].contentWindow.document.body.innerHTML;
+        let t = window.frames['IFrameWindow'].contentWindow.document.body.innerHTML;
         await navigator.clipboard.writeText(t);
     } catch (t) { }
 }
@@ -220,7 +253,7 @@ Gs.Functions.CopyFrameElement = async function () {
 Gs.Functions.ImageFromFrameElement = function () {
     try {
         $("document").ready(function () {
-            html2canvas(window.frames['FrameWindow'].contentWindow.document.body, {
+            html2canvas(document.getElementById("IFrameWindow").contentWindow.document.body, {
                 onrendered: function (t) {
                     $("#previewImage").append(t);
                     var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a"));

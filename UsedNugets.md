@@ -3,7 +3,7 @@ https://github.com/igloo-soft/KeywordSearch
 https://github.com/erikzaadi/GithubSharp
 https://github.com/libgit2/libgit2sharp/
 
-Step 7 TIA
+# Step 7 TIA
 https://github.com/ChrisPulman/S7PlcRx
 
 
@@ -11,6 +11,9 @@ https://github.com/ChrisPulman/S7PlcRx
 https://nuget.info/packages
 https://www.nuget.org/packages
 
+
+# SignalR Video Stream
+https://www.c-sharpcorner.com/article/screencastr-simple-screen-sharing-app-using-signalr-streaming/
 
 
 # Repos
