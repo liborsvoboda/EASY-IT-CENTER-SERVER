@@ -148,7 +148,21 @@
                             </button>
                             <span class="title">Basic HTML Editors</span>
                         </div>
-
+                        <div class="group">
+                            <button id="SetMDEditor" class="ribbon-button" onclick=SetEditor('MDEditor');Gs.Functions.RemoveClass('sectionFile','active');>
+                                <span class="icon">
+                                    <span class="mif-calendar"></span>
+                                </span>
+                                <span class="caption">MD Editor</span>
+                            </button>
+                            <button id="SetJSONEditor" class="ribbon-button" onclick=SetEditor('JSONEditor');Gs.Functions.RemoveClass('sectionFile','active');>
+                                <span class="icon">
+                                    <span class="mif-dropbox"></span>
+                                </span>
+                                <span class="caption">JSON Editor</span>
+                            </button>
+                            <span class="title">Special Editors</span>
+                        </div>
                         <div class="group">
                             <button class="ribbon-button">
                                 <span class="icon">
@@ -193,7 +207,7 @@
                     //console.log("activate", event, data, data.node.data.extension);
 
                     //Show Text Files ServerParam["TextFilesExtensionList"]
-                    if (["js", "md", "html", "css", "txt", "json", "svg"].includes(data.node.data.extension)) {
+                    if (["js", "html", "css", "txt", "svg"].includes(data.node.data.extension)) {
                         if (Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco") {
                             Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data.node.key);
                         } else if (Metro.storage.getItem("SelectedEditor", null) == "TinyMCE") {
@@ -206,6 +220,10 @@
                             $(`#SummerEditor`).summernote(`code`, data.node.key);
                         }
 
+                    } else if (["md"].includes(data.node.data.extension)) {
+                        SetEditor("MDEditor");
+                    } else if (["json"].includes(data.node.data.extension)) {
+                        SetEditor("JSONEditor");
                     } //Show Binary Files
                     else if (["stl", "mp4", "avi", "mp3", "jpg", "jpeg", "png", "tiff"].includes(data.node.data.extension)) {
 
@@ -312,7 +330,7 @@
                         //else if (action == "readTextFile") {//NOT USED
                         //    Gs.Apis.DownloadApi("UserStorageService/GetUserTextFile", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), false, "UserTextFile", "SetTextFileToEditor");
                         //}
-                        else if (action == "saveFile") {
+                        else if (action == "saveFile") { //console.log("extension", $('#DataTree').fancytree("getActiveNode").data.extension);
                             Gs.Apis.RunServerPostApi("UserStorageService/SetUserTextFile", {
                                 Path: $('#DataTree').fancytree("getActiveNode").data.path,
                                 Content: Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco" ?
@@ -320,7 +338,12 @@
                                     Metro.storage.getItem("SelectedEditor", null) == "TinyMCE" ? tinyMCE.getContent('TinyMCE') :
                                         Metro.storage.getItem("SelectedEditor", null) == "Froala" ? EditorInit.html.get() :
                                             Metro.storage.getItem("SelectedEditor", null) == "SUNEdit" ? EditorInit.getContents() : 
-                                                Metro.storage.getItem("SelectedEditor", null) == "Summer" ? $(`#SummerEditor`).summernote(`code`,"") : ""
+                                                Metro.storage.getItem("SelectedEditor", null) == "Summer" ? $(`#SummerEditor`).summernote(`code`, "") :
+                                                    Metro.storage.getItem("SelectedEditor", null) == "MDEditor" ? $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown() :
+                                                        Metro.storage.getItem("SelectedEditor", null) == "JSONEditor" ? 
+                                                            $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text") == 'null' ?
+                                                                $("#IFrameWindow")[0].contentWindow.inputEditor.doc.getValue() : $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text")
+                                                        : ""
                             }, null, "ReloadUserStorage");
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
@@ -366,23 +389,14 @@
             });
         }
 
-        $(document).ready(function () {
-            StartUp();
-        })
+        //STARTUP
+        $(document).ready(function () { StartUp(); });
+
 
         function ReloadUserStorage() {
+            SetEditor("");
             $('#DataTree').fancytree('option', 'source', { url: "/UserStorageService/GetUserStorage" });
         }
-
-        /*
-        function SetTextFileToEditor() {
-            Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(Metro.storage.getItem("UserTextFile", null));
-        }
-        function GetTextFileFromEditor() {
-            Metro.storage.setItem("UserTextFile", Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue());
-        } */
-
-
 
 
         function SetEditor(editor) {
@@ -391,11 +405,25 @@
             //CLEAN EDITOR
             Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
             Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
-            Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
-            Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
+            Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled'); Gs.Functions.RemoveClass('SetMDEditor', 'disabled');
+            Gs.Functions.RemoveClass('SetJSONEditor', 'disabled'); Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
 
             //SET EDITOR
             switch (editor) {
+                case "JSONEditor":
+                    Gs.Functions.AddClass('SetJSONEditor', 'disabled');
+                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "serverportal/addons/jsonData/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    setTimeout(function () {
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#IFrameWindow")[0].contentWindow.inputEditor.doc.setValue($('#DataTree').fancytree("getActiveNode").key); }
+                    }, 500);
+                    break;
+                case "MDEditor":
+                    Gs.Functions.AddClass('SetMDEditor', 'disabled');
+                    $("#FrameWindow").html('<iframe id="HelpEditor" src="/serverportal/addons/markdown/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    setTimeout(function () {
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { $('#HelpEditor')[0].contentWindow.mdEditor.setMarkdown($('#DataTree').fancytree("getActiveNode").key); }
+                    }, 500);
+                    break;
                 case "Monaco":
                     Gs.Functions.AddClass('SetMonaco', 'disabled'); $("#MonacoTheme").show(); $("#MonacoLanguage").show();
 

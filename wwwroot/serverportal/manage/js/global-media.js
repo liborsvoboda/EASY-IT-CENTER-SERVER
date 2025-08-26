@@ -1,32 +1,35 @@
-﻿//<video id="video" autoplay playsinline muted></video>
-//const videoElem = document.getElementById("video");
-
-//https://www.metered.ca/blog/webrtc-screen-sharing/#webrtc-screen-sharing-example
-
-Gs.Media.CaptureScreen = async function () {
-	let mediaStream = null;
-	try {
-		mediaStream = await navigator.mediaDevices.getDisplayMedia({
-			video: {
-				cursor: "always"
-			},
-			audio: false
-		});
-	} catch (ex) {
-		console.log("Error occurred", ex);
-	}
-}
-
-
-
-////
-
-//Start Capturing Screen Image
+﻿//Start Capturing Screen Image
 Gs.Media.CaptureToImage = async function () {
 	setTimeout(async () => {
 		let EICvideoCanvas = await Gs.Media.GoToCanvas();
 		Metro.storage.setItem("CapturedImage", EICvideoCanvas.toDataURL(Gs.Variables.media.imageMimeType));
 	}, 500);
+}
+
+
+Gs.Media.GoToCanvas = async function () {
+	let EICtmpStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+	let EICtmpVideo = document.createElement("video");
+	EICtmpVideo.srcObject = EICtmpStream;
+	EICtmpVideo.play();
+
+	return new Promise(resolve => {
+		EICtmpVideo.addEventListener("canplay", e => {
+			let EICtmpCanvas = Gs.Media.DrawCaptureImage(EICtmpVideo);
+			resolve(EICtmpCanvas);
+		}, { once: true });
+	});
+}
+
+
+Gs.Media.DrawCaptureImage = function (video) {
+	let EICtmpCanvas = document.createElement("canvas");
+	video.width = EICtmpCanvas.width = video.videoWidth;
+	video.height = EICtmpCanvas.height = video.videoHeight;
+	EICtmpCanvas.getContext("2d").drawImage(video, 0, 0);
+	video.srcObject.getTracks().forEach(track => track.stop());
+	video.srcObject = null;
+	return EICtmpCanvas;
 }
 
 
@@ -62,21 +65,6 @@ Gs.Media.CaptureScreenToVideo = async function () {
 }
 
 
-Gs.Media.GoToCanvas = async function () {
-	let EICtmpStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-	let EICtmpVideo = document.createElement("video");
-	EICtmpVideo.srcObject = EICtmpStream;
-	EICtmpVideo.play();
-
-	return new Promise(resolve => {
-		EICtmpVideo.addEventListener("canplay", e => {
-			let EICtmpCanvas = Gs.Media.DrawCaptureImage(EICtmpVideo);
-			resolve(EICtmpCanvas);
-		}, { once: true });
-	});
-}
-
-
 Gs.Media.HandleDataAvailable = function (event) {
 	if (event.data && event.data.size > 0) {
 		Gs.Variables.media.videoRecBlob.push(event.data);
@@ -96,18 +84,6 @@ Gs.Media.HandleStreamSuccess = function (stream) {
 	}
 	Gs.Variables.media.mediaRecorder.ondataavailable = Gs.Variables.media.HandleDataAvailable;
 	Gs.Variables.media.mediaRecorder.start();
-}
-
-
-
-Gs.Media.DrawCaptureImage = function (video) {
-	let EICtmpCanvas = document.createElement("canvas");
-	video.width = EICtmpCanvas.width = video.videoWidth;
-	video.height = EICtmpCanvas.height = video.videoHeight;
-	EICtmpCanvas.getContext("2d").drawImage(video, 0, 0);
-	video.srcObject.getTracks().forEach(track => track.stop());
-	video.srcObject = null;
-	return EICtmpCanvas;
 }
 
 
