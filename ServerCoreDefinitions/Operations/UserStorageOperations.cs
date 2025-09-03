@@ -4,6 +4,8 @@
 * DataTypes Conversion Support, etc.
 */
 
+using ReverseMarkdown.Converters;
+
 namespace EasyITCenter.ServerCoreStructure {
 
     /// <summary>
@@ -62,7 +64,8 @@ namespace EasyITCenter.ServerCoreStructure {
                 files.Add(new FancyTreeUserData() {
                     title = System.IO.Path.GetFileName(file), checkbox = true, folder = false, scanned = true, children = null, 
                     key = DbOperations.GetServerParameterLists("TextFilesExtensionList").Value.Split(";").ToList().Where(a => a.ToLower() == System.IO.Path.GetExtension(System.IO.Path.GetFileName(file)).ToLower().Replace(".", "")).Count() > 0
-                    ? FileOperations.ReadTextFile(file) : string.Empty, 
+                    ? FileOperations.ReadTextFile(file) //file content
+                    : file.Replace(SrvRuntime.WebRootPath, "").Replace(System.IO.Path.DirectorySeparatorChar, '/'), //file path
                     path = file.Replace(path, ""), extension = System.IO.Path.GetExtension(System.IO.Path.GetFileName(file)).ToLower().Replace(".","")
                 });
             });

@@ -173,6 +173,7 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("QuestionForResponseList");
     Metro.storage.delItem("SolutionCodeLibraryList"); 
     Metro.storage.delItem("SolutionMixedEnumList");
+    Metro.storage.delItem("SelectedEditor");
     
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));

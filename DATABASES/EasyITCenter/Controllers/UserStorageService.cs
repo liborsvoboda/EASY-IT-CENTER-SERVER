@@ -27,10 +27,17 @@ namespace EasyITCenter.Controllers {
     }
 
 
+    public class Files
+    {
+        public string Filename { get; set; }
+        public string Content { get; set; }
+    }
+
     public class UserStorageContent {
         public string Path { get; set; }
         public string? Filename { get; set; } = null;
         public string? Content { get; set; } = null;
+        public List<Files>? Files { get; set; } = null;
     }
 
     public class UserStorageRenameDir {
@@ -489,5 +496,32 @@ namespace EasyITCenter.Controllers {
                 return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetUserApiErrMessage(ex), Status = DBResult.error.ToString() }); 
             }
         }
+
+
+        /// <summary>
+        /// Upload User Storage Files
+        /// </summary>
+        /// <param name="userStorageContent"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/UploadUserFiles")]
+        [Consumes("application/json")]
+        public async Task<string> UploadUserFiles([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null;
+            try {
+                if (ServerApiServiceExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.UserPath, ServerApiServiceExtension.GetUserName());
+                    userStorageContent.Files.ForEach(file => { FileOperations.ByteArrayToFile(userRootPath + userStorageContent.Path + "\\" + file.Filename, Convert.FromBase64String(file.Content.Split(",")[1])); });
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = userStorageContent.Files.Count(), ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        
+
     }
 }
