@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="/serverportal/addons/fancytree/dist/skin-win8/ui.fancytree.min.css" />
     <link rel="stylesheet" href="/serverportal/addons/fancytree/extensions/contextmenu/jquery.contextMenu.min.css" />
-    <link rel="stylesheet" href="../../metro/css/metro-all.css" />
+    <link rel="stylesheet" href="/serverportal/metro/css/metro-all.min.css" />
 
     <link rel='stylesheet' type='text/css' href='/serverportal/addons/froalaeditor/froala.min.css' />
     <link rel="stylesheet" type="text/css" href="/serverportal/addons/froalaeditor/plugins/fullscreen.min.css" />
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="/serverportal/addons/fancytree/dist/fancytree-all-deps.js"></script>
     <script type="text/javascript" src="/serverportal/addons/fancytree/extensions/contextmenu/js/jquery.contextMenu.min.js"></script>
     <script type="text/javascript" src="/serverportal/addons/fancytree/extensions/contextmenu/js/jquery.fancytree.contextMenu.js"></script>
-    <script type="text/javascript" src="../../metro/js/metro.min.js"></script>
+    <script type="text/javascript" src="/serverportal/metro/js/metro.4.5.2.min.js"></script>
 
     <!--GLOBAL FUNCT-->
     <script type="text/javascript" src="/serverportal/manage/js/global-storage.js"></script>
@@ -412,7 +412,7 @@
             for (let i = 0; i < fileList.length; i++) {
                 let reader = new FileReader();
                 reader.onload = function () { Files.push({ Filename: fileList[i].name, Content: reader.result }); }
-                reader.readAsDataURL(fileList[i]); //readAsDataURL readAsText readAsBinaryString
+                reader.readAsDataURL(fileList[i]); 
             }
         }
 
@@ -429,10 +429,10 @@
             //SET EDITOR
             switch (editor) {
                 case "Audio":
-                    $("#FrameWindow").html('<audio id="Audio" data-role="audio" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark" style="width:100%;height: calc(100vh - 25px);"></audio>');
+                    $("#FrameWindow").html('<audio id="Audio" data-role="audio-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark" style="width:100%;height: calc(100vh - 25px);"></audio>');
                     break;
                 case "Video":
-                    $("#FrameWindow").html('<video id="Video" data-role="video" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" style="width:100%;height: calc(100vh - 25px);"></video>');
+                    $("#FrameWindow").html('<video id="Video" data-role="video-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" style="width:100%;height: calc(100vh - 25px);"></video>');
                     break;
                 case "Image":
                     $("#FrameWindow").html('<img src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="row" style="height: 100%;padding-left: 10px;">');
