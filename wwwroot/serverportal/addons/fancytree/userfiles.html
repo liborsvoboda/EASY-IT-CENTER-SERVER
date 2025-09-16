@@ -428,6 +428,12 @@
 
             //SET EDITOR
             switch (editor) {
+                case "PDFviewer":
+                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "serverportal/addons/pdf-viewer/web/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    setTimeout(function () {
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#IFrameWindow")[0].contentWindow.PDFViewerApplication.open($('#DataTree').fancytree("getActiveNode").key, 'default.pdf'); }
+                    }, 1000);
+                    break;
                 case "Audio":
                     $("#FrameWindow").html('<audio id="Audio" data-role="audio-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark" style="width:100%;height: calc(100vh - 25px);"></audio>');
                     break;
