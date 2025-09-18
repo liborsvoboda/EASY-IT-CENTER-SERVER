@@ -419,6 +419,9 @@
 
             //SET EDITOR
             switch (editor) {
+                case "Other":
+                    $("#FrameWindow").html('<h3 style="padding: 10px;">Unsupported Format</h3>')
+                    break;
                 case "STLviewer":
                     $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "serverportal/addons/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     setTimeout(function () {
@@ -432,10 +435,10 @@
                     }, 1000);
                     break;
                 case "Audio":
-                    $("#FrameWindow").html('<audio id="Audio" data-role="audio-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark" style="width:100%;height: calc(100vh - 25px);"></audio>');
+                    $("#FrameWindow").html('<audio id="Audio" data-role="audio-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark" style="width:100%;height: calc(100vh);"></audio>');
                     break;
                 case "Video":
-                    $("#FrameWindow").html('<video id="Video" data-role="video-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" style="width:100%;height: calc(100vh - 25px);"></video>');
+                    $("#FrameWindow").html('<video id="Video" data-role="video-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" style="width:100%;height: calc(100vh);"></video>');
                     break;
                 case "Image":
                     $("#FrameWindow").html('<img src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="row" style="height: 100%;padding-left: 10px;">');
