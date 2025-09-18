@@ -52,12 +52,7 @@
     <!--MONACO-->
     <script type="text/javascript" src="/serverportal/addons/monaco/js/monaco-editor/min/vs/loader.js"></script>
     <style>
-        .monaco-editor {
-            min-width: 100%;
-            width: 100%;
-            min-height: calc(100vh - 25px) !important;
-            height: calc(100vh - 25px) !important;
-        }
+        .monaco-editor { min-width: 100%;width: 100%; min-height: calc(100vh - 25px) !important; height: calc(100vh - 25px) !important; }
     </style>
 
     <title>User Storage Manager</title>
@@ -219,7 +214,7 @@
                     } else if (["mp3"].includes(data.node.data.extension)) {
                         SetEditor("Audio");
                     } else if (["stl"].includes(data.node.data.extension)) {
-                        SetEditor("3Dviewer");
+                        SetEditor("STLviewer");
                     } else if (["pdf"].includes(data.node.data.extension)) {
                         SetEditor("PDFviewer");
                     } else {
@@ -428,6 +423,12 @@
 
             //SET EDITOR
             switch (editor) {
+                case "STLviewer":
+                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "serverportal/addons/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    setTimeout(function () {
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#IFrameWindow")[0].contentWindow.init($('#DataTree').fancytree("getActiveNode").key); }
+                    }, 1000);
+                    break;
                 case "PDFviewer":
                     $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "serverportal/addons/pdf-viewer/web/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     setTimeout(function () {
