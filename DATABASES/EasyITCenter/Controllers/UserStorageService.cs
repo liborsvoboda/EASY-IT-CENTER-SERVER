@@ -118,14 +118,6 @@ namespace EasyITCenter.Controllers {
                 //FILES Part
                 result.AddRange(UserStorageOperations.GetUserFiles(userRootPath));
 
-                //move subnodes to parent node
-                /*
-                 * result.OrderByDescending(a => a.path.Split(System.IO.Path.DirectorySeparatorChar).Length).ToList().ForEach(res => {
-                if (res.path.Split(System.IO.Path.DirectorySeparatorChar).Count() > 2) {
-                    result.Where(a => a.path == string.Join("\\", res.path.Split("\\").Take(res.path.Split("\\").Count() - 1))).First().children.Add(res);
-                        result.Remove(res);
-                    }
-                });*/
                 result.OrderByDescending(a => a.path.Split(System.IO.Path.DirectorySeparatorChar).Length).ToList().ForEach(res => {
                     if (res.path.Split(System.IO.Path.DirectorySeparatorChar).Count() > 2) {
                         result.Where(a => a.path == string.Join(System.IO.Path.DirectorySeparatorChar, res.path.Split(System.IO.Path.DirectorySeparatorChar).Take(res.path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1))).First().children.Add(res);
@@ -139,7 +131,6 @@ namespace EasyITCenter.Controllers {
                 return base.Json(result);
             }
         }
-
 
 
         /// <summary>
@@ -308,32 +299,6 @@ namespace EasyITCenter.Controllers {
         }
 
 
-
-        /// <summary>
-        /// Get User File Content as String
-        /// </summary>
-        /// <returns></returns>
-        /*
-        [AllowAnonymous]
-        [HttpPost("/UserStorageService/GetUserTextFile")]
-        [Consumes("application/json")]
-        public async Task<IActionResult> GetUserTextFile([FromBody] UserStorageContent userStorageContent) {
-            string userRootPath = null; string result = null;
-
-            try {
-                if (ServerApiServiceExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, ServerApiServiceExtension.GetUserName());
-                } else { userRootPath = Path.Combine(SrvRuntime.UserPath, "guest"); }
-                result = FileOperations.ReadTextFile(userRootPath + userStorageContent.Path);
-
-                return base.Json(new WebClasses.JsonResult() { Result = result, Status = DBResult.success.ToString() });
-            } catch (Exception ex) {
-                return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
-            }
-        }
-        */
-
-
         /// <summary>
         /// Save User Storage File
         /// </summary>
@@ -356,7 +321,6 @@ namespace EasyITCenter.Controllers {
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
-
 
 
         /// <summary>
@@ -426,7 +390,6 @@ namespace EasyITCenter.Controllers {
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
-
 
 
         /// <summary>

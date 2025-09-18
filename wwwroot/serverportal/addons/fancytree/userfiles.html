@@ -326,10 +326,6 @@
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Upload Files", content, actions);
 
-
-                        //else if (action == "readTextFile") {//NOT USED
-                        //    Gs.Apis.DownloadApi("UserStorageService/GetUserTextFile", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), false, "UserTextFile", "SetTextFileToEditor");
-                        //}
                         } else if (action == "saveFile") { //console.log("extension", $('#DataTree').fancytree("getActiveNode").data.extension);
                             Gs.Apis.RunServerPostApi("UserStorageService/SetUserTextFile", {
                                 Path: $('#DataTree').fancytree("getActiveNode").data.path,
