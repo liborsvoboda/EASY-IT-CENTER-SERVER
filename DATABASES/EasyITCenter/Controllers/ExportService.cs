@@ -39,7 +39,7 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/ExportService/ExportXamlCz")]
         public async Task<IActionResult> ExportXamlCz() {
             try {
-                new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>("EXEC SpOperationFillTranslationTableList;");
+                new EasyITCenterContext().GetListOf<GenericDataList>("EXEC SpOperationFillTranslationTableList;");
 
                 List<SystemTranslationList> data = null;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().SystemTranslationLists.OrderBy(a => a.SystemName).ToList(); }
@@ -63,7 +63,7 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/ExportService/ExportXamlEn")]
         public async Task<IActionResult> ExportXamlEn() {
             try {
-                new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>("EXEC SpOperationFillTranslationTableList;");
+                new EasyITCenterContext().GetListOf<GenericDataList>("EXEC SpOperationFillTranslationTableList;");
 
                 List<SystemTranslationList> data = null;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().SystemTranslationLists.OrderBy(a => a.SystemName).ToList(); }

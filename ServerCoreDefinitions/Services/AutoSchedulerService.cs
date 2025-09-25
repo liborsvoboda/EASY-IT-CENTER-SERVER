@@ -177,7 +177,7 @@ namespace EasyITCenter.Services {
                         else if (jobType == "sqlquery") {
                             try {
                                 if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin") {
-                                    _ = new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>($"EXEC {data};");
+                                    _ = new EasyITCenterContext().GetListOf<GenericDataList>($"EXEC {data};");
                                 }
 
                             } catch (Exception ex) { taskResult.ProcessCrashed = true; taskResult.ProcessLog = DataOperations.GetErrMsg(ex); CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) }); }
@@ -192,7 +192,7 @@ namespace EasyITCenter.Services {
                         else if (jobType == "sqlwebsocketnotify") {
                             try {
                                 if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin") {
-                                    string? result = new EasyITCenterContext().EasyITCenterCollectionFromSql<GenericDataList>($"EXEC {data};").ToString();
+                                    string? result = new EasyITCenterContext().GetListOf<GenericDataList>($"EXEC {data};").ToString();
                                     Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(DbOperations.GetServerParameterLists("WebSocketGlobalNotifyPath").Value, result);
                                 }
 

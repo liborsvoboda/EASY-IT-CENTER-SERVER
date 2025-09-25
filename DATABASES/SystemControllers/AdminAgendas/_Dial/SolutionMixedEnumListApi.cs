@@ -1,6 +1,6 @@
 ﻿namespace EasyITCenter.Controllers {
 
-    [Authorize]
+    [AllowAnonymous]
     [ApiController]
     [Route("EasyITCenterSolutionMixedEnumList")]
     public class EasyITCenterSolutionMixedEnumListApi : ControllerBase {
@@ -52,6 +52,8 @@
             return JsonSerializer.Serialize(data);
         }
 
+
+        [Authorize]
         [HttpPut("/EasyITCenterSolutionMixedEnumList")]
         [Consumes("application/json")]
         public async Task<string> InsertSolutionMixedEnumList([FromBody] SolutionMixedEnumList record) {
@@ -66,6 +68,7 @@
             }
         }
 
+        [Authorize]
         [HttpPost("/EasyITCenterSolutionMixedEnumList")]
         [Consumes("application/json")]
         public async Task<string> UpdateSolutionMixedEnumList([FromBody] SolutionMixedEnumList record) {
@@ -77,6 +80,7 @@
             } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
+        [Authorize]
         [HttpDelete("/EasyITCenterSolutionMixedEnumList/{id}")]
         [Consumes("application/json")]
         public async Task<string> DeleteSolutionMixedEnumList(string id) {

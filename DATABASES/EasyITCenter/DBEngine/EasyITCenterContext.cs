@@ -146,7 +146,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        public static List<T> EasyITCenterCollectionFromSql<T>(this EasyITCenterContext EasyITCenterContext, string sql) where T : class, new() {
+        public static List<T> GetListOf<T>(this EasyITCenterContext EasyITCenterContext, string sql) where T : class, new() {
             using var cmd = EasyITCenterContext.Database.GetDbConnection().CreateCommand();
             cmd.CommandText = sql;
             if (cmd.Connection?.State != ConnectionState.Open)
