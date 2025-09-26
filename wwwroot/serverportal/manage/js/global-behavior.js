@@ -7,7 +7,7 @@ Gs.Behaviors.PortalStartup = async function () {
     Gs.Objects.CreateToolPanel();
 
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
-    await Gs.Apis.RunServerPostApi("DBProcedureService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
+    await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
     await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenu");
 
     $(document).ready(function () {

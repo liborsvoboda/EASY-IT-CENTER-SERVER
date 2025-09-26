@@ -420,7 +420,7 @@
             //SET EDITOR
             switch (editor) {
                 case "Other":
-                    $("#FrameWindow").html('<h3 style="padding: 10px;">Unsupported Format</h3>')
+                    $("#FrameWindow").html('<h3 style="padding: 10px;">Unsupported Format</h3>');
                     break;
                 case "STLviewer":
                     $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "serverportal/addons/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
