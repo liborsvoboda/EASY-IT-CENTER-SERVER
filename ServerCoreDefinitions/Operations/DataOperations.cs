@@ -40,11 +40,12 @@ namespace EasyITCenter.ServerCoreStructure {
                     var typeObject = Activator.CreateInstance<T>();
                     foreach (var fieldInfo in typeof(T).GetProperties()) {
                         foreach (DataColumn dc in dt.Columns) {
-                            if (fieldInfo.Name == dc.ColumnName) { fieldInfo.SetValue(typeObject, dr[dc.ColumnName]); break; }
+                            if (fieldInfo.Name == dc.ColumnName) { fieldInfo.SetValue(typeObject, dr[dc.ColumnName].GetType().FullName == typeof(System.DBNull).FullName ? null : dr[dc.ColumnName]); break; }
                         }
                     }; result.Add(typeObject);
                 };
-            } catch { }
+            } 
+            catch (Exception ex) { }
             return result;
         }
 

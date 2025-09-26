@@ -215,10 +215,11 @@ namespace EasyITCenter.Controllers {
         [Authorize]
         [HttpGet("/DatabaseService/SpGetUserMenuList")]
         public async Task<string> SpGetUserMenuList() {
-            try {
+            try
+            {
                 List<SpUserMenuList> data = new List<SpUserMenuList>();
 
-                data = new EasyITCenterContext().GetListOf<SpUserMenuList>("EXEC SpGetUserMenuList @userRole = N'" + ServerApiServiceExtension.GetUserRole() + "';");
+                data = new EasyITCenterContext().GetListOf<SpUserMenuList>("EXEC SpGetUserMenuList @userRole = N'" + ServerApiServiceExtension.GetUserRole() + "', @userId = " + ServerApiServiceExtension.GetUserId() + " ;");
                 return JsonSerializer.Serialize(data, new JsonSerializerOptions() {ReferenceHandler = ReferenceHandler.IgnoreCycles,WriteIndented = true,DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             } catch (Exception ex) {
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
