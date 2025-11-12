@@ -55,8 +55,19 @@ namespace EasyITCenter.ServerCoreConfiguration {
         }
 
 
-
-
+        /// <summary>
+        /// Server Portal Emailing with Template and History
+        /// https://github.com/lukencode/FluentEmail
+        /// </summary>
+        /// <param name="services"></param>
+        internal static void ConfigureUserFluentEmailing(ref IServiceCollection services)
+        {
+            if (bool.Parse(DbOperations.GetServerParameterLists("UserFluentEmailingEnabled").Value))
+            {
+                services.AddFluentEmail(DbOperations.GetServerParameterLists("ConfigManagerEmailAddress").Value).AddRazorRenderer().AddHandlebarsRenderer()
+                .AddSmtpSender(DbOperations.GetServerParameterLists("EmailerSMTPServerAddress").Value, int.Parse(DbOperations.GetServerParameterLists("EmailerSMTPPort").Value), DbOperations.GetServerParameterLists("EmailerSMTPLoginUsername").Value, DbOperations.GetServerParameterLists("EmailerSMTPLoginPassword").Value);
+            }
+        }
 
 
 
@@ -186,17 +197,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     services.AddMvc(options => {
                         options.CacheProfiles.Add("Default30", new CacheProfile() { Duration = 30 });
                         options.AllowEmptyInputInBodyModelBinding = true;
-
                     }).AddRazorPagesOptions(opt => {
                         opt.RootDirectory = "/ServerCorePages";
-
-
-                        //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/razor-pages-conventions/samples/6.x/SampleApp/Program.cs
-                        //https://learn.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-3.1 FULL DOC
-
                     }).AddRazorRuntimeCompilation();
-                    //.AddControllersAsServices(); PROBLEM WITH GIT
-                    //.WithRazorPagesAtContentRoot(); 
                 }
                 else {
                     services.AddMvc(options => {
