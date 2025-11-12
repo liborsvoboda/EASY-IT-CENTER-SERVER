@@ -3,9 +3,7 @@ using DocumentFormat.OpenXml.Office2010.Excel;
 using EasyITCenter.DBModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Tensorflow;
-using Tweetinvi.Core.DTO;
-using Tweetinvi.Core.Events;
+
 
 namespace EasyITCenter.Controllers
 {

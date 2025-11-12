@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using EasyITCenter.DBModel;
 using FastReport.Utils;
-using Fluid.Parser;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

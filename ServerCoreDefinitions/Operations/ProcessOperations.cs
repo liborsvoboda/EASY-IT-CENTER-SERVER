@@ -10,7 +10,6 @@ using System.Linq.Expressions;
 using System.Management.Automation;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
-using Python.Runtime;
 using EasyITCenter.DBModel;
 
 namespace EasyITCenter.ServerCoreStructure {

@@ -8,7 +8,7 @@ using Westwind.AspNetCore.LiveReload;
 using Westwind.AspNetCore.Markdown;
 using Pek.Markdig.HighlightJs;
 using Docfx.MarkdigEngine.Extensions;
-using Markdig.Prism;
+//using Markdig.Prism;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using EasyITCenter.ServerCoreStructure;

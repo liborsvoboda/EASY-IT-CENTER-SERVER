@@ -1,6 +1,5 @@
 ﻿
 
-using Tweetinvi.Core.Events;
 
 namespace EasyITCenter.Managers {
 
