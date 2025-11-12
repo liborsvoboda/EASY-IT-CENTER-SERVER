@@ -10,17 +10,13 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using EasyData.Services;
 using EasyITCenter.ServerCoreConfiguration;
-using SQLitePCL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.AspNetCore.ResponseCompression;
-using Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
-using HandlebarsDotNet;
-using PlaywrightExtraSharp.Plugins.Recaptcha;
 using SignalRChat.Hubs;
 
 
