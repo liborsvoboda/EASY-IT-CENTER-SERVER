@@ -4,6 +4,15 @@ using System.IO.Compression;
 
 namespace EasyITCenter.Controllers {
 
+
+    public partial class LicenseCheckRequest
+    {
+        public string UnlockCode { get; set; } = string.Empty;
+        public string PartNumber { get; set; } = string.Empty;
+    }
+
+
+
     [ApiController]
     [Route("LicenseService")]
     public class LicenseService : ControllerBase {

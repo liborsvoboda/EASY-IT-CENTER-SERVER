@@ -40,23 +40,10 @@ namespace EasyITCenter.ServerCoreStructure {
         public static bool DatabaseLogWarnToDbEnabled { get; set; } = false;
     }
 
-    /// <summary>
-    /// License Server Data Format
-    /// </summary>
-    public partial class LicenseCheckRequest {
-        public string UnlockCode { get; set; } = string.Empty;
-        public string PartNumber { get; set; } = string.Empty;
-    }
 
 
-    /// <summary>
-    /// WebSocket Extension Definition For Simple Central Control All Connection By Connection Path
-    /// and Timeout
-    /// </summary>
-    public class WebSocketLocation {
-        public string? socketAPIPath { get; set; }
-        public DateTimeOffset? SocketTimeout { get; set; }
-    }
+
+
 
 
 

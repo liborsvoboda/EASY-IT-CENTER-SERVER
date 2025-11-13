@@ -16,6 +16,31 @@ using Octokit;
 
 namespace EasyITCenter.Controllers {
 
+    public enum ProcessType
+    {
+        dotnet,
+        cmd,
+        bat,
+        node,
+        powershellFile,
+        powershellScript,
+        py,
+        py3,
+        sh
+    }
+
+    /// <summary>
+    /// Server Process class for running external prrocesses
+    /// </summary>
+    public class RunProcessRequest
+    {
+        public string Command { get; set; }
+        public string? WorkingDirectory { get; set; } = null;
+        public ProcessType ProcessType { get; set; }
+        public bool WaitForExit = true;
+        public string StartupScriptName { get; set; } = null;
+    }
+
 
     [AllowAnonymous]
     [Route("/ProcessService")]

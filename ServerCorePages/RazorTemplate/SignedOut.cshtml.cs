@@ -14,7 +14,7 @@ namespace ServerCorePages
             if (User.Identity.IsAuthenticated)
             {
                 // Redirect to home page if the user is authenticated.
-                return RedirectToPage("/DevPortal");
+                return RedirectToPage("/RazorTemplate");
             }
 
             return Page();
