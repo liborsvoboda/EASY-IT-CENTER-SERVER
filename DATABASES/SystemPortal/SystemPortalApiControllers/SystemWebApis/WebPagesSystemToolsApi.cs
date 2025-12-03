@@ -30,7 +30,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> SaveNewMinifiedFile([FromBody] MinifiedFile rec) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     WebCoreFileList data = new();
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         data = new EasyITCenterContext().WebCoreFileLists.Where(a => a.FileName == rec.FileName && a.InheritedJsCssDefinitionType == rec.SpecificationType).First(); }

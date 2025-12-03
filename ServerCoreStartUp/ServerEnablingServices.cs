@@ -100,14 +100,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
             app.UseEndpoints(endpoints => {
 
                 //EasyData Support
-                if (bool.Parse(DbOperations.GetServerParameterLists("ModuleWebDataManagerEnabled").Value)) { 
-                    endpoints.MapEasyData(options => { options.UseDbContext<EasyITCenterContext>(); }); 
-                }
-
-                if (bool.Parse(DbOperations.GetServerParameterLists("ModuleSwaggerApiDocEnabled").Value))
-                {
-                    endpoints.MapSwagger();
-                }
+                if (bool.Parse(DbOperations.GetServerParameterLists("ModuleWebDataManagerEnabled").Value)) { endpoints.MapEasyData(options => { options.UseDbContext<EasyITCenterContext>(); }); }
+                if (bool.Parse(DbOperations.GetServerParameterLists("ModuleSwaggerApiDocEnabled").Value)) { endpoints.MapSwagger(); }
 
                 endpoints.MapControllers();
 
@@ -115,8 +109,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                 if (bool.Parse(DbOperations.GetServerParameterLists("WebRazorPagesEngineEnabled").Value)) {
                     endpoints.MapRazorPages();
-                    //endpoints.MapControllerRoute(name: "DevPortal", pattern: "{controller=DevPortal}/{action=Index}/{id?}");
-                    //endpoints.MapControllerRoute(name: "WebAdmin",pattern: "{controller=WebAdmin}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute(name: "ServerCorePages", pattern: "{controller=ServerCorePages}/{action=Index}/{id?}");
                 }
 
@@ -140,23 +132,19 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     string text = await reader.ReadToEndAsync();
                     if (text != null) {
                         if (e.Request.Path.Value?.EndsWith("complete") == true) {
-                            var tabCompletionRequest = JsonSerializer.Deserialize<TabCompletionRequest>(text);
-                            var tabCompletionResults = await CompletitionRequestHandler.Handle(tabCompletionRequest);
+                            var tabCompletionResults = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<TabCompletionRequest>(text));
                             await JsonSerializer.SerializeAsync(e.Response.Body, tabCompletionResults); return;
                         }
                         else if (e.Request.Path.Value?.EndsWith("signature") == true) {
-                            var signatureHelpRequest = JsonSerializer.Deserialize<SignatureHelpRequest>(text);
-                            var signatureHelpResult = await CompletitionRequestHandler.Handle(signatureHelpRequest);
+                            var signatureHelpResult = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<SignatureHelpRequest>(text));
                             await JsonSerializer.SerializeAsync(e.Response.Body, signatureHelpResult); return;
                         }
                         else if (e.Request.Path.Value?.EndsWith("hover") == true) {
-                            var hoverInfoRequest = JsonSerializer.Deserialize<HoverInfoRequest>(text);
-                            var hoverInfoResult = await CompletitionRequestHandler.Handle(hoverInfoRequest);
+                            var hoverInfoResult = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<HoverInfoRequest>(text));
                             await JsonSerializer.SerializeAsync(e.Response.Body, hoverInfoResult); return;
                         }
                         else if (e.Request.Path.Value?.EndsWith("codeCheck") == true) {
-                            var codeCheckRequest = JsonSerializer.Deserialize<CodeCheckRequest>(text);
-                            var codeCheckResults = await CompletitionRequestHandler.Handle(codeCheckRequest);
+                            var codeCheckResults = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<CodeCheckRequest>(text));
                             await JsonSerializer.SerializeAsync(e.Response.Body, codeCheckResults); return;
                         }
                     }
@@ -166,7 +154,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
 
                 //MirrorSharp Support
-                if (bool.Parse(DbOperations.GetServerParameterLists("ModuleCSharpCodeBuilder").Value)) { endpoints.MapMirrorSharp("/mirrorsharp", new MirrorSharpOptions { SelfDebugEnabled = true, IncludeExceptionDetails = true  }
+                if (bool.Parse(DbOperations.GetServerParameterLists("ModuleCSharpCodeBuilderEnabled").Value)) { endpoints.MapMirrorSharp("/mirrorsharp", new MirrorSharpOptions { SelfDebugEnabled = true, IncludeExceptionDetails = true  }
                 .SetupCSharp(o => {
                     o.AddMetadataReferencesFromFiles(FileOperations.GetPathFiles(SrvRuntime.StartupPath, "*.dll", SearchOption.TopDirectoryOnly).ToArray());
                     // = ..MetadataReferences = GetAllReferences().ToImmutableList();
@@ -194,7 +182,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             });
             
             //MirrorSharp Support
-            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleCSharpCodeBuilder").Value)) { app.MapMirrorSharp("/mirrorsharp"); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleCSharpCodeBuilderEnabled").Value)) { app.MapMirrorSharp("/mirrorsharp"); }
 
             //HeathService Support
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleHealthServiceEnabled").Value)) {

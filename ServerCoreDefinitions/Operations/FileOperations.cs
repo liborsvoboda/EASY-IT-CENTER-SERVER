@@ -6,23 +6,6 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
         /// <summary>
-        /// Server Local Startup Configuration Its Running as First - Load from Congig.Json After DB
-        /// connection Before Server Start Is This configuration Replaced By Data from DB And next
-        /// Server Start. Its for situation - Bad Connection Server Start with Configuration from File
-        /// </summary>
-        public static void LoadOrCreateSettings() {
-            try {
-                if (!CheckDirectory(SrvRuntime.SettingFolder)) {
-                    CreatePath(SrvRuntime.SettingFolder);
-                    CopyFile(System.IO.Path.Combine(SrvRuntime.StartupPath, SrvRuntime.DataPath, SrvRuntime.ConfigFile), System.IO.Path.Combine(SrvRuntime.SettingFolder, SrvRuntime.ConfigFile));
-                }
-                //if (!CheckDirectory(ServerRuntimeData.UserPath)) { CreatePath(ServerRuntimeData.UserPath); }
-            } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
-        }
-
-
-
-        /// <summary>
         /// Fild Last Lath from Path By Directory Separator
         /// </summary>
         /// <param name="fullPath"></param>

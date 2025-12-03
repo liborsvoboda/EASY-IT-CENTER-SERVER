@@ -190,8 +190,8 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> UpdateRegistration([FromBody] UserProfile record) {
             try {
-                if (ServerApiServiceExtension.GetUserName().ToLower() == record.Username.ToLower()) {
-                    SolutionUserList user = new EasyITCenterContext().SolutionUserLists.Where(a => a.Id == ServerApiServiceExtension.GetUserId()).First();
+                if (HtttpContextExtension.GetUserName().ToLower() == record.Username.ToLower()) {
+                    SolutionUserList user = new EasyITCenterContext().SolutionUserLists.Where(a => a.Id == HtttpContextExtension.GetUserId()).First();
                     if (record.Password != null && record.Password.Length > 0) { user.Password = record.Password; }
                     user.Name = record.FirstName; user.SurName = record.Surname; user.Email = record.EmailAddress; user.TimeStamp = DateTimeOffset.Now.DateTime;
 

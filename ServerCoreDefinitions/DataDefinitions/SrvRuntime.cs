@@ -16,7 +16,6 @@ namespace EasyITCenter.ServerCoreStructure {
         public static string SrvStartPath { get; set; } = Path.GetDirectoryName(Environment.CurrentDirectory);
         public static string SrvVer { get; set; } = Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString();
         public static string StartupPath { get; set; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        public static string SettingFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), Assembly.GetEntryAssembly().GetName().FullName.Split(',')[0]);
         
         public static string WebRootPath { get; set; } = Path.Combine(SrvRuntime.StartupPath, "wwwroot");
         public static string SrvModulesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-Integrated", "server-modules");

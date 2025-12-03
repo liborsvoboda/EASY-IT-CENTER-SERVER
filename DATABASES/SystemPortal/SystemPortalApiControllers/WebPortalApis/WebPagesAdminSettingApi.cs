@@ -12,7 +12,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public IActionResult SetGuestSettingList([FromBody] WebSettingList1 record) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     string authId = User.FindFirst(ClaimTypes.PrimarySid.ToString()).Value;
                     List<WebSettingList> webSettingList;
                     webSettingList = new EasyITCenterContext().WebSettingLists.ToList();

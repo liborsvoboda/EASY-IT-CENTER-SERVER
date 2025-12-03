@@ -1,4 +1,27 @@
-﻿https://github.com/igloo15/MarkdownGenerator
+﻿# Build Project Command
+https://github.com/dotnet/sdk/issues/9487
+dotnet msbuild -property:Configuration=Release
+dotnet build -c Debug  - in folder project.sln
+msbuild /v:q  /t:Build /nologo /P:Configuration=Release MySolutionWithSevenProjectsInIt.sln
+
+# Run Project
+https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-run
+dotnet run : command in project folder to run project
+dotnet run --project ./projects/proj1/proj1.csproj --property:Configuration=Release
+
+
+dotnet restore
+dotnet build
+dotnet build --disable-build-servers
+dotnet test
+dotnet publish
+
+
+# Search
+
+
+
+https://github.com/igloo15/MarkdownGenerator
 https://github.com/igloo-soft/KeywordSearch
 https://github.com/erikzaadi/GithubSharp
 https://github.com/libgit2/libgit2sharp/

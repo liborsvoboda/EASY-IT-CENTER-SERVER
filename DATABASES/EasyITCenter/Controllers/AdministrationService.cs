@@ -23,7 +23,7 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/AdministrationService/SchedulerStart")]
         public async Task<IActionResult> ServerSchedulerStart() {
             try {
-                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+                if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
                     if (SrvRuntime.SrvScheduler != null) { await SrvRuntime.SrvScheduler.ResumeAll(); }
                     return Ok(JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty }));
                 }
@@ -39,7 +39,7 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/AdministrationService/SchedulerStop")]
         public async Task<IActionResult> ServerSchedulerStop() {
             try {
-                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+                if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
                     if (SrvRuntime.SrvScheduler != null) { await SrvRuntime.SrvScheduler.PauseAll(); }
                     return Ok(JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), ErrorMessage = string.Empty }));
                 }
@@ -70,7 +70,7 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/AdministrationService/CoreServerRestart")]
         public async Task<string> ServerRestart() {
             try {
-                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+                if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
                     EICServer.RestartServer();
 
                     return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("serverRestarting") });
@@ -88,7 +88,7 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/AdministrationService/FtpServerStart")]
         public async Task<string> FtpServerStart() {
             try {
-                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+                if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
                     if (SrvRuntime.ServerFTPProvider != null) {
                         SrvRuntime.FTPSrvStatus = true;
                         await SrvRuntime.ServerFTPProvider.StartAsync(); 
@@ -108,7 +108,7 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/AdministrationService/FtpServerStop")]
         public async Task<string> FtpServerStop() {
             try {
-                if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+                if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
                     if (SrvRuntime.ServerFTPProvider != null) {
                         SrvRuntime.FTPSrvStatus = false;
                         await SrvRuntime.ServerFTPProvider.StopAsync();

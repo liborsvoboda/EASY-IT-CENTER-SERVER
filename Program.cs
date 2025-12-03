@@ -56,7 +56,6 @@ namespace EasyITCenter {
             try {
                 CheckLicense();
                 SrvRuntime.ServerCancelToken = new CancellationTokenSource();
-                FileOperations.LoadOrCreateSettings();
 
                 IHostBuilder? hostBuilder = BuildWebHost(SrvRuntime.ServerArgs);
                 if (CoreOperations.SrvOStype.IsWindows()) {
@@ -191,9 +190,7 @@ namespace EasyITCenter {
         private static void LoadConfigurationFromFile() {
             try {
                 //Load From Config File
-                string json = CoreOperations.SrvOStype.IsWindows()
-                    ?  FileOperations.ReadTextFile(Path.Combine(SrvRuntime.SettingFolder, SrvRuntime.ConfigFile))
-                    : FileOperations.ReadTextFile(Path.Combine(SrvRuntime.StartupPath, "Data", SrvRuntime.ConfigFile));
+                string json = FileOperations.ReadTextFile(Path.Combine(SrvRuntime.StartupPath, "Data", SrvRuntime.ConfigFile));
 
                 Dictionary<string, object> exportServerSettingList = new Dictionary<string, object>();
                 exportServerSettingList.AddRange(JsonSerializer.Deserialize<Dictionary<string, object>>(json).ToList());

@@ -67,8 +67,8 @@ namespace EasyITCenter.Controllers {
                 } else { parameters += ( parameters.Length > 0 ? "," : "" ) + $"@{param.Keys.First()} = N'{param.Values.First()}' "; }
             }
 
-            parameters += ServerApiServiceExtension.GetUserRole() == null ? $", @userRole = N'all'" : $", @userRole = N'{ServerApiServiceExtension.GetUserRole()}'";
-            parameters += ServerApiServiceExtension.GetUserId() == null ? $", @userId = N''" : $", @userId = N'{ServerApiServiceExtension.GetUserId()}'";
+            parameters += HtttpContextExtension.GetUserRole() == null ? $", @userRole = N'all'" : $", @userRole = N'{HtttpContextExtension.GetUserRole()}'";
+            parameters += HtttpContextExtension.GetUserId() == null ? $", @userId = N''" : $", @userId = N'{HtttpContextExtension.GetUserId()}'";
 
             DataView data = ((DataView)(await new EasyITCenterContext().ExecuteReaderAsync($"EXEC {procedureName} {parameters};")).DefaultView);
             return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented);
@@ -97,11 +97,11 @@ namespace EasyITCenter.Controllers {
                     } else if (param.Where(a => a.Key.ToLower() == "tableName".ToLower()).Any()) {
                         parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First()}' ";
                         EntityTypeName = param.Values.First();
-                    } else { parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First().Replace("'","`")}' "; }
+                    } else { parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First().Replace("'","\"")}' "; }
                 }
 
-                parameters += ServerApiServiceExtension.GetUserRole() == null ? $", @userRole = N'all'" : $", @userRole = N'{ServerApiServiceExtension.GetUserRole()}'";
-                parameters += ServerApiServiceExtension.GetUserId() == null ? $", @userId = N''" : $", @userId = N'{ServerApiServiceExtension.GetUserId()}'";
+                parameters += HtttpContextExtension.GetUserRole() == null ? $", @userRole = N'all'" : $", @userRole = N'{HtttpContextExtension.GetUserRole()}'";
+                parameters += HtttpContextExtension.GetUserId() == null ? $", @userId = N''" : $", @userId = N'{HtttpContextExtension.GetUserId()}'";
 
                 data = new EasyITCenterContext().GetListOf<CustomMessageList>($"EXEC {procedureName} {parameters};");
             } catch (Exception ex) {
@@ -219,7 +219,7 @@ namespace EasyITCenter.Controllers {
             {
                 List<SpUserMenuList> data = new List<SpUserMenuList>();
 
-                data = new EasyITCenterContext().GetListOf<SpUserMenuList>("EXEC SpGetUserMenuList @userRole = N'" + ServerApiServiceExtension.GetUserRole() + "', @userId = " + ServerApiServiceExtension.GetUserId() + " ;");
+                data = new EasyITCenterContext().GetListOf<SpUserMenuList>("EXEC SpGetUserMenuList @userRole = N'" + HtttpContextExtension.GetUserRole() + "', @userId = " + HtttpContextExtension.GetUserId() + " ;");
                 return JsonSerializer.Serialize(data, new JsonSerializerOptions() {ReferenceHandler = ReferenceHandler.IgnoreCycles,WriteIndented = true,DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             } catch (Exception ex) {
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });

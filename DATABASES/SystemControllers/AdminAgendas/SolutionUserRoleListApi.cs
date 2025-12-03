@@ -45,7 +45,7 @@
         [Consumes("application/json")]
         public async Task<string> InsertSolutionUserRoleList([FromBody] SolutionUserRoleList record) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     var data = new EasyITCenterContext().SolutionUserRoleLists.Add(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -61,7 +61,7 @@
         [Consumes("application/json")]
         public async Task<string> UpdateSolutionUserRoleList([FromBody] SolutionUserRoleList record) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     var data = new EasyITCenterContext().SolutionUserRoleLists.Update(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -77,7 +77,7 @@
         [Consumes("application/json")]
         public async Task<string> DeleteSolutionUserRoleList(string id) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     SolutionUserRoleList record = new() { Id = int.Parse(id) };

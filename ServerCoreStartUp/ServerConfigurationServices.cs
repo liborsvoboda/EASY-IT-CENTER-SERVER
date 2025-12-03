@@ -90,17 +90,19 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services">The services.</param>
         internal static void ConfigureFTPServer(ref IServiceCollection services) {
             if (bool.Parse(DbOperations.GetServerParameterLists("ServerFtpEngineEnabled").Value)) {
+                services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "*"; /*opt.Port*/ });
+                services.Configure<DotNetFileSystemOptions>(opt => {
+                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.UserPath, "FTP") : Path.Combine(SrvRuntime.UserPath, "FTP");
+                    opt.AllowNonEmptyDirectoryDelete = true;
+                });
                 services.AddFtpServer(
                     builder => {
                         if (!bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value)) { 
-                            builder.UseDotNetFileSystem().DisableChecks().UseSingleRoot().EnableAnonymousAuthentication(); } else { builder.UseDotNetFileSystem().DisableChecks().UseRootPerUser(); 
+                            builder.UseDotNetFileSystem().EnableDefaultChecks().UseSingleRoot().EnableAnonymousAuthentication(); 
+                        } else { 
+                            builder.UseDotNetFileSystem().EnableDefaultChecks().UseRootPerUser(); 
                         }
                     });
-                services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "127.0.0.1"; /*opt.Port*/ });
-                services.Configure<DotNetFileSystemOptions>(opt => {
-                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.UserPath, "guest") : SrvRuntime.UserPath;
-                    opt.AllowNonEmptyDirectoryDelete = true;
-                });
                 services.AddSingleton<IMembershipProvider, HostedFtpServerMembershipProvider>();
                 services.AddHostedService<HostedFtpServer>();
 
@@ -286,7 +288,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services">The services.</param>
         internal static void ConfigureSingletons(ref IServiceCollection services) {
-            services.AddSingleton<IHttpContextAccessor, ServerApiServiceExtension>();
+            services.AddSingleton<IHttpContextAccessor, HtttpContextExtension>();
             services.AddSingleton<ISitemapProvider, SitemapProvider>();
             services.AddSingleton<IHealthCheckPublisher, HealthCheckActionService>();
         }

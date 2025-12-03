@@ -63,7 +63,7 @@
         [Consumes("application/json")]
         public async Task<string> UpdateSystemTranslationList([FromBody] SystemTranslationList record) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     var data = new EasyITCenterContext().SystemTranslationLists.Update(record);
                     int result = await data.Context.SaveChangesAsync();
 
@@ -82,7 +82,7 @@
         [Consumes("application/json")]
         public async Task<string> DeleteSystemTranslationList(string id) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     SystemTranslationList record = new() { Id = int.Parse(id) };

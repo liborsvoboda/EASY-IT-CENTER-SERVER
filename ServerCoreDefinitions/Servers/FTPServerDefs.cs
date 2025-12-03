@@ -40,7 +40,7 @@ namespace EasyITCenter.ServerCoreServers {
         /// <returns></returns>
         public MemberValidationResult ValidateUser(string username, string password) {
             if (!bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value)) {
-                return new MemberValidationResult(MemberValidationStatus.Anonymous, new CustomFtpUser("anonymous"));
+                return new MemberValidationResult(MemberValidationStatus.Anonymous, new CustomFtpUser("guest"));
             }
             else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) {
                 var user = new EasyITCenterContext()
@@ -59,7 +59,7 @@ namespace EasyITCenter.ServerCoreServers {
         /// <returns>The result of the validation.</returns>
         public async Task<MemberValidationResult> ValidateUserAsync(string username, string password) {
             if (!bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value)) {
-                return new MemberValidationResult(MemberValidationStatus.Anonymous, new CustomFtpUser("anonymous"));
+                return new MemberValidationResult(MemberValidationStatus.Anonymous, new CustomFtpUser("guest"));
             }
             else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) {
                 var user = new EasyITCenterContext()

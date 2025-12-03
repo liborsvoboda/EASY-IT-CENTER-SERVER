@@ -39,25 +39,24 @@ namespace EasyITCenter {
 
             ServerConfigurationServices.ConfigureServerManagement(ref services);
             //services.AddServiceStackGrpc();
-            #region Server Data Segment
+           
             //DB first for Configuration
             ServerConfigurationServices.ConfigureDatabaseContext(ref services);
             ServerConfigurationServices.ConfigureScoped(ref services);
             ServerConfigurationServices.ConfigureThirdPartyApi(ref services);
             ServerConfigurationServices.ConfigureLogging(ref services);
 
-            #endregion Server Data Segment
 
-            #region Server WebServer
+
+            
 
             ServerConfigurationServices.ConfigureServerWebPages(ref services);
             ServerConfigurationServices.ConfigureFTPServer(ref services);
             if (bool.Parse(DbOperations.GetServerParameterLists("WebBrowserContentEnabled").Value)) { services.AddDirectoryBrowser(); }
-
             ServerConfigurationServices.ConfigureAutoMinify(ref services);
-            #endregion Server WebServer
 
-            #region Server Core & Security Web
+
+
 
             ServerConfigurationServices.ConfigureCookie(ref services);
             ServerConfigurationServices.ConfigureControllers(ref services);
@@ -74,15 +73,14 @@ namespace EasyITCenter {
             });
 
             //services.AddStartupTask<ServerCycleTaskList>();
-            //services.AddStartupTask<MigrationStartupTask>();
 
             services.AddEndpointsApiExplorer();
             ServerConfigurationServices.ConfigureWebSocketLoggerMonitor(ref services);
             ServerConfigurationServices.ConfigureRssFeed(ref services);
 
-            #endregion Server Core & Security Web
 
-            #region Server Modules
+
+
 
             ServerModules.ConfigureScheduler(ref services);
             ServerModules.ConfigureSwagger(ref services);
@@ -93,7 +91,7 @@ namespace EasyITCenter {
             ServerModules.ConfigureMarkdownAsHtmlFiles(ref services);
             ServerModules.ConfigureReportDesigner(ref services);
 
-            #endregion Server Modules
+
 
             //REGISTERING SERVICES BY CLASS OR INTERFACE
 

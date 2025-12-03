@@ -11,7 +11,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// Migration/Api/Check/Unlimited Develop !!!Warning: Check this connection for
         /// Read/Write/Exec is enabled In Config File Must Be Only This Paramneter
         /// </summary>
-        public static string DatabaseConnectionString { get; set; } = "Server=127.0.0.1;Database=EasyITCenter;Trusted_Connection=True;TrustServerCertificate=True";
+        public static string DatabaseConnectionString { get; set; } = string.Empty;
 
         /// <summary>
         /// Enable Disable Entity Framework Internal Cache I recommend turning it off : from Logic,
@@ -32,12 +32,12 @@ namespace EasyITCenter.ServerCoreStructure {
         /// Enable Disable Database Migration Process on Starrtup
         /// 
         /// </summary>
-        public static bool DatabaseMigrationEnabled { get; set; } = true;
+        public static bool DatabaseMigrationEnabled { get; set; } = false;
 
         /// <summary>
         /// Enable Logging Server Warn and Errors To Database
         /// </summary>
-        public static bool DatabaseLogWarnToDbEnabled { get; set; } = false;
+        public static bool DatabaseLogWarnToDbEnabled { get; set; } = true;
     }
 
 

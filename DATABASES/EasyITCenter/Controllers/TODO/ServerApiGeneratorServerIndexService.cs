@@ -83,7 +83,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> GenerateDocsFile(MDGeneratorCreateIndexRequest webfilesrequest) {
             try {
 
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     string resultMessage = DbOperations.DBTranslate("ProcessSucessfullyCompleted", webfilesrequest.ServerLanguage);
 
                     List<string> indexRootList = new List<string>();

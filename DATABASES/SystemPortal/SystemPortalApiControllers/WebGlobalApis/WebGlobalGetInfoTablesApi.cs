@@ -77,7 +77,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> InsertOrUpdateWebMenuList([FromBody] WebSettingList1 record) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     string authId = User.FindFirst(ClaimTypes.PrimarySid.ToString()).Value;
                     string clientIPAddr = null;
                     int RecId = int.Parse(record.Settings.FirstOrDefault(a => a.Key == "Id").Value);
@@ -125,7 +125,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> DeleteWebMenuList(string id) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     WebMenuList record = new() { Id = int.Parse(id) };

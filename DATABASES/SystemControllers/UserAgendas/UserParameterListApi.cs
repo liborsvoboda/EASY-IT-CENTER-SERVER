@@ -41,7 +41,7 @@
         [Consumes("application/json")]
         public async Task<string> InsertUserParameterList([FromBody] UserParameterList record) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     record.User = null;  //EntityState.Detached IDENTITY_INSERT is set to OFF
                     var data = new EasyITCenterContext().UserParameterLists.Add(record);
                     int result = await data.Context.SaveChangesAsync();
@@ -59,7 +59,7 @@
         [Consumes("application/json")]
         public async Task<string> UpdateUserParameterList([FromBody] UserParameterList record) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     var data = new EasyITCenterContext().UserParameterLists.Update(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -74,7 +74,7 @@
         [Consumes("application/json")]
         public async Task<string> DeleteUserParameterList(string id) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     UserParameterList record = new() { Id = int.Parse(id) };

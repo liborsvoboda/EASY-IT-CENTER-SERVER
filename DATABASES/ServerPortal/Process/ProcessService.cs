@@ -56,7 +56,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<IActionResult> StartProcessScript([FromBody] RunProcessRequest processRequest) {
 
-            if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+            if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
                 processRequest.Command = processRequest.Command.Replace("wwwroot", SrvRuntime.WebRootPath);
                 processRequest.WorkingDirectory = processRequest.WorkingDirectory.Replace("wwwroot", SrvRuntime.WebRootPath);
                 
@@ -72,7 +72,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<IActionResult> KillProcessScript(int processPid) {
 
-            if (ServerApiServiceExtension.IsAdmin() || ServerApiServiceExtension.IsWebAdmin()) {
+            if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
                 ProcessOperations.ServerProcessKill(processPid);
                 return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
             }

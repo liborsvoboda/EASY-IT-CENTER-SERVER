@@ -11,7 +11,7 @@ namespace EasyITCenter.Controllers {
         [Authorize]
         [HttpGet("/WebApi/WebPages/GetAdminWebMenuList")]
         public async Task<string> GetAdminWebMenuList() {
-            if (ServerApiServiceExtension.IsAdmin()) {
+            if (HtttpContextExtension.IsAdmin()) {
                 bool IpIsBlocked = false;
                 // check If blocked and write Visit On menu load
                 try {

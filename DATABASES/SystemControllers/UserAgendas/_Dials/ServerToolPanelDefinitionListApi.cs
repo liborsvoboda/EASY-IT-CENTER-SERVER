@@ -45,7 +45,7 @@
         [Consumes("application/json")]
         public async Task<string> InsertServerToolPanelDefinitionList([FromBody] ServerToolPanelDefinitionList record) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     var data = new EasyITCenterContext().ServerToolPanelDefinitionLists.Add(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -61,7 +61,7 @@
         [Consumes("application/json")]
         public async Task<string> UpdateServerToolPanelDefinitionList([FromBody] ServerToolPanelDefinitionList record) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     var data = new EasyITCenterContext().ServerToolPanelDefinitionLists.Update(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -75,7 +75,7 @@
         [Consumes("application/json")]
         public async Task<string> DeleteServerToolPanelDefinitionList(string id) {
             try {
-                if (ServerApiServiceExtension.IsAdmin()) {
+                if (HtttpContextExtension.IsAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     ServerToolPanelDefinitionList record = new() { Id = int.Parse(id) };

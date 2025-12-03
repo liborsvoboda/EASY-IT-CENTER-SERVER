@@ -103,7 +103,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   <ItemGroup>
     <PackageReference Include="AspNetCore.Client" Version="0.19.1" />
     <PackageReference Include="AspNetCore.HealthChecks.ApplicationStatus" Version="6.0.0" />
-    <PackageReference Include="AspNetCore.HealthChecks.AzureStorage" Version="6.1.2" />
     <PackageReference Include="AspNetCore.HealthChecks.EventStore" Version="6.0.3" />
     <PackageReference Include="AspNetCore.HealthChecks.Hangfire" Version="6.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="6.0.2" />
@@ -128,7 +127,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="AutoMapper.Collection" Version="9.0.0" />
     <PackageReference Include="CSJsonDB" Version="1.1.0" />
     <PackageReference Include="CsvHelper" Version="28.0.1" />
-    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="Dapper.SimpleCRUD.ModelGenerator" Version="1.0.3" />
     <PackageReference Include="Dapper.SimpleCRUD.NetCore" Version="1.0.0" />
     <PackageReference Include="DatabaseWrapper" Version="5.0.0" />
@@ -172,6 +171,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="FluentStorage.FTP" Version="5.4.0" />
     <PackageReference Include="FluentStorage.SFTP" Version="5.3.1" />
     <PackageReference Include="FubarDev.FtpServer" Version="3.1.2" />
+    <PackageReference Include="FubarDev.FtpServer.Abstractions" Version="3.1.2" />
     <PackageReference Include="FubarDev.FtpServer.Commands" Version="3.1.2" />
     <PackageReference Include="FubarDev.FtpServer.FileSystem.DotNet" Version="3.1.2" />
     <PackageReference Include="Google.Api.CommonProtos" Version="2.15.0" />
@@ -278,7 +278,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.3" />
     <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.36" />
     <PackageReference Include="Microsoft.Graph" Version="5.56.0" />
     <PackageReference Include="Microsoft.JSInterop" Version="6.0.36" />
@@ -419,6 +419,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
  
    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="robocopy &quot;$(ProjectDir)wwwroot&quot; &quot;$(ProjectDir)bin\$(ConfigurationName)\net6.0\wwwroot&quot; /s /e &#xD;&#xA; exit /b 0" />
+    <Exec Command="robocopy &quot;$(ProjectDir)Data&quot; &quot;$(ProjectDir)bin\$(ConfigurationName)\net6.0\Data&quot; /s /e &#xD;&#xA; exit /b 0" />
     <Exec Command="robocopy &quot;$(ProjectDir)Docs&quot; &quot;$(ProjectDir)bin\$(ConfigurationName)\net6.0\Docs&quot; /s /e &#xD;&#xA; exit /b 0" />
   </Target>
 
