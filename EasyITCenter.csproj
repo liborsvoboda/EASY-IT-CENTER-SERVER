@@ -214,6 +214,9 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
       <Aliases>MarkdigSigned</Aliases>
     </PackageReference>
     <PackageReference Include="MarkdigBadHeaders" Version="2017.12.11" />
+    <PackageReference Include="MarkdigExtensions.Bootstrap.Admonitions" Version="0.3.0" />
+    <PackageReference Include="MarkdigExtensions.ImageAsFigure" Version="1.0.0" />
+    <PackageReference Include="MarkdigExtensions.RtfRenderer" Version="1.1.0" />
     <PackageReference Include="MarkdigExtensions.SyntaxHighlighting" Version="1.0.3" />
     <PackageReference Include="MarkdigExtensions.UrlRewriter" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.36" />

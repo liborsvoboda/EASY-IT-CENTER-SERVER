@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EasyITCenter.DBModel;
+﻿using EasyITCenter.DBModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
+using System.Threading.Tasks;
 
 
 namespace EasyITCenter.Controllers {
@@ -101,5 +102,35 @@ namespace EasyITCenter.Controllers {
                 return base.Json(result);
             }
         }
+
+
+
+        /// <summary>
+        /// Get User Md Files
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("/JsonGeneratorService/GetFancyMDFiles")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> GetFancyMDFiles()
+        {
+            try {
+                List<string>? loadFiles = null; List<FancyTreeJsonData> result = new();
+                if (HtttpContextExtension.IsLogged()) {
+                    loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName()), $"*.md", SearchOption.AllDirectories);
+                } else {
+                    loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.UserPath, "guest"), $"*.md", SearchOption.AllDirectories);
+                }
+
+                loadFiles.ForEach(htmlFile => {
+                    result.Add(new FancyTreeJsonData() { title = Path.GetFileNameWithoutExtension(htmlFile), checkbox = false, folder = false, key = htmlFile.Split("wwwroot")[1].Replace(".md", "") });
+                });
+
+                return base.Json(result);
+            } catch (Exception ex) {
+                return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
+            }
+        }
+
     }
 }

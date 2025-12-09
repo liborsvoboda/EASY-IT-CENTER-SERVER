@@ -39,11 +39,13 @@
         mdfileContent = System.IO.File.ReadAllText(filePath);
     }
     <div class="container" style="margin-top:50px;">
-    if (ViewerMarkDownFileModel.result != null) {
+    @{if (ViewerMarkDownFileModel.result != null) {
         @Html.Raw(ViewerMarkDownFileModel.result)
     } else if (fileContent != null) {
         @Html.Raw(fileContent)
         ;
+    }
+    
     }
     </div>
 } @* </markdown> *@

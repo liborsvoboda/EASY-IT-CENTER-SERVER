@@ -97,7 +97,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
 
 
-            app.UseEndpoints(endpoints => {
+           app.UseEndpoints(endpoints => {
 
                 //EasyData Support
                 if (bool.Parse(DbOperations.GetServerParameterLists("ModuleWebDataManagerEnabled").Value)) { endpoints.MapEasyData(options => { options.UseDbContext<EasyITCenterContext>(); }); }

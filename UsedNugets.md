@@ -1,4 +1,10 @@
-﻿# Build Project Command
+﻿# Used Nugets
+https://github.com/FubarDevelopment
+
+
+
+
+# Build Project Command
 https://github.com/dotnet/sdk/issues/9487
 dotnet msbuild -property:Configuration=Release
 dotnet build -c Debug  - in folder project.sln

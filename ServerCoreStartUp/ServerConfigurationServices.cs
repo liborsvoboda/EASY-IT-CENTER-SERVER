@@ -1,32 +1,33 @@
-﻿using FubarDev.FtpServer;
-using FubarDev.FtpServer.AccountManagement;
-using FubarDev.FtpServer.FileSystem.DotNet;
+﻿using EasyITCenter.Controllers;
+using EasyITCenter.ServerCoreServers;
+using EasyITCenter.ServerCoreStructure;
 using EasyITCenter.Services;
-using LettuceEncrypt;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Quartz;
-using SimpleMvcSitemap;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Westwind.AspNetCore.Markdown;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using Microsoft.AspNetCore.Authentication.Facebook;
-using Snickler.RSSCore.Extensions;
 using FileContextCore;
-using Microsoft.AspNetCore.Identity;
-using EasyITCenter.Controllers;
 using FileContextCore.FileManager;
 using FileContextCore.Serializer;
-using Microsoft.Extensions.DependencyInjection;
-using PuppeteerExtraSharp.Plugins.Recaptcha;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Korzh.DbUtils;
+using FubarDev.FtpServer;
+using FubarDev.FtpServer.AccountManagement;
+using FubarDev.FtpServer.FileSystem.DotNet;
 using Google.Apis.Translate.v3;
+using Korzh.DbUtils;
+using LettuceEncrypt;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using PuppeteerExtraSharp.Plugins.Recaptcha;
+using Quartz;
+using SimpleMvcSitemap;
+using Snickler.RSSCore.Extensions;
 using Stripe;
-using EasyITCenter.ServerCoreStructure;
-using EasyITCenter.ServerCoreServers;
+using Westwind.AspNetCore.Markdown;
+
 
 
 
@@ -91,7 +92,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         internal static void ConfigureFTPServer(ref IServiceCollection services) {
             if (bool.Parse(DbOperations.GetServerParameterLists("ServerFtpEngineEnabled").Value)) {
                 services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "*"; /*opt.Port*/ });
-                services.Configure<DotNetFileSystemOptions>(opt => {
+                services.Configure<FubarDev.FtpServer.FileSystem.DotNet.DotNetFileSystemOptions>(opt => {
                     opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.UserPath, "FTP") : Path.Combine(SrvRuntime.UserPath, "FTP");
                     opt.AllowNonEmptyDirectoryDelete = true;
                 });
