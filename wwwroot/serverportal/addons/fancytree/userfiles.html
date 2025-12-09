@@ -229,16 +229,21 @@
                     menu: function (node) {
                         if (node.folder) {
                             return {
-                                "createFolder": { "name": "Create Folder", "icon": "add" }, "moveFolder": { "name": "Move to Folder", "icon": "edit" },
-                                "copyFolder": { "name": "Copy to Folder", "icon": "copy" }, "clearFolder": { "name": "Clear Folder", "icon": "delete" },
+                                "createFolder": { "name": "Create Folder", "icon": "add" },
+                                "moveFolder": { "name": "Move to Folder", "icon": "edit" },
+                                "copyFolder": { "name": "Copy to Folder", "icon": "copy" },
+                                "clearFolder": { "name": "Clear Folder", "icon": "delete" },
                                 "deleteFolder": { "name": "Delete Folder", "icon": "quit" },
                                 "sep1": "---------", "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
-                                "sep2": "---------", "createFile": { "name": "Create File", "icon": "add" }, "uploadFiles": { "name": "Upload Files", "icon": "add" },
+                                "sep2": "---------", "createFile": { "name": "Create File", "icon": "add" },
+                                "uploadFiles": { "name": "Upload Files", "icon": "add" },
                             };
                         } else {
                             return {
-                                "saveFile": { "name": "Save File", "icon": "paste" }, "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
-                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" }, "deleteFile": { "name": "Delete File", "icon": "delete" },
+                                "saveFile": { "name": "Save File", "icon": "paste" },
+                                "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
+                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
+                                "deleteFile": { "name": "Delete File", "icon": "delete" },
                                 "sep1": "---------", "downloadFile": { "name": "Download File (Zip)", "icon": "paste" }, 
                             };
                         }
@@ -262,7 +267,7 @@
                                 caption: "Move Folder", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#FolderName").val().length > 0) {
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/MoveUserFolder", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FolderName").val() }, null, "ReloadUserStorage");
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/MoveUserFolder", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: $("#FolderName").val() }, null, "ReloadUserStorage");
                                     } else { alert("Name must be Inserted"); }
                                 }
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -274,7 +279,7 @@
                                 caption: "Copy Folder", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#FolderName").val().length > 0) {
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/CopyUserFolder", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FolderName").val() }, null, "ReloadUserStorage");
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/CopyUserFolder", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: $("#FolderName").val() }, null, "ReloadUserStorage");
                                     } else { alert("Name must be Inserted"); }
                                 }
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -308,7 +313,7 @@
                                 caption: "Create File", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#Filename").val().length > 0) {
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/CreateUserFile", { Path: $('#DataTree').fancytree("getActiveNode").data.path, Filename: "\\" + $("#Filename").val() }, null, "ReloadUserStorage");
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/CreateUserFile", { Path: $('#DataTree').fancytree("getActiveNode").data.path, Filename: $("#Filename").val() }, null, "ReloadUserStorage");
                                     } else { alert("FileName must be Inserted"); }
                                 }
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -347,7 +352,7 @@
                                 caption: "Move File", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#FileName").val().length > 0) {
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/MoveUserFile", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FileName").val() }, null, "ReloadUserStorage");
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/MoveUserFile", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: $("#FileName").val() }, null, "ReloadUserStorage");
                                     } else { alert("FileName must be Inserted"); }
                                 }
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -359,7 +364,7 @@
                                 caption: "Copy File", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#FileName").val().length > 0) {
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/CopyUserFile", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: "\\" + $("#FileName").val() }, null, "ReloadUserStorage");
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/CopyUserFile", { SourcePath: $('#DataTree').fancytree("getActiveNode").data.path, TargetPath: $("#FileName").val() }, null, "ReloadUserStorage");
                                     } else { alert("Name must be Inserted"); }
                                 }
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -455,7 +460,7 @@
                     $("#FrameWindow").html('<iframe id="HelpEditor" src="/serverportal/addons/markdown/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     setTimeout(function () {
                         if ($('#DataTree').fancytree("getActiveNode") != null) { $('#HelpEditor')[0].contentWindow.mdEditor.setMarkdown($('#DataTree').fancytree("getActiveNode").key); }
-                    }, 500);
+                    }, 3000);
                     break;
                 case "Monaco":
                     Gs.Functions.AddClass('SetMonaco', 'disabled'); $("#MonacoTheme").show(); $("#MonacoLanguage").show();

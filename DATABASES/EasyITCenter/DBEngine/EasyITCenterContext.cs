@@ -163,11 +163,13 @@ namespace EasyITCenter.Controllers {
             return new List<T>();
         }
 
+
         public static IQueryable? Set(this EasyITCenterContext context, Type T) {
             MethodInfo? method = typeof(EasyITCenterContext).GetMethod(nameof(EasyITCenterContext.Set), BindingFlags.Public | BindingFlags.Instance);
             method = method?.MakeGenericMethod(T);
             return method?.Invoke(context, null) as IQueryable;
         }
+
 
         public static IQueryable<T>? Set<T>(this EasyITCenterContext context) {
             MethodInfo? method = typeof(EasyITCenterContext).GetMethod(nameof(EasyITCenterContext.Set), BindingFlags.Public | BindingFlags.Instance);
@@ -187,9 +189,11 @@ namespace EasyITCenter.Controllers {
            return db.Set<T>() as object;
         }
 
+
         public static DbTransaction? GetDbTransaction(this EasyITCenterContext source) {
             return (source.Database.BeginTransaction() as IInfrastructure<DbTransaction>)?.Instance;
         }
+
 
         public static object? ExecuteScalar(this EasyITCenterContext context,
         string sql, List<DbParameter> parameters = null,
@@ -267,6 +271,7 @@ namespace EasyITCenter.Controllers {
             } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
             return new int();
         }
+
 
         public async static Task<int> ExecuteNonQueryAsync(this EasyITCenterContext context, string command, List<DbParameter>? parameters = null, CommandType commandType = CommandType.Text, int? commandTimeOutInSeconds = null) {
             try {

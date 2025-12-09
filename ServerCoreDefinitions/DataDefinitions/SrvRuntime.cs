@@ -18,17 +18,19 @@ namespace EasyITCenter.ServerCoreStructure {
         public static string StartupPath { get; set; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         
         public static string WebRootPath { get; set; } = Path.Combine(SrvRuntime.StartupPath, "wwwroot");
-        public static string SrvModulesPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-Integrated", "server-modules");
-        public static string SrvPrivatePath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-private");
-        public static string SrvGenerators_path { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-generator");
-        public static string SrvLibraryPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-library");
+        public static string ServerDocPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-doc");
+        public static string SrvModulesPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-Integrated", "server-modules");
+        public static string SrvPrivatePath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-private");
+        public static string SrvGenerators_path { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-generator");
+        public static string SrvLibraryPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-library");
 
-        public static string SrvPagesWebPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-PagesWeb");
-        public static string SrvPagesHelpPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-PagesHelp");
+        public static string SrvPagesWebPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-PagesWeb");
+        public static string SrvPagesHelpPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-PagesHelp");
         
-        public static string SysPortalPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "systemportal");
-        public static string ServerPortalPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "serverportal");
-        public static string UserPath { get; set; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "wwwroot", "server-users");
+        public static string SysPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "systemportal");
+        public static string ServerPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "serverportal");
+        public static string UserPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users");
+        public static string UserGuestPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users","guest");
 
 
 
