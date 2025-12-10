@@ -8,6 +8,10 @@
         public List<string>? Recipients { get; set; } = null;
         public string? Subject { get; set; } = null;
         public string? Content { get; set; } = null;
+        public string? HtmlUrl { get; set; } = null;
+        public List<string>? PdfUrl { get; set; } = null;
+        public List<string>? ImageUrl { get; set; } = null;
+        public List<Tuple<string,byte[]>>? Attachments { get; set; } = null;
     }
 
 
@@ -49,12 +53,16 @@
         [Consumes("application/json")]
         public async Task<string> PostMassMesseger([FromBody] List<SendMailRequest> messages) {
             try {
-                if (bool.Parse(DbOperations.GetServerParameterLists("ServiceEnableMassEmail").Value)) {
+                if (bool.Parse(DbOperations.GetServerParameterLists("ServiceMassEmailEnabled").Value)) {
                     CoreOperations.SendMassEmail(messages);
                     return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("emailsSent") });
                 }
                 else { return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate("massEmailNotEnabled") }); }
             } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
+
+
+
+       
     }
 }

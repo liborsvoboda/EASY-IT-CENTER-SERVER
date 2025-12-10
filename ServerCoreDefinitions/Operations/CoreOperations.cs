@@ -8,6 +8,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
+using ScrapySharp.Network;
+using CSJsonDB;
+using EasyITCenter.Controllers;
+using PuppeteerSharp;
+using Tensorflow;
+using Microsoft.Playwright;
 
 namespace EasyITCenter.ServerCoreStructure {
 
@@ -162,9 +168,43 @@ namespace EasyITCenter.ServerCoreStructure {
         /// Sends the mass mail.
         /// </summary>
         /// <param name="mailRequests">The mail requests.</param>
-        public static void SendMassEmail(List<SendMailRequest> mailRequests) {
-            mailRequests.ForEach(mailRequest => { SendEmail(mailRequest, true); });
+        public static async void SendMassEmail(List<SendMailRequest> mailRequests) {
+            mailRequests.ForEach(async mailRequest => {
+                //Scrap HTML Url
+                if (!string.IsNullOrWhiteSpace(mailRequest.HtmlUrl)) {
+                    ScrapingBrowser? browser = new ScrapingBrowser();
+                    WebPage? resultsPage = await browser.NavigateToPageAsync(new Uri(mailRequest.HtmlUrl));
+                    mailRequest.Content = resultsPage.Html.InnerHtml;
+                }
+                //Scrap PDF Urls
+                if (mailRequest.PdfUrl?.Count > 0) {
+                    mailRequest.PdfUrl.ForEach(async pdfUrl => {
+                        var browserFetcher = new BrowserFetcher();
+                        await browserFetcher.DownloadAsync();
+                        await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+                        await using var page = await browser.NewPageAsync();
+                        await page.GoToAsync(pdfUrl);
+                        await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+                        byte[]? attachment = await page.PdfDataAsync();
+                        mailRequest.Attachments?.Add(new Tuple<string, byte[]>(FileOperations.GetLastFolderFromPath(pdfUrl),attachment));
+                    });
+                }
+                //Scrap Image Urls
+                if (mailRequest.ImageUrl?.Count > 0) {
+                    mailRequest.ImageUrl?.ForEach(async imageUrl => {
+                        using var playwright = await Playwright.CreateAsync();
+                        await using var browser = await playwright.Chromium.LaunchAsync();
+                        var page = await browser.NewPageAsync();
+                        await page.GotoAsync(imageUrl);
+                        byte[]? attachment = await page.ScreenshotAsync();
+                        mailRequest.Attachments?.Add(new Tuple<string, byte[]>(FileOperations.GetLastFolderFromPath(imageUrl), attachment));
+                    });
+                }
+                SendEmail(mailRequest, true);
+            });
         }
+
+
 
         /// <summary>
         /// System Mailer sending Emails To service email with detected fail for analyze and
@@ -175,6 +215,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="mailRequest">    </param>
         /// <param name="sendImmediately"></param>
         public static string SendEmail(SendMailRequest mailRequest, bool sendImmediately = false) {
+            List<string> tempFiles = null;
             try {
                 if ((!SrvRuntime.DebugMode && !bool.Parse(DbOperations.GetServerParameterLists("ConfigLogWarnPlusToDbEnabled").Value)) || sendImmediately) {
                     if (bool.Parse(DbOperations.GetServerParameterLists("ServiceCoreCheckerEmailSenderActive").Value) || sendImmediately) {
@@ -187,6 +228,18 @@ namespace EasyITCenter.ServerCoreStructure {
                         Email.Body = mailRequest.Content;
                         Email.IsBodyHtml = true;
 
+                        //Attachments
+                        if (mailRequest.Attachments?.Count > 0) {
+                            mailRequest.Attachments.ForEach(attachment => {
+                                string path = Path.Combine(SrvRuntime.TempPath, DataOperations.RandomString(20), attachment.Item1);
+                                tempFiles?.Add(path);
+                                FileOperations.ByteArrayToFile(path, attachment.Item2);
+                                Email.Attachments.Add(new Attachment(path));
+                            });
+                            
+                        }
+                        
+
                         SmtpClient MailClient = new(DbOperations.GetServerParameterLists("EmailerSMTPServerAddress").Value, int.Parse(DbOperations.GetServerParameterLists("EmailerSMTPPort").Value)) {
                             Credentials = new NetworkCredential(DbOperations.GetServerParameterLists("EmailerSMTPLoginUsername").Value, DbOperations.GetServerParameterLists("EmailerSMTPLoginPassword").Value),
                             EnableSsl = bool.Parse(DbOperations.GetServerParameterLists("EmailerSMTPSslIsEnabled").Value),
@@ -195,6 +248,8 @@ namespace EasyITCenter.ServerCoreStructure {
                         };
                         MailClient.Timeout = 5000;
                         MailClient.SendAsync(Email, Guid.NewGuid().ToString());
+
+                        try { tempFiles?.ForEach(tempFile => { Directory.Delete(Path.GetDirectoryName(tempFile)); }); } catch { }
                     }
                 }
                 else {

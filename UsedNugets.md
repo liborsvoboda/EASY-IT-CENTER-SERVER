@@ -1,6 +1,4 @@
-﻿chyba smazani virtuasl table - posila ID menu misto ID virtual table
-
-chyba zobrazeni kodu v Portal menu administration
+﻿chyba zobrazeni kodu v Portal menu administration
 
 
 # Double Path for saving

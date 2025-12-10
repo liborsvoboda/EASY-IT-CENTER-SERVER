@@ -31,7 +31,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public static string ServerPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "serverportal");
         public static string UserPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users");
         public static string UserGuestPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users","guest");
-
+        public static string TempPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users", "temp");
 
 
         public static string ConfigFile { get; set; } = "config.json";

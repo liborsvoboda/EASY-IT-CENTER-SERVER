@@ -1,5 +1,6 @@
 ﻿using CSJsonDB;
 using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Presentation;
 using EasyITCenter.DBModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -433,22 +434,49 @@ namespace EasyITCenter.Controllers
         [AllowAnonymous]
         [HttpPost("/PortalApiTableService/SetEmailTemplate")]
         public async Task<string> SetEmailTemplate([FromBody] EmailTemplateRequest emailTemplateRequest) {
-            EasyITCenterContext data = new EasyITCenterContext();
+            EasyITCenterContext data = new EasyITCenterContext(); List<PortalApiTableColumnDataList>? original = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    string recGuid = Guid.NewGuid().ToString().ToUpper();
-                    List<PortalApiTableColumnDataList> record = new();
-                    record.Add(new PortalApiTableColumnDataList() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "TemplateName", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.TemplateName, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                    record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.HtmlContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                    record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
 
-                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                        data.PortalApiTableColumnDataLists.AddRange(record);
-                        data.SaveChanges();
-                        return true;
-                    });
+                    if (string.IsNullOrWhiteSpace(emailTemplateRequest.RecGuid)) {
+                        string recGuid = Guid.NewGuid().ToString().ToUpper();
+                        List<PortalApiTableColumnDataList> record = new();
+                        record.Add(new PortalApiTableColumnDataList() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "TemplateName", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.TemplateName, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.HtmlContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
 
-                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 3, ErrorMessage = recGuid });
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.AddRange(record);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    } else {
+                        using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                            original = new EasyITCenterContext().PortalApiTableColumnDataLists
+                                .Where(a => a.ApiTableName == "EmailTemplateList" && a.UserId == HtttpContextExtension.GetUserId() && a.RecGuid == emailTemplateRequest.RecGuid)
+                                .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                        }
+
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.RemoveRange(original);
+                            data.SaveChanges();
+                            return true;
+                        });
+
+                        original.ForEach(origItem => {
+                            if (origItem.ApiTableColumnName == "TemplateName") { origItem.Id = 0; origItem.Value = emailTemplateRequest.TemplateName; }
+                            else if (origItem.ApiTableColumnName == "HtmlContent") { origItem.Id = 0; origItem.Value = emailTemplateRequest.HtmlContent; } 
+                            else if (origItem.ApiTableColumnName == "Description") { origItem.Id = 0; origItem.Value = emailTemplateRequest.Description; }
+                        });
+
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.AddRange(original);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    }
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 3, ErrorMessage = string.Empty });
                 } else {
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
                 }
@@ -468,7 +496,7 @@ namespace EasyITCenter.Controllers
                 if (HtttpContextExtension.IsLogged()) {
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         data = new EasyITCenterContext().PortalApiTableColumnDataLists
-                            .Where(a => a.ApiTableName == "EmailTemplateList" && a.UserId == HtttpContextExtension.GetUserId())
+                            .Where(a => a.ApiTableName == "EmailTemplateList" /*&& a.UserId == HtttpContextExtension.GetUserId()*/)
                             .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
                     }
                 } else {
