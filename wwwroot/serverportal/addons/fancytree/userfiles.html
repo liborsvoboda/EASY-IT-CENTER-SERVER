@@ -467,8 +467,8 @@
 
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
                     new Function(dataJs)();
-                    $("#MonacoTheme").show();
-                    $("#MonacoLanguage").show();
+                    //$("#MonacoTheme").show();
+                    //$("#MonacoLanguage").show();
                     setTimeout(function () {
                         if ($('#DataTree').fancytree("getActiveNode") != null) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue($('#DataTree').fancytree("getActiveNode").key); }
                     }, 1000);

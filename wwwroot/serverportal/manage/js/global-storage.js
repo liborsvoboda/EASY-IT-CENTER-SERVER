@@ -81,11 +81,6 @@ window.WindowButtons = [
         html: "<span class='mif-video-camera' title='Record Video'></span>",
         cls: "sys-button",
         onclick: "Gs.Media.CaptureScreenToVideo()"
-    },
-    {
-        html: "<span class='mif-language' title='Translate'></span>",
-        cls: "sys-button",
-        onclick: "alert('You press user button')"
     }
 ]
 

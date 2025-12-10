@@ -43,7 +43,8 @@ namespace EasyITCenter.Controllers
     public partial class EmailTemplateRequest {
         public string RecGuid { get; set; } = null;
         public string TemplateName { get; set; }
-        public string Content { get; set; }
+        public string HtmlContent { get; set; }
+        public string Description { get; set; }
     }
 
 
@@ -438,7 +439,8 @@ namespace EasyITCenter.Controllers
                     string recGuid = Guid.NewGuid().ToString().ToUpper();
                     List<PortalApiTableColumnDataList> record = new();
                     record.Add(new PortalApiTableColumnDataList() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "TemplateName", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.TemplateName, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                    record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "Content", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.Content, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.HtmlContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
 
                     DatabaseContextExtensions.RunTransaction(data, (trans) => {
                         data.PortalApiTableColumnDataLists.AddRange(record);
@@ -454,6 +456,29 @@ namespace EasyITCenter.Controllers
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
         }
-        
+
+
+
+        [AllowAnonymous]
+        [HttpGet("/PortalApiTableService/GetEmailTemplateList")]
+        public async Task<string> GetEmailTemplateList()
+        {
+            List<PortalApiTableColumnDataList> data = new();
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                        data = new EasyITCenterContext().PortalApiTableColumnDataLists
+                            .Where(a => a.ApiTableName == "EmailTemplateList" && a.UserId == HtttpContextExtension.GetUserId())
+                            .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                    }
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
+
     }
 }

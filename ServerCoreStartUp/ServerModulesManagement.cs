@@ -50,7 +50,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                             .UseDiagrams().UseEmphasisExtras().UseFigures().UseListExtras().UseFooters().UseFootnotes()
                             .UseGlobalization().UseMathematics().UseMediaLinks().UsePreciseSourceLocation().UseReferralLinks()
                             .UseSmartyPants().UseSyntaxHighlighting().UseTableOfContent().UseTaskLists().UseDFMCodeInfoPrefix()
-                            .UseHighlightJs().UseInteractiveCode().UseXref().UseImageAsFigure(false).UseSyntaxHighlighting()//.UsePrism()
+                            .UseHighlightJs().UseInteractiveCode().UseXref().UseImageAsFigure(false).UseSyntaxHighlighting()
                             .UseUrlRewriter(link => link?.Url?.AsRelativeResource()).UseHeadingIdRewriter().UseDFMCodeInfoPrefix()
                             //.UseUrlRewriter(link => link.Url.Replace(!ServerConfigSettings.ConfigServerStartupOnHttps && ServerConfigSettings.ConfigServerStartupHTTPAndHTTPS ? "https://" : "http://", !ServerConfigSettings.ConfigServerStartupOnHttps && ServerConfigSettings.ConfigServerStartupHTTPAndHTTPS ? "http://" : "https://"))
                             .UseFigures().UseTaskLists().UseCustomContainers().UseGenericAttributes();//.Build();

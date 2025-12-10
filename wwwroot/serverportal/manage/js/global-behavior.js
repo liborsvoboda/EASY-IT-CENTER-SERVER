@@ -174,7 +174,11 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("SolutionCodeLibraryList"); 
     Metro.storage.delItem("SolutionMixedEnumList");
     Metro.storage.delItem("SelectedEditor");
-    
+    Metro.storage.delItem("PortalApiTableList");
+    Metro.storage.delItem("EmailTemplateList");
+
+    Metro.storage.delItem("SelectedEditor");
+
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
     Metro.storage.setItem('SelectedMenu', menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
