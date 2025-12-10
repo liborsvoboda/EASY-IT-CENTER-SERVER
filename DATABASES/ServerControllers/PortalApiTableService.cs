@@ -40,6 +40,12 @@ namespace EasyITCenter.Controllers
         public string Response { get; set; } = null;
     }
 
+    public partial class EmailTemplateRequest {
+        public string RecGuid { get; set; } = null;
+        public string TemplateName { get; set; }
+        public string Content { get; set; }
+    }
+
 
     public partial class ResponseRequest {
         public int Id { get; set; }
@@ -421,5 +427,33 @@ namespace EasyITCenter.Controllers
             return JsonSerializer.Serialize(result, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
 
+
+
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/SetEmailTemplate")]
+        public async Task<string> SetEmailTemplate([FromBody] EmailTemplateRequest emailTemplateRequest) {
+            EasyITCenterContext data = new EasyITCenterContext();
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    string recGuid = Guid.NewGuid().ToString().ToUpper();
+                    List<PortalApiTableColumnDataList> record = new();
+                    record.Add(new PortalApiTableColumnDataList() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "TemplateName", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.TemplateName, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "Content", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.Content, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+
+                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                        data.PortalApiTableColumnDataLists.AddRange(record);
+                        data.SaveChanges();
+                        return true;
+                    });
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 3, ErrorMessage = recGuid });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+        
     }
 }

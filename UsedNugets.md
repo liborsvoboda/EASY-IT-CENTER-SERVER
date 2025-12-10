@@ -1,4 +1,9 @@
-﻿# Double Path for saving
+﻿chyba smazani virtuasl table - posila ID menu misto ID virtual table
+
+chyba zobrazeni kodu v Portal menu administration
+
+
+# Double Path for saving
                 System.IO.File.WriteAllText(Path.Combine(SrvRuntime.StartupPath, "wwwroot", "ServerCoreTools","systemTools", "newsletter-preview", "index.html"), data);
                 System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, "ServerCoreTools", "systemTools", "newsletter-preview", "index.html"), data);
 
