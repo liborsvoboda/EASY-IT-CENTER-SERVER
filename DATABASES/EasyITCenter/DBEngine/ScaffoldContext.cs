@@ -98,7 +98,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SystemTranslationList> SystemTranslationLists { get; set; } = null!;
         public virtual DbSet<TemplateList> TemplateLists { get; set; } = null!;
         public virtual DbSet<UserAccessKeyList> UserAccessKeyLists { get; set; } = null!;
-        public virtual DbSet<UserImageGalleryList> UserImageGalleryLists { get; set; } = null!;
         public virtual DbSet<UserParameterList> UserParameterLists { get; set; } = null!;
         public virtual DbSet<WebBannedIpAddressList> WebBannedIpAddressLists { get; set; } = null!;
         public virtual DbSet<WebCoreFileList> WebCoreFileLists { get; set; } = null!;
@@ -1541,17 +1540,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserAccessKeyList_SolutionUserList");
-            });
-
-            modelBuilder.Entity<UserImageGalleryList>(entity =>
-            {
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserImageGalleryLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserImageGalleryList_UserList");
             });
 
             modelBuilder.Entity<UserParameterList>(entity =>

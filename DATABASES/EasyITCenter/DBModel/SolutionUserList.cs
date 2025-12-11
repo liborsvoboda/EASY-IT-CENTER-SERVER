@@ -86,7 +86,6 @@ namespace EasyITCenter.DBModel
             SystemTranslationLists = new HashSet<SystemTranslationList>();
             TemplateLists = new HashSet<TemplateList>();
             UserAccessKeyLists = new HashSet<UserAccessKeyList>();
-            UserImageGalleryLists = new HashSet<UserImageGalleryList>();
             UserParameterLists = new HashSet<UserParameterList>();
             WebBannedIpAddressLists = new HashSet<WebBannedIpAddressList>();
             WebCoreFileLists = new HashSet<WebCoreFileList>();
@@ -286,8 +285,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<TemplateList> TemplateLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<UserAccessKeyList> UserAccessKeyLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<UserImageGalleryList> UserImageGalleryLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<UserParameterList> UserParameterLists { get; set; }
         [InverseProperty("User")]
