@@ -1435,10 +1435,10 @@ namespace EasyITCenter.DBModel
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemMenuList_SystemGroupMenuList");
 
-                entity.HasOne(d => d.InheritedMenuTypeNavigation)
+                entity.HasOne(d => d.InheritedSystemMenuTypeNavigation)
                     .WithMany(p => p.SystemMenuLists)
                     .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedMenuType)
+                    .HasForeignKey(d => d.InheritedSystemMenuType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemMenuList_SolutionMixedEnumList");
 

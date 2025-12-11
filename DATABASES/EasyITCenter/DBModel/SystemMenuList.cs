@@ -14,7 +14,7 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string InheritedMenuType { get; set; } = null!;
+        public string InheritedSystemMenuType { get; set; } = null!;
         public int GroupId { get; set; }
         [StringLength(250)]
         [Unicode(false)]
@@ -39,7 +39,7 @@ namespace EasyITCenter.DBModel
         [ForeignKey("GroupId")]
         [InverseProperty("SystemMenuLists")]
         public virtual SystemGroupMenuList Group { get; set; } = null!;
-        public virtual SolutionMixedEnumList InheritedMenuTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedSystemMenuTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("SystemMenuLists")]
         public virtual SolutionUserList User { get; set; } = null!;
