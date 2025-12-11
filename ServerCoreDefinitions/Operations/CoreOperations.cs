@@ -107,7 +107,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
                 //Check MarkDown Type missing .md for Show in Markdown Layout
-                if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoShowStaticMdAsHtml").Value)) {
+                if (bool.Parse(DbOperations.GetServerParameterLists("StaticMdAsHtmlEnabled").Value)) {
                     if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(routePath) + ".md")) 
                         { validPath = routePath; routeLayout = RouteLayoutTypes.ViewerMarkDownFileLayout; routingResult = RoutingActionTypes.Next; }
                     else if (!routePath.EndsWith("/") && File.Exists(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(routePath) + "/index.md")) 
@@ -177,8 +177,8 @@ namespace EasyITCenter.ServerCoreStructure {
                     mailRequest.Content = resultsPage.Html.InnerHtml;
                 }
                 //Scrap PDF Urls
-                if (mailRequest.PdfUrl?.Count > 0) {
-                    mailRequest.PdfUrl.ForEach(async pdfUrl => {
+                if (mailRequest.PdfUrlList?.Count > 0) {
+                    mailRequest.PdfUrlList.ForEach(async pdfUrl => {
                         var browserFetcher = new BrowserFetcher();
                         await browserFetcher.DownloadAsync();
                         await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
@@ -186,18 +186,18 @@ namespace EasyITCenter.ServerCoreStructure {
                         await page.GoToAsync(pdfUrl);
                         await page.EvaluateExpressionHandleAsync("document.fonts.ready");
                         byte[]? attachment = await page.PdfDataAsync();
-                        mailRequest.Attachments?.Add(new Tuple<string, byte[]>(FileOperations.GetLastFolderFromPath(pdfUrl),attachment));
+                        mailRequest.AttachmentList?.Add(new Tuple<string, byte[]>(FileOperations.GetLastFolderFromPath(pdfUrl),attachment));
                     });
                 }
                 //Scrap Image Urls
-                if (mailRequest.ImageUrl?.Count > 0) {
-                    mailRequest.ImageUrl?.ForEach(async imageUrl => {
+                if (mailRequest.ImageUrlList?.Count > 0) {
+                    mailRequest.ImageUrlList?.ForEach(async imageUrl => {
                         using var playwright = await Playwright.CreateAsync();
                         await using var browser = await playwright.Chromium.LaunchAsync();
                         var page = await browser.NewPageAsync();
                         await page.GotoAsync(imageUrl);
                         byte[]? attachment = await page.ScreenshotAsync();
-                        mailRequest.Attachments?.Add(new Tuple<string, byte[]>(FileOperations.GetLastFolderFromPath(imageUrl), attachment));
+                        mailRequest.AttachmentList?.Add(new Tuple<string, byte[]>(FileOperations.GetLastFolderFromPath(imageUrl), attachment));
                     });
                 }
                 SendEmail(mailRequest, true);
@@ -229,8 +229,8 @@ namespace EasyITCenter.ServerCoreStructure {
                         Email.IsBodyHtml = true;
 
                         //Attachments
-                        if (mailRequest.Attachments?.Count > 0) {
-                            mailRequest.Attachments.ForEach(attachment => {
+                        if (mailRequest.AttachmentList?.Count > 0) {
+                            mailRequest.AttachmentList.ForEach(attachment => {
                                 string path = Path.Combine(SrvRuntime.TempPath, DataOperations.RandomString(20), attachment.Item1);
                                 tempFiles?.Add(path);
                                 FileOperations.ByteArrayToFile(path, attachment.Item2);

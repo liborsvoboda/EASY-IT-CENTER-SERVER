@@ -27,7 +27,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="app"></param>
         internal static void EnableAutoMinify(ref IApplicationBuilder app) {
-            if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoMinify").Value)) { app.UseWebOptimizer(); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("AutoMinifyEnabled").Value)) { app.UseWebOptimizer(); }
         }
                
 
@@ -126,29 +126,27 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                 
                 //Monaco Support
-                endpoints.MapPost("/MonacoCompletion/{0}", async (e) =>
-                {
-                    using var reader = new StreamReader(e.Request.Body);
-                    string text = await reader.ReadToEndAsync();
-                    if (text != null) {
-                        if (e.Request.Path.Value?.EndsWith("complete") == true) {
-                            var tabCompletionResults = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<TabCompletionRequest>(text));
-                            await JsonSerializer.SerializeAsync(e.Response.Body, tabCompletionResults); return;
+                endpoints.MapPost("/MonacoCompletion/{0}", async (e) => {
+                    try {
+                        using var reader = new StreamReader(e.Request.Body);
+                        string text = await reader.ReadToEndAsync();
+                        if (text != null) {
+                            if (e.Request.Path.Value?.EndsWith("complete") == true) {
+                                var tabCompletionResults = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<TabCompletionRequest>(text));
+                                await JsonSerializer.SerializeAsync(e.Response.Body, tabCompletionResults); return;
+                            } else if (e.Request.Path.Value?.EndsWith("signature") == true) {
+                                var signatureHelpResult = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<SignatureHelpRequest>(text));
+                                await JsonSerializer.SerializeAsync(e.Response.Body, signatureHelpResult); return;
+                            } else if (e.Request.Path.Value?.EndsWith("hover") == true) {
+                                var hoverInfoResult = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<HoverInfoRequest>(text));
+                                await JsonSerializer.SerializeAsync(e.Response.Body, hoverInfoResult); return;
+                            } else if (e.Request.Path.Value?.EndsWith("codeCheck") == true) {
+                                var codeCheckResults = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<CodeCheckRequest>(text));
+                                await JsonSerializer.SerializeAsync(e.Response.Body, codeCheckResults); return;
+                            }
                         }
-                        else if (e.Request.Path.Value?.EndsWith("signature") == true) {
-                            var signatureHelpResult = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<SignatureHelpRequest>(text));
-                            await JsonSerializer.SerializeAsync(e.Response.Body, signatureHelpResult); return;
-                        }
-                        else if (e.Request.Path.Value?.EndsWith("hover") == true) {
-                            var hoverInfoResult = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<HoverInfoRequest>(text));
-                            await JsonSerializer.SerializeAsync(e.Response.Body, hoverInfoResult); return;
-                        }
-                        else if (e.Request.Path.Value?.EndsWith("codeCheck") == true) {
-                            var codeCheckResults = await CompletitionRequestHandler.Handle(JsonSerializer.Deserialize<CodeCheckRequest>(text));
-                            await JsonSerializer.SerializeAsync(e.Response.Body, codeCheckResults); return;
-                        }
-                    }
-                    e.Response.StatusCode = 405;
+                        e.Response.StatusCode = 405;
+                    } catch { }
                 });
                 
 

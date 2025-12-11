@@ -75,9 +75,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureAutoMinify(ref IServiceCollection services) {
-            if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoMinify").Value)) {
+            if (bool.Parse(DbOperations.GetServerParameterLists("AutoMinifyEnabled").Value)) {
                 services.AddWebOptimizer(cfg => {
-                    cfg.MinifyCssFiles(); cfg.MinifyJsFiles();/*cfg.MinifyHtmlFiles();*/
+                    cfg.MinifyCssFiles(); cfg.MinifyJsFiles();cfg.MinifyHtmlFiles();
                 }, option => {  
                     option.EnableTagHelperBundling = true; 
                     option.AllowEmptyBundle = true;

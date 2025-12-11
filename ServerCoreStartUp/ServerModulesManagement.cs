@@ -37,7 +37,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="services"></param>
         internal static void ConfigureMarkdownAsHtmlFiles(ref IServiceCollection services) {
-            if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoShowStaticMdAsHtml").Value))
+            if (bool.Parse(DbOperations.GetServerParameterLists("StaticMdAsHtmlEnabled").Value))
             {
                 services.AddMarkdown(config =>
                 {
@@ -276,7 +276,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         /// <param name="app"></param>
         internal static void EnableMarkdownAsHtmlFiles(ref IApplicationBuilder app) {
-            if (bool.Parse(DbOperations.GetServerParameterLists("EnableAutoShowStaticMdAsHtml").Value)) { app.UseMarkdown(); }
+            if (bool.Parse(DbOperations.GetServerParameterLists("StaticMdAsHtmlEnabled").Value)) { app.UseMarkdown(); }
         }
 
 

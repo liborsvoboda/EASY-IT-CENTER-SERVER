@@ -9,9 +9,9 @@
         public string? Subject { get; set; } = null;
         public string? Content { get; set; } = null;
         public string? HtmlUrl { get; set; } = null;
-        public List<string>? PdfUrl { get; set; } = null;
-        public List<string>? ImageUrl { get; set; } = null;
-        public List<Tuple<string,byte[]>>? Attachments { get; set; } = null;
+        public List<string>? PdfUrlList { get; set; } = null;
+        public List<string>? ImageUrlList { get; set; } = null;
+        public List<Tuple<string,byte[]>>? AttachmentList { get; set; } = null;
     }
 
 
