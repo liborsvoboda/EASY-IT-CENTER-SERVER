@@ -6,14 +6,10 @@ using Dapper;
 namespace EasyITCenter.DBModel {
 
 
-    public class RepoSettings {
-        public string RepoPath { get; set; } = Path.Combine(SrvRuntime.SrvPrivatePath,"Databases","PlayGround");
-    }
-
 
     public class RepoMapper {
 
-        private string connectionString = null;
+        private string connectionString = $"Data Source={System.IO.Path.Combine(SrvRuntime.SrvPrivatePath, "Databases", "Playground", "PlayGround.db")};";
         private IDbConnection connection;
 
 
@@ -34,7 +30,6 @@ namespace EasyITCenter.DBModel {
 
 
         public RepoMapper(string dbFile) {
-            //connectionString = string.Format("Data Source={0}", dbfile);
             CreateDatabaseIfNotExists(dbFile);
             SimpleCRUD.SetDialect(SimpleCRUD.Dialect.SQLite);
         }
@@ -69,7 +64,7 @@ namespace EasyITCenter.DBModel {
 
 
         private int ExecuteQuery(string query) {
-            var conn = GetConnection();
+            IDbConnection? conn = GetConnection();
             try
             {
                 using (SqliteCommand cmd = new SqliteCommand(query, (SqliteConnection)conn))

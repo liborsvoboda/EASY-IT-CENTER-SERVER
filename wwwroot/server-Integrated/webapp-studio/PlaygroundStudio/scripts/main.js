@@ -2429,6 +2429,8 @@
             $.post(restBaseUrl + "newFile", function (resp) {
                 if (resp.success) {
                     //resp.Result.Name
+                    console.log("res1", resp.Result, "res2", resp.result);
+                
                     loadInEditors(resp.result.name, resp.result.milestone, resp.result.html, resp.result.css, resp.result.typescript);
                     setHash(resp.result.name + "-" + resp.result.milestone);
                 }

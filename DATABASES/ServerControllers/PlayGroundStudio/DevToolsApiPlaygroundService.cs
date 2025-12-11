@@ -22,10 +22,10 @@ namespace EasyITCenter.Controllers {
         private string repoPath;
 
 
-        public PlayGroundStudioControllers(IOptions<RepoSettings> settings, ILogger<PlayGroundStudioControllers> logger) {
-            repoPath = settings.Value.RepoPath;
+        public PlayGroundStudioControllers(ILogger<PlayGroundStudioControllers> logger) {
+            repoPath = System.IO.Path.Combine(SrvRuntime.SrvPrivatePath, "Databases", "Playground");
             SimpleCRUD.SetDialect(SimpleCRUD.Dialect.SQLite);
-            mapper = new RepoMapper(System.IO.Path.Combine(repoPath, "PlayGround.db"));
+            mapper = new RepoMapper(System.IO.Path.Combine(SrvRuntime.SrvPrivatePath, "Databases", "Playground", "PlayGround.db"));
             this.logger = logger;
         }
 
@@ -87,15 +87,15 @@ namespace EasyITCenter.Controllers {
 
             return Json(new HandlerResult()
             {
-                Result = new
+                result = new
                 {
-                    Name = entry.Key,
-                    Milestone = entry.LastMilestone,
-                    HTML = GetDefaultHTML(),
-                    CSS = GetDefaultCSS(),
-                    Typescript = GetDefaultTypescript()
+                    name = entry.Key,
+                    milestone = entry.LastMilestone,
+                    html = GetDefaultHTML(),
+                    css = GetDefaultCSS(),
+                    typescript = GetDefaultTypescript()
                 },
-                Success = true
+                success = true
             });
         }
 
@@ -104,7 +104,7 @@ namespace EasyITCenter.Controllers {
         public IActionResult LoadFile(string file, string milestone) {
             var entry = mapper.GetEntry(file);
             if (entry == null)
-                return Json(new HandlerResult() { Success = false, Message = "File does not exists" });
+                return Json(new HandlerResult() { success = false, message = "File does not exists" });
 
             var path = System.IO.Path.Combine(repoPath, file);
             //if (!System.IO.Directory.Exists(path))
@@ -118,9 +118,9 @@ namespace EasyITCenter.Controllers {
             {
                 int ms;
                 if (!int.TryParse(milestone, out ms))
-                    return Json(new HandlerResult() { Success = false, Message = "Invalid milestone" });
+                    return Json(new HandlerResult() { success = false, message = "Invalid milestone" });
                 if (ms > entry.LastMilestone)
-                    return Json(new HandlerResult() { Success = false, Message = "Invalid milestone" });
+                    return Json(new HandlerResult() { success = false, message = "Invalid milestone" });
             }
 
             string html;
@@ -159,45 +159,44 @@ namespace EasyITCenter.Controllers {
 
             return Json(new HandlerResult()
             {
-                Result = new
+                result = new
                 {
-                    Name = file,
-                    Milestone = milestone,
-                    Description = entry.Description,
-                    HTML = html,
-                    CSS = css,
-                    Typescript = typescript
+                    name = file,
+                    milestone = milestone,
+                    description = entry.Description,
+                    html = html,
+                    css = css,
+                    typescript = typescript
                 },
-                Success = true
+                success = true
             });
         }
 
 
         [HttpPost("/ToolsService/PlayGroundStudio/saveFile")]
+        //public IActionResult SaveFile([FromBody] string name) {
         public IActionResult SaveFile(string name, int milestone, string html, string css, string typescript, string output) {
             if (string.IsNullOrEmpty(name) || name.Contains(".."))
-                return Json(new HandlerResult() { Success = false });
+                return Json(new HandlerResult() { success = false });
 
             var entry = mapper.GetEntry(name);
             if (entry == null)
-                return Json(new HandlerResult() { Success = false });
+                return Json(new HandlerResult() { success = false });
 
-            if (milestone < entry.LastMilestone)
-            {
-                return Json(new HandlerResult()
-                {
-                    Success = false,
-                    Message = "Can't save an older milestone. Last milestone is " + entry.LastMilestone
-                });
-            }
+            //if (milestone < entry.LastMilestone) {
+            //    return Json(new HandlerResult() {
+            //        success = false,
+            //        message = "Can't save an older milestone. Last milestone is " + entry.LastMilestone
+            //    });
+            //}
 
-            Save(entry, html, css, typescript, output);
+            //Save(entry, html, css, typescript, output);
 
             logger.LogInformation("Saving entry " + entry.Key + ", last milestone : " + entry.LastMilestone);
 
             return Json(new HandlerResult()
             {
-                Success = true
+                success = true
             });
         }
 
@@ -209,10 +208,10 @@ namespace EasyITCenter.Controllers {
             try { var names = System.IO.Directory.GetDirectories(repoPath); } catch { }
             return Json(new HandlerResult()
             {
-                Result = entries.OrderByDescending(e => e.LastUpdated)
-                                .Select(e => new { Name = e.Key, Milestone = e.LastMilestone, LastUpdated = e.LastUpdated.ToString("yyyy-MM-dd"), Description = e.Description })
+                result = entries.OrderByDescending(e => e.LastUpdated)
+                                .Select(e => new { name = e.Key, milestone = e.LastMilestone, lastUpdated = e.LastUpdated.ToString("yyyy-MM-dd"), description = e.Description })
                                 .ToArray(),
-                Success = true
+                success = true
             });
         }
 
@@ -222,7 +221,7 @@ namespace EasyITCenter.Controllers {
 
             var entry = mapper.GetEntry(name);
             if (entry == null)
-                return Json(new HandlerResult() { Success = false });
+                return Json(new HandlerResult() { success = false });
             entry.LastMilestone++;
 
             Save(entry, html, css, typescript, output);
@@ -236,13 +235,13 @@ namespace EasyITCenter.Controllers {
             });
             return Json(new HandlerResult()
             {
-                Result = new
+                result = new
                 {
-                    Name = name,
-                    Description = entry.Description,
-                    Milestone = entry.LastMilestone
+                    name = name,
+                    description = entry.Description,
+                    milestone = entry.LastMilestone
                 },
-                Success = true
+                success = true
             });
         }
 
@@ -251,12 +250,12 @@ namespace EasyITCenter.Controllers {
         public IActionResult DeleteMilestone(string name) {
             var entry = mapper.GetEntry(name);
             if (entry == null)
-                return Json(new HandlerResult() { Success = false });
+                return Json(new HandlerResult() { success = false });
 
             if (entry.LastMilestone == 1)
             {
                 mapper.DeleteEntry(entry);
-                return Json(new HandlerResult() { Success = true, Result = true });
+                return Json(new HandlerResult() { success = true, result = true });
             }
             else
             {
@@ -268,7 +267,7 @@ namespace EasyITCenter.Controllers {
                 if (ms != null)
                     mapper.DeleteMilestone(ms);
 
-                return Json(new HandlerResult() { Success = true, Result = false });
+                return Json(new HandlerResult() { success = true, result = false });
             }
         }
 
@@ -277,12 +276,12 @@ namespace EasyITCenter.Controllers {
         public IActionResult UpdateDescription(string name, string description) {
             var entry = mapper.GetEntry(name);
             if (entry == null)
-                return Json(new HandlerResult() { Success = false });
+                return Json(new HandlerResult() { success = false });
 
             entry.Description = description;
             mapper.UpdateEntry(entry);
 
-            return Json(new HandlerResult() { Success = true });
+            return Json(new HandlerResult() { success = true });
         }
 
         private void Save(RepoMapper.Entry entry, string html, string css, string typescript, string output) {
@@ -352,11 +351,6 @@ namespace EasyITCenter.Controllers {
 
         //TODO insert TEMPLATES
         private string GetDefaultHTML() {
-            string path = System.IO.Path.Combine(repoPath, "default.html");
-            if (System.IO.File.Exists(path))
-                return System.IO.File.ReadAllText(path);
-            else
-            {
                 return
 @"<html>
 <head>
@@ -369,41 +363,29 @@ namespace EasyITCenter.Controllers {
 </body>
     
 </html>";
-            }
         }
 
         //TODO insert TEMPLATES
         private string GetDefaultCSS() {
             string path = System.IO.Path.Combine(repoPath, "default.css");
-            if (System.IO.File.Exists(path))
-                return System.IO.File.ReadAllText(path);
-            else
-            {
                 return
 @"body {
 
 }";
-            }
         }
 
         //TODO insert TEMPLATES
         private string GetDefaultTypescript() {
-            string path = System.IO.Path.Combine(repoPath, "default.ts");
-            if (System.IO.File.Exists(path))
-                return System.IO.File.ReadAllText(path);
-            else
-            {
                 return
 @"class Hello {
 
 }";
-            }
         }
 
         public class HandlerResult {
-            public bool Success { get; set; }
-            public object Result { get; set; }
-            public string Message { get; set; }
+            public bool success { get; set; }
+            public object result { get; set; }
+            public string message { get; set; }
         }
 
 
