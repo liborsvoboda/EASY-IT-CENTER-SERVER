@@ -183,14 +183,14 @@ namespace EasyITCenter.Controllers {
             if (entry == null)
                 return Json(new HandlerResult() { success = false });
 
-            //if (milestone < entry.LastMilestone) {
-            //    return Json(new HandlerResult() {
-            //        success = false,
-            //        message = "Can't save an older milestone. Last milestone is " + entry.LastMilestone
-            //    });
-            //}
+            if (milestone < entry.LastMilestone) {
+                return Json(new HandlerResult() {
+                    success = false,
+                    message = "Can't save an older milestone. Last milestone is " + entry.LastMilestone
+                });
+            }
 
-            //Save(entry, html, css, typescript, output);
+            Save(entry, html, css, typescript, output);
 
             logger.LogInformation("Saving entry " + entry.Key + ", last milestone : " + entry.LastMilestone);
 
