@@ -17,7 +17,6 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.Options;
 using ServerCorePages;
-using SFTP;
 using SignalRChat.Hubs;
 using SmtpServer.ComponentModel;
 using System.Diagnostics.Metrics;
@@ -49,22 +48,6 @@ namespace EasyITCenter {
             ServerConfigurationServices.ConfigureScoped(ref services);
             ServerConfigurationServices.ConfigureThirdPartyApi(ref services);
             ServerConfigurationServices.ConfigureLogging(ref services);
-
-
-            services.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.Configure<SFTPServerOptions>(options => Configuration.GetSection("SFTPServer").Bind(options));
-            var serviceprovider = serviceCollection.BuildServiceProvider();
-            var options = serviceprovider.GetRequiredService<IOptions<SFTPServerOptions>>();
-
-            using var stdin = Console.OpenStandardInput();
-            using var stdout = Console.OpenStandardOutput();
-            using var server = new SFTPServer(
-                options,
-                stdin,
-                stdout
-            );
-            await server.Run(new CancellationTokenSource().Token).ConfigureAwait(false);
 
 
             ServerConfigurationServices.ConfigureServerWebPages(ref services);

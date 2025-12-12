@@ -18,17 +18,28 @@ namespace EasyITCenter.ServerCoreStructure {
         public static string StartupPath { get; set; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         
         public static string WebRootPath { get; set; } = Path.Combine(SrvRuntime.StartupPath, "wwwroot");
+
+
         public static string ServerDocPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-doc");
-        public static string SrvModulesPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-Integrated", "server-modules");
+        public static string DownloadsPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-downloads");
+
+
+        public static string SrvModulesPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-integrated", "server-modules");
         public static string SrvPrivatePath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-private");
-        public static string SrvGenerators_path { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-generator");
+
+
+        public static string SrvGenerators_path { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-generators");
         public static string SrvLibraryPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-library");
+
 
         public static string SrvPagesWebPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-PagesWeb");
         public static string SrvPagesHelpPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-PagesHelp");
         
-        public static string SysPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "systemportal");
-        public static string ServerPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "serverportal");
+
+        public static string SystemPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "system-portal");
+        public static string ServerPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-portal");
+        
+
         public static string UserPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users");
         public static string UserGuestPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users","guest");
         public static string TempPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users", "temp");

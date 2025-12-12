@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+    <meta name="author" content="Aona Suzutsuki" />
+    <title>HtttpContextExtension Class</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/menu-icon.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/menu-anim.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/table.css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter/css/shCore.css" type="text/css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter/css/shThemeDefault.css" type="text/css" />
+    <script type="text/javascript" src="../../syntaxhighlighter/js/shCore.js"></script>
+    <script type="text/javascript" src="../../syntaxhighlighter/js/shBrushCSharp.js"></script>
+    <script src="../../js/jquery-1.7.1.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <style type="text/css">
+    </style>
+    <script>
+        $(function () {
+            SyntaxHighlighter.defaults.toolbar = false;
+            SyntaxHighlighter.all();
+
+            registMenu();
+        });
+    </script>
+</head>
+<body>
+
+    <div id="body-container">
+
+        <div id="menu-container">
+            <div id="top-menu-bt-cover">
+                <a class="menu-trigger" href="javascript:void(0);">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div id="menu">
+            <ul>
+                <li><a href="../../index.html">Index</a></li>
+                <li>EasyITCenter
+                    <ul>
+                        <li>Controllers
+                            <ul>
+                                <li><a href="../../EasyITCenter/Controllers/AdministrationService.html">AdministrationService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/AuthenticationService/AuthenticationService.html">AuthenticationService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/BackendCheckService.html">BackendCheckService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DatabaseService.html">DatabaseService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/MDDocBookGenerator.html">MDDocBookGenerator</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/AdminApiGeneratorMdBookService/AdminApiGeneratorMdBookService.html">AdminApiGeneratorMdBookService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerApiGeneratorServerIndexService.html">ServerApiGeneratorServerIndexService</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/Controllers/ServerApiGeneratorServerIndexService/MDGeneratorCreateIndexRequest.html">MDGeneratorCreateIndexRequest</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../../EasyITCenter/Controllers/EasyITCenterContext.html">EasyITCenterContext</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DatabaseContextExtensions.html">DatabaseContextExtensions</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DownloadService/DownloadService.html">DownloadService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ExportService/ExportService.html">ExportService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/GithubService/GithubService.html">GithubService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/HandleBarsService/HandleBarsService.html">HandleBarsService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/JsonGeneratorService/JsonGeneratorService.html">JsonGeneratorService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SendMailRequest.html">SendMailRequest</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/EmailService.html">EmailService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RunProcessRequest.html">RunProcessRequest</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ProcessService/ProcessService.html">ProcessService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RSSLoad/RSSLoad.html">RSSLoad</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SomeRSSProvider.html">SomeRSSProvider</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RssService.html">RssService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerDocApi/ServerDocApi.html">ServerDocApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RobotsController.html">RobotsController</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SitemapController.html">SitemapController</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/StatusPageService.html">StatusPageService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/UserStorageService/UserStorageService.html">UserStorageService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebSocketService.html">WebSocketService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemStdAuthGenericProviderApi`3.html">SystemStdAuthGenericProviderApi`3</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemStdFreeGenericProviderApi`3.html">SystemStdFreeGenericProviderApi`3</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ExpertDocApi/ExpertDocApi.html">ExpertDocApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemBuilderOnlinePreviewApi/SystemBuilderOnlinePreviewApi.html">SystemBuilderOnlinePreviewApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesSystemToolsApi/WebPagesSystemToolsApi.html">WebPagesSystemToolsApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebGlobalMessageModuleApi/WebGlobalMessageModuleApi.html">WebGlobalMessageModuleApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesAdminGroupMenuListApi/WebPagesAdminGroupMenuListApi.html">WebPagesAdminGroupMenuListApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesSystemDataGetOnlyApi.html">WebPagesSystemDataGetOnlyApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerWebProviderGetOnlyApi.html">ServerWebProviderGetOnlyApi</a></li>
+                            </ul>
+                        </li>
+                        <li>DBModel
+                            <ul>
+                                <li><a href="../../EasyITCenter/DBModel/DBResult.html">DBResult</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/ResultMessage.html">ResultMessage</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/AuthenticateResponse.html">AuthenticateResponse</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/SetReportFilter.html">SetReportFilter</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/GenericDataList.html">GenericDataList</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/CustomMessageList.html">CustomMessageList</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/GenericTable.html">GenericTable</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreStructure
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/HtttpContextExtension.html">HtttpContextExtension</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DBConn.html">DBConn</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ServerStatusTypes.html">ServerStatusTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/RouteLayoutTypes.html">RouteLayoutTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/RoutingActionTypes.html">RoutingActionTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SupportGenFileTypes.html">SupportGenFileTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ServerLocalDbDialsTypes.html">ServerLocalDbDialsTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SrvRuntime.html">SrvRuntime</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/JsonArray.html">JsonArray</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/JsonObject.html">JsonObject</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/CoreOperations.html">CoreOperations</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/ServerCoreStructure/CoreOperations/SrvOStype.html">SrvOStype</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DataOperations.html">DataOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DbOperations.html">DbOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/FileOperations/FileOperations.html">FileOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/NetOperations.html">NetOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ProcessOperations.html">ProcessOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SystemPortalOperations.html">SystemPortalOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/UserStorageOperations.html">UserStorageOperations</a></li>
+                            </ul>
+                        </li>
+                        <li>ControllersExtensions
+                            <ul>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/ServerCorePostFileRotatorApi.html">ServerCorePostFileRotatorApi</a></li>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/FileMinifyService.html">FileMinifyService</a></li>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/ServerCoreWebToolsGenApi.html">ServerCoreWebToolsGenApi</a></li>
+                            </ul>
+                        </li>
+                        <li>WebClasses
+                            <ul>
+                                <li><a href="../../EasyITCenter/WebClasses/DBWebApiResponses.html">DBWebApiResponses</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/ServerWebPagesToken.html">ServerWebPagesToken</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UserConfig.html">UserConfig</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/WebMessage.html">WebMessage</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/AutoGenRequest.html">AutoGenRequest</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/AutoGenConnectionString.html">AutoGenConnectionString</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UploadGeneratorFiles.html">UploadGeneratorFiles</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UploadFileData.html">UploadFileData</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/CarouselImage.html">CarouselImage</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/CarouselVideo.html">CarouselVideo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../../EasyITCenter/EICServer.html">EICServer</a></li>
+                        <li>Managers
+                            <ul>
+                                <li><a href="../../EasyITCenter/Managers/WebSocketLocation.html">WebSocketLocation</a></li>
+                                <li><a href="../../EasyITCenter/Managers/WebSocketManager.html">WebSocketManager</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreServers
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServer/HostedFtpServer.html">HostedFtpServer</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServerMembershipProvider.html">HostedFtpServerMembershipProvider</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServerMembershipProvider/CustomFtpUser.html">CustomFtpUser</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Services
+                            <ul>
+                                <li><a href="../../EasyITCenter/Services/ServerCoreAutoScheduler.html">ServerCoreAutoScheduler</a></li>
+                                <li><a href="../../EasyITCenter/Services/AutoScheduledJob.html">AutoScheduledJob</a></li>
+                                <li><a href="../../EasyITCenter/Services/GenericApiServiceAsync`2.html">GenericApiServiceAsync`2</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskProcess.html">ServerCycleTaskProcess</a></li>
+                                <li><a href="../../EasyITCenter/Services/HealthCheckActionService.html">HealthCheckActionService</a></li>
+                                <li><a href="../../EasyITCenter/Services/IServerCycleTaskService.html">IServerCycleTaskService</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskList.html">ServerCycleTaskList</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskListHealthCheck.html">ServerCycleTaskListHealthCheck</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskMiddleware.html">ServerCycleTaskMiddleware</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerWebSockeMonitorService.html">ServerWebSockeMonitorService</a></li>
+                                <li><a href="../../EasyITCenter/Services/WebSocketLogger.html">WebSocketLogger</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreConfiguration
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerConfigurationServices.html">ServerConfigurationServices</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerEnablingServices.html">ServerEnablingServices</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerModules.html">ServerModules</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerModulesEnabling.html">ServerModulesEnabling</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../../EasyITCenter/Startup.html">Startup</a></li>
+                        <li><a href="../../EasyITCenter/MimeTypes.html">MimeTypes</a></li>
+                    </ul>
+                </li>
+                <li>AutoResxTranslator
+                    <ul>
+                        <li><a href="../../AutoResxTranslator/SimpleJson.html">SimpleJson</a></li>
+                    </ul>
+                </li>
+                <li>ServerCorePages
+                    <ul>
+                        <li><a href="../../ServerCorePages/SystemModulesModel.html">SystemModulesModel</a></li>
+                        <li><a href="../../ServerCorePages/SystemPortalModel.html">SystemPortalModel</a></li>
+                        <li><a href="../../ServerCorePages/ViewerReportFileModel.html">ViewerReportFileModel</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+        <div id="body-content">
+            <div>
+                <h1>HtttpContextExtension Class</h1>
+                <div>Namespace: EasyITCenter.ServerCoreStructure</div>
+                <div id="inherited">Inherited: <span class="specific-element">System.Object</span></div>
+            </div>
+            <br />
+            Server Communication Extensions for Controlling Data Implmented FullUserTokenData For More<br />Info Modify Auth Claims And Add Get Info Here
+            <br />
+            <div>
+                <h3>Methods</h3>
+                <ol>
+                    <li><a href="#2F6170FD625C50424F8D5042302BFA28FD102569E447572D57EA5BB386386595">IsServerRequest()</a></li>
+                    <li><a href="#E1CD8A78928EED41234F2CC472076DE011E5ABCD095C8625D40E0EDCEE99A7F7">IsAdmin()</a></li>
+                    <li><a href="#462EB3EFF6CAE8B4D1F2ACCD6A7439E7E37885A222D3E54B25352A4CF9F1BB4B">IsSystemUser()</a></li>
+                    <li><a href="#6708095A3103B948979882EED0C688DED47224243AED79CD7F727C29C778823B">IsWebAdmin()</a></li>
+                    <li><a href="#428B64FBAEE228901366BB9FF25AB3A98ACE6BC3F07EC87E152ACEF92DF6518F">IsWebUser()</a></li>
+                    <li><a href="#D7A88F144F7B9F9C997E02F5B19CA5D0BA4EB93F4F83F88D9B6FB987BA18180A">IsLogged()</a></li>
+                    <li><a href="#EA98C802D622C7FB69748D4360144986AD0694139F3C617B78784A996D8C76D0">GetUserRole()</a></li>
+                    <li><a href="#34C4110E11F9F74554DAFD097FA8795A6B7F077E7CD7E8676082497414F5ED72">GetUserId()</a></li>
+                    <li><a href="#0B729A31BFA9B30953B9982070637B12B5C35AEB87C4B73F746E661868378225">GetUserName()</a></li>
+                    <li><a href="#6358D505791DFB0758F4CF993D9C8B2394DD5693D4BD3946C76E328FA10E0EDA">GetUserEmail()</a></li>
+                </ol>
+
+            </div>
+            
+
+            
+
+            
+
+            
+            <br />
+            <div id="methods">
+                <h2>Methods</h2>
+                <br />
+                <div class="method-elem">
+                    <h3 id="2F6170FD625C50424F8D5042302BFA28FD102569E447572D57EA5BB386386595">public IsServerRequest()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Extension for Request IP Address
+                Used by Data Areas Security
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="E1CD8A78928EED41234F2CC472076DE011E5ABCD095C8625D40E0EDCEE99A7F7">public IsAdmin()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Extension for check Admin Role
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="462EB3EFF6CAE8B4D1F2ACCD6A7439E7E37885A222D3E54B25352A4CF9F1BB4B">public IsSystemUser()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Extension for check user Role
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="6708095A3103B948979882EED0C688DED47224243AED79CD7F727C29C778823B">public IsWebAdmin()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Extension for check webAdmin Role
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="428B64FBAEE228901366BB9FF25AB3A98ACE6BC3F07EC87E152ACEF92DF6518F">public IsWebUser()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Extension for check webUser Role
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="D7A88F144F7B9F9C997E02F5B19CA5D0BA4EB93F4F83F88D9B6FB987BA18180A">public IsLogged()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Check HTTP if is the Request is Logged
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="EA98C802D622C7FB69748D4360144986AD0694139F3C617B78784A996D8C76D0">public GetUserRole()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Get UserRole
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="34C4110E11F9F74554DAFD097FA8795A6B7F077E7CD7E8676082497414F5ED72">public GetUserId()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Get UserId
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="0B729A31BFA9B30953B9982070637B12B5C35AEB87C4B73F746E661868378225">public GetUserName()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Get UserName
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="6358D505791DFB0758F4CF993D9C8B2394DD5693D4BD3946C76E328FA10E0EDA">public GetUserEmail()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Get User Email
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+
+            
+
+            
+        </div>
+
+    </div>
+
+    <div id="footer">
+        XMLDocumentToHtml: Copyright (C) 2018 - 2020 Aona Suzutsuki.
+    </div>
+
+</body>
+</html>

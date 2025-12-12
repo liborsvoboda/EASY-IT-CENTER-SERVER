@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+    <meta name="author" content="Aona Suzutsuki" />
+    <title>JsonObject Class</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/menu-icon.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/menu-anim.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/table.css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter/css/shCore.css" type="text/css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter/css/shThemeDefault.css" type="text/css" />
+    <script type="text/javascript" src="../../syntaxhighlighter/js/shCore.js"></script>
+    <script type="text/javascript" src="../../syntaxhighlighter/js/shBrushCSharp.js"></script>
+    <script src="../../js/jquery-1.7.1.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <style type="text/css">
+    </style>
+    <script>
+        $(function () {
+            SyntaxHighlighter.defaults.toolbar = false;
+            SyntaxHighlighter.all();
+
+            registMenu();
+        });
+    </script>
+</head>
+<body>
+
+    <div id="body-container">
+
+        <div id="menu-container">
+            <div id="top-menu-bt-cover">
+                <a class="menu-trigger" href="javascript:void(0);">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div id="menu">
+            <ul>
+                <li><a href="../../index.html">Index</a></li>
+                <li>EasyITCenter
+                    <ul>
+                        <li>Controllers
+                            <ul>
+                                <li><a href="../../EasyITCenter/Controllers/AdministrationService.html">AdministrationService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/AuthenticationService/AuthenticationService.html">AuthenticationService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/BackendCheckService.html">BackendCheckService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DatabaseService.html">DatabaseService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/MDDocBookGenerator.html">MDDocBookGenerator</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/AdminApiGeneratorMdBookService/AdminApiGeneratorMdBookService.html">AdminApiGeneratorMdBookService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerApiGeneratorServerIndexService.html">ServerApiGeneratorServerIndexService</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/Controllers/ServerApiGeneratorServerIndexService/MDGeneratorCreateIndexRequest.html">MDGeneratorCreateIndexRequest</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../../EasyITCenter/Controllers/EasyITCenterContext.html">EasyITCenterContext</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DatabaseContextExtensions.html">DatabaseContextExtensions</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DownloadService/DownloadService.html">DownloadService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ExportService/ExportService.html">ExportService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/GithubService/GithubService.html">GithubService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/HandleBarsService/HandleBarsService.html">HandleBarsService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/JsonGeneratorService/JsonGeneratorService.html">JsonGeneratorService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SendMailRequest.html">SendMailRequest</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/EmailService.html">EmailService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RunProcessRequest.html">RunProcessRequest</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ProcessService/ProcessService.html">ProcessService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RSSLoad/RSSLoad.html">RSSLoad</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SomeRSSProvider.html">SomeRSSProvider</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RssService.html">RssService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerDocApi/ServerDocApi.html">ServerDocApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RobotsController.html">RobotsController</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SitemapController.html">SitemapController</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/StatusPageService.html">StatusPageService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/UserStorageService/UserStorageService.html">UserStorageService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebSocketService.html">WebSocketService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemStdAuthGenericProviderApi`3.html">SystemStdAuthGenericProviderApi`3</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemStdFreeGenericProviderApi`3.html">SystemStdFreeGenericProviderApi`3</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ExpertDocApi/ExpertDocApi.html">ExpertDocApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemBuilderOnlinePreviewApi/SystemBuilderOnlinePreviewApi.html">SystemBuilderOnlinePreviewApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesSystemToolsApi/WebPagesSystemToolsApi.html">WebPagesSystemToolsApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebGlobalMessageModuleApi/WebGlobalMessageModuleApi.html">WebGlobalMessageModuleApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesAdminGroupMenuListApi/WebPagesAdminGroupMenuListApi.html">WebPagesAdminGroupMenuListApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesSystemDataGetOnlyApi.html">WebPagesSystemDataGetOnlyApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerWebProviderGetOnlyApi.html">ServerWebProviderGetOnlyApi</a></li>
+                            </ul>
+                        </li>
+                        <li>DBModel
+                            <ul>
+                                <li><a href="../../EasyITCenter/DBModel/DBResult.html">DBResult</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/ResultMessage.html">ResultMessage</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/AuthenticateResponse.html">AuthenticateResponse</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/SetReportFilter.html">SetReportFilter</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/GenericDataList.html">GenericDataList</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/CustomMessageList.html">CustomMessageList</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/GenericTable.html">GenericTable</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreStructure
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/HtttpContextExtension.html">HtttpContextExtension</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DBConn.html">DBConn</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ServerStatusTypes.html">ServerStatusTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/RouteLayoutTypes.html">RouteLayoutTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/RoutingActionTypes.html">RoutingActionTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SupportGenFileTypes.html">SupportGenFileTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ServerLocalDbDialsTypes.html">ServerLocalDbDialsTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SrvRuntime.html">SrvRuntime</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/JsonArray.html">JsonArray</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/JsonObject.html">JsonObject</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/CoreOperations.html">CoreOperations</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/ServerCoreStructure/CoreOperations/SrvOStype.html">SrvOStype</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DataOperations.html">DataOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DbOperations.html">DbOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/FileOperations/FileOperations.html">FileOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/NetOperations.html">NetOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ProcessOperations.html">ProcessOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SystemPortalOperations.html">SystemPortalOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/UserStorageOperations.html">UserStorageOperations</a></li>
+                            </ul>
+                        </li>
+                        <li>ControllersExtensions
+                            <ul>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/ServerCorePostFileRotatorApi.html">ServerCorePostFileRotatorApi</a></li>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/FileMinifyService.html">FileMinifyService</a></li>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/ServerCoreWebToolsGenApi.html">ServerCoreWebToolsGenApi</a></li>
+                            </ul>
+                        </li>
+                        <li>WebClasses
+                            <ul>
+                                <li><a href="../../EasyITCenter/WebClasses/DBWebApiResponses.html">DBWebApiResponses</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/ServerWebPagesToken.html">ServerWebPagesToken</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UserConfig.html">UserConfig</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/WebMessage.html">WebMessage</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/AutoGenRequest.html">AutoGenRequest</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/AutoGenConnectionString.html">AutoGenConnectionString</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UploadGeneratorFiles.html">UploadGeneratorFiles</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UploadFileData.html">UploadFileData</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/CarouselImage.html">CarouselImage</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/CarouselVideo.html">CarouselVideo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../../EasyITCenter/EICServer.html">EICServer</a></li>
+                        <li>Managers
+                            <ul>
+                                <li><a href="../../EasyITCenter/Managers/WebSocketLocation.html">WebSocketLocation</a></li>
+                                <li><a href="../../EasyITCenter/Managers/WebSocketManager.html">WebSocketManager</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreServers
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServer/HostedFtpServer.html">HostedFtpServer</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServerMembershipProvider.html">HostedFtpServerMembershipProvider</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServerMembershipProvider/CustomFtpUser.html">CustomFtpUser</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Services
+                            <ul>
+                                <li><a href="../../EasyITCenter/Services/ServerCoreAutoScheduler.html">ServerCoreAutoScheduler</a></li>
+                                <li><a href="../../EasyITCenter/Services/AutoScheduledJob.html">AutoScheduledJob</a></li>
+                                <li><a href="../../EasyITCenter/Services/GenericApiServiceAsync`2.html">GenericApiServiceAsync`2</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskProcess.html">ServerCycleTaskProcess</a></li>
+                                <li><a href="../../EasyITCenter/Services/HealthCheckActionService.html">HealthCheckActionService</a></li>
+                                <li><a href="../../EasyITCenter/Services/IServerCycleTaskService.html">IServerCycleTaskService</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskList.html">ServerCycleTaskList</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskListHealthCheck.html">ServerCycleTaskListHealthCheck</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskMiddleware.html">ServerCycleTaskMiddleware</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerWebSockeMonitorService.html">ServerWebSockeMonitorService</a></li>
+                                <li><a href="../../EasyITCenter/Services/WebSocketLogger.html">WebSocketLogger</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreConfiguration
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerConfigurationServices.html">ServerConfigurationServices</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerEnablingServices.html">ServerEnablingServices</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerModules.html">ServerModules</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerModulesEnabling.html">ServerModulesEnabling</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../../EasyITCenter/Startup.html">Startup</a></li>
+                        <li><a href="../../EasyITCenter/MimeTypes.html">MimeTypes</a></li>
+                    </ul>
+                </li>
+                <li>AutoResxTranslator
+                    <ul>
+                        <li><a href="../../AutoResxTranslator/SimpleJson.html">SimpleJson</a></li>
+                    </ul>
+                </li>
+                <li>ServerCorePages
+                    <ul>
+                        <li><a href="../../ServerCorePages/SystemModulesModel.html">SystemModulesModel</a></li>
+                        <li><a href="../../ServerCorePages/SystemPortalModel.html">SystemPortalModel</a></li>
+                        <li><a href="../../ServerCorePages/ViewerReportFileModel.html">ViewerReportFileModel</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+        <div id="body-content">
+            <div>
+                <h1>JsonObject Class</h1>
+                <div>Namespace: EasyITCenter.ServerCoreStructure</div>
+                <div id="inherited">Inherited: <span class="specific-element">System.Object</span></div>
+            </div>
+            <br />
+            Represents the json object.
+            <br />
+            <div>
+                <h3>Constructor</h3>
+                <ol>
+                    <li><a href="#D9EB66CE1F512FFA7D731DD6269577EA0029F2E824B2BEF677EC31E009C4EEF1">JsonObject()</a></li>
+                    <li><a href="#1FDAC79AED385F9D93B0465726AF69378E1AE978930711626E8EA4AF9C27AE70">JsonObject(IEqualityComparer&lt;string&gt; comparer)</a></li>
+                </ol>
+                <h3>Methods</h3>
+                <ol>
+                    <li><a href="#8C2D8BC6E960FBF858FA4EF24DD13CA3426CCC905FD6A4609A43EE617E6A9D29">Add(string key, object value)</a></li>
+                    <li><a href="#211E65C3EF24EDC030CA5F0615DDDDBE1D20E25FF73FED66E3D615C3CC2985E7">ContainsKey(string key)</a></li>
+                    <li><a href="#65971B728E58B9B3363684A676474E4272F73027D76F8BEFB6C86C8A17C42156">Remove(string key)</a></li>
+                    <li><a href="#42770ED7C6025C8E311C524718D5491093F0278D4DE56F9F2013BC8E128FB4C3">TryGetValue(string key, object@ value)</a></li>
+                    <li><a href="#6592E0C443EE17CD2DF468B0BBB71AC35EC4F5781E3EB437B2DC822A24F71D3D">Add(KeyValuePair&lt;string,object&gt; item)</a></li>
+                    <li><a href="#1539DB78CCB4D551CA40E36CEFD0C841F1600CBC7B82BC278B85534571A3AA72">Clear()</a></li>
+                    <li><a href="#DA7C6ABF1C46F3A157BC869F60079A2B14BF15118B79F06B25FE305EA655047F">Contains(KeyValuePair&lt;string,object&gt; item)</a></li>
+                    <li><a href="#0B7E5974DE546D385B4100004EA8AC2F436A4C91C373FE26E119D3C5D637F5B3">CopyTo(KeyValuePair&lt;string,object&gt;[] array, int arrayIndex)</a></li>
+                    <li><a href="#0D1CF44C74B32AC76A537B8B08E71EE4B8DF6A96E49040EEF09DF52EB31AC58B">Remove(KeyValuePair&lt;string,object&gt; item)</a></li>
+                    <li><a href="#D24E5EEC1A5E2F7010EE0EF16CFFC0ECFE40444F984A0F3F312A400537F4791C">GetEnumerator()</a></li>
+                    <li><a href="#9A4F30631FB4E7CD235F28EB9CA8DE132A58380F6C4DBA8F46DE9B9F6F43E65A">System#Collections#IEnumerable#GetEnumerator()</a></li>
+                    <li><a href="#DD517A84EE1D5ECBA392B48AACE00EE6A9B4E133B262FEDC5AF104D504996527">ToString()</a></li>
+                </ol>
+                <h3>Properties</h3>
+                <ol>
+                    <li><a href="#652BCC3A478428893CC505AE19F847B49BE52F861BEDC64BB192CEED409FA733">Item</a></li>
+                    <li><a href="#F0D66A79C138E951C2F840FCD94EA9BDF399F745088A832A9BA49CF07F7125DE">Keys</a></li>
+                    <li><a href="#53B09E104F608DAAC0A306ABC28A053B592F4518CFC1DC28D81C5B52813EB599">Values</a></li>
+                    <li><a href="#652BCC3A478428893CC505AE19F847B49BE52F861BEDC64BB192CEED409FA733">Item</a></li>
+                    <li><a href="#37BAC4952BECF21AC5838D3C9BA82811BC421C857571E89634DCBE346681D54C">Count</a></li>
+                    <li><a href="#8C398E477FB6C864BE7498598F8E2EBF6B33C4BE91626CF51DC29F1F141E790D">IsReadOnly</a></li>
+                </ol>
+                <h3>Fields</h3>
+                <ol>
+                    <li><a href="#AF5EB3D7EA9668DD5C5488F1BE8A72DEC50CFC51EA4C8C76E32650F0AC6981F7">_members</a></li>
+                </ol>
+
+            </div>
+            
+            <br />
+            <div id="constructors">
+                <h2>Constructors</h2>
+                <br />
+                <div class="method-elem">
+                    <h3 id="D9EB66CE1F512FFA7D731DD6269577EA0029F2E824B2BEF677EC31E009C4EEF1">public JsonObject()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Initializes a new instance of <span class="specific-element"><a href="../../EasyITCenter/ServerCoreStructure/JsonObject.html">JsonObject</a></span>.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="1FDAC79AED385F9D93B0465726AF69378E1AE978930711626E8EA4AF9C27AE70">public JsonObject(IEqualityComparer<string> comparer)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">IEqualityComparer&lt;string&gt;</div></td>
+                                    <td aria-label="Name" class="elem-name">comparer</td>
+                                    <td aria-label="Description">The <span class="specific-element">IEqualityComparer&lt;T0&gt;</span> implementation to use when comparing keys, or null to use the default <span class="specific-element">EqualityComparer&lt;T0&gt;</span> for the type of the key.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Initializes a new instance of <span class="specific-element"><a href="../../EasyITCenter/ServerCoreStructure/JsonObject.html">JsonObject</a></span>.
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+
+            
+
+            
+
+            
+            <br />
+            <div id="methods">
+                <h2>Methods</h2>
+                <br />
+                <div class="method-elem">
+                    <h3 id="8C2D8BC6E960FBF858FA4EF24DD13CA3426CCC905FD6A4609A43EE617E6A9D29">public Add(string key, object value)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">key</td>
+                                    <td aria-label="Description">The key.</td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">object</div></td>
+                                    <td aria-label="Name" class="elem-name">value</td>
+                                    <td aria-label="Description">The value.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Adds the specified key.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="211E65C3EF24EDC030CA5F0615DDDDBE1D20E25FF73FED66E3D615C3CC2985E7">public ContainsKey(string key)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">key</td>
+                                    <td aria-label="Description">The key.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <table class="parameter">
+                            <caption>Return</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td aria-label="Type"><span class="specific-element">void</span></td>
+                                    
+                                    <td aria-label="Description"><span class="specific-element">true</span> if the specified key contains key; otherwise, <span class="specific-element">false</span>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="elem-content">
+                            Determines whether the specified key contains key.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="65971B728E58B9B3363684A676474E4272F73027D76F8BEFB6C86C8A17C42156">public Remove(string key)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">key</td>
+                                    <td aria-label="Description">The key.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Removes the specified key.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="42770ED7C6025C8E311C524718D5491093F0278D4DE56F9F2013BC8E128FB4C3">public TryGetValue(string key, object@ value)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">key</td>
+                                    <td aria-label="Description">The key.</td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">object@</div></td>
+                                    <td aria-label="Name" class="elem-name">value</td>
+                                    <td aria-label="Description">The value.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Tries the get value.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="6592E0C443EE17CD2DF468B0BBB71AC35EC4F5781E3EB437B2DC822A24F71D3D">public Add(KeyValuePair<string,object> item)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">KeyValuePair&lt;string,object&gt;</div></td>
+                                    <td aria-label="Name" class="elem-name">item</td>
+                                    <td aria-label="Description">The item.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Adds the specified item.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="1539DB78CCB4D551CA40E36CEFD0C841F1600CBC7B82BC278B85534571A3AA72">public Clear()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Clears this instance.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="DA7C6ABF1C46F3A157BC869F60079A2B14BF15118B79F06B25FE305EA655047F">public Contains(KeyValuePair<string,object> item)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">KeyValuePair&lt;string,object&gt;</div></td>
+                                    <td aria-label="Name" class="elem-name">item</td>
+                                    <td aria-label="Description">The item.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <table class="parameter">
+                            <caption>Return</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td aria-label="Type"><span class="specific-element">void</span></td>
+                                    
+                                    <td aria-label="Description"><span class="specific-element">true</span> if [contains] [the specified item]; otherwise, <span class="specific-element">false</span>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="elem-content">
+                            Determines whether [contains] [the specified item].
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="0B7E5974DE546D385B4100004EA8AC2F436A4C91C373FE26E119D3C5D637F5B3">public CopyTo(KeyValuePair<string,object>[] array, int arrayIndex)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">KeyValuePair&lt;string,object&gt;[]</div></td>
+                                    <td aria-label="Name" class="elem-name">array</td>
+                                    <td aria-label="Description">The array.</td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">int</div></td>
+                                    <td aria-label="Name" class="elem-name">arrayIndex</td>
+                                    <td aria-label="Description">Index of the array.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Copies to.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="0D1CF44C74B32AC76A537B8B08E71EE4B8DF6A96E49040EEF09DF52EB31AC58B">public Remove(KeyValuePair<string,object> item)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">KeyValuePair&lt;string,object&gt;</div></td>
+                                    <td aria-label="Name" class="elem-name">item</td>
+                                    <td aria-label="Description">The item.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Removes the specified item.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="D24E5EEC1A5E2F7010EE0EF16CFFC0ECFE40444F984A0F3F312A400537F4791C">public GetEnumerator()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            Gets the enumerator.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="9A4F30631FB4E7CD235F28EB9CA8DE132A58380F6C4DBA8F46DE9B9F6F43E65A">public System#Collections#IEnumerable#GetEnumerator()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <table class="parameter">
+                            <caption>Return</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td aria-label="Type"><span class="specific-element">void</span></td>
+                                    
+                                    <td aria-label="Description">An <span class="specific-element">IEnumerator</span> object that can be used to iterate through the collection.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="elem-content">
+                            Returns an enumerator that iterates through a collection.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="DD517A84EE1D5ECBA392B48AACE00EE6A9B4E133B262FEDC5AF104D504996527">public ToString()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <table class="parameter">
+                            <caption>Return</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td aria-label="Type"><span class="specific-element">void</span></td>
+                                    
+                                    <td aria-label="Description">A json <span class="specific-element">String</span> that represents the current <span class="specific-element">Object</span>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="elem-content">
+                            Returns a json <span class="specific-element">String</span> that represents the current <span class="specific-element">Object</span>.
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+
+            
+            <br />
+            <div id="properties">
+                <h2>Properties</h2>
+                <br />
+                <div class="method-elem">
+                    <h3 id="652BCC3A478428893CC505AE19F847B49BE52F861BEDC64BB192CEED409FA733">public void Item</h3>
+                    <div class="method-content">
+                        
+                    
+                        <div class="method-elem">
+                            <div class="elem-content">
+                                Gets the <span class="specific-element">Object</span> at the specified index.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="F0D66A79C138E951C2F840FCD94EA9BDF399F745088A832A9BA49CF07F7125DE">public void Keys</h3>
+                    <div class="method-content">
+                        
+                    
+                        <div class="method-elem">
+                            <div class="elem-content">
+                                Gets the keys.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="53B09E104F608DAAC0A306ABC28A053B592F4518CFC1DC28D81C5B52813EB599">public void Values</h3>
+                    <div class="method-content">
+                        
+                    
+                        <div class="method-elem">
+                            <div class="elem-content">
+                                Gets the values.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="652BCC3A478428893CC505AE19F847B49BE52F861BEDC64BB192CEED409FA733">public void Item</h3>
+                    <div class="method-content">
+                        
+                    
+                        <div class="method-elem">
+                            <div class="elem-content">
+                                Gets or sets the <span class="specific-element">Object</span> with the specified key.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="37BAC4952BECF21AC5838D3C9BA82811BC421C857571E89634DCBE346681D54C">public void Count</h3>
+                    <div class="method-content">
+                        
+                    
+                        <div class="method-elem">
+                            <div class="elem-content">
+                                Gets the count.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="8C398E477FB6C864BE7498598F8E2EBF6B33C4BE91626CF51DC29F1F141E790D">public void IsReadOnly</h3>
+                    <div class="method-content">
+                        
+                    
+                        <div class="method-elem">
+                            <div class="elem-content">
+                                Gets a value indicating whether this instance is read only.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+
+            
+            <br />
+            <div id="fields">
+                <h2>Fields</h2>
+                <br />
+                <div class="method-elem">
+                    <h3 id="AF5EB3D7EA9668DD5C5488F1BE8A72DEC50CFC51EA4C8C76E32650F0AC6981F7">public void _members</h3>
+                    <div class="method-content">
+                        
+                    
+                        <div class="method-elem">
+                            <div class="elem-content">
+                                The internal member dictionary.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div id="footer">
+        XMLDocumentToHtml: Copyright (C) 2018 - 2020 Aona Suzutsuki.
+    </div>
+
+</body>
+</html>

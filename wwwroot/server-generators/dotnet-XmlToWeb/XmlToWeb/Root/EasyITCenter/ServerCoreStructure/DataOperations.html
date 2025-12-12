@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+    <meta name="author" content="Aona Suzutsuki" />
+    <title>DataOperations Class</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/menu-icon.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/menu-anim.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/table.css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter/css/shCore.css" type="text/css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter/css/shThemeDefault.css" type="text/css" />
+    <script type="text/javascript" src="../../syntaxhighlighter/js/shCore.js"></script>
+    <script type="text/javascript" src="../../syntaxhighlighter/js/shBrushCSharp.js"></script>
+    <script src="../../js/jquery-1.7.1.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <style type="text/css">
+    </style>
+    <script>
+        $(function () {
+            SyntaxHighlighter.defaults.toolbar = false;
+            SyntaxHighlighter.all();
+
+            registMenu();
+        });
+    </script>
+</head>
+<body>
+
+    <div id="body-container">
+
+        <div id="menu-container">
+            <div id="top-menu-bt-cover">
+                <a class="menu-trigger" href="javascript:void(0);">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div id="menu">
+            <ul>
+                <li><a href="../../index.html">Index</a></li>
+                <li>EasyITCenter
+                    <ul>
+                        <li>Controllers
+                            <ul>
+                                <li><a href="../../EasyITCenter/Controllers/AdministrationService.html">AdministrationService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/AuthenticationService/AuthenticationService.html">AuthenticationService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/BackendCheckService.html">BackendCheckService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DatabaseService.html">DatabaseService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/MDDocBookGenerator.html">MDDocBookGenerator</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/AdminApiGeneratorMdBookService/AdminApiGeneratorMdBookService.html">AdminApiGeneratorMdBookService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerApiGeneratorServerIndexService.html">ServerApiGeneratorServerIndexService</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/Controllers/ServerApiGeneratorServerIndexService/MDGeneratorCreateIndexRequest.html">MDGeneratorCreateIndexRequest</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../../EasyITCenter/Controllers/EasyITCenterContext.html">EasyITCenterContext</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DatabaseContextExtensions.html">DatabaseContextExtensions</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DownloadService/DownloadService.html">DownloadService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ExportService/ExportService.html">ExportService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/GithubService/GithubService.html">GithubService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/HandleBarsService/HandleBarsService.html">HandleBarsService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/JsonGeneratorService/JsonGeneratorService.html">JsonGeneratorService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SendMailRequest.html">SendMailRequest</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/EmailService.html">EmailService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RunProcessRequest.html">RunProcessRequest</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ProcessService/ProcessService.html">ProcessService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RSSLoad/RSSLoad.html">RSSLoad</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SomeRSSProvider.html">SomeRSSProvider</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RssService.html">RssService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerDocApi/ServerDocApi.html">ServerDocApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RobotsController.html">RobotsController</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SitemapController.html">SitemapController</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/StatusPageService.html">StatusPageService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/UserStorageService/UserStorageService.html">UserStorageService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebSocketService.html">WebSocketService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemStdAuthGenericProviderApi`3.html">SystemStdAuthGenericProviderApi`3</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemStdFreeGenericProviderApi`3.html">SystemStdFreeGenericProviderApi`3</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ExpertDocApi/ExpertDocApi.html">ExpertDocApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemBuilderOnlinePreviewApi/SystemBuilderOnlinePreviewApi.html">SystemBuilderOnlinePreviewApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesSystemToolsApi/WebPagesSystemToolsApi.html">WebPagesSystemToolsApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebGlobalMessageModuleApi/WebGlobalMessageModuleApi.html">WebGlobalMessageModuleApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesAdminGroupMenuListApi/WebPagesAdminGroupMenuListApi.html">WebPagesAdminGroupMenuListApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesSystemDataGetOnlyApi.html">WebPagesSystemDataGetOnlyApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerWebProviderGetOnlyApi.html">ServerWebProviderGetOnlyApi</a></li>
+                            </ul>
+                        </li>
+                        <li>DBModel
+                            <ul>
+                                <li><a href="../../EasyITCenter/DBModel/DBResult.html">DBResult</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/ResultMessage.html">ResultMessage</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/AuthenticateResponse.html">AuthenticateResponse</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/SetReportFilter.html">SetReportFilter</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/GenericDataList.html">GenericDataList</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/CustomMessageList.html">CustomMessageList</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/GenericTable.html">GenericTable</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreStructure
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/HtttpContextExtension.html">HtttpContextExtension</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DBConn.html">DBConn</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ServerStatusTypes.html">ServerStatusTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/RouteLayoutTypes.html">RouteLayoutTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/RoutingActionTypes.html">RoutingActionTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SupportGenFileTypes.html">SupportGenFileTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ServerLocalDbDialsTypes.html">ServerLocalDbDialsTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SrvRuntime.html">SrvRuntime</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/JsonArray.html">JsonArray</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/JsonObject.html">JsonObject</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/CoreOperations.html">CoreOperations</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/ServerCoreStructure/CoreOperations/SrvOStype.html">SrvOStype</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DataOperations.html">DataOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DbOperations.html">DbOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/FileOperations/FileOperations.html">FileOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/NetOperations.html">NetOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ProcessOperations.html">ProcessOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SystemPortalOperations.html">SystemPortalOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/UserStorageOperations.html">UserStorageOperations</a></li>
+                            </ul>
+                        </li>
+                        <li>ControllersExtensions
+                            <ul>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/ServerCorePostFileRotatorApi.html">ServerCorePostFileRotatorApi</a></li>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/FileMinifyService.html">FileMinifyService</a></li>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/ServerCoreWebToolsGenApi.html">ServerCoreWebToolsGenApi</a></li>
+                            </ul>
+                        </li>
+                        <li>WebClasses
+                            <ul>
+                                <li><a href="../../EasyITCenter/WebClasses/DBWebApiResponses.html">DBWebApiResponses</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/ServerWebPagesToken.html">ServerWebPagesToken</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UserConfig.html">UserConfig</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/WebMessage.html">WebMessage</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/AutoGenRequest.html">AutoGenRequest</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/AutoGenConnectionString.html">AutoGenConnectionString</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UploadGeneratorFiles.html">UploadGeneratorFiles</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UploadFileData.html">UploadFileData</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/CarouselImage.html">CarouselImage</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/CarouselVideo.html">CarouselVideo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../../EasyITCenter/EICServer.html">EICServer</a></li>
+                        <li>Managers
+                            <ul>
+                                <li><a href="../../EasyITCenter/Managers/WebSocketLocation.html">WebSocketLocation</a></li>
+                                <li><a href="../../EasyITCenter/Managers/WebSocketManager.html">WebSocketManager</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreServers
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServer/HostedFtpServer.html">HostedFtpServer</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServerMembershipProvider.html">HostedFtpServerMembershipProvider</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServerMembershipProvider/CustomFtpUser.html">CustomFtpUser</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Services
+                            <ul>
+                                <li><a href="../../EasyITCenter/Services/ServerCoreAutoScheduler.html">ServerCoreAutoScheduler</a></li>
+                                <li><a href="../../EasyITCenter/Services/AutoScheduledJob.html">AutoScheduledJob</a></li>
+                                <li><a href="../../EasyITCenter/Services/GenericApiServiceAsync`2.html">GenericApiServiceAsync`2</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskProcess.html">ServerCycleTaskProcess</a></li>
+                                <li><a href="../../EasyITCenter/Services/HealthCheckActionService.html">HealthCheckActionService</a></li>
+                                <li><a href="../../EasyITCenter/Services/IServerCycleTaskService.html">IServerCycleTaskService</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskList.html">ServerCycleTaskList</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskListHealthCheck.html">ServerCycleTaskListHealthCheck</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskMiddleware.html">ServerCycleTaskMiddleware</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerWebSockeMonitorService.html">ServerWebSockeMonitorService</a></li>
+                                <li><a href="../../EasyITCenter/Services/WebSocketLogger.html">WebSocketLogger</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreConfiguration
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerConfigurationServices.html">ServerConfigurationServices</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerEnablingServices.html">ServerEnablingServices</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerModules.html">ServerModules</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerModulesEnabling.html">ServerModulesEnabling</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../../EasyITCenter/Startup.html">Startup</a></li>
+                        <li><a href="../../EasyITCenter/MimeTypes.html">MimeTypes</a></li>
+                    </ul>
+                </li>
+                <li>AutoResxTranslator
+                    <ul>
+                        <li><a href="../../AutoResxTranslator/SimpleJson.html">SimpleJson</a></li>
+                    </ul>
+                </li>
+                <li>ServerCorePages
+                    <ul>
+                        <li><a href="../../ServerCorePages/SystemModulesModel.html">SystemModulesModel</a></li>
+                        <li><a href="../../ServerCorePages/SystemPortalModel.html">SystemPortalModel</a></li>
+                        <li><a href="../../ServerCorePages/ViewerReportFileModel.html">ViewerReportFileModel</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+        <div id="body-content">
+            <div>
+                <h1>DataOperations Class</h1>
+                <div>Namespace: EasyITCenter.ServerCoreStructure</div>
+                <div id="inherited">Inherited: <span class="specific-element">System.Object</span></div>
+            </div>
+            <br />
+            Data Formating and similar Operations Library
+            <br />
+            <div>
+                <h3>Methods</h3>
+                <ol>
+                    <li><a href="#AC8288EB0E0DF4172B458A67CA87B8E4E1AF4A2967450005A709556DDEDE5740">GenericToEnum``1(string value)</a></li>
+                    <li><a href="#17B3803CBDF7A13D8CF326A907319E4595A21553B497B7D300AAFA6CE895CD38">GenericConvertTableToClassList``1(DataTable dt)</a></li>
+                    <li><a href="#5A2005A7544A672E21AAB534AF67C1582646D440BF9296595555C364118C7BB3">ConvertTableToClassListByType(DataTable dt, Type classType)</a></li>
+                    <li><a href="#E5F8179E0035F7C203E74085D8610D9D742D5B60ECAFFF3E9D4414285775DCB3">ConvertDictionaryListToJson(Dictionary&lt;string,string&gt; keyList)</a></li>
+                    <li><a href="#3E85F66A156F145353711F91742D17DA77B32FFBEEF765973BCB00EC40829E71">NullSetInExtensionFields``1()</a></li>
+                    <li><a href="#253DA33CE8B3A402FAAE42F88DF6F5F1E87D2DC70710BBC1A5381A62F6F4D1FC">ObjectToJson(object obj)</a></li>
+                    <li><a href="#04DEE35EE9FEED38407BB898CCD9749AF349FD09791DEF54C06C76024B8EFC2F">CreateObjectTypeByTypeName(string className)</a></li>
+                    <li><a href="#476589DE222B7B2FD23FFF0A3823FC5A364D02D67C338185566D62A54F7D3717">FirstCharToLowerCase(string str)</a></li>
+                    <li><a href="#58B030F19EFD5B9C773D0F54196A0E6A3F2E7C0BEEBB442AAD4C3AD4685A174D">UnicodeToUTF8(string strFrom)</a></li>
+                    <li><a href="#D64208323CD0B8E7C862800715DD3DF578D42B2B8EDA1949BFC703CB9D7257BB">GetUserApiErrMessage(Exception exception, int msgCount)</a></li>
+                    <li><a href="#E25A1978D498A57B073E28C0BEE04EB97C326100841B05C6421DE104760D1DB6">GetErrMsg(Exception exception, int msgCount)</a></li>
+                    <li><a href="#DD97D66170F608F6120421EDA686B8321910252E08768FBF391A9A01B4F64060">RandomString(int length)</a></li>
+                    <li><a href="#63D665B5DB7F1843C7B70ABD858399152A997716172E83309E84F0F580487235">GetByteArrayFrom64Encode(string strContent)</a></li>
+                    <li><a href="#1685784FC8CE5F8E2B2563D7049343F78AE228CD564932445EA8B74EC8F845F1">IsValidEmail(string email)</a></li>
+                    <li><a href="#44E93659F597BE88B8CCBD3590B4E37A6C442995A0FBBCCBF05C9FCD2BD556AE">RemoveWhitespace(string input)</a></li>
+                    <li><a href="#2ED110825EF71C3DF659133D3508E692DA1EE52408773B14A632E3A6ACA958F3">MarkDownLineEndSpacesResolve(string input)</a></li>
+                    <li><a href="#F1001D7D5FDC38D236EA4E9FE4E559F00104462B14836BF5EBEDB87AA73C99E8">StringToUTF8(string text)</a></li>
+                    <li><a href="#1F21362DFECE8A171A2AE315E69F51167368556CB0A10E6808C1130A697E68F4">Utf8toUnicode(string utf8String)</a></li>
+                    <li><a href="#9A55571BB56B454CF131C4D6BE041FB186D4AA62D6FDE4C3298D8014CB75B687">RemoveDiacritism(string Text)</a></li>
+                    <li><a href="#5EA035C41B85AAB1601F2DF468DFE8952DF5849EB57569B3E5E9A3868F7AC1A9">ConvertGenericClassToStandard``1(``0 data)</a></li>
+                    <li><a href="#69F855C7468743B9044ACEFAF97B9955D363FDBF7E420392FF7BA9485149E019">ConvertDataTableToXml(DataTable dataTable, string tablename)</a></li>
+                    <li><a href="#5299D6CA3C973C37F73DF66427B21CD38F935052B19E4D13BA93FFF5172B400D">ParseEnum``1(string value)</a></li>
+                    <li><a href="#FACDF6F743B70DF6231E6DBC2E580F80262B1BA07A0DDC86A4D04C74FE2A2119">GetHandleBarPartialVariable(string template)</a></li>
+                </ol>
+
+            </div>
+            
+
+            
+
+            
+
+            
+            <br />
+            <div id="methods">
+                <h2>Methods</h2>
+                <br />
+                <div class="method-elem">
+                    <h3 id="AC8288EB0E0DF4172B458A67CA87B8E4E1AF4A2967450005A709556DDEDE5740">public GenericToEnum``1(string value)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">value</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Convert String to Generic Enum
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="17B3803CBDF7A13D8CF326A907319E4595A21553B497B7D300AAFA6CE895CD38">public GenericConvertTableToClassList``1(DataTable dt)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">DataTable</div></td>
+                                    <td aria-label="Name" class="elem-name">dt</td>
+                                    <td aria-label="Description">The dt.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Generic Convert Data Table To DataList
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="5A2005A7544A672E21AAB534AF67C1582646D440BF9296595555C364118C7BB3">public ConvertTableToClassListByType(DataTable dt, Type classType)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">DataTable</div></td>
+                                    <td aria-label="Name" class="elem-name">dt</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">Type</div></td>
+                                    <td aria-label="Name" class="elem-name">classType</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Convert Data Table To DataList of Type
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="E5F8179E0035F7C203E74085D8610D9D742D5B60ECAFFF3E9D4414285775DCB3">public ConvertDictionaryListToJson(Dictionary<string,string> keyList)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">Dictionary&lt;string,string&gt;</div></td>
+                                    <td aria-label="Name" class="elem-name">keyList</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Convert Dictionary string,string To Json Suportted Values Bool, Int, String
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="3E85F66A156F145353711F91742D17DA77B32FFBEEF765973BCB00EC40829E71">public NullSetInExtensionFields``1()</h3>
+                    <div class="method-content">
+                        
+                        
+                        
+                        <div class="elem-content">
+                            !!! SYSTEM RULE: ClassList with joining fields names must be nullable before API
+                operation !!! ClassName must contain: "Extended" WORD Extension field in Class - Dataset
+                must be set as null before Database Operation else is joining to other dataset is valid
+                and can be blocked by fail key Its Check Extended in ClassName - SYSTEM RULE
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="253DA33CE8B3A402FAAE42F88DF6F5F1E87D2DC70710BBC1A5381A62F6F4D1FC">public ObjectToJson(object obj)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">object</div></td>
+                                    <td aria-label="Name" class="elem-name">obj</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Object To Json Serializer
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="04DEE35EE9FEED38407BB898CCD9749AF349FD09791DEF54C06C76024B8EFC2F">public CreateObjectTypeByTypeName(string className)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">className</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Create Object Type By Type Name
+                Its need For Generic APi For Full Database Support
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="476589DE222B7B2FD23FFF0A3823FC5A364D02D67C338185566D62A54F7D3717">public FirstCharToLowerCase(string str)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">str</td>
+                                    <td aria-label="Description">The string.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Change First Character of String
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="58B030F19EFD5B9C773D0F54196A0E6A3F2E7C0BEEBB442AAD4C3AD4685A174D">public UnicodeToUTF8(string strFrom)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">strFrom</td>
+                                    <td aria-label="Description">The string from.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Unicodes to ut f8.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="D64208323CD0B8E7C862800715DD3DF578D42B2B8EDA1949BFC703CB9D7257BB">public GetUserApiErrMessage(Exception exception, int msgCount)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">Exception</div></td>
+                                    <td aria-label="Name" class="elem-name">exception</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">int</div></td>
+                                    <td aria-label="Name" class="elem-name">msgCount</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Mined-ed Error Message For Answer in API Error Response with detailed info about problem
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="E25A1978D498A57B073E28C0BEE04EB97C326100841B05C6421DE104760D1DB6">public GetErrMsg(Exception exception, int msgCount)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">Exception</div></td>
+                                    <td aria-label="Name" class="elem-name">exception</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">int</div></td>
+                                    <td aria-label="Name" class="elem-name">msgCount</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Mined-ed Error Message For System Save to Database For Simple Solving Problem
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="DD97D66170F608F6120421EDA686B8321910252E08768FBF391A9A01B4F64060">public RandomString(int length)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">int</div></td>
+                                    <td aria-label="Name" class="elem-name">length</td>
+                                    <td aria-label="Description">The length.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Randoms the string.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="63D665B5DB7F1843C7B70ABD858399152A997716172E83309E84F0F580487235">public GetByteArrayFrom64Encode(string strContent)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">strContent</td>
+                                    <td aria-label="Description">Content of the string.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Separate ByteArray from 64 encode file For inserted file types
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="1685784FC8CE5F8E2B2563D7049343F78AE228CD564932445EA8B74EC8F845F1">public IsValidEmail(string email)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">email</td>
+                                    <td aria-label="Description">The email.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <table class="parameter">
+                            <caption>Return</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td aria-label="Type"><span class="specific-element">void</span></td>
+                                    
+                                    <td aria-label="Description"><span class="specific-element">true</span> if [is valid email] [the specified email]; otherwise, <span class="specific-element">false</span>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="elem-content">
+                            Determines whether [is valid email] [the specified email].
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="44E93659F597BE88B8CCBD3590B4E37A6C442995A0FBBCCBF05C9FCD2BD556AE">public RemoveWhitespace(string input)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">input</td>
+                                    <td aria-label="Description">The input.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Removes the whitespace from the String.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="2ED110825EF71C3DF659133D3508E692DA1EE52408773B14A632E3A6ACA958F3">public MarkDownLineEndSpacesResolve(string input)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">input</td>
+                                    <td aria-label="Description">The input.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            MarkDown Global Resolve End Spaces Characters On Insert/Update API CALS of Managing
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="F1001D7D5FDC38D236EA4E9FE4E559F00104462B14836BF5EBEDB87AA73C99E8">public StringToUTF8(string text)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">text</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Convert String to UTF8
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="1F21362DFECE8A171A2AE315E69F51167368556CB0A10E6808C1130A697E68F4">public Utf8toUnicode(string utf8String)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">utf8String</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Convert UTF8 to UNICODE
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="9A55571BB56B454CF131C4D6BE041FB186D4AA62D6FDE4C3298D8014CB75B687">public RemoveDiacritism(string Text)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">Text</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Remove Diactritics
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="5EA035C41B85AAB1601F2DF468DFE8952DF5849EB57569B3E5E9A3868F7AC1A9">public ConvertGenericClassToStandard``1(``0 data)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">``0</div></td>
+                                    <td aria-label="Name" class="elem-name">data</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Convert Generic Tabla To Standard Table For Use Standard System Fields
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="69F855C7468743B9044ACEFAF97B9955D363FDBF7E420392FF7BA9485149E019">public ConvertDataTableToXml(DataTable dataTable, string tablename)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">DataTable</div></td>
+                                    <td aria-label="Name" class="elem-name">dataTable</td>
+                                    <td aria-label="Description">The data table.</td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">tablename</td>
+                                    <td aria-label="Description">The tablename.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <table class="parameter">
+                            <caption>Return</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td aria-label="Type"><span class="specific-element">void</span></td>
+                                    
+                                    <td aria-label="Description">A XElement.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="elem-content">
+                            Converts the data table to xml.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="5299D6CA3C973C37F73DF66427B21CD38F935052B19E4D13BA93FFF5172B400D">public ParseEnum``1(string value)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">value</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Convert String To Enum 
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="FACDF6F743B70DF6231E6DBC2E580F80262B1BA07A0DDC86A4D04C74FE2A2119">public GetHandleBarPartialVariable(string template)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">template</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Get HandleBar Partial Variable
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+
+            
+
+            
+        </div>
+
+    </div>
+
+    <div id="footer">
+        XMLDocumentToHtml: Copyright (C) 2018 - 2020 Aona Suzutsuki.
+    </div>
+
+</body>
+</html>

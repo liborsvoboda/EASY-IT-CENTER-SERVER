@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+    <meta name="author" content="Aona Suzutsuki" />
+    <title>DbOperations Class</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/menu-icon.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/menu-anim.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/table.css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter/css/shCore.css" type="text/css" />
+    <link rel="stylesheet" href="../../syntaxhighlighter/css/shThemeDefault.css" type="text/css" />
+    <script type="text/javascript" src="../../syntaxhighlighter/js/shCore.js"></script>
+    <script type="text/javascript" src="../../syntaxhighlighter/js/shBrushCSharp.js"></script>
+    <script src="../../js/jquery-1.7.1.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <style type="text/css">
+    </style>
+    <script>
+        $(function () {
+            SyntaxHighlighter.defaults.toolbar = false;
+            SyntaxHighlighter.all();
+
+            registMenu();
+        });
+    </script>
+</head>
+<body>
+
+    <div id="body-container">
+
+        <div id="menu-container">
+            <div id="top-menu-bt-cover">
+                <a class="menu-trigger" href="javascript:void(0);">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div id="menu">
+            <ul>
+                <li><a href="../../index.html">Index</a></li>
+                <li>EasyITCenter
+                    <ul>
+                        <li>Controllers
+                            <ul>
+                                <li><a href="../../EasyITCenter/Controllers/AdministrationService.html">AdministrationService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/AuthenticationService/AuthenticationService.html">AuthenticationService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/BackendCheckService.html">BackendCheckService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DatabaseService.html">DatabaseService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/MDDocBookGenerator.html">MDDocBookGenerator</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/AdminApiGeneratorMdBookService/AdminApiGeneratorMdBookService.html">AdminApiGeneratorMdBookService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerApiGeneratorServerIndexService.html">ServerApiGeneratorServerIndexService</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/Controllers/ServerApiGeneratorServerIndexService/MDGeneratorCreateIndexRequest.html">MDGeneratorCreateIndexRequest</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../../EasyITCenter/Controllers/EasyITCenterContext.html">EasyITCenterContext</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DatabaseContextExtensions.html">DatabaseContextExtensions</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/DownloadService/DownloadService.html">DownloadService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ExportService/ExportService.html">ExportService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/GithubService/GithubService.html">GithubService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/HandleBarsService/HandleBarsService.html">HandleBarsService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/JsonGeneratorService/JsonGeneratorService.html">JsonGeneratorService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SendMailRequest.html">SendMailRequest</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/EmailService.html">EmailService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RunProcessRequest.html">RunProcessRequest</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ProcessService/ProcessService.html">ProcessService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RSSLoad/RSSLoad.html">RSSLoad</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SomeRSSProvider.html">SomeRSSProvider</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RssService.html">RssService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerDocApi/ServerDocApi.html">ServerDocApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/RobotsController.html">RobotsController</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SitemapController.html">SitemapController</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/StatusPageService.html">StatusPageService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/UserStorageService/UserStorageService.html">UserStorageService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebSocketService.html">WebSocketService</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemStdAuthGenericProviderApi`3.html">SystemStdAuthGenericProviderApi`3</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemStdFreeGenericProviderApi`3.html">SystemStdFreeGenericProviderApi`3</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ExpertDocApi/ExpertDocApi.html">ExpertDocApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/SystemBuilderOnlinePreviewApi/SystemBuilderOnlinePreviewApi.html">SystemBuilderOnlinePreviewApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesSystemToolsApi/WebPagesSystemToolsApi.html">WebPagesSystemToolsApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebGlobalMessageModuleApi/WebGlobalMessageModuleApi.html">WebGlobalMessageModuleApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesAdminGroupMenuListApi/WebPagesAdminGroupMenuListApi.html">WebPagesAdminGroupMenuListApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/WebPagesSystemDataGetOnlyApi.html">WebPagesSystemDataGetOnlyApi</a></li>
+                                <li><a href="../../EasyITCenter/Controllers/ServerWebProviderGetOnlyApi.html">ServerWebProviderGetOnlyApi</a></li>
+                            </ul>
+                        </li>
+                        <li>DBModel
+                            <ul>
+                                <li><a href="../../EasyITCenter/DBModel/DBResult.html">DBResult</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/ResultMessage.html">ResultMessage</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/AuthenticateResponse.html">AuthenticateResponse</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/SetReportFilter.html">SetReportFilter</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/GenericDataList.html">GenericDataList</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/CustomMessageList.html">CustomMessageList</a></li>
+                                <li><a href="../../EasyITCenter/DBModel/GenericTable.html">GenericTable</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreStructure
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/HtttpContextExtension.html">HtttpContextExtension</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DBConn.html">DBConn</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ServerStatusTypes.html">ServerStatusTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/RouteLayoutTypes.html">RouteLayoutTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/RoutingActionTypes.html">RoutingActionTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SupportGenFileTypes.html">SupportGenFileTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ServerLocalDbDialsTypes.html">ServerLocalDbDialsTypes</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SrvRuntime.html">SrvRuntime</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/JsonArray.html">JsonArray</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/JsonObject.html">JsonObject</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/CoreOperations.html">CoreOperations</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/ServerCoreStructure/CoreOperations/SrvOStype.html">SrvOStype</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DataOperations.html">DataOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/DbOperations.html">DbOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/FileOperations/FileOperations.html">FileOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/NetOperations.html">NetOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/ProcessOperations.html">ProcessOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/SystemPortalOperations.html">SystemPortalOperations</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreStructure/UserStorageOperations.html">UserStorageOperations</a></li>
+                            </ul>
+                        </li>
+                        <li>ControllersExtensions
+                            <ul>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/ServerCorePostFileRotatorApi.html">ServerCorePostFileRotatorApi</a></li>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/FileMinifyService.html">FileMinifyService</a></li>
+                                <li><a href="../../EasyITCenter/ControllersExtensions/ServerCoreWebToolsGenApi.html">ServerCoreWebToolsGenApi</a></li>
+                            </ul>
+                        </li>
+                        <li>WebClasses
+                            <ul>
+                                <li><a href="../../EasyITCenter/WebClasses/DBWebApiResponses.html">DBWebApiResponses</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/ServerWebPagesToken.html">ServerWebPagesToken</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UserConfig.html">UserConfig</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/WebMessage.html">WebMessage</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/AutoGenRequest.html">AutoGenRequest</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/AutoGenConnectionString.html">AutoGenConnectionString</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UploadGeneratorFiles.html">UploadGeneratorFiles</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/UploadFileData.html">UploadFileData</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/CarouselImage.html">CarouselImage</a></li>
+                                <li><a href="../../EasyITCenter/WebClasses/CarouselVideo.html">CarouselVideo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../../EasyITCenter/EICServer.html">EICServer</a></li>
+                        <li>Managers
+                            <ul>
+                                <li><a href="../../EasyITCenter/Managers/WebSocketLocation.html">WebSocketLocation</a></li>
+                                <li><a href="../../EasyITCenter/Managers/WebSocketManager.html">WebSocketManager</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreServers
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServer/HostedFtpServer.html">HostedFtpServer</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServerMembershipProvider.html">HostedFtpServerMembershipProvider</a>
+                                    <ul>
+                                        <li><a href="../../EasyITCenter/ServerCoreServers/HostedFtpServerMembershipProvider/CustomFtpUser.html">CustomFtpUser</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Services
+                            <ul>
+                                <li><a href="../../EasyITCenter/Services/ServerCoreAutoScheduler.html">ServerCoreAutoScheduler</a></li>
+                                <li><a href="../../EasyITCenter/Services/AutoScheduledJob.html">AutoScheduledJob</a></li>
+                                <li><a href="../../EasyITCenter/Services/GenericApiServiceAsync`2.html">GenericApiServiceAsync`2</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskProcess.html">ServerCycleTaskProcess</a></li>
+                                <li><a href="../../EasyITCenter/Services/HealthCheckActionService.html">HealthCheckActionService</a></li>
+                                <li><a href="../../EasyITCenter/Services/IServerCycleTaskService.html">IServerCycleTaskService</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskList.html">ServerCycleTaskList</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskListHealthCheck.html">ServerCycleTaskListHealthCheck</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerCycleTaskMiddleware.html">ServerCycleTaskMiddleware</a></li>
+                                <li><a href="../../EasyITCenter/Services/ServerWebSockeMonitorService.html">ServerWebSockeMonitorService</a></li>
+                                <li><a href="../../EasyITCenter/Services/WebSocketLogger.html">WebSocketLogger</a></li>
+                            </ul>
+                        </li>
+                        <li>ServerCoreConfiguration
+                            <ul>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerConfigurationServices.html">ServerConfigurationServices</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerEnablingServices.html">ServerEnablingServices</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerModules.html">ServerModules</a></li>
+                                <li><a href="../../EasyITCenter/ServerCoreConfiguration/ServerModulesEnabling.html">ServerModulesEnabling</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../../EasyITCenter/Startup.html">Startup</a></li>
+                        <li><a href="../../EasyITCenter/MimeTypes.html">MimeTypes</a></li>
+                    </ul>
+                </li>
+                <li>AutoResxTranslator
+                    <ul>
+                        <li><a href="../../AutoResxTranslator/SimpleJson.html">SimpleJson</a></li>
+                    </ul>
+                </li>
+                <li>ServerCorePages
+                    <ul>
+                        <li><a href="../../ServerCorePages/SystemModulesModel.html">SystemModulesModel</a></li>
+                        <li><a href="../../ServerCorePages/SystemPortalModel.html">SystemPortalModel</a></li>
+                        <li><a href="../../ServerCorePages/ViewerReportFileModel.html">ViewerReportFileModel</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+        <div id="body-content">
+            <div>
+                <h1>DbOperations Class</h1>
+                <div>Namespace: EasyITCenter.ServerCoreStructure</div>
+                <div id="inherited">Inherited: <span class="specific-element">System.Object</span></div>
+            </div>
+            <br />
+            All Server Definitions of Database Operation method
+            <br />
+            <div>
+                <h3>Methods</h3>
+                <ol>
+                    <li><a href="#E4459F3FCC7C26D172B717CEF749CAE20CEFBFE13BCEBCAC03202A2D7EC5BC5A">LoadOrRefreshStaticDbDials(ServerLocalDbDialsTypes&gt; onlyThis)</a></li>
+                    <li><a href="#967180314558601995820FF3D485557B4A1ED4449B656F83FDC8FDC58F7E92DA">DBTranslate(string word, string language)</a></li>
+                    <li><a href="#4FFE49E6DCF0F7E9F34AFFD1FD53D08532AE13E585090F550F4D50019ADCBBDF">CheckDefinedWebPageExists(string modulePath)</a></li>
+                    <li><a href="#83101D879F59BE48D6ABFDFE874BB4EEB53FD08023FE48380772D483AE413A7A">CheckDBServerApiRule(string serverPath)</a></li>
+                    <li><a href="#BDB40E6922AA4BE26E95D14038F38448A0F2A71D1D86407181BCB53D99ADEBAB">GetWebPortalJsCssScripts(string specType, string fileName)</a></li>
+                    <li><a href="#5504E487946F439E4411164633051F38A19B3D935E3FC6C0A4ED498D679BC2DB">GetWebGlobalPageBlockLists(string pagePartType)</a></li>
+                    <li><a href="#D0C181649D1CEFA1346B2F0BACF6FBB5B6D0F18CF83E169B7AA8B5D07C89D4EC">GetServerApiSecurityOffline(string modulePath)</a></li>
+                    <li><a href="#E305293C0CBB31180B8505C57B2508D7BDD02A8662D473DB9C88ADC7D1A42666">GetServerApiSecurityOnline(string modulePath)</a></li>
+                    <li><a href="#16E6100588273B2CE124AC0252ACF42BE8EEE12A6E6D589D1200552E35634109">GetWebGlobalPageBlockListsOffline(string pagePartType)</a></li>
+                    <li><a href="#897061FC6A9E9771C1B2289270DA65DDE1EC32633B6840870B94532B0A11A7FC">GetWebGlobalPageBlockListsOnline(string pagePartType)</a></li>
+                    <li><a href="#383FC842AD08858EBF18EA432AC37B6409B4B237FB24FA9760DB493FC0DBC30E">GetWebPortalJsCssScriptsOffline(string specType, string fileName)</a></li>
+                    <li><a href="#6647B7C7C42CB910D2BC1AA0B33A386BB9CE8C5FB3580F1D0174D9868A776F4A">GetWebPortalJsCssScriptsOnline(string specType, string fileName)</a></li>
+                    <li><a href="#AFF450AE97A0A7088C66CC53B3F1CCACEBBB72EBE7B8F86DEA237F82E8FE4DA5">CheckDefinedWebPageOffline(string modulePath)</a></li>
+                    <li><a href="#69DF43D01B07D641C8704C815F0D5B2E56C5339BB290A5CA40A7A009EE73C835">CheckDefinedWebPageOnline(string modulePath)</a></li>
+                    <li><a href="#EA23C1A4571B7B4335AB06589F299BFFADAA7C1DA48A8755527909817AE57323">CheckDBServerApiRuleOffline(string serverPath)</a></li>
+                    <li><a href="#B4894A9CA80DAB1C00ADEB21B18AE4F3E38FD3BE6B5080D29CB86D6091AC9FE6">CheckDBServerApiRuleOnline(string serverPath)</a></li>
+                    <li><a href="#611A19E443FE2CA11A3EF741DC63890678248CA53E4F13D1D3DCC646FCDC77BF">DBTranslateOffline(string word, string language)</a></li>
+                    <li><a href="#161439F4ED2E9E8EED978574276D559E529957CCE33F340820FBE685F58AA1C9">DBTranslateOnline(string word, string language)</a></li>
+                </ol>
+
+            </div>
+            
+
+            
+
+            
+
+            
+            <br />
+            <div id="methods">
+                <h2>Methods</h2>
+                <br />
+                <div class="method-elem">
+                    <h3 id="E4459F3FCC7C26D172B717CEF749CAE20CEFBFE13BCEBCAC03202A2D7EC5BC5A">public LoadOrRefreshStaticDbDials(ServerLocalDbDialsTypes> onlyThis)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">ServerLocalDbDialsTypes&gt;</div></td>
+                                    <td aria-label="Name" class="elem-name">onlyThis</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Method for All Server Defined Table for Local Using As Off line AutoUpdated Tables
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="967180314558601995820FF3D485557B4A1ED4449B656F83FDC8FDC58F7E92DA">public DBTranslate(string word, string language)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">word</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">language</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Default Operation for Call Translation
+                Over Local Tables Functionality
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="4FFE49E6DCF0F7E9F34AFFD1FD53D08532AE13E585090F550F4D50019ADCBBDF">public CheckDefinedWebPageExists(string modulePath)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">modulePath</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Default Operation for Call CHEckModuleExist
+                Over Local Tables Functionality
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="83101D879F59BE48D6ABFDFE874BB4EEB53FD08023FE48380772D483AE413A7A">public CheckDBServerApiRule(string serverPath)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">serverPath</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Default Operation For Set Ignoring App.Use Paths
+                For MVC Tools, Static Webs And Content
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="BDB40E6922AA4BE26E95D14038F38448A0F2A71D1D86407181BCB53D99ADEBAB">public GetWebPortalJsCssScripts(string specType, string fileName)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">specType</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">fileName</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Default Operation For Working Wihth 
+                Portal Scripts From Local Tables.
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="5504E487946F439E4411164633051F38A19B3D935E3FC6C0A4ED498D679BC2DB">public GetWebGlobalPageBlockLists(string pagePartType)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">pagePartType</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Default Operation For Generate Web Portal
+                Over Local Tables Functionality
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="D0C181649D1CEFA1346B2F0BACF6FBB5B6D0F18CF83E169B7AA8B5D07C89D4EC">public GetServerApiSecurityOffline(string modulePath)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">modulePath</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Get Standard Api Security Definition Offline Method
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="E305293C0CBB31180B8505C57B2508D7BDD02A8662D473DB9C88ADC7D1A42666">public GetServerApiSecurityOnline(string modulePath)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">modulePath</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Get Standard Api Security Definition Online Method
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="16E6100588273B2CE124AC0252ACF42BE8EEE12A6E6D589D1200552E35634109">public GetWebGlobalPageBlockListsOffline(string pagePartType)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">pagePartType</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Get WebGlobalPageBlockList Offline Method
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="897061FC6A9E9771C1B2289270DA65DDE1EC32633B6840870B94532B0A11A7FC">public GetWebGlobalPageBlockListsOnline(string pagePartType)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">pagePartType</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Get WebGlobalPageBlockList OnLine Method
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="383FC842AD08858EBF18EA432AC37B6409B4B237FB24FA9760DB493FC0DBC30E">public GetWebPortalJsCssScriptsOffline(string specType, string fileName)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">specType</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">fileName</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Default Operation For Working Wihth 
+                Portal Scripts From Local Tables Offline
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="6647B7C7C42CB910D2BC1AA0B33A386BB9CE8C5FB3580F1D0174D9868A776F4A">public GetWebPortalJsCssScriptsOnline(string specType, string fileName)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">specType</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">fileName</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Default Operation For Working Wihth 
+                Portal Scripts From Local Tables. Online
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="AFF450AE97A0A7088C66CC53B3F1CCACEBBB72EBE7B8F86DEA237F82E8FE4DA5">public CheckDefinedWebPageOffline(string modulePath)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">modulePath</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Get Check ServerModule from OneTime Load Server List
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="69DF43D01B07D641C8704C815F0D5B2E56C5339BB290A5CA40A7A009EE73C835">public CheckDefinedWebPageOnline(string modulePath)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">modulePath</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Get Check ServerModule from DB 
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="EA23C1A4571B7B4335AB06589F299BFFADAA7C1DA48A8755527909817AE57323">public CheckDBServerApiRuleOffline(string serverPath)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">serverPath</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Get Ignored Static Web Or MVC Too Path In App.Use
+                For Continue Loading of Defined Layout or Static Web
+                Offline LocalDB Operation
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="B4894A9CA80DAB1C00ADEB21B18AE4F3E38FD3BE6B5080D29CB86D6091AC9FE6">public CheckDBServerApiRuleOnline(string serverPath)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">serverPath</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Get Ignored Static Web Or MVC Too Path In App.Use
+                For Continue Loading of Defined Layout or Static Web
+                Online LocalDB Operation
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="611A19E443FE2CA11A3EF741DC63890678248CA53E4F13D1D3DCC646FCDC77BF">public DBTranslateOffline(string word, string language)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">word</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">language</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Database LanuageList for Off-line Using Definitions
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="method-elem">
+                    <h3 id="161439F4ED2E9E8EED978574276D559E529957CCE33F340820FBE685F58AA1C9">public DBTranslateOnline(string word, string language)</h3>
+                    <div class="method-content">
+                        
+                        
+                        <table class="parameter">
+                            <caption>Parameters</caption>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="elem-name">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">word</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                                <tr>
+                                    <td aria-label="Type"><div class="specific-element">string</div></td>
+                                    <td aria-label="Name" class="elem-name">language</td>
+                                    <td aria-label="Description"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        <div class="elem-content">
+                            Database LanuageList for On-line Using Definitions
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+
+            
+
+            
+        </div>
+
+    </div>
+
+    <div id="footer">
+        XMLDocumentToHtml: Copyright (C) 2018 - 2020 Aona Suzutsuki.
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,2561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Costura.Fody.5.7.0\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.5.7.0\build\Costura.Fody.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7F787428-6D63-4AEC-BC79-DD3AAD96CE87}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EasyITSystemCenter</RootNamespace>
+    <AssemblyName>EasyITSystemCenter</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <IncrementVersionOnBuild>1.yyyy.Mdd.Hmm</IncrementVersionOnBuild>
+    <Version>1.2023.108.1236</Version>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <StaticWebAssetsEnabled>false</StaticWebAssetsEnabled>
+    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
+    <PublishUrl>Y:\EASY-IT-DOWNLOADS\EIC&amp;ESB-ITSolution\EsbOnline\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>https://kliknetezde.cz/EASY-IT-DOWNLOADS/EIC&amp;ESB-ITSolution/EsbOnline/</InstallUrl>
+    <SupportUrl>https://www.groupware-solution.eu/contactus</SupportUrl>
+    <ErrorReportUrl>https://www.groupware-solution.eu/contactus</ErrorReportUrl>
+    <ProductName>Easy SYSTEM builder</ProductName>
+    <PublisherName>GroupWare-Solution.Eu</PublisherName>
+    <SuiteName>Easy SYSTEM builder</SuiteName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>kliknetezde.cz</WebPage>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.6.25.0</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <DocumentationFile>Y:\EASY-IT-EXTENSIONS\EASY-IT-PROJECTS\WIN-GENERATORS.xml</DocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <UseWinFormsOutOfProcDesigner>False</UseWinFormsOutOfProcDesigner>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <DocumentationFile>E:\Projekty\MyGitHub\GroupWare-Solution\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-web\generated\xmltomd\EasyITCenter-System.xml</DocumentationFile>
+    <UseWinFormsOutOfProcDesigner>False</UseWinFormsOutOfProcDesigner>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>EasyITSystemCenter.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>98FFA951788C70724A4702F24D080BF65D7E27C4</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>EasyITSystemCenter_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\dotnet\sdk\2.0.0\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Linq" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Agendas\ExampleAgendas\HtmlFullEditorPage.xaml.cs">
+      <DependentUpon>HtmlFullEditorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenericSystem\InteractUserSystemPage.xaml.cs">
+      <DependentUpon>InteractUserSystemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenericSystemAgendas\DynamicIncludingObjects\IncludeTabItem.xaml.cs">
+      <DependentUpon>IncludeTabItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenericSystem\Views\InteractCleanWindowPage.xaml.cs">
+      <DependentUpon>InteractCleanWindowPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\XamlCodeEditorPage.xaml.cs">
+      <DependentUpon>XamlCodeEditorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\SolutionTaskList\SolutionTaskList.cs" />
+    <Compile Include="Agendas\UserAgendas\SolutionTaskList\SolutionTaskListPage.xaml.cs">
+      <DependentUpon>SolutionTaskListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerApiSecurityList\ServerApiSecurityList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerApiSecurityList\ServerApiSecurityListPage.xaml.cs">
+      <DependentUpon>ServerApiSecurityListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenericSystem\_SystemControls\ActionModel.cs" />
+    <Compile Include="GenericSystem\_SystemControls\BindableBase.cs" />
+    <Compile Include="GenericSystem\_SystemControls\DelegateCommand.cs" />
+    <Compile Include="GenericSystem\_SystemControls\FrameAnimator.cs" />
+    <Compile Include="GenericSystem\_SystemControls\MenuItem.cs" />
+    <Compile Include="GenericSystem\_SystemControls\NavigationServiceEx.cs" />
+    <Compile Include="GenericSystemAgendas\LocSrvWebTmpViewerPage.xaml.cs">
+      <DependentUpon>LocSrvWebTmpViewerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenericSystemAgendas\MltTblGenEsbSrvFormPage.xaml.cs">
+      <DependentUpon>MltTblGenEsbSrvFormPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserWebToolPagesAgendas\WebConfiguratorList\WebConfiguratorList.cs" />
+    <Compile Include="Agendas\UserWebToolPagesAgendas\WebConfiguratorList\WebConfiguratorListPage.xaml.cs">
+      <DependentUpon>WebConfiguratorListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\_Dials\WebCodeLibraryList\WebCodeLibraryListPage.xaml.cs">
+      <DependentUpon>WebCodeLibraryListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\UniversalCodeEditorPage.xaml.cs">
+      <DependentUpon>UniversalCodeEditorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\WebCodeEditorPage.xaml.cs">
+      <DependentUpon>WebCodeEditorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\DocAgendas\DocSrvDocTemplateList\DocSrvDocTemplateList.cs" />
+    <Compile Include="Agendas\DocAgendas\DocSrvDocTemplateList\DocSrvDocTemplateListPage.xaml.cs">
+      <DependentUpon>DocSrvDocTemplateListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\DocAgendas\DocSrvDocumentationCodeLibraryList\DocSrvDocumentationCodeLibraryList.cs" />
+    <Compile Include="Agendas\DocAgendas\DocSrvDocumentationCodeLibraryList\DocSrvDocumentationCodeLibraryListPage.xaml.cs">
+      <DependentUpon>DocSrvDocumentationCodeLibraryListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\DocAgendas\DocSrvDocumentationGroupList\DocSrvDocumentationGroupList.cs" />
+    <Compile Include="Agendas\DocAgendas\DocSrvDocumentationGroupList\DocSrvDocumentationGroupListPage.xaml.cs">
+      <DependentUpon>DocSrvDocumentationGroupListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\DocAgendas\DocSrvDocumentationList\DocSrvDocumentationList.cs" />
+    <Compile Include="Agendas\DocAgendas\DocSrvDocumentationList\DocSrvDocumentationListPage.xaml.cs">
+      <DependentUpon>DocSrvDocumentationListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\MessagingAgendas\SolutionEmailerHistoryList\SolutionEmailerHistoryList.cs" />
+    <Compile Include="Agendas\MessagingAgendas\SolutionEmailerHistoryList\SolutionEmailerHistoryListPage.xaml.cs">
+      <DependentUpon>SolutionEmailerHistoryListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\MessagingAgendas\SolutionMessageModuleList\SolutionMessageModuleList.cs" />
+    <Compile Include="Agendas\MessagingAgendas\SolutionMessageModuleList\SolutionMessageModuleListPage.xaml.cs">
+      <DependentUpon>SolutionMessageModuleListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\MessagingAgendas\SolutionMessageTypeList\SolutionMessageTypeList.cs" />
+    <Compile Include="Agendas\MessagingAgendas\SolutionMessageTypeList\SolutionMessageTypeListPage.xaml.cs">
+      <DependentUpon>SolutionMessageTypeListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\GraphsPage\ConfigEditorViewModel.cs" />
+    <Compile Include="GenericSystemAgendas\ExternalWebAppPage.xaml.cs">
+      <DependentUpon>ExternalWebAppPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationPage.xaml.cs">
+      <DependentUpon>TemplateClassListAutoDBTranslationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationViewPage.xaml.cs">
+      <DependentUpon>TemplateClassListAutoDBTranslationViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationWithParentPage.xaml.cs">
+      <DependentUpon>TemplateClassListAutoDBTranslationWithParentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationWithSubPage.xaml.cs">
+      <DependentUpon>TemplateClassListAutoDBTranslationWithSubPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationWithSubViewPage.xaml.cs">
+      <DependentUpon>TemplateClassListAutoDBTranslationWithSubViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenericSystemAgendas\MltEicSrvWebAppPage.xaml.cs">
+      <DependentUpon>MltEicSrvWebAppPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenericSystemAgendas\HostWin32AppPage.xaml.cs">
+      <DependentUpon>HostWin32AppPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerLiveDataMonitorList\ServerLiveDataMonitorList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerLiveDataMonitorList\ServerLiveDataMonitorListPage.xaml.cs">
+      <DependentUpon>ServerLiveDataMonitorListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerCorsDefAllowedOriginList\ServerCorsDefAllowedOriginList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerCorsDefAllowedOriginList\ServerCorsDefAllowedOriginListPage.xaml.cs">
+      <DependentUpon>ServerCorsDefAllowedOriginListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerModuleAndServiceList\ServerModuleAndServiceList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerModuleAndServiceList\ServerModuleAndServiceListPage.xaml.cs">
+      <DependentUpon>ServerModuleAndServiceListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\SolutionSchedulerList\SolutionSchedulerList.cs" />
+    <Compile Include="Agendas\UserAgendas\SolutionSchedulerList\SolutionSchedulerListPage.xaml.cs">
+      <DependentUpon>SolutionSchedulerListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SolutionMixedEnumList\SolutionMixedEnumList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SolutionMixedEnumList\SolutionMixedEnumListPage.xaml.cs">
+      <DependentUpon>SolutionMixedEnumListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\ClientSettingsPage.xaml.cs">
+      <DependentUpon>ClientSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\SystemOperationListPage.xaml.cs">
+      <DependentUpon>SystemOperationListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\_Dials\SystemModuleList\SystemModuleList.cs" />
+    <Compile Include="Agendas\UserAgendas\_Dials\SystemModuleList\SystemModuleListPage.xaml.cs">
+      <DependentUpon>SystemModuleListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SolutionOperationList\SolutionOperationList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SolutionOperationList\SolutionOperationListPage.xaml.cs">
+      <DependentUpon>SolutionOperationListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemCustomPageList\SystemCustomPageList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemCustomPageList\SystemCustomPageListPage.xaml.cs">
+      <DependentUpon>SystemCustomPageListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemGroupMenuList\SystemGroupMenuList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemGroupMenuList\SystemGroupMenuListPage.xaml.cs">
+      <DependentUpon>SystemGroupMenuListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemMenuList\SystemMenuList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemMenuList\SystemMenuListPage.xaml.cs">
+      <DependentUpon>SystemMenuListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\LicServerAgendas\_View\LicSrvLicenseActivationFailList\LicSrvLicenseActivationFailList.cs" />
+    <Compile Include="Agendas\LicServerAgendas\_View\LicSrvLicenseActivationFailList\LicSrvLicenseActivationFailListPage.xaml.cs">
+      <DependentUpon>LicSrvLicenseActivationFailListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\LicServerAgendas\LicSrvLicenseAlgorithmList\LicSrvLicenseAlgorithmList.cs" />
+    <Compile Include="Agendas\LicServerAgendas\LicSrvLicenseAlgorithmList\LicSrvLicenseAlgorithmListPage.xaml.cs">
+      <DependentUpon>LicSrvLicenseAlgorithmListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\LicServerAgendas\_View\LicSrvUsedLicenseList\LicSrvUsedLicenseListcs.cs" />
+    <Compile Include="Agendas\LicServerAgendas\_View\LicSrvUsedLicenseList\LicSrvUsedLicenseListPage.xaml.cs">
+      <DependentUpon>LicSrvUsedLicenseListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ProductionGuides\ProdGuidGroupList\ProdGuidGroupList.cs" />
+    <Compile Include="Agendas\ProductionGuides\ProdGuidGroupList\ProdGuidGroupListPage.xaml.cs">
+      <DependentUpon>ProdGuidGroupListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ProductionGuides\ProdGuidOperationList\ProdGuidOperationList.cs" />
+    <Compile Include="Agendas\ProductionGuides\ProdGuidOperationList\ProdGuidOperationList.xaml.cs">
+      <DependentUpon>ProdGuidOperationList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ProductionGuides\ProdGuidPartList\ProdGuidPartList.cs" />
+    <Compile Include="Agendas\ProductionGuides\ProdGuidPartList\ProdGuidPartListPage.xaml.cs">
+      <DependentUpon>ProdGuidPartListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ProductionGuides\ProdGuidPersonList\ProdGuidPersonList.cs" />
+    <Compile Include="Agendas\ProductionGuides\ProdGuidPersonList\ProdGuidPersonListPage.xaml.cs">
+      <DependentUpon>ProdGuidPersonListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ProductionGuides\ProdGuidWorkList\ProdGuidWorkList.cs" />
+    <Compile Include="Agendas\ProductionGuides\ProdGuidWorkList\ProdGuidWorkList.xaml.cs">
+      <DependentUpon>ProdGuidWorkList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerStaticOrMvcDefPathList\ServerStaticOrMvcDefPathList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerStaticOrMvcDefPathList\ServerStaticOrMvcDefPathListPage.xaml.cs">
+      <DependentUpon>ServerStaticOrMvcDefPathListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\SystemMonitorPage.xaml.cs">
+      <DependentUpon>SystemMonitorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\GraphsPage\GraphsPage.xaml.cs">
+      <DependentUpon>GraphsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\_Dials\ServerToolTypeList\ServerToolTypeList.cs" />
+    <Compile Include="Agendas\UserAgendas\_Dials\ServerToolTypeList\ServerToolTypeListPage.xaml.cs">
+      <DependentUpon>ServerToolTypeListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SolutionLanguageList\SolutionLanguageList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SolutionLanguageList\SolutionLanguageListPage.xaml.cs">
+      <DependentUpon>SolutionLanguageListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\ServerToolPanelListPage.xaml.cs">
+      <DependentUpon>ServerToolPanelListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserWebToolPagesAgendas\SolutionStaticFileList\SolutionStaticFileList.cs" />
+    <Compile Include="Agendas\UserWebToolPagesAgendas\SolutionStaticFileList\SolutionStaticFileListPage.xaml.cs">
+      <DependentUpon>SolutionStaticFileListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\WebDocumentationList\WebDocumentationList.cs" />
+    <Compile Include="Agendas\WebPortalAgendas\WebDocumentationList\WebDocumentationListPage.xaml.cs">
+      <DependentUpon>WebDocumentationListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\WebDeveloperNewsList\WebDeveloperNewsList.cs" />
+    <Compile Include="Agendas\WebPortalAgendas\WebDeveloperNewsList\WebDeveloperNewsListPage.xaml.cs">
+      <DependentUpon>WebDeveloperNewsListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\WebBannedIpAddressList\WebBannedIpAddressList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\WebBannedIpAddressList\WebBannedIpAddressListPage.xaml.cs">
+      <DependentUpon>WebBannedIpAddressListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\WebGlobalPageBlockList\WebGlobalPageBlockList.cs" />
+    <Compile Include="Agendas\WebPortalAgendas\WebGlobalPageBlockList\WebGlobalPageBlockListPage.xaml.cs">
+      <DependentUpon>WebGlobalPageBlockListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserWebToolPagesAgendas\SolutionWebsiteList\SolutionWebsiteList.cs" />
+    <Compile Include="Agendas\UserWebToolPagesAgendas\SolutionWebsiteList\SolutionWebsiteListPage.xaml.cs">
+      <DependentUpon>SolutionWebsiteListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\_Dials\WebDocumentationCodeLibraryList\WebDocumentationCodeLibraryList.cs" />
+    <Compile Include="Agendas\WebPortalAgendas\_Dials\WebDocumentationCodeLibraryList\WebDocumentationCodeLibraryListPage.xaml.cs">
+      <DependentUpon>WebDocumentationCodeLibraryListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\_Dials\WebCodeLibraryList\WebCodeLibraryList.cs" />
+    <Compile Include="Agendas\WebPortalAgendas\_Dials\WebCodeLibraryList\WebCodeLibraryListOldPage.xaml.cs">
+      <DependentUpon>WebCodeLibraryListOldPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\WebCoreFileList\WebCoreFileList.cs" />
+    <Compile Include="Agendas\WebPortalAgendas\WebCoreFileList\WebCoreFileListPage.xaml.cs">
+      <DependentUpon>WebCoreFileListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\WebGroupMenuList\WebGroupMenuList.cs" />
+    <Compile Include="Agendas\WebPortalAgendas\WebGroupMenuList\WebGroupMenuListPage.xaml.cs">
+      <DependentUpon>WebGroupMenuListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\WebMenuList\WebMenuList.cs" />
+    <Compile Include="Agendas\WebPortalAgendas\WebMenuList\WebMenuListPage.xaml.cs">
+      <DependentUpon>WebMenuListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\WebPortalAgendas\_Dials\WebSettingList\WebSettingList.cs" />
+    <Compile Include="Agendas\WebPortalAgendas\_Dials\WebSettingList\WebSettingListPage.xaml.cs">
+      <DependentUpon>WebSettingListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\_Dials\SolutionMottoList\SolutionMottoList.cs" />
+    <Compile Include="Agendas\UserAgendas\_Dials\SolutionMottoList\SolutionMottoListPage.xaml.cs">
+      <DependentUpon>SolutionMottoListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\BusinessAddressList\BusinessAddressList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessAddressList\BusinessAddressListPage.xaml.cs">
+      <DependentUpon>BusinessAddressListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\MessagingAgendas\EmailTemplateList\SolutionEmailTemplateList.cs" />
+    <Compile Include="Agendas\MessagingAgendas\EmailTemplateList\SolutionEmailTemplateListPage.xaml.cs">
+      <DependentUpon>SolutionEmailTemplateListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\ServerHealthCheckTaskList\ServerHealthCheckTaskList.cs" />
+    <Compile Include="Agendas\UserAgendas\ServerHealthCheckTaskList\ServerHealthCheckTaskListPage.xaml.cs">
+      <DependentUpon>ServerHealthCheckTaskListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Views\WebVisitIpList\WebVisitIpList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Views\WebVisitIpList\WebVisitIpListPage.xaml.cs">
+      <DependentUpon>WebVisitIpListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalClasses\GlobalEnumSetDefinitions.cs" />
+    <Compile Include="GlobalGenerators\XamlFormGenerator.cs" />
+    <Compile Include="GlobalGenerators\ImageElementGenerator.cs" />
+    <Compile Include="GlobalOperations\CommOperations.cs" />
+    <Compile Include="GlobalOperations\ToolsOperations.cs" />
+    <Compile Include="GlobalOperations\FormOperations.cs" />
+    <Compile Include="GlobalStylesLibrary\ProgramaticAnimationsLibrary.cs" />
+    <Compile Include="GlobalTools\UniversalEditor\BraceFoldingStrategy.cs" />
+    <Compile Include="GlobalTools\UniversalEditor\ColorizeDefinedString.cs" />
+    <Compile Include="GlobalTools\UniversalEditor\ITextMarker.cs" />
+    <Compile Include="GlobalTools\UniversalEditor\MyCompletionData.cs" />
+    <Compile Include="GlobalTools\UniversalEditor\TextMarkerService.cs" />
+    <Compile Include="GlobalTools\XamlCodeEditor\ToolboxItem.cs" />
+    <Compile Include="SystemCore\SystemHelpers\SystemInstaller.cs" />
+    <Compile Include="SystemCore\SystemObjectsExtensions\HostW32Application.cs" />
+    <Compile Include="GlobalStylesLibrary\StyleExtensions.cs" />
+    <Compile Include="SystemCore\OSHelpers\CPUUsage.cs" />
+    <Compile Include="SystemCore\OSHelpers\PerformanceInfo.cs" />
+    <Compile Include="SystemCore\OSHelpers\RAMUsage.cs" />
+    <Compile Include="Agendas\BasicAgendas\BasicImageGalleryList\BasicImageGalleryList.cs" />
+    <Compile Include="Agendas\BasicAgendas\BasicImageGalleryList\BasicImageGalleryListPage.xaml.cs">
+      <DependentUpon>BasicImageGalleryListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\CoreAgendas\ScreenSaverPage.xaml.cs">
+      <DependentUpon>ScreenSaverPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemIgnoredExceptionList\SystemIgnoredExceptionList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemIgnoredExceptionList\SystemIgnoredExceptionListPage.xaml.cs">
+      <DependentUpon>SystemIgnoredExceptionListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\_Dials\ServerToolPanelDefinitionList\ServerToolPanelDefinitionList.cs" />
+    <Compile Include="Agendas\UserAgendas\_Dials\ServerToolPanelDefinitionList\ServerToolPanelDefinitionListPage.xaml.cs">
+      <DependentUpon>ServerToolPanelDefinitionListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BasicAgendas\_Views\BasicAttachmentList\BasicAttachmentList.cs" />
+    <Compile Include="Agendas\BasicAgendas\_Views\BasicAttachmentList\BasicAttachmentListPage.xaml.cs">
+      <DependentUpon>BasicAttachmentListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\BusinessBranchList\BusinessBranchList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessBranchList\BusinessBranchListPage.xaml.cs">
+      <DependentUpon>BusinessBranchListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\BasicCalendarList\BasicCalendarListPage.xaml.cs">
+      <DependentUpon>BasicCalendarListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\BasicCalendarList\BasicCalendarList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessCreditNoteList\BusinessCreditNoteList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessCreditNoteList\BusinessCreditNoteListPage.xaml.cs">
+      <DependentUpon>BusinessCreditNoteListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\_Dials\SystemDocumentTypeList\SystemDocumentTypeList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\_Dials\SystemDocumentTypeList\SystemDocumentTypeListPage.xaml.cs">
+      <DependentUpon>SystemDocumentTypeListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessExchangeRateList\BusinessExchangeRateList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessExchangeRateList\BusinessExchangeRateListPage.xaml.cs">
+      <DependentUpon>BusinessExchangeRateListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BasicAgendas\_Dials\BasicCurrencyList\BasicCurrencyList.cs" />
+    <Compile Include="Agendas\BasicAgendas\_Dials\BasicCurrencyList\BasicCurrencyListPage.xaml.cs">
+      <DependentUpon>BasicCurrencyListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\_Dials\SystemDocumentAdviceList\SystemDocumentAdviceList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\_Dials\SystemDocumentAdviceList\SystemDocumentAdviceListPage.xaml.cs">
+      <DependentUpon>SystemDocumentAdviceListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\BusinessIncomingInvoiceList\BusinessIncomingInvoiceList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessIncomingInvoiceList\BusinessIncomingInvoiceListPage.xaml.cs">
+      <DependentUpon>BusinessIncomingInvoiceListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\BusinessIncomingOrderList\BusinessIncomingOrderList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessIncomingOrderList\BusinessIncomingOrderListPage.xaml.cs">
+      <DependentUpon>BusinessIncomingOrderListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\SystemTranslationList\SystemTranslationList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\SystemTranslationList\SystemTranslationListPage.xaml.cs">
+      <DependentUpon>SystemTranslationListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Views\SystemLoginHistoryList\SystemLoginHistoryListPage.xaml.cs">
+      <DependentUpon>SystemLoginHistoryListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessMaturityList\BusinessMaturityList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessMaturityList\BusinessMaturityListPage.xaml.cs">
+      <DependentUpon>BusinessMaturityListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessNotesList\BusinessNotesList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessNotesList\BusinessNotesListPage.xaml.cs">
+      <DependentUpon>BusinessNotesListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\BusinessOfferList\BusinessOfferList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessOfferList\BusinessOfferListPage.xaml.cs">
+      <DependentUpon>BusinessOfferListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\BusinessOutgoingInvoiceList\BusinessOutgoingInvoiceList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessOutgoingInvoiceList\BusinessOutgoingInvoiceListPage.xaml.cs">
+      <DependentUpon>BusinessOutgoingInvoiceListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\BusinessOutgoingOrderList\BusinessOutgoingOrderList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessOutgoingOrderList\BusinessOutgoingOrderListPage.xaml.cs">
+      <DependentUpon>BusinessOutgoingOrderListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessPaymentMethodList\BusinessPaymentMethodList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessPaymentMethodList\BusinessPaymentMethodListPage.xaml.cs">
+      <DependentUpon>BusinessPaymentMethodListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessPaymentStatusList\BusinessPaymentStatusList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessPaymentStatusList\BusinessPaymentStatusListPage.xaml.cs">
+      <DependentUpon>BusinessPaymentStatusListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\BusinessReceiptList\BusinessReceiptList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\BusinessReceiptList\BusinessReceiptListPage.xaml.cs">
+      <DependentUpon>BusinessReceiptListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\SystemReportQueueList\SystemReportQueueListPage.xaml.cs">
+      <DependentUpon>SystemReportQueueListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\SystemReportQueueList\SystemReportQueueList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\SolutionFailList\SolutionFailList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\SolutionFailList\SolutionFailListPage.xaml.cs">
+      <DependentUpon>SolutionFailListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BasicAgendas\BasicItemList\BasicItemList.cs" />
+    <Compile Include="Agendas\BasicAgendas\BasicItemList\BasicItemListPage.xaml.cs">
+      <DependentUpon>BasicItemListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\UserAgendas\SystemParameterList\SystemParameterList.cs" />
+    <Compile Include="Agendas\UserAgendas\SystemParameterList\SystemParameterListPage.xaml.cs">
+      <DependentUpon>SystemParameterListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BasicAgendas\_Dials\BasicUnitList\BasicUnitList.cs" />
+    <Compile Include="Agendas\BasicAgendas\_Dials\BasicUnitList\BasicUnitListPage.xaml.cs">
+      <DependentUpon>BasicUnitListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BasicAgendas\_Dials\BasicVatList\BasicVatList.cs" />
+    <Compile Include="Agendas\BasicAgendas\_Dials\BasicVatList\BasicVatListPage.xaml.cs">
+      <DependentUpon>BasicVatListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessWarehouseList\BusinessWarehouseList.cs" />
+    <Compile Include="Agendas\BusinessAgendas\_Dials\BusinessWarehouseList\BusinessWarehouseListPage.xaml.cs">
+      <DependentUpon>BusinessWarehouseListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemSvgIconList\SystemSvgIconList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Dials\SystemSvgIconList\SystemSvgIconListPage.xaml.cs">
+      <DependentUpon>SystemSvgIconListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommAPI\APIClasses.cs" />
+    <Compile Include="CommAPI\ApiFunctions.cs" />
+    <Compile Include="GlobalClasses\PhotoCollectionClasses.cs" />
+    <Compile Include="GlobalClasses\ConcurrentObservableList.cs" />
+    <Compile Include="GlobalClasses\GlobalClasses.cs" />
+    <Compile Include="GlobalOperations\DataOperations.cs" />
+    <Compile Include="GlobalOperations\HardwareOperations.cs" />
+    <Compile Include="GlobalOperations\ProgrammaticOperations.cs" />
+    <Compile Include="GlobalOperations\DBOperations.cs" />
+    <Compile Include="GlobalOperations\SystemOperations.cs" />
+    <Compile Include="SystemCore\SystemHelpers\SystemLoggerHelper.cs" />
+    <Compile Include="SystemServer\LocalWebServerStartup.cs" />
+    <Compile Include="SystemCore\SystemStructure\SystemCoreDataResources.cs" />
+    <Compile Include="SystemCore\SystemStructure\SystemCoreExtension.cs" />
+    <Compile Include="SystemServer\WebServerControllers.cs" />
+    <Compile Include="SystemServer\OWinApiMiddleWare.cs" />
+    <Compile Include="SystemWindow.xaml.cs">
+      <DependentUpon>SystemWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerSettingList\ServerServerSettingList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\_Views\SystemLoginHistoryList\SystemLoginHistoryList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\SystemReportList\SystemReportList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\SolutionUserList\SolutionUserList.cs" />
+    <Compile Include="Agendas\SolutionAdminAgendas\SolutionUserRoleList\SolutionUserRoleList.cs" />
+    <Compile Include="Agendas\ExampleAgendas\CoreAgendas\SupportPage.xaml.cs">
+      <DependentUpon>SupportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\SystemReportList\SystemReportListPage.xaml.cs">
+      <DependentUpon>SystemReportListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\SolutionUserList\SolutionUserListPage.xaml.cs">
+      <DependentUpon>SolutionUserListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\SolutionUserRoleList\SolutionUserRoleListPage.xaml.cs">
+      <DependentUpon>SolutionUserRoleListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalOperations\FileOperations.cs" />
+    <Compile Include="GlobalOperations\MediaOperations.cs" />
+    <Compile Include="GlobalStylesLibrary\ProgramaticStyleDefinitions.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\SolutionAdminAgendas\ServerSettingList\ServerSettingListPage.xaml.cs">
+      <DependentUpon>ServerSettingListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\CoreAgendas\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SystemCore\SystemStructure\SystemTheme.cs" />
+    <Compile Include="SystemCore\SystemStructure\ExtendedKeyUsageData.cs" />
+    <Compile Include="GlobalGenerators\IconMaker.cs" />
+    <Compile Include="SystemCore\SystemStructure\SystemWindowDataModel.cs" />
+    <Compile Include="SystemCore\SystemStructure\SystemObjectsBehaviors.cs" />
+    <Compile Include="SystemCore\SystemStructure\SystemPlatform.cs" />
+    <Compile Include="SystemCore\SystemStructure\SystemTabs.cs" />
+    <Compile Include="SystemCore\SystemConfiguration\CrashReporterSettings.cs" />
+    <Compile Include="SystemCore\SystemHelpers\DelegateCommand.cs" />
+    <Compile Include="SystemCore\SystemHelpers\SystemHelp.cs" />
+    <Compile Include="SystemCore\SystemHelpers\SystemUpdater.cs" />
+    <Compile Include="SystemCore\SystemConfiguration\IniFile.cs" />
+    <Compile Include="SystemCore\SystemConfiguration\Settings.cs" />
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateWebViewPage.xaml.cs">
+      <DependentUpon>TemplateWebViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListWithParentPage.xaml.cs">
+      <DependentUpon>TemplateClassListWithParentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassList.cs" />
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateDocumentViewPage.xaml.cs">
+      <DependentUpon>TemplateDocumentViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListWithSubPage.xaml.cs">
+      <DependentUpon>TemplateClassListWithSubPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListWithSubViewPage.xaml.cs">
+      <DependentUpon>TemplateClassListWithSubViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListViewPage.xaml.cs">
+      <DependentUpon>TemplateClassListViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateSettingsPage.xaml.cs">
+      <DependentUpon>TemplateSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateClassListPage.xaml.cs">
+      <DependentUpon>TemplateClassListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateSTLPage.xaml.cs">
+      <DependentUpon>TemplateSTLPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Agendas\ExampleAgendas\Templates\TemplateVideoPage.xaml.cs">
+      <DependentUpon>TemplateVideoPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Agendas\ExampleAgendas\HtmlFullEditorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystem\InteractUserSystemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystemAgendas\DynamicIncludingObjects\IncludeTabItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystem\Views\InteractMainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystem\Views\InteractUserPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystem\Views\InteractCleanWindowPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\XamlCodeEditorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\SolutionTaskList\SolutionTaskListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\ServerApiSecurityList\ServerApiSecurityListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystem\Views\InteractAboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystem\Views\InteractAwesomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystem\Views\InteractBreakPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystem\Views\InteractBugsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystem\Views\InteractSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystemAgendas\LocSrvWebTmpViewerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystemAgendas\MltTblGenEsbSrvFormPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserWebToolPagesAgendas\WebConfiguratorList\WebConfiguratorListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\_Dials\WebCodeLibraryList\WebCodeLibraryListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystemAgendas\ExternalWebAppPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\GlobalAnimationsEffectLibrary.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\UniversalCodeEditorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\WebCodeEditorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\DocAgendas\DocSrvDocTemplateList\DocSrvDocTemplateListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\DocAgendas\DocSrvDocumentationCodeLibraryList\DocSrvDocumentationCodeLibraryListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\DocAgendas\DocSrvDocumentationGroupList\DocSrvDocumentationGroupListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\DocAgendas\DocSrvDocumentationList\DocSrvDocumentationListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\MessagingAgendas\SolutionEmailerHistoryList\SolutionEmailerHistoryListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\MessagingAgendas\SolutionMessageModuleList\SolutionMessageModuleListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\MessagingAgendas\SolutionMessageTypeList\SolutionMessageTypeListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationWithParentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationWithSubPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationWithSubViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystemAgendas\MltEicSrvWebAppPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GenericSystemAgendas\HostWin32AppPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\ServerLiveDataMonitorList\ServerLiveDataMonitorListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\ServerCorsDefAllowedOriginList\ServerCorsDefAllowedOriginListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\ServerModuleAndServiceList\ServerModuleAndServiceListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\SolutionSchedulerList\SolutionSchedulerListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Dials\SolutionMixedEnumList\SolutionMixedEnumListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\ClientSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\SystemOperationListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\_Dials\SystemModuleList\SystemModuleListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Dials\SolutionOperationList\SolutionOperationListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Dials\SystemCustomPageList\SystemCustomPageListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Dials\SystemGroupMenuList\SystemGroupMenuListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Dials\SystemMenuList\SystemMenuListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\LicServerAgendas\_View\LicSrvLicenseActivationFailList\LicSrvLicenseActivationFailListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\LicServerAgendas\LicSrvLicenseAlgorithmList\LicSrvLicenseAlgorithmListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\LicServerAgendas\_View\LicSrvUsedLicenseList\LicSrvUsedLicenseListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ProductionGuides\ProdGuidGroupList\ProdGuidGroupListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ProductionGuides\ProdGuidOperationList\ProdGuidOperationList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ProductionGuides\ProdGuidPartList\ProdGuidPartListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ProductionGuides\ProdGuidPersonList\ProdGuidPersonListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ProductionGuides\ProdGuidWorkList\ProdGuidWorkList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\ServerStaticOrMvcDefPathList\ServerStaticOrMvcDefPathListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\SystemMonitorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\GraphsPage\GraphsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\_Dials\ServerToolTypeList\ServerToolTypeListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Dials\SolutionLanguageList\SolutionLanguageListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\ServerToolPanelListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserWebToolPagesAgendas\SolutionStaticFileList\SolutionStaticFileListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\WebDocumentationList\WebDocumentationListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\WebDeveloperNewsList\WebDeveloperNewsListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\WebBannedIpAddressList\WebBannedIpAddressListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\WebGlobalPageBlockList\WebGlobalPageBlockListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserWebToolPagesAgendas\SolutionWebsiteList\SolutionWebsiteListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\_Dials\WebDocumentationCodeLibraryList\WebDocumentationCodeLibraryListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\_Dials\WebCodeLibraryList\WebCodeLibraryListOldPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\WebCoreFileList\WebCoreFileListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\WebGroupMenuList\WebGroupMenuListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\WebMenuList\WebMenuListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\WebPortalAgendas\_Dials\WebSettingList\WebSettingListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\_Dials\SolutionMottoList\SolutionMottoListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\BusinessAddressList\BusinessAddressListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\MessagingAgendas\EmailTemplateList\SolutionEmailTemplateListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\ServerHealthCheckTaskList\ServerHealthCheckTaskListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BasicAgendas\BasicImageGalleryList\BasicImageGalleryListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\CoreAgendas\ScreenSaverPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Dials\SystemIgnoredExceptionList\SystemIgnoredExceptionListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\_Dials\ServerToolPanelDefinitionList\ServerToolPanelDefinitionListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BasicAgendas\_Views\BasicAttachmentList\BasicAttachmentListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\BusinessBranchList\BusinessBranchListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\BasicCalendarList\BasicCalendarListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\BusinessCreditNoteList\BusinessCreditNoteListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\_Dials\SystemDocumentTypeList\SystemDocumentTypeListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\_Dials\BusinessExchangeRateList\BusinessExchangeRateListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BasicAgendas\_Dials\BasicCurrencyList\BasicCurrencyListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\_Dials\SystemDocumentAdviceList\SystemDocumentAdviceListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\BusinessIncomingInvoiceList\BusinessIncomingInvoiceListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\BusinessIncomingOrderList\BusinessIncomingOrderListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\SystemTranslationList\SystemTranslationListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Views\SystemLoginHistoryList\SystemLoginHistoryListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\_Dials\BusinessMaturityList\BusinessMaturityListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\_Dials\BusinessNotesList\BusinessNotesListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\BusinessOfferList\BusinessOfferListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\BusinessOutgoingInvoiceList\BusinessOutgoingInvoiceListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\BusinessOutgoingOrderList\BusinessOutgoingOrderListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\_Dials\BusinessPaymentMethodList\BusinessPaymentMethodListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\_Dials\BusinessPaymentStatusList\BusinessPaymentStatusListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\BusinessReceiptList\BusinessReceiptListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\SystemReportQueueList\SystemReportQueueListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\SolutionFailList\SolutionFailListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BasicAgendas\BasicItemList\BasicItemListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\CoreAgendas\SupportPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\UserAgendas\SystemParameterList\SystemParameterListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\ServerSettingList\ServerSettingListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\SystemReportList\SystemReportListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BasicAgendas\_Dials\BasicUnitList\BasicUnitListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\SolutionUserList\SolutionUserListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\SolutionUserRoleList\SolutionUserRoleListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Agendas\BasicAgendas\_Dials\BasicVatList\BasicVatListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\BusinessAgendas\_Dials\BusinessWarehouseList\BusinessWarehouseListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Dials\SystemSvgIconList\SystemSvgIconListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\SolutionAdminAgendas\_Views\WebVisitIpList\WebVisitIpListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\GlobalObjectTemplatesLibrary.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\SystemObjectLibrary\ProgressBarFix.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </Page>
+    <Page Include="GlobalStylesLibrary\SystemObjectLibrary\MetroCheckComboBoxStyleFix.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\StandardObjectDefaultStyles.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\SystemObjectLibrary\MetroProgressBarStyle.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\CustomObjectSetStylesLibrary.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\AutoObjectSetStylesLibrary.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\Tools\Markdown\MarkdownStylesLibrary.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\Tools\ToolsStylesLibrary.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Languages\StringResources.cs-CZ.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Languages\StringResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SystemWindow.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GlobalStylesLibrary\SystemObjectLibrary\SystemMainMenuStyle.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\CoreAgendas\WelcomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateWebViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateDocumentViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListWithParentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListWithSubPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListWithSubViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateClassListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateSTLPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Agendas\ExampleAgendas\Templates\TemplateVideoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Resource Include="Assets\link.xml" />
+    <None Include="GenericSystemAgendas\_JakPouzivatNastroje.md" />
+    <Resource Include="Agendas\ExampleAgendas\CoreAgendas\roundcornersheet.png" />
+    <Resource Include="Agendas\ExampleAgendas\GraphsPage\World.xml" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.2 %28x86 a x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.EdgeRuntime">
+      <Visible>False</Visible>
+      <ProductName>Edge WebView runtime</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AirspaceFixer">
+      <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="AjaxPro.2">
+      <Version>6.10.6.2</Version>
+    </PackageReference>
+    <PackageReference Include="Alek.NjsonSchema">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="AlterNET.ExtensibilityStudio.Common">
+      <Version>5.1.8</Version>
+    </PackageReference>
+    <PackageReference Include="AlterNET.ExtensibilityStudio.Roslyn">
+      <Version>5.1.8</Version>
+    </PackageReference>
+    <PackageReference Include="AlterNET.ExtensibilityStudio.Syntax">
+      <Version>5.1.8</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.SourcemapToolkit.SourcemapParser">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Common">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Common.Python">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Common.TypeScript">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Common.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Editor.Common">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Editor.Common.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Editor.Roslyn">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Editor.Roslyn.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Editor.TypeScript">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Editor.TypeScript.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Editor.WindowsForms">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Editor.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.FormDesigner.Common.WindowsForms">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.FormDesigner.Common.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.FormDesigner.Integration">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.FormDesigner.Integration.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.FormDesigner.WindowsForms">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.FormDesigner.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Roslyn">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Roslyn.Features">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.RoslynDependencies">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Common">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Debugger">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Debugger.Common">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Debugger.Dap">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Debugger.TypeScript">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Debugger.UI.WindowsForms">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Debugger.UI.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Integration">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Integration.Wpf">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.IronPython2">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Python">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.Python.Embedded">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Scripter.TypeScript">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.Advanced">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.Advanced.Python">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.Generic">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.Lsp">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.Lua">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.PowerShell">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.PowerShell.Embedded">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.Python">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.Roslyn">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.TypeScript">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.XAML">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="Alternet.Studio.Syntax.Parsers.Xml">
+      <Version>9.5.7</Version>
+    </PackageReference>
+    <PackageReference Include="AngleSharp">
+      <Version>1.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="AngleSharp.Css">
+      <Version>0.17.0</Version>
+    </PackageReference>
+    <PackageReference Include="AngleSharp.Diffing">
+      <Version>0.18.2</Version>
+    </PackageReference>
+    <PackageReference Include="AngleSharp.Io">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="AngleSharp.Io.4.6.1">
+      <Version>0.12.1</Version>
+    </PackageReference>
+    <PackageReference Include="AngleSharp.Js">
+      <Version>0.15.0</Version>
+    </PackageReference>
+    <PackageReference Include="AngleSharp.Scripting.JavaScript">
+      <Version>0.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="AngleSharp.Xml">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="AutoMapper">
+      <Version>10.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="AvalonEdit">
+      <Version>6.3.0.90</Version>
+    </PackageReference>
+    <PackageReference Include="BlurWindow">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Bond">
+      <Version>0.2.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="Bond.Compiler">
+      <Version>10.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Bond.Compiler.CSharp">
+      <Version>9.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="Bond.Core.CSharp">
+      <Version>10.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Bond.CSharp">
+      <Version>10.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Bond.Runtime.CSharp">
+      <Version>10.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="bootstrap">
+      <Version>5.3.3</Version>
+    </PackageReference>
+    <PackageReference Include="BouncyCastle.Cryptography">
+      <Version>2.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="BouncyCastle.NetCore">
+      <Version>2.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="BrightSharp.Toolkit">
+      <Version>2.1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Codeuctivity.HtmlRenderer">
+      <Version>2.2.278</Version>
+    </PackageReference>
+    <PackageReference Include="Confuser.MSBuild">
+      <Version>1.6.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="ConfuserEx">
+      <Version>0.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="ConfuserEx.Final">
+      <Version>1.0.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="ControlzEx">
+      <Version>3.0.2.4</Version>
+    </PackageReference>
+    <PackageReference Include="Costura.Fody">
+      <Version>5.6.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Dapplo.Windows.Common">
+      <Version>0.11.29</Version>
+    </PackageReference>
+    <PackageReference Include="DeviceId">
+      <Version>6.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="DeviceId.Windows">
+      <Version>6.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="DeviceId.Windows.Wmi">
+      <Version>6.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="Dirkster.InplaceEditBoxLib">
+      <Version>1.4.2</Version>
+    </PackageReference>
+    <PackageReference Include="Dirkster.MWindowDialogLib">
+      <Version>1.3.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Disqus.NET">
+      <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="DocWorks.Markdig">
+      <Version>0.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="DotNet2HTML">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization">
+      <Version>6.1.94</Version>
+    </PackageReference>
+    <PackageReference Include="DotNetToolkit.Wpf.Metro.Dialogs">
+      <Version>1.0.4.35</Version>
+    </PackageReference>
+    <PackageReference Include="Dragablz">
+      <Version>0.0.3.234</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.Calendar">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.CrashReporter">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.HighlightTextBox">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.HTMLEditorNoImg">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.HTMLFullEditor">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.HTMLFullEditor.Locale.Default">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.HTMLFullEditor.Locale.Override">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.ImageEffectLibrary">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.MarkDownToFlow">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.MarkdownToHtml">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.SqlConnectionDialog">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="EASYTools.TouchKeyboard">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Elysium.Theme">
+      <Version>2.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Extended.Wpf.Toolkit">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="FastMember">
+      <Version>1.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="Fluent.Ribbon">
+      <Version>10.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="FluentEmail.MailKit">
+      <Version>3.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="FluentFTP">
+      <Version>50.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="FluentMermaid">
+      <Version>0.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Fluid">
+      <Version>2.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="FluidCollections">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="FluidKit">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="FluidNames">
+      <Version>1.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="FluidScript">
+      <Version>1.1.2.4</Version>
+    </PackageReference>
+    <PackageReference Include="FluidScript.CoreLib">
+      <Version>1.0.16.3</Version>
+    </PackageReference>
+    <PackageReference Include="FluidScript.Runtime">
+      <Version>1.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="FluidXml">
+      <Version>1.0.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Flurl">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Flurl.Http">
+      <Version>4.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Fody">
+      <Version>6.8.1</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="FredCK.FCKeditorV2">
+      <Version>2.6.3.22451</Version>
+    </PackageReference>
+    <PackageReference Include="FroalaEditor">
+      <Version>4.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="FxSocket.SftpServer">
+      <Version>5.0.1242</Version>
+    </PackageReference>
+    <PackageReference Include="gemini">
+      <Version>1.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.CommandLine">
+      <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Core">
+      <Version>0.4.2</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.CodeCompiler">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.CodeEditor">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.ErrorList">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.GraphEditor">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.Inspector">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.Inspector.Xna">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.Metro">
+      <Version>0.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.MonoGame">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.Output">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.PropertyGrid">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.SharpDX">
+      <Version>0.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Modules.Xna">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Gemini.Services">
+      <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="GeminiApi">
+      <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="GeminiWpf">
+      <Version>0.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Google.Cloud.Translation.V2">
+      <Version>3.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="HelixToolkit">
+      <Version>2.25.0</Version>
+    </PackageReference>
+    <PackageReference Include="HelixToolkit.Wpf">
+      <Version>2.25.0</Version>
+    </PackageReference>
+    <PackageReference Include="HelixToolkit.Wpf.Input">
+      <Version>2.25.0</Version>
+    </PackageReference>
+    <PackageReference Include="HelixToolkit.Wpf.SharpDX">
+      <Version>2.25.0</Version>
+    </PackageReference>
+    <PackageReference Include="hima.lib.htmleditor">
+      <Version>1.1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlAgilityPack">
+      <Version>1.11.61</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlDocGen">
+      <Version>1.0.2.826</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlGenerator">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="HTMLGeneratorAPI">
+      <Version>0.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlRenderer.Core">
+      <Version>1.5.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlRenderer.Mono">
+      <Version>1.5.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlRenderer.PdfSharp">
+      <Version>1.5.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlRenderer.WPF">
+      <Version>1.5.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="HtmlWarningsReportGenerator">
+      <Version>1.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="ICSharpCode.NRefactory">
+      <Version>5.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="ICSharpCode.TextEditor">
+      <Version>3.2.1.6466</Version>
+    </PackageReference>
+    <PackageReference Include="ICSharpCode.TextEditor.Extended">
+      <Version>4.2.4</Version>
+    </PackageReference>
+    <PackageReference Include="ICSharpCode.TextEditor.Sample">
+      <Version>3.2.1.6466</Version>
+    </PackageReference>
+    <PackageReference Include="ICSharpCode.WpfDesigner">
+      <Version>8.1.49</Version>
+    </PackageReference>
+    <PackageReference Include="ICSharpCode.WpfDesigner.ExpressionBlendInteractionAddon">
+      <Version>8.1.49</Version>
+    </PackageReference>
+    <PackageReference Include="InteractiveDataDisplay.WPF">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="IronWebScraper">
+      <Version>2024.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="JavaScriptEngineSwitcher.Jint">
+      <Version>3.27.0</Version>
+    </PackageReference>
+    <PackageReference Include="Jint">
+      <Version>4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Jint.CommonJS">
+      <Version>1.0.14</Version>
+    </PackageReference>
+    <PackageReference Include="jQuery.Validation">
+      <Version>1.21.0</Version>
+    </PackageReference>
+    <PackageReference Include="jQueryDOM">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="JsonUtility">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Leisn.MarkdigToc">
+      <Version>0.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="LightSwitchMetroTheme">
+      <Version>2.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Lints.HtmlRenderer.PdfSharp">
+      <Version>1.5.9</Version>
+    </PackageReference>
+    <PackageReference Include="LiveCharts">
+      <Version>0.9.7</Version>
+    </PackageReference>
+    <PackageReference Include="LiveCharts.Wpf">
+      <Version>0.9.7</Version>
+    </PackageReference>
+    <PackageReference Include="log4net">
+      <Version>2.0.15</Version>
+    </PackageReference>
+    <PackageReference Include="MahApps.Extra">
+      <Version>1.6.5</Version>
+    </PackageReference>
+    <PackageReference Include="MahApps.Metro">
+      <Version>1.6.5</Version>
+    </PackageReference>
+    <PackageReference Include="MahApps.Metro.IconPacks">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MahApps.Metro.IconPacks.FontAwesome">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MahApps.Metro.IconPacks.Material">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MahApps.Metro.SimpleChildWindow">
+      <Version>1.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="MahApps.Twitter.Bootstrap">
+      <Version>2.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="MailKit">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="MailKit.NET">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Markdig">
+      <Version>0.37.0</Version>
+    </PackageReference>
+    <PackageReference Include="Markdig.Signed">
+      <Aliases>MarkdigSigned</Aliases>
+      <Version>0.37.0</Version>
+    </PackageReference>
+    <PackageReference Include="Markdig.SyntaxHighlighting">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Markdig.Wpf">
+      <Version>0.5.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="MarkdigExtensions.SyntaxHighlighting">
+      <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="MarkDownHtmlGenerator">
+      <Version>1.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="MarkdownWeb">
+      <Version>1.5.4</Version>
+    </PackageReference>
+    <PackageReference Include="MarkedNet">
+      <Version>2.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignThemes.MahApps">
+      <Version>0.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignThemes.MahApps.163">
+      <Version>0.0.111</Version>
+    </PackageReference>
+    <PackageReference Include="MermaidNetHtmlBuilder">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MessagePack">
+      <Version>2.5.140</Version>
+    </PackageReference>
+    <PackageReference Include="Metro4">
+      <Version>4.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.OwinSelfHost">
+      <Version>5.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.SelfHost">
+      <Version>5.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp">
+      <Version>4.10.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.DependencyValidation.Analyzers">
+      <Version>0.11.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Maps.MapControl.WPF">
+      <Version>1.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.MarkedNet">
+      <Version>1.0.13</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.FileSystems">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Host.HttpListener">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Host.SystemWeb">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Hosting">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.SelfHost">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.StaticFiles">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Playwright">
+      <Version>1.46.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.PowerShell.EditorServices">
+      <Version>0.6.2.389</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.PowerShell.EditorServices.Host">
+      <Version>0.6.2.389</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.PowerShell.EditorServices.Protocol">
+      <Version>0.6.2.389</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Wpf.UI.Controls">
+      <Version>5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Web.WebView2">
+      <Version>1.0.2651.64</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Web.WebView2.DevToolsProtocolExtension">
+      <Version>1.0.2271</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
+      <Version>1.1.122</Version>
+    </PackageReference>
+    <PackageReference Include="MimeKit">
+      <Version>4.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler">
+      <Version>4.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.EF6">
+      <Version>4.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.EntityFrameworkCore">
+      <Version>4.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.Integrations">
+      <Version>2.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.Integrations.MySql">
+      <Version>2.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.Minimal">
+      <Version>4.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.Mvc5">
+      <Version>4.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.Providers.MySql">
+      <Version>4.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.Providers.Sqlite">
+      <Version>4.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.Providers.SqlServer">
+      <Version>4.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.Shared">
+      <Version>4.3.8</Version>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.WCF">
+      <Version>3.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="MinoriEditorShell">
+      <Version>0.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="MinoriEditorShell.Platforms.Wpf">
+      <Version>0.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="MinoriEditorShell.Ribbon">
+      <Version>0.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="MinoriEditorShell.VirtualCanvas">
+      <Version>0.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="MinoriEditorShell.VirtualCanvas.Platforms.Wpf">
+      <Version>0.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="Modernizr">
+      <Version>2.8.3</Version>
+    </PackageReference>
+    <PackageReference Include="ModernWpfUI">
+      <Version>0.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="Mono.Options">
+      <Version>6.12.0.148</Version>
+    </PackageReference>
+    <PackageReference Include="Mono.Terminal">
+      <Version>5.4.2</Version>
+    </PackageReference>
+    <PackageReference Include="Morincer.Markdig.Renderers.Docx">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="MtrDev.WebView2.Wpf">
+      <Version>0.9.430.4</Version>
+    </PackageReference>
+    <PackageReference Include="MultiSelectTreeView">
+      <Version>1.0.9</Version>
+    </PackageReference>
+    <PackageReference Include="NanoByte.StructureEditor">
+      <Version>0.8.2</Version>
+    </PackageReference>
+    <PackageReference Include="NanoByte.StructureEditor.WinForms">
+      <Version>0.8.2</Version>
+    </PackageReference>
+    <PackageReference Include="Neo.Markdig.Xaml">
+      <Version>1.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.Access">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.ADODBApi">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.Core">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.DAOApi">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.Excel">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.MSComctlLibApi">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.MSDATASRCApi">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.MSFormsApi">
+      <Version>1.8.1</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.MSProject">
+      <Version>1.8.1</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.Office">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.Office.Extensions">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.Outlook">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.OWC10Api">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.PowerPoint">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.Publisher">
+      <Version>1.8.1</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.VbaCompression">
+      <Version>0.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.VBIDE">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.Visio">
+      <Version>1.8.1</Version>
+    </PackageReference>
+    <PackageReference Include="NetOfficeFw.Word">
+      <Version>1.9.6</Version>
+    </PackageReference>
+    <PackageReference Include="NETStandard.Library">
+      <Version>2.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="NHotkey.Wpf">
+      <Version>3.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema-cm-fork">
+      <Version>11.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema-Ignore">
+      <Version>10.9.0</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema-ObjectOnOneOf">
+      <Version>11.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.Annotations">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.CodeGeneration">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.CodeGeneration-ObjectOnOneOf">
+      <Version>11.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.CodeGeneration.CSharp">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.CodeGeneration.CSharp-ObjectOnOneOf">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.CodeGeneration.TypeScript">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.CodeGeneration.TypeScript-ObjectOnOneOf">
+      <Version>11.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.Extensions">
+      <Version>0.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.NewtonsoftJson">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.NewtonsoftJson-Ignore">
+      <Version>11.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="NJsonSchema.Yaml">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Notifications.Wpf">
+      <Version>0.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="NReco.ImageGenerator">
+      <Version>1.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="NReco.LambdaParser">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="NReco.PdfGenerator">
+      <Version>1.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="NReco.PdfGenerator.LT">
+      <Version>1.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="NReco.PdfRenderer">
+      <Version>1.5.3</Version>
+    </PackageReference>
+    <PackageReference Include="NReco.PhantomJS">
+      <Version>1.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="NReco.PivotData">
+      <Version>1.4.2</Version>
+    </PackageReference>
+    <PackageReference Include="NReco.VideoConverter">
+      <Version>1.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="NuGetPackageExplorer.Types">
+      <Version>4.5.26</Version>
+    </PackageReference>
+    <PackageReference Include="Orc.Analytics">
+      <Version>4.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Orc.CsvTextEditor">
+      <Version>4.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Orc.DynamicObjects">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Orc.Extensibility">
+      <Version>4.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="Orc.Metadata">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Orc.Notifications">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Orc.SystemInfo">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Orc.Wizard">
+      <Version>4.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Outrage.HTML">
+      <Version>1.0.21</Version>
+    </PackageReference>
+    <PackageReference Include="OxyPlot.Contrib.Wpf">
+      <Version>2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="OxyPlot.Core">
+      <Version>2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="OxyPlot.Core.Drawing">
+      <Version>2.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="OxyPlot.OpenXml">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="OxyPlot.Pdf">
+      <Version>2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="OxyPlot.Wpf">
+      <Version>2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="OxyPlot.Wpf.Shared">
+      <Version>2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="PackageExplorer">
+      <Version>1.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="PDFsharp-MigraDoc-WPF">
+      <Version>1.50.5147</Version>
+    </PackageReference>
+    <PackageReference Include="Pek.Markdig.HighlightJs">
+      <Version>0.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Core">
+      <Version>8.1.97</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Forms">
+      <Version>8.1.97</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Plugin.Popups">
+      <Version>8.0.76</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Wpf">
+      <Version>8.1.97</Version>
+    </PackageReference>
+    <PackageReference Include="ReportGenerator">
+      <Version>5.3.6</Version>
+    </PackageReference>
+    <PackageReference Include="ReverseMarkdown">
+      <Version>4.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="SharpCompress">
+      <Version>0.37.2</Version>
+    </PackageReference>
+    <PackageReference Include="SharpDevelopCodeCompletion">
+      <Version>1.33.2</Version>
+    </PackageReference>
+    <PackageReference Include="SimpleBrowser">
+      <Version>0.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="SimpleBrowser.WebDriver">
+      <Version>0.5.43</Version>
+    </PackageReference>
+    <PackageReference Include="Softbyte.HtmlTableGenerator">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="SourceHeader">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation">
+      <Version>3.9.74</Version>
+    </PackageReference>
+    <PackageReference Include="SQLinq">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="SQLinq.Dapper">
+      <Version>1.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="SQLinq3">
+      <Version>3.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="SSH.NET">
+      <Version>2024.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Collections">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Private.DataContractSerialization">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.ServiceProcess.ServiceController">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Xml.XDocument">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Xml.XmlDocument">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="TaskScheduler">
+      <Version>2.11.0</Version>
+    </PackageReference>
+    <PackageReference Include="TaskSchedulerEditor">
+      <Version>2.11.0</Version>
+    </PackageReference>
+    <PackageReference Include="TimeZoneConverter">
+      <Version>6.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="TinyMCE">
+      <Version>7.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="TinyMCE.MVC">
+      <Version>3.4.7</Version>
+    </PackageReference>
+    <PackageReference Include="TinyMCE.MVC.JQuery">
+      <Version>3.4.7</Version>
+    </PackageReference>
+    <PackageReference Include="Twilio">
+      <Version>7.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="TypeGen">
+      <Version>3.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="WebBrowserWaiter">
+      <Version>1.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="WebGrease">
+      <Version>1.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="WebSocketSharp-netstandard">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="WebView2.DevTools.Dom">
+      <Version>4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="WebView2.DOM">
+      <Version>0.7.3</Version>
+    </PackageReference>
+    <PackageReference Include="Westwind.HtmlPackager">
+      <Version>0.2.4</Version>
+    </PackageReference>
+    <PackageReference Include="Westwind.RazorHosting">
+      <Version>3.3.9</Version>
+    </PackageReference>
+    <PackageReference Include="Westwind.Scripting">
+      <Version>1.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Westwind.Web">
+      <Version>2.85.0</Version>
+    </PackageReference>
+    <PackageReference Include="Westwind.Web.WebForms">
+      <Version>2.85.0</Version>
+    </PackageReference>
+    <PackageReference Include="WithoutHaste.DataFiles">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="WM.HtmlToOpenXml">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="WPF-UI">
+      <Version>3.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="Wpf.Controls.PanAndZoom">
+      <Version>2.3.4</Version>
+    </PackageReference>
+    <PackageReference Include="WPF.ListViewLayoutManager">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="WpfAnalyzers">
+      <Version>4.1.1</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="BaiqiSoft.WinFormsHtmlEditor.NET4">
+      <Version>24.7.17</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.Barcode">
+      <Version>6.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.Doc">
+      <Version>12.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.DocViewer">
+      <Version>7.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.Office">
+      <Version>8.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.PDF">
+      <Version>8.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.PDFViewer">
+      <Version>7.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.Presentation">
+      <Version>7.8.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.XLS">
+      <Version>12.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="GroupDocs.Editor">
+      <Version>24.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="Markdig">
+      <Version>0.33.0</Version>
+    </PackageReference>
+    <PackageReference Include="Markdig.Signed">
+      <Aliases>MarkdigSigned</Aliases>
+      <Version>0.37.0</Version>
+    </PackageReference>
+    <PackageReference Include="Selenium.WebDriver">
+      <Version>4.23.0</Version>
+    </PackageReference>
+    <PackageReference Include="SolutionScripts">
+      <Version>1.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="TinyHtml.Wpf">
+      <Version>1.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Zoople.HTMLEditor">
+      <Version>2.8.11.337</Version>
+    </PackageReference>
+    <PackageReference Include="LiteHtmlSharp">
+      <Version>1.1.15</Version>
+    </PackageReference>
+    <PackageReference Include="LiteHtmlSharp.Wpf">
+      <Version>1.1.15</Version>
+    </PackageReference>
+    <PackageReference Include="TinyHtml.Wpf">
+      <Version>1.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="WpfRichText">
+      <Version>1.0.16.2</Version>
+    </PackageReference>
+    <PackageReference Include="WpfRichText2">
+      <Version>1.0.17</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.Barcode">
+      <Version>6.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.Doc">
+      <Version>12.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.DocViewer">
+      <Version>7.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.Office">
+      <Version>8.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.PDF">
+      <Version>8.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.PDFViewer">
+      <Version>7.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.Presentation">
+      <Version>7.8.0</Version>
+    </PackageReference>
+    <PackageReference Include="FreeSpire.XLS">
+      <Version>12.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="GroupDocs.Editor">
+      <Version>24.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="WpfAnimatedGif">
+      <Version>2.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="WpfAppBar">
+      <Version>3.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="WpfBrowser">
+      <Version>0.9.3</Version>
+    </PackageReference>
+    <PackageReference Include="WPFCustomMessageBox">
+      <Version>1.0.7</Version>
+    </PackageReference>
+    <PackageReference Include="WPFExtensions">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="WPFFolderBrowser">
+      <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="WpfLightToolkit">
+      <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="WPFLocalizeExtension">
+      <Version>3.10.0</Version>
+    </PackageReference>
+    <PackageReference Include="WpfMath">
+      <Version>2.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="WPFMediaKit">
+      <Version>2.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="WPFTaskDialog">
+      <Version>1.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="WPFTextBoxAutoComplete">
+      <Version>1.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="WPFToolsAwesome">
+      <Version>2.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="XAML.MapControl">
+      <Version>10.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="XamlAnimatedGif">
+      <Version>2.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="XamlFlair.WPF">
+      <Version>1.2.13</Version>
+    </PackageReference>
+    <PackageReference Include="Xwt">
+      <Version>0.2.218</Version>
+    </PackageReference>
+    <PackageReference Include="Xwt.Gtk">
+      <Version>0.2.251</Version>
+    </PackageReference>
+    <PackageReference Include="Xwt.Gtk3">
+      <Version>0.2.251</Version>
+    </PackageReference>
+    <PackageReference Include="Xwt.WPF">
+      <Version>0.2.218</Version>
+    </PackageReference>
+    <PackageReference Include="Zeroit.Framework.CodeEditor.TextEditor">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Zeroit.Framework.CodeTextBox">
+      <Version>1.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Agendas\UserAgendas\_Views\" />
+    <Folder Include="Agendas\WebPortalAgendas\_View\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>robocopy "$(ProjectDir)Data" "$(ProjectDir)bin\$(ConfigurationName)\Data" /s /e 
+ exit /b 0
+</PostBuildEvent>
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties data_4config_1json__JsonSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

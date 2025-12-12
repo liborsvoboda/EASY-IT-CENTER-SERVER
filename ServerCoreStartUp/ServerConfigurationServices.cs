@@ -7,6 +7,7 @@ using FileContextCore.FileManager;
 using FileContextCore.Serializer;
 using FubarDev.FtpServer;
 using FubarDev.FtpServer.AccountManagement;
+using FubarDev.FtpServer.FileSystem;
 using FubarDev.FtpServer.FileSystem.DotNet;
 using Google.Apis.Translate.v3;
 using Korzh.DbUtils;
@@ -93,7 +94,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             if (bool.Parse(DbOperations.GetServerParameterLists("ServerFtpEngineEnabled").Value)) {
                 services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "*"; /*opt.Port*/ });
                 services.Configure<FubarDev.FtpServer.FileSystem.DotNet.DotNetFileSystemOptions>(opt => {
-                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.UserPath, "FTP") : Path.Combine(SrvRuntime.UserPath, "FTP");
+                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.UserPath, "FTPstorage") : Path.Combine(SrvRuntime.UserPath);
                     opt.AllowNonEmptyDirectoryDelete = true;
                 });
                 services.AddFtpServer(
@@ -105,6 +106,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                         }
                     });
                 services.AddSingleton<IMembershipProvider, HostedFtpServerMembershipProvider>();
+                services.AddSingleton<IAccountDirectoryQuery, RootPerUserAccountDirectory>();
                 services.AddHostedService<HostedFtpServer>();
 
                 using (var serviceProvider = services.BuildServiceProvider()) {
