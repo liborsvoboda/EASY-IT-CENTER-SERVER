@@ -44,6 +44,29 @@ namespace EasyITCenter.Controllers {
         //new EasyITCenterContext().Entry(data.GetType()).Context.Model.GetDbFunctions
 
 
+        /// <summary>
+        /// Run Admin Query with returned DataTable
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/DatabaseService/RunAdminQuery")]
+        [Consumes("application/json")]
+        public async Task<string> RunAdminQuery([FromBody] string query) {
+            if (HtttpContextExtension.IsWebAdmin() || HtttpContextExtension.IsAdmin()) {
+                try {
+                    DataView data = ((DataView)(await new EasyITCenterContext().ExecuteReaderAsync($"{query}")).DefaultView);
+                    return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented);
+                } catch (Exception ex) {
+                    return JsonSerializer.Serialize(new ResultMessage()
+                    { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+                }
+            } else {
+                return JsonSerializer.Serialize(new ResultMessage()
+                { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+            }
+        }
+
 
         /// <summary>
         /// Generic Procedure Return Full DB Over Params 

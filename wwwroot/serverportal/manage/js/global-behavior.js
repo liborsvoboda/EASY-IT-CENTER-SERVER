@@ -176,7 +176,8 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("SelectedEditor");
     Metro.storage.delItem("PortalApiTableList");
     Metro.storage.delItem("EmailTemplateList");
-
+    Metro.storage.delItem("RunAdminQueryResultList");
+    
     Metro.storage.delItem("SelectedEditor");
 
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
