@@ -40,6 +40,9 @@ https://github.com/igloo15/MarkdownGenerator  Generate MarkDown From Dll & Xml
 https://github.com/igloo15/Nuget.Searcher     Nuget Server
 https://github.com/igloo15/ChangelogGenerator/tree/master   Changelog Generator
 
+https://github.com/FoxCouncil/FoxSsh/tree/main SSH server
+https://github.com/KeenSystemsNL/SFTPServer  SFTP server
+
 https://www.nuget.org/packages/ServiceStack.Server
 dotnet add package ServiceStack.Server --version 10.0.4
 

@@ -1,23 +1,27 @@
-﻿using EasyITCenter.ServerCoreStructure;
-using ServerCorePages;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.Extensions.DependencyInjection;
-using System.Diagnostics.Metrics;
-using System.Linq;
+﻿using ColorCode.Compilation.Languages;
 using EasyData.Services;
 using EasyITCenter.ServerCoreConfiguration;
+using EasyITCenter.ServerCoreStructure;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using Microsoft.Extensions.Options;
+using ServerCorePages;
+using SFTP;
 using SignalRChat.Hubs;
+using SmtpServer.ComponentModel;
+using System.Diagnostics.Metrics;
+using System.Linq;
 
 
 namespace EasyITCenter {
@@ -47,8 +51,21 @@ namespace EasyITCenter {
             ServerConfigurationServices.ConfigureLogging(ref services);
 
 
+            services.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.Configure<SFTPServerOptions>(options => Configuration.GetSection("SFTPServer").Bind(options));
+            var serviceprovider = serviceCollection.BuildServiceProvider();
+            var options = serviceprovider.GetRequiredService<IOptions<SFTPServerOptions>>();
 
-            
+            using var stdin = Console.OpenStandardInput();
+            using var stdout = Console.OpenStandardOutput();
+            using var server = new SFTPServer(
+                options,
+                stdin,
+                stdout
+            );
+            await server.Run(new CancellationTokenSource().Token).ConfigureAwait(false);
+
 
             ServerConfigurationServices.ConfigureServerWebPages(ref services);
             ServerConfigurationServices.ConfigureFTPServer(ref services);
@@ -124,9 +141,7 @@ namespace EasyITCenter {
                 app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All });
                 app.UseCertificateForwarding();
             }
-
-
-
+            
             //Applied new Working Style For Files Markdown, Html, Editor, Images,
             app.Use(async (HttpContext context, Func<Task> next) => {
                 string requestPath = context.Request.Path.ToString().ToLower(); bool redirected = false;

@@ -6,7 +6,7 @@
 je přístupné ze všech ostatních typů služeb a nedochází k zbytečným duplicitám dat.
 - je možné pomocí generátorů a plánovaných úloh nechat generovat dynamická data.    
 - Slouží jako Primární úložiště uživatele ze Systému/Webu/Serveru
-- Každá uživatelská Složka je Subdoména
+
 
 
 
