@@ -14,15 +14,15 @@ namespace EasyITCenter.Controllers {
 
     //[Authorize]
     [ApiController]
-    [Route("ToolsService/PlayGroundStudio")]
-    public class PlayGroundStudioControllers : Controller {
+    [Route("PlaygroundStudioService/PlayGroundStudio")]
+    public class PlaygroundStudioService : Controller {
 
         private RepoMapper mapper;
         private readonly ILogger logger;
         private string repoPath;
 
 
-        public PlayGroundStudioControllers(ILogger<PlayGroundStudioControllers> logger) {
+        public PlaygroundStudioService(ILogger<PlaygroundStudioService> logger) {
             repoPath = System.IO.Path.Combine(SrvRuntime.SrvPrivatePath, "Databases", "Playground");
             SimpleCRUD.SetDialect(SimpleCRUD.Dialect.SQLite);
             mapper = new RepoMapper(System.IO.Path.Combine(SrvRuntime.SrvPrivatePath, "Databases", "Playground", "PlayGround.db"));
@@ -30,7 +30,7 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpGet("/ToolsService/PlayGroundStudio/output/{id}/{milestone}")]
+        [HttpGet("/PlaygroundStudioService/PlayGroundStudio/output/{id}/{milestone}")]
         public IActionResult Output(string id, string milestone) {
             var entry = mapper.GetEntry(id);
             if (entry != null)
@@ -68,8 +68,8 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/ToolsService/PlayGroundStudio/newFile")]
-        public IActionResult NewFile(string description) {
+        [HttpPost("/PlaygroundStudioService/PlayGroundStudio/newFile")]
+        public IActionResult NewFile([FromBody] string description) {
             RepoMapper.Entry entry;
             entry = new RepoMapper.Entry()
             {
@@ -100,24 +100,22 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpGet("/ToolsService/PlayGroundStudio/loadFile")]
-        public IActionResult LoadFile(string file, string milestone) {
-            var entry = mapper.GetEntry(file);
+        [HttpPost("/PlaygroundStudioService/PlayGroundStudio/loadFile")]
+        public IActionResult LoadFile([FromBody] LoadFileRequest loadFileRequest) {
+            var entry = mapper.GetEntry(loadFileRequest.file);
             if (entry == null)
                 return Json(new HandlerResult() { success = false, message = "File does not exists" });
 
-            var path = System.IO.Path.Combine(repoPath, file);
-            //if (!System.IO.Directory.Exists(path))
-            //    return Json(new HandlerResult() { Success = false });
+            var path = System.IO.Path.Combine(repoPath, loadFileRequest.file);
 
-            if (milestone == "-1")
+            if (loadFileRequest.milestone == "-1")
             {
-                milestone = entry.LastMilestone + ""; // GetLastMilestone(name) + "";
+                loadFileRequest.milestone = entry.LastMilestone + ""; 
             }
             else
             {
                 int ms;
-                if (!int.TryParse(milestone, out ms))
+                if (!int.TryParse(loadFileRequest.milestone, out ms))
                     return Json(new HandlerResult() { success = false, message = "Invalid milestone" });
                 if (ms > entry.LastMilestone)
                     return Json(new HandlerResult() { success = false, message = "Invalid milestone" });
@@ -128,7 +126,7 @@ namespace EasyITCenter.Controllers {
             string typescript;
 
             string filename;
-            filename = System.IO.Path.Combine(path, "html_" + milestone + ".html");
+            filename = System.IO.Path.Combine(path, "html_" + loadFileRequest.milestone + ".html");
             if (System.IO.File.Exists(filename))
                 html = System.IO.File.ReadAllText(filename);
             else
@@ -138,7 +136,7 @@ namespace EasyITCenter.Controllers {
             }
 
 
-            filename = System.IO.Path.Combine(path, "css_" + milestone + ".css");
+            filename = System.IO.Path.Combine(path, "css_" + loadFileRequest.milestone + ".css");
             if (System.IO.File.Exists(filename))
                 css = System.IO.File.ReadAllText(filename);
             else
@@ -146,7 +144,7 @@ namespace EasyITCenter.Controllers {
                 css = GetDefaultCSS();
                 //return Json(new HandlerResult() { Success = false, Message = "Files not available" });
             }
-            filename = System.IO.Path.Combine(path, "ts_" + milestone + ".ts");
+            filename = System.IO.Path.Combine(path, "ts_" + loadFileRequest.milestone + ".ts");
             if (System.IO.File.Exists(filename))
                 typescript = System.IO.File.ReadAllText(filename);
             else
@@ -161,8 +159,8 @@ namespace EasyITCenter.Controllers {
             {
                 result = new
                 {
-                    name = file,
-                    milestone = milestone,
+                    name = loadFileRequest.file,
+                    milestone = loadFileRequest.milestone,
                     description = entry.Description,
                     html = html,
                     css = css,
@@ -173,35 +171,31 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/ToolsService/PlayGroundStudio/saveFile")]
-        //public IActionResult SaveFile([FromBody] string name) {
-        public IActionResult SaveFile(string name, int milestone, string html, string css, string typescript, string output) {
-            if (string.IsNullOrEmpty(name) || name.Contains(".."))
-                return Json(new HandlerResult() { success = false });
 
-            var entry = mapper.GetEntry(name);
+        [HttpPost("/PlaygroundStudioService/PlayGroundStudio/saveFile")]
+        [Consumes("application/json")]
+        public string SaveFile([FromBody] CreateSaveRequest createSaveRequest) {
+            if (string.IsNullOrEmpty(createSaveRequest.name) || createSaveRequest.name.Contains(".."))
+                //return Json(new HandlerResult() { success = false });
+                return JsonSerializer.Serialize(new HandlerResult() { success = false });
+
+            var entry = mapper.GetEntry(createSaveRequest.name);
             if (entry == null)
-                return Json(new HandlerResult() { success = false });
+                return JsonSerializer.Serialize(new HandlerResult() { success = false });
 
-            if (milestone < entry.LastMilestone) {
-                return Json(new HandlerResult() {
-                    success = false,
-                    message = "Can't save an older milestone. Last milestone is " + entry.LastMilestone
-                });
+            if (createSaveRequest.milestone < entry.LastMilestone) {
+                return JsonSerializer.Serialize(new HandlerResult() { success = false, message = "Can't save an older milestone. Last milestone is " + entry.LastMilestone });
             }
 
-            Save(entry, html, css, typescript, output);
+            Save(entry, createSaveRequest.html, createSaveRequest.css, createSaveRequest.typescript, createSaveRequest.output);
 
             logger.LogInformation("Saving entry " + entry.Key + ", last milestone : " + entry.LastMilestone);
 
-            return Json(new HandlerResult()
-            {
-                success = true
-            });
+            return JsonSerializer.Serialize(new HandlerResult() { success = true });
         }
 
 
-        [HttpGet("/ToolsService/PlayGroundStudio/listFiles")]
+        [HttpGet("/PlaygroundStudioService/PlayGroundStudio/listFiles")]
         public IActionResult ListFiles() {
             var entries = mapper.GetEntries().Where(e => !e.IsNew).ToList();
 
@@ -216,28 +210,28 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/ToolsService/PlayGroundStudio/createMilestone")]
-        public IActionResult CreateMileStone(string name, string html, string css, string typescript, string output, string comments) {
+        [HttpPost("/PlaygroundStudioService/PlayGroundStudio/createMilestone")]
+        public IActionResult CreateMileStone([FromBody] CreateSaveRequest createSaveRequest) {
 
-            var entry = mapper.GetEntry(name);
+            var entry = mapper.GetEntry(createSaveRequest.name);
             if (entry == null)
                 return Json(new HandlerResult() { success = false });
             entry.LastMilestone++;
 
-            Save(entry, html, css, typescript, output);
+            Save(entry, createSaveRequest.html, createSaveRequest.css, createSaveRequest.typescript, createSaveRequest.output);
             logger.LogInformation("Creating new milestone " + entry.LastMilestone + " for " + entry.Key);
             mapper.InsertMilestone(new RepoMapper.EntryMilestone()
             {
-                EntryKey = name,
+                EntryKey = createSaveRequest.name,
                 Nr = entry.LastMilestone,
                 Created = DateTime.Today,
-                Comments = comments
+                Comments = createSaveRequest.comments
             });
             return Json(new HandlerResult()
             {
                 result = new
                 {
-                    name = name,
+                    name = createSaveRequest.name,
                     description = entry.Description,
                     milestone = entry.LastMilestone
                 },
@@ -246,8 +240,8 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/ToolsService/PlayGroundStudio/deleteMilestone")]
-        public IActionResult DeleteMilestone(string name) {
+        [HttpPost("/PlaygroundStudioService/PlayGroundStudio/deleteMilestone")]
+        public IActionResult DeleteMilestone([FromBody] string name) {
             var entry = mapper.GetEntry(name);
             if (entry == null)
                 return Json(new HandlerResult() { success = false });
@@ -272,13 +266,13 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        [HttpPost("/ToolsService/PlayGroundStudio/updateDescription")]
-        public IActionResult UpdateDescription(string name, string description) {
-            var entry = mapper.GetEntry(name);
+        [HttpPost("/PlaygroundStudioService/PlayGroundStudio/updateDescription")]
+        public IActionResult UpdateDescription([FromBody] UpdateDescriptionRequest updateDescription) {
+            var entry = mapper.GetEntry(updateDescription.name);
             if (entry == null)
                 return Json(new HandlerResult() { success = false });
 
-            entry.Description = description;
+            entry.Description = updateDescription.description;
             mapper.UpdateEntry(entry);
 
             return Json(new HandlerResult() { success = true });
@@ -389,6 +383,28 @@ namespace EasyITCenter.Controllers {
         }
 
 
+        public class CreateSaveRequest
+        {
+            public string name { get; set; }
+            public int? milestone { get; set; } = null;
+            public string html { get; set; }
+            public string css { get; set; }
+            public string typescript { get; set; }
+            public string output { get; set; }
 
+            public string comments { get; set; } = null;
+        }
+
+        public class LoadFileRequest
+        {
+            public string file { get; set; } 
+            public string milestone { get; set; }
+        }
+
+        public class UpdateDescriptionRequest
+        {
+            public string name { get; set; } 
+            public string description { get; set; }
+        }
     }
 }

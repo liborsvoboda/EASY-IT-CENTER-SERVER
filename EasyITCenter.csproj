@@ -180,6 +180,9 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Google.Apis.Core" Version="1.68.0" />
     <PackageReference Include="Google.Apis.Translate.v3" Version="1.68.0.3542" />
     <PackageReference Include="Google.Cloud.Translation.V2" Version="3.4.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.71.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.ClientFactory" Version="2.71.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.71.0" />
     <PackageReference Include="Handlebars.Net" Version="2.1.6" />
     <PackageReference Include="Handlebars.Net.Extension.Json" Version="1.0.0" />
     <PackageReference Include="Handlebars.Net.Extension.NewtonsoftJson" Version="1.0.3" />
@@ -317,6 +320,10 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="MirrorSharp.Testing" Version="3.0.0" />
     <PackageReference Include="Monaco.PathTree" Version="1.2.2" />
     <PackageReference Include="Morincer.Markdig.Renderers.Docx" Version="1.0.1" />
+    <PackageReference Include="MQTTnet" Version="4.3.7.1207" />
+    <PackageReference Include="MQTTnet.AspNetCore" Version="4.3.7.1207" />
+    <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="4.3.7.1207" />
+    <PackageReference Include="MQTTnet.Extensions.Rpc" Version="4.3.7.1207" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1" />
     <PackageReference Include="NSwag.ApiDescription.Client" Version="14.1.0">
@@ -372,6 +379,10 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.1" />
     <PackageReference Include="WebMarkupMin.AspNetCore6" Version="2.17.0" />
+    <PackageReference Include="WebSocketSharp.Standard" Version="1.0.3" />
+    <PackageReference Include="WebsocketsSimple.Client" Version="6.0.63" />
+    <PackageReference Include="WebsocketsSimple.Core" Version="6.0.63" />
+    <PackageReference Include="WebsocketsSimple.Server" Version="6.0.63" />
     <PackageReference Include="Weikio.PluginFramework" Version="1.5.1" />
     <PackageReference Include="Weikio.PluginFramework.AspNetCore" Version="1.5.1" />
     <PackageReference Include="Westwind.AspNetCore.LiveReload" Version="0.4.2" />

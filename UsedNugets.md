@@ -1,9 +1,10 @@
-﻿chyba zobrazeni kodu v Portal menu administration
+﻿# NetCore Electron with Metro
+https://github.com/taurenshaman/electron-net-demo/tree/master  Ideal For Standalone Touch Panel
 
 
-# Double Path for saving
-                System.IO.File.WriteAllText(Path.Combine(SrvRuntime.StartupPath, "wwwroot", "ServerCoreTools","systemTools", "newsletter-preview", "index.html"), data);
-                System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, "ServerCoreTools", "systemTools", "newsletter-preview", "index.html"), data);
+# Double Path for saving Project + StartupFolder
+System.IO.File.WriteAllText(Path.Combine(SrvRuntime.StartupPath, "wwwroot", "ServerCoreTools","systemTools", "newsletter-preview", "index.html"), data);
+System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, "ServerCoreTools", "systemTools", "newsletter-preview", "index.html"), data);
 
 
 # Used Nugets
@@ -33,10 +34,16 @@ dotnet publish
 
 # Search
 
+https://github.com/LiveOrDevTrying/WebsocketsSimple WebSocketServer
 
+https://github.com/igloo15/MarkdownGenerator  Generate MarkDown From Dll & Xml
+https://github.com/igloo15/Nuget.Searcher     Nuget Server
+https://github.com/igloo15/ChangelogGenerator/tree/master   Changelog Generator
 
-https://github.com/igloo15/MarkdownGenerator
-https://github.com/igloo-soft/KeywordSearch
+https://www.nuget.org/packages/ServiceStack.Server
+dotnet add package ServiceStack.Server --version 10.0.4
+
+https://github.com/dotnet/MQTTnet  Server
 https://github.com/erikzaadi/GithubSharp
 https://github.com/libgit2/libgit2sharp/
 

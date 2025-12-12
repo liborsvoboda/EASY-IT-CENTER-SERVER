@@ -14,5 +14,13 @@
         /// <returns></returns>
         [HttpGet("/BackendCheckService")]
         public Task<string> GetBackendCheckApi() { return Task.FromResult(DbOperations.DBTranslate("ServerRunning", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value)); }
+
+
+        [HttpGet("/BackendCheckDbService")]
+        public Task<string> GetBackendCheckDbApi() {
+            if (new EasyITCenterContext().Database.CanConnect()) {
+                return Task.FromResult(DbOperations.DBTranslate("DatabaseIsConnected", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value));
+            } else { return Task.FromResult(DbOperations.DBTranslate("DatabaseIsNotConnected", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value)); }
+        }
     }
 }

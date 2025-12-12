@@ -2423,22 +2423,33 @@
 
     function RestServices() {
         var self = this;
-        var restBaseUrl = window.location.origin + "/ToolsService/PlayGroundStudio/";
+        var restBaseUrl = window.location.origin + "/PlaygroundStudioService/PlayGroundStudio/";
 
         function newFile() {
-            $.post(restBaseUrl + "newFile", function (resp) {
-                if (resp.success) {
-                    //resp.Result.Name
-                    console.log("res1", resp.Result, "res2", resp.result);
-                
-                    loadInEditors(resp.result.name, resp.result.milestone, resp.result.html, resp.result.css, resp.result.typescript);
-                    setHash(resp.result.name + "-" + resp.result.milestone);
+            let description = $("#txtDescription").val();
+            $.ajax({
+                global: false,
+                type: "POST",
+                url: restBaseUrl + "newFile",
+                async: true,
+                cache: false,
+                headers: { 'Content-type': 'application/json charset=UTF-8', 'Content-type': 'application/json' },
+                data: JSON.stringify(description),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    if (resp.success) {
+                        console.log("Name", resp.result);
+                        loadInEditors(resp.result.name, resp.result.milestone, resp.result.html, resp.result.css, resp.result.typescript);
+                        setHash(resp.result.name + "-" + resp.result.milestone);
+                        showNotification("Milestone " + resp.result.milestone + " created", "info");
+                    } else { showNotification("Unable to create milestone", "error"); }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                    showNotification("Unable to create milestone", "error");
                 }
-                else {
-                    showNotification("Unable to create new file", "error");
-                }
-            }).fail(function () {
-                showNotification("Unable to create new file", "error");
             });
         }
         self.newFile = newFile;
@@ -2446,15 +2457,29 @@
         function loadFile(file, milestone) {
             if (typeof (milestone) == "undefined")
                 milestone = -1;
+            let data = {
+                file: file, milestone: milestone
+            }
+            $.ajax({
+                global: false,
+                type: "POST",
+                url: restBaseUrl + "loadFile",
+                async: true,
+                cache: false,
+                headers: { 'Content-type': 'application/json charset=UTF-8', 'Content-type': 'application/json' },
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    if (resp.success) {
+                        loadInEditors(resp.result.name, resp.result.milestone, resp.result.html, resp.result.css, resp.result.typescript, resp.result.description);
+                        setHash(resp.result.name + "-" + resp.result.milestone);
+                        showNotification("Loaded " + resp.result.name + " successfully", "info");
+                    } else { showNotification("Unable to load file", "error"); }
 
-            $.get(restBaseUrl + "loadFile", { file: file, milestone: milestone }, function (resp) {
-                if (resp.success) {
-
-                    loadInEditors(resp.result.name, resp.result.milestone, resp.result.html, resp.result.css, resp.result.typescript, resp.result.description);
-                    setHash(resp.result.name + "-" + resp.result.milestone);
-                    showNotification("Loaded " + resp.result.name + " successfully", "info");
-                }
-                else {
+                },
+                error: function (err) {
+                    console.log(err);
                     showNotification("Unable to load file", "error");
                 }
             });
@@ -2487,8 +2512,8 @@
         }
         self.listFiles = listFiles;
 
-        function saveFile(name, milestone, html, css, typescript, onSuccess) {
-            var file = {
+        async function saveFile(name, milestone, html, css, typescript, onSuccess) {
+            let file = {
                 name: name,
                 milestone:milestone,
                 html: html,
@@ -2496,34 +2521,55 @@
                 typescript: typescript,
                 output: getOutputHTML(true)
             };
-            $.post(restBaseUrl + "saveFile", file, function (resp) {
-                if (resp.success) {
-                    // show notification saved
-                    showNotification("Saved successfully", "info");
-                    onSuccess();
+            $.ajax({
+                global: false,
+                type: "POST",
+                url: restBaseUrl + "saveFile",
+                async: true,
+                cache: false,
+                headers: { 'Content-type': 'application/json charset=UTF-8', 'Content-type': 'application/json' },
+                data: JSON.stringify(file),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    if (resp.success) {
+                        showNotification("Saved successfully", "info");
+                        onSuccess();
+                    } else { showNotification("Unable to save, " + resp.message, "error"); }
+                    
+                },
+                error: function (err) {
+                    console.log(err);
+                    showNotification("Unable to save", "error");
                 }
-                else {
-                    showNotification("Unable to save, " + resp.message, "error");
-                }
-            }).fail(function () {
-                showNotification("Unable to save", "error");
             });
 
         }
         self.saveFile = saveFile;
 
         function deleteFile(name, onsuccess) {
-            $.post(restBaseUrl + "deleteMilestone", { name: name }, function (resp) {
-                if (resp.success) {
-                    if (typeof onsuccess !== "undefined") {
-                        onsuccess(resp.result);
-                    }
-                }
-                else {
+            $.ajax({
+                global: false,
+                type: "POST",
+                url: restBaseUrl + "deleteMilestone",
+                async: true,
+                cache: false,
+                headers: { 'Content-type': 'application/json charset=UTF-8', 'Content-type': 'application/json' },
+                data: JSON.stringify(name),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    if (resp.success) {
+                        if (typeof onsuccess !== "undefined") {
+                            onsuccess(resp.result);
+                        }
+                    } else { showNotification("Unable to delete", "error"); }
+
+                },
+                error: function (err) {
+                    console.log(err);
                     showNotification("Unable to delete", "error");
                 }
-            }).fail(function () {
-                showNotification("Unable to delete", "error");
             });
         }
         self.deleteFile = deleteFile;
@@ -2537,35 +2583,56 @@
                 output: getOutputHTML(true),
                 comments: comments
             };
-            $.post(restBaseUrl + "createMilestone", file, function (resp) {
-                if (resp.success) {
-                    // resp.Result.Milestone
-                    updateHeader(resp.result.name, resp.result.milestone, resp.result.description);
-                    selectMilestone = resp.result.milestone;
-                    setHash(resp.result.name + "-" + resp.result.milestone);
-                    showNotification("Milestone " + resp.result.milestone + " created", "info");
-                }
-                else {
+            $.ajax({
+                global: false,
+                type: "POST",
+                url: restBaseUrl + "createMilestone",
+                async: true,
+                cache: false,
+                headers: { 'Content-type': 'application/json charset=UTF-8', 'Content-type': 'application/json' },
+                data: JSON.stringify(file),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    if (resp.success) {
+                        updateHeader(resp.result.name, resp.result.milestone, resp.result.description);
+                        selectMilestone = resp.result.milestone;
+                        setHash(resp.result.name + "-" + resp.result.milestone);
+                        showNotification("Milestone " + resp.result.milestone + " created", "info");
+                    } else { showNotification("Unable to create milestone", "error"); }
+
+                },
+                error: function (err) {
+                    console.log(err);
                     showNotification("Unable to create milestone", "error");
                 }
-            }).fail(function () {
-                showNotification("Unable to create milestone", "error");
             });
         }
         self.createMilestone = createMilestone;
 
         function updateDescription(name, description) {
-            $.post(restBaseUrl + "updateDescription", { name: name, description: description }, function (resp) {
-                if (resp.success) {
+            let data = { name: name, description: description };
+            $.ajax({
+                global: false,
+                type: "POST",
+                url: restBaseUrl + "updateDescription",
+                async: true,
+                cache: false,
+                headers: { 'Content-type': 'application/json charset=UTF-8', 'Content-type': 'application/json' },
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resp) {
+                    if (resp.success) {
+                        showNotification("Description updated", "info");
+                        $("#txtHeaderDescription").text(description);
+                    } else { showNotification("Unable to update description", "error"); }
 
-                    showNotification("Description updated", "info");
-                    $("#txtHeaderDescription").text(description);
-                }
-                else {
+                },
+                error: function (err) {
+                    console.log(err);
                     showNotification("Unable to update description", "error");
                 }
-            }).fail(function () {
-                showNotification("Unable to update description", "error");
             });
         }
         self.updateDescription = updateDescription;
