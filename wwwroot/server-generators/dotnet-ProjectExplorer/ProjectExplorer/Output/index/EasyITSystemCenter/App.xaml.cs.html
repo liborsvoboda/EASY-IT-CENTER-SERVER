@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html><head><title>App.xaml.cs</title><link rel="stylesheet" href="../styles.css"><script src="../scripts.js"></script></head>
+<body class="cB" onload="i(267);"><div class="dH">
+<table style="width: 100%">
+<tr><td>File: <a id="filePath" class="blueLink" href="/#EasyITSystemCenter/App.xaml.cs" target="_top">App.xaml.cs</a><br/></td><td></td></tr>
+<tr><td>Project: <a id="projectPath" class="blueLink" href="/#EasyITSystemCenter" target="_top">EasyITSystemBuilder.csproj</a> (EasyITSystemCenter)</td></tr>
+</table>
+</div>
+<div class="cz"><table class="tb" cellpadding="0" cellspacing="0"><tr><td valign="top" align="right"><pre id="ln"></pre></td><td valign="top" align="left"><pre id="code">
+<b>using</b> <span class="i n">EasyITSystemCenter</span>.<span class="i">GlobalClasses</span>;
+<b>using</b> <span class="i n">EasyITSystemCenter</span>.<span class="i">GlobalOperations</span>;
+<b>using</b> <span class="i n">EasyITSystemCenter</span>.<span class="i">Pages</span>;
+<b>using</b> <span class="i n">EasyITSystemCenter</span>.<span class="i">SystemHelper</span>;
+<b>using</b> <span class="i n">EasyITSystemCenter</span>.<span class="i">SystemStructure</span>;
+<b>using</b> <span class="i">log4net</span>.<span class="i">Config</span>;
+<b>using</b> <span class="i">MahApps</span>.<span class="i">Metro</span>.<span class="i">Controls</span>;
+<b>using</b> <span class="i">MahApps</span>.<span class="i">Metro</span>.<span class="i">Controls</span>.<span class="i">Dialogs</span>;
+<b>using</b> <span class="i n">Microsoft</span>.<span class="i">Owin</span>.<span class="i">Hosting</span>;
+<b>using</b> <span class="i n">System</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Collections</span>.<span class="i n">Generic</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">ComponentModel</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Diagnostics</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">IO</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Linq</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Net</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Reflection</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Threading</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Threading</span>.<span class="i n">Tasks</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Windows</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Windows</span>.<span class="i n">Input</span>;
+<b>using</b> <span class="i n">System</span>.<span class="i n">Windows</span>.<span class="i">Threading</span>;
+ 
+<b>namespace</b> <span class="i n">EasyITSystemCenter</span> {
+ 
+    <b>public</b> <b>partial</b> <b>class</b> <a id="1c95c1f7ef1cc956" href="R/1c95c1f7ef1cc956.html" target="n" data-glyph="0,0" class="t t">App</a> : <span class="t t">Application</span> {
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> Tilt Document types definitions</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <b>public static</b> <span class="i">ExtendedReceiptList</span> <a id="98235764f1f2a931" href="R/98235764f1f2a931.html" target="n" data-glyph="42,1" class="i field">TiltReceiptDoc</a> = <b>new</b> <span class="i">ExtendedReceiptList</span>(); <b>public static</b> <span class="i">ExtendedCreditNoteList</span> <a id="e919fed2c1332679" href="R/e919fed2c1332679.html" target="n" data-glyph="42,1" class="i field">TiltCreditDoc</a> = <b>new</b> <span class="i">ExtendedCreditNoteList</span>(); <b>public static</b> <span class="i">ExtendedOutgoingInvoiceList</span> <a id="3524220225e5390d" href="R/3524220225e5390d.html" target="n" data-glyph="42,1" class="i field">TiltInvoiceDoc</a> = <b>new</b> <span class="i">ExtendedOutgoingInvoiceList</span>(); <b>public static</b> <span class="i">BusinessIncomingOrderList</span> <a id="89ff0c530267b445" href="R/89ff0c530267b445.html" target="n" data-glyph="42,1" class="i field">TiltOrderDoc</a> = <b>new</b> <span class="i">BusinessIncomingOrderList</span>();
+        <b>public static</b> <span class="i">BusinessOfferList</span> <a id="c34951f4b143bf2e" href="R/c34951f4b143bf2e.html" target="n" data-glyph="42,1" class="i field">TiltOfferDoc</a> = <b>new</b> <span class="i">BusinessOfferList</span>(); <b>public static</b> <a href="@1@mscorlib/A.html#cf7f4095e4de7646" class="t t">List</a>&lt;<span class="i">DocumentItemList</span>&gt; <a id="bf1a196fa28ee6de" href="R/bf1a196fa28ee6de.html" target="n" data-glyph="42,1" class="i field">TiltDocItems</a> = <b>new</b> <a href="@1@mscorlib/A.html#9e5352b2b304ceba" class="t constructor">List</a>&lt;<span class="i">DocumentItemList</span>&gt;(); <b>public static string</b> <a id="81ba72b0043ffbf3" href="R/81ba72b0043ffbf3.html" target="n" data-glyph="42,1" class="i field">tiltTargets</a> = <span class="i">TiltTargets</span>.<span class="i">None</span>.<span class="i">ToString</span>();
+ 
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> Global Application Startup Settings Central Parameters / Languages / User / Configure</span>
+        <span class="c">///</span><span class="c"> TODO must centralize to Global APP class</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <b>public static</b> <span class="i">AppRuntimeData</span> <a id="dc92dbffe4de680a" href="R/dc92dbffe4de680a.html" target="n" data-glyph="42,1" class="i field">appRuntimeData</a> = <b>new</b> <span class="i">AppRuntimeData</span>();
+ 
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> System Core Needs Runtime Data For Working</span>
+        <span class="c">///</span><span class="c"> //TODO move to RuntimeData</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <b>public static</b> <span class="i">log4net</span>.<span class="i">ILog</span> <a id="f634abd285baf94c" href="R/f634abd285baf94c.html" target="n" data-glyph="42,1" class="i field">log</a> = <span class="i">log4net</span>.<span class="i">LogManager</span>.<span class="i">GetLogger</span>(<a href="@1@mscorlib/A.html#1383b72169c6b2ae" class="t t">MethodBase</a>.<a href="@1@mscorlib/A.html#11305a9ceab0d732" class="i method">GetCurrentMethod</a>().<a href="@1@mscorlib/A.html#3eb1391de297c1a8" class="i property">DeclaringType</a>);
+        <b>public static</b> <a href="@1@mscorlib/A.html#cf7f4095e4de7646" class="t t">List</a>&lt;<span class="i">SystemMenuList</span>&gt; <a id="b1630904e3edc3be" href="R/b1630904e3edc3be.html" target="n" data-glyph="42,1" class="i field">SystemMenuList</a> = <b>null</b>;
+        <b>public static</b> <a href="@1@mscorlib/A.html#cf7f4095e4de7646" class="t t">List</a>&lt;<span class="i">SystemCustomPageList</span>&gt; <a id="c1251aa1acbb7978" href="R/c1251aa1acbb7978.html" target="n" data-glyph="42,1" class="i field">SystemCustomList</a> = <b>null</b>;
+        <b>public static</b> <a href="@1@mscorlib/A.html#cf7f4095e4de7646" class="t t">List</a>&lt;<span class="i">SystemSvgIconList</span>&gt; <a id="e8262a73403e0f40" href="R/e8262a73403e0f40.html" target="n" data-glyph="42,1" class="i field">SystemSvgIconList</a> = <b>null</b>;
+        <b>public static</b> <a href="@1@mscorlib/A.html#cf7f4095e4de7646" class="t t">List</a>&lt;<span class="i">SystemModuleList</span>&gt; <a id="f38b2a4eb0082b38" href="R/f38b2a4eb0082b38.html" target="n" data-glyph="42,1" class="i field">SystemModuleList</a> = <b>null</b>;
+        <b>public static</b> <a href="@1@mscorlib/A.html#cf7f4095e4de7646" class="t t">List</a>&lt;<span class="i">ServerServerSettingList</span>&gt; <a id="d6e266d4ee43269e" href="R/d6e266d4ee43269e.html" target="n" data-glyph="42,1" class="i field">ServerSetting</a> = <b>new</b> <a href="@1@mscorlib/A.html#9e5352b2b304ceba" class="t constructor">List</a>&lt;<span class="i">ServerServerSettingList</span>&gt;();
+        <b>public static</b> <a href="@1@mscorlib/A.html#cf7f4095e4de7646" class="t t">List</a>&lt;<span class="i">SystemParameterList</span>&gt; <a id="7b36f6fb13b01460" href="R/7b36f6fb13b01460.html" target="n" data-glyph="42,1" class="i field">ParameterList</a> = <b>null</b>;
+        <b>public static</b> <a href="@1@mscorlib/A.html#cf7f4095e4de7646" class="t t">List</a>&lt;<span class="i">SystemTranslationList</span>&gt; <a id="5404e54b9903b535" href="R/5404e54b9903b535.html" target="n" data-glyph="42,1" class="i field">LanguageList</a> = <b>null</b>;
+        <b>public static</b> <a href="@1@mscorlib/A.html#cf7f4095e4de7646" class="t t">List</a>&lt;<span class="i">SystemIgnoredExceptionList</span>&gt; <a id="92ffaded1f52a07c" href="R/92ffaded1f52a07c.html" target="n" data-glyph="42,1" class="i field">IgnoredExceptionList</a> = <b>new</b> <a href="@1@mscorlib/A.html#9e5352b2b304ceba" class="t constructor">List</a>&lt;<span class="i">SystemIgnoredExceptionList</span>&gt;();
+ 
+ 
+        <b>public static</b> <span class="i">SystemLoggerWebSocketClass</span> <a id="b05b0edee309018e" href="R/b05b0edee309018e.html" target="n" data-glyph="42,1" class="i field">SystemLoggerWebSocketMonitor</a> = <b>new</b> <span class="i">SystemLoggerWebSocketClass</span>();
+        <b>public static</b> <span class="i">UserData</span> <a id="ac2677820b7dfd9f" href="R/ac2677820b7dfd9f.html" target="n" data-glyph="42,1" class="i field">UserData</a> = <b>new</b> <span class="i">UserData</span>();
+ 
+        <b>public static bool</b> <a id="8b91b4f1ade660c4" href="R/8b91b4f1ade660c4.html" target="n" data-glyph="42,1" class="i field">ReloadLanguageListRequested</a> = <b>false</b>;
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> Application Global Exceptions Controls Definitions</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <b>public</b> <a id="18801d23f94712fe" href="R/18801d23f94712fe.html" target="n" data-glyph="72,1" class="t constructor">App</a>() {
+ 
+            <span class="i">FileOperations</span>.<span class="i">LoadSettings</span>();
+            <span class="i">SystemOperations</span>.<span class="i">SetLanguageDictionary</span>(<span class="i property">Resources</span>, <a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">AppClientSettings</span>.<span class="i">First</span>(<span id="r0 rd" class="r0 r">a</span> =&gt; <span class="r0 r">a</span>.<span class="i">Key</span> == <span class="s">&quot;sys_defaultLanguage&quot;</span>).<span class="i">Value</span>);
+            <span class="c">//RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.Default;</span>
+            <span class="i">log4net</span>.<span class="i">GlobalContext</span>.<span class="i">Properties</span>[<span class="s">&quot;RollingFileAppender&quot;</span>] = <a href="@1@mscorlib/A.html#090eca8621a248ee" class="t t">Path</a>.<a href="@1@mscorlib/A.html#b24651eb14e8aa68" class="i method">Combine</a>(<a href="@1@mscorlib/A.html#7d2f1469d916fc63" class="t t">Environment</a>.<a href="@1@mscorlib/A.html#3343103f0250f272" class="i method">GetFolderPath</a>(<a href="@1@mscorlib/A.html#7d2f1469d916fc63" class="t t">Environment</a>.<a href="@1@mscorlib/A.html#192440782c25956f" class="t t">SpecialFolder</a>.<a href="@1@mscorlib/A.html#b0dc480dfcf03c86" class="i field">CommonApplicationData</a>), <a href="@1@mscorlib/A.html#73b5be5e9c2474b2" class="t t">Assembly</a>.<a href="@1@mscorlib/A.html#0b58cbf47b813b13" class="i method">GetEntryAssembly</a>().<a href="@1@mscorlib/A.html#1fd23b897ffa9a75" class="i method">GetName</a>().<a href="@1@mscorlib/A.html#5c5f3f770e51b069" class="i property">FullName</a>.<a href="@1@mscorlib/A.html#1c4a9dc78ba38999" class="i method">Split</a>(<span class="s">&#39;,&#39;</span>)[0], <span class="s">&quot;Log4NetApplication.log&quot;</span>);
+            <b>_</b> = <span class="i">XmlConfigurator</span>.<span class="i">Configure</span>();
+            <span class="i">Dispatcher</span>.<span class="i">UnhandledException</span> += <span class="i">App_DispatcherUnhandledException</span>;
+            <span class="i">DispatcherUnhandledException</span> += <span class="i">App_DispatcherUnhandledException</span>;
+            <a href="@1@mscorlib/A.html#b76a4a6f77962f28" class="t t">TaskScheduler</a>.<a href="@1@mscorlib/A.html#e59cdb365bc82bca" class="i">UnobservedTaskException</a> += <a href="#13a41e7aacd916aa" class="i method">TaskScheduler_UnobservedTaskException</a>;
+            <span class="i n">System</span>.<span class="i n">Windows</span>.<span class="i n">Forms</span>.<span class="t t">Application</span>.<span class="i">ThreadException</span> += <a href="#de433010b20ab357" class="i method">WinFormApplication_ThreadException</a>;
+            <a href="@1@mscorlib/A.html#2e9e7922eace2be8" class="t t">AppDomain</a>.<a href="@1@mscorlib/A.html#0f1cf66beffbb219" class="i property">CurrentDomain</a>.<a href="@1@mscorlib/A.html#1ee9ddb9445ca30b" class="i">FirstChanceException</a> += <a href="#245b3dfa9e679334" class="i method">CurrentDomain_FirstChanceException</a>;
+            <a href="@1@mscorlib/A.html#2e9e7922eace2be8" class="t t">AppDomain</a>.<a href="@1@mscorlib/A.html#0f1cf66beffbb219" class="i property">CurrentDomain</a>.<a href="@1@mscorlib/A.html#5f15c93fb29d34a9" class="i">UnhandledException</a> += <a href="#36f5b3869bca1a3e" class="i method">CurrentDomain_UnhandledException</a>;
+ 
+            <span class="c">// enabled ssl connections</span>
+            <span class="t t">ServicePointManager</span>.<span class="i property">SecurityProtocol</span> = <span class="t t">SecurityProtocolType</span>.<span class="i field">Ssl3</span> | <span class="t t">SecurityProtocolType</span>.<span class="i field">Tls</span> | <span class="t t">SecurityProtocolType</span>.<span class="i field">Tls11</span> | <span class="t t">SecurityProtocolType</span>.<span class="i field">Tls12</span>;
+            <span class="t t">ServicePointManager</span>.<span class="i property">ServerCertificateValidationCallback</span> += (<span id="r1 rd" class="r1 r">sender</span>, <span id="r2 rd" class="r2 r">cert</span>, <span id="r3 rd" class="r3 r">chain</span>, <span id="r4 rd" class="r4 r">sslPolicyErrors</span>) =&gt; <b>true</b>;
+            <span class="i">DBOperations</span>.<span class="i">LoadStartupDBData</span>();
+        }
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> Connected Starting Video</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">param</span> <span class="c">name</span><span class="c">=</span><span class="c">&quot;</span><span class="r5 r">e</span><span class="c">&quot;</span><span class="c">&gt;</span><span class="c">&lt;/</span><span class="c">param</span><span class="c">&gt;</span>
+        <b>protected override void</b> <a id="786f5692321cddbc" href="R/786f5692321cddbc.html" target="n" data-glyph="75,1" class="i method">OnStartup</a>(<span class="t t">StartupEventArgs</span> <span id="r5 rd" class="r5 r">e</span>) {
+ 
+            <b>base</b>.<span class="i method">OnStartup</span>(<span class="r5 r">e</span>);
+            <b>if</b> (!<b>bool</b>.<span class="i">Parse</span>(<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">AppClientSettings</span>.<span class="i">First</span>(<span id="r6 rd" class="r6 r">a</span> =&gt; <span class="r6 r">a</span>.<span class="i">Key</span> == <span class="s">&quot;beh_hideStartVideo&quot;</span>).<span class="i">Value</span>))
+            {
+                <span class="i">MetroWindow</span> <span id="r7 rd" class="r7 r">startupAnimation</span> = <b>new</b> <span class="i">WelcomePage</span>();
+                <span class="i property">MainWindow</span> = <span class="r7 r">startupAnimation</span>;
+                <span class="r7 r">startupAnimation</span>.<span class="i">Closing</span> += <span class="i">StartupAnimation_Closing</span>;
+            }
+            <b>else</b> { <a href="#9f17943b189eaa32" class="i method">StartupAnimation_Closing</a>(<b>new</b> <b>object</b>(), <b>new</b> <span class="t constructor">CancelEventArgs</span>()); }
+        }
+ 
+        <b>private void</b> <a id="9f17943b189eaa32" href="R/9f17943b189eaa32.html" target="n" data-glyph="76,1" class="i method">StartupAnimation_Closing</a>(<b>object</b> <span id="r8 rd" class="r8 r">sender</span>, <span class="t t">CancelEventArgs</span> <span id="r9 rd" class="r9 r">e</span>) {
+            <span class="i">MetroWindow</span> <span id="r10 rd" class="r10 r">mainView</span> = <b>new</b> <a href="SystemWindow.xaml.cs.html#b43e0596606b17c0" class="t constructor">MainWindow</a>();
+            <span class="i property">MainWindow</span> = <span class="r10 r">mainView</span>;
+            <span class="r10 r">mainView</span>.<span class="i">Show</span>(); <span class="r10 r">mainView</span>.<span class="i">Focus</span>();
+ 
+            <a href="#97726b898d075a14" class="i method">PrepareStartupTools</a>();
+        }
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> System Restart Controller</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <b>public static void</b> <a id="d1dcca79bbf3b5d6" href="R/d1dcca79bbf3b5d6.html" target="n" data-glyph="72,1" class="i method">AppRestart</a>() {
+            <span class="i">SystemWindowDataModel</span>.<span class="i">SaveTheme</span>();
+            <span class="t t">Process</span>.<span class="i method">Start</span>(<a href="@1@mscorlib/A.html#73b5be5e9c2474b2" class="t t">Assembly</a>.<a href="@1@mscorlib/A.html#0b58cbf47b813b13" class="i method">GetEntryAssembly</a>().<a href="@1@mscorlib/A.html#9c96ea143e9ab605" class="i property">EscapedCodeBase</a>);
+            <a href="#46ed4c411d9b7a0d" class="i method">ApplicationQuit</a>();
+            <span class="t t">Process</span>.<span class="i method">GetCurrentProcess</span>().<span class="i method">Kill</span>();
+        }
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> System or Quit</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">param</span> <span class="c">name</span><span class="c">=</span><span class="c">&quot;</span><span class="r11 r">silent</span><span class="c">&quot;</span><span class="c">&gt;</span><span class="c">&lt;/</span><span class="c">param</span><span class="c">&gt;</span>
+        <b>public static async void</b> <a id="cd49ed8bebec25ce" href="R/cd49ed8bebec25ce.html" target="n" data-glyph="72,1" class="i method">AppQuitRequest</a>(<b>bool</b> <span id="r11 rd" class="r11 r">silent</span>) {
+            <b>if</b> (!<span class="r11 r">silent</span>)
+            {
+                <span class="i">MetroWindow</span> <span id="r12 rd" class="r12 r">metroWindow</span> = <span class="i property">Current</span>.<span class="i property">MainWindow</span> <b>as</b> <span class="i">MetroWindow</span>;
+                <span class="i">MetroDialogSettings</span> <span id="r13 rd" class="r13 r">settings</span> = <b>new</b> <span class="i">MetroDialogSettings</span>() { <span class="i">AffirmativeButtonText</span> = <span class="r12 r">metroWindow</span>.<span class="i">Resources</span>[<span class="s">&quot;yes&quot;</span>].<span class="i">ToString</span>(), <span class="i">NegativeButtonText</span> = <span class="r12 r">metroWindow</span>.<span class="i">Resources</span>[<span class="s">&quot;no&quot;</span>].<span class="i">ToString</span>() };
+                <span class="i">MessageDialogResult</span> <span id="r14 rd" class="r14 r">result</span> = <span class="r12 r">metroWindow</span>.<span class="i">ShowModalMessageExternal</span>(<span class="r12 r">metroWindow</span>.<span class="i">Resources</span>[<span class="s">&quot;closeAppTitle&quot;</span>].<span class="i">ToString</span>(), <span class="r12 r">metroWindow</span>.<span class="i">Resources</span>[<span class="s">&quot;closeAppQuestion&quot;</span>].<span class="i">ToString</span>(), <span class="i">MessageDialogStyle</span>.<span class="i">AffirmativeAndNegative</span>, <span class="r13 r">settings</span>);
+                <b>if</b> (<span class="r14 r">result</span> == <span class="i">MessageDialogResult</span>.<span class="i">Affirmative</span>) <a href="#46ed4c411d9b7a0d" class="i method">ApplicationQuit</a>();
+            }
+            <b>else</b> { <a href="#46ed4c411d9b7a0d" class="i method">ApplicationQuit</a>(); }
+        }
+ 
+ 
+        <b>private void</b> <a id="97726b898d075a14" href="R/97726b898d075a14.html" target="n" data-glyph="76,1" class="i method">PrepareStartupTools</a>() {
+            <b>try</b> { <a href="#aa0dae53756126c2" class="i method">StartupLocaslWebServer</a>();
+            } <b>catch</b> (<a href="@1@mscorlib/A.html#f092fb2b893a0162" class="t t">Exception</a> <span id="r15 rd" class="r15 r">autoEx</span>) { <a href="#dab97dd13130b1d3" class="i method">ApplicationLogging</a>(<span class="r15 r">autoEx</span>); }
+        }
+ 
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> Local Web Server Controller</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <b>private static void</b> <a id="aa0dae53756126c2" href="R/aa0dae53756126c2.html" target="n" data-glyph="76,1" class="i method">StartupLocaslWebServer</a>() {
+            <b>try</b>
+            {
+                <b>if</b> (<b>bool</b>.<span class="i">Parse</span>(<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">AppClientSettings</span>.<span class="i">First</span>(<span id="r16 rd" class="r16 r">a</span> =&gt; <span class="r16 r">a</span>.<span class="i">Key</span> == <span class="s">&quot;sys_localWebServerEnabled&quot;</span>).<span class="i">Value</span>))
+                {
+                    <a href="#3567771edd12ef27" class="i property">moduleApp</a> = <span class="i">WebApp</span>.<span class="i">Start</span>&lt;<span class="i">Startup</span>&gt;(<span class="i">url</span>: <a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">AppClientSettings</span>.<span class="i">First</span>(<span id="r17 rd" class="r17 r">a</span> =&gt; <span class="r17 r">a</span>.<span class="i">Key</span> == <span class="s">&quot;sys_localWebServerUrl&quot;</span>).<span class="i">Value</span>);
+                    <a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">webServerRunning</span> = <b>true</b>;
+                }
+            } <b>catch</b> { }
+        }
+        <b>public static</b> <a href="@1@mscorlib/A.html#1f55292c3174123d" class="t t">IDisposable</a> <a id="3567771edd12ef27" href="R/3567771edd12ef27.html" target="n" data-glyph="102,1" class="i property">moduleApp</a> { <b>get</b>; <b>set</b>; }
+ 
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> MainWindow Closing Handler for Cleaning TempData, disable AddOns / Tool and Third Party</span>
+        <span class="c">///</span><span class="c"> Software Closing Third Party processes</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <b>private static void</b> <a id="46ed4c411d9b7a0d" href="R/46ed4c411d9b7a0d.html" target="n" data-glyph="76,1" class="i method">ApplicationQuit</a>() {
+            <b>try</b>
+            {
+                <a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a> <span id="r18 rd" class="r18 r">MainWindow</span> = (<a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a>)<span class="i property">Current</span>.<span class="i property">MainWindow</span>;
+                <span class="r18 r">MainWindow</span>.<a href="SystemWindow.xaml.cs.html#db8e4322929eb4c7" class="i field">AppSystemTimer</a>.<span class="i property">Enabled</span> = <b>false</b>;
+                <b>if</b> (<span class="r18 r">MainWindow</span>.<a href="SystemWindow.xaml.cs.html#49e2885ce98aa84e" class="i field">vncProcess</a> != <b>null</b> &amp;&amp; !<span class="r18 r">MainWindow</span>.<a href="SystemWindow.xaml.cs.html#49e2885ce98aa84e" class="i field">vncProcess</a>.<span class="i property">HasExited</span>) { <span class="r18 r">MainWindow</span>.<a href="SystemWindow.xaml.cs.html#49e2885ce98aa84e" class="i field">vncProcess</a>.<span class="i method">Kill</span>(); };
+            } <b>catch</b> { }
+ 
+            <b>try</b>
+            {
+                <b>if</b> (<a href="#3567771edd12ef27" class="i property">moduleApp</a> != <b>null</b>) { <a href="#3567771edd12ef27" class="i property">moduleApp</a>.<a href="@1@mscorlib/A.html#4e23fed29bd598fa" class="i method">Dispose</a>(); }
+            } <b>catch</b> { }
+ 
+            <b>try</b> { <span class="i">FileOperations</span>.<span class="i">ClearFolder</span>(<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">reportFolder</span>); } <b>catch</b> { }
+            <b>try</b> { <span class="i">FileOperations</span>.<span class="i">ClearFolder</span>(<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">galleryFolder</span>); } <b>catch</b> { }
+            <b>try</b> { <span class="i">FileOperations</span>.<span class="i">ClearFolder</span>(<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">tempFolder</span>); } <b>catch</b> { }
+ 
+            <span class="i">SystemWindowDataModel</span>.<span class="i">SaveTheme</span>();
+            <span class="i property">Current</span>.<span class="i method">Shutdown</span>();
+        }
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> Full Application System logging Running If is AppSystemTimer is Enabled for disable</span>
+        <span class="c">///</span><span class="c"> other processes exceptions Full Application logging to file if enabled and to DB for</span>
+        <span class="c">///</span><span class="c"> solving by Developers Supported Custom Message Here Is Filling Local System Logger for</span>
+        <span class="c">///</span><span class="c"> Developers Logging to Database Are All non Developer working</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">param</span> <span class="c">name</span><span class="c">=</span><span class="c">&quot;</span><span class="r19 r">ex</span><span class="c">&quot;</span><span class="c">&gt;</span><span class="c">           </span><span class="c">&lt;/</span><span class="c">param</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">param</span> <span class="c">name</span><span class="c">=</span><span class="c">&quot;</span><span class="r20 r">customMessage</span><span class="c">&quot;</span><span class="c">&gt;</span><span class="c">&lt;/</span><span class="c">param</span><span class="c">&gt;</span>
+        <b>public static void</b> <a id="dab97dd13130b1d3" href="R/dab97dd13130b1d3.html" target="n" data-glyph="72,1" class="i method">ApplicationLogging</a>(<a href="@1@mscorlib/A.html#f092fb2b893a0162" class="t t">Exception</a> <span id="r19 rd" class="r19 r">ex</span>, <a href="@1@mscorlib/A.html#8281103e6f23cb5c" class="k">string</a> <span id="r20 rd" class="r20 r">customMessage</span> = <b>null</b>) {
+            <b>try</b>
+            {
+                <span class="i property">Current</span>?.<span class="i">Dispatcher</span>.<span class="i">Invoke</span>(<b>async</b> () =&gt;
+                {
+                    <b>if</b> (<span class="i property">Current</span>.<span class="i property">MainWindow</span> != <b>null</b> &amp;&amp; <span class="i property">Current</span>.<span class="i property">MainWindow</span>.<span class="i property">Name</span> == <span class="s">&quot;XamlMainWindow&quot;</span> &amp;&amp; <a href="#ac2677820b7dfd9f" class="i field">UserData</a>.<span class="i">Authentification</span> != <b>null</b>)
+                    {
+                        <b>if</b> (<a href="@1@mscorlib/A.html#8281103e6f23cb5c" class="k">string</a>.<a href="@1@mscorlib/A.html#55e241b6143365ef" class="i method">IsNullOrWhiteSpace</a>(<span class="r20 r">customMessage</span>))
+                        {
+                            <b>if</b> (!<b>bool</b>.<span class="i">Parse</span>(<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">AppClientSettings</span>.<span class="i">First</span>(<span id="r21 rd" class="r21 r">a</span> =&gt; <span class="r21 r">a</span>.<span class="i">Key</span> == <span class="s">&quot;sys_imDeveloper&quot;</span>).<span class="i">Value</span>)) <span class="i">DBOperations</span>.<span class="i">SaveSystemFailMessage</span>(<b>await</b> <span class="i">SystemOperations</span>.<span class="i">GetExceptionMessages</span>(<span class="r19 r">ex</span>), <b>nameof</b>(<a href="#f634abd285baf94c" class="i field">log</a>.<span class="i">Error</span>));
+ 
+                            <b>if</b> (
+                                (<a href="#b05b0edee309018e" class="i field">SystemLoggerWebSocketMonitor</a>.<span class="i">ShowSystemLogger</span> &amp;&amp; !((<a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a>)<span class="i property">Current</span>.<span class="i property">MainWindow</span>).<a href="SystemWindow.xaml.cs.html#072a901fb9b49813" class="i property">ServerLoggerSource</a> &amp;&amp; ((<a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a>)<span class="i property">Current</span>.<span class="i property">MainWindow</span>).<a href="SystemWindow.xaml.cs.html#3d028d82c1e6c6d8" class="i property">RunReleaseMode</a>)
+                                || (<b>bool</b>.<span class="i">Parse</span>(<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">AppClientSettings</span>.<span class="i">First</span>(<span id="r22 rd" class="r22 r">a</span> =&gt; <span class="r22 r">a</span>.<span class="i">Key</span> == <span class="s">&quot;sys_imDeveloper&quot;</span>).<span class="i">Value</span>) &amp;&amp; !((<a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a>)<span class="i property">Current</span>.<span class="i property">MainWindow</span>).<a href="SystemWindow.xaml.cs.html#072a901fb9b49813" class="i property">ServerLoggerSource</a> &amp;&amp; <a href="#b05b0edee309018e" class="i field">SystemLoggerWebSocketMonitor</a>.<span class="i">ShowSystemLogger</span>)
+                            ) { ((<a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a>)<span class="i property">Current</span>.<span class="i property">MainWindow</span>).<a href="SystemWindow.xaml.cs.html#f63362f75ad9ab7f" class="i property">SystemLogger</a> = <span class="i">SystemOperations</span>.<span class="i">GetExceptionMessagesAll</span>(<span class="r19 r">ex</span>).<span class="i">ToString</span>(); }
+                        }
+                        <b>else</b>
+                        {
+                            <b>if</b> (!<b>bool</b>.<span class="i">Parse</span>(<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">AppClientSettings</span>.<span class="i">First</span>(<span id="r23 rd" class="r23 r">a</span> =&gt; <span class="r23 r">a</span>.<span class="i">Key</span> == <span class="s">&quot;sys_imDeveloper&quot;</span>).<span class="i">Value</span>)) <span class="i">DBOperations</span>.<span class="i">SaveSystemFailMessage</span>(<span class="r20 r">customMessage</span>, <b>nameof</b>(<a href="#f634abd285baf94c" class="i field">log</a>.<span class="i">Error</span>));
+ 
+                            <b>if</b> (
+                                (<a href="#b05b0edee309018e" class="i field">SystemLoggerWebSocketMonitor</a>.<span class="i">ShowSystemLogger</span> &amp;&amp; !((<a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a>)<span class="i property">Current</span>.<span class="i property">MainWindow</span>).<a href="SystemWindow.xaml.cs.html#072a901fb9b49813" class="i property">ServerLoggerSource</a> &amp;&amp; ((<a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a>)<span class="i property">Current</span>.<span class="i property">MainWindow</span>).<a href="SystemWindow.xaml.cs.html#3d028d82c1e6c6d8" class="i property">RunReleaseMode</a>)
+                                || (<b>bool</b>.<span class="i">Parse</span>(<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">AppClientSettings</span>.<span class="i">First</span>(<span id="r24 rd" class="r24 r">a</span> =&gt; <span class="r24 r">a</span>.<span class="i">Key</span> == <span class="s">&quot;sys_imDeveloper&quot;</span>).<span class="i">Value</span>) &amp;&amp; !((<a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a>)<span class="i property">Current</span>.<span class="i property">MainWindow</span>).<a href="SystemWindow.xaml.cs.html#072a901fb9b49813" class="i property">ServerLoggerSource</a> &amp;&amp; <a href="#b05b0edee309018e" class="i field">SystemLoggerWebSocketMonitor</a>.<span class="i">ShowSystemLogger</span>)
+                            ) { ((<a href="SystemWindow.xaml.cs.html#e97556df5d389419" class="t t">MainWindow</a>)<span class="i property">Current</span>.<span class="i property">MainWindow</span>).<a href="SystemWindow.xaml.cs.html#f63362f75ad9ab7f" class="i property">SystemLogger</a> = <span class="r20 r">customMessage</span>; }
+                        }
+                        <span class="c">//if (Setting.WriteToLog) log.Error(ex.Message + Environment.NewLine + ex.StackTrace + Environment.NewLine + customMessage);</span>
+                    }
+                });
+            } <b>catch</b> { }
+        }
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> FullSystem Logging Every Exception types are monitored for maximize correct running all</span>
+        <span class="c">///</span><span class="c"> processes, System addOns, systems, communications, threads, network All detail of</span>
+        <span class="c">///</span><span class="c"> application system add all used possibilities</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">param</span> <span class="c">name</span><span class="c">=</span><span class="c">&quot;</span><span class="r25 r">sender</span><span class="c">&quot;</span><span class="c">&gt;</span><span class="c">&lt;/</span><span class="c">param</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">param</span> <span class="c">name</span><span class="c">=</span><span class="c">&quot;</span><span class="r26 r">e</span><span class="c">&quot;</span><span class="c">&gt;</span><span class="c">     </span><span class="c">&lt;/</span><span class="c">param</span><span class="c">&gt;</span>
+        <b>private void</b> <a id="245b3dfa9e679334" href="R/245b3dfa9e679334.html" target="n" data-glyph="76,1" class="i method">CurrentDomain_FirstChanceException</a>(<b>object</b> <span id="r25 rd" class="r25 r">sender</span>, <span class="i n">System</span>.<span class="i n">Runtime</span>.<span class="i n">ExceptionServices</span>.<a href="@1@mscorlib/A.html#953b53b59712192f" class="t t">FirstChanceExceptionEventArgs</a> <span id="r26 rd" class="r26 r">e</span>) {
+            <b>if</b> (!<span class="r26 r">e</span>.<a href="@1@mscorlib/A.html#d04cba3d16e81337" class="i property">Exception</a>.<a href="@1@mscorlib/A.html#950d763693dd32d3" class="i property">StackTrace</a>.<a href="@1@mscorlib/A.html#428c5c9954dea844" class="i method">Contains</a>(<span class="s">&quot;TabPanelOnSelectionChange&quot;</span>) &amp;&amp; !<span class="r26 r">e</span>.<a href="@1@mscorlib/A.html#d04cba3d16e81337" class="i property">Exception</a>.<a href="@1@mscorlib/A.html#950d763693dd32d3" class="i property">StackTrace</a>.<a href="@1@mscorlib/A.html#428c5c9954dea844" class="i method">Contains</a>(<span class="s">&quot;ControlzEx&quot;</span>)) <a href="#dab97dd13130b1d3" class="i method">ApplicationLogging</a>(<span class="r26 r">e</span>.<a href="@1@mscorlib/A.html#d04cba3d16e81337" class="i property">Exception</a>);
+        }
+ 
+        <b>private void</b> <a id="d306a8ad789407eb" href="R/d306a8ad789407eb.html" target="n" data-glyph="76,1" class="i method">App_DispatcherUnhandledException</a>(<b>object</b> <span id="r27 rd" class="r27 r">sender</span>, <span class="i">DispatcherUnhandledExceptionEventArgs</span> <span id="r28 rd" class="r28 r">e</span>) {
+            <span class="r28 r">e</span>.<span class="i">Handled</span> = <b>true</b>;
+            <span class="c">//MessageBox.Show(e.Exception.Message + &quot;\n&quot; + e.Exception.StackTrace?.ToString() + &quot;\n&quot; + &quot;Application must be close !!!&quot;, &quot;CurrentDomain UnhandledException&quot;, MessageBoxButton.OK, MessageBoxImage.Error);</span>
+            <span class="c">//if (UserData.Authentification != null) { SystemConfiguration.CrashReporterSettings._ReportCrash.Send(e.Exception); }</span>
+            <span class="i">ApplicationLogging</span>(<span class="r28 r">e</span>.<span class="i">Exception</span>);
+            <b>if</b> (<span class="i">SystemConfiguration</span>.<span class="i">CrashReporterSettings</span>.<span class="i">_ReportCrash</span> != <b>null</b> &amp;&amp; <span class="i">SystemConfiguration</span>.<span class="i">CrashReporterSettings</span>.<span class="i">_ReportCrash</span>.<span class="i">IsQuit</span>) { <span class="i property">Current</span>.<span class="i method">Shutdown</span>(-1); }
+        }
+ 
+        <b>private void</b> <a id="36f5b3869bca1a3e" href="R/36f5b3869bca1a3e.html" target="n" data-glyph="76,1" class="i method">CurrentDomain_UnhandledException</a>(<b>object</b> <span id="r29 rd" class="r29 r">sender</span>, <a href="@1@mscorlib/A.html#155dee805ece5aa6" class="t t">UnhandledExceptionEventArgs</a> <span id="r30 rd" class="r30 r">e</span>) {
+            <a href="@1@mscorlib/A.html#f092fb2b893a0162" class="t t">Exception</a> <span id="r31 rd" class="r31 r">exception</span> = <span class="r30 r">e</span>.<a href="@1@mscorlib/A.html#d87062835ca0c56d" class="i property">ExceptionObject</a> <b>as</b> <a href="@1@mscorlib/A.html#f092fb2b893a0162" class="t t">Exception</a>;
+            <span class="c">//MessageBox.Show(exception.Message + &quot;\n&quot; + exception.StackTrace?.ToString() + &quot;\n&quot; + &quot;Application must be close !!!&quot;, &quot;CurrentDomain UnhandledException&quot;, MessageBoxButton.OK, MessageBoxImage.Error);</span>
+            <a href="#dab97dd13130b1d3" class="i method">ApplicationLogging</a>(<span class="r31 r">exception</span>);
+            <b>if</b> (<span class="r30 r">e</span>.<a href="@1@mscorlib/A.html#2af5654adec9b70f" class="i property">IsTerminating</a>) <a href="@1@mscorlib/A.html#7d2f1469d916fc63" class="t t">Environment</a>.<a href="@1@mscorlib/A.html#29badb00f4fb6ca0" class="i method">Exit</a>(1);
+        }
+ 
+        <b>private void</b> <a id="13a41e7aacd916aa" href="R/13a41e7aacd916aa.html" target="n" data-glyph="76,1" class="i method">TaskScheduler_UnobservedTaskException</a>(<b>object</b> <span id="r32 rd" class="r32 r">sender</span>, <a href="@1@mscorlib/A.html#2e67cda330c4c4e6" class="t t">UnobservedTaskExceptionEventArgs</a> <span id="r33 rd" class="r33 r">e</span>) {
+            <span class="c">//MessageBox.Show(e.Exception.Message, &quot;TaskScheduler UnobservedTaskException&quot;, MessageBoxButton.OK, MessageBoxImage.Error);</span>
+            <a href="#dab97dd13130b1d3" class="i method">ApplicationLogging</a>(<span class="r33 r">e</span>.<a href="@1@mscorlib/A.html#58483ebaf0e54de0" class="i property">Exception</a>); <span class="r33 r">e</span>.<a href="@1@mscorlib/A.html#0e57b875003c0f7b" class="i method">SetObserved</a>();
+        }
+ 
+        <b>private void</b> <a id="de433010b20ab357" href="R/de433010b20ab357.html" target="n" data-glyph="76,1" class="i method">WinFormApplication_ThreadException</a>(<b>object</b> <span id="r34 rd" class="r34 r">sender</span>, <span class="t t">ThreadExceptionEventArgs</span> <span id="r35 rd" class="r35 r">e</span>) {
+            <span class="c">//if (UserData.Authentification != null) { SystemConfiguration.CrashReporterSettings._ReportCrash.Send(e.Exception); }</span>
+            <a href="#dab97dd13130b1d3" class="i method">ApplicationLogging</a>(<span class="r35 r">e</span>.<span class="i property">Exception</span>);
+        }
+ 
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> Keyboard Pointer to Central Keyboard Reaction Definitions</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;/</span><span class="c">summary</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">param</span> <span class="c">name</span><span class="c">=</span><span class="c">&quot;</span><span class="r36 r">sender</span><span class="c">&quot;</span><span class="c">&gt;</span><span class="c">&lt;/</span><span class="c">param</span><span class="c">&gt;</span>
+        <span class="c">///</span><span class="c"> </span><span class="c">&lt;</span><span class="c">param</span> <span class="c">name</span><span class="c">=</span><span class="c">&quot;</span><span class="r37 r">e</span><span class="c">&quot;</span><span class="c">&gt;</span><span class="c">     </span><span class="c">&lt;/</span><span class="c">param</span><span class="c">&gt;</span>
+        <b>private void</b> <a id="f25a737984ca8191" href="R/f25a737984ca8191.html" target="n" data-glyph="76,1" class="i method">RootAppKeyDownController</a>(<b>object</b> <span id="r36 rd" class="r36 r">sender</span>, <span class="t t">KeyEventArgs</span> <span id="r37 rd" class="r37 r">e</span>) {
+            <b>if</b> (!<b>bool</b>.<span class="i">Parse</span>(<a href="#1c95c1f7ef1cc956" class="t t">App</a>.<a href="#dc92dbffe4de680a" class="i field">appRuntimeData</a>.<span class="i">AppClientSettings</span>.<span class="i">First</span>(<span id="r38 rd" class="r38 r">a</span> =&gt; <span class="r38 r">a</span>.<span class="i">Key</span> == <span class="s">&quot;sys_disableSystemHotKeys&quot;</span>).<span class="i">Value</span>))
+            { <span class="i">HardwareOperations</span>.<span class="i">ApplicationKeyboardMaping</span>(<span class="r37 r">e</span>); }
+        }
+    }
+}</pre></td></tr></table></div></body></html>

@@ -1,3 +1,3 @@
 REM CommandLineOptions in htmlgenerator has all cmd arguments
 
-src\HtmlGenerator\bin\Debug\net481\HtmlGenerator.exe Codes\EASY-IT-CENTER-SERVER\EasyITCenter.csproj Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj /out:Output /force /excludetests /federation:https://referencesource.microsoft.com /assemblylist 
+src\HtmlGenerator\bin\Release\net481\HtmlGenerator.exe Codes\EASY-IT-CENTER-SERVER\EasyITCenter.csproj Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj /out:Output /force /excludetests /federation:https://referencesource.microsoft.com /assemblylist 

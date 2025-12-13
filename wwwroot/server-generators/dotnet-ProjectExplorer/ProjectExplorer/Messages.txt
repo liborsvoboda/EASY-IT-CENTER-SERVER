@@ -1,0 +1,2 @@
+﻿===============================================
+Adding federation 'https://referencesource.microsoft.com'.

@@ -1,2 +1,2 @@
 @ECHO OFF
-Vsxmd GoldenSystem.xml
+Vsxmd EasyITCenter.xml

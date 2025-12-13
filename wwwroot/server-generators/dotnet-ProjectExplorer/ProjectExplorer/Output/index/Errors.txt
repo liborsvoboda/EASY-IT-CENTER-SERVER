@@ -1,0 +1,582 @@
+﻿===============================================
+13.12.2025 12:33:43: First chance exception
+System.Runtime.InteropServices.COMException (0x80070490): Prvek nebyl nalezen. (Výjimka na základě hodnoty HRESULT: 0x80070490)
+   v Microsoft.VisualStudio.Setup.Configuration.ISetupConfiguration2.GetInstanceForCurrentProcess()
+   v Microsoft.DotNet.DotNetSdkResolver.VSSettings..ctor()
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.IO.FileLoadException: Nelze načíst soubor nebo sestavení Microsoft.CodeAnalysis.Features, Version=4.11.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35 nebo jeden z jejich závislých prvků. Zjištěná definice manifestu sestavení neodpovídá odkazu na sestavení. (Výjimka na základě hodnoty HRESULT: 0x80131040)
+Název souboru: Microsoft.CodeAnalysis.Features, Version=4.11.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+   v System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   v System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+
+WRN: Protokolování vazeb sestavení je VYPNUTO.
+Chcete-li povolit protokolování chyb vazeb sestavení, nastavte hodnotu registru [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD) na hodnotu 1.
+Poznámka: Protokolování chyb vazeb sestavení ovlivňuje výkon systému.
+Chcete-li tuto funkci vypnout, odeberte z registru hodnotu [HKLM\Software\Microsoft\Fusion!EnableLog].
+
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.IO.FileLoadException: Nelze načíst soubor nebo sestavení Microsoft.CodeAnalysis.CSharp.Features, Version=4.11.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35 nebo jeden z jejich závislých prvků. Zjištěná definice manifestu sestavení neodpovídá odkazu na sestavení. (Výjimka na základě hodnoty HRESULT: 0x80131040)
+Název souboru: Microsoft.CodeAnalysis.CSharp.Features, Version=4.11.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+   v System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   v System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+
+WRN: Protokolování vazeb sestavení je VYPNUTO.
+Chcete-li povolit protokolování chyb vazeb sestavení, nastavte hodnotu registru [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD) na hodnotu 1.
+Poznámka: Protokolování chyb vazeb sestavení ovlivňuje výkon systému.
+Chcete-li tuto funkci vypnout, odeberte z registru hodnotu [HKLM\Software\Microsoft\Fusion!EnableLog].
+
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.IO.FileLoadException: Nelze načíst soubor nebo sestavení Microsoft.CodeAnalysis.VisualBasic.Features, Version=4.11.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35 nebo jeden z jejich závislých prvků. Zjištěná definice manifestu sestavení neodpovídá odkazu na sestavení. (Výjimka na základě hodnoty HRESULT: 0x80131040)
+Název souboru: Microsoft.CodeAnalysis.VisualBasic.Features, Version=4.11.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+   v System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   v System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+
+WRN: Protokolování vazeb sestavení je VYPNUTO.
+Chcete-li povolit protokolování chyb vazeb sestavení, nastavte hodnotu registru [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD) na hodnotu 1.
+Poznámka: Protokolování chyb vazeb sestavení ovlivňuje výkon systému.
+Chcete-li tuto funkci vypnout, odeberte z registru hodnotu [HKLM\Software\Microsoft\Fusion!EnableLog].
+
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   v System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   v System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostWithFallbackAsync>d__8.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   v System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostWithFallbackAsync>d__8.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectFileInfosAsync>d__20.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   v System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostWithFallbackAsync>d__8.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectFileInfosAsync>d__20.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectInfosFromPathAsync>d__21.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   v System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostWithFallbackAsync>d__8.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectFileInfosAsync>d__20.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectInfosFromPathAsync>d__21.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadAsync>d__19.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   v System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostWithFallbackAsync>d__8.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectFileInfosAsync>d__20.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectInfosFromPathAsync>d__21.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadAsync>d__19.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.<LoadProjectInfoAsync>d__24.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   v System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostWithFallbackAsync>d__8.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectFileInfosAsync>d__20.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectInfosFromPathAsync>d__21.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadAsync>d__19.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.<LoadProjectInfoAsync>d__24.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.<LoadProjectInfoAsync>d__24.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+===============================================
+13.12.2025 12:33:44: First chance exception
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   v System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostWithFallbackAsync>d__8.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectFileInfosAsync>d__20.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectInfosFromPathAsync>d__21.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadAsync>d__19.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.<LoadProjectInfoAsync>d__24.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.<LoadProjectInfoAsync>d__24.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.<OpenProjectAsync>d__27.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+===============================================
+Failed to open solution: E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-CENTER-SERVER\EasyITCenter.csproj
+System.ComponentModel.Win32Exception (0x80004005): Požadovaná operace vyžaduje zvýšená oprávnění
+   v System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   v System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager.<GetBuildHostWithFallbackAsync>d__8.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectFileInfosAsync>d__20.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadProjectInfosFromPathAsync>d__21.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.Worker.<LoadAsync>d__19.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.<LoadProjectInfoAsync>d__24.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildProjectLoader.<LoadProjectInfoAsync>d__24.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.<OpenProjectAsync>d__27.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.SourceBrowser.HtmlGenerator.SolutionGenerator.CreateSolution(String solutionFilePath, ImmutableDictionary`2 properties, Boolean doNotIncludeReferencedProjects) v E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\src\HtmlGenerator\Pass1-Generation\SolutionGenerator.cs:řádek 471
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Nelze vytvořit adresář Y:\EASY-IT-EXTENSIONS\EASY-IT-PROJECTS\. Část cesty Y:\EASY-IT-EXTENSIONS\EASY-IT-PROJECTS\ nebyla nalezena.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\HtmlFullEditorPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystem\InteractUserSystemPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystemAgendas\DynamicIncludingObjects\IncludeTabItem.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystem\Views\InteractMainPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystem\Views\InteractUserPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystem\Views\InteractCleanWindowPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\XamlCodeEditorPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\SolutionTaskList\SolutionTaskListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\ServerApiSecurityList\ServerApiSecurityListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystem\Views\InteractAboutPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystem\Views\InteractAwesomePage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystem\Views\InteractBreakPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystem\Views\InteractBugsPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystem\Views\InteractSettingsPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystemAgendas\LocSrvWebTmpViewerPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystemAgendas\MltTblGenEsbSrvFormPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserWebToolPagesAgendas\WebConfiguratorList\WebConfiguratorListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\_Dials\WebCodeLibraryList\WebCodeLibraryListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystemAgendas\ExternalWebAppPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\GlobalAnimationsEffectLibrary.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\UniversalCodeEditorPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\WebCodeEditorPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\DocAgendas\DocSrvDocTemplateList\DocSrvDocTemplateListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\DocAgendas\DocSrvDocumentationCodeLibraryList\DocSrvDocumentationCodeLibraryListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\DocAgendas\DocSrvDocumentationGroupList\DocSrvDocumentationGroupListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\DocAgendas\DocSrvDocumentationList\DocSrvDocumentationListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\MessagingAgendas\SolutionEmailerHistoryList\SolutionEmailerHistoryListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\MessagingAgendas\SolutionMessageModuleList\SolutionMessageModuleListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\MessagingAgendas\SolutionMessageTypeList\SolutionMessageTypeListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationViewPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationWithParentPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationWithSubPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListAutoDBTranslationWithSubViewPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystemAgendas\MltEicSrvWebAppPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GenericSystemAgendas\HostWin32AppPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\ServerLiveDataMonitorList\ServerLiveDataMonitorListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\ServerCorsDefAllowedOriginList\ServerCorsDefAllowedOriginListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\ServerModuleAndServiceList\ServerModuleAndServiceListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\SolutionSchedulerList\SolutionSchedulerListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Dials\SolutionMixedEnumList\SolutionMixedEnumListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\ClientSettingsPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\SystemOperationListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\_Dials\SystemModuleList\SystemModuleListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Dials\SolutionOperationList\SolutionOperationListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Dials\SystemCustomPageList\SystemCustomPageListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Dials\SystemGroupMenuList\SystemGroupMenuListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Dials\SystemMenuList\SystemMenuListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\LicServerAgendas\_View\LicSrvLicenseActivationFailList\LicSrvLicenseActivationFailListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\LicServerAgendas\LicSrvLicenseAlgorithmList\LicSrvLicenseAlgorithmListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\LicServerAgendas\_View\LicSrvUsedLicenseList\LicSrvUsedLicenseListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ProductionGuides\ProdGuidGroupList\ProdGuidGroupListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ProductionGuides\ProdGuidOperationList\ProdGuidOperationList.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ProductionGuides\ProdGuidPartList\ProdGuidPartListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ProductionGuides\ProdGuidPersonList\ProdGuidPersonListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ProductionGuides\ProdGuidWorkList\ProdGuidWorkList.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\ServerStaticOrMvcDefPathList\ServerStaticOrMvcDefPathListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\SystemMonitorPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\GraphsPage\GraphsPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\_Dials\ServerToolTypeList\ServerToolTypeListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Dials\SolutionLanguageList\SolutionLanguageListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\ServerToolPanelListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserWebToolPagesAgendas\SolutionStaticFileList\SolutionStaticFileListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\WebDocumentationList\WebDocumentationListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\WebDeveloperNewsList\WebDeveloperNewsListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\WebBannedIpAddressList\WebBannedIpAddressListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\WebGlobalPageBlockList\WebGlobalPageBlockListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserWebToolPagesAgendas\SolutionWebsiteList\SolutionWebsiteListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\_Dials\WebDocumentationCodeLibraryList\WebDocumentationCodeLibraryListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\_Dials\WebCodeLibraryList\WebCodeLibraryListOldPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\WebCoreFileList\WebCoreFileListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\WebGroupMenuList\WebGroupMenuListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\WebMenuList\WebMenuListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\WebPortalAgendas\_Dials\WebSettingList\WebSettingListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\_Dials\SolutionMottoList\SolutionMottoListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\BusinessAddressList\BusinessAddressListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\MessagingAgendas\EmailTemplateList\SolutionEmailTemplateListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\ServerHealthCheckTaskList\ServerHealthCheckTaskListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BasicAgendas\BasicImageGalleryList\BasicImageGalleryListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\CoreAgendas\ScreenSaverPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Dials\SystemIgnoredExceptionList\SystemIgnoredExceptionListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\_Dials\ServerToolPanelDefinitionList\ServerToolPanelDefinitionListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BasicAgendas\_Views\BasicAttachmentList\BasicAttachmentListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\BusinessBranchList\BusinessBranchListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\BasicCalendarList\BasicCalendarListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\BusinessCreditNoteList\BusinessCreditNoteListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\_Dials\SystemDocumentTypeList\SystemDocumentTypeListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\_Dials\BusinessExchangeRateList\BusinessExchangeRateListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BasicAgendas\_Dials\BasicCurrencyList\BasicCurrencyListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\_Dials\SystemDocumentAdviceList\SystemDocumentAdviceListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\BusinessIncomingInvoiceList\BusinessIncomingInvoiceListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\BusinessIncomingOrderList\BusinessIncomingOrderListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\SystemTranslationList\SystemTranslationListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Views\SystemLoginHistoryList\SystemLoginHistoryListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\_Dials\BusinessMaturityList\BusinessMaturityListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\_Dials\BusinessNotesList\BusinessNotesListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\BusinessOfferList\BusinessOfferListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\BusinessOutgoingInvoiceList\BusinessOutgoingInvoiceListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\BusinessOutgoingOrderList\BusinessOutgoingOrderListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\_Dials\BusinessPaymentMethodList\BusinessPaymentMethodListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\_Dials\BusinessPaymentStatusList\BusinessPaymentStatusListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\BusinessReceiptList\BusinessReceiptListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\SystemReportQueueList\SystemReportQueueListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\SolutionFailList\SolutionFailListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BasicAgendas\BasicItemList\BasicItemListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\CoreAgendas\SupportPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\UserAgendas\SystemParameterList\SystemParameterListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\ServerSettingList\ServerSettingListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\SystemReportList\SystemReportListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BasicAgendas\_Dials\BasicUnitList\BasicUnitListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\SolutionUserList\SolutionUserListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\SolutionUserRoleList\SolutionUserRoleListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BasicAgendas\_Dials\BasicVatList\BasicVatListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\BusinessAgendas\_Dials\BusinessWarehouseList\BusinessWarehouseListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Dials\SystemSvgIconList\SystemSvgIconListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\SolutionAdminAgendas\_Views\WebVisitIpList\WebVisitIpListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\GlobalObjectTemplatesLibrary.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\SystemObjectLibrary\ProgressBarFix.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\SystemObjectLibrary\MetroCheckComboBoxStyleFix.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\StandardObjectDefaultStyles.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\SystemObjectLibrary\MetroProgressBarStyle.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\CustomObjectSetStylesLibrary.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\AutoObjectSetStylesLibrary.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\Tools\Markdown\MarkdownStylesLibrary.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\Tools\ToolsStylesLibrary.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Languages\StringResources.cs-CZ.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Languages\StringResources.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor GlobalStylesLibrary\SystemObjectLibrary\SystemMainMenuStyle.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\CoreAgendas\WelcomePage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateWebViewPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateDocumentViewPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListWithParentPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListWithSubPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListWithSubViewPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListViewPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateSettingsPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateClassListPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateSTLPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Soubor Agendas\ExampleAgendas\Templates\TemplateVideoPage.xaml nelze nalézt.
+===============================================
+Workspace failed: Při zpracovávání souboru E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\EasyITSystemBuilder.csproj došlo k chybě MSBuildu s touto zprávou: Projektový soubor obsahuje neplatnou hodnotu vlastnosti.
+===============================================
+Document generation failed for: E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\Agendas\LicServerAgendas\_View\LicSrvLicenseActivationFailList\LicSrvLicenseActivationFailListPage.xaml.cs
+System.IO.DirectoryNotFoundException: Část cesty E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Output\index\EasyITSystemCenter\Agendas\LicServerAgendas\_View\LicSrvLicenseActivationFailList\LicSrvLicenseActivationFailListPage.xaml.cs.html nebyla nalezena.
+   v System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   v System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   v System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   v System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   v System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   v System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   v Microsoft.SourceBrowser.HtmlGenerator.DocumentGenerator.<GenerateAsync>d__15.MoveNext() v E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\src\HtmlGenerator\Pass1-Generation\DocumentGenerator.cs:řádek 111
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.SourceBrowser.HtmlGenerator.ProjectGenerator.<GenerateDocumentAsync>d__62.MoveNext() v E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\src\HtmlGenerator\Pass1-Generation\ProjectGenerator.cs:řádek 231
+===============================================
+Document generation failed for: E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-SYSTEM-BUILDER\Agendas\WebPortalAgendas\_Dials\WebDocumentationCodeLibraryList\WebDocumentationCodeLibraryListPage.xaml.cs
+System.IO.DirectoryNotFoundException: Část cesty E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Output\index\EasyITSystemCenter\Agendas\WebPortalAgendas\_Dials\WebDocumentationCodeLibraryList\WebDocumentationCodeLibraryListPage.xaml.cs.html nebyla nalezena.
+   v System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   v System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   v System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   v System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   v System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   v System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   v Microsoft.SourceBrowser.HtmlGenerator.DocumentGenerator.<GenerateAsync>d__15.MoveNext() v E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\src\HtmlGenerator\Pass1-Generation\DocumentGenerator.cs:řádek 111
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.SourceBrowser.HtmlGenerator.ProjectGenerator.<GenerateDocumentAsync>d__62.MoveNext() v E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\src\HtmlGenerator\Pass1-Generation\ProjectGenerator.cs:řádek 231
+===============================================
+Project generation failed for: EasyITSystemBuilder.csproj
+System.IO.DirectoryNotFoundException: Část cesty E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Output\index\EasyITSystemCenter\Agendas\LicServerAgendas\_View\LicSrvLicenseActivationFailList\LicSrvLicenseActivationFailListPage.xaml.cs.html nebyla nalezena.
+   v System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   v System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   v System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   v System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   v System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   v System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   v Microsoft.SourceBrowser.HtmlGenerator.DocumentGenerator.<GenerateAsync>d__15.MoveNext() v E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\src\HtmlGenerator\Pass1-Generation\DocumentGenerator.cs:řádek 111
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.SourceBrowser.HtmlGenerator.ProjectGenerator.<GenerateDocumentAsync>d__62.MoveNext() v E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\src\HtmlGenerator\Pass1-Generation\ProjectGenerator.cs:řádek 236
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v Microsoft.SourceBrowser.HtmlGenerator.ProjectGenerator.<>c__DisplayClass59_0.<<GenerateAsync>b__2>d.MoveNext() v E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\src\HtmlGenerator\Pass1-Generation\ProjectGenerator.cs:řádek 161
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Microsoft.SourceBrowser.HtmlGenerator.ProjectGenerator.<GenerateAsync>d__59.MoveNext() v E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\src\HtmlGenerator\Pass1-Generation\ProjectGenerator.cs:řádek 170
