@@ -62,6 +62,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ProdGuidWorkList> ProdGuidWorkLists { get; set; } = null!;
         public virtual DbSet<ServerApiSecurityList> ServerApiSecurityLists { get; set; } = null!;
         public virtual DbSet<ServerCorsDefAllowedOriginList> ServerCorsDefAllowedOriginLists { get; set; } = null!;
+        public virtual DbSet<ServerGeneratorList> ServerGeneratorLists { get; set; } = null!;
         public virtual DbSet<ServerHealthCheckTaskList> ServerHealthCheckTaskLists { get; set; } = null!;
         public virtual DbSet<ServerLiveDataMonitorList> ServerLiveDataMonitorLists { get; set; } = null!;
         public virtual DbSet<ServerModuleAndServiceList> ServerModuleAndServiceLists { get; set; } = null!;
@@ -85,6 +86,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionTaskList> SolutionTaskLists { get; set; } = null!;
         public virtual DbSet<SolutionUserList> SolutionUserLists { get; set; } = null!;
         public virtual DbSet<SolutionUserRoleList> SolutionUserRoleLists { get; set; } = null!;
+        public virtual DbSet<SystemApplicationList> SystemApplicationLists { get; set; } = null!;
         public virtual DbSet<SystemCustomPageList> SystemCustomPageLists { get; set; } = null!;
         public virtual DbSet<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; } = null!;
         public virtual DbSet<SystemGroupMenuList> SystemGroupMenuLists { get; set; } = null!;
@@ -926,6 +928,45 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_ServerCorsDefAllowedOriginList_UserList");
             });
 
+            modelBuilder.Entity<ServerGeneratorList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.InheritedCategoryTypeNavigation)
+                    .WithMany(p => p.ServerGeneratorListInheritedCategoryTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedCategoryType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerGeneratorList_SolutionMixedEnumList3");
+
+                entity.HasOne(d => d.InheritedDownloadTypeNavigation)
+                    .WithMany(p => p.ServerGeneratorListInheritedDownloadTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedDownloadType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerGeneratorList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.InheritedProcessTypeNavigation)
+                    .WithMany(p => p.ServerGeneratorListInheritedProcessTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedProcessType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerGeneratorList_SolutionMixedEnumList1");
+
+                entity.HasOne(d => d.InheritedUploadTypeNavigation)
+                    .WithMany(p => p.ServerGeneratorListInheritedUploadTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedUploadType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerGeneratorList_SolutionMixedEnumList2");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.ServerGeneratorLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerGeneratorList_SolutionUserList");
+            });
+
             modelBuilder.Entity<ServerHealthCheckTaskList>(entity =>
             {
                 entity.Property(e => e.Active).HasDefaultValueSql("((1))");
@@ -1336,6 +1377,24 @@ namespace EasyITCenter.DBModel
                     .WithMany(p => p.SolutionUserRoleLists)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_SolutionUserRoleList_SolutionUserList");
+            });
+
+            modelBuilder.Entity<SystemApplicationList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.InheritedAppCategoryTypeNavigation)
+                    .WithMany(p => p.SystemApplicationLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedAppCategoryType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SystemApplicationList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SystemApplicationLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SystemApplicationList_SolutionUserList");
             });
 
             modelBuilder.Entity<SystemCustomPageList>(entity =>

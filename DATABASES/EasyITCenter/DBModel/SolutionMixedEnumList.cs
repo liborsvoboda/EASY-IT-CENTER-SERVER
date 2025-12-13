@@ -19,6 +19,10 @@ namespace EasyITCenter.DBModel
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableLists = new HashSet<PortalApiTableList>();
             ServerApiSecurityLists = new HashSet<ServerApiSecurityList>();
+            ServerGeneratorListInheritedCategoryTypeNavigations = new HashSet<ServerGeneratorList>();
+            ServerGeneratorListInheritedDownloadTypeNavigations = new HashSet<ServerGeneratorList>();
+            ServerGeneratorListInheritedProcessTypeNavigations = new HashSet<ServerGeneratorList>();
+            ServerGeneratorListInheritedUploadTypeNavigations = new HashSet<ServerGeneratorList>();
             ServerHealthCheckTaskLists = new HashSet<ServerHealthCheckTaskList>();
             ServerModuleAndServiceListInheritedLayoutTypeNavigations = new HashSet<ServerModuleAndServiceList>();
             ServerModuleAndServiceListInheritedPageTypeNavigations = new HashSet<ServerModuleAndServiceList>();
@@ -35,6 +39,7 @@ namespace EasyITCenter.DBModel
             SolutionSchedulerListInheritedIntervalTypeNavigations = new HashSet<SolutionSchedulerList>();
             SolutionTaskListInheritedStatusTypeNavigations = new HashSet<SolutionTaskList>();
             SolutionTaskListInheritedTargetTypeNavigations = new HashSet<SolutionTaskList>();
+            SystemApplicationLists = new HashSet<SystemApplicationList>();
             SystemCustomPageListInheritedFormTypeNavigations = new HashSet<SystemCustomPageList>();
             SystemCustomPageListInheritedSystemApiCallTypeNavigations = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
@@ -69,6 +74,10 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }
         public virtual ICollection<ServerApiSecurityList> ServerApiSecurityLists { get; set; }
+        public virtual ICollection<ServerGeneratorList> ServerGeneratorListInheritedCategoryTypeNavigations { get; set; }
+        public virtual ICollection<ServerGeneratorList> ServerGeneratorListInheritedDownloadTypeNavigations { get; set; }
+        public virtual ICollection<ServerGeneratorList> ServerGeneratorListInheritedProcessTypeNavigations { get; set; }
+        public virtual ICollection<ServerGeneratorList> ServerGeneratorListInheritedUploadTypeNavigations { get; set; }
         public virtual ICollection<ServerHealthCheckTaskList> ServerHealthCheckTaskLists { get; set; }
         public virtual ICollection<ServerModuleAndServiceList> ServerModuleAndServiceListInheritedLayoutTypeNavigations { get; set; }
         public virtual ICollection<ServerModuleAndServiceList> ServerModuleAndServiceListInheritedPageTypeNavigations { get; set; }
@@ -85,6 +94,7 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerListInheritedIntervalTypeNavigations { get; set; }
         public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedStatusTypeNavigations { get; set; }
         public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedTargetTypeNavigations { get; set; }
+        public virtual ICollection<SystemApplicationList> SystemApplicationLists { get; set; }
         public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedFormTypeNavigations { get; set; }
         public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedSystemApiCallTypeNavigations { get; set; }
         public virtual ICollection<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; }

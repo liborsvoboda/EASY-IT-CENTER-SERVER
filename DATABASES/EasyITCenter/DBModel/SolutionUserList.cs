@@ -54,6 +54,7 @@ namespace EasyITCenter.DBModel
             ProdGuidWorkLists = new HashSet<ProdGuidWorkList>();
             ServerApiSecurityLists = new HashSet<ServerApiSecurityList>();
             ServerCorsDefAllowedOriginLists = new HashSet<ServerCorsDefAllowedOriginList>();
+            ServerGeneratorLists = new HashSet<ServerGeneratorList>();
             ServerHealthCheckTaskLists = new HashSet<ServerHealthCheckTaskList>();
             ServerLiveDataMonitorLists = new HashSet<ServerLiveDataMonitorList>();
             ServerModuleAndServiceLists = new HashSet<ServerModuleAndServiceList>();
@@ -75,6 +76,7 @@ namespace EasyITCenter.DBModel
             SolutionSchedulerLists = new HashSet<SolutionSchedulerList>();
             SolutionTaskLists = new HashSet<SolutionTaskList>();
             SolutionUserRoleLists = new HashSet<SolutionUserRoleList>();
+            SystemApplicationLists = new HashSet<SystemApplicationList>();
             SystemCustomPageLists = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
             SystemGroupMenuLists = new HashSet<SystemGroupMenuList>();
@@ -222,6 +224,8 @@ namespace EasyITCenter.DBModel
         [InverseProperty("User")]
         public virtual ICollection<ServerCorsDefAllowedOriginList> ServerCorsDefAllowedOriginLists { get; set; }
         [InverseProperty("User")]
+        public virtual ICollection<ServerGeneratorList> ServerGeneratorLists { get; set; }
+        [InverseProperty("User")]
         public virtual ICollection<ServerHealthCheckTaskList> ServerHealthCheckTaskLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerLiveDataMonitorList> ServerLiveDataMonitorLists { get; set; }
@@ -263,6 +267,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionTaskList> SolutionTaskLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionUserRoleList> SolutionUserRoleLists { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<SystemApplicationList> SystemApplicationLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SystemCustomPageList> SystemCustomPageLists { get; set; }
         [InverseProperty("User")]
