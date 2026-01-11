@@ -1,4 +1,5 @@
 ﻿using CSJsonDB;
+using static DocumentFormat.OpenXml.Packaging.RelationshipErrorHandler;
 
 namespace EasyITCenter.ServerCoreStructure {
 
@@ -103,10 +104,14 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <returns></returns>
         public static bool ByteArrayToFile(string fileName, byte[] byteArray) {
             try {
-                using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write)) {
-                    fs.Write(byteArray, 0, byteArray.Length);
-                    return true;
+                if (CreateFile(fileName)) {
+                    DeleteFile(fileName); 
+                    using (FileStream? fs = new FileStream(fileName, FileMode.Create, FileAccess.Write)) {
+                        fs.Write(byteArray, 0, byteArray.Length);
+                        return true;
+                    }
                 }
+                return true;
             } catch (Exception ex) {
                 return false;
             }

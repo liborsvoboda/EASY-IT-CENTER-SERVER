@@ -101,9 +101,11 @@
                 <ul class="tabs-holder">
                     <li onclick="ReloadUserStorage();" class=""><a href="#">Reload</a></li>
                     <li><a href="#sectionFile">Editors</a></li>
-                    <li><a href="#">Download</a></li>
-                    <li><a href="#">Media</a></li>
-                    <li><a href="#">Preview</a></li>
+                    <!--
+                        <li><a href="#">Download</a></li>
+                        <li><a href="#">Media</a></li>
+                    -->
+                    <li onclick="SetEditor('Preview');" class=""><a href="#">Preview</a></li>
                 </ul>
                 <div class="content-holder">
                     <div class="section" id="sectionFile">
@@ -401,7 +403,6 @@
             $('#DataTree').fancytree('option', 'source', { url: "/UserStorageService/GetUserStorage" });
         }
 
-
         function LoadFiles() {
             let fileList = document.getElementById("Files").files;
             Files = [];
@@ -417,7 +418,7 @@
             Metro.storage.setItem("SelectedEditor", editor);
 
             //CLEAN EDITOR
-            Gs.Variables.monacoEditorList = []; $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+            if (Gs.Variables.monacoEditorList.length > 1) { Gs.Variables.monacoEditorList = []; } $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
             Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
             Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled'); Gs.Functions.RemoveClass('SetMDEditor', 'disabled');
             Gs.Functions.RemoveClass('SetJSONEditor', 'disabled'); Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
@@ -539,6 +540,9 @@
                         if ($('#DataTree').fancytree("getActiveNode") != null) { $(`#SummerEditor`).summernote(`code`, $('#DataTree').fancytree("getActiveNode").key); }
                     }, 1000);
                     break;
+                case "Preview":
+                    $("#FrameWindow").html(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue());
+
                 default:
             }
 
