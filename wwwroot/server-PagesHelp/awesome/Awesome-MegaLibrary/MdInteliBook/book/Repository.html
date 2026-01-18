@@ -1,0 +1,2280 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Repository - OneClickGenerator Centralized Docs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="Here Write Your Desciption">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./css/global.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="Summary.html">Summary</a></li><li class="chapter-item expanded "><a href="3D.html"><strong aria-hidden="true">1.</strong> 3D</a></li><li class="chapter-item expanded "><a href="aframe.html"><strong aria-hidden="true">2.</strong> aframe</a></li><li class="chapter-item expanded "><a href="AI.html"><strong aria-hidden="true">3.</strong> AI</a></li><li class="chapter-item expanded "><a href="Algolia.html"><strong aria-hidden="true">4.</strong> Algolia</a></li><li class="chapter-item expanded "><a href="Angular.html"><strong aria-hidden="true">5.</strong> Angular</a></li><li class="chapter-item expanded "><a href="ApiDevTools.html"><strong aria-hidden="true">6.</strong> ApiDevTools</a></li><li class="chapter-item expanded "><a href="Avalonia.html"><strong aria-hidden="true">7.</strong> Avalonia</a></li><li class="chapter-item expanded "><a href="Awesome-All.html"><strong aria-hidden="true">8.</strong> Awesome-All</a></li><li class="chapter-item expanded "><a href="awesome-awesomeness.html"><strong aria-hidden="true">9.</strong> awesome-awesomeness</a></li><li class="chapter-item expanded "><a href="AwesomeAll.html"><strong aria-hidden="true">10.</strong> AwesomeAll</a></li><li class="chapter-item expanded "><a href="AwesomeAwesome.html"><strong aria-hidden="true">11.</strong> AwesomeAwesome</a></li><li class="chapter-item expanded "><a href="Awesomeness.html"><strong aria-hidden="true">12.</strong> Awesomeness</a></li><li class="chapter-item expanded "><a href="AWS.html"><strong aria-hidden="true">13.</strong> AWS</a></li><li class="chapter-item expanded "><a href="Badges.html"><strong aria-hidden="true">14.</strong> Badges</a></li><li class="chapter-item expanded "><a href="Beginners.html"><strong aria-hidden="true">15.</strong> Beginners</a></li><li class="chapter-item expanded "><a href="BigData.html"><strong aria-hidden="true">16.</strong> BigData</a></li><li class="chapter-item expanded "><a href="Black-friday.html"><strong aria-hidden="true">17.</strong> Black-friday</a></li><li class="chapter-item expanded "><a href="Blazor.html"><strong aria-hidden="true">18.</strong> Blazor</a></li><li class="chapter-item expanded "><a href="blockchain.html"><strong aria-hidden="true">19.</strong> blockchain</a></li><li class="chapter-item expanded "><a href="BridgeNET.html"><strong aria-hidden="true">20.</strong> BridgeNET</a></li><li class="chapter-item expanded "><a href="Browserify.html"><strong aria-hidden="true">21.</strong> Browserify</a></li><li class="chapter-item expanded "><a href="Bun.html"><strong aria-hidden="true">22.</strong> Bun</a></li><li class="chapter-item expanded "><a href="C++.html"><strong aria-hidden="true">23.</strong> C++</a></li><li class="chapter-item expanded "><a href="Card.html"><strong aria-hidden="true">24.</strong> Card</a></li><li class="chapter-item expanded "><a href="CharpGenerators.html"><strong aria-hidden="true">25.</strong> CharpGenerators</a></li><li class="chapter-item expanded "><a href="Chatgp.html"><strong aria-hidden="true">26.</strong> Chatgp</a></li><li class="chapter-item expanded "><a href="Chatgpt-prompts.html"><strong aria-hidden="true">27.</strong> Chatgpt-prompts</a></li><li class="chapter-item expanded "><a href="Chrome-devtools.html"><strong aria-hidden="true">28.</strong> Chrome-devtools</a></li><li class="chapter-item expanded "><a href="Cli-Apps.html"><strong aria-hidden="true">29.</strong> Cli-Apps</a></li><li class="chapter-item expanded "><a href="Courses.html"><strong aria-hidden="true">30.</strong> Courses</a></li><li class="chapter-item expanded "><a href="Csharp.html"><strong aria-hidden="true">31.</strong> Csharp</a></li><li class="chapter-item expanded "><a href="CsharpCodeGen.html"><strong aria-hidden="true">32.</strong> CsharpCodeGen</a></li><li class="chapter-item expanded "><a href="DataEngineering.html"><strong aria-hidden="true">33.</strong> DataEngineering</a></li><li class="chapter-item expanded "><a href="DbTools.html"><strong aria-hidden="true">34.</strong> DbTools</a></li><li class="chapter-item expanded "><a href="DomainDesign.html"><strong aria-hidden="true">35.</strong> DomainDesign</a></li><li class="chapter-item expanded "><a href="DotMaui.html"><strong aria-hidden="true">36.</strong> DotMaui</a></li><li class="chapter-item expanded "><a href="Dotnet-core.html"><strong aria-hidden="true">37.</strong> Dotnet-core</a></li><li class="chapter-item expanded "><a href="Dotnet.html"><strong aria-hidden="true">38.</strong> Dotnet</a></li><li class="chapter-item expanded "><a href="DotnetMaui.html"><strong aria-hidden="true">39.</strong> DotnetMaui</a></li><li class="chapter-item expanded "><a href="dotnetReady.html"><strong aria-hidden="true">40.</strong> dotnetReady</a></li><li class="chapter-item expanded "><a href="Echarts.html"><strong aria-hidden="true">41.</strong> Echarts</a></li><li class="chapter-item expanded "><a href="ECommerce.html"><strong aria-hidden="true">42.</strong> ECommerce</a></li><li class="chapter-item expanded "><a href="Editorjs.html"><strong aria-hidden="true">43.</strong> Editorjs</a></li><li class="chapter-item expanded "><a href="Electron.html"><strong aria-hidden="true">44.</strong> Electron</a></li><li class="chapter-item expanded "><a href="Example.html"><strong aria-hidden="true">45.</strong> Example</a></li><li class="chapter-item expanded "><a href="Falsehood.html"><strong aria-hidden="true">46.</strong> Falsehood</a></li><li class="chapter-item expanded "><a href="FastReportCloud.html"><strong aria-hidden="true">47.</strong> FastReportCloud</a></li><li class="chapter-item expanded "><a href="FireWalls.html"><strong aria-hidden="true">48.</strong> FireWalls</a></li><li class="chapter-item expanded "><a href="Generators.html"><strong aria-hidden="true">49.</strong> Generators</a></li><li class="chapter-item expanded "><a href="Github-vue.html"><strong aria-hidden="true">50.</strong> Github-vue</a></li><li class="chapter-item expanded "><a href="Github.html"><strong aria-hidden="true">51.</strong> Github</a></li><li class="chapter-item expanded "><a href="Gitpod.html"><strong aria-hidden="true">52.</strong> Gitpod</a></li><li class="chapter-item expanded "><a href="Gogot.html"><strong aria-hidden="true">53.</strong> Gogot</a></li><li class="chapter-item expanded "><a href="Gpt3.html"><strong aria-hidden="true">54.</strong> Gpt3</a></li><li class="chapter-item expanded "><a href="Graph.html"><strong aria-hidden="true">55.</strong> Graph</a></li><li class="chapter-item expanded "><a href="Hacking.html"><strong aria-hidden="true">56.</strong> Hacking</a></li><li class="chapter-item expanded "><a href="hcloud.html"><strong aria-hidden="true">57.</strong> hcloud</a></li><li class="chapter-item expanded "><a href="HealthCare.html"><strong aria-hidden="true">58.</strong> HealthCare</a></li><li class="chapter-item expanded "><a href="Hydrogen.html"><strong aria-hidden="true">59.</strong> Hydrogen</a></li><li class="chapter-item expanded "><a href="Hyperterm.html"><strong aria-hidden="true">60.</strong> Hyperterm</a></li><li class="chapter-item expanded "><a href="Ilp.html"><strong aria-hidden="true">61.</strong> Ilp</a></li><li class="chapter-item expanded "><a href="IncidentResponse.html"><strong aria-hidden="true">62.</strong> IncidentResponse</a></li><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">63.</strong> index</a></li><li class="chapter-item expanded "><a href="Interledger.html"><strong aria-hidden="true">64.</strong> Interledger</a></li><li class="chapter-item expanded "><a href="Interview-question.html"><strong aria-hidden="true">65.</strong> Interview-question</a></li><li class="chapter-item expanded "><a href="Iot.html"><strong aria-hidden="true">66.</strong> Iot</a></li><li class="chapter-item expanded "><a href="IPTV.html"><strong aria-hidden="true">67.</strong> IPTV</a></li><li class="chapter-item expanded "><a href="JamStack.html"><strong aria-hidden="true">68.</strong> JamStack</a></li><li class="chapter-item expanded "><a href="Java.html"><strong aria-hidden="true">69.</strong> Java</a></li><li class="chapter-item expanded "><a href="Javascript-learning.html"><strong aria-hidden="true">70.</strong> Javascript-learning</a></li><li class="chapter-item expanded "><a href="Javascript.html"><strong aria-hidden="true">71.</strong> Javascript</a></li><li class="chapter-item expanded "><a href="Jekyll-editors.html"><strong aria-hidden="true">72.</strong> Jekyll-editors</a></li><li class="chapter-item expanded "><a href="Jekyll-plugins.html"><strong aria-hidden="true">73.</strong> Jekyll-plugins</a></li><li class="chapter-item expanded "><a href="Jekyll-themes.html"><strong aria-hidden="true">74.</strong> Jekyll-themes</a></li><li class="chapter-item expanded "><a href="Jekyll.html"><strong aria-hidden="true">75.</strong> Jekyll</a></li><li class="chapter-item expanded "><a href="List.html"><strong aria-hidden="true">76.</strong> List</a></li><li class="chapter-item expanded "><a href="MacroPad.html"><strong aria-hidden="true">77.</strong> MacroPad</a></li><li class="chapter-item expanded "><a href="Main.html"><strong aria-hidden="true">78.</strong> Main</a></li><li class="chapter-item expanded "><a href="MarkDown.html"><strong aria-hidden="true">79.</strong> MarkDown</a></li><li class="chapter-item expanded "><a href="MarkDownEdit.html"><strong aria-hidden="true">80.</strong> MarkDownEdit</a></li><li class="chapter-item expanded "><a href="Master.html"><strong aria-hidden="true">81.</strong> Master</a></li><li class="chapter-item expanded "><a href="Maui.html"><strong aria-hidden="true">82.</strong> Maui</a></li><li class="chapter-item expanded "><a href="Metalsmith.html"><strong aria-hidden="true">83.</strong> Metalsmith</a></li><li class="chapter-item expanded "><a href="Microsoft.html"><strong aria-hidden="true">84.</strong> Microsoft</a></li><li class="chapter-item expanded "><a href="Moleculer.html"><strong aria-hidden="true">85.</strong> Moleculer</a></li><li class="chapter-item expanded "><a href="Mqtt.html"><strong aria-hidden="true">86.</strong> Mqtt</a></li><li class="chapter-item expanded "><a href="MusicProduct.html"><strong aria-hidden="true">87.</strong> MusicProduct</a></li><li class="chapter-item expanded "><a href="NaturalLangProcess.html"><strong aria-hidden="true">88.</strong> NaturalLangProcess</a></li><li class="chapter-item expanded "><a href="Near.html"><strong aria-hidden="true">89.</strong> Near</a></li><li class="chapter-item expanded "><a href="NetworkAutomation.html"><strong aria-hidden="true">90.</strong> NetworkAutomation</a></li><li class="chapter-item expanded "><a href="Newsletters.html"><strong aria-hidden="true">91.</strong> Newsletters</a></li><li class="chapter-item expanded "><a href="Nlp.html"><strong aria-hidden="true">92.</strong> Nlp</a></li><li class="chapter-item expanded "><a href="NodeJs.html"><strong aria-hidden="true">93.</strong> NodeJs</a></li><li class="chapter-item expanded "><a href="Npm.html"><strong aria-hidden="true">94.</strong> Npm</a></li><li class="chapter-item expanded "><a href="Npx.html"><strong aria-hidden="true">95.</strong> Npx</a></li><li class="chapter-item expanded "><a href="Nugets.html"><strong aria-hidden="true">96.</strong> Nugets</a></li><li class="chapter-item expanded "><a href="Observables.html"><strong aria-hidden="true">97.</strong> Observables</a></li><li class="chapter-item expanded "><a href="Okr.html"><strong aria-hidden="true">98.</strong> Okr</a></li><li class="chapter-item expanded "><a href="OpenSource.html"><strong aria-hidden="true">99.</strong> OpenSource</a></li><li class="chapter-item expanded "><a href="Osint.html"><strong aria-hidden="true">100.</strong> Osint</a></li><li class="chapter-item expanded "><a href="Php.html"><strong aria-hidden="true">101.</strong> Php</a></li><li class="chapter-item expanded "><a href="Piracy.html"><strong aria-hidden="true">102.</strong> Piracy</a></li><li class="chapter-item expanded "><a href="Pnpm.html"><strong aria-hidden="true">103.</strong> Pnpm</a></li><li class="chapter-item expanded "><a href="Podcasts.html"><strong aria-hidden="true">104.</strong> Podcasts</a></li><li class="chapter-item expanded "><a href="PostHtml.html"><strong aria-hidden="true">105.</strong> PostHtml</a></li><li class="chapter-item expanded "><a href="Powershell.html"><strong aria-hidden="true">106.</strong> Powershell</a></li><li class="chapter-item expanded "><a href="PractiseProgram.html"><strong aria-hidden="true">107.</strong> PractiseProgram</a></li><li class="chapter-item expanded "><a href="Projects.html"><strong aria-hidden="true">108.</strong> Projects</a></li><li class="chapter-item expanded "><a href="Puppetier.html"><strong aria-hidden="true">109.</strong> Puppetier</a></li><li class="chapter-item expanded "><a href="Python.html"><strong aria-hidden="true">110.</strong> Python</a></li><li class="chapter-item expanded "><a href="Random.html"><strong aria-hidden="true">111.</strong> Random</a></li><li class="chapter-item expanded "><a href="ReadmeAwesome.html"><strong aria-hidden="true">112.</strong> ReadmeAwesome</a></li><li class="chapter-item expanded "><a href="ReadTheDocs.html"><strong aria-hidden="true">113.</strong> ReadTheDocs</a></li><li class="chapter-item expanded "><a href="Recursion.html"><strong aria-hidden="true">114.</strong> Recursion</a></li><li class="chapter-item expanded "><a href="RemoteJob.html"><strong aria-hidden="true">115.</strong> RemoteJob</a></li><li class="chapter-item expanded "><a href="Repository.html" class="active"><strong aria-hidden="true">116.</strong> Repository</a></li><li class="chapter-item expanded "><a href="Research.html"><strong aria-hidden="true">117.</strong> Research</a></li><li class="chapter-item expanded "><a href="Resources.html"><strong aria-hidden="true">118.</strong> Resources</a></li><li class="chapter-item expanded "><a href="Ripple.html"><strong aria-hidden="true">119.</strong> Ripple</a></li><li class="chapter-item expanded "><a href="Roslyn.html"><strong aria-hidden="true">120.</strong> Roslyn</a></li><li class="chapter-item expanded "><a href="Selfhosted.html"><strong aria-hidden="true">121.</strong> Selfhosted</a></li><li class="chapter-item expanded "><a href="SheetMusic.html"><strong aria-hidden="true">122.</strong> SheetMusic</a></li><li class="chapter-item expanded "><a href="Shell.html"><strong aria-hidden="true">123.</strong> Shell</a></li><li class="chapter-item expanded "><a href="Slack.html"><strong aria-hidden="true">124.</strong> Slack</a></li><li class="chapter-item expanded "><a href="Solidity.html"><strong aria-hidden="true">125.</strong> Solidity</a></li><li class="chapter-item expanded "><a href="Speakers.html"><strong aria-hidden="true">126.</strong> Speakers</a></li><li class="chapter-item expanded "><a href="Split-keyboards.html"><strong aria-hidden="true">127.</strong> Split-keyboards</a></li><li class="chapter-item expanded "><a href="StoryBook.html"><strong aria-hidden="true">128.</strong> StoryBook</a></li><li class="chapter-item expanded "><a href="Streaming.html"><strong aria-hidden="true">129.</strong> Streaming</a></li><li class="chapter-item expanded "><a href="SummerNote.html"><strong aria-hidden="true">130.</strong> SummerNote</a></li><li class="chapter-item expanded "><a href="SysAdmin.html"><strong aria-hidden="true">131.</strong> SysAdmin</a></li><li class="chapter-item expanded "><a href="TailWindCss.html"><strong aria-hidden="true">132.</strong> TailWindCss</a></li><li class="chapter-item expanded "><a href="Talks.html"><strong aria-hidden="true">133.</strong> Talks</a></li><li class="chapter-item expanded "><a href="Tap.html"><strong aria-hidden="true">134.</strong> Tap</a></li><li class="chapter-item expanded "><a href="Tauri.html"><strong aria-hidden="true">135.</strong> Tauri</a></li><li class="chapter-item expanded "><a href="TechBlogs.html"><strong aria-hidden="true">136.</strong> TechBlogs</a></li><li class="chapter-item expanded "><a href="Templates.html"><strong aria-hidden="true">137.</strong> Templates</a></li><li class="chapter-item expanded "><a href="Terraform.html"><strong aria-hidden="true">138.</strong> Terraform</a></li><li class="chapter-item expanded "><a href="Themes.html"><strong aria-hidden="true">139.</strong> Themes</a></li><li class="chapter-item expanded "><a href="Tuneling.html"><strong aria-hidden="true">140.</strong> Tuneling</a></li><li class="chapter-item expanded "><a href="Visualstudiocode.html"><strong aria-hidden="true">141.</strong> Visualstudiocode</a></li><li class="chapter-item expanded "><a href="Vue-3.html"><strong aria-hidden="true">142.</strong> Vue-3</a></li><li class="chapter-item expanded "><a href="Vue.html"><strong aria-hidden="true">143.</strong> Vue</a></li><li class="chapter-item expanded "><a href="Wasi.html"><strong aria-hidden="true">144.</strong> Wasi</a></li><li class="chapter-item expanded "><a href="Web-browsers.html"><strong aria-hidden="true">145.</strong> Web-browsers</a></li><li class="chapter-item expanded "><a href="Web-editor.html"><strong aria-hidden="true">146.</strong> Web-editor</a></li><li class="chapter-item expanded "><a href="WebAssembly.html"><strong aria-hidden="true">147.</strong> WebAssembly</a></li><li class="chapter-item expanded "><a href="WebAudio.html"><strong aria-hidden="true">148.</strong> WebAudio</a></li><li class="chapter-item expanded "><a href="WebExtensions.html"><strong aria-hidden="true">149.</strong> WebExtensions</a></li><li class="chapter-item expanded "><a href="WebHacking.html"><strong aria-hidden="true">150.</strong> WebHacking</a></li><li class="chapter-item expanded "><a href="WebHosting.html"><strong aria-hidden="true">151.</strong> WebHosting</a></li><li class="chapter-item expanded "><a href="Workflow.html"><strong aria-hidden="true">152.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="WPF.html"><strong aria-hidden="true">153.</strong> WPF</a></li><li class="chapter-item expanded "><a href="Wysiwyg.html"><strong aria-hidden="true">154.</strong> Wysiwyg</a></li><li class="spacer"></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">OneClickGenerator Centralized Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="写在前面"><a class="header" href="#写在前面">写在前面</a></h2>
+<p>看到这个项目的同好们如果有推荐的 Github 项目或是觉得有用、有趣的网站等都可以发起 issue 或 PR。</p>
+<p>友情链接：</p>
+<ul>
+<li><a href="https://github.com/ruanyf/weekly">ruanyf / weekly</a></li>
+<li><a href="https://github.com/GrowingGit/GitHub-Chinese-Top-Charts">GrowingGit / GitHub-Chinese-Top-Charts</a></li>
+<li><a href="https://lkssite.vip/">lkssite</a></li>
+</ul>
+<h2 id="有趣项目"><a class="header" href="#有趣项目">有趣项目</a></h2>
+<p><a href="https://github.com/chrislgarry/Apollo-11">chrislgarry / Apollo-11</a></p>
+<blockquote>
+<p>阿波罗 11 号。</p>
+</blockquote>
+<p><a href="https://github.com/YunYouJun/air-conditioner">YunYouJun / air-conditioner</a></p>
+<blockquote>
+<p>❄️ 云空调，便携小空调，为你的夏日带去清凉！<br />
+网站: <a href="https://ac.yunyoujun.cn/">https://ac.yunyoujun.cn/</a><br />
+类似网站: <a href="https://fan.elpsy.cn/">https://fan.elpsy.cn/</a></p>
+</blockquote>
+<p><a href="https://github.com/VincentSit/ChinaMobilePhoneNumberRegex">VincentSit / ChinaMobilePhoneNumberRegex</a></p>
+<blockquote>
+<p>一组匹配中国大陆手机号码的正则表达式。</p>
+</blockquote>
+<p><a href="https://github.com/houshanren/hangzhou_house_knowledge">houshanren / hangzhou_house_knowledge</a></p>
+<blockquote>
+<p>2017年买房经历总结出来的买房购房知识分享给大家，希望对大家有所帮助。买房不易，且买且珍惜。</p>
+</blockquote>
+<p><a href="https://github.com/Aniket965/Hello-world">Aniket965 / Hello-world</a></p>
+<blockquote>
+<p>搜集所有的编程语言如何打印 “Hello World”。</p>
+</blockquote>
+<p><a href="https://github.com/cmiscm/leonsans">cmiscm / leonsans</a></p>
+<blockquote>
+<p>代码生成的字体。<br />
+网站: <a href="https://leon-kim.com/examples/">https://leon-kim.com/examples/</a></p>
+</blockquote>
+<p><a href="https://github.com/shimohq/chinese-programmer-wrong-pronunciation">shimohq / chinese-programmer-wrong-pronunciation</a></p>
+<blockquote>
+<p>中国程序员容易发音错误的单词。</p>
+</blockquote>
+<p><a href="https://github.com/kelseyhightower/nocode">kelseyhightower / nocode</a></p>
+<blockquote>
+<p>写出最安全和可靠的应用的方法：啥也不写，哪也不部署。</p>
+</blockquote>
+<p><a href="https://github.com/danistefanovic/build-your-own-x">danistefanovic / build-your-own-x</a></p>
+<blockquote>
+<p>🤓 Build your own (insert technology here)</p>
+</blockquote>
+<p><a href="https://s3-us-west-1.amazonaws.com/vocs/map.html#">声音地图</a></p>
+<blockquote>
+<p>该网站将不同情绪对应的声音，画成一幅地图。鼠标移到每个点上，都会听到声音，比如包含了 50% 的敬爱、33% 的同情、17% 满意的声音。</p>
+</blockquote>
+<p><a href="https://aporee.org/maps/">radio aporee</a> </p>
+<blockquote>
+<p>全球声音地图，致力于现场录音、声学和收听艺术。</p>
+</blockquote>
+<p><a href="http://timelineofearth.com/">地球时间线</a></p>
+<blockquote>
+<p>网页展示地球演化的 46 亿年。</p>
+</blockquote>
+<p><a href="https://www.historyline.online/">中国历朝代视频讲解</a></p>
+<blockquote>
+<p>一个<a href="https://github.com/liujuntao123/chines-history-video">开源</a>网站，将 BiliBili 上面综合数据最高的一些中国历史视频，以时间轴的方式呈现。</p>
+</blockquote>
+<p><a href="http://www.airpano.com/">airpano</a></p>
+<blockquote>
+<p>超高清 360° 全景航拍。</p>
+</blockquote>
+<p><a href="http://stars.chromeexperiments.com/">宇宙模型</a></p>
+<blockquote>
+<p>一个浏览器的 3D 显示实验项目，在网页上展示 10 万颗恒星，讲解宇宙知识。</p>
+</blockquote>
+<p><a href="https://www.emailfuture.com/">EmailFuture</a></p>
+<blockquote>
+<p>给未来的自己或他人写信。<br />
+同类产品：<a href="https://www.futureme.org/">FutureMe</a></p>
+</blockquote>
+<p><a href="https://citywalks.live/">City Walks</a></p>
+<blockquote>
+<p>City Walks 是一款真「云逛街」产品，它通过视频的方式，让你足不出户，就能在雅典、阿姆斯特丹、罗马、里斯本、耶路撒冷、上海、重庆、里约热内卢等 37 个城市的街头闲逛，俗称云逛街。<br />
+类似网站: <a href="http://bigpixel.cn/zh-CN.html">千亿像素</a></p>
+</blockquote>
+<p><a href="https://neal.fun/wonders-of-street-view/">Wonders of Street View</a></p>
+<blockquote>
+<p>这个网站收集谷歌街景的各种奇怪影像，随机展示。 </p>
+</blockquote>
+<p><a href="https://www.window-swap.com/">WindowSwap</a> </p>
+<blockquote>
+<p>在世界的某个地方打开一扇新窗口。</p>
+</blockquote>
+<p><a href="https://pissang.github.io/little-big-city/">Little Big City</a></p>
+<blockquote>
+<p>Little Big City 是一款非常有趣的在线 3D 城市模拟生成器。网站目前提供了球体和立体地图两种形式，只需在右下角输入某一地区的经纬度信息，Little Big City 就会根据真实的地图数据，生成与城市环境对应的立体地图。</p>
+</blockquote>
+<p><a href="https://driveandlisten.herokuapp.com">Drive &amp; Listen</a></p>
+<blockquote>
+<p>Drive &amp; Listen 是一款给电脑前的同学们纯欣赏使用的小服务，它提供了 49 个城市的开车视频与当地电台，让你可以体验一边听着当地的收音机，一边开车在城市里转悠。</p>
+</blockquote>
+<p><a href="http://www.species-in-pieces.com/">In Pieces</a></p>
+<blockquote>
+<p>In Pieces 是一个公益网站，它们希望通过这样的方式来呼吁人们更多的关注这些濒临灭绝的动物们。网页利用了 HTML5 绘制了许多珍惜的濒危动物。这些动物均由 CSS 小片组织而成，色彩搭配非常惊艳。</p>
+</blockquote>
+<p><a href="http://weavesilk.com/">Silk</a></p>
+<blockquote>
+<p>Silk 是一个对称绘画的网站。笔触非常独特，它会自动进行对称绘图，即使你没有任何绘画基础，也可以在这里画出非常好看的图形。在网页的设置中，还可以调整增加对称轴的数量、调整颜色、是否中心对称等，可以绘制出非常华丽的图形。<br />
+类似网站: <a href="https://www.aliciaunderhill.xyz/Andala/">https://www.aliciaunderhill.xyz/Andala/</a></p>
+</blockquote>
+<p><a href="https://thisxdoesnotexist.com/">This x Does Not Exist</a></p>
+<blockquote>
+<p>这个___不存在。</p>
+</blockquote>
+<p><a href="https://baidu.gwliang.com/">需要我帮你百度 一下吗</a></p>
+<blockquote>
+<p>怒怼伸手党。</p>
+</blockquote>
+<p><a href="https://github.com/SaekiRaku/vscode-rainbow-fart">SaekiRaku / vscode-rainbow-fart</a></p>
+<blockquote>
+<p>一个在你编程时疯狂称赞你的 VSCode 扩展插件。<br />
+网站: <a href="https://saekiraku.github.io/vscode-rainbow-fart/">https://saekiraku.github.io/vscode-rainbow-fart/</a></p>
+</blockquote>
+<p><a href="https://github.com/KYDronePilot/SpaceEye">KYDronePilot / SpaceEye</a></p>
+<blockquote>
+<p>将地球的卫星照片当作 Windows、macOS 桌面壁纸的小工具。<br />
+网站: <a href="https://spaceeye.app/">Space Eye</a></p>
+</blockquote>
+<p><a href="https://github.com/Kaiyiwing/qwerty-learner">Kaiyiwing / qwerty-learner</a></p>
+<blockquote>
+<p>为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件。<br />
+网站: <a href="https://qwerty.kaiyi.cool/">https://qwerty.kaiyi.cool/</a></p>
+</blockquote>
+<p><a href="https://david.li/paint/">Fluid Paint</a></p>
+<blockquote>
+<p>一个网页画板工具，可以定制笔刷，产生刷油漆的流体效果，非常精美。</p>
+</blockquote>
+<p><a href="https://github.com/cuiliang/ClickShow">cuiliang / ClickShow</a></p>
+<blockquote>
+<p>在鼠标点击左键、右键或者中键时，显示类似波纹的效果。</p>
+</blockquote>
+<p><a href="https://fakeupdate.net/">FakeUpdate</a></p>
+<blockquote>
+<p>假装电脑在升级。</p>
+</blockquote>
+<p><a href="https://neal.fun/life-stats/">人生统计</a></p>
+<blockquote>
+<p>输入生日，这个网站会告诉你一些统计数字，比如你活了多少天、心跳了多少次、地球多了多少人口。 </p>
+</blockquote>
+<p><a href="https://bruno-simon.com/">bruno simon的blog</a></p>
+<blockquote>
+<p>使用three.js制作的3Dblog，效果很惊艳。</p>
+</blockquote>
+<p><a href="https://petapixel.com/2023/07/13/legal-lullabies-puts-you-to-sleep-by-reading-social-media-terms-of-use/">法律摇篮曲</a> </p>
+<blockquote>
+<p>互联网大厂的用户协议，充满了法律术语，冗长而乏味。如果仔细阅读，让人昏昏欲睡。有人想到一个点子，邀请配音演员来朗读这些协议，把录音放在网上，用来助眠，Instagram 协议的音频长达51分钟，TikTok 长约38分钟。</p>
+</blockquote>
+<h3 id="数据库"><a class="header" href="#数据库">数据库</a></h3>
+<p><a href="https://zhongguoyuyan.cn/">中国语言资源保护工程采录展示平台</a></p>
+<blockquote>
+<p>中国语言资源采录展示平台是中国语言资源保护工程的重要组成部分。主要任务是保存和管理大规模汉语方言和少数民族语言调查点采集的珍贵多媒体数据，利用科学化、规范化和具有前瞻性的技术手段，完成所有语言资源的数字化、存储管理、整理分析和应用展示等方面的工作。<br />
+类似网站:  <a href="http://web.xiangyin.mobi/">乡音</a><br />
+类似网站:  <a href="https://phonemica.net/">乡音苑</a></p>
+</blockquote>
+<p><a href="https://tools.buyixiao.xyz/historical-figure-query">中国古代历史人物可视化</a></p>
+<blockquote>
+<p>输入一个古代人物名（共收录52000+人物），就可以显示该人物的社会关系、亲戚关系和生平足迹图。</p>
+</blockquote>
+<p><a href="https://nadc.china-vo.org/eclipse/">日食列表</a></p>
+<blockquote>
+<p>国家天文科学数据中心，日食查询。</p>
+</blockquote>
+<p><a href="https://pudding.cool/2017/03/music-history/index.html">How Music Taste Evolved</a></p>
+<blockquote>
+<p>这个网站提供 1958 - 2016 每年美国最流行的五首歌曲，可以在线试听片段，了解美国大众音乐口味的变化。</p>
+</blockquote>
+<p><a href="http://www.impawards.com/">IMP Awards</a></p>
+<blockquote>
+<p>电影海报。</p>
+</blockquote>
+<p><a href="https://github.com/chinese-poetry/chinese-poetry">chinese-poetry / chinese-poetry</a></p>
+<blockquote>
+<p>最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近 5.5 万首唐诗加 26 万宋诗. 两宋时期 1564 位词人，21050 首词。</p>
+</blockquote>
+<p><a href="https://github.com/jwenjian/ghiblog/issues/114">水果证件照</a></p>
+<blockquote>
+<p>Python 爬虫保存美国农业部网站的水果数据库。</p>
+</blockquote>
+<p><a href="https://he.net/3d-map/">全球海底光缆</a></p>
+<blockquote>
+<p>这个网页提供了一个互动式的地球，上面有全世界海底光缆和骨干机房的位置。</p>
+</blockquote>
+<p><a href="https://www.animatedknots.com/">Animated Knots</a></p>
+<blockquote>
+<p>绳结打法数据库。</p>
+</blockquote>
+<p><a href="https://artvee.com/">Artvee</a></p>
+<blockquote>
+<p>该网站收集古典艺术品的照片和海报，都可以免费下载使用。</p>
+</blockquote>
+<p><a href="http://www.chineseetymology.org/">Etymology</a></p>
+<blockquote>
+<p>汉字字形汇总，一个老外（汉字叔叔） 20 多年的杰作，让人肃然起敬。<br />
+B 站：<a href="https://space.bilibili.com/697174669">https://space.bilibili.com/697174669</a></p>
+</blockquote>
+<p><a href="https://github.com/KanjiVG/kanjivg">KanjiVG / kanjivg</a></p>
+<blockquote>
+<p>这个项目提供汉字的 SVG 文件下载，可以显示笔划动画。<br />
+网站: <a href="https://kanjivg.tagaini.net/index.html">https://kanjivg.tagaini.net/index.html</a></p>
+</blockquote>
+<p><a href="https://zm-digicol.dpm.org.cn/">故宫博物院藏品总目</a></p>
+<blockquote>
+<p>故宫博物院官方的藏品目录，共收入 180 多万件，可以在线搜索，部分藏品带有彩色照片和文字介绍。</p>
+</blockquote>
+<p><a href="https://www.cbaigui.com/">纪妖</a></p>
+<blockquote>
+<p>中国妖怪百集，网站包括但不仅限于妖、怪、神、鬼、精、魔、仙等怪力乱神，甚至还包括一些神奇的植物。知妖是一个开放的在线“妖怪”资料库。致力于收集、整理、介绍、分享古人文献中的“妖怪”。</p>
+</blockquote>
+<p><a href="http://www.nlc.cn/pcab/zy/zhgj_zyk/">中国古籍保护网</a></p>
+<blockquote>
+<p>中国古籍保护网。<br />
+类似网站：<a href="https://new.shuge.org/">书格</a><br />
+类似网站：<a href="https://www.shidianguji.com/">识典古籍</a><br />
+类似网站：<a href="https://cnkgraph.com/">知识图谱</a></p>
+</blockquote>
+<p><a href="https://www.nbfox.com/">麦田艺术</a></p>
+<blockquote>
+<p>世界名画。
+类似网站: <a href="https://g2.ltfc.net/home">中华珍宝馆</a></p>
+</blockquote>
+<p><a href="https://neal.fun/ten-years-ago/">十年前</a></p>
+<blockquote>
+<p>这个网站可以查看十年前的同一天，美国的十几个著名网站是什么样子。</p>
+</blockquote>
+<p><a href="https://github.com/iptv-org/iptv">iptv-org / iptv</a></p>
+<blockquote>
+<p>网络直播源。</p>
+</blockquote>
+<p><a href="https://papersizes.io/">PaperSizes</a></p>
+<blockquote>
+<p>这个网站收集各种纸张的规格，按照行业和国别分类，总计有几百种之多。</p>
+</blockquote>
+<p><a href="https://www.systemrequirementslab.com/cyri">Can You Run It</a></p>
+<blockquote>
+<p><strong>Can I Run It</strong> 是一个帮你测试电脑性能的网站，它的游戏数据库中拥有超过 8500 款游戏，只需要选择你想要玩的游戏，下载一个小程序，几秒钟后就会告诉你：你的电脑能运行它吗。</p>
+</blockquote>
+<p><a href="https://cont.12315.cn/">合同示范文本库</a></p>
+<blockquote>
+<p>国家市场监管总局开发的一个数据库，面向社会免费开放，提供常见合同的示范文本。</p>
+</blockquote>
+<p><a href="https://pldb.com/">pldb</a></p>
+<blockquote>
+<p>这个数据库专门收入各种编程语言，任何人都可以提交新语言。</p>
+</blockquote>
+<p><a href="https://www.itjuzi.com/deathCompany">死亡公司公墓</a></p>
+<blockquote>
+<p>新经济死亡公司数据库，是目前最全面的死亡公司数据公开平台，从死亡原因、 死亡公司赛道、烧钱榜等多维度呈现死亡公司全貌，全方位把握风口生死的命脉。</p>
+</blockquote>
+<p><a href="https://www.maigoo.com/">买购网</a></p>
+<blockquote>
+<p>全行业品牌排行榜 &amp; 购物知识。</p>
+</blockquote>
+<p><a href="https://www.dimensions.com/">Dimensions</a> </p>
+<blockquote>
+<p>尺寸参考网站，记录了构成日常物体的标准尺寸。</p>
+</blockquote>
+<p><a href="http://nsf.nesbbs.com/">NSF 小站</a> </p>
+<blockquote>
+<p>经典 FC 游戏 BGM。</p>
+</blockquote>
+<p><a href="https://uniform.wingzero.tw/">制服地图</a> </p>
+<blockquote>
+<p>全球各类学校的制服收集,制服摄影。</p>
+</blockquote>
+<p><a href="https://jiangteng2019.github.io/satellite-track/">satellite-track</a></p>
+<blockquote>
+<p>基于 Web 的卫星轨道可视化项目，可以查看不同类别的卫星，代码<a href="https://github.com/jiangteng2019/satellite-track">开源</a>。</p>
+</blockquote>
+<p><a href="https://laosheng.top/fuwu/yuanxiao">中国高等院校三千所</a></p>
+<blockquote>
+<p>这个网站收集中国大专院校名单和网址，按照中管、部本、省本、专科的顺序形成中国高校层级图谱。</p>
+</blockquote>
+<p><a href="https://www.mobilephonemuseum.com/">手机博物馆</a></p>
+<blockquote>
+<p>该网站是一个老手机的搜索引擎。</p>
+</blockquote>
+<p><a href="https://docs.qq.com/sheet/DQ3FEUUZJdklNSWJP">IMAX 影厅</a></p>
+<blockquote>
+<p>全球 IMAX 影厅分布，从 IMAX 中国到 CGS 中国巨幕，还有杜比影院、特效影厅等。记录内容包括不限于影院名称、影厅编号、座位数、银幕宽高、放映系统和音效系统。</p>
+</blockquote>
+<p><a href="https://www.charlesdickensillustration.org/">狄更斯插图库</a></p>
+<blockquote>
+<p>这个网站收集了英国伟大小说家狄更斯的作品插图。</p>
+</blockquote>
+<p><a href="https://videocelebs.net/">Video Celebs</a></p>
+<blockquote>
+<p>影视剧删减片段。</p>
+</blockquote>
+<p><a href="https://github.com/lovefc/china_school_badge">高校校徽字体图标库</a></p>
+<blockquote>
+<p>这个仓库收集了全国200多所高校的校徽，制作成字体图标。<br />
+网站: <a href="http://xiaohui.lovefc.cn/">http://xiaohui.lovefc.cn/</a></p>
+</blockquote>
+<p><a href="https://www.urongda.com/">中国大学矢量校徽合集</a></p>
+<blockquote>
+<p>高校校徽的矢量文件下载，目前收集了100多个校徽。</p>
+</blockquote>
+<p><a href="https://www.msdmanuals.cn/home">默沙东诊疗手册</a></p>
+<blockquote>
+<p>人人可用的医学知识库。</p>
+</blockquote>
+<p><a href="https://apps.london.gov.uk/street-trees/">伦敦的树</a></p>
+<blockquote>
+<p>伦敦市政府的官方网站，在地图上标出了该市的每一棵树。点击后，显示这棵树的详细数据和谷歌地图照片。</p>
+</blockquote>
+<h3 id="工具"><a class="header" href="#工具">工具</a></h3>
+<p><a href="https://github.com/GitSquared/edex-ui">GitSquared / edex-ui</a></p>
+<blockquote>
+<p>跨平台全屏科幻效果终端工具。</p>
+</blockquote>
+<p><a href="https://github.com/svenstaro/genact">svenstaro / genact</a></p>
+<blockquote>
+<p>摸鱼神器，无意义任务命令行生成。<br />
+网站: <a href="https://svenstaro.github.io/genact/">https://svenstaro.github.io/genact/</a></p>
+</blockquote>
+<p><a href="https://github.com/Jannchie/Historical-ranking-data-visualization-based-on-d3.js">Jannchie / Historical-ranking-data-visualization-based-on-d3.js</a></p>
+<blockquote>
+<p>这是一个数据可视化项目，能够将历史数据排名转化为动态柱状图图表。</p>
+</blockquote>
+<p><a href="https://github.com/FabDevGit/barchartrace">FabDevGit / barchartrace</a></p>
+<blockquote>
+<p>在线生成条形竞赛图动画。<br />
+网站: <a href="https://fabdevgit.github.io/barchartrace/">https://fabdevgit.github.io/barchartrace/</a><br />
+网站: <a href="https://app.flourish.studio/">https://app.flourish.studio/</a></p>
+</blockquote>
+<p><a href="https://www.datawrapper.de/">Datawrapper</a></p>
+<blockquote>
+<p>著名的数据可视化生成工具，只要在网页上提交数据，经过几步配置，就能生成杂志级的可视化图表。</p>
+</blockquote>
+<p><a href="https://github.com/leon-ai/leon">leon-ai / leon</a></p>
+<blockquote>
+<p>Leon is your open-source personal assistant.</p>
+</blockquote>
+<p><a href="https://github.com/menzi11/BullshitGenerator">menzi11 / BullshitGenerator</a></p>
+<blockquote>
+<p>狗屁不通文章生成器。<br />
+网站: <a href="https://suulnnka.github.io/BullshitGenerator/index.html">https://suulnnka.github.io/BullshitGenerator/index.html</a></p>
+</blockquote>
+<p><a href="https://github.com/3b1b/manim">3b1b / manim</a></p>
+<blockquote>
+<p>数学动画引擎。</p>
+</blockquote>
+<p><a href="https://github.com/monicahq/monica">monicahq / monica</a></p>
+<blockquote>
+<p>私人客户关系管理（CRM）。记住你的朋友、家人、商务关系。<br />
+网站: <a href="https://www.monicahq.com/">https://www.monicahq.com/</a></p>
+</blockquote>
+<p><a href="http://www.haoweichi.com/">世界各国虚拟身份生成</a></p>
+<blockquote>
+<p>世界各国虚拟身份信息、地址、信用卡生成。</p>
+</blockquote>
+<p><a href="https://github.com/holynova/gushi_namer">holynova / gushi_namer</a></p>
+<blockquote>
+<p>古诗文起名古诗文起名。<br />
+网站: <a href="http://xiaosang.net/gushi_namer/">http://xiaosang.net/gushi_namer/</a></p>
+</blockquote>
+<p><a href="https://nova.astrometry.net/">Astrometry</a></p>
+<blockquote>
+<p>识别照片中天空的星座。</p>
+</blockquote>
+<p><a href="https://ai.12348.gov.cn/pc/">中国法律服务网</a> </p>
+<blockquote>
+<p>根据问卷提示填写相关信息，在线为您免费出具法律意见书。</p>
+</blockquote>
+<p><a href="https://geotraceroute.com/">Geo Traceroute</a></p>
+<blockquote>
+<p>用户指定 HTTP 请求的发出地和目的地，这个网站会在谷歌地球上显示路由的跳转路径。</p>
+</blockquote>
+<p><a href="https://github.com/LC044/WeChatMsg">LC044 / WeChatMsg</a></p>
+<blockquote>
+<p>提取微信聊天记录，将其导出成HTML、Word、CSV文档永久保存，对聊天记录进行分析生成年度聊天报告。</p>
+</blockquote>
+<h3 id="github-相关"><a class="header" href="#github-相关">Github 相关</a></h3>
+<p><a href="https://github.com/pomber/git-history">pomber / git-history</a></p>
+<blockquote>
+<p>GitHub 提交历史。<br />
+网站: <a href="https://githistory.xyz/">https://githistory.xyz/</a></p>
+</blockquote>
+<p><a href="https://skyline.github.com/">GitHub Skyline</a></p>
+<blockquote>
+<p>GitHub 官方出品，将你过去一年的提交统计转成一个三维的直方图，并且提供 stl 文件下载，进行 3D 打印。</p>
+</blockquote>
+<p><a href="https://github.com/hellodigua/code996">hellodigua / code996</a></p>
+<blockquote>
+<p>统计 Git 项目的 commit 时间分布，进而推导出项目的编码工作强度。</p>
+</blockquote>
+<p><a href="https://github.com/tipsy/profile-summary-for-github/">tipsy / profile-summary-for-github</a></p>
+<blockquote>
+<p>可视化 GitHub 个人信息。<br />
+网站: <a href="https://profile-summary-for-github.com/user/TommyMerlin">https://profile-summary-for-github.com/user/TommyMerlin</a></p>
+</blockquote>
+<p><a href="https://github.com/LHRUN/bubble">LHRUN / bubble</a></p>
+<blockquote>
+<p>该仓库收集各种可以放在 GitHub Profile 和 Readme 上面的小组件。<br />
+网站: <a href="https://bubble-awesome-profile.vercel.app/">https://bubble-awesome-profile.vercel.app/</a></p>
+</blockquote>
+<p><a href="https://github.com/anuraghazra/github-readme-stats">anuraghazra / github-readme-stats</a></p>
+<blockquote>
+<p>在你的 README 中获取动态生成的 GitHub 统计信息！<br />
+<a href="https://github.com/anuraghazra/github-readme-stats"><img src="https://github-readme-stats.vercel.app/api?username=TommyMerlin&amp;theme=vue" alt="Anurag's github stats" /></a></p>
+</blockquote>
+<p><a href="https://github-business-card.vercel.app/">GitHub 名片</a></p>
+<blockquote>
+<p>这个网页可以根据 GitHub 主页，生成用户的 GitHub 名片。<br />
+<img src="https://scastiel.dev/api/image/TommyMerlin" alt="TommyMerlin’s GitHub image" width="500" height="262" /></p>
+</blockquote>
+<p><a href="https://repobeats.axiom.co/">repobeats</a></p>
+<blockquote>
+<p>展示仓库的各项数据。<br />
+<img src="https://repobeats.axiom.co/api/embed/e2c3d517b721d7b585725f1390e87e6b059e8d5d.svg" alt="Alt" title="Repobeats analytics image" /></p>
+</blockquote>
+<p><a href="https://github.com/gelstudios/gitfiti">gelstudios / gitfiti</a></p>
+<blockquote>
+<p>随意更改 commit 历史。</p>
+</blockquote>
+<p><a href="https://github.com/jesseduffield/lazygit">https://github.com/jesseduffield/lazygit</a></p>
+<blockquote>
+<p>Git 操作的命令行 UI。</p>
+</blockquote>
+<p><a href="https://github.com/carloscuesta/gitmoji">carloscuesta / gitmoji</a></p>
+<blockquote>
+<p>在 commit 信息中添加 emoji。😜<br />
+网站: <a href="https://gitmoji.carloscuesta.me/">https://gitmoji.carloscuesta.me/</a></p>
+</blockquote>
+<p><a href="https://gh-card.dev/">GitHub Card</a></p>
+<blockquote>
+<p>生成 GitHub 仓库预览图。</p>
+</blockquote>
+<p><a href="https://github.com/antonkomarev/github-profile-views-counter">antonkomarev / github-profile-views-counter</a></p>
+<blockquote>
+<p>统计你的 GitHub 个人主页被访问的次数。<img src="https://komarev.com/ghpvc/?username=TommyMerlin" alt="Profile Views Counter" /></p>
+</blockquote>
+<p><a href="https://starchart.cc/TommyMerlin/Repository-Collection">starchart</a></p>
+<blockquote>
+<p>绘制仓库 start 数随时间变化曲线图。<br />
+<img src="https://starchart.cc/TommyMerlin/Awesome-Repository.svg" alt="Stargazers over time" /></p>
+<p>类似网站: <a href="https://star-history.com/">https://star-history.com/</a></p>
+<p><a href="https://star-history.com/#TommyMerlin/Awesome-Repository&amp;Date"><img src="https://api.star-history.com/svg?repos=TommyMerlin/Awesome-Repository&amp;type=Date" alt="Star History Chart" /></a></p>
+</blockquote>
+<p><a href="https://github.com/Platane/snk">Platane / snk</a></p>
+<blockquote>
+<p>根据 GitHub 上的贡献图，自动生成蛇的行走路径，一口气吃光所有“绿块”，支持生成 gif 或 svg 格式的动图。</p>
+</blockquote>
+<p><a href="https://github.com/cfour-hi/gitstars">Gitstars</a> </p>
+<blockquote>
+<p>一个开源的在线服务，用来管理你在 GitHub 打过星标的项目（收藏的项目）。<br />
+网站: <a href="https://gitstars.cfour.top/">https://gitstars.cfour.top/</a></p>
+</blockquote>
+<h3 id="游戏"><a class="header" href="#游戏">游戏</a></h3>
+<p><a href="https://nathanfriend.io/inspirograph/">在线万花尺绘制器</a></p>
+<blockquote>
+<p>在线万花尺绘制工具。</p>
+</blockquote>
+<p><a href="https://github.com/JustArchiNET/ArchiSteamFarm">JustArchiNET / ArchiSteamFarm</a></p>
+<blockquote>
+<p>Steam 挂卡。</p>
+</blockquote>
+<p><a href="https://github.com/JosefNemec/Playnite">JosefNemec / Playnite</a></p>
+<blockquote>
+<p>一款开源的电脑游戏管理工具。支持同步 Steam、Epic、GOG、Battle.net 等平台的游戏，导入后该工具会自动从 IGDB 获取游戏信息，为游戏提供一个统一的界面。。</p>
+</blockquote>
+<p><a href="https://github.com/rwv/chinese-dos-games">rwv / chinese-dos-games</a></p>
+<blockquote>
+<p>🎮 中文 DOS 游戏。</p>
+</blockquote>
+<p><a href="https://bluemaxima.org/flashpoint/">Flashpoint</a></p>
+<blockquote>
+<p>Flash 游戏库。</p>
+</blockquote>
+<p><a href="https://github.com/ornicar/lila">ornicar / lila</a></p>
+<blockquote>
+<p>国际象棋。</p>
+</blockquote>
+<p><a href="https://stockfishchess.org/">Stockfish</a></p>
+<blockquote>
+<p>开源国际象棋引擎。</p>
+</blockquote>
+<p><a href="http://oskarstalberg.com/game/house/index.html">Brick Block</a></p>
+<blockquote>
+<p>一个浏览器小游戏，使用砖块随心所欲建造大楼，只支持桌面浏览器。</p>
+</blockquote>
+<p><a href="http://oskarstalberg.com/Townscaper/">TownScaper</a></p>
+<blockquote>
+<p>一个休闲小游戏，只要随意点击，就能生成不可思议的美丽建筑物。</p>
+</blockquote>
+<p><a href="https://artsandculture.google.com/experiment/nAEJVwNkp-FnrQ">Viola the Bird</a></p>
+<blockquote>
+<p>指挥一只小鸟拉小提琴（音游）。</p>
+</blockquote>
+<p><a href="https://www.jezzamon.com/checkboxes/index.html">checkboxes</a></p>
+<blockquote>
+<p>点击出现的勾选框，链式反应，越点越多。<br />
+类似网站: <a href="https://checkboxrace.com/">https://checkboxrace.com/</a><br />
+类似网站: <a href="https://checkbox.toys/">https://checkbox.toys/</a><br />
+类似网站: <a href="https://www.bryanbraun.com/checkboxland/">https://www.bryanbraun.com/checkboxland/</a><br />
+类似网站: <a href="https://mrdoob.com/lab/javascript/checkbox_painter/">https://mrdoob.com/lab/javascript/checkbox_painter/</a></p>
+</blockquote>
+<p><a href="https://news.ycombinator.com/item?id=37931804">漂亮的网页游戏</a></p>
+<blockquote>
+<p>Hacker News 的一个讨论帖，里面列举许多非常漂亮的网页游戏。<br />
+网站: <a href="https://squigglegolf.com/">https://squigglegolf.com/</a>
+网站: <a href="https://alexanderperrin.com.au/paper/shorttrip/">https://alexanderperrin.com.au/paper/shorttrip/</a>
+网站: <a href="https://sandspiel.club/">https://sandspiel.club/</a>
+网站: <a href="https://abagames.github.io/crisp-game-lib-games/?cywall">https://abagames.github.io/crisp-game-lib-games/?cywall</a>
+网站: <a href="https://entanglement.gopherwoodstudios.com/en-GB-index.html">https://entanglement.gopherwoodstudios.com/en-GB-index.html</a>
+网站: <a href="https://slowroads.io/">https://slowroads.io/</a>
+网站: <a href="https://wayfinder.nfb.ca/">https://wayfinder.nfb.ca/</a>
+网站: <a href="https://shotty.itch.io/blitt-td">https://shotty.itch.io/blitt-td</a></p>
+</blockquote>
+<h3 id="其他"><a class="header" href="#其他">其他</a></h3>
+<p><a href="https://tikolu.net/emojimix/">emojimix</a></p>
+<blockquote>
+<p>混合两个 emoji 然后生成一个新的 emoji。</p>
+</blockquote>
+<p><a href="https://javier.xyz/emoji-to-scale/">Emoji to Scale</a></p>
+<blockquote>
+<p>这个网站选出一组 Emoji 符号，按照体积从小到大的顺序排列，可以滚动浏览。</p>
+</blockquote>
+<p><a href="https://neal.fun/ambient-chaos/">Ambient Chaos</a></p>
+<blockquote>
+<p>一个网页的背景音生成器，提供20多种声音，比如风声、雨声、火车站、教堂钟声等。每种都可以调节音量，还可以选择声音进行合成。</p>
+</blockquote>
+<p><a href="https://earthclock.cwandt.com/">地球时钟</a></p>
+<blockquote>
+<p>这个网站使用卫星照片，显示当前的数字时间。</p>
+</blockquote>
+<p><a href="https://musclewiki.com/">Muscle Wiki</a></p>
+<blockquote>
+<p>肌肉维基百科，简化你的锻炼。</p>
+</blockquote>
+<hr />
+<h2 id="人工智能"><a class="header" href="#人工智能">人工智能</a></h2>
+<h3 id="学习资料"><a class="header" href="#学习资料">学习资料</a></h3>
+<p><a href="https://github.com/apachecn/AiLearning">apachecn / AiLearning</a></p>
+<blockquote>
+<p>AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP。<br />
+网站: <a href="http://ailearning.apachecn.org">http://ailearning.apachecn.org</a></p>
+</blockquote>
+<p><a href="https://github.com/scutan90/DeepLearning-500-questions">scutan90 / DeepLearning-500-questions</a></p>
+<blockquote>
+<p>深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述。</p>
+</blockquote>
+<p><a href="https://github.com/roboticcam/machine-learning-notes">roboticcam/machine-learning-notes</a></p>
+<blockquote>
+<p>不间断更新机器学习，概率模型和深度学习的讲义(1000+页)和视频链接。</p>
+</blockquote>
+<p><a href="https://github.com/afshinea/stanford-cs-229-machine-learning">afshinea / stanford-cs-229-machine-learning</a></p>
+<blockquote>
+<p>VIP cheatsheets for Stanford's CS 229 Machine Learning.<br />
+网站: <a href="https://stanford.edu/~shervine/teaching/cs-229">https://stanford.edu/~shervine/teaching/cs-229</a></p>
+</blockquote>
+<p><a href="https://github.com/fengdu78/deeplearning_ai_books">fengdu78 / deeplearning_ai_books</a></p>
+<blockquote>
+<p>deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）。</p>
+</blockquote>
+<p><a href="https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes">fengdu78 / Coursera-ML-AndrewNg-Notes</a></p>
+<blockquote>
+<p>吴恩达老师的机器学习课程个人笔记。</p>
+</blockquote>
+<p><a href="https://github.com/microsoft/ai-edu">microsoft / ai-edu</a></p>
+<blockquote>
+<p>AI education materials for Chinese students, teachers and IT professionals.</p>
+</blockquote>
+<p><a href="https://github.com/firmai/industry-machine-learning">firmai / industry-machine-learning</a></p>
+<blockquote>
+<p>机器学习在工业上的应用实例。</p>
+</blockquote>
+<p><a href="https://github.com/poloclub/cnn-explainer">poloclub / cnn-explainer</a></p>
+<blockquote>
+<p>一个帮助非专业人士学习理解卷积神经网络的交互式可视化系统。An interactive visualization system designed to help non-experts learn about Convolutional Neural Networks (CNNs)。</p>
+</blockquote>
+<h3 id="书籍资源"><a class="header" href="#书籍资源">书籍资源</a></h3>
+<p><a href="https://github.com/datawhalechina/pumpkin-book">datawhalechina / pumpkin-book</a></p>
+<blockquote>
+<p>《机器学习》（西瓜书）公式推导解析，在线阅读地址：<a href="https://datawhalechina.github.io/pumpkin-book">https://datawhalechina.github.io/pumpkin-book</a></p>
+</blockquote>
+<p><a href="https://github.com/zergtant/pytorch-handbook">zergtant / pytorch-handbook</a></p>
+<blockquote>
+<p>pytorch handbook 是一本开源的书籍，目标是帮助那些希望和使用 PyTorch 进行深度学习开发和研究的朋友快速入门，其中包含的 Pytorch 教程全部通过测试保证可以成功运行。</p>
+</blockquote>
+<p><a href="https://github.com/fengdu78/lihang-code">fengdu78 / lihang-code</a></p>
+<blockquote>
+<p>《统计学习方法》的代码实现。</p>
+</blockquote>
+<p><a href="https://github.com/d2l-ai/d2l-zh">d2l-ai / d2l-zh</a></p>
+<blockquote>
+<p>《动手学深度学习》：面向中文读者、能运行、可讨论。英文版即伯克利“深度学习导论（STAT 157）”教材。<br />
+视频：<a href="https://space.bilibili.com/209599371/channel/detail?cid=23541">https://space.bilibili.com/209599371/channel/detail?cid=23541</a><br />
+PDF: <a href="https://github.com/TommyMerlin/Repository-Collection/tree/master/files">https://github.com/TommyMerlin/Repository-Collection/tree/master/files</a></p>
+</blockquote>
+<p><a href="https://github.com/MLEveryday/100-Days-Of-ML-Code">MLEveryday / 100-Days-Of-ML-Code</a></p>
+<blockquote>
+<p>100-Days-Of-ML-Code中文版。</p>
+</blockquote>
+<h3 id="工具-1"><a class="header" href="#工具-1">工具</a></h3>
+<p><a href="https://github.com/streamlit/streamlit">streamlit / streamlit</a></p>
+<blockquote>
+<p>一个机器学习工具，可以一边写脚本，一边自动生成模型的可视化运行结果。还可以生成网页控件，手动拖拉查看模型变化。<br />
+网站: <a href="https://streamlit.io/">https://streamlit.io/</a></p>
+</blockquote>
+<p><a href="https://github.com/fastnlp/fitlog">fastnlp / fitlog</a></p>
+<blockquote>
+<p>fitlog 是一款在深度学习训练中用于辅助用户记录日志和管理代码的工具。<br />
+网站: <a href="https://fitlog.readthedocs.io/zh/latest/">https://fitlog.readthedocs.io/zh/latest/</a></p>
+</blockquote>
+<h3 id="数据集"><a class="header" href="#数据集">数据集</a></h3>
+<p><a href="https://github.com/awesomedata/awesome-public-datasets">awesomedata / awesome-public-datasets</a></p>
+<blockquote>
+<p>数据集汇总。</p>
+</blockquote>
+<p><a href="https://datasetsearch.research.google.com/">datasetsearch</a></p>
+<blockquote>
+<p>谷歌-数据集搜索。</p>
+</blockquote>
+<p><a href="link">Charmve / Surface-Defect-Detection</a></p>
+<blockquote>
+<p>表面缺陷检测数据集。</p>
+</blockquote>
+<h3 id="ai-项目"><a class="header" href="#ai-项目">AI 项目</a></h3>
+<p><a href="https://github.com/microsoft/computervision-recipes">microsoft / computervision-recipes</a></p>
+<blockquote>
+<p>计算机视觉系统最佳实践，包含各种 CV 示例项目。示例使用 PytTorch 深度学习库+ Jupyter 文件，涵盖：图像分类、相似、识别、追踪等方面。</p>
+</blockquote>
+<p><a href="https://github.com/SkalskiP/make-sense">SkalskiP / make-sense</a></p>
+<blockquote>
+<p>对图片添加标签的在线工具。<br />
+网站: <a href="https://makesense.ai">https://makesense.ai</a></p>
+</blockquote>
+<p><a href="https://wenxin.baidu.com/moduleApi/ernieVilg">ERNIE-ViLG 文生图</a></p>
+<blockquote>
+<p>百度 AI 引擎&quot;文心大模型&quot;的文生图功能，输入中文句子，输出相应的图片，类似于 DALL-E 和 Stable Diffusion，绘图 / 画图。<br />
+类似网站: <a href="https://lexica.art/">https://lexica.art/</a><br />
+类似网站: <a href="https://art.elbo.ai/">https://art.elbo.ai/</a><br />
+类似网站: <a href="https://huggingface.co/spaces/PaddlePaddle/ERNIE-ViLG">https://huggingface.co/spaces/PaddlePaddle/ERNIE-ViLG</a><br />
+类似网站: <a href="https://huggingface.co/spaces/stabilityai/stable-diffusion">https://huggingface.co/spaces/stabilityai/stable-diffusion</a><br />
+类似网站: <a href="https://creator.nolibox.com/guest">https://creator.nolibox.com/guest</a></p>
+</blockquote>
+<p><a href="https://github.com/Baiyuetribe/paper2gui">Baiyuetribe / paper2gui</a></p>
+<blockquote>
+<p>一款面向普通人的 AI 桌面 APP 工具箱，免安装即开即用，已支持 40+AI 模型，内容涵盖 AI 绘画、语音合成、视频补帧、视频超分、目标检测、图片风格化、OCR 识别等领域。</p>
+</blockquote>
+<h3 id="gpt-相关"><a class="header" href="#gpt-相关">GPT 相关</a></h3>
+<p><a href="https://github.com/f/awesome-chatgpt-prompts">f / awesome-chatgpt-prompts</a></p>
+<blockquote>
+<p>ChatGPT 调教指南。各种场景使用指南。学习怎么让它听你的话。<br />
+网站: <a href="https://prompts.chat/">https://prompts.chat/</a><br />
+中文版: <a href="https://github.com/PlexPt/awesome-chatgpt-prompts-zh">https://github.com/PlexPt/awesome-chatgpt-prompts-zh</a></p>
+</blockquote>
+<p><a href="https://github.com/ddiu8081/chatgpt-demo">ddiu8081 / chatgpt-demo</a></p>
+<blockquote>
+<p>基于 OpenAI API 的前端。<br />
+类似工具: <a href="https://github.com/mckaywrigley/chatbot-ui">chatbot-ui</a></p>
+</blockquote>
+<p><a href="https://github.com/binary-husky/chatgpt_academic">binary-husky / chatgpt_academic</a></p>
+<blockquote>
+<p>科研工作专用ChatGPT拓展。</p>
+</blockquote>
+<p><a href="https://github.com/lencx/ChatGPT">lencx / ChatGPT</a></p>
+<blockquote>
+<p>ChatGPT 客户端。<br />
+类似工具: <a href="https://github.com/Bin-Huang/chatbox/">https://github.com/Bin-Huang/chatbox/</a></p>
+</blockquote>
+<p><a href="https://github.com/josStorer/chatGPTBox">josStorer / chatGPTBox</a></p>
+<blockquote>
+<p>ChatGPT 浏览器插件。</p>
+</blockquote>
+<p><a href="https://you.com/search?q=who+are+you&amp;tbm=youchat&amp;cfr=chat">You</a></p>
+<blockquote>
+<p>免费 AI 问答网站。<br />
+类似网站: <a href="https://www.phind.com/">https://www.phind.com/</a></p>
+</blockquote>
+<p><a href="https://www.aiyjs.com/">AI 研究所</a></p>
+<blockquote>
+<p>国内外 AI 资讯首发站。</p>
+</blockquote>
+<p><a href="https://www.chatpdf.com/">ChatPDF</a></p>
+<blockquote>
+<p>解析PDF文件内容，针对提问生成答案。</p>
+</blockquote>
+<p><a href="https://github.com/getcursor/cursor">getcursor / cursor</a></p>
+<blockquote>
+<p>ChatGPT 辅助代码编辑器。</p>
+</blockquote>
+<p><a href="https://github.com/lvwzhen/law-cn-ai">lvwzhen / law-cn-ai</a></p>
+<blockquote>
+<p>⚖️ AI 法律助手。<br />
+网站: <a href="https://law-cn-ai.vercel.app/">https://law-cn-ai.vercel.app/</a></p>
+</blockquote>
+<hr />
+<h2 id="python"><a class="header" href="#python">Python</a></h2>
+<h3 id="学习资源"><a class="header" href="#学习资源">学习资源</a></h3>
+<p><a href="https://github.com/jackfrued/Python-100-Days">jackfrued / Python-100-Days</a></p>
+<blockquote>
+<p>Python - 100天从新手到大师。</p>
+</blockquote>
+<p><a href="https://github.com/TheAlgorithms/Python">TheAlgorithms / Python</a></p>
+<blockquote>
+<p>算法的 Python 实现。All Algorithms implemented in Python.</p>
+</blockquote>
+<p><a href="https://github.com/vinta/awesome-python">vinta / awesome-python</a></p>
+<blockquote>
+<p>A curated list of awesome Python frameworks, libraries, software and resources.<br />
+网站: <a href="https://awesome-python.com/">https://awesome-python.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/fluentpython/example-code">fluentpython / example-code</a></p>
+<blockquote>
+<p>《流畅的Python》书中代码。Example code for the book Fluent Python.</p>
+</blockquote>
+<p><a href="https://github.com/leisurelicht/wtfpython-cn">leisurelicht / wtfpython-cn</a></p>
+<blockquote>
+<p>wtfpython 的中文翻译。</p>
+</blockquote>
+<p><a href="https://github.com/qxf2/wtfiswronghere">qxf2 / wtfiswronghere</a></p>
+<blockquote>
+<p>新手常犯的Python错误。</p>
+</blockquote>
+<p><a href="https://github.com/rougier/matplotlib-cheatsheet">rougier / matplotlib-cheatsheet</a></p>
+<blockquote>
+<p>Matplotlib 3.1 cheat sheet. From an upcoming book on matplotlib.</p>
+</blockquote>
+<p><a href="https://github.com/gto76/python-cheatsheet">gto76 / python-cheatsheet</a></p>
+<blockquote>
+<p>Comprehensive Python Cheatsheet.</p>
+</blockquote>
+<h3 id="第三方库开源项目"><a class="header" href="#第三方库开源项目">第三方库/开源项目</a></h3>
+<p><a href="https://github.com/fxsjy/jieba">fxsjy / jieba</a></p>
+<blockquote>
+<p>结巴中文分词。</p>
+</blockquote>
+<p><a href="https://github.com/lancopku/pkuseg-python">lancopku / pkuseg-python</a></p>
+<blockquote>
+<p>pkuseg 多领域中文分词工具。</p>
+</blockquote>
+<p><a href="https://github.com/fighting41love/funNLP">fighting41love / funNLP</a></p>
+<blockquote>
+<p>中英文敏感词、语言检测、中外手机/电话归属地/运营商查询、名字推断性别、手机号抽取、身份证抽取、邮箱抽取、中日文人名库、中文缩写库、拆字词典、词汇情感值、停用词、反动词表、暴恐词表、繁简体转换、英文模拟中文发音、汪峰歌词生成器、职业名称词库、同义词库、反义词库、否定词库、汽车品牌词库、汽车零件词库、连续英文切割、各种中文词向量、公司名字大全、古诗词库、IT词库、财经词库、成语词库、地名词库、历史名人词库、诗词词库、医学词库、饮食词库、法律词库、汽车词库、动物词库、中文聊天语料、中文谣言数据、百度中文问答数据集、句子相似度匹配算法集合、bert资源、文本生成&amp;摘要相关工具、cocoNLP信息抽取工具、国内电话号码正则匹配</p>
+</blockquote>
+<p><a href="https://github.com/amueller/word_cloud">amueller / word_cloud</a></p>
+<blockquote>
+<p>词云生成。A little word cloud generator in Python.<br />
+网站: <a href="https://amueller.github.io/word_cloud">https://amueller.github.io/word_cloud</a><br />
+类似网站: <a href="https://wordart.com/">https://wordart.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/jakevdp/PythonDataScienceHandbook">jakevdp / PythonDataScienceHandbook</a></p>
+<blockquote>
+<p>Python 数据处理。Python Data Science Handbook: full text in Jupyter Notebooks.</p>
+</blockquote>
+<p><a href="https://github.com/xchaoinfo/fuck-login">xchaoinfo / fuck-login</a></p>
+<blockquote>
+<p>模拟登录一些知名的网站，为了方便爬取需要登录的网站。</p>
+</blockquote>
+<p><a href="https://github.com/bokeh/bokeh">bokeh / bokeh</a></p>
+<blockquote>
+<p>浏览器交互式数据可视化工具。<br />
+网站: <a href="https://bokeh.org/">https://bokeh.org/</a></p>
+</blockquote>
+<p><a href="https://github.com/rsalmei/alive-progress">rsalmei / alive-progress</a></p>
+<blockquote>
+<p>Python 炫酷进度条项目。</p>
+</blockquote>
+<hr />
+<h2 id="java"><a class="header" href="#java">Java</a></h2>
+<h3 id="资源汇总"><a class="header" href="#资源汇总">资源汇总</a></h3>
+<p><a href="https://github.com/Snailclimb/JavaGuide">Snailclimb / JavaGuide</a></p>
+<blockquote>
+<p>【Java 学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。<br />
+网站: <a href="https://gitee.com/SnailClimb/JavaGuide">https://gitee.com/SnailClimb/JavaGuide</a></p>
+</blockquote>
+<p><a href="https://github.com/doocs/advanced-java">doocs / advanced-java</a></p>
+<blockquote>
+<p>😮 互联网 Java 工程师进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务、海量数据处理等领域知识，后端同学必看，前端同学也可学习。<br />
+网站: <a href="https://doocs.github.io/advanced-java">https://doocs.github.io/advanced-java</a></p>
+</blockquote>
+<p><a href="https://github.com/xingshaocheng/architect-awesome">xingshaocheng / architect-awesome</a></p>
+<blockquote>
+<p>后端架构师技术图谱。</p>
+</blockquote>
+<p><a href="https://github.com/aalansehaiyang/technology-talk">aalansehaiyang / technology-talk</a></p>
+<blockquote>
+<p>汇总 java 生态圈常用技术框架、开源中间件，系统架构、数据库、大公司架构案例、常用三方类库、项目管理、线上问题排查、个人成长、思考等知识。</p>
+</blockquote>
+<p><a href="https://github.com/AobingJava/JavaFamily">AobingJava / JavaFamily</a></p>
+<blockquote>
+<p>【互联网一线大厂面试+学习指南】进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务等领域知识。</p>
+</blockquote>
+<p><a href="https://github.com/ZhongFuCheng3y/3y">ZhongFuCheng3y / 3y</a></p>
+<blockquote>
+<p>📓从 Java 基础、JavaWeb 基础到常用的框架再到面试题都有完整的教程，几乎涵盖了Java后端必备的知识点。</p>
+</blockquote>
+<h3 id="java基础"><a class="header" href="#java基础">Java基础</a></h3>
+<p><a href="https://github.com/crossoverJie/JCSprout">crossoverJie / JCSprout</a></p>
+<blockquote>
+<p>👨‍🎓 Java Core Sprout : basic, concurrent, algorithm.<br />
+网站: <a href="https://crossoverjie.top/JCSprout">https://crossoverjie.top/JCSprout</a></p>
+</blockquote>
+<p><a href="https://github.com/wuyouzhuguli/SpringAll">wuyouzhuguli / SpringAll</a></p>
+<blockquote>
+<p>循序渐进，学习 Spring Boot、Spring Boot &amp; Shiro、Spring Cloud、Spring Security &amp; Spring Security OAuth2，博客 Spring 系列源码。</p>
+</blockquote>
+<p><a href="https://github.com/hollischuang/toBeTopJavaer">hollischuang / toBeTopJavaer</a></p>
+<blockquote>
+<p>To Be Top Javaer - Java工程师成神之路。<br />
+网站: <a href="http://hollischuang.gitee.io/tobetopjavaer/#/">http://hollischuang.gitee.io/tobetopjavaer/#/</a></p>
+</blockquote>
+<p><a href="https://github.com/iluwatar/java-design-patterns">iluwatar / java-design-patterns</a></p>
+<blockquote>
+<p>Design patterns implemented in Java.<br />
+网站: <a href="https://java-design-patterns.com/">https://java-design-patterns.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/TheAlgorithms/Java">TheAlgorithms / Java</a></p>
+<blockquote>
+<p>All Algorithms implemented in Java.</p>
+</blockquote>
+<p><a href="https://github.com/huangz1990/redis">huangz1990 / redis</a></p>
+<blockquote>
+<p>《Redis Command Reference》全文的中文翻译版。<br />
+网站: <a href="http://RedisDoc.com">http://RedisDoc.com</a></p>
+</blockquote>
+<h3 id="spring-boot"><a class="header" href="#spring-boot">Spring Boot</a></h3>
+<p><a href="https://github.com/xkcoding/spring-boot-demo">xkcoding / spring-boot-demo</a></p>
+<blockquote>
+<p>spring boot demo 是一个用来深度学习并实战 spring boot 的项目，目前总共包含 65 个集成demo，已经完成 53 个。 该项目已成功集成 actuator(监控)、admin(可视化监控)、logback(日志)、aopLog(通过AOP记录web请求日志)、统一异常处理(json级别和页面级别)、freemarker(模板引擎)、thymeleaf(模板引擎)、Beetl(模板引擎)、Enjoy(模板引擎)、JdbcTemplate(通用JDBC操作数据库)、JPA(强大的ORM框架)、mybatis(强大的ORM框架)、通用Mapper(快速操作Mybatis)、PageHelper(通用的Mybatis分页插件)......</p>
+</blockquote>
+<p><a href="https://github.com/lihengming/spring-boot-api-project-seed">lihengming / spring-boot-api-project-seed</a></p>
+<blockquote>
+<p>🌱🚀一个基于Spring Boot &amp; MyBatis的种子项目，用于快速构建中小型API、RESTful API项目~</p>
+</blockquote>
+<p><a href="https://github.com/ityouknow/spring-boot-examples">ityouknow / spring-boot-examples</a></p>
+<blockquote>
+<p>Spring Boot 教程、技术栈示例代码，快速简单上手教程。<br />
+网站: <a href="http://www.ityouknow.com/spring-boot.html">http://www.ityouknow.com/spring-boot.html</a></p>
+</blockquote>
+<p><a href="https://github.com/hansonwang99/Spring-Boot-In-Action">hansonwang99 / Spring-Boot-In-Action</a></p>
+<blockquote>
+<p>Spring Boot 系列实战合集。</p>
+</blockquote>
+<h3 id="spring-cloud"><a class="header" href="#spring-cloud">Spring Cloud</a></h3>
+<p><a href="https://github.com/keets2012/microservice-integration">keets2012 / microservice-integration</a></p>
+<blockquote>
+<p>整合的项目包括网关、auth 权限服务和 backend 服务。提供了一套微服务架构下，网关服务路由、鉴权和授权认证的项目案例。</p>
+</blockquote>
+<p><a href="https://github.com/sqshq/piggymetrics">sqshq / piggymetrics</a></p>
+<blockquote>
+<p>Microservice Architecture with Spring Boot, Spring Cloud and Docker.</p>
+</blockquote>
+<p><a href="https://github.com/dyc87112/SpringCloud-Learning">dyc87112 / SpringCloud-Learning</a></p>
+<blockquote>
+<p>Spring Cloud 基础教程。<br />
+网站: <a href="http://blog.didispace.com/">http://blog.didispace.com/</a></p>
+</blockquote>
+<h3 id="相关工具"><a class="header" href="#相关工具">相关工具</a></h3>
+<p><a href="https://github.com/alibaba/druid">alibaba / druid</a></p>
+<blockquote>
+<p>阿里巴巴数据库事业部出品，为监控而生的数据库连接池。</p>
+</blockquote>
+<p><a href="https://github.com/alibaba/p3c">alibaba / p3c</a></p>
+<blockquote>
+<p>Alibaba Java Coding Guidelines pmd implements and IDE plugin.</p>
+</blockquote>
+<p><a href="https://github.com/looly/hutool">looly / hutool</a></p>
+<blockquote>
+<p>A set of tools that keep Java sweet.<br />
+网站: <a href="http://www.hutool.cn/">http://www.hutool.cn/</a></p>
+</blockquote>
+<p><a href="https://github.com/alibaba/easyexcel">alibaba / easyexcel</a></p>
+<blockquote>
+<p>快速、简单避免 OOM 的 java 处理 Excel 工具。<br />
+网站: <a href="https://www.yuque.com/easyexcel/doc/easyexcel">https://www.yuque.com/easyexcel/doc/easyexcel</a></p>
+</blockquote>
+<p><a href="https://github.com/jhy/jsoup">jhy / jsoup</a></p>
+<blockquote>
+<p>Java HTML 解析器。<br />
+网站: <a href="https://github.com/jhy/jsoup">https://github.com/jhy/jsoup</a></p>
+</blockquote>
+<p><a href="https://gitee.com/binary/java-generator">binarywang / java-testdata-generator</a></p>
+<blockquote>
+<p>Java 测试数据生成，包括姓名、身份证号、地址、邮箱、电话号。<br />
+类似工具: <a href="https://github.com/HannnnXiao/javafaker">https://github.com/HannnnXiao/javafaker</a></p>
+</blockquote>
+<h3 id="开源项目"><a class="header" href="#开源项目">开源项目</a></h3>
+<p><a href="https://github.com/qiurunze123/miaosha">qiurunze123 / miaosha</a></p>
+<blockquote>
+<p>⭐⭐⭐⭐秒杀系统设计与实现.互联网工程师进阶与分析🙋🐓</p>
+</blockquote>
+<p><a href="https://github.com/macrozheng/mall">macrozheng / mall</a></p>
+<blockquote>
+<p>mall 项目是一套电商系统，包括前台商城系统及后台管理系统，基于 SpringBoot+MyBatis 实现，采用 Docker 容器化部署。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。<br />
+网站: <a href="http://www.macrozheng.com/admin/">http://www.macrozheng.com/admin/</a></p>
+</blockquote>
+<p><a href="https://github.com/lenve/vhr">lenve / vhr</a></p>
+<blockquote>
+<p>微人事是一个前后端分离的人力资源管理系统，项目采用 SpringBoot+Vue 开发。</p>
+</blockquote>
+<p><a href="https://github.com/lenve/VBlog">lenve / VBlog</a></p>
+<blockquote>
+<p>V部落，Vue+SpringBoot 实现的多用户博客管理平台!</p>
+</blockquote>
+<p><a href="https://github.com/justauth/JustAuth">justauth / JustAuth</a></p>
+<blockquote>
+<p>💯 史上最全的整合第三方登录的开源库。目前已支持 Github、Gitee、微博、钉钉、百度、Coding、腾讯云开发者平台、OSChina、支付宝、QQ、微信、淘宝、Google、Facebook、抖音、领英、小米、微软、今日头条、Teambition、StackOverflow、Pinterest、人人、华为、企业微信、酷家乐、Gitlab、美团、饿了么和推特等第三方平台的授权登录。 Login, so easy!<br />
+网站: <a href="https://docs.justauth.whnb.wang/">https://docs.justauth.whnb.wang/</a></p>
+</blockquote>
+<hr />
+<h2 id="c"><a class="header" href="#c">C++</a></h2>
+<h3 id="学习资源-1"><a class="header" href="#学习资源-1">学习资源</a></h3>
+<p><a href="https://github.com/Light-City/CPlusPlusThings">Light-City / CPlusPlusThings</a></p>
+<blockquote>
+<p>C++那些事。</p>
+</blockquote>
+<p><a href="https://github.com/applenob/Cpp_Primer_Practice">applenob / Cpp_Primer_Practice</a></p>
+<blockquote>
+<p>搞定C++👊。C++ Primer 中文版第5版学习仓库，包括笔记和课后练习答案。</p>
+</blockquote>
+<p><a href="https://github.com/changkun/modern-cpp-tutorial">changkun / modern-cpp-tutorial</a></p>
+<blockquote>
+<p>📚 Modern C++ Tutorial。<br />
+网站: <a href="https://changkun.de/modern-cpp/">https://changkun.de/modern-cpp/</a></p>
+</blockquote>
+<h3 id="开源项目-1"><a class="header" href="#开源项目-1">开源项目</a></h3>
+<p><a href="https://github.com/google/googletest">google / googletest</a></p>
+<blockquote>
+<p>Google 测试和模拟框架。</p>
+</blockquote>
+<p><a href="https://github.com/clangen/musikcube">clangen / musikcube</a></p>
+<blockquote>
+<p>一个使用C ++编写的跨平台，运行于终端上的音乐播放器。<br />
+网站: <a href="https://musikcube.com/">https://musikcube.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/fffaraz/awesome-cpp">fffaraz / awesome-cpp</a></p>
+<blockquote>
+<p>Awesome C++。</p>
+</blockquote>
+<p><a href="https://github.com/google/googletest">google / googletest</a></p>
+<blockquote>
+<p>谷歌 Testing 和 Mocking 框架。</p>
+</blockquote>
+<p><a href="https://github.com/PointCloudLibrary/pcl">PointCloudLibrary / pcl</a></p>
+<blockquote>
+<p>点云库。<br />
+网站: <a href="https://pointclouds.org/">https://pointclouds.org/</a></p>
+</blockquote>
+<hr />
+<h2 id="c-dotnet"><a class="header" href="#c-dotnet">C# DOTNET</a></h2>
+<p><a href="https://github.com/TheAlgorithms/C-Sharp">TheAlgorithms / C-Sharp</a></p>
+<blockquote>
+<p>算法的 C# 实现。</p>
+</blockquote>
+<p><a href="https://github.com/Live-Charts/Live-Charts">Live-Charts / Live-Charts</a></p>
+<blockquote>
+<p>.NET 下简单、灵活、可交互的图表。</p>
+</blockquote>
+<p><a href="https://github.com/0xd4d/dnSpy">0xd4d / dnSpy</a></p>
+<blockquote>
+<p>.NET 调试和编译器。</p>
+</blockquote>
+<p><a href="https://github.com/shimat/opencvsharp">shimat / opencvsharp</a></p>
+<blockquote>
+<p>.NET 框架下的OpenCV。</p>
+</blockquote>
+<p><a href="https://github.com/dathlin/HslCommunication">dathlin / HslCommunication</a></p>
+<blockquote>
+<p>工业物联网基础架构框架，专注于基础技术通信和跨平台、跨语言通信功能，实现多种主流 PLC 数据读写。<br />
+网站: <a href="http://www.hslcommunication.cn">http://www.hslcommunication.cn</a></p>
+</blockquote>
+<p><a href="https://github.com/quozd/awesome-dotnet">quozd / awesome-dotnet</a></p>
+<blockquote>
+<p>.NET 库、工具、框架、软件合集。</p>
+</blockquote>
+<p><a href="https://github.com/microsoft/dotnet">microsoft / dotnet</a></p>
+<blockquote>
+<p>.NET 官方仓库。</p>
+</blockquote>
+<p><a href="https://github.com/yuzhengyang/Fork">yuzhengyang / Fork</a></p>
+<blockquote>
+<p>C# 工具包，C# 工具类，常用方法，系统 API，文件处理、加密解密、Winform 美化（C# Tools）。</p>
+</blockquote>
+<p><a href="https://github.com/Jimmey-Jiang/Common.Utility">Jimmey-Jiang / Common.Utility</a></p>
+<blockquote>
+<p>比较全面的 C# 帮助类，各种功能性代码。</p>
+</blockquote>
+<hr />
+<h2 id="wpf"><a class="header" href="#wpf">WPF</a></h2>
+<p><a href="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit">MaterialDesignInXAML / MaterialDesignInXamlToolkit</a></p>
+<blockquote>
+<p>Google's Material Design in XAML &amp; WPF, for C# &amp; VB.Net.<br />
+网站: <a href="http://materialdesigninxaml.net/">http://materialdesigninxaml.net/</a></p>
+</blockquote>
+<p><a href="https://github.com/MahApps/MahApps.Metro">MahApps / MahApps.Metro</a></p>
+<blockquote>
+<p>允许开发人员以最小的代价为自己的 WPF 应用程序拼凑一个 Metro 或 Modern 的 UI。<br />
+网站: <a href="https://mahapps.com">https://mahapps.com</a></p>
+</blockquote>
+<p><a href="https://github.com/firstfloorsoftware/mui">firstfloorsoftware / mui</a></p>
+<blockquote>
+<p>WPF Modern UI。</p>
+</blockquote>
+<p><a href="https://github.com/xceedsoftware/wpftoolkit">xceedsoftware / wpftoolkit</a></p>
+<blockquote>
+<p>WPF 控件。</p>
+</blockquote>
+<p><a href="https://github.com/microsoft/WPF-Samples">microsoft / WPF-Samples</a></p>
+<blockquote>
+<p>WPF 相关实例仓库。</p>
+</blockquote>
+<p><a href="https://github.com/Panuon/PanuonUI">Panuon / PanuonUI</a></p>
+<blockquote>
+<p>一个好看精致、开源无限制使用的 WPF 控件库。</p>
+</blockquote>
+<p><a href="https://github.com/Panuon/PanuonUI.Silver">Panuon / PanuonUI.Silver</a></p>
+<blockquote>
+<p>Panuon.UI optimized version. A beautiful wpf ui library using templates &amp; attached properties.</p>
+</blockquote>
+<p><a href="https://github.com/kwonganding/wpf.controls">kwonganding / wpf.controls</a></p>
+<blockquote>
+<p>在学习中和使用 WPF 中，学习、借鉴了很多网友的文章和开源的项目的知识。发现提供实际项目开发需要的基础控件、样式的文章大都比较散，不成系列。因此基于现在项目中使用开发了一个 WPF 基础 UI 库。</p>
+</blockquote>
+<hr />
+<h2 id="大学课程资源"><a class="header" href="#大学课程资源">大学课程资源</a></h2>
+<p><a href="https://github.com/USTC-Resource/USTC-Course">USTC-Resource / USTC-Course</a></p>
+<blockquote>
+<p>中国科学技术大学课程资源。<br />
+网站: <a href="https://ustc-resource.github.io/USTC-Course">https://ustc-resource.github.io/USTC-Course</a></p>
+</blockquote>
+<p><a href="https://github.com/PKUanonym/REKCARC-TSC-UHT">PKUanonym / REKCARC-TSC-UHT</a></p>
+<blockquote>
+<p>清华大学计算机系课程攻略。</p>
+</blockquote>
+<p><a href="https://github.com/lib-pku/libpku">lib-pku / libpku</a></p>
+<blockquote>
+<p>北京大学课程资料。<br />
+网站: <a href="https://lib-pku.github.io/">https://lib-pku.github.io/</a></p>
+</blockquote>
+<p><a href="https://github.com/QSCTech/zju-icicles">QSCTech / zju-icicles</a></p>
+<blockquote>
+<p>浙江大学课程攻略共享计划。<br />
+网站: <a href="https://qsctech.github.io/zju-icicles/">https://qsctech.github.io/zju-icicles/</a></p>
+</blockquote>
+<p><a href="https://github.com/xioacd99/study-is-wonderful">study-is-wonderful</a></p>
+<blockquote>
+<p>本项目主要面向汉语人群，收集了一些比较好的公开课资源。</p>
+</blockquote>
+<p><a href="https://github.com/TheNetAdmin/zjuthesis">TheNetAdmin / zjuthesis</a></p>
+<blockquote>
+<p>浙江大学毕业论文 Latex 模板。</p>
+</blockquote>
+<hr />
+<h2 id="前端博客"><a class="header" href="#前端博客">前端/博客</a></h2>
+<h3 id="学习资源-2"><a class="header" href="#学习资源-2">学习资源</a></h3>
+<p><a href="https://www.designsystemhunt.com/">DesignSystemHunt</a></p>
+<blockquote>
+<p>这个网站收集各种设计系统（design system）。</p>
+</blockquote>
+<p><a href="https://github.com/qianguyihao/Web">qianguyihao / Web</a></p>
+<blockquote>
+<p>前端入门和进阶学习笔记，超详细的Web前端学习图文教程。</p>
+</blockquote>
+<p><a href="https://github.com/helloqingfeng/Awsome-Front-End-learning-resource">helloqingfeng / Awsome-Front-End-learning-resource</a></p>
+<blockquote>
+<p>GitHub最全的前端资源汇总仓库（包括前端学习、开发资源、求职面试等）。</p>
+</blockquote>
+<p><a href="https://github.com/kamranahmedse/developer-roadmap">kamranahmedse / developer-roadmap</a></p>
+<blockquote>
+<p>Web 开发路线图（2020）。<br />
+网站: <a href="https://roadmap.sh/">https://roadmap.sh/</a></p>
+</blockquote>
+<p><a href="https://github.com/CavsZhouyou/Front-End-Interview-Notebook">CavsZhouyou / Front-End-Interview-Notebook</a></p>
+<blockquote>
+<p>🐜前端面试复习笔记。</p>
+</blockquote>
+<p><a href="https://github.com/lydiahallie/javascript-questions">lydiahallie / javascript-questions</a></p>
+<blockquote>
+<p>JavaScript 相关问题及解答合集。✨</p>
+</blockquote>
+<p><a href="https://github.com/airbnb/javascript">airbnb / javascript</a></p>
+<blockquote>
+<p>JavaScript Style Guide</p>
+</blockquote>
+<p><a href="https://github.com/elsewhencode/project-guidelines">elsewhencode / project-guidelines</a></p>
+<blockquote>
+<p>JavaScript 项目最佳实践合集。</p>
+</blockquote>
+<h3 id="前端工具"><a class="header" href="#前端工具">前端工具</a></h3>
+<p><a href="https://github.com/pandao/editor.md">pandao / editor.md</a></p>
+<blockquote>
+<p>开源可嵌入的在线Markdown编辑器（模块）。<br />
+网站: <a href="http://editor.md.ipandao.com/">http://editor.md.ipandao.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/tabler/tabler-icons">tabler / tabler-icons</a></p>
+<blockquote>
+<p>450个免费的 MIT 许可的高质量 svg 图标。</p>
+</blockquote>
+<p><a href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify / NeteaseCloudMusicApi</a></p>
+<blockquote>
+<p>网易云音乐 Node.js API service<br />
+网站: <a href="https://binaryify.github.io/NeteaseCloudMusicApi">https://binaryify.github.io/NeteaseCloudMusicApi</a></p>
+</blockquote>
+<h3 id="博客框架"><a class="header" href="#博客框架">博客框架</a></h3>
+<p><a href="https://github.com/theme-next/hexo-theme-next">theme-next / hexo-theme-next</a></p>
+<blockquote>
+<p>Hexo主题。</p>
+</blockquote>
+<p><a href="https://github.com/docsifyjs/docsify">docsifyjs / docsify</a></p>
+<blockquote>
+<p>🃏 文档网页生成器。<br />
+网站: <a href="https://docsify.js.org/">https://docsify.js.org/</a></p>
+</blockquote>
+<p><a href="https://github.com/vuejs/vuepress">vuejs / vuepress</a></p>
+<blockquote>
+<p>📝 极简 Vue 驱动的静态网页生成器。<br />
+网站: <a href="https://vuepress.vuejs.org/">https://vuepress.vuejs.org/</a></p>
+</blockquote>
+<h3 id="开源项目-2"><a class="header" href="#开源项目-2">开源项目</a></h3>
+<p><a href="https://github.com/PanJiaChen/vue-element-admin">PanJiaChen / vue-element-admin</a></p>
+<blockquote>
+<p>🎉 Vue 管理系统。<br />
+网站: <a href="https://panjiachen.github.io/vue-element-admin">https://panjiachen.github.io/vue-element-admin</a></p>
+</blockquote>
+<p><a href="https://github.com/HalseySpicy/Geeker-Admin">HalseySpicy / Geeker-Admin</a></p>
+<blockquote>
+<p>✨✨✨ Geeker Admin，基于 Vue3.2、TypeScript、Vite4、Pinia、Element-Plus 开源的一套后台管理框架。<br />
+网站: <a href="https://admin.spicyboy.cn/">https://admin.spicyboy.cn/</a></p>
+</blockquote>
+<p><a href="https://github.com/PanJiaChen/vue-admin-template">PanJiaChen / vue-admin-template</a></p>
+<blockquote>
+<p>Vue2.0 最小化管理系统模板。<br />
+网站: <a href="https://git.io/fAnuM">https://git.io/fAnuM</a></p>
+</blockquote>
+<p><a href="https://github.com/renrenio/renren-fast-vue">renrenio / renren-fast-vue</a></p>
+<blockquote>
+<p>renren-fast-vue基于vue、element-ui构建开发，实现renren-fast后台管理前端功能，提供一套更优的前端解决方案。<br />
+网站: <a href="http://fast.demo.renren.io/">http://fast.demo.renren.io/</a></p>
+</blockquote>
+<p><a href="https://github.com/iview/iview-admin">iview / iview-admin</a></p>
+<blockquote>
+<p>基于 iView 的 Vue 2.0 管理系统模板。<br />
+网站: <a href="https://admin.iviewui.com/">https://admin.iviewui.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/electron/electron">electron / electron</a></p>
+<blockquote>
+<p>:electron: 基于 Javascript、HTML 和 CSS 构件跨平台的桌面应用。<br />
+网站: <a href="https://electronjs.org/">https://electronjs.org/</a></p>
+</blockquote>
+<p><a href="https://github.com/opendigg/awesome-github-vue">opendigg / awesome-github-vue</a></p>
+<blockquote>
+<p>Vue相关开源项目库汇总。<br />
+网站: <a href="http://www.opendigg.com/tags/front-vue">http://www.opendigg.com/tags/front-vue</a></p>
+</blockquote>
+<p><a href="https://github.com/sentsin/layui">sentsin / layui</a></p>
+<blockquote>
+<p>采用自身模块规范编写的前端 UI 框架，遵循原生 HTML/CSS/JS 的书写形式，极低门槛，拿来即用。</p>
+</blockquote>
+<p><a href="https://github.com/bradtraversy/vanillawebprojects">bradtraversy / vanillawebprojects</a></p>
+<blockquote>
+<p>仅靠 HTML5, CSS 和 JavaScript 构建的微型项目。</p>
+</blockquote>
+<h3 id="前端库"><a class="header" href="#前端库">前端库</a></h3>
+<p><a href="https://github.com/beizhedenglong/rough-charts">beizhedenglong / rough-charts</a></p>
+<blockquote>
+<p>手绘风格的 React 图表库。<br />
+网站: <a href="https://beizhedenglong.github.io/rough-charts/?path=/docs/roughcharts--page">https://beizhedenglong.github.io/rough-charts/?path=/docs/roughcharts--page</a></p>
+</blockquote>
+<p><a href="https://github.com/leeoniya/uPlot">leeoniya / uPlot</a></p>
+<blockquote>
+<p>📈 A small, fast chart for time series, lines, areas, ohlc &amp; bars.<br />
+一个 JS 的网页小型图表库，用于快速渲染超大型数据集，系统资源占用少。</p>
+</blockquote>
+<p><a href="https://github.com/transloadit/uppy">transloadit / uppy</a></p>
+<blockquote>
+<p>一个文件上传的 JS 库。<br />
+网站: <a href="https://uppy.io/">https://uppy.io/</a></p>
+</blockquote>
+<p><a href="https://github.com/timqian/chart.xkcd">timqian / chart.xkcd</a></p>
+<blockquote>
+<p>一个 XKCD 漫画风格的网页图表库。<br />
+网站: <a href="https://timqian.com/chart.xkcd/">https://timqian.com/chart.xkcd/</a></p>
+</blockquote>
+<p><a href="https://github.com/multiavatar/Multiavatar">multiavatar / Multiavatar</a></p>
+<blockquote>
+<p>生成人物头像的 JS 库。支持随机生成一个好看、独特、多文化的头像。<br />
+网站: <a href="https://multiavatar.com/">https://multiavatar.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/nhn/tui.image-editor">nhn / tui.image-editor</a></p>
+<blockquote>
+<p>功能齐全的图片编辑器。支持图片剪裁、旋转、涂鸦等功能，实现了 Vue 和 React 封装的组件。<br />
+网站: <a href="http://ui.toast.com/tui-image-editor">http://ui.toast.com/tui-image-editor</a></p>
+</blockquote>
+<p><a href="https://github.com/naptha/tesseract.js">naptha / tesseract.js</a></p>
+<blockquote>
+<p>支持多种语言的文字识别的 JS 库，能够方便、准确的把图片中的文字解析提取出来（可复制）。<br />
+网站: <a href="http://tesseract.projectnaptha.com/">http://tesseract.projectnaptha.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/kamranahmedse/driver.js">kamranahmedse / driver.js</a></p>
+<blockquote>
+<p>一个轻量、无依赖的 JavaScript 库，可驱动用户在整个页面上的注意力。<br />
+网站: <a href="https://driverjs.com/">https://driverjs.com/</a></p>
+</blockquote>
+<h3 id="css"><a class="header" href="#css">CSS</a></h3>
+<p><a href="https://github.com/necolas/normalize.css">necolas / normalize.css</a></p>
+<blockquote>
+<p>A modern alternative to CSS resets.<br />
+网站: <a href="http://necolas.github.io/normalize.css/">http://necolas.github.io/normalize.css/</a></p>
+</blockquote>
+<p><a href="https://github.com/l-hammer/You-need-to-know-css">l-hammer / You-need-to-know-css</a></p>
+<blockquote>
+<p>Web开发者应该掌握的 CSS tricks。<br />
+网站: <a href="https://lhammer.cn/You-need-to-know-css/#/zh-cn/">https://lhammer.cn/You-need-to-know-css/#/zh-cn/</a></p>
+</blockquote>
+<p><a href="https://github.com/chokcoco/CSS-Inspiration">chokcoco / CSS-Inspiration</a></p>
+<blockquote>
+<p>CSS Inspiration，在这里找到写 CSS 的灵感！<br />
+网站: <a href="https://chokcoco.github.io/CSS-Inspiration/">https://chokcoco.github.io/CSS-Inspiration/</a></p>
+</blockquote>
+<p><a href="https://github.com/QiShaoXuan/css_tricks">QiShaoXuan / css_tricks</a></p>
+<blockquote>
+<p>一些 CSS 常用样式。<br />
+网站: <a href="https://qishaoxuan.github.io/css_tricks/">https://qishaoxuan.github.io/css_tricks/</a></p>
+</blockquote>
+<p><a href="https://github.com/tobiasahlin/SpinKit">tobiasahlin / SpinKit</a></p>
+<blockquote>
+<p>CSS 写的加载动画合集。<br />
+网站: <a href="http://tobiasahlin.com/spinkit/">http://tobiasahlin.com/spinkit/</a></p>
+</blockquote>
+<p><a href="https://animista.net/">animista</a></p>
+<blockquote>
+<p>一些 CSS 实现的动画效果。</p>
+</blockquote>
+<p><a href="https://github.com/kognise/water.css">kognise / water.css</a></p>
+<blockquote>
+<p>一个专门为简单页面和示例网页准备的 CSS 框架。<br />
+网站: <a href="https://watercss.kognise.dev/">https://watercss.kognise.dev/</a></p>
+</blockquote>
+<p><a href="https://github.com/flukeout/css-diner">flukeout / css-diner</a></p>
+<blockquote>
+<p>通过游戏方式在线学习 CSS 选择器知识。<br />
+网站: <a href="https://flukeout.github.io/">https://flukeout.github.io/</a></p>
+</blockquote>
+<hr />
+<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
+<h3 id="工具-2"><a class="header" href="#工具-2">工具</a></h3>
+<p><a href="https://github.com/1Panel-dev/1Panel">1Panel-dev / 1Panel</a></p>
+<blockquote>
+<p>现代化、开源的 Linux 服务器运维管理面板。</p>
+</blockquote>
+<h3 id="docker"><a class="header" href="#docker">Docker</a></h3>
+<p><a href="https://www.composerize.com/">composerize</a></p>
+<blockquote>
+<p>将 Docker 命令行转换为 docker compose 文件。</p>
+</blockquote>
+<p><a href="https://github.com/louislam/dockge">louislam / dockge</a></p>
+<blockquote>
+<p>一个美观、易用的 Docker Compose 管理平台。该项目提供了一个 Web 界面，用于管理 docker-compose.yaml 文件。它开箱即用、界面设计精美，支持交互式编辑 compose.yaml 文件、更新 docker 镜像，以及启动、停止、重启、删除 docker 等操作。<br />
+网站: <a href="https://dockge.kuma.pet/">https://dockge.kuma.pet/</a></p>
+</blockquote>
+<p><a href="https://github.com/jesseduffield/lazydocker">lazydocker</a></p>
+<blockquote>
+<p>命令行管理 Docker 服务的一个图形界面工具。</p>
+</blockquote>
+<p><a href="https://github.com/containrrr/watchtower">containrrr / watchtower</a></p>
+<blockquote>
+<p>监测当前运行的容器的启动镜像是否有更新，是的话自动更新镜像并重新启动。</p>
+</blockquote>
+<p><a href="https://github.com/Wowu/docker-rollout">Wowu / docker-rollout</a></p>
+<blockquote>
+<p>这个工具可以不停机更新 Docker Compose 里面的某个服务。原理是同时新建两个实例，用已更新的实例替换未更新的实例。</p>
+</blockquote>
+<p><a href="https://github.com/DIYgod/RSSHub">DIYgod / RSSHub</a></p>
+<blockquote>
+<p>RSSHub 是一个开源、简单易用、易于扩展的 RSS 生成器，可以给任何奇奇怪怪的内容生成 RSS 订阅源。<br />
+相关项目: <a href="https://github.com/DIYgod/RSSHub-Radar">DIYgod / RSSHub-Radar</a></p>
+</blockquote>
+<p><a href="https://github.com/louislam/uptime-kuma">louislam / uptime-kuma</a></p>
+<blockquote>
+<p>一款简单易用的站点监控工具。</p>
+</blockquote>
+<p><a href="https://github.com/jesseduffield/lazydocker">jesseduffield / lazydocker</a></p>
+<blockquote>
+<p>基于终端的一个可视化管理工具。</p>
+</blockquote>
+<p><a href="https://github.com/portainer/portainer">portainer / portainer</a></p>
+<blockquote>
+<p>一款 Docker 可视化管理工具，可让您轻松构建和管理 Docker、Docker Swarm、Kubernetes 和 Azure ACI 中的容器。</p>
+</blockquote>
+<p><a href="https://github.com/netdata/netdata">netdata / netdata</a></p>
+<blockquote>
+<p>实时运行性能监控。<br />
+网站: <a href="https://www.netdata.cloud/">https://www.netdata.cloud/</a></p>
+</blockquote>
+<p><a href="https://github.com/AnalogJ/scrutiny">AnalogJ / scrutiny</a></p>
+<blockquote>
+<p>实时检查硬盘 S.M.A.R.T 健康状态的工具，Docker 安装，自带 Web UI。</p>
+</blockquote>
+<p><a href="https://github.com/NginxProxyManager/nginx-proxy-manager">NginxProxyManager / nginx-proxy-manager</a></p>
+<blockquote>
+<p>一款强大的 Nginx 可视化管理平台。</p>
+</blockquote>
+<p><a href="https://github.com/Frooodle/Stirling-PDF">Frooodle / Stirling-PDF</a></p>
+<blockquote>
+<p>本地部署的 PDF 服务，可执行多项操作。</p>
+</blockquote>
+<p><a href="https://github.com/glanceapp/glance/">glanceapp / glance/</a></p>
+<blockquote>
+<p>自部署面板，整合多个信息源。</p>
+</blockquote>
+<hr />
+<h2 id="资源汇总-1"><a class="header" href="#资源汇总-1">资源汇总</a></h2>
+<p><a href="https://github.com/sindresorhus/awesome">sindresorhus / awesome</a></p>
+<blockquote>
+<p>许多有趣主题 Awesome 合集。</p>
+</blockquote>
+<p><a href="https://github.com/dipakkr/A-to-Z-Resources-for-Students">dipakkr / A-to-Z-Resources-for-Students</a></p>
+<blockquote>
+<p>大学生实用资源合集。</p>
+</blockquote>
+<p><a href="https://github.com/LisaDziuba/Awesome-Design-Tools">LisaDziuba / Awesome-Design-Tools</a></p>
+<blockquote>
+<p>最好的设计工具。</p>
+</blockquote>
+<p><a href="https://github.com/TonnyL/Awesome_APIs">TonnyL / Awesome_APIs</a></p>
+<blockquote>
+<p>API 合集。</p>
+</blockquote>
+<p><a href="https://github.com/public-apis/public-apis">public-apis / public-apis</a></p>
+<blockquote>
+<p>免费 API 合集。</p>
+</blockquote>
+<p><a href="https://github.com/matiassingers/awesome-readme">matiassingers / awesome-readme</a></p>
+<blockquote>
+<p>Awesome READMEs 合集.</p>
+</blockquote>
+<p><a href="https://github.com/ryanoasis/nerd-fonts">ryanoasis / nerd-fonts</a></p>
+<blockquote>
+<p>图标、字体集合。🔡</p>
+</blockquote>
+<p><a href="https://github.com/justjavac/awesome-wechat-weapp">justjavac / awesome-wechat-weapp</a></p>
+<blockquote>
+<p>微信小程序开发资源汇总 💯</p>
+</blockquote>
+<p><a href="https://github.com/521xueweihan/HelloGitHub">521xueweihan / HelloGitHub</a></p>
+<blockquote>
+<p>分享 GitHub 上有趣、入门级的开源项目。<br />
+网站: <a href="https://hellogithub.com/">https://hellogithub.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/kon9chunkit/GitHub-Chinese-Top-Charts">kon9chunkit / GitHub-Chinese-Top-Charts</a></p>
+<blockquote>
+<p>🇨🇳 GitHub 中文排行榜，帮助你发现高分优秀中文项目、更高效地吸收国人的优秀经验成果；榜单每周更新一次，敬请关注！</p>
+</blockquote>
+<p><a href="https://github.com/ruanyf/weekly">ruanyf / weekly</a></p>
+<blockquote>
+<p>科技爱好者周刊，每周五发布。</p>
+</blockquote>
+<p><a href="https://github.com/niezhiyang/open_source_team">niezhiyang / open_source_team</a></p>
+<blockquote>
+<p>国内顶尖团队的开源地址。</p>
+</blockquote>
+<hr />
+<h2 id="cs相关"><a class="header" href="#cs相关">CS相关</a></h2>
+<p><a href="https://github.com/eryajf/Thanks-Mirror">eryajf / Thanks-Mirror</a></p>
+<blockquote>
+<p>整理记录各个包管理器，系统镜像，以及常用软件的好用镜像。</p>
+</blockquote>
+<p><a href="https://github.com/CyC2018/CS-Notes">CyC2018 / CS-Notes</a></p>
+<blockquote>
+<p>📚 技术面试必备基础知识、Leetcode 题解、Java、C++、Python、后端面试、操作系统、计算机网络、系统设计。</p>
+</blockquote>
+<p><a href="https://github.com/mtdvio/every-programmer-should-know">mtdvio / every-programmer-should-know</a></p>
+<blockquote>
+<p>每个软件开发者都应该知道的一些事。</p>
+</blockquote>
+<p><a href="https://github.com/halfrost/LeetCode-Go">halfrost / LeetCode-Go</a></p>
+<blockquote>
+<p>LeetCode 题解。<br />
+网站: <a href="https://books.halfrost.com/leetcode/">https://books.halfrost.com/leetcode/</a></p>
+</blockquote>
+<p><a href="https://github.com/halfrost/LeetCode-Go">LeetCode-Go</a></p>
+<blockquote>
+<p>Leetcode 算法刷题笔记。<br />
+网站: <a href="https://books.halfrost.com/leetcode/">https://books.halfrost.com/leetcode/</a></p>
+</blockquote>
+<p><a href="https://the-algorithms.com/zh_Hans">The Algorithms</a></p>
+<blockquote>
+<p>这个网站收集 GitHub 上面的各种算法实现，按照种类和语言进行分类。</p>
+</blockquote>
+<p><a href="https://github.com/krahets/hello-algo">krahets / hello-algo</a></p>
+<blockquote>
+<p>《Hello 算法》是一本动画图解、能运行、可提问的数据结构与算法入门书，支持 Java, C++, Python, Go, JS, TS, C#, Swift, Zig 等语言。<br />
+网站: <a href="https://hello-algo.com/">https://hello-algo.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/prakhar1989/awesome-courses">prakhar1989 / awesome-courses</a></p>
+<blockquote>
+<p>📚 大学CS课程。</p>
+</blockquote>
+<p><a href="https://github.com/EbookFoundation/free-programming-books">EbookFoundation / free-programming-books</a></p>
+<blockquote>
+<p>📚 编程相关书籍。</p>
+</blockquote>
+<p><a href="https://github.com/justjavac/free-programming-books-zh_CN">justjavac / free-programming-books-zh_CN</a></p>
+<blockquote>
+<p>📚 免费的计算机编程类中文书籍</p>
+</blockquote>
+<p><a href="https://github.com/ruanyf/free-books">ruanyf / free-books</a></p>
+<blockquote>
+<p>互联网上的免费书籍。</p>
+</blockquote>
+<p><a href="https://github.com/XiangLinPro/IT_book">XiangLinPro / IT_book</a></p>
+<blockquote>
+<p>本项目收藏这些年来看过或者听过的一些不错的常用的上千本书籍，包含了互联网行业大多数书籍和面试经验题目等等。有人工智能系列（常用深度学习框架TensorFlow、pytorch、keras。NLP、机器学习，深度学习等等），大数据系列(Spark,Hadoop,Scala,kafka等)，程序员必修系列（C、C++、java、数据结构、linux，设计模式、数据库等等）。</p>
+</blockquote>
+<p><a href="https://github.com/geeeeeeeeek/git-recipes">geeeeeeeeek / git-recipes</a></p>
+<blockquote>
+<p>🥡 高质量的 Git 中文教程。</p>
+</blockquote>
+<p><a href="https://github.com/github/gitignore">github / gitignore</a></p>
+<blockquote>
+<p>有用的 .gitignore 模板合集。</p>
+</blockquote>
+<p><a href="https://github.com/ziishaned/learn-regex">ziishaned / learn-regex</a></p>
+<blockquote>
+<p>学习正则表达式。Learn regex the easy way.
+相关网站: <a href="https://regex101.com/">https://regex101.com/</a>
+相关网站: <a href="https://regex-vis.com/">https://regex-vis.com/</a>
+相关网站: <a href="https://devtoolcafe.com/tools/regex">https://devtoolcafe.com/tools/regex</a>
+相关网站: <a href="https://jex.im/regulex/#!flags=&amp;re=%5E(a%7Cb)*%3F%24">https://jex.im/regulex/#!flags=&amp;re=%5E(a%7Cb)*%3F%24</a></p>
+</blockquote>
+<p><a href="https://github.com/Lellansin/Cipher-examples">Lellansin / Cipher-examples</a></p>
+<blockquote>
+<p>常见加密算法。</p>
+</blockquote>
+<p><a href="https://github.com/tuteng/Best-websites-a-programmer-should-visit-zh">tuteng / Best-websites-a-programmer-should-visit-zh</a></p>
+<blockquote>
+<p>程序员应该访问的最佳网站中文版。</p>
+</blockquote>
+<p><a href="https://refactoringguru.cn/design-patterns">设计模式</a></p>
+<blockquote>
+<p>该网站为中文教程，使用通俗的语言，介绍各种设计模式，图文并茂。此外，还有代码重构方面的英语内容。</p>
+</blockquote>
+<p><a href="https://visualgo.net/zh">Visu Algo</a></p>
+<blockquote>
+<p>该网站有各种常用算法的可视化演示。</p>
+</blockquote>
+<p><a href="https://endoflife.date/">endoflife.date</a></p>
+<blockquote>
+<p>这个网站列出了几乎所有主流项目的生命周期列表，可以快速查询哪些版本还在支持，哪些版本已经过期。</p>
+</blockquote>
+<p><a href="https://github.com/Developer-Y/cs-video-courses">Developer-Y / cs-video-courses</a></p>
+<blockquote>
+<p>计算机科学视频课程。</p>
+</blockquote>
+<hr />
+<h2 id="工具-3"><a class="header" href="#工具-3">工具</a></h2>
+<h3 id="开发工具"><a class="header" href="#开发工具">开发工具</a></h3>
+<p><a href="https://repl.it/languages">repl.it</a></p>
+<blockquote>
+<p>在线编程语言环境平台，可以在浏览器里面自动加载并运行各种 GitHub 仓库。这里有一个 C++ 写的<a href="https://repl.it/repls/StarkDefensiveCheckpoint">命令行扫雷游戏</a>，直接在浏览器运行。</p>
+</blockquote>
+<p><a href="https://www.gitpod.io/">Gitpod</a></p>
+<blockquote>
+<p>浏览器里面的 IDE 编辑环境，一键加载 GitHub 仓库，内部使用的是 VSCode Web 版。</p>
+</blockquote>
+<p><a href="https://github.com/conwnet/github1s">conwnet / github1s</a></p>
+<blockquote>
+<p>通过 VS Code 在线快速阅读 GitHub 项目代码。</p>
+</blockquote>
+<p><a href="https://github.com/docker-slim/docker-slim">docker-slim / docker-slim</a></p>
+<blockquote>
+<p>一个 Docker 镜像文件的瘦身工具，据称最好情况下，可以让镜像文件体积缩小为原来的30分之一。<br />
+网站: <a href="https://dockersl.im/">https://dockersl.im/</a></p>
+</blockquote>
+<p><a href="https://i18ns.com/zh/index.html">i18ns.com</a></p>
+<blockquote>
+<p>一个制作国际化应用的利器。该网站收集各种语言包，你输入中文，它返回各种语言包对这个词的翻译。</p>
+</blockquote>
+<p><a href="https://www.endpoints.dev/">endpoints.dev</a></p>
+<blockquote>
+<p>该网站向每个用户提供一个独特的 API 终点（endpoint），用于接受 HTTP 请求。用户发来的所有请求，都可以在该网站实时显示，用于调试和记录。</p>
+</blockquote>
+<p><a href="https://github.com/slatedocs/slate">slatedocs / slate</a></p>
+<blockquote>
+<p>API 文档的静态站点生成器。<br />
+网站: <a href="https://slatedocs.github.io/slate/#introduction">https://slatedocs.github.io/slate/#introduction</a></p>
+</blockquote>
+<p><a href="https://github.com/star7th/showdoc">star7th / showdoc</a></p>
+<blockquote>
+<p>ShowDoc is a tool greatly applicable for an IT team to share documents online一个非常适合IT团队的在线API文档、技术文档工具。<br />
+网站: <a href="https://www.showdoc.cc/">https://www.showdoc.cc/</a></p>
+</blockquote>
+<p><a href="https://gitee.com/xiaoym/knife4j">萧明 / knife4j</a></p>
+<blockquote>
+<p>knife4j 是为 Java MVC 框架集成 Swagger 生成 Api 文档的工具，前身是 swagger-bootstrap-ui。<br />
+网站: <a href="https://doc.xiaominfo.com/knife4j/documentation/">https://doc.xiaominfo.com/knife4j/documentation/</a></p>
+</blockquote>
+<p><a href="https://github.com/smart-doc-group/smart-doc">smart-doc-team / smart-doc</a></p>
+<blockquote>
+<p>smart-doc 是一款同时支持 java restful api 和 apache dubbo rpc 接口文档生成的工具。完全基于注释生成文档，做到零侵入。</p>
+</blockquote>
+<p><a href="https://github.com/mockoon/mockoon">mockoon / mockoon</a></p>
+<blockquote>
+<p>Mockoon 是在本地运行 mock api 最简单、最快的方法。无需远程部署，无需帐户，开源。</p>
+</blockquote>
+<p><a href="https://github.com/voidcosmos/npkill">voidcosmos / npkill</a></p>
+<blockquote>
+<p>查找列出系统中的 <code>node_modules</code> 文件及文件大小，可选择删除。<br />
+网站: <a href="https://npkill.js.org/">https://npkill.js.org/</a></p>
+</blockquote>
+<p><a href="https://github.com/localtunnel/localtunnel">Localtunnel</a></p>
+<blockquote>
+<p>一个 npm 软件包，为你的本地服务分配一个公网的 URL，使得公网可以访问这个本地服务。<br />
+网站: <a href="https://theboroer.github.io/localtunnel-www/">https://theboroer.github.io/localtunnel-www/</a></p>
+</blockquote>
+<h3 id="测试数据生成-api"><a class="header" href="#测试数据生成-api">测试数据生成 API</a></h3>
+<p><a href="https://randomuser.me/">RandomUser</a></p>
+<blockquote>
+<p>生成随机的用户数据。<br />
+API示例: <a href="https://randomuser.me/api/?gender=female">https://randomuser.me/api/?gender=female</a></p>
+</blockquote>
+<p><a href="https://baconipsum.com/json-api/">Bacon Ipsum</a></p>
+<blockquote>
+<p>lorem ipsum 生成器。<br />
+API示例: <a href="https://baconipsum.com/api/?type=meat-and-filler">https://baconipsum.com/api/?type=meat-and-filler</a></p>
+</blockquote>
+<p><a href="https://fakerapi.it/en">FakerAPI</a></p>
+<blockquote>
+<p>假数据生成合集。<br />
+API示例: <a href="https://fakerapi.it/api/v1/addresses?_quantity=1">https://fakerapi.it/api/v1/addresses?_quantity=1</a></p>
+</blockquote>
+<h3 id="客户端工具"><a class="header" href="#客户端工具">客户端工具</a></h3>
+<p><a href="https://github.com/plotly/falcon">plotly / falcon</a></p>
+<blockquote>
+<p>免费开源的 SQL 客户端。<br />
+网站: <a href="https://plot.ly/free-sql-client-download/">https://plot.ly/free-sql-client-download/</a></p>
+</blockquote>
+<p><a href="https://github.com/soimort/you-get">soimort / you-get</a></p>
+<blockquote>
+<p>下载器。</p>
+</blockquote>
+<p><a href="https://github.com/ytdl-org/youtube-dl">ytdl-org / youtube-dl</a></p>
+<blockquote>
+<p>命令行视频下载工具。<br />
+网站: <a href="http://ytdl-org.github.io/youtube-dl/">http://ytdl-org.github.io/youtube-dl/</a></p>
+</blockquote>
+<p><a href="https://github.com/cuiocean/ZY-Player">cuiocean / ZY-Player</a></p>
+<blockquote>
+<p>▶️ 跨平台桌面端视频资源播放器.简洁无广告.免费高颜值. 🎞<br />
+网站: <a href="http://zyplayer.fun/">http://zyplayer.fun/</a></p>
+</blockquote>
+<p><a href="https://github.com/zyedidia/micro">Micro</a></p>
+<blockquote>
+<p>一个命令行的文本编辑器，有窗格和便签，系统资源占用少，支持 Linux 和 Windows 系统。</p>
+</blockquote>
+<p><a href="https://github.com/CopyTranslator/CopyTranslator">CopyTranslator / CopyTranslator</a></p>
+<blockquote>
+<p>翻译小工具。<br />
+类似工具：<a href="https://github.com/ravenxrz/RubberTranslator">https://github.com/ravenxrz/RubberTranslator</a></p>
+</blockquote>
+<p><a href="https://github.com/speauty/anto">speauty / anto</a></p>
+<blockquote>
+<p>字幕文件(srt)翻译工具，Windows专用。</p>
+</blockquote>
+<p><a href="https://github.com/pavlobu/deskreen">pavlobu / deskreen</a></p>
+<blockquote>
+<p>将电脑屏幕共享到浏览器中，做第二块屏幕。<br />
+网站: <a href="http://deskreen.com/">http://deskreen.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/Albert-W/Folder-locker">Albert-W / Folder-locker</a></p>
+<blockquote>
+<p>一个小巧的文件上锁软件，没有压缩和加密过程，方便快捷。</p>
+</blockquote>
+<p><a href="https://github.com/torchgm/RoundedTB">torchgm / RoundedTB</a></p>
+<blockquote>
+<p>分段显示 Windows 11 任务栏，让它像 Mac。</p>
+</blockquote>
+<p><a href="https://github.com/hiroi-sora/Umi-OCR">hiroi-sora</a></p>
+<blockquote>
+<p>批量对本地图片文件进行离线OCR文字识别。</p>
+</blockquote>
+<p><a href="https://github.com/lqzhgood/Shmily">lqzhgood / Shmily</a></p>
+<blockquote>
+<p>这是一个 (QQ Wechat 短信 通话记录 照片 等) 记录归档的项目。<br />
+网站: <a href="http://lqzhgood.github.io/Shmily">http://lqzhgood.github.io/Shmily</a></p>
+</blockquote>
+<h3 id="查询"><a class="header" href="#查询">查询</a></h3>
+<p><a href="https://ip-geolocation.whoisxmlapi.com/api">WhoisXML API</a></p>
+<blockquote>
+<p>该网站提供各种网络信息查询，比如 IP 地理地址、Whois、DNS 等。</p>
+</blockquote>
+<p><a href="https://github.com/Lissy93/web-check">Lissy93 / web-check</a></p>
+<blockquote>
+<p>网站公开情报分析。<br />
+网站: <a href="https://web-check.as93.net/">https://web-check.as93.net/</a></p>
+</blockquote>
+<p><a href="https://github.com/jason5ng32/MyIP">jason5ng32 / MyIP</a></p>
+<blockquote>
+<p>一个更好的 IP 工具箱。可以查看IP、IP 信息（代理前后）、检查 DNS 泄露、检查 WebRTC 连接、测试网站可用性等。<br />
+网站: <a href="https://ipcheck.ing/">https://ipcheck.ing/</a></p>
+</blockquote>
+<p><a href="https://www.browserscan.net/">browserscan.net</a></p>
+<blockquote>
+<p>该网站检测浏览器指纹、IP 地址、WebRTC 泄露，DNS 泄露等信息。</p>
+</blockquote>
+<p><a href="https://github.com/anvaka/vs">anvaka / vs</a></p>
+<blockquote>
+<p>输入一个产品的名字，该工具会根据谷歌的自动搜索提示，生成一张图，上面是经常与该产品进行对比的其他产品。<br />
+网站: <a href="https://anvaka.github.io/vs/">https://anvaka.github.io/vs/</a></p>
+</blockquote>
+<p><a href="https://www.toptal.com/designers/htmlarrows/">符号清单</a></p>
+<blockquote>
+<p>常用符号的 Unicode 码点、HTML 代码和 HTML 实体写法。<br />
+网站: <a href="https://unicode-table.com/">https://unicode-table.com/</a><br />
+网站: <a href="https://blog.csdn.net/wy_97/article/details/77749405">https://blog.csdn.net/wy_97/article/details/77749405</a></p>
+</blockquote>
+<p><a href="https://redirectdetective.com/">重定向侦测</a></p>
+<blockquote>
+<p>该网站用来查看某个网址的重定向（redirect）情况。</p>
+</blockquote>
+<p><a href="https://devhints.io/">CheatSheet 汇总</a></p>
+<blockquote>
+<p>这个网站收集各种软件的 Cheat Sheet（常用操作表）。<br />
+同类网站: <a href="http://www.cheat-sheets.org/">http://www.cheat-sheets.org/</a></p>
+</blockquote>
+<p><a href="https://data.worldbank.org.cn/">世界银行</a></p>
+<blockquote>
+<p>世界银行统计数据。</p>
+</blockquote>
+<p><a href="https://hao.199it.com/">hao.199it</a></p>
+<blockquote>
+<p>数据查询。</p>
+</blockquote>
+<p><a href="https://emojipedia.org/">emojipedia</a></p>
+<blockquote>
+<p>查询各个平台的 Emoji 的高清图片。</p>
+</blockquote>
+<p><a href="https://searchemoji.app/zh-hans">SearchEmoji</a></p>
+<blockquote>
+<p>Emoji 搜索引擎，支持30种语言，<a href="https://github.com/rotick/searchemoji">代码</a>开源。</p>
+</blockquote>
+<p><a href="https://iconbuddy.app/">Iconbuddy</a></p>
+<blockquote>
+<p>一个很好用的图标搜索引擎，收入了10万+的图标，可以定制和下载每个图标。</p>
+</blockquote>
+<p><a href="https://flightadsb.variflight.com/">variflight</a></p>
+<blockquote>
+<p>全球航班飞行轨迹实时跟踪雷达。</p>
+</blockquote>
+<p><a href="https://www.shipxy.com/">船讯网</a></p>
+<blockquote>
+<p>全球船舶位置动态跟踪、船位查询、卫星 AIS 数据。</p>
+</blockquote>
+<p><a href="https://getsimnum.caict.ac.cn/">一证通查</a></p>
+<blockquote>
+<p>工信部推出的官方服务，查看个人名下登记了多少张电话卡。</p>
+</blockquote>
+<p><a href="https://github.com/thunlp/WantWords">thunlp / WantWords</a></p>
+<blockquote>
+<p>万词王。反向词典，返回语义匹配查询描述的词。</p>
+</blockquote>
+<h3 id="在线工具"><a class="header" href="#在线工具">在线工具</a></h3>
+<p><a href="https://github.com/CorentinTh/it-tools">CorentinTh / it-tools</a></p>
+<blockquote>
+<p>好用的开发者在线工具集合。<br />
+网站: <a href="https://it-tools.tech/">https://it-tools.tech/</a></p>
+</blockquote>
+<p><a href="https://github.com/hakimel/reveal.js">hakimel / reveal.js</a></p>
+<blockquote>
+<p>HTML Presentation 框架。</p>
+</blockquote>
+<p><a href="https://github.com/pearmini/gossip">pearmini / gossip</a></p>
+<blockquote>
+<p>一个高效创建和演示炫酷幻灯片的用户界面！<br />
+网站: <a href="https://pearmini.gitee.io/gossip/">https://pearmini.gitee.io/gossip/</a></p>
+</blockquote>
+<p><a href="https://github.com/slidevjs/slidev">slidevjs / slidev</a></p>
+<blockquote>
+<p>使用 Markdown 格式编写 PPT 幻灯片。<br />
+网站: <a href="https://cn.sli.dev/">https://cn.sli.dev/</a></p>
+</blockquote>
+<p><a href="https://github.com/ksky521/nodeppt">ksky521 / nodeppt</a></p>
+<blockquote>
+<p>将 Markdown 文档转成幻灯片，在浏览器演示的工具。<br />
+网站: <a href="https://nodeppt.js.org/">https://nodeppt.js.org/</a></p>
+</blockquote>
+<p><a href="https://sketchviz.com/new">Sketchviz</a></p>
+<blockquote>
+<p>生成手绘风格的流程图的在线工具。<br />
+类似网站: <a href="https://excalidraw.com/">https://excalidraw.com/</a></p>
+</blockquote>
+<p><a href="https://code2flow.com/app">code2flow</a></p>
+<blockquote>
+<p>一个符合直觉的，从伪码生成流程图的工具。</p>
+</blockquote>
+<p><a href="https://excalidraw.com/">Excalidraw</a></p>
+<blockquote>
+<p>手画效果流程图。</p>
+</blockquote>
+<p><a href="http://asciiflow.com/">asciiflow</a></p>
+<blockquote>
+<p>一个画 ASCII 码框图的网站。</p>
+</blockquote>
+<p><a href="https://smusamashah.github.io/text-to-diagram">文本到图形的在线工具</a></p>
+<blockquote>
+<p>这个页面给出一个在线工具的清单，可以将文本（图形的描述）渲染成图形，比如 PlantUML 和 ASCIIFlow。</p>
+</blockquote>
+<p><a href="https://www.plectica.com/">Plectica</a></p>
+<blockquote>
+<p>在线绘制知识图谱。</p>
+</blockquote>
+<p><a href="https://raileo.com/">Raileo</a></p>
+<blockquote>
+<p>该网站提供网站状态监控服务。免费账户可以监控三个网址，监控内容包括：运行时间监控、性能监控、SSL 监控和页面大小监控。</p>
+</blockquote>
+<p><a href="https://github.com/upptime/upptime">upptime / upptime</a></p>
+<blockquote>
+<p>一个免费开源的网站正常运行时间（uptime）监控服务。<br />
+网站: <a href="https://upptime.js.org/">https://upptime.js.org/</a></p>
+</blockquote>
+<p><a href="https://github.com/zhaoolee/ChromeAppHeroes">zhaoolee / ChromeAppHeroes</a></p>
+<blockquote>
+<p>🌈谷粒-Chrome插件英雄榜, 为优秀的Chrome插件写一本中文说明书, 让Chrome插件英雄们造福人类~<br />
+网站: <a href="https://v2fy.com/ChromeAppHeroes/">https://v2fy.com/ChromeAppHeroes/</a></p>
+</blockquote>
+<p><a href="https://github.com/badges/shields">badges / shields</a></p>
+<blockquote>
+<p>Badges 在线生成。<br />
+网站: <a href="https://shields.io/">https://shields.io/</a></p>
+</blockquote>
+<p><a href="https://github.com/ripienaar/free-for-dev">ripienaar / free-for-dev</a></p>
+<blockquote>
+<p>该仓库收集各种可以免费使用的（或有免费层的）互联网服务。<br />
+网站: <a href="https://free-for.dev">https://free-for.dev</a></p>
+</blockquote>
+<p><a href="https://getavataaars.com/">avataaars generator</a></p>
+<blockquote>
+<p>开源的卡通头像生成器，可以定制各种头像参数。<br />
+类似网站：<a href="https://multiavatar.com/">https://multiavatar.com/</a><br />
+类似网站：<a href="https://vue-color-avatar.vercel.app/">https://vue-color-avatar.vercel.app/</a><br />
+Notion 风格头像：<a href="https://notion-avatar.vercel.app/zh">https://notion-avatar.vercel.app/zh</a></p>
+</blockquote>
+<p><a href="https://github.com/txstc55/ugly-avatar">txstc55 / ugly-avatar</a></p>
+<blockquote>
+<p>丑丑头像生成器。<br />
+网站: <a href="https://txstc55.github.io/ugly-avatar/">https://txstc55.github.io/ugly-avatar/</a></p>
+</blockquote>
+<p><a href="https://www.explainshell.com/">ExplainShell.com</a></p>
+<blockquote>
+<p>Bash 命令的可视化解释工具。遇到复杂的 Bash 命令，可以输入到这个网站，查看该命令的解释。</p>
+</blockquote>
+<p><a href="https://audiomass.co/">AudioMass</a></p>
+<blockquote>
+<p>一个在线的音频处理工具，可以对声音的波形进行各种加工，添加特效。</p>
+</blockquote>
+<p><a href="https://app.flourish.studio/">Flourish</a></p>
+<blockquote>
+<p>在线数据可视化工具。</p>
+</blockquote>
+<p><a href="https://rawgraphs.io/">rawgraphs</a></p>
+<blockquote>
+<p>一个 Web 工具，只要把电子表格的数据复制粘贴到网页上，就可以转成数据可视化图形，不需要编写代码。</p>
+</blockquote>
+<p><a href="https://www.mygraphpaper.com/index.php?lang=zh-hans">MyGraphPaper</a></p>
+<blockquote>
+<p>生成笔记纸、方格纸、网格纸、草稿纸、乐谱纸、画稿纸等多种类型笔记纸，可下载 PDF。</p>
+</blockquote>
+<p><a href="https://random-data-api.com/">随机数据生成器</a></p>
+<blockquote>
+<p>这个网站提供一个 API，可以让你定制想要的随机数据，以 JSON 格式返回。</p>
+</blockquote>
+<p><a href="https://ba.net/screen-share-party/#6175501872347977">Screen Share Party</a></p>
+<blockquote>
+<p>该网站通过 WebRTC 协议把你的桌面分享给其他人。它生成一个 URL，其他人访问这个 URL，就能看到你的桌面。</p>
+</blockquote>
+<p><a href="https://www.diffchecker.com/">Diffchecker</a></p>
+<blockquote>
+<p>可以检查文本、图片、PDF 之间的差异。</p>
+</blockquote>
+<p><a href="https://www.calligrapher.ai/">Calligrapher.ai</a></p>
+<blockquote>
+<p>可以将英文输入变成手写体，并具有动画效果，提供 SVG 格式下载。</p>
+</blockquote>
+<p><a href="https://pfpmaker.com/">Profile Pic Maker</a></p>
+<blockquote>
+<p>一个在线工具，上传人像照片，可以自动提取头像，生成大头照图片。</p>
+</blockquote>
+<p><a href="https://github.com/logseq/logseq">Logseq</a></p>
+<blockquote>
+<p>一个开源的在线笔记工具，具有强大的知识整理功能。特点是所有数据都储存在你的 GitHub 仓库里面，网站本身不保存用户数据。<br />
+网站: <a href="https://logseq.com/">https://logseq.com/</a></p>
+</blockquote>
+<p><a href="https://github.com/salomonelli/best-resume-ever">best-resume-ever</a></p>
+<blockquote>
+<p>一个基于 Web 的简历模板，可以生成网页简历，然后用浏览器打印成 PDF 文件。<br />
+网站: <a href="https://salomonelli.github.io/best-resume-ever">https://salomonelli.github.io/best-resume-ever</a></p>
+</blockquote>
+<p><a href="https://www.mywifisign.com/zh-hans">我的 WiFi 卡片</a></p>
+<blockquote>
+<p>我的 WiFi 卡片是一款简单易用的生成可扫描的 Wi-Fi 密码信息二维码的在线服务。可直接使用手机相机直接扫描 我的WiFi 卡片，就能连接至对应 Wi-Fi，而无需输入密码。</p>
+</blockquote>
+<p><a href="https://thumbnail.ai/">Thumbnail.AI</a></p>
+<blockquote>
+<p>这个在线服务可以为任意 URL，自动生成标题图片，便于在社交媒体引用文章时，提供缩略图。</p>
+</blockquote>
+<p><a href="https://ray.so/">Ray.so</a></p>
+<blockquote>
+<p>可以生成漂亮的代码截图，颜色、阴影、背景都可以调整。<br />
+类似网站: <a href="https://carbon.now.sh/">https://carbon.now.sh/</a><br />
+类似网站: <a href="https://codeimg.io/">https://codeimg.io/</a><br />
+类似网站: <a href="https://www.codepng.app/">https://www.codepng.app/</a></p>
+</blockquote>
+<p><a href="https://text2image.jaychen.fun/">Text2image</a></p>
+<blockquote>
+<p>一个将文字或代码转换成图片的网页工具，可定制项多，主题、水印、阴影特效等都能自定义。</p>
+</blockquote>
+<p><a href="https://github.com/alyssaxuu/screenity">alyssaxuu / screenity</a></p>
+<blockquote>
+<p>一个强大的屏幕录制和标注的 Chrome 插件。<br />
+网站: <a href="https://chrome.google.com/webstore/detail/screenity-screen-recorder/kbbdabhdfibnancpjfhlkhafgdilcnji">https://chrome.google.com/webstore/detail/screenity-screen-recorder/kbbdabhdfibnancpjfhlkhafgdilcnji</a></p>
+</blockquote>
+<p><a href="https://github.com/RobinLinus/snapdrop">RobinLinus / snapdrop</a></p>
+<blockquote>
+<p>局域网内部分享文件。<br />
+网站: <a href="https://snapdrop.net/">https://snapdrop.net/</a><br />
+类似网站: <a href="http://cend.me/">http://cend.me/</a></p>
+</blockquote>
+<p><a href="https://azure.microsoft.com/zh-cn/services/cognitive-services/text-to-speech/#features">微软文字转语音</a></p>
+<blockquote>
+<p>文字转语音。</p>
+</blockquote>
+<p><a href="https://github.com/jsonhero-io/jsonhero-web">jsonhero-io / jsonhero-web</a></p>
+<blockquote>
+<p>JSON 可视化工具。<br />
+网站: <a href="https://jsonhero.io/">https://jsonhero.io/</a><br />
+类似网站: <a href="https://jsonvisio.com/">https://jsonvisio.com/</a></p>
+</blockquote>
+<p><a href="https://www.ourboard.io/">OurBoard</a></p>
+<blockquote>
+<p>一个在线白板，你创建一个房间，把网址分享给其他人，大家就可以在一块网页白板上共同涂写。 </p>
+</blockquote>
+<p><a href="https://www.alltoall.net/">alltoall</a></p>
+<blockquote>
+<p>文件格式转换。 
+类似网站: <a href="https://www.aconvert.com/cn/">https://www.aconvert.com/cn/</a></p>
+</blockquote>
+<p><a href="https://smallpdf.com/pdf-tools">smallpdf</a></p>
+<blockquote>
+<p>PDF 在线转换、编辑工具。 
+PDF 单页页内拆分: <a href="https://www.sejda.com/split-pdf-down-the-middle">https://www.sejda.com/split-pdf-down-the-middle</a></p>
+</blockquote>
+<p><a href="https://www.prettypolly.app/app">PrettyPolly</a></p>
+<blockquote>
+<p>学习外语时，最好有一个对话环境，可以练习口语，这个 AI 应用就解决了这个问题。它目前提供26种语言（包括中文、日文和韩文），你在网页上选择一种，就可以与 AI 进行口语练习了。</p>
+</blockquote>
+<p><a href="https://github.com/JasonGrass/rename">JasonGrass / rename</a></p>
+<blockquote>
+<p>在线文件批量重命名。<br />
+网站: <a href="https://rename.jgrass.xyz/">https://rename.jgrass.xyz/</a></p>
+</blockquote>
+<p><a href="https://github.com/mat/besticon">mat / besticon</a></p>
+<blockquote>
+<p>获取网站 favicon 图标的服务。<br />
+网站: <a href="https://besticon-demo.herokuapp.com/">https://besticon-demo.herokuapp.com/</a></p>
+</blockquote>
+<p><a href="https://patorjk.com/software/taag">TAAG</a></p>
+<blockquote>
+<p>Text to ASCII Art Generator (TAAG)，输入字符转换成 ASCII 艺术字。 </p>
+</blockquote>
+<h3 id="图片相关"><a class="header" href="#图片相关">图片相关</a></h3>
+<p><a href="https://aipix.net/?lang=zh">Aipix</a></p>
+<blockquote>
+<p>在线图片编辑器，AI 抠图。</p>
+</blockquote>
+<p><a href="https://www.remove.bg/zh">Removebg</a> </p>
+<blockquote>
+<p>抠图，去除图片背景。<br />
+类似网站: <a href="https://bgsub.cn/webapp/">https://bgsub.cn/webapp/</a><br />
+类似网站: <a href="https://www.photoroom.com/background-remover/">https://www.photoroom.com/background-remover/</a><br />
+类似网站: <a href="https://www.fococlipping.com/clip">https://www.fococlipping.com/clip</a></p>
+</blockquote>
+<p><a href="https://hotpot.ai/restore-picture">AI Picture Restorer</a></p>
+<blockquote>
+<p>去除老照片的破损和折痕。</p>
+</blockquote>
+<p><a href="https://github.com/TencentARC/GFPGAN">TencentARC / GFPGAN</a></p>
+<blockquote>
+<p>腾讯开源的旧照片 AI 修复。<br />
+网站: <a href="https://replicate.com/tencentarc/gfpgan">https://replicate.com/tencentarc/gfpgan</a></p>
+</blockquote>
+<p><a href="https://quququ.cn/">quququ</a> </p>
+<blockquote>
+<p>去除图片水印。<br />
+类似网站：<a href="https://www.watermarkremover.io/zh">https://www.watermarkremover.io/zh</a><br />
+类似网站：<a href="https://www.magiceraser.io/">https://www.magiceraser.io/</a><br />
+类似网站：<a href="https://theinpaint.com/">https://theinpaint.com/</a></p>
+</blockquote>
+<p><a href="https://colourise.sg/">ColouriseSG</a></p>
+<blockquote>
+<p>老照片上色。<br />
+类似网站：<a href="https://jpghd.com/">https://jpghd.com/</a><br />
+类似网站：<a href="https://palette.fm/">https://palette.fm/</a><br />
+类似网站：<a href="https://github.com/jantic/DeOldify">https://github.com/jantic/DeOldify</a></p>
+</blockquote>
+<p><a href="https://bigjpg.com/">Bigjpg</a></p>
+<blockquote>
+<p>图片无损放大。<br />
+类似项目：<a href="https://github.com/AaronFeng753/Waifu2x-Extension-GUI">AaronFeng753 / Waifu2x-Extension-GUI</a><br />
+类似项目：<a href="https://github.com/upscayl/upscayl">upscayl/upscayl</a> </p>
+</blockquote>
+<p><a href="https://www.geometrize.co.uk/">Geometrize</a></p>
+<blockquote>
+<p>将照片转成基于几何形状的水彩画。</p>
+</blockquote>
+<p><a href="https://www.qrpicture.com/">QRpicture</a></p>
+<blockquote>
+<p>一个在线工具，把图片变成可以扫描的二维码。</p>
+</blockquote>
+<p><a href="https://www.logoly.pro/">LogoLy</a></p>
+<blockquote>
+<p>P 站风格图标生成。</p>
+</blockquote>
+<p><a href="https://xoihazard.com/tools/halftone/">xoihazard</a></p>
+<blockquote>
+<p>半调图片生成。</p>
+</blockquote>
+<p><a href="https://clipdrop.co/relight">clipdrop光</a></p>
+<blockquote>
+<p>给你的画/图片二次打光。</p>
+</blockquote>
+<p><a href="https://toonme.com/">ToonMe</a></p>
+<blockquote>
+<p>ToonMe 是一款将自己的照片卡通化的图片编辑器，简单易用，效果出众。</p>
+</blockquote>
+<p><a href="https://www.softr.io/tools/svg-wave-generator">SVG Waves</a></p>
+<blockquote>
+<p>生成 SVG 的波浪图片。</p>
+</blockquote>
+<p><a href="https://cn.pattern.monster/">Pattern Monster</a></p>
+<blockquote>
+<p>一个简单的重复性 SVG 图案在线生成器。</p>
+</blockquote>
+<p><a href="https://github.com/beurtschipper/Depix">beurtschipper / Depix</a></p>
+<blockquote>
+<p>发布图片时，很多人喜欢使用马赛克隐去敏感信息，这个工具可以将打马赛克的文字还原。所以，隐藏信息尽量不要使用马赛克，最好是覆盖掉。</p>
+</blockquote>
+<p><a href="https://www.dbbqb.com/">逗比拯救世界</a></p>
+<blockquote>
+<p>表情包搜索网站。</p>
+</blockquote>
+<p><a href="https://stockcake.com/">StockCake</a></p>
+<blockquote>
+<p>AI 生成的免费图像素材网站，无限的无版权图片免费下载。</p>
+</blockquote>
+<h3 id="地图相关"><a class="header" href="#地图相关">地图相关</a></h3>
+<p><a href="http://bzdt.ch.mnr.gov.cn/">自然资源部标准地图服务系统</a></p>
+<blockquote>
+<p>地图下载。<br />
+类似网站：<a href="http://www.onegreen.net/maps/m/">http://www.onegreen.net/maps/m/</a></p>
+</blockquote>
+<p><a href="https://livingatlas.arcgis.com/wayback/#active=10321&amp;ext=119.21484,28.92340,123.52698,31.13228">World Imagery Wayback</a></p>
+<blockquote>
+<p>查看各个时期的卫星图像。<br />
+类似网站：<a href="https://earthexplorer.usgs.gov/">https://earthexplorer.usgs.gov/</a></p>
+</blockquote>
+<p><a href="https://www.davidrumsey.com/">大卫拉姆齐地图图书馆</a></p>
+<blockquote>
+<p>古地图下载。<br />
+类似网站: <a href="https://digitalatlas.ascdc.sinica.edu.tw/">https://digitalatlas.ascdc.sinica.edu.tw/</a></p>
+</blockquote>
+<p><a href="https://jthatch.com/Terrain2STL/">Terrain2STL</a></p>
+<blockquote>
+<p>该网站可以获取全球任何一个地点的地形图，生成 STL 文件供下载。</p>
+</blockquote>
+<p><a href="http://timespace-china.fudan.edu.cn/">中国历史地理信息平台</a></p>
+<blockquote>
+<p>复旦大学·中国历史地理信息平台。</p>
+</blockquote>
+<p><a href="http://amap.zju.edu.cn/">学术地图发布平台</a></p>
+<blockquote>
+<p>浙江大学·学术地图发布平台</p>
+</blockquote>
+<p><a href="https://datav.aliyun.com/tools/atlas">地图选择器</a></p>
+<blockquote>
+<p>生成全国各省市区地图，可下载 svg 格式。</p>
+</blockquote>
+<p><a href="http://www.ldmap.net/">兰图绘</a></p>
+<blockquote>
+<p>方便易用的在线地图绘制网站。</p>
+</blockquote>
+<p><a href="https://dmfw.mca.gov.cn/">国家地名信息库</a></p>
+<blockquote>
+<p>中国·国家地名信息库。</p>
+</blockquote>
+<p><a href="https://openinframap.org/">电力设施地图</a></p>
+<blockquote>
+<p>该网站的地图显示全世界电力设施的位置，包括电厂、变电站、输电线等等，甚至还有风力发电机。</p>
+</blockquote>
+<p><a href="https://minitokyo3d.com/">东京地铁实时 3D 地图</a></p>
+<blockquote>
+<p>这是一个 3D 地图，实时显示每一部地铁列车的位置。</p>
+</blockquote>
+<p><a href="http://cnrail.geogv.org/zhcn/">中国铁路地图</a></p>
+<blockquote>
+<p>这个网站可以查看全国铁路的路线图，另有<a href="https://www.openrailwaymap.org/">全世界的铁路地图</a>。 </p>
+</blockquote>
+<p><a href="https://anvaka.github.io/city-roads/">city-roads</a></p>
+<blockquote>
+<p>为你的城市生成一张手绘地图壁纸。</p>
+</blockquote>
+<p><a href="https://github.com/ruiduobao/gaode_MAP_CUN">中国五级行政区划查询</a></p>
+<blockquote>
+<p>该网站可以查询中国34个省份，2800多个县，60多万个行政村历年的行政管辖范围和所属关系变化。<br />
+网站: <a href="https://map.ruiduobao.com/">https://map.ruiduobao.com/</a></p>
+</blockquote>
+<p><a href="https://www.tasteatlas.com/search">Taste Atlas</a> </p>
+<blockquote>
+<p>全球食物地图。</p>
+</blockquote>
+<p><a href="https://dinosaurpictures.org/ancient-earth/">古代地球</a></p>
+<blockquote>
+<p>这个网站允许你查看各个地质年代的地球全景图，最早可以回溯到7.5亿年前。</p>
+</blockquote>
+<p><a href="https://www.earthcam.net/projects/empirestatebuilding/gigapixelpanorama/2021/">世界上最大的纽约市照片</a></p>
+<blockquote>
+<p>360 度的纽约全景照片，达到了800亿像素，支持移动和缩放。</p>
+</blockquote>
+<h3 id="设计工具"><a class="header" href="#设计工具">设计工具</a></h3>
+<p><a href="https://www.happyhues.co/palettes/17">Happy Hues</a></p>
+<blockquote>
+<p>该网站提供一系列配色方案，可以实时切换、定制，查看效果。</p>
+</blockquote>
+<p><a href="http://zhongguose.com/">中国色</a></p>
+<blockquote>
+<p>中国传统颜色。</p>
+</blockquote>
+<p><a href="https://coolbackgrounds.io/">Cool Backgrounds</a></p>
+<blockquote>
+<p>自动生成背景图片的工具网站，现在提供五种风格，每种都可以定制。</p>
+</blockquote>
+<h2 id="优秀文章"><a class="header" href="#优秀文章">优秀文章</a></h2>
+<p><a href="https://pages.longtian.info/gps/">GPS 原理解释</a></p>
+<blockquote>
+<p>解释了 GPS 的数学原理：卫星为什么可以用来定位？大量使用了动画图片进行说明。</p>
+</blockquote>
+<p><a href="https://www.jezzamon.com/fourier/zh-cn.html">傅里叶变换交互式入门</a></p>
+<blockquote>
+<p>傅里叶变换交互式入门。</p>
+</blockquote>
+<p><a href="https://setosa.io/blog/2014/07/26/markov-chains/">马尔可夫链的可视化解释</a></p>
+<blockquote>
+<p>使用大量动画，解释什么是马尔可夫链。</p>
+</blockquote>
+<p><a href="https://disneyanimation.com/process/">动画电影的制作过程</a></p>
+<blockquote>
+<p>迪斯尼的官方网页，解释动画电影是如何制作的，配有很多图片和视频。</p>
+</blockquote>
+<p><a href="https://sspai.com/post/71957">了解字体的基础知识</a></p>
+<blockquote>
+<p>设计师入门系列，介绍英文字体的基础知识，帮你认识各种字体名词。</p>
+</blockquote>
+<p><a href="https://www.nytimes.com/interactive/2021/03/02/climate/atlantic-ocean-climate-change.html">墨西哥湾洋流</a> </p>
+<blockquote>
+<p>《纽约时报》的长篇可视化作品，介绍墨西哥湾洋流的影响。</p>
+</blockquote>
+<p><a href="https://pudding.cool/2018/02/waveforms/">波形</a></p>
+<blockquote>
+<p>一篇互动式科普文章，介绍波的基本知识，有大量动画演示。</p>
+</blockquote>
+<p><a href="https://bbycroft.net/llm">LLM 可视化</a></p>
+<blockquote>
+<p>这个网站提供大型语言模型（LLM）原理讲解，每一步讲解都在右侧配上动画。</p>
+</blockquote>
+<p><a href="https://imgur.com/a/xi3P3">苏联台风级核潜艇</a></p>
+<blockquote>
+<p>苏联台风级核潜艇，诞生于上个世纪80年代，是世界最大的核潜艇。标题链接收集了100多张历史照片，详细回顾了这个巨无霸的历史。它一共建造了6艘，由于耗资巨大，苏联无力维持，目前已经全部退役。</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="RemoteJob.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Research.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="RemoteJob.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Research.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/mermaid.min.cdn.js"></script>
+        <script src="./js/jquery-storage.js"></script>
+        <script src="./js/globalscript.js"></script>
+
+
+    </div>
+    </body>
+</html>

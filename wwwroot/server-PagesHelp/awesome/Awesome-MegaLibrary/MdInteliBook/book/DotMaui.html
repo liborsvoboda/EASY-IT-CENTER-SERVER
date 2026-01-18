@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>DotMaui - OneClickGenerator Centralized Docs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="Here Write Your Desciption">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./css/global.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="Summary.html">Summary</a></li><li class="chapter-item expanded "><a href="3D.html"><strong aria-hidden="true">1.</strong> 3D</a></li><li class="chapter-item expanded "><a href="aframe.html"><strong aria-hidden="true">2.</strong> aframe</a></li><li class="chapter-item expanded "><a href="AI.html"><strong aria-hidden="true">3.</strong> AI</a></li><li class="chapter-item expanded "><a href="Algolia.html"><strong aria-hidden="true">4.</strong> Algolia</a></li><li class="chapter-item expanded "><a href="Angular.html"><strong aria-hidden="true">5.</strong> Angular</a></li><li class="chapter-item expanded "><a href="ApiDevTools.html"><strong aria-hidden="true">6.</strong> ApiDevTools</a></li><li class="chapter-item expanded "><a href="Avalonia.html"><strong aria-hidden="true">7.</strong> Avalonia</a></li><li class="chapter-item expanded "><a href="Awesome-All.html"><strong aria-hidden="true">8.</strong> Awesome-All</a></li><li class="chapter-item expanded "><a href="awesome-awesomeness.html"><strong aria-hidden="true">9.</strong> awesome-awesomeness</a></li><li class="chapter-item expanded "><a href="AwesomeAll.html"><strong aria-hidden="true">10.</strong> AwesomeAll</a></li><li class="chapter-item expanded "><a href="AwesomeAwesome.html"><strong aria-hidden="true">11.</strong> AwesomeAwesome</a></li><li class="chapter-item expanded "><a href="Awesomeness.html"><strong aria-hidden="true">12.</strong> Awesomeness</a></li><li class="chapter-item expanded "><a href="AWS.html"><strong aria-hidden="true">13.</strong> AWS</a></li><li class="chapter-item expanded "><a href="Badges.html"><strong aria-hidden="true">14.</strong> Badges</a></li><li class="chapter-item expanded "><a href="Beginners.html"><strong aria-hidden="true">15.</strong> Beginners</a></li><li class="chapter-item expanded "><a href="BigData.html"><strong aria-hidden="true">16.</strong> BigData</a></li><li class="chapter-item expanded "><a href="Black-friday.html"><strong aria-hidden="true">17.</strong> Black-friday</a></li><li class="chapter-item expanded "><a href="Blazor.html"><strong aria-hidden="true">18.</strong> Blazor</a></li><li class="chapter-item expanded "><a href="blockchain.html"><strong aria-hidden="true">19.</strong> blockchain</a></li><li class="chapter-item expanded "><a href="BridgeNET.html"><strong aria-hidden="true">20.</strong> BridgeNET</a></li><li class="chapter-item expanded "><a href="Browserify.html"><strong aria-hidden="true">21.</strong> Browserify</a></li><li class="chapter-item expanded "><a href="Bun.html"><strong aria-hidden="true">22.</strong> Bun</a></li><li class="chapter-item expanded "><a href="C++.html"><strong aria-hidden="true">23.</strong> C++</a></li><li class="chapter-item expanded "><a href="Card.html"><strong aria-hidden="true">24.</strong> Card</a></li><li class="chapter-item expanded "><a href="CharpGenerators.html"><strong aria-hidden="true">25.</strong> CharpGenerators</a></li><li class="chapter-item expanded "><a href="Chatgp.html"><strong aria-hidden="true">26.</strong> Chatgp</a></li><li class="chapter-item expanded "><a href="Chatgpt-prompts.html"><strong aria-hidden="true">27.</strong> Chatgpt-prompts</a></li><li class="chapter-item expanded "><a href="Chrome-devtools.html"><strong aria-hidden="true">28.</strong> Chrome-devtools</a></li><li class="chapter-item expanded "><a href="Cli-Apps.html"><strong aria-hidden="true">29.</strong> Cli-Apps</a></li><li class="chapter-item expanded "><a href="Courses.html"><strong aria-hidden="true">30.</strong> Courses</a></li><li class="chapter-item expanded "><a href="Csharp.html"><strong aria-hidden="true">31.</strong> Csharp</a></li><li class="chapter-item expanded "><a href="CsharpCodeGen.html"><strong aria-hidden="true">32.</strong> CsharpCodeGen</a></li><li class="chapter-item expanded "><a href="DataEngineering.html"><strong aria-hidden="true">33.</strong> DataEngineering</a></li><li class="chapter-item expanded "><a href="DbTools.html"><strong aria-hidden="true">34.</strong> DbTools</a></li><li class="chapter-item expanded "><a href="DomainDesign.html"><strong aria-hidden="true">35.</strong> DomainDesign</a></li><li class="chapter-item expanded "><a href="DotMaui.html" class="active"><strong aria-hidden="true">36.</strong> DotMaui</a></li><li class="chapter-item expanded "><a href="Dotnet-core.html"><strong aria-hidden="true">37.</strong> Dotnet-core</a></li><li class="chapter-item expanded "><a href="Dotnet.html"><strong aria-hidden="true">38.</strong> Dotnet</a></li><li class="chapter-item expanded "><a href="DotnetMaui.html"><strong aria-hidden="true">39.</strong> DotnetMaui</a></li><li class="chapter-item expanded "><a href="dotnetReady.html"><strong aria-hidden="true">40.</strong> dotnetReady</a></li><li class="chapter-item expanded "><a href="Echarts.html"><strong aria-hidden="true">41.</strong> Echarts</a></li><li class="chapter-item expanded "><a href="ECommerce.html"><strong aria-hidden="true">42.</strong> ECommerce</a></li><li class="chapter-item expanded "><a href="Editorjs.html"><strong aria-hidden="true">43.</strong> Editorjs</a></li><li class="chapter-item expanded "><a href="Electron.html"><strong aria-hidden="true">44.</strong> Electron</a></li><li class="chapter-item expanded "><a href="Example.html"><strong aria-hidden="true">45.</strong> Example</a></li><li class="chapter-item expanded "><a href="Falsehood.html"><strong aria-hidden="true">46.</strong> Falsehood</a></li><li class="chapter-item expanded "><a href="FastReportCloud.html"><strong aria-hidden="true">47.</strong> FastReportCloud</a></li><li class="chapter-item expanded "><a href="FireWalls.html"><strong aria-hidden="true">48.</strong> FireWalls</a></li><li class="chapter-item expanded "><a href="Generators.html"><strong aria-hidden="true">49.</strong> Generators</a></li><li class="chapter-item expanded "><a href="Github-vue.html"><strong aria-hidden="true">50.</strong> Github-vue</a></li><li class="chapter-item expanded "><a href="Github.html"><strong aria-hidden="true">51.</strong> Github</a></li><li class="chapter-item expanded "><a href="Gitpod.html"><strong aria-hidden="true">52.</strong> Gitpod</a></li><li class="chapter-item expanded "><a href="Gogot.html"><strong aria-hidden="true">53.</strong> Gogot</a></li><li class="chapter-item expanded "><a href="Gpt3.html"><strong aria-hidden="true">54.</strong> Gpt3</a></li><li class="chapter-item expanded "><a href="Graph.html"><strong aria-hidden="true">55.</strong> Graph</a></li><li class="chapter-item expanded "><a href="Hacking.html"><strong aria-hidden="true">56.</strong> Hacking</a></li><li class="chapter-item expanded "><a href="hcloud.html"><strong aria-hidden="true">57.</strong> hcloud</a></li><li class="chapter-item expanded "><a href="HealthCare.html"><strong aria-hidden="true">58.</strong> HealthCare</a></li><li class="chapter-item expanded "><a href="Hydrogen.html"><strong aria-hidden="true">59.</strong> Hydrogen</a></li><li class="chapter-item expanded "><a href="Hyperterm.html"><strong aria-hidden="true">60.</strong> Hyperterm</a></li><li class="chapter-item expanded "><a href="Ilp.html"><strong aria-hidden="true">61.</strong> Ilp</a></li><li class="chapter-item expanded "><a href="IncidentResponse.html"><strong aria-hidden="true">62.</strong> IncidentResponse</a></li><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">63.</strong> index</a></li><li class="chapter-item expanded "><a href="Interledger.html"><strong aria-hidden="true">64.</strong> Interledger</a></li><li class="chapter-item expanded "><a href="Interview-question.html"><strong aria-hidden="true">65.</strong> Interview-question</a></li><li class="chapter-item expanded "><a href="Iot.html"><strong aria-hidden="true">66.</strong> Iot</a></li><li class="chapter-item expanded "><a href="IPTV.html"><strong aria-hidden="true">67.</strong> IPTV</a></li><li class="chapter-item expanded "><a href="JamStack.html"><strong aria-hidden="true">68.</strong> JamStack</a></li><li class="chapter-item expanded "><a href="Java.html"><strong aria-hidden="true">69.</strong> Java</a></li><li class="chapter-item expanded "><a href="Javascript-learning.html"><strong aria-hidden="true">70.</strong> Javascript-learning</a></li><li class="chapter-item expanded "><a href="Javascript.html"><strong aria-hidden="true">71.</strong> Javascript</a></li><li class="chapter-item expanded "><a href="Jekyll-editors.html"><strong aria-hidden="true">72.</strong> Jekyll-editors</a></li><li class="chapter-item expanded "><a href="Jekyll-plugins.html"><strong aria-hidden="true">73.</strong> Jekyll-plugins</a></li><li class="chapter-item expanded "><a href="Jekyll-themes.html"><strong aria-hidden="true">74.</strong> Jekyll-themes</a></li><li class="chapter-item expanded "><a href="Jekyll.html"><strong aria-hidden="true">75.</strong> Jekyll</a></li><li class="chapter-item expanded "><a href="List.html"><strong aria-hidden="true">76.</strong> List</a></li><li class="chapter-item expanded "><a href="MacroPad.html"><strong aria-hidden="true">77.</strong> MacroPad</a></li><li class="chapter-item expanded "><a href="Main.html"><strong aria-hidden="true">78.</strong> Main</a></li><li class="chapter-item expanded "><a href="MarkDown.html"><strong aria-hidden="true">79.</strong> MarkDown</a></li><li class="chapter-item expanded "><a href="MarkDownEdit.html"><strong aria-hidden="true">80.</strong> MarkDownEdit</a></li><li class="chapter-item expanded "><a href="Master.html"><strong aria-hidden="true">81.</strong> Master</a></li><li class="chapter-item expanded "><a href="Maui.html"><strong aria-hidden="true">82.</strong> Maui</a></li><li class="chapter-item expanded "><a href="Metalsmith.html"><strong aria-hidden="true">83.</strong> Metalsmith</a></li><li class="chapter-item expanded "><a href="Microsoft.html"><strong aria-hidden="true">84.</strong> Microsoft</a></li><li class="chapter-item expanded "><a href="Moleculer.html"><strong aria-hidden="true">85.</strong> Moleculer</a></li><li class="chapter-item expanded "><a href="Mqtt.html"><strong aria-hidden="true">86.</strong> Mqtt</a></li><li class="chapter-item expanded "><a href="MusicProduct.html"><strong aria-hidden="true">87.</strong> MusicProduct</a></li><li class="chapter-item expanded "><a href="NaturalLangProcess.html"><strong aria-hidden="true">88.</strong> NaturalLangProcess</a></li><li class="chapter-item expanded "><a href="Near.html"><strong aria-hidden="true">89.</strong> Near</a></li><li class="chapter-item expanded "><a href="NetworkAutomation.html"><strong aria-hidden="true">90.</strong> NetworkAutomation</a></li><li class="chapter-item expanded "><a href="Newsletters.html"><strong aria-hidden="true">91.</strong> Newsletters</a></li><li class="chapter-item expanded "><a href="Nlp.html"><strong aria-hidden="true">92.</strong> Nlp</a></li><li class="chapter-item expanded "><a href="NodeJs.html"><strong aria-hidden="true">93.</strong> NodeJs</a></li><li class="chapter-item expanded "><a href="Npm.html"><strong aria-hidden="true">94.</strong> Npm</a></li><li class="chapter-item expanded "><a href="Npx.html"><strong aria-hidden="true">95.</strong> Npx</a></li><li class="chapter-item expanded "><a href="Nugets.html"><strong aria-hidden="true">96.</strong> Nugets</a></li><li class="chapter-item expanded "><a href="Observables.html"><strong aria-hidden="true">97.</strong> Observables</a></li><li class="chapter-item expanded "><a href="Okr.html"><strong aria-hidden="true">98.</strong> Okr</a></li><li class="chapter-item expanded "><a href="OpenSource.html"><strong aria-hidden="true">99.</strong> OpenSource</a></li><li class="chapter-item expanded "><a href="Osint.html"><strong aria-hidden="true">100.</strong> Osint</a></li><li class="chapter-item expanded "><a href="Php.html"><strong aria-hidden="true">101.</strong> Php</a></li><li class="chapter-item expanded "><a href="Piracy.html"><strong aria-hidden="true">102.</strong> Piracy</a></li><li class="chapter-item expanded "><a href="Pnpm.html"><strong aria-hidden="true">103.</strong> Pnpm</a></li><li class="chapter-item expanded "><a href="Podcasts.html"><strong aria-hidden="true">104.</strong> Podcasts</a></li><li class="chapter-item expanded "><a href="PostHtml.html"><strong aria-hidden="true">105.</strong> PostHtml</a></li><li class="chapter-item expanded "><a href="Powershell.html"><strong aria-hidden="true">106.</strong> Powershell</a></li><li class="chapter-item expanded "><a href="PractiseProgram.html"><strong aria-hidden="true">107.</strong> PractiseProgram</a></li><li class="chapter-item expanded "><a href="Projects.html"><strong aria-hidden="true">108.</strong> Projects</a></li><li class="chapter-item expanded "><a href="Puppetier.html"><strong aria-hidden="true">109.</strong> Puppetier</a></li><li class="chapter-item expanded "><a href="Python.html"><strong aria-hidden="true">110.</strong> Python</a></li><li class="chapter-item expanded "><a href="Random.html"><strong aria-hidden="true">111.</strong> Random</a></li><li class="chapter-item expanded "><a href="ReadmeAwesome.html"><strong aria-hidden="true">112.</strong> ReadmeAwesome</a></li><li class="chapter-item expanded "><a href="ReadTheDocs.html"><strong aria-hidden="true">113.</strong> ReadTheDocs</a></li><li class="chapter-item expanded "><a href="Recursion.html"><strong aria-hidden="true">114.</strong> Recursion</a></li><li class="chapter-item expanded "><a href="RemoteJob.html"><strong aria-hidden="true">115.</strong> RemoteJob</a></li><li class="chapter-item expanded "><a href="Repository.html"><strong aria-hidden="true">116.</strong> Repository</a></li><li class="chapter-item expanded "><a href="Research.html"><strong aria-hidden="true">117.</strong> Research</a></li><li class="chapter-item expanded "><a href="Resources.html"><strong aria-hidden="true">118.</strong> Resources</a></li><li class="chapter-item expanded "><a href="Ripple.html"><strong aria-hidden="true">119.</strong> Ripple</a></li><li class="chapter-item expanded "><a href="Roslyn.html"><strong aria-hidden="true">120.</strong> Roslyn</a></li><li class="chapter-item expanded "><a href="Selfhosted.html"><strong aria-hidden="true">121.</strong> Selfhosted</a></li><li class="chapter-item expanded "><a href="SheetMusic.html"><strong aria-hidden="true">122.</strong> SheetMusic</a></li><li class="chapter-item expanded "><a href="Shell.html"><strong aria-hidden="true">123.</strong> Shell</a></li><li class="chapter-item expanded "><a href="Slack.html"><strong aria-hidden="true">124.</strong> Slack</a></li><li class="chapter-item expanded "><a href="Solidity.html"><strong aria-hidden="true">125.</strong> Solidity</a></li><li class="chapter-item expanded "><a href="Speakers.html"><strong aria-hidden="true">126.</strong> Speakers</a></li><li class="chapter-item expanded "><a href="Split-keyboards.html"><strong aria-hidden="true">127.</strong> Split-keyboards</a></li><li class="chapter-item expanded "><a href="StoryBook.html"><strong aria-hidden="true">128.</strong> StoryBook</a></li><li class="chapter-item expanded "><a href="Streaming.html"><strong aria-hidden="true">129.</strong> Streaming</a></li><li class="chapter-item expanded "><a href="SummerNote.html"><strong aria-hidden="true">130.</strong> SummerNote</a></li><li class="chapter-item expanded "><a href="SysAdmin.html"><strong aria-hidden="true">131.</strong> SysAdmin</a></li><li class="chapter-item expanded "><a href="TailWindCss.html"><strong aria-hidden="true">132.</strong> TailWindCss</a></li><li class="chapter-item expanded "><a href="Talks.html"><strong aria-hidden="true">133.</strong> Talks</a></li><li class="chapter-item expanded "><a href="Tap.html"><strong aria-hidden="true">134.</strong> Tap</a></li><li class="chapter-item expanded "><a href="Tauri.html"><strong aria-hidden="true">135.</strong> Tauri</a></li><li class="chapter-item expanded "><a href="TechBlogs.html"><strong aria-hidden="true">136.</strong> TechBlogs</a></li><li class="chapter-item expanded "><a href="Templates.html"><strong aria-hidden="true">137.</strong> Templates</a></li><li class="chapter-item expanded "><a href="Terraform.html"><strong aria-hidden="true">138.</strong> Terraform</a></li><li class="chapter-item expanded "><a href="Themes.html"><strong aria-hidden="true">139.</strong> Themes</a></li><li class="chapter-item expanded "><a href="Tuneling.html"><strong aria-hidden="true">140.</strong> Tuneling</a></li><li class="chapter-item expanded "><a href="Visualstudiocode.html"><strong aria-hidden="true">141.</strong> Visualstudiocode</a></li><li class="chapter-item expanded "><a href="Vue-3.html"><strong aria-hidden="true">142.</strong> Vue-3</a></li><li class="chapter-item expanded "><a href="Vue.html"><strong aria-hidden="true">143.</strong> Vue</a></li><li class="chapter-item expanded "><a href="Wasi.html"><strong aria-hidden="true">144.</strong> Wasi</a></li><li class="chapter-item expanded "><a href="Web-browsers.html"><strong aria-hidden="true">145.</strong> Web-browsers</a></li><li class="chapter-item expanded "><a href="Web-editor.html"><strong aria-hidden="true">146.</strong> Web-editor</a></li><li class="chapter-item expanded "><a href="WebAssembly.html"><strong aria-hidden="true">147.</strong> WebAssembly</a></li><li class="chapter-item expanded "><a href="WebAudio.html"><strong aria-hidden="true">148.</strong> WebAudio</a></li><li class="chapter-item expanded "><a href="WebExtensions.html"><strong aria-hidden="true">149.</strong> WebExtensions</a></li><li class="chapter-item expanded "><a href="WebHacking.html"><strong aria-hidden="true">150.</strong> WebHacking</a></li><li class="chapter-item expanded "><a href="WebHosting.html"><strong aria-hidden="true">151.</strong> WebHosting</a></li><li class="chapter-item expanded "><a href="Workflow.html"><strong aria-hidden="true">152.</strong> Workflow</a></li><li class="chapter-item expanded "><a href="WPF.html"><strong aria-hidden="true">153.</strong> WPF</a></li><li class="chapter-item expanded "><a href="Wysiwyg.html"><strong aria-hidden="true">154.</strong> Wysiwyg</a></li><li class="spacer"></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">OneClickGenerator Centralized Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="awesome-maui"><a class="header" href="#awesome-maui">Awesome MAUI <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome" /></a></a></h1>
+<img src="https://raw.githubusercontent.com/MahmudX/awesome-maui/main/dotnet_bot.svg" align="right" width="170" style="transform: scaleX(-1);">
+<blockquote>
+<p>A collection of awesome MAUI resources</p>
+</blockquote>
+<p>.NET Multi-platform App UI (.NET MAUI) is a cross-platform framework for creating native mobile and desktop apps with C# and XAML.</p>
+<p>Contributions are always welcome! Please take a look at the <a href="https://github.com/MahmudX/awesome-maui/blob/main/contributing.md">contribution guidelines</a> page first.</p>
+<hr/>
+<h2 id="contents"><a class="header" href="#contents">Contents</a></h2>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#general">General</a></li>
+<li><a href="#plugins">Plugins</a></li>
+<li><a href="#ui">UI</a></li>
+<li><a href="#sample-apps">Sample Apps</a></li>
+</ul>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<h3 id="what-is-maui"><a class="header" href="#what-is-maui">What is MAUI?</a></h3>
+<p>.NET Multi-platform App UI (.NET MAUI) is a cross-platform framework for creating native mobile and desktop apps with C# and XAML. Using .NET MAUI, you can develop apps that can run on Android, iOS, macOS, and Windows from a single shared code-base.</p>
+<h3 id="get-started"><a class="header" href="#get-started">Get Started</a></h3>
+<p>To get started with MAUI, follow the instructions in the <a href="https://docs.microsoft.com/en-us/dotnet/maui/">MAUI Get Started</a> documentation.</p>
+<p><strong>Notable mention -</strong></p>
+<ul>
+<li><a href="https://github.com/jsuarezruiz">Javier Suárez</a>'s <a href="https://github.com/jsuarezruiz/awesome-dotnet-maui">Awesome .NET MAUI</a></li>
+<li>Microsoft's official sample repository - <a href="https://github.com/dotnet/maui-samples/">Maui Samples</a></li>
+</ul>
+<h2 id="general"><a class="header" href="#general">General</a></h2>
+<ul>
+<li><a href="https://devblogs.microsoft.com/dotnet/category/net-maui/">.NET MAUI Blog(s)</a> - Microsoft's Official Dev blog</li>
+<li><a href="https://github.com/dotnet/maui">Official GitHub repo</a> <a href="https://github.com/dotnet/maui"><img src="https://img.shields.io/github/issues/dotnet/maui?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/dotnet/maui/stargazers"><img src="https://img.shields.io/github/stars/dotnet/maui?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/dotnet/maui?style=flat-square" alt="last commit" /> .NET MAUI's official repo.</li>
+<li><a href="https://github.com/Redth/dotnet-maui-check">MAUI Check Tool</a> <a href="https://github.com/Redth/dotnet-maui-check">![GitHub issues](communityToolkit/Maui: https://img.shields.io/github/issues/Redth/dotnet-maui-check?style=flat-square)</a> <a href="https://github.com/Redth/dotnet-maui-check/stargazers"><img src="https://img.shields.io/github/stars/Redth/dotnet-maui-check?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/Redth/dotnet-maui-check?style=flat-square" alt="last commit" /> - .NET MAUI Check tool.</li>
+<li><a href="https://github.com/CommunityToolkit/Maui">.NET MAUI Community Toolkit</a> <a href="https://github.com/CommunityToolkit/Maui"><img src="https://img.shields.io/github/issues/CommunityToolkit/Maui?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/CommunityToolkit/Maui/stargazers"><img src="https://img.shields.io/github/stars/CommunityToolkit/Maui?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/CommunityToolkit/Maui?style=flat-square" alt="last commit" /> - A collection of common elements for development with .NET MAUI.</li>
+<li><a href="https://github.com/jsuarezruiz/xamarin-forms-to-net-maui">Xamarin Forms to .NET MAUI</a> <a href="https://github.com/jsuarezruiz/xamarin-forms-to-net-maui"><img src="https://img.shields.io/github/issues/jsuarezruiz/xamarin-forms-to-net-maui?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/jsuarezruiz/xamarin-forms-to-net-maui/stargazers"><img src="https://img.shields.io/github/stars/jsuarezruiz/xamarin-forms-to-net-maui?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/jsuarezruiz/xamarin-forms-to-net-maui?style=flat-square" alt="last commit" /> - This repository is a compilation with documentation, examples and tips when converting code from Xamarin.Forms to .NET MAUI.</li>
+</ul>
+<h2 id="plugins"><a class="header" href="#plugins">Plugins</a></h2>
+<ul>
+<li><a href="https://github.com/rrmanzano/maui-bindableproperty-generator">Maui.BindableProperty.Generator</a> <a href="https://github.com/rrmanzano/maui-bindableproperty-generator/issues"><img src="https://img.shields.io/github/issues/rrmanzano/maui-bindableproperty-generator?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/rrmanzano/maui-bindableproperty-generator/stargazers"><img src="https://img.shields.io/github/stars/rrmanzano/maui-bindableproperty-generator?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/rrmanzano/maui-bindableproperty-generator?style=flat-square" alt="last commit" /> - Source generator that automatically transforms fields into BindableProperties that can be used in MAUI.</li>
+<li><a href="https://github.com/matt-goldman/Maui.Plugins.PageResolver">Maui.Plugins.PageResolver</a> <a href="https://github.com/matt-goldman/Maui.Plugins.PageResolver/issues"><img src="https://img.shields.io/github/issues/matt-goldman/Maui.Plugins.PageResolver?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/matt-goldman/Maui.Plugins.PageResolver/stargazers"><img src="https://img.shields.io/github/stars/matt-goldman/Maui.Plugins.PageResolver?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/matt-goldman/Maui.Plugins.PageResolver?style=flat-square" alt="last commit" /> - A simple and lightweight page resolver for use in .NET MAUI projects.</li>
+<li><a href="https://github.com/CommunityToolkit/Maui">.NET MAUI Community Toolkit</a> - <a href="https://github.com/CommunityToolkit/Maui"><img src="https://img.shields.io/github/issues/CommunityToolkit/Maui?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/CommunityToolkit/Maui/stargazers"><img src="https://img.shields.io/github/stars/CommunityToolkit/Maui?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/CommunityToolkit/Maui?style=flat-square" alt="last commit" /> - The .NET MAUI Community Toolkit is a collection of common elements for development with .NET MAUI that people tend to replicate across multiple apps.</li>
+<li><a href="https://github.com/CommunityToolkit/Maui.Markup">.NET MAUI Community Toolkit Markup</a> - <a href="https://github.com/CommunityToolkit/Maui.Markup"><img src="https://img.shields.io/github/issues/CommunityToolkit/Maui.Markup?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/CommunityToolkit/Maui.Markup/stargazers"><img src="https://img.shields.io/github/stars/CommunityToolkit/Maui.Markup?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/CommunityToolkit/Maui.Markup?style=flat-square" alt="last commit" /> - MAUI Community Toolkit Markup</li>
+<li><a href="https://github.com/dotnet/Microsoft.Maui.Graphics">Microsoft MAUI Graphics</a> <a href="https://github.com/dotnet/Microsoft.Maui.Graphics/issues"><img src="https://img.shields.io/github/issues/dotnet/Microsoft.Maui.Graphics?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/dotnet/Microsoft.Maui.Graphics/stargazers"><img src="https://img.shields.io/github/stars/dotnet/Microsoft.Maui.Graphics?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/dotnet/Microsoft.Maui.Graphics?style=flat-square" alt="last commit" />  - Microsoft.Maui.Graphics is a cross-platform graphics library for iOS, Android, Windows, macOS, Tizen and Linux completely in C#.</li>
+<li><a href="https://github.com/enisn/Xamarin.Forms.InputKit">InputKit</a> <a href="https://github.com/enisn/Xamarin.Forms.InputKit/issues"><img src="https://img.shields.io/github/issues/enisn/Xamarin.Forms.InputKit?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/enisn/Xamarin.Forms.InputKit/stargazers"><img src="https://img.shields.io/github/stars/enisn/Xamarin.Forms.InputKit?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/enisn/Xamarin.Forms.InputKit?style=flat-square" alt="last commit" />  - Fully bindable, featured and customizable input collection for MAUI &amp; Xamarin.</li>
+<li><a href="https://github.com/Taiizor/Taiizor.Essentials.Maui">Taiizor.Essentials.Maui</a> <a href="https://github.com/Taiizor/Taiizor.Essentials.Maui/issues"><img src="https://img.shields.io/github/issues/Taiizor/Taiizor.Essentials.Maui?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/Taiizor/Taiizor.Essentials.Maui/stargazers"><img src="https://img.shields.io/github/stars/Taiizor/Taiizor.Essentials.Maui?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/Taiizor/Taiizor.Essentials.Maui?style=flat-square" alt="last commit" />  - Taiizor.Essentials.Maui is a essentials library for projects using .NET MAUI. It provides convenience with various functions it offers.</li>
+<li><a href="https://aptabase.com/for-maui">Aptabase.Maui</a> <a href="https://github.com/aptabase/aptabase-maui/issues"><img src="https://img.shields.io/github/issues/aptabase/aptabase-maui?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/aptabase/aptabase-maui/stargazers"><img src="https://img.shields.io/github/stars/aptabase/aptabase-maui?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/aptabase/aptabase-maui?style=flat-square" alt="last commit" /> - Analytics for .NET MAUI Apps. 100% Open Source, Privacy-Friendly and Simple.</li>
+</ul>
+<h2 id="ui"><a class="header" href="#ui">UI</a></h2>
+<ul>
+<li><a href="https://github.com/IeuanWalker/Maui.Breadcrumb">Breadcrumb</a> <a href="https://github.com/IeuanWalker/Maui.Breadcrumb/issues"><img src="https://img.shields.io/github/issues/IeuanWalker/Maui.Breadcrumb?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/IeuanWalker/Maui.Breadcrumb/stargazers"><img src="https://img.shields.io/github/stars/IeuanWalker/Maui.Breadcrumb?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/IeuanWalker/Maui.Breadcrumb?style=flat-square" alt="last commit" /> - This is a breadcrumb navigation control that is complete automatic and uses the Navigation stack and page titles to generate the breadcrumbs.</li>
+<li><a href="https://github.com/DevExpress-Examples/maui-data-grid-examples">DevExpress Date Grid</a> <a href="https://github.com/DevExpress-Examples/maui-data-grid-examples/issues"><img src="https://img.shields.io/github/issues/DevExpress-Examples/maui-data-grid-examples?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/DevExpress-Examples/maui-data-grid-examples/stargazers"><img src="https://img.shields.io/github/stars/DevExpress-Examples/maui-data-grid-examples?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/DevExpress-Examples/maui-data-grid-examples?style=flat-square" alt="last commit" /> - The DevExpress ChartView for for .NET MAUI Preview 5 can visualize data in the Cartesian coordinate system as areas, bars, points, bubbles, lines, and other forms.</li>
+<li><a href="https://github.com/DevExpress-Examples/maui-chart-examples/tree/21.2.1+/CS/ChartViewExample">DevExpress Cartesian Chart</a> <a href="https://github.com/DevExpress-Examples/maui-chart-examples/issues"><img src="https://img.shields.io/github/issues/DevExpress-Examples/maui-chart-examples?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/DevExpress-Examples/maui-chart-examples/stargazers"><img src="https://img.shields.io/github/stars/DevExpress-Examples/maui-chart-examples?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/DevExpress-Examples/maui-chart-examples?style=flat-square" alt="last commit" /> - The DevExpress ChartView for for .NET MAUI Preview 5 can visualize data in the Cartesian coordinate system as areas, bars, points, bubbles, lines, and other forms.</li>
+<li><a href="https://github.com/DevExpress-Examples/maui-chart-examples/tree/21.2.1+/CS/PieChartExample">DevExpress Pie Chart</a> <a href="https://github.com/DevExpress-Examples/maui-chart-examples/issues"><img src="https://img.shields.io/github/issues/DevExpress-Examples/maui-chart-examples?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/DevExpress-Examples/maui-chart-examples/stargazers"><img src="https://img.shields.io/github/stars/DevExpress-Examples/maui-chart-examples?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/DevExpress-Examples/maui-chart-examples?style=flat-square" alt="last commit" /> - The DevExpress Pie Chart for .NET MAUI Preview 5 visualizes data as a circle chart divided into slices to illustrate numerical proportion.</li>
+<li><a href="https://github.com/dotnet/Microsoft.Maui.Graphics.Controls">Microsoft MAUI Graphics Controls</a> <a href="https://github.com/dotnet/Microsoft.Maui.Graphics.Controls"><img src="https://img.shields.io/github/issues/dotnet/Microsoft.Maui.Graphics.Controls?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/dotnet/Microsoft.Maui.Graphics.Controls/stargazers"><img src="https://img.shields.io/github/stars/dotnet/Microsoft.Maui.Graphics.Controls?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/dotnet/Microsoft.Maui.Graphics.Controls?style=flat-square" alt="last commit" /> - Microsoft.Maui.Graphics.Controls is a .NET MAUI experiment that offers drawn controls allowing to choose between Cupertino, Fluent and Material.</li>
+<li><a href="https://github.com/beto-rodriguez/LiveCharts2">LiveCharts2</a> - <a href="https://github.com/beto-rodriguez/LiveCharts2"><img src="https://img.shields.io/github/issues/beto-rodriguez/LiveCharts2?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/beto-rodriguez/LiveCharts2/stargazers"><img src="https://img.shields.io/github/stars/beto-rodriguez/LiveCharts2?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/beto-rodriguez/LiveCharts2?style=flat-square" alt="last commit" /> - Simple, flexible, interactive &amp; powerful charts, maps and gauges for .Net</li>
+<li><a href="https://github.com/syncfusion/maui-demos">Syncfusion .NET MAUI examples</a> - <a href="https://github.com/syncfusion/maui-demos"><img src="https://img.shields.io/github/issues/syncfusion/maui-demos?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/syncfusion/maui-demos/stargazers"><img src="https://img.shields.io/github/stars/syncfusion/maui-demos?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/syncfusion/maui-demos?style=flat-square" alt="last commit" /> -  The Syncfusion .NET MAUI control’s samples and the guide to use them.</li>
+<li><a href="https://github.com/IeuanWalker/Maui.StateButton">StateButton</a> - <a href="https://github.com/IeuanWalker/Maui.StateButton"><img src="https://img.shields.io/github/issues/IeuanWalker/Maui.StateButton" alt="GitHub issues" /></a> <a href="https://github.com/IeuanWalker/Maui.StateButton/stargazers"><img src="https://img.shields.io/github/stars/IeuanWalker/Maui.StateButton?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/IeuanWalker/Maui.StateButton?style=flat-square" alt="last commit" /> -  With this control you are able to create any style of button. This is possible as it acts as a wrapper to your XAML and provides you the events/ commands and properties to bind too. It's also 100% accessible with each platform seeing/ treating the control as a native button.</li>
+<li><a href="https://github.com/IeuanWalker/Maui.Switch">Switch</a> - <a href="https://github.com/IeuanWalker/Maui.Switch"><img src="https://img.shields.io/github/issues/IeuanWalker/Maui.Switch" alt="GitHub issues" /></a> <a href="https://github.com/IeuanWalker/Maui.Switch/stargazers"><img src="https://img.shields.io/github/stars/IeuanWalker/Maui.Switch?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/IeuanWalker/Maui.Switch?style=flat-square" alt="last commit" /> - A control that allows you to design any type of switch/ toggle for .NET MAUI. It's also 100% accessible.</li>
+<li><a href="https://github.com/enisn/UraniumUI">Uranium UI Kit</a> - <a href="https://github.com/enisn/UraniumUI"><img src="https://img.shields.io/github/issues/enisn/UraniumUI" alt="GitHub issues" /></a> <a href="https://github.com/enisn/UraniumUI/stargazers"><img src="https://img.shields.io/github/stars/enisn/UraniumUI?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/enisn/UraniumUI?style=flat-square" alt="last commit" /> -  Uranium is a Free &amp; Open-Source UI Kit for .NET MAUI. It provides a set of controls and utilities to build modern applications. It is built on top of the .NET MAUI infrastructure and provides a set of controls and layouts to build modern UIs. It also provides infrastructure for building custom controls and themes on it.</li>
+<li><a href="https://github.com/syncfusion/maui-toolkit">Syncfusion .NET MAUI Toolkit</a> - <a href="https://github.com/syncfusion/maui-toolkit"><img src="https://img.shields.io/github/issues/syncfusion/maui-toolkit?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/syncfusion/maui-toolkit/stargazers"><img src="https://img.shields.io/github/stars/syncfusion/maui-toolkit?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/syncfusion/maui-toolkit?style=flat-square" alt="last commit" /> -  The Syncfusion Toolkit for .NET MAUI is an open-source library offering high-quality, customizable UI components, controls, and file-format libraries for building rich, interactive applications across iOS, Android, macOS, and Windows.</li>
+</ul>
+<h2 id="sample-apps"><a class="header" href="#sample-apps">Sample Apps</a></h2>
+<ul>
+<li><a href="https://github.com/sattasundar/maui-starbucks-ui">Starbucks Redesign</a> <a href="https://github.com/sattasundar/maui-starbucks-ui"><img src="https://img.shields.io/github/issues/sattasundar/maui-starbucks-ui?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/sattasundar/maui-starbucks-ui/stargazers"><img src="https://img.shields.io/github/stars/sattasundar/maui-starbucks-ui?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/sattasundar/maui-starbucks-ui?style=flat-square" alt="last commit" /> - A sample Starbucks redesign app using .NET MAUI features.</li>
+<li><a href="https://github.com/matt-goldman/maui-chat">MAUI Chat</a> <a href="https://github.com/matt-goldman/maui-chat"><img src="https://img.shields.io/github/issues/matt-goldman/maui-chat?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/matt-goldman/maui-chat/stargazers"><img src="https://img.shields.io/github/stars/matt-goldman/maui-chat?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/matt-goldman/maui-chat?style=flat-square" alt="last commit" /> - A simple chat app using SignalR, MAUI and Blazor.</li>
+<li><a href="https://github.com/jsuarezruiz/netmaui-chat-app-challenge">Chat App</a> <a href="https://github.com/jsuarezruiz/netmaui-chat-app-challenge"><img src="https://img.shields.io/github/issues/jsuarezruiz/netmaui-chat-app-challenge?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/jsuarezruiz/netmaui-chat-app-challenge/stargazers"><img src="https://img.shields.io/github/stars/jsuarezruiz/netmaui-chat-app-challenge?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/jsuarezruiz/netmaui-chat-app-challenge?style=flat-square" alt="last commit" /> - Chat App UI Challenge made with .NET MAUI.</li>
+<li><a href="https://github.com/brminnick/HackerNews">Hacker News</a> <a href="https://github.com/brminnick/HackerNews"><img src="https://img.shields.io/github/issues/brminnick/HackerNews?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/brminnick/HackerNews/stargazers"><img src="https://img.shields.io/github/stars/brminnick/HackerNews?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/brminnick/HackerNews?style=flat-square" alt="last commit" /> - A .NET MAUI app for displaying the top posts on Hacker News.</li>
+<li><a href="https://github.com/AppCreativity/BirdAtlas">Bird Atlas</a> <a href="https://github.com/AppCreativity/BirdAtlas"><img src="https://img.shields.io/github/issues/AppCreativity/BirdAtlas?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/AppCreativity/BirdAtlas/stargazers"><img src="https://img.shields.io/github/stars/AppCreativity/BirdAtlas?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/AppCreativity/BirdAtlas?style=flat-square" alt="last commit" /> - Bird Atlas app.</li>
+<li><a href="https://github.com/davidortinau/WeatherTwentyOne/">Weather '21</a> - <a href="https://github.com/davidortinau/WeatherTwentyOnes"><img src="https://img.shields.io/github/issues/davidortinau/WeatherTwentyOne?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/davidortinau/WeatherTwentyOne/stargazers"><img src="https://img.shields.io/github/stars/davidortinau/WeatherTwentyOne?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/davidortinau/WeatherTwentyOne?style=flat-square" alt="last commit" /> - Microsoft Build 2021 showcase app.</li>
+<li><a href="https://github.com/microsoft/dotnet-podcasts/tree/main/src">Dotnet Podcast</a> - <a href="https://github.com/microsoft/dotnet-podcasts"><img src="https://img.shields.io/github/issues/microsoft/dotnet-podcasts?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/microsoft/dotnet-podcasts/stargazers"><img src="https://img.shields.io/github/stars/microsoft/dotnet-podcasts?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/microsoft/dotnet-podcasts?style=flat-square" alt="last commit" /> - .NET 6 reference application shown at .NET Conf 2021</li>
+<li><a href="https://github.com/naweed/MauiScientificCalculator">Scientific Calculator</a> - <a href="https://github.com/naweed/MauiScientificCalculator"><img src="https://img.shields.io/github/issues/naweed/MauiScientificCalculator?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/naweed/MauiScientificCalculator/stargazers"><img src="https://img.shields.io/github/stars/naweed/MauiScientificCalculator?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/naweed/MauiScientificCalculator?style=flat-square" alt="last commit" /> - Beautiful Scentific Calculator built using .NET MAUI</li>
+<li><a href="https://github.com/jihadkhawaja/MobileChat">Mobile Chat</a> <a href="https://github.com/jihadkhawaja/MobileChat"><img src="https://img.shields.io/github/issues/jihadkhawaja/MobileChat?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/jihadkhawaja/MobileChat/stargazers"><img src="https://img.shields.io/github/stars/jihadkhawaja/MobileChat?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/jihadkhawaja/MobileChat?style=flat-square" alt="last commit" /> - Cross-platform chat application created with MAUI and ASP.NET SignalR.</li>
+<li><a href="https://github.com/Soferity/GamePortal">Soferity: Game Portal</a> <a href="https://github.com/Soferity/GamePortal/issues"><img src="https://img.shields.io/github/issues/Soferity/GamePortal?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/Soferity/GamePortal/stargazers"><img src="https://img.shields.io/github/stars/Soferity/GamePortal?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/Soferity/GamePortal?style=flat-square" alt="last commit" /> - Soferity: Game Portal is a game hub. It allows you to have a fun and good time with the various types of games it offers.</li>
+<li><a href="https://github.com/rwecho/V2ex.MAUI">V2ex.MAUI</a> <a href="https://github.com/rwecho/V2ex.MAUI/issues"><img src="https://img.shields.io/github/issues/rwecho/V2ex.MAUI?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/rwecho/V2ex.MAUI/stargazers"><img src="https://img.shields.io/github/stars/rwecho/V2ex.MAUI?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/rwecho/V2ex.MAUI?style=flat-square" alt="last commit" /> - A multi-platform, user-friendly, and feature-rich V2ex native application made by MAUI.</li>
+<li><a href="https://github.com/fdmomtaz/WeightTracker-DotNetMaui">WeightTracker</a> <a href="https://github.com/fdmomtaz/WeightTracker-DotNetMaui/issues"><img src="https://img.shields.io/github/issues/fdmomtaz/WeightTracker-DotNetMaui?style=flat-square" alt="GitHub issues" /></a> <a href="https://github.com/fdmomtaz/WeightTracker-DotNetMaui/stargazers"><img src="https://img.shields.io/github/stars/fdmomtaz/WeightTracker-DotNetMaui?style=flat-square" alt="GitHub stars" /></a> <img src="https://img.shields.io/github/last-commit/fdmomtaz/WeightTracker-DotNetMaui?style=flat-square" alt="last commit" /> - A simple, user-friendly .NET MAUI weight tracker app with a clean design for anyone looking to explore .NET MAUI development.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="DomainDesign.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Dotnet-core.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="DomainDesign.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Dotnet-core.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/mermaid.min.cdn.js"></script>
+        <script src="./js/jquery-storage.js"></script>
+        <script src="./js/globalscript.js"></script>
+
+
+    </div>
+    </body>
+</html>
