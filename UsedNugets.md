@@ -1,4 +1,8 @@
-﻿# NetCore Electron with Metro
+﻿# Excel on Web
+https://github.com/jspreadsheet/ce
+
+
+# NetCore Electron with Metro
 https://github.com/taurenshaman/electron-net-demo/tree/master  Ideal For Standalone Touch Panel
 
 
@@ -25,7 +29,7 @@ dotnet run : command in project folder to run project
 dotnet run --project ./projects/proj1/proj1.csproj --property:Configuration=Release
 
 
-dotnet restore
+dotnet restore = update packages 
 dotnet build
 dotnet build --disable-build-servers
 dotnet test

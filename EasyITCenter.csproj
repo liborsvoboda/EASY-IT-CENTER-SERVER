@@ -152,7 +152,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="EASYTools.LicenseVerify" Version="1.0.1" />
     <PackageReference Include="EASYTools.MonacoProvider" Version="0.2.4" />
     <PackageReference Include="EASYTools.StringReplaceInFiles" Version="1.0.0" />
-    <PackageReference Include="EASYTools.SUMMARY" Version="1.0.0" />
+    <PackageReference Include="EASYTools.SUMMARY" Version="1.0.2" />
     <PackageReference Include="EASYTools.TupleExtension" Version="1.0.0" />
     <PackageReference Include="ErikEJ.EntityFrameworkCore.DgmlBuilder" Version="6.0.0" />
     <PackageReference Include="FastReport.OpenSource" Version="2025.2.8" />
