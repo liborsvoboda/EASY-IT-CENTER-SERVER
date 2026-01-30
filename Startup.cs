@@ -94,8 +94,6 @@ namespace EasyITCenter {
 
 
             //REGISTERING SERVICES BY CLASS OR INTERFACE
-
-            ServerConfigurationServices.ConfigureUserFluentEmailing(ref services);
             ServerConfigurationServices.AutoRegisterClassServices(ref services);
             ServerConfigurationServices.ConfigureTransient(ref services);
             ServerConfigurationServices.ConfigureSingletons(ref services);

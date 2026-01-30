@@ -214,6 +214,11 @@ https://github.com/orgs/EasyMicroservices
     <PackageReference Include="Yeoman" Version="1.1.2" />
     <PackageReference Include="Yeoman.PowerMvc" Version="0.4.0" />
 
-
+    <PackageReference Include="FluentEmail.Core" Version="3.0.2" />
+    <PackageReference Include="FluentEmail.Handlebars" Version="0.1.3" />
+    <PackageReference Include="FluentEmail.Http2smtp" Version="1.0.1" />
+    <PackageReference Include="FluentEmail.Liquid" Version="3.0.2" />
+    <PackageReference Include="FluentEmail.Razor" Version="3.0.2" />
+    <PackageReference Include="FluentEmail.Smtp" Version="3.0.2" />
 
 

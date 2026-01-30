@@ -55,23 +55,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
 
         /// <summary>
-        /// Server Portal Emailing with Template and History
-        /// https://github.com/lukencode/FluentEmail
-        /// </summary>
-        /// <param name="services"></param>
-        internal static void ConfigureUserFluentEmailing(ref IServiceCollection services)
-        {
-            if (bool.Parse(DbOperations.GetServerParameterLists("UserFluentEmailingEnabled").Value))
-            {
-                services.AddFluentEmail(DbOperations.GetServerParameterLists("ConfigManagerEmailAddress").Value).AddRazorRenderer().AddHandlebarsRenderer()
-                .AddSmtpSender(DbOperations.GetServerParameterLists("EmailerSMTPServerAddress").Value, int.Parse(DbOperations.GetServerParameterLists("EmailerSMTPPort").Value), DbOperations.GetServerParameterLists("EmailerSMTPLoginUsername").Value, DbOperations.GetServerParameterLists("EmailerSMTPLoginPassword").Value);
-            }
-        }
-
-
-
-
-        /// <summary>
         /// Configure AutoMinify Js,Css 
         /// </summary>
         /// <param name="services"></param>
@@ -94,19 +77,16 @@ namespace EasyITCenter.ServerCoreConfiguration {
             if (bool.Parse(DbOperations.GetServerParameterLists("ServerFtpEngineEnabled").Value)) {
                 services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "*"; /*opt.Port*/ });
                 services.Configure<FubarDev.FtpServer.FileSystem.DotNet.DotNetFileSystemOptions>(opt => {
-                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.UserPath, "FTPstorage") : Path.Combine(SrvRuntime.UserPath);
+                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.UserPath, "guest") : Path.Combine(SrvRuntime.UserPath);
                     opt.AllowNonEmptyDirectoryDelete = true;
                 });
                 services.AddFtpServer(
                     builder => {
                         if (!bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value)) { 
-                            builder.UseDotNetFileSystem().EnableDefaultChecks().UseSingleRoot().EnableAnonymousAuthentication(); 
-                        } else { 
-                            builder.UseDotNetFileSystem().EnableDefaultChecks().UseRootPerUser(); 
-                        }
+                            builder.UseDotNetFileSystem().UseSingleRoot().EnableAnonymousAuthentication(); 
+                        } else { builder.UseDotNetFileSystem().UseRootPerUser(); }
                     });
                 services.AddSingleton<IMembershipProvider, HostedFtpServerMembershipProvider>();
-                services.AddSingleton<IAccountDirectoryQuery, RootPerUserAccountDirectory>();
                 services.AddHostedService<HostedFtpServer>();
 
                 using (var serviceProvider = services.BuildServiceProvider()) {
@@ -122,11 +102,10 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services"></param>
         internal static void ConfigureCookie(ref IServiceCollection services) {
             services.ConfigureApplicationCookie(options => {
-                // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                options.LoginPath = "/SrvAdmin/Account/Login";
-                options.AccessDeniedPath = "/SrvAdmin/Account/AccessDenied";
+                options.LoginPath = "/DefaultWebPages/GlobalLogin";
+                options.AccessDeniedPath = "/StatusPageService/401UnauthorizedPage";
                 options.SlidingExpiration = true;
             });
             services.Configure<CookiePolicyOptions>(opt => {
