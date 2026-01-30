@@ -237,8 +237,8 @@ namespace EasyITCenter.ServerCoreConfiguration {
                          Version = Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(),
                          TermsOfService = new Uri(DbOperations.GetServerParameterLists("ServerPublicUrl").Value),
                          Description = EICServer.SwaggerDesc,
-                         Contact = new OpenApiContact { Name = "Libor Svoboda", Email = DbOperations.GetServerParameterLists("EmailerServiceEmailAddress").Value, Url = new Uri("https://groupware-solution.eu/contactus") },
-                         License = new OpenApiLicense { Name = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value + " Server License", Url = new Uri("https://www.groupware-solution.eu/") }
+                         Contact = new OpenApiContact { Name = "Libor Svoboda", Email = DbOperations.GetServerParameterLists("EmailerServiceEmailAddress").Value, Url = new Uri("https://KlikneteZde.cz") },
+                         License = new OpenApiLicense { Name = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value + " Server License", Url = new Uri("https://www.KlikneteZde.Cz") }
                      });
 
                      var xmlFile = Path.Combine(SrvRuntime.StartupPath, $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml");
