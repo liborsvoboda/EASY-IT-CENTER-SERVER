@@ -39,7 +39,8 @@ namespace EasyITCenter.DBModel
             SolutionSchedulerListInheritedIntervalTypeNavigations = new HashSet<SolutionSchedulerList>();
             SolutionTaskListInheritedStatusTypeNavigations = new HashSet<SolutionTaskList>();
             SolutionTaskListInheritedTargetTypeNavigations = new HashSet<SolutionTaskList>();
-            SystemApplicationLists = new HashSet<SystemApplicationList>();
+            SystemApplicationListInheritedAppCategoryTypeNavigations = new HashSet<SystemApplicationList>();
+            SystemApplicationListInheritedAppTypeNavigations = new HashSet<SystemApplicationList>();
             SystemCustomPageListInheritedFormTypeNavigations = new HashSet<SystemCustomPageList>();
             SystemCustomPageListInheritedSystemApiCallTypeNavigations = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
@@ -63,7 +64,7 @@ namespace EasyITCenter.DBModel
         public string? Description { get; set; }
         public int UserId { get; set; }
         [Required]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
         [ForeignKey("UserId")]
@@ -94,7 +95,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerListInheritedIntervalTypeNavigations { get; set; }
         public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedStatusTypeNavigations { get; set; }
         public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedTargetTypeNavigations { get; set; }
-        public virtual ICollection<SystemApplicationList> SystemApplicationLists { get; set; }
+        public virtual ICollection<SystemApplicationList> SystemApplicationListInheritedAppCategoryTypeNavigations { get; set; }
+        public virtual ICollection<SystemApplicationList> SystemApplicationListInheritedAppTypeNavigations { get; set; }
         public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedFormTypeNavigations { get; set; }
         public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedSystemApiCallTypeNavigations { get; set; }
         public virtual ICollection<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; }
