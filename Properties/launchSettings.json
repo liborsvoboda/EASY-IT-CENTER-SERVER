@@ -1,4 +1,4 @@
-{
+﻿{
   "profiles": {
     "EasyITCenter": {
       "commandName": "Project",
@@ -21,7 +21,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:5542/",
+      "applicationUrl": "http://localhost:5000/",
       "sslPort": 44375
     }
   }

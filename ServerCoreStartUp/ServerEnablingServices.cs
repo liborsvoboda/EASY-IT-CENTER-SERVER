@@ -178,9 +178,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 }
                 */
             });
-            
-            //MirrorSharp Support
-            if (bool.Parse(DbOperations.GetServerParameterLists("ModuleCSharpCodeBuilderEnabled").Value)) { app.MapMirrorSharp("/mirrorsharp"); }
 
             //HeathService Support
             if (bool.Parse(DbOperations.GetServerParameterLists("ModuleHealthServiceEnabled").Value)) {

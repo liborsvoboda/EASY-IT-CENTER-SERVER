@@ -19,7 +19,9 @@ Inspired by [awesome](https://github.com/sindresorhus/awesome), [awesome-dotnet]
 
 
 ## General 
-
+* [Create a Sample Project File for a WPF XAML Browser Application](https://learn.microsoft.com/en-us/previous-versions/ms752086(v=vs.100)?redirectedfrom=MSDN)      
+* [WPF XAML Help Pages](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/globalization-for-wpf?view=netframeworkdesktop-4.8)
+* [820 WPF XAML Repositories](https://github.com/punker76?tab=repositories)
 * [Windows Presentation Foundation](https://docs.microsoft.com/en-us/dotnet/framework/wpf/) - Windows Presentation Foundation | Microsoft Docs.
 * [Windows Presentation Foundation (WPF) | Github](https://github.com/dotnet/wpf) - Windows Presentation Foundation Github Repository | WPF is a .NET Core UI framework for building Windows desktop applications.
 * [How to upgrade a WPF desktop app to .NET 8](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/migration/?view=netdesktop-8.0) This article describes how to upgrade a Windows Presentation Foundation (WPF) desktop app to .NET 8. 
