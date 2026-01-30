@@ -42,8 +42,9 @@ namespace EasyITCenter.Controllers {
                     FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SystemAppsPath, uploadPackageRequest.AppPathName, "Package", uploadPackageRequest.Package.Filename), Convert.FromBase64String(uploadPackageRequest.Package.Content.Split(",")[1]));
 
                     SystemApplicationList record = new() { 
-                        Name = uploadPackageRequest.Name, InheritedAppCategoryType = uploadPackageRequest.InheritedAppCategoryType, 
-                        Description = uploadPackageRequest.Description, AppPathName = uploadPackageRequest.AppPathName, 
+                        Name = uploadPackageRequest.Name, InheritedAppCategoryType = uploadPackageRequest.InheritedAppCategoryType, InheritedAppType = uploadPackageRequest.InheritedAppType,
+                        Description = uploadPackageRequest.Description, AppPathName = uploadPackageRequest.AppPathName, MdContent = uploadPackageRequest.MdContent,
+                        StartUpCommand = uploadPackageRequest.StartUpCommand, ApplicationCredit = uploadPackageRequest.ApplicationCredit, UserId = uploadPackageRequest.UserId,
                     };
                     var data = new EasyITCenterContext().SystemApplicationLists.Add(record);
                     int result = await data.Context.SaveChangesAsync();

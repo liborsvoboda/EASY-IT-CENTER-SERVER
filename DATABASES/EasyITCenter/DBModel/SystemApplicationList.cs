@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("SystemApplicationList")]
-    [Index("Name", Name = "IX_SystemApplicationList", IsUnique = true)]
     public partial class SystemApplicationList
     {
         [Key]
@@ -15,22 +14,29 @@ namespace EasyITCenter.DBModel
         [StringLength(50)]
         [Unicode(false)]
         public string InheritedAppCategoryType { get; set; } = null!;
-        [MaxLength(50)]
-        public byte[] Name { get; set; } = null!;
+        [StringLength(50)]
+        [Unicode(false)]
+        public string InheritedAppType { get; set; } = null!;
+        [StringLength(50)]
+        [Unicode(false)]
+        public string Name { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
         [Unicode(false)]
         public string MdContent { get; set; } = null!;
-        [MaxLength(50)]
-        public byte[] AppPathName { get; set; } = null!;
-        [MaxLength(1024)]
-        public byte[] StartUpCommand { get; set; } = null!;
+        [StringLength(50)]
+        [Unicode(false)]
+        public string AppPathName { get; set; } = null!;
+        [StringLength(1024)]
+        [Unicode(false)]
+        public string StartUpCommand { get; set; } = null!;
         [Column(TypeName = "decimal(18, 0)")]
-        public decimal AppDownloadPrice { get; set; }
+        public decimal ApplicationCredit { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public virtual SolutionMixedEnumList InheritedAppCategoryTypeNavigation { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedAppTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
         [InverseProperty("SystemApplicationLists")]
         public virtual SolutionUserList User { get; set; } = null!;

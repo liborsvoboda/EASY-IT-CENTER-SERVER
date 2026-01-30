@@ -1384,11 +1384,18 @@ namespace EasyITCenter.DBModel
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
                 entity.HasOne(d => d.InheritedAppCategoryTypeNavigation)
-                    .WithMany(p => p.SystemApplicationLists)
+                    .WithMany(p => p.SystemApplicationListInheritedAppCategoryTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
                     .HasForeignKey(d => d.InheritedAppCategoryType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemApplicationList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.InheritedAppTypeNavigation)
+                    .WithMany(p => p.SystemApplicationListInheritedAppTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedAppType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SystemApplicationList_SolutionMixedEnumList1");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SystemApplicationLists)
