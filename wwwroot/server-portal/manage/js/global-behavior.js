@@ -3,12 +3,13 @@ let pageLoader;
 
 
 Gs.Behaviors.PortalStartup = async function () {
-    if (Metro.storage.getItem("ApiToken", null) != null) { Cookies.set('ApiToken', Metro.storage.getItem("ApiToken", null).Token); }
+    if (Metro.storage.getItem("ApiToken", null) != null) { Cookies.set("ApiToken", Metro.storage.getItem("ApiToken", null).Token); }
     Gs.Objects.CreateToolPanel();
 
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
     await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
     await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenu");
+    await Gs.Apis.RunServerGetApi("InformationService/GetVersion", "ServerVersion");
 
     $(document).ready(function () {
         setTimeout(function () {
