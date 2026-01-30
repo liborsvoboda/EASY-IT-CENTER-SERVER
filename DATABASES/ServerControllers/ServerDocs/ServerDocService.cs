@@ -26,7 +26,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> GenerateMdBook() {
             try {
                     List<DocSrvDocTemplateList> templates; List<DocSrvDocumentationList> data;
-                    FileOperations.CreatePath(Path.Combine(SrvRuntime.ServerDocPath, "md-book", "src"), true); 
+                    FileOperations.CreatePath(Path.Combine(SrvRuntime.SrvDocPath, "md-book", "src"), true); 
                    
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         data = new EasyITCenterContext().DocSrvDocumentationLists.Where(a => a.DocumentationGroup.Active && a.Active)
@@ -47,22 +47,22 @@ namespace EasyITCenter.Controllers {
 
                             docDescription = "# Úvod   " + documentation.DocumentationGroup.Name + "  " + Environment.NewLine + Environment.NewLine + documentation.DocumentationGroup.Description + Environment.NewLine + documentation.Description + Environment.NewLine + Environment.NewLine;
                             
-                            System.IO.File.WriteAllText(Path.Combine(SrvRuntime.ServerDocPath,  "md-book", "src", DataOperations.RemoveWhitespace(documentation.Name) + ".md"), docDescription + documentation.MdContent, Encoding.UTF8);
+                            System.IO.File.WriteAllText(Path.Combine(SrvRuntime.SrvDocPath,  "md-book", "src", DataOperations.RemoveWhitespace(documentation.Name) + ".md"), docDescription + documentation.MdContent, Encoding.UTF8);
                         }); summary += "    ```  " + Environment.NewLine + Environment.NewLine + "---" + Environment.NewLine;
 
-                        System.IO.File.WriteAllText(Path.Combine(SrvRuntime.ServerDocPath, "md-book", "src", "SUMMARY.md"), summary, Encoding.UTF8);
+                        System.IO.File.WriteAllText(Path.Combine(SrvRuntime.SrvDocPath, "md-book", "src", "SUMMARY.md"), summary, Encoding.UTF8);
 
                         RunProcessRequest process = new RunProcessRequest();
                         if (CoreOperations.SrvOStype.IsWindows()) {
                             process = new RunProcessRequest() {
-                                Command = Path.Combine(SrvRuntime.ServerDocPath, "md-book", "generate-mdbook.cmd"),
-                                WorkingDirectory = Path.Combine(SrvRuntime.ServerDocPath, "md-book"),
+                                Command = Path.Combine(SrvRuntime.SrvDocPath, "md-book", "generate-mdbook.cmd"),
+                                WorkingDirectory = Path.Combine(SrvRuntime.SrvDocPath, "md-book"),
                                 ProcessType = ProcessType.cmd,
                             };
                         } else {
                             process = new RunProcessRequest() {
-                                Command = Path.Combine(SrvRuntime.ServerDocPath, "md-book", "generate-mdbook.sh"),
-                                WorkingDirectory = Path.Combine(SrvRuntime.ServerDocPath, "md-book"),
+                                Command = Path.Combine(SrvRuntime.SrvDocPath, "md-book", "generate-mdbook.sh"),
+                                WorkingDirectory = Path.Combine(SrvRuntime.SrvDocPath, "md-book"),
                                 ProcessType = ProcessType.sh,
                             };
                         }

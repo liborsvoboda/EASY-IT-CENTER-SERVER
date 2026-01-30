@@ -232,9 +232,9 @@ namespace EasyITCenter.ServerCoreConfiguration {
                      { { new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }, new List<string>() } });
 
                      cfg.SchemaGeneratorOptions = new SchemaGeneratorOptions { SchemaIdSelector = type => type.FullName };
-                     cfg.SwaggerDoc(Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(), new OpenApiInfo {
+                     cfg.SwaggerDoc(SrvRuntime.SrvVersion, new OpenApiInfo {
                          Title = DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value + " Server API",
-                         Version = Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(),
+                         Version = SrvRuntime.SrvVersion,
                          TermsOfService = new Uri(DbOperations.GetServerParameterLists("ServerPublicUrl").Value),
                          Description = EICServer.SwaggerDesc,
                          Contact = new OpenApiContact { Name = "Libor Svoboda", Email = DbOperations.GetServerParameterLists("EmailerServiceEmailAddress").Value, Url = new Uri("https://KlikneteZde.cz") },
@@ -341,7 +341,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                     cfg.SupportedSubmitMethods(SubmitMethod.Get,SubmitMethod.Put, SubmitMethod.Delete, SubmitMethod.Head, SubmitMethod.Post);
                     cfg.UseRequestInterceptor("(request) => { return request; }");
                     cfg.UseResponseInterceptor("(response) => { return response; }");
-                    cfg.SwaggerEndpoint(SrvRuntime.OpenApiDescriptionFile, "Server API version " + Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString());
+                    cfg.SwaggerEndpoint(SrvRuntime.OpenApiDescriptionFile, "Server API version " + SrvRuntime.SrvVersion);
                 });
             }
         }

@@ -30,7 +30,7 @@ namespace EasyITCenter.Controllers
         [Consumes("application/json")]
         public async Task<IActionResult> GetVersion()
         {
-            return base.Json(new WebClasses.JsonResult() { Result = Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(), Status = DBResult.success.ToString() });
+            return base.Json(new WebClasses.JsonResult() { Result = SrvRuntime.SrvVersion, Status = DBResult.success.ToString() });
         }
 
 

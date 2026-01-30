@@ -22,9 +22,9 @@ namespace EasyITCenter.ServerCoreStructure {
         public static bool CreateUserStorage(string username) {
            string[] folders = null;
             try {
-                FileOperations.CreatePath(Path.Combine(SrvRuntime.UserPath, username), false);
+                FileOperations.CreatePath(Path.Combine(SrvRuntime.SrvUserPath, username), false);
                 folders = DbOperations.GetServerParameterLists("DefaultUserStorageFolders").Value.Split(";");
-                folders.ToList().ForEach(folder => { FileOperations.CreatePath(Path.Combine(SrvRuntime.UserPath, username, folder), false); });
+                folders.ToList().ForEach(folder => { FileOperations.CreatePath(Path.Combine(SrvRuntime.SrvUserPath, username, folder), false); });
             } catch { }
 
             return true;

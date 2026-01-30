@@ -83,7 +83,7 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
 
-                    userRootPath = path = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName());
+                    userRootPath = path = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
 
                 ScanDirectory:
                     result.AddRange(UserStorageOperations.GetUserDirectories(userRootPath + Path.DirectorySeparatorChar, path));
@@ -98,7 +98,7 @@ namespace EasyITCenter.Controllers {
                         goto ScanDirectory;
                     }
                 } else {
-                    userRootPath = path = SrvRuntime.UserGuestPath;
+                    userRootPath = path = SrvRuntime.SrvUserGuestPath;
 
                 ScanDirectoryGuest:
                     result.AddRange(UserStorageOperations.GetUserDirectories(userRootPath + Path.DirectorySeparatorChar, path));
@@ -144,7 +144,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName());
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
                     FileOperations.CreateDirectory(Path.Combine(userRootPath, userStorageContent.Path));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -169,7 +169,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName());
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
                     FileOperations.MoveDirectory(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath, userStorageRenameDir.TargetPath));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -192,7 +192,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName());
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
                     FileOperations.CopyDirectory(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath, userStorageRenameDir.TargetPath));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -215,12 +215,12 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
-                } else { userRootPath = Path.Combine(SrvRuntime.UserGuestPath, userStorageContent.Path); }
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
+                } else { userRootPath = Path.Combine(SrvRuntime.SrvUserGuestPath, userStorageContent.Path); }
 
-                ZipFile.CreateFromDirectory(userRootPath, Path.Combine(SrvRuntime.UserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
-                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.UserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
-                FileOperations.DeleteFile(Path.Combine(SrvRuntime.UserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
+                ZipFile.CreateFromDirectory(userRootPath, Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
+                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
+                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
 
                 return File(zipPackage, "application/x-zip-compressed", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip");
             } catch (Exception ex) {
@@ -241,7 +241,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                     FileOperations.ClearFolder(userRootPath);
                 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -264,7 +264,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                     FileOperations.DeleteDirectory(userRootPath);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -287,7 +287,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path, userStorageContent.Filename);
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path, userStorageContent.Filename);
                     FileOperations.CreateFile(userRootPath);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -311,7 +311,7 @@ namespace EasyITCenter.Controllers {
 
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName());
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
                     FileOperations.WriteToFile(Path.Combine(userRootPath, userStorageContent.Path), userStorageContent.Content, true);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -334,7 +334,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName());
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
                     FileOperations.MoveFile(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath, userStorageRenameDir.TargetPath));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -357,7 +357,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName());
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
                     FileOperations.CopyFile(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath , userStorageRenameDir.TargetPath));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -380,7 +380,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                     FileOperations.DeleteFile(userRootPath);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -403,20 +403,20 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null; string tempFolder = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                 } else { 
-                    userRootPath = Path.Combine(SrvRuntime.UserGuestPath, userStorageContent.Path); 
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserGuestPath, userStorageContent.Path); 
                 }
 
-                tempFolder = Path.Combine(SrvRuntime.UserPath, "temp") + string.Join(System.IO.Path.DirectorySeparatorChar, userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Take(userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1));
+                tempFolder = Path.Combine(SrvRuntime.SrvUserPath, "temp") + string.Join(System.IO.Path.DirectorySeparatorChar, userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Take(userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1));
                 FileOperations.DeleteDirectory(tempFolder); FileOperations.CreateDirectory(tempFolder);
                 FileOperations.CopyFile(userRootPath, tempFolder + System.IO.Path.DirectorySeparatorChar + System.IO.Path.GetFileName(userStorageContent.Path));
                 
-                ZipFile.CreateFromDirectory(tempFolder, Path.Combine(SrvRuntime.UserPath,"temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
-                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.UserPath, "temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
+                ZipFile.CreateFromDirectory(tempFolder, Path.Combine(SrvRuntime.SrvUserPath,"temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
+                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvUserPath, "temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
 
                 FileOperations.DeleteDirectory(tempFolder);
-                FileOperations.DeleteFile(Path.Combine(SrvRuntime.UserPath, "temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
+                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SrvUserPath, "temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
 
                 return File(zipPackage, "application/x-zip-compressed", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip");
             } catch (Exception ex) {
@@ -437,8 +437,8 @@ namespace EasyITCenter.Controllers {
             List<string> images = new(); List<UserStorageSunGallery> result = new();
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName(), "Images");
-                } else { userRootPath = Path.Combine(SrvRuntime.UserGuestPath, "Images"); }
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Images");
+                } else { userRootPath = Path.Combine(SrvRuntime.SrvUserGuestPath, "Images"); }
 
                 extensionList = DbOperations.GetServerParameterLists("ImageExtensionList").Value.Split(";").ToList();
                 extensionList.ForEach(ext => {
@@ -472,7 +472,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    userRootPath = Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName());
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
                     userStorageContent.Files.ForEach(file => { FileOperations.ByteArrayToFile(Path.Combine(userRootPath, userStorageContent.Path , file.Filename), Convert.FromBase64String(file.Content.Split(",")[1])); });
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = userStorageContent.Files.Count(), ErrorMessage = string.Empty });

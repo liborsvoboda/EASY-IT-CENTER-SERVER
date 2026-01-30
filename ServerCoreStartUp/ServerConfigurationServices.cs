@@ -77,7 +77,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             if (bool.Parse(DbOperations.GetServerParameterLists("ServerFtpEngineEnabled").Value)) {
                 services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "*"; /*opt.Port*/ });
                 services.Configure<FubarDev.FtpServer.FileSystem.DotNet.DotNetFileSystemOptions>(opt => {
-                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.UserGuestPath) : Path.Combine(SrvRuntime.UserPath);
+                    opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.SrvUserGuestPath) : Path.Combine(SrvRuntime.SrvUserPath);
                     opt.AllowNonEmptyDirectoryDelete = true;
                 });
                 services.AddFtpServer(

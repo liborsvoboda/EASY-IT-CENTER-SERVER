@@ -1,5 +1,6 @@
 ﻿{
-  "DataSource": "Server=127.0.0.1;Database=EasyITCenter;Trusted_Connection=True;TrustServerCertificate=True;command timeout=300;",
+  "DataSource": "Server=127.0.0.1\\SQLEXPRESS;Database=EasyITCenter;User ID=easyitcenter;Password=easyitcenter;TrustServerCertificate=True;command timeout=300;",
+  "DataSourceHOME": "Server=127.0.0.1;Database=EasyITCenter;Trusted_Connection=True;TrustServerCertificate=True;command timeout=300;",
   "Provider": "Microsoft.EntityFrameworkCore.SqlServer",
   "ContextName": "ScaffoldContext",
   "ContextDirectory": "DATABASES/EasyITCenter/DBEngine",

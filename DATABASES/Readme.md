@@ -8,7 +8,9 @@ Must be defined Previous Controllers for Swagger
 # Entity Framework 6
 Je použit Entity Framework 6, tím jsou tedy podporovány všechny standardní Typy Databází
 
-
+````     
+dotnet tool install --global dotnet-ef --version 6.*
+````     
 
 **Jasná a Jednoduchá Globální Struktura**    
 Api se nabízí jako Služby, plánované úlohy, Procesy, Operace, Generátory, Exporty   

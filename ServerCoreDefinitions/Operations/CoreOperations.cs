@@ -231,7 +231,7 @@ namespace EasyITCenter.ServerCoreStructure {
                         //Attachments
                         if (mailRequest.AttachmentList?.Count > 0) {
                             mailRequest.AttachmentList.ForEach(attachment => {
-                                string path = Path.Combine(SrvRuntime.TempPath, DataOperations.RandomString(20), attachment.Item1);
+                                string path = Path.Combine(SrvRuntime.SrvTempPath, DataOperations.RandomString(20), attachment.Item1);
                                 tempFiles?.Add(path);
                                 FileOperations.ByteArrayToFile(path, attachment.Item2);
                                 Email.Attachments.Add(new Attachment(path));

@@ -119,9 +119,9 @@ namespace EasyITCenter.Controllers {
             try {
                 List<string>? loadFiles = null; List<FancyTreeJsonData> result = new();
                 if (HtttpContextExtension.IsLogged()) {
-                    loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.UserPath, HtttpContextExtension.GetUserName()), $"*.md", SearchOption.AllDirectories);
+                    loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName()), $"*.md", SearchOption.AllDirectories);
                 } else {
-                    loadFiles = FileOperations.GetPathFiles(SrvRuntime.UserGuestPath, $"*.md", SearchOption.AllDirectories);
+                    loadFiles = FileOperations.GetPathFiles(SrvRuntime.SrvUserGuestPath, $"*.md", SearchOption.AllDirectories);
                 }
 
                 loadFiles.ForEach(htmlFile => {
@@ -152,7 +152,7 @@ namespace EasyITCenter.Controllers {
             try {
                 List<string>? loadFiles = null; List<FancyTreeJsonData> result = new();
 
-                loadFiles = FileOperations.GetPathFiles(SrvRuntime.UserGuestPath, $"*.md", SearchOption.AllDirectories);
+                loadFiles = FileOperations.GetPathFiles(SrvRuntime.SrvUserGuestPath, $"*.md", SearchOption.AllDirectories);
 
                 loadFiles.ForEach(htmlFile => {
                     result.Add(new FancyTreeJsonData() { 
