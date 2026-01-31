@@ -47,7 +47,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
         public static string ConfigFile { get; set; } = "config.json";
-        public static string OpenApiDescriptionFile { get; set; } = "/swagger/" + Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString() + "/swagger.json";
+        public static string OpenApiDescriptionFile { get; set; } = "/swagger/" + SrvRuntime.SrvVersion + "/swagger.json";
         public static string DataPath { get; set; } = "Data";
         public static bool DebugMode { get; set; } = "Development" == Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
