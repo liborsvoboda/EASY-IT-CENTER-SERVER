@@ -22,7 +22,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="file">The file.</param>
         /// <returns></returns>
-        public static bool CheckFile(string file) { return File.Exists(file);}
+        public static bool CheckFile(string file) { return File.Exists(file); }
 
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace EasyITCenter.ServerCoreStructure {
                     if (!Directory.Exists(pathParts[i]))
                         Directory.CreateDirectory(pathParts[i]);
                 }
-                
+
                 return true;
             } catch {
                 return false;
@@ -105,7 +105,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public static bool ByteArrayToFile(string fileName, byte[] byteArray) {
             try {
                 if (CreateFile(fileName)) {
-                    DeleteFile(fileName); 
+                    DeleteFile(fileName);
                     using (FileStream? fs = new FileStream(fileName, FileMode.Create, FileAccess.Write)) {
                         fs.Write(byteArray, 0, byteArray.Length);
                         return true;
@@ -168,12 +168,12 @@ namespace EasyITCenter.ServerCoreStructure {
             string enc = "";
             if (File.Exists(FileName)) {
                 FileStream filein = new FileStream(FileName, FileMode.Open, FileAccess.Read);
-                if ((filein.CanSeek)) {
+                if (( filein.CanSeek )) {
                     byte[] bom = new byte[5];
                     filein.Read(bom, 0, 4);
                     // EF BB BF = utf-8 FF FE = ucs-2le, ucs-4le, and ucs-16le FE FF = utf-16 and
                     // ucs-2 00 00 FE FF = ucs-4
-                    if ((((bom[0] == 0xEF) && (bom[1] == 0xBB) && (bom[2] == 0xBF)) || ((bom[0] == 0xFF) && (bom[1] == 0xFE)) || ((bom[0] == 0xFE) && (bom[1] == 0xFF)) || ((bom[0] == 0x0) && (bom[1] == 0x0) && (bom[2] == 0xFE) && (bom[3] == 0xFF))))
+                    if (( ( ( bom[0] == 0xEF ) && ( bom[1] == 0xBB ) && ( bom[2] == 0xBF ) ) || ( ( bom[0] == 0xFF ) && ( bom[1] == 0xFE ) ) || ( ( bom[0] == 0xFE ) && ( bom[1] == 0xFF ) ) || ( ( bom[0] == 0x0 ) && ( bom[1] == 0x0 ) && ( bom[2] == 0xFE ) && ( bom[3] == 0xFF ) ) ))
                         enc = "Unicode";
                     else
                         enc = "ASCII";
@@ -193,7 +193,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// Deletes the directory.
         /// </summary>
         /// <param name="directory">The directory.</param>
-        public static void DeleteDirectory(string directory ) {
+        public static void DeleteDirectory(string directory) {
             if (Directory.Exists(directory))
                 Directory.Delete(directory, true);
         }
@@ -344,6 +344,16 @@ namespace EasyITCenter.ServerCoreStructure {
             if (!webpath.StartsWith("/")) { webpath = $"/{webpath}"; }
             webpath = webpath.Replace('/', slash).Replace('\\', slash).Replace(slash.ToString() + slash.ToString(), slash.ToString());
             return webpath;
+        }
+
+
+        /// <summary>
+        /// Get Directory From Full FilePath
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string GetDirectoryFromFilePath(string path) {
+            return Path.GetDirectoryName(path);
         }
     }
 }

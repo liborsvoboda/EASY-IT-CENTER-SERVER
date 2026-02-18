@@ -43,9 +43,11 @@ namespace EasyITCenter.Controllers {
                     renameFilesRequest.WebRootPath = renameFilesRequest.WebRootPath.StartsWith("/") ? renameFilesRequest.WebRootPath.Substring(1) : renameFilesRequest.WebRootPath.StartsWith("\\") ? renameFilesRequest.WebRootPath.Substring(1) : renameFilesRequest.WebRootPath;
                     
                     List<string>? sourceFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath, renameFilesRequest.WebRootPath), renameFilesRequest.SourceFilename, renameFilesRequest.RootDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
-                    sourceFiles.ForEach(file => { FileOperations.MoveFile(file, Path.Combine(SrvRuntime.WebRootPath, renameFilesRequest.WebRootPath, renameFilesRequest.TargetFilename)); });
+                    sourceFiles.ForEach(file => { 
+                            FileOperations.MoveFile(file, Path.Combine(FileOperations.GetDirectoryFromFilePath(file), renameFilesRequest.TargetFilename));
+                    });
 
-                    return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.success.ToString() });
+                    return base.Ok(new WebClasses.JsonResult() { Result = sourceFiles.Count.ToString(), Status = DBResult.success.ToString() });
                 } else {
                     return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.UnauthorizedRequest.ToString() });
                 }
@@ -75,7 +77,7 @@ namespace EasyITCenter.Controllers {
                         FileOperations.WriteToFile(file, fileContent, true);
                     });
 
-                    return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.success.ToString() });
+                    return base.Ok(new WebClasses.JsonResult() { Result = sourceFiles.Count.ToString(), Status = DBResult.success.ToString() });
                 } else {
                     return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.UnauthorizedRequest.ToString() });
                 }

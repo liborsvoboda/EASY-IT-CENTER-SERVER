@@ -68,7 +68,7 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
             
-            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Status); return true; }
+            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
             else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
         error: function (err) {
@@ -102,7 +102,7 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction =
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
 
-            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Status); return true; }
+            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
             else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
         error: function (err) {
@@ -131,7 +131,7 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
 
-            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Status); return true; }
+            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
             else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
         },
         error: function (err) {
