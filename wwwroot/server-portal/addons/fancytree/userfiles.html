@@ -288,9 +288,47 @@
                                 }
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Download HTML from URL", content, actions);
+
+                        } else if (action == "downloadMdFromUrl") {
+                            let content = "<div><input id='UrlPath' type='text' data-role='input' data-prepend='Url:' ><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ></div>";
+                            let actions = [{
+                                caption: "Download MarkDown from URL", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#UrlPath").val().length > 0 && $("#Filename").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/DownloadMdFromUrl", { Url: $("#UrlPath").val(), Filename: $("#Filename").val() }, null, "ReloadUserStorage");
+                                    } else { alert("Data must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Download MarkDown from URL", content, actions);
+
+                        } else if (action == "downloadPdfFromUrl") {
+                            let content = "<div><input id='UrlPath' type='text' data-role='input' data-prepend='Url:' ><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ></div>";
+                            let actions = [{
+                                caption: "Download PDF from URL", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#UrlPath").val().length > 0 && $("#Filename").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/DownloadPdfFromUrl", { Url: $("#UrlPath").val(), Filename: $("#Filename").val() }, null, "ReloadUserStorage");
+                                    } else { alert("Data must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Download PDF ScreenShot from URL", content, actions);
+
+                        } else if (action == "downloadImageFromUrl") {
+                            let content = "<div><input id='UrlPath' type='text' data-role='input' data-prepend='Url:' ><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ></div>";
+                            let actions = [{
+                                caption: "Download PNG from URL", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#UrlPath").val().length > 0 && $("#Filename").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/DownloadImageFromUrl", { Url: $("#UrlPath").val(), Filename: $("#Filename").val() }, null, "ReloadUserStorage");
+                                    } else { alert("Data must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Download PNG Image ScreenShot from URL", content, actions);
+
                         } else if (action == "generateSummary") {
                             await Gs.Apis.RunServerPostApi("SummaryService/GenerateUserSummaryFile", { MdFilesPath: $('#DataTree').fancytree("getActiveNode").data.path }, null, "ReloadUserStorage");
-                        } else  if (action == "createFolder") {
+
+                        } else if (action == "createFolder") {
                             let content = "<div><input id='FolderName' type='text' data-role='input' data-prepend='Folder Name:' ></div>";
                             let actions = [{
                                 caption: "Create Folder", cls: "js-dialog-close success",
@@ -328,6 +366,7 @@
 
                         } else if (action == "downloadFolder") {
                             Gs.Apis.DownloadApi("UserStorageService/DownloadUserFolder", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), true);
+
                         } else if (action == "clearFolder") {
                             let content = "<div>Do you want to Clear selected Folder? " + $('#DataTree').fancytree("getActiveNode").data.path + "</div>";
                             let actions = [{
@@ -387,6 +426,7 @@
                                                                 $("#IFrameWindow")[0].contentWindow.inputEditor.doc.getValue() : $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text")
                                                         : ""
                             }, null, "ReloadUserStorage");
+
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
                             let actions = [{

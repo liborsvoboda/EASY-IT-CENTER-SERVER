@@ -9,8 +9,10 @@ using FastReport.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Playwright;
+using PuppeteerSharp;
 using ScrapySharp.Network;
-
+using Westwind.AspNetCore.Markdown;
 
 namespace EasyITCenter.Controllers {
 
@@ -490,7 +492,11 @@ namespace EasyITCenter.Controllers {
         }
 
 
-
+        /// <summary>
+        /// User Download Html from URL
+        /// </summary>
+        /// <param name="downloadFileRequest"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("/UserStorageService/DownloadHtmlFromUrl")]
         [Consumes("application/json")]
@@ -498,10 +504,16 @@ namespace EasyITCenter.Controllers {
             
             try {
                 if (HtttpContextExtension.IsLogged()) {
-                    ScrapingBrowser? browser = new ScrapingBrowser();
-                    WebPage? resultsPage = await browser.NavigateToPageAsync(new Uri(downloadFileRequest.Url));
+                    var browserFetcher = new BrowserFetcher();
+                    await browserFetcher.DownloadAsync();
+                    await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+                    await using var page = await browser.NewPageAsync();
+                    await page.GoToAsync(downloadFileRequest.Url);
 
-                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename), resultsPage.Html.InnerText, true);
+                    await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+                    string InnerHTML = await page.GetContentAsync();
+
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename), InnerHTML, true);
                     
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
                 } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
@@ -510,5 +522,87 @@ namespace EasyITCenter.Controllers {
             }
         }
 
+
+
+        /// <summary>
+        /// User Download Md from Url
+        /// </summary>
+        /// <param name="downloadFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadMdFromUrl")]
+        [Consumes("application/json")]
+        public async Task<string> DownloadMdFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
+
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    string MdAsHtml = await Markdown.ParseFromUrlAsync(downloadFileRequest.Url, true, false, false);
+
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename), MdAsHtml, true);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Generate PDF from URL
+        /// </summary>
+        /// <param name="downloadFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadPdfFromUrl")]
+        [Consumes("application/json")]
+        public async Task<string> DownloadPdfFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
+
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    var browserFetcher = new BrowserFetcher();
+                    await browserFetcher.DownloadAsync();
+                    await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+                    await using var page = await browser.NewPageAsync();
+                    await page.GoToAsync(downloadFileRequest.Url);
+
+                    await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+                    await page.PdfAsync(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Generate PNG Image from URL
+        /// </summary>
+        /// <param name="downloadFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadImageFromUrl")]
+        [Consumes("application/json")]
+        public async Task<string> DownloadImageFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
+
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    var browserFetcher = new BrowserFetcher();
+                    await browserFetcher.DownloadAsync();
+                    await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+                    await using var page = await browser.NewPageAsync();
+                    await page.GoToAsync(downloadFileRequest.Url);
+
+                    await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+                    await page.ScreenshotAsync(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
     }
 }
