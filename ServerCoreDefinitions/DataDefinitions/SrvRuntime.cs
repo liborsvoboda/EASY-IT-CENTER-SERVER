@@ -32,8 +32,8 @@ namespace EasyITCenter.ServerCoreStructure {
         public static string SrvLibraryPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-library");
 
 
-        public static string SrvPagesWebPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-PagesWeb");
-        public static string SrvPagesHelpPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-PagesHelp");
+        public static string SrvPagesWebPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-pagesWeb");
+        public static string SrvPagesHelpPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-pagesHelp");
         
 
         public static string SystemAppsPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "system-apps");

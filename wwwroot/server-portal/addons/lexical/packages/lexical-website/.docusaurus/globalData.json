@@ -1,0 +1,906 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs",
+          "mainDocId": "api/index",
+          "docs": [
+            {
+              "id": "api/classes/lexical_code.CodeHighlightNode",
+              "path": "/docs/api/classes/lexical_code.CodeHighlightNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_code.CodeNode",
+              "path": "/docs/api/classes/lexical_code.CodeNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_hashtag.HashtagNode",
+              "path": "/docs/api/classes/lexical_hashtag.HashtagNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_link.AutoLinkNode",
+              "path": "/docs/api/classes/lexical_link.AutoLinkNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_link.LinkNode",
+              "path": "/docs/api/classes/lexical_link.LinkNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_list.ListItemNode",
+              "path": "/docs/api/classes/lexical_list.ListItemNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_list.ListNode",
+              "path": "/docs/api/classes/lexical_list.ListNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_mark.MarkNode",
+              "path": "/docs/api/classes/lexical_mark.MarkNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_offset.OffsetView",
+              "path": "/docs/api/classes/lexical_offset.OffsetView",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_overflow.OverflowNode",
+              "path": "/docs/api/classes/lexical_overflow.OverflowNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_react_LexicalAutoEmbedPlugin.AutoEmbedOption",
+              "path": "/docs/api/classes/lexical_react_LexicalAutoEmbedPlugin.AutoEmbedOption",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_react_LexicalContextMenuPlugin.MenuOption",
+              "path": "/docs/api/classes/lexical_react_LexicalContextMenuPlugin.MenuOption",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_react_LexicalDecoratorBlockNode.DecoratorBlockNode",
+              "path": "/docs/api/classes/lexical_react_LexicalDecoratorBlockNode.DecoratorBlockNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_react_LexicalHorizontalRuleNode.HorizontalRuleNode",
+              "path": "/docs/api/classes/lexical_react_LexicalHorizontalRuleNode.HorizontalRuleNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_rich_text.HeadingNode",
+              "path": "/docs/api/classes/lexical_rich_text.HeadingNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_rich_text.QuoteNode",
+              "path": "/docs/api/classes/lexical_rich_text.QuoteNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_table.TableCellNode",
+              "path": "/docs/api/classes/lexical_table.TableCellNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_table.TableNode",
+              "path": "/docs/api/classes/lexical_table.TableNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_table.TableObserver",
+              "path": "/docs/api/classes/lexical_table.TableObserver",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_table.TableRowNode",
+              "path": "/docs/api/classes/lexical_table.TableRowNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical_table.TableSelection",
+              "path": "/docs/api/classes/lexical_table.TableSelection",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.ArtificialNode__DO_NOT_USE",
+              "path": "/docs/api/classes/lexical.ArtificialNode__DO_NOT_USE",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.DecoratorNode",
+              "path": "/docs/api/classes/lexical.DecoratorNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.EditorState",
+              "path": "/docs/api/classes/lexical.EditorState",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.ElementNode",
+              "path": "/docs/api/classes/lexical.ElementNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.LexicalEditor",
+              "path": "/docs/api/classes/lexical.LexicalEditor",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.LexicalNode",
+              "path": "/docs/api/classes/lexical.LexicalNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.LineBreakNode",
+              "path": "/docs/api/classes/lexical.LineBreakNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.NodeSelection",
+              "path": "/docs/api/classes/lexical.NodeSelection",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.ParagraphNode",
+              "path": "/docs/api/classes/lexical.ParagraphNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.Point",
+              "path": "/docs/api/classes/lexical.Point",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.RangeSelection",
+              "path": "/docs/api/classes/lexical.RangeSelection",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.RootNode",
+              "path": "/docs/api/classes/lexical.RootNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.TabNode",
+              "path": "/docs/api/classes/lexical.TabNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/classes/lexical.TextNode",
+              "path": "/docs/api/classes/lexical.TextNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/index",
+              "path": "/docs/api/",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/interfaces/lexical_file.SerializedDocument",
+              "path": "/docs/api/interfaces/lexical_file.SerializedDocument",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/interfaces/lexical_react_LexicalAutoEmbedPlugin.EmbedConfig",
+              "path": "/docs/api/interfaces/lexical_react_LexicalAutoEmbedPlugin.EmbedConfig",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/interfaces/lexical_yjs.Provider",
+              "path": "/docs/api/interfaces/lexical_yjs.Provider",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/interfaces/lexical.BaseSelection",
+              "path": "/docs/api/interfaces/lexical.BaseSelection",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/interfaces/lexical.EditorStateReadOptions",
+              "path": "/docs/api/interfaces/lexical.EditorStateReadOptions",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/interfaces/lexical.SerializedEditorState",
+              "path": "/docs/api/interfaces/lexical.SerializedEditorState",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules",
+              "path": "/docs/api/modules",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical",
+              "path": "/docs/api/modules/lexical",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_clipboard",
+              "path": "/docs/api/modules/lexical_clipboard",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_code",
+              "path": "/docs/api/modules/lexical_code",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_devtools_core",
+              "path": "/docs/api/modules/lexical_devtools_core",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_dragon",
+              "path": "/docs/api/modules/lexical_dragon",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_eslint_plugin",
+              "path": "/docs/api/modules/lexical_eslint_plugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_file",
+              "path": "/docs/api/modules/lexical_file",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_hashtag",
+              "path": "/docs/api/modules/lexical_hashtag",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_headless",
+              "path": "/docs/api/modules/lexical_headless",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_history",
+              "path": "/docs/api/modules/lexical_history",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_html",
+              "path": "/docs/api/modules/lexical_html",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_link",
+              "path": "/docs/api/modules/lexical_link",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_list",
+              "path": "/docs/api/modules/lexical_list",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_mark",
+              "path": "/docs/api/modules/lexical_mark",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_markdown",
+              "path": "/docs/api/modules/lexical_markdown",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_offset",
+              "path": "/docs/api/modules/lexical_offset",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_overflow",
+              "path": "/docs/api/modules/lexical_overflow",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_plain_text",
+              "path": "/docs/api/modules/lexical_plain_text",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalAutoEmbedPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalAutoEmbedPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalAutoFocusPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalAutoFocusPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalAutoLinkPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalAutoLinkPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalBlockWithAlignableContents",
+              "path": "/docs/api/modules/lexical_react_LexicalBlockWithAlignableContents",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalClearEditorPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalClearEditorPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalClickableLinkPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalClickableLinkPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalCollaborationContext",
+              "path": "/docs/api/modules/lexical_react_LexicalCollaborationContext",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalCollaborationPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalCollaborationPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalComposer",
+              "path": "/docs/api/modules/lexical_react_LexicalComposer",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalComposerContext",
+              "path": "/docs/api/modules/lexical_react_LexicalComposerContext",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalContentEditable",
+              "path": "/docs/api/modules/lexical_react_LexicalContentEditable",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalContextMenuPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalContextMenuPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalDecoratorBlockNode",
+              "path": "/docs/api/modules/lexical_react_LexicalDecoratorBlockNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalDraggableBlockPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalDraggableBlockPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalEditorRefPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalEditorRefPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalErrorBoundary",
+              "path": "/docs/api/modules/lexical_react_LexicalErrorBoundary",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalHashtagPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalHashtagPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalHistoryPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalHistoryPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalHorizontalRuleNode",
+              "path": "/docs/api/modules/lexical_react_LexicalHorizontalRuleNode",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalHorizontalRulePlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalHorizontalRulePlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalCharacterLimitPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalCharacterLimitPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalCheckListPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalCheckListPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalLinkPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalLinkPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalListPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalListPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalMarkdownShortcutPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalMarkdownShortcutPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalNestedComposer",
+              "path": "/docs/api/modules/lexical_react_LexicalNestedComposer",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalNodeEventPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalNodeEventPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalNodeMenuPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalNodeMenuPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalOnChangePlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalOnChangePlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalPlainTextPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalPlainTextPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalRichTextPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalRichTextPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalTabIndentationPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalTabIndentationPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalTableOfContents",
+              "path": "/docs/api/modules/lexical_react_LexicalTableOfContents",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalTableOfContentsPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalTableOfContentsPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalTablePlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalTablePlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalTreeView",
+              "path": "/docs/api/modules/lexical_react_LexicalTreeView",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_LexicalTypeaheadMenuPlugin",
+              "path": "/docs/api/modules/lexical_react_LexicalTypeaheadMenuPlugin",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_useLexicalEditable",
+              "path": "/docs/api/modules/lexical_react_useLexicalEditable",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_useLexicalIsTextContentEmpty",
+              "path": "/docs/api/modules/lexical_react_useLexicalIsTextContentEmpty",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_useLexicalNodeSelection",
+              "path": "/docs/api/modules/lexical_react_useLexicalNodeSelection",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_useLexicalSubscription",
+              "path": "/docs/api/modules/lexical_react_useLexicalSubscription",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_react_useLexicalTextEntity",
+              "path": "/docs/api/modules/lexical_react_useLexicalTextEntity",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_rich_text",
+              "path": "/docs/api/modules/lexical_rich_text",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_selection",
+              "path": "/docs/api/modules/lexical_selection",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_table",
+              "path": "/docs/api/modules/lexical_table",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_text",
+              "path": "/docs/api/modules/lexical_text",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_utils",
+              "path": "/docs/api/modules/lexical_utils",
+              "sidebar": "api"
+            },
+            {
+              "id": "api/modules/lexical_yjs",
+              "path": "/docs/api/modules/lexical_yjs",
+              "sidebar": "api"
+            },
+            {
+              "id": "collaboration/faq",
+              "path": "/docs/collaboration/faq",
+              "sidebar": "docs"
+            },
+            {
+              "id": "collaboration/react",
+              "path": "/docs/collaboration/react",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/commands",
+              "path": "/docs/concepts/commands",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/dom-events",
+              "path": "/docs/concepts/dom-events",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/editor-state",
+              "path": "/docs/concepts/editor-state",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/history",
+              "path": "/docs/concepts/history",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/listeners",
+              "path": "/docs/concepts/listeners",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/node-replacement",
+              "path": "/docs/concepts/node-replacement",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/nodes",
+              "path": "/docs/concepts/nodes",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/read-only",
+              "path": "/docs/concepts/read-only",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/selection",
+              "path": "/docs/concepts/selection",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/serialization",
+              "path": "/docs/concepts/serialization",
+              "sidebar": "docs"
+            },
+            {
+              "id": "concepts/transforms",
+              "path": "/docs/concepts/transforms",
+              "sidebar": "docs"
+            },
+            {
+              "id": "design",
+              "path": "/docs/design"
+            },
+            {
+              "id": "error",
+              "path": "/docs/error"
+            },
+            {
+              "id": "faq",
+              "path": "/docs/faq",
+              "sidebar": "docs"
+            },
+            {
+              "id": "getting-started/creating-plugin",
+              "path": "/docs/getting-started/creating-plugin",
+              "sidebar": "docs"
+            },
+            {
+              "id": "getting-started/devtools",
+              "path": "/docs/getting-started/devtools",
+              "sidebar": "docs"
+            },
+            {
+              "id": "getting-started/quick-start",
+              "path": "/docs/getting-started/quick-start",
+              "sidebar": "docs"
+            },
+            {
+              "id": "getting-started/react",
+              "path": "/docs/getting-started/react",
+              "sidebar": "docs"
+            },
+            {
+              "id": "getting-started/supported-browsers",
+              "path": "/docs/getting-started/supported-browsers",
+              "sidebar": "docs"
+            },
+            {
+              "id": "getting-started/theming",
+              "path": "/docs/getting-started/theming",
+              "sidebar": "docs"
+            },
+            {
+              "id": "intro",
+              "path": "/docs/intro",
+              "sidebar": "docs"
+            },
+            {
+              "id": "maintainers-guide",
+              "path": "/docs/maintainers-guide"
+            },
+            {
+              "id": "packages/lexical",
+              "path": "/docs/packages/lexical",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-clipboard",
+              "path": "/docs/packages/lexical-clipboard",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-code",
+              "path": "/docs/packages/lexical-code",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-devtools-core",
+              "path": "/docs/packages/lexical-devtools-core",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-dragon",
+              "path": "/docs/packages/lexical-dragon",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-eslint-plugin",
+              "path": "/docs/packages/lexical-eslint-plugin",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-file",
+              "path": "/docs/packages/lexical-file",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-hashtag",
+              "path": "/docs/packages/lexical-hashtag",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-headless",
+              "path": "/docs/packages/lexical-headless",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-history",
+              "path": "/docs/packages/lexical-history",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-html",
+              "path": "/docs/packages/lexical-html",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-link",
+              "path": "/docs/packages/lexical-link",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-list",
+              "path": "/docs/packages/lexical-list",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-mark",
+              "path": "/docs/packages/lexical-mark",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-markdown",
+              "path": "/docs/packages/lexical-markdown",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-offset",
+              "path": "/docs/packages/lexical-offset",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-overflow",
+              "path": "/docs/packages/lexical-overflow",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-plain-text",
+              "path": "/docs/packages/lexical-plain-text",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-react",
+              "path": "/docs/packages/lexical-react",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-rich-text",
+              "path": "/docs/packages/lexical-rich-text",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-selection",
+              "path": "/docs/packages/lexical-selection",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-table",
+              "path": "/docs/packages/lexical-table",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-text",
+              "path": "/docs/packages/lexical-text",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-utils",
+              "path": "/docs/packages/lexical-utils",
+              "sidebar": "docs"
+            },
+            {
+              "id": "packages/lexical-yjs",
+              "path": "/docs/packages/lexical-yjs",
+              "sidebar": "docs"
+            },
+            {
+              "id": "react/create_plugin",
+              "path": "/docs/react/create_plugin",
+              "sidebar": "docs"
+            },
+            {
+              "id": "react/faq",
+              "path": "/docs/react/faq",
+              "sidebar": "docs"
+            },
+            {
+              "id": "react/index",
+              "path": "/docs/react/",
+              "sidebar": "docs"
+            },
+            {
+              "id": "react/plugins",
+              "path": "/docs/react/plugins",
+              "sidebar": "docs"
+            },
+            {
+              "id": "testing",
+              "path": "/docs/testing"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "api": {
+              "link": {
+                "path": "/docs/api/",
+                "label": "Readme"
+              }
+            },
+            "docs": {
+              "link": {
+                "path": "/docs/intro",
+                "label": "intro"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  },
+  "docusaurus-plugin-google-gtag": {
+    "default": {
+      "trackingID": [
+        "G-7C6YYBYBBT"
+      ],
+      "anonymizeIP": false,
+      "id": "default"
+    }
+  },
+  "internaldocs-fb": {
+    "default": {
+      "opts": {
+        "blog": {
+          "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/blog/",
+          "showReadingTime": true
+        },
+        "docs": {
+          "beforeDefaultRemarkPlugins": [
+            null,
+            [
+              null,
+              {}
+            ]
+          ],
+          "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/",
+          "path": "docs",
+          "sidebarPath": "E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\test\\lexical\\packages\\lexical-website\\sidebars.js",
+          "remarkPlugins": [
+            [
+              null,
+              {
+                "strippedFilePattern": {}
+              }
+            ],
+            [
+              null,
+              {}
+            ],
+            [
+              null,
+              {
+                "version": "v1"
+              }
+            ],
+            null
+          ],
+          "rehypePlugins": []
+        },
+        "gtag": {
+          "trackingID": "G-7C6YYBYBBT"
+        },
+        "staticDocsProject": "lexical",
+        "theme": {
+          "customCss": "E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\test\\lexical\\packages\\lexical-website\\src\\css\\custom.css"
+        },
+        "id": "default"
+      },
+      "docsDir": "E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\test\\lexical\\packages\\lexical-website\\docs",
+      "repoRootToWebsiteRoot": "E:\\Projekty\\zEasy\\EASY-IT-CENTER\\EASY-IT-CENTER-SERVER\\wwwroot\\test\\lexical\\packages\\lexical-website"
+    }
+  }
+}

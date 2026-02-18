@@ -1,0 +1,11 @@
+{
+  "type": "mdx",
+  "permalink": "/gallery",
+  "source": "@site/src/pages/gallery.md",
+  "title": "Gallery",
+  "frontMatter": {
+    "id": "gallery",
+    "title": "Gallery"
+  },
+  "unlisted": false
+}

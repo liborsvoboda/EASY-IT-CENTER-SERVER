@@ -72,11 +72,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
 	<EmbeddedResource Remove="wwwroot\**" />
     <None Remove="bin\**" />
 	<None Remove="wwwroot\**" />
-    <TypeScriptCompile Remove="*" />
-    <TypeScriptCompile Remove="bin\**" />
     <Content Remove="bin\**" />
 	<Content Remove="wwwroot\**" />
-	<EntityDeploy Remove="wwwroot\server-users\server\**" />
   </ItemGroup>
 
    <ItemGroup>

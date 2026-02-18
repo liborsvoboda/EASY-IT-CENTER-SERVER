@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO.Compression;
-using System.Linq;
-using System.Threading.Tasks;
-using EasyITCenter.DBModel;
+﻿using EasyITCenter.DBModel;
 using FastReport.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +6,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using PuppeteerSharp;
 using ScrapySharp.Network;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO.Compression;
+using System.Linq;
+using System.Threading.Tasks;
 using Westwind.AspNetCore.Markdown;
+using static EasyITCenter.Controllers.FileService;
 
 namespace EasyITCenter.Controllers {
 
@@ -154,6 +155,7 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                     FileOperations.CreateDirectory(Path.Combine(userRootPath, userStorageContent.Path));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -179,6 +181,9 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
+                    userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
+                    userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
+
                     FileOperations.MoveDirectory(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath, userStorageRenameDir.TargetPath));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -202,6 +207,9 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
+                    userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
+                    userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
+
                     FileOperations.CopyDirectory(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath, userStorageRenameDir.TargetPath));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -223,6 +231,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> DownloadUserFolder([FromBody] UserStorageContent userStorageContent) {
             string userRootPath = null;
             try {
+                userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                 } else { userRootPath = Path.Combine(SrvRuntime.SrvUserPublicPath, userStorageContent.Path); }
@@ -250,6 +259,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                     FileOperations.ClearFolder(userRootPath);
                 
@@ -273,6 +283,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                     FileOperations.DeleteDirectory(userRootPath);
 
@@ -296,6 +307,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path, userStorageContent.Filename);
                     FileOperations.CreateFile(userRootPath);
 
@@ -321,6 +333,8 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+
                     FileOperations.WriteToFile(Path.Combine(userRootPath, userStorageContent.Path), userStorageContent.Content, true);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -344,6 +358,10 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
+
+                    userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
+                    userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
+
                     FileOperations.MoveFile(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath, userStorageRenameDir.TargetPath));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -367,6 +385,9 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
+                    userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
+                    userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
+
                     FileOperations.CopyFile(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath , userStorageRenameDir.TargetPath));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
@@ -389,6 +410,8 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null;
             try {
                 if (HtttpContextExtension.IsLogged()) {
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+                    
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                     FileOperations.DeleteFile(userRootPath);
 
@@ -411,6 +434,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> DownloadUserFile([FromBody] UserStorageContent userStorageContent) {
             string userRootPath = null; string tempFolder = null;
             try {
+                userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                 } else { 
@@ -482,6 +506,8 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+
                     userStorageContent.Files.ForEach(file => { FileOperations.ByteArrayToFile(Path.Combine(userRootPath, userStorageContent.Path , file.Filename), Convert.FromBase64String(file.Content.Split(",")[1])); });
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = userStorageContent.Files.Count(), ErrorMessage = string.Empty });
