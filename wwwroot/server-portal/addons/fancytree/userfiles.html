@@ -251,8 +251,20 @@
                             };
                         } else if (node.folder && node.data.path == "Downloads") {
                             return {
+                                "createFolder": { "name": "Create Folder", "icon": "add" },
+                                "moveFolder": { "name": "Move to Folder", "icon": "edit" },
+                                "copyFolder": { "name": "Copy to Folder", "icon": "copy" },
+                                "clearFolder": { "name": "Clear Folder", "icon": "delete" },
+                                "deleteFolder": { "name": "Delete Folder", "icon": "quit" },
+                                "sep0": "---------",
+                                "downloadHtmlFromUrl": { "name": "Get Html From Url", "icon": "add" },
+                                "downloadMdFromUrl": { "name": "Get MD From Url", "icon": "add" },
                                 "downloadPdfFromUrl": { "name": "Get Pdf From Url", "icon": "add" },
                                 "downloadImageFromUrl": { "name": "Get Image From Url", "icon": "add" },
+                                "sep1": "---------", "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
+                                "sep2": "---------", "createFile": { "name": "Create File", "icon": "add" },
+                                "uploadFiles": { "name": "Upload Files", "icon": "add" },
+                                "sep3": "---------", "generateSummary": { "name": "Generate Summary.md", "icon": "add" },
                             };
                         } else if (!node.folder) {
                             return {
@@ -265,7 +277,18 @@
                         }
                     },
                     actions: async function (node, action, options) {
-                        if (action == "generateSummary") {
+                        if (action == "downloadHtmlFromUrl") {
+                            let content = "<div><input id='UrlPath' type='text' data-role='input' data-prepend='Url:' ><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ></div>";
+                            let actions = [{
+                                caption: "Download HTML from URL", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#UrlPath").val().length > 0 && $("#Filename").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/DownloadHtmlFromUrl", { Url: $("#UrlPath").val(), Filename: $("#Filename").val() }, null, "ReloadUserStorage");
+                                    } else { alert("Data must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Download HTML from URL", content, actions);
+                        } else if (action == "generateSummary") {
                             await Gs.Apis.RunServerPostApi("SummaryService/GenerateUserSummaryFile", { MdFilesPath: $('#DataTree').fancytree("getActiveNode").data.path }, null, "ReloadUserStorage");
                         } else  if (action == "createFolder") {
                             let content = "<div><input id='FolderName' type='text' data-role='input' data-prepend='Folder Name:' ></div>";

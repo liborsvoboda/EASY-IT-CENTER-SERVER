@@ -32,9 +32,9 @@ namespace EasyITCenter.Controllers {
                     summaryFileRequest.MdFilesPath = summaryFileRequest.MdFilesPath.StartsWith("/") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath.StartsWith("\\") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath;
 
                     GlobalFunctions.CreateSummaryFromPath(Path.Combine(SrvRuntime.WebRootPath, summaryFileRequest.MdFilesPath));
-                    return base.Ok(new WebClasses.JsonResult() { Result = DBResult.success.ToString(), Status = DBResult.success.ToString() });
+                    return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.success.ToString() });
                 } else {
-                    return base.Ok(new WebClasses.JsonResult() { Result = DBResult.UnauthorizedRequest.ToString(), Status = DBResult.UnauthorizedRequest.ToString() });
+                    return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.UnauthorizedRequest.ToString() });
                 }
             } catch (Exception ex) {
                 return base.Ok(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });

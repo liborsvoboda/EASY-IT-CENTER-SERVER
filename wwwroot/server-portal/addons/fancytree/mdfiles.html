@@ -33,7 +33,7 @@
 			<nav data-role="ribbonmenu">
 				<ul class="tabs-holder">
 					<li onclick="ReloadUserHelpFiles()" class=""><a href="#">User Help Files</a></li>
-					<li onclick="ReloadGuestHelpFiles()" class=""><a href="#">Guest Help Files</a></li>
+					<li onclick="ReloadPublicHelpFiles()" class=""><a href="#">Public Help Files</a></li>
 					<li onclick="EditHelpFiles()" class=""><a href="#">Edit Selected File</a></li>
 				</ul>
 		</div>
@@ -42,8 +42,8 @@
 		function ReloadUserHelpFiles() {
             $('#DataTree').fancytree('option', 'source', { url: "/JsonGeneratorService/GetFancyUserMDFiles" });
 		}
-        function ReloadGuestHelpFiles() {
-            $('#DataTree').fancytree('option', 'source', { url: "/JsonGeneratorService/GetFancyGuestMDFiles" });
+        function ReloadPublicHelpFiles() {
+            $('#DataTree').fancytree('option', 'source', { url: "/JsonGeneratorService/GetFancyPublicMDFiles" });
         }
 		function EditHelpFiles() {
 			Gs.Behaviors.ShowPageLoading();

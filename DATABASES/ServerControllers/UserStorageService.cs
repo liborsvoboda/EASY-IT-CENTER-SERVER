@@ -9,6 +9,7 @@ using FastReport.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ScrapySharp.Network;
 
 
 namespace EasyITCenter.Controllers {
@@ -60,6 +61,12 @@ namespace EasyITCenter.Controllers {
     }
 
 
+    public class DownloadFileRequest {
+        public string Url { get; set; }
+        public string Filename { get; set; }
+    }
+
+
     [AllowAnonymous]
     [Route("/UserStorageService")]
     public class UserStorageService : Controller {
@@ -98,7 +105,7 @@ namespace EasyITCenter.Controllers {
                         goto ScanDirectory;
                     }
                 } else {
-                    userRootPath = path = SrvRuntime.SrvUserGuestPath;
+                    userRootPath = path = SrvRuntime.SrvUserPublicPath;
 
                 ScanDirectoryGuest:
                     result.AddRange(UserStorageOperations.GetUserDirectories(userRootPath + Path.DirectorySeparatorChar, path));
@@ -216,7 +223,7 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
-                } else { userRootPath = Path.Combine(SrvRuntime.SrvUserGuestPath, userStorageContent.Path); }
+                } else { userRootPath = Path.Combine(SrvRuntime.SrvUserPublicPath, userStorageContent.Path); }
 
                 ZipFile.CreateFromDirectory(userRootPath, Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
                 byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
@@ -405,7 +412,7 @@ namespace EasyITCenter.Controllers {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                 } else { 
-                    userRootPath = Path.Combine(SrvRuntime.SrvUserGuestPath, userStorageContent.Path); 
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPublicPath, userStorageContent.Path); 
                 }
 
                 tempFolder = Path.Combine(SrvRuntime.SrvUserPath, "temp") + string.Join(System.IO.Path.DirectorySeparatorChar, userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Take(userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1));
@@ -438,7 +445,7 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Images");
-                } else { userRootPath = Path.Combine(SrvRuntime.SrvUserGuestPath, "Images"); }
+                } else { userRootPath = Path.Combine(SrvRuntime.SrvUserPublicPath, "Images"); }
 
                 extensionList = DbOperations.GetServerParameterLists("ImageExtensionList").Value.Split(";").ToList();
                 extensionList.ForEach(ext => {
@@ -483,7 +490,25 @@ namespace EasyITCenter.Controllers {
         }
 
 
-        
+
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadHtmlFromUrl")]
+        [Consumes("application/json")]
+        public async Task<string> DownloadHtmlFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
+            
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    ScrapingBrowser? browser = new ScrapingBrowser();
+                    WebPage? resultsPage = await browser.NavigateToPageAsync(new Uri(downloadFileRequest.Url));
+
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename), resultsPage.Html.InnerText, true);
+                    
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
 
     }
 }

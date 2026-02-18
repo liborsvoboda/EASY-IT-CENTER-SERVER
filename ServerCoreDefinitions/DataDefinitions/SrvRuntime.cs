@@ -42,7 +42,7 @@ namespace EasyITCenter.ServerCoreStructure {
         
 
         public static string SrvUserPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users");
-        public static string SrvUserGuestPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users","guest");
+        public static string SrvUserPublicPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users","public");
         public static string SrvTempPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-temp", "temp");
 
 

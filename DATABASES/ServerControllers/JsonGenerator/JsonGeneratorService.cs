@@ -121,7 +121,7 @@ namespace EasyITCenter.Controllers {
                 if (HtttpContextExtension.IsLogged()) {
                     loadFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName()), $"*.md", SearchOption.AllDirectories);
                 } else {
-                    loadFiles = FileOperations.GetPathFiles(SrvRuntime.SrvUserGuestPath, $"*.md", SearchOption.AllDirectories);
+                    loadFiles = FileOperations.GetPathFiles(SrvRuntime.SrvUserPublicPath, $"*.md", SearchOption.AllDirectories);
                 }
 
                 loadFiles.ForEach(htmlFile => {
@@ -146,13 +146,13 @@ namespace EasyITCenter.Controllers {
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpGet("/JsonGeneratorService/GetFancyGuestMDFiles")]
+        [HttpGet("/JsonGeneratorService/GetFancyPublicMDFiles")]
         [Consumes("application/json")]
-        public async Task<IActionResult> GetFancyGuestMDFiles() {
+        public async Task<IActionResult> GetFancyPublicMDFiles() {
             try {
                 List<string>? loadFiles = null; List<FancyTreeJsonData> result = new();
 
-                loadFiles = FileOperations.GetPathFiles(SrvRuntime.SrvUserGuestPath, $"*.md", SearchOption.AllDirectories);
+                loadFiles = FileOperations.GetPathFiles(SrvRuntime.SrvUserPublicPath, $"*.md", SearchOption.AllDirectories);
 
                 loadFiles.ForEach(htmlFile => {
                     result.Add(new FancyTreeJsonData() { 
