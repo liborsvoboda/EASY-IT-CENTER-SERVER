@@ -21,6 +21,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
         public static string SrvDocPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-doc");
+        public static string SrvServersPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-servers");
         public static string SrvDownloadsPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-downloads");
 
 
