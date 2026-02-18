@@ -13,7 +13,7 @@ using CSJsonDB;
 using EasyITCenter.Controllers;
 using PuppeteerSharp;
 using Tensorflow;
-using Microsoft.Playwright;
+
 
 namespace EasyITCenter.ServerCoreStructure {
 
@@ -172,9 +172,14 @@ namespace EasyITCenter.ServerCoreStructure {
             mailRequests.ForEach(async mailRequest => {
                 //Scrap HTML Url
                 if (!string.IsNullOrWhiteSpace(mailRequest.HtmlUrl)) {
-                    ScrapingBrowser? browser = new ScrapingBrowser();
-                    WebPage? resultsPage = await browser.NavigateToPageAsync(new Uri(mailRequest.HtmlUrl));
-                    mailRequest.Content = resultsPage.Html.InnerHtml;
+                    var browserFetcher = new BrowserFetcher();
+                    await browserFetcher.DownloadAsync();
+                    await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+                    await using var page = await browser.NewPageAsync();
+                    await page.GoToAsync(mailRequest.HtmlUrl);
+
+                    await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+                    mailRequest.Content = await page.GetContentAsync();
                 }
                 //Scrap PDF Urls
                 if (mailRequest.PdfUrlList?.Count > 0) {
@@ -192,11 +197,14 @@ namespace EasyITCenter.ServerCoreStructure {
                 //Scrap Image Urls
                 if (mailRequest.ImageUrlList?.Count > 0) {
                     mailRequest.ImageUrlList?.ForEach(async imageUrl => {
-                        using var playwright = await Playwright.CreateAsync();
-                        await using var browser = await playwright.Chromium.LaunchAsync();
-                        var page = await browser.NewPageAsync();
-                        await page.GotoAsync(imageUrl);
-                        byte[]? attachment = await page.ScreenshotAsync();
+                        var browserFetcher = new BrowserFetcher();
+                        await browserFetcher.DownloadAsync();
+                        await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+                        await using var page = await browser.NewPageAsync();
+                        await page.GoToAsync(imageUrl);
+
+                        await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+                        byte[]? attachment = await page.ScreenshotDataAsync();
                         mailRequest.AttachmentList?.Add(new Tuple<string, byte[]>(FileOperations.GetLastFolderFromPath(imageUrl), attachment));
                     });
                 }
@@ -334,9 +342,6 @@ namespace EasyITCenter.ServerCoreStructure {
         }
 
 
-       
-       
-
         /// <summary>
         /// Server Token Validation Parameters definition For Api is Used if is ON/Off for Api is On everyTime
         /// </summary>
@@ -351,6 +356,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 ClockSkew = TimeSpan.FromMinutes(double.Parse(DbOperations.GetServerParameterLists("ConfigApiTokenTimeoutMin").Value)),
             };
         }
+
 
         /// <summary>
         /// Token Validator Extension For Server WebPages
