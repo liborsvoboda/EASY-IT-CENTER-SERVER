@@ -53,9 +53,6 @@ namespace EasyITCenter {
             ServerConfigurationServices.ConfigureServerWebPages(ref services);
             ServerConfigurationServices.ConfigureFTPServer(ref services);
             if (bool.Parse(DbOperations.GetServerParameterLists("WebBrowserContentEnabled").Value)) { services.AddDirectoryBrowser(); }
-            ServerConfigurationServices.ConfigureAutoMinify(ref services);
-
-
 
 
             ServerConfigurationServices.ConfigureCookie(ref services);
@@ -230,7 +227,6 @@ namespace EasyITCenter {
             
             app.UseAuthentication();
             app.UseAuthorization();
-            ServerEnablingServices.EnableAutoMinify(ref app);
             ServerModulesEnabling.EnableSwagger(ref app);
             ServerModulesEnabling.EnableLiveDataMonitor(ref app);
             ServerModulesEnabling.EnableDBEntitySchema(ref app);

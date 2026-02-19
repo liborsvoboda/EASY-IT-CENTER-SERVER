@@ -55,21 +55,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
 
         /// <summary>
-        /// Configure AutoMinify Js,Css 
-        /// </summary>
-        /// <param name="services"></param>
-        internal static void ConfigureAutoMinify(ref IServiceCollection services) {
-            if (bool.Parse(DbOperations.GetServerParameterLists("AutoMinifyEnabled").Value)) {
-                services.AddWebOptimizer(cfg => {
-                    cfg.MinifyCssFiles(); cfg.MinifyJsFiles();cfg.MinifyHtmlFiles();
-                }, option => {  
-                    option.EnableTagHelperBundling = true; 
-                    option.AllowEmptyBundle = true;
-                });
-            }
-        }
-
-        /// <summary>
         /// Custom Secure FTP Server
         /// </summary>
         /// <param name="services">The services.</param>

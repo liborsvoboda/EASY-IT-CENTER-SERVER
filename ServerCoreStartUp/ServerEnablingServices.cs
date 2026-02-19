@@ -21,16 +21,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
     public class ServerEnablingServices {
 
 
-
-        /// <summary>
-        /// Enable Automatic Js,Css Minification
-        /// </summary>
-        /// <param name="app"></param>
-        internal static void EnableAutoMinify(ref IApplicationBuilder app) {
-            if (bool.Parse(DbOperations.GetServerParameterLists("AutoMinifyEnabled").Value)) { app.UseWebOptimizer(); }
-        }
-               
-
         /// <summary>
         /// Enable Server Logging in Debug Mode
         /// </summary>
