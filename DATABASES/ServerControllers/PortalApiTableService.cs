@@ -49,6 +49,15 @@ namespace EasyITCenter.Controllers
     }
 
 
+    public partial class AudioNotepadRequest
+    {
+        public string RecGuid { get; set; } = null;
+        public string Subject { get; set; }
+        public string HtmlContent { get; set; }
+        public string Description { get; set; }
+    }
+
+
     public partial class ResponseRequest {
         public int Id { get; set; }
         public string Response { get; set; }
@@ -132,6 +141,11 @@ namespace EasyITCenter.Controllers
         }
 
 
+        /// <summary>
+        /// Universal Delete from Virtual Table
+        /// </summary>
+        /// <param name="recGuid"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpDelete("/PortalApiTableService/DeleteApiTableColumnDataList/{recGuid}")]
         public async Task<string> DeleteApiTableColumnDataList(string recGuid) {
@@ -508,5 +522,84 @@ namespace EasyITCenter.Controllers
             return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
 
+
+
+        [AllowAnonymous]
+        [HttpGet("/PortalApiTableService/GetAudioNotepad")]
+        public async Task<string> GetAudioNotepad() {
+            List<PortalApiTableColumnDataList> data = new();
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted }))
+                    {
+                        data = new EasyITCenterContext().PortalApiTableColumnDataLists
+                            .Where(a => a.ApiTableName == "AudioNotepad" && a.UserId == HtttpContextExtension.GetUserId())
+                            .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                    }
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
+
+
+
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/SetAudioNotepad")]
+        public async Task<string> SetAudioNotepad([FromBody] AudioNotepadRequest audioNotepadRequest) {
+            EasyITCenterContext data = new EasyITCenterContext(); List<PortalApiTableColumnDataList>? original = null;
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+
+                    if (string.IsNullOrWhiteSpace(audioNotepadRequest.RecGuid)) {
+                        string recGuid = Guid.NewGuid().ToString().ToUpper();
+                        List<PortalApiTableColumnDataList> record = new();
+                        record.Add(new PortalApiTableColumnDataList() { ApiTableName = "AudioNotepad", ApiTableColumnName = "Subject", InheritedDataType = "string", RecGuid = recGuid, Value = audioNotepadRequest.Subject, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "AudioNotepad", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = recGuid, Value = audioNotepadRequest.HtmlContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "AudioNotepad", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = audioNotepadRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.AddRange(record);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    } else {
+                        using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted }))
+                        {
+                            original = new EasyITCenterContext().PortalApiTableColumnDataLists
+                                .Where(a => a.ApiTableName == "AudioNotepad" && a.UserId == HtttpContextExtension.GetUserId() && a.RecGuid == audioNotepadRequest.RecGuid)
+                                .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                        }
+
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.RemoveRange(original);
+                            data.SaveChanges();
+                            return true;
+                        });
+
+                        original.ForEach(origItem => {
+                            if (origItem.ApiTableColumnName == "Subject") { origItem.Id = 0; origItem.Value = audioNotepadRequest.Subject; }
+                            else if (origItem.ApiTableColumnName == "HtmlContent") { origItem.Id = 0; origItem.Value = audioNotepadRequest.HtmlContent; }
+                            else if (origItem.ApiTableColumnName == "Description") { origItem.Id = 0; origItem.Value = audioNotepadRequest.Description; }
+                        });
+
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.AddRange(original);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    }
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 3, ErrorMessage = string.Empty });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
     }
 }
