@@ -43,7 +43,7 @@ namespace EasyITCenter.ControllersExtensions {
                 List<string> fileList = new List<string>();
                 imageList.Files.ForEach(file => {
                     if (file.FileArray != null) {
-                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "EasyGallery\\images\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray));
+                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "EasyGallery\\images\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray), true);
                         fileList.Add("./images/" + DataOperations.RemoveWhitespace(file.Name));
                     }
                 });
@@ -90,7 +90,7 @@ namespace EasyITCenter.ControllersExtensions {
                 List<CarouselImage> fileList = new List<CarouselImage>();
                 imageList.Files.ForEach(file => {
                     if (file.FileArray != null) {
-                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselGallery\\images\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray));
+                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselGallery\\images\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray), true);
                         fileList.Add(new CarouselImage() { title = DataOperations.RemoveWhitespace(file.Name.Split(".").First()), href = "./images/" + DataOperations.RemoveWhitespace(file.Name), thumbnail = "./images/" + DataOperations.RemoveWhitespace(file.Name) });
                     }
                 });
@@ -137,7 +137,7 @@ namespace EasyITCenter.ControllersExtensions {
                 List<CarouselVideo> fileList = new List<CarouselVideo>();
                 videoList.Files.ForEach(file => {
                     if (file.Name != null) {
-                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselVideoGallery\\videos\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray));
+                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "CarouselVideoGallery\\videos\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray), true);
                         fileList.Add(new CarouselVideo() { title = DataOperations.RemoveWhitespace(file.Name.Split(".").First()), href = "./videos/" + DataOperations.RemoveWhitespace(file.Name) });
                     }
                 });
@@ -186,7 +186,7 @@ namespace EasyITCenter.ControllersExtensions {
                 videoList.Files.ForEach(file => {
                     if (file.Name != null) {
                         if (firstVideo.Length == 0) { firstVideo = "videos/" + DataOperations.RemoveWhitespace(file.Name); firstName = counter.ToString() + ". " + file.Name.Split(".").First(); }
-                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "VideoPlayList\\videos\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray));
+                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "VideoPlayList\\videos\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray), true);
                         playList += "<div class=\"list\">\r\n                    <video src=\"videos/" + DataOperations.RemoveWhitespace(file.Name) + "\" class=\"list-video\"></video>\r\n                    <h3 class=\"list-title\">" + counter.ToString() + ". " + file.Name.Split(".").First() + "</h3>\r\n                </div>";
                         counter++;
                     }
@@ -228,7 +228,7 @@ namespace EasyITCenter.ControllersExtensions {
                 FileOperations.CopyDirectory(Path.Combine(SrvRuntime.WebRootPath, "Tools\\XmlToMD\\generator"), Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd"));
 
                 if (fileList.Files[0].FileArray != null) {
-                    FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd", (string)DataOperations.RemoveWhitespace(fileList.Files[0].Name)), DataOperations.GetByteArrayFrom64Encode(fileList.Files[0].FileArray));
+                    FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd", (string)DataOperations.RemoveWhitespace(fileList.Files[0].Name)), DataOperations.GetByteArrayFrom64Encode(fileList.Files[0].FileArray), true);
 
                     string cmdGenerator = System.IO.File.ReadAllText(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "XmlToMd", "GenerateDocs.bat"))
                         .Replace("StartDrive", Path.GetPathRoot(SrvRuntime.SrvUserPath))
@@ -277,7 +277,7 @@ namespace EasyITCenter.ControllersExtensions {
 
                 fileList.Files.ForEach(file => {
                     if (file.FileArray != null) {
-                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "src", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray));
+                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "MdToMdBook", "src", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray), true);
                     }
                 });
 
@@ -328,7 +328,7 @@ namespace EasyITCenter.ControllersExtensions {
                 string fileList = "";
                 imageList.Files.ForEach(file => {
                     if (file.FileArray != null) {
-                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "ImageBook\\pages\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray));
+                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "ImageBook\\pages\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray), true);
                         fileList += "<div style=\"background-image:url(pages/" + DataOperations.RemoveWhitespace(file.Name) + ");\"></div>";
                     }
                 });
@@ -371,7 +371,7 @@ namespace EasyITCenter.ControllersExtensions {
                 string fileList = "";
                 imageList.Files.ForEach(file => {
                     if (file.FileArray != null) {
-                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "MedialPresentation\\images\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray));
+                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, User.Claims.First(a => a.Issuer != null).Value, "MedialPresentation\\images\\", (string)DataOperations.RemoveWhitespace(file.Name)), DataOperations.GetByteArrayFrom64Encode(file.FileArray), true);
                         fileList += "<section data-background-transition=\"zoom\" data-autoslide=\"0\" data-background=\"rgba(30, 114, 195, 0.35)\" class=\"author\">\r\n                <section data-transition=\"slide\">\r\n                    <div class=\"black-bg fade-up\" style=\"box-shadow: 5px 10px #888888;border-radius: 20px;transform: scale(0.8);\">\r\n                        <img class=\"\" src=\"./images/" + DataOperations.RemoveWhitespace(file.Name) + "\" width=\"100%\" />\r\n                    </div>\r\n                </section>\r\n            </section>\r\n";
                     }
                 });

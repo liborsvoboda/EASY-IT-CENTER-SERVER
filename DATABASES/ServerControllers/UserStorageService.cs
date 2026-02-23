@@ -508,7 +508,7 @@ namespace EasyITCenter.Controllers {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName());
                     userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
 
-                    userStorageContent.Files.ForEach(file => { FileOperations.ByteArrayToFile(Path.Combine(userRootPath, userStorageContent.Path , file.Filename), Convert.FromBase64String(file.Content.Split(",")[1])); });
+                    userStorageContent.Files.ForEach(file => { FileOperations.ByteArrayToFile(Path.Combine(userRootPath, userStorageContent.Path , file.Filename), Convert.FromBase64String(file.Content.Split(",")[1]), true); });
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = userStorageContent.Files.Count(), ErrorMessage = string.Empty });
                 } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
@@ -625,6 +625,27 @@ namespace EasyITCenter.Controllers {
                     await page.ScreenshotAsync(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename));
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Save converted MarkdownFile from Html
+        /// </summary>
+        /// <param name="files"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/SaveMarkdownFile")]
+        [Consumes("application/json")]
+        public async Task<string> SaveMarkdownFile([FromBody] Files file) {
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Help", file.Filename + ".md"), file.Content, true);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
                 } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
             } catch (Exception ex) {
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });

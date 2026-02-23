@@ -37,9 +37,9 @@ namespace EasyITCenter.Controllers {
                 if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
 
                     uploadPackageRequest.Images.ForEach(image => {
-                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SystemAppsPath, uploadPackageRequest.AppPathName, "Images", image.Filename), Convert.FromBase64String(image.Content.Split(",")[1]));
+                        FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SystemAppsPath, uploadPackageRequest.AppPathName, "Images", image.Filename), Convert.FromBase64String(image.Content.Split(",")[1]), true);
                     });
-                    FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SystemAppsPath, uploadPackageRequest.AppPathName, "Package", uploadPackageRequest.Package.Filename), Convert.FromBase64String(uploadPackageRequest.Package.Content.Split(",")[1]));
+                    FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SystemAppsPath, uploadPackageRequest.AppPathName, "Package", uploadPackageRequest.Package.Filename), Convert.FromBase64String(uploadPackageRequest.Package.Content.Split(",")[1]), true);
 
                     SystemApplicationList record = new() { 
                         Name = uploadPackageRequest.Name, InheritedAppCategoryType = uploadPackageRequest.InheritedAppCategoryType, InheritedAppType = uploadPackageRequest.InheritedAppType,

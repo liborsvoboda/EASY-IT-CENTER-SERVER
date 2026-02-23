@@ -99,19 +99,19 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <summary>
         /// Write ByteArray to File
         /// </summary>
-        /// <param name="fileName"> Name of the file.</param>
-        /// <param name="byteArray">The byte array.</param>
+        /// <param name="fileName"></param>
+        /// <param name="byteArray"></param>
+        /// <param name="rewrite"></param>
         /// <returns></returns>
-        public static bool ByteArrayToFile(string fileName, byte[] byteArray) {
+        public static bool ByteArrayToFile(string fileName, byte[] byteArray, bool rewrite = true) {
             try {
-                if (CreateFile(fileName)) {
-                    DeleteFile(fileName);
+                if ((!CheckFile(fileName) &&  !rewrite) || (CheckFile(fileName) && rewrite)) {
+                    if (CheckFile(fileName)) { DeleteFile(fileName); }
                     using (FileStream? fs = new FileStream(fileName, FileMode.Create, FileAccess.Write)) {
                         fs.Write(byteArray, 0, byteArray.Length);
                         return true;
                     }
-                }
-                return true;
+                } return false;
             } catch (Exception ex) {
                 return false;
             }
@@ -137,8 +137,8 @@ namespace EasyITCenter.ServerCoreStructure {
                     });
                     File.Create(file).Close();
                 }
-            }
-            return CheckFile(file);
+                return true;
+            } return false;
         }
 
 

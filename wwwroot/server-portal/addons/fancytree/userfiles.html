@@ -24,6 +24,12 @@
     <script type="text/javascript" src="/server-portal/addons/fancytree/extensions/contextmenu/js/jquery.fancytree.contextMenu.js"></script>
     <script type="text/javascript" src="/server-portal/metro/js/metro.4.5.2.min.js"></script>
 
+    <!--Canvas-->
+    <script type="text/javascript" src="/server-portal/manage/js/html2canvas.min.js"></script>
+
+    <!--Html to Md-->
+    <script type="text/javascript" src="/server-portal/manage/js/htmltomd.js"></script>
+
     <!--GLOBAL FUNCT-->
     <script type="text/javascript" src="/server-portal/manage/js/global-storage.js"></script>
     <script type="text/javascript" src="/server-portal/manage/js/global-behavior.js"></script>
@@ -266,6 +272,27 @@
                                 "uploadFiles": { "name": "Upload Files", "icon": "add" },
                                 "sep3": "---------", "generateSummary": { "name": "Generate Summary.md", "icon": "add" },
                             };
+                        } else if (!node.folder && node.data.path.endsWith(".html")) {
+                            return {
+                                "saveFile": { "name": "Save File", "icon": "paste" },
+                                "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
+                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
+                                "deleteFile": { "name": "Delete File", "icon": "delete" },
+                                "sep1": "---------",
+                                "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
+                                "convertToMd": { "name": "Convert To Md", "icon": "add" },
+                            };
+                        } else if (!node.folder && (node.data.path.endsWith(".png") || node.data.path.endsWith(".jpeg") || node.data.path.endsWith(".jpg") || node.data.path.endsWith(".tiff") || node.data.path.endsWith(".bmp") || node.data.path.endsWith(".svg"))) {
+                            return {
+                                "saveFile": { "name": "Save File", "icon": "paste" },
+                                "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
+                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
+                                "deleteFile": { "name": "Delete File", "icon": "delete" },
+                                "sep1": "---------",
+                                "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
+                                "sep2": "---------",
+                                "MiniPaint": { "name": "Edit in MiniPaint", "icon": "paste" },
+                            };
                         } else if (!node.folder) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
@@ -277,7 +304,12 @@
                         }
                     },
                     actions: async function (node, action, options) {
-                        if (action == "downloadHtmlFromUrl") {
+                        if (action == "MiniPaint") {
+                            SetEditor("MiniPaint");
+                        } else if (action == "convertToMd") {
+                            let markdown = toMarkdown(node.key);
+                            await Gs.Apis.RunServerPostApi("UserStorageService/SaveMarkdownFile", { Content: markdown, Filename: node.title.split(".")[0] }, null, "ReloadUserStorage");
+                        } else if (action == "downloadHtmlFromUrl") {
                             let content = "<div><input id='UrlPath' type='text' data-role='input' data-prepend='Url:' ><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ></div>";
                             let actions = [{
                                 caption: "Download HTML from URL", cls: "js-dialog-close success",
@@ -411,22 +443,28 @@
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Upload Files", content, actions);
 
-                        } else if (action == "saveFile") { //console.log("extension", $('#DataTree').fancytree("getActiveNode").data.extension);
+                        } else if (action == "saveFile" && Metro.storage.getItem("SelectedEditor", null) != "MiniPaint") { //console.log("extension", $('#DataTree').fancytree("getActiveNode").data.extension);
                             Gs.Apis.RunServerPostApi("UserStorageService/SetUserTextFile", {
                                 Path: $('#DataTree').fancytree("getActiveNode").data.path,
                                 Content: Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco" ?
                                     Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue() :
                                     Metro.storage.getItem("SelectedEditor", null) == "TinyMCE" ? tinyMCE.getContent('TinyMCE') :
-                                        Metro.storage.getItem("SelectedEditor", null) == "Froala" ? EditorInit.html.get() :
-                                            Metro.storage.getItem("SelectedEditor", null) == "SUNEdit" ? EditorInit.getContents() : 
-                                                Metro.storage.getItem("SelectedEditor", null) == "Summer" ? $(`#SummerEditor`).summernote(`code`) :
-                                                    Metro.storage.getItem("SelectedEditor", null) == "MDEditor" ? $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown() :
-                                                        Metro.storage.getItem("SelectedEditor", null) == "JSONEditor" ? 
-                                                            $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text") == 'null' ?
-                                                                $("#IFrameWindow")[0].contentWindow.inputEditor.doc.getValue() : $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text")
+                                    Metro.storage.getItem("SelectedEditor", null) == "Froala" ? EditorInit.html.get() :
+                                    Metro.storage.getItem("SelectedEditor", null) == "SUNEdit" ? EditorInit.getContents() : 
+                                    Metro.storage.getItem("SelectedEditor", null) == "Summer" ? $(`#SummerEditor`).summernote(`code`) :
+                                    Metro.storage.getItem("SelectedEditor", null) == "MDEditor" ? $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown() :
+                                    Metro.storage.getItem("SelectedEditor", null) == "JSONEditor" ? 
+                                          $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text") == 'null' ?
+                                          $("#IFrameWindow")[0].contentWindow.inputEditor.doc.getValue() : $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text")
                                                         : ""
                             }, null, "ReloadUserStorage");
 
+                        } else if (action == "saveFile" && Metro.storage.getItem("SelectedEditor", null) == "MiniPaint") {
+                            html2canvas($('#IFrameWindow')[0].contentWindow.document.querySelector("#canvas_minipaint")).then(async canvas => {
+                                let target = new Image(); target.src = canvas.toDataURL("image." + $('#DataTree').fancytree("getActiveNode").data.path.split(".").pop()); Files = [];
+                                Files.push({ Filename: $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), Content: target.src });
+                                await Gs.Apis.RunServerPostApi("UserStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(),""), Files: Files }, null, "ReloadUserStorage");
+                            });
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
                             let actions = [{
@@ -482,6 +520,7 @@
             $('#DataTree').fancytree('option', 'source', { url: "/UserStorageService/GetUserStorage" });
         }
 
+
         function LoadFiles() {
             let fileList = document.getElementById("Files").files;
             Files = [];
@@ -504,6 +543,26 @@
 
             //SET EDITOR
             switch (editor) {
+                case "MiniPaint":
+                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="/server-portal/addons/minipaint/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    let sourceImage = Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key;
+                    console.log("key", $('#DataTree').fancytree("getActiveNode"));
+                    setTimeout(function () {
+                        let toDataURL = url => fetch(url)
+                            .then(response => response.blob())
+                            .then(blob => new Promise((resolve, reject) => {
+                                const reader = new FileReader()
+                                reader.onloadend = () => resolve(reader.result)
+                                reader.onerror = reject
+                                reader.readAsDataURL(blob)
+                            }));
+                        toDataURL(Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key)
+                            .then(dataUrl => {
+                                console.log('RESULT:', dataUrl)
+                                $("#IFrameWindow")[0].contentWindow.FileOpen.open_resource(dataUrl)
+                            })
+                    }, 1000);
+                    break;
                 case "XLSEditor":
 
                     fetch($('#DataTree').fancytree("getActiveNode").key).then(response => response.blob())
