@@ -1,4 +1,5 @@
-﻿using EasyITCenter.DBModel;
+﻿using DocumentFormat.OpenXml.Vml.Office;
+using EasyITCenter.DBModel;
 using FastReport.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -69,6 +70,18 @@ namespace EasyITCenter.Controllers {
         public string Filename { get; set; }
     }
 
+
+    public class UnpackArchiveRequest {
+        public string TargetFolder { get; set; }
+        public string FilePath { get; set; }
+    }
+
+
+    public class SaveMediaFileRequest {
+        public string Filename { get; set; }
+        public string Type { get; set; }
+        public string Content { get; set; }
+    }
 
     [AllowAnonymous]
     [Route("/UserStorageService")]
@@ -644,6 +657,49 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Help", file.Filename + ".md"), file.Content, true);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Unpack User Archive
+        /// </summary>
+        /// <param name="unpackArchiveRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/UnpackArchive")]
+        [Consumes("application/json")]
+        public async Task<string> UnpackArchive([FromBody] UnpackArchiveRequest unpackArchiveRequest) {
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    FileOperations.CreateDirectory(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), unpackArchiveRequest.TargetFolder));
+                    System.IO.Compression.ZipFile.ExtractToDirectory(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), unpackArchiveRequest.FilePath), Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), unpackArchiveRequest.TargetFolder));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Save User Media File
+        /// </summary>
+        /// <param name="saveMediaFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/SaveMediaFile")]
+        [Consumes("application/json")]
+        public async Task<string> SaveMediaFile([FromBody] SaveMediaFileRequest saveMediaFileRequest) {
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), saveMediaFileRequest.Type, saveMediaFileRequest.Filename + ( saveMediaFileRequest.Type == "Images" ? ".png" : saveMediaFileRequest.Type == "Audio" ? ".mp3" : ".mp4" )), Convert.FromBase64String(saveMediaFileRequest.Content.Split(",")[1]), true);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
                 } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }

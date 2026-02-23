@@ -105,7 +105,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <returns></returns>
         public static bool ByteArrayToFile(string fileName, byte[] byteArray, bool rewrite = true) {
             try {
-                if ((!CheckFile(fileName) &&  !rewrite) || (CheckFile(fileName) && rewrite)) {
+                if (!CheckFile(fileName) || (CheckFile(fileName) && rewrite)) {
                     if (CheckFile(fileName)) { DeleteFile(fileName); }
                     using (FileStream? fs = new FileStream(fileName, FileMode.Create, FileAccess.Write)) {
                         fs.Write(byteArray, 0, byteArray.Length);

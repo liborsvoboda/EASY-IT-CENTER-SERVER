@@ -50,7 +50,8 @@ Gs.Media.CaptureCameraToVideo = async function () {
 
 
 Gs.Media.CaptureScreenToVideo = async function () {
-	if (Gs.Variables.media.mediaRecorder == null) {
+	//if (Gs.Variables.media.mediaRecorder == null) {
+	if (Metro.storage.getItem("CapturedVideo", null) == null) {
 		try {
 			const stream = await navigator.mediaDevices.getDisplayMedia(Gs.Variables.media.videoCaptureOpt);
 			Gs.Media.HandleStreamSuccess(stream);
@@ -101,6 +102,20 @@ Gs.Media.DownloadCapturedVideo = function () {
 	}, 100);
 }
 
+
+Gs.Media.DownloadCapturedVideoName = function (fileName) {
+	const EICdownloadUrl = window.URL.createObjectURL(Metro.storage.getItem("CapturedVideo", null));
+	const a = document.createElement('a');
+	a.style.display = 'none';
+	a.href = EICdownloadUrl;
+	a.download = fileName + ".mp4";
+	a.mimeType = Gs.Variables.media.videoMimeType;
+	document.body.appendChild(a);
+	a.click();
+	setTimeout(() => {
+		document.body.removeChild(a); window.URL.revokeObjectURL(EICdownloadUrl);
+	}, 100);
+}
 
 Gs.Media.DownloadCapturedImage = function () {
 	const a = document.createElement('a');
