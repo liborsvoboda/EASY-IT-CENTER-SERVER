@@ -1,6 +1,6 @@
 ﻿# Excel on Web
-https://github.com/jspreadsheet/ce
-
+https://github.com/jspreadsheet/ce datatables
+https://calendarjs.com/docs/getting-startedv scheduler
 
 # NetCore Electron with Metro
 https://github.com/taurenshaman/electron-net-demo/tree/master  Ideal For Standalone Touch Panel
