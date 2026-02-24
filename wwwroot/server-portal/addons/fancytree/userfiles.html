@@ -320,11 +320,6 @@
                                 "copyFolder": { "name": "Copy to Folder", "icon": "copy" },
                                 "clearFolder": { "name": "Clear Folder", "icon": "delete" },
                                 "deleteFolder": { "name": "Delete Folder", "icon": "quit" },
-                                "sep0": "---------",
-                                "downloadHtmlFromUrl": { "name": "Get Html From Url", "icon": "add" },
-                                "downloadMdFromUrl": { "name": "Get MD From Url", "icon": "add" },
-                                "downloadPdfFromUrl": { "name": "Get Pdf From Url", "icon": "add" },
-                                "downloadImageFromUrl": { "name": "Get Image From Url", "icon": "add" },
                                 "sep1": "---------", "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
                                 "sep2": "---------", "createFile": { "name": "Create File", "icon": "add" },
                                 "uploadFiles": { "name": "Upload Files", "icon": "add" },
@@ -386,7 +381,7 @@
                                         let reader = new FileReader(); 
                                         reader.onload = async function () {
                                             var dataURL = reader.result; localStorage.setItem(":CapturedAudio", dataURL);
-                                            await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Type: "Audio", Filename: filename, Content: localStorage.getItem(":CapturedAudio", null) }, null, "ReloadUserStorage");
+                                            await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Path: "Audio", Filename: filename, Content: localStorage.getItem(":CapturedAudio", null) }, null, "ReloadUserStorage");
                                             Gs.Media.ClearCapturedAudio();
                                         }
                                         //reader.readAsArrayBuffer(blob);
@@ -404,7 +399,7 @@
                                 onclick: async function () {
                                     if ($("#Filename").val().length > 0) {
                                         await Gs.Media.CaptureToImage();
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Type: "Images", Filename: $("#Filename").val(), Content: Metro.storage.getItem("CapturedImage", null) }, null, "ReloadUserStorage");
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Path: "Images", Filename: $("#Filename").val(), Content: Metro.storage.getItem("CapturedImage", null) }, null, "ReloadUserStorage");
                                         Gs.Media.ClearCapturedImage();
                                     } else { alert("Data must be Inserted"); }
                                 }
@@ -417,22 +412,32 @@
                                 caption: "Start Record Desktop", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#Filename").val().length > 0) {
-                                        Gs.Media.CaptureScreenToVideo();
+                                        Gs.Media.StartCaptureScreen($("#Filename").val());
                                     } else { alert("Data must be Inserted"); }
                                 }
                             }, {
-                                caption: "Stop Record Desktop", cls: "js-dialog-close success",
-                                onclick: async function () {
-                                    await Gs.Media.CaptureScreenToVideo();
-                                    Gs.Media.DownloadCapturedVideoName($("#Filename").val());
-                                    Gs.Media.ClearCapturedVideo();
-                                }
-                                }, {
                                 caption: "Cancel", cls: "js-dialog-close alert", onclick: function () {
 
                                     }
                                 }]
                             Gs.Objects.CreateDialogRequest("Record Desktop", content, actions);
+
+                        } else if (action == "recordCamera") {
+                            let content = "<div><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ><BUTTON class='button success outline shadowed' onclick=Gs.Media.StartCaptureCamera(); >Start</BUTTON><BUTTON onclick ='Gs.Variables.media.mediaRecorder.stop();Gs.Variables.media.mediaStream.getTracks().forEach(track=>{ track.stop()})' class='button warning outline shadowed'> Stop</BUTTON></div>";
+                            let actions = [{
+                                caption: "Save Video", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#Filename").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Path: "Videos", Filename: $("#Filename").val(), Content: Metro.storage.getItem("CapturedVideo", null) }, null, "ReloadUserStorage");
+                                        Gs.Media.ClearCapturedVideo();
+                                    } else { alert("Data must be Inserted"); }
+                                }
+                            }, {
+                                caption: "Cancel", cls: "js-dialog-close alert", onclick: function () {
+
+                                }
+                            }]
+                            Gs.Objects.CreateDialogRequest("Record Camera", content, actions);
 
                         } else if (action == "unpackArchive") {
                             let content = "<div><input id='TargetFolder' type='text' data-role='input' data-prepend='Target Folder:' ></div>";
@@ -654,9 +659,7 @@
         }
 
         //STARTUP
-        $(document).ready(function () {
-            StartUp();
-        });
+        $(document).ready(function () { StartUp(); });
 
 
         function ReloadUserStorage() {
@@ -728,7 +731,7 @@
                         });
                     break;
                 case "Other":
-                    $("#FrameWindow").html('<h3 style="padding: 10px;">Unsupported Format</h3>');
+                    //$("#FrameWindow").html('<h3 style="padding: 10px;">Unsupported Format</h3>');
                     break;
                 case "STLviewer":
                     $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');

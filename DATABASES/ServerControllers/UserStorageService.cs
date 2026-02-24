@@ -79,7 +79,7 @@ namespace EasyITCenter.Controllers {
 
     public class SaveMediaFileRequest {
         public string Filename { get; set; }
-        public string Type { get; set; }
+        public string Path { get; set; }
         public string Content { get; set; }
     }
 
@@ -682,10 +682,9 @@ namespace EasyITCenter.Controllers {
         [HttpPost("/UserStorageService/SaveMediaFile")]
         [Consumes("application/json")]
         public async Task<string> SaveMediaFile([FromBody] SaveMediaFileRequest saveMediaFileRequest) {
-            try
-            {
+            try {
                 if (HtttpContextExtension.IsLogged() && !string.IsNullOrWhiteSpace(saveMediaFileRequest.Content) ) {
-                    FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), saveMediaFileRequest.Type, saveMediaFileRequest.Filename + ( saveMediaFileRequest.Type == "Images" ? ".png" : saveMediaFileRequest.Type == "Audio" ? ".mp3" : ".mp4" )), Convert.FromBase64String(saveMediaFileRequest.Content.Split(",")[1]), true);
+                    FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), saveMediaFileRequest.Path, saveMediaFileRequest.Filename + ( saveMediaFileRequest.Path == "Images" ? ".png" : saveMediaFileRequest.Path == "Audio" ? ".mp3" : ".mp4" )), Convert.FromBase64String(saveMediaFileRequest.Content.Split(",").Last()), true);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
                 } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }

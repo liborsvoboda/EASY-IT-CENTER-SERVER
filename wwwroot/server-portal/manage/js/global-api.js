@@ -1,4 +1,8 @@
-﻿
+﻿Gs.Apis.SaveCapturedVideo = async function (filename) {
+    await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Path: "Videos", Filename: filename, Content: Metro.storage.getItem("CapturedVideo", null) }, null, "ReloadUserStorage");
+    Gs.Media.ClearCapturedVideo();
+}
+
 
 Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, storageName = null, windowFunction = null ) {
     //used for Downloading files

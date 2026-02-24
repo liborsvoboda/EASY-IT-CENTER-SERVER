@@ -65,90 +65,6 @@ Gs.Media.DrawCaptureImage = function (video) {
 }
 
 
-Gs.Media.CaptureCameraToVideo = async function () {
-	if (Gs.Variables.media.mediaRecorder == null) {
-		try {
-			const stream = await navigator.mediaDevices.getUserMedia(Gs.Variables.media.videoCaptureOpt);
-			Gs.Media.HandleStreamSuccess(stream);
-		} catch (e) {
-			//Gs.Variables.media.EICconsole = 'navigator.getUserMedia error: ' + e + "\r\n" + Gs.Variables.media.EICconsole;
-		}
-	} else {
-		Gs.Variables.media.mediaRecorder.stop();
-		let tracks = Gs.Variables.media.videoCaptureStream.getTracks();
-		tracks.forEach(track => { track.stop(); });
-	}
-}
-
-
-Gs.Media.CaptureScreenToVideo = async function () {
-	//if (Gs.Variables.media.mediaRecorder == null) {
-	if (Metro.storage.getItem("CapturedVideo", null) == null) {
-		try {
-			const stream = await navigator.mediaDevices.getDisplayMedia(Gs.Variables.media.videoCaptureOpt);
-			Gs.Media.HandleStreamSuccess(stream);
-		} catch (e) {
-			//Gs.Variables.media.EICconsole = 'navigator.getUserMedia error: ' + e + "\r\n" + Gs.Variables.media.EICconsole;
-		}
-	} else {
-		Gs.Variables.media.mediaRecorder.stop();
-		let tracks = Gs.Variables.media.videoCaptureStream.getTracks();
-		tracks.forEach(track => { track.stop(); });
-	}
-}
-
-
-Gs.Media.HandleDataAvailable = function (event) {
-	if (event.data && event.data.size > 0) {
-		Gs.Variables.media.videoRecBlob.push(event.data);
-		Metro.storage.setItem("CapturedVideo", new Blob(Gs.Variables.media.videoRecBlob, { type: Gs.Variables.media.videoMimeType }));
-	}
-}
-
-
-Gs.Media.HandleStreamSuccess = function (stream) {
-	Gs.Variables.media.videoCaptureStream = stream;
-	try {
-		let options = Gs.Variables.media.videoMimeType;
-		Gs.Variables.media.mediaRecorder = new MediaRecorder(Gs.Variables.media.videoCaptureStream, { options });
-	} catch (e) {
-		//Gs.Variables.media.EICconsole = 'Exception while creating MediaRecorder: ' + e + "\r\n" + Gs.Variables.media.EICconsole;
-		return;
-	}
-	Gs.Variables.media.mediaRecorder.ondataavailable = Gs.Variables.media.HandleDataAvailable;
-	Gs.Variables.media.mediaRecorder.start();
-}
-
-
-Gs.Media.DownloadCapturedVideo = function () {
-	const EICdownloadUrl = window.URL.createObjectURL(Metro.storage.getItem("CapturedVideo",null));
-	const a = document.createElement('a');
-	a.style.display = 'none';
-	a.href = EICdownloadUrl;
-	a.download = "ScreenShot.mp4";
-	a.mimeType = Gs.Variables.media.videoMimeType;
-	document.body.appendChild(a);
-	a.click();
-	setTimeout(() => {
-		document.body.removeChild(a); window.URL.revokeObjectURL(EICdownloadUrl);
-	}, 100);
-}
-
-
-Gs.Media.DownloadCapturedVideoName = function (fileName) {
-	const EICdownloadUrl = window.URL.createObjectURL(Metro.storage.getItem("CapturedVideo", null));
-	const a = document.createElement('a');
-	a.style.display = 'none';
-	a.href = EICdownloadUrl;
-	a.download = fileName + ".mp4";
-	a.mimeType = Gs.Variables.media.videoMimeType;
-	document.body.appendChild(a);
-	a.click();
-	setTimeout(() => {
-		document.body.removeChild(a); window.URL.revokeObjectURL(EICdownloadUrl);
-	}, 100);
-}
-
 Gs.Media.DownloadCapturedImage = function () {
 	const a = document.createElement('a');
 	a.style.display = 'none';
@@ -160,6 +76,81 @@ Gs.Media.DownloadCapturedImage = function () {
 		document.body.removeChild(a);
 	}, 100);
 }
+
+
+
+
+
+//Video Capturing Screen 
+Gs.Media.StartCaptureScreen = async function (filename) {
+	let mediaStream = await navigator.mediaDevices.getDisplayMedia({
+		video: true,
+		audio: true,
+	});
+
+	const mime = MediaRecorder.isTypeSupported("video/webm; codecs=vp9")
+		? "video/webm; codecs=vp9"
+		: "video/webm"
+	let mediaRecorder = new MediaRecorder(mediaStream, {
+		mimeType: mime
+	});
+
+	mediaRecorder.addEventListener('dataavailable', function (e) {
+		Gs.Variables.media.videoData.push(e.data);
+	});
+
+	mediaRecorder.addEventListener('stop', function () {
+		let blob = new Blob(Gs.Variables.media.videoData, {
+			type: Gs.Variables.media.videoData[0].type
+		});
+		let reader = new FileReader();
+		reader.onload = async function () {
+			var dataURL = reader.result;
+			Metro.storage.setItem("CapturedVideo", dataURL);
+			await Gs.Apis.SaveCapturedVideo(filename);
+		}
+		reader.readAsDataURL(blob);
+
+	});
+
+	mediaRecorder.start();
+}
+
+
+//Video Capturing Camera 
+Gs.Media.StartCaptureCamera = async function () {
+	await navigator.mediaDevices.getUserMedia({
+		video: true,
+		audio: true,
+	}).then(mediaStream => {
+
+		let mediaRecorder = new MediaRecorder(mediaStream);
+
+		Gs.Variables.media.mediaStream = mediaStream;
+		Gs.Variables.media.mediaRecorder = mediaRecorder;
+
+
+		mediaRecorder.ondataavailable = (e) => {
+			Gs.Variables.media.videoData.push(e.data);
+		};
+
+		mediaRecorder.onstop = () => {
+			//const videFile = new Blob(Gs.Variables.media.videoData, { type: "video/mp4" });
+			//Metro.storage.setItem("CapturedVideo", videFile);
+			
+			let reader = new FileReader();
+			reader.onload = async function () {
+				var dataURL = reader.result;
+				Metro.storage.setItem("CapturedVideo", dataURL);
+				Gs.Variables.media.videoData = [];
+			}
+			reader.readAsDataURL(Gs.Variables.media.videoData[0]);
+		
+		}
+
+		mediaRecorder.start();
+	})
+ }
 
 
 Gs.Media.ClearCapturedImage = function () {

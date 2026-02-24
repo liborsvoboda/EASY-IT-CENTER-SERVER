@@ -25,22 +25,8 @@ window.Gs = {
         ],
         media: {
             mediaRecorder: null, 
-            videoRecBlob: [], 
-            videoCaptureStream: null, 
-            videoMimeType: "video/mp4",
-            imageMimeType: "image/png",
-            elVideoCameraControl: "VideoCameraButton",
-            elImageControl: "ImageButton",
-            videoCaptureOpt: {
-                video: { displaySurface: "browser" }, // "monitor","browser"
-                audio: { suppressLocalAudioPlayback: false },
-                preferCurrentTab: false,
-                systemAudio: "include",
-                selfBrowserSurface: "exclude",
-                surfaceSwitching: "include",
-                monitorTypeSurfaces: "include",
-                cursor: 'always'		
-            }
+            mediaStream: null,
+            videoData: [],
         },
         UserSettingList: {
             EnableAutoTranslate: false,
@@ -75,13 +61,8 @@ window.WindowButtons = [
     {
         html: "<span class='mif-image' title='Take ScreenShot'></span>",
         cls: "sys-button",
-        onclick: "Gs.Media.CaptureToImage()"
+        onclick: "Gs.Media.CaptureToImage();Gs.Media.DownloadCapturedImage();Gs.Media.ClearCapturedImage();"
     },
-    {
-        html: "<span class='mif-video-camera' title='Record Video'></span>",
-        cls: "sys-button",
-        onclick: "Gs.Media.CaptureScreenToVideo()"
-    }
 ]
 
 
