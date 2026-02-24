@@ -374,3 +374,146 @@ Gs.Functions.ExportTable = function (params) {
     $.extend(true, options, params);
     if (document.getElementById("IFrameWindow") == null) { $('#menuTable').tableExport(options); } 
 }
+
+
+Gs.Functions.BlobToBase64Image = function (blob) {
+    let blobUrl = URL.createObjectURL(blob);
+
+    return new Promise((resolve, reject) => {
+        let img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = err => reject(err);
+        img.src = blobUrl;
+    }).then(img => {
+        URL.revokeObjectURL(blobUrl);
+        let [w, h] = [img.width, img.height]
+        let aspectRatio = w / h
+        let factor = Math.max(w, h) / 256
+        w = w / factor
+        h = h / factor
+        let canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        let ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        return canvas.toDataURL();
+    })
+} 
+
+
+Gs.Functions.BlobToImageData = function (blob) {
+    let blobUrl = URL.createObjectURL(blob);
+
+    return new Promise((resolve, reject) => {
+        let img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = err => reject(err);
+        img.src = blobUrl;
+    }).then(img => {
+        URL.revokeObjectURL(blobUrl);
+        let [w, h] = [img.width, img.height]
+        let aspectRatio = w / h
+        let factor = Math.max(w, h) / 256
+        w = w / factor
+        h = h / factor
+
+        let canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        let ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        return ctx.getImageData(0, 0, w, h);
+    })
+}
+
+
+Gs.Functions.ImageDataToBlob = function (imageData) {
+    let w = imageData.width;
+    let h = imageData.height;
+    let canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    let ctx = canvas.getContext("2d");
+    ctx.putImageData(imageData, 0, 0, w, h); 
+
+    return new Promise((resolve, reject) => {
+        canvas.toBlob(resolve); 
+    })
+}
+
+
+Gs.Functions.ObjectURLToBlob = function (url) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let blob = await fetch(url)
+            resolve(blob)
+        } catch (err) {
+            reject(err)
+        }
+    })
+}
+
+
+Gs.Functions.BlobToObjectURL = function (blob) {
+    return new Promise((resolve, reject) => {
+        try {
+            resolve(URL.createObjectURL(blob))
+        } catch (err) {
+            reject(err)
+        }
+    })
+}
+
+
+Gs.Functions.convertToMP3 = function (arrayBuffer) {
+    //var arrayBuffer;
+    var fileReader = new FileReader();
+
+    fileReader.onload = function () {
+        arrayBuffer = this.result;
+        var buffer = new Uint8Array(arrayBuffer),
+            data = parseWav(buffer);
+
+        encoderWorker.postMessage({
+            cmd: 'init',
+            config: {
+                mode: 3,
+                channels: 1,
+                samplerate: data.sampleRate,
+                bitrate: data.bitsPerSample
+            }
+        });
+
+        encoderWorker.postMessage({
+            cmd: 'encode',
+            buf: Uint8ArrayToFloat32Array(data.samples)
+        });
+        encoderWorker.postMessage({
+            cmd: 'finish'
+        });
+        encoderWorker.onmessage = function (e) {
+            if (e.data.cmd == 'data') {
+
+                var mp3Blob = new Blob([new Uint8Array(e.data.buf)], {
+                    type: 'audio/mp3'
+                });
+                global[self.callback](self, mp3Blob, config.element);
+
+            }
+        };
+    };
+
+    fileReader.readAsArrayBuffer(this.audioData);
+};
+
+
+Gs.Functions.Uint8ArrayToFloat32Array = function (u8a) {
+    var f32Buffer = new Float32Array(u8a.length);
+    for (var i = 0; i < u8a.length; i++) {
+        var value = u8a[i << 1] + (u8a[(i << 1) + 1] << 8);
+        if (value >= 0x8000) value |= ~0x7FFF;
+        f32Buffer[i] = value / 0x8000;
+    }
+    return f32Buffer;
+};

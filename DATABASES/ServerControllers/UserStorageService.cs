@@ -120,25 +120,10 @@ namespace EasyITCenter.Controllers {
                         result = result.OrderBy(a => a.title).ToList();
                         goto ScanDirectory;
                     }
-                } else {
-                    userRootPath = path = SrvRuntime.SrvUserPublicPath;
+                } else { return base.Json(result); }
 
-                ScanDirectoryGuest:
-                    result.AddRange(UserStorageOperations.GetUserDirectories(userRootPath + Path.DirectorySeparatorChar, path));
-                    dir = result.Where(a => a.scanned == false).FirstOrDefault();
-
-                    if (dir != null) {
-                        path = Path.Combine(userRootPath, dir.path);
-                        result.Remove(dir);
-                        dir.scanned = true;
-                        result.Add(dir);
-                        result = result.OrderBy(a => a.title).ToList();
-                        goto ScanDirectoryGuest;
-                    }
-                }
-
-                //FILES Part
-                result.AddRange(UserStorageOperations.GetUserFiles(userRootPath + Path.DirectorySeparatorChar));
+                    //FILES Part
+                    result.AddRange(UserStorageOperations.GetUserFiles(userRootPath + Path.DirectorySeparatorChar));
 
                 result.OrderByDescending(a => a.path.Split(System.IO.Path.DirectorySeparatorChar).Length).ToList().ForEach(res => {
                     if (res.path.Split(System.IO.Path.DirectorySeparatorChar).Count() > 1) {
@@ -247,7 +232,7 @@ namespace EasyITCenter.Controllers {
                 userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
-                } else { userRootPath = Path.Combine(SrvRuntime.SrvUserPublicPath, userStorageContent.Path); }
+                } else { return BadRequest(new { Status = DBResult.UnauthorizedRequest.ToString(), ErrorMessage = String.Empty }); }
 
                 ZipFile.CreateFromDirectory(userRootPath, Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
                 byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
@@ -450,8 +435,8 @@ namespace EasyITCenter.Controllers {
                 userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
-                } else { 
-                    userRootPath = Path.Combine(SrvRuntime.SrvUserPublicPath, userStorageContent.Path); 
+                } else {
+                    return BadRequest(new { Status = DBResult.error.ToString(), ErrorMessage = String.Empty });
                 }
 
                 tempFolder = Path.Combine(SrvRuntime.SrvUserPath, "temp") + string.Join(System.IO.Path.DirectorySeparatorChar, userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Take(userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1));
@@ -484,7 +469,7 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.IsLogged()) {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), "Images");
-                } else { userRootPath = Path.Combine(SrvRuntime.SrvUserPublicPath, "Images"); }
+                } else { return base.Json(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.UnauthorizedRequest.ToString() }); }
 
                 extensionList = DbOperations.GetServerParameterLists("ImageExtensionList").Value.Split(";").ToList();
                 extensionList.ForEach(ext => {
@@ -697,8 +682,9 @@ namespace EasyITCenter.Controllers {
         [HttpPost("/UserStorageService/SaveMediaFile")]
         [Consumes("application/json")]
         public async Task<string> SaveMediaFile([FromBody] SaveMediaFileRequest saveMediaFileRequest) {
-            try {
-                if (HtttpContextExtension.IsLogged()) {
+            try
+            {
+                if (HtttpContextExtension.IsLogged() && !string.IsNullOrWhiteSpace(saveMediaFileRequest.Content) ) {
                     FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), saveMediaFileRequest.Type, saveMediaFileRequest.Filename + ( saveMediaFileRequest.Type == "Images" ? ".png" : saveMediaFileRequest.Type == "Audio" ? ".mp3" : ".mp4" )), Convert.FromBase64String(saveMediaFileRequest.Content.Split(",")[1]), true);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });

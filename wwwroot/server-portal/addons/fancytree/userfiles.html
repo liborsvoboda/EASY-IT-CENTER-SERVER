@@ -24,6 +24,15 @@
     <script type="text/javascript" src="/server-portal/addons/fancytree/extensions/contextmenu/js/jquery.fancytree.contextMenu.js"></script>
     <script type="text/javascript" src="/server-portal/metro/js/metro.4.5.2.min.js"></script>
 
+
+    <!--Media-->
+    <script type="text/javascript" src="/server-portal/addons/media/js/MediaStreamRecorder.js"></script>
+    <script type="text/javascript" src="/server-portal/addons/media/js/recorder.js"></script>
+    <script type="text/javascript" src="/server-portal/addons/media/js/lame.min.js"></script>
+    <!--<script type="text/javascript" src="/server-portal/addons/media/recordmp3.js"></script>-->
+
+
+
     <!--Canvas-->
     <script type="text/javascript" src="/server-portal/manage/js/html2canvas.min.js"></script>
 
@@ -189,6 +198,7 @@
             new Function(dataJs)(); Metro.storage.setItem("SelectedEditor", "Monaco");
             InitiateTree();
         }
+
 
         function InitiateTree() {
             $("#DataTree").fancytree({
@@ -366,16 +376,26 @@
                     actions: async function (node, action, options) {
                         
                         if (action == "recordAudio") {
-                            let content = "<div><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ></div>";
+                            let content = "<div><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ><BUTTON class='button success outline shadowed' onclick=Gs.Media.StartRecordAudio(); >Start</BUTTON><BUTTON onclick ='Gs.Media.StopRecordAudio()' class='button warning outline shadowed'> Stop</BUTTON></div>";
                             let actions = [{
-                                caption: "Record Audio", cls: "js-dialog-close success",
+                                caption: "Save Audio File", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#Filename").val().length > 0) {
-                                        await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Type: "Audio", TargetFolder: $("#Filename").val(), FilePath: node.data.path }, null, "ReloadUserStorage");
+                                        let filename = $("#Filename").val();
+                                        let blob = await fetch(Metro.storage.getItem("CapturedAudio", null)).then(r => r.blob());
+                                        let reader = new FileReader(); 
+                                        reader.onload = async function () {
+                                            var dataURL = reader.result; localStorage.setItem(":CapturedAudio", dataURL);
+                                            await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Type: "Audio", Filename: filename, Content: localStorage.getItem(":CapturedAudio", null) }, null, "ReloadUserStorage");
+                                            Gs.Media.ClearCapturedAudio();
+                                        }
+                                        //reader.readAsArrayBuffer(blob);
+                                        reader.readAsDataURL(blob);
+                                        //reader.readAsText(blob);
                                     } else { alert("Data must be Inserted"); }
                                 }
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
-                            Gs.Objects.CreateDialogRequest("Record Audio", content, actions);
+                            Gs.Objects.CreateDialogRequest("Save Audio File", content, actions);
 
                         } else if (action == "takeSnapshot") {
                             let content = "<div><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ></div>";
@@ -383,7 +403,7 @@
                                 caption: "Take SnapShot", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#Filename").val().length > 0) {
-                                        Gs.Media.CaptureToImage();
+                                        await Gs.Media.CaptureToImage();
                                         await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Type: "Images", Filename: $("#Filename").val(), Content: Metro.storage.getItem("CapturedImage", null) }, null, "ReloadUserStorage");
                                         Gs.Media.ClearCapturedImage();
                                     } else { alert("Data must be Inserted"); }

@@ -1,4 +1,37 @@
-﻿//Start Capturing Screen Image
+﻿//Record Audio
+
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+window.URL = window.URL || window.webkitURL;
+let audioRecorder;
+
+let onFail = function (e) {
+	console.log('Rejected!', e);
+};
+
+let onSuccess = function (s) {
+	let tracks = s.getTracks();
+	context = new AudioContext();
+	let mediaStreamSource = context.createMediaStreamSource(s);
+	audioRecorder = new Recorder(mediaStreamSource);
+	audioRecorder.record();
+
+	Gs.Media.StopRecordAudio = async function () {
+		audioRecorder.stop();
+		tracks.forEach(track => track.stop());
+		audioRecorder.exportWAV(async function (s) {
+			Metro.storage.setItem("CapturedAudio", window.URL.createObjectURL(s));
+		});
+	}
+}
+
+
+Gs.Media.StartRecordAudio = function () {
+	navigator.getUserMedia({ audio: true }, onSuccess, onFail);
+}
+
+
+//Start Capturing Screen Image
 Gs.Media.CaptureToImage = async function () {
 	setTimeout(async () => {
 		let EICvideoCanvas = await Gs.Media.GoToCanvas();
@@ -136,4 +169,8 @@ Gs.Media.ClearCapturedImage = function () {
 
 Gs.Media.ClearCapturedVideo = function () {
 	Metro.storage.delItem("CapturedVideo");
+}
+
+Gs.Media.ClearCapturedAudio = function () {
+	Metro.storage.delItem("CapturedAudio");
 }
