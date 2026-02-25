@@ -79,6 +79,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionMessageModuleList> SolutionMessageModuleLists { get; set; } = null!;
         public virtual DbSet<SolutionMessageTypeList> SolutionMessageTypeLists { get; set; } = null!;
         public virtual DbSet<SolutionMixedEnumList> SolutionMixedEnumLists { get; set; } = null!;
+        public virtual DbSet<SolutionMonacoSuggestionList> SolutionMonacoSuggestionLists { get; set; } = null!;
         public virtual DbSet<SolutionMottoList> SolutionMottoLists { get; set; } = null!;
         public virtual DbSet<SolutionOperationList> SolutionOperationLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerList> SolutionSchedulerLists { get; set; } = null!;
@@ -1249,6 +1250,26 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GlobalMixedEnumList_UserList");
+            });
+
+            modelBuilder.Entity<SolutionMonacoSuggestionList>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.InheritedMonacoLanguageTypeNavigation)
+                    .WithMany()
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedMonacoLanguageType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionMonacoSuggestionList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.User)
+                    .WithMany()
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionMonacoSuggestionList_SolutionUserList");
             });
 
             modelBuilder.Entity<SolutionMottoList>(entity =>

@@ -4,6 +4,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Common;
 using EasyITCenter.Controllers;
 using System.Xml;
+using Newtonsoft.Json;
 
 
 
@@ -81,8 +82,11 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> GetSystemOperationsList(List<Dictionary<string, string>> dataset) {
             string procedureName = ""; string parameters = ""; string EntityTypeName = "";
+            bool lowerCase = false; JsonSerializerSettings? settings = new JsonSerializerSettings(); settings.ContractResolver = new LowercaseContractResolver();
             foreach (Dictionary<string, string> param in dataset) {
-                if (param.Where(a => a.Key.ToLower() == "SpProcedure".ToLower()).Any()) {
+                if (param.Where(a => a.Key.ToLower() == "LowerCase".ToLower()).Any() && bool.Parse(param.Where(a => a.Key.ToLower() == "LowerCase".ToLower()).First().Value) == true) {
+                    lowerCase = true; 
+                } else if (param.Where(a => a.Key.ToLower() == "SpProcedure".ToLower()).Any()) {
                     procedureName = param.Where(a => a.Key.ToLower() == "SpProcedure".ToLower()).First().Value;
                 } else if (param.Where(a => a.Key.ToLower() == "tableName".ToLower()).Any()) {
                     parameters += ( parameters.Length > 0 ? "," : "" ) + $"@{param.Keys.First()} = N'{param.Values.First()}' ";
@@ -94,7 +98,9 @@ namespace EasyITCenter.Controllers {
             parameters += HtttpContextExtension.GetUserId() == null ? $", @userId = N''" : $", @userId = N'{HtttpContextExtension.GetUserId()}'";
 
             DataView data = ((DataView)(await new EasyITCenterContext().ExecuteReaderAsync($"EXEC {procedureName} {parameters};")).DefaultView);
-            return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented);
+
+            if (lowerCase) { return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented, settings); }
+            else { return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented); }
 
         }
 
