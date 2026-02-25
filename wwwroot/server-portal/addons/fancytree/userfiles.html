@@ -412,7 +412,7 @@
                                 caption: "Start Record Desktop", cls: "js-dialog-close success",
                                 onclick: async function () {
                                     if ($("#Filename").val().length > 0) {
-                                        Gs.Media.StartCaptureScreen($("#Filename").val());
+                                        Gs.Media.StartUserCaptureScreen($("#Filename").val());
                                     } else { alert("Data must be Inserted"); }
                                 }
                             }, {
@@ -614,6 +614,7 @@
                                 Files.push({ Filename: $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), Content: target.src });
                                 await Gs.Apis.RunServerPostApi("UserStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(),""), Files: Files }, null, "ReloadUserStorage");
                             });
+
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
                             let actions = [{

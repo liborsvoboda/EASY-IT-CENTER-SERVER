@@ -81,8 +81,8 @@ Gs.Media.DownloadCapturedImage = function () {
 
 
 
-//Video Capturing Screen 
-Gs.Media.StartCaptureScreen = async function (filename) {
+//User Video Capturing Screen 
+Gs.Media.StartUserCaptureScreen = async function (filename) {
 	let mediaStream = await navigator.mediaDevices.getDisplayMedia({
 		video: true,
 		audio: true,
@@ -107,7 +107,43 @@ Gs.Media.StartCaptureScreen = async function (filename) {
 		reader.onload = async function () {
 			var dataURL = reader.result;
 			Metro.storage.setItem("CapturedVideo", dataURL);
-			await Gs.Apis.SaveCapturedVideo(filename);
+			await Gs.Apis.SaveUserCapturedVideo(filename);
+		}
+		reader.readAsDataURL(blob);
+
+	});
+
+	mediaRecorder.start();
+}
+
+
+//Public Video Capturing Screen 
+Gs.Media.StartPublicCaptureScreen = async function (filename) {
+	let mediaStream = await navigator.mediaDevices.getDisplayMedia({
+		video: true,
+		audio: true,
+	});
+
+	const mime = MediaRecorder.isTypeSupported("video/webm; codecs=vp9")
+		? "video/webm; codecs=vp9"
+		: "video/webm"
+	let mediaRecorder = new MediaRecorder(mediaStream, {
+		mimeType: mime
+	});
+
+	mediaRecorder.addEventListener('dataavailable', function (e) {
+		Gs.Variables.media.videoData.push(e.data);
+	});
+
+	mediaRecorder.addEventListener('stop', function () {
+		let blob = new Blob(Gs.Variables.media.videoData, {
+			type: Gs.Variables.media.videoData[0].type
+		});
+		let reader = new FileReader();
+		reader.onload = async function () {
+			var dataURL = reader.result;
+			Metro.storage.setItem("CapturedVideo", dataURL);
+			await Gs.Apis.SavePublicCapturedVideo(filename);
 		}
 		reader.readAsDataURL(blob);
 

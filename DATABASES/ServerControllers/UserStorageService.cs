@@ -221,7 +221,7 @@ namespace EasyITCenter.Controllers {
         /// <summary>
         /// Download User Storage Folder
         /// </summary>
-        /// <param name="userStorageRenameDir"></param>
+        /// <param name="userStorageContent"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("/UserStorageService/DownloadUserFolder")]
@@ -234,9 +234,9 @@ namespace EasyITCenter.Controllers {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), userStorageContent.Path);
                 } else { return BadRequest(new { Status = DBResult.UnauthorizedRequest.ToString(), ErrorMessage = String.Empty }); }
 
-                ZipFile.CreateFromDirectory(userRootPath, Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
-                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
-                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SrvUserPath, "temp", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
+                ZipFile.CreateFromDirectory(userRootPath, Path.Combine(SrvRuntime.SrvTempPath, FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
+                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvTempPath, FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
+                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SrvTempPath, FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
 
                 return File(zipPackage, "application/x-zip-compressed", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip");
             } catch (Exception ex) {
@@ -633,7 +633,7 @@ namespace EasyITCenter.Controllers {
         /// <summary>
         /// Save converted MarkdownFile from Html
         /// </summary>
-        /// <param name="files"></param>
+        /// <param name="file"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("/UserStorageService/SaveMarkdownFile")]

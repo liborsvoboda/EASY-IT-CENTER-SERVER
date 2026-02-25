@@ -64,6 +64,7 @@ namespace EasyITCenter.Controllers
         public string RecGuid { get; set; } = null;
         public string TableName { get; set; }
         public string ColumnsDef { get; set; }
+        public string Data { get; set; }
         public string Description { get; set; }
     }
 
@@ -96,8 +97,8 @@ namespace EasyITCenter.Controllers
 
 
         [AllowAnonymous]
-        [HttpPost("/PortalApiTableService/SetApiTableColumnDataList")]
-        public async Task<string> SetApiTableColumnDataList([FromBody] MenuData menuData) {
+        [HttpPost("/PortalApiTableService/SetPortalMenuList")]
+        public async Task<string> SetPortalMenuList([FromBody] MenuData menuData) {
             EasyITCenterContext data = new EasyITCenterContext();
             try {
                 
@@ -162,22 +163,33 @@ namespace EasyITCenter.Controllers
         public async Task<string> DeleteApiTableColumnDataList(string recGuid) {
             EasyITCenterContext data = new EasyITCenterContext();
             try {
+                if (!String.IsNullOrWhiteSpace(recGuid)) {
+                    List<PortalApiTableColumnDataList> original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == recGuid).ToList();
+                    if (original.Any()) {
+                        PortalApiTableList checkRight = new EasyITCenterContext().PortalApiTableLists.Where(a => a.Name == original.First().ApiTableName).FirstOrDefault();
 
-                if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
-
-                    List<PortalApiTableColumnDataList> original = new();
-                    original = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.RecGuid == recGuid).ToList();
-
-                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                        data.PortalApiTableColumnDataLists.RemoveRange(original);
-                        data.SaveChanges();
-                        return true;
-                    });
-
-                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = original.Count(), ErrorMessage = string.Empty });
-                } else {
-                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.DeniedYouAreNotAdmin.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                        if (checkRight?.InheritedTableType == "PublicTable") {
+                            DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                                data.PortalApiTableColumnDataLists.RemoveRange(original);
+                                data.SaveChanges();
+                                return true;
+                            });
+                        } else if (checkRight?.InheritedTableType == "UserTable" && HtttpContextExtension.IsLogged()) {
+                            DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                                data.PortalApiTableColumnDataLists.RemoveRange(original);
+                                data.SaveChanges();
+                                return true;
+                            });
+                        } else if (checkRight?.InheritedTableType == "AdminTable" && (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin())) {
+                            DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                                data.PortalApiTableColumnDataLists.RemoveRange(original);
+                                data.SaveChanges();
+                                return true;
+                            });
+                        } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+                    } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
                 }
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
             } catch (Exception ex) {
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
@@ -648,6 +660,7 @@ namespace EasyITCenter.Controllers
                         List<PortalApiTableColumnDataList> record = new();
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "DataTableList", ApiTableColumnName = "TableName", InheritedDataType = "string", RecGuid = recGuid, Value = dataTableRequest.TableName, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { ApiTableName = "DataTableList", ApiTableColumnName = "ColumnsDef", InheritedDataType = "string", RecGuid = recGuid, Value = dataTableRequest.ColumnsDef, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "DataTableList", ApiTableColumnName = "Data", InheritedDataType = "string", RecGuid = recGuid, Value = dataTableRequest.Data, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { ApiTableName = "DataTableList", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = dataTableRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
@@ -672,6 +685,7 @@ namespace EasyITCenter.Controllers
                         original.ForEach(origItem => {
                             if (origItem.ApiTableColumnName == "TableName") { origItem.Id = 0; origItem.Value = dataTableRequest.TableName; }
                             else if (origItem.ApiTableColumnName == "ColumnsDef") { origItem.Id = 0; origItem.Value = dataTableRequest.ColumnsDef; }
+                            else if (origItem.ApiTableColumnName == "Data") { origItem.Id = 0; origItem.Value = dataTableRequest.Data; }
                             else if (origItem.ApiTableColumnName == "Description") { origItem.Id = 0; origItem.Value = dataTableRequest.Description; }
                         });
 
