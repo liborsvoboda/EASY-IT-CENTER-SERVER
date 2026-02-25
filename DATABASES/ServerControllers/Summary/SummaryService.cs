@@ -65,5 +65,24 @@ namespace EasyITCenter.Controllers {
         }
 
 
+        /// <summary>
+        /// Generate Sumary file in User Path
+        /// </summary>
+        /// <param name="summaryFileRequest"></param>
+        /// <returns></returns>
+        [HttpPost("/SummaryService/GeneratePublicSummaryFile")]
+        public async Task<IActionResult> GeneratePublicSummaryFile([FromBody] SummaryFileRequest summaryFileRequest) {
+            try {
+                if (HtttpContextExtension.IsWebAdmin() || HtttpContextExtension.IsAdmin()) {
+                    summaryFileRequest.MdFilesPath = summaryFileRequest.MdFilesPath.StartsWith("/") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath.StartsWith("\\") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath;
+
+                    GlobalFunctions.CreateSummaryFromPath(Path.Combine(SrvRuntime.SrvUserPublicPath, summaryFileRequest.MdFilesPath));
+                    return base.Ok(new WebClasses.JsonResult() { Result = DBResult.success.ToString(), Status = DBResult.success.ToString() });
+                } else { return base.Ok(new WebClasses.JsonResult() { Result = DBResult.UnauthorizedRequest.ToString(), Status = DBResult.UnauthorizedRequest.ToString() }); }
+            } catch (Exception ex) {
+                return base.Ok(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
+            }
+
+        }
     }
 }

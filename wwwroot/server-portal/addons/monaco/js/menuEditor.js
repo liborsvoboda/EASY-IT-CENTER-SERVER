@@ -55,13 +55,53 @@ require(['vs/editor/editor.main'], function () {
     }
     */
 
-   
+    var languageSelected = document.querySelector('.language');
+    languageSelected.onchange = function () {
+        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model, languageSelected.value)
+        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model, languageSelected.value)
+        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model, languageSelected.value)
+    }
+
     var themeSelected = document.querySelector('.theme');    
     themeSelected.onchange = function () {
         monaco.editor.setTheme(themeSelected.value)
     }
     
+
     
 
+
+    monaco.languages.registerCompletionItemProvider('metro4', {
+        provideCompletionItems: function (model, position) {
+            const suggestions = [
+                {
+                    label: 'console',
+                    kind: monaco.languages.CompletionItemKind.Function,
+                    documentation: 'Logs a message to the console.',
+                    insertText: 'console.log()',
+                },
+                {
+                    label: 'setTimeout',
+                    kind: monaco.languages.CompletionItemKind.Function,
+                    documentation: 'Executes a function after a specified time interval.',
+                    insertText: 'setTimeout(() => {\n\n}, 1000)',
+                },
+                {
+                    label: 'metro',
+                    kind: 1,
+                    documentation: 'Executes a function after a specified time interval.',
+                    insertText: 'setTimeout(() => {\n\n}, 1000)',
+                }
+            ];
+
+            return { suggestions: suggestions };
+        }
+    });
+    let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
+    mixedenumList.forEach(mixedEnum => {
+        if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active) {
+            monaco.languages.register({ id: mixedEnum.Name });
+        }
+    });
     
 });

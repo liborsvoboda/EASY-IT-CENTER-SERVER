@@ -105,7 +105,8 @@ namespace EasyITCenter.Controllers {
             AuthenticateResponse authResponse = new() 
             { Id = user.Id, Name = user.Name, SurName = user.SurName, Token = token == null ? string.Empty : tokenHandler.WriteToken(token), 
                 Email = user.Email, Message = !string.IsNullOrWhiteSpace(errorMessage) ? $"Token Generation Error, Check {errorMessage}" : "",
-                Expiration = token?.ValidTo.ToLocalTime(), Role = user.Role.SystemName.ToLower() 
+                Expiration = token?.ValidTo.ToLocalTime(), Role = user.Role.SystemName.ToLower(),
+                Username = user.UserName
             };
             return authResponse;
             

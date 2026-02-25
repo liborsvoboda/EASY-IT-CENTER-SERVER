@@ -2,7 +2,6 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 window.URL = window.URL || window.webkitURL;
-let audioRecorder;
 
 let onFail = function (e) {
 	console.log('Rejected!', e);
@@ -12,13 +11,13 @@ let onSuccess = function (s) {
 	let tracks = s.getTracks();
 	context = new AudioContext();
 	let mediaStreamSource = context.createMediaStreamSource(s);
-	audioRecorder = new Recorder(mediaStreamSource);
-	audioRecorder.record();
+	Gs.Variables.media.audioRecorder = new Recorder(mediaStreamSource);
+	Gs.Variables.media.audioRecorder.record();
 
 	Gs.Media.StopRecordAudio = async function () {
-		audioRecorder.stop();
+		Gs.Variables.media.audioRecorder.stop();
 		tracks.forEach(track => track.stop());
-		audioRecorder.exportWAV(async function (s) {
+		Gs.Variables.media.audioRecorder.exportWAV(async function (s) {
 			Metro.storage.setItem("CapturedAudio", window.URL.createObjectURL(s));
 		});
 	}
@@ -164,7 +163,8 @@ Gs.Media.StartCaptureCamera = async function () {
 
 		Gs.Variables.media.mediaStream = mediaStream;
 		Gs.Variables.media.mediaRecorder = mediaRecorder;
-
+		let videoPreview = document.getElementById('videoPreview');
+		videoPreview.srcObject = Gs.Variables.media.mediaStream;
 
 		mediaRecorder.ondataavailable = (e) => {
 			Gs.Variables.media.videoData.push(e.data);

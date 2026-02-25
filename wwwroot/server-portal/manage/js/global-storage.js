@@ -24,6 +24,7 @@ window.Gs = {
             { dataRec: null }
         ],
         media: {
+            audioRecorder: null,
             mediaRecorder: null, 
             mediaStream: null,
             videoData: [],
@@ -63,6 +64,12 @@ window.WindowButtons = [
         cls: "sys-button",
         onclick: "Gs.Media.CaptureToImage();Gs.Media.DownloadCapturedImage();Gs.Media.ClearCapturedImage();"
     },
+    {
+        html: "<span class='mif-printer' title='Print'></span>",
+        cls: "sys-button",
+        onclick: "print();"
+    },
+    
 ]
 
 

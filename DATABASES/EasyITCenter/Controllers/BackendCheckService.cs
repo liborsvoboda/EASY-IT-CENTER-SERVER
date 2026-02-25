@@ -22,5 +22,6 @@
                 return Task.FromResult(DbOperations.DBTranslate("DatabaseIsConnected", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value));
             } else { return Task.FromResult(DbOperations.DBTranslate("DatabaseIsNotConnected", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value)); }
         }
+
     }
 }

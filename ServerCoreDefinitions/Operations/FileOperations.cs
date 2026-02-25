@@ -150,7 +150,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="content"></param>
         /// <param name="rewrite"></param>
         public static void WriteToFile(string file, string content, bool rewrite = true) {
-            if (CreateFile(file)) {
+            if (!CheckFile(file) || (CheckFile(file) && rewrite)) {
                 if (rewrite) { DeleteFile(file); }
                 StreamWriter objWriter = new StreamWriter(file, true);
                 objWriter.WriteLine(content);

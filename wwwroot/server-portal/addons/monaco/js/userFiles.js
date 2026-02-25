@@ -72,6 +72,12 @@ require(['vs/editor/editor.main'], function () {
                     kind: monaco.languages.CompletionItemKind.Function,
                     documentation: 'Executes a function after a specified time interval.',
                     insertText: 'setTimeout(() => {\n\n}, 1000)',
+                },
+                {
+                    label: 'setTimeout',
+                    kind: 1,
+                    documentation: 'Executes a function after a specified time interval.',
+                    insertText: 'setTimeout(() => {\n\n}, 1000)',
                 }
             ];
 
@@ -79,4 +85,5 @@ require(['vs/editor/editor.main'], function () {
         }
     });
     */
+    
 });

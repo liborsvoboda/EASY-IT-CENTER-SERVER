@@ -350,7 +350,7 @@ Gs.Objects.GetMyQuestionList = async function () {
 
         Gs.Objects.InfoboxObjectCreate("myQuestionList", html);
         Gs.Functions.loadJS("InjectedScript", scriptCode);
-    }, 3000);
+    }, 5000);
 }
 
 

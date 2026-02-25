@@ -83,6 +83,16 @@ namespace EasyITCenter.Controllers {
         public string Content { get; set; }
     }
 
+
+    public class ReplaceInFilesRequest {
+        public string FileMask { get; set; }
+        public string SourceContent { get; set; }
+        public string TargetContent { get; set; }
+        public string WebRootPath { get; set; }
+        public bool RootDirectoryOnly { get; set; }
+    }
+
+
     [AllowAnonymous]
     [Route("/UserStorageService")]
     public class UserStorageService : Controller {
@@ -690,6 +700,36 @@ namespace EasyITCenter.Controllers {
                 } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
             } catch (Exception ex) {
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Replace in User Files
+        /// </summary>
+        /// <param name="replaceInFilesRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/ReplaceInFiles")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> ReplaceInFiles([FromBody] ReplaceInFilesRequest replaceInFilesRequest) {
+            try {
+
+                if (HtttpContextExtension.IsLogged()) {
+                    replaceInFilesRequest.WebRootPath = replaceInFilesRequest.WebRootPath.StartsWith("/") ? replaceInFilesRequest.WebRootPath.Substring(1) : replaceInFilesRequest.WebRootPath.StartsWith("\\") ? replaceInFilesRequest.WebRootPath.Substring(1) : replaceInFilesRequest.WebRootPath;
+                    List<string>? sourceFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvUserPath, HtttpContextExtension.GetUserName(), replaceInFilesRequest.WebRootPath), replaceInFilesRequest.FileMask, replaceInFilesRequest.RootDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
+                    sourceFiles.ForEach(file => {
+                        string fileContent = FileOperations.ReadTextFile(file);
+                        fileContent = fileContent.Replace(replaceInFilesRequest.SourceContent, replaceInFilesRequest.TargetContent);
+                        FileOperations.WriteToFile(file, fileContent, true);
+                    });
+
+                    return base.Ok(new WebClasses.JsonResult() { Result = sourceFiles.Count.ToString(), Status = DBResult.success.ToString() });
+                } else {
+                    return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.UnauthorizedRequest.ToString() });
+                }
+            } catch (Exception ex) {
+                return base.Ok(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
             }
         }
     }
