@@ -19,5 +19,7 @@ namespace EasyITCenter.ServerCoreStructure {
     Wil result in:
 
     Result:
-    {"username":"Mark","apitoken":"xyzABC1234"}
+    From> {"Username":"Mark","Apitoken":"xyzABC1234"}
+    To> {"username":"Mark","apitoken":"xyzABC1234"}
+    */
 }

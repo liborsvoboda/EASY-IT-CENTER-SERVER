@@ -85,5 +85,17 @@ require(['vs/editor/editor.main'], function () {
         }
     });
     */
+    let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
+    mixedenumList.forEach(mixedEnum => {
+        if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active) {
+            monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
+                provideCompletionItems: function (model, position) {
+                    const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });
+                    return { suggestions: suggestions };
+                }
+            });
+            monaco.languages.register({ id: mixedEnum.Name });
+        }
+    });
     
 });

@@ -21,7 +21,7 @@ namespace EasyITCenter.Controllers {
 
 
         public class ReplaceFileContentRequest {
-            public string SourceFilename { get; set; }
+            public string FileMask { get; set; }
             public string SourceContent { get; set; }
             public string TargetContent { get; set; }
             public string WebRootPath { get; set; }
@@ -70,7 +70,7 @@ namespace EasyITCenter.Controllers {
                 if (HtttpContextExtension.IsAdmin() || HtttpContextExtension.IsWebAdmin()) {
                     replaceFileContentRequest.WebRootPath = replaceFileContentRequest.WebRootPath.StartsWith("/") ? replaceFileContentRequest.WebRootPath.Substring(1) : replaceFileContentRequest.WebRootPath.StartsWith("\\") ? replaceFileContentRequest.WebRootPath.Substring(1) : replaceFileContentRequest.WebRootPath;
 
-                    List<string>? sourceFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath, replaceFileContentRequest.WebRootPath), replaceFileContentRequest.SourceFilename, replaceFileContentRequest.RootDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
+                    List<string>? sourceFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath, replaceFileContentRequest.WebRootPath), replaceFileContentRequest.FileMask, replaceFileContentRequest.RootDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
                     sourceFiles.ForEach(file => { 
                         string fileContent = FileOperations.ReadTextFile(file);
                         fileContent = fileContent.Replace(replaceFileContentRequest.SourceContent, replaceFileContentRequest.TargetContent);

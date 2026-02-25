@@ -16,7 +16,8 @@ window.Gs = {
         },
         getSpProcedure :[
             { SpProcedure: "SpGetTableDataList" },
-            { tableName: null }
+            { tableName: null },
+            { camelCase: false }
          ],
         setSpProcedure :[
             { SpProcedure: "SpSetTableDataRec" },

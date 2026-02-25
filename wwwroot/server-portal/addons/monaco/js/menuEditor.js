@@ -12,13 +12,6 @@ require(['vs/editor/editor.main'], function () {
     monaco.editor.setTheme('myTheme');
 
 
-    //monaco.languages.registerCompletionItemProvider('functionList', {
-    //    provideCompletionItems: function (model, position) {
-    //        const suggestions = Metro.storage.getItem('FunctionList', null);
-    //        return { suggestions: suggestions };
-    //    }
-    //});
-
     function newEditor(elementId, container_id, code, language) {
         let model = monaco.editor.createModel (code, language);
         let editor = monaco.editor.create(document.getElementById(container_id), {
@@ -70,7 +63,7 @@ require(['vs/editor/editor.main'], function () {
 
     
 
-
+    /*
     monaco.languages.registerCompletionItemProvider('metro4', {
         provideCompletionItems: function (model, position) {
             const suggestions = [
@@ -78,7 +71,7 @@ require(['vs/editor/editor.main'], function () {
                     label: 'console',
                     kind: monaco.languages.CompletionItemKind.Function,
                     documentation: 'Logs a message to the console.',
-                    insertText: 'console.log()',
+                    insertText: 'console.log("data",)',
                 },
                 {
                     label: 'setTimeout',
@@ -97,9 +90,16 @@ require(['vs/editor/editor.main'], function () {
             return { suggestions: suggestions };
         }
     });
+    */
     let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
     mixedenumList.forEach(mixedEnum => {
         if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active) {
+            monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
+                provideCompletionItems: function (model, position) {
+                    const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });
+                    return { suggestions: suggestions };
+                }
+            });
             monaco.languages.register({ id: mixedEnum.Name });
         }
     });

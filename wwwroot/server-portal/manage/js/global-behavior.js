@@ -8,6 +8,12 @@ Gs.Behaviors.PortalStartup = async function () {
 
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
     await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
+
+    Gs.Variables.getSpProcedure[1].tableName = "SolutionMonacoSuggestionList";
+    Gs.Variables.getSpProcedure[2].camelCase = true;
+    await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MonacoSuggestionList");
+    Gs.Variables.getSpProcedure[2].camelCase = false;
+
     await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenu");
     await Gs.Apis.RunServerGetApi("InformationService/GetVersion", "ServerVersion");
 
