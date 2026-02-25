@@ -1254,19 +1254,17 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SolutionMonacoSuggestionList>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
                 entity.HasOne(d => d.InheritedMonacoLanguageTypeNavigation)
-                    .WithMany()
+                    .WithMany(p => p.SolutionMonacoSuggestionLists)
                     .HasPrincipalKey(p => p.Name)
                     .HasForeignKey(d => d.InheritedMonacoLanguageType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionMonacoSuggestionList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.User)
-                    .WithMany()
+                    .WithMany(p => p.SolutionMonacoSuggestionLists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionMonacoSuggestionList_SolutionUserList");

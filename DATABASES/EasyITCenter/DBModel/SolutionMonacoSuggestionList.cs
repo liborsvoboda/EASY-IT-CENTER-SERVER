@@ -6,10 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.DBModel
 {
-    [Keyless]
     [Table("SolutionMonacoSuggestionList")]
+    [Index("Label", Name = "IX_SolutionMonacoSuggestionList", IsUnique = true)]
     public partial class SolutionMonacoSuggestionList
     {
+        [Key]
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
@@ -27,6 +28,7 @@ namespace EasyITCenter.DBModel
 
         public virtual SolutionMixedEnumList InheritedMonacoLanguageTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
+        [InverseProperty("SolutionMonacoSuggestionLists")]
         public virtual SolutionUserList User { get; set; } = null!;
     }
 }
