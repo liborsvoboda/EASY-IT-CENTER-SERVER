@@ -613,8 +613,7 @@ namespace EasyITCenter.Controllers {
         [HttpPost("/PublicStorageService/SaveMediaFile")]
         [Consumes("application/json")]
         public async Task<string> SaveMediaFile([FromBody] SaveMediaFileRequest saveMediaFileRequest) {
-            try
-            {
+            try {
                 if ((HtttpContextExtension.IsWebAdmin() || HtttpContextExtension.IsAdmin()) && !string.IsNullOrWhiteSpace(saveMediaFileRequest.Content) ) {
                     FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPublicPath, saveMediaFileRequest.Path, saveMediaFileRequest.Filename + ( saveMediaFileRequest.Path == "Images" ? ".png" : saveMediaFileRequest.Path == "Audio" ? ".mp3" : ".mp4" )), Convert.FromBase64String(saveMediaFileRequest.Content.Split(",").Last()), true);
 

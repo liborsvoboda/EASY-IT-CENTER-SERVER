@@ -40,29 +40,23 @@ require(['vs/editor/editor.main'], function () {
     addNewEditor("", "TemplateEditor", 'handlebars');
     addNewEditor("", "PartialTemplateEditor", 'handlebars');
     addNewEditor("", "ResultCodeEditor", 'html');
-    /*
-    var languageSelected = document.querySelector('.language');    
-    languageSelected.onchange = function () {
-        monaco.editor.setModelLanguage(window.monaco.editor.getModels()[0], "html")
-    }
-    */
-
+  
    
-    let templateEditorLang = document.getElementById('TemplateEditorLang');    
-    templateEditorLang.onchange = function () {
-        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "TemplateEditor" })[0].editor._themeService.setTheme(templateEditorLang.value)
-    }
-
-    let partialTemplateEditorLang = document.getElementById('PartialTemplateEditorLang');
-    partialTemplateEditorLang.onchange = function () {
-        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "PartialTemplateEditor" })[0].editor._themeService.setTheme(partialTemplateEditorLang.value)
-    }
-
-    let resultCodeEditorLang = document.getElementById('ResultCodeEditorLang');
-    resultCodeEditorLang.onchange = function () {
-        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "ResultCodeEditor" })[0].editor._themeService.setTheme(resultCodeEditorLang.value)
+    let codeContentEditorLang = document.getElementById('TemplateEditorLang');
+    codeContentEditorLang.onchange = function () {
+        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "TemplateEditor" })[0].model, codeContentEditorLang.value);
+        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "PartialTemplateEditor" })[0].model, codeContentEditorLang.value);
+        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "ResultCodeEditor" })[0].model, codeContentEditorLang.value);
     }
     
+    let templateEditorTheme = document.getElementById('TemplateEditorTheme');    
+    templateEditorTheme.onchange = function () {
+        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "TemplateEditor" })[0].editor._themeService.setTheme(templateEditorTheme.value)
+        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "PartialTemplateEditor" })[0].editor._themeService.setTheme(templateEditorTheme.value)
+        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "ResultCodeEditor" })[0].editor._themeService.setTheme(templateEditorTheme.value)
+    }
+
+   
     /*
     monaco.languages.registerCompletionItemProvider('myCustomLanguage', {
         provideCompletionItems: function (model, position) {
@@ -85,9 +79,11 @@ require(['vs/editor/editor.main'], function () {
         }
     });
     */
+
+
     let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
     mixedenumList.forEach(mixedEnum => {
-        if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active) {
+        if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } }).length > 0) {
             monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
                 provideCompletionItems: function (model, position) {
                     const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });

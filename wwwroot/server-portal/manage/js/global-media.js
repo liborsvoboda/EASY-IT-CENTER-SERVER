@@ -171,9 +171,6 @@ Gs.Media.StartCaptureCamera = async function () {
 		};
 
 		mediaRecorder.onstop = () => {
-			//const videFile = new Blob(Gs.Variables.media.videoData, { type: "video/mp4" });
-			//Metro.storage.setItem("CapturedVideo", videFile);
-			
 			let reader = new FileReader();
 			reader.onload = async function () {
 				var dataURL = reader.result;

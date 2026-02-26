@@ -46,12 +46,12 @@ require(['vs/editor/editor.main'], function () {
 
     addNewEditor("" ,"monacoPreview", 'javascript');
 
-    var languageSelected = document.querySelector('.language');    
+    let languageSelected = document.querySelector('.language');    
     languageSelected.onchange = function () {
         monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoPreview" })[0].model, languageSelected.value)
     }
 
-    var themeSelected = document.querySelector('.theme');    
+    let themeSelected = document.querySelector('.theme');    
     themeSelected.onchange = function () {
         monaco.editor.setTheme(themeSelected.value)
     }
@@ -80,16 +80,28 @@ require(['vs/editor/editor.main'], function () {
     });
     */
     let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
-    mixedenumList.forEach(mixedEnum => {
-        if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active) {
-            monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
-                provideCompletionItems: function (model, position) {
-                    const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });
-                    return { suggestions: suggestions };
-                }
-            });
-            monaco.languages.register({ id: mixedEnum.Name });
-        }
-    });
 
+    let selectElement = document.querySelector('.language');
+    if (selectElement.options.length == 0) {
+        mixedenumList.forEach(mixedEnum => {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType") {
+                var opt = document.createElement('option');
+                opt.value = mixedEnum.Name;
+                opt.innerHTML = mixedEnum.Name;
+                selectElement.appendChild(opt);
+            }
+        });
+
+        mixedenumList.forEach(mixedEnum => {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } }).length > 0) {
+                monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
+                    provideCompletionItems: function (model, position) {
+                        const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });
+                        return { suggestions: suggestions };
+                    }
+                });
+                monaco.languages.register({ id: mixedEnum.Name });
+            }
+        });
+    }
 });

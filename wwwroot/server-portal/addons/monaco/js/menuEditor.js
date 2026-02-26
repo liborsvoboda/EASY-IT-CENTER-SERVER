@@ -48,7 +48,7 @@ require(['vs/editor/editor.main'], function () {
     }
     */
 
-    var languageSelected = document.querySelector('.language');
+    let languageSelected = document.querySelector('.language');
     languageSelected.onchange = function () {
         monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model, languageSelected.value)
         monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model, languageSelected.value)
@@ -91,17 +91,32 @@ require(['vs/editor/editor.main'], function () {
         }
     });
     */
+
+
     let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
-    mixedenumList.forEach(mixedEnum => {
-        if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active) {
-            monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
-                provideCompletionItems: function (model, position) {
-                    const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });
-                    return { suggestions: suggestions };
-                }
-            });
-            monaco.languages.register({ id: mixedEnum.Name });
-        }
-    });
+
+    let selectElement = document.querySelector('.language');
+    if (selectElement.options.length == 0) {
+        mixedenumList.forEach(mixedEnum => {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType") {
+                var opt = document.createElement('option');
+                opt.value = mixedEnum.Name;
+                opt.innerHTML = mixedEnum.Name;
+                selectElement.appendChild(opt);
+            }
+        });
+
+        mixedenumList.forEach(mixedEnum => {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } }).length > 0) {
+                monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
+                    provideCompletionItems: function (model, position) {
+                        const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });
+                        return { suggestions: suggestions };
+                    }
+                });
+                monaco.languages.register({ id: mixedEnum.Name });
+            }
+        });
+    }
     
 });
