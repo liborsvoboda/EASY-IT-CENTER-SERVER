@@ -221,7 +221,8 @@
                     } else if (["xls"].includes(data.node.data.extension)) { 
                         SetEditor("XLSEditor");
                     } else {
-                        SetEditor("Other");
+                        //SetEditor("Other");
+                        SetEditor("Monaco");
                     }
                 },
                 checkbox: function (event, data) {
@@ -695,7 +696,6 @@
                 case "MiniPaint":
                     $("#FrameWindow").html('<iframe id="IFrameWindow" src="/server-portal/addons/minipaint/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     let sourceImage = Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key;
-                    console.log("key", $('#DataTree').fancytree("getActiveNode"));
                     setTimeout(function () {
                         let toDataURL = url => fetch(url)
                             .then(response => response.blob())
@@ -707,7 +707,6 @@
                             }));
                         toDataURL(Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key)
                             .then(dataUrl => {
-                                console.log('RESULT:', dataUrl)
                                 $("#IFrameWindow")[0].contentWindow.FileOpen.open_resource(dataUrl)
                             })
                     }, 3000);
@@ -767,7 +766,9 @@
                     Gs.Functions.AddClass('SetMDEditor', 'disabled');
                     $("#FrameWindow").html('<iframe id="HelpEditor" src="/server-portal/addons/markdown/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { $('#HelpEditor')[0].contentWindow.mdEditor.setMarkdown($('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) {
+                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $('#HelpEditor')[0].contentWindow.mdEditor.setMarkdown(data); });
+                        }
                     }, 3000);
                     break;
                 case "Monaco":
@@ -777,11 +778,13 @@
                     Gs.Variables.monacoEditorList = [];
                     new Function(dataJs)();
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue($('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) {
+                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
+                        }
                     }, 3000);
                     break;
                 case "TinyMCE":
-                    Gs.Functions.AddClass('SetTinyMCE', 'disabled'); 
+                    Gs.Functions.AddClass('SetTinyMCE', 'disabled');
 
                     $("#FrameWindow").html('<textarea id="TinyMCE" class="form-control"></textarea >');
                     const standardEditor = {
@@ -798,7 +801,9 @@
                     setTimeout(function () { if (document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux") != null) { $("#FrameWindow").append(document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux")); } }, 1000);
                     setTimeout(function () {
                         if (document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux") != null) { $("#FrameWindow").append(document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux")); }
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { tinymce.get('TinyMCE').setContent($('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) {
+                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { tinymce.get('TinyMCE').setContent(data); });
+                        }
                     }, 5000);
                     break;
                 case "Froala":
@@ -808,7 +813,9 @@
                         if (!EditorInit.fullscreen.isActive()) { EditorInit.fullscreen.toggle() };
                     });
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { EditorInit.html.set($('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) {
+                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.html.set(data); });
+                        }
                     }, 1000);
                     break;
                 case "SUNEdit":
@@ -829,7 +836,9 @@
                         codeMirror: CodeMirror,katex: katex
                     });
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { EditorInit.setContents($('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) {
+                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.setContents(data); });
+                        }
                     }, 1000);
                     break;
                 case "Summer":
@@ -843,7 +852,9 @@
                         [`insert`, [`link`, `picture`, `video`]], [`view`, [`fullscreen`, `codeview`, `undo`, `redo`, `help`]]]
                     });
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { $(`#SummerEditor`).summernote(`code`, $('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) {
+                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $(`#SummerEditor`).summernote(`code`, data); });
+                        }
                     }, 1000);
                     break;
                 case "Preview":
