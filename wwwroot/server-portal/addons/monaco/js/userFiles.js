@@ -11,14 +11,6 @@ require(['vs/editor/editor.main'], function () {
     });
     monaco.editor.setTheme('myTheme');
 
-
-    //monaco.languages.registerCompletionItemProvider('functionList', {
-    //    provideCompletionItems: function (model, position) {
-    //        const suggestions = Metro.storage.getItem('FunctionList', null);
-    //        return { suggestions: suggestions };
-    //    }
-    //});
-
     function newEditor(elementId, container_id, code, language) {
         let model = monaco.editor.createModel (code, language);
         let editor = monaco.editor.create(document.getElementById(container_id), {
@@ -87,7 +79,7 @@ require(['vs/editor/editor.main'], function () {
     */
     let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
 
-    let selectElement = document.getElementById('MonacoLanguage');
+    let selectElement = document.getElementById("MonacoLanguage");
     if (selectElement.options.length == 0) {
         mixedenumList.forEach(mixedEnum => {
             if (mixedEnum.ItemsGroup == "MonacoLanguageType") {

@@ -188,7 +188,7 @@
                     //console.log("activate", event, data, data.node.data.extension);
 
                     //Show Text Files ServerParam["TextFilesExtensionList"]
-                    if (["js", "html", "css", "txt"].includes(data.node.data.extension)) {
+                    if (["js", "html", "css", "txt", "json_"].includes(data.node.data.extension)) {
                         SetEditor("Monaco");
                         if (Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco") {
                             Gs.Variables.monacoEditorList.filter(obj => {
@@ -204,7 +204,7 @@
                             $(`#SummerEditor`).summernote(`code`, data.node.key);
                         }
 
-                    } else if (["md"].includes(data.node.data.extension)) {
+                    } else if (["md","markdown"].includes(data.node.data.extension)) {
                         SetEditor("MDEditor");
                     } else if (["json"].includes(data.node.data.extension)) {
                         SetEditor("JSONEditor");
@@ -212,7 +212,7 @@
                         SetEditor("Image");
                     } else if (["mp4", "avi", "mov"].includes(data.node.data.extension)) {
                         SetEditor("Video");
-                    } else if (["mp3"].includes(data.node.data.extension)) {
+                    } else if (["mp3","wav"].includes(data.node.data.extension)) {
                         SetEditor("Audio");
                     } else if (["stl"].includes(data.node.data.extension)) {
                         SetEditor("STLviewer");
@@ -685,7 +685,7 @@
             Metro.storage.setItem("SelectedEditor", editor);
 
             //CLEAN EDITOR
-            if (Gs.Variables.monacoEditorList.length > 1) { Gs.Variables.monacoEditorList = []; } $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+            $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
             Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
             Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled'); Gs.Functions.RemoveClass('SetMDEditor', 'disabled');
             Gs.Functions.RemoveClass('SetJSONEditor', 'disabled'); Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
@@ -774,9 +774,8 @@
                     Gs.Functions.AddClass('SetMonaco', 'disabled'); $("#MonacoTheme").show(); $("#MonacoLanguage").show();
 
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
+                    Gs.Variables.monacoEditorList = [];
                     new Function(dataJs)();
-                    //$("#MonacoTheme").show();
-                    //$("#MonacoLanguage").show();
                     setTimeout(function () {
                         if ($('#DataTree').fancytree("getActiveNode") != null) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue($('#DataTree').fancytree("getActiveNode").key); }
                     }, 3000);
