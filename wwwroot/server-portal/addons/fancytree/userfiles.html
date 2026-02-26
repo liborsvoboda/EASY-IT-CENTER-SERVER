@@ -338,6 +338,16 @@
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
                                 "unpackArchive": { "name": "Unpack Archive", "icon": "add" },
                             };
+                        } else if (!node.folder && (node.data.path.endsWith(".js") || node.data.path.endsWith(".css"))) {
+                            return {
+                                "saveFile": { "name": "Save File", "icon": "paste" },
+                                "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
+                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
+                                "deleteFile": { "name": "Delete File", "icon": "delete" },
+                                "sep1": "---------",
+                                "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
+                                "minifyFile": { "name": "Create Minified", "icon": "add" },
+                            };
                         } else if (!node.folder && (node.data.path.endsWith(".png") || node.data.path.endsWith(".jpeg") || node.data.path.endsWith(".jpg") || node.data.path.endsWith(".tiff") || node.data.path.endsWith(".bmp") || node.data.path.endsWith(".svg"))) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
@@ -360,7 +370,9 @@
                         }
                     },
                     actions: async function (node, action, options) {
-                        if (action == "replaceInFiles") {
+                        if (action == "minifyFile") {
+                            await Gs.Apis.RunServerPostApi("FileMinifyService/MinifyAndSaveMinToPath", { WebRootPath: node.key }, null, "ReloadUserStorage");
+                        } else if (action == "replaceInFiles") {
                             let content = "<div><input id='FileMask' type='text' data-role='input' data-prepend='FileMask: *.*' ><textarea id='SourceContent' data-role='textarea' data-default-value='Find string'></textarea><textarea id='TargetContent' data-role='textarea' data-default-value='Replace string'></textarea><INPUT id='RootDirOnly' style='HEIGHT: auto' autocomplete='off' data-role='checkbox' data-caption='Root Directory Only'></div>";
                             let actions = [{
                                 caption: "Replace", cls: "js-dialog-close success",
