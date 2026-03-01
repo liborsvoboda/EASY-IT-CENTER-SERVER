@@ -91,6 +91,42 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
 }
 
 
+
+Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, windowFunction = null) {
+    //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "PUT",
+        url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath,
+        async: true,
+        cache: false,
+        headers: JSON.parse(JSON.stringify(Metro.storage.getItem("ApiToken", null))) != null ? { 'Content-type': 'application/json charset=UTF-8', 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : { 'Content-type': 'application/json' },
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            if (storageName != null) {
+                if (result.Result != undefined) {
+                    Metro.storage.setItem(storageName, result.Result);
+                } else { Metro.storage.setItem(storageName, result); }
+            }
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+
+            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
+            else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
+        },
+        error: function (err) {
+            console.log(err);
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+            Gs.Objects.ShowNotify("alert", err.statusText); return false;
+        }
+    });
+}
+
+
 Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction = null) {
     //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();

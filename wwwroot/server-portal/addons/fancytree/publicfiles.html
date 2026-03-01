@@ -103,7 +103,7 @@
                         <li><a href="#">Download</a></li>
                         <li><a href="#">Media</a></li>
                     -->
-                    <li onclick="SetEditor('Preview');" class=""><a href="#">Preview</a></li>
+                    <li onclick="SetEditor('Preview');" class=""><a href="#">Preview Html&Md</a></li>
                 </ul>
                 <div class="content-holder">
                     <div class="section" id="sectionFile">
@@ -870,7 +870,10 @@
                     }, 1000);
                     break;
                 case "Preview":
-                    $("#FrameWindow").html(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue());
+                    //$.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.html.set($("#FrameWindow").html('<iframe id="IFrameWindow" srcdoc="' + data + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');); });
+                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + ($('#DataTree').fancytree("getActiveNode").data.extension == "md" ? $('#DataTree').fancytree("getActiveNode").key.replace(".md", "") : $('#DataTree').fancytree("getActiveNode").key) + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                    //Preview As Html
+                    //$("#FrameWindow").html(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue());
 
                 default:
             }
