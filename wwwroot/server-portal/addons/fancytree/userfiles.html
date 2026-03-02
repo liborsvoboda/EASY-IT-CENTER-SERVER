@@ -217,6 +217,10 @@
                         SetEditor("PDFviewer");
                     } else if (["xls","xlsx"].includes(data.node.data.extension)) { 
                         SetEditor("XLSEditor");
+                    } else if (["doc", "docx"].includes(data.node.data.extension)) {
+                        SetEditor("DOCEditor");
+                    } else if (["pptx"].includes(data.node.data.extension)) {
+                        SetEditor("PPTXEditor");
                     } else {
                         //SetEditor("Other");
                         SetEditor("Monaco");
@@ -724,8 +728,15 @@
                     break;
                 case "XLSEditor":
                     Metro.storage.setItem("OpenExcelFile", $('#DataTree').fancytree("getActiveNode").key);
-                    //$("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/xlsx/index.html?file=" + $('#DataTree').fancytree("getActiveNode").key + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                    break;
+                case "DOCEditor":
+                    Metro.storage.setItem("OpenWordFile", $('#DataTree').fancytree("getActiveNode").key);
+                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/docx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                    break;
+                case "PPTXEditor":
+                    Metro.storage.setItem("OpenPowerPointFile", $('#DataTree').fancytree("getActiveNode").key);
+                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
                 case "Other":
                     //$("#FrameWindow").html('<h3 style="padding: 10px;">Unsupported Format</h3>');

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure JS PPTX Viewer (v4 - Table Support)</title>
+    <script type="text/javascript" crossorigin='anonymous' src="./js/jszip.min.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="./js/html2canvas.min.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="./js/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script type="text/javascript" crossorigin='anonymous' src="/server-portal/addons/jquery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="/server-portal/metro/js/metro.4.5.2.min.js"></script>
+
+</head>
+<body>
+    <input id="SourceFile" type="file" data-role="file" data-on-file-create="GetFile" style="display:none" />
+
+    <div class="wrapper">
+        <div class="toolbar">
+            <div class="controls" style="display:flex; gap:5px; align-items:center;">
+                <button id="btn-prev">◀</button>
+                <span id="page-num" style="font-size:13px; min-width:50px; text-align:center;">0 / 0</span>
+                <button id="btn-next">▶</button>
+                <div style="width:15px; border-left:1px solid #555; height:20px;"></div>
+                <button id="btn-zoom-out">-</button>
+                <button id="btn-zoom-reset">100%</button>
+                <button id="btn-zoom-in">+</button>
+                <div style="width:15px; border-left:1px solid #555; height:20px;"></div>
+                <button id="btn-export-pdf" class="export-btn" disabled>Export PDF</button>
+                <button id="btn-export-images" class="export-btn" disabled>Export ZIP</button>
+            </div>
+        </div>
+
+        <div class="slides-container" id="container">
+            <div id="loading">loading...</div>
+            <div id="slides-viewport"></div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
