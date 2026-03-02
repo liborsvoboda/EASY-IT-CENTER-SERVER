@@ -621,7 +621,7 @@
                                     Metro.storage.getItem("SelectedEditor", null) == "MDEditor" ? $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown() :
                                     Metro.storage.getItem("SelectedEditor", null) == "JSONEditor" ? 
                                           $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text") == 'null' ?
-                                          $("#IFrameWindow")[0].contentWindow.inputEditor.doc.getValue() : $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text")
+                                          document.querySelector("#IFrameWindow").contentWindow.inputEditor.getValue() : $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text")
                                                         : ""
                             }, null, "ReloadUserStorage");
 
@@ -766,7 +766,7 @@
                     Gs.Functions.AddClass('SetJSONEditor', 'disabled');
                     $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/jsonData/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#IFrameWindow")[0].contentWindow.inputEditor.doc.setValue($('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#IFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
                     }, 500);
                     break;
                 case "MDEditor":
