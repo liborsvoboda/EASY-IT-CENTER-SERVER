@@ -54,7 +54,6 @@
     <script type="text/javascript" src="/server-portal/addons/highlightjs/highlight.min.js"></script>
     <script rel="stylesheet" src="/server-portal/addons/suneditor/dist/codemirror.min.js"></script>
     <script type="text/javascript" src="/server-portal/addons/suneditor/dist/katex/katex.min.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/xls/xls.js"></script>
 
     <!--SUMMERNOTE-->
     <script src="/server-portal/addons/bootstrap/js/bootstrap.js"></script>
@@ -218,7 +217,7 @@
                         SetEditor("STLviewer");
                     } else if (["pdf"].includes(data.node.data.extension)) {
                         SetEditor("PDFviewer");
-                    } else if (["xls"].includes(data.node.data.extension)) { 
+                    } else if (["xls", "xlsx"].includes(data.node.data.extension)) {
                         SetEditor("XLSEditor");
                     } else {
                         //SetEditor("Other");
@@ -724,24 +723,9 @@
                     }, 3000);
                     break;
                 case "XLSEditor":
-
-                    fetch($('#DataTree').fancytree("getActiveNode").key).then(response => response.blob())
-                        .then(blob => {
-                            var reader = new FileReader();
-                            reader.onload = function (e) {
-                                var cfb = XLS.CFB.read(blob, { type: 'binary' });
-                                var wb = XLS.parse_xlscfb(cfb);
-                                wb.SheetNames.forEach(function (sheetName) {
-                                    var CSVdata = XLS.utils.make_csv(wb.Sheets[sheetName]);
-                                    var JsonData = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
-                                    $("#FrameWindow").html('<div class="row" style="height: 100%;padding-left: 10px;">' + JsonData + '</div>');
-                                    //console.log(JsonData);
-                                });
-                            };
-                        })
-                        .catch(error => {
-                            console.error('XLS Error:', error);
-                        });
+                    Metro.storage.setItem("OpenExcelFile", $('#DataTree').fancytree("getActiveNode").key);
+                    //$("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/xlsx/index.html?file=" + $('#DataTree').fancytree("getActiveNode").key + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
                 case "Other":
                     //$("#FrameWindow").html('<h3 style="padding: 10px;">Unsupported Format</h3>');

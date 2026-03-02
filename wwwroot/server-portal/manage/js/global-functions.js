@@ -372,7 +372,10 @@ Gs.Functions.ExportTable = function (params) {
         worksheetName: 'Export Table'
     };
     $.extend(true, options, params);
-    if (document.getElementById("IFrameWindow") == null) { $('#menuTable').tableExport(options); } 
+    if (document.getElementById("IFrameWindow") == null) { $('#menuTable').tableExport(options); }
+    else {
+        $('#menuTable').tableExport(options);
+    }
 }
 
 

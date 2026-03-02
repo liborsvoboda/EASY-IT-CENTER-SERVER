@@ -1,4 +1,4 @@
-/*The MIT License (MIT)
+﻿/*The MIT License (MIT)
 
 Original work Copyright (c) 2014 https://github.com/kayalshri/
 Modified work Copyright (c) 2015 https://github.com/hhurz/
@@ -32,7 +32,7 @@ THE SOFTWARE.*/
         displayTableName: false,
         theadSelector: 'tr',
         tbodySelector: 'tr',
-        tableName: 'myTableName',
+        tableName: 'menuTable',
         worksheetName: 'xlsWorksheetName',
         type: 'csv',
         jspdf: { orientation: 'p', unit:'pt', format:'a4',
