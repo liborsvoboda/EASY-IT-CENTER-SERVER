@@ -228,7 +228,7 @@ Gs.Functions.PrintOrExportWindow = function (command) {
 
 Gs.Functions.PrintFrameElement = function () {
     try {
-        document.getElementById("IFrameWindow").contentWindow.print();
+        document.querySelector("#IFrameWindow").contentWindow.print();
     } catch (t) { }
 }
 
@@ -237,14 +237,14 @@ Gs.Functions.DownloadFrameHtmlElement = function () {
     try {
         var t = document.body.appendChild(document.createElement("a"));
         t.download = "KlikneteZde" + ".html";
-        t.href = "data:text/html;charset=utf-8," + encodeURIComponent(window.frames['IFrameWindow'].contentWindow.document.body.innerHTML);
+        t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML);
         t.click();
     } catch (i) { }
 }
 
 Gs.Functions.CopyFrameElement = async function () {
     try {
-        let t = window.frames['IFrameWindow'].contentWindow.document.body.innerHTML;
+        let t = document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML;
         await navigator.clipboard.writeText(t);
     } catch (t) { }
 }
@@ -253,7 +253,7 @@ Gs.Functions.CopyFrameElement = async function () {
 Gs.Functions.ImageFromFrameElement = function () {
     try {
         $("document").ready(function () {
-            html2canvas(document.getElementById("IFrameWindow").contentWindow.document.body, {
+            html2canvas(document.querySelector("#IFrameWindow").contentWindow.document.body, {
                 onrendered: function (t) {
                     $("#previewImage").append(t);
                     var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a"));
