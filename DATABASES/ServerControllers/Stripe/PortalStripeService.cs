@@ -24,6 +24,13 @@ namespace server.Controllers {
         public long Price { get; set; }
     }
 
+
+    public class CreatePriceRequest {
+        public string Name { get; set; }
+        public long Price { get; set; }
+    }
+
+
     /// <summary>
     /// https://docs.stripe.com/get-started
     /// </summary>
@@ -113,12 +120,12 @@ namespace server.Controllers {
 
 
         [HttpPost("/StripeService/CreatePrice")]
-        public ActionResult CreatePrice([FromBody] CreateCustomerRequest createCustomerRequest) {
+        public ActionResult CreatePrice([FromBody] CreatePriceRequest createPriceRequest) {
             PriceCreateOptions? options = new PriceCreateOptions {
-                Currency = "usd",
-                UnitAmount = 1000,
+                Currency = "czk",
+                UnitAmount = createPriceRequest.Price * 100,
                 Recurring = new PriceRecurringOptions { Interval = "month" },
-                ProductData = new PriceProductDataOptions { Name = "Gold Plan" },
+                ProductData = new PriceProductDataOptions { Name = createPriceRequest.Name },
             };
             PriceService? service = new PriceService();
             Price price = service.Create(options);
