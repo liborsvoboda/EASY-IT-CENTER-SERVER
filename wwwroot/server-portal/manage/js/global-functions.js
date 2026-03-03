@@ -235,13 +235,33 @@ Gs.Functions.CopyWindowElement = async function () {
 
 
         if (elementId == "IFrameWindow") {
-            let t = document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML;
-            await navigator.clipboard.writeText(t);
+            let aux = document.createElement("input");
+            aux.setAttribute("value", document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML);
+            document.body.appendChild(aux);
+            aux.select();
+            document.execCommand("copy");
+            document.body.removeChild(aux);
+
+            //let t = document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML;
+            //await navigator.clipboard.writeText(t);
         } else if (elementId == "FrameWindow") {
-            let t = document.getElementById(elementId).innerHTML; await navigator.clipboard.writeText(t);
+                let aux = document.createElement("input");
+                aux.setAttribute("value", document.getElementById("FrameWindow").innerHTML);
+                document.body.appendChild(aux);
+                aux.select();
+                document.execCommand("copy");
+                document.body.removeChild(aux);
+            //let t = document.getElementById(elementId).innerHTML; await navigator.clipboard.writeText(t);
         } else {
-            let t = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body.innerHTML;
-            await navigator.clipboard.writeText(t);
+            let aux = document.createElement("input");
+            aux.setAttribute("value", document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body.innerHTML);
+            document.body.appendChild(aux);
+            aux.select();
+            document.execCommand("copy");
+            document.body.removeChild(aux);
+
+            //let t = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body.innerHTML;
+            //await navigator.clipboard.writeText(t);
         }
     } catch (t) { }
 }
