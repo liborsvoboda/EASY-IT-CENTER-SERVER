@@ -1,148 +1,132 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Stripe;
-
-namespace EasyITCenter.Controllers
-{
-
-    public record AddStripeCard
-       (
-           string Name,
-           string CardNumber,
-           string ExpirationYear,
-           string ExpirationMonth,
-           string Cvc
-       );
-
-    public record AddStripeCustomer
-    (
-        string Email,
-        string Name,
-        AddStripeCard CreditCard
-    );
-
-    public record AddStripePayment
-    (
-        string CustomerId,
-        string ReceiptEmail,
-        string Description,
-        string Currency,
-        long Amount
-    );
-
-    public record StripeCustomer
-    (
-        string Name,
-        string Email,
-        string CustomerId
-    );
-
-    public record StripePayment
-    (
-        string CustomerId,
-        string ReceiptEmail,
-        string Description,
-        string Currency,
-        long Amount,
-        string PaymentId
-    );
+using Stripe.Checkout;
 
 
-    public interface IStripeService {
-        Task<StripeCustomer> AddStripeCustomerAsync(AddStripeCustomer customer, CancellationToken ct);
-        Task<StripePayment> AddStripePaymentAsync(AddStripePayment payment, CancellationToken ct);
-    }
+namespace server.Controllers {
 
-    public class StripeService : IStripeService {
-        private readonly ChargeService _chargeService;
-        private readonly CustomerService _customerService;
-        private readonly TokenService _tokenService;
-        public StripeService(ChargeService chargeService, CustomerService customerService, TokenService tokenService) {
-            _chargeService = chargeService;
-            _customerService = customerService;
-            _tokenService = tokenService;
-        }
 
-        public async Task<StripeCustomer> AddStripeCustomerAsync(AddStripeCustomer customer, CancellationToken ct) {
-            // Set Stripe Token options based on customer data
-            TokenCreateOptions tokenOptions = new TokenCreateOptions {
-                Card = new TokenCardOptions {
-                    Name = customer.Name,
-                    Number = customer.CreditCard.CardNumber,
-                    ExpYear = customer.CreditCard.ExpirationYear,
-                    ExpMonth = customer.CreditCard.ExpirationMonth,
-                    Cvc = customer.CreditCard.Cvc
-                }
-            };
-
-            // Create new Stripe Token
-            Token stripeToken = await _tokenService.CreateAsync(tokenOptions, null, ct);
-
-            // Set Customer options using
-            CustomerCreateOptions customerOptions = new CustomerCreateOptions {
-                Name = customer.Name,
-                Email = customer.Email,
-                Source = stripeToken.Id
-            };
-
-            // Create customer at Stripe
-            Customer createdCustomer = await _customerService.CreateAsync(customerOptions, null, ct);
-
-            // Return the created customer at stripe
-            return new StripeCustomer(createdCustomer.Name, createdCustomer.Email, createdCustomer.Id);
-        }
-
-        public async Task<StripePayment> AddStripePaymentAsync(AddStripePayment payment, CancellationToken ct) {
-            // Set the options for the payment we would like to create at Stripe
-            ChargeCreateOptions paymentOptions = new ChargeCreateOptions {
-                Customer = payment.CustomerId,
-                ReceiptEmail = payment.ReceiptEmail,
-                Description = payment.Description,
-                Currency = payment.Currency,
-                Amount = payment.Amount
-            };
-
-            // Create the payment
-            var createdPayment = await _chargeService.CreateAsync(paymentOptions, null, ct);
-
-            // Return the payment to requesting method
-            return new StripePayment
-              (
-              createdPayment.CustomerId,
-              createdPayment.ReceiptEmail,
-              createdPayment.Description,
-              createdPayment.Currency,
-              createdPayment.Amount,
-              createdPayment.Id
-              );
-        }
+    public class CreateCheckoutSessionRequest {
+        public string ProductName { get; set; }
+        public long Price { get; set; }
     }
 
 
+    public class CreateCustomerRequest {
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
 
 
-    [Route("ServerPortalApi/StripeApi")]
+    public class PaymentIntentRequest {
+        public long Price { get; set; }
+    }
+
+    /// <summary>
+    /// https://docs.stripe.com/get-started
+    /// </summary>
+    [AllowAnonymous]
+    [Route("StripeService")]
     [ApiController]
-    public class PortalStripeService : ControllerBase
-    {
-        private readonly IStripeService _stripeService;
-        public PortalStripeService(IStripeService stripeService)
-        {
-            _stripeService = stripeService;
+    public class PaymentsController : Controller {
+
+
+        [HttpPost("/StripeService/PaymentIntentService")]
+        public ActionResult PaymentIntentService([FromBody] PaymentIntentRequest paymentIntentRequest) {
+            var options = new PaymentIntentCreateOptions {
+                Amount = paymentIntentRequest.Price,
+                Currency = "czk",
+                PaymentMethod = "pm_card_visa",
+                PaymentMethodTypes = new List<string> { "card" },
+            };
+            var service = new PaymentIntentService();
+            PaymentIntent paymentIntent = service.Create(options);
+
+            return Json(new { paymentIntent = paymentIntent });
         }
 
-        [HttpPost("/ServerPortalApi/StripeApi/customer/add")]
-        public async Task<ActionResult<StripeCustomer>> AddStripeCustomer([FromBody] AddStripeCustomer customer, CancellationToken ct)
-        {
-            StripeCustomer createdCustomer = await _stripeService.AddStripeCustomerAsync(customer, ct);
-            return StatusCode(StatusCodes.Status200OK, createdCustomer);
+
+        [HttpPost("/StripeService/CreateCheckoutSession")]
+        public ActionResult CreateCheckoutSession([FromBody] CreateCheckoutSessionRequest createCheckoutSessionRequest) {
+            SessionCreateOptions? options = new SessionCreateOptions {
+                LineItems = new List<SessionLineItemOptions> {
+                    new SessionLineItemOptions {
+                        PriceData = new SessionLineItemPriceDataOptions {
+                            //2000  = 20.00 CZK
+                            UnitAmount = createCheckoutSessionRequest.Price * 100,
+                            Currency = "czk",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions {
+                                Name = createCheckoutSessionRequest.ProductName,
+                            },
+                        },
+                    Quantity = 1,
+                    },
+                },
+                Mode = "payment",
+                UiMode = "embedded",
+                ReturnUrl = $"{DbOperations.GetServerParameterLists("ServerPublicUrl").Value}/server-portal/addons/stripe/index.html?session_id={HttpContext.Session.Id}",
+            };
+
+            SessionService? service = new SessionService();
+            Session session = service.Create(options);
+
+            return Json(new { clientSecret = session.ClientSecret });
         }
 
-        [HttpPost("/ServerPortalApi/StripeApi/payment/add")]
-        public async Task<ActionResult<StripePayment>> AddStripePayment([FromBody] AddStripePayment payment, CancellationToken ct)
-        {
-            StripePayment createdPayment = await _stripeService.AddStripePaymentAsync(payment, ct);
-            return StatusCode(StatusCodes.Status200OK, createdPayment);
+
+        [HttpPost("/StripeService/CreateProduct")]
+        public ActionResult CreateProduct([FromBody] CreateCheckoutSessionRequest createCheckoutSessionRequest) {
+            var options = new ProductCreateOptions { Name = createCheckoutSessionRequest.ProductName };
+            var service = new ProductService();
+            Product product = service.Create(options);
+
+            return Json(new { product = product });
+        }
+
+
+        [Route("/StripeService/SessionStatus")]
+        [ApiController]
+        public class SessionStatusController : Controller {
+            [HttpGet]
+            public ActionResult SessionStatus([FromQuery] string session_id) {
+                var sessionService = new SessionService();
+                Session session = sessionService.Get(session_id);
+
+                return Json(new { status = session.Status, customer_email = session.CustomerDetails.Email });
+            }
+        }
+
+
+        [HttpPost("/StripeService/CreateCustomer")]
+        public ActionResult CreateCustomer([FromBody] CreateCustomerRequest createCustomerRequest) {
+            var options = new CustomerCreateOptions {
+                Name = createCustomerRequest.Name,
+                Email = createCustomerRequest.Email,
+            };
+            var service = new CustomerService();
+            Customer customer = service.Create(options);
+
+            return Json(new { customer = customer });
+        }
+
+
+        [HttpPost("/StripeService/CreatePrice")]
+        public ActionResult CreatePrice([FromBody] CreateCustomerRequest createCustomerRequest) {
+            PriceCreateOptions? options = new PriceCreateOptions {
+                Currency = "usd",
+                UnitAmount = 1000,
+                Recurring = new PriceRecurringOptions { Interval = "month" },
+                ProductData = new PriceProductDataOptions { Name = "Gold Plan" },
+            };
+            PriceService? service = new PriceService();
+            Price price = service.Create(options);
+
+            return Json(new { price = price });
         }
     }
 }
+
+
+

@@ -269,12 +269,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             services.AddScoped(typeof(IGenericApiService<,>), typeof(GenericApiService<,>));
 
             //Stripe    
-            StripeConfiguration.ApiKey = "SecretKey";
-            services.AddScoped<CustomerService>();
-            services.AddScoped<ChargeService>();
-            services.AddScoped<TokenService>(); 
-            services.AddScoped<IStripeService, StripeService>();
-
+            StripeConfiguration.ApiKey = DbOperations.GetServerParameterLists("StripeSecretKey").Value;
         }
 
         /// <summary>
