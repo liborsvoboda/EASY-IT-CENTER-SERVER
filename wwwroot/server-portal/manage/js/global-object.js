@@ -94,8 +94,8 @@ function GenerateMenu() {
     let htmlContent = "";
 
     let lastGuid = null, menuItem = {}, menu = [];
-    let portalMenu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenu', null)));
- 
+    let portalMenu = Metro.storage.getItem('PortalMenu', null);
+
     portalMenu.forEach((mItem, index, arr) => {
 
         switch (mItem.apiTableColumnName) {
@@ -156,9 +156,10 @@ function GenerateMenu() {
             htmlContent += '<ul id ="' + mItem.RecGuid + '" class="navview-menu stay-open" data-role="dropdown"><li class="item-header" > ' + mItem.Name + '</li></ul>';
             htmlContent += '</li>';
         }
-        document.getElementById("PortalMenu").innerHTML = htmlContent;
+
+        if (index == arr.length - 1) { document.getElementById("PortalMenu").innerHTML = htmlContent; }
     });
-    
+
     menu.forEach((mItem, index, arr) => {
         if (mItem.InheritedMenuType == "link") {
             htmlContent = '<li onclick=Gs.Behaviors.SetLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
@@ -179,7 +180,16 @@ function GenerateMenu() {
             htmlContent = '<li onclick=Gs.Behaviors.SetExternalContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
+
+
     });
+
+
+    //let windowFunction = Metro.storage.getItem("RunFunction", null);
+    //if (windowFunction != null) {
+    //    window[windowFunction]();
+    //    Metro.storage.delItem("RunFunction", null);
+    //}
 }
 
 
@@ -426,18 +436,12 @@ Gs.Objects.CreateDialogRequest =async function (title, content, actions) {
 
 Gs.Objects.ShowPrintExport = function () {
     Metro.dialog.create({
-        clsTitle: "CloseClass",
         title: "Print & Export",
         content: "<div>Print & Export Opened Page</div>",
         closeButton: true,
         removeOnClose: true,
         closeAction: true,
         actions: [
-            //{
-            //    caption: "Print",
-            //    cls: "js-dialog-close success",
-            //    onclick: function () { Gs.Functions.PrintOrExportWindow("Print"); }
-            //},
             {
                 caption: "Download Html",
                 cls: "js-dialog-close success",

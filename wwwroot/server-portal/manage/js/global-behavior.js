@@ -191,7 +191,7 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("OpenExcelFile");
     Metro.storage.delItem("OpenWordFile");
     Metro.storage.delItem("OpenPowerPointFile");
-    
+    //Metro.storage.delItem("RunFunction");
 
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('Menu', null)));
@@ -205,7 +205,7 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
 Gs.Behaviors.SetLink = function (htmlContentId, content) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
 
-    $("#FrameWindow").load(Metro.storage.getItem('ApiOriginSuffix', null) + content)
+    $("#FrameWindow").load(Metro.storage.getItem('ApiOriginSuffix', null) + content);
 }
 
 
