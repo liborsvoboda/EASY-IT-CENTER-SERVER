@@ -19,7 +19,7 @@
 					url: "/server-portal/addons/fancytree/jsondata.json"
 				},
 				activate: function (event, data) {
-                    $("#FrameWindow").html("<iframe id=IFrameWindow src='" + data.node.key + "' class='h-100' height='100%' frameborder='0' scrolling='yes' style='width:100%; height: 100%;' ></iframe>");
+                    $("#FrameWindow").html("<iframe id='DataFrameWindow' src='" + data.node.key + "' class='h-100' height='100%' frameborder='0' scrolling='yes' style='width:100%; height: 100%;' ></iframe>");
 				},
 				checkbox: function (event, data) {
 					return data.node.isFolder() ? false : false;

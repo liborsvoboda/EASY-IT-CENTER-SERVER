@@ -374,6 +374,8 @@ Gs.Objects.ShowExportDialog = function (title) {
     Metro.dialog.create({
         title: title,
         content: "<div>Export Table Data id=menuTable to File</div>",
+        closeButton: true,
+        removeOnClose: true,
         actions: [
             {
                 caption: "CSV",
@@ -415,6 +417,7 @@ Gs.Objects.CreateDialogRequest =async function (title, content, actions) {
         title: title,
         content: content,
         closeButton: true,
+        removeOnClose: true,
         actions: actions,
         clsDialog: "supertop"
     });
@@ -423,26 +426,30 @@ Gs.Objects.CreateDialogRequest =async function (title, content, actions) {
 
 Gs.Objects.ShowPrintExport = function () {
     Metro.dialog.create({
+        clsTitle: "CloseClass",
         title: "Print & Export",
         content: "<div>Print & Export Opened Page</div>",
+        closeButton: true,
+        removeOnClose: true,
+        closeAction: true,
         actions: [
+            //{
+            //    caption: "Print",
+            //    cls: "js-dialog-close success",
+            //    onclick: function () { Gs.Functions.PrintOrExportWindow("Print"); }
+            //},
             {
-                caption: "Print",
+                caption: "Download Html",
                 cls: "js-dialog-close success",
-                onclick: function () { Gs.Functions.PrintOrExportWindow("Print"); }
+                onclick: function () { Gs.Functions.PrintOrExportWindow("Download");  }
             },
             {
-                caption: "Download",
-                cls: "js-dialog-close success",
-                onclick: function () { Gs.Functions.PrintOrExportWindow("Download"); }
-            },
-            {
-                caption: "Image",
+                caption: "Download Image",
                 cls: "js-dialog-close success",
                 onclick: function () { Gs.Functions.PrintOrExportWindow("Image"); }
             },
             {
-                caption: "Copy",
+                caption: "Copy to Buffer",
                 cls: "js-dialog-close success",
                 onclick: function () { Gs.Functions.PrintOrExportWindow("Copy"); }
             }

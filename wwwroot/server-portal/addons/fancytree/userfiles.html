@@ -620,13 +620,13 @@
                                     Metro.storage.getItem("SelectedEditor", null) == "Summer" ? $(`#SummerEditor`).summernote(`code`) :
                                     Metro.storage.getItem("SelectedEditor", null) == "MDEditor" ? $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown() :
                                     Metro.storage.getItem("SelectedEditor", null) == "JSONEditor" ? 
-                                          $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text") == 'null' ?
-                                          document.querySelector("#IFrameWindow").contentWindow.inputEditor.getValue() : $("#IFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text")
+                                          $("#DataFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text") == 'null' ?
+                                          document.querySelector("#DataFrameWindow").contentWindow.inputEditor.getValue() : $("#DataFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text")
                                                         : ""
                             }, null, "ReloadUserStorage");
 
                         } else if (action == "saveFile" && Metro.storage.getItem("SelectedEditor", null) == "MiniPaint") {
-                            html2canvas($('#IFrameWindow')[0].contentWindow.document.querySelector("#canvas_minipaint")).then(async canvas => {
+                            html2canvas($('#DataFrameWindow')[0].contentWindow.document.querySelector("#canvas_minipaint")).then(async canvas => {
                                 let target = new Image(); target.src = canvas.toDataURL("image." + $('#DataTree').fancytree("getActiveNode").data.path.split(".").pop()); Files = [];
                                 Files.push({ Filename: $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), Content: target.src });
                                 await Gs.Apis.RunServerPostApi("UserStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(),""), Files: Files }, null, "ReloadUserStorage");
@@ -709,7 +709,7 @@
             //SET EDITOR
             switch (editor) {
                 case "MiniPaint":
-                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="/server-portal/addons/minipaint/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="/server-portal/addons/minipaint/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     let sourceImage = Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key;
                     setTimeout(function () {
                         let toDataURL = url => fetch(url)
@@ -722,35 +722,35 @@
                             }));
                         toDataURL(Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key)
                             .then(dataUrl => {
-                                $("#IFrameWindow")[0].contentWindow.FileOpen.open_resource(dataUrl)
+                                $("#DataFrameWindow")[0].contentWindow.FileOpen.open_resource(dataUrl)
                             })
                     }, 3000);
                     break;
                 case "XLSEditor":
                     Metro.storage.setItem("OpenExcelFile", $('#DataTree').fancytree("getActiveNode").key);
-                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
                 case "DOCEditor":
                     Metro.storage.setItem("OpenWordFile", $('#DataTree').fancytree("getActiveNode").key);
-                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/docx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/docx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
                 case "PPTXEditor":
                     Metro.storage.setItem("OpenPowerPointFile", $('#DataTree').fancytree("getActiveNode").key);
-                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
                 case "Other":
                     //$("#FrameWindow").html('<h3 style="padding: 10px;">Unsupported Format</h3>');
                     break;
                 case "STLviewer":
-                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#IFrameWindow")[0].contentWindow.init($('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.init($('#DataTree').fancytree("getActiveNode").key); }
                     }, 1000);
                     break;
                 case "PDFviewer":
-                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/pdf-viewer/web/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/pdf-viewer/web/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#IFrameWindow")[0].contentWindow.PDFViewerApplication.open($('#DataTree').fancytree("getActiveNode").key, 'default.pdf'); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.PDFViewerApplication.open($('#DataTree').fancytree("getActiveNode").key, 'default.pdf'); }
                     }, 1000);
                     break;
                 case "Audio":
@@ -764,9 +764,9 @@
                     break;
                 case "JSONEditor":
                     Gs.Functions.AddClass('SetJSONEditor', 'disabled');
-                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/jsonData/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/jsonData/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#IFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
+                        if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
                     }, 500);
                     break;
                 case "MDEditor":
@@ -865,8 +865,8 @@
                     }, 1000);
                     break;
                 case "Preview":
-                    //$.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.html.set($("#FrameWindow").html('<iframe id="IFrameWindow" srcdoc="' + data + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');); });
-                    $("#FrameWindow").html('<iframe id="IFrameWindow" src="' + ($('#DataTree').fancytree("getActiveNode").data.extension == "md" ? $('#DataTree').fancytree("getActiveNode").key.replace(".md","") : $('#DataTree').fancytree("getActiveNode").key) + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                    //$.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.html.set($("#FrameWindow").html('<iframe id="DataFrameWindow" srcdoc="' + data + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');); });
+                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + ($('#DataTree').fancytree("getActiveNode").data.extension == "md" ? $('#DataTree').fancytree("getActiveNode").key.replace(".md","") : $('#DataTree').fancytree("getActiveNode").key) + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     //Preview As Html
                     //$("#FrameWindow").html(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue());
 

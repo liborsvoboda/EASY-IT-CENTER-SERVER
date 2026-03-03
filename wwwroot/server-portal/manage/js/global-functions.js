@@ -1,9 +1,9 @@
 ﻿
 Gs.Functions.GenerateUUID = function () { 
-    var d = new Date().getTime();
-    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;
+    let d = new Date().getTime();
+    let d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16;
+        let r = Math.random() * 16;
         if (d > 0) {
             r = (d + r) % 16 | 0;
             d = Math.floor(d / 16);
@@ -30,7 +30,7 @@ Gs.Functions.RemoveClass = function (elementId, clasName) {
 }
 
 Gs.Functions.HtmlDecode = function (input) {
-    var doc = new DOMParser().parseFromString(input, "text/html");
+    let doc = new DOMParser().parseFromString(input, "text/html");
     return doc.documentElement.textContent;
 }
 
@@ -44,7 +44,7 @@ Gs.Functions.FileReaderToImageData = async function (n) {
 
 Gs.Functions.Str2bytes = function (str) {
     let bytes = new Uint8Array(str.length);
-    for (var i = 0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
         bytes[i] = str.charCodeAt(i);
     }
     return bytes;
@@ -56,13 +56,13 @@ Gs.Functions.PreloadImage = function (src) {
 }
 
 Gs.Functions.BindYouTubePlay = function (img) {
-    var a = img.parent();
-    var p = a.parent();
+    let a = img.parent();
+    let p = a.parent();
     if (p[0] && p[0].tagName === 'P') {
-        var id = splitOnFirst(splitOnLast(a.attr('href'), '/')[1], '?')[0];
-        var width = Math.floor(img[0].offsetWidth / 2 - 43);
-        var height = Math.floor(img[0].offsetHeight / 2 - 31);
-        var html = `<i class="youtube-play" style="width:${img[0].offsetWidth}px;height:${img[0].offsetHeight}px;background-position:${width}px ${height}px" onclick="playVideo(this,'${id}')"></i>`;
+        let id = splitOnFirst(splitOnLast(a.attr('href'), '/')[1], '?')[0];
+        let width = Math.floor(img[0].offsetWidth / 2 - 43);
+        let height = Math.floor(img[0].offsetHeight / 2 - 31);
+        let html = `<i class="youtube-play" style="width:${img[0].offsetWidth}px;height:${img[0].offsetHeight}px;background-position:${width}px ${height}px" onclick="playVideo(this,'${id}')"></i>`;
         p.prepend(html);
     }
 }
@@ -85,8 +85,8 @@ Gs.Functions.Video = function (url) {
 
 
 Gs.Functions.PlayVideo = function (el, id) {
-    var url = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
-    $(el).parent().html(video(url));
+    let url = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+    $(el).parent().html(Gs.Functions.Video(url));
 }
 
 
@@ -161,107 +161,134 @@ Gs.Functions.ShowFrameSource = function () {
 }
 
 
-Gs.Functions.PrintElement = function (elementId) {
-    try {
-        let divElements = document.getElementById(elementId).innerHTML;
-        let oldPage = document.body.innerHTML;
-        document.body.innerHTML =
-            "<html><head>" + document.getElementsByTagName('head')[0].innerHTML + "</head><body>" +  divElements + "</body>";
-        window.print();
-        document.body.innerHTML = oldPage;
-    } catch (t) { }
-}
-
-
-Gs.Functions.DownloadHtmlElement = function (elementId) {
-    try {
-        var t = document.body.appendChild(document.createElement("a"));
-        t.download = elementId + ".html";
-        t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.getElementById(elementId).innerHTML);
-        t.click();
-    } catch (i) { }
-}
-
-Gs.Functions.CopyElement = async function (elementId) {
-    try { let t = document.getElementById(elementId).innerHTML; await navigator.clipboard.writeText(t); } catch (t) { }
-}
-
-Gs.Functions.ImageFromElement = function (elementId) {
-    try {
-        $("document").ready(function () {
-            html2canvas($("#" + elementId), {
-                onrendered: function (t) {
-                    $("#previewImage").append(t);
-                    var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a"));
-                    i.download = elementId + ".png";
-                    i.href = u; i.click()
-                }
-            })
-        })
-    } catch (t) { }
-}
-
-
 Gs.Functions.PrintOrExportWindow = function (command) {
-    let frameExist = document.getElementById("IFrameWindow") != null;
-
     switch (command) {
         case "Print":
-            if (frameExist) { Gs.Functions.PrintFrameElement(); }
-            else { Gs.Functions.PrintElement("FrameWindow"); }
+            Gs.Functions.PrintWindowElement();
             break;
         case "Download":
-            if (frameExist) { Gs.Functions.DownloadFrameHtmlElement(); }
-            else { Gs.Functions.DownloadHtmlElement("FrameWindow"); }
+            Gs.Functions.DownloadWindowElement(); 
             break;
         case "Image":
-            if (frameExist) { Gs.Functions.ImageFromFrameElement(); }
-            else { Gs.Functions.ImageFromElement("FrameWindow"); }
+            Gs.Functions.ImageFromWindowElement();
             break;
         case "Copy":
-            if (frameExist) { Gs.Functions.CopyFrameElement(); }
-            else { Gs.Functions.CopyElement("FrameWindow"); }
+            Gs.Functions.CopyWindowElement(); 
             break;
     }
 }
 
 
-Gs.Functions.PrintFrameElement = function () {
+Gs.Functions.PrintWindowElement = function (elementId) {
     try {
-        document.querySelector("#IFrameWindow").contentWindow.print();
+        let iFrameExist = document.querySelector("#IFrameWindow") != null;
+        let dataFrameExist = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") != null;
+        if (!dataFrameExist && elementId == "FrameWindow" && iFrameExist) { elementId = "IFrameWindow"; }
+        else if (dataFrameExist) { elementId = "DataFrameWindow"; } else { elementId = "FrameWindow"; }
+
+        if (elementId == "FrameWindow") {
+            let divElements = document.getElementById(elementId).innerHTML;
+            let oldPage = document.body.innerHTML;
+            document.body.innerHTML =
+                "<html><head>" + document.getElementsByTagName('head')[0].innerHTML + "</head><body>" + divElements + "</body>";
+            window.print();
+            document.body.innerHTML = oldPage;
+        } else if (elementId == "IFrameWindow") { document.querySelector(`#${elementId}`).contentWindow.print(); }
+        else { document.querySelector("#IFrameWindow").contentWindow.document.querySelector("#DataFrameWindow").contentWindow.print(); }
     } catch (t) { }
 }
 
 
-Gs.Functions.DownloadFrameHtmlElement = function () {
+Gs.Functions.DownloadWindowElement = function (elementId) {
     try {
-        var t = document.body.appendChild(document.createElement("a"));
-        t.download = "KlikneteZde" + ".html";
-        t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML);
-        t.click();
+        let iFrameExist = document.querySelector("#IFrameWindow") != null;
+        let dataFrameExist = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") != null;
+        if (!dataFrameExist && elementId == "FrameWindow" && iFrameExist) { elementId = "IFrameWindow"; }
+        else if (dataFrameExist) { elementId = "DataFrameWindow"; } else { elementId = "FrameWindow"; }
+
+        if (elementId == "IFrameWindow") {
+            let t = document.body.appendChild(document.createElement("a"));
+            t.download = "KlikneteZde" + ".html";
+            t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML);
+            t.click();
+        } else if (elementId == "FrameWindow") {
+            let t = document.body.appendChild(document.createElement("a"));
+            t.download = elementId + ".html";
+            t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.querySelector("#FrameWindow").innerHTML);
+            t.click();
+        } else {
+            let t = document.body.appendChild(document.createElement("a"));
+            t.download = elementId + ".html";
+            t.href = "data:text/html;charset=utf-8," + encodeURIComponent(document.querySelector("#IFrameWindow").contentWindow.document.querySelector("#DataFrameWindow").contentDocument.body.innerHTML);
+            t.click();
+        }
     } catch (i) { }
 }
 
-Gs.Functions.CopyFrameElement = async function () {
+
+Gs.Functions.CopyWindowElement = async function () {
     try {
-        let t = document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML;
-        await navigator.clipboard.writeText(t);
+        let iFrameExist = document.querySelector("#IFrameWindow") != null;
+        let dataFrameExist = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") != null;
+        if (!dataFrameExist && elementId == "FrameWindow" && iFrameExist) { elementId = "IFrameWindow"; }
+        else if (dataFrameExist) { elementId = "DataFrameWindow"; } else { elementId = "FrameWindow"; }
+
+
+        if (elementId == "IFrameWindow") {
+            let t = document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML;
+            await navigator.clipboard.writeText(t);
+        } else if (elementId == "FrameWindow") {
+            let t = document.getElementById(elementId).innerHTML; await navigator.clipboard.writeText(t);
+        } else {
+            let t = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body.innerHTML;
+            await navigator.clipboard.writeText(t);
+        }
     } catch (t) { }
 }
 
 
-Gs.Functions.ImageFromFrameElement = function () {
+Gs.Functions.ImageFromWindowElement = function () {
     try {
-        $("document").ready(function () {
-            html2canvas(document.querySelector("#IFrameWindow").contentWindow.document.body, {
-                onrendered: function (t) {
-                    $("#previewImage").append(t);
-                    var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a"));
-                    i.download = "KlikneteZdeCz.png";
-                    i.href = u; i.click();
-                }
+        let iFrameExist = document.querySelector("#IFrameWindow") != null;
+        let dataFrameExist = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") != null;
+        if (!dataFrameExist && elementId == "FrameWindow" && iFrameExist) { elementId = "IFrameWindow"; }
+        else if (dataFrameExist) { elementId = "DataFrameWindow"; } else { elementId = "FrameWindow"; }
+
+
+        if (elementId == "FrameWindow") {
+            $("document").ready(function () {
+                html2canvas($("#" + elementId), {
+                    onrendered: function (t) {
+                        $("#previewImage").append(t);
+                        var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a"));
+                        i.download = elementId + ".png";
+                        i.href = u; i.click()
+                    }
+                })
+            })
+        } else if (elementId == "IFrameWindow") {
+            $("document").ready(function () {
+                html2canvas(document.querySelector("#IFrameWindow").contentWindow.document.body, {
+                    onrendered: function (t) {
+                        $("#previewImage").append(t);
+                        var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a"));
+                        i.download = "KlikneteZdeCz.png";
+                        i.href = u; i.click();
+                    }
+                });
             });
-        });
+        } else {
+            $("document").ready(function () {
+                html2canvas(document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body, {
+                    onrendered: function (t) {
+                        $("#previewImage").append(t);
+                        var r = t.toDataURL("image/png"), u = r.replace(/^data:image\/png/, "data:application/octet-stream"), i = document.body.appendChild(document.createElement("a"));
+                        i.download = "KlikneteZdeCz.png";
+                        i.href = u; i.click();
+                    }
+                });
+            });
+        }
     } catch (t) { }
 }
 
@@ -297,15 +324,12 @@ Gs.Functions.LoadMetro = async function () {
 
     const myFont = new FontFace('metro', "url('./metro/mif/metro.svg') format('svg'), url('./metro/mif/metro.woff') format('woff'), url('./metro/mif/metro.ttf') format('truetype')");
     await myFont.load(); document.fonts.add(myFont);
-
-    const dataJs = await fetch(pathJs).then((r) => r.text())
-
-    const style = document.createElement("style")
-    style.textContent = dataCss
-    document.querySelector("head").appendChild(style)
-
-    style.textContent = dataThemeCss
-    document.querySelector("head").appendChild(style)
+    const dataJs = await fetch(pathJs).then((r) => r.text());
+    const style = document.createElement("style");
+    style.textContent = dataCss;
+    document.querySelector("head").appendChild(style);
+    style.textContent = dataThemeCss;
+    document.querySelector("head").appendChild(style);
 
     new Function(dataJs)();
     Metro.init();
@@ -317,6 +341,7 @@ Gs.Functions.UnloadMetro = function () {
     delete Metro;
 }
 
+
 Gs.Functions.LoadHtmlPage = function (elementId,url) {
     $.ajax({
         url: url
@@ -324,6 +349,7 @@ Gs.Functions.LoadHtmlPage = function (elementId,url) {
         $('#' + elementId).html(data);
     });
 }
+
 
 Gs.Functions.LoadHtmlPageToFrame = function (elementId, url) {
     let frame = '<div id=MainWindow data-role="window" data-custom-buttons="WindowButtons" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'

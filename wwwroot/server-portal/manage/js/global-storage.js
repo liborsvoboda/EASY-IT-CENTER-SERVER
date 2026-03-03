@@ -37,6 +37,9 @@ window.Gs = {
             RememberLastHandleBar: true,
             EnableScreenSaver: true,
         },
+        RemoveObjectList: {
+            dialog: null
+        }
     }
 }
 window.WindowButtons = [
@@ -68,7 +71,7 @@ window.WindowButtons = [
     {
         html: "<span class='mif-printer' title='Print'></span>",
         cls: "sys-button",
-        onclick: "print();"
+        onclick: "Gs.Functions.PrintWindowElement();"
     },
     
 ]
