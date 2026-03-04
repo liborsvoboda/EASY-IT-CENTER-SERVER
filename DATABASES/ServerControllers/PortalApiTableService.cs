@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Presentation;
 using EasyITCenter.DBModel;
+using Google.Protobuf.Compiler;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -74,6 +75,17 @@ namespace EasyITCenter.Controllers
         public int Id { get; set; }
         public string Response { get; set; }
     }
+
+
+    public class CodeGeneratorRequest {
+        public string RecGuid { get; set; } = null;
+        public string CodeName { get; set; }
+        public string Description { get; set; }
+        public string JsonContent { get; set; }
+        public string CodeContent { get; set; }
+        public string SubCodeContent { get; set; }
+    }
+
 
     [Route("PortalApiTableService")]
     [ApiController]
@@ -494,20 +506,14 @@ namespace EasyITCenter.Controllers
                                 .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
                         }
 
-                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                            data.PortalApiTableColumnDataLists.RemoveRange(original);
-                            data.SaveChanges();
-                            return true;
-                        });
-
                         original.ForEach(origItem => {
-                            if (origItem.ApiTableColumnName == "TemplateName") { origItem.Id = 0; origItem.Value = emailTemplateRequest.TemplateName; }
-                            else if (origItem.ApiTableColumnName == "HtmlContent") { origItem.Id = 0; origItem.Value = emailTemplateRequest.HtmlContent; } 
-                            else if (origItem.ApiTableColumnName == "Description") { origItem.Id = 0; origItem.Value = emailTemplateRequest.Description; }
+                            if (origItem.ApiTableColumnName == "TemplateName") { origItem.Value = emailTemplateRequest.TemplateName; }
+                            else if (origItem.ApiTableColumnName == "HtmlContent") { origItem.Value = emailTemplateRequest.HtmlContent; } 
+                            else if (origItem.ApiTableColumnName == "Description") { origItem.Value = emailTemplateRequest.Description; }
                         });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                            data.PortalApiTableColumnDataLists.AddRange(original);
+                            data.PortalApiTableColumnDataLists.UpdateRange(original);
                             data.SaveChanges();
                             return true;
                         });
@@ -597,20 +603,15 @@ namespace EasyITCenter.Controllers
                                 .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
                         }
 
-                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                            data.PortalApiTableColumnDataLists.RemoveRange(original);
-                            data.SaveChanges();
-                            return true;
-                        });
 
                         original.ForEach(origItem => {
-                            if (origItem.ApiTableColumnName == "Subject") { origItem.Id = 0; origItem.Value = audioNotepadRequest.Subject; }
-                            else if (origItem.ApiTableColumnName == "HtmlContent") { origItem.Id = 0; origItem.Value = audioNotepadRequest.HtmlContent; }
-                            else if (origItem.ApiTableColumnName == "Description") { origItem.Id = 0; origItem.Value = audioNotepadRequest.Description; }
+                            if (origItem.ApiTableColumnName == "Subject") { origItem.Value = audioNotepadRequest.Subject; }
+                            else if (origItem.ApiTableColumnName == "HtmlContent") { origItem.Value = audioNotepadRequest.HtmlContent; }
+                            else if (origItem.ApiTableColumnName == "Description") { origItem.Value = audioNotepadRequest.Description; }
                         });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                            data.PortalApiTableColumnDataLists.AddRange(original);
+                            data.PortalApiTableColumnDataLists.UpdateRange(original);
                             data.SaveChanges();
                             return true;
                         });
@@ -676,17 +677,89 @@ namespace EasyITCenter.Controllers
                                 .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
                         }
 
+
+                        original.ForEach(origItem => {
+                            if (origItem.ApiTableColumnName == "TableName") {  origItem.Value = dataTableRequest.TableName; }
+                            else if (origItem.ApiTableColumnName == "ColumnsDef") {  origItem.Value = dataTableRequest.ColumnsDef; }
+                            else if (origItem.ApiTableColumnName == "Data") {  origItem.Value = dataTableRequest.Data; }
+                            else if (origItem.ApiTableColumnName == "Description") { origItem.Value = dataTableRequest.Description; }
+                        });
+
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                            data.PortalApiTableColumnDataLists.RemoveRange(original);
+                            data.PortalApiTableColumnDataLists.UpdateRange(original);
                             data.SaveChanges();
                             return true;
                         });
+                    }
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 3, ErrorMessage = string.Empty });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+
+        ///
+        [AllowAnonymous]
+        [HttpGet("/PortalApiTableService/GetCodeGeneratorList")]
+        public async Task<string> GetCodeGeneratorList() {
+            List<PortalApiTableColumnDataList> data = new();
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                        data = new EasyITCenterContext().PortalApiTableColumnDataLists
+                            .Where(a => a.ApiTableName == "CodeGeneratorList" && a.UserId == HtttpContextExtension.GetUserId())
+                            .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                    }
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
+
+
+
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/SetCodeGeneratorList")]
+        public async Task<string> SetCodeGeneratorList([FromBody] CodeGeneratorRequest codeGeneratorRequest) {
+            EasyITCenterContext data = new EasyITCenterContext(); List<PortalApiTableColumnDataList>? original = null;
+            try {
+                if (HtttpContextExtension.IsLogged()) {
+
+                    if (string.IsNullOrWhiteSpace(codeGeneratorRequest.RecGuid)) {
+                        string recGuid = Guid.NewGuid().ToString().ToUpper();
+                        List<PortalApiTableColumnDataList> record = new();
+                        record.Add(new PortalApiTableColumnDataList() { ApiTableName = "CodeGeneratorList", ApiTableColumnName = "CodeName", InheritedDataType = "string", RecGuid = recGuid, Value = codeGeneratorRequest.CodeName, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new PortalApiTableColumnDataList() { ApiTableName = "CodeGeneratorList", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = codeGeneratorRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "CodeGeneratorList", ApiTableColumnName = "JsonContent", InheritedDataType = "string", RecGuid = recGuid, Value = codeGeneratorRequest.JsonContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "CodeGeneratorList", ApiTableColumnName = "CodeContent", InheritedDataType = "string", RecGuid = recGuid, Value = codeGeneratorRequest.CodeContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "CodeGeneratorList", ApiTableColumnName = "SubCodeContent", InheritedDataType = "string", RecGuid = recGuid, Value = codeGeneratorRequest.SubCodeContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.AddRange(record);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    } else {
+                        using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                            original = new EasyITCenterContext().PortalApiTableColumnDataLists
+                                .Where(a => a.ApiTableName == "CodeGeneratorList" && a.UserId == HtttpContextExtension.GetUserId() && a.RecGuid == codeGeneratorRequest.RecGuid)
+                                .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                        }
+
 
                         original.ForEach(origItem => {
-                            if (origItem.ApiTableColumnName == "TableName") { origItem.Id = 0; origItem.Value = dataTableRequest.TableName; }
-                            else if (origItem.ApiTableColumnName == "ColumnsDef") { origItem.Id = 0; origItem.Value = dataTableRequest.ColumnsDef; }
-                            else if (origItem.ApiTableColumnName == "Data") { origItem.Id = 0; origItem.Value = dataTableRequest.Data; }
-                            else if (origItem.ApiTableColumnName == "Description") { origItem.Id = 0; origItem.Value = dataTableRequest.Description; }
+                            if (origItem.ApiTableColumnName == "CodeName") { origItem.Value = codeGeneratorRequest.CodeName; } 
+                            else if (origItem.ApiTableColumnName == "Description") { origItem.Value = codeGeneratorRequest.Description; } 
+                            else if (origItem.ApiTableColumnName == "JsonContent") { origItem.Value = codeGeneratorRequest.JsonContent; } 
+                            else if (origItem.ApiTableColumnName == "CodeContent") { origItem.Value = codeGeneratorRequest.CodeContent; } 
+                            else if (origItem.ApiTableColumnName == "SubCodeContent") { origItem.Value = codeGeneratorRequest.SubCodeContent; }
                         });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
