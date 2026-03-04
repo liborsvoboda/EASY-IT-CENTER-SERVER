@@ -28,9 +28,10 @@ Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, stora
         },
         success: function (result) {
             if (storageName != null) {//SAVE to Storage
-                if (result.Result != undefined) {
+                if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
-                } else { Metro.storage.setItem(storageName, result); }
+                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") { Metro.storage.setItem(storageName, []); }
+                else { Metro.storage.setItem(storageName, result); }
             } else { //DOWNLOAD When not saved to Storage
                 let a = document.createElement('a');
                 a.href = window.URL.createObjectURL(result);
@@ -71,9 +72,10 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
         dataType: "json",
         success: function (result) {
             if (storageName != null) {
-                if (result.Result != undefined) {
+                if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
-                } else { Metro.storage.setItem(storageName, result); }
+                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") { Metro.storage.setItem(storageName, []); }
+                else { Metro.storage.setItem(storageName, result); }
             }
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
@@ -107,9 +109,10 @@ Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, window
         dataType: "json",
         success: function (result) {
             if (storageName != null) {
-                if (result.Result != undefined) {
+                if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
-                } else { Metro.storage.setItem(storageName, result); }
+                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") { Metro.storage.setItem(storageName, []); }
+                else { Metro.storage.setItem(storageName, result); }
             }
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
@@ -141,9 +144,10 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction =
         dataType: "json",
         success: function (result) {
             if (storageName != null) {
-                if (result.Result != undefined) {
+                if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
-                } else { Metro.storage.setItem(storageName, result); }
+                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") { Metro.storage.setItem(storageName, []); }
+                else { Metro.storage.setItem(storageName, result); }
             }
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();

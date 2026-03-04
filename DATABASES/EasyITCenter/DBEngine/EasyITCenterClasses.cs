@@ -20,7 +20,7 @@
         public string Status { get; set; }
         public int RecordCount { get; set; }
         public string ErrorMessage { get; set; }
-        public string Result { get; set; } = String.Empty;
+        public string Result { get; set; } = [];
     }
 
     /// <summary>
