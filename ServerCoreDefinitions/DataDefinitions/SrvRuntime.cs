@@ -43,8 +43,8 @@ namespace EasyITCenter.ServerCoreStructure {
         
 
         public static string SrvUserPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users");
-        public static string SrvUserPublicPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users","public");
-        public static string SrvTempPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-temp", "temp");
+        public static string SrvPublicPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-public");
+        public static string SrvTempPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-temp");
 
 
         public static string ConfigFile { get; set; } = "config.json";

@@ -46,6 +46,7 @@ namespace EasyITCenter.Controllers
         public string RecGuid { get; set; } = null;
         public string TemplateName { get; set; }
         public string HtmlContent { get; set; }
+        public string JsonContent { get; set; }
         public string Description { get; set; }
     }
 
@@ -498,6 +499,7 @@ namespace EasyITCenter.Controllers
                         List<PortalApiTableColumnDataList> record = new();
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "TemplateName", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.TemplateName, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.HtmlContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "JsonContent", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.JsonContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { ApiTableName = "EmailTemplateList", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = emailTemplateRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
@@ -515,6 +517,7 @@ namespace EasyITCenter.Controllers
                         original.ForEach(origItem => {
                             if (origItem.ApiTableColumnName == "TemplateName") { origItem.Value = emailTemplateRequest.TemplateName; }
                             else if (origItem.ApiTableColumnName == "HtmlContent") { origItem.Value = emailTemplateRequest.HtmlContent; } 
+                            else if (origItem.ApiTableColumnName == "JsonContent") { origItem.Value = emailTemplateRequest.JsonContent; } 
                             else if (origItem.ApiTableColumnName == "Description") { origItem.Value = emailTemplateRequest.Description; }
                         });
 

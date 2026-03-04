@@ -200,7 +200,7 @@ namespace EasyITCenter {
             ServerModulesEnabling.EnableMarkdownAsHtmlFiles(ref app);
 
             app.UseHsts();
-
+            if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value)) { app.UseHttpsRedirection(); }
 
             //Allowed File Types For Web TODO define over Administration
             FileExtensionContentTypeProvider? staticFilesProvider = new FileExtensionContentTypeProvider();
@@ -212,13 +212,24 @@ namespace EasyITCenter {
             staticFilesProvider.Mappings[".jpg"] = "image/jpeg"; staticFilesProvider.Mappings[".jpeg"] = "image/jpeg";
             staticFilesProvider.Mappings[".png"] = "image/png"; staticFilesProvider.Mappings[".gif"] = "image/gif";
             staticFilesProvider.Mappings[".ico"] = "image/vnd.microsoft.icon"; staticFilesProvider.Mappings[".ttf"] = "font/ttf";
-            staticFilesProvider.Mappings[".ts"] = "text/javascript";
+            staticFilesProvider.Mappings[".ts"] = "text/javascript"; staticFilesProvider.Mappings[".tiff"] = "image/tiff";
+            staticFilesProvider.Mappings[".svg"] = "image/svg+xml"; staticFilesProvider.Mappings[".bmp"] = "image/bmp";
+            staticFilesProvider.Mappings[".mp4"] = "video/mp4";
+            staticFilesProvider.Mappings[".md"] = "text/markdown"; staticFilesProvider.Mappings[".mpeg"] = "audio/mpeg";
 
-            if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value)) { app.UseHttpsRedirection(); }
             
-            
+
+
             //app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html" });
-            app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true });
+            app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress,
+                OnPrepareResponse = (context) => { context = CoreOperations.IncludeStaticCookieTokenToRequest(context);
+                    //TODO Ignore WHEN SHARED Check RIGHT USER & HIS FOLDER
+                    if ( !HtttpContextExtension.IsLogged() &&
+                        ( context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvUserPath)}") || context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SystemAppsPath)}") )) {
+                            context.Context.Response.Redirect("/StatusPageService/401UnauthorizedPage", true);
+                        }
+                    }
+                });
 
             app.UseCookiePolicy();
             app.UseSession();

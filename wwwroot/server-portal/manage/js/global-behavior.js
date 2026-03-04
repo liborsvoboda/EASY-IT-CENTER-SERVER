@@ -193,6 +193,7 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("OpenExcelFile");
     Metro.storage.delItem("OpenWordFile");
     Metro.storage.delItem("OpenPowerPointFile");
+    Metro.storage.delItem("CodeGeneratorList");
     //Metro.storage.delItem("RunFunction");
 
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");

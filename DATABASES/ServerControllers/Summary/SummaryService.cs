@@ -76,7 +76,7 @@ namespace EasyITCenter.Controllers {
                 if (HtttpContextExtension.IsWebAdmin() || HtttpContextExtension.IsAdmin()) {
                     summaryFileRequest.MdFilesPath = summaryFileRequest.MdFilesPath.StartsWith("/") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath.StartsWith("\\") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath;
 
-                    GlobalFunctions.CreateSummaryFromPath(Path.Combine(SrvRuntime.SrvUserPublicPath, summaryFileRequest.MdFilesPath));
+                    GlobalFunctions.CreateSummaryFromPath(Path.Combine(SrvRuntime.SrvPublicPath, summaryFileRequest.MdFilesPath));
                     return base.Ok(new WebClasses.JsonResult() { Result = DBResult.success.ToString(), Status = DBResult.success.ToString() });
                 } else { return base.Ok(new WebClasses.JsonResult() { Result = DBResult.UnauthorizedRequest.ToString(), Status = DBResult.UnauthorizedRequest.ToString() }); }
             } catch (Exception ex) {

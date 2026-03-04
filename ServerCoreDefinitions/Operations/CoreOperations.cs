@@ -13,6 +13,7 @@ using CSJsonDB;
 using EasyITCenter.Controllers;
 using PuppeteerSharp;
 using Tensorflow;
+using Microsoft.AspNetCore.StaticFiles;
 
 
 namespace EasyITCenter.ServerCoreStructure {
@@ -23,7 +24,33 @@ namespace EasyITCenter.ServerCoreStructure {
     public static class CoreOperations {
 
 
-        //TODO CAN BE INSERTED CUSTOM KEYS FOR Machines o Other HERE WILL BE VALIDATED: NEW AGENDA 
+        /// <summary>
+        /// Insert Token To Static Request
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static StaticFileResponseContext IncludeStaticCookieTokenToRequest(StaticFileResponseContext context) {
+            ServerWebPagesToken? serverWebPagesToken = null;
+            string token = context.Context.Request.Cookies.FirstOrDefault(a => a.Key == "ApiToken").Value;
+
+            if (token == null && context.Context.Request.Headers.Authorization.ToString().Length > 0) { token = context.Context.Request.Headers.Authorization.ToString().Substring(7); }
+            if (token != null) {
+                serverWebPagesToken = CoreOperations.CheckTokenValidityFromString(token);
+                if (serverWebPagesToken.IsValid) {
+                    context.Context.User.AddIdentities(serverWebPagesToken.UserClaims.Identities);
+                    try { context.Context.Items.Add(new KeyValuePair<object, object>("ServerWebPagesToken", serverWebPagesToken)); } catch { }
+                }
+            }
+            return context;
+        }
+
+
+        /// <summary>
+        /// Insert Token from Api KEY REQUEST
+        /// TODO CAN BE INSERTED CUSTOM KEYS FOR Machines o Other HERE WILL BE VALIDATED: NEW AGENDA
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static HttpContext IncludeCookieTokenToRequest(HttpContext context) {
             ServerWebPagesToken? serverWebPagesToken = null;
             string token = context.Request.Cookies.FirstOrDefault(a => a.Key == "ApiToken").Value;
