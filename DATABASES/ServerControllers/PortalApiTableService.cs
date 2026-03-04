@@ -93,7 +93,6 @@ namespace EasyITCenter.Controllers
         public string Description { get; set; }
         public string DataContent { get; set; }
         public string Theme { get; set; }
-        public string Transition { get; set; }
     }
 
     [Route("PortalApiTableService")]
@@ -837,7 +836,6 @@ namespace EasyITCenter.Controllers
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "DataContent", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.DataContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "Theme", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.Theme, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "Transition", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.Transition, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
 
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
@@ -859,7 +857,6 @@ namespace EasyITCenter.Controllers
                             else if (origItem.ApiTableColumnName == "Description") { origItem.Value = mediaPresentationListRequest.Description; }
                             else if (origItem.ApiTableColumnName == "DataContent") { origItem.Value = mediaPresentationListRequest.DataContent; } 
                             else if (origItem.ApiTableColumnName == "Theme") { origItem.Value = mediaPresentationListRequest.Theme; } 
-                            else if (origItem.ApiTableColumnName == "Transition") { origItem.Value = mediaPresentationListRequest.Transition; }
                         });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
