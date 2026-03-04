@@ -4,18 +4,16 @@
  * of external markdown documents.
  */
 (function( root, factory ) {
-	if (typeof define === 'function' && define.amd) {
-		root.marked = require( './marked' );
-		root.RevealMarkdown = factory( root.marked );
-		root.RevealMarkdown.initialize();
-	} else if( typeof exports === 'object' ) {
+	if( typeof exports === 'object' ) {
 		module.exports = factory( require( './marked' ) );
-	} else {
+	}
+	else {
 		// Browser globals (root is window)
 		root.RevealMarkdown = factory( root.marked );
 		root.RevealMarkdown.initialize();
 	}
 }( this, function( marked ) {
+
 	if( typeof marked === 'undefined' ) {
 		throw 'The reveal.js Markdown plugin requires marked to be loaded';
 	}
@@ -33,20 +31,17 @@
 		DEFAULT_ELEMENT_ATTRIBUTES_SEPARATOR = '\\\.element\\\s*?(.+?)$',
 		DEFAULT_SLIDE_ATTRIBUTES_SEPARATOR = '\\\.slide:\\\s*?(\\\S.+?)$';
 
-	var SCRIPT_END_PLACEHOLDER = '__SCRIPT_END__';
 
 	/**
 	 * Retrieves the markdown contents of a slide section
 	 * element. Normalizes leading tabs/whitespace.
 	 */
 	function getMarkdownFromSlide( section ) {
+
 		var template = section.querySelector( 'script' );
 
 		// strip leading whitespace so it isn't evaluated as code
 		var text = ( template || section ).textContent;
-
-		// restore script end tags
-		text = text.replace( new RegExp( SCRIPT_END_PLACEHOLDER, 'g' ), '</script>' );
 
 		var leadingWs = text.match( /^\n?(\s*)/ )[1].length,
 			leadingTabs = text.match( /^\n?(\t*)/ )[1].length;
@@ -59,6 +54,7 @@
 		}
 
 		return text;
+
 	}
 
 	/**
@@ -68,6 +64,7 @@
 	 * to the output markdown slide.
 	 */
 	function getForwardedAttributes( section ) {
+
 		var attributes = section.attributes;
 		var result = [];
 
@@ -87,6 +84,7 @@
 		}
 
 		return result.join( ' ' );
+
 	}
 
 	/**
@@ -94,31 +92,31 @@
 	 * values for what's not defined.
 	 */
 	function getSlidifyOptions( options ) {
+
 		options = options || {};
 		options.separator = options.separator || DEFAULT_SLIDE_SEPARATOR;
 		options.notesSeparator = options.notesSeparator || DEFAULT_NOTES_SEPARATOR;
 		options.attributes = options.attributes || '';
 
 		return options;
+
 	}
 
 	/**
 	 * Helper function for constructing a markdown slide.
 	 */
 	function createMarkdownSlide( content, options ) {
+
 		options = getSlidifyOptions( options );
 
 		var notesMatch = content.split( new RegExp( options.notesSeparator, 'mgi' ) );
 
 		if( notesMatch.length === 2 ) {
-			content = notesMatch[0] + '<aside class="notes">' + marked(notesMatch[1].trim()) + '</aside>';
+			content = notesMatch[0] + '<aside class="notes" data-markdown>' + notesMatch[1].trim() + '</aside>';
 		}
 
-		// prevent script end tags in the content from interfering
-		// with parsing
-		content = content.replace( /<\/script>/g, SCRIPT_END_PLACEHOLDER );
-
 		return '<script type="text/template">' + content + '</script>';
+
 	}
 
 	/**
@@ -126,6 +124,7 @@
 	 * on the passed in separator arguments.
 	 */
 	function slidify( markdown, options ) {
+
 		options = getSlidifyOptions( options );
 
 		var separatorRegex = new RegExp( options.separator + ( options.verticalSeparator ? '|' + options.verticalSeparator : '' ), 'mg' ),
@@ -189,6 +188,7 @@
 		}
 
 		return markdownSections;
+
 	}
 
 	/**
@@ -197,13 +197,16 @@
 	 * handles loading of external markdown.
 	 */
 	function processSlides() {
+
 		var sections = document.querySelectorAll( '[data-markdown]'),
 			section;
 
 		for( var i = 0, len = sections.length; i < len; i++ ) {
+
 			section = sections[i];
 
 			if( section.getAttribute( 'data-markdown' ).length ) {
+
 				var xhr = new XMLHttpRequest(),
 					url = section.getAttribute( 'data-markdown' );
 
@@ -218,19 +221,23 @@
 					if( xhr.readyState === 4 ) {
 						// file protocol yields status code 0 (useful for local debug, mobile applications etc.)
 						if ( ( xhr.status >= 200 && xhr.status < 300 ) || xhr.status === 0 ) {
+
 							section.outerHTML = slidify( xhr.responseText, {
 								separator: section.getAttribute( 'data-separator' ),
 								verticalSeparator: section.getAttribute( 'data-separator-vertical' ),
 								notesSeparator: section.getAttribute( 'data-separator-notes' ),
 								attributes: getForwardedAttributes( section )
 							});
+
 						}
 						else {
+
 							section.outerHTML = '<section data-state="alert">' +
 								'ERROR: The attempt to fetch ' + url + ' failed with HTTP status ' + xhr.status + '.' +
 								'Check your browser\'s JavaScript console for more details.' +
 								'<p>Remember that you need to serve the presentation HTML from a HTTP server.</p>' +
 								'</section>';
+
 						}
 					}
 				};
@@ -243,19 +250,23 @@
 				catch ( e ) {
 					alert( 'Failed to get the Markdown file ' + url + '. Make sure that the presentation and the file are served by a HTTP server and the file can be found there. ' + e );
 				}
+
 			}
 			else if( section.getAttribute( 'data-separator' ) || section.getAttribute( 'data-separator-vertical' ) || section.getAttribute( 'data-separator-notes' ) ) {
+
 				section.outerHTML = slidify( getMarkdownFromSlide( section ), {
 					separator: section.getAttribute( 'data-separator' ),
 					verticalSeparator: section.getAttribute( 'data-separator-vertical' ),
 					notesSeparator: section.getAttribute( 'data-separator-notes' ),
 					attributes: getForwardedAttributes( section )
 				});
+
 			}
 			else {
 				section.innerHTML = createMarkdownSlide( getMarkdownFromSlide( section ) );
 			}
 		}
+
 	}
 
 	/**
@@ -268,10 +279,12 @@
 	 * http://stackoverflow.com/questions/5690269/disabling-chrome-cache-for-website-development/7000899#answer-11786277
 	 */
 	function addAttributeInElement( node, elementTarget, separator ) {
+
 		var mardownClassesInElementsRegex = new RegExp( separator, 'mg' );
 		var mardownClassRegex = new RegExp( "([^\"= ]+?)=\"([^\"=]+?)\"", 'mg' );
 		var nodeValue = node.nodeValue;
 		if( matches = mardownClassesInElementsRegex.exec( nodeValue ) ) {
+
 			var classes = matches[1];
 			nodeValue = nodeValue.substring( 0, matches.index ) + nodeValue.substring( mardownClassesInElementsRegex.lastIndex );
 			node.nodeValue = nodeValue;
@@ -288,6 +301,7 @@
 	 * or the element of an attribute node.
 	 */
 	function addAttributes( section, element, previousElement, separatorElementAttributes, separatorSectionAttributes ) {
+
 		if ( element != null && element.childNodes != undefined && element.childNodes.length > 0 ) {
 			previousParentElement = element;
 			for( var i = 0; i < element.childNodes.length; i++ ) {
@@ -326,13 +340,16 @@
 	 * DOM to HTML.
 	 */
 	function convertSlides() {
+
 		var sections = document.querySelectorAll( '[data-markdown]');
 
 		for( var i = 0, len = sections.length; i < len; i++ ) {
+
 			var section = sections[i];
 
 			// Only parse the same slide once
 			if( !section.getAttribute( 'data-markdown-parsed' ) ) {
+
 				section.setAttribute( 'data-markdown-parsed', true )
 
 				var notes = section.querySelector( 'aside.notes' );
@@ -351,12 +368,16 @@
 				if( notes ) {
 					section.appendChild( notes );
 				}
+
 			}
+
 		}
+
 	}
 
 	// API
 	return {
+
 		initialize: function() {
 			processSlides();
 			convertSlides();
@@ -366,5 +387,7 @@
 		processSlides: processSlides,
 		convertSlides: convertSlides,
 		slidify: slidify
+
 	};
+
 }));

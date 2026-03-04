@@ -1,4 +1,5 @@
 (function() {
+
 	// don't emit events from inside the previews themselves
 	if( window.location.search.match( /receiver/gi ) ) { return; }
 
@@ -13,6 +14,7 @@
 	 * Posts the current slide data to the notes window
 	 */
 	function post() {
+
 		var slideElement = Reveal.getCurrentSlide(),
 			notesElement = slideElement.querySelector( 'aside.notes' );
 
@@ -35,16 +37,12 @@
 		}
 
 		socket.emit( 'statechanged', messageData );
+
 	}
 
 	// When a new notes window connects, post our current state
-	socket.on( 'new-subscriber', function( data ) {
+	socket.on( 'connect', function( data ) {
 		post();
-	} );
-
-	// When the state changes from inside of the speaker view
-	socket.on( 'statechanged-speaker', function( data ) {
-		Reveal.setState( data.state );
 	} );
 
 	// Monitor events that trigger a change in state
@@ -58,4 +56,5 @@
 
 	// Post the initial state
 	post();
+
 }());

@@ -582,6 +582,22 @@ namespace EasyITCenter.Controllers {
         }
 
 
+        [AllowAnonymous]
+        [HttpPost("/PublicStorageService/SaveHtmlFile")]
+        [Consumes("application/json")]
+        public async Task<string> SaveHtmlFile([FromBody] Files file) {
+            try {
+                if (HtttpContextExtension.IsWebAdmin() || HtttpContextExtension.IsAdmin()) {
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPublicPath, "WebPages", file.Filename + ".html"), file.Content, true);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
         /// <summary>
         /// Unpack User Archive
         /// </summary>

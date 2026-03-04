@@ -453,10 +453,15 @@ Gs.Objects.ShowPrintExport = function () {
                 onclick: function () { Gs.Functions.PrintOrExportWindow("Image"); }
             },
             {
-                caption: "Copy to Buffer",
+                caption: "Download Pdf",
                 cls: "js-dialog-close success",
-                onclick: function () { Gs.Functions.PrintOrExportWindow("Copy"); }
-            }
+                onclick: function () { Gs.Functions.PrintOrExportWindow("Pdf"); }
+            },
+            //{
+            //    caption: "Copy to Buffer",
+            //    cls: "js-dialog-close success",
+            //    onclick: function () { Gs.Functions.PrintOrExportWindow("Copy"); }
+            //}
         ]
     });
 }

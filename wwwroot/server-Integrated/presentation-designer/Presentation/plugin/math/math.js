@@ -4,56 +4,61 @@
  *
  * @author Hakim El Hattab
  */
-var RevealMath = window.RevealMath || (function () {
-    var options = Reveal.getConfig().math || {};
-    options.mathjax = options.mathjax || 'https://cdn.mathjax.org/mathjax/latest/MathJax.js';
-    options.config = options.config || 'TeX-AMS_HTML-full';
+var RevealMath = window.RevealMath || (function(){
 
-    loadScript(options.mathjax + '?config=' + options.config, function () {
-        MathJax.Hub.Config({
-            messageStyle: 'none',
-            tex2jax: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-            },
-            skipStartupTypeset: true
-        });
+	var options = Reveal.getConfig().math || {};
+	options.mathjax = options.mathjax || 'https://cdn.mathjax.org/mathjax/latest/MathJax.js';
+	options.config = options.config || 'TeX-AMS_HTML-full';
 
-        // Typeset followed by an immediate reveal.js layout since
-        // the typesetting process could affect slide height
-        MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
-        MathJax.Hub.Queue(Reveal.layout);
+	loadScript( options.mathjax + '?config=' + options.config, function() {
 
-        // Reprocess equations in slides when they turn visible
-        Reveal.addEventListener('slidechanged', function (event) {
-            MathJax.Hub.Queue(['Typeset', MathJax.Hub, event.currentSlide]);
-        });
-    });
+		MathJax.Hub.Config({
+			messageStyle: 'none',
+			tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
+			skipStartupTypeset: true
+		});
 
-    function loadScript(url, callback) {
-        var head = document.querySelector('head');
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = url;
+		// Typeset followed by an immediate reveal.js layout since
+		// the typesetting process could affect slide height
+		MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub ] );
+		MathJax.Hub.Queue( Reveal.layout );
 
-        // Wrapper for callback to make sure it only fires once
-        var finish = function () {
-            if (typeof callback === 'function') {
-                callback.call();
-                callback = null;
-            }
-        }
+		// Reprocess equations in slides when they turn visible
+		Reveal.addEventListener( 'slidechanged', function( event ) {
 
-        script.onload = finish;
+			MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, event.currentSlide ] );
 
-        // IE
-        script.onreadystatechange = function () {
-            if (this.readyState === 'loaded') {
-                finish();
-            }
-        }
+		} );
 
-        // Normal browsers
-        head.appendChild(script);
-    }
+	} );
+
+	function loadScript( url, callback ) {
+
+		var head = document.querySelector( 'head' );
+		var script = document.createElement( 'script' );
+		script.type = 'text/javascript';
+		script.src = url;
+
+		// Wrapper for callback to make sure it only fires once
+		var finish = function() {
+			if( typeof callback === 'function' ) {
+				callback.call();
+				callback = null;
+			}
+		}
+
+		script.onload = finish;
+
+		// IE
+		script.onreadystatechange = function() {
+			if ( this.readyState === 'loaded' ) {
+				finish();
+			}
+		}
+
+		// Normal browsers
+		head.appendChild( script );
+
+	}
+
 })();

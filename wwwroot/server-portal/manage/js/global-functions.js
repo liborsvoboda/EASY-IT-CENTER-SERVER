@@ -175,14 +175,32 @@ Gs.Functions.PrintOrExportWindow = function (command) {
         case "Copy":
             Gs.Functions.CopyWindowElement(); 
             break;
+        case "Pdf":
+            Gs.Functions.HtmlToPdfElement();
+            break;
     }
 }
 
+Gs.Functions.HtmlToPdfElement = function (elementId) {
+    let iFrameExist = document.querySelector("#IFrameWindow") != null;
+    let dataFrameExist = document.querySelector("#IFrameWindow") != null ? document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") : null != null;
+    if (!dataFrameExist && elementId == "FrameWindow" && iFrameExist) { elementId = "IFrameWindow"; }
+    else if (dataFrameExist) { elementId = "DataFrameWindow"; } else { elementId = "FrameWindow"; }
+
+    if (elementId == "IFrameWindow") {
+        pdfMake.createPdf({ content: htmlToPdfmake(document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML) }).download('Html2Pdf.pdf');
+    } else if (elementId == "FrameWindow") {
+        pdfMake.createPdf({ content: htmlToPdfmake(document.getElementById("FrameWindow").innerHTML) }).download('Html2Pdf.pdf');
+
+    } else {
+        pdfMake.createPdf({ content: htmlToPdfmake(document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body.innerHTML) }).download('Html2Pdf.pdf');
+    }
+}
 
 Gs.Functions.PrintWindowElement = function (elementId) {
     try {
         let iFrameExist = document.querySelector("#IFrameWindow") != null;
-        let dataFrameExist = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") != null;
+        let dataFrameExist = document.querySelector("#IFrameWindow") != null ? document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") : null != null;
         if (!dataFrameExist && elementId == "FrameWindow" && iFrameExist) { elementId = "IFrameWindow"; }
         else if (dataFrameExist) { elementId = "DataFrameWindow"; } else { elementId = "FrameWindow"; }
 
@@ -202,7 +220,7 @@ Gs.Functions.PrintWindowElement = function (elementId) {
 Gs.Functions.DownloadWindowElement = function (elementId) {
     try {
         let iFrameExist = document.querySelector("#IFrameWindow") != null;
-        let dataFrameExist = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") != null;
+        let dataFrameExist = document.querySelector("#IFrameWindow") != null ? document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") : null != null;
         if (!dataFrameExist && elementId == "FrameWindow" && iFrameExist) { elementId = "IFrameWindow"; }
         else if (dataFrameExist) { elementId = "DataFrameWindow"; } else { elementId = "FrameWindow"; }
 
@@ -229,39 +247,40 @@ Gs.Functions.DownloadWindowElement = function (elementId) {
 Gs.Functions.CopyWindowElement = async function () {
     try {
         let iFrameExist = document.querySelector("#IFrameWindow") != null;
-        let dataFrameExist = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") != null;
+        let dataFrameExist = document.querySelector("#IFrameWindow") != null ? document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") : null != null;
         if (!dataFrameExist && elementId == "FrameWindow" && iFrameExist) { elementId = "IFrameWindow"; }
         else if (dataFrameExist) { elementId = "DataFrameWindow"; } else { elementId = "FrameWindow"; }
 
 
         if (elementId == "IFrameWindow") {
-            let aux = document.createElement("input");
-            aux.setAttribute("value", document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML);
-            document.body.appendChild(aux);
-            aux.select();
-            document.execCommand("copy");
-            document.body.removeChild(aux);
+            //let aux = document.createElement("input");
+            //aux.setAttribute("value", document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML);
+            //document.body.appendChild(aux);
+            //aux.select();
+            //document.execCommand("copy");
+            //document.body.removeChild(aux);
 
-            //let t = document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML;
-            //await navigator.clipboard.writeText(t);
+            let t = document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML;
+            await navigator.clipboard.writeText(t);
         } else if (elementId == "FrameWindow") {
-                let aux = document.createElement("input");
-                aux.setAttribute("value", document.getElementById("FrameWindow").innerHTML);
-                document.body.appendChild(aux);
-                aux.select();
-                document.execCommand("copy");
-                document.body.removeChild(aux);
-            //let t = document.getElementById(elementId).innerHTML; await navigator.clipboard.writeText(t);
+                //let aux = document.createElement("input");
+                //aux.setAttribute("value", document.getElementById("FrameWindow").innerHTML);
+                //document.body.appendChild(aux);
+                //aux.select();
+                //document.execCommand("copy");
+                //document.body.removeChild(aux);
+            let t = document.getElementById(elementId).innerHTML;
+            await navigator.clipboard.writeText(t);
         } else {
-            let aux = document.createElement("input");
-            aux.setAttribute("value", document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body.innerHTML);
-            document.body.appendChild(aux);
-            aux.select();
-            document.execCommand("copy");
-            document.body.removeChild(aux);
+            //let aux = document.createElement("input");
+            //aux.setAttribute("value", document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body.innerHTML);
+            //document.body.appendChild(aux);
+            //aux.select();
+            //document.execCommand("copy");
+            //document.body.removeChild(aux);
 
-            //let t = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body.innerHTML;
-            //await navigator.clipboard.writeText(t);
+            let t = document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow").contentWindow.document.body.innerHTML;
+            await navigator.clipboard.writeText(t);
         }
     } catch (t) { }
 }

@@ -3,7 +3,7 @@ require(['vs/editor/editor.main'], function () {
 
 
     let fileCounter = 0;
-    
+
     monaco.editor.defineTheme('myTheme', {
         base: 'vs-dark',
         inherit: true,
@@ -22,7 +22,7 @@ require(['vs/editor/editor.main'], function () {
             },
             automaticLayout: true, fixedOverflowWidgets: true
         });
-        
+
         Gs.Variables.monacoEditorList.push({ elementId: elementId, editor: editor, model: model });
         return editor;
     }
@@ -33,30 +33,30 @@ require(['vs/editor/editor.main'], function () {
         new_container.id = "container-" + fileCounter.toString(10);
         new_container.className = "monacocontainer";
         document.getElementById(elementId).appendChild(new_container);
-        newEditor(elementId,new_container.id, code, language);
+        newEditor(elementId, new_container.id, code, language);
         fileCounter += 1;
     }
 
     addNewEditor("", "TemplateEditor", 'handlebars');
     addNewEditor("", "PartialTemplateEditor", 'handlebars');
     addNewEditor("", "ResultCodeEditor", 'html');
-  
-   
+
+
     let codeContentEditorLang = document.getElementById('TemplateEditorLang');
     codeContentEditorLang.onchange = function () {
         monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "TemplateEditor" })[0].model, codeContentEditorLang.value);
         monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "PartialTemplateEditor" })[0].model, codeContentEditorLang.value);
         monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "ResultCodeEditor" })[0].model, codeContentEditorLang.value);
     }
-    
-    let templateEditorTheme = document.getElementById('TemplateEditorTheme');    
+
+    let templateEditorTheme = document.getElementById('TemplateEditorTheme');
     templateEditorTheme.onchange = function () {
         Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "TemplateEditor" })[0].editor._themeService.setTheme(templateEditorTheme.value)
         Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "PartialTemplateEditor" })[0].editor._themeService.setTheme(templateEditorTheme.value)
         Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "ResultCodeEditor" })[0].editor._themeService.setTheme(templateEditorTheme.value)
     }
 
-   
+
     /*
     monaco.languages.registerCompletionItemProvider('myCustomLanguage', {
         provideCompletionItems: function (model, position) {
@@ -79,18 +79,30 @@ require(['vs/editor/editor.main'], function () {
         }
     });
     */
-
-
     let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
-    mixedenumList.forEach(mixedEnum => {
-        if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } }).length > 0) {
-            monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
-                provideCompletionItems: function (model, position) {
-                    const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });
-                    return { suggestions: suggestions };
-                }
-            });
-            monaco.languages.register({ id: mixedEnum.Name });
-        }
-    });
+
+    let selectElement = document.getElementById('TemplateEditorLang');
+    if (selectElement.options.length == 0) {
+        mixedenumList.forEach(mixedEnum => {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType") {
+                var opt = document.createElement('option');
+                opt.value = mixedEnum.Name;
+                opt.innerHTML = mixedEnum.Name;
+                selectElement.appendChild(opt);
+            }
+        });
+
+        mixedenumList.forEach(mixedEnum => {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } }).length > 0) {
+                monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
+                    provideCompletionItems: function (model, position) {
+                        const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });
+                        return { suggestions: suggestions };
+                    }
+                });
+                monaco.languages.register({ id: mixedEnum.Name });
+            }
+        });
+    }
+
 });

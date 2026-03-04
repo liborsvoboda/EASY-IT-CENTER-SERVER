@@ -6,6 +6,7 @@
  */
 
 var RevealSearch = (function() {
+
 	var matchedSlides;
 	var currentMatchedIndex;
 	var searchboxDirty;
@@ -17,6 +18,7 @@ var RevealSearch = (function() {
 
 function Hilitor(id, tag)
 {
+
   var targetNode = document.getElementById(id) || document.body;
   var hiliteTag = tag || "EM";
   var skipTags = new RegExp("^(?:" + hiliteTag + "|SCRIPT|FORM|SPAN)$");
@@ -55,7 +57,7 @@ function Hilitor(id, tag)
       	while (secnode.nodeName != 'SECTION') {
       		secnode = secnode.parentNode;
       	}
-
+      	
       	var slideIndex = Reveal.getIndices(secnode);
       	var slidelen = matchingSlides.length;
       	var alreadyAdded = false;
@@ -67,7 +69,7 @@ function Hilitor(id, tag)
       	if (! alreadyAdded) {
       		matchingSlides.push(slideIndex);
       	}
-
+      	
         if(!wordColor[regs[0].toLowerCase()]) {
           wordColor[regs[0].toLowerCase()] = colors[colorIdx++ % colors.length];
         }
@@ -103,6 +105,7 @@ function Hilitor(id, tag)
     this.hiliteWords(targetNode);
     return matchingSlides;
   };
+
 }
 
 	function openSearch() {

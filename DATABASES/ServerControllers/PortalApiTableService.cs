@@ -763,7 +763,7 @@ namespace EasyITCenter.Controllers
                         });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                            data.PortalApiTableColumnDataLists.AddRange(original);
+                            data.PortalApiTableColumnDataLists.UpdateRange(original);
                             data.SaveChanges();
                             return true;
                         });

@@ -35,6 +35,7 @@
  * Copyright (C) 2011-2014 Hakim El Hattab, http://hakim.se
  */
 var zoom = (function(){
+
 	// The current zoom level (scale)
 	var level = 1;
 
@@ -85,6 +86,7 @@ var zoom = (function(){
 	 * @param {Number} scale
 	 */
 	function magnify( rect, scale ) {
+
 		var scrollOffset = getScrollOffset();
 
 		// Ensure a width/height is set
@@ -203,6 +205,7 @@ var zoom = (function(){
 		 *   - scale: can be used instead of width/height to explicitly set scale
 		 */
 		to: function( options ) {
+
 			// Due to an implementation limitation we can't zoom in
 			// to another element without zooming out first
 			if( level !== 1 ) {
@@ -236,11 +239,13 @@ var zoom = (function(){
 					magnify( options, options.scale );
 
 					if( options.pan !== false ) {
+
 						// Wait with engaging panning as it may conflict with the
 						// zoom transition
 						panEngageTimeout = setTimeout( function() {
 							panUpdateInterval = setInterval( pan, 1000 / 60 );
 						}, 800 );
+
 					}
 				}
 			}
@@ -266,4 +271,8 @@ var zoom = (function(){
 			return level;
 		}
 	}
+
 })();
+
+
+

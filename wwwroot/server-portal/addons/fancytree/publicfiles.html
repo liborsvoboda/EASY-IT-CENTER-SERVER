@@ -30,14 +30,13 @@
     <script type="text/javascript" src="/server-portal/addons/media/js/recorder.js"></script>
     <script type="text/javascript" src="/server-portal/addons/media/js/lame.min.js"></script>
     <!--<script type="text/javascript" src="/server-portal/addons/media/recordmp3.js"></script>-->
-
-
-
     <!--Canvas-->
     <script type="text/javascript" src="/server-portal/manage/js/html2canvas.min.js"></script>
 
     <!--Html to Md-->
-    <script type="text/javascript" src="/server-portal/manage/js/htmltomd.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="/server-portal/addons/html2md/html2md.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="/server-portal/manage/js/htmltomd.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="/server-portal/addons/md2html/md2html.js"></script>
 
     <!--GLOBAL FUNCT-->
     <script type="text/javascript" src="/server-portal/manage/js/global-storage.js"></script>
@@ -328,7 +327,17 @@
                                 "openInNewWindow": { "name": "Open in New Window", "icon": "paste" },
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
                                 "convertToMd": { "name": "Convert To Md", "icon": "add" },
-                            };
+                            }; 
+                        } else if (!node.folder && node.data.path.endsWith(".md")) {
+                            return {
+                                "saveFile": { "name": "Save File", "icon": "paste" },
+                                "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
+                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
+                                "deleteFile": { "name": "Delete File", "icon": "delete" },
+                                "sep1": "---------",
+                                "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
+                                "convertToHtml": { "name": "Convert To Html", "icon": "add" },
+                            }; 
                         } else if (!node.folder && node.data.path.endsWith(".zip")) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
@@ -472,9 +481,16 @@
                             SetEditor("MiniPaint");
 
                         } else if (action == "convertToMd") {
-                            let markdown = toMarkdown(node.key);
-                            await Gs.Apis.RunServerPostApi("PublicStorageService/SaveMarkdownFile", { Content: markdown, Filename: node.title.split(".")[0] }, null, "ReloadUserStorage");
-
+                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(async function (data) {
+                                let markdown = mdream.htmlToMarkdown(data);
+                                await Gs.Apis.RunServerPostApi("PublicStorageService/SaveMarkdownFile", { Content: markdown, Filename: node.title.split(".")[0] }, null, "ReloadUserStorage");
+                            });
+                        } else if (action == "convertToHtml") {
+                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(async function (data) {
+                                Markdown2HTML();
+                                let markdown = md2html(data);
+                                await Gs.Apis.RunServerPostApi("PublicStorageService/SaveHtmlFile", { Content: markdown, Filename: node.title.split(".")[0] }, null, "ReloadUserStorage");
+                            });
                         } else if (action == "downloadHtmlFromUrl") {
                             let content = "<div><input id='UrlPath' type='text' data-role='input' data-prepend='Url:' ><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ></div>";
                             let actions = [{
