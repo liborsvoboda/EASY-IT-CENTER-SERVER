@@ -84,6 +84,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionOperationList> SolutionOperationLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerList> SolutionSchedulerLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerProcessList> SolutionSchedulerProcessLists { get; set; } = null!;
+        public virtual DbSet<SolutionShareSourceList> SolutionShareSourceLists { get; set; } = null!;
         public virtual DbSet<SolutionTaskList> SolutionTaskLists { get; set; } = null!;
         public virtual DbSet<SolutionUserList> SolutionUserLists { get; set; } = null!;
         public virtual DbSet<SolutionUserRoleList> SolutionUserRoleLists { get; set; } = null!;
@@ -105,7 +106,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<WebBannedIpAddressList> WebBannedIpAddressLists { get; set; } = null!;
         public virtual DbSet<WebCoreFileList> WebCoreFileLists { get; set; } = null!;
         public virtual DbSet<WebDeveloperNewsList> WebDeveloperNewsLists { get; set; } = null!;
-        public virtual DbSet<WebDocumentationList> WebDocumentationLists { get; set; } = null!;
         public virtual DbSet<WebGlobalPageBlockList> WebGlobalPageBlockLists { get; set; } = null!;
         public virtual DbSet<WebGroupMenuList> WebGroupMenuLists { get; set; } = null!;
         public virtual DbSet<WebMenuList> WebMenuLists { get; set; } = null!;
@@ -1347,6 +1347,24 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_SolutionSchedulerProcessList_SolutionSchedulerList");
             });
 
+            modelBuilder.Entity<SolutionShareSourceList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.InheritedShareSourceTypeNavigation)
+                    .WithMany(p => p.SolutionShareSourceLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedShareSourceType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionShareSourceList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SolutionShareSourceLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionShareSourceList_SolutionUserList");
+            });
+
             modelBuilder.Entity<SolutionTaskList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
@@ -1689,19 +1707,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_WebDeveloperNewsList_UserList");
-            });
-
-            modelBuilder.Entity<WebDocumentationList>(entity =>
-            {
-                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.WebDocumentationLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WebDocumentationList_UserList");
             });
 
             modelBuilder.Entity<WebGlobalPageBlockList>(entity =>

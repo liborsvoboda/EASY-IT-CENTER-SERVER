@@ -834,8 +834,13 @@ namespace EasyITCenter.Controllers
                         List<PortalApiTableColumnDataList> record = new();
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "PresentationName", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.PresentationName, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+<<<<<<< Updated upstream
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "DataContent", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.DataContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "Theme", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.Theme, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+=======
+                        record.Add(new() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "DataContent", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.DataContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "Theme", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.Theme, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+>>>>>>> Stashed changes
 
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
@@ -851,12 +856,16 @@ namespace EasyITCenter.Controllers
                                 .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
                         }
 
-
                         original.ForEach(origItem => {
                             if (origItem.ApiTableColumnName == "PresentationName") { origItem.Value = mediaPresentationListRequest.PresentationName; }
                             else if (origItem.ApiTableColumnName == "Description") { origItem.Value = mediaPresentationListRequest.Description; }
+<<<<<<< Updated upstream
                             else if (origItem.ApiTableColumnName == "DataContent") { origItem.Value = mediaPresentationListRequest.DataContent; } 
                             else if (origItem.ApiTableColumnName == "Theme") { origItem.Value = mediaPresentationListRequest.Theme; } 
+=======
+                            else if (origItem.ApiTableColumnName == "DataContent") { origItem.Value = mediaPresentationListRequest.DataContent; }
+                            else if (origItem.ApiTableColumnName == "Theme") { origItem.Value = mediaPresentationListRequest.Theme; }
+>>>>>>> Stashed changes
                         });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {

@@ -75,6 +75,7 @@ namespace EasyITCenter.DBModel
             SolutionMottoLists = new HashSet<SolutionMottoList>();
             SolutionOperationLists = new HashSet<SolutionOperationList>();
             SolutionSchedulerLists = new HashSet<SolutionSchedulerList>();
+            SolutionShareSourceLists = new HashSet<SolutionShareSourceList>();
             SolutionTaskLists = new HashSet<SolutionTaskList>();
             SolutionUserRoleLists = new HashSet<SolutionUserRoleList>();
             SystemApplicationLists = new HashSet<SystemApplicationList>();
@@ -93,7 +94,6 @@ namespace EasyITCenter.DBModel
             WebBannedIpAddressLists = new HashSet<WebBannedIpAddressList>();
             WebCoreFileLists = new HashSet<WebCoreFileList>();
             WebDeveloperNewsLists = new HashSet<WebDeveloperNewsList>();
-            WebDocumentationLists = new HashSet<WebDocumentationList>();
             WebGlobalPageBlockLists = new HashSet<WebGlobalPageBlockList>();
             WebGroupMenuLists = new HashSet<WebGroupMenuList>();
             WebMenuLists = new HashSet<WebMenuList>();
@@ -267,6 +267,8 @@ namespace EasyITCenter.DBModel
         [InverseProperty("User")]
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerLists { get; set; }
         [InverseProperty("User")]
+        public virtual ICollection<SolutionShareSourceList> SolutionShareSourceLists { get; set; }
+        [InverseProperty("User")]
         public virtual ICollection<SolutionTaskList> SolutionTaskLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionUserRoleList> SolutionUserRoleLists { get; set; }
@@ -302,8 +304,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<WebCoreFileList> WebCoreFileLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<WebDeveloperNewsList> WebDeveloperNewsLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<WebDocumentationList> WebDocumentationLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<WebGlobalPageBlockList> WebGlobalPageBlockLists { get; set; }
         [InverseProperty("User")]

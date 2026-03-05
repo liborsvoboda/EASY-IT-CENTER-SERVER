@@ -38,6 +38,7 @@ namespace EasyITCenter.DBModel
             SolutionOperationListInheritedOperationTypeNavigations = new HashSet<SolutionOperationList>();
             SolutionSchedulerListInheritedGroupNameNavigations = new HashSet<SolutionSchedulerList>();
             SolutionSchedulerListInheritedIntervalTypeNavigations = new HashSet<SolutionSchedulerList>();
+            SolutionShareSourceLists = new HashSet<SolutionShareSourceList>();
             SolutionTaskListInheritedStatusTypeNavigations = new HashSet<SolutionTaskList>();
             SolutionTaskListInheritedTargetTypeNavigations = new HashSet<SolutionTaskList>();
             SystemApplicationListInheritedAppCategoryTypeNavigations = new HashSet<SystemApplicationList>();
@@ -95,6 +96,7 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedOperationTypeNavigations { get; set; }
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerListInheritedGroupNameNavigations { get; set; }
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerListInheritedIntervalTypeNavigations { get; set; }
+        public virtual ICollection<SolutionShareSourceList> SolutionShareSourceLists { get; set; }
         public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedStatusTypeNavigations { get; set; }
         public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedTargetTypeNavigations { get; set; }
         public virtual ICollection<SystemApplicationList> SystemApplicationListInheritedAppCategoryTypeNavigations { get; set; }
