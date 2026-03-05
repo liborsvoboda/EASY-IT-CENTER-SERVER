@@ -855,7 +855,6 @@ namespace EasyITCenter.Controllers
                             else if (origItem.ApiTableColumnName == "Description") { origItem.Value = mediaPresentationListRequest.Description; }
                             else if (origItem.ApiTableColumnName == "DataContent") { origItem.Value = mediaPresentationListRequest.DataContent; } 
                             else if (origItem.ApiTableColumnName == "Theme") { origItem.Value = mediaPresentationListRequest.Theme; } 
-                            else if (origItem.ApiTableColumnName == "DataContent") { origItem.Value = mediaPresentationListRequest.DataContent; }
                         });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
