@@ -840,6 +840,9 @@ namespace EasyITCenter.Controllers
 =======
                         record.Add(new() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "DataContent", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.DataContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "Theme", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.Theme, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 
@@ -865,6 +868,9 @@ namespace EasyITCenter.Controllers
 =======
                             else if (origItem.ApiTableColumnName == "DataContent") { origItem.Value = mediaPresentationListRequest.DataContent; }
                             else if (origItem.ApiTableColumnName == "Theme") { origItem.Value = mediaPresentationListRequest.Theme; }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                         });
 
