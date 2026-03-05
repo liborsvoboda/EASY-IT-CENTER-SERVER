@@ -8,15 +8,11 @@
 
 
     <link rel="stylesheet" href="./css/reveal.css">
-    <link rel="stylesheet" href="./css/theme/beige.css">
-
-    <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="./lib/css/monokai-sublime.css">
-
     <link rel="stylesheet" href="./css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/custom.css">
     <link rel="icon" href="./img/img/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/server-portal/metro/css/metro-all.min.css" />
+    <!--<link rel="stylesheet" href="/server-portal/metro/css/metro-all.min.css" />-->
 
     <script type="text/javascript" crossorigin='anonymous' src="/server-portal/addons/jquery/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" crossorigin='anonymous' src="/server-portal/metro/js/metro.4.5.2.min.js"></script>
@@ -36,24 +32,45 @@
         </div>
     </div>
 
-    <script src="./lib/js/head.min.js"></script>
-    <script src="./js/reveal.js"></script>
 
+    
     <script>
-        //<section data-background-transition="fade">  convex 
+        let sliderData = Metro.storage.getItem("RevealPreview", null) != undefined ? Metro.storage.getItem("RevealPreview", null) : [];
+        let theme = Metro.storage.getItem("RevealPreviewTheme", null);
+
+        let style = document.createElement('link'); style.id = "InheritStyle"; style.type = "text/css"; style.rel = "stylesheet";
+        style.href = `/server-portal/addons/reveal/css/theme/${theme}.css`;
+        let iframeHead = document.getElementsByTagName('head')[0];
+        iframeHead.appendChild(style);
+
+        let htmlData = "";
+        sliderData.forEach((slide, index, arr) => {
+            htmlData += `<section id=${slide.Id} ${(slide.EditorType == 'Markdown' ? "data-markdown" : "")} >${slide.Data)}</section>`;
+
+            if (index == arr.length - 1) { $("#Slides").html(htmlData); }
+        });
+
+        //<section data-background-transition="fade">  convex
         //<section data-background-transition="slide">
         //<section data-background-transition="zoom">
-        //<section data-markdown>
-        //    ## Markdown support
-        //    Write content using inline or external Markdown.
-        //    Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-        //</section>
 
-        // More info https://github.com/hakimel/reveal.js#configuration
+    </script>
+
+    <script src="./lib/js/head.min.js"></script>
+    <script src="./js/reveal.js"></script>
+    <script>
+        //options https://revealjs.com/config/
         Reveal.initialize({
+            autoPlayMedia: true,
+            //transition: 'zoom', // none/fade/slide/convex/concave/zoom
+            //transitionSpeed: 'slow', // default/fast/slow
+            //backgroundTransition: 'slide',// none/fade/slide/convex/concave/zoom
+            pdfSeparateFragments: true,
+            preloadIframes: true,
+            touch: true,
+            autoSlide: 5000,
+            loop: true,
             history: true,
-            //transition: 'default',
-            transition: 'slide', 
             controls: true,
             progress: true,
             center: true,
@@ -61,11 +78,11 @@
             // More info https://github.com/hakimel/reveal.js#dependencies
             dependencies: [
                 { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
-                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
                 { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
                 { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
                 { src: 'plugin/notes/notes.js', async: true },
-                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+                { src: 'plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } }
             ],
             keyboard: {
                 39: 'next',

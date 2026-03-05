@@ -394,7 +394,7 @@
 
                         } else if (action == "openInNewWindow") {
                             let path = Metro.storage.getItem('ApiOriginSuffix', null);
-                            window.open(`${path}server-users/public/${node.data.path}`);
+                            window.open(`${path}server-public/${node.data.path}`);
 
                         } else if (action == "recordAudio") {
                             let content = "<div><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ><BUTTON class='button success outline shadowed' onclick=Gs.Media.StartRecordAudio(); >Start</BUTTON><BUTTON onclick ='Gs.Media.StopRecordAudio()' class='button warning outline shadowed'> Stop</BUTTON></div>";

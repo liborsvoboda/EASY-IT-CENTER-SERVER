@@ -1,6 +1,7 @@
 ﻿using CSJsonDB;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Presentation;
+using DocumentFormat.OpenXml.Vml.Spreadsheet;
 using EasyITCenter.DBModel;
 using Google.Protobuf.Compiler;
 using Microsoft.AspNetCore.Http;
@@ -93,6 +94,7 @@ namespace EasyITCenter.Controllers
         public string Description { get; set; }
         public string DataContent { get; set; }
         public string Theme { get; set; }
+        public int AutoSlide { get; set; }
     }
 
     [Route("PortalApiTableService")]
@@ -836,7 +838,8 @@ namespace EasyITCenter.Controllers
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "Description", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.Description, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "DataContent", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.DataContent, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "Theme", InheritedDataType = "string", RecGuid = recGuid, Value = mediaPresentationListRequest.Theme, Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-
+                        record.Add(new PortalApiTableColumnDataList() { ApiTableName = "MediaPresentationList", ApiTableColumnName = "AutoSlide", InheritedDataType = "int", RecGuid = recGuid, Value = mediaPresentationListRequest.AutoSlide.ToString(), Description = null, Active = true, UserId = (int)HtttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
                             data.PortalApiTableColumnDataLists.AddRange(record);
                             data.SaveChanges();
@@ -854,7 +857,8 @@ namespace EasyITCenter.Controllers
                             if (origItem.ApiTableColumnName == "PresentationName") { origItem.Value = mediaPresentationListRequest.PresentationName; }
                             else if (origItem.ApiTableColumnName == "Description") { origItem.Value = mediaPresentationListRequest.Description; }
                             else if (origItem.ApiTableColumnName == "DataContent") { origItem.Value = mediaPresentationListRequest.DataContent; } 
-                            else if (origItem.ApiTableColumnName == "Theme") { origItem.Value = mediaPresentationListRequest.Theme; } 
+                            else if (origItem.ApiTableColumnName == "Theme") { origItem.Value = mediaPresentationListRequest.Theme; }
+                            else if (origItem.ApiTableColumnName == "AutoSlide") { origItem.Value = mediaPresentationListRequest.AutoSlide.ToString(); }
                         });
 
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {

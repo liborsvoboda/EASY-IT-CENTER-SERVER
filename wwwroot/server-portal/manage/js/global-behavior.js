@@ -193,7 +193,8 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("OpenExcelFile");
     Metro.storage.delItem("OpenWordFile");
     Metro.storage.delItem("OpenPowerPointFile");
-    Metro.storage.delItem("CodeGeneratorList");
+    Metro.storage.delItem("RevealPreview");
+    Metro.storage.delItem("RevealPreviewTheme");
     //Metro.storage.delItem("RunFunction");
 
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
@@ -233,7 +234,7 @@ Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
         $('body').append(script);
     }
     if (menu.filter(menuItem => { return menuItem.CssContentId == cssContentId })[0].CssContent != null) {
-        let style = document.createElement('style'); style.id = "InheritStyle";
+        let style = document.createElement('style'); style.id = "InheritStyle"; style.rel = 'stylesheet';
         style.innerText = menu.filter(menuItem => { return menuItem.CssContentId == cssContentId })[0].CssContent;
         document.head.appendChild(style);
     }
@@ -252,7 +253,7 @@ Gs.Behaviors.SetExternalContent = function (htmlContentId, jsContentId, cssConte
         $("#IFrameWindow").contents().find("body").append(script);
     }
     if (menu.filter(menuItem => { return menuItem.CssContentId == cssContentId })[0].CssContent != null) {
-        let style = document.createElement('style'); style.id = "InheritStyle";
+        let style = document.createElement('style'); style.id = "InheritStyle"; style.rel = 'stylesheet';
         style.innerText = menu.filter(menuItem => { return menuItem.CssContentId == cssContentId })[0].CssContent;
         let iframeHead = document.getElementById('IFrameWindow').contentWindow.document.head;
         iframeHead.appendChild(style);
