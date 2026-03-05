@@ -46,7 +46,6 @@ Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, stora
         },
         error: function (err) {
             console.log(err);
-
             if (storageName != null) { Metro.storage.delItem(storageName); }
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
@@ -81,10 +80,15 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
             Gs.Behaviors.HidePageLoading();
             
             if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
-            else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
+            else {
+                if (storageName != null) { Metro.storage.setItem(storageName, []); }
+                if (windowFunction != null) { window[windowFunction](); }
+                Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false;
+            }
         },
         error: function (err) {
             console.log(err);
+            if (storageName != null) { Metro.storage.setItem(storageName, []); }
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
             Gs.Objects.ShowNotify("alert", err.statusText); return false;
@@ -118,10 +122,15 @@ Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, window
             Gs.Behaviors.HidePageLoading();
 
             if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
-            else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
+            else {
+                if (storageName != null) { Metro.storage.setItem(storageName, []); }
+                if (windowFunction != null) { window[windowFunction](); }
+                Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false;
+            }
         },
         error: function (err) {
             console.log(err);
+            if (storageName != null) { Metro.storage.setItem(storageName, []); }
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
             Gs.Objects.ShowNotify("alert", err.statusText); return false;
@@ -153,10 +162,15 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction =
             Gs.Behaviors.HidePageLoading();
 
             if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
-            else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
+            else {
+                if (storageName != null) { Metro.storage.setItem(storageName, []); }
+                if (windowFunction != null) { window[windowFunction](); }
+                Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false;
+            }
         },
         error: function (err) {
             console.log(err);
+            if (storageName != null) { Metro.storage.setItem(storageName, []); }
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
             Gs.Objects.ShowNotify("alert", err.statusText); return false;
@@ -182,7 +196,10 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
             Gs.Behaviors.HidePageLoading();
 
             if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
-            else { Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false; }
+            else {
+                if (windowFunction != null) { window[windowFunction](); }
+                Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false;
+            }
         },
         error: function (err) {
             console.log(err);
