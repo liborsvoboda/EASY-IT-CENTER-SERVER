@@ -194,7 +194,7 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("OpenWordFile");
     Metro.storage.delItem("OpenPowerPointFile");
     Metro.storage.delItem("RevealPreview");
-    Metro.storage.delItem("RevealPreviewTheme");
+    Metro.storage.delItem("RevealPreviewData");
     //Metro.storage.delItem("RunFunction");
 
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");

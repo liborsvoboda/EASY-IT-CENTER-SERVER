@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Crypto.Generators;
+
 
 namespace EasyITCenter.Controllers {
 

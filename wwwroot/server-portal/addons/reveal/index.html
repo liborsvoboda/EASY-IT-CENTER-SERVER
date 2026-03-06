@@ -6,7 +6,6 @@
     <meta name="author" content="Libor Svoboda">
     <title>Presentation Designer</title>
 
-
     <link rel="stylesheet" href="./css/reveal.css">
     <link rel="stylesheet" href="./lib/css/monokai-sublime.css">
     <link rel="stylesheet" href="./css/font-awesome.min.css">
@@ -32,28 +31,23 @@
         </div>
     </div>
 
-
-    
     <script>
-        let sliderData = Metro.storage.getItem("RevealPreview", null) != undefined ? Metro.storage.getItem("RevealPreview", null) : [];
-        let theme = Metro.storage.getItem("RevealPreviewTheme", null);
+        let header = Metro.storage.getItem("RevealPreview", null);
+        let sliderData = Metro.storage.getItem("RevealPreviewData", null) != undefined ? Metro.storage.getItem("RevealPreviewData", null) : [];
 
-        let style = document.createElement('link'); style.id = "InheritStyle"; style.type = "text/css"; style.rel = "stylesheet";
-        style.href = `/server-portal/addons/reveal/css/theme/${theme}.css`;
-        let iframeHead = document.getElementsByTagName('head')[0];
-        iframeHead.appendChild(style);
+        if (header.Theme != "") {
+            let style = document.createElement('link'); style.id = "InheritStyle"; style.type = "text/css"; style.rel = "stylesheet";
+            style.href = `/server-portal/addons/reveal/css/theme/${header.Theme}.css`;
+            let iframeHead = document.getElementsByTagName('head')[0];
+            iframeHead.appendChild(style);
+        }
 
         let htmlData = "";
         sliderData.forEach((slide, index, arr) => {
-            htmlData += `<section id=${slide.Id} ${(slide.EditorType == 'Markdown' ? "data-markdown" : "")} >${slide.Data)}</section>`;
+            htmlData += `<section id=${slide.Id} ${(slide.EditorType == 'Markdown' ? "data-markdown" : "")} data-transition="${slide.Transition}" data-background-transition="${slide.BackTransition}" >${slide.Data}</section>`;
 
             if (index == arr.length - 1) { $("#Slides").html(htmlData); }
         });
-
-        //<section data-background-transition="fade">  convex
-        //<section data-background-transition="slide">
-        //<section data-background-transition="zoom">
-
     </script>
 
     <script src="./lib/js/head.min.js"></script>
@@ -68,7 +62,7 @@
             pdfSeparateFragments: true,
             preloadIframes: true,
             touch: true,
-            autoSlide: 5000,
+            autoSlide: header.AutoSlide == "" ? false : header.AutoSlide,
             loop: true,
             history: true,
             controls: true,
