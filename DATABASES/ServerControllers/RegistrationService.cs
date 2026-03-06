@@ -90,7 +90,7 @@ namespace EasyITCenter.Controllers {
                     origUser = new EasyITCenterContext().SolutionUserLists.Where(a => a.UserName == webRegistration.EmailAddress).FirstOrDefault();
                 }
                 if (origUser != null) {
-                    origUser.Name = webRegistration.FirstName; origUser.SurName = webRegistration.Surname; origUser.UserName = webRegistration.Username; origUser.Password = webRegistration.Password;
+                    origUser.Name = webRegistration.FirstName; origUser.SurName = webRegistration.Surname; origUser.UserName = webRegistration.Username; origUser.Password = BCrypt.Net.BCrypt.HashPassword(webRegistration.Password);
                     origUser.Email = webRegistration.EmailAddress; origUser.Active = true;
 
                     DatabaseContextExtensions.RunTransaction(data, (trans) => {
@@ -101,7 +101,7 @@ namespace EasyITCenter.Controllers {
 
                 }
                 else {
-                    origUser = new() { RoleId = 4, UserName = webRegistration.Username, Password = webRegistration.Password, Name = webRegistration.FirstName, 
+                    origUser = new() { RoleId = 4, UserName = webRegistration.Username, Password = BCrypt.Net.BCrypt.HashPassword(webRegistration.Password), Name = webRegistration.FirstName, 
                         SurName = webRegistration.Surname, Email = webRegistration.EmailAddress, EmailConfirmed = true };
                     
                     DatabaseContextExtensions.RunTransaction(data, (trans) => {
@@ -152,7 +152,7 @@ namespace EasyITCenter.Controllers {
                     if (data == null) { return BadRequest(JsonSerializer.Serialize(new ResultMessage() { Status = DBWebApiResponses.emailNotExist.ToString(), ErrorMessage = DbOperations.DBTranslate(DBWebApiResponses.emailNotExist.ToString()) })); }
 
                     //Set new Password
-                    string newPassword = DataOperations.RandomString(10); data.Password = newPassword;
+                    string newPassword = DataOperations.RandomString(10); data.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
                     var dbdata = new EasyITCenterContext().SolutionUserLists.Update(data);
                     await dbdata.Context.SaveChangesAsync();
 
@@ -192,7 +192,7 @@ namespace EasyITCenter.Controllers {
             try {
                 if (HtttpContextExtension.GetUserName().ToLower() == record.Username.ToLower()) {
                     SolutionUserList user = new EasyITCenterContext().SolutionUserLists.Where(a => a.Id == HtttpContextExtension.GetUserId()).First();
-                    if (record.Password != null && record.Password.Length > 0) { user.Password = record.Password; }
+                    if (record.Password != null && record.Password.Length > 0) { user.Password = BCrypt.Net.BCrypt.HashPassword(record.Password); }
                     user.Name = record.FirstName; user.SurName = record.Surname; user.Email = record.EmailAddress; user.TimeStamp = DateTimeOffset.Now.DateTime;
 
                     var data = new EasyITCenterContext().SolutionUserLists.Update(user);

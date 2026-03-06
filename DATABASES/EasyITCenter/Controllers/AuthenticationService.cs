@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Generators;
 
 namespace EasyITCenter.Controllers {
 
@@ -63,7 +64,8 @@ namespace EasyITCenter.Controllers {
 
             if (username == null) { return null; }
             var user = new EasyITCenterContext().SolutionUserLists.Include(a => a.Role)
-                .Where(a => a.Active == true && a.UserName == username && a.Password == password).FirstOrDefault();
+                .Where(a => a.Active == true && a.UserName == username /*&& a.Password == password*/).FirstOrDefault();
+            if (user != null) user = BCrypt.Net.BCrypt.Verify(password, user.Password) ? user : null;
             if (user == null) { return null; }
                 
             try {

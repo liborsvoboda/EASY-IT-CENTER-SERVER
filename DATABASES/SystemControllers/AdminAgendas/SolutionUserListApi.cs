@@ -47,6 +47,7 @@
             try {
                 if (HtttpContextExtension.IsAdmin()) {
                     record.Role = null;  //EntityState.Detached IDENTITY_INSERT is set to OFF
+                    record.Password = BCrypt.Net.BCrypt.HashPassword(record.Password);
                     var data = new EasyITCenterContext().SolutionUserLists.Add(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -63,6 +64,7 @@
         public async Task<string> UpdateSolutionUserList([FromBody] SolutionUserList record) {
             try {
                 if (HtttpContextExtension.IsAdmin()) {
+                    record.Password = BCrypt.Net.BCrypt.HashPassword(record.Password);
                     var data = new EasyITCenterContext().SolutionUserLists.Update(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
