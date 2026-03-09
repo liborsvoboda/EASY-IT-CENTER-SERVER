@@ -72,13 +72,13 @@ namespace EasyITCenter.Controllers {
                     using var ret = dbContext.Database.BeginTransaction();
                     if (ret != null) {
 
-                        try {
-                            if (act.Invoke(ret)) {
-                                ret.Commit();
-                            }
-                        } catch (Exception e) {
-                            ret.Rollback();
-                            throw new Exception("Error during transaction, rolling back");
+                    try {
+                        if (act.Invoke(ret)) {
+                            ret.Commit();
+                        }
+                    } catch (Exception e) {
+                        ret.Rollback();
+                        throw new Exception(DataOperations.GetErrMsg(e));
                         }
 
                     } else {

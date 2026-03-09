@@ -534,3 +534,12 @@ Gs.Functions.BlobToObjectURL = function (blob) {
 }
 
 
+Gs.Functions.ColorHexToRgb = function (hex) {
+    return ['0x' + hex[1] + hex[2] | 0, '0x' + hex[3] + hex[4] | 0, '0x' + hex[5] + hex[6] | 0];
+}
+
+
+Gs.Functions.ColorRgbToHex = function rgbToHex(colorArray) {
+    let r = colorArray[0]; let g = colorArray[1]; let b = colorArray[2];
+    return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
+}
