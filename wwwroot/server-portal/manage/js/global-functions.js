@@ -534,8 +534,16 @@ Gs.Functions.BlobToObjectURL = function (blob) {
 }
 
 
-Gs.Functions.ColorHexToRgb = function (hex) {
+Gs.Functions.ColorHexToRgbArr = function (hex) {
     return ['0x' + hex[1] + hex[2] | 0, '0x' + hex[3] + hex[4] | 0, '0x' + hex[5] + hex[6] | 0];
+}
+
+
+Gs.Functions.ColorHexToRgb = function (hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return r.toString() + "," + g.toString() + "," + b.toString() ;
 }
 
 
