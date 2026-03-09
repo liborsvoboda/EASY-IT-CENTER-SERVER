@@ -119,7 +119,7 @@ namespace EasyITCenter {
                 app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All });
                 app.UseCertificateForwarding();
             }
-            
+
             //Applied new Working Style For Files Markdown, Html, Editor, Images,
             app.Use(async (HttpContext context, Func<Task> next) => {
                 string requestPath = context.Request.Path.ToString().ToLower(); bool redirected = false;
@@ -146,7 +146,7 @@ namespace EasyITCenter {
                     ServerApiSecurityList? serverApiSecurity = DbOperations.GetServerApiSecurity(requestPath);
                     if (serverApiSecurity != null) {
                         if (context.User.Identity != null && context.User.FindFirstValue(ClaimTypes.PrimarySid) == null
-                        && ( ( context.Request.Method == "GET" && serverApiSecurity.ReadRestrictedAccess ) || ( context.Request.Method == "POST" && serverApiSecurity.WriteRestrictedAccess ) )) {
+                        && ((context.Request.Method == "GET" && serverApiSecurity.ReadRestrictedAccess) || (context.Request.Method == "POST" && serverApiSecurity.WriteRestrictedAccess))) {
                             if (serverApiSecurity.RedirectPathOnError?.Length == 0) { redirected = true; context.Request.Path = "/StatusPageService/401UnauthorizedPage"; await next(); } else {
                                 ServerModuleAndServiceList? loginModule = new EasyITCenterContext().ServerModuleAndServiceLists.FirstOrDefault(a => a.IsLoginModule);
                                 if (context.Items.FirstOrDefault(a => a.Key.ToString() == "LoginModule").Value != null) { context.Items.Remove("LoginModule"); }
@@ -155,8 +155,8 @@ namespace EasyITCenter {
                                 redirected = true; context.Request.Path = "/SystemModules"; await next();
                             }
                         } else if (context.User.Identity != null && context.User.FindFirstValue(ClaimTypes.PrimarySid) != null
-                              && ( ( context.Request.Method == "GET" && serverApiSecurity.ReadRestrictedAccess && serverApiSecurity.ReadAllowedRoles != null && !serverApiSecurity.ReadAllowedRoles.ToLower().Split(",").Contains(context.User.FindFirstValue(ClaimTypes.Role).ToLower()) )
-                              || ( context.Request.Method != "GET" && serverApiSecurity.WriteRestrictedAccess && serverApiSecurity.WriteAllowedRoles != null && !serverApiSecurity.WriteAllowedRoles.ToLower().Split(",").Contains(context.User.FindFirstValue(ClaimTypes.Role).ToLower()) )
+                              && ((context.Request.Method == "GET" && serverApiSecurity.ReadRestrictedAccess && serverApiSecurity.ReadAllowedRoles != null && !serverApiSecurity.ReadAllowedRoles.ToLower().Split(",").Contains(context.User.FindFirstValue(ClaimTypes.Role).ToLower()))
+                              || (context.Request.Method != "GET" && serverApiSecurity.WriteRestrictedAccess && serverApiSecurity.WriteAllowedRoles != null && !serverApiSecurity.WriteAllowedRoles.ToLower().Split(",").Contains(context.User.FindFirstValue(ClaimTypes.Role).ToLower()))
                               )) {
                             if (serverApiSecurity.RedirectPathOnError?.Length == 0) { redirected = true; context.Request.Path = "/StatusPageService/401UnauthorizedPage"; await next(); } else {
                                 ServerModuleAndServiceList? loginModule = new EasyITCenterContext().ServerModuleAndServiceLists.FirstOrDefault(a => a.IsLoginModule);
@@ -176,9 +176,9 @@ namespace EasyITCenter {
                     //Verify Request For Detect Layout, Redirection, Module, Correct File Path, WebMenu Selection
                     RouteLayoutTypes routeLayout = RouteLayoutTypes.EmptyLayout; RoutingActionTypes commandType = RoutingActionTypes.None; string fileValidUrl = context.Request.Path;
                     context = CoreOperations.ChechUrlRequestValidOrAuthorized(context);
-                    try { routeLayout = ( (RouteLayoutTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "RouteLayoutTypes").Value ); } catch { }
-                    try { commandType = ( (RoutingActionTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "CommandType").Value ); } catch { }
-                    try { fileValidUrl = ( (string)context.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value ); } catch { }
+                    try { routeLayout = ((RouteLayoutTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "RouteLayoutTypes").Value); } catch { }
+                    try { commandType = ((RoutingActionTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "CommandType").Value); } catch { }
+                    try { fileValidUrl = ((string)context.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value); } catch { }
 
 
 
@@ -217,25 +217,25 @@ namespace EasyITCenter {
             staticFilesProvider.Mappings[".mp4"] = "video/mp4";
             staticFilesProvider.Mappings[".md"] = "text/markdown"; staticFilesProvider.Mappings[".mpeg"] = "audio/mpeg";
 
-            
+
 
 
             //app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html" });
             app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress,
                 OnPrepareResponse = (context) => { context = CoreOperations.IncludeStaticCookieTokenToRequest(context);
                     //TODO Ignore WHEN SHARED Check RIGHT USER & HIS FOLDER
-                    if ( !HtttpContextExtension.IsLogged() &&
-                        ( context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvUserPath)}") || context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SystemAppsPath)}") )) {
-                            context.Context.Response.Redirect("/StatusPageService/401UnauthorizedPage", true);
-                        }
+                    if (!HtttpContextExtension.IsLogged() &&
+                        (context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvUserPath)}") || context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SystemAppsPath)}"))) {
+                        context.Context.Response.Redirect("/StatusPageService/401UnauthorizedPage", true);
                     }
-                });
+                }
+            });
 
             app.UseCookiePolicy();
             app.UseSession();
             app.UseResponseCaching();
             app.UseResponseCompression();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
             ServerModulesEnabling.EnableSwagger(ref app);
@@ -259,7 +259,7 @@ namespace EasyITCenter {
                             RequestPath = path.WebRootSubPath.StartsWith("/") ? path.WebRootSubPath : "/" + path.WebRootSubPath, EnableDirectoryBrowsing = true
                         });
                         if (!string.IsNullOrWhiteSpace(path.AliasPath)) { app.UseFileServer(new FileServerOptions { FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath))),
-                            RequestPath = !string.IsNullOrWhiteSpace(path.AliasPath) ? ( path.AliasPath.StartsWith("/") ? path.AliasPath : "/" + path.AliasPath ) : "", EnableDirectoryBrowsing = true
+                            RequestPath = !string.IsNullOrWhiteSpace(path.AliasPath) ? (path.AliasPath.StartsWith("/") ? path.AliasPath : "/" + path.AliasPath) : "", EnableDirectoryBrowsing = true
                         });
                         }
                     } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
@@ -273,7 +273,8 @@ namespace EasyITCenter {
 
 
             //Load registered routes List To Runtime
-            CoreOperations.GetServerRegisteredRoutesList("",true);
+            CoreOperations.GetServerRegisteredRoutesList("", true);
+            ServerCoreServers.Server.SSHServer();
         }
 
         /// <summary>

@@ -8,3 +8,4 @@
   "Server=localhost\\SQLEXPRESS;Database=EasyITCenter;Trusted_Connection=True;TrustServerCertificate=True;"
   "Server=YTWSEM-OTRL240\\SQLEXPRESS;Database=EasyITCenter;User ID=easyitcenter;Password=easyitcenter;TrustServerCertificate=True;"
 "Server=127.0.0.1;Database=EasyITCenter;Trusted_Connection=True;TrustServerCertificate=True"
+"Server=(localdb)\\MSSQLLocalDB;Database=_CHANGE_ME;Trusted_Connection=True;"

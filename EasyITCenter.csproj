@@ -169,8 +169,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="FxSocket.FileTransferSuite" Version="5.0.1242" />
     <PackageReference Include="FxSocket.Sftp" Version="5.0.1242" />
     <PackageReference Include="FxSocket.SftpServer" Version="5.0.1242" />
-    <PackageReference Include="FxSsh" Version="1.2.0" />
-    <PackageReference Include="FxSsh.PwAuth" Version="1.0.2" />
     <PackageReference Include="Google.Api.CommonProtos" Version="2.15.0" />
     <PackageReference Include="Google.Apis" Version="1.68.0" />
     <PackageReference Include="Google.Apis.Auth" Version="1.68.0" />
@@ -304,7 +302,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
     <PackageReference Include="Microsoft.WSMan.Management" Version="7.2.23" />
     <PackageReference Include="Microsoft.WSMan.Runtime" Version="7.2.23" />
-    <PackageReference Include="MimeKit" Version="4.7.1" />
+    <PackageReference Include="MimeKit" Version="4.15.1" />
     <PackageReference Include="MimeMapping" Version="3.0.1" />
     <PackageReference Include="MimeTypes" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -330,9 +328,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Octokit.Webhooks" Version="2.2.3" />
     <PackageReference Include="Octokit.Webhooks.AspNetCore" Version="2.2.3" />
     <PackageReference Include="OpenGraph-Net" Version="4.0.1" />
-    <PackageReference Include="PayPal.NET" Version="6.0.0" />
     <PackageReference Include="PayPal.SDK.NETCore" Version="1.9.1.2" />
-    <PackageReference Include="PayPalHttp" Version="1.0.1" />
     <PackageReference Include="Pek.Markdig.HighlightJs" Version="0.5.1" />
     <PackageReference Include="PlaywrightExtraSharp2" Version="1.0.7.1" />
     <PackageReference Include="PuppeteerExtraSharp" Version="2.0.0" />
@@ -346,7 +342,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Sharp7" Version="1.1.84" />
     <PackageReference Include="SimpleMvcSitemap" Version="4.0.1" />
     <PackageReference Include="SimpleSockets" Version="1.2.20" />
-    <PackageReference Include="SmtpServer" Version="10.0.1" />
+    <PackageReference Include="SmtpServer" Version="11.1.0" />
+    <PackageReference Include="SmtpServer2" Version="5.2.0" />
     <PackageReference Include="Snickler.RSSCore" Version="2.0.0" />
     <PackageReference Include="SoapCore-net5.0" Version="1.1.0.10" />
     <PackageReference Include="SoapHttpClient" Version="3.0.0" />
