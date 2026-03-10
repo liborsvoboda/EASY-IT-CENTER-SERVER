@@ -76,7 +76,11 @@ namespace EasyITCenter.Controllers
         }
 
 
-
+        /// <summary>
+        /// SSH STFP File Service
+        /// </summary>
+        /// <param name="fileServiceRequest"></param>
+        /// <returns></returns>
         [HttpPost("/SSHService/FileService")]
         public async Task<string> FileService([FromBody] FileServiceRequest fileServiceRequest) {
             try

@@ -274,7 +274,7 @@ namespace EasyITCenter {
 
             //Load registered routes List To Runtime
             CoreOperations.GetServerRegisteredRoutesList("", true);
-            ServerCoreServers.Server.SSHServer();
+            
         }
 
         /// <summary>

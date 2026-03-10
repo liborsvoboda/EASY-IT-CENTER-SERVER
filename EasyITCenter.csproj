@@ -161,14 +161,10 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="FluentStorage" Version="5.5.1" />
     <PackageReference Include="FluentStorage.FTP" Version="5.4.0" />
     <PackageReference Include="FluentStorage.SFTP" Version="5.3.1" />
-    <PackageReference Include="FoxSsh" Version="0.1.0" />
     <PackageReference Include="FubarDev.FtpServer" Version="3.0.0" />
     <PackageReference Include="FubarDev.FtpServer.Abstractions" Version="3.0.0" />
     <PackageReference Include="FubarDev.FtpServer.Commands" Version="3.0.0" />
     <PackageReference Include="FubarDev.FtpServer.FileSystem.DotNet" Version="3.0.0" />
-    <PackageReference Include="FxSocket.FileTransferSuite" Version="5.0.1242" />
-    <PackageReference Include="FxSocket.Sftp" Version="5.0.1242" />
-    <PackageReference Include="FxSocket.SftpServer" Version="5.0.1242" />
     <PackageReference Include="Google.Api.CommonProtos" Version="2.15.0" />
     <PackageReference Include="Google.Apis" Version="1.68.0" />
     <PackageReference Include="Google.Apis.Auth" Version="1.68.0" />
