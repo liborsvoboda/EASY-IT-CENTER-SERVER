@@ -77,6 +77,7 @@ Gs.Objects.ShowBlockedMessage = function () {
     Metro.infobox.create(html_content, "alert");
 }
 
+
 //Unauthorized Access Info Panel
 Gs.Objects.ShowUnAuthMessage = function () {
     Gs.Behaviors.SignOut();
@@ -86,8 +87,6 @@ Gs.Objects.ShowUnAuthMessage = function () {
         "<p>nebo platnost vašeho tokenu vypršela.</p>";
     Metro.infobox.create(html_content, "alert");
 }
-
-
 
 
 function GenerateMenu() {
