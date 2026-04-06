@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover" />
+    <link rel="stylesheet" crossorigin="anonymous" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" crossorigin="anonymous" href="./css/thumbnail.example.css">
+
+    <script type="text/javascript" crossorigin='anonymous' src="./js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="./js/jszip.min.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="./js/docx-preview.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="./js/thumbnail.example.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="./js/tiff.min.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="./js/tiff-preprocessor.js"></script>
+
+    <!--ExportToXsl-->
+    <script type="text/javascript" crossorigin='anonymous' src="/server-portal/addons/docxToXsl/js/index.js"></script>
+
+    <script type="text/javascript" crossorigin='anonymous' src="/server-portal/addons/jquery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" crossorigin='anonymous' src="/server-portal/metro/js/metro.4.5.2.min.js"></script>
+
+    <style>
+        @media print {
+            .no-print {
+                display: none;
+            }
+
+            .overflow-auto {
+                overflow: initial !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="vh-100 d-flex flex-column">
+    <input id="SourceFile" type="file" data-role="file" data-on-file-create="GetFile" style="display:none" />
+
+    <button class="button" style="position:absolute;right:50px;top:10px;" onclick="ExportToHtml();"><span class="mif-import-export"></span>Export TO HTML</button>
+    <button class="button" style="position:absolute;right:50px;top:40px;" onclick="ExportToXsl();"><span class="mif-import-export"></span>Export TO Xsl</button>
+
+    <div class="flex-grow-1 d-flex flex-row" style="height: 0;">
+        <details class="docx-thumbnails h-100 no-print">
+            <summary></summary>
+            <div id="thumbnails-container" class="docx-thumbnails-container"></div>
+        </details>
+        <div id="document-container" class="overflow-auto flex-grow-1 h-100"></div>
+    </div>
+
+    <script>
+        let sourceFile = Metro.storage.getItem("OpenWordFile", null);
+        let currentDocument = null;
+        const docxOptions = Object.assign(docx.defaultOptions, {
+            debug: false,
+            experimental: true,
+            hideWrapperOnPrint: true
+        });
+
+        const container = document.querySelector("#document-container");
+        setTimeout(function () { $("body > label > span.button")[0].style["display"] = "none"; }, 100);
+        let wordFile = null;
+
+
+        function GetFile(e) {
+            fetch(sourceFile).then(r => r.blob()).then(data => { wordFile = new File([data], "name"); RenderDocx(data); });
+        }
+
+
+        async function RenderDocx(file) {
+            currentDocument = file;
+            if (!currentDocument) { return; }
+            let docxBlob = preprocessTiff(currentDocument);
+            let res = await docx.renderAsync(docxBlob, container, null, docxOptions)
+            renderThumbnails(container, document.querySelector("#thumbnails-container"));
+
+        }
+
+
+        async function ExportToHtml() {
+            const file = await showSaveFilePicker({ types: [{ description: "HTML File", accept: { "text/html": [".html"] } }] });
+            const stream = await file.createWritable();
+            await stream.write(container.innerHTML);
+            await stream.close();
+        }
+
+
+        async function ExportToXsl() {
+            let file = await showSaveFilePicker({ types: [{ description: "XML File", accept: { "application/xml": [".xml"] } }] });
+            require("docx2xsl")(wordFile)
+                .then(async xsl => {
+                    console.log("Xsl", xsl);
+                    let stream = await file.createWritable();
+                    await stream.write(xsl.data);
+                    await stream.close();
+                }).catch(e => { console.log(e); })
+        }
+
+
+    </script>
+</body>
+
+    </html>
