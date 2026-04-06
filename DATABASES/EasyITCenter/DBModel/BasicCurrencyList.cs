@@ -29,10 +29,12 @@ namespace EasyITCenter.DBModel
         public string Name { get; set; } = null!;
         [Column(TypeName = "numeric(10, 2)")]
         public decimal ExchangeRate { get; set; }
+        [Required]
         public bool Fixed { get; set; }
         [Unicode(false)]
         public string? Description { get; set; }
         public int UserId { get; set; }
+        [Required]
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
         public bool Default { get; set; }

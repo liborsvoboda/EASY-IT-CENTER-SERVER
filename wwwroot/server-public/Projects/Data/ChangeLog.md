@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <small>[Compare with latest](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/compare/1930e822d8de7df63ac738c23a8a47961d6b26b2...HEAD)</small>
 
+### Added
+
+- Added Dial Mime Types ([c4aa01b](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/c4aa01be64ff93c19d23374f4f74f9572f9a7e67) by Libor Svoboda).
+
 ### Misc
 
 - Final Upload ([e171def](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e171def6f55d0a82cdc7101340b1467b72320b94) by Libor Svoboda).

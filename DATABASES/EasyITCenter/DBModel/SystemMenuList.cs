@@ -25,7 +25,7 @@ namespace EasyITCenter.DBModel
         [StringLength(2048)]
         [Unicode(false)]
         public string? AccessUser { get; set; }
-        [StringLength(50)]
+        [StringLength(150)]
         [Unicode(false)]
         public string? OrderBy { get; set; }
         [Unicode(false)]

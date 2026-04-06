@@ -68,8 +68,12 @@ namespace EasyITCenter.ServerCoreConfiguration {
             using (var serviceProvider = services.BuildServiceProvider())
             {
                 SrvRuntime.PerformanceMonitorService = serviceProvider.GetService<PerformanceMonitorService>();
+                SrvRuntime.PerformanceMonitorStatus = true;
             }
-            if (!bool.Parse(DbOperations.GetServerParameterLists("ServerPerformanceMonitorEnabled").Value)) { SrvRuntime.PerformanceMonitorService.Stop(default); }
+            if (!bool.Parse(DbOperations.GetServerParameterLists("ServerPerformanceMonitorEnabled").Value)) {
+                SrvRuntime.PerformanceMonitorStatus = false;
+                SrvRuntime.PerformanceMonitorService.Stop(default); 
+            }
         }
 
 

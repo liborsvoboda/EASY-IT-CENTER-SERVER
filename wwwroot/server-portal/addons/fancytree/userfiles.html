@@ -234,7 +234,7 @@
                 contextMenu: {
                     autoFocus: true,
                     menu: function (node) {
-                        if (node.folder && !node.data.path.startsWith("Downloads") && !node.data.path.startsWith("Videos") && !node.data.path.startsWith("Images") && !node.data.path.startsWith("Audio") && !node.data.path.startsWith("Help")) {
+                        if (node.folder && !node.data.path.startsWith("Downloads") && !node.data.path.startsWith("Videos") && !node.data.path.startsWith("Images") && !node.data.path.startsWith("Audio") && !node.data.path.startsWith("Help") && !node.data.path.startsWith("Generators")) {
                             return {
                                 "createFolder": { "name": "Create Folder", "icon": "add" },
                                 "moveFolder": { "name": "Move to Folder", "icon": "edit" },

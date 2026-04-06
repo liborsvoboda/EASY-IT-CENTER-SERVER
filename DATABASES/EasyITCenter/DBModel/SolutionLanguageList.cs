@@ -10,11 +10,6 @@ namespace EasyITCenter.DBModel
     [Index("SystemName", Name = "IX_ServerLanguageList", IsUnique = true)]
     public partial class SolutionLanguageList
     {
-        public SolutionLanguageList()
-        {
-           
-        }
-
         [Key]
         public int Id { get; set; }
         [StringLength(50)]
@@ -28,6 +23,5 @@ namespace EasyITCenter.DBModel
         [ForeignKey("UserId")]
         [InverseProperty("SolutionLanguageLists")]
         public virtual SolutionUserList User { get; set; } = null!;
-       
     }
 }

@@ -42,7 +42,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 } else if (processDefinition.ProcessType == ProcessType.py) {
                     proc.StartInfo.FileName = "py";
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
-                } else if (processDefinition.ProcessType == ProcessType.py3 ) {
+                } else if (processDefinition.ProcessType == ProcessType.py3) {
                     proc.StartInfo.FileName = "py3";
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
                 } else if (processDefinition.ProcessType == ProcessType.dotnet) {
@@ -65,7 +65,7 @@ namespace EasyITCenter.ServerCoreStructure {
                 }
 
                 proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.WorkingDirectory = null;// processDefinition.WorkingDirectory + "\\" ?? null;
+                proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + ( processDefinition.WorkingDirectory.EndsWith("\\") ? "" : "\\" ) ?? null;
                 //proc.StartInfo.LoadUserProfile = false;
                 proc.StartInfo.CreateNoWindow = true;
                 proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;

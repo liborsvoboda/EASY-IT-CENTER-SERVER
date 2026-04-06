@@ -78,7 +78,8 @@ namespace EasyITCenter.ServerCoreStructure {
         public static Dictionary<object, object> FileRotatorTool = new();
 
         public static PerformanceMonitorService? PerformanceMonitorService;
-        public static PersistentDictionary<string, string> PerformanceMonitor = new PersistentDictionary<string, string>();
+        public static Dictionary<string, string> PerformanceMonitor = new Dictionary<string, string>();
+        public static bool PerformanceMonitorStatus;
 
         public static SmtpServer.SmtpServer? SmtpServerService = null;
         public static bool SmtpServerStatus;

@@ -1,6 +1,7 @@
 ﻿
 
 using XmlDocMarkdown.Core;
+using static TorchSharp.torch;
 
 namespace EasyITCenter.Controllers {
 
@@ -66,7 +67,10 @@ namespace EasyITCenter.Controllers {
                     EASYTools.Summary.GlobalFunctions.CreateSummaryFromPath(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Input"));
                     FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Input"), Path.Combine(SrvRuntime.SrvTempPath, "MdBook", "src"));
 
-                    RunProcessRequest processRequest = new RunProcessRequest() { Command = Path.Combine(SrvRuntime.SrvTempPath, "MdBook", "generate-mdbook.bat"), ProcessType = ProcessType.bat, WaitForExit = true };
+                    RunProcessRequest processRequest = new RunProcessRequest() { 
+                        Command = Path.Combine(SrvRuntime.SrvTempPath, "MdBook", "generate-mdbook.bat"), ProcessType = ProcessType.bat, WaitForExit = true,
+                        WorkingDirectory = Path.Combine(SrvRuntime.SrvTempPath, "MdBook")
+                    };
                     await ProcessOperations.ServerProcessStartAsync(processRequest);
 
                     FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvTempPath, "MdBook", "book"), Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Output"));

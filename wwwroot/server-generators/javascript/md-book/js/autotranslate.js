@@ -1,5 +1,5 @@
 ﻿
-$('body').storage.set('DetectedLanguage', (navigator.language || navigator.userLanguage).substring(0, 2));
+localStorage.setItem('DetectedLanguage', (navigator.language || navigator.userLanguage).substring(0, 2));
 
 //Function for  Mermaid Data to Graphics Conversion
 async function Mermaid() { try { await mermaid.run({ nodes: document.querySelectorAll('.language-mermaid'), }); } catch (err) { } }
@@ -21,14 +21,14 @@ function injectFile(type, src) {
 
 let injectToolPanel = document.createElement("div");
 injectToolPanel.innerHTML = '<div id="google_translate_element" style="position: fixed;bottom: 0px;left: 40%;"></div>';
-//document.body.append(injectToolPanel);
-//injectFile("script","https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit");
+document.body.append(injectToolPanel);
+injectFile("script","https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit");
 
 $(document).ready(function () {
     setTimeout(() => {
 
         Mermaid();
-        //GoogleTranslateElementInit();
+        GoogleTranslateElementInit();
     }, 3000);
 
 });
@@ -46,7 +46,7 @@ function GoogleTranslateElementInit() {
         if (document.querySelector('#google_translate_element select') != null) {
             setTimeout(function () {
                 let selectElement = document.querySelector('#google_translate_element select');
-                selectElement.value = $('body').storage.get('DetectedLanguage');
+                selectElement.value = localStorage.getItem('DetectedLanguage');
                 selectElement.dispatchEvent(new Event('change'));
             }, 1000);
         }

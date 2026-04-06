@@ -1,10 +1,10 @@
 ﻿[book]
-title = "EIC&ESB Dokumentace"
+title = "Dokumentace"
 authors = ["Libor Svoboda"]
 language = "en"
 multilingual = false
 src = "src"
-description = "EasyITcenter & EasySYSTEMbuilder Dokumentace"
+description = "Dokumentace"
 
 
 [output.html]

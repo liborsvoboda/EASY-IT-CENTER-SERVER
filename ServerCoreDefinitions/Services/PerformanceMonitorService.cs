@@ -1,4 +1,5 @@
 ﻿using CSJsonDB;
+using Google.Api;
 using PerformanceStatistics;
 using System.Management;
 using Tensorflow;
@@ -20,21 +21,10 @@ namespace EasyITCenter.Services {
                 SrvRuntime.PerformanceMonitor.Add("Platform", PerformanceStatisticsFactory.CurrentPlatform.ToString());
                 SrvRuntime.PerformanceMonitor.Add("CPU Count", Environment.ProcessorCount.ToString());
 
-
-                SelectQuery? query = new SelectQuery("Win32_PerfFormattedData_PerfOS_Processor", "PercentProcessorTime", new string[] {"NOT Name LIKE '%_Total'" });
-                ManagementObjectSearcher? searcher = new ManagementObjectSearcher(query);
-
-                ManagementObjectCollection results = null;
-                try {
-                    results = Task.Run(() => searcher.Get()).GetAwaiter().GetResult();
-                    foreach (ManagementObject result in results) {
-                        
-                        float usage = (float)( Convert.ToUInt64(result.Properties["PercentProcessorTime"].Value) ) / Environment.ProcessorCount;
-                        SrvRuntime.PerformanceMonitor.Add("CPU Usage", usage.ToString());
-                        break; 
-                    }
-                } catch (Exception ex) {
-                   
+                int index = 1;
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2","SELECT * FROM Win32_PerfFormattedData_PerfProc_Process");
+                foreach (ManagementObject queryObj in searcher.Get()) {
+                    SrvRuntime.PerformanceMonitor.Add($"CPU {index++} Usage", queryObj["PercentProcessorTime"].ToString());
                 }
 
                 //SrvRuntime.PerformanceMonitor.Add("CPU", stats.System.CpuUtilizationPercent.ToString() + "%");
@@ -85,7 +75,7 @@ namespace EasyITCenter.Services {
 
                 SrvRuntime.PerformanceMonitor.Add("All Connections", stats.GetActiveTcpConnections().Length.ToString());
 
-                int index = 0;
+                index = 0;
                 stats.GetActiveTcpConnections().Select(a => a.LocalEndPoint.ToString() + " " + a.RemoteEndPoint.ToString()).ToList()
                     .ForEach(item => { SrvRuntime.PerformanceMonitor.Add($"{index++} TCP Connection", item); });
                 
