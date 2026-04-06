@@ -1,0 +1,351 @@
+
+# Funkční objekt, NFE
+
+Jak již víme, funkce v JavaScriptu je hodnota.
+
+Každá hodnota v JavaScriptu má svůj typ. Jakého typu je funkce?
+
+V JavaScriptu jsou funkce objekty.
+
+Dobrý způsob, jak si představit funkce, je představit si je jako „akční objekty“, které lze volat. Můžeme je nejenom volat, ale i zacházet s nimi jako s objekty: přidávat a ubírat vlastnosti, předávat je odkazem a tak dále.
+
+
+## Vlastnost „name“
+
+Funkční objekty obsahují některé užitečné vlastnosti.
+
+Například název funkce je dostupný ve vlastnosti `name`:    
+
+```js run
+function řekniAhoj() {
+  alert("Ahoj");
+}
+
+alert(řekniAhoj.name); // řekniAhoj
+```
+
+Zábavné je, že logika přiřazení názvu je chytrá a přiřadí korektní název i funkci, která je vytvořena bez názvu a pak okamžitě přiřazena:
+
+```js run
+let řekniAhoj = function() {
+  alert("Ahoj");
+};
+
+alert(řekniAhoj.name); // řekniAhoj (je tady název!)
+```
+
+Funguje to i tehdy, je-li přiřazena jako standardní hodnota: 
+
+```js run
+function f(řekniAhoj = function() {}) {
+  alert(řekniAhoj.name); // řekniAhoj (funguje!)
+}
+
+f();
+```
+
+Ve specifikaci se tato vlastnost nazývá „kontextuální název“ („contextual name“). Jestliže funkce neobsahuje vlastní název, je při přiřazení detekován z kontextu.
+
+I metody objektů mají názvy:
+
+```js run
+let uživatel = {
+
+  řekniAhoj() {
+    // ...
+  },
+
+  řekniNashle: function() {
+    // ...
+  }
+
+}
+
+alert(uživatel.řekniAhoj.name); // řekniAhoj
+alert(uživatel.řekniNashle.name); // řekniNashle
+```
+
+Není v tom ovšem nic magického. Existují případy, kdy není způsob, jak zjistit skutečný název. V takovém případě je vlastnost `name` prázdná, například zde:
+
+```js run
+// funkce vytvořená uvnitř pole
+let pole = [function() {}];
+
+alert( pole[0].name ); // <prázdný řetězec>
+// motor nemá jak zjistit správný název, takže tady žádný není
+```
+
+V praxi však většina funkcí název má.
+
+## Vlastnost „length“
+
+Další vestavěná vlastnost je `length`, která vrací počet parametrů funkce, například:
+
+```js run
+function f1(a) {}
+function f2(a, b) {}
+function mnoho(a, b, ...další) {}
+
+alert(f1.length); // 1
+alert(f2.length); // 2
+alert(mnoho.length); // 2
+```
+
+Zde vidíme, že zbytkové parametry se nepočítají.
+
+Vlastnost `length` se někdy používá pro [introspekci](https://en.wikipedia.org/wiki/Type_introspection) ve funkcích, které operují s jinými funkcemi.
+
+Například v níže uvedeném kódu funkce `zeptejSe` přijímá parametr `otázka`, kterou položí, a libovolný počet funkčních handlerů v parametru `handlery`, které zavolá.
+
+Jakmile uživatel poskytne odpověď, funkce zavolá handlery. Můžeme předávat dva druhy handlerů:
+
+- Funkci bez argumentů, která se volá jedině tehdy, když uživatel zadá kladnou odpověď.
+- Funkci s argumenty, která se volá v každém případě a vrátí nějakou odpověď.
+
+Abychom zavolali `handler` správně, prozkoumáme vlastnost `handler.length`.
+
+Myšlenkou je, že máme jednoduchou syntaxi handleru bez argumentů pro kladné případy (nejčastější varianta), ale jsme schopni podporovat i univerzální handlery:
+
+```js run
+function zeptejSe(otázka, ...handlery) {
+  let jeAno = confirm(otázka);
+
+  for(let handler of handlery) {
+    if (handler.length == 0) {
+      if (jeAno) handler();
+    } else {
+      handler(jeAno);
+    }
+  }
+
+}
+
+// při kladné odpovědi se volají oba handlery
+// při záporné odpovědi se volá jen druhý
+zeptejSe("Otázka?", () => alert('Řekl jste ano'), výsledek => alert(výsledek));
+```
+
+Toto je zvláštní případ tzv. [polymorfismu](https://cs.wikipedia.org/wiki/Polymorfismus_(programování)) -- odlišného zacházení s argumenty v závislosti na jejich typu nebo v našem případě v závislosti na jejich počtu v `length`. Tato myšlenka je často využívána v knihovnách JavaScriptu.
+
+## Vlastní vlastnosti
+
+Můžeme si také přidávat svoje vlastní vlastnosti.
+
+Zde přidáme vlastnost `čítač`, která počítá celkový počet volání:
+
+```js run
+function řekniAhoj() {
+  alert("Ahoj");
+
+  *!*
+  // spočítáme, kolikrát jsme tuto funkci volali
+  řekniAhoj.čítač++;
+  */!*
+}
+řekniAhoj.čítač = 0; // počáteční hodnota
+
+řekniAhoj(); // Ahoj
+řekniAhoj(); // Ahoj
+
+alert( `Voláno ${řekniAhoj.čítač}krát` ); // Voláno 2krát
+```
+
+```warn header="Vlastnost není proměnná"
+Vlastnost přiřazená funkci, např. `řekniAhoj.čítač = 0`, *nedefinuje* uvnitř funkce lokální proměnnou `čítač`. Jinými slovy, vlastnost `čítač` a proměnná `let čítač` jsou dvě různé věci.
+
+Můžeme s funkcí zacházet jako s objektem, ukládat do ní vlastnosti, ale to nemá žádný vliv na její provádění. Proměnné nejsou vlastnosti funkce a naopak. Jsou to dva paralelní světy.
+```
+
+Vlastnosti funkce někdy mohou nahradit uzávěry. Například můžeme přepsat příklad funkce čítače z kapitoly <info:closure> tak, že použijeme vlastnost funkce:
+
+```js run
+function vytvořČítač() {
+  // namísto:
+  // let počet = 0
+
+  function čítač() {
+    return čítač.počet++;
+  };
+
+  čítač.počet = 0;
+
+  return čítač;
+}
+
+let čítač = vytvořČítač();
+alert( čítač() ); // 0
+alert( čítač() ); // 1
+```
+
+Nyní je `počet` uložen přímo ve funkci, ne v jejím vnějším lexikálním prostředí.
+
+Je to lepší nebo horší, než použít uzávěr?
+
+Hlavním rozdílem je, že jestliže hodnota `počet` přebývá ve vnější proměnné, externí kód není schopen k ní přistupovat. Mohou ji modifikovat jedině vnořené funkce. Ale jestliže je vázána na funkci, pak je něco takového možné:
+
+```js run
+function vytvořČítač() {
+
+  function čítač() {
+    return čítač.počet++;
+  };
+
+  čítač.počet = 0;
+
+  return čítač;
+}
+
+let čítač = vytvořČítač();
+
+*!*
+čítač.počet = 10;
+alert( čítač() ); // 10
+*/!*
+```
+
+Volba implementace tedy závisí na našich potřebách.
+
+## Pojmenovaný funkční výraz
+
+Pojmenovaný funkční výraz („Named Function Expression“), zkráceně NFE, je termín označující funkční výraz, který má nějaký název.
+
+Vezměme si například obyčejný funkční výraz:
+
+```js
+let řekniAhoj = function(kdo) {
+  alert(`Ahoj, ${kdo}`);
+};
+```
+
+A přidejme mu název:
+
+```js
+let řekniAhoj = function *!*funkce*/!*(kdo) {
+  alert(`Ahoj, ${kdo}`);
+};
+```
+
+Dosáhli jsme tím něčeho? Jaký je smysl přidaného názvu `„funkce“`?
+
+Nejprve si všimněme, že stále máme funkční výraz. Přidání názvu `„funkce“` za `function` z něj neučinilo deklaraci funkce, protože funkce je stále vytvořena jako součást přiřazovacího výrazu.
+
+Přidání takového názvu rovněž nic nerozbilo.
+
+Funkce je stále dostupná jako `řekniAhoj()`:
+
+```js run
+let řekniAhoj = function *!*funkce*/!*(kdo) {
+  alert(`Ahoj, ${kdo}`);
+};
+
+řekniAhoj("Jan"); // Ahoj, Jan
+```
+
+Název `funkce` má dvě speciální věci, které jsou důvodem pro jeho použití:
+
+1. Název umožňuje funkci odkazovat se uvnitř sebe na sebe sama.
+2. Název není viditelný zvnějšku funkce.
+
+Například následující funkce `řekniAhoj` volá sama sebe s parametrem `"Host"`, není-li předáno `kdo`:
+
+```js run
+let řekniAhoj = function *!*funkce*/!*(kdo) {
+  if (kdo) {
+    alert(`Ahoj, ${kdo}`);
+  } else {
+*!*
+    funkce("Host"); // použijeme „funkce“ k volání sebe sama
+*/!*
+  }
+};
+
+řekniAhoj(); // Ahoj, Host
+
+// Ale tohle nebude fungovat:
+funkce(); // Chyba, funkce není definována (není viditelná zvnějšku funkce)
+```
+
+Proč používáme `funkce`? Možná by pro vnořené volání stačilo použít `řekniAhoj`?
+
+Ve skutečnosti ve většině případů ano:
+
+```js
+let řekniAhoj = function(kdo) {
+  if (kdo) {
+    alert(`Ahoj, ${kdo}`);
+  } else {
+*!*
+    řekniAhoj("Host");
+*/!*
+  }
+};
+```
+
+Problém s tímto kódem je, že `řekniAhoj` se může ve vnějším kódu změnit. Jestliže funkce bude přiřazena do jiné proměnné, tento kód začne způsobovat chyby:
+
+```js run
+let řekniAhoj = function(kdo) {
+  if (kdo) {
+    alert(`Ahoj, ${kdo}`);
+  } else {
+*!*
+    řekniAhoj("Host"); // Chyba: řekniAhoj není funkce
+*/!*
+  }
+};
+
+let vítej = řekniAhoj;
+řekniAhoj = null;
+
+vítej(); // Chyba, vnořené volání řekniAhoj už nefunguje!
+```
+
+To se stane proto, že funkce přebírá `řekniAhoj` ze svého vnějšího lexikálního prostředí. Neexistuje lokální `řekniAhoj`, takže se použije vnější proměnná. A v okamžiku volání je vnější `řekniAhoj` rovno `null`.
+
+Nepovinný název, který můžeme vložit do funkčního výrazu, je určen právě k řešení problémů tohoto druhu.
+
+Použijme jej k opravě našeho kódu:
+
+```js run
+let řekniAhoj = function *!*funkce*/!*(kdo) {
+  if (kdo) {
+    alert(`Ahoj, ${kdo}`);
+  } else {
+*!*
+    funkce("Host"); // Nyní je vše v pořádku
+*/!*
+  }
+};
+
+let vítej = řekniAhoj;
+řekniAhoj = null;
+
+vítej(); // Ahoj, Host (vnořené volání funguje)
+```
+
+Nyní to funguje, protože název `„funkce“` je funkčně lokální. Nepřebírá se zvnějšku (a není tam viditelný). Specifikace zaručuje, že se bude vždy odkazovat na aktuální funkci.
+
+Vnější kód stále má svou proměnnou `řekniAhoj` nebo `vítej`. A `funkce` je „interní funkční název“, způsob, jakým tato funkce může spolehlivě volat sama sebe.
+
+```smart header="Pro deklarace funkce nic takového neexistuje"
+Popsaná vlastnost „interní název“ je k dispozici jen pro funkční výrazy, ne pro deklarace funkcí. V deklaracích funkcí neexistuje žádná syntaxe, jak přidat „interní“ název.
+
+Někdy, když potřebujeme spolehlivý interní název, je to důvod, proč přepsat deklaraci funkce do formy pojmenovaného funkčního výrazu.
+```
+
+## Shrnutí
+
+Funkce jsou objekty.
+
+Zde jsme probrali jejich vlastnosti:
+
+- `name` -- název funkce. Obvykle se přebírá z definice funkce, ale pokud tam není, JavaScript se pokusí odhadnout jej z kontextu (tj. z přiřazení).
+- `length` -- počet argumentů v definici funkce. Zbytkové parametry se nepočítají.
+
+Je-li funkce deklarována jako funkční výraz (ne v hlavním běhu kódu) a ten obsahuje název, nazývá se pojmenovaný funkční výraz. Název lze používat uvnitř funkce, aby se na ni odkazoval, pro rekurzívní volání a podobně.
+
+Funkce si také může uchovávat přidané vlastnosti. Tuto vlastnost zhusta využívá mnoho dobře známých JavaScriptových knihoven.
+
+Vytvářejí „hlavní“ funkci a přidávají k ní mnoho dalších „pomocných“ funkcí. Například knihovna [jQuery](https://jquery.com) vytváří funkci jménem `$`. Knihovna [lodash](https://lodash.com) vytváří funkci jménem `_` a pak do ní přidává `_.clone`, `_.keyBy` a jiné vlastnosti (pokud se o nich chcete dozvědět víc, nahlédněte do [dokumentace](https://lodash.com/docs)). Ve skutečnosti to dělají proto, aby snížily zamoření globálního prostoru, takže jedna knihovna vytváří pouze jednu globální proměnnou. Tím se snižuje pravděpodobnost konfliktů názvů.
+
+Funkce tedy může sama o sobě odvádět užitečnou práci a může také obsahovat hromadu jiných funkcionalit ve svých vlastnostech.

@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <p>Přetáhněte míč.</p>
+
+  <img src="https://en.js.cx/clipart/soccer-gate.svg" id="branka" class="droppable">
+
+  <img src="https://en.js.cx/clipart/ball.svg" id="míč">
+
+  <script>
+    let aktuálníCíl = null;
+
+    míč.onmousedown = function(událost) {
+
+      let posunX = událost.clientX - míč.getBoundingClientRect().left;
+      let posunY = událost.clientY - míč.getBoundingClientRect().top;
+
+      míč.style.position = 'absolute';
+      míč.style.zIndex = 1000;
+      document.body.append(míč);
+
+      moveAt(událost.pageX, událost.pageY);
+
+      function moveAt(stránkaX, stránkaY) {
+        míč.style.left = stránkaX - posunX + 'px';
+        míč.style.top = stránkaY - posunY + 'px';
+      }
+
+      function onMouseMove(událost) {
+        moveAt(událost.pageX, událost.pageY);
+
+        míč.hidden = true;
+        let elemPod = document.elementFromPoint(událost.clientX, událost.clientY);
+        míč.hidden = false;
+
+        if (!elemPod) return;
+
+        let cílPod = elemPod.closest('.droppable');
+        if (aktuálníCíl != cílPod) {
+          if (aktuálníCíl) { // null, pokud jsme před touto událostí nebyli nad cílem přetahování
+            opusťCíl(aktuálníCíl);
+          }
+          aktuálníCíl = cílPod;
+          if (aktuálníCíl) { // null, pokud nevstupujeme na cíl přetahování
+            // (možná jsme právě opustili cíl)
+            vstupNaCíl(aktuálníCíl);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      míč.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        míč.onmouseup = null;
+      };
+
+    };
+
+    function vstupNaCíl(elem) {
+      elem.style.background = 'pink';
+    }
+
+    function opusťCíl(elem) {
+      elem.style.background = '';
+    }
+
+    míč.ondragstart = function() {
+      return false;
+    };
+  </script>
+
+
+</body>
+</html>

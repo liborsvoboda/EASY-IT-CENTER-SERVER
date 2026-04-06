@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <input type="button" id="hider" value="Kliknutím schováte text" />
+
+  <div id="text">Text</div>
+
+  <script>
+    // Zde nezáleží na tom, jak text schováme,
+    // můžeme použít i style.display:
+    document.getElementById('hider').onclick = function() {
+      document.getElementById('text').hidden = true;
+    }
+  </script>
+</body>
+</html>

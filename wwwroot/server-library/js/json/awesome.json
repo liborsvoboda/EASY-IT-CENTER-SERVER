@@ -1,0 +1,29 @@
+[
+  {
+    "title": "AweOpenSource",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\Awesome\\AweOpenSource\\index.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "AwesomeJS",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\Awesome\\AwesomeJS\\index.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "MegaLibrary",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\Awesome\\Awesome-MegaLibrary\\MdInteliBook\\book\\index.html",
+    "children": null,
+    "content": null,
+    "path": null
+  }
+]

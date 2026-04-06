@@ -1,0 +1,70 @@
+body {
+  padding: 10px;
+}
+
+.kolotoč {
+  position: relative;
+  width: 398px;
+  padding: 10px 40px;
+  border: 1px solid #CCC;
+  border-radius: 15px;
+  background: #eee;
+}
+
+.kolotoč img {
+  width: 130px;
+  height: 130px;
+  /* učiníme jej blokem, abychom odstranili místo kolem obrázků */
+  display: block;
+}
+
+.šipka {
+  position: absolute;
+  top: 60px;
+  padding: 0;
+  background: #ddd;
+  border-radius: 15px;
+  border: 1px solid gray;
+  font-size: 24px;
+  line-height: 24px;
+  color: #444;
+  display: block;
+}
+
+.šipka:focus {
+  outline: none;
+}
+
+.šipka:hover {
+  background: #ccc;
+  cursor: pointer;
+}
+
+.předchozí {
+  left: 7px;
+}
+
+.další {
+  right: 7px;
+}
+
+.galerie {
+  width: 390px;
+  overflow: hidden;
+}
+
+.galerie ul {
+  height: 130px;
+  width: 9999px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: margin-left 250ms;
+  /* odstraníme prázdné místo mezi elementy li, které jsou inline-block */
+  /* http://davidwalsh.name/remove-whitespace-inline-block */
+  font-size: 0;
+}
+
+.galerie li {
+  display: inline-block;
+}

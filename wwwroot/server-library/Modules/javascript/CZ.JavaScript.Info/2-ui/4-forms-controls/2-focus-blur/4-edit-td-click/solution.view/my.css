@@ -1,0 +1,24 @@
+.edit-td .edit-area {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  
+  /* odstraní změnu velikosti ve Firefoxu */
+  resize: none;
+  
+  /* odstraní orámování fokusu v Chrome */
+  outline: none;
+  
+  /* odstraní posuvník v IE */
+  overflow: auto;
+}
+
+.edit-tlačítka {
+  position: absolute;
+}
+
+.edit-td {
+  position: relative;
+  padding: 0;
+}

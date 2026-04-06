@@ -1,0 +1,1 @@
+# Ošetřování chyb

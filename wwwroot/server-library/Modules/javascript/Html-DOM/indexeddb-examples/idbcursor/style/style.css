@@ -1,0 +1,48 @@
+/* || basic set up + sizing for containers */
+
+html,
+body {
+  width: fit-content;
+  font-family: sans-serif;
+  margin: 1rem;
+}
+
+body {
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+ul {
+  padding: 0;
+  text-align: center;
+  list-style-type: none;
+}
+
+li {
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+li strong {
+  color: black;
+}
+button {
+  margin: 1rem;
+  font-size: 1.2rem;
+}
+
+#container {
+  margin: 1rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+li:nth-child(odd) {
+  background-color: lightgrey;
+}

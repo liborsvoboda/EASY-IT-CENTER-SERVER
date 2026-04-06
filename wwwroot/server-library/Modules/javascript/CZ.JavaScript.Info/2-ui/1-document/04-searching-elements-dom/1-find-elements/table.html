@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+  <form name="hledání">
+    <label>Prohledávání stránky:
+      <input type="text" name="hledání">
+    </label>
+    <input type="submit" value="Hledej!">
+  </form>
+
+  <hr>
+
+  <form name="search-person">
+    Hledání návštěvníků:
+    <table id="tabulka-věků">
+      <tr>
+        <td>Věk:</td>
+        <td id="seznam-věků">
+          <label>
+            <input type="radio" name="věk" value="mladý">méně než 18 let</label>
+          <label>
+            <input type="radio" name="věk" value="dospělý">18-50 let</label>
+          <label>
+            <input type="radio" name="věk" value="senior">více než 50 let</label>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Navíc:</td>
+        <td>
+          <input type="text" name="info[0]">
+          <input type="text" name="info[1]">
+          <input type="text" name="info[2]">
+        </td>
+      </tr>
+
+    </table>
+
+    <input type="submit" value="Hledej!">
+  </form>
+</body>
+</html>

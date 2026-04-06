@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    #hřiště {
+      width: 200px;
+      border: 10px groove black;
+      background-color: #00FF00;
+      position: relative;
+    }
+
+    #míč {
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="hřiště">
+    <img src="https://js.cx/clipart/ball.svg" height="40" width="40" id="míč"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+
+  <script>
+    let míč = document.getElementById('míč')
+    let hřiště = document.getElementById('hřiště')
+
+    // před načtením obrázku je míč.offsetWidth=0!
+    // oprava: nastavte šířku
+    míč.style.left = Math.round(hřiště.clientWidth / 2) + 'px'
+    míč.style.top = Math.round(hřiště.clientHeight / 2) + 'px'
+  </script>
+
+
+</body>
+
+</html>

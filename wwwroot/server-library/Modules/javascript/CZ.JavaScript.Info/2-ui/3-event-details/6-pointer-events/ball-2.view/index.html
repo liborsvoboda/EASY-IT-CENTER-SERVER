@@ -1,0 +1,38 @@
+<!doctype html>
+<body style="height: 200px">
+  <style>
+    #míč {
+      touch-action: none;
+    }
+  </style>
+
+  <p>Přetáhněte míč.</p>
+
+  <img src="https://js.cx/clipart/ball.svg" style="cursor:pointer" width="40" height="40" id="míč">
+
+  <script>
+
+    míč.onpointerdown = log;
+    míč.onpointerup = log;
+    míč.onpointermove = log;
+    míč.onpointercancel = log;
+
+    míč.ondragstart = () => false;
+
+    let typPosledníUdálosti;
+    let n = 1;
+    function log(událost) {
+      if (typPosledníUdálosti == událost.type) {
+        n++;
+        text.value = text.value.replace(/.*\n$/, `${událost.type} * ${n}\n`);
+        return;
+      }
+      typPosledníUdálosti = událost.type;
+      n = 1;
+      text.value += událost.type + '\n';
+      text.scrollTop = 1e9;
+    }
+  </script>
+
+  <textarea id="text" style="display:block;width:300px;height:100px"></textarea>
+</body>

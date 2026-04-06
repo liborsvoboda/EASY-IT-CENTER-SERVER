@@ -1,0 +1,10 @@
+<!doctype html>
+<script>
+  async function načti() {
+    let řekni = await import('./say.js');
+    řekni.ahoj(); // Ahoj!
+    řekni.nashle(); // Nashle!
+    řekni.default(); // Modul načten (výchozí export)!
+  }
+</script>
+<button onclick="načti()">Klikni na mě</button>

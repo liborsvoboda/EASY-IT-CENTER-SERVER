@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    td select,
+    td input {
+      width: 150px;
+    }
+
+    #diagram td {
+      vertical-align: bottom;
+      text-align: center;
+      padding: 10px;
+    }
+
+    #diagram div {
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  Kalkulátor vkladů.
+
+  <form name="kalkulátor">
+    <table>
+      <tr>
+        <td>Počáteční vklad</td>
+        <td>
+          <input name="peníze" type="number" value="10000" required>
+        </td>
+      </tr>
+      <tr>
+        <td>Kolik měsíců?</td>
+        <td>
+          <select name="měsíce">
+            <option value="3">3 (minimum)</option>
+            <option value="6">6 (půl roku)</option>
+            <option value="12" selected>12 (jeden rok)</option>
+            <option value="18">18 (1,5 roku)</option>
+            <option value="24">24 (2 roky)</option>
+            <option value="30">30 (2,5 roku)</option>
+            <option value="36">36 (3 roky)</option>
+            <option value="60">60 (5 let)</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Roční úrok?</td>
+        <td>
+          <input name="úrok" type="number" value="5" required>
+        </td>
+      </tr>
+    </table>
+
+
+  </form>
+
+
+  <table id="diagram">
+    <tr>
+      <th>Původně:</th>
+      <th>Poté:</th>
+    </tr>
+    <tr>
+      <th id="peníze-před"></th>
+      <th id="peníze-po"></th>
+    </tr>
+    <td>
+      <div style="background: red;width:40px;height:100px"></div>
+    </td>
+    <td>
+      <div style="background: green;width:40px;height:0" id="sloupec-po"></div>
+    </td>
+  </table>
+
+  <script>
+
+    let formulář = document.forms.kalkulátor;
+
+    formulář.peníze.oninput = vypočti;
+    formulář.měsíce.onchange = vypočti;
+    formulář.úrok.oninput = vypočti;
+
+    function vypočti() {
+      let počátek = +formulář.peníze.value;
+      if (!počátek) return;
+
+      let úrok = formulář.úrok.value * 0.01;
+
+      if (!úrok) return;
+
+      let roky = formulář.měsíce.value / 12;
+      if (!roky) return;
+
+      let výsledek = Math.round(počátek * (1 + úrok) ** roky);
+
+      let výška = výsledek / formulář.peníze.value * 100 + 'px';
+      document.getElementById('sloupec-po').style.height = výška;
+      document.getElementById('peníze-před').innerHTML = formulář.peníze.value;
+      document.getElementById('peníze-po').innerHTML = výsledek;
+    }
+
+    vypočti();
+  </script>
+
+
+</body>
+</html>

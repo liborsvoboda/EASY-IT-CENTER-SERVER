@@ -1,0 +1,17 @@
+@keyframes slide-from-right {
+  from {
+    transform: translateX(100vw);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation: slide-from-right 0.3s;
+}

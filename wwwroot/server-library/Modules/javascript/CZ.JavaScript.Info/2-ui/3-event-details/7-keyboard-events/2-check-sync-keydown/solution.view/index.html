@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+  <p>Stiskněte současně „Q“ a „W“ (můžete být v jakémkoli jazyce).</p>
+
+  <script>
+    function spusťNaKlávesy(funkce, ...kódy) {
+      let stisknuté = new Set();
+
+      document.addEventListener('keydown', function(událost) {
+        stisknuté.add(událost.code);
+
+        for (let kód of kódy) { // jsou v množině všechny klávesy?
+          if (!stisknuté.has(kód)) {
+            return;
+          }
+        }
+
+        // ano, jsou
+
+        // pokud během alertu návštěvník uvolní klávesy,
+        // JavaScript neobdrží událost „keyup“
+        // a množina stisknuté bude nadále předpokládat, že jsou stisknuté
+        // abychom se tedy vyvarovali „zaseknutých“ kláves, resetujeme stav
+        // bude-li uživatel chtít spustit horké klávesy znovu, necháme ho stisknout je všechny znovu
+        stisknuté.clear();
+
+        funkce();
+      });
+
+      document.addEventListener('keyup', function(událost) {
+        stisknuté.delete(událost.code);
+      });
+
+    }
+
+    spusťNaKlávesy(
+      () => alert("Ahoj!"),
+      "KeyQ",
+      "KeyW"
+    );
+  </script>
+
+</body>
+
+</html>

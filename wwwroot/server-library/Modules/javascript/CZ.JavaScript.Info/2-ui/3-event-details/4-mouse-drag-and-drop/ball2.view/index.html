@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body style="height: 200px">
+
+  <p>Přetáhněte míč.</p>
+
+  <img src="https://js.cx/clipart/ball.svg" style="cursor:pointer" width="40" height="40" id="míč">
+
+
+  <script>
+    míč.onmousedown = function(událost) {
+      míč.style.position = 'absolute';
+      míč.style.zIndex = 1000;
+      document.body.appendChild(míč);
+
+      přesuňNa(událost.pageX, událost.pageY);
+
+      function přesuňNa(stránkaX, stránkaY) {
+        míč.style.left = stránkaX - míč.offsetWidth / 2 + 'px';
+        míč.style.top = stránkaY - míč.offsetHeight / 2 + 'px';
+      }
+
+      function onMouseMove(událost) {
+        přesuňNa(událost.pageX, událost.pageY);
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      míč.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        míč.onmouseup = null;
+      };
+
+    };
+
+
+    míč.ondragstart = function() {
+      return false;
+    };
+  </script>
+
+
+</body>
+</html>

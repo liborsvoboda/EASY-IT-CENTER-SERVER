@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body style="height: 2000px">
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
+
+  <blockquote>
+    Učitel: Proč jsi přišel pozdě?
+    Student: Potkal jsem pána, který ztratil stodolarovou bankovku.
+    Učitel: Ty jsi mu ji pomáhal hledat? To je od tebe hezké.
+    Student: Ne, já jsem na ní stál.
+  </blockquote>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
+
+  <script>
+    function vraťSouřadnice(elem) {
+      let box = elem.getBoundingClientRect();
+
+      return {
+        top: box.top + window.pageYOffset,
+        left: box.left + window.pageXOffset
+      };
+    }
+
+    function zobrazPoznámku(kotva, pozice, html) {
+
+      let poznámka = document.createElement('div');
+      poznámka.className = "poznámka";
+      poznámka.innerHTML = html;
+      document.body.append(poznámka);
+
+      umístiNa(kotva, pozice, poznámka);
+    }
+
+    function umístiNa(kotva, pozice, elem) {
+
+      let souřadniceKotvy = vraťSouřadnice(kotva);
+
+      switch (pozice) {
+        case "nahoru-ven":
+          elem.style.left = souřadniceKotvy.left + "px";
+          elem.style.top = souřadniceKotvy.top - elem.offsetHeight + "px";
+          break;
+
+        case "doprava-ven":
+          elem.style.left = souřadniceKotvy.left + kotva.offsetWidth + "px";
+          elem.style.top = souřadniceKotvy.top + "px";
+          break;
+
+        case "dolů-ven":
+          elem.style.left = souřadniceKotvy.left + "px";
+          elem.style.top = souřadniceKotvy.top + kotva.offsetHeight + "px";
+          break;
+
+        case "nahoru-dovnitř":
+          elem.style.left = souřadniceKotvy.left + "px";
+          elem.style.top = souřadniceKotvy.top + "px";
+          break;
+
+        case "doprava-dovnitř":
+          elem.style.width = '150px';
+          elem.style.left = souřadniceKotvy.left + kotva.offsetWidth - elem.offsetWidth + "px";
+          elem.style.top = souřadniceKotvy.top + "px";
+          break;
+
+        case "dolů-dovnitř":
+          elem.style.left = souřadniceKotvy.left + "px";
+          elem.style.top = souřadniceKotvy.top + kotva.offsetHeight - elem.offsetHeight + "px";
+          break;
+      }
+
+    }
+
+
+    let blockquote = document.querySelector('blockquote');
+
+    zobrazPoznámku(blockquote, "nahoru-dovnitř", "poznámka nahoře uvnitř");
+    zobrazPoznámku(blockquote, "nahoru-ven", "poznámka nahoře vně");
+    zobrazPoznámku(blockquote, "doprava-ven", "poznámka vpravo vně");
+    zobrazPoznámku(blockquote, "dolů-dovnitř", "poznámka dole uvnitř");
+  </script>
+
+
+</body>
+</html>

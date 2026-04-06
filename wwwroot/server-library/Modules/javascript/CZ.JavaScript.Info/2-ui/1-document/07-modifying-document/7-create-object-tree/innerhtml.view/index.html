@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <div id="kontejner"></div>
+
+  <script>
+    let data = {
+      "Ryby": {
+        "pstruh": {},
+        "losos": {}
+      },
+
+      "Stromy": {
+        "Velké": {
+          "sekvoj": {},
+          "dub": {}
+        },
+        "Kvetoucí": {
+          "jabloň": {},
+          "magnólie": {}
+        }
+      }
+    };
+
+    function vytvořStrom(kontejner, obj) {
+      kontejner.innerHTML = vytvořTextStromu(obj);
+    }
+
+    function vytvořTextStromu(obj) { // samostatná rekurzívní funkce
+      let li = '';
+      let ul;
+      for (let klíč in obj) {
+        li += '<li>' + klíč + vytvořTextStromu(obj[klíč]) + '</li>';
+      }
+      if (li) {
+        ul = '<ul>' + li + '</ul>'
+      }
+      return ul || '';
+    }
+
+    vytvořStrom(kontejner, data);
+  </script>
+</body>
+</html>

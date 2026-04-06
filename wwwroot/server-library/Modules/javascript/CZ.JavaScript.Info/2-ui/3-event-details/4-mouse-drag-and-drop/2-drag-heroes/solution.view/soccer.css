@@ -1,0 +1,48 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#hřiště {
+  background: url(field.svg);
+  width: 800px;
+  height: 500px;
+  float: left;
+}
+
+/* hrdinové a míč (přetahovatelní) */
+
+.hrdina {
+  background: url(https://js.cx/drag-heroes/heroes.png);
+  width: 130px;
+  height: 128px;
+  float: left;
+}
+
+#hrdina1 {
+  background-position: 0 0;
+}
+
+#hrdina2 {
+  background-position: 0 -128px;
+}
+
+#hrdina3 {
+  background-position: -120px 0;
+}
+
+#hrdina4 {
+  background-position: -125px -128px;
+}
+
+#hrdina5 {
+  background-position: -248px -128px;
+}
+
+#hrdina6 {
+  background-position: -244px 0;
+}
+
+.přetahovatelný {
+  cursor: pointer;
+}

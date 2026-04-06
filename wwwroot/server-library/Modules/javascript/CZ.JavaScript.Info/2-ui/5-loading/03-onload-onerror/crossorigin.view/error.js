@@ -1,0 +1,1 @@
+takováFunkceNení();

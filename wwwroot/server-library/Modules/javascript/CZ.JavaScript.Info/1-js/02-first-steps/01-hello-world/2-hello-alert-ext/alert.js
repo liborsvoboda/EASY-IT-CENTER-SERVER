@@ -1,0 +1,1 @@
+alert("Já jsem JavaScript!");

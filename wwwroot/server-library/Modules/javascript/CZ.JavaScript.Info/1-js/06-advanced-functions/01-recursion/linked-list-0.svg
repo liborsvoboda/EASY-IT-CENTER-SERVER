@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="816"
+   height="108"
+   viewBox="0 0 816 108"
+   version="1.1"
+   id="svg17"
+   sodipodi:docname="linked-list-0.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview17"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="2.1764706"
+     inkscape:cx="40.432432"
+     inkscape:cy="54.216216"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="linked-list-0.svg" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);@font-face{font-family:'PT Mono';font-weight:700;font-style:normal;src:local('PT MonoBold'),url(/font/PTMonoBold.woff2) format('woff2'),url(/font/PTMonoBold.woff) format('woff'),url(/font/PTMonoBold.ttf) format('truetype')}</style>
+  </defs>
+  <g
+     id="combined"
+     fill="none"
+     fill-rule="evenodd"
+     stroke="none"
+     stroke-width="1">
+    <g
+       id="linked-list-0.svg">
+      <path
+         id="Rectangle-15"
+         fill="#fbf2ec"
+         stroke="#dbaf88"
+         stroke-width="2"
+         d="m 225,61 h 78 v 32 h -78 z" />
+      <text
+         id="value"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="227"
+           y="51"
+           id="tspan1">hodnota</tspan></text>
+      <text
+         id="-8"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="259"
+           y="81"
+           id="tspan2">1</tspan></text>
+      <path
+         id="Line-21"
+         fill="#c06334"
+         fill-rule="nonzero"
+         d="m 347.27,69 14,7 -14,7 v -6 h -58.54 v -2 h 58.54 z" />
+      <text
+         id="next"
+         fill="#c06334"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="313"
+           y="65"
+           id="tspan3">další</tspan></text>
+      <path
+         id="Rectangle-15-Copy"
+         fill="#fbf2ec"
+         stroke="#c06334"
+         stroke-width="2"
+         d="m 54,61 h 93 V 93 H 54 Z" />
+      <text
+         id="value-copy"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="56"
+           y="51"
+           id="tspan4">hodnota</tspan></text>
+      <text
+         id="&quot;new-item&quot;"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="61"
+           y="80"
+           id="tspan5">&quot;nový prvek&quot;</tspan></text>
+      <path
+         id="Line-21-Copy"
+         fill="#c06334"
+         fill-rule="nonzero"
+         d="m 206.27,69 14,7 -14,7 -0.001,-6 H 147.73 v -2 h 58.539 z" />
+      <text
+         id="next-copy"
+         fill="#c06334"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="172"
+           y="65"
+           id="tspan6">další</tspan></text>
+      <path
+         id="Rectangle-11"
+         fill="#fbf2ec"
+         stroke="#dbaf88"
+         stroke-width="2"
+         d="m 365,61 h 78 v 32 h -78 z" />
+      <text
+         id="value-2"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="367"
+           y="51"
+           id="tspan7">hodnota</tspan></text>
+      <text
+         id="-9"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="399"
+           y="81"
+           id="tspan8">2</tspan></text>
+      <path
+         id="Line-22"
+         fill="#c06334"
+         fill-rule="nonzero"
+         d="m 487.27,69 14,7 -14,7 v -6 h -58.54 v -2 h 58.54 z" />
+      <text
+         id="next-2"
+         fill="#c06334"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="453"
+           y="65"
+           id="tspan9">další</tspan></text>
+      <path
+         id="Rectangle-13"
+         fill="#fbf2ec"
+         stroke="#dbaf88"
+         stroke-width="2"
+         d="m 504,61 h 78 v 32 h -78 z" />
+      <text
+         id="value-3"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="506"
+           y="51"
+           id="tspan10">hodnota</tspan></text>
+      <text
+         id="-10"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="538"
+           y="81"
+           id="tspan11">3</tspan></text>
+      <path
+         id="Line-23"
+         fill="#c06334"
+         fill-rule="nonzero"
+         d="m 626.27,69 14,7 -14,7 v -6 h -58.54 v -2 h 58.54 z" />
+      <text
+         id="next-3"
+         fill="#c06334"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="592"
+           y="65"
+           id="tspan12">další</tspan></text>
+      <path
+         id="Rectangle-14"
+         fill="#fbf2ec"
+         stroke="#dbaf88"
+         stroke-width="2"
+         d="m 644,61 h 78 v 32 h -78 z" />
+      <text
+         id="value-4"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="646"
+           y="51"
+           id="tspan13">hodnota</tspan></text>
+      <text
+         id="4"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="678"
+           y="81"
+           id="tspan14">4</tspan></text>
+      <path
+         id="Line-24"
+         fill="#c06334"
+         fill-rule="nonzero"
+         d="m 766.27,69 14,7 -14,7 v -6 h -58.54 v -2 h 58.54 z" />
+      <text
+         id="next-4"
+         fill="#c06334"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="732"
+           y="65"
+           id="tspan15">další</tspan></text>
+      <text
+         id="null"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="6"><tspan
+           x="788"
+           y="80"
+           id="tspan16">null</tspan></text>
+      <text
+         id="list"
+         fill="#af6e24"
+         font-family="PTMono-Regular, 'PT Mono'"
+         font-size="14px"
+         font-weight="normal"
+         x="-8"><tspan
+           x="0"
+           y="80"
+           id="tspan17">seznam</tspan></text>
+    </g>
+  </g>
+</svg>
