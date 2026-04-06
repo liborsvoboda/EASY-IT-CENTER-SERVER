@@ -101,7 +101,7 @@ namespace EasyITCenter {
         private static IHostBuilder BuildWebHost(string[] args) {
 
             LoadConfigurationFromFile();
-            //LoadConfiguration();
+            LoadConfiguration();
 
             return Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder => {
                 webBuilder.UseStartup<Startup>();
@@ -200,7 +200,7 @@ namespace EasyITCenter {
 
         
         /// <summary>
-        /// Load DB Configuration DEPRECTED
+        /// Load DB Configuration
         /// </summary>
         private static void LoadConfiguration() {
             System.Data.SqlClient.SqlConnection cnn = new System.Data.SqlClient.SqlConnection(DBConn.DatabaseConnectionString);

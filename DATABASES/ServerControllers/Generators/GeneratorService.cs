@@ -32,8 +32,8 @@ namespace EasyITCenter.Controllers {
 
                 if (HttpContextExtension.IsLogged()) {
                     XmlDocMarkdownGenerator.Generate(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Input", xmlToMdWebDocsRequest.DllFilename), Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Output"),
-                       new XmlDocMarkdownSettings() { GenerateToc = true, IncludeObsolete = true, VisibilityLevel = XmlDocVisibilityLevel.Private }
-                       );
+                        new XmlDocMarkdownSettings() { GenerateToc = true, IncludeObsolete = true, VisibilityLevel = XmlDocVisibilityLevel.Private }
+                        );
 
                     FileOperations.CopyFile(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Output", xmlToMdWebDocsRequest.DllFilename.ToLower().Replace(".dll", ".md")), Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Output", "index.md"));
                     FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvGeneratorsPath, "javascript", "md-browser"), Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Output"));
@@ -41,11 +41,13 @@ namespace EasyITCenter.Controllers {
                     return base.Ok(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
                 } else {
                     return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.UnauthorizedRequest.ToString() });
-                } catch (Exception ex) {
+                }
+            } catch (Exception ex) {
                 return base.Ok(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
             }
-            
         }
+            
+       
 
 
 

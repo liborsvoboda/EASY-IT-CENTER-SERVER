@@ -52,6 +52,7 @@ namespace EasyITCenter.DBModel
             ProdGuidPartLists = new HashSet<ProdGuidPartList>();
             ProdGuidPersonLists = new HashSet<ProdGuidPersonList>();
             ProdGuidWorkLists = new HashSet<ProdGuidWorkList>();
+            ServerAllowedMimeTypeLists = new HashSet<ServerAllowedMimeTypeList>();
             ServerApiSecurityLists = new HashSet<ServerApiSecurityList>();
             ServerCorsDefAllowedOriginLists = new HashSet<ServerCorsDefAllowedOriginList>();
             ServerGeneratorLists = new HashSet<ServerGeneratorList>();
@@ -66,7 +67,6 @@ namespace EasyITCenter.DBModel
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             ServerToolTypeLists = new HashSet<ServerToolTypeList>();
             SolutionCodeLibraryLists = new HashSet<SolutionCodeLibraryList>();
-            SolutionEmailerLists = new HashSet<SolutionEmailerList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
             SolutionLanguageLists = new HashSet<SolutionLanguageList>();
             SolutionMixedEnumLists = new HashSet<SolutionMixedEnumList>();
@@ -220,6 +220,8 @@ namespace EasyITCenter.DBModel
         [InverseProperty("User")]
         public virtual ICollection<ProdGuidWorkList> ProdGuidWorkLists { get; set; }
         [InverseProperty("User")]
+        public virtual ICollection<ServerAllowedMimeTypeList> ServerAllowedMimeTypeLists { get; set; }
+        [InverseProperty("User")]
         public virtual ICollection<ServerApiSecurityList> ServerApiSecurityLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerCorsDefAllowedOriginList> ServerCorsDefAllowedOriginLists { get; set; }
@@ -247,8 +249,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerToolTypeList> ServerToolTypeLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionCodeLibraryList> SolutionCodeLibraryLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<SolutionEmailerList> SolutionEmailerLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
         [InverseProperty("User")]

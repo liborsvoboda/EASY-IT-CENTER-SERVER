@@ -1,5 +1,6 @@
 ﻿using CSJsonDB;
 using PerformanceStatistics;
+using System.Management;
 using Tensorflow;
 
 namespace EasyITCenter.Services {
@@ -20,16 +21,16 @@ namespace EasyITCenter.Services {
                 SrvRuntime.PerformanceMonitor.Add("CPU Count", Environment.ProcessorCount.ToString());
 
 
-                SelectQuery? query = new SelectQuery("Win32_PerfFormattedData_PerfOS_Processor", "PercentProcessorTime", "NOT Name LIKE '%_Total'");
+                SelectQuery? query = new SelectQuery("Win32_PerfFormattedData_PerfOS_Processor", "PercentProcessorTime", new string[] {"NOT Name LIKE '%_Total'" });
                 ManagementObjectSearcher? searcher = new ManagementObjectSearcher(query);
 
                 ManagementObjectCollection results = null;
                 try {
-                    results = await Task.Run(() => searcher.Get());
+                    results = Task.Run(() => searcher.Get()).GetAwaiter().GetResult();
                     foreach (ManagementObject result in results) {
                         
                         float usage = (float)( Convert.ToUInt64(result.Properties["PercentProcessorTime"].Value) ) / Environment.ProcessorCount;
-                        SrvRuntime.PerformanceMonitor.Add("CPU Count", usage.ToString());
+                        SrvRuntime.PerformanceMonitor.Add("CPU Usage", usage.ToString());
                         break; 
                     }
                 } catch (Exception ex) {

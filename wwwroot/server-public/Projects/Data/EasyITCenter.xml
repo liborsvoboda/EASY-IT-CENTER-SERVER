@@ -4,6 +4,25 @@
         <name>EasyITCenter</name>
     </assembly>
     <members>
+        <member name="T:Microsoft.SourceLink.Tools.SourceLinkMap">
+            <summary>
+            Source Link URL map. Maps file paths matching Source Link patterns to URLs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SourceLink.Tools.SourceLinkMap.Parse(System.String)">
+            <summary>
+            Parses Source Link JSON string.
+            </summary>
+            <exception cref="T:System.ArgumentNullException"><paramref name="json"/> is null.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The JSON does not follow Source Link specification.</exception>
+            <exception cref="T:System.Text.Json.JsonException"><paramref name="json"/> is not valid JSON string.</exception>
+        </member>
+        <member name="M:Microsoft.SourceLink.Tools.SourceLinkMap.TryGetUri(System.String,System.String@)">
+            <summary>
+            Maps specified <paramref name="path"/> to the corresponding URL.
+            </summary>
+            <exception cref="T:System.ArgumentNullException"><paramref name="path"/> is null.</exception>
+        </member>
         <member name="T:EasyITCenter.Controllers.AdministrationService">
             <summary>
             Server Services Remote Control
@@ -328,12 +347,18 @@
             Server Routing Rulles
             </summary>
         </member>
-        <member name="M:EasyITCenter.Controllers.GeneratorService.XmlDocMarkdown(EasyITCenter.Controllers.GeneratorService.XmlDocMarkdownGeneratorRequest)">
+        <member name="M:EasyITCenter.Controllers.GeneratorService.XmlToMdWebDocs(EasyITCenter.Controllers.GeneratorService.XmlToMdWebDocsRequest)">
             <summary>
-            Generate MD Doc from Project
-            InputPath is BIN folder, Output Path For Export
+            Generate MD Doc from Dll
+            InputPath is Dll FilenamePath, Output Path For Export
             </summary>
-            <param name="renameFilesRequest"></param>
+            <param name="xmlToMdWebDocsRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyITCenter.Controllers.GeneratorService.MdFilesToWebBook">
+            <summary>
+            Md Files To Web Book
+            </summary>
             <returns></returns>
         </member>
         <member name="M:EasyITCenter.Controllers.GithubService.GetGitHubReposList(EasyITCenter.Controllers.GithubSearchRequest)">
@@ -1168,11 +1193,11 @@
         </member>
         <member name="P:EasyITCenter.ServerCoreStructure.DBConn.DatabaseMigrationEnabled">
             <summary>
-            Enable Disable Database Migration Process on Starrtup
-            
+            Enable Disable Database Migration Process on Startup
+            TODO
             </summary>
         </member>
-        <member name="P:EasyITCenter.ServerCoreStructure.DBConn.DatabaseLogWarnToDbEnabled">
+        <member name="P:EasyITCenter.ServerCoreStructure.DBConn.DatabaseLogToDbEnabled">
             <summary>
             Enable Logging Server Warn and Errors To Database
             </summary>
@@ -2286,7 +2311,7 @@
         </member>
         <member name="M:EasyITCenter.EICServer.LoadConfiguration">
             <summary>
-            Load DB Configuration DEPRECTED
+            Load DB Configuration
             </summary>
         </member>
         <member name="T:EasyITCenter.Managers.WebSocketLocation">
@@ -2451,7 +2476,7 @@
             ServerCycleTaskMiddleware Reference Definition
             </summary>
         </member>
-        <member name="M:EasyITCenter.Services.SampleUserAuthenticator.AuthenticateAsync(SmtpServer.ISessionContext,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:EasyITCenter.Services.EmailUserAuthenticator.AuthenticateAsync(SmtpServer.ISessionContext,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Authenticate a user account.
             </summary>
@@ -2461,7 +2486,7 @@
             <param name="cancellationToken">The cancellation token.</param>
             <returns>true if the user is authenticated, false if not.</returns>
         </member>
-        <member name="M:EasyITCenter.Services.SampleMessageStore.SaveAsync(SmtpServer.ISessionContext,SmtpServer.IMessageTransaction,System.Buffers.ReadOnlySequence{System.Byte},System.Threading.CancellationToken)">
+        <member name="M:EasyITCenter.Services.EmailMessageStore.SaveAsync(SmtpServer.ISessionContext,SmtpServer.IMessageTransaction,System.Buffers.ReadOnlySequence{System.Byte},System.Threading.CancellationToken)">
             <summary>
             Save the given message to the underlying storage system.
             </summary>

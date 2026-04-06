@@ -60,6 +60,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ProdGuidPartList> ProdGuidPartLists { get; set; } = null!;
         public virtual DbSet<ProdGuidPersonList> ProdGuidPersonLists { get; set; } = null!;
         public virtual DbSet<ProdGuidWorkList> ProdGuidWorkLists { get; set; } = null!;
+        public virtual DbSet<ServerAllowedMimeTypeList> ServerAllowedMimeTypeLists { get; set; } = null!;
         public virtual DbSet<ServerApiSecurityList> ServerApiSecurityLists { get; set; } = null!;
         public virtual DbSet<ServerCorsDefAllowedOriginList> ServerCorsDefAllowedOriginLists { get; set; } = null!;
         public virtual DbSet<ServerGeneratorList> ServerGeneratorLists { get; set; } = null!;
@@ -895,6 +896,17 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_ProdGuidWorkList_UserList");
             });
 
+            modelBuilder.Entity<ServerAllowedMimeTypeList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.ServerAllowedMimeTypeLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ServerAllowedMimeTypeList_SolutionUserList");
+            });
+
             modelBuilder.Entity<ServerApiSecurityList>(entity =>
             {
                 entity.Property(e => e.Active).HasDefaultValueSql("((1))");
@@ -1176,12 +1188,6 @@ namespace EasyITCenter.DBModel
             modelBuilder.Entity<SolutionEmailerList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SolutionEmailerLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionMessageModuleList_SolutionUserList");
             });
 
             modelBuilder.Entity<SolutionFailList>(entity =>

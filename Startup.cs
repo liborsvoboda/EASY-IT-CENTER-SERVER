@@ -228,9 +228,9 @@ namespace EasyITCenter {
             app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress,
                 OnPrepareResponse = (context) => { context = CoreOperations.IncludeStaticCookieTokenToRequest(context);
                     //TODO Ignore WHEN SHARED Check RIGHT USER & HIS FOLDER
-                    if (!HttpContextExtension.IsLogged() &&
-                        ( context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvUserPath)}") || context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SystemAppsPath)}") )
-                        && (!context.Context.Request.Path.ToString().Contains($"{HttpContextExtension.GetUserName().ToLower()}/Public" || !context.Context.Request.Path.ToString().Contains($"{HttpContextExtension.GetUserName().ToLower()}/Shared" )
+                    if (!HttpContextExtension.IsLogged()
+                        && ( context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvUserPath)}") || context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SystemAppsPath)}") ) 
+                        && ( !context.Context.Request.Path.ToString().Contains($"{HttpContextExtension.GetUserName().ToLower()}/Public", StringComparison.OrdinalIgnoreCase) || !context.Context.Request.Path.ToString().Contains($"{HttpContextExtension.GetUserName().ToLower()}/Shared", StringComparison.OrdinalIgnoreCase) )
                         ) {
                         context.Context.Response.Redirect("/StatusPageService/401UnauthorizedPage", true);
                     }
