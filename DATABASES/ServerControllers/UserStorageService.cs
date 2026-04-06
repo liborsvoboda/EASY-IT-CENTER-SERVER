@@ -1,0 +1,815 @@
+﻿using DocumentFormat.OpenXml.Vml.Office;
+using EasyITCenter.DBModel;
+using FastReport.Utils;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Playwright;
+using PuppeteerSharp;
+using ScrapySharp.Network;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO.Compression;
+using System.Linq;
+using System.Threading.Tasks;
+using Westwind.AspNetCore.Markdown;
+using static EasyITCenter.Controllers.FileService;
+
+namespace EasyITCenter.Controllers {
+
+
+    public class FancyTreeUserData {
+        public string title { get; set; }
+        public bool folder { get; set; }
+        public bool checkbox { get; set; }
+        public string key { get; set; }
+        public string path { get; set; }
+        public string extension { get; set; }
+        public bool scanned { get; set; }
+        public List<FancyTreeUserData>? children { get; set; } = null;
+    }
+
+
+    public class Files
+    {
+        public string Filename { get; set; }
+        public string Content { get; set; }
+    }
+
+    public class UserStorageContent {
+        public string Path { get; set; }
+        public string? Filename { get; set; } = null;
+        public string? Content { get; set; } = null;
+        public List<Files>? Files { get; set; } = null;
+    }
+
+    public class UserStorageRenameDir {
+        public string SourcePath { get; set; }
+        public string TargetPath { get; set; }
+    }
+
+    public class UserStorageSunGallery {
+        public string src { get; set; }
+        public string name { get; set; }
+        public string alt { get; set; }
+        public string tag { get; set; }
+    }
+
+
+    public class JsonResultLower
+    {
+        public string status { get; set; }
+        public object result { get; set; }
+        public string errorMessage { get; set; }
+    }
+
+
+    public class DownloadFileRequest {
+        public string Url { get; set; }
+        public string Filename { get; set; }
+    }
+
+
+    public class UnpackArchiveRequest {
+        public string TargetFolder { get; set; }
+        public string FilePath { get; set; }
+    }
+
+
+    public class SaveMediaFileRequest {
+        public string Filename { get; set; }
+        public string Path { get; set; }
+        public string Content { get; set; }
+    }
+
+
+    public class ReplaceInFilesRequest {
+        public string FileMask { get; set; }
+        public string SourceContent { get; set; }
+        public string TargetContent { get; set; }
+        public string WebRootPath { get; set; }
+        public bool RootDirectoryOnly { get; set; }
+    }
+
+
+    public class SearchInFilesRequest
+    {
+        public string SearchInput { get; set; }
+        public string DataPath { get; set; }
+    }
+
+
+    [AllowAnonymous]
+    [Route("/UserStorageService")]
+    public class UserStorageService : Controller {
+
+        private readonly Microsoft.AspNetCore.Hosting.IWebHostEnvironment _hostingEnvironment;
+        public UserStorageService(Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment) {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
+
+        /// <summary>
+        /// Get User Storage Structure
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("/UserStorageService/GetUserStorage")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> GetUserStorage() {
+            FancyTreeUserData dir = new(); string path = null; string userRootPath = null;
+            List<FancyTreeUserData> result = new();
+            try {
+                if (HttpContextExtension.IsLogged()) {
+
+                    userRootPath = path = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName());
+
+                ScanDirectory:
+                    result.AddRange(UserStorageOperations.GetUserDirectories(userRootPath + Path.DirectorySeparatorChar, path));
+                    dir = result.Where(a => a.scanned == false).FirstOrDefault();
+
+                    if (dir != null) {
+                        path = Path.Combine(userRootPath, dir.path);
+                        result.Remove(dir);
+                        dir.scanned = true;
+                        result.Add(dir);
+                        result = result.OrderBy(a => a.title).ToList();
+                        goto ScanDirectory;
+                    }
+                } else { return base.Json(result); }
+
+                    //FILES Part
+                    result.AddRange(UserStorageOperations.GetUserFiles(userRootPath + Path.DirectorySeparatorChar));
+
+                result.OrderByDescending(a => a.path.Split(System.IO.Path.DirectorySeparatorChar).Length).ToList().ForEach(res => {
+                    if (res.path.Split(System.IO.Path.DirectorySeparatorChar).Count() > 1) {
+                        result.Where(a => a.path == string.Join(System.IO.Path.DirectorySeparatorChar, res.path.Split(System.IO.Path.DirectorySeparatorChar).Take(res.path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1))).First().children.Add(res);
+                        result.Remove(res);
+                    }
+                });
+
+
+                return base.Json(result);
+            } catch (Exception ex) {
+                return base.Json(result);
+            }
+        }
+
+
+        /// <summary>
+        /// Create User Storage Folder
+        /// </summary>
+        /// <param name="userStorageContent"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/CreateUserFolder")]
+        [Consumes("application/json")]
+        public async Task<string> CreateUserFolder([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName());
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+                    FileOperations.CreateDirectory(Path.Combine(userRootPath, userStorageContent.Path));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+
+                           
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Rename User Storage Folder
+        /// </summary>
+        /// <param name="userStorageRenameDir"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/MoveUserFolder")]
+        [Consumes("application/json")]
+        public async Task<string> MoveUserFolder([FromBody] UserStorageRenameDir userStorageRenameDir) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName());
+                    userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
+                    userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
+
+                    FileOperations.MoveDirectory(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath, userStorageRenameDir.TargetPath));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Copy User Storage Folder
+        /// </summary>
+        /// <param name="userStorageRenameDir"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/CopyUserFolder")]
+        [Consumes("application/json")]
+        public async Task<string> CopyUserFolder([FromBody] UserStorageRenameDir userStorageRenameDir) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName());
+                    userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
+                    userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
+
+                    FileOperations.CopyDirectory(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath, userStorageRenameDir.TargetPath));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Download User Storage Folder
+        /// </summary>
+        /// <param name="userStorageContent"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadUserFolder")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> DownloadUserFolder([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null;
+            try {
+                userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), userStorageContent.Path);
+                } else { return BadRequest(new { Status = DBResult.UnauthorizedRequest.ToString(), ErrorMessage = String.Empty }); }
+
+                ZipFile.CreateFromDirectory(userRootPath, Path.Combine(SrvRuntime.SrvTempPath, FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
+                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvTempPath, FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
+                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SrvTempPath, FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip"));
+
+                return File(zipPackage, "application/x-zip-compressed", FileOperations.GetLastFolderFromPath(userStorageContent.Path) + ".zip");
+            } catch (Exception ex) {
+                return BadRequest(new { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Clear User Storage Folder
+        /// </summary>
+        /// <param name="userStorageContent"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/ClearUserFolder")]
+        [Consumes("application/json")]
+        public async Task<string> ClearUserFolder([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), userStorageContent.Path);
+                    FileOperations.ClearFolder(userRootPath);
+                
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Delete User Storage Folder
+        /// </summary>
+        /// <param name="userStorageContent"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DeleteUserFolder")]
+        [Consumes("application/json")]
+        public async Task<string> DeleteUserFolder([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), userStorageContent.Path);
+                    FileOperations.DeleteDirectory(userRootPath);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Create User Storage File
+        /// </summary>
+        /// <param name="userStorageContent"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/CreateUserFile")]
+        [Consumes("application/json")]
+        public async Task<string> CreateUserFile([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), userStorageContent.Path, userStorageContent.Filename);
+                    FileOperations.CreateFile(userRootPath);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Save User Storage File
+        /// </summary>
+        /// <param name="userStorageContent"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/SetUserTextFile")]
+        [Consumes("application/json")]
+        public async Task<string> SetUserTextFile([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null; string result = null;
+
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName());
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+
+                    FileOperations.WriteToFile(Path.Combine(userRootPath, userStorageContent.Path), userStorageContent.Content, true);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Rename User Storage File
+        /// </summary>
+        /// <param name="userStorageRenameDir"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/MoveUserFile")]
+        [Consumes("application/json")]
+        public async Task<string> MoveUserFile([FromBody] UserStorageRenameDir userStorageRenameDir) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName());
+
+                    userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
+                    userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
+
+                    FileOperations.MoveFile(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath, userStorageRenameDir.TargetPath));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Copy User Storage File
+        /// </summary>
+        /// <param name="userStorageRenameDir"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/CopyUserFile")]
+        [Consumes("application/json")]
+        public async Task<string> CopyUserFile([FromBody] UserStorageRenameDir userStorageRenameDir) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName());
+                    userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
+                    userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
+
+                    FileOperations.CopyFile(Path.Combine(userRootPath, userStorageRenameDir.SourcePath), Path.Combine(userRootPath , userStorageRenameDir.TargetPath));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Delete User Storage Folder
+        /// </summary>
+        /// <param name="userStorageContent"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DeleteUserFile")]
+        [Consumes("application/json")]
+        public async Task<string> DeleteUserFile([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+                    
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), userStorageContent.Path);
+                    FileOperations.DeleteFile(userRootPath);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Download User Storage File
+        /// </summary>
+        /// <param name="userStorageRenameDir"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadUserFile")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> DownloadUserFile([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null; string tempFolder = null;
+            try {
+                userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), userStorageContent.Path);
+                } else {
+                    return BadRequest(new { Status = DBResult.error.ToString(), ErrorMessage = String.Empty });
+                }
+
+                tempFolder = Path.Combine(SrvRuntime.SrvUserPath, "temp") + string.Join(System.IO.Path.DirectorySeparatorChar, userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Take(userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1));
+                FileOperations.DeleteDirectory(tempFolder); FileOperations.CreateDirectory(tempFolder);
+                FileOperations.CopyFile(userRootPath, tempFolder + System.IO.Path.DirectorySeparatorChar + System.IO.Path.GetFileName(userStorageContent.Path));
+                
+                ZipFile.CreateFromDirectory(tempFolder, Path.Combine(SrvRuntime.SrvUserPath,"temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
+                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvUserPath, "temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
+
+                FileOperations.DeleteDirectory(tempFolder);
+                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SrvUserPath, "temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
+
+                return File(zipPackage, "application/x-zip-compressed", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip");
+            } catch (Exception ex) {
+                return BadRequest(new { Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// User Storage SUNEditor Galery List
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("/UserStorageService/GetSunImageList")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> GetSunImageList() {
+            string userRootPath = null; List<string> extensionList = new();
+            List<string> images = new(); List<UserStorageSunGallery> result = new();
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Images");
+                } else { return base.Json(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.UnauthorizedRequest.ToString() }); }
+
+                extensionList = DbOperations.GetServerParameterLists("ImageExtensionList").Value.Split(";").ToList();
+                extensionList.ForEach(ext => {
+                    images = FileOperations.GetPathFiles(userRootPath, $"*.{ext}", SearchOption.AllDirectories);
+                    images.ForEach(img => { 
+                        result.Add(new UserStorageSunGallery() {
+                            name = System.IO.Path.GetFileName(img),
+                            alt = System.IO.Path.GetFileNameWithoutExtension(img),
+                            src = img.Replace(SrvRuntime.WebRootPath, "").Replace(System.IO.Path.DirectorySeparatorChar,'/'),
+                            tag = FileOperations.GetLastFolderFromPath(img)
+                        });
+                    });
+                });
+                result = result.OrderBy(a => a.tag).ThenBy(a=>a.name).ToList();
+                return base.Json(new JsonResultLower() { result = result, status = DBResult.success.ToString() }); ;
+            } catch (Exception ex) {
+                return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetUserApiErrMessage(ex), Status = DBResult.error.ToString() }); 
+            }
+        }
+
+
+        /// <summary>
+        /// Upload User Storage Files
+        /// </summary>
+        /// <param name="userStorageContent"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/UploadUserFiles")]
+        [Consumes("application/json")]
+        public async Task<string> UploadUserFiles([FromBody] UserStorageContent userStorageContent) {
+            string userRootPath = null;
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName());
+                    userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
+
+                    userStorageContent.Files.ForEach(file => { FileOperations.ByteArrayToFile(Path.Combine(userRootPath, userStorageContent.Path , file.Filename), Convert.FromBase64String(file.Content.Split(",")[1]), true); });
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = userStorageContent.Files.Count(), ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// User Download Html from URL
+        /// </summary>
+        /// <param name="downloadFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadHtmlFromUrl")]
+        [Consumes("application/json")]
+        public async Task<string> DownloadHtmlFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
+            
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    var browserFetcher = new BrowserFetcher();
+                    await browserFetcher.DownloadAsync();
+                    await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+                    await using var page = await browser.NewPageAsync();
+                    await page.GoToAsync(downloadFileRequest.Url);
+
+                    await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+                    string InnerHTML = await page.GetContentAsync();
+
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename), InnerHTML, true);
+                    
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+
+        /// <summary>
+        /// User Download Md from Url
+        /// </summary>
+        /// <param name="downloadFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadMdFromUrl")]
+        [Consumes("application/json")]
+        public async Task<string> DownloadMdFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
+
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    string MdAsHtml = await Markdown.ParseFromUrlAsync(downloadFileRequest.Url, true, false, false);
+
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename), MdAsHtml, true);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Generate PDF from URL
+        /// </summary>
+        /// <param name="downloadFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadPdfFromUrl")]
+        [Consumes("application/json")]
+        public async Task<string> DownloadPdfFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
+
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    var browserFetcher = new BrowserFetcher();
+                    await browserFetcher.DownloadAsync();
+                    await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+                    await using var page = await browser.NewPageAsync();
+                    await page.GoToAsync(downloadFileRequest.Url);
+
+                    await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+                    await page.PdfAsync(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Generate PNG Image from URL
+        /// </summary>
+        /// <param name="downloadFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/DownloadImageFromUrl")]
+        [Consumes("application/json")]
+        public async Task<string> DownloadImageFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
+
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    var browserFetcher = new BrowserFetcher();
+                    await browserFetcher.DownloadAsync();
+                    await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+                    await using var page = await browser.NewPageAsync();
+                    await page.GoToAsync(downloadFileRequest.Url);
+
+                    await page.EvaluateExpressionHandleAsync("document.fonts.ready");
+                    await page.ScreenshotAsync(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Downloads", downloadFileRequest.Filename));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Save converted MarkdownFile from Html
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/SaveMarkdownFile")]
+        [Consumes("application/json")]
+        public async Task<string> SaveMarkdownFile([FromBody] Files file) {
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Help", file.Filename + ".md"), file.Content, true);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+
+        /// <summary>
+        /// Save User Html File
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/SaveHtmlFile")]
+        [Consumes("application/json")]
+        public async Task<string> SaveHtmlFile([FromBody] Files file) {
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "WebPages", file.Filename + ".html"), file.Content, true);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                }
+                else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            }
+            catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+        /// <summary>
+        /// Unpack User Archive
+        /// </summary>
+        /// <param name="unpackArchiveRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/UnpackArchive")]
+        [Consumes("application/json")]
+        public async Task<string> UnpackArchive([FromBody] UnpackArchiveRequest unpackArchiveRequest) {
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    FileOperations.CreateDirectory(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), unpackArchiveRequest.TargetFolder));
+                    System.IO.Compression.ZipFile.ExtractToDirectory(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), unpackArchiveRequest.FilePath), Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), unpackArchiveRequest.TargetFolder));
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Save User Media File
+        /// </summary>
+        /// <param name="saveMediaFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/SaveMediaFile")]
+        [Consumes("application/json")]
+        public async Task<string> SaveMediaFile([FromBody] SaveMediaFileRequest saveMediaFileRequest) {
+            try {
+                if (HttpContextExtension.IsLogged() && !string.IsNullOrWhiteSpace(saveMediaFileRequest.Content) ) {
+                    FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), saveMediaFileRequest.Path, saveMediaFileRequest.Filename + ( saveMediaFileRequest.Path == "Images" ? ".png" : saveMediaFileRequest.Path == "Audio" ? ".mp3" : ".mp4" )), Convert.FromBase64String(saveMediaFileRequest.Content.Split(",").Last()), true);
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Replace in User Files
+        /// </summary>
+        /// <param name="replaceInFilesRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/ReplaceInFiles")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> ReplaceInFiles([FromBody] ReplaceInFilesRequest replaceInFilesRequest) {
+            try {
+
+                if (HttpContextExtension.IsLogged()) {
+                    replaceInFilesRequest.WebRootPath = replaceInFilesRequest.WebRootPath.StartsWith("/") ? replaceInFilesRequest.WebRootPath.Substring(1) : replaceInFilesRequest.WebRootPath.StartsWith("\\") ? replaceInFilesRequest.WebRootPath.Substring(1) : replaceInFilesRequest.WebRootPath;
+                    List<string>? sourceFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), replaceInFilesRequest.WebRootPath), replaceInFilesRequest.FileMask, replaceInFilesRequest.RootDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
+                    sourceFiles.ForEach(file => {
+                        string fileContent = FileOperations.ReadTextFile(file);
+                        fileContent = fileContent.Replace(replaceInFilesRequest.SourceContent, replaceInFilesRequest.TargetContent);
+                        FileOperations.WriteToFile(file, fileContent, true);
+                    });
+
+                    return base.Ok(new WebClasses.JsonResult() { Result = sourceFiles.Count.ToString(), Status = DBResult.success.ToString() });
+                } else {
+                    return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.UnauthorizedRequest.ToString() });
+                }
+            } catch (Exception ex) {
+                return base.Ok(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
+            }
+        }
+
+
+        
+        /// <summary>
+        /// Search in User Files
+        /// </summary>
+        /// <param name="searchInFilesRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/SearchInFiles")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> SearchInFiles([FromBody] SearchInFilesRequest searchInFilesRequest) {
+            FancyTreeUserData dir = new(); string path = null; string userRootPath = null;
+            List<FancyTreeUserData> result = new();
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    searchInFilesRequest.DataPath = searchInFilesRequest.DataPath.StartsWith("/") ? searchInFilesRequest.DataPath.Substring(1) : searchInFilesRequest.DataPath.StartsWith("\\") ? searchInFilesRequest.DataPath.Substring(1) : searchInFilesRequest.DataPath;
+                    userRootPath = path = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), searchInFilesRequest.DataPath);
+
+                ScanDirectory:
+                    result.AddRange(UserStorageOperations.GetUserDirectories(userRootPath + Path.DirectorySeparatorChar, path));
+                    dir = result.Where(a => a.scanned == false).FirstOrDefault();
+
+                    if (dir != null) {
+                        path = Path.Combine(userRootPath, dir.path);
+                        result.Remove(dir);
+                        dir.scanned = true;
+                        result.Add(dir);
+                        result = result.OrderBy(a => a.title).ToList();
+                        goto ScanDirectory;
+                    }
+                } else { return base.Json(result); }
+
+                //FILES Part
+                result.AddRange(UserStorageOperations.SearchUserFiles(userRootPath + Path.DirectorySeparatorChar, searchInFilesRequest.SearchInput));
+
+                result.OrderByDescending(a => a.path.Split(System.IO.Path.DirectorySeparatorChar).Length).ToList().ForEach(res => {
+                    if (res.path.Split(System.IO.Path.DirectorySeparatorChar).Count() > 1) {
+                        result.Where(a => a.path == string.Join(System.IO.Path.DirectorySeparatorChar, res.path.Split(System.IO.Path.DirectorySeparatorChar).Take(res.path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1))).First().children.Add(res);
+                        result.Remove(res);
+                    }
+                });
+                return base.Json(result);
+            }
+            catch (Exception ex) {
+                return base.Json(result);
+            }
+        }
+
+    }
+}
