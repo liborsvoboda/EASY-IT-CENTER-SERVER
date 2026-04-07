@@ -278,6 +278,24 @@
             Server Routing Rulles
             </summary>
         </member>
+        <member name="M:EasyITCenter.Controllers.ConversionService.XlsxToHtml(EasyITCenter.Controllers.ConversionService.XlsxToHtmlRequest)">
+            <summary>
+            Xlsx To Html
+            </summary>
+            <param name="xlsxToHtmlRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyITCenter.Controllers.ConversionService.MssqlToMysql">
+            <summary>
+            MsSql Database to MySql Database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:EasyITCenter.Controllers.ConversionService.StringType">
+            <summary>
+            PRIVATE PART
+            </summary>
+        </member>
         <member name="M:EasyITCenter.Controllers.DashboardService.GetToolsCounter">
             <summary>
             Get Dashboard Counters
@@ -361,6 +379,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:EasyITCenter.Controllers.GeneratorService.XmlToMarkdown">
+            <summary>
+            Xml Project File To MarkDown
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EasyITCenter.Controllers.GeneratorService.XmlToMdWebDocs">
+            <summary>
+            XML Project file to Documentation Web
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:EasyITCenter.Controllers.GithubService.GetGitHubReposList(EasyITCenter.Controllers.GithubSearchRequest)">
             <summary>
             Search in GitHub Repos By Value and Language
@@ -433,6 +463,20 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase"/>
         </member>
+        <member name="M:EasyITCenter.Controllers.PortalApiTableService.GetApiTableDataList(System.String)">
+            <summary>
+            Get Virtual API Tables List
+            </summary>
+            <param name="tablename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyITCenter.Controllers.PortalApiTableService.SetPortalMenuList(EasyITCenter.Controllers.MenuData)">
+            <summary>
+            Set Postal Menu List
+            </summary>
+            <param name="menuData"></param>
+            <returns></returns>
+        </member>
         <member name="M:EasyITCenter.Controllers.PortalApiTableService.DeleteApiTableColumnDataList(System.String)">
             <summary>
             Universal Delete from Virtual Table
@@ -457,6 +501,13 @@
             Set User Media Presentation List
             </summary>
             <param name="mediaPresentationListRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EasyITCenter.Controllers.PortalApiTableService.SetMdMenuHelp(EasyITCenter.Controllers.SetMdMenuHelpRequest)">
+            <summary>
+            Set Fast Portal Menu Help
+            </summary>
+            <param name="setMdMenuHelp"></param>
             <returns></returns>
         </member>
         <member name="T:EasyITCenter.Controllers.RunProcessRequest">
@@ -3023,6 +3074,14 @@
             Fast Report Webový Prohlížeč Reportů 
             V případě že je zadána Cesta nástroje Zobrazí Ukázky
             Cesta Nástroje: /ServerCoreTools/ViewerReportFile
+            </summary>
+        </member>
+        <member name="T:McMaster.Extensions.CommandLineUtils.GenerateMetadataAttribute">
+            <summary>
+            Marker attribute to indicate that source generation should create
+            an ICommandMetadataProvider for this command. This attribute is optional
+            when the CommandLineUtils.Generators package is referenced - all [Command]
+            classes will automatically get generated providers.
             </summary>
         </member>
     </members>

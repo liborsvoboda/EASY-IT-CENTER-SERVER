@@ -193,8 +193,8 @@ namespace EasyITCenter.Controllers {
                     });
 
                     RunProcessRequest processRequest = new RunProcessRequest() {
-                        Command = '"'+Path.Combine(SrvRuntime.SrvTempPath, folder, $"HtmlGenerator.exe")+'"',
-                        ProcessType = ProcessType.exe, WaitForExit = true, WorkingDirectory = Path.Combine(SrvRuntime.SrvTempPath, folder),
+                        Command = Path.Combine(SrvRuntime.SrvTempPath, folder, $"HtmlGenerator.bat"),
+                        ProcessType = ProcessType.bat, WaitForExit = true, WorkingDirectory = Path.Combine(SrvRuntime.SrvTempPath, folder),
                         Arguments = null
                     };
                     await ProcessOperations.ServerProcessStartAsync(processRequest);
