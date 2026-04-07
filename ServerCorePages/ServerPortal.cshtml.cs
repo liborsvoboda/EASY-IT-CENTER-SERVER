@@ -38,10 +38,5 @@ namespace ServerCorePages {
             } else { serverWebPagesToken = new ServerWebPagesToken(); }
         }
 
-        //TODO Create Script loading for model
-        public static IActionResult GetFromMainFrame() {
-
-            return new ContentResult() { Content = "test" };
-        }
     }
 }

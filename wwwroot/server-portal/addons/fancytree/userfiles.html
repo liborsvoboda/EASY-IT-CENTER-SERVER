@@ -234,7 +234,7 @@
                 contextMenu: {
                     autoFocus: true,
                     menu: function (node) {
-                        if (node.folder && !node.data.path.startsWith("Downloads") && !node.data.path.startsWith("Videos") && !node.data.path.startsWith("Images") && !node.data.path.startsWith("Audio") && !node.data.path.startsWith("Help") && !node.data.path.startsWith("Generators")) {
+                        if (node.folder && !node.data.path.startsWith("Downloads") && !node.data.path.startsWith("Videos") && !node.data.path.startsWith("Images") && !node.data.path.startsWith("Audio") && !node.data.path.startsWith("Help") && !node.data.path.startsWith("Generators") && !node.data.path.startsWith("Databases")) {
                             return {
                                 "createFolder": { "name": "Create Folder", "icon": "add" },
                                 "moveFolder": { "name": "Move to Folder", "icon": "edit" },
@@ -242,6 +242,7 @@
                                 "clearFolder": { "name": "Clear Folder", "icon": "delete" },
                                 "deleteFolder": { "name": "Delete Folder", "icon": "quit" },
                                 "sep1": "---------",
+                                "replaceInFiles": { "name": "Replace in Files", "icon": "add" },
                                 "searchInFiles": { "name": "Search in Files", "icon": "paste" },
                                 "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
                                 "sep2": "---------",
@@ -249,7 +250,25 @@
                                 "uploadFiles": { "name": "Upload Files", "icon": "add" },
 
                                 "sep3": "---------",
+                                
+                            };
+                        } else if (node.folder && node.data.path.startsWith("Databases")) {
+                            return {
+                                "createFolder": { "name": "Create Folder", "icon": "add" },
+                                "moveFolder": { "name": "Move to Folder", "icon": "edit" },
+                                "copyFolder": { "name": "Copy to Folder", "icon": "copy" },
+                                "clearFolder": { "name": "Clear Folder", "icon": "delete" },
+                                "deleteFolder": { "name": "Delete Folder", "icon": "quit" },
+                                "sep1": "---------",
                                 "replaceInFiles": { "name": "Replace in Files", "icon": "add" },
+                                "searchInFiles": { "name": "Search in Files", "icon": "paste" },
+                                "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
+                                "sep2": "---------",
+                                "createFile": { "name": "Create File", "icon": "add" },
+                                "uploadFiles": { "name": "Upload Files", "icon": "add" },
+                                "sep3": "---------",
+                                "mssqlToMysql": { "name": "MSSQL DB to MYSQL script", "icon": "add" },
+                                
                             };
                         } else if (node.folder && node.data.path.startsWith("Generators")) {
                             return {
@@ -257,9 +276,12 @@
                                 "uploadFiles": { "name": "Upload Files", "icon": "add" },
                                 "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
                                 "sep1": "---------",
+                                "xmlToMarkdown": { "name": "Xml To Markdown", "icon": "add" },
                                 "mdFilesToWebBook": { "name": "Md Files To WebBook", "icon": "add" },
                                 "dllToMdWebDocs": { "name": "Dll To Md Web Docs", "icon": "add" },
+                                "xmlToMdWebDocs": { "name": "Xml To Web Docs", "icon": "add" },
                                 "sep2": "---------",
+                                "rotateGallery": { "name": "Images to Rotate Gallery", "icon": "add" },
                             };
                         } else if (node.folder && node.data.path.startsWith("Help")) {
                             return {
@@ -269,13 +291,13 @@
                                 "clearFolder": { "name": "Clear Folder", "icon": "delete" },
                                 "deleteFolder": { "name": "Delete Folder", "icon": "quit" },
                                 "sep1": "---------",
+                                "replaceInFiles": { "name": "Replace in Files", "icon": "add" },
                                 "searchInFiles": { "name": "Search in Files", "icon": "paste" },
                                 "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
                                 "sep2": "---------",
                                 "createFile": { "name": "Create File", "icon": "add" },
                                 "uploadFiles": { "name": "Upload Files", "icon": "add" },
-                                "sep3": "---------",
-                                "replaceInFiles": { "name": "Replace in Files", "icon": "add" },
+                                "sep3": "---------",                                
                                 "generateSummary": { "name": "Generate Summary.md", "icon": "add" },
                             };
                         } else if (node.folder && node.data.path.startsWith("Audio")) {
@@ -328,12 +350,12 @@
                                 "downloadPdfFromUrl": { "name": "Get Pdf From Url", "icon": "add" },
                                 "downloadImageFromUrl": { "name": "Get Image From Url", "icon": "add" },
                                 "sep1": "---------",
+                                "replaceInFiles": { "name": "Replace in Files", "icon": "add" },
                                 "searchInFiles": { "name": "Search in Files", "icon": "paste" },
                                 "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
                                 "sep2": "---------",
                                 "createFile": { "name": "Create File", "icon": "add" },
                                 "uploadFiles": { "name": "Upload Files", "icon": "add" },
-                                "replaceInFiles": { "name": "Replace in Files", "icon": "add" },
                                 "sep3": "---------",
 
                             };
@@ -428,7 +450,19 @@
                         }
                     },
                     actions: async function (node, action, options) {
-                        if (action == "mdFilesToWebBook") {
+                        if (action == "xmlToMdWebDocs") {
+                            await Gs.Apis.RunServerGetApi("GeneratorService/XmlToMdWebDocs", null, "ReloadUserStorage");
+
+                        } else if (action == "xmlToMarkdown") {
+                            await Gs.Apis.RunServerGetApi("GeneratorService/XmlToMarkdown", null, "ReloadUserStorage");
+
+                        } else if (action == "rotateGallery") {
+                            await Gs.Apis.RunServerGetApi("GeneratorService/RotateGallery", null, "ReloadUserStorage");
+
+                        } else if (action == "mssqlToMysql") {
+                            await Gs.Apis.RunServerGetApi("ConversionService/MssqlToMysql", null, "ReloadUserStorage");
+
+                        } else if (action == "mdFilesToWebBook") {
                             await Gs.Apis.RunServerGetApi("GeneratorService/MdFilesToWebBook", null, "ReloadUserStorage");
 
                         } else if (action == "dllToMdWebDocs") {
@@ -765,8 +799,6 @@
                         } else if (action == "downloadFile") {
                             Gs.Apis.DownloadApi("UserStorageService/DownloadUserFile", { Path: $('#DataTree').fancytree("getActiveNode").data.path }, $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), true);
                         }
-
-                        //console.log("Selected action '" + action + "' on node " + node + "." + $('#DataTree').fancytree("getActiveNode").data);
                     }
                 },
             });

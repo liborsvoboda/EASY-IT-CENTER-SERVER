@@ -37,6 +37,7 @@
     <TypeScriptToolsVersion>3.9</TypeScriptToolsVersion>
     <UserSecretsId>dffec4f1-eb35-43b7-a694-a0f10862b4a8</UserSecretsId>
    <!--<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>-->
+	<ServerGarbageCollection>true</ServerGarbageCollection>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -80,7 +81,11 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </Content>
      <Content Include="wwwroot\**" />
-  </ItemGroup>  
+  </ItemGroup>
+
+   <ItemGroup>
+     <Content Remove="C:\Users\lsvoboda\.nuget\packages\easytools.vebexcli\0.1.1\contentFiles\any\net6.0\test.ps1" />
+   </ItemGroup>  
 
 
    <ItemGroup>
@@ -224,6 +229,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="MarkdigExtensions.RtfRenderer" Version="1.1.0" />
     <PackageReference Include="MarkdigExtensions.SyntaxHighlighting" Version="1.0.3" />
     <PackageReference Include="MarkdigExtensions.UrlRewriter" Version="1.0.0" />
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.36" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.36" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.36" />
@@ -327,6 +333,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1" />
     <PackageReference Include="NFS-Client" Version="1.0.0" />
     <PackageReference Include="NFS-ClientLibrary" Version="0.0.1" />
+    <PackageReference Include="NHibernate" Version="5.6.0" />
     <PackageReference Include="NSwag.ApiDescription.Client" Version="14.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

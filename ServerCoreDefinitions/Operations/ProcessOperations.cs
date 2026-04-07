@@ -39,68 +39,89 @@ namespace EasyITCenter.ServerCoreStructure {
                 if (processDefinition.ProcessType == ProcessType.node) {
                     proc.StartInfo.FileName = "node";
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
-                } else if (processDefinition.ProcessType == ProcessType.py) {
+                }
+                else if (processDefinition.ProcessType == ProcessType.py) {
                     proc.StartInfo.FileName = "py";
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
-                } else if (processDefinition.ProcessType == ProcessType.py3) {
+                }
+                else if (processDefinition.ProcessType == ProcessType.py3) {
                     proc.StartInfo.FileName = "py3";
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
-                } else if (processDefinition.ProcessType == ProcessType.dotnet) {
+                }
+                else if (processDefinition.ProcessType == ProcessType.dotnet) {
                     proc.StartInfo.FileName = "dotnet";
                     proc.StartInfo.Arguments = processDefinition.Command ?? null;
-                } else if (processDefinition.ProcessType == ProcessType.cmd) {
+                }
+                else if (processDefinition.ProcessType == ProcessType.cmd) {
                     proc.StartInfo.FileName = "cmd.exe";
                     proc.StartInfo.Arguments = $"/c {processDefinition.Command ?? null}";
-                } else if (processDefinition.ProcessType == ProcessType.bat) {
+                }
+                else if (processDefinition.ProcessType == ProcessType.bat) {
                     proc.StartInfo.FileName = processDefinition.Command;
-                    proc.StartInfo.Arguments = null;
-                } else if (processDefinition.ProcessType == ProcessType.sh) {
+                    proc.StartInfo.Arguments = " " + processDefinition.Arguments;
+                }
+                else if (processDefinition.ProcessType == ProcessType.exe) {
+                    proc.StartInfo.FileName = processDefinition.Command;
+                    proc.StartInfo.Arguments = " " + processDefinition.Arguments;
+                }
+                else if (processDefinition.ProcessType == ProcessType.sh) {
                     proc.StartInfo.FileName = "/bin/bash";
                     proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
-                } else if (processDefinition.ProcessType == ProcessType.powershellFile) {
+                }
+                else if (processDefinition.ProcessType == ProcessType.powershellFile) {
                     proc.StartInfo.FileName = "powershell";
                     proc.StartInfo.Arguments = string.Format(" \"{0}\"", processDefinition.Command);
-                } else if (processDefinition.ProcessType == ProcessType.powershellScript) {
+                }
+                else if (processDefinition.ProcessType == ProcessType.powershellScript) {
                     RunPowerShellProcess(processDefinition);
                 }
 
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + ( processDefinition.WorkingDirectory.EndsWith("\\") ? "" : "\\" ) ?? null;
-                //proc.StartInfo.LoadUserProfile = false;
-                proc.StartInfo.CreateNoWindow = true;
-                proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.RedirectStandardError = true;
-                proc.StartInfo.Verb = ( Environment.OSVersion.Version.Major >= 6 ) ? "runas" : "";
-                proc.Start();
+                if (processDefinition.ProcessType != ProcessType.powershellScript) {
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + (processDefinition.WorkingDirectory.EndsWith("\\") ? "" : "\\") ?? null;
+                    //proc.StartInfo.LoadUserProfile = false;
+                    proc.StartInfo.CreateNoWindow = true;
+                    proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    proc.StartInfo.RedirectStandardOutput = true;
+                    proc.StartInfo.RedirectStandardError = true;
+                    proc.StartInfo.Verb = (Environment.OSVersion.Version.Major >= 6) ? "runas" : "";
+                    proc.Start();
 
-                ServerStartUpScriptList startupScript = null;
-                if (!string.IsNullOrWhiteSpace(processDefinition.StartupScriptName)) { 
-                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
-                        startupScript = new EasyITCenterContext().ServerStartUpScriptLists.Where(a => a.Name == processDefinition.StartupScriptName).FirstOrDefault();
+                    ServerStartUpScriptList startupScript = null;
+                    if (!string.IsNullOrWhiteSpace(processDefinition.StartupScriptName))
+                    {
+                        using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted }))
+                        {
+                            startupScript = new EasyITCenterContext().ServerStartUpScriptLists.Where(a => a.Name == processDefinition.StartupScriptName).FirstOrDefault();
+                        }
+                        if (!string.IsNullOrWhiteSpace(startupScript?.Id.ToString()))
+                        {
+                            startupScript.Pid = proc.Id;
+                            EntityEntry<ServerStartUpScriptList>? data = new EasyITCenterContext().ServerStartUpScriptLists.Update(startupScript);
+                            await data.Context.SaveChangesAsync();
+                        }
                     }
-                    if (!string.IsNullOrWhiteSpace(startupScript?.Id.ToString())) { startupScript.Pid = proc.Id;
-                        EntityEntry<ServerStartUpScriptList>? data = new EasyITCenterContext().ServerStartUpScriptLists.Update(startupScript);
-                        await data.Context.SaveChangesAsync();
-                    }
-                }
 
-                //proc.OutputDataReceived +=;
-                proc.Exited += ServerProcessFinishedAsync; 
-                proc.Disposed += ServerProcessFinishedAsync;
-                if (!proc.HasExited) {
-                    SrvRuntime.SrvProcessManager.Add(new Tuple<int, string, string, Process>(proc.Id, !string.IsNullOrWhiteSpace(processDefinition.StartupScriptName) ? processDefinition.StartupScriptName : proc.ProcessName, ( startupScript?.Description == null ? string.Empty : startupScript?.Description ), proc));
                     //proc.OutputDataReceived +=;
                     proc.Exited += ServerProcessFinishedAsync;
                     proc.Disposed += ServerProcessFinishedAsync;
+                    if (!proc.HasExited)
+                    {
+                        SrvRuntime.SrvProcessManager.Add(new Tuple<int, string, string, Process>(proc.Id, !string.IsNullOrWhiteSpace(processDefinition.StartupScriptName) ? processDefinition.StartupScriptName : proc.ProcessName, (startupScript?.Description == null ? string.Empty : startupScript?.Description), proc));
+                        //proc.OutputDataReceived +=;
+                        proc.Exited += ServerProcessFinishedAsync;
+                        proc.Disposed += ServerProcessFinishedAsync;
+                    }
+
+                    if (processDefinition.WaitForExit)
+                    {
+                        await proc.WaitForExitAsync();
+                        return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError });
+                    }
+                    else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError }); }
                 }
-
-                if (processDefinition.WaitForExit) {
-                    await proc.WaitForExitAsync();
-                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError });
-                } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError }); }
-
-            } catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
+            } 
+            catch (Exception ex) { resultError += ex.StackTrace + Environment.NewLine + ex.Message;
                 CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(ex) });
             }
             return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError });
@@ -179,7 +200,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public async static Task<string> RunPowerShellProcess(RunProcessRequest processDefinition) {
             try {
                     using (PowerShell ps = PowerShell.Create()) {
-                    //ps.AddArgument = processDefinition.WorkingDirectory
+                    //ps.AddArgument = processDefinition.WorkingDirectory + (processDefinition.WorkingDirectory.EndsWith("\\") ? "" : "\\") ?? null;
                     Collection<PSObject>? results = ps.AddScript(processDefinition.Command).Invoke();
                     ps.Commands.Clear();
                     return results.AsEnumerable().ToList().ObjectToJson();

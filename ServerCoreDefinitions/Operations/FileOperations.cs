@@ -50,7 +50,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public static bool CreatePath(string path, bool clearIfExist = false) {
             try {
                 if (clearIfExist && Directory.Exists(path)) { Directory.Delete(path, true); }
-                string[] pathParts = path.Split('\\');
+                string[] pathParts = path.Split(Path.DirectorySeparatorChar);
 
                 for (int i = 0; i < pathParts.Length; i++) {
                     if (i > 0)
@@ -105,6 +105,15 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <returns></returns>
         public static bool ByteArrayToFile(string fileName, byte[] byteArray, bool rewrite = true) {
             try {
+                string[] pathParts = FileOperations.GetDirectoryFromFilePath(fileName).Split(Path.DirectorySeparatorChar);
+                for (int i = 0; i < pathParts.Length; i++) {
+                    if (i > 0)
+                        pathParts[i] = System.IO.Path.Combine(pathParts[i - 1], pathParts[i]);
+
+                    if (!Directory.Exists(pathParts[i]))
+                        Directory.CreateDirectory(pathParts[i]);
+                }
+
                 if (!CheckFile(fileName) || (CheckFile(fileName) && rewrite)) {
                     if (CheckFile(fileName)) { DeleteFile(fileName); }
                     using (FileStream? fs = new FileStream(fileName, FileMode.Create, FileAccess.Write)) {
@@ -150,6 +159,11 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="content"></param>
         /// <param name="rewrite"></param>
         public static void WriteToFile(string file, string content, bool rewrite = true) {
+            string[] pathParts = FileOperations.GetDirectoryFromFilePath(file).Split(Path.DirectorySeparatorChar);
+            for (int i = 0; i < pathParts.Length; i++) {
+                if (i > 0) { pathParts[i] = System.IO.Path.Combine(pathParts[i - 1], pathParts[i]); }
+                if (!Directory.Exists(pathParts[i])) { Directory.CreateDirectory(pathParts[i]); }
+            }
             if (!CheckFile(file) || (CheckFile(file) && rewrite)) {
                 if (rewrite) { DeleteFile(file); }
                 StreamWriter objWriter = new StreamWriter(file, true);

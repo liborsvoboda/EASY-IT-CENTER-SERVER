@@ -271,9 +271,9 @@ namespace EasyITCenter.ServerCoreStructure {
                                 FileOperations.ByteArrayToFile(path, attachment.Item2, true);
                                 Email.Attachments.Add(new Attachment(path));
                             });
-                            
+
                         }
-                        
+
 
                         SmtpClient MailClient = new(DbOperations.GetServerParameterLists("EmailerSMTPServerAddress").Value, int.Parse(DbOperations.GetServerParameterLists("EmailerSMTPPort").Value)) {
                             Credentials = new NetworkCredential(DbOperations.GetServerParameterLists("EmailerSMTPLoginUsername").Value, DbOperations.GetServerParameterLists("EmailerSMTPLoginPassword").Value),
@@ -283,6 +283,7 @@ namespace EasyITCenter.ServerCoreStructure {
                         };
                         MailClient.Timeout = 5000;
                         MailClient.SendAsync(Email, Guid.NewGuid().ToString());
+                        MailClient.Dispose();
 
                         try { tempFiles?.ForEach(tempFile => { Directory.Delete(Path.GetDirectoryName(tempFile)); }); } catch { }
                     }

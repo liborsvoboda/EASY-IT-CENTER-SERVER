@@ -60,7 +60,7 @@ Gs.Behaviors.ShowPageLoading = function () {
             }
         }
     }
-    pageLoader = Metro.activity.open({ type: 'atom', style: 'dark', overlayClickClose: true, /*overlayColor: '#fff', overlayAlpha: 1*/ });
+    pageLoader = Metro.activity.open({ type: 'square', style: 'color', overlayClickClose: true, /*overlayColor: '#fff', overlayAlpha: 1*/ });
 }
 
 

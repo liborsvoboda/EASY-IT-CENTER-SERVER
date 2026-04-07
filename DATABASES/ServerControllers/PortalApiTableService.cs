@@ -97,11 +97,30 @@ namespace EasyITCenter.Controllers
         public int AutoSlide { get; set; }
     }
 
+
+    public class SetMdMenuHelpRequest
+    {
+        public int Id { get; set; }
+        public string RecGuid { get; set; }
+        public string Value { get; set; }
+
+    }
+
+
+
+
     [Route("PortalApiTableService")]
     [ApiController]
     public class PortalApiTableService : ControllerBase
     {
 
+
+
+        /// <summary>
+        /// Get Virtual API Tables List
+        /// </summary>
+        /// <param name="tablename"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("/PortalApiTableService/GetApiTableDataList/{tablename}")]
         public async Task<string> GetApiTableDataList(string tablename) {
@@ -118,6 +137,12 @@ namespace EasyITCenter.Controllers
         }
 
 
+
+        /// <summary>
+        /// Set Postal Menu List
+        /// </summary>
+        /// <param name="menuData"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("/PortalApiTableService/SetPortalMenuList")]
         public async Task<string> SetPortalMenuList([FromBody] MenuData menuData) {
@@ -874,6 +899,37 @@ namespace EasyITCenter.Controllers
             } catch (Exception ex) {
                 return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
+        }
+
+
+
+        /// <summary>
+        /// Set Fast Portal Menu Help
+        /// </summary>
+        /// <param name="setMdMenuHelp"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/SetMdMenuHelp")]
+        public async Task<string> SetMdMenuHelp([FromBody] SetMdMenuHelpRequest setMdMenuHelp) {
+            EasyITCenterContext data = new EasyITCenterContext(); PortalApiTableColumnDataList record = new();
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    record = new() { Id = setMdMenuHelp.Id, RecGuid = setMdMenuHelp.RecGuid, ApiTableName = "PortalMenu", InheritedDataType = "string", ApiTableColumnName = "MdHelp", Value = setMdMenuHelp.Value, Description = null, Active = true, UserId = (int)HttpContextExtension.GetUserId() };
+
+                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                        data.PortalApiTableColumnDataLists.Update(record);
+                        data.SaveChanges();
+                        return true;
+                    });
+
+                    return JsonSerializer.Serialize(new ResultMessage() { Result = string.Empty, InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
 
     }

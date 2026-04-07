@@ -602,3 +602,16 @@ Gs.Functions.LoadUrlImageAsString = async function (url) {
         });
 }
 
+
+Gs.Functions.AddSuggestionSave = async function () {
+    let jsonData = {
+        InheritedMonacoLanguageType: $("#menuInheritedMonacoLanguageType").val(),
+        Label: $("#menuLabel").val(),
+        Documentation: "",
+        Kind: 1,
+        InsertText: Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "fastSuggestion" })[0].model.getValue(),
+        UserId: Metro.storage.getItem("ApiToken", null) != null ? Metro.storage.getItem("ApiToken", null).Id : null
+    }
+    await Gs.Apis.RunServerPutApi("EasyITCenterSolutionMonacoLanguageList", jsonData, null);
+    $("#AddSuggest").remove();
+}

@@ -20,6 +20,7 @@ namespace EasyITCenter.Controllers {
     {
         dotnet,
         cmd,
+        exe,
         bat,
         node,
         powershellFile,
@@ -39,6 +40,7 @@ namespace EasyITCenter.Controllers {
         public ProcessType ProcessType { get; set; }
         public bool WaitForExit = true;
         public string StartupScriptName { get; set; } = null;
+        public string? Arguments { get; set; } = null;
     }
 
 

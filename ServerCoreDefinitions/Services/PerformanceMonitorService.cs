@@ -13,6 +13,8 @@ namespace EasyITCenter.Services {
 
         public Task StartAsync(CancellationToken cancellationToken) {
 
+            SrvRuntime.PerformanceMonitorStatus = true;
+
             if (PerformanceStatisticsFactory.IsPlatformSupported) {
                 using var stats = PerformanceStatisticsFactory.Create();
                 stats.MonitoredProcessNames.Add(DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value);
@@ -27,8 +29,6 @@ namespace EasyITCenter.Services {
                     SrvRuntime.PerformanceMonitor.Add($"CPU {index++} Usage", queryObj["PercentProcessorTime"].ToString());
                 }
 
-                //SrvRuntime.PerformanceMonitor.Add("CPU", stats.System.CpuUtilizationPercent.ToString() + "%");
-                //SrvRuntime.PerformanceMonitor.Add("Free RAM", stats.System.MemoryFreeMegabytes.ToString() + " MB");
 
                 stats.MonitoredProcessNames.Add("dotnet");
                 foreach (var kvp in stats.MonitoredProcesses) {
@@ -63,16 +63,6 @@ namespace EasyITCenter.Services {
                     }
                 }
 
-                // Disk
-                //SrvRuntime.PerformanceMonitor.Add("Disc Read", stats.System.TotalDiskReadOperations.ToString());
-                //SrvRuntime.PerformanceMonitor.Add("Disc Write", stats.System.TotalDiskWriteOperations.ToString());
-                //SrvRuntime.PerformanceMonitor.Add("Disc Read Queue", stats.System.TotalDiskReadQueue.ToString());
-                //SrvRuntime.PerformanceMonitor.Add("Disc Write Queue", stats.System.TotalDiskWriteQueue.ToString());
-                //SrvRuntime.PerformanceMonitor.Add("Disc Free %", stats.System.TotalDiskFreePercent.ToString());
-                //SrvRuntime.PerformanceMonitor.Add("Disc Free MB", stats.System.TotalDiskFreeMegabytes.ToString());
-                //SrvRuntime.PerformanceMonitor.Add("Disc Size", stats.System.TotalDiskSizeMegabytes.ToString());
-                //SrvRuntime.PerformanceMonitor.Add("Disc Used MB", stats.System.TotalDiskUsedMegabytes.ToString());
-
                 SrvRuntime.PerformanceMonitor.Add("All Connections", stats.GetActiveTcpConnections().Length.ToString());
 
                 index = 0;
@@ -104,6 +94,7 @@ namespace EasyITCenter.Services {
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            SrvRuntime.PerformanceMonitorStatus = false;
             timer?.Change(Timeout.Infinite, 0);
             return Task.CompletedTask;
         }
@@ -111,6 +102,7 @@ namespace EasyITCenter.Services {
 
         public void Stop(CancellationToken cancellationToken)
         {
+            SrvRuntime.PerformanceMonitorStatus = false;
             timer?.Change(Timeout.Infinite, 0);
         }
 

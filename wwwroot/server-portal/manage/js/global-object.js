@@ -135,6 +135,7 @@ function GenerateMenuList() {
                 break;
             case "MdHelp":
                 menuItem.MdHelp = mItem.value;
+                menuItem.MdHelpId = mItem.id;
                 break;
             default:
         }
@@ -517,4 +518,49 @@ Gs.Objects.OpenChat = async function () {
     }
 }
 
+
+Gs.Objects.AddSuggest = async function () {
+
+    let html = `
+    <BUTTON onclick="Gs.Functions.AddSuggestionSave();" class="button success c-pointer outline shadowed" style="position:absolute; top:20px;left:40px;z-index:2500;">Save Suggestion</BUTTON>
+    <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
+        <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12" style="z-index:2000;" >
+            <DIV class="form-group pt-5">
+                <select id="menuInheritedMonacoLanguageType" data-role="select" data-use-placeholder="true" data-placeholder="Language Type">
+                </select>
+            </DIV>
+        </DIV>
+        <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="z-index:2000;" >
+            <DIV class="form-group pt-5">
+                <INPUT id="menuLabel" style="HEIGHT: auto" data-role="input" data-validate="required" autocomplete="off" data-label="Label" />
+            </DIV>
+        </DIV>
+        <DIV id=_menuCodeContent class="w-100">
+            <div id="fastSuggestion" style="top: -50px;" ></div >
+            <select id=FastSugestEditorTheme class="theme" style="position: absolute;z-index: 2000;top: 50px;right: 0px;">
+                <option>vs-dark</option>
+                <option>vs</option>
+                <option>hc-black</option>
+            </select>
+            <select id=FastSugestEditorLang class="language" style="position: absolute;z-index: 2000;top: 80px;right: 0px;"></select>
+        </DIV >
+    </DIV >`;
+    Gs.Objects.InfoboxObjectCreate("AddSuggest", html, width = "1000", height = "100%");
+
+    setTimeout(async function () {
+        Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(p => p.elementId == "fastSuggestion"), 1);
+        let dataJs = await fetch(`/server-portal/addons/monaco/js/fastSuggestion.js`).then((r) => r.text());
+        new Function(dataJs)();
+
+        $("#menuLabel").val("");
+        let select = Metro.getPlugin("#menuInheritedMonacoLanguageType", "select"); let options = []; select.data("");
+        let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
+        mixedenumList.forEach(mixedEnum => {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active) {
+                options.push({ val: mixedEnum.Name, title: mixedEnum.Name, selected: false });
+            }
+        });
+        select.addOptions(options);
+    }, 1000);
+}
 

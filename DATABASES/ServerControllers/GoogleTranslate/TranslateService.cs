@@ -11,6 +11,7 @@ namespace EasyITCenter.Controllers {
      //[ApiExplorerSettings(IgnoreApi = true)]
     public class TranslateService : ControllerBase {
 
+
         [HttpGet("/TranslateService/{destLang}/{origText}")]
         public async Task<string> Translate(string destLang, string origText) {
             try {
