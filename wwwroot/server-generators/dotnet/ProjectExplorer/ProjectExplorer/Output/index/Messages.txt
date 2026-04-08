@@ -1,2 +1,0 @@
-﻿===============================================
-Solution is null: E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-generators\dotnet-ProjectExplorer\ProjectExplorer\Codes\EASY-IT-CENTER-SERVER\EasyITCenter.csproj

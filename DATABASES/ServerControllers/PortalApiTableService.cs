@@ -107,6 +107,11 @@ namespace EasyITCenter.Controllers
     }
 
 
+    public class SetBlogRequest
+    {
+        public string MenuName { get; set; }
+        public string HtmlContent { get; set; }
+    }
 
 
     [Route("PortalApiTableService")]
@@ -931,6 +936,64 @@ namespace EasyITCenter.Controllers
             }
             return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
+
+
+
+        /// <summary>
+        /// Get Public Blog List
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("/PortalApiTableService/GetBlogList")]
+        public async Task<string> GetBlogList() {
+            List<PortalApiTableColumnDataList> data = new();
+            try {
+
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                    data = new EasyITCenterContext().PortalApiTableColumnDataLists
+                        .Where(a => a.ApiTableName == "BlogList" && a.UserId == HttpContextExtension.GetUserId())
+                        .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                }
+
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
+
+
+        /// <summary>
+        /// Set Public Blog List
+        /// </summary>
+        /// <param name="setBlogRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/SetBlogList")]
+        public async Task<string> SetBlogList([FromBody] SetBlogRequest setBlogRequest) {
+            EasyITCenterContext data = new EasyITCenterContext(); List<PortalApiTableColumnDataList>? original = null;
+            try {
+                string recGuid = Guid.NewGuid().ToString().ToUpper();
+                List<PortalApiTableColumnDataList> record = new();
+                record.Add(new PortalApiTableColumnDataList() { ApiTableName = "BlogList", ApiTableColumnName = "MenuName", InheritedDataType = "string", RecGuid = recGuid, Value = setBlogRequest.MenuName, Description = null, Active = true, UserId = 1, TimeStamp = DateTimeOffset.Now.DateTime });
+                record.Add(new PortalApiTableColumnDataList() { ApiTableName = "BlogList", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = recGuid, Value = setBlogRequest.HtmlContent, Description = null, Active = true, UserId = 1, TimeStamp = DateTimeOffset.Now.DateTime });
+
+                DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                    data.PortalApiTableColumnDataLists.AddRange(record);
+                    data.SaveChanges();
+                    return true;
+                });
+                    
+                return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 3, ErrorMessage = string.Empty });
+                
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+
+
+
 
     }
 }

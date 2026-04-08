@@ -535,7 +535,7 @@ Gs.Objects.AddSuggest = async function () {
                 <INPUT id="menuLabel" style="HEIGHT: auto" data-role="input" data-validate="required" autocomplete="off" data-label="Label" />
             </DIV>
         </DIV>
-        <DIV id=_menuCodeContent class="w-100">
+        <DIV id=_menuCodeContent class="w-100" style="max-height: 650px;overflow: hidden;">
             <div id="fastSuggestion" style="top: -50px;" ></div >
             <select id=FastSugestEditorTheme class="theme" style="position: absolute;z-index: 2000;top: 50px;right: 0px;">
                 <option>vs-dark</option>
@@ -545,7 +545,7 @@ Gs.Objects.AddSuggest = async function () {
             <select id=FastSugestEditorLang class="language" style="position: absolute;z-index: 2000;top: 80px;right: 0px;"></select>
         </DIV >
     </DIV >`;
-    Gs.Objects.InfoboxObjectCreate("AddSuggest", html, width = "1000", height = "100%");
+    Gs.Objects.InfoboxObjectCreate("AddSuggest", html, width = "1000", height = "800");
 
     setTimeout(async function () {
         Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(p => p.elementId == "fastSuggestion"), 1);
@@ -564,3 +564,104 @@ Gs.Objects.AddSuggest = async function () {
     }, 1000);
 }
 
+
+Gs.Objects.EditHelpMenu = function () {
+    let html = `
+    <BUTTON onclick="Gs.Functions.SaveMenuHelp();" class="button success c-pointer outline shadowed" style="position:absolute; top:57px;right:60px;z-index:2500;">Save Menu Help</BUTTON>
+    <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
+        <DIV id=_menuCodeContent class="w-100" style="max-height: 650px;overflow: hidden;">
+            <iframe id="HelpFastEditor" src="/server-portal/addons/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:900px;"></iframe>
+        </DIV >
+    </DIV >`;
+    Gs.Objects.InfoboxObjectCreate("EditHelpMenu", html, width = "1000", height = "800");
+
+    setTimeout(async function () {
+        $('#HelpFastEditor')[0].contentWindow.mdEditor.setMarkdown(Metro.storage.getItem("SelectedMenu", null).MdHelp);
+    }, 1000);
+
+}
+
+
+Gs.Objects.OpenBlogMenu = async function () {
+    $("#EditBlogMenu").remove();
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetBlogList", "BlogList", "EditBlogMenu");
+}
+
+function EditBlogMenu(search = null) {
+    let html = `
+    <BUTTON onclick="Gs.Functions.SaveBlog();" class="button success c-pointer outline shadowed" style="position:absolute; top:20px;right:200px;z-index:2500;">Save Contribution</BUTTON>
+    <BUTTON onclick="Gs.Functions.SearchBlog();" class="button warning c-pointer outline shadowed" style="position:absolute; top:20px;right:120px;z-index:2500;">Search</BUTTON>
+    <BUTTON onclick="Gs.Functions.ResetBlog();" class="button alert c-pointer outline shadowed" style="position:absolute; top:20px;right:50px;z-index:2500;">Reset</BUTTON>
+    <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
+        <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12" >
+            <DIV class="form-group">
+                <p>Portal Menu</p>
+                <select id="menuBlogName" data-role="select" data-use-placeholder="true" data-placeholder="Language Type">
+                </select>
+            </DIV>
+        </DIV>
+        <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >
+            <DIV class="form-group pt-7">
+                <INPUT id="menuSearch" style="HEIGHT: auto" data-role="input" data-search-button="true" autocomplete="off" data-label="Search" />
+            </DIV>
+        </DIV>
+        <DIV class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <DIV class="form-group"><div id="menuBlogContent"></div>
+        </DIV>
+        <DIV class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <DIV id="MenuBlog" class="pt-5">
+            </DIV>
+        </DIV>
+    </DIV >`;
+    Gs.Objects.InfoboxObjectCreate("EditBlogMenu", html, width = "1000", height = "800");
+
+    setTimeout(async function () {
+        $('#menuBlogContent').summernote({
+            tabsize: 2, height: 150, maxHeight: 150,
+            lang: 'cs-CZ',
+            placeholder: 'write Contribution...',
+            toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]]
+        });
+
+        let select = Metro.getPlugin("#menuBlogName", "select"); let options = []; select.data("");
+        let portalMenuList = Metro.storage.getItem("PortalMenuList", null);
+        portalMenuList.sort((a, b) => a.Name > b.Name ? 1 : -1);
+        portalMenuList.forEach(item => {
+            options.push({ val: item.Name, title: item.Name, selected: false });
+        });
+        select.addOptions(options);
+
+
+
+        let lastGuid = null, menuItem = {}, blogList = [];
+        let portalMenu = Metro.storage.getItem('BlogList', null);
+
+        portalMenu.forEach((mItem, index, arr) => {
+
+            switch (mItem.apiTableColumnName) {
+                case "MenuName":
+                    menuItem.MenuName = mItem.value;
+                    menuItem.RecGuid = mItem.recGuid;
+                    break;
+                case "HtmlContent":
+                    menuItem.HtmlContent = mItem.value;
+                    break;
+                default:
+            }
+
+            if (lastGuid != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != mItem.recGuid)) {
+                blogList.push(menuItem);
+                menuItem = {};
+            }
+
+            lastGuid = mItem.recGuid;
+        });
+        blogList.sort((a, b) => a.MenuName > b.MenuName ? 1 : -1);
+        Metro.storage.setItem('BlogList', blogList);
+
+
+
+    }, 1000);
+}

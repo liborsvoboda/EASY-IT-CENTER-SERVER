@@ -13410,7 +13410,7 @@ var demo = function() {
         permalink.href = "";
       }
     } catch (__) {
-      permalink.href = "";
+      //permalink.href = "";
     }
   }
   // Build offsets for each line (lines can be wrapped)

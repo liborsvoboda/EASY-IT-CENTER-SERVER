@@ -212,5 +212,43 @@ namespace EasyITCenter.Controllers {
 
         }
 
+
+
+        [HttpGet("/GeneratorService/ProjectToServer")]
+        public async Task<IActionResult> ProjectToServer() {
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    string folder = DataOperations.RandomString(20);
+                    FileOperations.ClearFolder(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Output"));
+
+                    FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvGeneratorsPath, "dotnet", "ProjectExplorer"), Path.Combine(SrvRuntime.SrvTempPath, folder));
+                    FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Input"), Path.Combine(SrvRuntime.SrvTempPath, folder, "Codes"));
+
+                    List<string> project = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvTempPath, folder, "Codes"), "*.csproj", SearchOption.AllDirectories);
+                    string generatorScript = FileOperations.ReadTextFile(Path.Combine(SrvRuntime.SrvTempPath, folder, "generate.bat"));
+                    generatorScript = generatorScript.Replace("AUTOCONTENT", project[0].Split($"{folder}{Path.DirectorySeparatorChar}")[1]);
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvTempPath, folder, "generate.bat"), generatorScript, true);
+
+                    RunProcessRequest processRequest = new RunProcessRequest() {
+                        Command = Path.Combine(SrvRuntime.SrvTempPath, folder, $"generate.bat"),
+                        ProcessType = ProcessType.bat,
+                        WaitForExit = true,
+                        WorkingDirectory = Path.Combine(SrvRuntime.SrvTempPath, folder),
+                        Arguments = null
+                    };
+                    await ProcessOperations.ServerProcessStartAsync(processRequest);
+
+                    FileOperations.CopyDirectory(Path.Combine(SrvRuntime.SrvTempPath, folder, "Output"), Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), "Generators", "Output"));
+                    FileOperations.DeleteDirectory(Path.Combine(SrvRuntime.SrvTempPath, folder));
+                    return base.Ok(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
+                } else {
+                    return base.Ok(new WebClasses.JsonResult() { Result = String.Empty, Status = DBResult.UnauthorizedRequest.ToString() });
+                }
+            } catch (Exception ex) {
+                return base.Ok(new WebClasses.JsonResult() { Result = DataOperations.GetErrMsg(ex), Status = DBResult.error.ToString(), ErrorMessage = DataOperations.GetErrMsg(ex) });
+            }
+
+        }
+
     }
 }

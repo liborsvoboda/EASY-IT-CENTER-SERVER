@@ -1,3 +1,0 @@
-pushd Output
-dotnet Microsoft.SourceBrowser.SourceIndexServer.dll
-popd

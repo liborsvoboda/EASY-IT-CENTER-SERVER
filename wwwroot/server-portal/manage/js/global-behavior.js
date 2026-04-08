@@ -208,8 +208,9 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("ToolsCounterList");
     Metro.storage.delItem("StorageFolderList");
     Metro.storage.delItem("ServerStorageVersionList");
+    Metro.storage.delItem("BlogList");
 
-    
+    Metro.storage.delItem("SelectedMenu");
     Metro.storage.delItem("SelectedEditor");
     Metro.storage.delItem("OpenExcelFile");
     Metro.storage.delItem("OpenWordFile");
@@ -220,7 +221,7 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     
 
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
-    let menu = JSON.parse(JSON.stringify(Metro.storage.getItem('PortalMenuList', null)));
+    let menu = Metro.storage.getItem('PortalMenuList', null);
     return menu;
 }
 
@@ -229,12 +230,18 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
 Gs.Behaviors.SetLink = function (htmlContentId, content) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
 
+    let portalMenuList = Metro.storage.getItem("PortalMenuList");
+    Metro.storage.setItem("SelectedMenu", portalMenuList.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
+
     $("#FrameWindow").load(Metro.storage.getItem('ApiOriginSuffix', null) + content);
 }
 
 
 Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
+
+    let portalMenuList = Metro.storage.getItem("PortalMenuList");
+    Metro.storage.setItem("SelectedMenu", portalMenuList.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
     document.getElementById("FrameWindow").innerHTML = 
     '<div id=MainWindow data-role="window" data-custom-buttons="WindowButtons" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" class="h-100" data-btn-close="false" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
@@ -244,6 +251,9 @@ Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
 
 Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
+
+    let portalMenuList = Metro.storage.getItem("PortalMenuList");
+    Metro.storage.setItem("SelectedMenu", portalMenuList.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
     document.getElementById("FrameWindow").innerHTML =
          '<div id=MainWindow data-role="window" data-custom-buttons="WindowButtons" data-icon="<span class=\'' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Icon + '\'></spam>" data-title="' + menu.filter(obj => { return obj.HtmlContentId == htmlContentId })[0].Name + '" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
@@ -264,6 +274,9 @@ Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
 
 Gs.Behaviors.SetExternalContent = function (htmlContentId, jsContentId, cssContentId) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
+
+    let portalMenuList = Metro.storage.getItem("PortalMenuList");
+    Metro.storage.setItem("SelectedMenu", portalMenuList.filter(obj => { return obj.HtmlContentId == htmlContentId })[0]);
 
     document.getElementById("FrameWindow").innerHTML =
     '<iframe id="IFrameWindow" src="' + menu.filter(menuItem => { return menuItem.HtmlContentId == htmlContentId })[0].HtmlContent + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>';

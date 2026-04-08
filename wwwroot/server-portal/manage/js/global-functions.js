@@ -613,5 +613,57 @@ Gs.Functions.AddSuggestionSave = async function () {
         UserId: Metro.storage.getItem("ApiToken", null) != null ? Metro.storage.getItem("ApiToken", null).Id : null
     }
     await Gs.Apis.RunServerPutApi("EasyITCenterSolutionMonacoLanguageList", jsonData, null);
+    setTimeout(async function () {
+        Gs.Variables.getSpProcedure[1].tableName = "SolutionMonacoSuggestionList";
+        Gs.Variables.getSpProcedure[2].camelCase = true;
+        await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MonacoSuggestionList");
+        Gs.Variables.getSpProcedure[2].camelCase = false;
+    }, 5000);
     $("#AddSuggest").remove();
+}
+
+
+Gs.Functions.SaveMenuHelp = async function () {
+    let data = Metro.storage.getItem("SelectedMenu", null);
+    data.MdHelp = $('#HelpFastEditor')[0].contentWindow.mdEditor.getMarkdown();
+    Metro.storage.setItem("SelectedMenu", data);
+
+    let jsonData = {
+        Id: data.MdHelpId,
+        RecGuid: data.RecGuid,
+        Value: data.MdHelp
+    };
+
+    await Gs.Apis.RunServerPostApi("PortalApiTableService/SetMdMenuHelp", jsonData, null, "RefreshPortalMenuList");
+    $("#EditHelpMenu").remove();
+}
+
+
+async function RefreshPortalMenuList() {
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenuList", "GenerateMenuList");
+}
+
+
+Gs.Functions.ResetBlog = function () {
+    $("#EditBlogMenu").remove();
+    EditBlogMenu();
+}
+
+
+Gs.Functions.SearchBlog = function () {
+    let search = $("#menuSearch").val();
+    $("#EditBlogMenu").remove();
+    EditBlogMenu(search);
+}
+
+
+Gs.Functions.SaveBlog = async function () {
+    let jsonData = {
+        MenuName: $("#menuBlogName").val(),
+        HtmlContent: $("#menuBlogContent").summernote('code')
+    };
+    if (jsonData.HtmlContent != "<p><br></p>") {
+        await Gs.Apis.RunServerPostApi("PortalApiTableService/SetBlogList", jsonData, null);
+        $("#EditBlogMenu").remove();
+    }
 }

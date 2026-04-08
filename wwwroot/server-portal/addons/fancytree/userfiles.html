@@ -279,7 +279,6 @@
                                 "xmlToMarkdown": { "name": "Xml To Markdown", "icon": "add" },
                                 "mdFilesToWebBook": { "name": "Md Files To WebBook", "icon": "add" },
                                 "dllToMdWebDocs": { "name": "Dll To Md Web Docs", "icon": "add" },
-                                "xmlToMdWebDocs": { "name": "Xml To Web Docs", "icon": "add" },
                                 "sep2": "---------",
                                 "rotateGallery": { "name": "Images to Rotate Gallery", "icon": "add" },
                             };
@@ -324,12 +323,6 @@
                                 "clearFolder": { "name": "Clear Folder", "icon": "delete" },
                                 "deleteFolder": { "name": "Delete Folder", "icon": "quit" },
                                 "sep0": "---------",
-                                "downloadHtmlFromUrl": { "name": "Get Html From Url", "icon": "add" },
-                                "downloadMdFromUrl": { "name": "Get MD From Url", "icon": "add" },
-                                "downloadPdfFromUrl": { "name": "Get Pdf From Url", "icon": "add" },
-                                "downloadImageFromUrl": { "name": "Get Image From Url", "icon": "add" },
-                                "sep1": "---------",
-                                "searchInFiles": { "name": "Search in Files", "icon": "paste" },
                                 "downloadFolder": { "name": "Download Folder (Zip)", "icon": "paste" },
                                 "sep2": "---------",
                                 "createFile": { "name": "Create File", "icon": "add" },
@@ -450,10 +443,7 @@
                         }
                     },
                     actions: async function (node, action, options) {
-                        if (action == "xmlToMdWebDocs") {
-                            await Gs.Apis.RunServerGetApi("GeneratorService/XmlToMdWebDocs", null, "ReloadUserStorage");
-
-                        } else if (action == "xmlToMarkdown") {
+                        if (action == "xmlToMarkdown") {
                             await Gs.Apis.RunServerGetApi("GeneratorService/XmlToMarkdown", null, "ReloadUserStorage");
 
                         } else if (action == "rotateGallery") {
