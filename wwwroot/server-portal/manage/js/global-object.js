@@ -588,6 +588,7 @@ Gs.Objects.OpenBlogMenu = async function () {
 }
 
 function EditBlogMenu(search = null) {
+
     let html = `
     <BUTTON onclick="Gs.Functions.SaveBlog();" class="button success c-pointer outline shadowed" style="position:absolute; top:20px;right:200px;z-index:2500;">Save Contribution</BUTTON>
     <BUTTON onclick="Gs.Functions.SearchBlog();" class="button warning c-pointer outline shadowed" style="position:absolute; top:20px;right:120px;z-index:2500;">Search</BUTTON>
@@ -609,11 +610,11 @@ function EditBlogMenu(search = null) {
             <DIV class="form-group"><div id="menuBlogContent"></div>
         </DIV>
         <DIV class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <DIV id="MenuBlog" class="pt-5">
+            <DIV id="MenuBlog" style="height: 300px;max-height: 300px;overflow: auto;">
             </DIV>
         </DIV>
     </DIV >`;
-    Gs.Objects.InfoboxObjectCreate("EditBlogMenu", html, width = "1000", height = "800");
+    Gs.Objects.InfoboxObjectCreate("EditBlogMenu", html, width = "1200", height = "800");
 
     setTimeout(async function () {
         $('#menuBlogContent').summernote({
@@ -632,36 +633,48 @@ function EditBlogMenu(search = null) {
             options.push({ val: item.Name, title: item.Name, selected: false });
         });
         select.addOptions(options);
+        
+        let blogList = [];
+        if (Metro.storage.getItem("BlogList", null)[0].Menu == undefined) {
+            let lastGuid = null, menuItem = {};
+            let portalMenu = Metro.storage.getItem('BlogList', null);
+            portalMenu.forEach((mItem, index, arr) => {
 
+                switch (mItem.apiTableColumnName) {
+                    case "MenuName":
+                        menuItem.Menu = mItem.value;
+                        menuItem.RecGuid = mItem.recGuid;
+                        break;
+                    case "HtmlContent":
+                        menuItem.HtmlContent = mItem.value;
+                        break;
+                    default:
+                }
 
+                if (lastGuid != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != mItem.recGuid)) {
+                    blogList.push(menuItem);
+                    menuItem = {};
+                }
 
-        let lastGuid = null, menuItem = {}, blogList = [];
-        let portalMenu = Metro.storage.getItem('BlogList', null);
+                lastGuid = mItem.recGuid;
+            });
+            blogList.sort((a, b) => a.Menu > b.Menu ? 1 : -1);
+            Metro.storage.setItem('BlogList', blogList);
+        }
 
-        portalMenu.forEach((mItem, index, arr) => {
-
-            switch (mItem.apiTableColumnName) {
-                case "MenuName":
-                    menuItem.MenuName = mItem.value;
-                    menuItem.RecGuid = mItem.recGuid;
-                    break;
-                case "HtmlContent":
-                    menuItem.HtmlContent = mItem.value;
-                    break;
-                default:
+        blogList = Metro.storage.getItem('BlogList', null);
+        let menuName = null;
+        let html = `<div data-role="accordion" data-one-frame="true" data-show-active="true">`;
+        blogList.forEach(blog => {
+            if (menuName == null || menuName != blog.Menu) {
+                if (menuName != null) { html += `</ul></div></div>`; }
+                html += `<div class="frame"><div class="heading">${blog.Menu}</div><div class="content"><ul class="step-list">`;
             }
-
-            if (lastGuid != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != mItem.recGuid)) {
-                blogList.push(menuItem);
-                menuItem = {};
-            }
-
-            lastGuid = mItem.recGuid;
+            if (search == null || (search != null && blog.HtmlContent.toLowerCase().indexOf(search.toLowerCase()) > -1)) { html += `<li>${blog.HtmlContent}</li>`; }
+            menuName = blog.Menu;
         });
-        blogList.sort((a, b) => a.MenuName > b.MenuName ? 1 : -1);
-        Metro.storage.setItem('BlogList', blogList);
-
-
-
+        html += `</ul></div></div></div>`;
+        $("#MenuBlog").html(html);
+    
     }, 1000);
 }

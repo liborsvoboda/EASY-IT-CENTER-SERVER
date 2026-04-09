@@ -65,7 +65,6 @@
     <Description>Universal Multi Cloud Server With Developing Online.
 Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <DelaySign>True</DelaySign>
-    <DocumentationFile>E:\Projekty\zEasy\EASY-IT-CENTER\EASY-IT-CENTER-SERVER\wwwroot\server-public\Projects\Data\EasyITCenter.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
