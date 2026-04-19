@@ -1,0 +1,26 @@
+{
+  "id": "packages/lexical-eslint-plugin",
+  "title": "@lexical/eslint-plugin",
+  "description": "This ESLint plugin enforces the Lexical $function convention.",
+  "source": "@site/docs/packages/lexical-eslint-plugin.md",
+  "sourceDirName": "packages",
+  "slug": "/packages/lexical-eslint-plugin",
+  "permalink": "/docs/packages/lexical-eslint-plugin",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-eslint-plugin/README.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "custom_edit_url": "https://github.com/facebook/lexical/tree/main/packages/lexical-eslint-plugin/README.md"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "@lexical/dragon",
+    "permalink": "/docs/packages/lexical-dragon"
+  },
+  "next": {
+    "title": "@lexical/file",
+    "permalink": "/docs/packages/lexical-file"
+  }
+}

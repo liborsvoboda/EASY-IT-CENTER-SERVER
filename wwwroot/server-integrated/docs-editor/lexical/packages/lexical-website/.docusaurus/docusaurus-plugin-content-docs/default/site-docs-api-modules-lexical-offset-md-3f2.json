@@ -1,0 +1,28 @@
+{
+  "id": "api/modules/lexical_offset",
+  "title": "Module: @lexical/offset",
+  "description": "Classes",
+  "source": "@site/docs/api/modules/lexical_offset.md",
+  "sourceDirName": "api/modules",
+  "slug": "/api/modules/lexical_offset",
+  "permalink": "/docs/api/modules/lexical_offset",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_offset",
+    "title": "Module: @lexical/offset",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "@lexical/markdown",
+    "permalink": "/docs/api/modules/lexical_markdown"
+  },
+  "next": {
+    "title": "@lexical/overflow",
+    "permalink": "/docs/api/modules/lexical_overflow"
+  }
+}

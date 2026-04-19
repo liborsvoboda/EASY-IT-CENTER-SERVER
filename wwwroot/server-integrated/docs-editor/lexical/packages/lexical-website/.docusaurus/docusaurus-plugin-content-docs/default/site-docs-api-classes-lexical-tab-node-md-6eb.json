@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical.TabNode",
+  "title": "Class: TabNode",
+  "description": "lexical.TabNode",
+  "source": "@site/docs/api/classes/lexical.TabNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical.TabNode",
+  "permalink": "/docs/api/classes/lexical.TabNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical.TabNode",
+    "title": "Class: TabNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "RootNode",
+    "permalink": "/docs/api/classes/lexical.RootNode"
+  },
+  "next": {
+    "title": "TextNode",
+    "permalink": "/docs/api/classes/lexical.TextNode"
+  }
+}

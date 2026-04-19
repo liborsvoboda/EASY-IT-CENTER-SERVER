@@ -1,0 +1,27 @@
+{
+  "id": "collaboration/faq",
+  "title": "Collaboration FAQ",
+  "description": "Source of truth: Lexical State, Yjs and App's DB",
+  "source": "@site/docs/collaboration/faq.md",
+  "sourceDirName": "collaboration",
+  "slug": "/collaboration/faq",
+  "permalink": "/docs/collaboration/faq",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/collaboration/faq.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "React",
+    "permalink": "/docs/collaboration/react"
+  },
+  "next": {
+    "title": "FAQ",
+    "permalink": "/docs/faq"
+  }
+}

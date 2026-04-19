@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical_link.LinkNode",
+  "title": "Class: LinkNode",
+  "description": "@lexical/link.LinkNode",
+  "source": "@site/docs/api/classes/lexical_link.LinkNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical_link.LinkNode",
+  "permalink": "/docs/api/classes/lexical_link.LinkNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_link.LinkNode",
+    "title": "Class: LinkNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "AutoLinkNode",
+    "permalink": "/docs/api/classes/lexical_link.AutoLinkNode"
+  },
+  "next": {
+    "title": "ListItemNode",
+    "permalink": "/docs/api/classes/lexical_list.ListItemNode"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "api/interfaces/lexical.SerializedEditorState",
+  "title": "Interface: SerializedEditorState<T>",
+  "description": "lexical.SerializedEditorState",
+  "source": "@site/docs/api/interfaces/lexical.SerializedEditorState.md",
+  "sourceDirName": "api/interfaces",
+  "slug": "/api/interfaces/lexical.SerializedEditorState",
+  "permalink": "/docs/api/interfaces/lexical.SerializedEditorState",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical.SerializedEditorState",
+    "title": "Interface: SerializedEditorState<T>",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "EditorStateReadOptions",
+    "permalink": "/docs/api/interfaces/lexical.EditorStateReadOptions"
+  },
+  "next": {
+    "title": "SerializedDocument",
+    "permalink": "/docs/api/interfaces/lexical_file.SerializedDocument"
+  }
+}

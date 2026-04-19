@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical.EditorState",
+  "title": "Class: EditorState",
+  "description": "lexical.EditorState",
+  "source": "@site/docs/api/classes/lexical.EditorState.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical.EditorState",
+  "permalink": "/docs/api/classes/lexical.EditorState",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical.EditorState",
+    "title": "Class: EditorState",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "DecoratorNode",
+    "permalink": "/docs/api/classes/lexical.DecoratorNode"
+  },
+  "next": {
+    "title": "ElementNode",
+    "permalink": "/docs/api/classes/lexical.ElementNode"
+  }
+}

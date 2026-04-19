@@ -1,0 +1,27 @@
+{
+  "id": "getting-started/react",
+  "title": "Getting Started with React",
+  "description": "Video Tutorials",
+  "source": "@site/docs/getting-started/react.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/react",
+  "permalink": "/docs/getting-started/react",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/getting-started/react.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Quick Start (Vanilla JS)",
+    "permalink": "/docs/getting-started/quick-start"
+  },
+  "next": {
+    "title": "Theming",
+    "permalink": "/docs/getting-started/theming"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical_table.TableRowNode",
+  "title": "Class: TableRowNode",
+  "description": "@lexical/table.TableRowNode",
+  "source": "@site/docs/api/classes/lexical_table.TableRowNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical_table.TableRowNode",
+  "permalink": "/docs/api/classes/lexical_table.TableRowNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_table.TableRowNode",
+    "title": "Class: TableRowNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "TableObserver",
+    "permalink": "/docs/api/classes/lexical_table.TableObserver"
+  },
+  "next": {
+    "title": "TableSelection",
+    "permalink": "/docs/api/classes/lexical_table.TableSelection"
+  }
+}

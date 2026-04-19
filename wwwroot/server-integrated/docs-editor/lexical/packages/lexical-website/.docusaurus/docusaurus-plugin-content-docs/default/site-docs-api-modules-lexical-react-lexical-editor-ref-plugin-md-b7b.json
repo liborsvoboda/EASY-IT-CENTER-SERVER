@@ -1,0 +1,28 @@
+{
+  "id": "api/modules/lexical_react_LexicalEditorRefPlugin",
+  "title": "Module: @lexical/react/LexicalEditorRefPlugin",
+  "description": "Functions",
+  "source": "@site/docs/api/modules/lexical_react_LexicalEditorRefPlugin.md",
+  "sourceDirName": "api/modules",
+  "slug": "/api/modules/lexical_react_LexicalEditorRefPlugin",
+  "permalink": "/docs/api/modules/lexical_react_LexicalEditorRefPlugin",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_react_LexicalEditorRefPlugin",
+    "title": "Module: @lexical/react/LexicalEditorRefPlugin",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "LexicalDraggableBlockPlugin",
+    "permalink": "/docs/api/modules/lexical_react_LexicalDraggableBlockPlugin"
+  },
+  "next": {
+    "title": "LexicalErrorBoundary",
+    "permalink": "/docs/api/modules/lexical_react_LexicalErrorBoundary"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "faq",
+  "title": "FAQ",
+  "description": "Why does Lexical use the $ prefix in the name of many of the functions?",
+  "source": "@site/docs/faq.md",
+  "sourceDirName": ".",
+  "slug": "/faq",
+  "permalink": "/docs/faq",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/faq.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 7,
+  "frontMatter": {
+    "sidebar_position": 7
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Collaboration FAQ",
+    "permalink": "/docs/collaboration/faq"
+  }
+}

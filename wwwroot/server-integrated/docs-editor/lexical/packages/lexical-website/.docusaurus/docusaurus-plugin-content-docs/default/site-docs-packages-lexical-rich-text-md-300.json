@@ -1,0 +1,26 @@
+{
+  "id": "packages/lexical-rich-text",
+  "title": "@lexical/rich-text",
+  "description": "This package provides a starting point for Lexical users by registering listeners for a set of basic commands that cover simple text-editing behavior such as entering text, deleting characters, copy + paste, or changing the selection with arrow keys. It also provides default behavior for rich text features, such as headings, formatted, text and blockquotes.",
+  "source": "@site/docs/packages/lexical-rich-text.md",
+  "sourceDirName": "packages",
+  "slug": "/packages/lexical-rich-text",
+  "permalink": "/docs/packages/lexical-rich-text",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-rich-text/README.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "custom_edit_url": "https://github.com/facebook/lexical/tree/main/packages/lexical-rich-text/README.md"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "@lexical/react",
+    "permalink": "/docs/packages/lexical-react"
+  },
+  "next": {
+    "title": "@lexical/selection",
+    "permalink": "/docs/packages/lexical-selection"
+  }
+}

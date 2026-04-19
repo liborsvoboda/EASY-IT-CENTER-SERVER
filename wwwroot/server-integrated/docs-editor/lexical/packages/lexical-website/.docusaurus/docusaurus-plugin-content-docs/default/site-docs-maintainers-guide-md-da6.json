@@ -1,0 +1,15 @@
+{
+  "id": "maintainers-guide",
+  "title": "Maintainers' Guide",
+  "description": "This is the grimoire of arcane knowledge covering the overall organization",
+  "source": "@site/docs/maintainers-guide.md",
+  "sourceDirName": ".",
+  "slug": "/maintainers-guide",
+  "permalink": "/docs/maintainers-guide",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/maintainers-guide.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

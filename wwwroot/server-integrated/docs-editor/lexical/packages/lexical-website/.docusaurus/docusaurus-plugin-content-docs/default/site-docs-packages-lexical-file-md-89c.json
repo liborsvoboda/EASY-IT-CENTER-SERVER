@@ -1,0 +1,26 @@
+{
+  "id": "packages/lexical-file",
+  "title": "@lexical/file",
+  "description": "See API Documentation",
+  "source": "@site/docs/packages/lexical-file.md",
+  "sourceDirName": "packages",
+  "slug": "/packages/lexical-file",
+  "permalink": "/docs/packages/lexical-file",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-file/README.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "custom_edit_url": "https://github.com/facebook/lexical/tree/main/packages/lexical-file/README.md"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "@lexical/eslint-plugin",
+    "permalink": "/docs/packages/lexical-eslint-plugin"
+  },
+  "next": {
+    "title": "@lexical/hashtag",
+    "permalink": "/docs/packages/lexical-hashtag"
+  }
+}

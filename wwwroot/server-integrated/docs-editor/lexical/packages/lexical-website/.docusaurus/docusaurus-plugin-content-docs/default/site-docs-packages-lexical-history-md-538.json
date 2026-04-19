@@ -1,0 +1,26 @@
+{
+  "id": "packages/lexical-history",
+  "title": "@lexical/history",
+  "description": "See API Documentation",
+  "source": "@site/docs/packages/lexical-history.md",
+  "sourceDirName": "packages",
+  "slug": "/packages/lexical-history",
+  "permalink": "/docs/packages/lexical-history",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-history/README.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "custom_edit_url": "https://github.com/facebook/lexical/tree/main/packages/lexical-history/README.md"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "@lexical/headless",
+    "permalink": "/docs/packages/lexical-headless"
+  },
+  "next": {
+    "title": "@lexical/html",
+    "permalink": "/docs/packages/lexical-html"
+  }
+}

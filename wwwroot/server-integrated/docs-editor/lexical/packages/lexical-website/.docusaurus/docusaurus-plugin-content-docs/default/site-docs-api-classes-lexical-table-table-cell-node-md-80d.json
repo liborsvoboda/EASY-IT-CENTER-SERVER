@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical_table.TableCellNode",
+  "title": "Class: TableCellNode",
+  "description": "@lexical/table.TableCellNode",
+  "source": "@site/docs/api/classes/lexical_table.TableCellNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical_table.TableCellNode",
+  "permalink": "/docs/api/classes/lexical_table.TableCellNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_table.TableCellNode",
+    "title": "Class: TableCellNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "QuoteNode",
+    "permalink": "/docs/api/classes/lexical_rich_text.QuoteNode"
+  },
+  "next": {
+    "title": "TableNode",
+    "permalink": "/docs/api/classes/lexical_table.TableNode"
+  }
+}

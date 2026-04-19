@@ -1,0 +1,28 @@
+{
+  "id": "api/modules/lexical_eslint_plugin",
+  "title": "Module: @lexical/eslint-plugin",
+  "description": "Type Aliases",
+  "source": "@site/docs/api/modules/lexical_eslint_plugin.md",
+  "sourceDirName": "api/modules",
+  "slug": "/api/modules/lexical_eslint_plugin",
+  "permalink": "/docs/api/modules/lexical_eslint_plugin",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_eslint_plugin",
+    "title": "Module: @lexical/eslint-plugin",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "@lexical/dragon",
+    "permalink": "/docs/api/modules/lexical_dragon"
+  },
+  "next": {
+    "title": "@lexical/file",
+    "permalink": "/docs/api/modules/lexical_file"
+  }
+}

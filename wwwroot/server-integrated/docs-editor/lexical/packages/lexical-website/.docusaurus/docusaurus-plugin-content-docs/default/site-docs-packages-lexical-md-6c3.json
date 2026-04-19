@@ -1,0 +1,29 @@
+{
+  "id": "packages/lexical",
+  "title": "lexical",
+  "description": "See API Documentation",
+  "source": "@site/docs/packages/lexical.md",
+  "sourceDirName": "packages",
+  "slug": "/packages/lexical",
+  "permalink": "/docs/packages/lexical",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical/README.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "sidebar_label": "lexical (core)",
+    "custom_edit_url": "https://github.com/facebook/lexical/tree/main/packages/lexical/README.md"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Working with DOM Events",
+    "permalink": "/docs/concepts/dom-events"
+  },
+  "next": {
+    "title": "@lexical/clipboard",
+    "permalink": "/docs/packages/lexical-clipboard"
+  }
+}

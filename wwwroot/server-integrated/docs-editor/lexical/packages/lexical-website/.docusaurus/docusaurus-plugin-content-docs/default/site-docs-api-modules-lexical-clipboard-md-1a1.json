@@ -1,0 +1,28 @@
+{
+  "id": "api/modules/lexical_clipboard",
+  "title": "Module: @lexical/clipboard",
+  "description": "Functions",
+  "source": "@site/docs/api/modules/lexical_clipboard.md",
+  "sourceDirName": "api/modules",
+  "slug": "/api/modules/lexical_clipboard",
+  "permalink": "/docs/api/modules/lexical_clipboard",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_clipboard",
+    "title": "Module: @lexical/clipboard",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "lexical",
+    "permalink": "/docs/api/modules/lexical"
+  },
+  "next": {
+    "title": "@lexical/code",
+    "permalink": "/docs/api/modules/lexical_code"
+  }
+}

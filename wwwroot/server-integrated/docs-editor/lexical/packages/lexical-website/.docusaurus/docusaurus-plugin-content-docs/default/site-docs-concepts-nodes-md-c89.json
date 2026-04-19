@@ -1,0 +1,24 @@
+{
+  "id": "concepts/nodes",
+  "title": "Nodes",
+  "description": "Base Nodes",
+  "source": "@site/docs/concepts/nodes.md",
+  "sourceDirName": "concepts",
+  "slug": "/concepts/nodes",
+  "permalink": "/docs/concepts/nodes",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/concepts/nodes.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "docs",
+  "previous": {
+    "title": "Editor State",
+    "permalink": "/docs/concepts/editor-state"
+  },
+  "next": {
+    "title": "Node Overrides",
+    "permalink": "/docs/concepts/node-replacement"
+  }
+}

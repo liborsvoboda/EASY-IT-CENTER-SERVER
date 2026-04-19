@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical.LexicalEditor",
+  "title": "Class: LexicalEditor",
+  "description": "lexical.LexicalEditor",
+  "source": "@site/docs/api/classes/lexical.LexicalEditor.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical.LexicalEditor",
+  "permalink": "/docs/api/classes/lexical.LexicalEditor",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical.LexicalEditor",
+    "title": "Class: LexicalEditor",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "ElementNode",
+    "permalink": "/docs/api/classes/lexical.ElementNode"
+  },
+  "next": {
+    "title": "LexicalNode",
+    "permalink": "/docs/api/classes/lexical.LexicalNode"
+  }
+}

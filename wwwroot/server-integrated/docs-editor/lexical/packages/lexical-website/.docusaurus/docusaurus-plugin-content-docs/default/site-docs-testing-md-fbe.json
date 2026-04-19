@@ -1,0 +1,15 @@
+{
+  "id": "testing",
+  "title": "Testing",
+  "description": "Lexical relies on tests to ensure that changes don't break anything, using a mix of unit and end-to-end tests.",
+  "source": "@site/docs/testing.md",
+  "sourceDirName": ".",
+  "slug": "/testing",
+  "permalink": "/docs/testing",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/testing.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

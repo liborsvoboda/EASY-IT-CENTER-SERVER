@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical_rich_text.QuoteNode",
+  "title": "Class: QuoteNode",
+  "description": "@lexical/rich-text.QuoteNode",
+  "source": "@site/docs/api/classes/lexical_rich_text.QuoteNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical_rich_text.QuoteNode",
+  "permalink": "/docs/api/classes/lexical_rich_text.QuoteNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_rich_text.QuoteNode",
+    "title": "Class: QuoteNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "HeadingNode",
+    "permalink": "/docs/api/classes/lexical_rich_text.HeadingNode"
+  },
+  "next": {
+    "title": "TableCellNode",
+    "permalink": "/docs/api/classes/lexical_table.TableCellNode"
+  }
+}

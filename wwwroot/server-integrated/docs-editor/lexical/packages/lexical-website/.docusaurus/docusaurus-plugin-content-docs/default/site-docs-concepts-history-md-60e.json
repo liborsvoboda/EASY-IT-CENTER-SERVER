@@ -1,0 +1,24 @@
+{
+  "id": "concepts/history",
+  "title": "useHistory",
+  "description": "Lexical's useHistory adds support for Undo and Redo. Part of undo and redo requires supporting coalescing of certain dynamic operations such as continuous typing. The below provides background information regarding the continuous typing undo coalescing feature.",
+  "source": "@site/docs/concepts/history.md",
+  "sourceDirName": "concepts",
+  "slug": "/concepts/history",
+  "permalink": "/docs/concepts/history",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/concepts/history.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "docs",
+  "previous": {
+    "title": "Read Mode / Edit Mode",
+    "permalink": "/docs/concepts/read-only"
+  },
+  "next": {
+    "title": "Serialization & Deserialization",
+    "permalink": "/docs/concepts/serialization"
+  }
+}

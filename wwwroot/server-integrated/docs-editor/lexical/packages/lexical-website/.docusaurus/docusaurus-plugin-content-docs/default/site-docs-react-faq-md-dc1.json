@@ -1,0 +1,24 @@
+{
+  "id": "react/faq",
+  "title": "React FAQ",
+  "description": "My app does not work in dev when using StrictMode, help!?",
+  "source": "@site/docs/react/faq.md",
+  "sourceDirName": "react",
+  "slug": "/react/faq",
+  "permalink": "/docs/react/faq",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/react/faq.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "docs",
+  "previous": {
+    "title": "Creating a React Plugin",
+    "permalink": "/docs/react/create_plugin"
+  },
+  "next": {
+    "title": "React",
+    "permalink": "/docs/collaboration/react"
+  }
+}

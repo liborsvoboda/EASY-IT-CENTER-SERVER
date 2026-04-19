@@ -1,0 +1,26 @@
+{
+  "id": "packages/lexical-html",
+  "title": "@lexical/html",
+  "description": "See API Documentation",
+  "source": "@site/docs/packages/lexical-html.md",
+  "sourceDirName": "packages",
+  "slug": "/packages/lexical-html",
+  "permalink": "/docs/packages/lexical-html",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-html/README.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "custom_edit_url": "https://github.com/facebook/lexical/tree/main/packages/lexical-html/README.md"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "@lexical/history",
+    "permalink": "/docs/packages/lexical-history"
+  },
+  "next": {
+    "title": "@lexical/link",
+    "permalink": "/docs/packages/lexical-link"
+  }
+}

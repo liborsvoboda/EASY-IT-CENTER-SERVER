@@ -1,0 +1,24 @@
+{
+  "id": "concepts/dom-events",
+  "title": "Working with DOM Events",
+  "description": "Sometimes, when working with Lexical, it might be necessary or useful for you to attach a DOM Event Listener to the underlying DOM nodes that Lexical controls. For instance, you might want to to show a popover when a user mouses over a specific node or open a modal when they click on a node. Either of these use cases (and many others) can be accomplished via native DOM Event Listeners. There are 3 main ways that you can listen for DOM Events on nodes controlled by Lexical:",
+  "source": "@site/docs/concepts/dom-events.md",
+  "sourceDirName": "concepts",
+  "slug": "/concepts/dom-events",
+  "permalink": "/docs/concepts/dom-events",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/concepts/dom-events.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "docs",
+  "previous": {
+    "title": "Serialization & Deserialization",
+    "permalink": "/docs/concepts/serialization"
+  },
+  "next": {
+    "title": "lexical (core)",
+    "permalink": "/docs/packages/lexical"
+  }
+}

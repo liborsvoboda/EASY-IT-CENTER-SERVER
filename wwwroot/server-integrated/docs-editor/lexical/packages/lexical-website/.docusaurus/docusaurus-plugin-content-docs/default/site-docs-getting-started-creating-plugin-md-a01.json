@@ -1,0 +1,27 @@
+{
+  "id": "getting-started/creating-plugin",
+  "title": "Creating a Plugin",
+  "description": "This page covers Lexical plugin creation, independently of any framework or library. For those not yet familiar with Lexical it's advisable to check out the Quick Start (Vanilla JS) page.",
+  "source": "@site/docs/getting-started/creating-plugin.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/creating-plugin",
+  "permalink": "/docs/getting-started/creating-plugin",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/getting-started/creating-plugin.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 15,
+  "frontMatter": {
+    "sidebar_position": 15
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Supported Browsers",
+    "permalink": "/docs/getting-started/supported-browsers"
+  },
+  "next": {
+    "title": "Developer Tools",
+    "permalink": "/docs/getting-started/devtools"
+  }
+}

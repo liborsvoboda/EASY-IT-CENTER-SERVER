@@ -1,0 +1,26 @@
+{
+  "id": "packages/lexical-mark",
+  "title": "@lexical/mark",
+  "description": "See API Documentation",
+  "source": "@site/docs/packages/lexical-mark.md",
+  "sourceDirName": "packages",
+  "slug": "/packages/lexical-mark",
+  "permalink": "/docs/packages/lexical-mark",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-mark/README.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "custom_edit_url": "https://github.com/facebook/lexical/tree/main/packages/lexical-mark/README.md"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "@lexical/list",
+    "permalink": "/docs/packages/lexical-list"
+  },
+  "next": {
+    "title": "@lexical/markdown",
+    "permalink": "/docs/packages/lexical-markdown"
+  }
+}

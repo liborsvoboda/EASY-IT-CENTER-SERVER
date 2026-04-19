@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical_table.TableSelection",
+  "title": "Class: TableSelection",
+  "description": "@lexical/table.TableSelection",
+  "source": "@site/docs/api/classes/lexical_table.TableSelection.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical_table.TableSelection",
+  "permalink": "/docs/api/classes/lexical_table.TableSelection",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_table.TableSelection",
+    "title": "Class: TableSelection",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "TableRowNode",
+    "permalink": "/docs/api/classes/lexical_table.TableRowNode"
+  },
+  "next": {
+    "title": "BaseSelection",
+    "permalink": "/docs/api/interfaces/lexical.BaseSelection"
+  }
+}

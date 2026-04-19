@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical.ParagraphNode",
+  "title": "Class: ParagraphNode",
+  "description": "lexical.ParagraphNode",
+  "source": "@site/docs/api/classes/lexical.ParagraphNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical.ParagraphNode",
+  "permalink": "/docs/api/classes/lexical.ParagraphNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical.ParagraphNode",
+    "title": "Class: ParagraphNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "NodeSelection",
+    "permalink": "/docs/api/classes/lexical.NodeSelection"
+  },
+  "next": {
+    "title": "Point",
+    "permalink": "/docs/api/classes/lexical.Point"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "packages/lexical-react",
+  "title": "@lexical/react",
+  "description": "This package provides a set of components and hooks for Lexical that allow for text editing in React applications.",
+  "source": "@site/docs/packages/lexical-react.md",
+  "sourceDirName": "packages",
+  "slug": "/packages/lexical-react",
+  "permalink": "/docs/packages/lexical-react",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-react/README.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "custom_edit_url": "https://github.com/facebook/lexical/tree/main/packages/lexical-react/README.md"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "@lexical/plain-text",
+    "permalink": "/docs/packages/lexical-plain-text"
+  },
+  "next": {
+    "title": "@lexical/rich-text",
+    "permalink": "/docs/packages/lexical-rich-text"
+  }
+}

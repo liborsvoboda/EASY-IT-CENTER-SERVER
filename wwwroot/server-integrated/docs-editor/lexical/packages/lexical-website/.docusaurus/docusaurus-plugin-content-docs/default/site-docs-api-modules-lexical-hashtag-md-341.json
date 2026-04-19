@@ -1,0 +1,28 @@
+{
+  "id": "api/modules/lexical_hashtag",
+  "title": "Module: @lexical/hashtag",
+  "description": "Classes",
+  "source": "@site/docs/api/modules/lexical_hashtag.md",
+  "sourceDirName": "api/modules",
+  "slug": "/api/modules/lexical_hashtag",
+  "permalink": "/docs/api/modules/lexical_hashtag",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_hashtag",
+    "title": "Module: @lexical/hashtag",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "@lexical/file",
+    "permalink": "/docs/api/modules/lexical_file"
+  },
+  "next": {
+    "title": "@lexical/headless",
+    "permalink": "/docs/api/modules/lexical_headless"
+  }
+}

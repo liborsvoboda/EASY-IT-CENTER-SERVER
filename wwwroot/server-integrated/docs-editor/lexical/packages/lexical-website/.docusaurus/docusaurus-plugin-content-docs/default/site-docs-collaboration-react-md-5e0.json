@@ -1,0 +1,27 @@
+{
+  "id": "collaboration/react",
+  "title": "React",
+  "description": "Lexical provides LexicalCollaborationPlugin and useCollaborationContext hook within @lexical/react to accelerate creation of the collaborative React backed editors.",
+  "source": "@site/docs/collaboration/react.md",
+  "sourceDirName": "collaboration",
+  "slug": "/collaboration/react",
+  "permalink": "/docs/collaboration/react",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/collaboration/react.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "React FAQ",
+    "permalink": "/docs/react/faq"
+  },
+  "next": {
+    "title": "Collaboration FAQ",
+    "permalink": "/docs/collaboration/faq"
+  }
+}

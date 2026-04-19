@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical.RootNode",
+  "title": "Class: RootNode",
+  "description": "lexical.RootNode",
+  "source": "@site/docs/api/classes/lexical.RootNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical.RootNode",
+  "permalink": "/docs/api/classes/lexical.RootNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical.RootNode",
+    "title": "Class: RootNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "RangeSelection",
+    "permalink": "/docs/api/classes/lexical.RangeSelection"
+  },
+  "next": {
+    "title": "TabNode",
+    "permalink": "/docs/api/classes/lexical.TabNode"
+  }
+}

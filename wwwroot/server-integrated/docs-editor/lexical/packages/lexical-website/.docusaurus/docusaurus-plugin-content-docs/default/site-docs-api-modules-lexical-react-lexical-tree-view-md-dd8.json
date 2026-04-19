@@ -1,0 +1,28 @@
+{
+  "id": "api/modules/lexical_react_LexicalTreeView",
+  "title": "Module: @lexical/react/LexicalTreeView",
+  "description": "Functions",
+  "source": "@site/docs/api/modules/lexical_react_LexicalTreeView.md",
+  "sourceDirName": "api/modules",
+  "slug": "/api/modules/lexical_react_LexicalTreeView",
+  "permalink": "/docs/api/modules/lexical_react_LexicalTreeView",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_react_LexicalTreeView",
+    "title": "Module: @lexical/react/LexicalTreeView",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "LexicalTablePlugin",
+    "permalink": "/docs/api/modules/lexical_react_LexicalTablePlugin"
+  },
+  "next": {
+    "title": "LexicalTypeaheadMenuPlugin",
+    "permalink": "/docs/api/modules/lexical_react_LexicalTypeaheadMenuPlugin"
+  }
+}

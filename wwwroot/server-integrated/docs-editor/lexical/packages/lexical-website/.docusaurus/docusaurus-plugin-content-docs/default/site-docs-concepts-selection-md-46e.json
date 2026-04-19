@@ -1,0 +1,24 @@
+{
+  "id": "concepts/selection",
+  "title": "Selection",
+  "description": "Types of selection",
+  "source": "@site/docs/concepts/selection.md",
+  "sourceDirName": "concepts",
+  "slug": "/concepts/selection",
+  "permalink": "/docs/concepts/selection",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/concepts/selection.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "docs",
+  "previous": {
+    "title": "Commands",
+    "permalink": "/docs/concepts/commands"
+  },
+  "next": {
+    "title": "Read Mode / Edit Mode",
+    "permalink": "/docs/concepts/read-only"
+  }
+}

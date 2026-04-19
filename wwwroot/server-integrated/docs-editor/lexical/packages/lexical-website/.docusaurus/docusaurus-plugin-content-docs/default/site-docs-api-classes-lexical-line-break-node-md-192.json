@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical.LineBreakNode",
+  "title": "Class: LineBreakNode",
+  "description": "lexical.LineBreakNode",
+  "source": "@site/docs/api/classes/lexical.LineBreakNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical.LineBreakNode",
+  "permalink": "/docs/api/classes/lexical.LineBreakNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical.LineBreakNode",
+    "title": "Class: LineBreakNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "LexicalNode",
+    "permalink": "/docs/api/classes/lexical.LexicalNode"
+  },
+  "next": {
+    "title": "NodeSelection",
+    "permalink": "/docs/api/classes/lexical.NodeSelection"
+  }
+}

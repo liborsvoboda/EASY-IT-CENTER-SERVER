@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical_list.ListNode",
+  "title": "Class: ListNode",
+  "description": "@lexical/list.ListNode",
+  "source": "@site/docs/api/classes/lexical_list.ListNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical_list.ListNode",
+  "permalink": "/docs/api/classes/lexical_list.ListNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_list.ListNode",
+    "title": "Class: ListNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "ListItemNode",
+    "permalink": "/docs/api/classes/lexical_list.ListItemNode"
+  },
+  "next": {
+    "title": "MarkNode",
+    "permalink": "/docs/api/classes/lexical_mark.MarkNode"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "design",
+  "title": "Lexical's Design",
+  "description": "Note: this document is still a work-in-progress and things are likely still in flux.",
+  "source": "@site/docs/design.md",
+  "sourceDirName": ".",
+  "slug": "/design",
+  "permalink": "/docs/design",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/design.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

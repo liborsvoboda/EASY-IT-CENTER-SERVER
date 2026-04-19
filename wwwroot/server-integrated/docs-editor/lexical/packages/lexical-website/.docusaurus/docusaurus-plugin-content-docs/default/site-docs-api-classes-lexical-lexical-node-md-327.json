@@ -1,0 +1,28 @@
+{
+  "id": "api/classes/lexical.LexicalNode",
+  "title": "Class: LexicalNode",
+  "description": "lexical.LexicalNode",
+  "source": "@site/docs/api/classes/lexical.LexicalNode.md",
+  "sourceDirName": "api/classes",
+  "slug": "/api/classes/lexical.LexicalNode",
+  "permalink": "/docs/api/classes/lexical.LexicalNode",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical.LexicalNode",
+    "title": "Class: LexicalNode",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "LexicalEditor",
+    "permalink": "/docs/api/classes/lexical.LexicalEditor"
+  },
+  "next": {
+    "title": "LineBreakNode",
+    "permalink": "/docs/api/classes/lexical.LineBreakNode"
+  }
+}

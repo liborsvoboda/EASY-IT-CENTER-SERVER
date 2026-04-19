@@ -1,0 +1,27 @@
+{
+  "id": "react/create_plugin",
+  "title": "Creating a React Plugin",
+  "description": "In addition to using the Lexical React plugins offered by the core library, you can make your own plugins to extend or alter Lexical's functionality to suit your own use cases.",
+  "source": "@site/docs/react/create_plugin.md",
+  "sourceDirName": "react",
+  "slug": "/react/create_plugin",
+  "permalink": "/docs/react/create_plugin",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-website/docs/react/create_plugin.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Lexical Plugins",
+    "permalink": "/docs/react/plugins"
+  },
+  "next": {
+    "title": "React FAQ",
+    "permalink": "/docs/react/faq"
+  }
+}

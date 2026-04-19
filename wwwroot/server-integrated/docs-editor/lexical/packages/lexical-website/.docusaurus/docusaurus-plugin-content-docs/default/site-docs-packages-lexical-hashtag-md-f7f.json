@@ -1,0 +1,26 @@
+{
+  "id": "packages/lexical-hashtag",
+  "title": "@lexical/hashtag",
+  "description": "See API Documentation",
+  "source": "@site/docs/packages/lexical-hashtag.md",
+  "sourceDirName": "packages",
+  "slug": "/packages/lexical-hashtag",
+  "permalink": "/docs/packages/lexical-hashtag",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/lexical/tree/main/packages/lexical-hashtag/README.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "custom_edit_url": "https://github.com/facebook/lexical/tree/main/packages/lexical-hashtag/README.md"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "@lexical/file",
+    "permalink": "/docs/packages/lexical-file"
+  },
+  "next": {
+    "title": "@lexical/headless",
+    "permalink": "/docs/packages/lexical-headless"
+  }
+}

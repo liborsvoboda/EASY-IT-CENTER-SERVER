@@ -1,0 +1,846 @@
+{
+  "/blog-e21": {
+    "__comp": "a6aa9e1f",
+    "__context": {
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "7661071f"
+      },
+      {
+        "content": "f4f34a3a"
+      },
+      {
+        "content": "8717b14a"
+      },
+      {
+        "content": "925b3f96"
+      }
+    ],
+    "__props": "53a3e6dc"
+  },
+  "/blog/archive-245": {
+    "__comp": "9e4087bc",
+    "__context": {
+      "plugin": "36994c47"
+    },
+    "__props": "25003e4f"
+  },
+  "/blog/first-blog-post-89a": {
+    "__comp": "ccc49370",
+    "__context": {
+      "data": {
+        "blogMetadata": "acecf23e"
+      },
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "content": "e273c56f"
+  },
+  "/blog/long-blog-post-9ad": {
+    "__comp": "ccc49370",
+    "__context": {
+      "data": {
+        "blogMetadata": "acecf23e"
+      },
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "content": "73664a40"
+  },
+  "/blog/mdx-blog-post-e9f": {
+    "__comp": "ccc49370",
+    "__context": {
+      "data": {
+        "blogMetadata": "acecf23e"
+      },
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "content": "59362658"
+  },
+  "/blog/tags-4c4": {
+    "__comp": "01a85c17",
+    "__context": {
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "__props": "41756ce8"
+  },
+  "/blog/tags/docusaurus-fb9": {
+    "__comp": "6875c492",
+    "__context": {
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "7661071f"
+      },
+      {
+        "content": "f4f34a3a"
+      },
+      {
+        "content": "8717b14a"
+      },
+      {
+        "content": "925b3f96"
+      }
+    ],
+    "__props": "f752113f"
+  },
+  "/blog/tags/facebook-aba": {
+    "__comp": "6875c492",
+    "__context": {
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "7661071f"
+      }
+    ],
+    "__props": "a3226c22"
+  },
+  "/blog/tags/hello-41a": {
+    "__comp": "6875c492",
+    "__context": {
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "7661071f"
+      },
+      {
+        "content": "8717b14a"
+      }
+    ],
+    "__props": "9d2a5b67"
+  },
+  "/blog/tags/hola-8e5": {
+    "__comp": "6875c492",
+    "__context": {
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "925b3f96"
+      }
+    ],
+    "__props": "fbc76f6c"
+  },
+  "/blog/welcome-d2b": {
+    "__comp": "ccc49370",
+    "__context": {
+      "data": {
+        "blogMetadata": "acecf23e"
+      },
+      "plugin": "36994c47"
+    },
+    "sidebar": "814f3328",
+    "content": "d9f32620"
+  },
+  "/community/-506": {
+    "__comp": "0ffa903f",
+    "__context": {
+      "plugin": "a7456010"
+    },
+    "config": "5e9f5e1a"
+  },
+  "/gallery-85d": {
+    "__comp": "1f391b9e",
+    "__context": {
+      "plugin": "a7456010"
+    },
+    "content": "af80f652"
+  },
+  "/markdown-page-3d7": {
+    "__comp": "1f391b9e",
+    "__context": {
+      "plugin": "a7456010"
+    },
+    "content": "393be207"
+  },
+  "/search-5de": {
+    "__comp": "1a4e3797",
+    "__context": {
+      "plugin": "c141421f"
+    }
+  },
+  "/docs-ad0": {
+    "__comp": "5e95c892",
+    "__context": {
+      "plugin": "aba21aa0"
+    }
+  },
+  "/docs-15f": {
+    "__comp": "a7bd4aaa",
+    "__props": "7c110bd0"
+  },
+  "/docs-2b7": {
+    "__comp": "a94703ab"
+  },
+  "/docs/api/-e35": {
+    "__comp": "17896441",
+    "content": "5e8c322a"
+  },
+  "/docs/api/classes/lexical_code.CodeHighlightNode-20f": {
+    "__comp": "17896441",
+    "content": "827ffaeb"
+  },
+  "/docs/api/classes/lexical_code.CodeNode-ede": {
+    "__comp": "17896441",
+    "content": "6694fbc6"
+  },
+  "/docs/api/classes/lexical_hashtag.HashtagNode-5c1": {
+    "__comp": "17896441",
+    "content": "8bddbc2c"
+  },
+  "/docs/api/classes/lexical_link.AutoLinkNode-057": {
+    "__comp": "17896441",
+    "content": "70022603"
+  },
+  "/docs/api/classes/lexical_link.LinkNode-241": {
+    "__comp": "17896441",
+    "content": "e07b8827"
+  },
+  "/docs/api/classes/lexical_list.ListItemNode-d8c": {
+    "__comp": "17896441",
+    "content": "3eb6134e"
+  },
+  "/docs/api/classes/lexical_list.ListNode-6cb": {
+    "__comp": "17896441",
+    "content": "621e17f6"
+  },
+  "/docs/api/classes/lexical_mark.MarkNode-7e2": {
+    "__comp": "17896441",
+    "content": "21275c44"
+  },
+  "/docs/api/classes/lexical_offset.OffsetView-f8b": {
+    "__comp": "17896441",
+    "content": "3d751d1d"
+  },
+  "/docs/api/classes/lexical_overflow.OverflowNode-d37": {
+    "__comp": "17896441",
+    "content": "abbf3a19"
+  },
+  "/docs/api/classes/lexical_react_LexicalAutoEmbedPlugin.AutoEmbedOption-046": {
+    "__comp": "17896441",
+    "content": "5757d85b"
+  },
+  "/docs/api/classes/lexical_react_LexicalContextMenuPlugin.MenuOption-b45": {
+    "__comp": "17896441",
+    "content": "b3102277"
+  },
+  "/docs/api/classes/lexical_react_LexicalDecoratorBlockNode.DecoratorBlockNode-0a9": {
+    "__comp": "17896441",
+    "content": "b4110dc5"
+  },
+  "/docs/api/classes/lexical_react_LexicalHorizontalRuleNode.HorizontalRuleNode-db0": {
+    "__comp": "17896441",
+    "content": "2322ab06"
+  },
+  "/docs/api/classes/lexical_rich_text.HeadingNode-96d": {
+    "__comp": "17896441",
+    "content": "5ce7d2ff"
+  },
+  "/docs/api/classes/lexical_rich_text.QuoteNode-61d": {
+    "__comp": "17896441",
+    "content": "dbbb44dc"
+  },
+  "/docs/api/classes/lexical_table.TableCellNode-0c6": {
+    "__comp": "17896441",
+    "content": "80d3b0ce"
+  },
+  "/docs/api/classes/lexical_table.TableNode-151": {
+    "__comp": "17896441",
+    "content": "d9bf3871"
+  },
+  "/docs/api/classes/lexical_table.TableObserver-72d": {
+    "__comp": "17896441",
+    "content": "068252f6"
+  },
+  "/docs/api/classes/lexical_table.TableRowNode-e0f": {
+    "__comp": "17896441",
+    "content": "5bd7a256"
+  },
+  "/docs/api/classes/lexical_table.TableSelection-66e": {
+    "__comp": "17896441",
+    "content": "4d38511b"
+  },
+  "/docs/api/classes/lexical.ArtificialNode__DO_NOT_USE-882": {
+    "__comp": "17896441",
+    "content": "d3a3996f"
+  },
+  "/docs/api/classes/lexical.DecoratorNode-f00": {
+    "__comp": "17896441",
+    "content": "32b8f097"
+  },
+  "/docs/api/classes/lexical.EditorState-0e0": {
+    "__comp": "17896441",
+    "content": "7141b619"
+  },
+  "/docs/api/classes/lexical.ElementNode-fa5": {
+    "__comp": "17896441",
+    "content": "7c720bb1"
+  },
+  "/docs/api/classes/lexical.LexicalEditor-a77": {
+    "__comp": "17896441",
+    "content": "ae1f2464"
+  },
+  "/docs/api/classes/lexical.LexicalNode-2de": {
+    "__comp": "17896441",
+    "content": "327dde11"
+  },
+  "/docs/api/classes/lexical.LineBreakNode-f97": {
+    "__comp": "17896441",
+    "content": "1924a2e6"
+  },
+  "/docs/api/classes/lexical.NodeSelection-d38": {
+    "__comp": "17896441",
+    "content": "f4b9538e"
+  },
+  "/docs/api/classes/lexical.ParagraphNode-c63": {
+    "__comp": "17896441",
+    "content": "ed32b8da"
+  },
+  "/docs/api/classes/lexical.Point-0bf": {
+    "__comp": "17896441",
+    "content": "9a3e50e3"
+  },
+  "/docs/api/classes/lexical.RangeSelection-de1": {
+    "__comp": "17896441",
+    "content": "9d681116"
+  },
+  "/docs/api/classes/lexical.RootNode-a3e": {
+    "__comp": "17896441",
+    "content": "719d8eb4"
+  },
+  "/docs/api/classes/lexical.TabNode-b7c": {
+    "__comp": "17896441",
+    "content": "6ebbec16"
+  },
+  "/docs/api/classes/lexical.TextNode-3c3": {
+    "__comp": "17896441",
+    "content": "84fa7fc7"
+  },
+  "/docs/api/interfaces/lexical_file.SerializedDocument-831": {
+    "__comp": "17896441",
+    "content": "18cfaa20"
+  },
+  "/docs/api/interfaces/lexical_react_LexicalAutoEmbedPlugin.EmbedConfig-031": {
+    "__comp": "17896441",
+    "content": "089ff692"
+  },
+  "/docs/api/interfaces/lexical_yjs.Provider-fc3": {
+    "__comp": "17896441",
+    "content": "f89d08f4"
+  },
+  "/docs/api/interfaces/lexical.BaseSelection-d7f": {
+    "__comp": "17896441",
+    "content": "408a2bf2"
+  },
+  "/docs/api/interfaces/lexical.EditorStateReadOptions-7d0": {
+    "__comp": "17896441",
+    "content": "b87583db"
+  },
+  "/docs/api/interfaces/lexical.SerializedEditorState-9d9": {
+    "__comp": "17896441",
+    "content": "a2fabfd6"
+  },
+  "/docs/api/modules-9e7": {
+    "__comp": "17896441",
+    "content": "f6aebfbf"
+  },
+  "/docs/api/modules/lexical-1e5": {
+    "__comp": "17896441",
+    "content": "a56797d8"
+  },
+  "/docs/api/modules/lexical_clipboard-060": {
+    "__comp": "17896441",
+    "content": "1a180c78"
+  },
+  "/docs/api/modules/lexical_code-a50": {
+    "__comp": "17896441",
+    "content": "bfec7cc8"
+  },
+  "/docs/api/modules/lexical_devtools_core-24b": {
+    "__comp": "17896441",
+    "content": "3deefea8"
+  },
+  "/docs/api/modules/lexical_dragon-677": {
+    "__comp": "17896441",
+    "content": "4bd6a868"
+  },
+  "/docs/api/modules/lexical_eslint_plugin-78b": {
+    "__comp": "17896441",
+    "content": "0277d65a"
+  },
+  "/docs/api/modules/lexical_file-cbd": {
+    "__comp": "17896441",
+    "content": "2e0f6729"
+  },
+  "/docs/api/modules/lexical_hashtag-5b9": {
+    "__comp": "17896441",
+    "content": "341999a5"
+  },
+  "/docs/api/modules/lexical_headless-0f1": {
+    "__comp": "17896441",
+    "content": "65d400e8"
+  },
+  "/docs/api/modules/lexical_history-55c": {
+    "__comp": "17896441",
+    "content": "5b759b61"
+  },
+  "/docs/api/modules/lexical_html-28e": {
+    "__comp": "17896441",
+    "content": "73ef2355"
+  },
+  "/docs/api/modules/lexical_link-162": {
+    "__comp": "17896441",
+    "content": "2c88252b"
+  },
+  "/docs/api/modules/lexical_list-d73": {
+    "__comp": "17896441",
+    "content": "d0bb408c"
+  },
+  "/docs/api/modules/lexical_mark-90b": {
+    "__comp": "17896441",
+    "content": "41cbf432"
+  },
+  "/docs/api/modules/lexical_markdown-ca8": {
+    "__comp": "17896441",
+    "content": "e11d9b9e"
+  },
+  "/docs/api/modules/lexical_offset-e5a": {
+    "__comp": "17896441",
+    "content": "3f256249"
+  },
+  "/docs/api/modules/lexical_overflow-9cb": {
+    "__comp": "17896441",
+    "content": "dcb22188"
+  },
+  "/docs/api/modules/lexical_plain_text-aca": {
+    "__comp": "17896441",
+    "content": "70b4ba13"
+  },
+  "/docs/api/modules/lexical_react_LexicalAutoEmbedPlugin-747": {
+    "__comp": "17896441",
+    "content": "17110cef"
+  },
+  "/docs/api/modules/lexical_react_LexicalAutoFocusPlugin-07c": {
+    "__comp": "17896441",
+    "content": "35563fc3"
+  },
+  "/docs/api/modules/lexical_react_LexicalAutoLinkPlugin-8c0": {
+    "__comp": "17896441",
+    "content": "2bf66c35"
+  },
+  "/docs/api/modules/lexical_react_LexicalBlockWithAlignableContents-129": {
+    "__comp": "17896441",
+    "content": "9eabc1ab"
+  },
+  "/docs/api/modules/lexical_react_LexicalClearEditorPlugin-6c7": {
+    "__comp": "17896441",
+    "content": "776f6637"
+  },
+  "/docs/api/modules/lexical_react_LexicalClickableLinkPlugin-c16": {
+    "__comp": "17896441",
+    "content": "0c31f92e"
+  },
+  "/docs/api/modules/lexical_react_LexicalCollaborationContext-380": {
+    "__comp": "17896441",
+    "content": "f930dd91"
+  },
+  "/docs/api/modules/lexical_react_LexicalCollaborationPlugin-099": {
+    "__comp": "17896441",
+    "content": "62774999"
+  },
+  "/docs/api/modules/lexical_react_LexicalComposer-5c6": {
+    "__comp": "17896441",
+    "content": "53f2eb1f"
+  },
+  "/docs/api/modules/lexical_react_LexicalComposerContext-676": {
+    "__comp": "17896441",
+    "content": "88297a9f"
+  },
+  "/docs/api/modules/lexical_react_LexicalContentEditable-29c": {
+    "__comp": "17896441",
+    "content": "63d5c270"
+  },
+  "/docs/api/modules/lexical_react_LexicalContextMenuPlugin-11e": {
+    "__comp": "17896441",
+    "content": "53aedf97"
+  },
+  "/docs/api/modules/lexical_react_LexicalDecoratorBlockNode-c17": {
+    "__comp": "17896441",
+    "content": "9f5b4a87"
+  },
+  "/docs/api/modules/lexical_react_LexicalDraggableBlockPlugin-e71": {
+    "__comp": "17896441",
+    "content": "4ee88579"
+  },
+  "/docs/api/modules/lexical_react_LexicalEditorRefPlugin-804": {
+    "__comp": "17896441",
+    "content": "b7ba7cc4"
+  },
+  "/docs/api/modules/lexical_react_LexicalErrorBoundary-797": {
+    "__comp": "17896441",
+    "content": "9affe820"
+  },
+  "/docs/api/modules/lexical_react_LexicalHashtagPlugin-64b": {
+    "__comp": "17896441",
+    "content": "053ee575"
+  },
+  "/docs/api/modules/lexical_react_LexicalHistoryPlugin-5a3": {
+    "__comp": "17896441",
+    "content": "3489afc9"
+  },
+  "/docs/api/modules/lexical_react_LexicalHorizontalRuleNode-73e": {
+    "__comp": "17896441",
+    "content": "fbc21faf"
+  },
+  "/docs/api/modules/lexical_react_LexicalHorizontalRulePlugin-6ef": {
+    "__comp": "17896441",
+    "content": "19cf9e65"
+  },
+  "/docs/api/modules/lexical_react_LexicalCharacterLimitPlugin-422": {
+    "__comp": "17896441",
+    "content": "8ff20a18"
+  },
+  "/docs/api/modules/lexical_react_LexicalCheckListPlugin-f8f": {
+    "__comp": "17896441",
+    "content": "791960bd"
+  },
+  "/docs/api/modules/lexical_react_LexicalLinkPlugin-555": {
+    "__comp": "17896441",
+    "content": "0052723a"
+  },
+  "/docs/api/modules/lexical_react_LexicalListPlugin-b10": {
+    "__comp": "17896441",
+    "content": "3999bb86"
+  },
+  "/docs/api/modules/lexical_react_LexicalMarkdownShortcutPlugin-1ec": {
+    "__comp": "17896441",
+    "content": "cfa65955"
+  },
+  "/docs/api/modules/lexical_react_LexicalNestedComposer-b68": {
+    "__comp": "17896441",
+    "content": "b1e43638"
+  },
+  "/docs/api/modules/lexical_react_LexicalNodeEventPlugin-0e9": {
+    "__comp": "17896441",
+    "content": "e4ae22d8"
+  },
+  "/docs/api/modules/lexical_react_LexicalNodeMenuPlugin-598": {
+    "__comp": "17896441",
+    "content": "c0e62fb2"
+  },
+  "/docs/api/modules/lexical_react_LexicalOnChangePlugin-b8b": {
+    "__comp": "17896441",
+    "content": "d83f87cd"
+  },
+  "/docs/api/modules/lexical_react_LexicalPlainTextPlugin-121": {
+    "__comp": "17896441",
+    "content": "aafb27a3"
+  },
+  "/docs/api/modules/lexical_react_LexicalRichTextPlugin-870": {
+    "__comp": "17896441",
+    "content": "230c438e"
+  },
+  "/docs/api/modules/lexical_react_LexicalTabIndentationPlugin-533": {
+    "__comp": "17896441",
+    "content": "2c36f581"
+  },
+  "/docs/api/modules/lexical_react_LexicalTableOfContents-bc4": {
+    "__comp": "17896441",
+    "content": "8aa479d5"
+  },
+  "/docs/api/modules/lexical_react_LexicalTableOfContentsPlugin-df0": {
+    "__comp": "17896441",
+    "content": "e1e08938"
+  },
+  "/docs/api/modules/lexical_react_LexicalTablePlugin-1cf": {
+    "__comp": "17896441",
+    "content": "d9d39684"
+  },
+  "/docs/api/modules/lexical_react_LexicalTreeView-298": {
+    "__comp": "17896441",
+    "content": "dd87e7a4"
+  },
+  "/docs/api/modules/lexical_react_LexicalTypeaheadMenuPlugin-c61": {
+    "__comp": "17896441",
+    "content": "2d2a1e72"
+  },
+  "/docs/api/modules/lexical_react_useLexicalEditable-6ef": {
+    "__comp": "17896441",
+    "content": "88a98389"
+  },
+  "/docs/api/modules/lexical_react_useLexicalIsTextContentEmpty-c71": {
+    "__comp": "17896441",
+    "content": "0b40b5bf"
+  },
+  "/docs/api/modules/lexical_react_useLexicalNodeSelection-09b": {
+    "__comp": "17896441",
+    "content": "64cfb4f6"
+  },
+  "/docs/api/modules/lexical_react_useLexicalSubscription-f3e": {
+    "__comp": "17896441",
+    "content": "03da3620"
+  },
+  "/docs/api/modules/lexical_react_useLexicalTextEntity-e14": {
+    "__comp": "17896441",
+    "content": "1ad4d4db"
+  },
+  "/docs/api/modules/lexical_rich_text-77c": {
+    "__comp": "17896441",
+    "content": "74fb9545"
+  },
+  "/docs/api/modules/lexical_selection-a76": {
+    "__comp": "17896441",
+    "content": "b8a25f0b"
+  },
+  "/docs/api/modules/lexical_table-013": {
+    "__comp": "17896441",
+    "content": "231cc4d7"
+  },
+  "/docs/api/modules/lexical_text-650": {
+    "__comp": "17896441",
+    "content": "b0f444f2"
+  },
+  "/docs/api/modules/lexical_utils-7d1": {
+    "__comp": "17896441",
+    "content": "32e63e05"
+  },
+  "/docs/api/modules/lexical_yjs-37a": {
+    "__comp": "17896441",
+    "content": "898c3fb1"
+  },
+  "/docs/collaboration/faq-0ec": {
+    "__comp": "17896441",
+    "content": "f31483a8"
+  },
+  "/docs/collaboration/react-0ad": {
+    "__comp": "17896441",
+    "content": "5e0e34b8"
+  },
+  "/docs/concepts/commands-d4f": {
+    "__comp": "17896441",
+    "content": "d3715bf7"
+  },
+  "/docs/concepts/dom-events-1d7": {
+    "__comp": "17896441",
+    "content": "587b0676"
+  },
+  "/docs/concepts/editor-state-3eb": {
+    "__comp": "17896441",
+    "content": "0f72d69c"
+  },
+  "/docs/concepts/history-b46": {
+    "__comp": "17896441",
+    "content": "60e5aa2f"
+  },
+  "/docs/concepts/listeners-56e": {
+    "__comp": "17896441",
+    "content": "4b7c66ca"
+  },
+  "/docs/concepts/node-replacement-cc3": {
+    "__comp": "17896441",
+    "content": "73c8063f"
+  },
+  "/docs/concepts/nodes-aca": {
+    "__comp": "17896441",
+    "content": "c8905571"
+  },
+  "/docs/concepts/read-only-1f4": {
+    "__comp": "17896441",
+    "content": "3947a754"
+  },
+  "/docs/concepts/selection-9ee": {
+    "__comp": "17896441",
+    "content": "46e06dfb"
+  },
+  "/docs/concepts/serialization-28d": {
+    "__comp": "17896441",
+    "content": "e31db9f7"
+  },
+  "/docs/concepts/transforms-e44": {
+    "__comp": "17896441",
+    "content": "eef4c85c"
+  },
+  "/docs/design-006": {
+    "__comp": "17896441",
+    "content": "0aeccac2"
+  },
+  "/docs/error-260": {
+    "__comp": "17896441",
+    "content": "f9d25b73"
+  },
+  "/docs/faq-b65": {
+    "__comp": "17896441",
+    "content": "0480b142"
+  },
+  "/docs/getting-started/creating-plugin-038": {
+    "__comp": "17896441",
+    "content": "a0122cd0"
+  },
+  "/docs/getting-started/devtools-56a": {
+    "__comp": "17896441",
+    "content": "7cd8eedc"
+  },
+  "/docs/getting-started/quick-start-599": {
+    "__comp": "17896441",
+    "content": "588bd741"
+  },
+  "/docs/getting-started/react-05f": {
+    "__comp": "17896441",
+    "content": "30e0ecd2"
+  },
+  "/docs/getting-started/supported-browsers-424": {
+    "__comp": "17896441",
+    "content": "67e457cc"
+  },
+  "/docs/getting-started/theming-eb3": {
+    "__comp": "17896441",
+    "content": "d1cc1946"
+  },
+  "/docs/intro-a6e": {
+    "__comp": "17896441",
+    "content": "0e384e19"
+  },
+  "/docs/maintainers-guide-34b": {
+    "__comp": "17896441",
+    "content": "da6c4029"
+  },
+  "/docs/packages/lexical-6b5": {
+    "__comp": "17896441",
+    "content": "6c3d43f8"
+  },
+  "/docs/packages/lexical-clipboard-029": {
+    "__comp": "17896441",
+    "content": "1afdaeda"
+  },
+  "/docs/packages/lexical-code-f58": {
+    "__comp": "17896441",
+    "content": "a658c415"
+  },
+  "/docs/packages/lexical-devtools-core-3f3": {
+    "__comp": "17896441",
+    "content": "9037c92c"
+  },
+  "/docs/packages/lexical-dragon-896": {
+    "__comp": "17896441",
+    "content": "5bbde627"
+  },
+  "/docs/packages/lexical-eslint-plugin-3ad": {
+    "__comp": "17896441",
+    "content": "eb1e3bfc"
+  },
+  "/docs/packages/lexical-file-487": {
+    "__comp": "17896441",
+    "content": "89ce8fca"
+  },
+  "/docs/packages/lexical-hashtag-0ab": {
+    "__comp": "17896441",
+    "content": "f7f1f9a6"
+  },
+  "/docs/packages/lexical-headless-8c7": {
+    "__comp": "17896441",
+    "content": "f57839da"
+  },
+  "/docs/packages/lexical-history-239": {
+    "__comp": "17896441",
+    "content": "538b31ed"
+  },
+  "/docs/packages/lexical-html-bd7": {
+    "__comp": "17896441",
+    "content": "3e773e31"
+  },
+  "/docs/packages/lexical-link-3cc": {
+    "__comp": "17896441",
+    "content": "58735c59"
+  },
+  "/docs/packages/lexical-list-994": {
+    "__comp": "17896441",
+    "content": "5e0eecf3"
+  },
+  "/docs/packages/lexical-mark-dfa": {
+    "__comp": "17896441",
+    "content": "008811ca"
+  },
+  "/docs/packages/lexical-markdown-a38": {
+    "__comp": "17896441",
+    "content": "38e5c38c"
+  },
+  "/docs/packages/lexical-offset-0d5": {
+    "__comp": "17896441",
+    "content": "1df0e33d"
+  },
+  "/docs/packages/lexical-overflow-fff": {
+    "__comp": "17896441",
+    "content": "3b4a980a"
+  },
+  "/docs/packages/lexical-plain-text-2e0": {
+    "__comp": "17896441",
+    "content": "d2300664"
+  },
+  "/docs/packages/lexical-react-8c2": {
+    "__comp": "17896441",
+    "content": "9d35a0f6"
+  },
+  "/docs/packages/lexical-rich-text-aa6": {
+    "__comp": "17896441",
+    "content": "30005104"
+  },
+  "/docs/packages/lexical-selection-c12": {
+    "__comp": "17896441",
+    "content": "5ae6c5e1"
+  },
+  "/docs/packages/lexical-table-a7d": {
+    "__comp": "17896441",
+    "content": "426f93ef"
+  },
+  "/docs/packages/lexical-text-fa5": {
+    "__comp": "17896441",
+    "content": "85da5bed"
+  },
+  "/docs/packages/lexical-utils-b43": {
+    "__comp": "17896441",
+    "content": "18c24a6a"
+  },
+  "/docs/packages/lexical-yjs-eec": {
+    "__comp": "17896441",
+    "content": "b77bd0ad"
+  },
+  "/docs/react/-90e": {
+    "__comp": "17896441",
+    "content": "49f38925"
+  },
+  "/docs/react/create_plugin-29f": {
+    "__comp": "17896441",
+    "content": "4bcd8591"
+  },
+  "/docs/react/faq-7a3": {
+    "__comp": "17896441",
+    "content": "dc13f9c1"
+  },
+  "/docs/react/plugins-3a2": {
+    "__comp": "17896441",
+    "content": "d5c3ab0c"
+  },
+  "/docs/testing-0d9": {
+    "__comp": "17896441",
+    "content": "fbe93038"
+  },
+  "/-2e1": {
+    "__comp": "c4f5d8e4",
+    "__context": {
+      "plugin": "a7456010"
+    },
+    "config": "5e9f5e1a"
+  }
+}

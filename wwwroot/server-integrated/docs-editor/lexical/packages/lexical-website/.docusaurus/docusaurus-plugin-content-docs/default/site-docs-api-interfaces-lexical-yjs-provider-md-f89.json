@@ -1,0 +1,24 @@
+{
+  "id": "api/interfaces/lexical_yjs.Provider",
+  "title": "Interface: Provider",
+  "description": "@lexical/yjs.Provider",
+  "source": "@site/docs/api/interfaces/lexical_yjs.Provider.md",
+  "sourceDirName": "api/interfaces",
+  "slug": "/api/interfaces/lexical_yjs.Provider",
+  "permalink": "/docs/api/interfaces/lexical_yjs.Provider",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "lexical_yjs.Provider",
+    "title": "Interface: Provider",
+    "custom_edit_url": null
+  },
+  "sidebar": "api",
+  "previous": {
+    "title": "EmbedConfig",
+    "permalink": "/docs/api/interfaces/lexical_react_LexicalAutoEmbedPlugin.EmbedConfig"
+  }
+}
