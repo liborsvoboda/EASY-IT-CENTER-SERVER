@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added FastAddSugest,XML to MD Generator, XML to WEB Generator, Rotate Gallery Generator ([6d03a73](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/6d03a73d85d53711dbba56d644298e7580e74f26) by lioborsvoboda).
 - Added Dial Mime Types ([c4aa01b](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/c4aa01be64ff93c19d23374f4f74f9572f9a7e67) by Libor Svoboda).
 
+### Removed
+
+- REMOVE STATIC To WEB ([37465cc](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/37465cc4b9e1fbe55fa0552ed266690f74b7c73e) by Libor Svoboda).
+
 ### Misc
 
 - Update ([935ab09](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/935ab0904074b8f18168acdc137fefb0fde9987b) by lioborsvoboda).

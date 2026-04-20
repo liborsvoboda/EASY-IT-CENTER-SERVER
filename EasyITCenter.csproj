@@ -68,10 +68,15 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   </PropertyGroup>
 
   <ItemGroup>
+	<Compile Remove="%2a%2a\**" />
 	<Compile Remove="wwwroot\**" />
+	<EmbeddedResource Remove="%2a%2a\**" />
 	<EmbeddedResource Remove="wwwroot\**" />
+	<None Remove="%2a%2a\**" />
 	<None Remove="wwwroot\**" />
+	<Content Remove="%2a%2a\**" />
 	<Content Remove="wwwroot\**" />
+	<EntityDeploy Remove="%2a%2a\**" />
   </ItemGroup>
 
    <ItemGroup>
@@ -438,12 +443,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <EmbeddedResource Update="Data\license.lic">
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </EmbeddedResource>
-  </ItemGroup>
-  
- 
-  <ItemGroup>
-    <Folder Include="DATABASES\SystemControllers\UserAgendas\_Views\" />
-    <Folder Include="Data\certificates\" />
   </ItemGroup>
   
  
