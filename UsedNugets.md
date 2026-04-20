@@ -1,4 +1,7 @@
-﻿
+﻿# Dynamic APIconfigurator
+udelat konfiguraci pro REST SET a pro Vlastní SQL
+
+
 # Migrate Database
 https://www.sqlines.com/online
 
@@ -15,18 +18,13 @@ https://github.com/jchristn/GitHubCrawler Download Github File
 https://github.com/jchristn/SimpleUdp
 https://github.com/jchristn/PythonSharp
 https://github.com/jchristn/PdfTextExtractor
-https://github.com/jchristn/KeyGenerator/tree/main
 https://github.com/jchristn/NFS-Client   NFS Linux mount remote folder as folder 
-https://github.com/jchristn/WatsonORM
 https://github.com/jchristn/SqliteHelper
 https://github.com/jchristn/EzSmb
 https://github.com/jchristn/Gatekeeper
 https://github.com/jchristn/IndexEngine  Search Indexing Engine
 https://github.com/jchristn/Shelli       Windows/Linux Shell Executor
 https://github.com/jchristn/containerfs  Folder/File Container
-https://github.com/jchristn/S3Server  Storage server
-https://github.com/jchristn/S3Explorer/tree/main  WPF S3 Explorer
-https://github.com/jchristn/CavemanTcp  TCP  Server/Client
 https://github.com/jchristn/PerformanceStatistics/tree/main HW Performance Statistics
 https://github.com/jchristn/DatabaseWrapper Database dynamic definition and access CONFLICT with EF
 https://github.com/jchristn/Voltaic TCP  Server/Client

@@ -139,7 +139,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="EasyData.Exporters.ClosedXML" Version="1.5.10" />
     <PackageReference Include="EasyData.Exporters.Default" Version="1.5.10" />
     <PackageReference Include="EasyData.Exporters.PdfSharp" Version="1.5.10" />
-    <PackageReference Include="EASYTools.CavemanTcp" Version="2.0.17" />
     <PackageReference Include="EASYTools.ContainerFS" Version="1.2.0.1" />
     <PackageReference Include="EASYTools.DatabaseWrapper.Core" Version="6.2.0" />
     <PackageReference Include="EASYTools.DatabaseWrapper.Mysql" Version="6.2.0" />
@@ -163,7 +162,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="EASYTools.PersistentCollection" Version="2.0.12" />
     <PackageReference Include="EASYTools.PptxFromImageFolder" Version="1.0.0" />
     <PackageReference Include="EASYTools.PythonSharp" Version="1.0.2" />
-    <PackageReference Include="EASYTools.S3Server" Version="6.0.37" />
     <PackageReference Include="EASYTools.Shelli" Version="2.0.2" />
     <PackageReference Include="EASYTools.SimpleUdp" Version="2.0.2" />
     <PackageReference Include="EASYTools.SmtpServer" Version="10.0.1" />
@@ -256,6 +254,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.AspNetCore.Metadata" Version="6.0.36" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" Version="6.0.36" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="6.0.36" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="6.0.36" />
     <PackageReference Include="Microsoft.CodeAnalysis.Razor" Version="6.0.36" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -277,7 +276,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.36" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.36" />
@@ -390,15 +389,12 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Tcp.NET.Client" Version="6.0.78" />
     <PackageReference Include="Tcp.NET.Core" Version="6.0.78" />
     <PackageReference Include="Tcp.NET.Server" Version="6.0.78" />
-    <PackageReference Include="Watson" Version="6.5.1" />
-    <PackageReference Include="Watson.Core" Version="6.5.1" />
-    <PackageReference Include="Watson.Lite" Version="6.5.1" />
+    <PackageReference Include="Watson" Version="7.0.12" />
     <PackageReference Include="WatsonCluster" Version="3.0.0.2" />
     <PackageReference Include="WatsonMesh" Version="5.0.1" />
-    <PackageReference Include="WatsonTcp" Version="6.0.11" />
-    <PackageReference Include="WatsonWebsocket" Version="4.1.7" />
+    <PackageReference Include="WatsonTcp" Version="6.1.0" />
+    <PackageReference Include="WatsonWebsocket" Version="4.1.8" />
     <PackageReference Include="WebMarkupMin.AspNetCore6" Version="2.17.0" />
-    <PackageReference Include="WebSocketSharp.Standard" Version="1.0.3" />
     <PackageReference Include="WebsocketsSimple.Client" Version="6.0.63" />
     <PackageReference Include="WebsocketsSimple.Core" Version="6.0.63" />
     <PackageReference Include="WebsocketsSimple.Server" Version="6.0.63" />

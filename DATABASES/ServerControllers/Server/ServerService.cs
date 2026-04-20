@@ -1,13 +1,13 @@
 ﻿using WatsonWebsocket;
 using WatsonWebserver;
-using WatsonWebserver.Core;
 using ReverseMarkdown.Converters;
 using Tcp.NET.Server;
 using Tcp.NET.Server.Models;
 using WatsonTcp;
-using WatsonWebserver.Core;
 using XmlDocMarkdown.Core;
 using static EasyITCenter.Controllers.GeneratorService;
+using Voltaic;
+using WatsonWebserver.Core;
 
 
 namespace EasyITCenter.Controllers {
@@ -40,8 +40,9 @@ namespace EasyITCenter.Controllers {
             public bool CertificatePassword { get; set; } = false;
         }
 
-        /*
+        
         /// <summary>
+        /// ONLY SERVER Outgoing Messages
         /// https://github.com/dotnet/WatsonWebserver
         /// </summary>
         /// <param name="tcpServerRequest"></param>
@@ -67,8 +68,9 @@ namespace EasyITCenter.Controllers {
         }
 
 
-
+        
         /// <summary>
+        /// FULL SEVRER FULL REST + WEBSOCKET + STREAM + ROUTES
         /// https://github.com/dotnet/WatsonWebserver
         /// </summary>
         /// <param name="webServerRequest"></param>
@@ -78,13 +80,13 @@ namespace EasyITCenter.Controllers {
             try {
 
                 if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
-                    WebserverSettings? setting = new WatsonWebserver.Core.WebserverSettings("0.0.0.0", webServerRequest.Port, webServerRequest.SSLenabled);
+                    WebserverSettings? setting = new WebserverSettings("0.0.0.0", webServerRequest.Port, webServerRequest.SSLenabled);
 
                     if (webServerRequest.SSLenabled) { setting.Ssl.SslCertificate = CoreOperations.GetSelfSignedCertificate(DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value); }
 
-
+                    
                     Webserver server = new Webserver( setting, DefaultRequest);
-                    server.StartAsync();
+                    await server.StartAsync();
 
 
                     static async Task DefaultRequest(HttpContextBase ctx) {
@@ -115,6 +117,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
+        /// SEND/RECEIVE MESSAGES
         /// https://github.com/LiveOrDevTrying/Tcp.NET?tab=readme-ov-file#tcpnetserver
         /// </summary>
         /// <param name="tcpServerRequest"></param>
@@ -128,8 +131,8 @@ namespace EasyITCenter.Controllers {
                     byte[] certificate = System.IO.File.ReadAllBytes("cert.pfx");
                     string certificatePassword = "yourCertificatePassword";
                     TcpNETServer? server = new TcpNETServer(new ParamsTcpServer(tcpServerRequest.Port, "\r\n", connectionSuccessString: "Connected Successfully"), certificate, DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value);
-                    
-                    server.StartAsync();
+
+                    await server.StartAsync();
 
                     return base.Ok(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
                 } else {
@@ -143,6 +146,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
+        /// ONLY INCOMING MESSAGES
         /// https://github.com/jchristn/WatsonWebsocket
         /// </summary>
         /// <param name="socketServerRequest"></param>
@@ -158,7 +162,7 @@ namespace EasyITCenter.Controllers {
                     server.ClientDisconnected += ClientDisconnected;
                     server.MessageReceived += MessageReceived;
                     
-                    server.StartAsync();
+                    await server.StartAsync();
 
 
                     return base.Ok(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
@@ -187,8 +191,9 @@ namespace EasyITCenter.Controllers {
         }
 
 
-
+        
         /// <summary>
+        /// METHOD IN/OUT Server 
         /// https://github.com/jchristn/Voltaic
         /// </summary>
         /// <param name="socketServerRequest"></param>
@@ -250,8 +255,9 @@ namespace EasyITCenter.Controllers {
         }
 
 
-
+        
         /// <summary>
+        /// IN/OUT SCHEMA DEFINED SERVER
         /// https://github.com/jchristn/Voltaic
         /// </summary>
         /// <returns></returns>
@@ -308,7 +314,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// 
+        /// IN/OUT METHOD SERVER
         /// </summary>
         /// <param name="socketServerRequest"></param>
         /// <returns></returns>
@@ -375,6 +381,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
+        /// IN/OUT SESSION SEVER + ROUTE
         /// https://github.com/jchristn/Voltaic
         /// </summary>
         /// <param name="socketServerRequest"></param>
@@ -427,6 +434,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
+        /// IN/OUT ClieNT SERVER 
         /// https://github.com/jchristn/Voltaic
         /// </summary>
         /// <param name="socketServerRequest"></param>
@@ -493,10 +501,6 @@ namespace EasyITCenter.Controllers {
         }
 
 
-
-        */
-        // https://github.com/jchristn/CavemanTcp
-        
     }
         
 }
