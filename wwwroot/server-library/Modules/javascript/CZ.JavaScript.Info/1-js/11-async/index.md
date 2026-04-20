@@ -1,2 +1,0 @@
-
-# Přísliby, async/await

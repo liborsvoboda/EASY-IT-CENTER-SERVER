@@ -1,2 +1,0 @@
-
-# Načítání dokumentu a zdrojů

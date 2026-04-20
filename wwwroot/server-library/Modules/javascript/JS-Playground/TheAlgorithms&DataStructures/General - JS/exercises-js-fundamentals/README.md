@@ -1,1 +1,0 @@
-https://github.com/jfarmer/exercises-js-fundamentals/tree/master/exercises

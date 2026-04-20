@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- Update ([935ab09](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/935ab0904074b8f18168acdc137fefb0fde9987b) by lioborsvoboda).
 - Updated Blog ([f8e457a](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f8e457a5c2a0f7334eda24fc5040b67efaaf74b3) by lioborsvoboda).
 - upd ([0a5c044](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/0a5c044390a4198e3a7b109f0784ccb6d9bb7940) by Libor Svoboda).
 - Md viewer added highlight+mermaid ([415d54f](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/415d54fafc21e019eb08028f3cee20da799db431) by Libor Svoboda).

@@ -1,2 +1,0 @@
-
-# Generátory, pokročilá iterace

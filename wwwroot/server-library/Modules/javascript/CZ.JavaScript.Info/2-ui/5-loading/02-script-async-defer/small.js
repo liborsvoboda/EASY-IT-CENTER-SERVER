@@ -1,3 +1,0 @@
-// ...krátký js...
-
-alert("Krátký skript načten");

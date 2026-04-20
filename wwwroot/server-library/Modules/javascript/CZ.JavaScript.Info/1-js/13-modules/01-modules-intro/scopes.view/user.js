@@ -1,1 +1,0 @@
-let uživatel = "Jan";

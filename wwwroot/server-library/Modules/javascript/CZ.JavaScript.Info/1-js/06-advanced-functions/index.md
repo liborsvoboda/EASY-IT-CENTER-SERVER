@@ -1,1 +1,0 @@
-# Pokročilá práce s funkcemi

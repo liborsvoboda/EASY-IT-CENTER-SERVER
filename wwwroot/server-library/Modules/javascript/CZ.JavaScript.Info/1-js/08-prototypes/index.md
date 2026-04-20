@@ -1,1 +1,0 @@
-# Prototypy, dědičnost

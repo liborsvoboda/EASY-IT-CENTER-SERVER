@@ -1,11 +1,14 @@
-﻿let pageloader = null;
+﻿let pageLoader = null;
+
+localStorage.setItem('DetectedLanguage', (navigator.language || navigator.userLanguage).substring(0, 2));
+async function Mermaid() { try { await mermaid.run({ nodes: document.querySelectorAll('.class-mermaid'), }); } catch (err) { } }
 
 $(document).ready(function () {
     $("#docLoader").hide();
     setTimeout(() => {
         GoogleTranslateElementInit();
-      /*  Mermaid();*/
-        HidePageLoading();
+        Mermaid();
+        document.body.append(injectToolPanel);
     }, 3000);
 });
 
@@ -22,8 +25,8 @@ function injectFile(type, src) {
 
 
 let injectToolPanel = document.createElement("div");
-injectToolPanel.innerHTML = '<div id="google_translate_element" style="position: fixed;bottom: 0px;left: 40%;"></div>';
-document.body.append(injectToolPanel);
+injectToolPanel.innerHTML = '<div id="google_translate_element" style="position: fixed;top: 55px;left: 19%;z-index: 2000; "></div>';
+
 injectFile("script", "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit");
 
 
@@ -38,7 +41,7 @@ function GoogleTranslateElementInit() {
         if (document.querySelector('#google_translate_element select') != null) {
             setTimeout(function () {
                 let selectElement = document.querySelector('#google_translate_element select');
-                selectElement.value = $('body').storage.set('DetectedLanguage');
+                selectElement.value = localStorage.getItem('DetectedLanguage');
                 selectElement.dispatchEvent(new Event('change'));
             }, 1000);
         }
