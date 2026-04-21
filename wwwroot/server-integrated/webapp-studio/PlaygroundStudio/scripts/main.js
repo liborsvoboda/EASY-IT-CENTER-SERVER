@@ -906,7 +906,12 @@
         });
         editorJavascript = ace.edit("editorJavascript");
         editorJavascript.getSession().setMode('ace/mode/javascript');
-        editorJavascript.setReadOnly(true);
+        //editorJavascript.setReadOnly(false);
+        editorJavascript.setOptions({
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: false,
+            enableSnippets: true
+        });
 
         document.getElementById('editorTypescript').style.fontSize = '14px';
         document.getElementById('editorJavascript').style.fontSize = '14px';
