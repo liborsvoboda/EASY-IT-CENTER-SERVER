@@ -60,6 +60,7 @@ namespace EasyITCenter {
             ServerConfigurationServices.ConfigureControllers(ref services);
             ServerConfigurationServices.ConfigureDefaultAuthentication(ref services);
             ServerConfigurationServices.ConfigureLetsEncrypt(ref services);
+            
             services.AddHttpContextAccessor();
             services.AddResponseCompression(options => { options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "text/javascript" }); });
             services.AddResponseCaching();
@@ -197,7 +198,7 @@ namespace EasyITCenter {
                 }
             });
 
-
+            app.UseDeveloperExceptionPage();
             app.UseExceptionHandler("/Error");
             app.UseRouting();
             app.UseDefaultFiles(new DefaultFilesOptions() { DefaultFileNames = new List<string> { "index.html" } });
