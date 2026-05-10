@@ -15,6 +15,7 @@
     /// Request Types For Selected correct Layout 
     /// </summary>
     public enum RouteLayoutTypes {
+        ErrorLayout,
         CentralLayout,
         DevPortalLayout,
         EasyDataLayout,

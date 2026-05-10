@@ -30,6 +30,18 @@ namespace EasyITCenter.ControllersExtensions {
     }
 
 
+    public class UploadFileModelRequest
+    {
+        public IFormFile File { get; set; }
+    }
+
+
+    public class UploadImageModelRequest
+    {
+        public IFormFile Image { get; set; }
+    }
+
+
     /// <summary>
     /// Server Root Controller
     /// </summary>
@@ -114,25 +126,25 @@ namespace EasyITCenter.ControllersExtensions {
             } catch (Exception ex) { return BadRequest(new string[] { "error:" + DataOperations.GetUserApiErrMessage(ex), "application/json" }); }
         }
 
-
+        
         /// <summary>
         /// EditorJs File Upload
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
         [HttpPost("/FileUploadService/UploadEditorJSFile"), DisableRequestSizeLimit]
-        public async Task<string> UploadEditorJSFile([FromForm] IFormFile file) {
+        public async Task<string> UploadEditorJSFile([FromForm] UploadFileModelRequest file) {
             try
             {
-                using (Stream fileStream = new FileStream(Path.Combine(SrvRuntime.ServerPortalPath, "addons", "editorjs", "files", file.FileName), FileMode.Create)) {
-                    await file.CopyToAsync(fileStream);
+                using (Stream fileStream = new FileStream(Path.Combine(SrvRuntime.ServerPortalPath, "addons", "editorjs", "files", file.File.FileName), FileMode.Create)) {
+                    await file.File.CopyToAsync(fileStream);
                 }
 
                 return JsonSerializer.Serialize( new UploadFileResponse() {
                     success = 1, 
                     file = new UploadFile() { 
-                        url = $"{DbOperations.GetServerParameterLists("ServerPublicUrl").Value}/server-portal/addons/editorjs/files/{file.FileName}",
-                        type = file.ContentType, name = file.FileName, size = file.Length
+                        url = $"{DbOperations.GetServerParameterLists("ServerPublicUrl").Value}/server-portal/addons/editorjs/files/{file.File.FileName}",
+                        type = file.File.ContentType, name = file.File.FileName, size = file.File.Length
                     }
                 });
             } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
@@ -145,24 +157,25 @@ namespace EasyITCenter.ControllersExtensions {
         /// <param name="image"></param>
         /// <returns></returns>
         [HttpPost("/FileUploadService/UploadEditorJSImage"), DisableRequestSizeLimit]
-        public async Task<string> UploadEditorJSImage([FromForm] IFormFile image) {
+        public async Task<string> UploadEditorJSImage([FromForm] UploadImageModelRequest image) {
             try {
 
-                using (Stream fileStream = new FileStream(Path.Combine(SrvRuntime.ServerPortalPath, "addons", "editorjs", "files", image.FileName), FileMode.Create)) {
-                    await image.CopyToAsync(fileStream);
+                using (Stream fileStream = new FileStream(Path.Combine(SrvRuntime.ServerPortalPath, "addons", "editorjs", "files", image.Image.FileName), FileMode.Create)) {
+                    await image.Image.CopyToAsync(fileStream);
                 }
 
                 return JsonSerializer.Serialize(new UploadFileResponse() {
                     success = 1,
                     file = new UploadFile() {
-                        url = $"{DbOperations.GetServerParameterLists("ServerPublicUrl").Value}/server-portal/addons/editorjs/files/{image.FileName}",
-                        type = image.ContentType,
-                        name = image.FileName,
-                        size = image.Length
+                        url = $"{DbOperations.GetServerParameterLists("ServerPublicUrl").Value}/server-portal/addons/editorjs/files/{image.Image.FileName}",
+                        type = image.Image.ContentType,
+                        name = image.Image.FileName,
+                        size = image.Image.Length
                     }
                 });
             }
             catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
+        
     }
 }

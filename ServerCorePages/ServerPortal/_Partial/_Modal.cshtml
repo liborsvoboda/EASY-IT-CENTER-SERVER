@@ -97,8 +97,11 @@
         <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowFavorites('Favorites',true);"></span>Search</li>
         <li class="divider"></li>
         <li class="shadowed"><span class="icon mif-file-code" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.AddSuggest();"></span>Suggest+</li>
-    <li class="shadowed"><span class="icon mif-help" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.EditHelpMenu();"></span>Edit Help</li>
-    <li class="shadowed"><span class="icon mif-blogger" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.OpenBlogMenu();"></span>Blog</li>
+        <li class="shadowed"><span class="icon mif-help" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.EditHelpMenu();"></span>Edit Help</li>
+        <li class="shadowed"><span class="icon mif-blogger" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.OpenBlogMenu();"></span>Blog</li>
+        <li class="shadowed"><span class="icon mif-comment" onclick="Gs.Objects.ShowFavorites('Favorites',true);Metro.storage.delItem('JsonGeneratorService');Gs.Objects.WindowIframeCreate('JSON Editor',' /server-portal/addons/jsonData/')"></span>JsonEdit</li>
+        <li class="shadowed"><span class="icon mif-codepen" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.WindowIframeCreate('Code Compiler',' /server-portal/addons/compiler/')"></span>Compiler</li>
+        <li class="shadowed"><span class="icon mif-chart-line" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.WindowIframeCreate('Graph Editor',' /server-portal/addons/mermaid-studio/')"></span>GraphEdit</li>
     </ul>
 
 
