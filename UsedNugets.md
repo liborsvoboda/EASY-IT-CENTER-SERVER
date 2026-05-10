@@ -77,6 +77,10 @@ System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, "Serve
 https://github.com/FubarDevelopment
 
 
+#Github Profiles
+https://github.com/benkaiser 200repos JS solutions
+https://github.com/rcdexta?tab=repositories 130repos JS solutions
+https://github.com/Houfeng?tab=repositories 256repos JS+C# solutions
 
 
 # Build Project Command
