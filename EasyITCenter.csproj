@@ -89,6 +89,7 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
 
    <ItemGroup>
      <Content Remove="C:\Users\lsvoboda\.nuget\packages\easytools.vebexcli\0.1.1\contentFiles\any\net6.0\test.ps1" />
+     <Content Remove="C:\Users\tatka\.nuget\packages\easytools.vebexcli\0.1.1\contentFiles\any\net6.0\test.ps1" />
    </ItemGroup>  
 
 
@@ -306,7 +307,6 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="Microsoft.SQL.Server.2016.LocalDB" Version="13.1.4001" />
     <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
     <PackageReference Include="Microsoft.WSMan.Management" Version="7.2.23" />
     <PackageReference Include="Microsoft.WSMan.Runtime" Version="7.2.23" />
     <PackageReference Include="MimeKit" Version="4.15.1" />
@@ -379,6 +379,8 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.0" />
     <PackageReference Include="System.Management.Automation" Version="7.2.23" />
     <PackageReference Include="System.Net.Http.WinHttpHandler" Version="6.0.1" />
+    <PackageReference Include="System.Reactive" Version="6.1.0" />
+    <PackageReference Include="System.Reactive.Linq" Version="6.1.0" />
     <PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.1" />
     <PackageReference Include="Tcp.NET" Version="6.0.78" />

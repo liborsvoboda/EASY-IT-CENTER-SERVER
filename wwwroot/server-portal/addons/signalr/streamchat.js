@@ -1,18 +1,18 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-    // <snippet_Connection>
     const connection = new signalR.HubConnectionBuilder()
-        .withUrl("/chathub")
+        .withUrl("/StreamChat")
+        .withAutomaticReconnect()
         .configureLogging(signalR.LogLevel.Information)
         .build();
-    // </snippet_Connection>
 
-    // <snippet_ReceiveMessage>
+
+
     connection.on("ReceiveMessage", (user, message) => {
         const li = document.createElement("li");
         li.textContent = `${user}: ${message}`;
         document.getElementById("messageList").appendChild(li);
     });
-    // </snippet_ReceiveMessage>
+
 
     document.getElementById("send").addEventListener("click", async () => {
         const user = document.getElementById("userInput").value;

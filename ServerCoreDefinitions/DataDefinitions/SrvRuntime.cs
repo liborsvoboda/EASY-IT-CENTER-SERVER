@@ -17,7 +17,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public static string SrvStartPath { get; set; } = Path.GetDirectoryName(Environment.CurrentDirectory);
         public static string SrvVersion { get; set; } = Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString();
         public static string StartupPath { get; set; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        
+
         public static string WebRootPath { get; set; } = Path.Combine(SrvRuntime.StartupPath, "wwwroot");
 
 
@@ -41,7 +41,7 @@ namespace EasyITCenter.ServerCoreStructure {
         public static string SystemAppsPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "system-apps");
         public static string SystemPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "system-portal");
         public static string ServerPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-portal");
-        
+
 
         public static string SrvUserPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-users");
         public static string SrvPublicPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-public");
@@ -83,6 +83,8 @@ namespace EasyITCenter.ServerCoreStructure {
 
         public static SmtpServer.SmtpServer? SmtpServerService = null;
         public static bool SmtpServerStatus;
+
+        public static List<string> SignalRUsers = new();
 
     }
 }

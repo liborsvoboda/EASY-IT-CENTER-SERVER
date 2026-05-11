@@ -18,7 +18,6 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.Options;
 using ServerCorePages;
-using SignalRChat.Hubs;
 using System.Diagnostics.Metrics;
 using System.Linq;
 

@@ -14,9 +14,10 @@ Gs.Behaviors.PortalStartup = async function () {
         let html = `<button class="button mr-1">Profile</button>
                     <button class="button ml-1" onclick=Gs.Apis.SignOut(); >Sign out</button>`;
         $("#LoginReaction").html(html);
+        
     } else {
         Cookies.remove("ApiToken"); Metro.storage.delItem("ApiToken");
-        Gs.Variables.username = "Anonymous";
+        Gs.Functions.GetPublicIp(); //Gs.Variables.username = "Anonymous";
         $("#LoginName").html("Login");
         Gs.Functions.AddClass("LoginName", "ani-shuttle");
         let html = `<button class="button mr-1" onclick=Gs.Objects.ShowLoginPage(); >Login</button>
@@ -51,8 +52,14 @@ Gs.Behaviors.PortalStartup = async function () {
             Gs.Functions.GetFunctionList();
             Gs.Behaviors.RefreshBasket();
         
-            if (!Gs.Apis.IsLogged()) { Gs.Behaviors.LoadUserSettings();
-            } else { Gs.Apis.GetUserSetting(); }
+            if (!Gs.Apis.IsLogged()) {
+                Gs.Functions.AddClass("ShareMainButton", "disabled");
+                Gs.Behaviors.LoadUserSettings();
+            } else {
+                Gs.Functions.RemoveClass("ShareMainButton", "disabled");
+                Gs.Apis.GetUserSetting();
+
+            }
         }, 3000);
     }); 
     

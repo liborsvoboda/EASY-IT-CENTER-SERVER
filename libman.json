@@ -1,5 +1,14 @@
-{
+﻿{
   "version": "1.0",
   "defaultProvider": "cdnjs",
-  "libraries": []
+  "libraries": [
+    //{
+    //  "provider": "unpkg",
+    //  "library": "@microsoft/signalr@10.0.0",
+    //  "destination": "wwwroot/server-portal/addons/signalr/",
+    //  "files": [
+    //    "signalr.js"
+    //  ]
+    //}
+  ]
 }

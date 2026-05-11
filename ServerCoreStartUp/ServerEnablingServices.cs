@@ -10,7 +10,7 @@ using Snickler.RSSCore.Caching;
 using Snickler.RSSCore.Extensions;
 using Snickler.RSSCore.Models;
 using System.Collections.Immutable;
-using SignalRChat.Hubs;
+
 
 namespace EasyITCenter.ServerCoreConfiguration {
 
@@ -85,9 +85,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         internal static void EnableEndpoints(ref IApplicationBuilder app) {
 
-
-
-           app.UseEndpoints(endpoints => {
+            app.UseEndpoints(endpoints => {
 
                 //EasyData Support
                 if (bool.Parse(DbOperations.GetServerParameterLists("ModuleWebDataManagerEnabled").Value)) { endpoints.MapEasyData(options => { options.UseDbContext<EasyITCenterContext>(); }); }
@@ -95,7 +93,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
                 endpoints.MapControllers();
 
-                //endpoints.MapHub<ChatHub>("/chatHub");
+                endpoints.MapHub<StreamChat>("/StreamChat");
 
                 if (bool.Parse(DbOperations.GetServerParameterLists("WebRazorPagesEngineEnabled").Value)) {
                     endpoints.MapRazorPages();

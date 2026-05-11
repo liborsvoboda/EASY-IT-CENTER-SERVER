@@ -1,4 +1,8 @@
-﻿# Dynamic APIconfigurator
+﻿# SEARCH
+https://stackoverflow.com/questions/tagged/asp.net-core = variable
+
+
+# Dynamic APIconfigurator
 udelat konfiguraci pro REST SET a pro Vlastní SQL
 
 

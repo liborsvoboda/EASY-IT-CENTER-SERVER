@@ -47,15 +47,28 @@
             <span class="mif-language mif-5x"></span>
             <span class="ml-2 app-bar-name">Info Settings</span>
         </a>
+
         <a href="#" class="app-bar-item shadowed" title="Favorites" onclick=Gs.Objects.ShowFavorites("Favorites",false); >
             <span class="mif-favorite mif-5x"></span>
             <span class="ml-2 app-bar-name">Favorites</span>
+        </a>        
+        
+        <a href="#" class="app-bar-item shadowed" title="Online Tools & Devs" onclick=Gs.Objects.ShowOnlineTools(); >
+            <span class="mif-import-contacts mif-5x"></span>
+            <span class="ml-2 app-bar-name">Online Tools</span>
         </a>
 
         <a href="#" class="app-bar-item shadowed" title="Rezervace Online" onclick=window.open("https://calendar.app.google/7GtS8wkYG9HoUVAB7");>
             <span class="mif-contacts-dialer mif-5x"></span>
             <span class="ml-2 app-bar-name">Reservation Online</span>
         </a>
+
+        <a id="ShareMainButton" href="#" class="app-bar-item shadowed" title="Share" onclick=Gs.Objects.OpenShare(); >
+            <span class="mif-share mif-5x"></span>
+            <span class="ml-2 app-bar-name">Share</span>
+             <span id="ShareMessageCount" class="badge bg-green fg-white">0</span>
+        </a>
+
         <a href="#" class="app-bar-item shadowed" title="Chat" onclick=Gs.Objects.OpenChat(); >
             <span class="mif-chat mif-5x"></span>
             <span class="ml-2 app-bar-name">Chat</span>

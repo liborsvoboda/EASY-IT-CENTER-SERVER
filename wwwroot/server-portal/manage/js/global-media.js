@@ -152,6 +152,31 @@ Gs.Media.StartPublicCaptureScreen = async function (filename) {
 }
 
 
+
+//Start Share Window Screen
+Gs.Media.StartShareCaptureScreen = async function () {
+	try {
+		Gs.Functions.AddClass("ShareButton", "hide");
+
+		let videoPreview = document.getElementById('videoPreview');
+		videoPreview.srcObject = await navigator.mediaDevices.getDisplayMedia(
+			Gs.Variables.SignalR.displayMediaOptions
+		);
+	} catch (err) {
+		console.error(err);
+	}
+}
+
+
+Gs.Media.StopShareCaptureScreen = function () {
+	let videoPreview = document.getElementById('videoPreview');
+	let tracks = videoPreview.srcObject.getTracks();
+	tracks.forEach((track) => track.stop());
+	videoPreview.srcObject = null;
+}
+
+
+
 //Video Capturing Camera 
 Gs.Media.StartCaptureCamera = async function () {
 	await navigator.mediaDevices.getUserMedia({
@@ -199,16 +224,17 @@ Gs.Media.ClearCapturedAudio = function () {
 }
 
 
-/*
-Gs.Media.GetVideoFrame = function () {
+//Get Image From Video Element
+Gs.Media.GetVideoFrame = function (videoElement) {
 	const canvas = document.createElement('canvas');
-	Gs.Variables.media.videoData;
-	canvas.width = video.videoWidth;
-	canvas.height = video.videoHeight;
-	canvas.getContext('2d').drawImage(video, 0, 0);
+
+	let videoPreview = document.getElementById(videoElement);
+	canvas.width = videoPreview.videoWidth;
+	canvas.height = videoPreview.videoHeight;
+	canvas.getContext('2d').drawImage(videoPreview, 0, 0);
 	const data = canvas.toDataURL('image/jpeg', 0.2);
 	return data;
-}*/
+}
 
 
 Gs.Media.GenerateImageWithCanvas = function(track,videoElem) {

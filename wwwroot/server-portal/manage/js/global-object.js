@@ -500,8 +500,7 @@ Gs.Objects.DownloadBasket = function () {
 Gs.Objects.OpenChat = async function () {
     if ($("#ChatPanel").html() == undefined) {
 
-
-        let html = `<div class="row"><span class="h3">${Gs.Variables.username} Chat</span><button onclick="Gs.Behaviors.ClearChat()" class="button ml-10 warning shadowed">Clear Chat</button></div><div class="row">`;
+        let html = `<div class="row"><span class="h3">${Gs.Variables.username}: Chat</span><button onclick="Gs.Behaviors.ClearChat()" class="button ml-10 warning shadowed">Clear Chat</button></div><div class="row">`;
         html += `<div id="ChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send=Gs.Socket.SendChatMessage data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with All Users" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
         html += ` data-random-color="true" data-welcome="Welcome to EIC & ESDB Portal chat" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" ></div>`;
         html += `</div>`;
@@ -515,6 +514,26 @@ Gs.Objects.OpenChat = async function () {
             });
             $("#ChatMessageCount").html("0");
         }, 100);
+    }
+}
+
+
+
+
+Gs.Objects.OpenShare = async function () {
+    if ($("#SharePanel").html() == undefined) {
+
+        let html = `<div class="row"><span class="h3">${Gs.Variables.username}: Share Window Chat</span><select id="userList" data-role="select" data-on-change="Gs.Functions.ShareUserSelected" data-cls-select="ml-10 w-25" data-clear-button="true" data-prepend="Select User" data-empty-value="" ></select>`
+        html += `<button id="ShareButton" onclick="Gs.Media.StartShareCaptureScreen()" class="button pos-absolute success shadowed" style="right:140px;">Start Share Window</button><button onclick="Gs.Behaviors.ClearChat()" class="button pos-absolute warning shadowed" style="right:30px;">Clear Chat</button></div><div class="row">`;
+        html += `<video id="videoPreview" autoplay style="width: 730px;height: 600px;background-color: lightgray;"></video><div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send=Gs.Socket.SendChatMessage data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
+        html += ` data-random-color="true" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" ></div>`;
+        html += `</div>`;
+        Gs.Objects.InfoboxObjectCreate("SharePanel", html, width = "1200", height = "700");
+
+        setTimeout(function () {
+            Gs.SignalR.GetUsers();
+            $("#ShareMessageCount").html("0");
+        }, 1000);
     }
 }
 

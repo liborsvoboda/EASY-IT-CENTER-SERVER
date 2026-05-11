@@ -411,6 +411,7 @@ Gs.Functions.GetFunctionList = function () {
     for (var p in Gs.Objects) { if (typeof Gs.Objects[p] === "function") { functionList.push({ title: `Gs.Objects.${p}()`, folder: false, checkbox: false, key: Gs.Objects[p].toString() }); } }
     for (var p in Gs.Apis) { if (typeof Gs.Apis[p] === "function") { functionList.push({ title: `Gs.Apis.${p}()`, folder: false, checkbox: false, key: Gs.Apis[p].toString() }); } }
     for (var p in Gs.Socket) { if (typeof Gs.Socket[p] === "function") { functionList.push({ title: `Gs.Socket.${p}()`, folder: false, checkbox: false, key: Gs.Socket[p].toString() }); } }
+    for (var p in Gs.SignalR) { if (typeof Gs.SignalR[p] === "function") { functionList.push({ title: `Gs.SignalR.${p}()`, folder: false, checkbox: false, key: Gs.SignalR[p].toString() }); } }
     
     Metro.storage.setItem('FunctionList', functionList.sort((a, b) => (a.title > b.title) * 2 - 1));
 }
@@ -665,5 +666,29 @@ Gs.Functions.SaveBlog = async function () {
     if (jsonData.HtmlContent != "<p><br></p>") {
         await Gs.Apis.RunServerPostApi("PortalApiTableService/SetBlogList", jsonData, null);
         $("#EditBlogMenu").remove();
+    }
+}
+
+
+
+Gs.Functions.GetPublicIp = function () {
+    //$.getJSON("http://jsonip.com/?callback=?", function (data) {
+    //    //console.log(data);
+    //    Gs.Variables.username = data.ip;
+    //});
+
+    $.get("http://ipinfo.io", function (response) {
+        //console.log(response.ip);
+        Gs.Variables.username = response.ip;
+    }, "jsonp");
+}
+
+
+Gs.Functions.ShareUserSelected = function () {
+    let select = Metro.getPlugin("#userList", "select");
+    if (select.val() == undefined) {
+        Gs.Functions.AddClass("ShareButton", "disabled");
+    } else {
+        Gs.Functions.RemoveClass("ShareButton", "disabled");
     }
 }

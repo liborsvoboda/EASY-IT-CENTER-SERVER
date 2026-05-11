@@ -21,6 +21,7 @@ window.Gs = {
     Apis: {},
     Media: {},
     Socket: {},
+    SignalR: {},
     Variables: {
         chatmessage: {},
         username: "Anonymous",
@@ -60,6 +61,16 @@ window.Gs = {
         },
         Socket: {
             chatSocket: new WebSocket(`${Metro.storage.getItem('ApiOriginSuffix', null).replace("http:", "ws:").replace("https:", "wss:")}WebSocketService/chat`)
+        },
+        SignalR: {
+            streamChat: null,
+            displayMediaOptions : {
+                video: {
+                    displaySurface: "window",
+                },
+                audio: false,
+                //preferCurrentTab: true,
+            }
         }
     }
 }
