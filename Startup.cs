@@ -90,16 +90,17 @@ namespace EasyITCenter {
             ServerModules.ConfigureReportDesigner(ref services);
             ServerModules.ConfigurePerformanceMonitor(ref services);
 
-            ServerModules.EnableSmtpServer(ref services);
-
-
             //REGISTERING SERVICES BY CLASS OR INTERFACE
             ServerConfigurationServices.ConfigureTransient(ref services);
             ServerConfigurationServices.ConfigureSingletons(ref services);
 
             //https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/signalr/dotnet-client/sample/SignalRChatClient/MainWindow.xaml.cs
             //primi chat s aplikaci
-            services.AddSignalR();
+            services.AddSignalR(cfg =>
+            {
+                cfg.EnableDetailedErrors = true;
+                cfg.MaximumReceiveMessageSize = 1024 * 1024; // 1MB
+            });
             //services.AddServerSideBlazor();
 
             

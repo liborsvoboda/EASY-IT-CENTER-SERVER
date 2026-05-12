@@ -156,12 +156,39 @@ Gs.Media.StartPublicCaptureScreen = async function (filename) {
 //Start Share Window Screen
 Gs.Media.StartShareCaptureScreen = async function () {
 	try {
-		Gs.Functions.AddClass("ShareButton", "hide");
+
+		Gs.Functions.RemoveClass("ShareButton", "success");
+		Gs.Functions.AddClass("ShareButton", "alert");
+		document.getElementById("ShareButton").innerHTML = "Stop Share Window";
+		setTimeout(function () { document.getElementById("ShareButton").onclick = function () { Gs.Media.StopShareCaptureScreen(); } }, 1000);
+
 
 		let videoPreview = document.getElementById('videoPreview');
-		videoPreview.srcObject = await navigator.mediaDevices.getDisplayMedia(
-			Gs.Variables.SignalR.displayMediaOptions
-		);
+		let mediaStream = await navigator.mediaDevices.getDisplayMedia(Gs.Variables.SignalR.displayMediaOptions);
+		videoPreview.srcObject = mediaStream;
+		///
+
+		const mime = MediaRecorder.isTypeSupported("video/webm; codecs=vp9")
+			? "video/webm; codecs=vp9"
+			: "video/webm"
+		let mediaRecorder = new MediaRecorder(mediaStream, {
+			mimeType: mime
+		});
+
+		Gs.Variables.media.mediaStream = mediaStream;
+		Gs.Variables.media.mediaRecorder = mediaRecorder;
+
+		mediaRecorder.ondataavailable = (e) => {
+			Gs.Variables.media.videoData.push(e.data);
+		};
+
+		mediaRecorder.start();
+
+		///
+
+		Gs.Variables.SignalR.stopStreaming = false;
+		setTimeout(function () { Gs.SignalR.StartVideoStream(); }, 1000);
+	
 	} catch (err) {
 		console.error(err);
 	}
@@ -169,10 +196,20 @@ Gs.Media.StartShareCaptureScreen = async function () {
 
 
 Gs.Media.StopShareCaptureScreen = function () {
+
+	Gs.Functions.RemoveClass("ShareButton", "alert");
+	Gs.Functions.AddClass("ShareButton", "success");
+	document.getElementById("ShareButton").innerHTML = "Start Share Window";
+	setTimeout(function () { document.getElementById("ShareButton").onclick = function () { Gs.Media.StartShareCaptureScreen(); } }, 1000);
+
+	Gs.Variables.SignalR.stopStreaming = true;
+
 	let videoPreview = document.getElementById('videoPreview');
 	let tracks = videoPreview.srcObject.getTracks();
 	tracks.forEach((track) => track.stop());
 	videoPreview.srcObject = null;
+
+
 }
 
 
@@ -232,7 +269,7 @@ Gs.Media.GetVideoFrame = function (videoElement) {
 	canvas.width = videoPreview.videoWidth;
 	canvas.height = videoPreview.videoHeight;
 	canvas.getContext('2d').drawImage(videoPreview, 0, 0);
-	const data = canvas.toDataURL('image/jpeg', 0.2);
+	const data = canvas.toDataURL('image/png');
 	return data;
 }
 

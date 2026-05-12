@@ -14,7 +14,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Pek.Markdig.HighlightJs;
 using Quartz.Impl;
 using Quartz.Spi;
-using SmtpServer;
 using Westwind.AspNetCore.LiveReload;
 using Westwind.AspNetCore.Markdown;
 
@@ -29,31 +28,6 @@ namespace EasyITCenter.ServerCoreConfiguration {
 
         internal static void StartUpServices(ref IServiceCollection services) {
             services.AddHostedService<StartUpService>();
-        }
-
-        internal static void EnableSmtpServer(ref IServiceCollection services) {
-
-            services.AddSingleton(provider => {
-
-                ISmtpServerOptions? options = new SmtpServerOptionsBuilder()
-                    .ServerName("SMTP Server").MaxAuthenticationAttempts(int.Parse(DbOperations.GetServerParameterLists("MaxEmailAuthenticationAttempts").Value))
-                    .Endpoint(builder => builder.AuthenticationRequired(true).AllowUnsecureAuthentication(true).Port(25).IsSecure(false)).MaxRetryCount(10)
-                    .MaxMessageSize(int.Parse(DbOperations.GetServerParameterLists("MaxEmailMessageSizeKb").Value)).Build();
-
-                //ISmtpServerOptions? options = new SmtpServerOptionsBuilder()
-                //   .ServerName("SMTP Server").MaxAuthenticationAttempts(int.Parse(DbOperations.GetServerParameterLists("MaxEmailAuthenticationAttempts").Value))
-                //   .Endpoint(builder => builder.Port(465).IsSecure(true).Certificate(new X509Certificate2()))
-                //   .MaxRetryCount(10).MaxMessageSize(int.Parse(DbOperations.GetServerParameterLists("MaxEmailMessageSizeKb").Value)).Build();
-
-
-                //.Endpoint(builder => builder.AllowUnsecureAuthentication().AuthenticationRequired().Port(9025))
-                var iprovider = provider.GetRequiredService<IServiceProvider>();
-                //iprovider.Add(EmailUserAuthenticator)
-                return new SmtpServer.SmtpServer(options, iprovider);
-            });
-
-            services.AddHostedService<SmtpServerService>();
-            if (!bool.Parse(DbOperations.GetServerParameterLists("SmtpEmailEnabled").Value)) { SrvRuntime.SmtpServerService.Shutdown(); }
         }
 
 

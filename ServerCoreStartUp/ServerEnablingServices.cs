@@ -85,6 +85,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// </summary>
         internal static void EnableEndpoints(ref IApplicationBuilder app) {
 
+
             app.UseEndpoints(endpoints => {
 
                 //EasyData Support

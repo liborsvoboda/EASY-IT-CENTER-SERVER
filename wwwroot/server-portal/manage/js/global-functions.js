@@ -672,13 +672,7 @@ Gs.Functions.SaveBlog = async function () {
 
 
 Gs.Functions.GetPublicIp = function () {
-    //$.getJSON("http://jsonip.com/?callback=?", function (data) {
-    //    //console.log(data);
-    //    Gs.Variables.username = data.ip;
-    //});
-
     $.get("http://ipinfo.io", function (response) {
-        //console.log(response.ip);
         Gs.Variables.username = response.ip;
     }, "jsonp");
 }
@@ -686,9 +680,39 @@ Gs.Functions.GetPublicIp = function () {
 
 Gs.Functions.ShareUserSelected = function () {
     let select = Metro.getPlugin("#userList", "select");
-    if (select.val() == undefined) {
+    if (select.val() == "") {
         Gs.Functions.AddClass("ShareButton", "disabled");
     } else {
         Gs.Functions.RemoveClass("ShareButton", "disabled");
     }
+}
+
+
+
+function SetQuestionCount() {
+    let myQuestionList = []; let group = null; menuItem = {}; let data = [];
+    let origQuestionList = Metro.storage.getItem('AdminQuestionList', null);
+
+    origQuestionList.forEach((item, index, arr) => {
+        switch (item.apiTableColumnName) {
+            case "MenuName":
+                menuItem.recGuid = item.recGuid;
+                menuItem.MenuName = item.value;
+                break;
+            case "Question":
+                menuItem.Question = item.value;
+                break;
+            case "Response":
+                menuItem.Id = item.id;
+                menuItem.Response = item.value;
+                break;
+        }
+        if (group != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != item.recGuid)) {
+            myQuestionList.push(menuItem);
+            menuItem = {};
+        }
+        group = item.recGuid;
+    });
+    Metro.storage.setItem('AdminQuestionList', myQuestionList);
+    $("#QuestionCount").html(myQuestionList.length.toString());
 }

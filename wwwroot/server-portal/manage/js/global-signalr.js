@@ -1,20 +1,29 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
     Gs.Variables.SignalR.streamChat = new signalR.HubConnectionBuilder()
         .withUrl("/StreamChat")
-        .withAutomaticReconnect([0,0,10000])
-        .configureLogging(signalR.LogLevel.Information)
+        .withAutomaticReconnect()
+        //.configureLogging(signalR.LogLevel.Information)
         .build();
+
+    Gs.Variables.SignalR.streamChat.onclose(Gs.SignalR.Start());
 
     Gs.Variables.SignalR.streamChat.on("ReceiveMessage", (user, message) => {
         console.log("Receive Message", user, message);
     });
 
+    Gs.Variables.SignalR.streamChat.on("ReceiveStream", (user, message) => {
+        Gs.Objects.OpenShareReceive();
+        //document.getElementById("imagePreview").src = `data:image/png;base64,${JSON.parse(message).image}`;
+
+
+        document.getElementById("imagePreview").srcObject = `data:video/webm;base64,${JSON.parse(message).image}`;
+        console.log("Receive Stream", user, JSON.parse(message));
+    });
 
     Gs.Variables.SignalR.streamChat.on("ResponseUsers", (response) => {
         let select = Metro.getPlugin("#userList", "select"); let options = []; select.data(""); let users = JSON.parse(response);
-        users.forEach(user => { options.push({ val: user, title: user, selected: false }); });
+        users.forEach(user => { if (Gs.Variables.username != user) { options.push({ val: user, title: user, selected: false }); } });
         select.addOptions(options);  
-
         //console.log("Users", response);
     });
 
@@ -25,11 +34,10 @@
 
 Gs.SignalR.Start = async function () {
     try {
-        await Gs.Variables.SignalR.streamChat.start();
-        //console.log("SignalR Connected.");
+        if (Gs.Variables.SignalR.streamChat.state == signalR.HubConnectionState.Disconnected) { await Gs.Variables.SignalR.streamChat.start(); }
     } catch (err) {
-        console.log(err);
-        setTimeout(Gs.SignalR.Start, 5000);
+        console.log(err, Gs.Variables.SignalR.streamChat.state);
+        if (Gs.Variables.SignalR.streamChat.state == signalR.HubConnectionState.Disconnected) { setTimeout(Gs.SignalR.Start, 1000); }
     }
 }
 
@@ -47,4 +55,53 @@ Gs.SignalR.GetUsers = function () {
     });
 }
 
+//data:image/jpeg;base64,
+Gs.SignalR.StartVideoStream = async function (stopStreaming) {
+    try {
+        if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Disconnected) {
+            await Gs.Variables.SignalR.streamChat.start();
+        }
 
+        let select = Metro.getPlugin("#userList", "select");
+
+        let image = Gs.Media.GetVideoFrame("videoPreview");
+        //let message = JSON.stringify({ image: image.split(",")[1], message: "" });
+        let message = { image: image.split(",")[1], message: "" };
+
+        ////
+        let blob = new Blob(Gs.Variables.media.videoData, { type: "video/webm" });
+        Gs.Variables.media.videoData = [];
+
+        let reader = new FileReader();
+        reader.onload = async function () {
+            var dataURL = reader.result;
+            message.image = dataURL.split(",")[1];
+            message = JSON.stringify(message);
+
+            if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Connected) {
+                Gs.Variables.SignalR.streamChat.invoke("SendMessageToUser", select.val(), message).catch(function (err) {
+                    return console.error(err);
+                });
+            }
+        }
+        reader.readAsDataURL(blob);
+        
+        ////
+
+
+
+        //if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Connected) {
+        //    Gs.Variables.SignalR.streamChat.invoke("SendMessageToUser", select.val(), message).catch(function (err) {
+        //        return console.error(err);
+        //    });
+        //}
+
+        if (!stopStreaming) {
+            setTimeout(function () {
+                Gs.SignalR.StartVideoStream(Gs.Variables.SignalR.stopStreaming);
+            },2000);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}

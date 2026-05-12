@@ -1,10 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using SmtpServer;
-using SmtpServer.Authentication;
-using SmtpServer.Mail;
-using SmtpServer.Net;
-using SmtpServer.Protocol;
-using SmtpServer.Storage;
 using System.Buffers;
 
 namespace EasyITCenter.Services {

@@ -24,7 +24,8 @@ window.Gs = {
     SignalR: {},
     Variables: {
         chatmessage: {},
-        username: "Anonymous",
+        username: "127.0.0.1",
+        fullname: "Anonymous",
         stripe: null,
         monacoEditorList: [],
         screensaver: {},
@@ -70,7 +71,8 @@ window.Gs = {
                 },
                 audio: false,
                 //preferCurrentTab: true,
-            }
+            },
+            stopStreaming: false
         }
     }
 }

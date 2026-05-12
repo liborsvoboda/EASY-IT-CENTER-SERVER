@@ -9,7 +9,8 @@ const StripePayed = urlParams.get('Payed');
 Gs.Behaviors.PortalStartup = async function () {
     if (Metro.storage.getItem("ApiToken", null) != null) {
         Cookies.set("ApiToken", Metro.storage.getItem("ApiToken", null).Token);
-        Gs.Variables.username = Metro.storage.getItem("ApiToken", null).Name + " " + Metro.storage.getItem("ApiToken", null).SurName;
+        Gs.Variables.username = Metro.storage.getItem("ApiToken", null).Username;
+        Gs.Variables.fullname = Metro.storage.getItem("ApiToken", null).Name + " " + Metro.storage.getItem("ApiToken", null).SurName;
         $("#LoginName").html(Metro.storage.getItem("ApiToken", null).Username);
         let html = `<button class="button mr-1">Profile</button>
                     <button class="button ml-1" onclick=Gs.Apis.SignOut(); >Sign out</button>`;
@@ -17,7 +18,7 @@ Gs.Behaviors.PortalStartup = async function () {
         
     } else {
         Cookies.remove("ApiToken"); Metro.storage.delItem("ApiToken");
-        Gs.Functions.GetPublicIp(); //Gs.Variables.username = "Anonymous";
+        Gs.Functions.GetPublicIp(); Gs.Variables.fullname = "Anonymous";
         $("#LoginName").html("Login");
         Gs.Functions.AddClass("LoginName", "ani-shuttle");
         let html = `<button class="button mr-1" onclick=Gs.Objects.ShowLoginPage(); >Login</button>
@@ -34,6 +35,8 @@ Gs.Behaviors.PortalStartup = async function () {
     Gs.Variables.getSpProcedure[2].camelCase = true;
     await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MonacoSuggestionList");
     Gs.Variables.getSpProcedure[2].camelCase = false;
+
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetQuestionForResponseList", "AdminQuestionList", "SetQuestionCount");
 
     await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenuList","GenerateMenuList");
     await Gs.Apis.RunServerGetApi("InformationService/GetVersion", "ServerVersion");

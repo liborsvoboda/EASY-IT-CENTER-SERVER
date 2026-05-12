@@ -81,9 +81,6 @@ namespace EasyITCenter.ServerCoreStructure {
         public static Dictionary<string, string> PerformanceMonitor = new Dictionary<string, string>();
         public static bool PerformanceMonitorStatus;
 
-        public static SmtpServer.SmtpServer? SmtpServerService = null;
-        public static bool SmtpServerStatus;
-
         public static List<string> SignalRUsers = new();
 
     }

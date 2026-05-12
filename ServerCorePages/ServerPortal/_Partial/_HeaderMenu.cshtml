@@ -42,6 +42,7 @@
         <a href="#" class="app-bar-item shadowed" title="Help Center" onclick="Gs.Objects.WindowIframeCreate('Virtual Assistant','/server-portal/addons/assistent/assistent.html');" >
             <span class="mif-info mif-5x"></span>
             <span class="ml-2 app-bar-name">Any Question?</span>
+            <span id="QuestionCount" class="badge bg-green fg-white">0</span>
         </a>
         <a href="#" class="app-bar-item shadowed" title="Portal Tools" onclick=Gs.Objects.ShowToolPanel(); >
             <span class="mif-language mif-5x"></span>
@@ -63,10 +64,9 @@
             <span class="ml-2 app-bar-name">Reservation Online</span>
         </a>
 
-        <a id="ShareMainButton" href="#" class="app-bar-item shadowed" title="Share" onclick=Gs.Objects.OpenShare(); >
+        <a id="ShareMainButton" href="#" class="app-bar-item shadowed" title="Share" onclick=Gs.Objects.OpenShareWindow();>
             <span class="mif-share mif-5x"></span>
             <span class="ml-2 app-bar-name">Share</span>
-             <span id="ShareMessageCount" class="badge bg-green fg-white">0</span>
         </a>
 
         <a href="#" class="app-bar-item shadowed" title="Chat" onclick=Gs.Objects.OpenChat(); >
