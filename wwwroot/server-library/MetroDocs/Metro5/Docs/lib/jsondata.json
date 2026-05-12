@@ -1,0 +1,1730 @@
+[
+  {
+    "title": "accordion",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\accordion.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "action-button",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\action-button.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "activity",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\activity.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "adblock",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\adblock.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "analog-clock-{size}",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\analog-clock-{size}.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "analog-clock",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\analog-clock.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "animate-border",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\animate-border.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "any",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\any.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "app-bar",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\app-bar.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "audio-button",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\audio-button.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "audio-player",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\audio-player.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "bar3d",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\bar3d.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "blocks",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\blocks.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "bottom-sheet",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\bottom-sheet.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "breadcrumbs",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\breadcrumbs.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "bulls",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\bulls.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "button-group",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\button-group.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "buttons",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\buttons.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "calendar-picker",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\calendar-picker.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "calendar-wide",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\calendar-wide.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "calendar-with-time",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\calendar-with-time.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "calendar",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\calendar.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "cards",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\cards.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "carousel",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\carousel.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "catalog-menu",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\catalog-menu.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "charms",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\charms.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "chat",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\chat.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "checkbox",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\checkbox.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "chips",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\chips.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "clock",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\clock.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "code",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\code.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "collapse",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\collapse.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "color-palette",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\color-palette.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "color-picker",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\color-picker.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "color-selector",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\color-selector.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "colors",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\colors.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "container",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\container.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "context-menu",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\context-menu.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "cookie-disclaimer",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\cookie-disclaimer.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "cookie",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\cookie.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "countdown",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\countdown.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "counter",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\counter.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "cube",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\cube.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "custom-checkbox",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\custom-checkbox.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "cutter",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\cutter.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "d-menu",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\d-menu.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "date-picker",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\date-picker.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "datetime",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\datetime.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "dialog",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\dialog.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "directive",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\directive.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "directive2",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\directive2.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "directive3",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\directive3.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "donut",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\donut.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "double-select-box",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\double-select-box.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "double-slider",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\double-slider.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "drag-items",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\drag-items.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "draggable-boundary-restriction",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\draggable-boundary-restriction.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "draggable",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\draggable.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "dropdown-button",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\dropdown-button.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "dropdown-{position}",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\dropdown-{position}.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "dropdown",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\dropdown.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "dropmenu",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\dropmenu.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "eval",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\eval.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "file",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\file.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "form-elements",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\form-elements.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "form",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\form.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "gauge",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\gauge.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "github-box",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\github-box.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "gradient-box",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\gradient-box.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "gradients",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\gradients.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "gravatar",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\gravatar.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "grid-new",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\grid-new.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "grid-{enclosed)",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\grid-{enclosed).html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "grid",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\grid.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "h-menu",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\h-menu.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "h-tag",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\h-tag.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "hero1",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\hero1.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "hero2",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\hero2.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "hero3",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\hero3.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "hero4",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\hero4.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "hero5",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\hero5.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "hero6",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\hero6.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "hint",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\hint.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "hotkey",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\hotkey.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "hover-box",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\hover-box.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "html-container",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\html-container.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "i18n",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\i18n.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "icons",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\icons.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "image-box",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\image-box.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "image-carousel",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\image-carousel.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "image-compare",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\image-compare.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "image-grid",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\image-grid.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "image-magnifier",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\image-magnifier.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "image-placeholder",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\image-placeholder.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "info-box",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\info-box.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "input-mask",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\input-mask.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "input",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\input.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "jquery",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\jquery.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "keypad",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\keypad.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "lightbox",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\lightbox.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "linked-block",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\linked-block.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "list",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\list.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "lists",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\lists.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "listview",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\listview.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "load-metro",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\load-metro.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "log",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\log.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "marquee-sw",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\marquee-sw.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "marquee",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\marquee.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "master",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\master.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "material-input",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\material-input.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "material-tabs",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\material-tabs.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "model",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\model.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "multicolor-gradients",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\multicolor-gradients.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "navview",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\navview.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "navview2",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\navview2.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "notify",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\notify.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "package-manager",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\package-manager.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "page-control",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\page-control.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "pagination",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\pagination.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "panel",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\panel.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "patterns",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\patterns.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "popover",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\popover.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "progress",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\progress.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "push-button",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\push-button.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "quick-start",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\quick-start.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "radio",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\radio.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "rating",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\rating.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "remark",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\remark.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "remote-dataset",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\remote-dataset.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "remote-table",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\remote-table.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "resizable-container",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\resizable-container.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "resizable",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\resizable.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "resizer",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\resizer.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "ribbon-menu",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\ribbon-menu.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "ripple",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\ripple.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "scrollbar",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\scrollbar.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "select-2",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\select-2.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "select-options",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\select-options.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "select-{data}",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\select-{data}.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "select-{reset}",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\select-{reset}.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "select-{source}",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\select-{source}.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "select-{val}",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\select-{val}.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "select",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\select.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "shadow-text",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\shadow-text.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "shadow",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\shadow.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "shapes",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\shapes.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "shortcuts",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\shortcuts.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "sidebar",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\sidebar.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "sidenav-counter",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\sidenav-counter.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "sidenav",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\sidenav.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "slider",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\slider.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "sorter",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\sorter.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "spinner",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\spinner.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "splashscreen",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\splashscreen.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "splitter",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\splitter.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "stack-menu",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\stack-menu.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "stepper",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\stepper.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "storage",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\storage.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "streamer",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\streamer.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "stroke-color",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\stroke-color.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "swipe",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\swipe.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "switch",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\switch.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "t-menu",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\t-menu.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "table-static",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\table-static.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "table",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\table.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "table2",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\table2.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "tabs-material",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\tabs-material.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "tabs",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\tabs.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "tag-input",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\tag-input.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "template",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\template.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "textarea",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\textarea.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "theme-switcher",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\theme-switcher.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "tile",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\tile.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "time-picker",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\time-picker.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "timeline",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\timeline.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "toast",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\toast.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "toggle-button",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\toggle-button.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "tokenizer",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\tokenizer.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "touch",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\touch.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "treeview",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\treeview.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "typer",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\typer.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "typography",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\typography.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "v-menu",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\v-menu.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "validator-{required}",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\validator-{required}.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "validator-{submit}",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\validator-{submit}.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "validator",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\validator.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "vegas",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\vegas.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "video-player",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\video-player.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "viewport-check",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\viewport-check.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "window",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\window.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "wizard-classic",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\wizard-classic.html",
+    "children": null,
+    "content": null,
+    "path": null
+  },
+  {
+    "title": "wizard",
+    "folder": false,
+    "checkbox": false,
+    "key": "\\server-library\\MetroDocs\\Metro5\\Docs\\examples\\wizard.html",
+    "children": null,
+    "content": null,
+    "path": null
+  }
+]

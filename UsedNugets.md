@@ -1,4 +1,10 @@
-﻿# SEARCH
+﻿# Other Solutions
+https://github.com/ServiceStack/ServiceStack/tree/main
+# AddOn
+dotnet add package WebMarkupMin.AspNetCore6 --version 2.21.0 
+html minify
+
+# SEARCH
 https://stackoverflow.com/questions/tagged/asp.net-core = variable
 
 
