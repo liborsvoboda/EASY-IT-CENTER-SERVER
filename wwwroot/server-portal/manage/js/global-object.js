@@ -539,31 +539,45 @@ Gs.Objects.OpenChat = async function () {
 Gs.Objects.OpenShareWindow = async function () {
     if ($("#SharePanel").html() == undefined) {
          
-        let html = `<div class="row"><span class="h3">${Gs.Variables.username}: Share Window Chat</span><select id="userList" data-role="select" data-on-change="Gs.Functions.ShareUserSelected" data-cls-select="ml-10 w-25" data-clear-button="true" data-add-empty-value="true" data-prepend="Select User" data-empty-value="" ></select>`
-        html += `<button id="ShareButton" onclick="Gs.Media.StartShareCaptureScreen()" class="button pos-absolute success shadowed disabled" style="right:140px;">Start Share Window</button><button onclick="Gs.Behaviors.ClearChat()" class="button pos-absolute warning shadowed" style="right:30px;">Clear Chat</button></div><div class="row">`;
-        html += `<video id="videoPreview" autoplay style="width: 730px;height: 600px;background-color: lightgray;"></video><div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send=Gs.Socket.SendChatMessage data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
+        let html = `<div class="row ml-3"><span class="h3">${Gs.Variables.username}: Share Window Chat</span><select id="userList" data-role="select" data-on-change="Gs.Functions.ShareUserSelected" data-cls-select="ml-10 w-25" data-clear-button="true" data-add-empty-value="true" data-prepend="Select User" data-empty-value="" ></select>`
+        html += `<button id="ShareButton" onclick="Gs.Media.StartShareCaptureScreen()" class="button pos-absolute success shadowed disabled" style="right:140px;">Start Share Window</button><button onclick="Gs.Behaviors.ShareClearChat()" class="button pos-absolute warning shadowed" style="right:30px;">Clear Chat</button></div>`;
+        html += `<div class="row ml-3"><video id="videoPreview" autoplay style="width: 730px;height: 600px;background-color: lightgray;"></video><div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send="Gs.SignalR.SendStreamChatMessage" data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
         html += ` data-random-color="true" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" ></div>`;
         html += `</div>`;
         Gs.Objects.WindowHtmlCreate("SharePanel", html);
 
         setTimeout(function () {
             Gs.SignalR.GetUsers();
-        }, 1000);
+
+            let chatMessageList = Metro.storage.getItem("ShareChatMessageList", null);
+            let chatWindow = Metro.getPlugin("#ShareChatWindow", "chat");
+            chatMessageList.forEach(message => {
+                chatWindow.add(message);
+            });
+            $("#ShareChatMessageCount").html("0");
+        }, 100);
     }
 }
 
 
 Gs.Objects.OpenShareReceive = async function () {
-    console.log("Share  Received Panel exist", $("#ShareReceivePanel").html());
-
     if ($("#ShareReceivePanel").html() == undefined) {
 
-        let html = `<div class="row"><span class="h3">${Gs.Variables.username}: Share Window Chat</span>`
-        html += `<button onclick="Gs.Behaviors.ClearChat()" class="button pos-absolute warning shadowed" style="right:30px;">Clear Chat</button></div><div class="row">`;
-        html += `<video id="imagePreview" style="width: 730px;height: 600px;background-color: lightgray;"></video><div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send=Gs.Socket.SendChatMessage data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
+        let html = `<div class="row"><span class="h3">${Gs.Variables.username}: Share Window Chat</span><span class="h5 ml-10">connected with</span><div id="StreamAdmin" class="ml-10 h3"></div>`
+        html += `<button onclick="Gs.Behaviors.ShareReceiveClearChat()" class="button pos-absolute warning shadowed" style="right:30px;">Clear Chat</button></div><div class="row">`;
+        html += `<image id="imagePreview" style="width: 100%;height: 100%;background-color: lightgray;"></image><div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send="Gs.SignalR.SendStreamChatMessage" data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
         html += ` data-random-color="true" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" ></div>`;
         html += `</div>`;
         Gs.Objects.InfoboxObjectCreate("ShareReceivePanel", html, width = "1200", height = "700", true);
+
+        setTimeout(function () {
+            let chatMessageList = Metro.storage.getItem("ShareChatMessageList", null);
+            let chatWindow = Metro.getPlugin("#ShareChatWindow", "chat");
+            chatMessageList.forEach(message => {
+                chatWindow.add(message);
+            });
+            $("#ShareChatMessageCount").html("0");
+        }, 100);
     }
 }
 

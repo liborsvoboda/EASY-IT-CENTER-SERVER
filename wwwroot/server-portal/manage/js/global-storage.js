@@ -8,7 +8,7 @@ Metro.storage.setItem('DefaultPath', Metro.storage.getItem('DefaultPath', null) 
 
 if (Metro.storage.getItem('BasketPriceList', null) == null) { Metro.storage.setItem('BasketPriceList', []); }
 if (Metro.storage.getItem('ChatMessageList', null) == null) { Metro.storage.setItem('ChatMessageList', []); }
-
+if (Metro.storage.getItem('ShareChatMessageList', null) == null) { Metro.storage.setItem('ShareChatMessageList', []); }
 
 
 

@@ -99,7 +99,7 @@ namespace EasyITCenter {
             services.AddSignalR(cfg =>
             {
                 cfg.EnableDetailedErrors = true;
-                cfg.MaximumReceiveMessageSize = 1024 * 1024; // 1MB
+                cfg.MaximumReceiveMessageSize = 2048 * 1024; // 1MB
             });
             //services.AddServerSideBlazor();
 

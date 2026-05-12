@@ -166,25 +166,6 @@ Gs.Media.StartShareCaptureScreen = async function () {
 		let videoPreview = document.getElementById('videoPreview');
 		let mediaStream = await navigator.mediaDevices.getDisplayMedia(Gs.Variables.SignalR.displayMediaOptions);
 		videoPreview.srcObject = mediaStream;
-		///
-
-		const mime = MediaRecorder.isTypeSupported("video/webm; codecs=vp9")
-			? "video/webm; codecs=vp9"
-			: "video/webm"
-		let mediaRecorder = new MediaRecorder(mediaStream, {
-			mimeType: mime
-		});
-
-		Gs.Variables.media.mediaStream = mediaStream;
-		Gs.Variables.media.mediaRecorder = mediaRecorder;
-
-		mediaRecorder.ondataavailable = (e) => {
-			Gs.Variables.media.videoData.push(e.data);
-		};
-
-		mediaRecorder.start();
-
-		///
 
 		Gs.Variables.SignalR.stopStreaming = false;
 		setTimeout(function () { Gs.SignalR.StartVideoStream(); }, 1000);
@@ -268,20 +249,20 @@ Gs.Media.GetVideoFrame = function (videoElement) {
 	let videoPreview = document.getElementById(videoElement);
 	canvas.width = videoPreview.videoWidth;
 	canvas.height = videoPreview.videoHeight;
-	canvas.getContext('2d').drawImage(videoPreview, 0, 0);
-	const data = canvas.toDataURL('image/png');
-	return data;
+	canvas.getContext('2d').drawImage(videoPreview, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width * 0.5, canvas.height * 0.5);
+	const image = canvas.toDataURL('image/png');
+	return image;
 }
 
 
-Gs.Media.GenerateImageWithCanvas = function(track,videoElem) {
+Gs.Media.GenerateImageWithCanvas = function (track, videoElement) {
 	const canvas = document.createElement("canvas");
 
 	const { width, height } = track.getSettings();
 	canvas.width = width || 100;
 	canvas.height = height || 100;
 
-	canvas.getContext("2d")?.drawImage(videoElem, 0, 0);
+	canvas.getContext("2d")?.drawImage(videoElement, 0, 0);
 	const image = canvas.toDataURL("image/png");
 
 	return image;

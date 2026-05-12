@@ -25,6 +25,11 @@ namespace EasyITCenter.ServerCoreStructure {
             return Clients.Group("SignalR Users").SendAsync("ReceiveMessage", user, message);
         }
 
+        
+        public Task SendChatMessageToUser(string user, string message)
+        {
+            return Clients.User(user).SendAsync("ReceiveStreamChat", Context.UserIdentifier != null ? Context.UserIdentifier : "", message);
+        }
 
         public Task SendMessageToUser(string user, string message) {
                 return Clients.User(user).SendAsync("ReceiveStream", Context.UserIdentifier != null ? Context.UserIdentifier : "", message);

@@ -426,3 +426,16 @@ Gs.Behaviors.ClearChat = function () {
     $("#ChatPanel").remove();
     Gs.Objects.OpenChat();
 }
+
+
+Gs.Behaviors.ShareClearChat = function () {
+    Metro.storage.setItem("ShareChatMessageList", []);
+    $("#SharePanel").remove();
+    Gs.Objects.OpenShareWindow();
+}
+
+Gs.Behaviors.ShareReceiveClearChat = function () {
+    Metro.storage.setItem("ShareChatMessageList", []);
+    $("#ShareReceivePanel").remove();
+    Gs.Objects.OpenShareReceive();
+}

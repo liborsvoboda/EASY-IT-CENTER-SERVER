@@ -38,7 +38,7 @@ Gs.Socket.SetReceivingChat = function () {
             message.avatar = message.name == "Anonymous" ? "/server-portal/images/anonymous.jpg" : message.avatar;
 
             let chatMessageList = Metro.storage.getItem("ChatMessageList", null);
-            if (Metro.storage.getItem("ChatMessageList", null).filter(obj => { return obj.id == message.id }).length == 0) {
+            if (chatMessageList.filter(obj => { return obj.id == message.id }).length == 0) {
                 chatMessageList.push(message);
             }
             Metro.storage.setItem("ChatMessageList", chatMessageList);

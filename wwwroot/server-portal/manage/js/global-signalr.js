@@ -5,20 +5,48 @@
         //.configureLogging(signalR.LogLevel.Information)
         .build();
 
+
     Gs.Variables.SignalR.streamChat.onclose(Gs.SignalR.Start());
+
 
     Gs.Variables.SignalR.streamChat.on("ReceiveMessage", (user, message) => {
         console.log("Receive Message", user, message);
     });
 
-    Gs.Variables.SignalR.streamChat.on("ReceiveStream", (user, message) => {
+
+    Gs.Variables.SignalR.streamChat.on("ReceiveStreamChat", (user, message) => {
         Gs.Objects.OpenShareReceive();
-        //document.getElementById("imagePreview").src = `data:image/png;base64,${JSON.parse(message).image}`;
+        setTimeout(function () { $("#StreamAdmin").html(user); }, 100);
 
+        message = JSON.parse(message);
+        message.position = "left";
+        message.avatar = message.name == "Anonymous" ? "/server-portal/images/anonymous.jpg" : message.avatar;
 
-        document.getElementById("imagePreview").srcObject = `data:video/webm;base64,${JSON.parse(message).image}`;
+        let chatMessageList = Metro.storage.getItem("ShareChatMessageList", null);
+        if (chatMessageList.filter(obj => { return obj.id == message.id }).length == 0) {
+            chatMessageList.push(message);
+        }
+        Metro.storage.setItem("ShareChatMessageList", chatMessageList);
+
+        let chatWindow = Metro.getPlugin("#ShareChatWindow", "chat");
+        if (chatWindow != undefined) {
+            chatWindow.add(message);
+            $("#ShareChatMessageCount").html("0");
+        } else {
+            $("#ShareChatMessageCount").html((parseInt($("#ShareChatMessageCount").html()) + 1).toString());
+        }
         console.log("Receive Stream", user, JSON.parse(message));
     });
+
+
+    Gs.Variables.SignalR.streamChat.on("ReceiveStream", (user, message) => {
+        Gs.Objects.OpenShareReceive();
+        setTimeout(function () { $("#StreamAdmin").html(user); }, 100);
+
+        document.getElementById("imagePreview").src = JSON.parse(message).image;
+        //console.log("Receive Stream", user, JSON.parse(message));
+    });
+
 
     Gs.Variables.SignalR.streamChat.on("ResponseUsers", (response) => {
         let select = Metro.getPlugin("#userList", "select"); let options = []; select.data(""); let users = JSON.parse(response);
@@ -27,7 +55,6 @@
         //console.log("Users", response);
     });
 
-    // Start the connection.
     Gs.SignalR.Start();
 });
 
@@ -50,9 +77,11 @@ Gs.SignalR.SendMessage = function (user, message) {
 
 
 Gs.SignalR.GetUsers = function () {
-    Gs.Variables.SignalR.streamChat.invoke("RequestUsers").catch(function (err) {
-        return console.error(err);
-    });
+    if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Connected) {
+        Gs.Variables.SignalR.streamChat.invoke("RequestUsers").catch(function (err) {
+            return console.error(err);
+        });
+    }
 }
 
 //data:image/jpeg;base64,
@@ -63,38 +92,16 @@ Gs.SignalR.StartVideoStream = async function (stopStreaming) {
         }
 
         let select = Metro.getPlugin("#userList", "select");
-
         let image = Gs.Media.GetVideoFrame("videoPreview");
         //let message = JSON.stringify({ image: image.split(",")[1], message: "" });
-        let message = { image: image.split(",")[1], message: "" };
+        let message = JSON.stringify({ image: image, message: "" });
 
-        ////
-        let blob = new Blob(Gs.Variables.media.videoData, { type: "video/webm" });
-        Gs.Variables.media.videoData = [];
-
-        let reader = new FileReader();
-        reader.onload = async function () {
-            var dataURL = reader.result;
-            message.image = dataURL.split(",")[1];
-            message = JSON.stringify(message);
-
-            if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Connected) {
-                Gs.Variables.SignalR.streamChat.invoke("SendMessageToUser", select.val(), message).catch(function (err) {
-                    return console.error(err);
-                });
-            }
+      
+        if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Connected) {
+            Gs.Variables.SignalR.streamChat.invoke("SendMessageToUser", select.val(), message).catch(function (err) {
+                return console.error(err);
+            });
         }
-        reader.readAsDataURL(blob);
-        
-        ////
-
-
-
-        //if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Connected) {
-        //    Gs.Variables.SignalR.streamChat.invoke("SendMessageToUser", select.val(), message).catch(function (err) {
-        //        return console.error(err);
-        //    });
-        //}
 
         if (!stopStreaming) {
             setTimeout(function () {
@@ -104,4 +111,18 @@ Gs.SignalR.StartVideoStream = async function (stopStreaming) {
     } catch (err) {
         console.log(err);
     }
+}
+
+
+Gs.SignalR.SendStreamChatMessage = function (message) {
+    let chatMessageList = Metro.storage.getItem("ShareChatMessageList", null);
+/*    Gs.Variables.chatmessage = message;*/
+    chatMessageList.push(message);
+    Metro.storage.setItem("ShareChatMessageList", chatMessageList);
+
+    let select = Metro.getPlugin("#userList", "select");
+    message = JSON.stringify({ message: message });
+    Gs.Variables.SignalR.streamChat.invoke("SendChatMessageToUser", select.val(), message).catch(function (err) {
+        return console.error(err);
+    });
 }
