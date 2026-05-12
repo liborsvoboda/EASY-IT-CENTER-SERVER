@@ -49,12 +49,17 @@
             <span class="ml-2 app-bar-name">Info Settings</span>
         </a>
 
-        <a href="#" class="app-bar-item shadowed" title="Favorites" onclick=Gs.Objects.ShowFavorites("Favorites",false); >
+        <a href="#" class="app-bar-item shadowed" title="Favorites" onclick="Gs.Objects.ShowFavoritesPanel(false);" >
             <span class="mif-favorite mif-5x"></span>
             <span class="ml-2 app-bar-name">Favorites</span>
-        </a>        
+        </a> 
         
-        <a href="#" class="app-bar-item shadowed" title="Online Tools & Devs" onclick=Gs.Objects.ShowOnlineTools(); >
+        <a href="#" class="app-bar-item shadowed" title="Modal Menu" onclick=Gs.Objects.ShowModalMenu("ModalMenu",false); >
+            <span class="mif-assignment mif-5x"></span>
+            <span class="ml-2 app-bar-name">Modal Menu</span>
+        </a> 
+        
+        <a href="#" class="app-bar-item shadowed" title="Online Tools & Devs" onclick="Gs.Objects.ShowOnlineToolPanel(false);" >
             <span class="mif-import-contacts mif-5x"></span>
             <span class="ml-2 app-bar-name">Online Tools</span>
         </a>

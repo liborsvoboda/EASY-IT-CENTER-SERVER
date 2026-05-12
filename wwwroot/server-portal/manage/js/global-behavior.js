@@ -435,7 +435,9 @@ Gs.Behaviors.ShareClearChat = function () {
 }
 
 Gs.Behaviors.ShareReceiveClearChat = function () {
+    let targetUser = $("#StreamAdmin").html();
     Metro.storage.setItem("ShareChatMessageList", []);
     $("#ShareReceivePanel").remove();
     Gs.Objects.OpenShareReceive();
+    setTimeout(function () { $("#StreamAdmin").html(targetUser) }, 100);
 }

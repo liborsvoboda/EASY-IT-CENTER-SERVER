@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- StreamChat ([1d960b1](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1d960b1154b4acef0d94cf4c0e5a4c0f05299066) by lioborsvoboda).
+- Stream Window ([aca096e](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/aca096e2136abbb9050c0febc31c2633abf2eeb9) by lioborsvoboda).
+-  Metro Docs ([e12bfd6](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e12bfd6a2d1cec5dd963b13be06d4cbab6bdfe4e) by Libor Svoboda).
+- Stream Chat ([b55c688](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b55c6888bf6d215847202fb47f4098ddf3702df0) by Libor Svoboda).
 - imageeditor ([f37f41f](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f37f41f1d8d44fff0306eea9c8fff3544ae55562) by Libor Svoboda).
 - system apps ([07fae94](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/07fae94659dd6d4912c8550e5ae98191ff71ecea) by lioborsvoboda).
 - clean ([bfdf849](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/bfdf849ed58274ac8ca5a9743f473cd7a3468ac0) by lioborsvoboda).

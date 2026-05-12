@@ -76,6 +76,8 @@ window.Gs = {
         }
     }
 }
+
+
 window.WindowButtons = [
     {
         html: "<span class='mif-file-code' title='Show Window Code'></span>",

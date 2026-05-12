@@ -199,15 +199,23 @@ Gs.Objects.ShowNotify = function (type, message) {
 }
 
 
-Gs.Objects.ShowMessagePanel = function (close) {
-    charms = Metro.getPlugin($("#charmPanel"), 'charms');
+Gs.Objects.ShowFavoritesPanel = function (close) {
+    let charms = Metro.getPlugin($("#FavoritesPanel"), 'charms');
     if (close) {
         charms.close();
     } else { charms.toggle(); }
 }
 
 
-Gs.Objects.ShowFavorites = function (elementId, close = false) {
+Gs.Objects.ShowOnlineToolPanel = function (close) {
+    let charms = Metro.getPlugin($("#OnlineToolPanel"), 'charms');
+    if (close) {
+        charms.close();
+    } else { charms.toggle(); }
+}
+
+
+Gs.Objects.ShowModalMenu = function (elementId, close = false) {
     if (close || Metro.bottomsheet.isOpen("#" + elementId)) {
         Gs.Functions.AddClass(elementId, "hidden");
         Metro.bottomsheet.close("#" + elementId);
@@ -296,7 +304,7 @@ Gs.Objects.InfoboxObjectCreate = function (elementId, html, width = "80%", heigh
 
 Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
     if (lastWindow) { ( url = document.getElementById("IFrameWindow") != null ? document.getElementById("IFrameWindow").src : "/") }
-    Metro.window.create({
+    let custwindow = Metro.window.create({
         cls: "p-0", title: title, clsCaption: 'bg-orange',
         btnMin: true, btnMax: true, shadow: true,
         draggable: true, resizable: true,
@@ -308,11 +316,12 @@ Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
         btnClose: true,
         content: "<iframe id=WindowFrame src='" + url + "' width='100%' height='800' frameborder='0' scrolling='yes' style='width: 100%; height: 100 %;'></iframe>"
     });
+    //custwindow[0].id = elementId;
 }
 
 
-Gs.Objects.WindowHtmlCreate = function (title, html) {
-    Metro.window.create({
+Gs.Objects.WindowHtmlCreate = function (elementId, title, html) {
+    let custwindow = Metro.window.create({
         cls: "p-0", title: title, clsCaption: 'bg-orange',
         btnMin: true, btnMax: true, shadow: true,
         draggable: true, resizable: true,
@@ -324,6 +333,7 @@ Gs.Objects.WindowHtmlCreate = function (title, html) {
         btnClose: true,
         content: html
     });
+    custwindow[0].id = elementId;
 }
 
 
@@ -536,7 +546,7 @@ Gs.Objects.OpenChat = async function () {
 
 
 
-Gs.Objects.OpenShareWindow = async function () {
+Gs.Objects.OpenShareWindow = async function (selectedUser = null) {
     if ($("#SharePanel").html() == undefined) {
          
         let html = `<div class="row ml-3"><span class="h3">${Gs.Variables.username}: Share Window Chat</span><select id="userList" data-role="select" data-on-change="Gs.Functions.ShareUserSelected" data-cls-select="ml-10 w-25" data-clear-button="true" data-add-empty-value="true" data-prepend="Select User" data-empty-value="" ></select>`
@@ -544,7 +554,7 @@ Gs.Objects.OpenShareWindow = async function () {
         html += `<div class="row ml-3"><video id="videoPreview" autoplay style="width: 730px;height: 600px;background-color: lightgray;"></video><div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send="Gs.SignalR.SendStreamChatMessage" data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
         html += ` data-random-color="true" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" ></div>`;
         html += `</div>`;
-        Gs.Objects.WindowHtmlCreate("SharePanel", html);
+        Gs.Objects.WindowHtmlCreate("SharePanel","Share Desktop & Chat", html);
 
         setTimeout(function () {
             Gs.SignalR.GetUsers();
@@ -565,7 +575,7 @@ Gs.Objects.OpenShareReceive = async function () {
 
         let html = `<div class="row"><span class="h3">${Gs.Variables.username}: Share Window Chat</span><span class="h5 ml-10">connected with</span><div id="StreamAdmin" class="ml-10 h3"></div>`
         html += `<button onclick="Gs.Behaviors.ShareReceiveClearChat()" class="button pos-absolute warning shadowed" style="right:30px;">Clear Chat</button></div><div class="row">`;
-        html += `<image id="imagePreview" style="width: 100%;height: 100%;background-color: lightgray;"></image><div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send="Gs.SignalR.SendStreamChatMessage" data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
+        html += `<image id="imagePreview" style="width: 730px;height: 600px;background-color: lightgray;"></image><div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send="Gs.SignalR.SendStreamChatMessage" data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
         html += ` data-random-color="true" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" ></div>`;
         html += `</div>`;
         Gs.Objects.InfoboxObjectCreate("ShareReceivePanel", html, width = "1200", height = "700", true);
@@ -740,4 +750,11 @@ function EditBlogMenu(search = null) {
         $("#MenuBlog").html(html);
     
     }, 1000);
+}
+
+
+
+Gs.Objects.ShowOnlineTools = function () {
+    if (Metro.charms.isOpen("#OnlineToolPanel")) { Metro.charms.close("#OnlineToolPanel"); }
+    else { Metro.charms.open("#OnlineToolPanel"); }
 }

@@ -1,4 +1,11 @@
-﻿# Other Solutions
+﻿# FAvorites
+Web, GitHub, Server
+
+# Online Tools
+Online, Developer, Data
+
+
+# Other Solutions
 https://github.com/ServiceStack/ServiceStack/tree/main
 # AddOn
 dotnet add package WebMarkupMin.AspNetCore6 --version 2.21.0 

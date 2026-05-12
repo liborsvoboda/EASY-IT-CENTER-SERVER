@@ -33,11 +33,16 @@
 }
 
 
-    @* <div id="charmPanel" data-role="charms" style="width:350px !important;height:calc(100% - 45px) !important;" data-position="right" data-opacity=".5">
-        <textarea id="NewMessage" data-role="textarea" data-auto-size="true" data-max-height="150" class="primary" placeholder="Zanechte mi Zprávu...."></textarea>
-        <button id="SendMessageBtn" class="button success mb-4" onclick="SendMessage()">Save Message</button>
-        <div id="MessageBox" class="d-block m-0 p-0" style="overflow-y: scroll;max-height: 500px;"></div>
-    </div> *@
+    <div id="FavoritesPanel" data-role="charms" style="width:400px !important;height:calc(100%) !important;" data-position="left" data-opacity=".7">
+        <button class="button success mb-4" onclick="AddFavorites()"><span class="mif-plus mif-3x"></span>Add Favorites</button>
+        <div id="Favorites" class="tiles-grid" style="overflow-y: scroll;max-height: 500px;"></div>
+    </div>
+
+
+    <div id="OnlineToolPanel" data-role="charms" style="width:400px !important;height:calc(100%) !important;" data-position="right" data-opacity=".7">
+        <button class="button success mb-4" onclick="AddOnlineTool()"><span class="mif-plus mif-3x"></span>Add Online Tool</button>
+        <div id="OnlineTools" class="tiles-grid" style="overflow-y: scroll;max-height: 500px;"></div>
+    </div>
 
 
     @* Menu Editor *@
@@ -85,23 +90,23 @@
     </div>
 
 
-    @* Menu Favorites *@
-    <ul id="Favorites" data-role="bottomsheet" class="hidden">
-        <li class="shadowed"><span class="icon mif-question" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.GetMyQuestionList();"></span>Questions</li>
-        <li class="shadowed"><span class="icon mif-library" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.WindowIframeCreate('Code Library & Templates','/server-portal/addons/fancytree/codelibrary.html');"></span>Templates</li>
-        <li class="shadowed"><span class="icon mif-download" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.InfoboxFrameCreate('Downloads','/server-downloads');"></span>Downloads</li>
-        <li class="shadowed"><span class="icon mif-printer" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.ShowPrintExport();"></span>Print</li>
-        <li class="shadowed"><span class="icon mif-import-contacts" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.WindowIframeCreate('Function List','/server-portal/addons/fancytree/codepreview.html');"></span>Functions</li>
-        <li class="shadowed"><span class="icon mif-import-export" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.ShowExportDialog('Export Table');"></span>Export Tbl</li>
-        @* <li class="shadowed"><span class="icon mif-github" onclick="Gs.Objects.ShowFavorites('Favorites',true);"></span>Github</li> *@
-        <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowFavorites('Favorites',true);"></span>Search</li>
+    @* Menu Modal Menu *@
+    <ul id="ModalMenu" data-role="bottomsheet" class="hidden">
+        <li class="shadowed"><span class="icon mif-question" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.GetMyQuestionList();"></span>Questions</li>
+        <li class="shadowed"><span class="icon mif-library" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Code Library & Templates','/server-portal/addons/fancytree/codelibrary.html');"></span>Templates</li>
+        <li class="shadowed"><span class="icon mif-download" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.InfoboxFrameCreate('Downloads','/server-downloads');"></span>Downloads</li>
+        <li class="shadowed"><span class="icon mif-printer" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.ShowPrintExport();"></span>Print</li>
+        <li class="shadowed"><span class="icon mif-import-contacts" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Function List','/server-portal/addons/fancytree/codepreview.html');"></span>Functions</li>
+        <li class="shadowed"><span class="icon mif-import-export" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.ShowExportDialog('Export Table');"></span>Export Tbl</li>
+        @* <li class="shadowed"><span class="icon mif-github" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);"></span>Github</li> *@
+        <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);"></span>Search</li>
         <li class="divider"></li>
-        <li class="shadowed"><span class="icon mif-file-code" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.AddSuggest();"></span>Suggest+</li>
-        <li class="shadowed"><span class="icon mif-help" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.EditHelpMenu();"></span>Edit Help</li>
-        <li class="shadowed"><span class="icon mif-blogger" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.OpenBlogMenu();"></span>Blog</li>
-        <li class="shadowed"><span class="icon mif-comment" onclick="Gs.Objects.ShowFavorites('Favorites',true);Metro.storage.delItem('JsonGeneratorService');Gs.Objects.WindowIframeCreate('JSON Editor',' /server-portal/addons/jsonData/')"></span>JsonEdit</li>
-        <li class="shadowed"><span class="icon mif-codepen" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.WindowIframeCreate('Code Compiler',' /server-portal/addons/compiler/')"></span>Compiler</li>
-        <li class="shadowed"><span class="icon mif-chart-line" onclick="Gs.Objects.ShowFavorites('Favorites',true);Gs.Objects.WindowIframeCreate('Graph Editor',' /server-portal/addons/mermaid-studio/')"></span>GraphEdit</li>
+        <li class="shadowed"><span class="icon mif-file-code" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.AddSuggest();"></span>Suggest+</li>
+        <li class="shadowed"><span class="icon mif-help" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.EditHelpMenu();"></span>Edit Help</li>
+        <li class="shadowed"><span class="icon mif-blogger" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.OpenBlogMenu();"></span>Blog</li>
+        <li class="shadowed"><span class="icon mif-comment" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Metro.storage.delItem('JsonGeneratorService');Gs.Objects.WindowIframeCreate('JSON Editor','/server-portal/addons/jsonData/')"></span>JsonEdit</li>
+        <li class="shadowed"><span class="icon mif-codepen" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Code Compiler','/server-portal/addons/compiler/')"></span>Compiler</li>
+        <li class="shadowed"><span class="icon mif-chart-line" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Graph Editor','/server-portal/addons/mermaid-studio/')"></span>GraphEdit</li>
     </ul>
 
 

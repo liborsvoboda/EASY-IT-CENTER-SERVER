@@ -249,7 +249,7 @@ Gs.Media.GetVideoFrame = function (videoElement) {
 	let videoPreview = document.getElementById(videoElement);
 	canvas.width = videoPreview.videoWidth;
 	canvas.height = videoPreview.videoHeight;
-	canvas.getContext('2d').drawImage(videoPreview, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width * 0.5, canvas.height * 0.5);
+	canvas.getContext('2d').drawImage(videoPreview, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width , canvas.height );
 	const image = canvas.toDataURL('image/png');
 	return image;
 }
