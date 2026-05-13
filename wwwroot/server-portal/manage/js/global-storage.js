@@ -12,7 +12,6 @@ if (Metro.storage.getItem('ShareChatMessageList', null) == null) { Metro.storage
 
 
 
-
 //Global Javascript Library
 window.Gs = {
     Behaviors: {},
@@ -104,6 +103,12 @@ window.WindowButtons = [
         cls: "sys-button",
         onclick: "Gs.Media.CaptureToImage();Gs.Media.DownloadCapturedImage();Gs.Media.ClearCapturedImage();"
     },
+    {
+        html: "<span class='mif-vpn-publ' title='Show URL'></span>",
+        cls: "sys-button",
+        onclick: "alert(document.getElementById('IFrameWindow').contentWindow.location.href);"
+    }
+    
     //{
     //    html: "<span class='mif-printer' title='Print'></span>",
     //    cls: "sys-button",

@@ -98,8 +98,7 @@ namespace EasyITCenter.Controllers
     }
 
 
-    public class SetMdMenuHelpRequest
-    {
+    public class SetMdMenuHelpRequest {
         public int Id { get; set; }
         public string RecGuid { get; set; }
         public string Value { get; set; }
@@ -107,12 +106,27 @@ namespace EasyITCenter.Controllers
     }
 
 
-    public class SetBlogRequest
-    {
+    public class SetBlogRequest {
         public string MenuName { get; set; }
         public string HtmlContent { get; set; }
     }
 
+
+    public class AddToFavoritesRequest {
+        public string MenuGroup { get; set; }
+        public string MenuName { get; set; }
+        public string MenuIcon { get; set; }
+        public string MenuUrl { get; set; }
+        public string MenuDescription { get; set; }
+    }
+
+
+    public class WebSearchListRequest {
+        public string MenuName { get; set; }
+        public string MenuDescription { get; set; }
+        public string MenuUrl { get; set; }
+        public bool MenuNewWindow { get; set; }
+    }
 
     [Route("PortalApiTableService")]
     [ApiController]
@@ -991,9 +1005,180 @@ namespace EasyITCenter.Controllers
         }
 
 
+        /// <summary>
+        /// Add To User Favorite List
+        /// </summary>
+        /// <param name="addToFavorites"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/AddToFavorites")]
+        public async Task<string> AddToFavorites([FromBody] AddToFavoritesRequest addToFavorites) {
+            EasyITCenterContext data = new EasyITCenterContext();
+            try {
+
+                if (HttpContextExtension.IsLogged()) {
+                    
+                        string RecGuid = Guid.NewGuid().ToString().ToUpper();
+                        List<PortalApiTableColumnDataList> record = new();
+                        record.Add(new() { ApiTableName = "FavoritesList", ApiTableColumnName = "MenuGroup", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuGroup, Description = addToFavorites.MenuDescription, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "FavoritesList", ApiTableColumnName = "MenuName", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuName, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "FavoritesList", ApiTableColumnName = "MenuIcon", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuIcon, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "FavoritesList", ApiTableColumnName = "MenuUrl", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuUrl, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.AddRange(record);
+                            data.SaveChanges();
+                            return true;
+                        });
+                    
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 8, ErrorMessage = RecGuid });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            }
+            catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
 
 
+        /// <summary>
+        /// Get User Favorite List
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("/PortalApiTableService/GetFavoritesList")]
+        public async Task<string> GetFavoritesList() {
+            List<PortalApiTableColumnDataList> data = new();
+            try {
+                if (HttpContextExtension.IsLogged()) {
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted }))
+                    {
+                        data = new EasyITCenterContext().PortalApiTableColumnDataLists
+                            .Where(a => a.ApiTableName == "FavoritesList" && a.UserId == HttpContextExtension.GetUserId())
+                            .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                    }
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
 
 
+        /// <summary>
+        /// Get Global Tool List
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("/PortalApiTableService/GetOnlineToolList")]
+        public async Task<string> GetOnlineToolList() {
+            List<PortalApiTableColumnDataList> data = new();
+            try {
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted }))
+                {
+                    data = new EasyITCenterContext().PortalApiTableColumnDataLists
+                        .Where(a => a.ApiTableName == "OnlineToolList")
+                        .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
+
+
+        /// <summary>
+        /// Add to Global Tool List
+        /// </summary>
+        /// <param name="addToFavorites"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/AddToOnlineToolList")]
+        public async Task<string> AddToOnlineToolList([FromBody] AddToFavoritesRequest addToFavorites) {
+            EasyITCenterContext data = new EasyITCenterContext();
+            try {
+
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+
+                    string RecGuid = Guid.NewGuid().ToString().ToUpper();
+                    List<PortalApiTableColumnDataList> record = new();
+                    record.Add(new() { ApiTableName = "OnlineToolList", ApiTableColumnName = "MenuGroup", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuGroup, Description = addToFavorites.MenuDescription, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "OnlineToolList", ApiTableColumnName = "MenuName", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuName, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "OnlineToolList", ApiTableColumnName = "MenuIcon", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuIcon, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "OnlineToolList", ApiTableColumnName = "MenuUrl", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuUrl, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                        data.PortalApiTableColumnDataLists.AddRange(record);
+                        data.SaveChanges();
+                        return true;
+                    });
+
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 8, ErrorMessage = RecGuid });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Add To Web Search List
+        /// </summary>
+        /// <param name="webSearchListRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/PortalApiTableService/AddWebSearchList")]
+        public async Task<string> AddWebSearchList([FromBody] WebSearchListRequest webSearchListRequest) {
+            EasyITCenterContext data = new EasyITCenterContext();
+            try {
+
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+
+                    string RecGuid = Guid.NewGuid().ToString().ToUpper();
+                    List<PortalApiTableColumnDataList> record = new();
+                    record.Add(new() { ApiTableName = "WebSearchList", ApiTableColumnName = "MenuName", InheritedDataType = "string", RecGuid = RecGuid, Value = webSearchListRequest.MenuName, Description = webSearchListRequest.MenuDescription, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "WebSearchList", ApiTableColumnName = "MenuUrl", InheritedDataType = "string", RecGuid = RecGuid, Value = webSearchListRequest.MenuUrl, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "WebSearchList", ApiTableColumnName = "MenuNewWindow", InheritedDataType = "bit", RecGuid = RecGuid, Value = webSearchListRequest.MenuNewWindow.ToString(), Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                        data.PortalApiTableColumnDataLists.AddRange(record);
+                        data.SaveChanges();
+                        return true;
+                    });
+
+
+                    return JsonSerializer.Serialize(new ResultMessage() { InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 8, ErrorMessage = RecGuid });
+                } else {
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+        }
+
+
+        /// <summary>
+        /// Get Web Search List
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("/PortalApiTableService/GetWebSearchList")]
+        public async Task<string> GetWebSearchList() {
+            List<PortalApiTableColumnDataList> data = new();
+            try {
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                    data = new EasyITCenterContext().PortalApiTableColumnDataLists
+                        .Where(a => a.ApiTableName == "WebSearchList")
+                        .OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
+                }
+            } catch (Exception ex) {
+                return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
+            }
+            return JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
     }
 }

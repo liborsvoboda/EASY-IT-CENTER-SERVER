@@ -1,19 +1,8 @@
-﻿# FAvorites
-Web, GitHub, Server
-
-# Online Tools
-Online, Developer, Data
-
-
-# Other Solutions
+﻿# Other Solutions
 https://github.com/ServiceStack/ServiceStack/tree/main
 # AddOn
 dotnet add package WebMarkupMin.AspNetCore6 --version 2.21.0 
 html minify
-
-# SEARCH
-https://stackoverflow.com/questions/tagged/asp.net-core = variable
-
 
 # Dynamic APIconfigurator
 udelat konfiguraci pro REST SET a pro Vlastní SQL
@@ -58,11 +47,6 @@ Csharp Servers 140repos https://github.com/jchristn?page=2&tab=repositories
 CSharp 500Repos https://github.com/ststeiger?tab=repositories
 Functional JS 50 repos https://github.com/mrdoob?page=2&tab=repositories
 
-# SEARCH
-https://stackoverflow.com/
-
-
-
 # Install dotnet support
 dotnet tool install -g upgrade-assistant
 upgrade-assistant upgrade your-project-name.csproj
@@ -92,6 +76,7 @@ System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.WebRootPath, "Serve
 
 # Used Nugets
 https://github.com/FubarDevelopment
+https://github.com/dotnet/MQTTnet  Server
 
 
 #Github Profiles
@@ -132,21 +117,12 @@ https://github.com/KeenSystemsNL/SFTPServer  SFTP server
 https://www.nuget.org/packages/ServiceStack.Server
 dotnet add package ServiceStack.Server --version 10.0.4
 
-https://github.com/dotnet/MQTTnet  Server
+
 https://github.com/erikzaadi/GithubSharp
 https://github.com/libgit2/libgit2sharp/
 
 # Step 7 TIA Sharp7
 https://github.com/fbarresi/Sharp7
-
-
-# Search Nugets
-https://nuget.info/packages
-https://www.nuget.org/packages
-
-
-# SignalR Video Stream
-https://www.c-sharpcorner.com/article/screencastr-simple-screen-sharing-app-using-signalr-streaming/
 
 
 # Repos

@@ -37136,7 +37136,7 @@ textarea {
   max-width: 33%;
   height: 33%;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   -webkit-transform: translateY(-50%) translateX(-50%);
           transform: translateY(-50%) translateX(-50%);

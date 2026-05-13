@@ -1,4 +1,4 @@
-﻿//Timeout Pinging
+﻿
 Gs.Socket.PingInterval = setInterval(() => {
     Gs.Socket.SendChatMessageWS(1000, JSON.stringify({}));
 }, 30000);

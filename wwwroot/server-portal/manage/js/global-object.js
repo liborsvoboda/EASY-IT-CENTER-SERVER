@@ -309,7 +309,23 @@ Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
         btnMin: true, btnMax: true, shadow: true,
         draggable: true, resizable: true,
         width:"100%", height:"100%",
-        place: 'center',
+        place: 'center', customButtons: [
+            {
+                html: "<span class='mif-file-code' title='Show Window Code'></span>",
+                cls: "alert",
+                onclick: "Gs.Behaviors.ShowWindowFrameWindowCode()"
+            },
+            {
+                html: "<span class='mif-windows' title='Open in External Window'></span>",
+                cls: "sys-button",
+                onclick: "Gs.Objects.WindowFrameOpenInExternalWindow('External Window','',true);"
+            },
+            {
+                html: "<span class='mif-vpn-publ' title='Show URL'></span>",
+                cls: "sys-button",
+                onclick: "alert(document.getElementById('WindowFrame').contentWindow.location.href);"
+            }
+        ],
         clsWindow: "supertop",
         icon: "<span class='mif-hour-glass'></spam>",
         onCaptionDblClick: function () { },
@@ -337,11 +353,17 @@ Gs.Objects.WindowHtmlCreate = function (elementId, title, html) {
 }
 
 
+
 Gs.Objects.OpenInExternalWindow = function (title, url, lastWindow = false) {
     if (lastWindow) { (url = document.getElementById("IFrameWindow") != null ? document.getElementById("IFrameWindow").src : "/") }
     window.open(url, '_blank');
 }
 
+
+Gs.Objects.WindowFrameOpenInExternalWindow = function (title, url, lastWindow = false) {
+    if (lastWindow) { (url = document.getElementById("WindowFrame") != null ? document.getElementById("WindowFrame").src : "/") }
+    window.open(url, '_blank');
+}
 
 Gs.Objects.GetMyQuestionList = async function () {
     await Gs.Apis.RunServerGetApi("PortalApiTableService/GetMyQuestionList", "MyQuestionList");
@@ -757,4 +779,321 @@ function EditBlogMenu(search = null) {
 Gs.Objects.ShowOnlineTools = function () {
     if (Metro.charms.isOpen("#OnlineToolPanel")) { Metro.charms.close("#OnlineToolPanel"); }
     else { Metro.charms.open("#OnlineToolPanel"); }
+}
+
+
+Gs.Objects.AddToFavorites = async function () {
+    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Web">Web</option><option value="GitHub">GitHub</option><option value="Server">Server</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><div id="menuDescription"></div></div>`;
+    let actions = [{
+        caption: "Add", cls: "js-dialog-close success",
+        onclick: async function () {
+            if ($("#menuName").val().length > 0 && $("#menuUrl").val().length > 0) {
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToFavorites", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadFavorites");
+            } else { alert("Data must be Inserted"); }
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Add to Favorites", content, actions);
+    setTimeout(function () {
+        $('#menuDescription').summernote({
+            tabsize: 2, height: 150, maxHeight: 150,
+            lang: 'cs-CZ',
+            placeholder: 'write Description...',
+            toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]]
+        });
+    }, 100);
+
+}
+
+async function LoadFavorites() {
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetFavoritesList", "FavoritesList", "GenerateFavorites");
+}
+
+function GenerateFavorites() {
+    let lastGuid = null, menuItem = {}, menu = [];
+    let favoritesList = Metro.storage.getItem('FavoritesList', null);
+
+    favoritesList.forEach((mItem, index, arr) => {
+
+        switch (mItem.apiTableColumnName) {
+            case "MenuGroup":
+                menuItem.MenuGroup = mItem.value;
+                menuItem.RecGuid = mItem.recGuid;
+                menuItem.Id = mItem.id;
+                menuItem.Description = mItem.description;
+                break;
+            case "MenuName":
+                menuItem.MenuName = mItem.value;
+                break;
+            case "MenuIcon":
+                menuItem.MenuIcon = mItem.value;
+                break;
+            case "MenuUrl":
+                menuItem.MenuUrl = mItem.value;
+                break;
+            default:
+        }
+
+        if (lastGuid != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != mItem.recGuid)) {
+            menu.push(menuItem);
+            menuItem = {};
+        }
+
+        lastGuid = mItem.recGuid;
+    });
+    menu.sort((a, b) => a.MenuName > b.MenuName ? 1 : -1);
+    Metro.storage.setItem('FavoritesList', menu);
+
+    let menuWeb = "", menuGithub = "", menuServer = "";
+    menu.forEach(favorite => {
+        if (favorite.MenuGroup == "Web") {
+            menuWeb += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${favorite.MenuName}','${favorite.MenuUrl}')">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
+                        <div class="slide-front">
+                            <span class="icon ${favorite.MenuIcon}"></span>
+                            <span class="branding-bar">${favorite.MenuName}</span>
+                        </div>
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                            <p class="text-center"> ${favorite.Description}</p>
+                        </div>
+                    </div>`;
+        } else if (favorite.MenuGroup == "Github") {
+            menuGithub += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${favorite.MenuName}','${favorite.MenuUrl}')">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
+                        <div class="slide-front">
+                            <span class="icon ${favorite.MenuIcon}"></span>
+                            <span class="branding-bar">${favorite.MenuName}</span>
+                        </div>
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                            <p class="text-center"> ${favorite.Description}</p>
+                        </div>
+                    </div>`;
+        } else if (favorite.MenuGroup == "Server") {
+            menuServer += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${favorite.MenuName}','${favorite.MenuUrl}')">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
+                        <div class="slide-front">
+                            <span class="icon ${favorite.MenuIcon}"></span>
+                            <span class="branding-bar">${favorite.MenuName}</span>
+                        </div>
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                            <p class="text-center"> ${favorite.Description}</p>
+                        </div>
+                    </div>`;
+        }
+
+    });
+    $("#WebMenu").html(menuWeb); $("#GithubMenu").html(menuGithub); $("#ServerMenu").html(menuServer);
+}
+
+
+Gs.Objects.RemoveFavorite = async function (recGuid) {
+    await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`,"LoadFavorites");
+}
+
+
+Gs.Objects.AddToOnlineToolList = async function () {
+    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Online Tool">Online Tool</option><option value="Data Tool">Data Tool</option><option value="Developer">Developer</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><div id="menuDescription"></div></div>`;
+    let actions = [{
+        caption: "Add", cls: "js-dialog-close success",
+        onclick: async function () {
+            if ($("#menuName").val().length > 0 && $("#menuUrl").val().length > 0) {
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToOnlineToolList", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadOnlineToolList");
+            } else { alert("Data must be Inserted"); }
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Add to Online Tools", content, actions);
+    setTimeout(function () {
+        $('#menuDescription').summernote({
+            tabsize: 2, height: 150, maxHeight: 150,
+            lang: 'cs-CZ',
+            placeholder: 'write Description...',
+            toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]]
+        });
+    }, 100);
+
+}
+
+
+async function LoadOnlineToolList() {
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetOnlineToolList", "OnlineToolList", "GenerateOnlineToolList");
+}
+
+function GenerateOnlineToolList() {
+    let lastGuid = null, menuItem = {}, menu = [];
+    let onlineToolList = Metro.storage.getItem('OnlineToolList', null);
+
+    onlineToolList.forEach((mItem, index, arr) => {
+
+        switch (mItem.apiTableColumnName) {
+            case "MenuGroup":
+                menuItem.MenuGroup = mItem.value;
+                menuItem.RecGuid = mItem.recGuid;
+                menuItem.Id = mItem.id;
+                menuItem.Description = mItem.description;
+                break;
+            case "MenuName":
+                menuItem.MenuName = mItem.value;
+                break;
+            case "MenuIcon":
+                menuItem.MenuIcon = mItem.value;
+                break;
+            case "MenuUrl":
+                menuItem.MenuUrl = mItem.value;
+                break;
+            default:
+        }
+
+        if (lastGuid != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != mItem.recGuid)) {
+            menu.push(menuItem);
+            menuItem = {};
+        }
+
+        lastGuid = mItem.recGuid;
+    });
+    menu.sort((a, b) => a.MenuName > b.MenuName ? 1 : -1);
+    Metro.storage.setItem('OnlineToolList', menu);
+
+    let menuOnline = "", menuData = "", menuDeveloper = "";
+    menu.forEach(online => {
+        if (online.MenuGroup == "Online Tool") {
+            menuOnline += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${online.MenuName}','${online.MenuUrl}')">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
+                        <div class="slide-front">
+                            <span class="icon ${online.MenuIcon}"></span>
+                            <span class="branding-bar">${online.MenuName}</span>
+                        </div>
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                            <p class="text-center"> ${online.Description}</p>
+                        </div>
+                    </div>`;
+        } else if (online.MenuGroup == "Data Tool") {
+            menuData += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${online.MenuName}','${online.MenuUrl}')">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
+                        <div class="slide-front">
+                            <span class="icon ${online.MenuIcon}"></span>
+                            <span class="branding-bar">${online.MenuName}</span>
+                        </div>
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                            <p class="text-center"> ${online.Description}</p>
+                        </div>
+                    </div>`;
+        } else if (online.MenuGroup == "Developer") {
+            menuDeveloper += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${online.MenuName}','${online.MenuUrl}')">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
+                        <div class="slide-front">
+                            <span class="icon ${online.MenuIcon}"></span>
+                            <span class="branding-bar">${online.MenuName}</span>
+                        </div>
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                            <p class="text-center"> ${online.Description}</p>
+                        </div>
+                    </div>`;
+        }
+
+    });
+    $("#OnlineMenu").html(menuOnline); $("#DataMenu").html(menuData); $("#DeveloperMenu").html(menuDeveloper);
+}
+
+
+Gs.Objects.RemoveOnlineTool = async function (recGuid) {
+    await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`, "LoadOnlineToolList");
+}
+
+
+async function LoadSearchWindow() {
+    if ($("#SearchWindow").html != undefined) { Metro.window.close("#SearchWindow"); }
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetWebSearchList", "WebSearchList", "GenerateWebSearchList");
+}
+
+
+function GenerateWebSearchList() {
+    let lastGuid = null, menuItem = {}, menu = [];
+    let webSearchList = Metro.storage.getItem('WebSearchList', null);
+
+    webSearchList.forEach((mItem, index, arr) => {
+
+        switch (mItem.apiTableColumnName) {
+            case "MenuName":
+                menuItem.MenuName = mItem.value;
+                menuItem.RecGuid = mItem.recGuid;
+                menuItem.Description = mItem.description;
+                break;
+            case "MenuNewWindow":
+                menuItem.MenuNewWindow = mItem.value;
+                break;
+            case "MenuUrl":
+                menuItem.MenuUrl = mItem.value;
+                break;
+            default:
+        }
+
+        if (lastGuid != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != mItem.recGuid)) {
+            menu.push(menuItem);
+            menuItem = {};
+        }
+
+        lastGuid = mItem.recGuid;
+    });
+    menu.sort((a, b) => a.MenuName > b.MenuName ? 1 : -1);
+    Metro.storage.setItem('WebSearchList', menu);
+
+    let html = `<button class="button success pos-absolute mb-4" style="z-index: 2000;right: 200px;" onclick="Gs.Objects.AddWebSearchList()"><span class="mif-plus mif-3x"></span>Add Web Search</button>
+    <button class="button alert pos-absolute mb-4" style="z-index: 2000;right: 0px;" onclick="Gs.Objects.GenerateRemoveWebSearchList()"><span class="mif-minus mif-3x"></span>Remove Web Search</button>
+    <ul data-role="tabs" data-expand="true">`;
+    menu.forEach(search => {
+        if (search.MenuNewWindow.toLowerCase() == "false") { html += `<li><a href="#menu${search.MenuName.replace(/\s/g, "")}">${search.MenuName}</a></li>`; }
+    });
+    html += `</ul><div class="border bd-default no-border-top p-2" style="height: calc(100% - 100px);">`;
+    menu.forEach( (search, index) => {
+        if (search.MenuNewWindow.toLowerCase() == "false") {
+            html += `<div id="menu${search.MenuName.replace(/\s/g, "")}" style="overflow-y: auto;height: 100%;">
+                <iframe src="${search.MenuUrl}" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:100%;position: fixed;"></iframe></div>`;
+        } else { window.open(`${search.MenuUrl}`); }
+    });
+    html += `</div>`;
+
+    Gs.Objects.WindowHtmlCreate("SearchWindow", "Global Search", html);
+}
+
+Gs.Objects.GenerateRemoveWebSearchList = async function () {
+    let webSearch = Metro.storage.getItem('WebSearchList', null);
+    let content = `<div>`;
+    webSearch.forEach(search => {
+        content += `<button id="${search.RecGuid}" class='button alert outline ml-2 mr-2' onclick="Gs.Objects.RemoveWebSearchList('${search.RecGuid}')">Remove ${search.MenuName}</button>`;
+    });
+    content += `</div>`;
+    let actions = [{ caption: "Close", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Remove from Web Search", content, actions);
+}
+
+Gs.Objects.AddWebSearchList = async function () {
+    let content = `<div><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><div id="menuDescription"></div></div>`;
+    let actions = [{
+        caption: "Add", cls: "js-dialog-close success",
+        onclick: async function () {
+            if ($("#menuName").val().length > 0 && $("#menuUrl").val().length > 0) {
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddWebSearchList", { MenuName: $("#menuName").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow").val('checked')[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadSearchWindow");
+            } else { alert("Data must be Inserted"); }
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Add to Web Search", content, actions);
+    setTimeout(function () {
+        $('#menuDescription').summernote({
+            tabsize: 2, height: 150, maxHeight: 150,
+            lang: 'cs-CZ',
+            placeholder: 'write Description...',
+            toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]]
+        });
+    }, 100);
+
+}
+
+Gs.Objects.RemoveWebSearchList = async function (recGuid) {
+    $(`#${recGuid}`).hide();
+    await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`);
 }

@@ -6,7 +6,7 @@ const StripePayed = urlParams.get('Payed');
 
 
 
-Gs.Behaviors.PortalStartup = async function () {
+Gs.Behaviors.PortalStartup = async function () { //LOGGED
     if (Metro.storage.getItem("ApiToken", null) != null) {
         Cookies.set("ApiToken", Metro.storage.getItem("ApiToken", null).Token);
         Gs.Variables.username = Metro.storage.getItem("ApiToken", null).Username;
@@ -15,8 +15,10 @@ Gs.Behaviors.PortalStartup = async function () {
         let html = `<button class="button mr-1">Profile</button>
                     <button class="button ml-1" onclick=Gs.Apis.SignOut(); >Sign out</button>`;
         $("#LoginReaction").html(html);
-        
-    } else {
+
+        await LoadFavorites();
+
+    } else { //NOT LOGGED 
         Cookies.remove("ApiToken"); Metro.storage.delItem("ApiToken");
         Gs.Functions.GetPublicIp(); Gs.Variables.fullname = "Anonymous";
         $("#LoginName").html("Login");
@@ -41,6 +43,8 @@ Gs.Behaviors.PortalStartup = async function () {
     await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenuList","GenerateMenuList");
     await Gs.Apis.RunServerGetApi("InformationService/GetVersion", "ServerVersion");
     await Gs.Apis.RunServerGetApi("InformationService/GetStripePublicKey", "StripePublicKey", "SetStripeKey");
+
+    await LoadOnlineToolList();
 
     //Check Stripe Payment
     if (StripePayed != null && StripePayed) {
@@ -352,6 +356,10 @@ Gs.Behaviors.ShowWindowCode = function () {
     } else { Gs.Functions.ShowFrameSource(); }
 }
 
+
+Gs.Behaviors.ShowWindowFrameWindowCode = function () {
+    Gs.Functions.ShowWindowFrameSource();
+}
 
 Gs.Behaviors.RefreshBasket = function () {
     let basketPrice = 0; let basketData = Metro.storage.getItem('BasketPriceList', null);

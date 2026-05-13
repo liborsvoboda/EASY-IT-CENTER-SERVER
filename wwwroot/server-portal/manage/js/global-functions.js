@@ -161,6 +161,19 @@ Gs.Functions.ShowFrameSource = function () {
 }
 
 
+Gs.Functions.ShowWindowFrameSource = function () {
+    var source = "<html>";
+    source += document.getElementById('WindowFrame').contentWindow.document.body.innerHTML;
+    source += "</html>";
+    source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    source = "<pre>" + source + "</pre>";
+    sourceWindow = window.open('', 'Sorce code', 'height=800,width=1000,scrollbars=1,resizable=1');
+    sourceWindow.document.write(source);
+    sourceWindow.document.close();
+    if (window.focus) sourceWindow.focus();
+}
+
+
 Gs.Functions.PrintOrExportWindow = function (command) {
     switch (command) {
         case "Print":

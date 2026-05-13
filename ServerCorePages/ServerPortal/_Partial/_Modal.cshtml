@@ -34,14 +34,44 @@
 
 
     <div id="FavoritesPanel" data-role="charms" style="width:400px !important;height:calc(100%) !important;" data-position="left" data-opacity=".7">
-        <button class="button success mb-4" onclick="AddFavorites()"><span class="mif-plus mif-3x"></span>Add Favorites</button>
-        <div id="Favorites" class="tiles-grid" style="overflow-y: scroll;max-height: 500px;"></div>
+        <button class="button success mb-4" onclick="Gs.Objects.AddToFavorites()" style="left: 225px;"><span class="mif-plus mif-3x"></span>Add Favorites</button>
+        <ul data-role="tabs" data-expand="true">
+            <li><a href="#WebMenu">Web</a></li>
+            <li><a href="#GithubMenu">GitHub</a></li>
+            <li><a href="#ServerMenu">Server</a></li>
+        </ul>
+        <div class="border bd-default no-border-top p-2" style="height: calc(100% - 100px);">
+            <div id="WebMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
+                Web Favorites Links
+            </div>
+            <div id="GithubMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
+                Github Favorites Links
+            </div>
+            <div id="ServerMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
+                Server Favorites Links
+            </div>
+        </div>
     </div>
 
 
     <div id="OnlineToolPanel" data-role="charms" style="width:400px !important;height:calc(100%) !important;" data-position="right" data-opacity=".7">
-        <button class="button success mb-4" onclick="AddOnlineTool()"><span class="mif-plus mif-3x"></span>Add Online Tool</button>
-        <div id="OnlineTools" class="tiles-grid" style="overflow-y: scroll;max-height: 500px;"></div>
+        <button class="button success mb-4" onclick="Gs.Objects.AddToOnlineToolList()"><span class="mif-plus mif-3x"></span>Add Online Tool</button>
+        <ul data-role="tabs" data-expand="true">
+            <li><a href="#OnlineMenu">Online Tools</a></li>
+            <li><a href="#DataMenu">Data Tools</a></li>
+            <li><a href="#DeveloperMenu">Developer</a></li>
+        </ul>
+        <div class="border bd-default no-border-top p-2" style="height: calc(100% - 100px);">
+            <div id="OnlineMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
+                Online Web Links
+            </div>
+            <div id="DataMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
+                Data Web Links
+            </div>
+            <div id="DeveloperMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
+                Developer Web Links
+            </div>
+        </div>
     </div>
 
 
@@ -99,7 +129,7 @@
         <li class="shadowed"><span class="icon mif-import-contacts" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Function List','/server-portal/addons/fancytree/codepreview.html');"></span>Functions</li>
         <li class="shadowed"><span class="icon mif-import-export" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.ShowExportDialog('Export Table');"></span>Export Tbl</li>
         @* <li class="shadowed"><span class="icon mif-github" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);"></span>Github</li> *@
-        <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);"></span>Search</li>
+        <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);LoadSearchWindow();"></span>Search</li>
         <li class="divider"></li>
         <li class="shadowed"><span class="icon mif-file-code" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.AddSuggest();"></span>Suggest+</li>
         <li class="shadowed"><span class="icon mif-help" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.EditHelpMenu();"></span>Edit Help</li>
