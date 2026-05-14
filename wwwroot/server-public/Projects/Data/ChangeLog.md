@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added Favorites, Menu  Tools, Search ([b93364e](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b93364e5c6b85681668c31a6dcc35bb73c5e833f) by lioborsvoboda).
 - Added JsonEdit, Compiler ([f79e59f](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f79e59fe26419bca947b2e3838604df2febe7224) by lioborsvoboda).
 - Added Blog, Added Fast Edit Menu Help ([104cf50](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/104cf506b13b020d8029a594fe5727c30c22c423) by lioborsvoboda).
 - Added FastAddSugest,XML to MD Generator, XML to WEB Generator, Rotate Gallery Generator ([6d03a73](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/6d03a73d85d53711dbba56d644298e7580e74f26) by lioborsvoboda).
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- StreamChat Done ([aa44ab3](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/aa44ab3b1a258e5273118d2a71519cfd83a3789d) by Libor Svoboda).
 - StreamChat ([1d960b1](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1d960b1154b4acef0d94cf4c0e5a4c0f05299066) by lioborsvoboda).
 - Stream Window ([aca096e](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/aca096e2136abbb9050c0febc31c2633abf2eeb9) by lioborsvoboda).
 -  Metro Docs ([e12bfd6](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e12bfd6a2d1cec5dd963b13be06d4cbab6bdfe4e) by Libor Svoboda).

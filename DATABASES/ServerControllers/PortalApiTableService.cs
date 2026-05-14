@@ -118,6 +118,7 @@ namespace EasyITCenter.Controllers
         public string MenuIcon { get; set; }
         public string MenuUrl { get; set; }
         public string MenuDescription { get; set; }
+        public bool MenuNewWindow { get; set; }
     }
 
 
@@ -1024,6 +1025,7 @@ namespace EasyITCenter.Controllers
                         record.Add(new() { ApiTableName = "FavoritesList", ApiTableColumnName = "MenuName", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuName, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { ApiTableName = "FavoritesList", ApiTableColumnName = "MenuIcon", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuIcon, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { ApiTableName = "FavoritesList", ApiTableColumnName = "MenuUrl", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuUrl, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "OnlineToolList", ApiTableColumnName = "MenuNewWindow", InheritedDataType = "bit", RecGuid = RecGuid, Value = addToFavorites.MenuNewWindow.ToString(), Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
                             data.PortalApiTableColumnDataLists.AddRange(record);
                             data.SaveChanges();
@@ -1109,6 +1111,7 @@ namespace EasyITCenter.Controllers
                     record.Add(new() { ApiTableName = "OnlineToolList", ApiTableColumnName = "MenuName", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuName, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                     record.Add(new() { ApiTableName = "OnlineToolList", ApiTableColumnName = "MenuIcon", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuIcon, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                     record.Add(new() { ApiTableName = "OnlineToolList", ApiTableColumnName = "MenuUrl", InheritedDataType = "string", RecGuid = RecGuid, Value = addToFavorites.MenuUrl, Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                    record.Add(new() { ApiTableName = "OnlineToolList", ApiTableColumnName = "MenuNewWindow", InheritedDataType = "bit", RecGuid = RecGuid, Value = addToFavorites.MenuNewWindow.ToString(), Description = null, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                     DatabaseContextExtensions.RunTransaction(data, (trans) => {
                         data.PortalApiTableColumnDataLists.AddRange(record);
                         data.SaveChanges();

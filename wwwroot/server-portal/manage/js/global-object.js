@@ -782,13 +782,21 @@ Gs.Objects.ShowOnlineTools = function () {
 }
 
 
+Gs.Objects.TestWindowLink = function () {
+    if ($("#menuNewWindow").val('checked')[0].checked) {
+        window.open($("#menuUrl").val());
+    } else {
+        Gs.Objects.WindowIframeCreate($("#menuName").val(), $("#menuUrl").val());
+    }
+}
+
 Gs.Objects.AddToFavorites = async function () {
-    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Web">Web</option><option value="GitHub">GitHub</option><option value="Server">Server</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><div id="menuDescription"></div></div>`;
+    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Web">Web</option><option value="GitHub">GitHub</option><option value="Server">Server</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
     let actions = [{
         caption: "Add", cls: "js-dialog-close success",
         onclick: async function () {
             if ($("#menuName").val().length > 0 && $("#menuUrl").val().length > 0) {
-                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToFavorites", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadFavorites");
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToFavorites", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow").val('checked')[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadFavorites");
             } else { alert("Data must be Inserted"); }
         }
     }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -828,6 +836,9 @@ function GenerateFavorites() {
                 break;
             case "MenuIcon":
                 menuItem.MenuIcon = mItem.value;
+            case "MenuNewWindow":
+                menuItem.MenuNewWindow = mItem.value;
+                break;
                 break;
             case "MenuUrl":
                 menuItem.MenuUrl = mItem.value;
@@ -847,34 +858,36 @@ function GenerateFavorites() {
 
     let menuWeb = "", menuGithub = "", menuServer = "";
     menu.forEach(favorite => {
+        let cmd = favorite.MenuNewWindow.toLowerCase() == "false" ? `Gs.Objects.WindowIframeCreate('${favorite.MenuName}','${favorite.MenuUrl}')` : `window.open('${favorite.MenuUrl}')`;
+
         if (favorite.MenuGroup == "Web") {
-            menuWeb += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${favorite.MenuName}','${favorite.MenuUrl}')">
+            menuWeb += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
                         <div class="slide-front">
                             <span class="icon ${favorite.MenuIcon}"></span>
-                            <span class="branding-bar">${favorite.MenuName}</span>
+                            <span class="branding-bar" style="font-size: 8px;">${favorite.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${favorite.Description}</p>
                         </div>
                     </div>`;
         } else if (favorite.MenuGroup == "Github") {
-            menuGithub += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${favorite.MenuName}','${favorite.MenuUrl}')">
+            menuGithub += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
                         <div class="slide-front">
                             <span class="icon ${favorite.MenuIcon}"></span>
-                            <span class="branding-bar">${favorite.MenuName}</span>
+                            <span class="branding-bar" style="font-size: 8px;">${favorite.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${favorite.Description}</p>
                         </div>
                     </div>`;
         } else if (favorite.MenuGroup == "Server") {
-            menuServer += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${favorite.MenuName}','${favorite.MenuUrl}')">
+            menuServer += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
                         <div class="slide-front">
                             <span class="icon ${favorite.MenuIcon}"></span>
-                            <span class="branding-bar">${favorite.MenuName}</span>
+                            <span class="branding-bar" style="font-size: 8px;">${favorite.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${favorite.Description}</p>
@@ -893,12 +906,12 @@ Gs.Objects.RemoveFavorite = async function (recGuid) {
 
 
 Gs.Objects.AddToOnlineToolList = async function () {
-    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Online Tool">Online Tool</option><option value="Data Tool">Data Tool</option><option value="Developer">Developer</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><div id="menuDescription"></div></div>`;
+    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Online Tool">Online Tool</option><option value="Data Tool">Data Tool</option><option value="Developer">Developer</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
     let actions = [{
         caption: "Add", cls: "js-dialog-close success",
         onclick: async function () {
             if ($("#menuName").val().length > 0 && $("#menuUrl").val().length > 0) {
-                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToOnlineToolList", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadOnlineToolList");
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToOnlineToolList", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow").val('checked')[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadOnlineToolList");
             } else { alert("Data must be Inserted"); }
         }
     }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -939,6 +952,9 @@ function GenerateOnlineToolList() {
                 break;
             case "MenuIcon":
                 menuItem.MenuIcon = mItem.value;
+            case "MenuNewWindow":
+                menuItem.MenuNewWindow = mItem.value;
+                break;
                 break;
             case "MenuUrl":
                 menuItem.MenuUrl = mItem.value;
@@ -958,34 +974,36 @@ function GenerateOnlineToolList() {
 
     let menuOnline = "", menuData = "", menuDeveloper = "";
     menu.forEach(online => {
+        let cmd = online.MenuNewWindow.toLowerCase() == "false" ? `Gs.Objects.WindowIframeCreate('${online.MenuName}','${online.MenuUrl}')` : `window.open('${online.MenuUrl}')`;
+
         if (online.MenuGroup == "Online Tool") {
-            menuOnline += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${online.MenuName}','${online.MenuUrl}')">
+            menuOnline += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
                         <div class="slide-front">
                             <span class="icon ${online.MenuIcon}"></span>
-                            <span class="branding-bar">${online.MenuName}</span>
+                            <span class="branding-bar" style="font-size: 8px;">${online.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${online.Description}</p>
                         </div>
                     </div>`;
         } else if (online.MenuGroup == "Data Tool") {
-            menuData += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${online.MenuName}','${online.MenuUrl}')">
+            menuData += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
                         <div class="slide-front">
                             <span class="icon ${online.MenuIcon}"></span>
-                            <span class="branding-bar">${online.MenuName}</span>
+                            <span class="branding-bar" style="font-size: 8px;">${online.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${online.Description}</p>
                         </div>
                     </div>`;
         } else if (online.MenuGroup == "Developer") {
-            menuDeveloper += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="Gs.Objects.WindowIframeCreate('${online.MenuName}','${online.MenuUrl}')">
+            menuDeveloper += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
                         <div class="slide-front">
                             <span class="icon ${online.MenuIcon}"></span>
-                            <span class="branding-bar">${online.MenuName}</span>
+                            <span class="branding-bar" style="font-size: 8px;">${online.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${online.Description}</p>
@@ -1070,7 +1088,7 @@ Gs.Objects.GenerateRemoveWebSearchList = async function () {
 }
 
 Gs.Objects.AddWebSearchList = async function () {
-    let content = `<div><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><div id="menuDescription"></div></div>`;
+    let content = `<div><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
     let actions = [{
         caption: "Add", cls: "js-dialog-close success",
         onclick: async function () {
