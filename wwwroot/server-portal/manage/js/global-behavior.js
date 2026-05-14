@@ -153,7 +153,7 @@ Gs.Behaviors.CancelTranslation = async function (cancel) {
     }
 }
 
-
+Gs.Behaviors.ScrollToBottom = function () { window.scrollTo(0, document.body.scrollHeight); }
 Gs.Behaviors.ScrollToTop = function () { window.scrollTo(0, 0); }
 Gs.Behaviors.EnableScroll = function () { window.onscroll = function () { }; }
 Gs.Behaviors.DisableScroll = function () {

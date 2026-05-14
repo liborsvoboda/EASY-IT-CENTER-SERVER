@@ -3,6 +3,7 @@ class Console {
         console.log = this.handleLog.bind(this);
         console.error = this.handleError.bind(this);
 
+        let socket = new WebSocket(`${document.location.protocol === "https:" ? "wss" : "ws"}://${document.location.hostname}:${document.location.port}/WebSocketService/ServerCoreMonitor`);
         let conInput = document.getElementById('input');
         let self = this;
         self.consoleBackbuffer = [];
@@ -25,6 +26,10 @@ class Console {
             }
         });
         conInput.focus();
+
+        socket.onmessage = function (event) {
+            self.addConsoleLine(event.data, 'log');
+        };
     }
 
     clear() {
@@ -52,6 +57,17 @@ class Console {
     handleError(msg) {
         this.addConsoleLine(msg, 'error');
     }
+
+    htmlEscape(str) {
+        return str.toString()
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
+    ScrollToBottom = function () { window.scrollTo(0, document.body.scrollHeight); }
 }
 
 const con = new Console();

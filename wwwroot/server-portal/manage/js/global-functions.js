@@ -648,8 +648,8 @@ Gs.Functions.SaveMenuHelp = async function () {
         Value: data.MdHelp
     };
 
-    await Gs.Apis.RunServerPostApi("PortalApiTableService/SetMdMenuHelp", jsonData, null, "RefreshPortalMenuList");
     $("#EditHelpMenu").remove();
+    await Gs.Apis.RunServerPostApi("PortalApiTableService/SetMdMenuHelp", jsonData, null, "RefreshPortalMenuList");
 }
 
 
@@ -728,4 +728,27 @@ function SetQuestionCount() {
     });
     Metro.storage.setItem('AdminQuestionList', myQuestionList);
     $("#QuestionCount").html(myQuestionList.length.toString());
+}
+
+
+Gs.Functions.HtmlEscape = function(str) {
+    return str.toString()
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+
+Gs.Functions.SaveNotesList = async function () {
+    let notes = Metro.storage.getItem('NotesList', null);
+
+    let jsonData = {
+        Notes: $('#NotesListEditor')[0].contentWindow.mdEditor.getMarkdown(),
+        RecGuid: notes[0] != undefined ? notes[0].recGuid : null
+    };
+
+    $("#EditNotesList").remove();
+    await Gs.Apis.RunServerPostApi("PortalApiTableService/SetNotesList", jsonData, null, "LoadNotesList");
 }

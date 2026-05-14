@@ -664,7 +664,7 @@ Gs.Objects.EditHelpMenu = function () {
     let html = `
     <BUTTON onclick="Gs.Functions.SaveMenuHelp();" class="button success c-pointer outline shadowed" style="position:absolute; top:57px;right:60px;z-index:2500;">Save Menu Help</BUTTON>
     <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
-        <DIV id=_menuCodeContent class="w-100" style="max-height: 650px;overflow: hidden;">
+        <DIV id=_menuCodeContent class="w-100" style="max-height: 750px;overflow: hidden;">
             <iframe id="HelpFastEditor" src="/server-portal/addons/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:900px;"></iframe>
         </DIV >
     </DIV >`;
@@ -1114,4 +1114,26 @@ Gs.Objects.AddWebSearchList = async function () {
 Gs.Objects.RemoveWebSearchList = async function (recGuid) {
     $(`#${recGuid}`).hide();
     await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`);
+}
+
+
+async function LoadNotesList() {
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetNotesList", "NotesList", "OpenNotesList");
+
+}
+
+function OpenNotesList() {
+    let html = `
+    <BUTTON onclick="Gs.Functions.SaveNotesList();" class="button success c-pointer outline shadowed" style="position:absolute; top:22px;right:60px;z-index:2500;">Save Notes</BUTTON>
+    <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
+        <DIV id=_menuCodeContent class="w-100" style="max-height: 750px;overflow: hidden;">
+            <iframe id="NotesListEditor" src="/server-portal/addons/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:900px;"></iframe>
+        </DIV >
+    </DIV >`;
+
+    Gs.Objects.InfoboxObjectCreate("EditNotesList", html, width = "100%", height = "800");
+
+    setTimeout(async function () {
+        $('#NotesListEditor')[0].contentWindow.mdEditor.setMarkdown(Metro.storage.getItem("NotesList", null)[0] != undefined ? Metro.storage.getItem("NotesList", null)[0].value : " ");
+    }, 1000);
 }
