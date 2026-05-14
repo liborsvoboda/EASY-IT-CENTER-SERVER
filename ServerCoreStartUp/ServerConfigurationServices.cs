@@ -243,7 +243,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             services.AddSingleton<IHttpContextAccessor, HttpContextExtension>();
             services.AddSingleton<ISitemapProvider, SitemapProvider>();
             services.AddSingleton<IHealthCheckPublisher, HealthCheckActionService>();
-            services.AddSingleton<MyMemoryCache>();
+            //services.AddSingleton<MyMemoryCache>();
         }
 
         /// <summary>
