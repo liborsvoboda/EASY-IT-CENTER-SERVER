@@ -466,8 +466,9 @@ Gs.Objects.ShowExportDialog = function (title) {
 }
 
 
-Gs.Objects.CreateDialogRequest =async function (title, content, actions) {
-    Metro.dialog.create({
+Gs.Objects.CreateDialogRequest = async function (title, content, actions) {
+    Metro.dialog.close(`#${title.replaceAll(/\s/g, '')}`);
+    let dialog = Metro.dialog.create({
         title: title,
         content: content,
         closeButton: true,
@@ -475,6 +476,7 @@ Gs.Objects.CreateDialogRequest =async function (title, content, actions) {
         actions: actions,
         clsDialog: "supertop"
     });
+    dialog[0].id = title.replaceAll(/\s/g, '');
 }
 
 

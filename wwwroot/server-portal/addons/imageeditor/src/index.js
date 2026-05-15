@@ -1,8 +1,10 @@
 const container = document.getElementById("image-editor");
 const config = {
-  source: "https://scaleflex.cloudimg.io/v7/demo/river.png"
+    source: localStorage.getItem("SourceImageEditor")
 };
 const ImageEditor = new window.FilerobotImageEditor(container, config);
+
+window.ImageEditor = ImageEditor;
 
 ImageEditor.render({
   // additional config provided while rendering

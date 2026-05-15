@@ -78,7 +78,7 @@ Gs.SignalR.GetUsers =async function () {
     }
 }
 
-//data:image/jpeg;base64,
+
 Gs.SignalR.StartVideoStream = async function (stopStreaming) {
     try {
         if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Disconnected) { await Gs.Variables.SignalR.streamChat.start(); }

@@ -186,7 +186,7 @@
                     //console.log("activate", event, data, data.node.data.extension);
 
                     //Show Text Files ServerParam["TextFilesExtensionList"]
-                    if (["js", "html", "css", "txt", "json_"].includes(data.node.data.extension)) {
+                    if (["js", "html", "css", "txt", "xml", "bat", "cmd", "sql", "yml", "service"].includes(data.node.data.extension)) {
                         SetEditor("Monaco");
                         if (Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco") {
                             Gs.Variables.monacoEditorList.filter(obj => {
@@ -204,11 +204,11 @@
 
                     } else if (["md","markdown"].includes(data.node.data.extension)) {
                         SetEditor("MDEditor");
-                    } else if (["json"].includes(data.node.data.extension)) {
+                    } else if (["json", "json_"].includes(data.node.data.extension)) {
                         SetEditor("JSONEditor");
                     } else if (["jpg", "jpeg", "png", "tiff", "bmp", "gif", "svg"].includes(data.node.data.extension)) {
                         SetEditor("Image");
-                    } else if (["mp4", "avi", "mov"].includes(data.node.data.extension)) {
+                    } else if (["mp4", "avi", "mov", "mpeg"].includes(data.node.data.extension)) {
                         SetEditor("Video");
                     } else if (["mp3","wav"].includes(data.node.data.extension)) {
                         SetEditor("Audio");
@@ -347,6 +347,17 @@
                                 "recordCamera": { "name": "Record Camera", "icon": "add" },
                             };
                             //files
+                        } else if (!node.folder && node.data.path.toLowerCase().endsWith(".xml")) {
+                            return {
+                                "saveFile": { "name": "Save File", "icon": "paste" },
+                                "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
+                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
+                                "deleteFile": { "name": "Delete File", "icon": "delete" },
+                                "copyToUserStorage": { "name": "Copy to User Storage", "icon": "add" },
+                                "sep1": "---------",
+                                "openInNewWindow": { "name": "Open in New Window", "icon": "paste" },
+                                "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
+                            };
                         } else if (!node.folder && node.data.path.toLowerCase().endsWith(".html")) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
@@ -403,6 +414,8 @@
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
                                 "sep2": "---------",
                                 "MiniPaint": { "name": "Edit in MiniPaint", "icon": "paste" },
+                                "ImageEditor": { "name": "Edit in Image Editor", "icon": "paste" },
+
                             };
                         } else if (!node.folder) {
                             return {
@@ -534,6 +547,9 @@
 
                         } else if (action == "MiniPaint") {
                             SetEditor("MiniPaint");
+
+                        } else if (action == "ImageEditor") {
+                            SetEditor("ImageEditor");
 
                         } else if (action == "convertToMd") {
                             $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(async function (data) {
@@ -680,10 +696,10 @@
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Upload Files", content, actions);
 
-                        } else if (action == "saveFile" && Metro.storage.getItem("SelectedEditor", null) != "MiniPaint") { //console.log("extension", $('#DataTree').fancytree("getActiveNode").data.extension);
+                        } else if (action == "saveFile" && Metro.storage.getItem("SelectedEditor", null) != "MiniPaint" && Metro.storage.getItem("SelectedEditor", null) != "ImageEditor") { //console.log("extension", $('#DataTree').fancytree("getActiveNode").data.extension);
                             Gs.Apis.RunServerPostApi("PublicStorageService/SetPublicTextFile", {
                                 Path: $('#DataTree').fancytree("getActiveNode").data.path,
-                                Content: Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco" ?
+                                Content: Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco" || Metro.storage.getItem("SelectedEditor", null) == "Other" ?
                                     Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue() :
                                     Metro.storage.getItem("SelectedEditor", null) == "TinyMCE" ? tinyMCE.getContent('TinyMCE') :
                                     Metro.storage.getItem("SelectedEditor", null) == "Froala" ? EditorInit.html.get() :
@@ -702,6 +718,12 @@
                                 Files.push({ Filename: $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), Content: target.src });
                                 await Gs.Apis.RunServerPostApi("PublicStorageService/UploadPublicFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(),""), Files: Files }, null);
                             });
+                            Files.push({ Filename: $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), Content: $("#DataFrameWindow")[0].contentWindow.ImageEditor.getCurrentImgData().imageData.imageBase64 });
+
+                        } else if (action == "saveFile" && Metro.storage.getItem("SelectedEditor", null) == "ImageEditor") {
+                            Files = [];
+                            Files.push({ Filename: $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), Content: $("#DataFrameWindow")[0].contentWindow.ImageEditor.getCurrentImgData().imageData.imageBase64 });
+                            await Gs.Apis.RunServerPostApi("UserStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), ""), Files: Files }, null);
 
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
@@ -804,6 +826,11 @@
                             })
                     }, 3000);
                     break;
+                case "ImageEditor":
+                    //localStorage.setItem("SourceImageEditor", Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key);
+                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="/server-portal/addons/imageeditor/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    setTimeout(function () { $("#DataFrameWindow")[0].contentWindow.ImageEditor.render({ source: Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key }); }, 2000);
+                    break;
                 case "XLSEditor":
                     Metro.storage.setItem("OpenExcelFile", $('#DataTree').fancytree("getActiveNode").key);
                     //$("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/xlsx/index.html?file=" + $('#DataTree').fancytree("getActiveNode").key + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
@@ -823,9 +850,13 @@
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
                     Gs.Variables.monacoEditorList = [];
                     new Function(dataJs)();
-                    setTimeout(function () {
-                        Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue("");
-                    }, 1000);
+                    if (!$('#DataTree').fancytree("getActiveNode").folder) {
+                        setTimeout(function () {
+                            if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
+                            }
+                        }, 1000);
+                    }
                     break;
                 case "STLviewer":
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
