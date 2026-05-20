@@ -97,7 +97,6 @@ namespace EasyITCenter.DBModel
             WebGroupMenuLists = new HashSet<WebGroupMenuList>();
             WebMenuLists = new HashSet<WebMenuList>();
             WebSettingLists = new HashSet<WebSettingList>();
-            WebUserSettingLists = new HashSet<WebUserSettingList>();
         }
 
         [Key]
@@ -309,7 +308,5 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<WebMenuList> WebMenuLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<WebSettingList> WebSettingLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<WebUserSettingList> WebUserSettingLists { get; set; }
     }
 }

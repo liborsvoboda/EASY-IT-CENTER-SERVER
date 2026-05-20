@@ -110,7 +110,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<WebGroupMenuList> WebGroupMenuLists { get; set; } = null!;
         public virtual DbSet<WebMenuList> WebMenuLists { get; set; } = null!;
         public virtual DbSet<WebSettingList> WebSettingLists { get; set; } = null!;
-        public virtual DbSet<WebUserSettingList> WebUserSettingLists { get; set; } = null!;
         public virtual DbSet<WebVisitIpList> WebVisitIpLists { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1742,16 +1741,6 @@ namespace EasyITCenter.DBModel
                     .WithMany(p => p.WebSettingLists)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_WebSettingList_UserList");
-            });
-
-            modelBuilder.Entity<WebUserSettingList>(entity =>
-            {
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.WebUserSettingLists)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_WebUserSettingList_UserList");
             });
 
             modelBuilder.Entity<WebVisitIpList>(entity =>

@@ -685,7 +685,7 @@ Gs.Functions.SaveBlog = async function () {
 
 
 Gs.Functions.GetPublicIp = function () {
-    $.get("http://ipinfo.io", function (response) {
+    $.get("https://ipinfo.io", function (response) {
         Gs.Variables.username = response.ip;
     }, "jsonp");
 }
