@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added Public WebApps ([b898f41](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b898f410302af2faa4b39a1209102a714f8e63c8) by lioborsvoboda).
+- Added Static ServerPortal Page ([f423b98](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f423b980c18c24d4f9cf571d77853940430f946e) by lioborsvoboda).
+- Added Changelog View, User Notes ([7daa42c](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/7daa42ccb18949ed20d8deb8c5000f4044a00c92) by lioborsvoboda).
 - Added Favorites, Menu  Tools, Search ([b93364e](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b93364e5c6b85681668c31a6dcc35bb73c5e833f) by lioborsvoboda).
 - Added JsonEdit, Compiler ([f79e59f](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f79e59fe26419bca947b2e3838604df2febe7224) by lioborsvoboda).
 - Added Blog, Added Fast Edit Menu Help ([104cf50](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/104cf506b13b020d8029a594fe5727c30c22c423) by lioborsvoboda).
@@ -24,6 +27,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- Update ([29cc70b](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/29cc70b413e1ba237e9364004fa1c884d374ba26) by lioborsvoboda).
+- Repair Bug ([3932bec](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/3932bec3baa8cd9416b5abf324ab75ed3e055ba7) by lioborsvoboda).
+- Implemented Image Editor, Updated Storage Edit ([08fffdf](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/08fffdf901f2f241cc41a524af35c35cde670ec1) by lioborsvoboda).
+- Update tools ([f9ec333](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f9ec33395a96d3129fc1c09adc5679abf57a1b71) by Libor Svoboda).
+- Javascript Used ([3275af9](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/3275af93288a7a12f27949e63b21247a01ed1afe) by lioborsvoboda).
 - StreamChat Done ([aa44ab3](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/aa44ab3b1a258e5273118d2a71519cfd83a3789d) by Libor Svoboda).
 - StreamChat ([1d960b1](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1d960b1154b4acef0d94cf4c0e5a4c0f05299066) by lioborsvoboda).
 - Stream Window ([aca096e](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/aca096e2136abbb9050c0febc31c2633abf2eeb9) by lioborsvoboda).
@@ -33,7 +41,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - system apps ([07fae94](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/07fae94659dd6d4912c8550e5ae98191ff71ecea) by lioborsvoboda).
 - clean ([bfdf849](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/bfdf849ed58274ac8ca5a9743f473cd7a3468ac0) by lioborsvoboda).
 - drawdb ([2350bbc](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2350bbc35c157120767b8279c6db1ca0d4467064) by lioborsvoboda).
-- Update ([57e426a](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/57e426a6fbbaafdfe0326501e1590e71c6d870d8) by Libor Svoboda).
 - Updated Blog ([f8e457a](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f8e457a5c2a0f7334eda24fc5040b67efaaf74b3) by lioborsvoboda).
 - upd ([0a5c044](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/0a5c044390a4198e3a7b109f0784ccb6d9bb7940) by Libor Svoboda).
 - Md viewer added highlight+mermaid ([415d54f](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/415d54fafc21e019eb08028f3cee20da799db431) by Libor Svoboda).

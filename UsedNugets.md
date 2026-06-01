@@ -1,6 +1,9 @@
 ﻿# Other Solutions
 [ServiceStack](https://github.com/ServiceStack/ServiceStack/tree/main)     
 [DashBoards](https://github.com/orgs/creativetimofficial/repositories?page=2)    
+[PlanUML](https://plantuml.com/)     
+      
+
 
 # AddOn
 dotnet add package WebMarkupMin.AspNetCore6 --version 2.21.0 

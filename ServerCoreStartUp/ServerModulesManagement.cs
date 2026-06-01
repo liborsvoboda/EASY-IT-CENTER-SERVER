@@ -70,6 +70,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             {
                 services.AddMarkdown(config =>
                 {
+                    config.MarkdownRenderExtensions.Add(new PlantUmlMarkdownRenderExtension());
                     config.ConfigureMarkdigPipeline = builder =>
                     {
                         builder.UseEmphasisExtras(Markdig.Extensions.EmphasisExtras.EmphasisExtraOptions.Default)
