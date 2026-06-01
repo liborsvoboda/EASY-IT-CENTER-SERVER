@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -60,7 +60,7 @@
         })
 
         // render marked plantuml diagrams
-        plantuml.initialize('/app/node_modules/@sakirtemel/plantuml.js').then(() => {
+        plantuml.initialize('./js/plantuml.js').then(() => {
             for(const element of document.querySelectorAll('.plantuml-diagram')){
                 const code = element.querySelector('*:is(code, pre)').innerText
                 const url = plantuml.renderPng(code).then((blob) => {

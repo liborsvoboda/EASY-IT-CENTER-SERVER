@@ -1,22 +1,97 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>C4 Mermaid Quick Test Page</title>
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=" />
-    <style>
-      div.mermaid {
-        /* font-family: 'trebuchet ms', verdana, arial; */
-        /*font-family: 'Courier New', Courier, monospace !important;*/
-      }
-    </style>
-  </head>
+﻿# Mermaid Examples
 
-  <body>
-    <h1>C4 context diagram demos</h1>
-    <pre class="mermaid">
-    C4Context
+### Class
+
+<pre class="class-mermaid">
+     
+      classDiagram
+       class BankAccount{
+        +String owner
+        +BigDecimal balance
+        +deposit(amount) bool
+        +withdrawl(amount) int
+       }
+       cssClass "BankAccount" customCss
+
+    </pre>
+<pre class="class-mermaid">
+
+      classDiagram-v2
+classA <|-- classB : implements
+classC *-- classD : composition
+classE o-- classF : aggregation
+    </pre>
+<pre class="class-mermaid">
+        classDiagram
+         class BankAccount{
+          +String owner
+          +BigDecimal balance
+          +deposit(amount) bool
+          +withdrawl(amount) int
+        }
+          Class01~T~ <|-- AveryLongClass : Cool
+          Class03~T~ *-- Class04~T~
+            Class01 : size()
+            Class01 : int chimp
+            Class01 : int gorilla
+            Class08 <--> C2: Cool label
+            class Class10~T~ {
+              &lt;&lt;service&gt;&gt;
+              int id
+              test()
+            }
+            callback Class01 "callback" "A Tooltip"
+
+    </pre>
+<pre class="class-mermaid">
+      flowchart TB
+      a_a(Aftonbladet) --> b_b[gorilla]:::apa --> c_c{chimp}:::apa -->a_a
+      a_a --> c --> d_d --> c_c
+      classDef apa fill:#f9f,stroke:#333,stroke-width:4px;
+      class a_a apa;
+      click a_a "https://www.aftonbladet.se" "apa"
+
+    </pre>
+
+<pre class="class-mermaid">
+        classDiagram-v2
+
+        classA -- classB : Inheritance
+        classA -- classC : link
+        classC -- classD : link
+        classB -- classD
+        classA --|> classB : Inheritance
+        classC --* classD : Composition
+        classE --o classF : Aggregation
+        classG --> classH : Association
+        classI -- classJ : Link(Solid)
+        classK ..> classL : Dependency
+        classM ..|> classN : Realization
+        classO .. classP : Link(Dashed)
+        classA : +attr1
+        classA : attr2
+        classA : method1()
+        &lt;&lt;interface&gt;&gt; classB
+        classB : method2() int
+
+        Customer "1" --> "*" Ticket
+        Student "1" --> "1..*" Course
+        Galaxy --> "many" Star : Contains
+        &lt;&lt;interface&gt;&gt; Customer
+
+        class Shape
+        callback Shape "callbackFunction" "This is a tooltip for a callback"
+
+    </pre>
+
+
+
+
+
+### C4context
+
+<pre class="class-mermaid">
+C4Context
       accTitle: C4 context demo
       accDescr: Many large C4 diagrams
 
@@ -62,10 +137,45 @@
       UpdateRelStyle(SystemC, customerA, $textColor="red", $lineColor="red", $offsetX="-50", $offsetY="20")
       
       UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
-    </pre>
-    <hr />
 
-    <pre class="class-mermaid">
+    </pre>
+
+   <pre class="class-mermaid">
+ timeline
+        title History of Social Media Platform
+          2002 : LinkedIn
+          2004 : Facebook : Google
+          2005 : Youtube
+          2006 : Twitter
+          2007 : Tumblr
+          2008s : Instagram
+          2010 : Pinterest
+    </pre>
+   <pre class="class-mermaid">
+mindmap
+  root
+    child1((Circle))
+        grandchild 1
+        grandchild 2
+    child2(Round rectangle)
+        grandchild 3
+        grandchild 4
+    child3[Square]
+        grandchild 5
+        ::icon(mdi mdi-fire)
+        gc6((grand<br/>child 6))
+        ::icon(mdi mdi-fire)
+          gc7((grand<br/>grand<br/>child 8))
+        </pre>
+   <pre class="class-mermaid">
+      flowchart-elk TB
+      a --> b
+      a --> c
+      b --> d
+      c --> d
+    </pre>
+
+<pre class="class-mermaid">
     C4Container
     title Container diagram for Internet Banking System
 
@@ -103,9 +213,9 @@
     Rel(backend_api, banking_system, "Uses", "sync/async, XML/HTTPS")
     UpdateRelStyle(backend_api, banking_system, $offsetY="-50", $offsetX="-140")
     </pre>
-    <hr />
 
-    <pre class="class-mermaid">
+
+<pre class="class-mermaid">
     C4Component
     title Component diagram for Internet Banking System - API Application
 
@@ -143,9 +253,9 @@
         UpdateRelStyle(security, db, $offsetY="-40")
         UpdateRelStyle(mbsfacade, mbs, $offsetY="-40")
     </pre>
-    <hr />
 
-    <pre class="class-mermaid">
+
+<pre class="class-mermaid">
     C4Dynamic
     title Dynamic diagram for Internet Banking System - API Application
 
@@ -163,9 +273,9 @@
     UpdateRelStyle(c2, c3, $textColor="red", $offsetX="-40", $offsetY="60")
     UpdateRelStyle(c3, c4, $textColor="red", $offsetY="-40", $offsetX="10")
     </pre>
-    <hr />
 
-    <pre class="class-mermaid">
+
+<pre class="class-mermaid">
     C4Deployment
     title Deployment Diagram for Internet Banking System - Live
 
@@ -214,86 +324,6 @@
     UpdateRelStyle(api, db, $offsetY="-20", $offsetX="5")
     UpdateRelStyle(api, db2, $offsetX="-40", $offsetY="-20")
     UpdateRelStyle(db, db2, $offsetY="-10")
-     </pre>
-    <hr />
+</pre>
 
-    <script type="module">
-      import mermaid from './mermaid.esm.mjs';
-      const ALLOWED_TAGS = [
-        'a',
-        'b',
-        'blockquote',
-        'br',
-        'dd',
-        'div',
-        'dl',
-        'dt',
-        'em',
-        'foreignObject',
-        'h1',
-        'h2',
-        'h3',
-        'h4',
-        'h5',
-        'h6',
-        'h7',
-        'h8',
-        'hr',
-        'i',
-        'li',
-        'ul',
-        'ol',
-        'p',
-        'pre',
-        'span',
-        'strike',
-        'strong',
-        'table',
-        'tbody',
-        'td',
-        'tfoot',
-        'th',
-        'thead',
-        'tr',
-      ];
-      mermaid.initialize({
-        theme: 'forest',
-        // themeCSS: '.node rect { fill: red; }',
-        logLevel: 3,
-        securityLevel: 'loose',
-        flowchart: { curve: 'basis' },
-        gantt: { axisFormat: '%m/%d/%Y' },
-        sequence: { actorMargin: 50 },
-        dompurifyConfig: {
-          USE_PROFILES: {
-            svg: true,
-          },
-          ADD_TAGS: ALLOWED_TAGS,
-          ADD_ATTR: ['transform-origin'],
-        },
-        // sequenceDiagram: { actorMargin: 300 } // deprecated
-      });
 
-      function testClick(nodeId) {
-        console.log('clicked', nodeId);
-        let originalBgColor = document.querySelector('body').style.backgroundColor;
-        document.querySelector('body').style.backgroundColor = 'yellow';
-        setTimeout(function () {
-          document.querySelector('body').style.backgroundColor = originalBgColor;
-        }, 100);
-      }
-
-      const testLineEndings = async (test, input) => {
-        try {
-          await mermaid.render(test, input);
-        } catch (err) {
-          console.error('Error in %s:\n\n%s', test, err);
-        }
-      };
-
-      await testLineEndings('CR', 'graph LR\rsubgraph CR\rA --> B\rend');
-      await testLineEndings('LF', 'graph LR\nsubgraph LF\nA --> B\nend');
-      await testLineEndings('CRLF', 'graph LR\r\nsubgraph CRLF\r\nA --> B\r\nend');
-    </script>
-  </body>
-</html>

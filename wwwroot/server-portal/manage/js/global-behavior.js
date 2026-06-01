@@ -241,7 +241,7 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("RevealPreview");
     Metro.storage.delItem("RevealPreviewData");
     Metro.storage.delItem("SearchResultFileList");
-    
+
 
     Gs.Functions.RemoveElement("InheritScript"); Gs.Functions.RemoveElement("InheritStyle");
     let menu = Metro.storage.getItem('PortalMenuList', null);

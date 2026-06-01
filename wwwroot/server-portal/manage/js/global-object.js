@@ -275,12 +275,13 @@ Gs.Objects.RefreshPreview = function () {
 
 
 Gs.Objects.InfoboxFrameCreate = function (elementId,url) {
-    let infoBox = Metro.infobox.create("<iframe id='" + elementId + "' src='" + url + "'  width='100%' height='880' frameborder='0' scrolling='yes' style='width: 100%; height: 780px;' ></iframe>", "", {
+    let infoBox = Metro.infobox.create("<iframe id='" + elementId + "' src='" + url + "'  width='100%' height='880' frameborder='0' scrolling='yes' style='width: 100%; height: 750px;' ></iframe>", "", {
         closeButton: true,
         type: "",
         removeOnClose: true,
         width: "80%",
         height: "800",
+        clsBox: "hypertop",
         tag: "",
         id: elementId
     });
@@ -310,6 +311,16 @@ Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
         draggable: true, resizable: true,
         width:"100%", height:"100%",
         place: 'center', customButtons: [
+            {
+                html: "<span class='mif-help' title='Open Readme.md'></span>",
+                cls: "success",
+                onclick: "Gs.Objects.InfoboxFrameCreate('HelpViewer','" + url + "Readme', false);"
+            },
+            {
+                html: "<span class='mif-help' title='Show Readme.md Code'></span>",
+                cls: "warning",
+                onclick: "Gs.Objects.InfoboxFrameCreate('HelpCodeViewer','" + url + "Readme.md', false);"
+            },
             {
                 html: "<span class='mif-file-code' title='Show Window Code'></span>",
                 cls: "alert",
@@ -793,7 +804,7 @@ Gs.Objects.TestWindowLink = function () {
 }
 
 Gs.Objects.AddToFavorites = async function () {
-    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Web">Web</option><option value="GitHub">GitHub</option><option value="Server">Server</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
+    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Web">Web</option><option value="GitHub">GitHub</option><option value="Server">Server</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' class='hidden' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
     let actions = [{
         caption: "Add", cls: "js-dialog-close success",
         onclick: async function () {
@@ -866,8 +877,8 @@ function GenerateFavorites() {
             menuWeb += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
                         <div class="slide-front">
-                            <span class="icon ${favorite.MenuIcon}"></span>
-                            <span class="branding-bar" style="font-size: 8px;">${favorite.MenuName}</span>
+                            
+                            <span class="row p-2" >${favorite.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${favorite.Description}</p>
@@ -877,8 +888,8 @@ function GenerateFavorites() {
             menuGithub += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
                         <div class="slide-front">
-                            <span class="icon ${favorite.MenuIcon}"></span>
-                            <span class="branding-bar" style="font-size: 8px;">${favorite.MenuName}</span>
+                            
+                            <span class="row p-2" >${favorite.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${favorite.Description}</p>
@@ -888,8 +899,8 @@ function GenerateFavorites() {
             menuServer += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
                         <div class="slide-front">
-                            <span class="icon ${favorite.MenuIcon}"></span>
-                            <span class="branding-bar" style="font-size: 8px;">${favorite.MenuName}</span>
+                            
+                            <span class="row p-2" >${favorite.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${favorite.Description}</p>
@@ -908,7 +919,7 @@ Gs.Objects.RemoveFavorite = async function (recGuid) {
 
 
 Gs.Objects.AddToOnlineToolList = async function () {
-    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Online Tool">Online Tool</option><option value="Data Tool">Data Tool</option><option value="Developer">Developer</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
+    let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Online Tool">Online Tool</option><option value="Data Tool">Data Tool</option><option value="Developer">Developer</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' class='hidden' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
     let actions = [{
         caption: "Add", cls: "js-dialog-close success",
         onclick: async function () {
@@ -982,8 +993,8 @@ function GenerateOnlineToolList() {
             menuOnline += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
                         <div class="slide-front">
-                            <span class="icon ${online.MenuIcon}"></span>
-                            <span class="branding-bar" style="font-size: 8px;">${online.MenuName}</span>
+                            
+                            <span class="row p-2">${online.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${online.Description}</p>
@@ -993,8 +1004,8 @@ function GenerateOnlineToolList() {
             menuData += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
                         <div class="slide-front">
-                            <span class="icon ${online.MenuIcon}"></span>
-                            <span class="branding-bar" style="font-size: 8px;">${online.MenuName}</span>
+                            
+                            <span class="row p-2" >${online.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${online.Description}</p>
@@ -1004,8 +1015,8 @@ function GenerateOnlineToolList() {
             menuDeveloper += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
                         <div class="slide-front">
-                            <span class="icon ${online.MenuIcon}"></span>
-                            <span class="branding-bar" style="font-size: 8px;">${online.MenuName}</span>
+                            
+                            <span class="row p-2" >${online.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
                             <p class="text-center"> ${online.Description}</p>

@@ -54,8 +54,17 @@
 
 
 <script>
+    let pageLoader = null;
+
     localStorage.setItem('DetectedLanguage', (navigator.language || navigator.userLanguage).substring(0, 2));
-    async function Mermaid() { try { await mermaid.run({ nodes: document.querySelectorAll('.class-mermaid'), }); } catch (err) { } }
+    async function Mermaid() { 
+        try { 
+            await mermaid.run({ nodes: document.querySelectorAll('.class-mermaid'), }); } 
+        catch (err) { }
+        try { 
+            await mermaid.run({ nodes: document.querySelectorAll('.mermaid'), }); } 
+        catch (err) { }
+    }
     ShowPageLoading();
 
     var pres = document.querySelectorAll("pre>code"); pres = document.querySelectorAll("code");

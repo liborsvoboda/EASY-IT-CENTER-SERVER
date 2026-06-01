@@ -536,7 +536,11 @@ body {
 }
 
 .supertop {
-    z-index: 9999999999 !important;
+    z-index: 9999999 !important;
+}
+
+.hypertop {
+    z-index: 9999999 !important;
 }
 
 
