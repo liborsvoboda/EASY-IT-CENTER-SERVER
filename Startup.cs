@@ -1,5 +1,4 @@
-﻿using ColorCode.Compilation.Languages;
-using EasyData.Services;
+﻿using EasyData.Services;
 using EasyITCenter.ServerCoreConfiguration;
 using EasyITCenter.ServerCoreStructure;
 using EasyITCenter.Services;
@@ -223,7 +222,8 @@ namespace EasyITCenter {
             staticFilesProvider.Mappings[".md"] = "text/markdown"; staticFilesProvider.Mappings[".mpeg"] = "audio/mpeg";
             staticFilesProvider.Mappings[".exe"] = "application/exe"; staticFilesProvider.Mappings[".dll"] = "x-msdownload";
             staticFilesProvider.Mappings[".ppt"] = "application/vnd.ms-powerpoint"; staticFilesProvider.Mappings[".xls"] = "application/vnd.ms-excel";
-            staticFilesProvider.Mappings[".doc"] = "application/msword";
+            staticFilesProvider.Mappings[".doc"] = "application/msword"; staticFilesProvider.Mappings[".jar"] = "application/java-archive";
+            staticFilesProvider.Mappings[".xml"] = "application/xml";
 
             //app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html" });
             app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress,

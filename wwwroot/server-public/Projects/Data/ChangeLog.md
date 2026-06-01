@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added PlantUML support ([a1d6ac4](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/a1d6ac4a9a9af2db3e5289c6b5dc6276eae6063c) by Libor Svoboda).
 - Added Public WebApps ([b898f41](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b898f410302af2faa4b39a1209102a714f8e63c8) by lioborsvoboda).
 - Added Static ServerPortal Page ([f423b98](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f423b980c18c24d4f9cf571d77853940430f946e) by lioborsvoboda).
 - Added Changelog View, User Notes ([7daa42c](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/7daa42ccb18949ed20d8deb8c5000f4044a00c92) by lioborsvoboda).
@@ -27,6 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- Correction ([1365bcb](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1365bcbf16030fa6f6f3c328bf7483cad93e8d76) by Libor Svoboda).
 - Update ([29cc70b](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/29cc70b413e1ba237e9364004fa1c884d374ba26) by lioborsvoboda).
 - Repair Bug ([3932bec](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/3932bec3baa8cd9416b5abf324ab75ed3e055ba7) by lioborsvoboda).
 - Implemented Image Editor, Updated Storage Edit ([08fffdf](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/08fffdf901f2f241cc41a524af35c35cde670ec1) by lioborsvoboda).
