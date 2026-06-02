@@ -11,8 +11,11 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="fullPath"></param>
         /// <returns></returns>
-        public static string GetLastFolderFromPath(string fullPath) {
-            return fullPath.Split(System.IO.Path.DirectorySeparatorChar).Last();
+        public static string GetLastFolderFromPath(string fullPath)
+        {
+            string result = fullPath.Split(Path.DirectorySeparatorChar).Last();
+            if (result == fullPath) { result = fullPath.Split("/").Last(); }
+            return result;
         }
 
 
