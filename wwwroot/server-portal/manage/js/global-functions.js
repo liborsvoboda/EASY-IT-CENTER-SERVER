@@ -20,7 +20,8 @@ Gs.Functions.RemoveElement = function (elementId) {
     if (element != null) { element.remove(); }
 }
 
-//TODO odebrat # z elementId
+
+
 Gs.Functions.AddClass = function (elementId,clasName) {
     $("#" + elementId).addClass(clasName); //"disabled"
 }
@@ -395,7 +396,7 @@ Gs.Functions.LoadMetro = async function () {
 
 
 Gs.Functions.UnloadMetro = function () {
-    delete Metro;
+    //delete Metro;
 }
 
 
