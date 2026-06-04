@@ -26,7 +26,7 @@ let onSuccess = function (s) {
 
 /**
  * Recording Audio and save to Storage
- * @constructor
+ * @function
  */
 Gs.Media.StartRecordAudio = function () {
 	navigator.getUserMedia({ audio: true }, onSuccess, onFail);
@@ -36,7 +36,7 @@ Gs.Media.StartRecordAudio = function () {
 
 /**
  * Start Capturing Screen Image and Save to Storage
- * @constructor
+ * @function
  */
 Gs.Media.CaptureToImage = async function () {
 	setTimeout(async () => {
@@ -48,7 +48,7 @@ Gs.Media.CaptureToImage = async function () {
 
 /**
  * Start Capturing Screen Video
- * @constructor
+ * @function
  */
 Gs.Media.GoToCanvas = async function () {
 	let EICtmpStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
@@ -66,7 +66,7 @@ Gs.Media.GoToCanvas = async function () {
 
 /**
  * Capturing Screen Video
- * @constructor
+ * @function
  */
 Gs.Media.DrawCaptureImage = function (video) {
 	let EICtmpCanvas = document.createElement("canvas");
@@ -81,7 +81,7 @@ Gs.Media.DrawCaptureImage = function (video) {
 
 /**
  *Download Captured Screen Image
- * @constructor
+ * @function
  */
 Gs.Media.DownloadCapturedImage = function () {
 	const a = document.createElement('a');
@@ -98,7 +98,7 @@ Gs.Media.DownloadCapturedImage = function () {
 
 /**
  *User Video Capturing Screen 
- * @constructor
+ * @function
  */
 Gs.Media.StartUserCaptureScreen = async function (filename) {
 	let mediaStream = await navigator.mediaDevices.getDisplayMedia({
@@ -138,7 +138,7 @@ Gs.Media.StartUserCaptureScreen = async function (filename) {
 
 /**
  *Public Storage Video Capturing Screen 
- * @constructor
+ * @function
  */
 Gs.Media.StartPublicCaptureScreen = async function (filename) {
 	let mediaStream = await navigator.mediaDevices.getDisplayMedia({
@@ -178,7 +178,7 @@ Gs.Media.StartPublicCaptureScreen = async function (filename) {
 
 /**
  *Start Share Window Screen 
- * @constructor
+ * @function
  */
 Gs.Media.StartShareCaptureScreen = async function () {
 	try {
@@ -204,7 +204,7 @@ Gs.Media.StartShareCaptureScreen = async function () {
 
 /**
  *Stop Share Window Screen 
- * @constructor
+ * @function
  */
 Gs.Media.StopShareCaptureScreen = function () {
 
@@ -227,7 +227,7 @@ Gs.Media.StopShareCaptureScreen = function () {
 
 /**
  *Start Capture Camera Video
- * @constructor
+ * @function
  */
 Gs.Media.StartCaptureCamera = async function () {
 	await navigator.mediaDevices.getUserMedia({
@@ -264,7 +264,7 @@ Gs.Media.StartCaptureCamera = async function () {
 
 /**
  *Clean Captured Image from Storage
- * @constructor
+ * @function
  */
 Gs.Media.ClearCapturedImage = function () {
 	Metro.storage.delItem("CapturedImage");
@@ -272,7 +272,7 @@ Gs.Media.ClearCapturedImage = function () {
 
 /**
  *Clean Captured Video from Storage
- * @constructor
+ * @function
  */
 Gs.Media.ClearCapturedVideo = function () {
 	Metro.storage.delItem("CapturedVideo");
@@ -280,7 +280,7 @@ Gs.Media.ClearCapturedVideo = function () {
 
 /**
  *Clean Captured Audio from Storage
- * @constructor
+ * @function
  */
 Gs.Media.ClearCapturedAudio = function () {
 	Metro.storage.delItem("CapturedAudio");
@@ -290,7 +290,7 @@ Gs.Media.ClearCapturedAudio = function () {
 
 /**
  *Get Image From Video Element
- * @constructor
+ * @function
  */
 Gs.Media.GetVideoFrame = function (videoElement) {
 	const canvas = document.createElement('canvas');
@@ -306,7 +306,7 @@ Gs.Media.GetVideoFrame = function (videoElement) {
 
 /**
  *Generate Image With Canvas
- * @constructor
+ * @function
  */
 Gs.Media.GenerateImageWithCanvas = function (track, videoElement) {
 	const canvas = document.createElement("canvas");

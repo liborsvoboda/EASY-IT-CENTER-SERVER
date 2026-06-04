@@ -5,7 +5,10 @@ const urlParams = new URLSearchParams(window.location.search);
 const StripePayed = urlParams.get('Payed');
 
 
-
+/**
+ *Portal StartUp Function
+  * @function
+ */
 Gs.Behaviors.PortalStartup = async function () { //LOGGED
     if (Metro.storage.getItem("ApiToken", null) != null) {
         Cookies.set("ApiToken", Metro.storage.getItem("ApiToken", null).Token);
@@ -72,8 +75,16 @@ Gs.Behaviors.PortalStartup = async function () { //LOGGED
     
 }
 
-
+/**
+ *Hide Page Loading
+  * @function
+ */
 Gs.Behaviors.HidePageLoading = function () { Metro.activity.close(pageLoader); }
+
+/**
+ *Show Page Loading
+  * @function
+ */
 Gs.Behaviors.ShowPageLoading = function () {
     if (pageLoader != undefined) {
         if (pageLoader[0]["DATASET:UID:M4Q"] == undefined) { pageLoader = null; }
@@ -87,6 +98,10 @@ Gs.Behaviors.ShowPageLoading = function () {
 }
 
 
+/**
+ *Get Google Option Language Index
+  * @function
+ */
 Gs.Behaviors.GetGoogleOptionLanguageIndex = function (optionValue) {
     if (document.querySelector('#google_translate_element select') != null) {
         let options = Array.from(document.getElementsByClassName("goog-te-combo")[0].options);
@@ -94,7 +109,10 @@ Gs.Behaviors.GetGoogleOptionLanguageIndex = function (optionValue) {
     } else { return 0; }
 }
 
-
+/**
+ *Google Translate Element Init
+  * @function
+ */
 Gs.Behaviors.GoogleTranslateElementInit = function () {
     $(document).ready(function () {
         new google.translate.TranslateElement({
@@ -114,7 +132,10 @@ Gs.Behaviors.GoogleTranslateElementInit = function () {
     });
 }
 
-
+/**
+ *Cancel Google Translation
+  * @function
+ */
 Gs.Behaviors.CancelTranslation = async function (cancel) {
     if (cancel) {
         let userSettingList = Metro.storage.getItem('UserSettingList', null);
@@ -153,16 +174,38 @@ Gs.Behaviors.CancelTranslation = async function (cancel) {
     }
 }
 
+/**
+ *Scroll To Bottom
+  * @function
+ */
 Gs.Behaviors.ScrollToBottom = function () { window.scrollTo(0, document.body.scrollHeight); }
+
+/**
+ *Scroll To Top
+  * @function
+ */
 Gs.Behaviors.ScrollToTop = function () { window.scrollTo(0, 0); }
+
+/**
+ *Enable Scroll
+  * @function
+ */
 Gs.Behaviors.EnableScroll = function () { window.onscroll = function () { }; }
+
+/**
+ *Disable Scroll
+  * @function
+ */
 Gs.Behaviors.DisableScroll = function () {
     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
         window.onscroll = function () { window.scrollTo(scrollLeft, scrollTop); };
 }
 
-
+/**
+ *Set User Settings
+  * @function
+ */
 Gs.Behaviors.SetUserSettings = async function () {
     let userSetting = JSON.parse(JSON.stringify(Metro.storage.getItem('UserSettingList', null)))
     userSetting.EnableAutoTranslate = $("#EnableAutoTranslate")[0].checked;
@@ -193,7 +236,10 @@ Gs.Behaviors.SetUserSettings = async function () {
     } else if (!$("#EnableScreenSaver").val('checked')[0].checked) { Gs.Variables.screensaver = {}; Gs.Functions.RemoveElement("ScreenSaver"); }
 }
 
-
+/**
+ *Load User Settings
+  * @function
+ */
 Gs.Behaviors.LoadUserSettings = function () {
     Gs.Behaviors.ElementSetCheckBox("EnableAutoTranslate", Gs.Variables.UserSettingList.EnableAutoTranslate);
     Gs.Behaviors.ElementSetCheckBox("EnableShowDescription", Gs.Variables.UserSettingList.EnableShowDescription);
@@ -206,6 +252,11 @@ Gs.Behaviors.LoadUserSettings = function () {
 }
 
 
+/**
+* Function Before Set Selected Portal Menu
+* @function
+* @param {number}     num Id of HtmlContent saved in Storage.
+*/
 Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Gs.Variables.monacoEditorList = [];
 
@@ -249,7 +300,12 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
 }
 
 
-//Menu Behaviors
+/**
+* Set Link Menu Function from Selected Menu
+* @function
+* @param {number}     num Id of HtmlContent saved in Storage.
+* @param {string}     HtmlContent saved in Storage.
+*/
 Gs.Behaviors.SetLink = function (htmlContentId, content) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
 
@@ -259,7 +315,12 @@ Gs.Behaviors.SetLink = function (htmlContentId, content) {
     $("#FrameWindow").load(Metro.storage.getItem('ApiOriginSuffix', null) + content);
 }
 
-
+/**
+* Set External Link Menu Function from Selected Menu
+* @function
+* @param {number}     num Id of HtmlContent saved in Storage.
+* @param {string}     HtmlContent saved in Storage.
+*/
 Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
 
@@ -271,7 +332,13 @@ Gs.Behaviors.SetExternalLink = function (htmlContentId, content) {
     + '<iframe id="IFrameWindow" src="' + content + '" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe></div>';
 }
 
-
+/**
+* Set Html Content Menu Function from Selected Menu
+* @function
+* @param {number}     num Id of HtmlContent saved in Storage.
+* @param {number}     num Id of JsContent saved in Storage.
+* @param {number}     num Id of CssContent saved in Storage.
+*/
 Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
 
@@ -294,7 +361,13 @@ Gs.Behaviors.SetContent = function (htmlContentId, jsContentId, cssContentId) {
     
 }
 
-
+/**
+* Set Html Iframe Content Menu Function from Selected Menu
+* @function
+* @param {number}     num Id of HtmlContent saved in Storage.
+* @param {number}     num Id of JsContent saved in Storage.
+* @param {number}     num Id of CssContent saved in Storage.
+*/
 Gs.Behaviors.SetExternalContent = function (htmlContentId, jsContentId, cssContentId) {
     let menu = Gs.Behaviors.BeforeSetMenu(htmlContentId);
 
@@ -316,7 +389,11 @@ Gs.Behaviors.SetExternalContent = function (htmlContentId, jsContentId, cssConte
     }
 }
 
-
+/**
+* Function for Expand or Collapse of collapse Objects
+* @function
+* @param {number}     num Element Id for Expand or Collapse.
+*/
 Gs.Behaviors.ElementExpand = function (elementId) {
     try {
         let el = Metro.getPlugin('#' + elementId, 'collapse');
@@ -325,7 +402,12 @@ Gs.Behaviors.ElementExpand = function (elementId) {
     } catch { }
 }
 
-
+/**
+* Function for Show or Hide of Objects
+* @function
+* @param {number}     num Element Id for Show or Hide.
+* @param {boolean}    bool Optional ShowOnly
+*/
 Gs.Behaviors.ElementShowHide = function (elementId, showOnly = false) {
     try {
         let el = Metro.get$el('#' + elementId);
@@ -334,14 +416,23 @@ Gs.Behaviors.ElementShowHide = function (elementId, showOnly = false) {
     } catch { }
 }
 
-
+/**
+* Set Element CheckBox to Value
+* @function
+* @param {number}     num Element Id for Set Value.
+* @param {boolean}    bool CheckBox Value
+*/
 Gs.Behaviors.ElementSetCheckBox = function (elementId, val) {
     try {
         $('#' + elementId).val('checked')[0].checked = JSON.parse((val.toString().toLowerCase()));
     } catch { }
 }
 
-
+/**
+* Object InfoBox Open / Close Function
+* @function
+* @param {number}     num Element Id for Open / Close InfoBox.
+*/
 Gs.Behaviors.InfoBoxOpenClose = function (elementId) {
     try {
         if (Metro.infobox.isOpen('#' + elementId)) { Metro.infobox.close('#' + elementId); }
@@ -349,18 +440,28 @@ Gs.Behaviors.InfoBoxOpenClose = function (elementId) {
     } catch { }
 }
 
-
+/**
+* Show Html Window Source Code in Modal Window
+* @function
+*/
 Gs.Behaviors.ShowWindowCode = function () {
     if (document.getElementById("IFrameWindow") == null) {
         Gs.Functions.ShowSource();
     } else { Gs.Functions.ShowFrameSource(); }
 }
 
-
+/**
+* Show IFrame Window Source Code in Modal Window
+* @function
+*/
 Gs.Behaviors.ShowWindowFrameWindowCode = function () {
     Gs.Functions.ShowWindowFrameSource();
 }
 
+/**
+* Refresh and set Basket Value
+* @function
+*/
 Gs.Behaviors.RefreshBasket = function () {
     let basketPrice = 0; let basketData = Metro.storage.getItem('BasketPriceList', null);
     basketData.forEach(item => {
@@ -369,7 +470,11 @@ Gs.Behaviors.RefreshBasket = function () {
     $("#BasketPrice").html(`${basketPrice} Kč`);
 }
 
-
+/**
+* Remove Item from Basket
+* @function
+* @param {string}     Basket Title Item
+*/
 Gs.Behaviors.RemoveItemBasket = function (basketTitle) {
     $("#BasketForm").remove();
     let dataBasket = Metro.storage.getItem("BasketPriceList", null);
@@ -381,7 +486,12 @@ Gs.Behaviors.RemoveItemBasket = function (basketTitle) {
     Gs.Objects.OpenBasket();
 }
 
-
+/**
+* Init Stripe Credit Card Payment
+* @function
+* @param {number}     num Basket Price
+* @param {string}     Basket Product Name
+*/
 Gs.Behaviors.InitStripe = async function (price, productName) {
     const fetchClientSecret = async () => {
         const response = await fetch("/StripeService/CreateCheckoutSession", {
@@ -402,7 +512,12 @@ Gs.Behaviors.InitStripe = async function (price, productName) {
     document.querySelector("body > div.overlay").remove()
 }
 
-
+/**
+* Start Stripe Credit Card Payment
+* @function
+* @param {number}     num Basket Price
+* @param {string}     Basket Product Name
+*/
 Gs.Behaviors.RunStripe = function (price, productName) {
 
     $("#BasketForm").remove();
@@ -411,12 +526,20 @@ Gs.Behaviors.RunStripe = function (price, productName) {
 }
 
 
+/**
+* Set Stripe Public Key
+* @function
+*/
 function SetStripeKey() {
     Gs.Variables.stripe = Stripe(Metro.storage.getItem("StripePublicKey", null));
 }
 
 
-
+/**
+* Download Payed Basket Product
+* @function
+* @param {string}     Basket Product Name
+*/
 Gs.Behaviors.DownloadedBasket = function (basketTitle) {
     $("#BasketForm").remove();
     let dataBasket = Metro.storage.getItem("BasketPriceList", null);
@@ -428,20 +551,30 @@ Gs.Behaviors.DownloadedBasket = function (basketTitle) {
 }
 
 
-
+/**
+* Clear Chat Message Window
+* @function
+*/
 Gs.Behaviors.ClearChat = function () { 
     Metro.storage.setItem("ChatMessageList", []);
     $("#ChatPanel").remove();
     Gs.Objects.OpenChat();
 }
 
-
+/**
+* Clear Share Chat Message Window
+* @function
+*/
 Gs.Behaviors.ShareClearChat = function () {
     Metro.storage.setItem("ShareChatMessageList", []);
     $("#SharePanel").remove();
     Gs.Objects.OpenShareWindow();
 }
 
+/**
+* Clear Share Receiver Chat Message Window
+* @function
+*/
 Gs.Behaviors.ShareReceiveClearChat = function () {
     let targetUser = $("#StreamAdmin").html();
     Metro.storage.setItem("ShareChatMessageList", []);

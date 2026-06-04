@@ -1,38 +1,38 @@
 {
-    "plugins": [
-        "plugins/markdown"
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc"]
+    },
+	"plugins": [
+        "jsdoc/plugins/markdown",
+        "jsdoc/plugins/summarize",
+		"jsdoc/plugins/commentConvert",
+		"jsdoc/plugins/escapeHtml",
+		"jsdoc/plugins/overloadHelper",
+		"jsdoc/plugins/partial",
+		"jsdoc/plugins/railsTemplate",
+		"jsdoc/plugins/shout",
+		"jsdoc/plugins/sourcetag",
+		"jsdoc/plugins/underscore"
     ],
     "source": {
         "include": [
-            "src/api.js"
+            "manage/js/global-storage.js",
+			"manage/js/global-behavior.js",
+			"manage/js/global-functions.js",
+			"manage/js/global-api.js",
+			"manage/js/global-media.js",
+			"manage/js/global-object.js",
+			"manage/js/global-signalr.js",
+			"manage/js/global-socket.js"
         ]
     },
     "opts": {
         "encoding": "utf8",
         "destination": "./doc/",
+		"private": true,
+        "recurse": true,
         "readme": "Readme.md",
-        "template": "./node_modules/clean-jsdoc-theme",
-        "theme_opts": {
-            "title": "sql.js",
-            "meta": [
-                "<title>sql.js API documentation</title>",
-                "<meta name=\"author\" content=\"Libor Svoboda\">",
-                "<meta name=\"description\" content=\"Documentation for sql.js: an in-memory SQL database for the browser based on SQLite.\">"
-            ],
-            "menu": [
-                {
-                    "title": "Website",
-                    "link": "https://KlikneteZde.Cz"
-                },
-                {
-                    "title": "Github",
-                    "link": "https://KlikneteZde.Cz"
-                },
-                {
-                    "title": "Demo",
-                    "link": "https://KlikneteZde.Cz"
-                }
-            ]
-        }
+		"template": "jsdoc/templates/default"
     }
 }
