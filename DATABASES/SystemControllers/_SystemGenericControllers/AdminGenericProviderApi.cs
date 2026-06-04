@@ -6,12 +6,13 @@ namespace EasyITCenter.Controllers {
     /// </summary>
     /// <seealso cref="ControllerBase"/>
     [Authorize]
+    [Authorize(Roles = "webadmin,admin")]
     [Route("[controller]")]
     [ApiController]
-    public abstract class SystemStdAuthGenericProviderApi<DbEntity, Tentity, TKey> : ControllerBase where DbEntity : EasyITCenterContext where Tentity : class where TKey : notnull {
+    public abstract class AdminGenericProviderApi<DbEntity, Tentity, TKey> : ControllerBase where DbEntity : EasyITCenterContext where Tentity : class where TKey : notnull {
         private readonly IGenericApiServiceAsync<DbEntity, Tentity> db;
 
-        public SystemStdAuthGenericProviderApi(IGenericApiServiceAsync<DbEntity, Tentity> repo) => db = repo;
+        public AdminGenericProviderApi(IGenericApiServiceAsync<DbEntity, Tentity> repo) => db = repo;
 
         [HttpGet]
         public async Task<string> GetGenericList() {

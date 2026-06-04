@@ -37,7 +37,7 @@
         }
 
 
-        [HttpPost("/EmailService/PostMessenger")]
+        [HttpPost("/EmailService/PostMessenger"), DisableRequestSizeLimit]
         [Consumes("application/json")]
         public async Task<string> PostMessenger([FromBody] SendMailRequest message) {
             try {
@@ -49,7 +49,7 @@
         }
 
 
-        [HttpPost("/EmailService/PostMassMesseger")]
+        [HttpPost("/EmailService/PostMassMesseger"), DisableRequestSizeLimit]
         [Consumes("application/json")]
         public async Task<string> PostMassMesseger([FromBody] List<SendMailRequest> messages) {
             try {

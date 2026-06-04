@@ -7,10 +7,10 @@ namespace EasyITCenter.Controllers {
     /// <seealso cref="ControllerBase"/>
     [Route("[controller]")]
     [ApiController]
-    public abstract class SystemStdFreeGenericProviderApi<DbEntity, Tentity, TKey> : ControllerBase where DbEntity : EasyITCenterContext where Tentity : class where TKey : notnull {
+    public abstract class PublicGenericProviderApi<DbEntity, Tentity, TKey> : ControllerBase where DbEntity : EasyITCenterContext where Tentity : class where TKey : notnull {
         private readonly IGenericApiServiceAsync<DbEntity, Tentity> db;
 
-        public SystemStdFreeGenericProviderApi(IGenericApiServiceAsync<DbEntity, Tentity> repo) => db = repo;
+        public PublicGenericProviderApi(IGenericApiServiceAsync<DbEntity, Tentity> repo) => db = repo;
 
         [HttpGet]
         public async Task<string> GetGenericList() {

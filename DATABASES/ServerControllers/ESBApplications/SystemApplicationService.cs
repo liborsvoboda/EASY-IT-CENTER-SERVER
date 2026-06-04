@@ -30,7 +30,7 @@ namespace EasyITCenter.Controllers {
 
         
         [AllowAnonymous]
-        [HttpPost("/SystemApplicationService/UploadPackage")]
+        [HttpPost("/SystemApplicationService/UploadPackage"), DisableRequestSizeLimit]
         public async Task<string> UploadPackage([FromBody] UploadPackageRequest uploadPackageRequest) {
             try {
 
