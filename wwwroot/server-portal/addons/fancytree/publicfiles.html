@@ -802,9 +802,10 @@
 
             //CLEAN EDITOR
             $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
-            Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
-            Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled'); Gs.Functions.RemoveClass('SetMDEditor', 'disabled');
-            Gs.Functions.RemoveClass('SetJSONEditor', 'disabled'); Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
+            Gs.Functions.AddClass('SetMonaco', 'disabled'); Gs.Functions.AddClass('SetTinyMCE', 'disabled'); Gs.Functions.AddClass('SetFroala', 'disabled');
+            Gs.Functions.AddClass('SetSUNEdit', 'disabled'); Gs.Functions.AddClass('SetSummer', 'disabled');
+            Gs.Functions.AddClass('SetMDEditor', 'disabled'); Gs.Functions.AddClass('SetJSONEditor', 'disabled');
+            Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
 
             //SET EDITOR
             switch (editor) {
@@ -896,6 +897,11 @@
                     }, 1000);
                     break;
                 case "Monaco":
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
+                    Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
+                    //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
+
                     Gs.Functions.AddClass('SetMonaco', 'disabled'); $("#MonacoTheme").show(); $("#MonacoLanguage").show();
 
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
@@ -908,6 +914,11 @@
                     }, 1000);
                     break;
                 case "TinyMCE":
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
+                    Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
+                    //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
+
                     Gs.Functions.AddClass('SetTinyMCE', 'disabled');
 
                     $("#FrameWindow").html('<textarea id="TinyMCE" class="form-control"></textarea >');
@@ -931,6 +942,11 @@
                     }, 3000);
                     break;
                 case "Froala":
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
+                    Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
+                    //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
+
                     Gs.Functions.AddClass('SetFroala', 'disabled'); 
                     $("#FrameWindow").html('<div id="FroalaEditor" style="height:100%;padding-top: 25px;"></div>');
                     EditorInit = new FroalaEditor('#FroalaEditor', { language: 'cs', toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo', 'trackChanges', 'markdown'] }, function () {
@@ -943,6 +959,11 @@
                     }, 1000);
                     break;
                 case "SUNEdit":
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
+                    Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
+                    //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
+
                     Gs.Functions.AddClass('SetSUNEdit', 'disabled'); 
                     $("#FrameWindow").html('<textarea id="SUNEdit" style="display:none;">');
 
@@ -966,6 +987,11 @@
                     }, 1000);
                     break;
                 case "Summer":
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
+                    Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
+                    //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
+
                     Gs.Functions.AddClass('SetSummer', 'disabled'); 
                     $("#FrameWindow").html('<div id="SummerEditor" style="width: 100%;"></div> ');
                     $(`#SummerEditor`).summernote({
