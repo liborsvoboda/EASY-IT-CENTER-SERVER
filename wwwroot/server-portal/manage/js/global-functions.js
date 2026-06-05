@@ -1,4 +1,19 @@
 ﻿
+
+/**
+* HTML entities decode
+*
+* @param {string} str Input text
+* @return {string} Filtered text
+*/
+Gs.Functions.HtmlDecode = function (str) {
+
+    var txt = document.createElement('textarea');
+    txt.innerHTML = str;
+    return txt.value;
+}
+
+
 Gs.Functions.GenerateUUID = function () { 
     let d = new Date().getTime();
     let d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;
