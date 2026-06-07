@@ -582,3 +582,6 @@ Gs.Behaviors.ShareReceiveClearChat = function () {
     Gs.Objects.OpenShareReceive();
     setTimeout(function () { $("#StreamAdmin").html(targetUser) }, 100);
 }
+
+
+

@@ -1,48 +1,63 @@
-body {
-  font-family: 'Courier New', Courier, monospace;
-  background-color: black;
-  color: white;
-  margin: 0;
+﻿body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: black;
+    color: white;
+    margin: 0;
 }
 
 .console {
-  display: table-cell;
-  vertical-align: bottom;
-  height: calc(100vh - 20px);
-  width: 100vw;
+    display: table-cell;
+    vertical-align: bottom;
+    height: calc(100vh - 20px);
+    width: 100vw;
 }
 
-.console .output {
-  overflow: auto;
-}
+    .console .output {
+        overflow: auto;
+    }
 
-.console .output div {
-  border: 1px solid #333;
-}
+        .console .output div {
+            border: 1px solid #333;
+        }
 
-.console .output .error {
-  background-color: #300;
-  color: #C00;
-}
+        .console .output .info {
+            background-color: #acdbe8;
+            color: #084859;
+        }
 
-.console .output .input:before,
-.input:before {
-  content: '->';
-  margin-right: 4px;
-}
+        .console .output .debug {
+            background-color: #b5e8ac;
+            color: #188f03;
+        }
 
-.console .output .return:before {
-  content: '<-';
-  margin-right: 4px;
-}
+        .console .output .warn {
+            background-color: #ffc9a3;
+            color: #cc0000;
+        }
+
+        .console .output .error {
+            background-color: #300;
+            color: #C00;
+        }
+
+        .console .output .input:before,
+        .input:before {
+            content: '->';
+            margin-right: 4px;
+        }
+
+        .console .output .return:before {
+            content: '<-';
+            margin-right: 4px;
+        }
 
 .input input {
-  border: none;
-  outline: none;
-  background-color: #00F;
-  color: #FFF;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
-  width: calc(100% - 25px);
-  padding: 0;
+    border: none;
+    outline: none;
+    background-color: #00F;
+    color: #FFF;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    width: calc(100% - 25px);
+    padding: 0;
 }

@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added HtmlDecode function ([fbcc753](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/fbcc753eeadbab5d2c823ed9bb0a1b23dcae200d) by lioborsvoboda).
+- Added jsDoc Generator ([0cb435d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/0cb435dc4f3974bd1af44dedb0d5f5645e07eeab) by lioborsvoboda).
+- Added Documentation ([e60aa21](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e60aa211330b95dfa37dd2058bbc0343f659d9b2) by Libor Svoboda).
 - added ToolHelpMarkDownViewer and Tool HelpCode Viewer ([39556fd](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/39556fd3e06deeca0d04ccfa9dd80b6d47b4eba0) by Libor Svoboda).
 - Added PlantUML support ([a1d6ac4](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/a1d6ac4a9a9af2db3e5289c6b5dc6276eae6063c) by Libor Svoboda).
 - Added Public WebApps ([b898f41](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b898f410302af2faa4b39a1209102a714f8e63c8) by lioborsvoboda).
@@ -29,6 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- Repaired Editors Bug ([4df7606](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/4df76064b827ea570baffec7e32553ad80fd1a65) by lioborsvoboda).
+- Update DisableSizeLimit ([0fb182e](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/0fb182ef24285c7d3b8b3f89de549b78450855d6) by lioborsvoboda).
 - Update ([b4e8b3d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b4e8b3d1362a6ccc7bfd6f4c95dee27883937938) by lioborsvoboda).
 - dolphin ([d163262](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/d1632629c457cbdaee8e210ef537e96705a13223) by Libor Svoboda).
 - upd ([03dfa23](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/03dfa23d5c01ddc408f7b30f8abd1b3d4ecfc113) by Libor Svoboda).

@@ -303,23 +303,23 @@ Gs.Objects.InfoboxObjectCreate = function (elementId, html, width = "80%", heigh
 }
 
 
-Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
+Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false, frameName = "WindowFrame") {
     if (lastWindow) { ( url = document.getElementById("IFrameWindow") != null ? document.getElementById("IFrameWindow").src : "/") }
     let custwindow = Metro.window.create({
         cls: "p-0", title: title, clsCaption: 'bg-orange',
         btnMin: true, btnMax: true, shadow: true,
         draggable: true, resizable: true,
-        width:"100%", height:"100%",
+        width: "100%", height: "100%",
         place: 'center', customButtons: [
             {
                 html: "<span class='mif-help' title='Open Readme.md'></span>",
                 cls: "success",
-                onclick: "Gs.Objects.InfoboxFrameCreate('HelpViewer','" + url + "Readme', false);"
+                onclick: `Gs.Objects.InfoboxFrameCreate('HelpViewer','${url}Readme', false);`
             },
             {
                 html: "<span class='mif-help' title='Show Readme.md Code'></span>",
                 cls: "warning",
-                onclick: "Gs.Objects.InfoboxFrameCreate('HelpCodeViewer','" + url + "Readme.md', false);"
+                onclick: `Gs.Objects.InfoboxFrameCreate('HelpCodeViewer','${url}Readme.md', false);`
             },
             {
                 html: "<span class='mif-file-code' title='Show Window Code'></span>",
@@ -334,14 +334,14 @@ Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false) {
             {
                 html: "<span class='mif-vpn-publ' title='Show URL'></span>",
                 cls: "sys-button",
-                onclick: "alert(document.getElementById('WindowFrame').contentWindow.location.href);"
+                onclick: `alert(document.getElementById('${frameName}').contentWindow.location.href);`
             }
         ],
         clsWindow: "supertop",
         icon: "<span class='mif-hour-glass'></spam>",
         onCaptionDblClick: function () { },
         btnClose: true,
-        content: "<iframe id=WindowFrame src='" + url + "' width='100%' height='800' frameborder='0' scrolling='yes' style='width: 100%; height: 100 %;'></iframe>"
+        content: `<iframe id='${frameName}' src='${url}' width='100%' height='800' frameborder='0' scrolling='yes' style='width: 100%; height: 100 %;'></iframe>`
     });
     //custwindow[0].id = elementId;
 }
@@ -874,35 +874,35 @@ function GenerateFavorites() {
         let cmd = favorite.MenuNewWindow.toLowerCase() == "false" ? `Gs.Objects.WindowIframeCreate('${favorite.MenuName}','${favorite.MenuUrl}')` : `window.open('${favorite.MenuUrl}')`;
 
         if (favorite.MenuGroup == "Web") {
-            menuWeb += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
-                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
-                        <div class="slide-front">
+            menuWeb += `<div data-role="tile" class="m-1 shadowed" data-size="small" data-effect="hover-slide-up">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.MenuName}','${favorite.RecGuid}')"></span>
+                        <div class="slide-front" onclick="${cmd}">
                             
                             <span class="row p-2" >${favorite.MenuName}</span>
                         </div>
-                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${favorite.Description}</p>
                         </div>
                     </div>`;
         } else if (favorite.MenuGroup == "Github") {
-            menuGithub += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
-                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
-                        <div class="slide-front">
+            menuGithub += `<div data-role="tile" class="m-1 shadowed" data-size="small" data-effect="hover-slide-up">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.MenuName}','${favorite.RecGuid}')"></span>
+                        <div class="slide-front" onclick="${cmd}">
                             
                             <span class="row p-2" >${favorite.MenuName}</span>
                         </div>
-                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${favorite.Description}</p>
                         </div>
                     </div>`;
         } else if (favorite.MenuGroup == "Server") {
-            menuServer += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
-                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.RecGuid}')"></span>
-                        <div class="slide-front">
+            menuServer += `<div data-role="tile" class="m-1 shadowed" data-size="small" data-effect="hover-slide-up">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.MenuName}','${favorite.RecGuid}')"></span>
+                        <div class="slide-front" onclick="${cmd}">
                             
                             <span class="row p-2" >${favorite.MenuName}</span>
                         </div>
-                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${favorite.Description}</p>
                         </div>
                     </div>`;
@@ -913,8 +913,15 @@ function GenerateFavorites() {
 }
 
 
-Gs.Objects.RemoveFavorite = async function (recGuid) {
-    await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`,"LoadFavorites");
+Gs.Objects.RemoveFavorite = async function (menuName,recGuid) {
+    let content = `<div>Do you want to Remove Favorite: ${menuName}</div>`;
+    let actions = [{
+        caption: "Remove", cls: "js-dialog-close success",
+        onclick: async function () {
+            await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`, "LoadFavorites");
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Remove Favorite", content, actions);
 }
 
 
@@ -990,35 +997,35 @@ function GenerateOnlineToolList() {
         let cmd = online.MenuNewWindow.toLowerCase() == "false" ? `Gs.Objects.WindowIframeCreate('${online.MenuName}','${online.MenuUrl}')` : `window.open('${online.MenuUrl}')`;
 
         if (online.MenuGroup == "Online Tool") {
-            menuOnline += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
-                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
-                        <div class="slide-front">
+            menuOnline += `<div data-role="tile" class="m-1 shadowed" data-size="small" data-effect="hover-slide-up">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.MenuName}','${online.RecGuid}')"></span>
+                        <div class="slide-front" onclick="${cmd}">
                             
                             <span class="row p-2">${online.MenuName}</span>
                         </div>
-                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${online.Description}</p>
                         </div>
                     </div>`;
         } else if (online.MenuGroup == "Data Tool") {
-            menuData += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
-                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
-                        <div class="slide-front">
+            menuData += `<div data-role="tile" class="m-1 shadowed" data-size="small" data-effect="hover-slide-up">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.MenuName}','${online.RecGuid}')"></span>
+                        <div class="slide-front" onclick="${cmd}">
                             
                             <span class="row p-2" >${online.MenuName}</span>
                         </div>
-                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${online.Description}</p>
                         </div>
                     </div>`;
         } else if (online.MenuGroup == "Developer") {
-            menuDeveloper += `<div data-role="tile" class="" data-size="small" data-effect="hover-slide-up" onclick="${cmd}">
-                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.RecGuid}')"></span>
-                        <div class="slide-front">
+            menuDeveloper += `<div data-role="tile" class="m-1 shadowed" data-size="small" data-effect="hover-slide-up">
+                        <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.MenuName}','${online.RecGuid}')"></span>
+                        <div class="slide-front" onclick="${cmd}">
                             
                             <span class="row p-2" >${online.MenuName}</span>
                         </div>
-                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;">
+                        <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${online.Description}</p>
                         </div>
                     </div>`;
@@ -1029,8 +1036,15 @@ function GenerateOnlineToolList() {
 }
 
 
-Gs.Objects.RemoveOnlineTool = async function (recGuid) {
-    await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`, "LoadOnlineToolList");
+Gs.Objects.RemoveOnlineTool = async function (menuName, recGuid) {
+    let content = `<div>Do you want to Remove Online Tool: ${menuName}</div>`;
+    let actions = [{
+        caption: "Remove", cls: "js-dialog-close success",
+        onclick: async function () {
+            await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`, "LoadOnlineToolList");
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Remove Online Tool", content, actions);
 }
 
 
@@ -1089,16 +1103,18 @@ function GenerateWebSearchList() {
     Gs.Objects.WindowHtmlCreate("SearchWindow", "Global Search", html);
 }
 
+
 Gs.Objects.GenerateRemoveWebSearchList = async function () {
     let webSearch = Metro.storage.getItem('WebSearchList', null);
     let content = `<div>`;
     webSearch.forEach(search => {
-        content += `<button id="${search.RecGuid}" class='button alert outline ml-2 mr-2' onclick="Gs.Objects.RemoveWebSearchList('${search.RecGuid}')">Remove ${search.MenuName}</button>`;
+        content += `<button id="${search.RecGuid}" class='button alert outline ml-2 mr-2' onclick="Gs.Objects.RemoveWebSearchList('${search.MenuName}','${search.RecGuid}')">Remove ${search.MenuName}</button>`;
     });
     content += `</div>`;
     let actions = [{ caption: "Close", cls: "js-dialog-close alert", onclick: function () { } }]
     Gs.Objects.CreateDialogRequest("Remove from Web Search", content, actions);
 }
+
 
 Gs.Objects.AddWebSearchList = async function () {
     let content = `<div><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
@@ -1124,16 +1140,24 @@ Gs.Objects.AddWebSearchList = async function () {
 
 }
 
-Gs.Objects.RemoveWebSearchList = async function (recGuid) {
-    $(`#${recGuid}`).hide();
-    await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`);
+
+Gs.Objects.RemoveWebSearchList = async function (menuName, recGuid) {
+    let content = `<div>Do you want to Remove Web Search: ${menuName}</div>`;
+    let actions = [{
+        caption: "Remove", cls: "js-dialog-close success",
+        onclick: async function () {
+            $(`#${recGuid}`).hide();
+            await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`);
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Remove Web Search", content, actions);
 }
 
 
 async function LoadNotesList() {
     await Gs.Apis.RunServerGetApi("PortalApiTableService/GetNotesList", "NotesList", "OpenNotesList");
-
 }
+
 
 function OpenNotesList() {
     let html = `

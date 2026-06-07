@@ -1,7 +1,5 @@
-class Console {
+﻿class Console {
     constructor() {
-        console.log = this.handleLog.bind(this);
-        console.error = this.handleError.bind(this);
 
         let socket = new WebSocket(`${document.location.protocol === "https:" ? "wss" : "ws"}://${document.location.hostname}:${document.location.port}/WebSocketService/ServerCoreMonitor`);
         let conInput = document.getElementById('input');
@@ -48,14 +46,6 @@ class Console {
         newLine.classList.add(type);
         newLine.innerText = msg;
         output.appendChild(newLine);
-    }
-
-    handleLog(msg) {
-        this.addConsoleLine(msg, 'log');
-    }
-
-    handleError(msg) {
-        this.addConsoleLine(msg, 'error');
     }
 
     htmlEscape(str) {

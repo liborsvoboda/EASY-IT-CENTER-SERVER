@@ -1,4 +1,43 @@
-﻿# Other Solutions
+﻿# WINDOWS Install Servers
+[FTP, SFTP](https://winscp.net/eng/docs/guide_windows_ftps_server)
+[SSH,SFTP](https://winscp.net/eng/docs/guide_windows_openssh_server#installing_sftp_ssh_server)
+[WinSCP Commands](https://winscp.net/eng/docs/scripting#example)
+[PowerShell, OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/releases)
+[PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6#winget)
+
+# Linux Install
+[PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/install-debian?view=powershell-7.6)    
+
+# Kontrola Kódu
+[Tree-sitter Install](https://tree-sitter.github.io/node-tree-sitter/#installation)    
+[tree-sitter Docs](https://tree-sitter.github.io/tree-sitter/using-parsers/1-getting-started.html)     
+[PowerShell Tree-sitter](https://github.com/PowerShell/tree-sitter-PowerShell/tree/master)    
+
+# Project Generator Yeoman
+[Yeoman](npm install -g yo)
+[Docs](https://yeoman.io/authoring/)
+[Generator Office](https://github.com/OfficeDev/generator-office)
+[Generator PowerShell](https://github.com/PowerShell/generator-powershell)    
+
+
+# Github Repos
+[PowerShell](https://github.com/orgs/PowerShell/repositories)
+[51 Js Repos](https://github.com/1111mp/single-spa)
+[105 JS Repos](https://github.com/coreybutler?tab=repositories)
+
+
+# Certificates
+
+npm install -g sslgen
+
+# NVM Desktop & Command Linux & Windows
+[NVM Desktop](https://github.com/1111mp/nvm-desktop/tree/tauri)   
+[NVM Command](https://github.com/1111mp/nvmd-command/releases)
+[NVM](https://github.com/coreybutler/nvm-windows/releases)   
+
+
+
+# Other Solutions
 [ServiceStack](https://github.com/ServiceStack/ServiceStack/tree/main)     
 [DashBoards](https://github.com/orgs/creativetimofficial/repositories?page=2)    
 [PlanUML](https://plantuml.com/)     

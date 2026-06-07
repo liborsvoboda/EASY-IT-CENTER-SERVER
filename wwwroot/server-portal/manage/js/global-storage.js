@@ -9,7 +9,7 @@ Metro.storage.setItem('DefaultPath', Metro.storage.getItem('DefaultPath', null) 
 if (Metro.storage.getItem('BasketPriceList', null) == null) { Metro.storage.setItem('BasketPriceList', []); }
 if (Metro.storage.getItem('ChatMessageList', null) == null) { Metro.storage.setItem('ChatMessageList', []); }
 if (Metro.storage.getItem('ShareChatMessageList', null) == null) { Metro.storage.setItem('ShareChatMessageList', []); }
-
+if (Metro.storage.getItem('ConsoleLogList', null) == null) { Metro.storage.setItem('ConsoleLogList', []); }
 
 
 //Global Javascript Library
@@ -75,6 +75,40 @@ window.Gs = {
         }
     }
 }
+
+
+
+let console = (function (oldCons) {
+    return {
+        log: function (text) {
+            oldCons.log(text);
+            let data = Metro.storage.getItem('ConsoleLogList', null);
+            data.push({ id: data.length + 1, type: "debug", message: JSON.stringify(text) });
+            Metro.storage.setItem('ConsoleLogList', data);
+        },
+        info: function (text) {
+            oldCons.info(text);
+            let data = Metro.storage.getItem('ConsoleLogList', null);
+            data.push({ id: data.length + 1, type: "info", message: JSON.stringify(text) });
+            Metro.storage.setItem('ConsoleLogList', data);
+        },
+        warn: function (text) {
+            oldCons.warn(text);
+            let data = Metro.storage.getItem('ConsoleLogList', null);
+            data.push({ id: data.length + 1, type: "warn", message: JSON.stringify(text) });
+            Metro.storage.setItem('ConsoleLogList', data);
+        },
+        error: function (text) {
+            oldCons.error(text);
+            let data = Metro.storage.getItem('ConsoleLogList', null);
+            data.push({ id: data.length + 1, type: "error", message: JSON.stringify(text) });
+            Metro.storage.setItem('ConsoleLogList', data);
+        }
+    };
+}(window.console));
+
+//Then redefine the old console
+window.console = console;
 
 
 window.WindowButtons = [
