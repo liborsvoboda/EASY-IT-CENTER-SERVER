@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- Clean ([9101080](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/9101080ebb52125e870867655537fc217622428b) by Libor Svoboda).
+- Repair Bugs onclick, added Browser Console ([e4651ee](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e4651eeb31a8c2714653ad9b0e2a6f3e3d7c44cd) by Libor Svoboda).
 - Repaired Editors Bug ([4df7606](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/4df76064b827ea570baffec7e32553ad80fd1a65) by lioborsvoboda).
 - Update DisableSizeLimit ([0fb182e](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/0fb182ef24285c7d3b8b3f89de549b78450855d6) by lioborsvoboda).
 - Update ([b4e8b3d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b4e8b3d1362a6ccc7bfd6f4c95dee27883937938) by lioborsvoboda).
@@ -49,7 +51,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Stream Chat ([b55c688](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b55c6888bf6d215847202fb47f4098ddf3702df0) by Libor Svoboda).
 - imageeditor ([f37f41f](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f37f41f1d8d44fff0306eea9c8fff3544ae55562) by Libor Svoboda).
 - system apps ([07fae94](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/07fae94659dd6d4912c8550e5ae98191ff71ecea) by lioborsvoboda).
-- clean ([bfdf849](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/bfdf849ed58274ac8ca5a9743f473cd7a3468ac0) by lioborsvoboda).
 - drawdb ([2350bbc](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2350bbc35c157120767b8279c6db1ca0d4467064) by lioborsvoboda).
 - Updated Blog ([f8e457a](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/f8e457a5c2a0f7334eda24fc5040b67efaaf74b3) by lioborsvoboda).
 - Md viewer added highlight+mermaid ([415d54f](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/415d54fafc21e019eb08028f3cee20da799db431) by Libor Svoboda).

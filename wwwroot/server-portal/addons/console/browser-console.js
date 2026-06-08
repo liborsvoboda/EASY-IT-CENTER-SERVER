@@ -12,9 +12,12 @@
                 if (input.toLowerCase() === 'clear') {
                     self.clear();
                     return;
+                } else {
+                    
                 }
                 self.addConsoleLine(input, 'browser-console-input');
                 try {
+                    console.log(input);
                     let returnVal = eval.apply(this, [input]);
                     self.addConsoleLine(returnVal, 'return');
                 } catch (e) {
@@ -46,6 +49,13 @@
         output.appendChild(newLine);
     }
 
+    handleLog(msg) {
+        this.addConsoleLine(msg, 'log');
+    }
+
+    handleError(msg) {
+        this.addConsoleLine(msg, 'error');
+    }
 
     openWindow() {
         let output = document.getElementById('browser-console-output');
