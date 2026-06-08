@@ -212,7 +212,7 @@
                         SetEditor("Video");
                     } else if (["mp3","wav"].includes(data.node.data.extension)) {
                         SetEditor("Audio");
-                    } else if (["stl"].includes(data.node.data.extension)) {
+                    } else if (["stl", "drc", "fbx", "glb", "gltf", "obj", "ply"].includes(data.node.data.extension)) {
                         SetEditor("STLviewer");
                     } else if (["pdf"].includes(data.node.data.extension)) {
                         SetEditor("PDFviewer");

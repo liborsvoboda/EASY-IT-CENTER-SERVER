@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- resolve browser console commands ([efed039](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/efed039b404aa05aa6462f612fa3ddb8f00f2e34) by Libor Svoboda).
 - Clean ([9101080](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/9101080ebb52125e870867655537fc217622428b) by Libor Svoboda).
 - Repair Bugs onclick, added Browser Console ([e4651ee](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e4651eeb31a8c2714653ad9b0e2a6f3e3d7c44cd) by Libor Svoboda).
 - Repaired Editors Bug ([4df7606](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/4df76064b827ea570baffec7e32553ad80fd1a65) by lioborsvoboda).

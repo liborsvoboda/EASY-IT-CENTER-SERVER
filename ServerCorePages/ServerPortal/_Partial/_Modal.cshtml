@@ -121,12 +121,12 @@
 
 
     @* Menu Modal Menu *@
-    <ul id="ModalMenu" data-role="bottomsheet" class="hidden">
+    <ul id="ModalMenu" data-role="bottomsheet" class="hidden pos-absolute" style="left:80%;">
         <li class="shadowed"><span class="icon mif-question" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.GetMyQuestionList();"></span>Questions</li>
         <li class="shadowed"><span class="icon mif-library" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Code Library & Templates','/server-portal/addons/fancytree/codelibrary.html');"></span>Templates</li>
+        <li class="shadowed"><span class="icon mif-import-contacts" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Function List','/server-portal/addons/fancytree/codepreview.html');"></span>Functions</li>
         <li class="shadowed"><span class="icon mif-download" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.InfoboxFrameCreate('Downloads','/server-downloads');"></span>Downloads</li>
         <li class="shadowed"><span class="icon mif-printer" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.ShowPrintExport();"></span>Print</li>
-        <li class="shadowed"><span class="icon mif-import-contacts" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Function List','/server-portal/addons/fancytree/codepreview.html');"></span>Functions</li>
         <li class="shadowed"><span class="icon mif-import-export" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.ShowExportDialog('Export Table');"></span>Export Tbl</li>
         <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);LoadSearchWindow();"></span>WebSearch</li>
         <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);"></span>DocSearch</li>
