@@ -117,5 +117,92 @@
             } catch { return null; }
         }
 
+
+        /// <summary>
+        /// Extension for check all access Role
+        /// </summary>
+        public static bool IsAllAccess()
+        {
+            try
+            {
+                var context = _accessor?.HttpContext;
+                if (context != null && ((context.User != null && !context.User.IsInRole("all")) || context.User != null)) { return false; } else return true;
+            }
+            catch { return false; }
+        }
+
+
+        /// <summary>
+        /// Extension for check none Role
+        /// </summary>
+        public static bool IsNoneUser()
+        {
+            try
+            {
+                var context = _accessor?.HttpContext;
+                if (context != null && context.User != null && !context.User.IsInRole("none")) { return false; } else return true;
+            }
+            catch { return false; }
+        }
+
+
+
+        /// <summary>
+        /// Extension for check none Role
+        /// </summary>
+        public static bool IsClientUser()
+        {
+            try
+            {
+                var context = _accessor?.HttpContext;
+                if (context != null && context.User != null && !context.User.IsInRole("client")) { return false; } else return true;
+            }
+            catch { return false; }
+        }
+
+
+
+        /// <summary>
+        /// Extension for check none Role
+        /// </summary>
+        public static bool IsWebClientUser()
+        {
+            try
+            {
+                var context = _accessor?.HttpContext;
+                if (context != null && context.User != null && !context.User.IsInRole("webclient")) { return false; } else return true;
+            }
+            catch { return false; }
+        }
+
+
+
+        /// <summary>
+        /// Extension for check supplier Role
+        /// </summary>
+        public static bool IsSupplierUser()
+        {
+            try
+            {
+                var context = _accessor?.HttpContext;
+                if (context != null && context.User != null && !context.User.IsInRole("supplier")) { return false; } else return true;
+            }
+            catch { return false; }
+        }
+
+
+
+        /// <summary>
+        /// Extension for check supplier Role
+        /// </summary>
+        public static bool IsWebSupplierUser()
+        {
+            try
+            {
+                var context = _accessor?.HttpContext;
+                if (context != null && context.User != null && !context.User.IsInRole("websupplier")) { return false; } else return true;
+            }
+            catch { return false; }
+        }
     }
 }
