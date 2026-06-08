@@ -278,7 +278,7 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SystemGroupMenuList> SystemGroupMenuLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SystemIgnoredExceptionList> SystemIgnoredExceptionLists { get; set; }
-        [InverseProperty("User")]
+        [InverseProperty("SolutionUserList")]
         public virtual ICollection<SystemMenuList> SystemMenuLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SystemModuleList> SystemModuleLists { get; set; }

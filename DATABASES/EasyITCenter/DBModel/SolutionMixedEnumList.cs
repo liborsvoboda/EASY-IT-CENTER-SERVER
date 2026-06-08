@@ -46,7 +46,8 @@ namespace EasyITCenter.DBModel
             SystemCustomPageListInheritedFormTypeNavigations = new HashSet<SystemCustomPageList>();
             SystemCustomPageListInheritedSystemApiCallTypeNavigations = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
-            SystemMenuLists = new HashSet<SystemMenuList>();
+            SystemMenuListInheritedQueryLimitTypeNavigations = new HashSet<SystemMenuList>();
+            SystemMenuListInheritedSystemMenuTypeNavigations = new HashSet<SystemMenuList>();
             SystemModuleLists = new HashSet<SystemModuleList>();
             UserAccessKeyLists = new HashSet<UserAccessKeyList>();
             UserParameterLists = new HashSet<UserParameterList>();
@@ -104,7 +105,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedFormTypeNavigations { get; set; }
         public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedSystemApiCallTypeNavigations { get; set; }
         public virtual ICollection<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; }
-        public virtual ICollection<SystemMenuList> SystemMenuLists { get; set; }
+        public virtual ICollection<SystemMenuList> SystemMenuListInheritedQueryLimitTypeNavigations { get; set; }
+        public virtual ICollection<SystemMenuList> SystemMenuListInheritedSystemMenuTypeNavigations { get; set; }
         public virtual ICollection<SystemModuleList> SystemModuleLists { get; set; }
         public virtual ICollection<UserAccessKeyList> UserAccessKeyLists { get; set; }
         public virtual ICollection<UserParameterList> UserParameterLists { get; set; }

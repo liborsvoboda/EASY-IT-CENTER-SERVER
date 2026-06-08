@@ -1514,26 +1514,35 @@ namespace EasyITCenter.DBModel
             {
                 entity.Property(e => e.Active).HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.InheritedQueryLimitType).HasDefaultValueSql("('AllRecords')");
+
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.Group)
-                    .WithMany(p => p.SystemMenuLists)
-                    .HasForeignKey(d => d.GroupId)
+                entity.HasOne(d => d.InheritedQueryLimitTypeNavigation)
+                    .WithMany(p => p.SystemMenuListInheritedQueryLimitTypeNavigations)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.InheritedQueryLimitType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SystemMenuList_SystemGroupMenuList");
+                    .HasConstraintName("FK_SystemMenuList_SolutionMixedEnumList2");
 
                 entity.HasOne(d => d.InheritedSystemMenuTypeNavigation)
-                    .WithMany(p => p.SystemMenuLists)
+                    .WithMany(p => p.SystemMenuListInheritedSystemMenuTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
                     .HasForeignKey(d => d.InheritedSystemMenuType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemMenuList_SolutionMixedEnumList");
 
-                entity.HasOne(d => d.User)
+                entity.HasOne(d => d.SolutionUserList)
                     .WithMany(p => p.SystemMenuLists)
-                    .HasForeignKey(d => d.UserId)
+                    .HasForeignKey(d => d.SolutionUserListId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemMenuList_UserList");
+
+                entity.HasOne(d => d.SystemGroupMenuList)
+                    .WithMany(p => p.SystemMenuLists)
+                    .HasForeignKey(d => d.SystemGroupMenuListId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SystemMenuList_SystemGroupMenuList");
             });
 
             modelBuilder.Entity<SystemModuleList>(entity =>

@@ -30,7 +30,7 @@ namespace EasyITCenter.DBModel
         [ForeignKey("UserId")]
         [InverseProperty("SystemGroupMenuLists")]
         public virtual SolutionUserList User { get; set; } = null!;
-        [InverseProperty("Group")]
+        [InverseProperty("SystemGroupMenuList")]
         public virtual ICollection<SystemMenuList> SystemMenuLists { get; set; }
     }
 }

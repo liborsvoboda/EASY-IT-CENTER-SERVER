@@ -15,7 +15,7 @@ namespace EasyITCenter.DBModel
         [StringLength(50)]
         [Unicode(false)]
         public string InheritedSystemMenuType { get; set; } = null!;
-        public int GroupId { get; set; }
+        public int SystemGroupMenuListId { get; set; }
         [StringLength(250)]
         [Unicode(false)]
         public string FormPageName { get; set; } = null!;
@@ -28,20 +28,24 @@ namespace EasyITCenter.DBModel
         [StringLength(150)]
         [Unicode(false)]
         public string? OrderBy { get; set; }
+        [StringLength(50)]
+        [Unicode(false)]
+        public string InheritedQueryLimitType { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
-        public int UserId { get; set; }
+        public int SolutionUserListId { get; set; }
         public bool NotShowInMenu { get; set; }
         [Required]
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        [ForeignKey("GroupId")]
-        [InverseProperty("SystemMenuLists")]
-        public virtual SystemGroupMenuList Group { get; set; } = null!;
+        public virtual SolutionMixedEnumList InheritedQueryLimitTypeNavigation { get; set; } = null!;
         public virtual SolutionMixedEnumList InheritedSystemMenuTypeNavigation { get; set; } = null!;
-        [ForeignKey("UserId")]
+        [ForeignKey("SolutionUserListId")]
         [InverseProperty("SystemMenuLists")]
-        public virtual SolutionUserList User { get; set; } = null!;
+        public virtual SolutionUserList SolutionUserList { get; set; } = null!;
+        [ForeignKey("SystemGroupMenuListId")]
+        [InverseProperty("SystemMenuLists")]
+        public virtual SystemGroupMenuList SystemGroupMenuList { get; set; } = null!;
     }
 }
