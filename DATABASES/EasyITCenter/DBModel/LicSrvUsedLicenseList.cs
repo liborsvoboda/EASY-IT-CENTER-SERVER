@@ -21,7 +21,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string UnlockCode { get; set; } = null!;
         public int BussinessAddressListId { get; set; }
-        public int ItemId { get; set; }
+        public int BasicItemListId { get; set; }
         [StringLength(50)]
         [Unicode(false)]
         public string License { get; set; } = null!;
@@ -30,11 +30,11 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string IpAddress { get; set; } = null!;
 
+        [ForeignKey("BasicItemListId")]
+        [InverseProperty("LicSrvUsedLicenseLists")]
+        public virtual BasicItemList BasicItemList { get; set; } = null!;
         [ForeignKey("BussinessAddressListId")]
         [InverseProperty("LicSrvUsedLicenseLists")]
         public virtual BusinessAddressList BussinessAddressList { get; set; } = null!;
-        [ForeignKey("ItemId")]
-        [InverseProperty("LicSrvUsedLicenseLists")]
-        public virtual BasicItemList Item { get; set; } = null!;
     }
 }

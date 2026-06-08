@@ -7,9 +7,6 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("BusinessAddressList")]
-    [Index("Email", Name = "IX_BusinessAddressList", IsUnique = true)]
-    [Index("AddressType", Name = "IX_BusinessAddressList_1")]
-    [Index("CompanyName", Name = "IX_BusinessAddressList_2", IsUnique = true)]
     public partial class BusinessAddressList
     {
         public BusinessAddressList()
@@ -59,6 +56,9 @@ namespace EasyITCenter.DBModel
         [StringLength(2048)]
         [Unicode(false)]
         public string Password { get; set; } = null!;
+        [Unicode(false)]
+        public string? AccessToken { get; set; }
+        public DateTime? Expiration { get; set; }
         public int SolutionUserId { get; set; }
         public int SolutionUserRoleListId { get; set; }
         [Required]

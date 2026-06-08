@@ -4,14 +4,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.Controllers {
 
+    /// <summary>
+    /// Authentification Service Basic and JWT Token
+    /// Remember for Tables with UserId - Cannot be mnodified Over Client
+    /// </summary>
     [ApiController]
     [Route("AuthenticationService")]
     public class AuthenticationService : ControllerBase {
         private static Encoding ISO_8859_1_ENCODING = Encoding.GetEncoding("ISO-8859-1");
 
+        /// <summary>
+        /// POST Method Authentication Service
+        /// </summary>
+        /// <param name="Authorization"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("/AuthenticationService")]
-        public IActionResult Authenticate([FromHeader] string Authorization) {
+        public IActionResult AuthenticationServicePost([FromHeader] string Authorization) {
             (string? username, string? password) = GetUsernameAndPasswordFromAuthorizeHeader(Authorization);
             AuthenticateResponse? user = Authenticate(username, password);
             
@@ -32,6 +41,48 @@ namespace EasyITCenter.Controllers {
 
             return Ok(JsonSerializer.Serialize(user));
         }
+
+
+        /// <summary>
+        /// GET Method Authentication Service
+        /// </summary>
+        /// <param name="Authorization"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("/AuthenticationService")]
+        public IActionResult AuthenticationServiceGet([FromHeader] string Authorization)
+        {
+            (string? username, string? password) = GetUsernameAndPasswordFromAuthorizeHeader(Authorization);
+            AuthenticateResponse? user = Authenticate(username, password);
+
+            if (!string.IsNullOrWhiteSpace(user?.Message))
+            {
+                return Ok(JsonSerializer.Serialize(user));
+            }
+            else if (user == null) { { return BadRequest(new { message = DbOperations.DBTranslate("UsernameOrPasswordIncorrect", DbOperations.GetServerParameterLists("ServiceServerLanguage").Value) }); }; }
+
+            try
+            {
+                if (HttpContext.Connection.RemoteIpAddress != null && user != null)
+                {
+                    string clientIPAddr = Dns.GetHostEntry(HttpContext.Connection.RemoteIpAddress).AddressList.First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
+                    if (!string.IsNullOrWhiteSpace(clientIPAddr)) { DatabaseContextExtensions.WriteVisit(clientIPAddr, user.Id, username); }
+                }
+            }
+            catch { }
+
+
+            if (!bool.Parse(DbOperations.GetServerParameterLists("ConfigTimeTokenValidationEnabled").Value)) { user.Expiration = null; }
+
+            RefreshUserToken(username, user);
+            UserStorageOperations.CreateUserStorage(username);
+
+            return Ok(JsonSerializer.Serialize(user));
+        }
+
+
+
+
 
         private static (string?, string?) GetUsernameAndPasswordFromAuthorizeHeader(string authorizeHeader) {
             if (authorizeHeader == null || (!authorizeHeader.Contains("Basic ") && !authorizeHeader.Contains("Bearer "))) return (null, null);
@@ -63,23 +114,27 @@ namespace EasyITCenter.Controllers {
 
 
             if (username == null) { return null; }
-            var user = new EasyITCenterContext().SolutionUserLists.Include(a => a.Role)
-                .Where(a => a.Active == true && a.UserName == username /*&& a.Password == password*/).FirstOrDefault();
+            SolutionUserList? user = new EasyITCenterContext().SolutionUserLists.Include(a => a.Role)
+                .Where(a => a.Active == true && (a.UserName.ToLower() == username.ToLower() || a.Email.ToLower() == username.ToLower()) ).FirstOrDefault();
+            BusinessAddressList? client = new EasyITCenterContext().BusinessAddressLists.Include(a => a.SolutionUserRoleList)
+                .Where(a => a.Active == true && a.Email.ToLower() == username.ToLower() ).FirstOrDefault();
             if (user != null) user = BCrypt.Net.BCrypt.Verify(password, user.Password) ? user : null;
-            if (user == null) { return null; }
+            if (client != null) client = BCrypt.Net.BCrypt.Verify(password, client.Password) ? client : null;
+
+            if (user == null && client == null) { return null; }
                 
             try {
                
                 var tokenDescriptor = new SecurityTokenDescriptor {
                     Subject = new ClaimsIdentity(new Claim[] {
 
-                    new Claim(ClaimTypes.PrimarySid, user.Id.ToString()),
-                    new Claim(ClaimTypes.NameIdentifier, user.UserName),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Role.SystemName.ToLower())
+                    new Claim(ClaimTypes.PrimarySid, user != null ? user.Id.ToString(): client.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user != null ? user.UserName: client.Email),
+                    new Claim(ClaimTypes.Email, user != null ? user.Email : client.Email),
+                    new Claim(ClaimTypes.Role, user != null ? user.Role.SystemName.ToLower() : client.SolutionUserRoleList.SystemName.ToLower())
                 }),
                     CompressionAlgorithm = CompressionAlgorithms.Deflate,
-                    Issuer = user.UserName,
+                    Issuer = user != null ? user.UserName : client.Email,
                     TokenType = "JWT",
                     IssuedAt = DateTimeOffset.Now.DateTime,
                     NotBefore = DateTimeOffset.Now.DateTime,
@@ -105,10 +160,10 @@ namespace EasyITCenter.Controllers {
             } catch (Exception ex) { errorMessage = DataOperations.GetErrMsg(ex); }
 
             AuthenticateResponse authResponse = new() 
-            { Id = user.Id, Name = user.Name, SurName = user.SurName, Token = token == null ? string.Empty : tokenHandler.WriteToken(token), 
-                Email = user.Email, Message = !string.IsNullOrWhiteSpace(errorMessage) ? $"Token Generation Error, Check {errorMessage}" : "",
-                Expiration = token?.ValidTo.ToLocalTime(), Role = user.Role.SystemName.ToLower(),
-                Username = user.UserName
+            { Id = user != null ? user.Id : client.Id, Name = user != null ? user.Name : client.FirstName, SurName = user != null ? user.SurName: client.LastName, Token = token == null ? string.Empty : tokenHandler.WriteToken(token), 
+                Email = user != null ? user.Email: client.Email, Message = !string.IsNullOrWhiteSpace(errorMessage) ? $"Token Generation Error, Check {errorMessage}" : "",
+                Expiration = token?.ValidTo.ToLocalTime(), Role = user != null ? user.Role.SystemName.ToLower(): client.SolutionUserRoleList.SystemName.ToLower(),
+                Username = user != null ? user.UserName : client.Email
             };
             return authResponse;
             
@@ -121,14 +176,27 @@ namespace EasyITCenter.Controllers {
         /// <param name="token">   </param>
         /// <returns></returns>
         public static bool RefreshUserToken(string username, AuthenticateResponse token) {
-            try {
+            try
+            {
                 SolutionUserList? dbUser = new EasyITCenterContext().SolutionUserLists
-                    .Where(a => a.Active == true && a.UserName == username).FirstOrDefault();
-                if (dbUser == null || dbUser.AccessToken == token.Token && dbUser.Expiration < DateTimeOffset.Now) { return false; }
+                    .Where(a => a.Active == true && (a.UserName.ToLower() == username.ToLower() || a.Email.ToLower() == username.ToLower())).FirstOrDefault();
+                BusinessAddressList? dbClient = new EasyITCenterContext().BusinessAddressLists
+                    .Where(a => a.Active == true && a.Email.ToLower() == username.ToLower()).FirstOrDefault();
 
-                dbUser.AccessToken = token.Token; dbUser.Expiration = token.Expiration;
-                var data = new EasyITCenterContext().SolutionUserLists.Update(dbUser);
-                int result = data.Context.SaveChanges();
+                if ((dbUser == null || dbUser.AccessToken == token.Token && dbUser.Expiration < DateTimeOffset.Now)
+                    && (dbClient == null || dbClient.AccessToken == token.Token && dbClient.Expiration < DateTimeOffset.Now)) { return false; }
+
+                int result = 0;
+                if (dbUser != null)
+                {
+                    dbUser.AccessToken = token.Token; dbUser.Expiration = token.Expiration;
+                    var data = new EasyITCenterContext().SolutionUserLists.Update(dbUser);
+                    result = data.Context.SaveChanges();
+                } else if (dbClient != null) {
+                    dbClient.AccessToken = token.Token; dbClient.Expiration = token.Expiration;
+                    var data = new EasyITCenterContext().BusinessAddressLists.Update(dbClient);
+                    result = data.Context.SaveChanges();
+                }
 
                 if (result > 0) { return true; }
                 return false;

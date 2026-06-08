@@ -48,9 +48,9 @@ namespace EasyITCenter.DBModel
         [ForeignKey("VatId")]
         [InverseProperty("BasicItemLists")]
         public virtual BasicVatList Vat { get; set; } = null!;
-        [InverseProperty("Item")]
+        [InverseProperty("BasicItemList")]
         public virtual ICollection<LicSrvLicenseAlgorithmList> LicSrvLicenseAlgorithmLists { get; set; }
-        [InverseProperty("Item")]
+        [InverseProperty("BasicItemList")]
         public virtual ICollection<LicSrvUsedLicenseList> LicSrvUsedLicenseLists { get; set; }
     }
 }

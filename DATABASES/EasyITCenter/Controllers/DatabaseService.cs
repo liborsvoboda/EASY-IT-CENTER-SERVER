@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using CSJsonDB;
 using EasyITCenter.Controllers;
+using Flurl.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -84,19 +86,20 @@ namespace EasyITCenter.Controllers {
             bool camelCase = false; //JsonSerializerSettings? settings = new JsonSerializerSettings(); settings.ContractResolver = new LowercaseContractResolver();
             foreach (Dictionary<string, string> param in dataset) {
                 if (param.Where(a => a.Key.ToLower() == "CamelCase".ToLower()).Any()) {
-                    camelCase = bool.Parse(param.Where(a => a.Key.ToLower() == "CamelCase".ToLower()).First().Value); 
+                    camelCase = bool.Parse(param.Where(a => a.Key.ToLower() == "CamelCase".ToLower()).First().Value);
                 } else if (param.Where(a => a.Key.ToLower() == "SpProcedure".ToLower()).Any()) {
                     procedureName = param.Where(a => a.Key.ToLower() == "SpProcedure".ToLower()).First().Value;
                 } else if (param.Where(a => a.Key.ToLower() == "tableName".ToLower()).Any()) {
-                    parameters += ( parameters.Length > 0 ? "," : "" ) + $"@{param.Keys.First()} = N'{param.Values.First()}' ";
+                    parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First()}' ";
                     EntityTypeName = param.Values.First();
-                } else { parameters += ( parameters.Length > 0 ? "," : "" ) + $"@{param.Keys.First()} = N'{param.Values.First()}' "; }
+                } else { parameters += (parameters.Length > 0 ? "," : "") + $"@{param.Keys.First()} = N'{param.Values.First()}' "; }
             }
 
             parameters += HttpContextExtension.GetUserRole() == null ? $", @userRole = N'all'" : $", @userRole = N'{HttpContextExtension.GetUserRole()}'";
             parameters += HttpContextExtension.GetUserId() == null ? $", @userId = N''" : $", @userId = N'{HttpContextExtension.GetUserId()}'";
 
             DataView data = ((DataView)(await new EasyITCenterContext().ExecuteReaderAsync($"EXEC {procedureName} {parameters};")).DefaultView);
+            //var resultData = data.RowFilter.GroupBy(a => a.Where("")).Update("", "Password", "", "");
 
             if (camelCase) { return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }); }
             else { return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented); }
