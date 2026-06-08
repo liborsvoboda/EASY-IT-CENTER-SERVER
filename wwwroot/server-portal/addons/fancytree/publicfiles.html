@@ -627,7 +627,9 @@
                             Gs.Objects.CreateDialogRequest("Create Folder", content, actions);
 
                         } else if (action == "moveFolder") {
-                            let content = "<div><input id='FolderName' type='text' data-role='input' data-prepend='Target Folder Name: ' ></div>"
+                            let targetPath = node.data.path.replace(node.title, "");
+                            let content = `<div><input id='FolderName' type='text' data-role='input' data-prepend='Target Folder Name: ' value="${targetPath}\\"></div>`;
+
                             let actions = [{
                                 caption: "Move Folder", cls: "js-dialog-close success",
                                 onclick: async function () {
@@ -639,7 +641,9 @@
                             Gs.Objects.CreateDialogRequest("Move Folder", content, actions);
 
                         } else if (action == "copyFolder") {
-                            let content = "<div><input id='FolderName' type='text' data-role='input' data-prepend='Target Folder Name: ' ></div>";
+                            let targetPath = node.data.path.replace(node.title, "");
+                            let content = `<div><input id='FolderName' type='text' data-role='input' data-prepend='Target Folder Name: ' value="${targetPath}\\"></div>`;
+
                             let actions = [{
                                 caption: "Copy Folder", cls: "js-dialog-close success",
                                 onclick: async function () {
