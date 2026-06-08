@@ -448,23 +448,27 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<IActionResult> DownloadUserFile([FromBody] UserStorageContent userStorageContent) {
             string userRootPath = null; string tempFolder = null;
-            try {
+            try
+            {
                 userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
-                if (HttpContextExtension.IsLogged()) {
+                if (HttpContextExtension.IsLogged())
+                {
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), userStorageContent.Path);
-                } else {
+                }
+                else
+                {
                     return BadRequest(new { Status = DBResult.error.ToString(), ErrorMessage = String.Empty });
                 }
-
-                tempFolder = Path.Combine(SrvRuntime.SrvUserPath, "temp") + string.Join(System.IO.Path.DirectorySeparatorChar, userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Take(userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1));
+                string tempPath = DataOperations.RandomString(10);
+                tempFolder = Path.Combine(SrvRuntime.SrvTempPath, tempPath, string.Join(System.IO.Path.DirectorySeparatorChar, userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Take(userStorageContent.Path.Split(System.IO.Path.DirectorySeparatorChar).Count() - 1)));
                 FileOperations.DeleteDirectory(tempFolder); FileOperations.CreateDirectory(tempFolder);
                 FileOperations.CopyFile(userRootPath, tempFolder + System.IO.Path.DirectorySeparatorChar + System.IO.Path.GetFileName(userStorageContent.Path));
                 
-                ZipFile.CreateFromDirectory(tempFolder, Path.Combine(SrvRuntime.SrvUserPath,"temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
-                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvUserPath, "temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
+                ZipFile.CreateFromDirectory(tempFolder, Path.Combine(SrvRuntime.SrvTempPath, tempPath, System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
+                byte[] zipPackage = await System.IO.File.ReadAllBytesAsync(Path.Combine(SrvRuntime.SrvTempPath, tempPath, System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
 
                 FileOperations.DeleteDirectory(tempFolder);
-                FileOperations.DeleteFile(Path.Combine(SrvRuntime.SrvUserPath, "temp", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip"));
+                FileOperations.DeleteDirectory(Path.Combine(SrvRuntime.SrvTempPath, tempPath));
 
                 return File(zipPackage, "application/x-zip-compressed", System.IO.Path.GetFileNameWithoutExtension(userStorageContent.Path) + ".zip");
             } catch (Exception ex) {

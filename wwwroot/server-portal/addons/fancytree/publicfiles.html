@@ -534,7 +534,8 @@
                             Gs.Objects.CreateDialogRequest("Record Camera", content, actions);
 
                         } else if (action == "unpackArchive") {
-                            let content = "<div><input id='TargetFolder' type='text' data-role='input' data-prepend='Target Folder:' ></div>";
+                            let targetPath = node.data.path.replace(node.title, "");
+                            let content = `<div><input id='TargetFolder' type='text' data-role='input' data-prepend='Target Folder:' value="${targetPath}" ></div>`;
                             let actions = [{
                                 caption: "Unpack Archive", cls: "js-dialog-close success",
                                 onclick: async function () {
@@ -723,7 +724,7 @@
                         } else if (action == "saveFile" && Metro.storage.getItem("SelectedEditor", null) == "ImageEditor") {
                             Files = [];
                             Files.push({ Filename: $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), Content: $("#DataFrameWindow")[0].contentWindow.ImageEditor.getCurrentImgData().imageData.imageBase64 });
-                            await Gs.Apis.RunServerPostApi("UserStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), ""), Files: Files }, null);
+                            await Gs.Apis.RunServerPostApi("PublicStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), ""), Files: Files }, null);
 
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
@@ -798,13 +799,14 @@
 
 
         async function SetEditor(editor) {
+            if (!$('#DataTree').fancytree("getActiveNode").folder) { Gs.Behaviors.ShowPageLoading(); }
             Metro.storage.setItem("SelectedEditor", editor);
 
             //CLEAN EDITOR
             $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
             Gs.Functions.AddClass('SetMonaco', 'disabled'); Gs.Functions.AddClass('SetTinyMCE', 'disabled'); Gs.Functions.AddClass('SetFroala', 'disabled');
-            Gs.Functions.AddClass('SetSUNEdit', 'disabled'); Gs.Functions.AddClass('SetSummer', 'disabled');
-            Gs.Functions.AddClass('SetMDEditor', 'disabled'); Gs.Functions.AddClass('SetJSONEditor', 'disabled');
+            Gs.Functions.AddClass('SetSUNEdit', 'disabled'); Gs.Functions.AddClass('SetSummer', 'disabled'); Gs.Functions.AddClass('SetMDEditor', 'disabled');
+            Gs.Functions.AddClass('SetJSONEditor', 'disabled');
             Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
 
             //SET EDITOR
@@ -812,29 +814,13 @@
                 case "MiniPaint":
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="/server-portal/addons/minipaint/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     let sourceImage = Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key;
-                    setTimeout(function () {
-                        let toDataURL = url => fetch(url)
-                            .then(response => response.blob())
-                            .then(blob => new Promise((resolve, reject) => {
-                                const reader = new FileReader()
-                                reader.onloadend = () => resolve(reader.result)
-                                reader.onerror = reject
-                                reader.readAsDataURL(blob)
-                            }));
-                        toDataURL(Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key)
-                            .then(dataUrl => {
-                                $("#DataFrameWindow")[0].contentWindow.FileOpen.open_resource(dataUrl)
-                            })
-                    }, 3000);
                     break;
                 case "ImageEditor":
                     //localStorage.setItem("SourceImageEditor", Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key);
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="/server-portal/addons/imageeditor/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
-                    setTimeout(function () { $("#DataFrameWindow")[0].contentWindow.ImageEditor.render({ source: Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key }); }, 2000);
                     break;
                 case "XLSEditor":
                     Metro.storage.setItem("OpenExcelFile", $('#DataTree').fancytree("getActiveNode").key);
-                    //$("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/xlsx/index.html?file=" + $('#DataTree').fancytree("getActiveNode").key + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
                 case "DOCEditor":
@@ -851,28 +837,15 @@
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
                     Gs.Variables.monacoEditorList = [];
                     new Function(dataJs)();
-                    if (!$('#DataTree').fancytree("getActiveNode").folder) {
-                        setTimeout(function () {
-                            if ($('#DataTree').fancytree("getActiveNode") != null) {
-                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
-                            }
-                        }, 1000);
-                    }
                     break;
                 case "STLviewer":
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
-                    setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.init($('#DataTree').fancytree("getActiveNode").key); }
-                    }, 1000);
                     break;
                 case "PDFviewer":
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/pdf-viewer/web/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
-                    setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.PDFViewerApplication.open($('#DataTree').fancytree("getActiveNode").key, 'default.pdf'); }
-                    }, 1000);
                     break;
                 case "Audio":
-                    $("#FrameWindow").html('<audio id="Audio" data-role="audio-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark" style="width:100%;height: calc(100vh);"></audio>');
+                    $("#FrameWindow").html('<audio id="Audio" data-role="audio-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark p-10 m-10" style="width:100%;height: calc(100vh);"></audio>');
                     break;
                 case "Video":
                     $("#FrameWindow").html('<video id="Video" data-role="video-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" style="width:100%;height: calc(100vh);"></video>');
@@ -883,18 +856,10 @@
                 case "JSONEditor":
                     Gs.Functions.AddClass('SetJSONEditor', 'disabled');
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-portal/addons/jsonData/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
-                    setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
-                    }, 500);
                     break;
                 case "MDEditor":
                     Gs.Functions.AddClass('SetMDEditor', 'disabled');
                     $("#FrameWindow").html('<iframe id="HelpEditor" src="/server-portal/addons/markdown/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
-                    setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) {
-                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $('#HelpEditor')[0].contentWindow.mdEditor.setMarkdown(data); });
-                        }
-                    }, 1000);
                     break;
                 case "Monaco":
                     $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
@@ -907,11 +872,6 @@
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
                     Gs.Variables.monacoEditorList = [];
                     new Function(dataJs)();
-                    setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) {
-                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
-                        }
-                    }, 1000);
                     break;
                 case "TinyMCE":
                     $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
@@ -933,13 +893,6 @@
                         menu: { menubar: 'favs file edit view insert format tools table help', content_css: 'css/content.css' }
                     }; tinymce.init(standardEditor);
 
-                    setTimeout(function () { if (document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux") != null) { $("#FrameWindow").append(document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux")); } }, 1000);
-                    setTimeout(function () {
-                        if (document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux") != null) { $("#FrameWindow").append(document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux")); }
-                        if ($('#DataTree').fancytree("getActiveNode") != null) {
-                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { tinymce.get('TinyMCE').setContent(data); });
-                        }
-                    }, 3000);
                     break;
                 case "Froala":
                     $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
@@ -947,16 +900,11 @@
                     Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
                     //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
 
-                    Gs.Functions.AddClass('SetFroala', 'disabled'); 
+                    Gs.Functions.AddClass('SetFroala', 'disabled');
                     $("#FrameWindow").html('<div id="FroalaEditor" style="height:100%;padding-top: 25px;"></div>');
                     EditorInit = new FroalaEditor('#FroalaEditor', { language: 'cs', toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo', 'trackChanges', 'markdown'] }, function () {
                         if (!EditorInit.fullscreen.isActive()) { EditorInit.fullscreen.toggle() };
                     });
-                    setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) {
-                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.html.set(data); });
-                        }
-                    }, 1000);
                     break;
                 case "SUNEdit":
                     $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
@@ -964,7 +912,7 @@
                     Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
                     //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
 
-                    Gs.Functions.AddClass('SetSUNEdit', 'disabled'); 
+                    Gs.Functions.AddClass('SetSUNEdit', 'disabled');
                     $("#FrameWindow").html('<textarea id="SUNEdit" style="display:none;">');
 
                     EditorInit = SUNEDITOR.create('SUNEdit', {
@@ -978,13 +926,8 @@
                             ['imageGallery'], ['fullScreen', 'showBlocks', 'codeView'], ['preview', 'print'], ['save', 'template']
                         ], placeholder: 'Zde vytvořte mediální dokument...',
                         templates: [{ name: 'Calendar', html: '<div data-role="calendar"></div>' }, { name: 'Donut', html: '<div id="donut3" data-role="donut" data-value="35" data-hole=".6" data-stroke="#f5f5f5" data-fill="#9C27B0" data-animate="10" ></div> ' }],
-                        codeMirror: CodeMirror,katex: katex
+                        codeMirror: CodeMirror, katex: katex
                     });
-                    setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) {
-                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.setContents(data); });
-                        }
-                    }, 1000);
                     break;
                 case "Summer":
                     $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
@@ -992,7 +935,7 @@
                     Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
                     //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
 
-                    Gs.Functions.AddClass('SetSummer', 'disabled'); 
+                    Gs.Functions.AddClass('SetSummer', 'disabled');
                     $("#FrameWindow").html('<div id="SummerEditor" style="width: 100%;"></div> ');
                     $(`#SummerEditor`).summernote({
                         tabsize: 2, width: 1200, height: 800, maxHeight: 1200, lang: `cs-CZ`,
@@ -1001,21 +944,111 @@
                         [`fontsize`, [`fontsize`]], [`color`, [`color`]], [`para`, [`ul`, `ol`, `paragraph`]], [`table`, [`table`]],
                         [`insert`, [`link`, `picture`, `video`]], [`view`, [`fullscreen`, `codeview`, `undo`, `redo`, `help`]]]
                     });
-                    setTimeout(function () {
-                        if ($('#DataTree').fancytree("getActiveNode") != null) {
-                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $(`#SummerEditor`).summernote(`code`, data); });
-                        }
-                    }, 1000);
                     break;
                 case "Preview":
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + ($('#DataTree').fancytree("getActiveNode").data.extension == "md" ? $('#DataTree').fancytree("getActiveNode").key.replace(".md", "") : $('#DataTree').fancytree("getActiveNode").key) + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                 default:
             }
+            LoadEditorData();
 
         }
 
 
-
+        function LoadEditorData() {
+            setTimeout(function () {
+                editor = Metro.storage.getItem("SelectedEditor", null);
+                try {
+                    switch (editor) {
+                        case "MiniPaint":
+                            let toDataURL = url => fetch(url)
+                                .then(response => response.blob())
+                                .then(blob => new Promise((resolve, reject) => {
+                                    const reader = new FileReader()
+                                    reader.onloadend = () => resolve(reader.result)
+                                    reader.onerror = reject
+                                    reader.readAsDataURL(blob)
+                                }));
+                            toDataURL(Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key)
+                                .then(dataUrl => {
+                                    $("#DataFrameWindow")[0].contentWindow.FileOpen.open_resource(dataUrl);
+                                });
+                            break;
+                        case "ImageEditor":
+                            $("#DataFrameWindow")[0].contentWindow.ImageEditor.render({ source: Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key });
+                            break;
+                        case "XLSEditor":
+                            $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                            break;
+                        case "DOCEditor":
+                            $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/docx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                            break;
+                        case "PPTXEditor":
+                            $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-portal/addons/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                            break;
+                        case "Other":
+                            if (!$('#DataTree').fancytree("getActiveNode").folder) {
+                                setTimeout(function () {
+                                    if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                        $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
+                                    }
+                                }, 1000);
+                            }
+                            break;
+                        case "STLviewer":
+                            if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.init($('#DataTree').fancytree("getActiveNode").key); }
+                            break;
+                        case "PDFviewer":
+                            if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.PDFViewerApplication.open($('#DataTree').fancytree("getActiveNode").key, 'default.pdf'); }
+                            break;
+                        case "Audio":
+                            $("#FrameWindow").html('<audio id="Audio" data-role="audio-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark p-10 m-10" style="width:100%;height: calc(100vh);"></audio>');
+                            break;
+                        case "Video":
+                            $("#FrameWindow").html('<video id="Video" data-role="video-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" style="width:100%;height: calc(100vh);"></video>');
+                            break;
+                        case "Image":
+                            $("#FrameWindow").html('<img src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="row" style="height: 100%;padding-left: 10px;">');
+                            break;
+                        case "JSONEditor":
+                            if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
+                            break;
+                        case "MDEditor":
+                            if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $('#HelpEditor')[0].contentWindow.mdEditor.setMarkdown(data); });
+                            }
+                            break;
+                        case "Monaco":
+                            if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
+                            }
+                            break;
+                        case "TinyMCE":
+                            if (document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux") != null) { $("#FrameWindow").append(document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux")); }
+                            if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { tinymce.get('TinyMCE').setContent(data); });
+                            }
+                            break;
+                        case "Froala":
+                            if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.html.set(data); });
+                            }
+                            break;
+                        case "SUNEdit":
+                            if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.setContents(data); });
+                            }
+                            break;
+                        case "Summer":
+                            if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $(`#SummerEditor`).summernote(`code`, data); });
+                            }
+                            break;
+                        default:
+                    }
+                    Gs.Behaviors.HidePageLoading();
+                } catch { LoadEditorData(); }
+            }, 1000);
+        }
     </script>
 
     <!--TYNYMCE-->

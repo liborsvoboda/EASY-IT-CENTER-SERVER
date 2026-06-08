@@ -45,7 +45,7 @@
         [Consumes("application/json")]
         public async Task<string> InsertLicSrvLicenseAlgorithmList([FromBody] LicSrvLicenseAlgorithmList record) {
             try {
-                record.User = null;  //EntityState.Detached IDENTITY_INSERT is set to OFF
+                record.SolutionUserList = null;  //EntityState.Detached IDENTITY_INSERT is set to OFF
                 var data = new EasyITCenterContext().LicSrvLicenseAlgorithmLists.Add(record);
                 int result = await data.Context.SaveChangesAsync();
                 if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });

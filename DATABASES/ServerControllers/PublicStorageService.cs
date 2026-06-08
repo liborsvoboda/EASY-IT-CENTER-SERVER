@@ -38,7 +38,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Get User Storage Structure
+        /// Get Public Storage Structure
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
@@ -82,7 +82,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Create User Storage Folder
+        /// Create Public Storage Folder
         /// </summary>
         /// <param name="userStorageContent"></param>
         /// <returns></returns>
@@ -108,7 +108,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Rename User Storage Folder
+        /// Rename Public Storage Folder
         /// </summary>
         /// <param name="userStorageRenameDir"></param>
         /// <returns></returns>
@@ -134,7 +134,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Copy User Storage Folder
+        /// Copy Public Storage Folder
         /// </summary>
         /// <param name="userStorageRenameDir"></param>
         /// <returns></returns>
@@ -160,7 +160,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Download User Storage Folder
+        /// Download Public Storage Folder
         /// </summary>
         /// <param name="userStorageContent"></param>
         /// <returns></returns>
@@ -187,7 +187,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Clear User Storage Folder
+        /// Clear Public Storage Folder
         /// </summary>
         /// <param name="userStorageContent"></param>
         /// <returns></returns>
@@ -211,7 +211,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Delete User Storage Folder
+        /// Delete Public Storage Folder
         /// </summary>
         /// <param name="userStorageContent"></param>
         /// <returns></returns>
@@ -235,7 +235,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Create User Storage File
+        /// Create Public Storage File
         /// </summary>
         /// <param name="userStorageContent"></param>
         /// <returns></returns>
@@ -259,7 +259,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Save User Storage File
+        /// Save Public Storage File
         /// </summary>
         /// <param name="userStorageContent"></param>
         /// <returns></returns>
@@ -285,7 +285,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Rename User Storage File
+        /// Rename Public Storage File
         /// </summary>
         /// <param name="userStorageRenameDir"></param>
         /// <returns></returns>
@@ -312,7 +312,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Copy User Storage File
+        /// Copy Public Storage File
         /// </summary>
         /// <param name="userStorageRenameDir"></param>
         /// <returns></returns>
@@ -338,7 +338,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Delete User Storage Folder
+        /// Delete Public Storage Folder
         /// </summary>
         /// <param name="userStorageContent"></param>
         /// <returns></returns>
@@ -363,9 +363,9 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Download User Storage File
+        /// Download Public Storage File
         /// </summary>
-        /// <param name="userStorageRenameDir"></param>
+        /// <param name="userStorageContent"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("/PublicStorageService/DownloadPublicFile")]
@@ -398,7 +398,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// User Storage SUNEditor Galery List
+        /// Public Storage SUNEditor Galery List
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
@@ -431,7 +431,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Upload User Storage Files
+        /// Upload Public Storage Files
         /// </summary>
         /// <param name="userStorageContent"></param>
         /// <returns></returns>
@@ -456,7 +456,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// User Download Html from URL
+        /// Public Download Html from URL
         /// </summary>
         /// <param name="downloadFileRequest"></param>
         /// <returns></returns>
@@ -488,7 +488,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// User Download Md from Url
+        /// Public Download Md from Url
         /// </summary>
         /// <param name="downloadFileRequest"></param>
         /// <returns></returns>
@@ -512,7 +512,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Generate PDF from URL
+        /// Generate Public PDF from URL
         /// </summary>
         /// <param name="downloadFileRequest"></param>
         /// <returns></returns>
@@ -541,7 +541,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Generate PNG Image from URL
+        /// Generate Public PNG Image from URL
         /// </summary>
         /// <param name="downloadFileRequest"></param>
         /// <returns></returns>
@@ -570,7 +570,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Save converted MarkdownFile from Html
+        /// Save Public converted MarkdownFile from Html
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
@@ -607,7 +607,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Unpack User Archive
+        /// Unpack Public Archive
         /// </summary>
         /// <param name="unpackArchiveRequest"></param>
         /// <returns></returns>
@@ -629,7 +629,7 @@ namespace EasyITCenter.Controllers {
 
 
         /// <summary>
-        /// Save User Media File
+        /// Save Public Media File
         /// </summary>
         /// <param name="saveMediaFileRequest"></param>
         /// <returns></returns>

@@ -878,7 +878,7 @@ function GenerateFavorites() {
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.MenuName}','${favorite.RecGuid}')"></span>
                         <div class="slide-front" onclick="${cmd}">
                             
-                            <span class="row p-2" >${favorite.MenuName}</span>
+                            <span class="row p-2" style="font-size: 12px;">${favorite.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${favorite.Description}</p>
@@ -889,7 +889,7 @@ function GenerateFavorites() {
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.MenuName}','${favorite.RecGuid}')"></span>
                         <div class="slide-front" onclick="${cmd}">
                             
-                            <span class="row p-2" >${favorite.MenuName}</span>
+                            <span class="row p-2" style="font-size: 12px;">${favorite.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${favorite.Description}</p>
@@ -900,7 +900,7 @@ function GenerateFavorites() {
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveFavorite('${favorite.MenuName}','${favorite.RecGuid}')"></span>
                         <div class="slide-front" onclick="${cmd}">
                             
-                            <span class="row p-2" >${favorite.MenuName}</span>
+                            <span class="row p-2" style="font-size: 12px;">${favorite.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${favorite.Description}</p>
@@ -1001,7 +1001,7 @@ function GenerateOnlineToolList() {
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.MenuName}','${online.RecGuid}')"></span>
                         <div class="slide-front" onclick="${cmd}">
                             
-                            <span class="row p-2">${online.MenuName}</span>
+                            <span class="row p-2" style="font-size: 12px;">${online.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${online.Description}</p>
@@ -1012,7 +1012,7 @@ function GenerateOnlineToolList() {
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.MenuName}','${online.RecGuid}')"></span>
                         <div class="slide-front" onclick="${cmd}">
                             
-                            <span class="row p-2" >${online.MenuName}</span>
+                            <span class="row p-2" style="font-size: 12px;">${online.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${online.Description}</p>
@@ -1023,7 +1023,7 @@ function GenerateOnlineToolList() {
                         <span class="mif-cancel pos-absolute fg-red" style="right:0px;z-index: 2000;" onclick="Gs.Objects.RemoveOnlineTool('${online.MenuName}','${online.RecGuid}')"></span>
                         <div class="slide-front" onclick="${cmd}">
                             
-                            <span class="row p-2" >${online.MenuName}</span>
+                            <span class="row p-2" style="font-size: 12px;">${online.MenuName}</span>
                         </div>
                         <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve" style="font-size: 10px;" onclick="${cmd}">
                             <p class="text-center"> ${online.Description}</p>

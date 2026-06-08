@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using AspNetCore.Client.GeneratorExtensions;
 using CSJsonDB;
 using EasyITCenter.Controllers;
 using Flurl.Util;
@@ -99,7 +100,14 @@ namespace EasyITCenter.Controllers {
             parameters += HttpContextExtension.GetUserId() == null ? $", @userId = N''" : $", @userId = N'{HttpContextExtension.GetUserId()}'";
 
             DataView data = ((DataView)(await new EasyITCenterContext().ExecuteReaderAsync($"EXEC {procedureName} {parameters};")).DefaultView);
-            //var resultData = data.RowFilter.GroupBy(a => a.Where("")).Update("", "Password", "", "");
+            
+
+            //Remove Password
+            if (data.Table != null && data.Table.Columns.Contains("Password")) { 
+                for (int i = 0; i < data.Table.Rows.Count; i++) {
+                    data.Table.Rows[i].SetField(data.Table.Columns["Password"].Ordinal, "");
+                }
+            }
 
             if (camelCase) { return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }); }
             else { return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented); }
