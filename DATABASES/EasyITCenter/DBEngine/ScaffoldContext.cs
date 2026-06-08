@@ -242,11 +242,17 @@ namespace EasyITCenter.DBModel
 
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.User)
+                entity.HasOne(d => d.SolutionUser)
                     .WithMany(p => p.BusinessAddressLists)
-                    .HasForeignKey(d => d.UserId)
+                    .HasForeignKey(d => d.SolutionUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AddressList_UserList");
+
+                entity.HasOne(d => d.SolutionUserRoleList)
+                    .WithMany(p => p.BusinessAddressLists)
+                    .HasForeignKey(d => d.SolutionUserRoleListId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_BusinessAddressList_SolutionUserRoleList");
             });
 
             modelBuilder.Entity<BusinessBranchList>(entity =>
@@ -756,11 +762,11 @@ namespace EasyITCenter.DBModel
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.Address)
+                entity.HasOne(d => d.BussinessAddressList)
                     .WithMany(p => p.LicSrvLicenseAlgorithmLists)
-                    .HasForeignKey(d => d.AddressId)
+                    .HasForeignKey(d => d.BussinessAddressListId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_LicenseAlgorithmList_AddressList");
+                    .HasConstraintName("FK_LicSrvLicenseAlgorithmList_BusinessAddressList");
 
                 entity.HasOne(d => d.Item)
                     .WithMany(p => p.LicSrvLicenseAlgorithmLists)
@@ -779,11 +785,11 @@ namespace EasyITCenter.DBModel
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.Address)
+                entity.HasOne(d => d.BussinessAddressList)
                     .WithMany(p => p.LicSrvUsedLicenseLists)
-                    .HasForeignKey(d => d.AddressId)
+                    .HasForeignKey(d => d.BussinessAddressListId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UsedLicenseList_AddressList");
+                    .HasConstraintName("FK_LicSrvUsedLicenseList_BusinessAddressList");
 
                 entity.HasOne(d => d.Item)
                     .WithMany(p => p.LicSrvUsedLicenseLists)

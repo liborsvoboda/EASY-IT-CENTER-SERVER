@@ -12,6 +12,7 @@ namespace EasyITCenter.DBModel
     {
         public SolutionUserRoleList()
         {
+            BusinessAddressLists = new HashSet<BusinessAddressList>();
             SolutionUserLists = new HashSet<SolutionUserList>();
             TemplateLists = new HashSet<TemplateList>();
         }
@@ -29,6 +30,8 @@ namespace EasyITCenter.DBModel
         [ForeignKey("UserId")]
         [InverseProperty("SolutionUserRoleLists")]
         public virtual SolutionUserList? User { get; set; }
+        [InverseProperty("SolutionUserRoleList")]
+        public virtual ICollection<BusinessAddressList> BusinessAddressLists { get; set; }
         [InverseProperty("Role")]
         public virtual ICollection<SolutionUserList> SolutionUserLists { get; set; }
         [InverseProperty("Group")]

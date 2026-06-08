@@ -204,5 +204,19 @@
             }
             catch { return false; }
         }
+
+
+        /// <summary>
+        /// Extension for check manbager Role
+        /// </summary>
+        public static bool IsManagerUser()
+        {
+            try
+            {
+                var context = _accessor?.HttpContext;
+                if (context != null && context.User != null && !context.User.IsInRole("manager")) { return false; } else return true;
+            }
+            catch { return false; }
+        }
     }
 }

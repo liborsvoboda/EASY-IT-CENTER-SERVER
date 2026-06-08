@@ -12,7 +12,7 @@ namespace EasyITCenter.DBModel
     {
         [Key]
         public int Id { get; set; }
-        public int AddressId { get; set; }
+        public int BussinessAddressListId { get; set; }
         public int ItemId { get; set; }
         [StringLength(30)]
         [Unicode(false)]
@@ -33,9 +33,9 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        [ForeignKey("AddressId")]
+        [ForeignKey("BussinessAddressListId")]
         [InverseProperty("LicSrvLicenseAlgorithmLists")]
-        public virtual BusinessAddressList Address { get; set; } = null!;
+        public virtual BusinessAddressList BussinessAddressList { get; set; } = null!;
         [ForeignKey("ItemId")]
         [InverseProperty("LicSrvLicenseAlgorithmLists")]
         public virtual BasicItemList Item { get; set; } = null!;

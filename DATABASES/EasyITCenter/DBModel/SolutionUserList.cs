@@ -120,7 +120,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Description { get; set; }
         [Required]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
         public DateTime TimeStamp { get; set; }
         [Unicode(false)]
         public string? AccessToken { get; set; }
@@ -152,7 +152,7 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<BasicUnitList> BasicUnitLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<BasicVatList> BasicVatLists { get; set; }
-        [InverseProperty("User")]
+        [InverseProperty("SolutionUser")]
         public virtual ICollection<BusinessAddressList> BusinessAddressLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<BusinessBranchList> BusinessBranchLists { get; set; }

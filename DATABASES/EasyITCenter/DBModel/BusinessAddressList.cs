@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("BusinessAddressList")]
-    [Index("AddressType", Name = "IX_AddressList")]
+    [Index("Email", Name = "IX_BusinessAddressList", IsUnique = true)]
+    [Index("AddressType", Name = "IX_BusinessAddressList_1")]
+    [Index("CompanyName", Name = "IX_BusinessAddressList_2", IsUnique = true)]
     public partial class BusinessAddressList
     {
         public BusinessAddressList()
@@ -26,9 +28,6 @@ namespace EasyITCenter.DBModel
         public string CompanyName { get; set; } = null!;
         [StringLength(150)]
         [Unicode(false)]
-        public string? ContactName { get; set; }
-        [StringLength(150)]
-        [Unicode(false)]
         public string Street { get; set; } = null!;
         [StringLength(150)]
         [Unicode(false)]
@@ -41,7 +40,7 @@ namespace EasyITCenter.DBModel
         public string Phone { get; set; } = null!;
         [StringLength(150)]
         [Unicode(false)]
-        public string? Email { get; set; }
+        public string Email { get; set; } = null!;
         [StringLength(150)]
         [Unicode(false)]
         public string? BankAccount { get; set; }
@@ -51,17 +50,30 @@ namespace EasyITCenter.DBModel
         [StringLength(20)]
         [Unicode(false)]
         public string? Dic { get; set; }
-        public int UserId { get; set; }
+        [StringLength(150)]
+        [Unicode(false)]
+        public string FirstName { get; set; } = null!;
+        [StringLength(150)]
+        [Unicode(false)]
+        public string LastName { get; set; } = null!;
+        [StringLength(2048)]
+        [Unicode(false)]
+        public string Password { get; set; } = null!;
+        public int SolutionUserId { get; set; }
+        public int SolutionUserRoleListId { get; set; }
         [Required]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        [ForeignKey("UserId")]
+        [ForeignKey("SolutionUserId")]
         [InverseProperty("BusinessAddressLists")]
-        public virtual SolutionUserList User { get; set; } = null!;
-        [InverseProperty("Address")]
+        public virtual SolutionUserList SolutionUser { get; set; } = null!;
+        [ForeignKey("SolutionUserRoleListId")]
+        [InverseProperty("BusinessAddressLists")]
+        public virtual SolutionUserRoleList SolutionUserRoleList { get; set; } = null!;
+        [InverseProperty("BussinessAddressList")]
         public virtual ICollection<LicSrvLicenseAlgorithmList> LicSrvLicenseAlgorithmLists { get; set; }
-        [InverseProperty("Address")]
+        [InverseProperty("BussinessAddressList")]
         public virtual ICollection<LicSrvUsedLicenseList> LicSrvUsedLicenseLists { get; set; }
     }
 }
