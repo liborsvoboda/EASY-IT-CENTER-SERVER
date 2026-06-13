@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- added placeholders ([ccf370d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/ccf370ddc916c8df9a353d138106eeac177621bd) by lioborsvoboda).
+- Added Get Table Record Limitations ([e71cf06](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e71cf06c8d5ae3c603818f9e8fb7fa923f7a6532) by lioborsvoboda).
+- Added API Authenticate GET,POST ([05f8123](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/05f8123b432bf43b8412ad28a59a2669356e679b) by lioborsvoboda).
+- added server tools ([248f3c6](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/248f3c663a3ab0521cb6399b49395e6dd196d429) by Libor Svoboda).
 - Added HtmlDecode function ([fbcc753](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/fbcc753eeadbab5d2c823ed9bb0a1b23dcae200d) by lioborsvoboda).
 - Added jsDoc Generator ([0cb435d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/0cb435dc4f3974bd1af44dedb0d5f5645e07eeab) by lioborsvoboda).
 - Added Documentation ([e60aa21](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e60aa211330b95dfa37dd2058bbc0343f659d9b2) by Libor Svoboda).
@@ -32,6 +36,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- Repair Storage Bugs ([21c4136](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/21c41366646e3730a3529b7c507328e66e67684e) by lioborsvoboda).
+- Extended User Roles ([06bb5d7](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/06bb5d7a3e456660e6c0444c8bff9c9542af6c64) by lioborsvoboda).
 - resolve browser console commands ([efed039](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/efed039b404aa05aa6462f612fa3ddb8f00f2e34) by Libor Svoboda).
 - Clean ([9101080](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/9101080ebb52125e870867655537fc217622428b) by Libor Svoboda).
 - Repair Bugs onclick, added Browser Console ([e4651ee](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e4651eeb31a8c2714653ad9b0e2a6f3e3d7c44cd) by Libor Svoboda).

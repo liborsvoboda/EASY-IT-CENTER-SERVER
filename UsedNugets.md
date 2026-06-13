@@ -5,6 +5,29 @@
 [PowerShell, OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/releases)
 [PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6#winget)
 
+
+# Install Go
+https://go.dev/doc/install
+
+
+# Apache FTP
+https://downloads.apache.org/
+
+Office Online
+https://www.rollapp.com/rollmyfile/button/new
+
+Office Viewer
+https://officeviewer.herokuapp.com/
+
+Pivot Editor
+https://pivot.apache.org/demos/
+
+
+#PowerShell Script Library
+https://learn.microsoft.com/en-us/powershell/scripting/samples/creating-.net-and-com-objects--new-object-?view=powershell-7.6
+[PowerShell Gallery](https://www.powershellgallery.com/)
+
+
 # Linux Install
 [PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/install-debian?view=powershell-7.6)    
 
