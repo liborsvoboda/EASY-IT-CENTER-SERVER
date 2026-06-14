@@ -350,6 +350,7 @@
                         } else if (!node.folder && node.data.path.toLowerCase().endsWith(".xml")) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
+                                "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
                                 "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
                                 "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
                                 "deleteFile": { "name": "Delete File", "icon": "delete" },
@@ -357,10 +358,12 @@
                                 "sep1": "---------",
                                 "openInNewWindow": { "name": "Open in New Window", "icon": "paste" },
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
+                                "showFileUrl": { "name": "Show File Url", "icon": "add" },
                             };
-                        } else if (!node.folder && node.data.path.toLowerCase().endsWith(".html")) {
+                        } else if (!node.folder && (node.data.path.toLowerCase().endsWith(".html") || node.data.path.toLowerCase().endsWith(".htm") || node.data.path.toLowerCase().endsWith(".shtml")) ) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
+                                "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
                                 "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
                                 "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
                                 "deleteFile": { "name": "Delete File", "icon": "delete" },
@@ -369,21 +372,25 @@
                                 "openInNewWindow": { "name": "Open in New Window", "icon": "paste" },
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
                                 "convertToMd": { "name": "Convert To Md", "icon": "add" },
+                                "showFileUrl": { "name": "Show File Url", "icon": "add" },
                             }; 
-                        } else if (!node.folder && node.data.path.toLowerCase().endsWith(".md")) {
+                        } else if (!node.folder && (node.data.path.toLowerCase().endsWith(".md") || node.data.path.toLowerCase().endsWith(".markdown")) ) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
+                                "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
                                 "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
                                 "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
                                 "deleteFile": { "name": "Delete File", "icon": "delete" },
                                 "copyToUserStorage": { "name": "Copy to User Storage", "icon": "add" },
                                 "sep1": "---------",
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
-                                "convertToHtml": { "name": "Convert To Html", "icon": "add" },
+                                "convertToHtml": { "name": "Convert Md To Html", "icon": "add" },
+                                "showFileUrl": { "name": "Show File Url", "icon": "add" },
                             }; 
                         } else if (!node.folder && node.data.path.toLowerCase().endsWith(".zip")) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
+                                "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
                                 "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
                                 "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
                                 "deleteFile": { "name": "Delete File", "icon": "delete" },
@@ -391,10 +398,12 @@
                                 "sep1": "---------",
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
                                 "unpackArchive": { "name": "Unpack Archive", "icon": "add" },
+                                "showFileUrl": { "name": "Show File Url", "icon": "add" },
                             };
                         } else if (!node.folder && (node.data.path.toLowerCase().endsWith(".js") || node.data.path.toLowerCase().endsWith(".css"))) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
+                                "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
                                 "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
                                 "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
                                 "deleteFile": { "name": "Delete File", "icon": "delete" },
@@ -402,10 +411,12 @@
                                 "sep1": "---------",
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
                                 "minifyFile": { "name": "Create Minified", "icon": "add" },
+                                "showFileUrl": { "name": "Show File Url", "icon": "add" },
                             };
                         } else if (!node.folder && (node.data.path.toLowerCase().endsWith(".png") || node.data.path.toLowerCase().endsWith(".jpeg") || node.data.path.toLowerCase().endsWith(".jpg") || node.data.path.toLowerCase().endsWith(".tiff") || node.data.path.toLowerCase().endsWith(".bmp") || node.data.path.toLowerCase().endsWith(".svg"))) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
+                                "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
                                 "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
                                 "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
                                 "deleteFile": { "name": "Delete File", "icon": "delete" },
@@ -415,24 +426,28 @@
                                 "sep2": "---------",
                                 "MiniPaint": { "name": "Edit in MiniPaint", "icon": "paste" },
                                 "ImageEditor": { "name": "Edit in Image Editor", "icon": "paste" },
+                                "showFileUrl": { "name": "Show File Url", "icon": "add" },
 
                             };
                         } else if (!node.folder) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
+                                "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
                                 "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
                                 "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
                                 "deleteFile": { "name": "Delete File", "icon": "delete" },
                                 "copyToUserStorage": { "name": "Copy to User Storage", "icon": "add" },
                                 "sep1": "---------",
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" }, 
+                                "showFileUrl": { "name": "Show File Url", "icon": "add" },
                             };
                         }
                     },
                     actions: async function (node, action, options) {
-                        
-                    
-                        if (action == "copyToUserStorage") {
+                        if (action == "showFileUrl") {
+                            alert(window.location.origin + $('#DataTree').fancytree("getActiveNode").key);
+
+                        } else if (action == "copyToUserStorage") {
                             await Gs.Apis.RunServerPostApi("PublicStorageService/CopyToUserStorage", { Filename: (node.key == "" ? null : node.title), DataPath: node.data.path }, null);
 
                         } else if (action == "searchInFiles") {
@@ -730,6 +745,85 @@
                             Files.push({ Filename: $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), Content: $("#DataFrameWindow")[0].contentWindow.ImageEditor.getCurrentImgData().imageData.imageBase64 });
                             await Gs.Apis.RunServerPostApi("PublicStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), ""), Files: Files }, null);
 
+                        } else if (action == "saveAssFile" && Metro.storage.getItem("SelectedEditor", null) != "MiniPaint" && Metro.storage.getItem("SelectedEditor", null) != "ImageEditor" && Metro.storage.getItem("SelectedEditor", null) != "OfficeEditor") { //console.log("extension", $('#DataTree').fancytree("getActiveNode").data.extension);
+
+                            let contentData = {
+                                Path: $('#DataTree').fancytree("getActiveNode").data.path,
+                                Content: Metro.storage.getItem("SelectedEditor", null) == null || Metro.storage.getItem("SelectedEditor", null) == "Monaco" || Metro.storage.getItem("SelectedEditor", null) == "Other" ?
+                                    Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].model.getValue() :
+                                    Metro.storage.getItem("SelectedEditor", null) == "TinyMCE" ? tinyMCE.getContent('TinyMCE') :
+                                        Metro.storage.getItem("SelectedEditor", null) == "Froala" ? EditorInit.html.get() :
+                                            Metro.storage.getItem("SelectedEditor", null) == "SUNEdit" ? EditorInit.getContents() :
+                                                Metro.storage.getItem("SelectedEditor", null) == "Summer" ? $(`#SummerEditor`).summernote(`code`) :
+                                                    Metro.storage.getItem("SelectedEditor", null) == "MDEditor" ? $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown() :
+                                                        Metro.storage.getItem("SelectedEditor", null) == "JSONEditor" ?
+                                                            $("#DataFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text") == 'null' ?
+                                                                document.querySelector("#DataFrameWindow").contentWindow.inputEditor.getValue() : $("#DataFrameWindow")[0].contentWindow.document.getElementById("copy-code").getAttribute("data-clipboard-text")
+                                                            : ""
+                            };
+
+                            let targetPath = node.data.path.replace(node.title, "");
+                            let content = `<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' value="${targetPath}" ></div>`;
+                            let actions = [{
+                                caption: "Save File Ass", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#FileName").val().length > 0) {
+                                        Gs.Apis.RunServerPostApi("PublicStorageService/SetUserTextFile", contentData, null);
+                                    } else { alert("File Name must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Save File Ass", content, actions);
+
+                        } else if (action == "saveAssFile" && Metro.storage.getItem("SelectedEditor", null) == "MiniPaint") {
+
+                            let targetPath = node.data.path.replace(node.title, "");
+                            let content = `<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' value="${targetPath}" ></div>`;
+                            let actions = [{
+                                caption: "Save File Ass", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#FileName").val().length > 0) {
+                                        html2canvas($('#DataFrameWindow')[0].contentWindow.document.querySelector("#canvas_minipaint")).then(async canvas => {
+                                            let target = new Image(); target.src = canvas.toDataURL("image." + $('#DataTree').fancytree("getActiveNode").data.path.split(".").pop()); Files = [];
+                                            Files.push({ Filename: $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), Content: target.src });
+                                            await Gs.Apis.RunServerPostApi("PublicStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), ""), Files: Files }, null);
+                                        });
+                                    } else { alert("File Name must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Save File Ass", content, actions);
+
+                        } else if (action == "saveAssFile" && Metro.storage.getItem("SelectedEditor", null) == "ImageEditor") {
+
+                            let targetPath = node.data.path.replace(node.title, "");
+                            let content = `<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' value="${targetPath}" ></div>`;
+                            let actions = [{
+                                caption: "Save File Ass", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#FileName").val().length > 0) {
+                                        Files = [];
+                                        Files.push({ Filename: $("#FileName").val(), Content: $("#DataFrameWindow")[0].contentWindow.ImageEditor.getCurrentImgData().imageData.imageBase64 });
+                                        await Gs.Apis.RunServerPostApi("PublicStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), ""), Files: Files }, null);
+                                    } else { alert("File Name must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Save File Ass", content, actions);
+
+                        } else if (action == "saveAssFile" && Metro.storage.getItem("SelectedEditor", null) == "OfficeEditor") {
+
+                            let targetPath = node.data.path.replace(node.title, "");
+                            let content = `<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' value="${targetPath}" ></div>`;
+                            let actions = [{
+                                caption: "Save File Ass", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#FileName").val().length > 0) {
+                                        Files = [];
+                                        $("#DataFrameWindow")[0].contentWindow.editorOptions.saveAssCallback();
+                                        SaveOpenOffice($("#FileName").val());
+                                    } else { alert("File Name must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Save File Ass", content, actions);
+
                         } else if (action == "moveFile") {
                             let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
                             let actions = [{
@@ -743,7 +837,8 @@
                             Gs.Objects.CreateDialogRequest("Move File", content, actions);
 
                         } else if (action == "copyFile") {
-                            let content = "<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' ></div>";
+                            let targetPath = node.data.path.replace(node.title, "");
+                            let content = `<div><input id='FileName' type='text' data-role='input' data-prepend='Target Folder\\File Name: ' value="${targetPath}" ></div>`;
                             let actions = [{
                                 caption: "Copy File", cls: "js-dialog-close success",
                                 onclick: async function () {
@@ -795,6 +890,16 @@
         }
 
 
+        async function SaveOpenOffice(filename = null) {
+            const reader = new FileReader();
+            reader.onloadend = async () => {
+                Files.push({ Filename: filename == null ? $('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop() : filename, Content: reader.result });
+                await Gs.Apis.RunServerPostApi("PublicStorageService/UploadUserFiles", { Path: $('#DataTree').fancytree("getActiveNode").data.path.replace($('#DataTree').fancytree("getActiveNode").data.path.split("\\").pop(), ""), Files: Files }, null);
+            }
+            reader.readAsDataURL($("#DataFrameWindow")[0].contentWindow.File);
+        }
+
+
         function SetSearchResult() {
             let fileList = Metro.storage.getItem("SearchResultFileList", null);
             $("#DataTree").fancytree("getRootNode").tree.clear();
@@ -803,7 +908,7 @@
 
 
         async function SetEditor(editor) {
-            if (!$('#DataTree').fancytree("getActiveNode").folder) { Gs.Behaviors.ShowPageLoading(); }
+            //if (!$('#DataTree').fancytree("getActiveNode").folder) { Gs.Behaviors.ShowPageLoading(); }
             Metro.storage.setItem("SelectedEditor", editor);
 
             //CLEAN EDITOR

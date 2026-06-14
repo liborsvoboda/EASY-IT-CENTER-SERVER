@@ -569,6 +569,17 @@ Gs.Functions.ObjectURLToBlob = function (url) {
 }
 
 
+
+Gs.Functions.BlobToBase64 = function (blob) {
+    let result = new Promise((resolve, _) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+    });
+    return result;
+}
+
+
 Gs.Functions.BlobToObjectURL = function (blob) {
     return new Promise((resolve, reject) => {
         try {
