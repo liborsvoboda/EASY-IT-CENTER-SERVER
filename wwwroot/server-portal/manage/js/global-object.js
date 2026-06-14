@@ -1174,3 +1174,13 @@ function OpenNotesList() {
         $('#NotesListEditor')[0].contentWindow.mdEditor.setMarkdown(Metro.storage.getItem("NotesList", null)[0] != undefined ? Metro.storage.getItem("NotesList", null)[0].value : " ");
     }, 1000);
 }
+
+
+
+Gs.Objects.OpenBrowserConsole = function () {
+    let html = `<div id="ConsoleWindow" class="w-100 h-100" style="width: 100vw; height: 100vh; background-color: black;">
+                            <div class="console"><div id="browser-console-output" class="output"></div></div>
+                            <div class="browserconsoleinput"><input class="browserconsoleinput" id="browserconsoleinput" type="text" /></div>
+                        </div>`;
+    Gs.Objects.WindowHtmlCreate("ConsoleWindow", "Web Console Debugger", html);
+}

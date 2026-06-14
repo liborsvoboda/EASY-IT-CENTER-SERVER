@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added Open Office Editor ([2075083](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2075083ee3efeab447b8cfa51003e45fdb9812b2) by Libor Svoboda).
+- Added FileViewer ([592ee8a](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/592ee8aa6ca29e5a08028db4b5120b7eec3e5b9f) by Libor Svoboda).
+- Added Web Editors ([a9b3c0a](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/a9b3c0a27fcb09d435f44425f274ff8fee26169c) by Libor Svoboda).
 - added placeholders ([ccf370d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/ccf370ddc916c8df9a353d138106eeac177621bd) by lioborsvoboda).
 - Added Get Table Record Limitations ([e71cf06](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e71cf06c8d5ae3c603818f9e8fb7fa923f7a6532) by lioborsvoboda).
 - Added API Authenticate GET,POST ([05f8123](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/05f8123b432bf43b8412ad28a59a2669356e679b) by lioborsvoboda).

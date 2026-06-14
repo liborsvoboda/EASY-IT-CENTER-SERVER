@@ -1,0 +1,60 @@
+﻿body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+
+.console {
+    display: table-cell;
+    vertical-align: bottom;
+    height: calc(100vh - 20px);
+    width: 100vw;
+}
+
+    .console .output {
+        overflow: auto;
+    }
+
+        .console .output {
+            border: 1px solid #333;
+        }
+
+        .console .output .info_console {
+            background-color: #acdbe8;
+            color: #084859;
+        }
+
+        .console .output .debug_console {
+            background-color: #b5e8ac;
+            color: #188f03;
+        }
+
+        .console .output .warn_console {
+            background-color: #ffc9a3;
+            color: #cc0000;
+        }
+
+        .console .output .error_console {
+            background-color: #300;
+            color: #C00;
+        }
+
+        .console .output {
+            content: '->';
+            margin-right: 4px;
+        }
+
+        .console .output .return:before {
+            content: '<-';
+            margin-right: 4px;
+        }
+
+.browserconsoleinput {
+    border: none;
+    outline: none;
+    background-color: #00F;
+	color: #FFF !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    width: calc(100% - 25px);
+    padding: 0;
+}
