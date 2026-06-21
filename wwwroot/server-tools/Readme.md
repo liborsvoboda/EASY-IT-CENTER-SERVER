@@ -9,3 +9,5 @@
 
 - Each Toll has index.html with Preview, Readme.md with Help, 
 - and Help Folder With more Help or Precview Files
+
+- Tools are Grouped to Using Groups Logic 

@@ -29,7 +29,7 @@
     },
     "opts": {
         "encoding": "utf8",
-        "destination": "./doc/",
+        "destination": "./JsDoc/",
 		//"private": true,
         "recurse": true,
         "readme": "Readme.md",
