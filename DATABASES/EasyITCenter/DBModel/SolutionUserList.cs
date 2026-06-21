@@ -74,6 +74,8 @@ namespace EasyITCenter.DBModel
             SolutionMottoLists = new HashSet<SolutionMottoList>();
             SolutionOperationLists = new HashSet<SolutionOperationList>();
             SolutionSchedulerLists = new HashSet<SolutionSchedulerList>();
+            SolutionServerToolsGroupLists = new HashSet<SolutionServerToolsGroupList>();
+            SolutionServerToolsNameLists = new HashSet<SolutionServerToolsNameList>();
             SolutionShareSourceLists = new HashSet<SolutionShareSourceList>();
             SolutionTaskLists = new HashSet<SolutionTaskList>();
             SolutionUserRoleLists = new HashSet<SolutionUserRoleList>();
@@ -262,6 +264,10 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionOperationList> SolutionOperationLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerLists { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<SolutionServerToolsGroupList> SolutionServerToolsGroupLists { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<SolutionServerToolsNameList> SolutionServerToolsNameLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionShareSourceList> SolutionShareSourceLists { get; set; }
         [InverseProperty("User")]

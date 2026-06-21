@@ -84,6 +84,8 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionOperationList> SolutionOperationLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerList> SolutionSchedulerLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerProcessList> SolutionSchedulerProcessLists { get; set; } = null!;
+        public virtual DbSet<SolutionServerToolsGroupList> SolutionServerToolsGroupLists { get; set; } = null!;
+        public virtual DbSet<SolutionServerToolsNameList> SolutionServerToolsNameLists { get; set; } = null!;
         public virtual DbSet<SolutionShareSourceList> SolutionShareSourceLists { get; set; } = null!;
         public virtual DbSet<SolutionTaskList> SolutionTaskLists { get; set; } = null!;
         public virtual DbSet<SolutionUserList> SolutionUserLists { get; set; } = null!;
@@ -1329,6 +1331,36 @@ namespace EasyITCenter.DBModel
                     .WithMany(p => p.SolutionSchedulerProcessLists)
                     .HasForeignKey(d => d.ScheduledTaskId)
                     .HasConstraintName("FK_SolutionSchedulerProcessList_SolutionSchedulerList");
+            });
+
+            modelBuilder.Entity<SolutionServerToolsGroupList>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SolutionServerToolsGroupLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionServerToolsGroupList_SolutionUserList");
+            });
+
+            modelBuilder.Entity<SolutionServerToolsNameList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.SystemGroupMenuListNameNavigation)
+                    .WithMany(p => p.SolutionServerToolsNameLists)
+                    .HasForeignKey(d => d.SystemGroupMenuListName)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionServerToolsNameList_SolutionServerToolsGroupList");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SolutionServerToolsNameLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionServerToolsNameList_SolutionUserList");
             });
 
             modelBuilder.Entity<SolutionShareSourceList>(entity =>
