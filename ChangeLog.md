@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- added Metro2-5 Templates ([cce28be](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/cce28befbbcb4aa69b82939a5d7e77d35d834d25) by lioborsvoboda).
+- added server-tools table ([d982820](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/d9828203f939e1bfe27f26c56019e13c42f5c8fd) by Libor Svoboda).
+- added server-tools ([9f62043](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/9f620430811844169adea026cfed7714faed7139) by Libor Svoboda).
 - Added Open Office Editor ([2075083](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2075083ee3efeab447b8cfa51003e45fdb9812b2) by Libor Svoboda).
 - Added FileViewer ([592ee8a](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/592ee8aa6ca29e5a08028db4b5120b7eec3e5b9f) by Libor Svoboda).
 - Added Web Editors ([a9b3c0a](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/a9b3c0a27fcb09d435f44425f274ff8fee26169c) by Libor Svoboda).

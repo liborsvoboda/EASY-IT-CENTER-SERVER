@@ -1,0 +1,60 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc"]
+    },
+	"plugins": [
+        "addons/jsdoc/plugins/markdown",
+        "addons/jsdoc/plugins/summarize",
+		"addons/jsdoc/plugins/commentConvert",
+		"addons/jsdoc/plugins/escapeHtml",
+		"addons/jsdoc/plugins/overloadHelper",
+		"addons/jsdoc/plugins/partial",
+		"addons/jsdoc/plugins/railsTemplate",
+		"addons/jsdoc/plugins/shout",
+		"addons/jsdoc/plugins/sourcetag",
+		"addons/jsdoc/plugins/underscore"
+    ],
+    "source": {
+        "include": [
+            "manage/js/global-storage.js",
+			"manage/js/global-behavior.js",
+			"manage/js/global-functions.js",
+			"manage/js/global-api.js",
+			"manage/js/global-media.js",
+			"manage/js/global-object.js",
+			"manage/js/global-signalr.js",
+			"manage/js/global-socket.js"
+        ]
+    },
+    "opts": {
+        "encoding": "utf8",
+        "destination": "./JsDoc/",
+		//"private": true,
+        "recurse": true,
+        "readme": "Readme.md",
+		//"template": "addons/jsdoc/templates/default",
+        "theme_opts": {
+            "title": "EIC Javascript Library",
+            "meta": [
+                "<title>EIC Javascript Library</title>",
+                "<meta name=\"author\" content=\"Libor Svoboda\">",
+                "<meta name=\"description\" content=\"Documentation for EIC Server Portal for Global Functions of Negerated portaL\">"
+            ],
+            "menu": [
+                {
+                    "title": "Website",
+                    "link": "https://KlikneteZde.Cz"
+                },
+                {
+                    "title": "Github",
+                    "link": "https://KlikneteZde.Cz"
+                },
+                {
+                    "title": "Demo",
+                    "link": "https://KlikneteZde.Cz"
+                }
+            ]
+        }
+    }
+}
