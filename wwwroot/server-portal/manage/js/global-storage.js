@@ -120,7 +120,7 @@ window.WindowButtons = [
     {
         html: "<span class='mif-help' title='Show Menu Help'></span>",
         cls: "success",
-        onclick: "Gs.Objects.InfoboxFrameCreate('HelpViewer','/server-portal/addons/md-viewer/index.html', false);"
+        onclick: "Gs.Objects.InfoboxFrameCreate('HelpViewer','/server-tools/DocsSolution/md-viewer/index.html', false);"
     },
     {
         html: "<span class='mif-windows' title='Open in New Window'></span>",
@@ -155,7 +155,7 @@ window.WindowButtons = [
 
 Gs.Behaviors.ChangeSchemeTo = function (n) {
     $("#AppPanel").css({ backgroundColor: n.split("?")[1] });
-    $("#portal-color-scheme").attr("href", window.location.origin + "/server-portal/metro/css/schemes/" + n.split("?")[0]);
+    $("#portal-color-scheme").attr("href", window.location.origin + "/server-tools/Metro/metro4/css/schemes/" + n.split("?")[0]);
     $("#scheme-name").html(n.split("?")[0]);
     Metro.storage.setItem('WebScheme', n.split("?")[0]);
 }

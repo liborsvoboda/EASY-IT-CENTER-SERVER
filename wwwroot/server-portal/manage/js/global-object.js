@@ -678,7 +678,7 @@ Gs.Objects.EditHelpMenu = function () {
     <BUTTON onclick="Gs.Functions.SaveMenuHelp();" class="button success c-pointer outline shadowed" style="position:absolute; top:57px;right:60px;z-index:2500;">Save Menu Help</BUTTON>
     <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
         <DIV id=_menuCodeContent class="w-100" style="max-height: 750px;overflow: hidden;">
-            <iframe id="HelpFastEditor" src="/server-portal/addons/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:900px;"></iframe>
+            <iframe id="HelpFastEditor" src="/server-tools/Editor/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:900px;"></iframe>
         </DIV >
     </DIV >`;
     Gs.Objects.InfoboxObjectCreate("EditHelpMenu", html, width = "1000", height = "800");
@@ -1164,7 +1164,7 @@ function OpenNotesList() {
     <BUTTON onclick="Gs.Functions.SaveNotesList();" class="button success c-pointer outline shadowed" style="position:absolute; top:22px;right:60px;z-index:2500;">Save Notes</BUTTON>
     <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
         <DIV id=_menuCodeContent class="w-100" style="max-height: 750px;overflow: hidden;">
-            <iframe id="NotesListEditor" src="/server-portal/addons/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:900px;"></iframe>
+            <iframe id="NotesListEditor" src="/server-tools/Editor/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:900px;"></iframe>
         </DIV >
     </DIV >`;
 

@@ -16,13 +16,14 @@
     /// </summary>
     public enum RouteLayoutTypes {
         ErrorLayout,
-        CentralLayout,
         DevPortalLayout,
         EasyDataLayout,
         EmptyLayout,
-        GlobalLayout,
-        MetroLayout,
-        MultiLangLayout,
+
+        Metro2Layout,
+        Metro5Layout,
+        Metro4Layout,
+        Metro3Layout,
         
         RazorTemplateLayout,
         ServerPortalLayout,

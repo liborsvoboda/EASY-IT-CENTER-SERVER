@@ -30,7 +30,7 @@
 
         filePath = FileOperations.CheckFile(filePath) ? filePath : FileOperations.CheckFile($"{filePath}.md") ? $"{filePath}.md" :
             FileOperations.CheckFile($"{filePath}/readme.md") ? $"{filePath}/readme.md" : FileOperations.CheckFile($"{filePath}/index.md") ?
-            $"{filePath}/index.md" : FileOperations.GetPathFiles("filePath", "*.md", SearchOption.AllDirectories)[0];
+            $"{filePath}/index.md" : FileOperations.GetPathFiles($"{filePath}", "*.md", SearchOption.AllDirectories)[0];
 
         fileContent = Markdown.ParseHtmlString(System.IO.File.ReadAllText(filePath));
     } catch {
