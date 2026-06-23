@@ -10,6 +10,10 @@
     width: 100vw;
 }
 
+.log_console {
+    color: #ffffff;;
+}
+
     .console .output {
         overflow: auto;
     }

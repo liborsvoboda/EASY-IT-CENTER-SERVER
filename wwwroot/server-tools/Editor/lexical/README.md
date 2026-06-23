@@ -1,6 +1,18 @@
-# Repair After Build
+# Lexical Audio Editor
 
-In file: server-portal\addons\lexical\packages\lexical-playground\build\index.html
+- show in IFrame file: server-tools\Editor\lexical\packages\lexical-playground\build\index.html
+
+- Get Content
+````
+getElementsByClassName("ContentEditable__root")[0].innerHTML;
+````
+
+- Set Content
+````
+
+````
+
+
 add point
 ````javascript
     <script type="module" crossorigin src="./assets/main-CcnZxwwd.js"></script>

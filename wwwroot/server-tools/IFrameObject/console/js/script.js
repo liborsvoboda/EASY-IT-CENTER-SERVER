@@ -2,7 +2,7 @@
     constructor() {
 
         let socket = new WebSocket(`${document.location.protocol === "https:" ? "wss" : "ws"}://${document.location.hostname}:${document.location.port}/WebSocketService/ServerCoreMonitor`);
-        let conInput = document.getElementById('input');
+        let conInput = document.getElementById('browserconsoleinput');
         let self = this;
         self.consoleBackbuffer = [];
         conInput.addEventListener('keydown', function(e) {
@@ -14,7 +14,7 @@
                     self.clear();
                     return;
                 }
-                self.addConsoleLine(input, 'input');
+                self.addConsoleLine(input, 'browserconsoleinput');
                 try {
                     let returnVal = eval.apply(this, [input]);
                     self.addConsoleLine(returnVal, 'return');
@@ -31,17 +31,17 @@
     }
 
     clear() {
-        while(document.getElementById('output').hasChildNodes) {
-            let blah = document.getElementById('output').lastChild;
+        while(document.getElementById('browser-console-output').hasChildNodes) {
+            let blah = document.getElementById('browser-console-output').lastChild;
             if (blah === null) {
                 break;
             }
-            document.getElementById('output').removeChild(blah);
+            document.getElementById('browser-console-output').removeChild(blah);
         }
     }
 
     addConsoleLine(msg, type) {
-        let output = document.getElementById('output');
+        let output = document.getElementById('browser-console-output');
         let newLine = document.createElement('div');
         newLine.classList.add(type);
         newLine.innerText = msg;
