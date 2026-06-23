@@ -1,9 +1,20 @@
 ﻿
+
+/**
+* Function SetInterval 30 sec for WebSocketRefresh
+* @function
+*/
 Gs.Socket.PingInterval = setInterval(() => {
     Gs.Socket.SendChatMessageWS(1000, JSON.stringify({}));
 }, 30000);
 
 
+/**
+* Function SendChat Message Web Socket
+* @function
+* @param {string} interval interval in milisecond
+* @param {string} message webSocket message
+*/
 Gs.Socket.SendChatMessageWS = function (interval, message = null) {
     if (Gs.Variables.Socket.chatSocket.readyState === 1) {
 
@@ -24,6 +35,10 @@ Gs.Socket.SendChatMessageWS = function (interval, message = null) {
 };
 
 
+/**
+* Function Set Receiving Chat Message to Chat
+* @function
+*/
 Gs.Socket.SetReceivingChat = function () {
 
     //RECEIVE MESSAGE
@@ -54,7 +69,11 @@ Gs.Socket.SetReceivingChat = function () {
 }
 
 
-
+/**
+* Function SendChat Message 
+* @function
+* @param {string} message message
+*/
 Gs.Socket.SendChatMessage = function (message) {
     let chatMessageList = Metro.storage.getItem("ChatMessageList", null);
     Gs.Variables.chatmessage = message;

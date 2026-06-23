@@ -13,7 +13,11 @@ Gs.Functions.HtmlDecode = function (str) {
     return txt.value;
 }
 
-
+/**
+* Function Generate UUID string
+* @function
+* @return {string} return UUID
+*/
 Gs.Functions.GenerateUUID = function () { 
     let d = new Date().getTime();
     let d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;
@@ -30,26 +34,57 @@ Gs.Functions.GenerateUUID = function () {
     });
 }
 
+
+/**
+* Function Element from Page
+* @function
+*/
 Gs.Functions.RemoveElement = function (elementId) {
     let element = document.getElementById(elementId);
     if (element != null) { element.remove(); }
 }
 
 
-
+/**
+* Function Add Class to Element
+* @function
+* @param {string} elementId elementId
+* @param {string} clasName className for adding
+*/
 Gs.Functions.AddClass = function (elementId,clasName) {
     $("#" + elementId).addClass(clasName); //"disabled"
 }
 
+
+/**
+* Function Remove Class from Element
+* @function
+* @param {string} elementId elementId
+* @param {string} clasName className for removing
+*/
 Gs.Functions.RemoveClass = function (elementId, clasName) {
     $("#" + elementId).removeClass(clasName); //"disabled"
 }
 
+/**
+* Function Html Decode
+* @function
+* @param {string} input string
+* @return {boolean} return string
+*/
 Gs.Functions.HtmlDecode = function (input) {
     let doc = new DOMParser().parseFromString(input, "text/html");
     return doc.documentElement.textContent;
 }
 
+
+/**
+* Function FileReader to Base64 Image Data
+* @function
+* @param {string} n Files
+* @param {string} clasName className for adding
+* @return {boolean} return status
+*/
 Gs.Functions.FileReaderToImageData = async function (n) {
     const t = new FileReader; return await new Promise((t, i) => {
         const r = new FileReader; r.onloadend = () => t(r.result); r.onerror = i;
@@ -58,6 +93,13 @@ Gs.Functions.FileReaderToImageData = async function (n) {
     })
 }
 
+
+/**
+* Function String to Byte Array
+* @function
+* @param {string} str string
+* @return {boolean} return byte Array
+*/
 Gs.Functions.Str2bytes = function (str) {
     let bytes = new Uint8Array(str.length);
     for (let i = 0; i < str.length; i++) {
@@ -66,11 +108,22 @@ Gs.Functions.Str2bytes = function (str) {
     return bytes;
 }
 
+
+/**
+* Function Preload IMage from Source
+* @function
+* @param {string} src source URL
+*/
 Gs.Functions.PreloadImage = function (src) {
     let img = new Image();
     img.src = src;
 }
 
+/**
+* Function Bind YouTube Play
+* @function
+* @param {string} img elementId
+*/
 Gs.Functions.BindYouTubePlay = function (img) {
     let a = img.parent();
     let p = a.parent();
@@ -83,7 +136,10 @@ Gs.Functions.BindYouTubePlay = function (img) {
     }
 }
 
-
+/**
+* Function Bind YouTebe Images
+* @function
+*/
 Gs.Functions.BindYouTubeImages = function () {
     preloadImage('/images/youtube-play-hover.png');
     $("a[href^='https://youtu.be/']>img").each(function () {
@@ -95,18 +151,34 @@ Gs.Functions.BindYouTubeImages = function () {
     });
 }
 
+
+/**
+* Function Video to Iframe
+* @function
+* @return {string} return iframe
+*/
 Gs.Functions.Video = function (url) {
     return '<iframe style="width:100%;min-height:585px" src="' + url + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
 }
 
-
+/**
+* Function Play Video in IFrame
+* @function
+* @param {string} el elementId
+* @param {string} id video Id
+*/
 Gs.Functions.PlayVideo = function (el, id) {
     let url = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
     $(el).parent().html(Gs.Functions.Video(url));
 }
 
 
-// Generate Tables
+/**
+* Function PrintTables
+* @function
+* @param {string} tables table List
+* @return {boolean} return Html Table
+*/
 Gs.Functions.PrintTables = function (tables) {
     let html = "<thead><tr><th>Table List</th></tr></thead>";
     const rows = tables.map(function (table) {
@@ -123,13 +195,25 @@ Gs.Functions.PrintTables = function (tables) {
 }
 
 
-// Code to MarkDown 
+/**
+* Function Print MarkDown for insert string to Markdown Tag
+* @function
+* @param {string} text string
+* @return {boolean} return markdown tag
+*/
 Gs.Functions.PrintMarkdown = function (text) {
     return `<pre>${text}</pre>`;
 }
 
 
-// Generate TagList
+/**
+* Function Add Values to Tag with Class
+* @function
+* @param {string} values values
+* @param {string} tagName tagName
+* @param {string} className className
+* @return {boolean} return tags
+*/
 Gs.Functions.GenerateTagList = function (values, tagName, className) {
     if (values.length === 0) {
         return "";
@@ -139,18 +223,10 @@ Gs.Functions.GenerateTagList = function (values, tagName, className) {
     return open + values.join(close + open) + close;
 }
 
-
-//Function for  Mermaid Data to Graphics Conversion
-async function Mermaid() { try { await mermaid.run({ nodes: document.querySelectorAll('.class-mermaid'), }); } catch (err) { } }
-
-
-//Function for Highlighting Code Segments
-function HighlightCode() {
-    //hljs.highlightAll()
-    document.querySelectorAll('div.code').forEach(el => { hljs.highlightElement(el); });
-}
-
-
+/**
+* Function ShowSource Show New Window wiht SourceCode
+* @function
+*/
 Gs.Functions.ShowSource = function () {
     var source = "<html>";
     source += document.getElementsByTagName('html')[0].innerHTML;
@@ -163,7 +239,10 @@ Gs.Functions.ShowSource = function () {
     if (window.focus) sourceWindow.focus();
 }
 
-
+/**
+* Function ShowFrameSource Window with Sorce Code from Iframe
+* @function
+*/
 Gs.Functions.ShowFrameSource = function () {
     var source = "<html>";
     source += document.getElementById('IFrameWindow').contentWindow.document.body.innerHTML;
@@ -176,7 +255,10 @@ Gs.Functions.ShowFrameSource = function () {
     if (window.focus) sourceWindow.focus();
 }
 
-
+/**
+* Function ShowWindowFrameSource to new Window with Source Code
+* @function
+*/
 Gs.Functions.ShowWindowFrameSource = function () {
     var source = "<html>";
     source += document.getElementById('WindowFrame').contentWindow.document.body.innerHTML;
@@ -190,6 +272,10 @@ Gs.Functions.ShowWindowFrameSource = function () {
 }
 
 
+/**
+* Function PrintOrExportWindow for function of Openned Window
+* @function
+*/
 Gs.Functions.PrintOrExportWindow = function (command) {
     switch (command) {
         case "Print":
@@ -210,6 +296,12 @@ Gs.Functions.PrintOrExportWindow = function (command) {
     }
 }
 
+
+/**
+* Function HtmlToPdfElement Download Pdf from HTML
+* @function
+* @param {string} elementId elementId
+*/
 Gs.Functions.HtmlToPdfElement = function (elementId) {
     let iFrameExist = document.querySelector("#IFrameWindow") != null;
     let dataFrameExist = document.querySelector("#IFrameWindow") != null ? document.querySelector("#IFrameWindow").contentWindow.window.document.querySelector("#DataFrameWindow") : null != null;
@@ -226,6 +318,11 @@ Gs.Functions.HtmlToPdfElement = function (elementId) {
     }
 }
 
+/**
+* Function Print Window Element
+* @function
+* @param {string} elementId elementId
+*/
 Gs.Functions.PrintWindowElement = function (elementId) {
     try {
         let iFrameExist = document.querySelector("#IFrameWindow") != null;
@@ -246,6 +343,11 @@ Gs.Functions.PrintWindowElement = function (elementId) {
 }
 
 
+/**
+* Function Download HTML Window Element
+* @function
+* @param {string} elementId elementId
+*/
 Gs.Functions.DownloadWindowElement = function (elementId) {
     try {
         let iFrameExist = document.querySelector("#IFrameWindow") != null;
@@ -272,7 +374,10 @@ Gs.Functions.DownloadWindowElement = function (elementId) {
     } catch (i) { }
 }
 
-
+/**
+* Function CopyWindowElement to buffer
+* @function
+*/
 Gs.Functions.CopyWindowElement = async function () {
     try {
         let iFrameExist = document.querySelector("#IFrameWindow") != null;
@@ -314,7 +419,10 @@ Gs.Functions.CopyWindowElement = async function () {
     } catch (t) { }
 }
 
-
+/**
+* Function Download Image from Window Element
+* @function
+*/
 Gs.Functions.ImageFromWindowElement = function () {
     try {
         let iFrameExist = document.querySelector("#IFrameWindow") != null;
@@ -360,12 +468,18 @@ Gs.Functions.ImageFromWindowElement = function () {
     } catch (t) { }
 }
 
-
+/**
+* Function Save Url to Browser
+* @function
+*/
 Gs.Functions.SaveBrowserLink = function () {
     document.execCommand("createLink", false, window.location.origin);
 }
 
-
+/**
+* Function Add Web Page to Favories
+* @function
+*/
 Gs.Functions.SaveToFavorites = function (title, url) {
     if (window.sidebar) { // Firefox
         window.sidebar.addPanel(title, url, '');
@@ -387,6 +501,11 @@ Gs.Functions.SaveToFavorites = function (title, url) {
     }
 }
 
+
+/**
+* Function Load Metro Framework
+* @function
+*/
 Gs.Functions.LoadMetro = async function () {
     const pathCss = './metro/css/metro-all.min.css';
     const pathThemeCss = './metro/css/schemes/sky-net.css';
@@ -409,12 +528,20 @@ Gs.Functions.LoadMetro = async function () {
     Metro.toast.create("Metro 4 did loaded successful!", { showTop: true, clsToast: "success" });
 }
 
-
+/**
+* Function Unload Metro Framework
+* @function
+*/
 Gs.Functions.UnloadMetro = function () {
     //delete Metro;
 }
 
-
+/**
+* Function Load Html Page to Element
+* @function
+* @param {string} elementId elementId
+* @param {string} url url
+*/
 Gs.Functions.LoadHtmlPage = function (elementId,url) {
     $.ajax({
         url: url
@@ -423,7 +550,13 @@ Gs.Functions.LoadHtmlPage = function (elementId,url) {
     });
 }
 
-
+/**
+* Function Load HTML content from URL
+* @function
+* @param {string} elementId elementId
+* @param {string} url url
+* @return {boolean} return status
+*/
 Gs.Functions.LoadHtmlContent = function (elementId, url) {
     $.ajax({
         url: url
@@ -432,7 +565,12 @@ Gs.Functions.LoadHtmlContent = function (elementId, url) {
     });
 }
 
-
+/**
+* Function load URL Html Page to Iframe in Element
+* @function
+* @param {string} elementId elementId
+* @param {string} url url of Iframe
+*/
 Gs.Functions.LoadHtmlPageToFrame = function (elementId, url) {
     let frame = '<div id=MainWindow data-role="window" data-custom-buttons="WindowButtons" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
         + '<iframe id="IFrameWindow" src="' + url + '" width="100%" height="700" frameborder="0" scrolling="yes" style="width: 100%; height: 100%;" ></iframe>';
@@ -440,7 +578,10 @@ Gs.Functions.LoadHtmlPageToFrame = function (elementId, url) {
   
 }
 
-
+/**
+* Function Get Function List of WebPages
+* @function
+*/
 Gs.Functions.GetFunctionList = function () {
     let functionList = [];
     for (var p in Gs.Media) { if (typeof Gs.Media[p] === "function") { functionList.push({ title: `Gs.Media.${p}()`, folder: false, checkbox: false, key: Gs.Media[p].toString() }); } }
@@ -454,7 +595,12 @@ Gs.Functions.GetFunctionList = function () {
     Metro.storage.setItem('FunctionList', functionList.sort((a, b) => (a.title > b.title) * 2 - 1));
 }
 
-
+/**
+* Function load CSS code as WEbPage Style
+* @function
+* @param {string} elementId elementId
+* @param {string} code className for adding
+*/
 Gs.Functions.loadCSS = function (elementId, code) {
     if (code) {
         Gs.Functions.RemoveElement(elementId);
@@ -465,7 +611,12 @@ Gs.Functions.loadCSS = function (elementId, code) {
     }
 };
 
-
+/**
+* Function load Javascript as Script Code
+* @function
+* @param {string} elementId elementId
+* @param {string} code script code
+*/
 Gs.Functions.loadJS = function (elementId, code) {
     if (code) {
         Gs.Functions.RemoveElement(elementId);
@@ -476,7 +627,11 @@ Gs.Functions.loadJS = function (elementId, code) {
     }
 };
 
-
+/**
+* Function Export Table MenuTable to Specific Format
+* @function
+* @param {string} params params
+*/
 Gs.Functions.ExportTable = function (params) {
     var options = {
         tableName: 'TableData',
@@ -489,7 +644,12 @@ Gs.Functions.ExportTable = function (params) {
     }
 }
 
-
+/**
+* Function Blob to Base64 Image
+* @function
+* @param {string} blob blob
+* @return {string} return Base64 string
+*/
 Gs.Functions.BlobToBase64Image = function (blob) {
     let blobUrl = URL.createObjectURL(blob);
 
@@ -514,7 +674,12 @@ Gs.Functions.BlobToBase64Image = function (blob) {
     })
 } 
 
-
+/**
+* Function Blob to Image
+* @function
+* @param {string} blob blob data
+* @return {bytes} return status
+*/
 Gs.Functions.BlobToImageData = function (blob) {
     let blobUrl = URL.createObjectURL(blob);
 
@@ -541,7 +706,12 @@ Gs.Functions.BlobToImageData = function (blob) {
     })
 }
 
-
+/**
+* Function Image Data to Blob
+* @function
+* @param {string} imageData image data
+* @return {bytes} return blob
+*/
 Gs.Functions.ImageDataToBlob = function (imageData) {
     let w = imageData.width;
     let h = imageData.height;
@@ -556,7 +726,12 @@ Gs.Functions.ImageDataToBlob = function (imageData) {
     })
 }
 
-
+/**
+* Function Object from Url to Blob
+* @function
+* @param {string} url url
+* @return {bytes} return blob
+*/
 Gs.Functions.ObjectURLToBlob = function (url) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -569,7 +744,12 @@ Gs.Functions.ObjectURLToBlob = function (url) {
 }
 
 
-
+/**
+* Function Blob to Base64
+* @function
+* @param {string} blob blob
+* @return {string} return base64
+*/
 Gs.Functions.BlobToBase64 = function (blob) {
     let result = new Promise((resolve, _) => {
         const reader = new FileReader();
@@ -580,6 +760,12 @@ Gs.Functions.BlobToBase64 = function (blob) {
 }
 
 
+/**
+* Function Blob to URL Object
+* @function
+* @param {string} blob blob
+* @return {string} return url
+*/
 Gs.Functions.BlobToObjectURL = function (blob) {
     return new Promise((resolve, reject) => {
         try {
@@ -591,11 +777,22 @@ Gs.Functions.BlobToObjectURL = function (blob) {
 }
 
 
+/**
+* Function Color HEX to RGB Array
+* @function
+* @param {string} hex hex color
+* @return {Array} return array
+*/
 Gs.Functions.ColorHexToRgbArr = function (hex) {
     return ['0x' + hex[1] + hex[2] | 0, '0x' + hex[3] + hex[4] | 0, '0x' + hex[5] + hex[6] | 0];
 }
 
-
+/**
+* Function Color Hex to RGB
+* @function
+* @param {string} hex hex color
+* @return {string} return rgb string
+*/
 Gs.Functions.ColorHexToRgb = function (hex) {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -604,12 +801,23 @@ Gs.Functions.ColorHexToRgb = function (hex) {
 }
 
 
+/**
+* Function Color RGB to HEX
+* @function
+* @param {string} colorArray RGB Array
+* @return {boolean} return HEX color
+*/
 Gs.Functions.ColorRgbToHex = function rgbToHex(colorArray) {
     let r = colorArray[0]; let g = colorArray[1]; let b = colorArray[2];
     return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
 }
 
-
+/**
+* Function What Is It object type
+* @function
+* @param {string} data object
+* @return {boolean} return object type
+*/
 Gs.Functions.WhatIsIt = function (data) {
     if (data === null) {
         return "null";
@@ -638,7 +846,12 @@ Gs.Functions.WhatIsIt = function (data) {
 }
 
 
-
+/**
+* Function Load URL Image as String
+* @function
+* @param {string} url url
+* @return {string} return base64
+*/
 Gs.Functions.LoadUrlImageAsString = async function (url) {
     return await fetch(url)
         .then(response => response.blob())
@@ -652,7 +865,10 @@ Gs.Functions.LoadUrlImageAsString = async function (url) {
         });
 }
 
-
+/**
+* Function AddSuggestion Save New Suggestion
+* @function
+*/
 Gs.Functions.AddSuggestionSave = async function () {
     let jsonData = {
         InheritedMonacoLanguageType: $("#menuInheritedMonacoLanguageType").val(),
@@ -672,7 +888,10 @@ Gs.Functions.AddSuggestionSave = async function () {
     $("#AddSuggest").remove();
 }
 
-
+/**
+* Function Save new Menu Help 
+* @function
+*/
 Gs.Functions.SaveMenuHelp = async function () {
     let data = Metro.storage.getItem("SelectedMenu", null);
     data.MdHelp = $('#HelpFastEditor')[0].contentWindow.mdEditor.getMarkdown();
@@ -689,24 +908,29 @@ Gs.Functions.SaveMenuHelp = async function () {
 }
 
 
-async function RefreshPortalMenuList() {
-    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenuList", "GenerateMenuList");
-}
-
-
+/**
+* Function Reset Blog to Default
+* @function
+*/
 Gs.Functions.ResetBlog = function () {
     $("#EditBlogMenu").remove();
     EditBlogMenu();
 }
 
-
+/**
+* Function Search Blog 
+* @function
+*/
 Gs.Functions.SearchBlog = function () {
     let search = $("#menuSearch").val();
     $("#EditBlogMenu").remove();
     EditBlogMenu(search);
 }
 
-
+/**
+* Function Save new Blog Message
+* @function
+*/
 Gs.Functions.SaveBlog = async function () {
     let jsonData = {
         MenuName: $("#menuBlogName").val(),
@@ -719,7 +943,10 @@ Gs.Functions.SaveBlog = async function () {
 }
 
 
-
+/**
+* Function Set Username as Public IP
+* @function
+*/
 Gs.Functions.GetPublicIp = function () {
     $.get("https://ipinfo.io", function (response) {
         Gs.Variables.username = response.ip;
@@ -727,6 +954,10 @@ Gs.Functions.GetPublicIp = function () {
 }
 
 
+/**
+* Function Share User Selected Enable/Disable Start Sharing
+* @function
+*/
 Gs.Functions.ShareUserSelected = function () {
     let select = Metro.getPlugin("#userList", "select");
     if (select.val() == "") {
@@ -738,35 +969,12 @@ Gs.Functions.ShareUserSelected = function () {
 
 
 
-function SetQuestionCount() {
-    let myQuestionList = []; let group = null; menuItem = {}; let data = [];
-    let origQuestionList = Metro.storage.getItem('AdminQuestionList', null);
-
-    origQuestionList.forEach((item, index, arr) => {
-        switch (item.apiTableColumnName) {
-            case "MenuName":
-                menuItem.recGuid = item.recGuid;
-                menuItem.MenuName = item.value;
-                break;
-            case "Question":
-                menuItem.Question = item.value;
-                break;
-            case "Response":
-                menuItem.Id = item.id;
-                menuItem.Response = item.value;
-                break;
-        }
-        if (group != null && (arr[index + 1] == undefined || arr[index + 1].recGuid != item.recGuid)) {
-            myQuestionList.push(menuItem);
-            menuItem = {};
-        }
-        group = item.recGuid;
-    });
-    Metro.storage.setItem('AdminQuestionList', myQuestionList);
-    $("#QuestionCount").html(myQuestionList.length.toString());
-}
-
-
+/**
+* Function Html Escape encoded string to Normal
+* @function
+* @param {string} str string
+* @return {string} return string
+*/
 Gs.Functions.HtmlEscape = function(str) {
     return str.toString()
         .replace(/&/g, '&amp;')
@@ -777,6 +985,10 @@ Gs.Functions.HtmlEscape = function(str) {
 }
 
 
+/**
+* Function Save Updated Notes List
+* @function
+*/
 Gs.Functions.SaveNotesList = async function () {
     let notes = Metro.storage.getItem('NotesList', null);
 
@@ -790,33 +1002,3 @@ Gs.Functions.SaveNotesList = async function () {
 }
 
 
-
-//function getIframeWindow(iframe_object) {
-//    var doc;
-
-//    if (iframe_object.contentWindow) {
-//        return iframe_object.contentWindow;
-//    }
-
-//    if (iframe_object.window) {
-//        return iframe_object.window;
-//    }
-
-//    if (!doc && iframe_object.contentDocument) {
-//        doc = iframe_object.contentDocument;
-//    }
-
-//    if (!doc && iframe_object.document) {
-//        doc = iframe_object.document;
-//    }
-
-//    if (doc && doc.defaultView) {
-//        return doc.defaultView;
-//    }
-
-//    if (doc && doc.parentWindow) {
-//        return doc.parentWindow;
-//    }
-
-//    return undefined;
-//}

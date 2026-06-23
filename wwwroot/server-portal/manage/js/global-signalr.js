@@ -1,9 +1,13 @@
-﻿document.addEventListener("DOMContentLoaded", () => {
+﻿
+
+/**
+* Function Add Function After Content is Loaded
+*/
+document.addEventListener("DOMContentLoaded", () => {
     Gs.Variables.SignalR.streamChat = new signalR.HubConnectionBuilder()
         .withUrl("/StreamChat")
         //.configureLogging(signalR.LogLevel.Information)
         .build();
-
 
     Gs.Variables.SignalR.streamChat.onclose(Gs.SignalR.Start());
 
@@ -105,6 +109,11 @@ Gs.SignalR.StartVideoStream = async function (stopStreaming) {
 }
 
 
+/**
+* Function Send Stream Chat Message on SignalR
+* @function
+* @param {string} message message
+*/
 Gs.SignalR.SendStreamChatMessage = async function (message) {
     if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Disconnected) { await Gs.Variables.SignalR.streamChat.start(); }
 

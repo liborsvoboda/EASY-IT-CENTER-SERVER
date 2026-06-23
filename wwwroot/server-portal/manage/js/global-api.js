@@ -1,15 +1,36 @@
-﻿Gs.Apis.SaveUserCapturedVideo = async function (filename) {
+﻿
+/**
+* Function for Save Captured Video of User Cloud Request
+* @function
+* @param {string} filename Filename for Saving
+*/
+Gs.Apis.SaveUserCapturedVideo = async function (filename) {
     await Gs.Apis.RunServerPostApi("UserStorageService/SaveMediaFile", { Path: "Videos", Filename: filename, Content: Metro.storage.getItem("CapturedVideo", null) }, null, "ReloadUserStorage");
     Gs.Media.ClearCapturedVideo();
 }
 
-
+/**
+* Function for Save Captured Video of Public Cloud Request
+* @function
+* @param {string} filename Filename for Saving
+*/
 Gs.Apis.SavePublicCapturedVideo = async function (filename) {
     await Gs.Apis.RunServerPostApi("PublicStorageService/SaveMediaFile", { Path: "Videos", Filename: filename, Content: Metro.storage.getItem("CapturedVideo", null) }, null, "ReloadUserStorage");
     Gs.Media.ClearCapturedVideo();
 }
 
 
+/**
+* Function for Downloading binary file from Server
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} jsonData Post Json Data
+* @param {string} filename Filename for Download File
+* @param {boolean} binary Binary or Text file
+* @param {string} storageName Name of LocalStorage for Saving Result
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
 Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, storageName = null, windowFunction = null ) {
     //used for Downloading files
     Gs.Behaviors.ShowPageLoading();
@@ -56,6 +77,15 @@ Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, stora
 }
 
 
+/**
+* Function for call API POST Request
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} jsonData Post Json Data
+* @param {string} storageName Name of LocalStorage for Saving Result
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
 Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windowFunction = null) {
     //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
@@ -97,7 +127,15 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
 }
 
 
-
+/**
+* Function for call API PUT Request
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} jsonData Post Json Data
+* @param {string} storageName Name of LocalStorage for Saving Result
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
 Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, windowFunction = null) {
     //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
@@ -139,6 +177,14 @@ Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, window
 }
 
 
+/**
+* Function for call API GET Request
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} storageName Name of LocalStorage for Saving Result
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
 Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction = null) {
     //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
@@ -179,6 +225,13 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction =
 }
 
 
+/**
+* Function for call API DELETE Request
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
 Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
     //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
@@ -211,70 +264,11 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
 }
 
 
-function InvalidForm() {
-    var form = $(this); form.addClass("ani-ring");
-    setTimeout(function () { form.removeClass("ani-ring"); }, 1000);
-}
-
-
-function ValidateForm() {
-    Gs.Behaviors.ShowPageLoading();
-    $.ajax({
-        global: false,
-        type: "POST",
-        url: Metro.storage.getItem('BackendServerAddress', null) + "/AuthenticationService",
-        async: true,
-        cache: false,
-        headers: { "Authorization": "Basic " + btoa($("#usernameId").val() + ":" + $("#passwordId").val()) },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            Cookies.set('ApiToken', result.Token);
-            Metro.storage.setItem("ApiToken", result);
-            Gs.Behaviors.HidePageLoading();
-            window.location.href = Metro.storage.getItem("DefaultPath", null);
-            return true;
-        },
-        error: function (err) {
-            console.log(err);
-            Cookies.remove('ApiToken');
-            Metro.storage.delItem("ApiToken");
-            Gs.Behaviors.HidePageLoading();
-            Gs.Objects.ShowNotify("alert", err.statusText); return false;
-        }
-    });
-
-}
-
-
-function ValidateRegForm() {
-    Gs.Behaviors.ShowPageLoading();
-    $.ajax({
-        global: false,
-        type: "POST",
-        url: Metro.storage.getItem('BackendServerAddress', null) + "/RegistrationService/Registration",
-        async: true,
-        cache: false,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify({ FirstName: $("#firstName").val(), Surname: $("#surname").val(), Username: $("#userName").val(), EmailAddress: $("#email").val(), Password: $("#password").val() }),
-        success: function (result) {
-            if (result.Status != "success") { Gs.Objects.ShowNotify("alert", result.ErrorMessage); }
-            else { Gs.Objects.ShowNotify("success", result.Status); }
-            Gs.Behaviors.HidePageLoading();
-            return true;
-        },
-        error: function (err) {
-            console.log(err);
-            Gs.Behaviors.HidePageLoading();
-            Gs.Objects.ShowNotify("alert", err.statusText); return false;
-        }
-    });
-
-}
-
-
-Gs.Apis.GetUserSetting = function () {
+/**
+* Function with API of Portal User Setting
+* @function
+* @return {boolean} return status
+*/Gs.Apis.GetUserSetting = function () {
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
         global: false,
@@ -309,11 +303,20 @@ Gs.Apis.GetUserSetting = function () {
 }
 
 
+/**
+* Function of Status if User is Logged or NOT
+* @function
+* @return {boolean} return status
+*/
 Gs.Apis.IsLogged = function () {
     if (Cookies.get('ApiToken') == undefined || Cookies.get('ApiToken') == null) { return false } else { return true};
 }
 
 
+/**
+* Function for SignOut of Logged User
+* @function
+*/
 Gs.Apis.SignOut = function () {
     Cookies.remove('ApiToken');
     Metro.storage.delItem('ApiToken');

@@ -526,14 +526,6 @@ Gs.Behaviors.RunStripe = function (price, productName) {
 }
 
 
-/**
-* Set Stripe Public Key
-* @function
-*/
-function SetStripeKey() {
-    Gs.Variables.stripe = Stripe(Metro.storage.getItem("StripePublicKey", null));
-}
-
 
 /**
 * Download Payed Basket Product
