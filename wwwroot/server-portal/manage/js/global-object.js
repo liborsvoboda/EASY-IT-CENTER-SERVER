@@ -705,7 +705,6 @@ Gs.Objects.AddSuggest = async function () {
 /**
 * Function Generate and Show Editor for Help Menu
 * @function
-* @param {string} selectedUser selected User
 */
 Gs.Objects.EditHelpMenu = function () {
     let html = `
@@ -724,19 +723,30 @@ Gs.Objects.EditHelpMenu = function () {
 }
 
 
+/**
+* Function Open Blog Menu get API and Open
+* @function
+*/
 Gs.Objects.OpenBlogMenu = async function () {
     $("#EditBlogMenu").remove();
     await Gs.Apis.RunServerGetApi("PortalApiTableService/GetBlogList", "BlogList", "EditBlogMenu");
 }
 
 
-
+/**
+* Function Show/Close Online Tool Panel
+* @function
+*/
 Gs.Objects.ShowOnlineTools = function () {
     if (Metro.charms.isOpen("#OnlineToolPanel")) { Metro.charms.close("#OnlineToolPanel"); }
     else { Metro.charms.open("#OnlineToolPanel"); }
 }
 
 
+/**
+* Function Test Window Link Open URL in Window
+* @function
+*/
 Gs.Objects.TestWindowLink = function () {
     if ($("#menuNewWindow").val('checked')[0].checked) {
         window.open($("#menuUrl").val());
@@ -745,6 +755,11 @@ Gs.Objects.TestWindowLink = function () {
     }
 }
 
+
+/**
+* Function Generate and Show Add to Favorites
+* @function
+*/
 Gs.Objects.AddToFavorites = async function () {
     let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Web">Web</option><option value="GitHub">GitHub</option><option value="Server">Server</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' class='hidden' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
     let actions = [{
@@ -770,7 +785,10 @@ Gs.Objects.AddToFavorites = async function () {
 }
 
 
-
+/**
+* Function Generate and Show Remove Favorite
+* @function
+*/
 Gs.Objects.RemoveFavorite = async function (menuName,recGuid) {
     let content = `<div>Do you want to Remove Favorite: ${menuName}</div>`;
     let actions = [{
@@ -783,6 +801,10 @@ Gs.Objects.RemoveFavorite = async function (menuName,recGuid) {
 }
 
 
+/**
+* Function Generate and Show Add to Online Tool Panel
+* @function
+*/
 Gs.Objects.AddToOnlineToolList = async function () {
     let content = `<div><select id=menuGroup data-role="select" data-prepend="Group"><option value="Online Tool">Online Tool</option><option value="Data Tool">Data Tool</option><option value="Developer">Developer</option>"</select><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuIcon' type='text' data-role='input' data-prepend='Icon' class='hidden' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
     let actions = [{
@@ -808,6 +830,10 @@ Gs.Objects.AddToOnlineToolList = async function () {
 }
 
 
+/**
+* Function Generate and Show Remove Online Tool
+* @function
+*/
 Gs.Objects.RemoveOnlineTool = async function (menuName, recGuid) {
     let content = `<div>Do you want to Remove Online Tool: ${menuName}</div>`;
     let actions = [{
@@ -820,9 +846,10 @@ Gs.Objects.RemoveOnlineTool = async function (menuName, recGuid) {
 }
 
 
-
-
-
+/**
+* Function Generate and Show Remove Web Seach Panel
+* @function
+*/
 Gs.Objects.GenerateRemoveWebSearchList = async function () {
     let webSearch = Metro.storage.getItem('WebSearchList', null);
     let content = `<div>`;
@@ -835,6 +862,10 @@ Gs.Objects.GenerateRemoveWebSearchList = async function () {
 }
 
 
+/**
+* Function Generate and Show Add Web Search Panel
+* @function
+*/
 Gs.Objects.AddWebSearchList = async function () {
     let content = `<div><input id='menuName' type='text' data-role='input' data-prepend='Name' ><input id='menuUrl' type='text' data-role='input' data-prepend='Url' ><input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window"><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()"><span class="mif-home mif-3x"></span>Test Web Url</button><div id="menuDescription"></div></div>`;
     let actions = [{
@@ -860,6 +891,10 @@ Gs.Objects.AddWebSearchList = async function () {
 }
 
 
+/**
+* Function Generate and Show Remove Web Search API
+* @function
+*/
 Gs.Objects.RemoveWebSearchList = async function (menuName, recGuid) {
     let content = `<div>Do you want to Remove Web Search: ${menuName}</div>`;
     let actions = [{
@@ -874,7 +909,10 @@ Gs.Objects.RemoveWebSearchList = async function (menuName, recGuid) {
 
 
 
-
+/**
+* Function Generate and Show Browser Console
+* @function
+*/
 Gs.Objects.OpenBrowserConsole = function () {
     let html = `<div id="ConsoleWindow" class="w-100 h-100" style="width: 100vw; height: 100vh; background-color: black;">
                             <div class="console"><div id="browser-console-output" class="output"></div></div>
