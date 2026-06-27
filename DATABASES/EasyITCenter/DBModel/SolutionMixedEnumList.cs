@@ -68,6 +68,7 @@ namespace EasyITCenter.DBModel
         public int UserId { get; set; }
         [Required]
         public bool Active { get; set; }
+        public int Version { get; set; }
         public DateTime TimeStamp { get; set; }
 
         [ForeignKey("UserId")]

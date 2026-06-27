@@ -244,6 +244,12 @@ namespace EasyITCenter.DBModel
 
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
+                entity.HasOne(d => d.SolutionLanguageListNameNavigation)
+                    .WithMany(p => p.BusinessAddressLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.SolutionLanguageListName)
+                    .HasConstraintName("FK_BusinessAddressList_SolutionLanguageList");
+
                 entity.HasOne(d => d.SolutionUser)
                     .WithMany(p => p.BusinessAddressLists)
                     .HasForeignKey(d => d.SolutionUserId)
@@ -1231,6 +1237,8 @@ namespace EasyITCenter.DBModel
 
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.Version).HasDefaultValueSql("((1))");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SolutionMixedEnumLists)
                     .HasForeignKey(d => d.UserId)
@@ -1414,12 +1422,21 @@ namespace EasyITCenter.DBModel
 
                 entity.Property(e => e.Phone).HasDefaultValueSql("((0))");
 
+                entity.Property(e => e.SolutionLanguageListName).HasDefaultValueSql("('CZ')");
+
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.SolutionUserLists)
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("FK_UserList_UserRoleList");
+
+                entity.HasOne(d => d.SolutionLanguageListNameNavigation)
+                    .WithMany(p => p.SolutionUserLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.SolutionLanguageListName)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionUserList_SolutionLanguageList");
             });
 
             modelBuilder.Entity<SolutionUserRoleList>(entity =>
@@ -1549,6 +1566,8 @@ namespace EasyITCenter.DBModel
                 entity.Property(e => e.InheritedQueryLimitType).HasDefaultValueSql("('AllRecords')");
 
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Version).HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.InheritedQueryLimitTypeNavigation)
                     .WithMany(p => p.SystemMenuListInheritedQueryLimitTypeNavigations)

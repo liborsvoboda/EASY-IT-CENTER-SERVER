@@ -6,6 +6,12 @@
 [PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6#winget)
 
 
+
+[MSSQL CZ-Doc](https://learn.microsoft.com/cs-cz)
+
+
+
+
 # Install Go
 https://go.dev/doc/install
 

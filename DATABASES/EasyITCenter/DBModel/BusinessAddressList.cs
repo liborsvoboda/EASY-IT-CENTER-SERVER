@@ -64,7 +64,11 @@ namespace EasyITCenter.DBModel
         [Required]
         public bool? Active { get; set; }
         public DateTime TimeStamp { get; set; }
+        [StringLength(10)]
+        [Unicode(false)]
+        public string? SolutionLanguageListName { get; set; }
 
+        public virtual SolutionLanguageList? SolutionLanguageListNameNavigation { get; set; }
         [ForeignKey("SolutionUserId")]
         [InverseProperty("BusinessAddressLists")]
         public virtual SolutionUserList SolutionUser { get; set; } = null!;

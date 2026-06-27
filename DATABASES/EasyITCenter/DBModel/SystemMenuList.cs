@@ -37,6 +37,7 @@ namespace EasyITCenter.DBModel
         public bool NotShowInMenu { get; set; }
         [Required]
         public bool Active { get; set; }
+        public int Version { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public virtual SolutionMixedEnumList InheritedQueryLimitTypeNavigation { get; set; } = null!;

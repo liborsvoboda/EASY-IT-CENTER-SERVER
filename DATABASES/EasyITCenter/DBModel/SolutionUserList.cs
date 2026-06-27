@@ -136,10 +136,14 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Phone { get; set; }
         public bool PhoneConfirmed { get; set; }
+        [StringLength(10)]
+        [Unicode(false)]
+        public string SolutionLanguageListName { get; set; } = null!;
 
         [ForeignKey("RoleId")]
         [InverseProperty("SolutionUserLists")]
         public virtual SolutionUserRoleList Role { get; set; } = null!;
+        public virtual SolutionLanguageList SolutionLanguageListNameNavigation { get; set; } = null!;
         [InverseProperty("User")]
         public virtual ICollection<BasicAttachmentList> BasicAttachmentLists { get; set; }
         [InverseProperty("User")]
