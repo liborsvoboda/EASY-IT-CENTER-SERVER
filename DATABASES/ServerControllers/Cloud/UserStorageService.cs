@@ -852,10 +852,10 @@ namespace EasyITCenter.Controllers {
                 }
 
                 if (success) {
-                    FileOperations.WriteToFile((Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), translateFileRequest.FilePath + "_" + translateFileRequest.DestLang), translated, true);
-                    JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                    FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), translateFileRequest.FilePath + "_" + translateFileRequest.DestLang), translated, true);
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
                 } else {
-                    JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = Exception });
+                    return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = Exception });
                 }
             } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }

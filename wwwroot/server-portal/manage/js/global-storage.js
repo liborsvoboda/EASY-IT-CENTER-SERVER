@@ -26,6 +26,7 @@ window.Gs = {
     Socket: {},
     SignalR: {},
     Variables: {
+        breakException: {},
         chatmessage: {},
         username: "127.0.0.1",
         fullname: "Anonymous",

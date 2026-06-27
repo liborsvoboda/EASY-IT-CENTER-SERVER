@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- added server-portal Access Rights to Menu, ([1c30824](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1c30824da5ac3d5a0c2e4a1418dde773d98cf23d) by Libor Svoboda).
+- added server-portal open selected menu on refresh, api manager ([5d6c6a8](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/5d6c6a80648b0e3d526db30e8da909503902e56e) by Libor Svoboda).
 - Added Table Version, FullLanguageList ([2de03b1](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2de03b173457310ba916f462a05b06178211e31e) by Libor Svoboda).
 - added function comments ([dd9a0b3](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/dd9a0b3a13fcba4515eb2220645c211d64fc9b27) by lioborsvoboda).
 - added ESB Tool Script Template ([fbdfe3d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/fbdfe3d4c5068165810be61f8ad111c465a3322f) by Libor Svoboda).

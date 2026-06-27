@@ -152,8 +152,9 @@ function SetQuestionCount() {
 /**
 * Function Generate Menu List of Portal
 * @function
+* @param {boolean} ignoreUrl ignore URL Option
 */
-function GenerateMenuList() {
+function GenerateMenuList(ignoreUrl = false) {
     let htmlContent = "";
 
     let lastGuid = null, menuItem = {}, menu = [];
@@ -169,7 +170,10 @@ function GenerateMenuList() {
                 menuItem.Description = mItem.description;
                 menuItem.Public = mItem.public;
                 menuItem.Active = mItem.active;
-                break;
+                menuItem.AccessRoleWrite = mItem.accessRoleWrite;
+                menuItem.AccessUserWrite = mItem.accessUserWrite;
+                menuItem.AccessRoleRead = mItem.accessRoleRead;
+                menuItem.AccessUserRead = mItem.accessUserRead;
             case "Sequence":
                 menuItem.Sequence = parseInt(mItem.value);
                 break;
@@ -200,12 +204,6 @@ function GenerateMenuList() {
             case "MdContent":
                 menuItem.MdContent = mItem.value;
                 menuItem.MdContentId = mItem.id;
-                break;
-            case "AccessRole":
-                menuItem.AccessRole = mItem.value;
-                break;
-            case "AccessUser":
-                menuItem.AccessUser = mItem.value;
                 break;
             default:
         }
@@ -253,7 +251,11 @@ function GenerateMenuList() {
 
 
     });
-    if (currentMenu != undefined) { $(`#${currentMenu}`).click(); }
+
+    try {
+        //Load Menu from Selected URL
+        if (currentMenu != undefined && !ignoreUrl) { $(`#${currentMenu}`).click(); }
+    } catch { }
 }
 
 

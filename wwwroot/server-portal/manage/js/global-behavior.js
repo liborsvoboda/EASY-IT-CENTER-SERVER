@@ -7,20 +7,22 @@ const currentMenu = unescape(document.URL.split('#')[1]).replaceAll(/\s/g, '');
 
 
 /**
- * Autop Service is for Automatic Solve Functions, and Operations on  Backgroud
+ * Autop Service is for Automatic Solve Functions, and Operations on Background
  * Add Auto Solutions Here
  * Example Auto API, Prepare Data,
   * @function
  */
-Gs.Behaviors.AutoService = async function () {
-    setTimeout(async () => {
-        //Auto API
-        if (Gs.Variables.apiTaskList.length > 0) { await Gs.Apis.RunApiManager(); }
+Gs.Behaviors.AutoService = function () {
+    try {
+        setTimeout(function () {
+            //Auto API
+            if (Gs.Variables.apiTaskList.length > 0) { Gs.Apis.RunApiManager(); }
 
 
 
-        await Gs.Behaviors.AutoService();
-    }, 1000);
+            Gs.Behaviors.AutoService();
+        }, 1000);
+    } catch { Gs.Behaviors.AutoService(); }
 }
 
 
@@ -307,7 +309,7 @@ Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
     Metro.storage.delItem("MyQuestionList");
     Metro.storage.delItem("QuestionForResponseList");
     Metro.storage.delItem("SolutionCodeLibraryList"); 
-    Metro.storage.delItem("SolutionMixedEnumList");
+    //Metro.storage.delItem("SolutionMixedEnumList");
     Metro.storage.delItem("SelectedEditor");
     Metro.storage.delItem("PortalApiTableList");
     Metro.storage.delItem("EmailTemplateList");
