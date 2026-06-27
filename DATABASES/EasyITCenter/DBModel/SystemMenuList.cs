@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("SystemMenuList")]
-    [Index("FormPageName", Name = "IX_GlobalMenuList", IsUnique = true)]
+    [Index("TableName", Name = "IX_GlobalMenuList", IsUnique = true)]
     public partial class SystemMenuList
     {
         [Key]
@@ -18,13 +18,19 @@ namespace EasyITCenter.DBModel
         public int SystemGroupMenuListId { get; set; }
         [StringLength(250)]
         [Unicode(false)]
-        public string FormPageName { get; set; } = null!;
+        public string TableName { get; set; } = null!;
         [StringLength(1024)]
         [Unicode(false)]
-        public string AccessRole { get; set; } = null!;
+        public string AccessRoleWrite { get; set; } = null!;
         [StringLength(2048)]
         [Unicode(false)]
-        public string? AccessUser { get; set; }
+        public string? AccessUserWrite { get; set; }
+        [StringLength(1024)]
+        [Unicode(false)]
+        public string AccessRoleRead { get; set; } = null!;
+        [StringLength(2048)]
+        [Unicode(false)]
+        public string? AccessUserRead { get; set; }
         [StringLength(150)]
         [Unicode(false)]
         public string? OrderBy { get; set; }

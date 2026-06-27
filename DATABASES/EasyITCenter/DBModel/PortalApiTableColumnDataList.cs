@@ -35,6 +35,18 @@ namespace EasyITCenter.DBModel
         [Required]
         public bool Active { get; set; }
         public int UserId { get; set; }
+        [StringLength(1024)]
+        [Unicode(false)]
+        public string AccessRoleWrite { get; set; } = null!;
+        [StringLength(2048)]
+        [Unicode(false)]
+        public string? AccessUserWrite { get; set; }
+        [StringLength(1024)]
+        [Unicode(false)]
+        public string AccessRoleRead { get; set; } = null!;
+        [StringLength(2048)]
+        [Unicode(false)]
+        public string? AccessUserRead { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public virtual PortalApiTableList ApiTableNameNavigation { get; set; } = null!;

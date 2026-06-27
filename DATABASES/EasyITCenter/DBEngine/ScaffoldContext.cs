@@ -814,6 +814,10 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<PortalApiTableColumnDataList>(entity =>
             {
+                entity.Property(e => e.AccessRoleRead).HasDefaultValueSql("('admin,webadmin,')");
+
+                entity.Property(e => e.AccessRoleWrite).HasDefaultValueSql("('admin,webadmin,user,webuser,')");
+
                 entity.Property(e => e.Active).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
@@ -1561,6 +1565,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<SystemMenuList>(entity =>
             {
+                entity.Property(e => e.AccessRoleRead).HasDefaultValueSql("('admin,webadmin,')");
+
                 entity.Property(e => e.Active).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.InheritedQueryLimitType).HasDefaultValueSql("('AllRecords')");
