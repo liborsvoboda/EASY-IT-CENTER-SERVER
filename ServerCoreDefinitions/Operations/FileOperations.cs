@@ -161,15 +161,15 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="file"></param>
         /// <param name="content"></param>
         /// <param name="rewrite"></param>
-        public static void WriteToFile(string file, string content, bool rewrite = true) {
+        public static void WriteToFile(string filePath, string content, bool rewrite = true) {
             string[] pathParts = FileOperations.GetDirectoryFromFilePath(file).Split(Path.DirectorySeparatorChar);
             for (int i = 0; i < pathParts.Length; i++) {
-                if (i > 0) { pathParts[i] = System.IO.Path.Combine(pathParts[i - 1], pathParts[i]); }
+                if (i > 0) { pathParts[i] = Path.Combine(pathParts[i - 1], pathParts[i]); }
                 if (!Directory.Exists(pathParts[i])) { Directory.CreateDirectory(pathParts[i]); }
             }
-            if (!CheckFile(file) || (CheckFile(file) && rewrite)) {
-                if (rewrite) { DeleteFile(file); }
-                StreamWriter objWriter = new StreamWriter(file, true);
+            if (!CheckFile(filePath) || (CheckFile(filePath) && rewrite)) {
+                if (rewrite) { DeleteFile(filePath); }
+                StreamWriter objWriter = new StreamWriter(filePath, true);
                 objWriter.WriteLine(content);
                 objWriter.Close();
             }

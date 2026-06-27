@@ -24,7 +24,9 @@ namespace EasyITCenter.Controllers
         public string HtmlContent { get; set; } = null;
         public string JsContent { get; set; } = null;
         public string CssContent { get; set; } = null;
-        public string MdHelp { get; set; } = null;
+        public string MdContent { get; set; } = null;
+        public string AccessRole { get; set; } = null;
+        public string AccessUser { get; set; } = null;
     }
 
     public partial class UserSetting {
@@ -187,8 +189,10 @@ namespace EasyITCenter.Controllers
                         record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.HtmlContent, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "JsContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.JsContent, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "CSSContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.CssContent, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "MdHelp", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdHelp, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "MdContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdContent, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "AccessRole", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.AccessRole, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { ApiTableName = "PortalMenu", ApiTableColumnName = "AccessUser", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.AccessUser, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
                             data.PortalApiTableColumnDataLists.AddRange(record);
                             data.SaveChanges();
@@ -207,8 +211,11 @@ namespace EasyITCenter.Controllers
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "HtmlContent").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "HtmlContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.HtmlContent, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "JsContent").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "JsContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.JsContent, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
                         record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "CSSContent").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "CSSContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.CssContent, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "MdHelp").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "MdHelp", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdHelp, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
-                        
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "MdContent").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "MdContent", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.MdContent, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "AccessRole").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "AccessRole", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.AccessRole, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+                        record.Add(new() { Id = (int)original.Where(a => a.ApiTableColumnName == "AccessUser").Select(a => a.Id).FirstOrDefault(), ApiTableName = "PortalMenu", ApiTableColumnName = "AccessUser", InheritedDataType = "string", RecGuid = menuData.RecGuid, Value = menuData.AccessUser, Description = null, Active = menuData.Active, UserId = (int)HttpContextExtension.GetUserId(), TimeStamp = DateTimeOffset.Now.DateTime });
+
+
                         DatabaseContextExtensions.RunTransaction(data, (trans) => {
                             data.PortalApiTableColumnDataLists.UpdateRange(record);
                             data.SaveChanges();
@@ -940,7 +947,7 @@ namespace EasyITCenter.Controllers
             EasyITCenterContext data = new EasyITCenterContext(); PortalApiTableColumnDataList record = new();
             try {
                 if (HttpContextExtension.IsLogged()) {
-                    record = new() { Id = setMdMenuHelp.Id, RecGuid = setMdMenuHelp.RecGuid, ApiTableName = "PortalMenu", InheritedDataType = "string", ApiTableColumnName = "MdHelp", Value = setMdMenuHelp.Value, Description = null, Active = true, UserId = (int)HttpContextExtension.GetUserId() };
+                    record = new() { Id = setMdMenuHelp.Id, RecGuid = setMdMenuHelp.RecGuid, ApiTableName = "PortalMenu", InheritedDataType = "string", ApiTableColumnName = "MdContent", Value = setMdMenuHelp.Value, Description = null, Active = true, UserId = (int)HttpContextExtension.GetUserId() };
 
                     DatabaseContextExtensions.RunTransaction(data, (trans) => {
                         data.PortalApiTableColumnDataLists.Update(record);

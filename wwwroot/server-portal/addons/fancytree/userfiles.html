@@ -171,6 +171,7 @@
         EditorInit = null;
         Files = [];
 
+        //Commercial OpenOffice
         let key = "SeCur3AP1K3y";
         let rollMyFile = new RollMyFile(key, function () {
         });
@@ -228,13 +229,13 @@
                     } else if (["pdf"].includes(data.node.data.extension)) {
                         SetEditor("PDFviewer");
                     } else if (["xls", "xlsx"].includes(data.node.data.extension)) {
-                        SetEditor("XLSEditor");
+                        SetEditor("XLSViewer");
                     } else if (["doc", "docx"].includes(data.node.data.extension)) {
-                        SetEditor("DOCEditor");
+                        SetEditor("DOCViewer");
                     } else if (["odt", "ods", "odp" ].includes(data.node.data.extension)) {
                         SetEditor("OfficeEditor");
                     } else if (["pptx"].includes(data.node.data.extension)) {
-                        SetEditor("PPTXEditor");
+                        SetEditor("PPTXViewer");
                     } else {
                         SetEditor("Other");
                     }
@@ -379,6 +380,17 @@
                                 "recordDesktop": { "name": "Record Desktop", "icon": "add" },
                                 "recordCamera": { "name": "Record Camera", "icon": "add" },
                             };
+                        } else if (!node.folder && node.data.path.startsWith("Translate")) {
+                            return {
+                                "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
+                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
+                                "deleteFile": { "name": "Delete File", "icon": "delete" },
+                                "sep1": "---------",
+                                "translateFile": { "name": "Translate File", "icon": "add" },
+                                "openInNewWindow": { "name": "Open in New Window", "icon": "paste" },
+                                "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
+                                "showFileUrl": { "name": "Show File Url", "icon": "add" },
+                            };
                         } else if (!node.folder && node.data.path.toLowerCase().endsWith(".xml")) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
@@ -481,7 +493,17 @@
                         }
                     },
                     actions: async function (node, action, options) {
-                        if (action == "showFileUrl") {
+                        if (action == "translateFile"){
+                            let content = "<div><input id='DllFilename' type='text' data-role='input' data-prepend='Dll Filename:' ></div>";
+                            let actions = [{
+                                caption: "Translate", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    await Gs.Apis.RunServerPostApi("UserStorageService/TranslateFile", { FilePath: node.data.path }, null, "ReloadUserStorage");
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Translate File", content, actions);
+
+                        } else if (action == "showFileUrl") {
                             alert(window.location.origin + $('#DataTree').fancytree("getActiveNode").key);
 
                         } else if (action == "xmlToMarkdown") {
@@ -961,6 +983,7 @@
             await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "ServerStorageVersionList", "SetVersioning2");
         }
         async function SetVersioning2() {
+            SaveOpenOffice
             let html = "<div class='row'><div class='cell-4 offset-4'><ul data-role='listview' data-selectable='true'>";
             let dataList = Metro.storage.getItem("StorageFolderList", null).split(";").sort();
             dataList.forEach(item => {
@@ -1010,15 +1033,15 @@
                     //localStorage.setItem("SourceImageEditor", Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key);
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="/server-tools/Media/imageeditor/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     break;
-                case "XLSEditor":
+                case "XLSViewer":
                     Metro.storage.setItem("OpenExcelFile", $('#DataTree').fancytree("getActiveNode").key);
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
-                case "DOCEditor":
+                case "DOCViewer":
                     Metro.storage.setItem("OpenWordFile", $('#DataTree').fancytree("getActiveNode").key);
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/docx/userfiles.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
-                case "PPTXEditor":
+                case "PPTXViewer":
                     Metro.storage.setItem("OpenPowerPointFile", $('#DataTree').fancytree("getActiveNode").key);
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
@@ -1172,13 +1195,13 @@
                         case "ImageEditor":
                             $("#DataFrameWindow")[0].contentWindow.ImageEditor.render({ source: Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key });
                             break;
-                        case "XLSEditor":
+                        case "XLSViewer":
                             $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                             break;
-                        case "DOCEditor":
+                        case "DOCViewer":
                             $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/docx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                             break;
-                        case "PPTXEditor":
+                        case "PPTXViewer":
                             $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                             break;
                         case "Other":

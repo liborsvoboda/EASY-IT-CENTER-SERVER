@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added Table Version, FullLanguageList ([2de03b1](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2de03b173457310ba916f462a05b06178211e31e) by Libor Svoboda).
+- added function comments ([dd9a0b3](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/dd9a0b3a13fcba4515eb2220645c211d64fc9b27) by lioborsvoboda).
+- added ESB Tool Script Template ([fbdfe3d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/fbdfe3d4c5068165810be61f8ad111c465a3322f) by Libor Svoboda).
 - added Metro2-5 Templates ([cce28be](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/cce28befbbcb4aa69b82939a5d7e77d35d834d25) by lioborsvoboda).
 - added server-tools table ([d982820](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/d9828203f939e1bfe27f26c56019e13c42f5c8fd) by Libor Svoboda).
 - added server-tools ([9f62043](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/9f620430811844169adea026cfed7714faed7139) by Libor Svoboda).
@@ -42,6 +45,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- repaired server-tools ([1ceb0e9](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1ceb0e968392ede8c62c0558850870d62bc9c190) by lioborsvoboda).
+- repair server portal tools ([bdc9cc3](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/bdc9cc39c50a6c6771006f664e524b2ee3f5a62b) by lioborsvoboda).
+- repair server-tools ([2619a6d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2619a6d05bd5e02c2020292db56d4a10678b6c26) by lioborsvoboda).
+- prepare server-tools ([4a5efd3](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/4a5efd380e12d10184f8f8fc5b84f2d969d65ea2) by Libor Svoboda).
 - Repair Storage Bugs ([21c4136](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/21c41366646e3730a3529b7c507328e66e67684e) by lioborsvoboda).
 - Extended User Roles ([06bb5d7](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/06bb5d7a3e456660e6c0444c8bff9c9542af6c64) by lioborsvoboda).
 - resolve browser console commands ([efed039](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/efed039b404aa05aa6462f612fa3ddb8f00f2e34) by Libor Svoboda).

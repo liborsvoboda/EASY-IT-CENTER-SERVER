@@ -1,4 +1,4 @@
-/**
+﻿/**
 * Functions for Using after API Call is finished
 */
 
@@ -197,9 +197,15 @@ function GenerateMenuList() {
                 menuItem.CssContent = mItem.value;
                 menuItem.CssContentId = mItem.id;
                 break;
-            case "MdHelp":
-                menuItem.MdHelp = mItem.value;
-                menuItem.MdHelpId = mItem.id;
+            case "MdContent":
+                menuItem.MdContent = mItem.value;
+                menuItem.MdContentId = mItem.id;
+                break;
+            case "AccessRole":
+                menuItem.AccessRole = mItem.value;
+                break;
+            case "AccessUser":
+                menuItem.AccessUser = mItem.value;
                 break;
             default:
         }
@@ -226,28 +232,28 @@ function GenerateMenuList() {
 
     menu.forEach((mItem, index, arr) => {
         if (mItem.InheritedMenuType == "link") {
-            htmlContent = '<li onclick=Gs.Behaviors.SetLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li id="' + mItem.Name.replaceAll(/\s/g, '') +'" onclick=Gs.Behaviors.SetLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         } else if (mItem.InheritedMenuType == "externalLink") {
-            htmlContent = '<li onclick=Gs.Behaviors.SetExternalLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li id="' + mItem.Name.replaceAll(/\s/g, '') +'" onclick=Gs.Behaviors.SetExternalLink(' + mItem.HtmlContentId + ',"' + mItem.HtmlContent + '"); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
 
         }
 
         else if (mItem.InheritedMenuType == "content") {
-            htmlContent = '<li onclick=Gs.Behaviors.SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li id="' + mItem.Name.replaceAll(/\s/g, '') +'" onclick=Gs.Behaviors.SetContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
 
         else if (mItem.InheritedMenuType == "externalContent") {
-            htmlContent = '<li onclick=Gs.Behaviors.SetExternalContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
+            htmlContent = '<li id="' + mItem.Name.replaceAll(/\s/g, '') +'" onclick=Gs.Behaviors.SetExternalContent(' + mItem.HtmlContentId + ',' + mItem.JsContentId + ',' + mItem.CssContentId + '); ' + (Metro.storage.getItem('UserSettingList', null).EnableShowDescription && mItem.Description != null && mItem.Description.length > 0 ? ' data-role="hint" data-hint-text="' + mItem.Description + '"' : "''") + ' ><a href= "#' + mItem.Name + '" ><span class="icon"><span class="' + mItem.Icon + '"></span></span><span class="caption">' + mItem.Name + '</span></a></li >';
             document.getElementById(mItem.ParentGuid).innerHTML = document.getElementById(mItem.ParentGuid).innerHTML + htmlContent;
         }
 
 
     });
-
+    if (currentMenu != undefined) { $(`#${currentMenu}`).click(); }
 }
 
 

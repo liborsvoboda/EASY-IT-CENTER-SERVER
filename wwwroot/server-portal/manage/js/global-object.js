@@ -715,11 +715,7 @@ Gs.Objects.EditHelpMenu = function () {
         </DIV >
     </DIV >`;
     Gs.Objects.InfoboxObjectCreate("EditHelpMenu", html, width = "1000", height = "800");
-
-    setTimeout(async function () {
-        $('#HelpFastEditor')[0].contentWindow.mdEditor.setMarkdown(Metro.storage.getItem("SelectedMenu", null).MdHelp);
-    }, 1000);
-
+    Gs.Behaviors.LoadDataToTool("FastHelpEditor");
 }
 
 

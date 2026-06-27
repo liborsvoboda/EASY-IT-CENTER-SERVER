@@ -12,7 +12,11 @@ if (Metro.storage.getItem('ShareChatMessageList', null) == null) { Metro.storage
 if (Metro.storage.getItem('ConsoleLogList', null) == null) { Metro.storage.setItem('ConsoleLogList', []); }
 
 
-//Global Javascript Library
+/**
+* Global Javascript Library
+* { UUID, Api: [Id = RandomString,Sequence = 0 - XXXX number same for Paraler Call, Other for Serial, Processing = true/false, Processed = true/false, Type: ApiName + WindowFunction, next Same ass Definition//apiPath, jsonData, filename, binary, storageName = null, windowFunction = null ] }
+* 
+*/
 window.Gs = {
     Behaviors: {},
     Objects: {},
@@ -27,6 +31,7 @@ window.Gs = {
         fullname: "Anonymous",
         stripe: null,
         monacoEditorList: [],
+        apiTaskList: [], 
         screensaver: {},
         notifySetting :{
             notifyWidth: 300,
@@ -77,7 +82,7 @@ window.Gs = {
 }
 
 
-
+/*
 let console = (function (oldCons) {
     return {
         log: function (text) {
@@ -109,7 +114,7 @@ let console = (function (oldCons) {
 
 //Then redefine the old console
 window.console = console;
-
+*/
 
 window.WindowButtons = [
     {

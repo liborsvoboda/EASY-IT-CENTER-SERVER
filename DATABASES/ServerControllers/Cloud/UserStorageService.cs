@@ -100,6 +100,18 @@ namespace EasyITCenter.Controllers {
     }
 
 
+    public class TranslateFileRequest {
+        public string DestLang { get; set; }
+        public string FilePath { get; set; }
+    }
+
+
+    public class TranslateContentRequest {
+        public string DestLang { get; set; }
+        public string OrigText { get; set; }
+    }
+
+
     [AllowAnonymous]
     [Route("/UserStorageService")]
     public class UserStorageService : Controller {
@@ -815,5 +827,76 @@ namespace EasyITCenter.Controllers {
             }
         }
 
+
+
+        /// <summary>
+        /// User Storage Translate Service
+        /// </summary>
+        /// <param name="translateFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/TranslateFile")]
+        [Consumes("application/json")]
+        public async Task<string> TranslateFile([FromBody] TranslateFileRequest translateFileRequest) {
+            try {
+
+                string textTranslatorUrlKey = ""; string translated = string.Empty; bool success = false;
+                string origText = string.Empty; string Exception = string.Empty;
+                try {
+                    translateFileRequest.FilePath = translateFileRequest.FilePath.StartsWith("/") ? translateFileRequest.FilePath.Substring(1) : translateFileRequest.FilePath.StartsWith("\\") ? translateFileRequest.FilePath.Substring(1) : translateFileRequest.FilePath;
+                    origText = FileOperations.ReadTextFile(Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), translateFileRequest.FilePath));
+                    success = GoogleTranslateService.Translate(origText, translateFileRequest.DestLang, "en", textTranslatorUrlKey, out translated);
+                } catch (Exception ex) {
+                    Exception = DataOperations.GetUserApiErrMessage(ex);
+                    success = false;
+                }
+
+                if (success) {
+                    FileOperations.WriteToFile((Path.Combine(SrvRuntime.SrvUserPath, HttpContextExtension.GetUserName(), translateFileRequest.FilePath + "_" + translateFileRequest.DestLang), translated, true);
+                    JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
+                } else {
+                    JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = Exception });
+                }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+        }
+
+
+        /// <summary>
+        /// User Storage Translate Service
+        /// </summary>
+        /// <param name="translateFileRequest"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("/UserStorageService/TranslateContent")]
+        [Consumes("application/json")]
+        public async Task<string> TranslateContent([FromBody] TranslateContentRequest translateContentRequest) {
+            try {
+
+                string? textTranslatorUrlKey = "";
+                string translated = string.Empty;
+                bool success = false;
+                try {
+                    success = GoogleTranslateService.Translate(translateContentRequest.OrigText, translateContentRequest.DestLang, "en", textTranslatorUrlKey, out translated);
+                } catch (Exception) {
+                    success = false;
+                }
+
+                if (success) {
+                    return JsonSerializer.Serialize(translated, new JsonSerializerOptions() {
+                        ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                        WriteIndented = true,
+                        DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    });
+                } else {
+                    return JsonSerializer.Serialize(String.Empty, new JsonSerializerOptions() {
+                        ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                        WriteIndented = true,
+                        DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    });
+                }
+            } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
+        }
     }
 }

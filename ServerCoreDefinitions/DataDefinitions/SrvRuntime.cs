@@ -39,6 +39,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
         public static string SrvCertPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-certificate");
         public static string SystemAppsPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "system-apps");
+        public static string SrvToolsPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-tools");
         public static string SystemPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "system-portal");
         public static string ServerPortalPath { get; set; } = Path.Combine(SrvRuntime.WebRootPath, "server-portal");
 

@@ -218,11 +218,11 @@
                     } else if (["pdf"].includes(data.node.data.extension)) {
                         SetEditor("PDFviewer");
                     } else if (["xls", "xlsx"].includes(data.node.data.extension)) {
-                        SetEditor("XLSEditor");
+                        SetEditor("XLSViewer");
                     } else if (["doc", "docx"].includes(data.node.data.extension)) {
-                        SetEditor("DOCEditor");
+                        SetEditor("DOCViewer");
                     } else if (["pptx"].includes(data.node.data.extension)) {
-                        SetEditor("PPTXEditor");
+                        SetEditor("PPTXViewer");
                     } else {
                         SetEditor("Other");
                     }
@@ -929,15 +929,15 @@
                     //localStorage.setItem("SourceImageEditor", Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key);
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="/server-tools/Media/imageeditor/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     break;
-                case "XLSEditor":
+                case "XLSViewer":
                     Metro.storage.setItem("OpenExcelFile", $('#DataTree').fancytree("getActiveNode").key);
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
-                case "DOCEditor":
+                case "DOCViewer":
                     Metro.storage.setItem("OpenWordFile", $('#DataTree').fancytree("getActiveNode").key);
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/docx/userfiles.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
-                case "PPTXEditor":
+                case "PPTXViewer":
                     Metro.storage.setItem("OpenPowerPointFile", $('#DataTree').fancytree("getActiveNode").key);
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                     break;
@@ -1089,13 +1089,13 @@
                         case "ImageEditor":
                             $("#DataFrameWindow")[0].contentWindow.ImageEditor.render({ source: Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key });
                             break;
-                        case "XLSEditor":
+                        case "XLSViewer":
                             $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                             break;
-                        case "DOCEditor":
+                        case "DOCViewer":
                             $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/docx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                             break;
-                        case "PPTXEditor":
+                        case "PPTXViewer":
                             $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                             break;
                         case "Other":

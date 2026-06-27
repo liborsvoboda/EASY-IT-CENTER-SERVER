@@ -1,5 +1,94 @@
 ﻿
 /**
+* Function for Collective run APIS and Start function on APIs done
+* ////{ UUID, Api: [Id = RandomString,Sequence = 0 - XXXX number same for Paraler Call, Other for Serial, Processing = true/false, Processed = true/false, Type: ApiName + WindowFunction,
+next Same as Definition with UpperCase First Character//ApiPath, JsonData, Filename, Binary, StorageName = null, WindowFunction = null ] }
+* @function
+*/
+Gs.Apis.RunApiManager = async function () {
+    let lastUUID = ""; 
+    Gs.Variables.apiTaskList.forEach((api, index, arr) => {
+        let processing = false; let sequence = 0; let prewSequence = 0;
+
+        //FORMAT CORRECT API FLOW
+        if (api.UUID == undefined) { api.UUID = Gs.Functions.GenerateUUID(); }
+
+        //Clean Processed
+        if (api.Processed) { Gs.Variables.apiTaskList =arr.filter(obj => {return obj.Id != api.Id }); }
+
+
+        if (api.UUID != lastUUID) {
+           
+            //FORMAT CORRECT API FLOW
+            if (api.Id == undefined) { api.Id = Gs.Functions.RandomString(); }
+            if (api.Processing == undefined) { api.Processing = false; }
+            if (api.Processed == undefined) { api.Processed = false; }
+            if (api.Sequence == undefined) { api.Sequence = 0; }
+            if (api.ApiPath == undefined) { api.ApiPath = null; }
+            if (api.JsonData == undefined) { api.JsonData = []; }
+            if (api.Filename == undefined) { api.Filename = null; }
+            if (api.Binary == undefined) { api.Binary = false; }
+            if (api.StorageName == undefined) { api.StorageName = null; }
+            if (api.WindowFunction == undefined) { api.WindowFunction = null; }
+
+            if (api.Processed != undefined && api.Processed) { api.Processing = false; }
+
+
+            //Check Previous
+            if (index == 0) { prewSequence = 0; } else { prewSequence = arr[index - 1].Sequence; }
+            if (api.Processed) { sequence = api.Sequence; }
+
+            //Process API
+            if (!api.Processed && !processing && !api.Processing && (arr[index].Sequence == prewSequence || arr[index].Sequence > sequence)) {
+
+                switch (api.Type) {
+                    case "DownloadApi":
+                        //(apiPath, jsonData, filename, binary, storageName = null, windowFunction = null )
+                        arr[index].Processing = true;
+                        Gs.Apis.DownloadApi(api.ApiPath, api.JsonData, api.Filename, api.Binary, api.StorageName, api.WindowFunction, api.Id);
+                        if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw BreakException; }
+                        break;
+                    case "RunServerPostApi":
+                        //(apiPath, jsonData, storageName = null, windowFunction = null )
+                        arr[index].Processing = true;
+                        Gs.Apis.RunServerPostApi(api.ApiPath, api.JsonData, api.StorageName, api.WindowFunction, api.Id);
+                        if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw BreakException; }
+                        break;
+                    case "RunServerPutApi":
+                        //(apiPath, jsonData, storageName = null, windowFunction = null )
+                        arr[index].Processing = true;
+                        Gs.Apis.RunServerPutApi(api.ApiPath, api.JsonData, api.StorageName, api.WindowFunction, api.Id);
+                        if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw BreakException; }
+                        break;
+                    case "RunServerGetApi":
+                        //(apiPath, storageName = null, windowFunction = null )
+                        arr[index].Processing = true;
+                        Gs.Apis.RunServerGetApi(api.ApiPath, api.StorageName, api.WindowFunction, api.Id);
+                        if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw BreakException; }
+                        break;
+                    case "RunServerDeleteApi":
+                        //(apiPath, windowFunction = null )
+                        arr[index].Processing = true;
+                        Gs.Apis.RunServerDeleteApi(api.ApiPath, api.WindowFunction, api.Id);
+                        if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw BreakException; }
+                        break;
+                    case "WindowFunction":
+                        arr[index].Processing = true;
+                        window[api.WindowFunction]();
+                        arr[index].Processed = true;
+                        if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw BreakException; }
+                        break;
+                    default:
+                }
+            }
+            processing = arr[index].Processing;
+        }
+        lastUUID = arr[index].UUID;
+    });
+}
+
+
+/**
 * Function for Save Captured Video of User Cloud Request
 * @function
 * @param {string} filename Filename for Saving
@@ -31,7 +120,7 @@ Gs.Apis.SavePublicCapturedVideo = async function (filename) {
 * @param {string} windowFunction Function name for call after API is done
 * @return {boolean} return status
 */
-Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, storageName = null, windowFunction = null ) {
+Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, storageName = null, windowFunction = null, Id = null) {
     //used for Downloading files
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
@@ -48,6 +137,7 @@ Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, stora
             'responseType': binary ? 'blob' : "text"
         },
         success: function (result) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             if (storageName != null) {//SAVE to Storage
                 if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
@@ -66,6 +156,7 @@ Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, stora
             Gs.Behaviors.HidePageLoading();
         },
         error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             console.log(err);
             if (storageName != null) { Metro.storage.delItem(storageName); }
             if (windowFunction != null) { window[windowFunction](); }
@@ -86,7 +177,7 @@ Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, stora
 * @param {string} windowFunction Function name for call after API is done
 * @return {boolean} return status
 */
-Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windowFunction = null) {
+Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windowFunction = null, Id = null) {
     //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
@@ -100,6 +191,7 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             if (storageName != null) {
                 if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
@@ -117,6 +209,7 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
             }
         },
         error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             console.log(err);
             if (storageName != null) { Metro.storage.setItem(storageName, []); }
             if (windowFunction != null) { window[windowFunction](); }
@@ -136,7 +229,7 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
 * @param {string} windowFunction Function name for call after API is done
 * @return {boolean} return status
 */
-Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, windowFunction = null) {
+Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, windowFunction = null, Id = null) {
     //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
@@ -150,6 +243,8 @@ Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, window
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+
             if (storageName != null) {
                 if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
@@ -167,6 +262,7 @@ Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, window
             }
         },
         error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             console.log(err);
             if (storageName != null) { Metro.storage.setItem(storageName, []); }
             if (windowFunction != null) { window[windowFunction](); }
@@ -185,7 +281,7 @@ Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, window
 * @param {string} windowFunction Function name for call after API is done
 * @return {boolean} return status
 */
-Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction = null) {
+Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction = null, Id = null) {
     //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
@@ -198,6 +294,7 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction =
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             if (storageName != null) {
                 if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
@@ -215,6 +312,7 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction =
             }
         },
         error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             console.log(err);
             if (storageName != null) { Metro.storage.setItem(storageName, []); }
             if (windowFunction != null) { window[windowFunction](); }
@@ -232,7 +330,7 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction =
 * @param {string} windowFunction Function name for call after API is done
 * @return {boolean} return status
 */
-Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
+Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null, Id = null) {
     //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
     Gs.Behaviors.ShowPageLoading();
     $.ajax({
@@ -245,6 +343,7 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
 
@@ -255,6 +354,7 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
             }
         },
         error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             console.log(err);
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
@@ -273,7 +373,7 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null) {
     $.ajax({
         global: false,
         type: "GET",
-        url: Metro.storage.getItem('BackendServerAddress', null) + "/PortalApiTableService/GetUserSettingList",
+        url: Metro.storage.getItem('ApiOriginSuffix', null) + "PortalApiTableService/GetUserSettingList",
         async: true,
         cache: false,
         headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : "",

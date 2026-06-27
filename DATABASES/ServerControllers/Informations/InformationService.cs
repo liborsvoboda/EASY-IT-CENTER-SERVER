@@ -42,7 +42,12 @@ namespace EasyITCenter.Controllers
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
-                data = new EasyITCenterContext().ServerParameterLists.Where(a => a.Key == "StripePublicKey").FirstOrDefault();
+                if(HttpContext.Request.Host.Host.ToLower() == "localhost") {
+                    data = new EasyITCenterContext().ServerParameterLists.Where(a => a.Key == "StripeTestPublicKey").FirstOrDefault();
+                } else {
+                    data = new EasyITCenterContext().ServerParameterLists.Where(a => a.Key == "StripePublicKey").FirstOrDefault();
+                }
+                
             }
             return base.Json(new WebClasses.JsonResult() { Result = data.Value, Status = DBResult.success.ToString() });
         }

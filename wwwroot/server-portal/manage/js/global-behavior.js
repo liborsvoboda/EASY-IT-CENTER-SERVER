@@ -3,6 +3,25 @@ let pageLoader;
 
 const urlParams = new URLSearchParams(window.location.search);
 const StripePayed = urlParams.get('Payed');
+const currentMenu = unescape(document.URL.split('#')[1]).replaceAll(/\s/g, '');
+
+
+/**
+ * Autop Service is for Automatic Solve Functions, and Operations on  Backgroud
+ * Add Auto Solutions Here
+ * Example Auto API, Prepare Data,
+  * @function
+ */
+Gs.Behaviors.AutoService = async function () {
+    setTimeout(async () => {
+        //Auto API
+        if (Gs.Variables.apiTaskList.length > 0) { await Gs.Apis.RunApiManager(); }
+
+
+
+        await Gs.Behaviors.AutoService();
+    }, 1000);
+}
 
 
 /**
@@ -33,6 +52,21 @@ Gs.Behaviors.PortalStartup = async function () { //LOGGED
 
     Gs.Objects.CreateToolPanel();
 
+
+    Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: Gs.Variables.getSpProcedure, StorageName: "MixedEnumList" } );
+    Gs.Variables.getSpProcedure[1].tableName = "SolutionMonacoSuggestionList";
+    Gs.Variables.getSpProcedure[2].camelCase = true;
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: Gs.Variables.getSpProcedure, StorageName: "MonacoSuggestionList" } );
+    Gs.Variables.getSpProcedure[2].camelCase = false;
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "PortalApiTableService/GetQuestionForResponseList", StorageName: "AdminQuestionList", WindowFunction: "SetQuestionCount" } );
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "PortalApiTableService/GetApiTableDataList/PortalMenu", StorageName: "PortalMenuList", WindowFunction: "GenerateMenuList" } );
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "InformationService/GetVersion", StorageName: "ServerVersion" } );
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "InformationService/GetStripePublicKey", StorageName: "StripePublicKey", WindowFunction: "SetStripeKey" } );
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(),  Id: Gs.Functions.RandomString(), Sequence: 0, Type: "WindowFunction", WindowFunction: "LoadOnlineToolList" } );
+
+
+    /*
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
     await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
 
@@ -48,6 +82,8 @@ Gs.Behaviors.PortalStartup = async function () { //LOGGED
     await Gs.Apis.RunServerGetApi("InformationService/GetStripePublicKey", "StripePublicKey", "SetStripeKey");
 
     await LoadOnlineToolList();
+    */
+
 
     //Check Stripe Payment
     if (StripePayed != null && StripePayed) {
@@ -576,4 +612,20 @@ Gs.Behaviors.ShareReceiveClearChat = function () {
 }
 
 
-
+/**
+* Load Data To Tool in 1 Sec Cycle
+* @function
+* @param {string} tool tool Name from Program Code
+*/
+Gs.Behaviors.LoadDataToTool = function (tool) {
+    try {
+        setTimeout(() => {
+            switch (tool) {
+                case "FastHelpEditor":
+                    $('#HelpFastEditor')[0].contentWindow.mdEditor.setMarkdown(Metro.storage.getItem("SelectedMenu", null).MdContent);
+                    break;
+                default:
+            }
+        }, 1000);
+    } catch { Gs.Behaviors.LoadDataToTool(tool) }
+}

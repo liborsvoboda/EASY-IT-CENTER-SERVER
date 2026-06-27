@@ -1,8 +1,20 @@
 ﻿
 
 /**
+* Get Random String
+*
+* @function
+* @return {string} Filtered text
+*/
+Gs.Functions.RandomString = function () {
+    return Math.random(10) * 10000000000000000;
+}
+
+
+/**
 * HTML entities decode
 *
+* @function
 * @param {string} str Input text
 * @return {string} Filtered text
 */
@@ -894,13 +906,13 @@ Gs.Functions.AddSuggestionSave = async function () {
 */
 Gs.Functions.SaveMenuHelp = async function () {
     let data = Metro.storage.getItem("SelectedMenu", null);
-    data.MdHelp = $('#HelpFastEditor')[0].contentWindow.mdEditor.getMarkdown();
+    data.MdContent = $('#HelpFastEditor')[0].contentWindow.mdEditor.getMarkdown();
     Metro.storage.setItem("SelectedMenu", data);
 
     let jsonData = {
-        Id: data.MdHelpId,
+        Id: data.MdContentId,
         RecGuid: data.RecGuid,
-        Value: data.MdHelp
+        Value: data.MdContent
     };
 
     $("#EditHelpMenu").remove();
