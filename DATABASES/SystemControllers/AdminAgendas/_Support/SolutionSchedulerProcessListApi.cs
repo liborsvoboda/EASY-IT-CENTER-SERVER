@@ -2,25 +2,25 @@
 
     [Authorize]
     [ApiController]
-    [Route("EasyITCenterSolutionSchedulerProcessList")]
+    [Route("EasyITCenterSolutionSchedulerProcessSupportList")]
     public class EasyITCenterSolutionSchedulerProcessListApi : ControllerBase {
 
 
-        [HttpGet("/EasyITCenterSolutionSchedulerProcessList")]
+        [HttpGet("/EasyITCenterSolutionSchedulerProcessSupportList")]
         public async Task<string> GetSolutionSchedulerProcessList() {
-            List<SolutionSchedulerProcessList> data;
+            List<SolutionSchedulerProcessSupportList> data;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
-            })) { data = new EasyITCenterContext().SolutionSchedulerProcessLists.OrderByDescending(a => a.TimeStamp).ToList(); }
+            })) { data = new EasyITCenterContext().SolutionSchedulerProcessSupportLists.OrderByDescending(a => a.TimeStamp).ToList(); }
             return JsonSerializer.Serialize(data);
         }
 
-        [HttpGet("/EasyITCenterSolutionSchedulerProcessList/{taskId}")]
+        [HttpGet("/EasyITCenterSolutionSchedulerProcessSupportList/{taskId}")]
         public async Task<string> GetSolutionSchedulerProcessListByParent(int taskId ) {
-            List<SolutionSchedulerProcessList> data;
+            List<SolutionSchedulerProcessSupportList> data;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
-            })) { data = new EasyITCenterContext().SolutionSchedulerProcessLists.Where(a=>a.ScheduledTaskId == taskId).OrderByDescending(a => a.TimeStamp).ToList(); }
+            })) { data = new EasyITCenterContext().SolutionSchedulerProcessSupportLists.Where(a=>a.ScheduledTaskId == taskId).OrderByDescending(a => a.TimeStamp).ToList(); }
             return JsonSerializer.Serialize(data);
         }
 
