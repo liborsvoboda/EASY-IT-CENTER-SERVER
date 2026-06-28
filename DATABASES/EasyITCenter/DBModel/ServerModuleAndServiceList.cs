@@ -46,6 +46,9 @@ namespace EasyITCenter.DBModel
         public bool RedirectSetAllowed { get; set; }
         [Required]
         public bool Active { get; set; }
+        [Unicode(false)]
+        public string? MdContent { get; set; }
+        public int Version { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 

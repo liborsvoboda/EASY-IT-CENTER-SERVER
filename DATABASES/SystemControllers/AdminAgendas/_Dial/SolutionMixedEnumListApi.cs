@@ -11,7 +11,7 @@
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
-                data = new EasyITCenterContext().SolutionMixedEnumLists.OrderBy(a => a.ItemsGroup).ThenBy(a=>a.Name).ToList();
+                data = new EasyITCenterContext().SolutionMixedEnumLists.OrderBy(a => a.ItemsGroup).ThenBy(a=>a.SystemName).ToList();
             }
             return JsonSerializer.Serialize(data);
         }
@@ -34,7 +34,7 @@
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted
             })) {
-                data = new EasyITCenterContext().SolutionMixedEnumLists.Where(a => a.ItemsGroup.ToLower() == groupname.ToLower()).OrderBy(a=>a.Name).ToList();
+                data = new EasyITCenterContext().SolutionMixedEnumLists.Where(a => a.ItemsGroup.ToLower() == groupname.ToLower()).OrderBy(a=>a.SystemName).ToList();
             }
 
             return JsonSerializer.Serialize(data);

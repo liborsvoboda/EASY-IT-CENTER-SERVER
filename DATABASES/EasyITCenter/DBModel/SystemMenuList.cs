@@ -41,8 +41,9 @@ namespace EasyITCenter.DBModel
         public string? Description { get; set; }
         public int SolutionUserListId { get; set; }
         public bool NotShowInMenu { get; set; }
+        public bool OnlyOwnRec { get; set; }
         [Required]
-        public boo Active { get; set; }
+        public bool Active { get; set; }
         public int Version { get; set; }
         public DateTime TimeStamp { get; set; }
 
