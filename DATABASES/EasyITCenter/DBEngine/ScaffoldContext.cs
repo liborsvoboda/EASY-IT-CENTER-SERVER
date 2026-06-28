@@ -82,8 +82,9 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionMonacoSuggestionList> SolutionMonacoSuggestionLists { get; set; } = null!;
         public virtual DbSet<SolutionMottoList> SolutionMottoLists { get; set; } = null!;
         public virtual DbSet<SolutionOperationList> SolutionOperationLists { get; set; } = null!;
+        public virtual DbSet<SolutionRegistrationParameterList> SolutionRegistrationParameterLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerList> SolutionSchedulerLists { get; set; } = null!;
-        public virtual DbSet<SolutionSchedulerProcessList> SolutionSchedulerProcessLists { get; set; } = null!;
+        public virtual DbSet<SolutionSchedulerProcessSupportList> SolutionSchedulerProcessSupportLists { get; set; } = null!;
         public virtual DbSet<SolutionServerToolsGroupList> SolutionServerToolsGroupLists { get; set; } = null!;
         public virtual DbSet<SolutionServerToolsNameList> SolutionServerToolsNameLists { get; set; } = null!;
         public virtual DbSet<SolutionShareSourceList> SolutionShareSourceLists { get; set; } = null!;
@@ -120,12 +121,7 @@ namespace EasyITCenter.DBModel
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.InheritedParentRecordTypeNavigation)
-                    .WithMany(p => p.BasicAttachmentLists)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasForeignKey(d => d.InheritedParentRecordType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_BasicAttachmentList_SolutionMixedEnumList");
+                entity.Property(e => e.Version).HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BasicAttachmentLists)
@@ -1037,6 +1033,8 @@ namespace EasyITCenter.DBModel
 
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.Version).HasDefaultValueSql("((1))");
+
                 entity.HasOne(d => d.InheritedLayoutTypeNavigation)
                     .WithMany(p => p.ServerModuleAndServiceListInheritedLayoutTypeNavigations)
                     .HasPrincipalKey(p => p.Name)
@@ -1088,6 +1086,8 @@ namespace EasyITCenter.DBModel
             modelBuilder.Entity<ServerStartUpScriptList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Version).HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.InheritedOsTypeNavigation)
                     .WithMany(p => p.ServerStartUpScriptListInheritedOsTypeNavigations)
@@ -1254,6 +1254,8 @@ namespace EasyITCenter.DBModel
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.Version).HasDefaultValueSql("((1))");
+
                 entity.HasOne(d => d.InheritedMonacoLanguageTypeNavigation)
                     .WithMany(p => p.SolutionMonacoSuggestionLists)
                     .HasPrincipalKey(p => p.Name)
@@ -1308,6 +1310,19 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_SolutionOperationList_UserList");
             });
 
+            modelBuilder.Entity<SolutionRegistrationParameterList>(entity =>
+            {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SolutionRegistrationParameterLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionRegistrationParameterList_SolutionUserList");
+            });
+
             modelBuilder.Entity<SolutionSchedulerList>(entity =>
             {
                 entity.Property(e => e.Active).HasDefaultValueSql("((1))");
@@ -1335,12 +1350,12 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_GlobalAutoSchedulerList_UserList");
             });
 
-            modelBuilder.Entity<SolutionSchedulerProcessList>(entity =>
+            modelBuilder.Entity<SolutionSchedulerProcessSupportList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
                 entity.HasOne(d => d.ScheduledTask)
-                    .WithMany(p => p.SolutionSchedulerProcessLists)
+                    .WithMany(p => p.SolutionSchedulerProcessSupportLists)
                     .HasForeignKey(d => d.ScheduledTaskId)
                     .HasConstraintName("FK_SolutionSchedulerProcessList_SolutionSchedulerList");
             });

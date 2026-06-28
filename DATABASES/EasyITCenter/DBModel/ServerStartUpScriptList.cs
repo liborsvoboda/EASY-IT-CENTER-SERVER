@@ -34,6 +34,9 @@ namespace EasyITCenter.DBModel
         public int? Pid { get; set; }
         public bool Installed { get; set; }
         public int UserId { get; set; }
+        [Unicode(false)]
+        public string? MdContent { get; set; }
+        public int Version { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public virtual SolutionMixedEnumList InheritedOsTypeNavigation { get; set; } = null!;

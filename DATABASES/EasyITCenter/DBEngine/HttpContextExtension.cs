@@ -22,6 +22,18 @@
             } catch { return false; }
         }
 
+
+        /// <summary>
+        /// Extension for check SuperAdmin Role
+        /// </summary>
+        public static bool IsSuperAdmin() {
+            try {
+                var context = _accessor?.HttpContext;
+                if (context != null && context.User != null && !context.User.IsInRole("superadmin")) { return false; } else return true;
+            } catch { return false; }
+        }
+
+
         /// <summary>
         /// Extension for check Admin Role
         /// </summary>
@@ -91,30 +103,30 @@
         public static int? GetUserId() {
             try {
                 var context = _accessor?.HttpContext;
-                if (context != null && context.User != null) { return int.Parse(context.User.FindFirst(ClaimTypes.PrimarySid.ToString())?.Value); } else return null;
-            } catch { return null; }
+                if (context != null && context.User != null) { return int.Parse(context.User.FindFirst(ClaimTypes.PrimarySid.ToString())?.Value); } else return 0;
+            } catch { return 0; }
         }
 
         /// <summary>
         /// Get UserName
         /// </summary>
         /// <returns></returns>
-        public static string? GetUserName() {
+        public static string GetUserName() {
             try {
                 var context = _accessor?.HttpContext;
-                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.NameIdentifier.ToString())?.Value; } else return null;
-            } catch { return null; }
+                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.NameIdentifier.ToString())?.Value; } else return string.Empty;
+            } catch { return string.Empty; }
         }
 
         /// <summary>
         /// Get User Email
         /// </summary>
         /// <returns></returns>
-        public static string? GetUserEmail() {
+        public static string GetUserEmail() {
             try {
                 var context = _accessor?.HttpContext;
-                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Email.ToString())?.Value; } else return null;
-            } catch { return null; }
+                if (context != null && context.User != null) { return context.User.FindFirst(ClaimTypes.Email.ToString())?.Value; } else return string.Empty;
+            } catch { return string.Empty; }
         }
 
 

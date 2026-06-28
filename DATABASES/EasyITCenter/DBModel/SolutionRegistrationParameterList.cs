@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.DBModel
 {
-    [Table("ServerParameterList")]
-    [Index("Key", Name = "IX_ServerParameterList", IsUnique = true)]
-    public partial class ServerParameterList
+    [Table("SolutionRegistrationParameterList")]
+    [Index("Key", Name = "IX_SolutionRegistrationParameterList", IsUnique = true)]
+    public partial class SolutionRegistrationParameterList
     {
         [Key]
         public int Id { get; set; }
@@ -26,23 +26,16 @@ namespace EasyITCenter.DBModel
         public string Value { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
-        [StringLength(1024)]
-        [Unicode(false)]
-        public string? Link { get; set; }
-        [StringLength(1024)]
-        [Unicode(false)]
-        public string? HelpUrl { get; set; }
         [Unicode(false)]
         public string? MdContent { get; set; }
         public int UserId { get; set; }
         [Required]
         public bool? Active { get; set; }
+        public DateTime? Expiry { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public virtual SolutionMixedEnumList InheritedDataTypeNavigation { get; set; } = null!;
-        public virtual SolutionMixedEnumList InheritedServerParamTypeNavigation { get; set; } = null!;
         [ForeignKey("UserId")]
-        [InverseProperty("ServerParameterLists")]
+        [InverseProperty("SolutionRegistrationParameterLists")]
         public virtual SolutionUserList User { get; set; } = null!;
     }
 }

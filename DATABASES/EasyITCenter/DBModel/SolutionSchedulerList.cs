@@ -12,7 +12,7 @@ namespace EasyITCenter.DBModel
     {
         public SolutionSchedulerList()
         {
-            SolutionSchedulerProcessLists = new HashSet<SolutionSchedulerProcessList>();
+            SolutionSchedulerProcessSupportLists = new HashSet<SolutionSchedulerProcessSupportList>();
         }
 
         [Key]
@@ -40,7 +40,7 @@ namespace EasyITCenter.DBModel
         public string InheritedIntervalType { get; set; } = null!;
         public int UserId { get; set; }
         [Required]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public virtual SolutionMixedEnumList InheritedGroupNameNavigation { get; set; } = null!;
@@ -49,6 +49,6 @@ namespace EasyITCenter.DBModel
         [InverseProperty("SolutionSchedulerLists")]
         public virtual SolutionUserList User { get; set; } = null!;
         [InverseProperty("ScheduledTask")]
-        public virtual ICollection<SolutionSchedulerProcessList> SolutionSchedulerProcessLists { get; set; }
+        public virtual ICollection<SolutionSchedulerProcessSupportList> SolutionSchedulerProcessSupportLists { get; set; }
     }
 }

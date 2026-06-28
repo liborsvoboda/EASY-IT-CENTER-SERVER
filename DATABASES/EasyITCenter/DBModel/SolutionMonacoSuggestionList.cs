@@ -23,6 +23,9 @@ namespace EasyITCenter.DBModel
         public string? Documentation { get; set; }
         [Unicode(false)]
         public string InsertText { get; set; } = null!;
+        [Unicode(false)]
+        public string? MdContent { get; set; }
+        public int Version { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 

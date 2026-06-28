@@ -14,7 +14,6 @@ namespace EasyITCenter.DBModel
     {
         public SolutionMixedEnumList()
         {
-            BasicAttachmentLists = new HashSet<BasicAttachmentList>();
             DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableLists = new HashSet<PortalApiTableList>();
@@ -65,16 +64,17 @@ namespace EasyITCenter.DBModel
         public string Name { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
+        [Unicode(false)]
+        public string? MdContent { get; set; }
         public int UserId { get; set; }
         [Required]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
         public int Version { get; set; }
         public DateTime TimeStamp { get; set; }
 
         [ForeignKey("UserId")]
         [InverseProperty("SolutionMixedEnumLists")]
         public virtual SolutionUserList User { get; set; } = null!;
-        public virtual ICollection<BasicAttachmentList> BasicAttachmentLists { get; set; }
         public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }

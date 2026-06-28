@@ -73,6 +73,7 @@ namespace EasyITCenter.DBModel
             SolutionMonacoSuggestionLists = new HashSet<SolutionMonacoSuggestionList>();
             SolutionMottoLists = new HashSet<SolutionMottoList>();
             SolutionOperationLists = new HashSet<SolutionOperationList>();
+            SolutionRegistrationParameterLists = new HashSet<SolutionRegistrationParameterList>();
             SolutionSchedulerLists = new HashSet<SolutionSchedulerList>();
             SolutionServerToolsGroupLists = new HashSet<SolutionServerToolsGroupList>();
             SolutionServerToolsNameLists = new HashSet<SolutionServerToolsNameList>();
@@ -122,7 +123,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Description { get; set; }
         [Required]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
         public DateTime TimeStamp { get; set; }
         [Unicode(false)]
         public string? AccessToken { get; set; }
@@ -266,6 +267,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionMottoList> SolutionMottoLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionOperationList> SolutionOperationLists { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<SolutionRegistrationParameterList> SolutionRegistrationParameterLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerLists { get; set; }
         [InverseProperty("User")]
