@@ -42,7 +42,7 @@ namespace EasyITCenter.DBModel
         public int SolutionUserListId { get; set; }
         public bool NotShowInMenu { get; set; }
         [Required]
-        public bool Active { get; set; }
+        public boo Active { get; set; }
         public int Version { get; set; }
         public DateTime TimeStamp { get; set; }
 

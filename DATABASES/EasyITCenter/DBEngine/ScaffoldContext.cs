@@ -713,7 +713,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedCodeTypeNavigation)
                     .WithMany(p => p.DocSrvDocTemplateLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedCodeType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DocSrvDocTemplateList_SolutionMixedEnumList");
@@ -827,7 +827,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedDataTypeNavigation)
                     .WithMany(p => p.PortalApiTableColumnDataLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedDataType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableColumnDataList_SolutionMixedEnumList");
@@ -845,7 +845,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedTableTypeNavigation)
                     .WithMany(p => p.PortalApiTableLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedTableType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PortalApiTableList_SolutionMixedEnumList");
@@ -928,7 +928,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedApiTypeNavigation)
                     .WithMany(p => p.ServerApiSecurityLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedApiType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerApiSecurityList_SolutionMixedEnumList");
@@ -959,28 +959,28 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedCategoryTypeNavigation)
                     .WithMany(p => p.ServerGeneratorListInheritedCategoryTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedCategoryType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerGeneratorList_SolutionMixedEnumList3");
 
                 entity.HasOne(d => d.InheritedDownloadTypeNavigation)
                     .WithMany(p => p.ServerGeneratorListInheritedDownloadTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedDownloadType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerGeneratorList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.InheritedProcessTypeNavigation)
                     .WithMany(p => p.ServerGeneratorListInheritedProcessTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedProcessType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerGeneratorList_SolutionMixedEnumList1");
 
                 entity.HasOne(d => d.InheritedUploadTypeNavigation)
                     .WithMany(p => p.ServerGeneratorListInheritedUploadTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedUploadType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerGeneratorList_SolutionMixedEnumList2");
@@ -1000,7 +1000,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedCheckTypeNavigation)
                     .WithMany(p => p.ServerHealthCheckTaskLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedCheckType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerHealthCheckTaskList_SolutionMixedEnumList");
@@ -1037,14 +1037,14 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedLayoutTypeNavigation)
                     .WithMany(p => p.ServerModuleAndServiceListInheritedLayoutTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedLayoutType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerModuleAndServiceList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.InheritedPageTypeNavigation)
                     .WithMany(p => p.ServerModuleAndServiceListInheritedPageTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedPageType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerModuleAndServiceList_SolutionMixedEnumList1");
@@ -1064,14 +1064,14 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedDataTypeNavigation)
                     .WithMany(p => p.ServerParameterListInheritedDataTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedDataType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerParameterList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.InheritedServerParamTypeNavigation)
                     .WithMany(p => p.ServerParameterListInheritedServerParamTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedServerParamType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerParameterList_SolutionMixedEnumList1");
@@ -1091,14 +1091,14 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedOsTypeNavigation)
                     .WithMany(p => p.ServerStartUpScriptListInheritedOsTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedOsType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerStartUpScriptList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.InheritedProcessTypeNavigation)
                     .WithMany(p => p.ServerStartUpScriptListInheritedProcessTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedProcessType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerStartUpScriptList_SolutionMixedEnumList1");
@@ -1151,7 +1151,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedToolLinkTypeNavigation)
                     .WithMany(p => p.ServerToolPanelDefinitionLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedToolLinkType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerToolPanelDefinitionList_SolutionMixedEnumList");
@@ -1190,7 +1190,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedCodeTypeNavigation)
                     .WithMany(p => p.SolutionCodeLibraryLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedCodeType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_WebCodeLibraryList_SolutionMixedEnumList");
@@ -1213,7 +1213,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedLogMonitorTypeNavigation)
                     .WithMany(p => p.SolutionFailLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedLogMonitorType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionFailList_SolutionMixedEnumList");
@@ -1258,7 +1258,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedMonacoLanguageTypeNavigation)
                     .WithMany(p => p.SolutionMonacoSuggestionLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedMonacoLanguageType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionMonacoSuggestionList_SolutionMixedEnumList");
@@ -1291,14 +1291,14 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedApiResultTypeNavigation)
                     .WithMany(p => p.SolutionOperationListInheritedApiResultTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedApiResultType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionOperationList_SolutionMixedEnumList1");
 
                 entity.HasOne(d => d.InheritedOperationTypeNavigation)
                     .WithMany(p => p.SolutionOperationListInheritedOperationTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedOperationType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionOperationList_SolutionMixedEnumList");
@@ -1331,14 +1331,14 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedGroupNameNavigation)
                     .WithMany(p => p.SolutionSchedulerListInheritedGroupNameNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedGroupName)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionSchedulerList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.InheritedIntervalTypeNavigation)
                     .WithMany(p => p.SolutionSchedulerListInheritedIntervalTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedIntervalType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionSchedulerList_SolutionMixedEnumList1");
@@ -1396,7 +1396,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedShareSourceTypeNavigation)
                     .WithMany(p => p.SolutionShareSourceLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedShareSourceType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionShareSourceList_SolutionMixedEnumList");
@@ -1414,14 +1414,14 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedStatusTypeNavigation)
                     .WithMany(p => p.SolutionTaskListInheritedStatusTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedStatusType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionTaskList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.InheritedTargetTypeNavigation)
                     .WithMany(p => p.SolutionTaskListInheritedTargetTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedTargetType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionTaskList_SolutionMixedEnumList1");
@@ -1474,14 +1474,14 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedAppCategoryTypeNavigation)
                     .WithMany(p => p.SystemApplicationListInheritedAppCategoryTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedAppCategoryType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemApplicationList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.InheritedAppTypeNavigation)
                     .WithMany(p => p.SystemApplicationListInheritedAppTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedAppType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemApplicationList_SolutionMixedEnumList1");
@@ -1503,14 +1503,14 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedFormTypeNavigation)
                     .WithMany(p => p.SystemCustomPageListInheritedFormTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedFormType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemCustomPageList_SolutionMixedEnumList");
 
                 entity.HasOne(d => d.InheritedSystemApiCallTypeNavigation)
                     .WithMany(p => p.SystemCustomPageListInheritedSystemApiCallTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedSystemApiCallType)
                     .HasConstraintName("FK_SystemCustomPageList_SolutionMixedEnumList1");
 
@@ -1535,7 +1535,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedDocumentTypeNavigation)
                     .WithMany(p => p.SystemDocumentAdviceLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedDocumentType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemDocumentAdviceList_SolutionMixedEnumList");
@@ -1592,14 +1592,14 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedQueryLimitTypeNavigation)
                     .WithMany(p => p.SystemMenuListInheritedQueryLimitTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedQueryLimitType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemMenuList_SolutionMixedEnumList2");
 
                 entity.HasOne(d => d.InheritedSystemMenuTypeNavigation)
                     .WithMany(p => p.SystemMenuListInheritedSystemMenuTypeNavigations)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedSystemMenuType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemMenuList_SolutionMixedEnumList");
@@ -1623,7 +1623,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedModuleTypeNavigation)
                     .WithMany(p => p.SystemModuleLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedModuleType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SystemModuleList_SolutionMixedEnumList");
@@ -1699,7 +1699,7 @@ namespace EasyITCenter.DBModel
             {
                 entity.HasOne(d => d.InheritedClientTypeNavigation)
                     .WithMany(p => p.UserAccessKeyLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedClientType)
                     .HasConstraintName("FK_UserAccessKeyList_SolutionMixedEnumList");
 
@@ -1716,7 +1716,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedDataTypeNavigation)
                     .WithMany(p => p.UserParameterLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedDataType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserParameterList_SolutionMixedEnumList");
@@ -1749,7 +1749,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedJsCssDefinitionTypeNavigation)
                     .WithMany(p => p.WebCoreFileLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedJsCssDefinitionType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_WebCoreFileList_SolutionMixedEnumList");
@@ -1780,7 +1780,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.InheritedPagePartTypeNavigation)
                     .WithMany(p => p.WebGlobalPageBlockLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.SystemName)
                     .HasForeignKey(d => d.InheritedPagePartType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_WebGlobalPageBlockList_SolutionMixedEnumList");

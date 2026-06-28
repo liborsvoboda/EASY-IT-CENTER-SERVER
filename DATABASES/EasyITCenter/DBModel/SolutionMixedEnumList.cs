@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("SolutionMixedEnumList")]
-    [Index("ItemsGroup", "Name", Name = "IX_GlobalMixedEnumList", IsUnique = true)]
+    [Index("ItemsGroup", "SystemName", Name = "IX_GlobalMixedEnumList", IsUnique = true)]
     [Index("ItemsGroup", Name = "IX_SolutionMixedEnumList")]
-    [Index("Name", Name = "IX_SolutionMixedEnumList_1", IsUnique = true)]
+    [Index("SystemName", Name = "IX_SolutionMixedEnumList_1", IsUnique = true)]
     public partial class SolutionMixedEnumList
     {
         public SolutionMixedEnumList()
@@ -61,14 +61,14 @@ namespace EasyITCenter.DBModel
         public string ItemsGroup { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
-        public string Name { get; set; } = null!;
+        public string SystemName { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
         [Unicode(false)]
         public string? MdContent { get; set; }
         public int UserId { get; set; }
         [Required]
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         public int Version { get; set; }
         public DateTime TimeStamp { get; set; }
 

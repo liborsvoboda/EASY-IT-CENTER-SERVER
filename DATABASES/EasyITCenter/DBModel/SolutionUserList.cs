@@ -123,7 +123,7 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Description { get; set; }
         [Required]
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
         [Unicode(false)]
         public string? AccessToken { get; set; }

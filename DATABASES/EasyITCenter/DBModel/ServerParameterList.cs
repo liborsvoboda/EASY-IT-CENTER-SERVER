@@ -36,7 +36,7 @@ namespace EasyITCenter.DBModel
         public string? MdContent { get; set; }
         public int UserId { get; set; }
         [Required]
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public virtual SolutionMixedEnumList InheritedDataTypeNavigation { get; set; } = null!;

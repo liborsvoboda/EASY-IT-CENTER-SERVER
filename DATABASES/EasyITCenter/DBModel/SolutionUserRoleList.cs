@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("SolutionUserRoleList")]
-    [Index("Name", Name = "IX_UserRoleList", IsUnique = true)]
+    [Index("SystemName", Name = "IX_UserRoleList", IsUnique = true)]
     public partial class SolutionUserRoleList
     {
         public SolutionUserRoleList()
@@ -21,7 +21,7 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
-        public string Name { get; set; } = null!;
+        public string SystemName { get; set; } = null!;
         [Unicode(false)]
         public string? Description { get; set; }
         public int? UserId { get; set; }
