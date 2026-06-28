@@ -217,7 +217,7 @@ namespace EasyITCenter {
                         spsDataLL.Add(new ServerParameterList() {
                             Id = int.Parse(item[0].ToString()), InheritedServerParamType = item[1].ToString(), InheritedDataType = item[2].ToString(), Sequence = int.Parse(item[3].ToString()), 
                             Key = item[4].ToString(), Value = item[5].ToString(), Description = item[6].ToString(), Link = item[7].ToString(), 
-                            HelpUrl = item[8].ToString(), UserId = int.Parse(item[9].ToString()), Active = bool.Parse(item[10].ToString()), TimeStamp = DateTime.Parse(item[11].ToString())
+                            HelpUrl = item[8].ToString(), MdContent = item[9].ToString(), UserId = int.Parse(item[10].ToString()), Active = bool.Parse(item[11].ToString()), TimeStamp = DateTime.Parse(item[12].ToString())
                         });
                     }
                 } 

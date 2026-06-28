@@ -24,12 +24,12 @@ namespace EasyITCenter.DBModel
         [StringLength(100)]
         [Unicode(false)]
         public string? UrlSubPath { get; set; }
-        [StringLength(500)]
+        [StringLength(1024)]
         [Unicode(false)]
-        public string? WriteAllowedRoles { get; set; }
-        [StringLength(500)]
+        public string? AccessRoleWrite { get; set; }
+        [StringLength(1024)]
         [Unicode(false)]
-        public string? ReadAllowedRoles { get; set; }
+        public string? AccessRoleRead { get; set; }
         public bool WriteRestrictedAccess { get; set; }
         public bool ReadRestrictedAccess { get; set; }
         [StringLength(100)]

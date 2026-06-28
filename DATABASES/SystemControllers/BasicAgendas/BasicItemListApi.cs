@@ -66,9 +66,9 @@
             } catch (Exception ex) { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) }); }
         }
 
-        [HttpDelete("/EasyITCenterBasicItemList/{inheritedParentRecordType}/{parentId}")]
+        [HttpDelete("/EasyITCenterBasicItemList/{tableName}/{parentId}")]
         [Consumes("application/json")]
-        public async Task<string> DeleteBasicItemList(string inheritedParentRecordType, string parentId) {
+        public async Task<string> DeleteBasicItemList(string tableName, string parentId) {
             try {
                 if (!int.TryParse(parentId, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
@@ -79,7 +79,7 @@
 
                 //Remove Item Attachments Previous delete Item HERE is not deleted BY foreign key
                 List<BasicAttachmentList> Attachmentdata;
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { Attachmentdata = new EasyITCenterContext().BasicAttachmentLists.Where(a => a.InheritedParentRecordType == inheritedParentRecordType && a.ParentId == int.Parse(parentId)).ToList(); }
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { Attachmentdata = new EasyITCenterContext().BasicAttachmentLists.Where(a => a.TableName == tableName && a.ParentId == int.Parse(parentId)).ToList(); }
                 EasyITCenterContext itemData = new EasyITCenterContext(); itemData.BasicAttachmentLists.RemoveRange(Attachmentdata);
                 itemData.SaveChanges();
 

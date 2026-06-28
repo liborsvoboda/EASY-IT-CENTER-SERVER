@@ -121,7 +121,7 @@ namespace EasyITCenter.Services {
     public class AutoScheduledJob : IJob {
 
         public async Task Execute(IJobExecutionContext context) {
-            SolutionSchedulerProcessList taskResult = new SolutionSchedulerProcessList();
+            SolutionSchedulerProcessSupportList taskResult = new SolutionSchedulerProcessSupportList();
 
             try {
                 var jobData = context.JobDetail.JobDataMap;
@@ -202,7 +202,7 @@ namespace EasyITCenter.Services {
 
                         //Log Process Result
                         taskResult.ProcessCompleted = true; taskResult.TimeStamp = DateTimeOffset.Now.DateTime;
-                        EntityEntry<SolutionSchedulerProcessList>? dbdata = new EasyITCenterContext().SolutionSchedulerProcessLists.Add(taskResult); dbdata.Context.SaveChanges();
+                        EntityEntry<SolutionSchedulerProcessSupportList>? dbdata = new EasyITCenterContext().SolutionSchedulerProcessSupportLists.Add(taskResult); dbdata.Context.SaveChanges();
 
                         //Deactivate Task in Database
                         if (runOneTime || (finistAt != null && finistAt < DateTimeOffset.Now)) {

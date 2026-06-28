@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- added SystemName for Translation ([6e482a6](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/6e482a6f02927cfba30ff2230324770db4a265f3) by Libor Svoboda).
+- Added MD Content and Version for Developing ([5903841](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/590384194a44bef22c7ad31396215a3808a6976c) by Libor Svoboda).
 - added server-portal Access Rights to Menu, ([1c30824](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1c30824da5ac3d5a0c2e4a1418dde773d98cf23d) by Libor Svoboda).
 - added server-portal open selected menu on refresh, api manager ([5d6c6a8](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/5d6c6a80648b0e3d526db30e8da909503902e56e) by Libor Svoboda).
 - Added Table Version, FullLanguageList ([2de03b1](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2de03b173457310ba916f462a05b06178211e31e) by Libor Svoboda).
@@ -43,10 +45,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
+- remove SystemName return Name DB Field ([0565552](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/0565552a9d9c9bcdb3465ff69ffcdde8dc9e9b8b) by Libor Svoboda).
 - REMOVE STATIC To WEB ([37465cc](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/37465cc4b9e1fbe55fa0552ed266690f74b7c73e) by Libor Svoboda).
 
 ### Misc
 
+- update ([194627d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/194627d89ea16ddeaa2718c328b9d2aaa143599b) by Libor Svoboda).
 - repaired server-tools ([1ceb0e9](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1ceb0e968392ede8c62c0558850870d62bc9c190) by lioborsvoboda).
 - repair server portal tools ([bdc9cc3](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/bdc9cc39c50a6c6771006f664e524b2ee3f5a62b) by lioborsvoboda).
 - repair server-tools ([2619a6d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2619a6d05bd5e02c2020292db56d4a10678b6c26) by lioborsvoboda).
@@ -58,7 +62,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Repair Bugs onclick, added Browser Console ([e4651ee](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/e4651eeb31a8c2714653ad9b0e2a6f3e3d7c44cd) by Libor Svoboda).
 - Repaired Editors Bug ([4df7606](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/4df76064b827ea570baffec7e32553ad80fd1a65) by lioborsvoboda).
 - Update DisableSizeLimit ([0fb182e](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/0fb182ef24285c7d3b8b3f89de549b78450855d6) by lioborsvoboda).
-- Update ([b4e8b3d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b4e8b3d1362a6ccc7bfd6f4c95dee27883937938) by lioborsvoboda).
 - dolphin ([d163262](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/d1632629c457cbdaee8e210ef537e96705a13223) by Libor Svoboda).
 - upd ([03dfa23](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/03dfa23d5c01ddc408f7b30f8abd1b3d4ecfc113) by Libor Svoboda).
 - Correction ([1365bcb](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1365bcbf16030fa6f6f3c328bf7483cad93e8d76) by Libor Svoboda).
