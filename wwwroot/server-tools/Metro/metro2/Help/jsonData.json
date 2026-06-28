@@ -3,7 +3,7 @@
     "title": "accordion",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\accordion.html",
+    "key": "./accordion.html",
     "children": null,
     "content": null,
     "path": null
@@ -12,7 +12,7 @@
     "title": "balloon",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\balloon.html",
+    "key": "./balloon.html",
     "children": null,
     "content": null,
     "path": null
@@ -21,7 +21,7 @@
     "title": "buttons",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\buttons.html",
+    "key": "./buttons.html",
     "children": null,
     "content": null,
     "path": null
@@ -30,7 +30,7 @@
     "title": "calendar",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\calendar.html",
+    "key": "./calendar.html",
     "children": null,
     "content": null,
     "path": null
@@ -39,7 +39,7 @@
     "title": "carousel",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\carousel.html",
+    "key": "./carousel.html",
     "children": null,
     "content": null,
     "path": null
@@ -48,7 +48,7 @@
     "title": "datepicker",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\datepicker.html",
+    "key": "./datepicker.html",
     "children": null,
     "content": null,
     "path": null
@@ -57,7 +57,7 @@
     "title": "dialog",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\dialog.html",
+    "key": "./dialog.html",
     "children": null,
     "content": null,
     "path": null
@@ -66,7 +66,7 @@
     "title": "fluent-menu",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\fluent-menu.html",
+    "key": "./fluent-menu.html",
     "children": null,
     "content": null,
     "path": null
@@ -75,7 +75,7 @@
     "title": "footer",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\footer.html",
+    "key": "./footer.html",
     "children": null,
     "content": null,
     "path": null
@@ -84,7 +84,7 @@
     "title": "forms",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\forms.html",
+    "key": "./forms.html",
     "children": null,
     "content": null,
     "path": null
@@ -93,7 +93,7 @@
     "title": "global",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\global.html",
+    "key": "./global.html",
     "children": null,
     "content": null,
     "path": null
@@ -102,7 +102,7 @@
     "title": "grid",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\grid.html",
+    "key": "./grid.html",
     "children": null,
     "content": null,
     "path": null
@@ -111,7 +111,7 @@
     "title": "header",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\header.html",
+    "key": "./header.html",
     "children": null,
     "content": null,
     "path": null
@@ -120,7 +120,7 @@
     "title": "hint",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\hint.html",
+    "key": "./hint.html",
     "children": null,
     "content": null,
     "path": null
@@ -129,7 +129,7 @@
     "title": "icons",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\icons.html",
+    "key": "./icons.html",
     "children": null,
     "content": null,
     "path": null
@@ -138,7 +138,7 @@
     "title": "images",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\images.html",
+    "key": "./images.html",
     "children": null,
     "content": null,
     "path": null
@@ -147,7 +147,7 @@
     "title": "layouts",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\layouts.html",
+    "key": "./layouts.html",
     "children": null,
     "content": null,
     "path": null
@@ -156,7 +156,7 @@
     "title": "lists",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\lists.html",
+    "key": "./lists.html",
     "children": null,
     "content": null,
     "path": null
@@ -165,7 +165,7 @@
     "title": "menus",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\menus.html",
+    "key": "./menus.html",
     "children": null,
     "content": null,
     "path": null
@@ -174,7 +174,7 @@
     "title": "navbar",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\navbar.html",
+    "key": "./navbar.html",
     "children": null,
     "content": null,
     "path": null
@@ -183,7 +183,7 @@
     "title": "notices",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\notices.html",
+    "key": "./notices.html",
     "children": null,
     "content": null,
     "path": null
@@ -192,7 +192,7 @@
     "title": "notify",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\notify.html",
+    "key": "./notify.html",
     "children": null,
     "content": null,
     "path": null
@@ -201,7 +201,7 @@
     "title": "one-page-example",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\one-page-example.html",
+    "key": "./one-page-example.html",
     "children": null,
     "content": null,
     "path": null
@@ -210,7 +210,7 @@
     "title": "page-template",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\page-template.html",
+    "key": "./page-template.html",
     "children": null,
     "content": null,
     "path": null
@@ -219,7 +219,7 @@
     "title": "progress-bar",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\progress-bar.html",
+    "key": "./progress-bar.html",
     "children": null,
     "content": null,
     "path": null
@@ -228,7 +228,7 @@
     "title": "rating",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\rating.html",
+    "key": "./rating.html",
     "children": null,
     "content": null,
     "path": null
@@ -237,7 +237,7 @@
     "title": "requirements",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\requirements.html",
+    "key": "./requirements.html",
     "children": null,
     "content": null,
     "path": null
@@ -246,7 +246,7 @@
     "title": "responsive",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\responsive.html",
+    "key": "./responsive.html",
     "children": null,
     "content": null,
     "path": null
@@ -255,7 +255,7 @@
     "title": "scroll",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\scroll.html",
+    "key": "./scroll.html",
     "children": null,
     "content": null,
     "path": null
@@ -264,7 +264,7 @@
     "title": "sidebar",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\sidebar.html",
+    "key": "./sidebar.html",
     "children": null,
     "content": null,
     "path": null
@@ -273,7 +273,7 @@
     "title": "slider",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\slider.html",
+    "key": "./slider.html",
     "children": null,
     "content": null,
     "path": null
@@ -282,7 +282,7 @@
     "title": "start-screen",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\start-screen.html",
+    "key": "./start-screen.html",
     "children": null,
     "content": null,
     "path": null
@@ -291,7 +291,7 @@
     "title": "stepper",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\stepper.html",
+    "key": "./stepper.html",
     "children": null,
     "content": null,
     "path": null
@@ -300,7 +300,7 @@
     "title": "streamer",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\streamer.html",
+    "key": "./streamer.html",
     "children": null,
     "content": null,
     "path": null
@@ -309,7 +309,7 @@
     "title": "tab-control",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\tab-control.html",
+    "key": "./tab-control.html",
     "children": null,
     "content": null,
     "path": null
@@ -318,7 +318,7 @@
     "title": "tables",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\tables.html",
+    "key": "./tables.html",
     "children": null,
     "content": null,
     "path": null
@@ -327,7 +327,7 @@
     "title": "test-page",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\test-page.html",
+    "key": "./test-page.html",
     "children": null,
     "content": null,
     "path": null
@@ -336,7 +336,7 @@
     "title": "tiles",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\tiles.html",
+    "key": "./tiles.html",
     "children": null,
     "content": null,
     "path": null
@@ -345,7 +345,7 @@
     "title": "times",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\times.html",
+    "key": "./times.html",
     "children": null,
     "content": null,
     "path": null
@@ -354,7 +354,7 @@
     "title": "treeview",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\treeview.html",
+    "key": "./treeview.html",
     "children": null,
     "content": null,
     "path": null
@@ -363,7 +363,7 @@
     "title": "typography",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\typography.html",
+    "key": "./typography.html",
     "children": null,
     "content": null,
     "path": null
@@ -372,7 +372,7 @@
     "title": "window",
     "folder": false,
     "checkbox": false,
-    "key": "\\server-library\\MetroDocs\\Metro2\\Docs\\window.html",
+    "key": "./window.html",
     "children": null,
     "content": null,
     "path": null

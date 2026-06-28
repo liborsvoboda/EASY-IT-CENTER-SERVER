@@ -39,7 +39,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> RenameFiles([FromBody] RenameFilesRequest renameFilesRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     renameFilesRequest.WebRootPath = renameFilesRequest.WebRootPath.StartsWith("/") ? renameFilesRequest.WebRootPath.Substring(1) : renameFilesRequest.WebRootPath.StartsWith("\\") ? renameFilesRequest.WebRootPath.Substring(1) : renameFilesRequest.WebRootPath;
                     
                     List<string>? sourceFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath, renameFilesRequest.WebRootPath), renameFilesRequest.SourceFilename, renameFilesRequest.RootDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
@@ -67,7 +67,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> ReplaceFileContent([FromBody] ReplaceFileContentRequest replaceFileContentRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     replaceFileContentRequest.WebRootPath = replaceFileContentRequest.WebRootPath.StartsWith("/") ? replaceFileContentRequest.WebRootPath.Substring(1) : replaceFileContentRequest.WebRootPath.StartsWith("\\") ? replaceFileContentRequest.WebRootPath.Substring(1) : replaceFileContentRequest.WebRootPath;
 
                     List<string>? sourceFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.WebRootPath, replaceFileContentRequest.WebRootPath), replaceFileContentRequest.FileMask, replaceFileContentRequest.RootDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);

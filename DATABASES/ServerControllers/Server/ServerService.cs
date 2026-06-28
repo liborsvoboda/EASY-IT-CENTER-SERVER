@@ -51,7 +51,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> CreateTcpServer([FromBody] TcpServerRequest tcpServerRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     var server = new WatsonTcpServer("0.0.0.0", tcpServerRequest.Port, CoreOperations.GetSelfSignedCertificate(DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value),TlsVersion.Tls12);
 
                     
@@ -79,7 +79,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> CreateWebServer([FromBody] WebServerRequest webServerRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     WebserverSettings? setting = new WebserverSettings("0.0.0.0", webServerRequest.Port, webServerRequest.SSLenabled);
 
                     if (webServerRequest.SSLenabled) { setting.Ssl.SslCertificate = CoreOperations.GetSelfSignedCertificate(DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value); }
@@ -126,7 +126,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> CreateTcpNetServer([FromBody] TcpServerRequest tcpServerRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
 
                     byte[] certificate = System.IO.File.ReadAllBytes("cert.pfx");
                     string certificatePassword = "yourCertificatePassword";
@@ -155,7 +155,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> CreateSocketServer([FromBody] SocketServerRequest socketServerRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
 
                     WatsonWsServer server = new WatsonWsServer("0.0.0.0", socketServerRequest.Port, socketServerRequest.SSLenabled);
                     server.ClientConnected += ClientConnected;
@@ -202,7 +202,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> CreateJsonServer([FromBody] SocketServerRequest socketServerRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
 
                     JsonRpcServer server = new JsonRpcServer(IPAddress.Any, socketServerRequest.Port);
 
@@ -265,7 +265,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> CreateMCPServer() {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
 
                     McpServer server = new McpServer(true);
 
@@ -322,7 +322,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> CreateMcpTcpServer([FromBody] SocketServerRequest socketServerRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
 
                     McpTcpServer server = new McpTcpServer(IPAddress.Any, socketServerRequest.Port);
 
@@ -390,7 +390,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> CreateMcpHttpServer([FromBody] SocketServerRequest socketServerRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
 
                     McpHttpServer server = new McpHttpServer("0.0.0.0", socketServerRequest.Port);
 
@@ -443,7 +443,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> CreateMcpWebsocketsServer([FromBody] SocketServerRequest socketServerRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
 
                     McpWebsocketsServer server = new McpWebsocketsServer("localhost", socketServerRequest.Port);
 

@@ -1,4 +1,4 @@
-
+﻿
 
 namespace EasyITCenter.Controllers {
 
@@ -34,7 +34,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> UploadPackage([FromBody] UploadPackageRequest uploadPackageRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
 
                     uploadPackageRequest.Images.ForEach(image => {
                         FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SystemAppsPath, uploadPackageRequest.AppPathName, "Images", image.Filename), Convert.FromBase64String(image.Content.Split(",")[1]), true);

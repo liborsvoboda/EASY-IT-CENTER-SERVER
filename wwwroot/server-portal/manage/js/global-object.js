@@ -659,29 +659,46 @@ Gs.Objects.OpenShareReceive = async function () {
 Gs.Objects.AddSuggest = async function () {
 
     let html = `
-    <BUTTON onclick="Gs.Functions.AddSuggestionSave();" class="button success c-pointer outline shadowed" style="position:absolute; top:20px;left:40px;z-index:2500;">Save Suggestion</BUTTON>
-    <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
-        <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12" style="z-index:2000;" >
-            <DIV class="form-group pt-5">
-                <select id="menuInheritedMonacoLanguageType" data-role="select" data-use-placeholder="true" data-placeholder="Language Type">
-                </select>
-            </DIV>
+    <DIV id=TogglePanelBackground class=panel style="MIN-HEIGHT: 700px">
+        <DIV class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-0">
+            <BUTTON onclick="Gs.Functions.AddSuggestionSave();" class="button success c-pointer outline shadowed" style="position:absolute; top:20px;right:40px;z-index:2500;">Save Suggestion</BUTTON>
+            <UL data-role="materialtabs" data-expand="true" data-tabs-type="text" data-on-tab="">
+            <LI id=menuListMenu class=fg-black><A href="#_menuEditor">Portal Menu List</A> </LI>
+            <LI id=menuBuilderMenu class="fg-black "><A href="#_menuHelp">Help Form</A> </LI>
+            </UL>
         </DIV>
-        <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="z-index:2000;" >
-            <DIV class="form-group pt-5">
-                <INPUT id="menuLabel" style="HEIGHT: auto" data-role="input" data-validate="required" autocomplete="off" data-label="Label" />
+        <DIV class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <DIV id="_menuEditor" class="w-100">
+                <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
+                    <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12" style="z-index:2000;" >
+                        <DIV class="form-group pt-5">
+                            <select id="menuInheritedMonacoLanguageType" data-role="select" data-use-placeholder="true" data-placeholder="Language Type">
+                            </select>
+                        </DIV>
+                    </DIV>
+                    <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="z-index:2000;" >
+                        <DIV class="form-group pt-5">
+                            <INPUT id="menuLabel" style="HEIGHT: auto" data-role="input" data-validate="required" autocomplete="off" data-label="Label" />
+                        </DIV>
+                    </DIV>
+                    <DIV id=_menuCodeContent class="w-100" style="max-height: 650px;overflow: hidden;">
+                        <div id="fastSuggestion" style="top: -50px;" ></div >
+                        <select id=FastSugestEditorTheme class="theme" style="position: absolute;z-index: 2000;top: 50px;right: 0px;">
+                            <option>vs-dark</option>
+                            <option>vs</option>
+                            <option>hc-black</option>
+                        </select>
+                        <select id=FastSugestEditorLang class="language" style="position: absolute;z-index: 2000;top: 80px;right: 0px;"></select>
+                    </DIV>
+                </DIV>
             </DIV>
+            <div id="_menuHelp" class="w-100">
+                <div style="overflow:auto;width:100%; height:700px;">
+                    <iframe id="FastHelpEditor" src="/server-tools/Editor/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>
+                </div>
+            </div>
         </DIV>
-        <DIV id=_menuCodeContent class="w-100" style="max-height: 650px;overflow: hidden;">
-            <div id="fastSuggestion" style="top: -50px;" ></div >
-            <select id=FastSugestEditorTheme class="theme" style="position: absolute;z-index: 2000;top: 50px;right: 0px;">
-                <option>vs-dark</option>
-                <option>vs</option>
-                <option>hc-black</option>
-            </select>
-            <select id=FastSugestEditorLang class="language" style="position: absolute;z-index: 2000;top: 80px;right: 0px;"></select>
-        </DIV >
-    </DIV >`;
+    </DIV>`;
     Gs.Objects.InfoboxObjectCreate("AddSuggest", html, width = "1000", height = "800");
 
     setTimeout(async function () {
@@ -691,13 +708,10 @@ Gs.Objects.AddSuggest = async function () {
 
         $("#menuLabel").val("");
         let select = Metro.getPlugin("#menuInheritedMonacoLanguageType", "select"); let options = []; select.data("");
-        let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
+        let mixedenumList = Metro.storage.getItem("SolutionMixedEnumList", null);
         mixedenumList.forEach(mixedEnum => {
-            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active) {
-                options.push({ val: mixedEnum.Name, title: mixedEnum.Name, selected: false });
-            }
-        });
-        select.addOptions(options);
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active) { options.push({ val: mixedEnum.SystemName, title: mixedEnum.SystemName, selected: false }); }
+        }); select.addOptions(options);
     }, 1000);
 }
 

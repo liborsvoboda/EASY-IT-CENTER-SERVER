@@ -56,10 +56,10 @@ Gs.Behaviors.PortalStartup = async function () { //LOGGED
 
 
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
-    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: Gs.Variables.getSpProcedure, StorageName: "MixedEnumList" } );
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure)), StorageName: "MixedEnumList" } );
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMonacoSuggestionList";
     Gs.Variables.getSpProcedure[2].camelCase = true;
-    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: Gs.Variables.getSpProcedure, StorageName: "MonacoSuggestionList" } );
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure)), StorageName: "MonacoSuggestionList" } );
     Gs.Variables.getSpProcedure[2].camelCase = false;
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "PortalApiTableService/GetQuestionForResponseList", StorageName: "AdminQuestionList", WindowFunction: "SetQuestionCount" } );
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "PortalApiTableService/GetApiTableDataList/PortalMenu", StorageName: "PortalMenuList", WindowFunction: "GenerateMenuList" } );

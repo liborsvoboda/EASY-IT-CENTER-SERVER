@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: global-object.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: global-object.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>﻿
+/**
+* Function ShowToolPanel on Web Page
+* @function
+* @param {boolean} close boolean if Close
+*/
+Gs.Objects.ShowToolPanel = function (close) {
+    if (close) { Metro.bottomsheet.close($('#ToolPanel')); } else {
+        if (Metro.bottomsheet.isOpen($('#ToolPanel'))) { Metro.bottomsheet.close($('#ToolPanel')); }
+        else { Metro.bottomsheet.open($('#ToolPanel')); }
+    }
+}
+
+/**
+* Function Create Tool Panel and append to Web Page
+* @function
+*/
+Gs.Objects.CreateToolPanel = function () {
+    let html = '&lt;div id="ToolPanel" data-role="bottom-sheet" class="bottom-sheet pos-fixed list-list grid-style opened" style="top: 0px; left: 90%; z-index:10000;min-width: 430px;">';
+    html += '&lt;div class="c-pointer mif-cancel mif-1x icon pos-absolute fg-red" style="top:5px;right:5px;" onclick=Gs.Objects.ShowToolPanel(); >&lt;/div>';
+    html += '&lt;DIV class=d-block>&lt;DIV class="d-flex row gutters mr-4" >'
+    html += '&lt;ul data-role="materialtabs" data-expand="true" data-tabs-type="text" data-on-tab="">';
+    html += '&lt;li class="fg-black">&lt;A href="#_toolTranslate">Translate&lt;/A> &lt;/li>';
+    html += '&lt;li class="fg-black">&lt;A href="#_toolUserSet">User Setting&lt;/A> &lt;/li>';
+    //html += '&lt;li class="fg-black">&lt;A href="#_toolHelp">Fast Help&lt;/A>&lt;/li>';
+    //html += '&lt;li class="fg-black">&lt;A href="#_toolImages">Images&lt;/A>&lt;/li>';
+    //html += '&lt;li class="fg-black">&lt;A href="#_toolRadio">Radio&lt;/A>&lt;/li>';
+    //html += '&lt;li class="fg-black">&lt;A href="#_toolVideo">Video&lt;/A>&lt;/li>';
+    html += '&lt;/ul>';
+    html += '&lt;DIV id=_toolTranslate class="d-contents" style="display: contents !important;">';
+    //html += '&lt;div class="w-100 text-left"> &lt;audio id="radio" class="light bg-transparent" data-role="audio-player" data-src="/server-integrated/razor-pages/server-portal/media/hotel_california.mp3" data-volume=".5">&lt;/audio> &lt;/div>';
+    html += '&lt;div class="w-100 text-left" style="z-index: 1000000;">&lt;div id="google_translate_element">&lt;/div>&lt;/div>';
+    html += '&lt;div class="w-100 d-inline-flex">&lt;div class="w-75 text-left">';
+    html += '&lt;input id="EnableAutoTranslate" type="checkbox" data-role="checkbox" data-cls-caption="fg-cyan text-bold" data-caption="Auto Translate" onchange=Gs.Behaviors.SetUserSettings(); >';
+    html += '&lt;/div>&lt;div class="w-25 mt-1 text-right" style="max-width:25% !important;">&lt;button class="button secondary mini" style="max-width:100% !important;" onclick=Gs.Behaviors.CancelTranslation(true); >Cancel Translate&lt;/button>&lt;/div>&lt;/div>';
+    html += '&lt;/div>';
+
+    html += '&lt;DIV id=_toolUserSet>';
+    html += '&lt;DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
+    html += '&lt;DIV class="form-group m-0 p-0" > &lt;INPUT id=EnableShowDescription onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Enable Show Description" > &lt;/DIV >&lt;/DIV > ';
+    html += '&lt;DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
+    html += '&lt;DIV class="form-group m-0 p-0" > &lt;INPUT id=RememberLastJson onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Remember Last JSON" > &lt;/DIV >&lt;/DIV > ';
+    html += '&lt;DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
+    html += '&lt;DIV class="form-group m-0 p-0" > &lt;INPUT id=RememberLastHandleBar onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Remember Last HandleBar" > &lt;/DIV >&lt;/DIV > ';
+    html += '&lt;DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >';
+    html += '&lt;DIV class="form-group m-0 p-0" > &lt;INPUT id=EnableScreenSaver onchange=Gs.Behaviors.SetUserSettings()  style = "HEIGHT: auto" autocomplete = "off" data-role="checkbox" data-caption="Enable ScreenSaver" > &lt;/DIV >&lt;/DIV > ';
+
+    html += '&lt;DIV id=_toolRadio>&lt;/div>';
+
+    html += '&lt;DIV id=_toolVideo>&lt;/div>';
+
+    html += '&lt;/div>&lt;/div>';
+    //html += '&lt;div class="d-flex w-100" title="Theme">';
+    //let themes = [
+    //    ["#585b5d", "darcula.css?white"], ["#AF0015", "red-alert.css?white"], ["#690012", "red-dark.css?white"], ["#0CA9F2", "sky-net.css?white"],
+    //    ["#585b5d", "darcula.css?#585b5d"], ["#AF0015", "red-alert.css?#AF0015"], ["#690012", "red-dark.css?#690012"], ["#0CA9F2", "sky-net.css?#0CA9F2"]
+    //];
+    //themes.forEach((theme, index) => {
+    //    html += '&lt;button class="button shadowed w-50px ' + (index &lt; 4 ? "opc-05" : "") + ' mt-1" style="background-color: ' + theme[0] + ';" onclick=Gs.Behaviors.ChangeSchemeTo(\'' + theme[1] + '\'); >&lt;/button>';
+    //    if (index == 3) { html += '&lt;/div>&lt;div class="d-flex w-100" title="BackGround">'; }
+    //});
+
+    let injectToolPanel = document.createElement("div");
+    injectToolPanel.innerHTML = html;
+    document.body.append(injectToolPanel);
+};
+
+
+/**
+* Function Create and Show Login Form
+* @function
+*/
+Gs.Objects.ShowLoginPage = function () {
+    let htnlContent = '&lt;DIV class=text-center>&lt;WINDOW>&lt;DIV class="hero hero-bg 1bg-brand-secondary add-neb">&lt;DIV class=container>&lt;DIV class=row>';
+    htnlContent += '&lt;FORM id=loginform class="login-form bg-white fg-darkBlue p-6 mx-auto border bd-default win-shadow" method=post action=javascript: data-role="validator" data-on-validate-form="ValidateForm" data-on-error-form="InvalidForm" data-clear-invalid="2000">&lt;SPAN class="mif-vpn-lock mif-4x place-right" style="MARGIN-TOP: -10px">&lt;/SPAN>';
+    htnlContent += '&lt;H2 class=text-light>EIC&amp;ESB Portal&lt;/H2>'
+    htnlContent += '&lt;DIV class=form-group>&lt;INPUT id=usernameId class=input style="HEIGHT: auto" maxLength=50 data-role="input" data-validate="required" placeholder="Insert Username..." data-prepend="&lt;span class=\'mif-envelop\'>"> &lt;/DIV>';
+    htnlContent += '&lt;DIV class=form-group>&lt;INPUT id=passwordId type=password data-role="input" data-validate="required minlength=6" placeholder="Insert Password..." data-prepend="&lt;span class=\'mif-key\'>"> &lt;/DIV>';
+    htnlContent += '&lt;DIV class="form-group mt-10">&lt;INPUT class=place-right type=checkbox data-role="checkbox" data-caption="Remember">&lt;BUTTON class="button shadowed">Přihlásit&lt;/BUTTON> &lt;/DIV>&lt;/FORM>&lt;/DIV>&lt;/DIV>&lt;/DIV>&lt;/WINDOW>&lt;/DIV>';
+    document.getElementById("FrameWindow").innerHTML = htnlContent;
+}
+
+
+/**
+* Function Show Message That IP is Blocked
+* @function
+*/
+Gs.Objects.ShowBlockedMessage = function () {
+    var html_content =
+        "&lt;h3>Blokovaná IP Adresa&lt;/h3>" +
+        "&lt;p>Vaše adrese je blokována, protože byla zjištěna podezřelá činnost...&lt;/p>" +
+        "&lt;p>Pro Odblokování nás kontaktujte Telefonicky.&lt;/p>";
+    Metro.infobox.create(html_content, "alert");
+}
+
+
+/**
+* Function Show Message that is Unauthorized Request
+* @function
+*/
+Gs.Objects.ShowUnAuthMessage = function () {
+    Gs.Behaviors.SignOut();
+    var html_content =
+        "&lt;h3>Neautorizovaný Přístup&lt;/h3>" +
+        "&lt;p>Pokoušíte se provést autorizovanou operaci neoprávněně,&lt;/p>" +
+        "&lt;p>nebo platnost vašeho tokenu vypršela.&lt;/p>";
+    Metro.infobox.create(html_content, "alert");
+}
+
+/**
+* Function Show Notify Message with Type
+* @function
+* @param {string} type type
+* @param {string} message notify message
+*/
+Gs.Objects.ShowNotify = function (type, message) {
+    try {
+        var notify = Metro.notify; notify.setup({ width: Gs.Variables.notifySetting.notifyWidth, timeout: Metro.storage.getItem('NotifyShowTime', 2000), duration: Gs.Variables.notifySetting.notifyDuration, animation: Gs.Variables.notifySetting.notifyAnimation });
+        if (type == 'error' || type == 'alert') { notify.create(message, "Error", { cls: "alert" }); }
+        else if (type == 'success') { notify.create(message, "Success", { cls: "success" }); }
+        else if (type == 'info') { notify.create(message, "Info"); }
+        notify.reset();
+    } catch { }
+}
+
+
+/**
+* Function Show or Close Favorites Panel
+* @function
+* @param {boolean} close close
+*/
+Gs.Objects.ShowFavoritesPanel = function (close) {
+    let charms = Metro.getPlugin($("#FavoritesPanel"), 'charms');
+    if (close) {
+        charms.close();
+    } else { charms.toggle(); }
+}
+
+/**
+* Function Show or Close Online Tool Panel
+* @function
+* @param {boolean} close close
+*/
+Gs.Objects.ShowOnlineToolPanel = function (close) {
+    let charms = Metro.getPlugin($("#OnlineToolPanel"), 'charms');
+    if (close) {
+        charms.close();
+    } else { charms.toggle(); }
+}
+
+
+/**
+* Function Show or Close Bottom Modal Menu
+* @function
+* @param {string} elementId elementId
+* @param {string} close close
+*/
+Gs.Objects.ShowModalMenu = function (elementId, close = false) {
+    if (close || Metro.bottomsheet.isOpen("#" + elementId)) {
+        Gs.Functions.AddClass(elementId, "hidden");
+        Metro.bottomsheet.close("#" + elementId);
+        Gs.Functions.AddClass(elementId, "hidden");
+    }
+    else { Metro.bottomsheet.open("#" + elementId, "grid"); Gs.Functions.RemoveClass(elementId, "hidden"); }
+}
+
+
+/**
+* Function Refresh Portal Menu Preview 
+* @function
+*/
+Gs.Objects.RefreshPreview = function () {
+    Gs.Functions.RemoveElement("PreviewScript"); Gs.Functions.RemoveElement("PreviewStyle");
+    document.getElementById("menuPreview").innerHTML = null;
+
+    if ($("#menuType").val() == "link") {
+        $("#menuPreview").load(Metro.storage.getItem('BackendServerAddress', null) + "/" + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue());
+
+    } else if ($("#menuType").val() == "externalLink") {
+        document.getElementById("menuPreview").innerHTML = '&lt;iframe id="PreviewFrameWindow" src="' + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue() + '" width="100%" height="600" frameborder="0" scrolling="yes" style="width:100%; height:100%;">&lt;/iframe>';
+
+    } else if ($("#menuType").val() == "content") {
+        document.getElementById("menuPreview").innerHTML = Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model.getValue();
+
+        if (Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model.getValue() != null) {
+            let script = "&lt;script id='PreviewScript' type='text/javascript'> " + Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model.getValue();
+            $('body').append(script);
+        }
+        if (Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model.getValue() != null) {
+            let style = document.createElement('style'); style.id = "PreviewStyle";
+            style.innerText = Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model.getValue();
+            document.head.appendChild(style);
+        }
+    } else if ($("#menuType").val() == "externalContent") {
+
+    } else if ($("#menuType").val() == "menu") {
+        document.getElementById("menuPreview").innerHTML ="Menu doesnt have Content"
+    }
+}
+
+
+//Gs.Objects.InfoboxTableCreate = function (elementId) {
+//    let html = "&lt;div class='container'>&lt;table id='MenuTable' class='table striped' data-role='table' data-pagination='true' data-show-all-pages='false' >&lt;/div>";
+//    let infoBox = Metro.infobox.create(html, "", {
+//        closeButton: true,
+//        type: "",
+//        removeOnClose: true,
+//        width: "80%",
+//        height: "802",
+//        tag: "",
+//        id: elementId
+//    });
+//    var table = Metro.getPlugin("#PreviewTable", "table");
+//    let data=[];
+//    let functionList = Metro.storage.getItem('FunctionList', null);
+//    functionList.forEach(fn => { data.push([ fn.Group, fn.Label, fn.Path ]); });
+//    table.setItems(data); table.reload();
+//}
+
+
+/**
+* Function Create Infobox Iframe from URL
+* @function
+* @param {string} elementId elementId
+* @param {string} url url
+*/
+Gs.Objects.InfoboxFrameCreate = function (elementId,url) {
+    let infoBox = Metro.infobox.create("&lt;iframe id='" + elementId + "' src='" + url + "'  width='100%' height='880' frameborder='0' scrolling='yes' style='width: 100%; height: 750px;' >&lt;/iframe>", "", {
+        closeButton: true,
+        type: "",
+        removeOnClose: true,
+        width: "80%",
+        height: "800",
+        clsBox: "hypertop",
+        tag: "",
+        id: elementId
+    });
+    infoBox[0].id = elementId;
+}
+
+/**
+* Function Create Infobox with Custom Html
+* @function
+* @param {string} elementId elementId
+* @param {string} html html string
+* @param {string} width width percent
+* @param {string} height height size
+* @param {boolean} closeButton Close button True/False
+*/
+Gs.Objects.InfoboxObjectCreate = function (elementId, html, width = "80%", height = "800", closeButton = true) {
+    let infoBox = Metro.infobox.create(html, "", {
+        closeButton: closeButton,
+        type: "",
+        removeOnClose: true,
+        width: width,
+        height: height,
+        tag: "",
+        id: elementId
+    });
+    infoBox[0].id = elementId;
+}
+
+/**
+* Function Create Window from URL
+* @function
+* @param {string} title window Title
+* @param {string} url url
+* @param {boolean} lastWindow if Last window is Iframe URL is Taken
+* @param {string} frameName Iframe Id
+*/
+Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false, frameName = "WindowFrame") {
+    if (lastWindow) { ( url = document.getElementById("IFrameWindow") != null ? document.getElementById("IFrameWindow").src : "/") }
+    let custwindow = Metro.window.create({
+        cls: "p-0", title: title, clsCaption: 'bg-orange',
+        btnMin: true, btnMax: true, shadow: true,
+        draggable: true, resizable: true,
+        width: "100%", height: "100%",
+        place: 'center', customButtons: [
+            {
+                html: "&lt;span class='mif-help' title='Open Readme.md'>&lt;/span>",
+                cls: "success",
+                onclick: `Gs.Objects.InfoboxFrameCreate('HelpViewer','${url}Readme', false);`
+            },
+            {
+                html: "&lt;span class='mif-help' title='Show Readme.md Code'>&lt;/span>",
+                cls: "warning",
+                onclick: `Gs.Objects.InfoboxFrameCreate('HelpCodeViewer','${url}Readme.md', false);`
+            },
+            {
+                html: "&lt;span class='mif-file-code' title='Show Window Code'>&lt;/span>",
+                cls: "alert",
+                onclick: "Gs.Behaviors.ShowWindowFrameWindowCode()"
+            },
+            {
+                html: "&lt;span class='mif-windows' title='Open in External Window'>&lt;/span>",
+                cls: "sys-button",
+                onclick: "Gs.Objects.WindowFrameOpenInExternalWindow('External Window','',true);"
+            },
+            {
+                html: "&lt;span class='mif-vpn-publ' title='Show URL'>&lt;/span>",
+                cls: "sys-button",
+                onclick: `alert(document.getElementById('${frameName}').contentWindow.location.href);`
+            }
+        ],
+        clsWindow: "supertop",
+        icon: "&lt;span class='mif-hour-glass'>&lt;/spam>",
+        onCaptionDblClick: function () { },
+        btnClose: true,
+        content: `&lt;iframe id='${frameName}' src='${url}' width='100%' height='800' frameborder='0' scrolling='yes' style='width: 100%; height: 100 %;'>&lt;/iframe>`
+    });
+    //custwindow[0].id = elementId;
+}
+
+
+/**
+* Function Create Window from HTML
+* @function
+* @param {string} elementId window elementId
+* @param {string} title window title
+* @param {string} html html string
+*/
+Gs.Objects.WindowHtmlCreate = function (elementId, title, html) {
+    let custwindow = Metro.window.create({
+        cls: "p-0", title: title, clsCaption: 'bg-orange',
+        btnMin: true, btnMax: true, shadow: true,
+        draggable: true, resizable: true,
+        width: "100%", height: "100%",
+        place: 'center',
+        clsWindow: "supertop",
+        icon: "&lt;span class='mif-hour-glass'>&lt;/spam>",
+        onCaptionDblClick: function () { },
+        btnClose: true,
+        content: html
+    });
+    custwindow[0].id = elementId;
+}
+
+
+/**
+* Function Open in External Window
+* @function
+* @param {string} title window Title
+* @param {string} url opened URL
+* @param {boolean} lastWindow if LastWindow URL is Taken
+*/
+Gs.Objects.OpenInExternalWindow = function (title, url, lastWindow = false) {
+    if (lastWindow) { (url = document.getElementById("IFrameWindow") != null ? document.getElementById("IFrameWindow").src : "/") }
+    window.open(url, '_blank');
+}
+
+/**
+* Function WindowFrame Open in External Window
+* @function
+* @param {string} title window Title
+* @param {string} url opened URL
+* @param {boolean} lastWindow if LastWindow URL is Taken
+*/
+Gs.Objects.WindowFrameOpenInExternalWindow = function (title, url, lastWindow = false) {
+    if (lastWindow) { (url = document.getElementById("WindowFrame") != null ? document.getElementById("WindowFrame").src : "/") }
+    window.open(url, '_blank');
+}
+
+/**
+* Function Get My Question List with API and Generate InfoBox
+* @function
+*/
+Gs.Objects.GetMyQuestionList = async function () {
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetMyQuestionList", "MyQuestionList");
+    
+    setTimeout(function () {
+        let myQuestionList = []; let group = null; menuItem = {};
+        let origQuestionList = Metro.storage.getItem('MyQuestionList', null);
+        
+        origQuestionList.forEach((item, index, arr) => {
+            switch (item.apiTableColumnName) {
+                case "MenuName":
+                    menuItem.recGuid = item.recGuid;
+                    menuItem.MenuName = item.value;
+                    break;
+                case "Question":
+                    menuItem.Question = item.value;
+                    break;
+                case "Response":
+                    menuItem.Response = item.value;
+                    break;
+            }
+            if (group != null &amp;&amp; (arr[index + 1] == undefined || arr[index + 1].recGuid != item.recGuid)) {
+                myQuestionList.push(menuItem);
+                menuItem = {};
+            }
+            group = item.recGuid;
+        });
+
+        let scriptCode = "";
+        let html = '&lt;div data-role="accordion" data-active-heading-class="bg-cyan fg-white" data-active-content-class="fg-cyan" class="pt-5" >';
+        myQuestionList.forEach((item, index, arr) => {
+            html += '&lt;div class="frame">&lt;div class="heading">' + item.MenuName + '&lt;/div>';
+            html += '&lt;div class="content">&lt;div class="p-2 fg-green">Question: ' + item.Question + '&lt;/div>&lt;div class="p-2">Response:&lt;div id="codeEditor' + index + '">&lt;/div>&lt;/div>&lt;/div>';
+            html += '&lt;/div>';
+            scriptCode += '$("#codeEditor' + index + '").summernote({ tabsize: 2, height: 150, maxHeight: 150, lang: "cs-CZ", toolbar: [] }); $("#codeEditor' + index + '").summernote("codeview.activate"); $("#codeEditor' + index + '").summernote("code", ' + decodeURI(item.Response) + ');';
+        });
+        html += '&lt;/div>';
+
+        Gs.Objects.InfoboxObjectCreate("myQuestionList", html);
+        Gs.Functions.loadJS("InjectedScript", scriptCode);
+    }, 5000);
+}
+
+
+/**
+* Function Generate and Show Registration Form
+* @function
+*/
+Gs.Objects.ShowRegistrationPage = function () {
+    let htnlContent = '&lt;DIV class=text-center>&lt;window>&lt;DIV class="hero hero-bg 1bg-brand-secondary add-neb">&lt;DIV class=container>&lt;DIV class=row>';
+    htnlContent += '&lt;form class="bg-white p-4 login-form bg-white fg-darkBlue p-6 mx-auto border bd-default win-shadow" action="javascript:" data-role="validator" data-on-validate-form="ValidateRegForm" data-clear-invalid="2000" data-on-error-form="InvalidForm" >';
+    htnlContent += '&lt;img src="/server-portal/images/p-120x120.png" class="place-right mt-4-minus mr-5-minus">&lt;h1 class="mb-0">Register&lt;/h1>&lt;div class="text-muted mb-4">Register to EIC &amp; ESB Portal&lt;/div>'
+    htnlContent += '&lt;div class="form-group">&lt;input id="firstName" type="text" data-role="input" placeholder="First name" data-append="&lt;span class=\'mif-user\'>" data-validate="required">&lt;span class="invalid_feedback">Please enter a valid First Name&lt;/span>&lt;/div>';
+    htnlContent += '&lt;div class="form-group">&lt;input id="surname" type="text" data-role="input" placeholder="Surname" data-append="&lt;span class=\'mif-user\'>" data-validate="required">&lt;span class="invalid_feedback">Please enter a Surname&lt;/span>&lt;/div>';
+    htnlContent += '&lt;div class="form-group">&lt;input id="userName" type="text" data-role="input" placeholder="UserName" data-append="&lt;span class=\'mif-user\'>" data-validate="required">&lt;span class="invalid_feedback">Please enter a UserName&lt;/span>&lt;/div>';
+    htnlContent += '&lt;div class="form-group">&lt;input id="email" type="text" data-role="input" placeholder="Email" data-append="&lt;span class=\'mif-envelop\'>" data-validate="required">&lt;span class="invalid_feedback">Please enter a valid Email Address&lt;/span>&lt;/div>';
+    htnlContent += '&lt;div class="form-group">&lt;input id="password" type="password" data-role="input" placeholder="Password" data-append="&lt;span class=\'mif-key\'>" data-validate="required" name="password">&lt;span class="invalid_feedback">Please enter a Password&lt;/span>';
+    htnlContent += '&lt;input class="mt-4" type="password" data-role="input" placeholder="Retype password" data-append="&lt;span class=\'mif-checkmark\'>" data-validate="required equals=password">&lt;span class="invalid_feedback">Please enter a Password&lt;/span>&lt;/div>';
+    htnlContent += '&lt;div class="form-group d-flex flex-align-center flex-justify-between">&lt;input type="checkbox" data-role="checkbox" data-caption="I agree to the &lt;a href=\'#\'>terms&lt;/a>">&lt;button class="button primary">Register&lt;/button>&lt;/div>';
+    htnlContent += '&lt;/form>&lt;/div>&lt;/div>&lt;/div>&lt;/window>&lt;/div>';
+    document.getElementById("FrameWindow").innerHTML = htnlContent;
+}
+
+
+/**
+* Function Generate and Show Export Dialog
+* @function
+* @param {string} title dialog Title
+*/
+Gs.Objects.ShowExportDialog = function (title) {
+    Metro.dialog.create({
+        title: title,
+        content: "&lt;div>Export Table Data id=menuTable to File&lt;/div>",
+        closeButton: true,
+        removeOnClose: true,
+        actions: [
+            {
+                caption: "CSV",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'csv' }); }
+            },
+            {
+                caption: "TXT",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'txt' }); }
+            },
+            {
+                caption: "JSON",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'json', escape: 'true' }); }
+            },
+            {
+                caption: "XLS",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'excel' }); }
+            },
+            {
+                caption: "DOC",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'doc' }); }
+            },
+            {
+                caption: "PDF",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.ExportTable({ type: 'pdf', jspdf: { orientation: 'l', margins: { right: 10, left: 10, top: 40, bottom: 40 }, autotable: { extendWidth: true } } }); }
+            }
+        ]
+    });
+}
+
+
+/**
+* Function Create Dialog Request
+* @function
+* @param {string} title dialog Title
+* @param {string} content html content
+* @param {boolean} actions buttons
+*/
+Gs.Objects.CreateDialogRequest = async function (title, content, actions) {
+    Metro.dialog.close(`#${title.replaceAll(/\s/g, '')}`);
+    let dialog = Metro.dialog.create({
+        title: title,
+        content: content,
+        closeButton: true,
+        removeOnClose: true,
+        actions: actions,
+        clsDialog: "supertop"
+    });
+    dialog[0].id = title.replaceAll(/\s/g, '');
+}
+
+
+/**
+* Function Show Print Export Dialog
+* @function
+*/
+Gs.Objects.ShowPrintExport = function () {
+    Metro.dialog.create({
+        title: "Print &amp; Export",
+        content: "&lt;div>Print &amp; Export Opened Page&lt;/div>",
+        closeButton: true,
+        removeOnClose: true,
+        closeAction: true,
+        actions: [
+            {
+                caption: "Download Html",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.PrintOrExportWindow("Download");  }
+            },
+            {
+                caption: "Download Image",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.PrintOrExportWindow("Image"); }
+            },
+            {
+                caption: "Download Pdf",
+                cls: "js-dialog-close success",
+                onclick: function () { Gs.Functions.PrintOrExportWindow("Pdf"); }
+            },
+            //{
+            //    caption: "Copy to Buffer",
+            //    cls: "js-dialog-close success",
+            //    onclick: function () { Gs.Functions.PrintOrExportWindow("Copy"); }
+            //}
+        ]
+    });
+}
+
+
+/**
+* Function Generate and Show Basket InfoBox
+* @function
+*/
+Gs.Objects.OpenBasket = function () {
+    let html = '&lt;h1>Basket&lt;/h1>&lt;ul class="items-list">';
+    let dataBasket = Metro.storage.getItem("BasketPriceList", null);
+    let price = 0; let productName = "";
+
+    dataBasket.forEach(item => {
+        price += item.Price; productName += item.Title + ";";
+        html += `&lt;li>&lt;img class='avatar' src='/server-portal/images/logo.png' >&lt;span class='h7' style="margin-left:60px;">${item.Title}&lt;/span>&lt;span class="second-label">${item.Price} ${item.Currency}&lt;/span>&lt;span onclick='Gs.Behaviors.RemoveItemBasket("${item.Title}")' class="second-action mif-cancel mif-3x fg-red">&lt;/span>&lt;/li>`;
+    }); html += `&lt;/ul>&lt;p>&lt;/p>&lt;div>&lt;button class='button warning shadowed' onclick='Gs.Behaviors.RunStripe("${price}","${productName}")' >&lt;img src='/server-portal/images/stripe.png'>STRIPE PAY&lt;/button>&lt;/div>`;
+
+    Gs.Objects.InfoboxObjectCreate("BasketForm", html);
+}
+
+/**
+* Function Generate and Show Download Basket after Pay
+* @function
+*/
+Gs.Objects.DownloadBasket = function () {
+    let basketData = Metro.storage.getItem('BasketPriceList', null);
+    basketData.forEach((item, index) => {  basketData[index].Price = 0; });
+    Metro.storage.setItem('BasketPriceList', basketData);
+
+    let html = '&lt;h1>Basket&lt;/h1>&lt;ul class="items-list">';
+    let dataBasket = Metro.storage.getItem("BasketPriceList", null);
+    let price = 0; let productName = "";
+
+    dataBasket.forEach(item => {
+        price += 0; productName += item.Title + ";";
+        html += `&lt;li>&lt;img class='avatar' src='/server-portal/images/logo.png' >&lt;span class='h7' style="margin-left:60px;">${item.Title}&lt;/span>&lt;span class="second-label">${item.Price} ${item.Currency}&lt;/span>&lt;span onclick='Gs.Apis.DownloadApi("DashboardService/DownloadLibraryFolder", { Path: "${item.Path.replaceAll('\\', '\\\\')}" }, "${item.Title}", true);Gs.Behaviors.DownloadedBasket("${item.Title}");' class="second-action mif-download mif-3x fg-green">&lt;/span>&lt;/li>`;
+    }); html += `&lt;/ul>`;
+
+    Gs.Objects.InfoboxObjectCreate("BasketForm", html);
+    Gs.Behaviors.RefreshBasket();
+}
+
+
+/**
+* Function Generate and Show Chat InfoBox
+* @function
+*/
+Gs.Objects.OpenChat = async function () {
+    if ($("#ChatPanel").html() == undefined) {
+
+        let html = `&lt;div class="row">&lt;span class="h3">${Gs.Variables.username}: Chat&lt;/span>&lt;button onclick="Gs.Behaviors.ClearChat()" class="button ml-10 warning shadowed">Clear Chat&lt;/button>&lt;/div>&lt;div class="row">`;
+        html += `&lt;div id="ChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send=Gs.Socket.SendChatMessage data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with All Users" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
+        html += ` data-random-color="true" data-welcome="Welcome to EIC &amp; ESDB Portal chat" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" >&lt;/div>`;
+        html += `&lt;/div>`;
+        Gs.Objects.InfoboxObjectCreate("ChatPanel", html, width = "470", height = "700");
+
+        setTimeout(function () {
+            let chatMessageList = Metro.storage.getItem("ChatMessageList", null);
+            let chatWindow = Metro.getPlugin("#ChatWindow", "chat");
+            chatMessageList.forEach(message => {
+                chatWindow.add(message);
+            });
+            $("#ChatMessageCount").html("0");
+        }, 100);
+    }
+}
+
+
+
+/**
+* Function Generate and Show Share InfoBox
+* @function
+* @param {string} selectedUser selected User
+*/
+Gs.Objects.OpenShareWindow = async function (selectedUser = null) {
+    if ($("#SharePanel").html() == undefined) {
+         
+        let html = `&lt;div class="row ml-3">&lt;span class="h3">${Gs.Variables.username}: Share Window Chat&lt;/span>&lt;select id="userList" data-role="select" data-on-change="Gs.Functions.ShareUserSelected" data-cls-select="ml-10 w-25" data-clear-button="true" data-add-empty-value="true" data-prepend="Select User" data-empty-value="" >&lt;/select>`
+        html += `&lt;button id="ShareButton" onclick="Gs.Media.StartShareCaptureScreen()" class="button pos-absolute success shadowed disabled" style="right:140px;">Start Share Window&lt;/button>&lt;button onclick="Gs.Behaviors.ShareClearChat()" class="button pos-absolute warning shadowed" style="right:30px;">Clear Chat&lt;/button>&lt;/div>`;
+        html += `&lt;div class="row ml-3">&lt;video id="videoPreview" autoplay style="width: 730px;height: 600px;background-color: lightgray;">&lt;/video>&lt;div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send="Gs.SignalR.SendStreamChatMessage" data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
+        html += ` data-random-color="true" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" >&lt;/div>`;
+        html += `&lt;/div>`;
+        Gs.Objects.WindowHtmlCreate("SharePanel","Share Desktop &amp; Chat", html);
+
+        setTimeout(function () {
+            Gs.SignalR.GetUsers();
+
+            let chatMessageList = Metro.storage.getItem("ShareChatMessageList", null);
+            let chatWindow = Metro.getPlugin("#ShareChatWindow", "chat");
+            chatMessageList.forEach(message => {
+                chatWindow.add(message);
+            });
+            $("#ShareChatMessageCount").html("0");
+        }, 100);
+    }
+}
+
+/**
+* Function Generate and Show Receiving Share InfoBox
+* @function
+*/
+Gs.Objects.OpenShareReceive = async function () {
+    if ($("#ShareReceivePanel").html() == undefined) {
+
+        let html = `&lt;div class="row">&lt;span class="h3">${Gs.Variables.username}: Share Window Chat&lt;/span>&lt;span class="h5 ml-10">connected with&lt;/span>&lt;div id="StreamAdmin" class="ml-10 h3">&lt;/div>`
+        html += `&lt;button onclick="Gs.Behaviors.ShareReceiveClearChat()" class="button pos-absolute warning shadowed" style="right:30px;">Clear Chat&lt;/button>&lt;/div>&lt;div class="row">`;
+        html += `&lt;image id="imagePreview" style="width: 730px;height: 600px;background-color: lightgray;">&lt;/image>&lt;div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send="Gs.SignalR.SendStreamChatMessage" data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
+        html += ` data-random-color="true" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" >&lt;/div>`;
+        html += `&lt;/div>`;
+        Gs.Objects.InfoboxObjectCreate("ShareReceivePanel", html, width = "1200", height = "700", true);
+
+        setTimeout(function () {
+            let chatMessageList = Metro.storage.getItem("ShareChatMessageList", null);
+            let chatWindow = Metro.getPlugin("#ShareChatWindow", "chat");
+            chatMessageList.forEach(message => {
+                chatWindow.add(message);
+            });
+            $("#ShareChatMessageCount").html("0");
+        }, 100);
+    }
+}
+
+
+/**
+* Function Generate and Show Monaco Suggest InfoBox
+* @function
+*/
+Gs.Objects.AddSuggest = async function () {
+
+    let html = `
+    &lt;BUTTON onclick="Gs.Functions.AddSuggestionSave();" class="button success c-pointer outline shadowed" style="position:absolute; top:20px;left:40px;z-index:2500;">Save Suggestion&lt;/BUTTON>
+    &lt;DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
+        &lt;DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12" style="z-index:2000;" >
+            &lt;DIV class="form-group pt-5">
+                &lt;select id="menuInheritedMonacoLanguageType" data-role="select" data-use-placeholder="true" data-placeholder="Language Type">
+                &lt;/select>
+            &lt;/DIV>
+        &lt;/DIV>
+        &lt;DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="z-index:2000;" >
+            &lt;DIV class="form-group pt-5">
+                &lt;INPUT id="menuLabel" style="HEIGHT: auto" data-role="input" data-validate="required" autocomplete="off" data-label="Label" />
+            &lt;/DIV>
+        &lt;/DIV>
+        &lt;DIV id=_menuCodeContent class="w-100" style="max-height: 650px;overflow: hidden;">
+            &lt;div id="fastSuggestion" style="top: -50px;" >&lt;/div >
+            &lt;select id=FastSugestEditorTheme class="theme" style="position: absolute;z-index: 2000;top: 50px;right: 0px;">
+                &lt;option>vs-dark&lt;/option>
+                &lt;option>vs&lt;/option>
+                &lt;option>hc-black&lt;/option>
+            &lt;/select>
+            &lt;select id=FastSugestEditorLang class="language" style="position: absolute;z-index: 2000;top: 80px;right: 0px;">&lt;/select>
+        &lt;/DIV >
+    &lt;/DIV >`;
+    Gs.Objects.InfoboxObjectCreate("AddSuggest", html, width = "1000", height = "800");
+
+    setTimeout(async function () {
+        Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(p => p.elementId == "fastSuggestion"), 1);
+        let dataJs = await fetch(`/server-portal/addons/monaco/js/fastSuggestion.js`).then((r) => r.text());
+        new Function(dataJs)();
+
+        $("#menuLabel").val("");
+        let select = Metro.getPlugin("#menuInheritedMonacoLanguageType", "select"); let options = []; select.data("");
+        let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
+        mixedenumList.forEach(mixedEnum => {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType" &amp;&amp; mixedEnum.Active) {
+                options.push({ val: mixedEnum.Name, title: mixedEnum.Name, selected: false });
+            }
+        });
+        select.addOptions(options);
+    }, 1000);
+}
+
+
+/**
+* Function Generate and Show Editor for Help Menu
+* @function
+*/
+Gs.Objects.EditHelpMenu = function () {
+    let html = `
+    &lt;BUTTON onclick="Gs.Functions.SaveMenuHelp();" class="button success c-pointer outline shadowed" style="position:absolute; top:57px;right:60px;z-index:2500;">Save Menu Help&lt;/BUTTON>
+    &lt;DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
+        &lt;DIV id=_menuCodeContent class="w-100" style="max-height: 750px;overflow: hidden;">
+            &lt;iframe id="HelpFastEditor" src="/server-tools/Editor/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:900px;">&lt;/iframe>
+        &lt;/DIV >
+    &lt;/DIV >`;
+    Gs.Objects.InfoboxObjectCreate("EditHelpMenu", html, width = "1000", height = "800");
+    Gs.Behaviors.LoadDataToTool("FastHelpEditor");
+}
+
+
+/**
+* Function Open Blog Menu get API and Open
+* @function
+*/
+Gs.Objects.OpenBlogMenu = async function () {
+    $("#EditBlogMenu").remove();
+    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetBlogList", "BlogList", "EditBlogMenu");
+}
+
+
+/**
+* Function Show/Close Online Tool Panel
+* @function
+*/
+Gs.Objects.ShowOnlineTools = function () {
+    if (Metro.charms.isOpen("#OnlineToolPanel")) { Metro.charms.close("#OnlineToolPanel"); }
+    else { Metro.charms.open("#OnlineToolPanel"); }
+}
+
+
+/**
+* Function Test Window Link Open URL in Window
+* @function
+*/
+Gs.Objects.TestWindowLink = function () {
+    if ($("#menuNewWindow").val('checked')[0].checked) {
+        window.open($("#menuUrl").val());
+    } else {
+        Gs.Objects.WindowIframeCreate($("#menuName").val(), $("#menuUrl").val());
+    }
+}
+
+
+/**
+* Function Generate and Show Add to Favorites
+* @function
+*/
+Gs.Objects.AddToFavorites = async function () {
+    let content = `&lt;div>&lt;select id=menuGroup data-role="select" data-prepend="Group">&lt;option value="Web">Web&lt;/option>&lt;option value="GitHub">GitHub&lt;/option>&lt;option value="Server">Server&lt;/option>"&lt;/select>&lt;input id='menuName' type='text' data-role='input' data-prepend='Name' >&lt;input id='menuIcon' type='text' data-role='input' data-prepend='Icon' class='hidden' >&lt;input id='menuUrl' type='text' data-role='input' data-prepend='Url' >&lt;input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window">&lt;button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()">&lt;span class="mif-home mif-3x">&lt;/span>Test Web Url&lt;/button>&lt;div id="menuDescription">&lt;/div>&lt;/div>`;
+    let actions = [{
+        caption: "Add", cls: "js-dialog-close success",
+        onclick: async function () {
+            if ($("#menuName").val().length > 0 &amp;&amp; $("#menuUrl").val().length > 0) {
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToFavorites", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow").val('checked')[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadFavorites");
+            } else { alert("Data must be Inserted"); }
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Add to Favorites", content, actions);
+    setTimeout(function () {
+        $('#menuDescription').summernote({
+            tabsize: 2, height: 150, maxHeight: 150,
+            lang: 'cs-CZ',
+            placeholder: 'write Description...',
+            toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]]
+        });
+    }, 100);
+
+}
+
+
+/**
+* Function Generate and Show Remove Favorite
+* @function
+*/
+Gs.Objects.RemoveFavorite = async function (menuName,recGuid) {
+    let content = `&lt;div>Do you want to Remove Favorite: ${menuName}&lt;/div>`;
+    let actions = [{
+        caption: "Remove", cls: "js-dialog-close success",
+        onclick: async function () {
+            await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`, "LoadFavorites");
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Remove Favorite", content, actions);
+}
+
+
+/**
+* Function Generate and Show Add to Online Tool Panel
+* @function
+*/
+Gs.Objects.AddToOnlineToolList = async function () {
+    let content = `&lt;div>&lt;select id=menuGroup data-role="select" data-prepend="Group">&lt;option value="Online Tool">Online Tool&lt;/option>&lt;option value="Data Tool">Data Tool&lt;/option>&lt;option value="Developer">Developer&lt;/option>"&lt;/select>&lt;input id='menuName' type='text' data-role='input' data-prepend='Name' >&lt;input id='menuIcon' type='text' data-role='input' data-prepend='Icon' class='hidden' >&lt;input id='menuUrl' type='text' data-role='input' data-prepend='Url' >&lt;input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window">&lt;button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()">&lt;span class="mif-home mif-3x">&lt;/span>Test Web Url&lt;/button>&lt;div id="menuDescription">&lt;/div>&lt;/div>`;
+    let actions = [{
+        caption: "Add", cls: "js-dialog-close success",
+        onclick: async function () {
+            if ($("#menuName").val().length > 0 &amp;&amp; $("#menuUrl").val().length > 0) {
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToOnlineToolList", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow").val('checked')[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadOnlineToolList");
+            } else { alert("Data must be Inserted"); }
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Add to Online Tools", content, actions);
+    setTimeout(function () {
+        $('#menuDescription').summernote({
+            tabsize: 2, height: 150, maxHeight: 150,
+            lang: 'cs-CZ',
+            placeholder: 'write Description...',
+            toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]]
+        });
+    }, 100);
+
+}
+
+
+/**
+* Function Generate and Show Remove Online Tool
+* @function
+*/
+Gs.Objects.RemoveOnlineTool = async function (menuName, recGuid) {
+    let content = `&lt;div>Do you want to Remove Online Tool: ${menuName}&lt;/div>`;
+    let actions = [{
+        caption: "Remove", cls: "js-dialog-close success",
+        onclick: async function () {
+            await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`, "LoadOnlineToolList");
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Remove Online Tool", content, actions);
+}
+
+
+/**
+* Function Generate and Show Remove Web Seach Panel
+* @function
+*/
+Gs.Objects.GenerateRemoveWebSearchList = async function () {
+    let webSearch = Metro.storage.getItem('WebSearchList', null);
+    let content = `&lt;div>`;
+    webSearch.forEach(search => {
+        content += `&lt;button id="${search.RecGuid}" class='button alert outline ml-2 mr-2' onclick="Gs.Objects.RemoveWebSearchList('${search.MenuName}','${search.RecGuid}')">Remove ${search.MenuName}&lt;/button>`;
+    });
+    content += `&lt;/div>`;
+    let actions = [{ caption: "Close", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Remove from Web Search", content, actions);
+}
+
+
+/**
+* Function Generate and Show Add Web Search Panel
+* @function
+*/
+Gs.Objects.AddWebSearchList = async function () {
+    let content = `&lt;div>&lt;input id='menuName' type='text' data-role='input' data-prepend='Name' >&lt;input id='menuUrl' type='text' data-role='input' data-prepend='Url' >&lt;input id=menuNewWindow style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="Open in New Window">&lt;button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Objects.TestWindowLink()">&lt;span class="mif-home mif-3x">&lt;/span>Test Web Url&lt;/button>&lt;div id="menuDescription">&lt;/div>&lt;/div>`;
+    let actions = [{
+        caption: "Add", cls: "js-dialog-close success",
+        onclick: async function () {
+            if ($("#menuName").val().length > 0 &amp;&amp; $("#menuUrl").val().length > 0) {
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddWebSearchList", { MenuName: $("#menuName").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow").val('checked')[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadSearchWindow");
+            } else { alert("Data must be Inserted"); }
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Add to Web Search", content, actions);
+    setTimeout(function () {
+        $('#menuDescription').summernote({
+            tabsize: 2, height: 150, maxHeight: 150,
+            lang: 'cs-CZ',
+            placeholder: 'write Description...',
+            toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]]
+        });
+    }, 100);
+
+}
+
+
+/**
+* Function Generate and Show Remove Web Search API
+* @function
+*/
+Gs.Objects.RemoveWebSearchList = async function (menuName, recGuid) {
+    let content = `&lt;div>Do you want to Remove Web Search: ${menuName}&lt;/div>`;
+    let actions = [{
+        caption: "Remove", cls: "js-dialog-close success",
+        onclick: async function () {
+            $(`#${recGuid}`).hide();
+            await Gs.Apis.RunServerDeleteApi(`PortalApiTableService/DeleteApiTableColumnDataList/${recGuid}`);
+        }
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    Gs.Objects.CreateDialogRequest("Remove Web Search", content, actions);
+}
+
+
+
+/**
+* Function Generate and Show Browser Console
+* @function
+*/
+Gs.Objects.OpenBrowserConsole = function () {
+    let html = `&lt;div id="ConsoleWindow" class="w-100 h-100" style="width: 100vw; height: 100vh; background-color: black;">
+                            &lt;div class="console">&lt;div id="browser-console-output" class="output">&lt;/div>&lt;/div>
+                            &lt;div class="browserconsoleinput">&lt;input class="browserconsoleinput" id="browserconsoleinput" type="text" />&lt;/div>
+                        &lt;/div>`;
+    Gs.Objects.WindowHtmlCreate("ConsoleWindow", "Web Console Debugger", html);
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#EditBlogMenu">EditBlogMenu</a></li><li><a href="global.html#GenerateFavorites">GenerateFavorites</a></li><li><a href="global.html#GenerateMenuList">GenerateMenuList</a></li><li><a href="global.html#GenerateOnlineToolList">GenerateOnlineToolList</a></li><li><a href="global.html#GenerateWebSearchList">GenerateWebSearchList</a></li><li><a href="global.html#HighlightCode">HighlightCode</a></li><li><a href="global.html#InvalidForm">InvalidForm</a></li><li><a href="global.html#LoadFavorites">LoadFavorites</a></li><li><a href="global.html#LoadNotesList">LoadNotesList</a></li><li><a href="global.html#LoadOnlineToolList">LoadOnlineToolList</a></li><li><a href="global.html#LoadSearchWindow">LoadSearchWindow</a></li><li><a href="global.html#Mermaid">Mermaid</a></li><li><a href="global.html#OpenNotesList">OpenNotesList</a></li><li><a href="global.html#RefreshPortalMenuList">RefreshPortalMenuList</a></li><li><a href="global.html#SetQuestionCount">SetQuestionCount</a></li><li><a href="global.html#SetStripeKey">SetStripeKey</a></li><li><a href="global.html#ValidateForm">ValidateForm</a></li><li><a href="global.html#ValidateRegForm">ValidateRegForm</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Jun 28 2026 15:26:38 GMT+0200 (středoevropský letní čas)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -73,6 +73,20 @@ Gs.SignalR.Start = async function () {
 }
 
 
+/**
+* Function SetInterval 30 sec for SignarlR Refresh
+* @function
+*/
+Gs.SignalR.PingInterval =async () => {
+    setTimeout(async () => {
+        await Gs.SignalR.GetUsers();
+    }, 30000);
+}
+
+/**
+* Function Get Online Users 
+* @function
+*/
 Gs.SignalR.GetUsers =async function () {
     if (Gs.Variables.SignalR.streamChat.state == signalR.HubConnectionState.Disconnected) { await Gs.Variables.SignalR.streamChat.start(); }
     if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Connected) {

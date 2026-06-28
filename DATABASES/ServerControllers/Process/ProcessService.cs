@@ -57,18 +57,18 @@ namespace EasyITCenter.Controllers {
         [HttpPost("/ProcessService/StartProcessScript")]
         [Consumes("application/json")]
         public async Task<IActionResult> StartProcessScript([FromBody] RunProcessRequest processRequest) {
+            try {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
+                    processRequest.Command = processRequest.Command.StartsWith("/") ? processRequest.Command.Substring(1) : processRequest.Command.StartsWith("\\") ? processRequest.Command.Substring(1) : processRequest.Command;
 
-            if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
-                processRequest.Command = processRequest.Command.StartsWith("/") ? processRequest.Command.Substring(1) : processRequest.Command.StartsWith("\\") ? processRequest.Command.Substring(1) : processRequest.Command;
+                    processRequest.Command = processRequest.Command.Replace("wwwroot", SrvRuntime.WebRootPath);
+                    processRequest.WorkingDirectory = processRequest.WorkingDirectory.Replace("wwwroot", SrvRuntime.WebRootPath);
 
-                processRequest.Command = processRequest.Command.Replace("wwwroot", SrvRuntime.WebRootPath);
-                processRequest.WorkingDirectory = processRequest.WorkingDirectory.Replace("wwwroot", SrvRuntime.WebRootPath);
-                
-                await ProcessOperations.ServerProcessStartAsync(processRequest);
-                return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
-            }
-            return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.DeniedYouAreNotAdmin.ToString() });
-
+                    await ProcessOperations.ServerProcessStartAsync(processRequest);
+                    return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
+                }
+                return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.DeniedYouAreNotAdmin.ToString() });
+            } catch (Exception ex) { return base.Json(new WebClasses.JsonResult() { Result = DataOperations.GetUserApiErrMessage(ex), Status = DBResult.DeniedYouAreNotAdmin.ToString() });}
         }
 
 
@@ -76,7 +76,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<IActionResult> KillProcessScript(int processPid) {
 
-            if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+            if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
                 ProcessOperations.ServerProcessKill(processPid);
                 return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });
             }

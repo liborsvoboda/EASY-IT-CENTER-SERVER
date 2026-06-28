@@ -5,10 +5,10 @@
 next Same as Definition with UpperCase First Character//ApiPath, JsonData, Filename, Binary, StorageName = null, WindowFunction = null ] }
 * @function
 */
-Gs.Apis.RunApiManager = function () {
+Gs.Apis.RunApiManager = async function () {
     let lastUUID = ""; 
-    Gs.Variables.apiTaskList.forEach(function(api, index, arr) {
-        let processing = false; let sequence = 0; let prewSequence = 0;
+    Gs.Variables.apiTaskList.forEach(async function(api, index, arr) {
+        let processing = false; let sequence = -1; let prewSequence = -1;
 
         //FORMAT CORRECT API FLOW
         if (api.UUID == undefined) { api.UUID = Gs.Functions.GenerateUUID(); }
@@ -36,59 +36,60 @@ Gs.Apis.RunApiManager = function () {
             if (api.WindowFunction == undefined) { api.WindowFunction = null; }
 
             //Check Previous
-            if (index == 0) { prewSequence = 0; } else { prewSequence = arr[index - 1].Sequence; }
+            if (index == 0) { prewSequence = -1; } else { prewSequence = arr[index - 1].Sequence; }
             if (api.Processed) { sequence = api.Sequence; }
 
             //Process API
-            if (!api.Processed && !processing && !api.Processing && (arr[index].Sequence == prewSequence || arr[index].Sequence > sequence)) {
+            if (!api.Processed && !processing && !api.Processing && (api.Sequence == prewSequence || api.Sequence > sequence)) {
                 try {
                     switch (api.Type) {
                         case "DownloadApi":
                             //(apiPath, jsonData, filename, binary, storageName = null, windowFunction = null )
-                            arr[index].Processing = true;
-                            Gs.Apis.DownloadApi(api.ApiPath, api.JsonData, api.Filename, api.Binary, api.StorageName, api.WindowFunction, api.Id);
-                            if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw new Error("Break ForEach"); }
+                            api.Processing = true;
+                            await Gs.Apis.DownloadApi(api.ApiPath, api.JsonData, api.Filename, api.Binary, api.StorageName, api.WindowFunction, api.Id);
+                            if (arr.length - 1 > index && arr[index + 1] != undefined && arr[index + 1].UUID == api.UUID && arr[index + 1].Sequence > api.Sequence) { throw new Error("Break ForEach"); }
                             break;
                         case "RunServerPostApi":
                             //(apiPath, jsonData, storageName = null, windowFunction = null )
-                            arr[index].Processing = true;
-                            Gs.Apis.RunServerPostApi(api.ApiPath, api.JsonData, api.StorageName, api.WindowFunction, api.Id);
-                            if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw new Error("Break ForEach"); }
+                            api.Processing = true;
+                            await Gs.Apis.RunServerPostApi(api.ApiPath, api.JsonData, api.StorageName, api.WindowFunction, api.Id);
+                            if (arr.length - 1 > index && arr[index + 1] != undefined && arr[index + 1].UUID == api.UUID && arr[index + 1].Sequence > api.Sequence) { throw new Error("Break ForEach"); }
                             break;
                         case "RunServerPutApi":
                             //(apiPath, jsonData, storageName = null, windowFunction = null )
-                            arr[index].Processing = true;
-                            Gs.Apis.RunServerPutApi(api.ApiPath, api.JsonData, api.StorageName, api.WindowFunction, api.Id);
-                            if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw new Error("Break ForEach"); }
+                            api.Processing = true;
+                            await Gs.Apis.RunServerPutApi(api.ApiPath, api.JsonData, api.StorageName, api.WindowFunction, api.Id);
+                            if (arr.length - 1 > index && arr[index + 1] != undefined && arr[index + 1].UUID == api.UUID && arr[index + 1].Sequence > api.Sequence) { throw new Error("Break ForEach"); }
                             break;
                         case "RunServerGetApi":
                             //(apiPath, storageName = null, windowFunction = null )
-                            arr[index].Processing = true;
-                            Gs.Apis.RunServerGetApi(api.ApiPath, api.StorageName, api.WindowFunction, api.Id);
-                            if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw new Error("Break ForEach"); }
+                            api.Processing = true;
+                            await Gs.Apis.RunServerGetApi(api.ApiPath, api.StorageName, api.WindowFunction, api.Id);
+                            if (arr.length - 1 > index && arr[index + 1] != undefined && arr[index + 1].UUID == api.UUID && arr[index + 1].Sequence > api.Sequence) { throw new Error("Break ForEach"); }
                             break;
                         case "RunServerDeleteApi":
                             //(apiPath, windowFunction = null )
-                            arr[index].Processing = true;
-                            Gs.Apis.RunServerDeleteApi(api.ApiPath, api.WindowFunction, api.Id);
-                            if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw new Error("Break ForEach"); }
+                            api.Processing = true;
+                            await Gs.Apis.RunServerDeleteApi(api.ApiPath, api.WindowFunction, api.Id);
+                            if (arr.length - 1 > index && arr[index + 1] != undefined && arr[index + 1].UUID == api.UUID && arr[index + 1].Sequence > api.Sequence) { throw new Error("Break ForEach"); }
                             break;
                         case "WindowFunction":
-                            arr[index].Processing = false;
+                            api.Processing = false;
                             arr[index].Processed = true;
                             try {
                                 window[api.WindowFunction]();
                             } catch { }
-                            if (arr.length > (index - 1) && arr[index + 1] != undefined && arr[index + 1].Sequence > arr[index].Sequence) { throw new Error("Break ForEach"); }
+                            if (arr.length - 1 > index && arr[index + 1] != undefined && arr[index + 1].UUID == api.UUID && arr[index + 1].Sequence > api.Sequence) { throw new Error("Break ForEach"); }
                             break;
                         default:
                     }
                 } catch (e) { }
             }
-            processing = arr[index].Processing;
+            processing = api.Processing;
         }
         lastUUID = arr[index].UUID;
     });
+
 }
 
 

@@ -160,7 +160,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     data = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName.ToLower() == tablename.ToLower() && a.Active == true
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") ) 
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all") 
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}" 
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},") 
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") ) 
                         ).OrderBy(a => a.RecGuid).ThenBy(a => a.Id).ToList();
                 }
             } 
@@ -184,7 +187,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "PortalMenu"
-                            && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
 
@@ -255,7 +261,10 @@ namespace EasyITCenter.Controllers
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                             .Where(a => a.RecGuid == recGuid
-                                && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
                             ).FirstOrDefault();
                     }
 
@@ -276,7 +285,7 @@ namespace EasyITCenter.Controllers
                                 data.SaveChanges();
                                 return true;
                             });
-                            //} else if (checkRight?.InheritedTableType == "AdminTable" && (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin())) {
+                            //} else if (checkRight?.InheritedTableType == "AdminTable" && (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin())) {
                             DatabaseContextExtensions.RunTransaction(data, (trans) => {
                                 data.PortalApiTableColumnDataLists.RemoveRange(original);
                                 data.SaveChanges();
@@ -303,7 +312,11 @@ namespace EasyITCenter.Controllers
                 PortalApiTableColumnDataList? checkData = new PortalApiTableColumnDataList();
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.ApiTableName == "PortalApiTableList"
-                            && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
+
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -452,7 +465,11 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "QuestionList"
-                            && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
+
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -484,7 +501,7 @@ namespace EasyITCenter.Controllers
             PortalApiTableColumnDataList data = new();
             EasyITCenterContext dbContext = new EasyITCenterContext();
             try {
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                         data = new EasyITCenterContext().PortalApiTableColumnDataLists
                             .Where(a => a.ApiTableName == "QuestionList" && a.Id == responseRequest.Id).FirstOrDefault();
@@ -521,7 +538,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "QuestionList"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -561,7 +581,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "QuestionList"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -601,7 +624,11 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "EmailTemplateList"
-                            && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
+
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -661,7 +688,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "EmailTemplateList"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -690,7 +720,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "AudioNotepad"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -720,7 +753,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "AudioNotepad"
-                            && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -779,7 +815,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "DataTableList"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -864,7 +903,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "CodeGeneratorList"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -893,7 +935,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "CodeGeneratorList"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -984,7 +1029,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "MediaPresentationList"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -1133,7 +1181,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName.ToString() == "FavoritesList"
-                            && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -1176,7 +1227,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "FavoritesList"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -1232,7 +1286,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "OnlineToolList"
-                            && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -1276,7 +1333,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "WebSearchList"
-                            && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -1338,7 +1398,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "NotesList"
-                            && ( a.AccessRoleWrite.Contains($"all,") || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserWrite.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleWrite == "all" || a.AccessRoleWrite.StartsWith("all,") || a.AccessRoleWrite.Contains(",all,") || a.AccessRoleWrite.EndsWith(",all")
+                            || a.AccessRoleWrite.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessRoleWrite == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserWrite.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserWrite.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserWrite.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {
@@ -1387,7 +1450,10 @@ namespace EasyITCenter.Controllers
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
                     checkData = new EasyITCenterContext().PortalApiTableColumnDataLists
                         .Where(a => a.ApiTableName == "NotesList"
-                            && ( a.AccessRoleRead.Contains($"all,") || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()},") || a.AccessUserRead.Contains($"{HttpContextExtension.GetUserId()},") )
+                            && ( a.AccessRoleRead == "all" || a.AccessRoleRead.StartsWith("all,") || a.AccessRoleRead.Contains(",all,") || a.AccessRoleRead.EndsWith(",all")
+                            || a.AccessRoleRead.Contains($"{HttpContextExtension.GetUserRole()}") || a.AccessUserRead == $"{HttpContextExtension.GetUserId()}"
+                            || a.AccessUserRead.StartsWith($"{HttpContextExtension.GetUserId()},") || a.AccessUserRead.Contains($",{HttpContextExtension.GetUserId()},")
+                            || a.AccessUserRead.EndsWith($",{HttpContextExtension.GetUserId()}") )
                         ).FirstOrDefault();
                 }
                 if (checkData != null) {

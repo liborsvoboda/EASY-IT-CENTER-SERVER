@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: global-storage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: global-storage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>﻿
+
+/*Start Set Global Constants*/
+Metro.storage.setItem('BackendServerAddress', window.location.origin);
+Metro.storage.setItem('DetectedLanguage', (navigator.language || navigator.userLanguage).substring(0, 2));
+Metro.storage.setItem('ApiOriginSuffix', Metro.storage.getItem('BackendServerAddress', null) + "/");
+Metro.storage.setItem('DefaultPath', Metro.storage.getItem('DefaultPath', null) == null ? `${Metro.storage.getItem('ApiOriginSuffix', null)}serverportal` : Metro.storage.getItem('DefaultPath', null));
+
+if (Metro.storage.getItem('BasketPriceList', null) == null) { Metro.storage.setItem('BasketPriceList', []); }
+if (Metro.storage.getItem('ChatMessageList', null) == null) { Metro.storage.setItem('ChatMessageList', []); }
+if (Metro.storage.getItem('ShareChatMessageList', null) == null) { Metro.storage.setItem('ShareChatMessageList', []); }
+if (Metro.storage.getItem('ConsoleLogList', null) == null) { Metro.storage.setItem('ConsoleLogList', []); }
+
+
+/**
+* Global Javascript Library
+* { UUID, Api: [Id = RandomString,Sequence = 0 - XXXX number same for Paraler Call, Other for Serial, Processing = true/false, Processed = true/false, Type: ApiName + WindowFunction, next Same ass Definition//apiPath, jsonData, filename, binary, storageName = null, windowFunction = null ] }
+* 
+*/
+window.Gs = {
+    Behaviors: {},
+    Objects: {},
+    Functions: {},
+    Apis: {},
+    Media: {},
+    Socket: {},
+    SignalR: {},
+    Variables: {
+        breakException: {},
+        chatmessage: {},
+        username: "127.0.0.1",
+        fullname: "Anonymous",
+        stripe: null,
+        monacoEditorList: [],
+        apiTaskList: [], 
+        screensaver: {},
+        notifySetting :{
+            notifyWidth: 300,
+            notifyDuration: 5000,
+            notifyAnimation: "easeOutBounce"
+        },
+        getSpProcedure :[
+            { SpProcedure: "SpGetTableDataList" },
+            { tableName: null },
+            { camelCase: false }
+         ],
+        setSpProcedure :[
+            { SpProcedure: "SpSetTableDataRec" },
+            { tableName: null },
+            { dataRec: null }
+        ],
+        media: {
+            audioRecorder: null,
+            mediaRecorder: null, 
+            mediaStream: null,
+            videoData: [],
+        },
+        UserSettingList: {
+            EnableAutoTranslate: false,
+            EnableShowDescription: true,
+            RememberLastJson: true,
+            RememberLastHandleBar: true,
+            EnableScreenSaver: true,
+        },
+        RemoveObjectList: {
+            dialog: null
+        },
+        Socket: {
+            chatSocket: new WebSocket(`${Metro.storage.getItem('ApiOriginSuffix', null).replace("http:", "ws:").replace("https:", "wss:")}WebSocketService/chat`)
+        },
+        SignalR: {
+            streamChat: null,
+            displayMediaOptions : {
+                video: {
+                    displaySurface: "window",
+                },
+                audio: false,
+                //preferCurrentTab: true,
+            },
+            stopStreaming: false
+        }
+    }
+}
+
+
+/*
+let console = (function (oldCons) {
+    return {
+        log: function (text) {
+            //oldCons.log(text);
+            let data = Metro.storage.getItem('ConsoleLogList', null);
+            data.push({ id: data.length + 1, type: "debug", message: JSON.stringify(text) });
+            Metro.storage.setItem('ConsoleLogList', data);
+        },
+        info: function (text) {
+            //oldCons.info(text);
+            let data = Metro.storage.getItem('ConsoleLogList', null);
+            data.push({ id: data.length + 1, type: "info", message: JSON.stringify(text) });
+            Metro.storage.setItem('ConsoleLogList', data);
+        },
+        warn: function (text) {
+           // oldCons.warn(text);
+            let data = Metro.storage.getItem('ConsoleLogList', null);
+            data.push({ id: data.length + 1, type: "warn", message: JSON.stringify(text) });
+            Metro.storage.setItem('ConsoleLogList', data);
+        },
+        error: function (text) {
+            //oldCons.error(text);
+            let data = Metro.storage.getItem('ConsoleLogList', null);
+            data.push({ id: data.length + 1, type: "error", message: JSON.stringify(text) });
+            Metro.storage.setItem('ConsoleLogList', data);
+        }
+    };
+}(window.console));
+
+//Then redefine the old console
+window.console = console;
+*/
+
+window.WindowButtons = [
+    {
+        html: "&lt;span class='mif-file-code' title='Show Window Code'>&lt;/span>",
+        cls: "alert",
+        onclick: "Gs.Behaviors.ShowWindowCode()"
+    },
+    {
+        html: "&lt;span class='mif-help' title='Show Menu Help'>&lt;/span>",
+        cls: "success",
+        onclick: "Gs.Objects.InfoboxFrameCreate('HelpViewer','/server-tools/DocsSolution/md-viewer/index.html', false);"
+    },
+    {
+        html: "&lt;span class='mif-windows' title='Open in New Window'>&lt;/span>",
+        cls: "warning",
+        onclick: "Gs.Objects.WindowIframeCreate('Open Window','', true);"
+    },
+    {
+        html: "&lt;span class='mif-windows' title='Open in External Window'>&lt;/span>",
+        cls: "sys-button",
+        onclick: "Gs.Objects.OpenInExternalWindow('External Window','',true);"
+    },
+    {
+        html: "&lt;span class='mif-image' title='Take ScreenShot'>&lt;/span>",
+        cls: "sys-button",
+        onclick: "Gs.Media.CaptureToImage();Gs.Media.DownloadCapturedImage();Gs.Media.ClearCapturedImage();"
+    },
+    {
+        html: "&lt;span class='mif-vpn-publ' title='Show URL'>&lt;/span>",
+        cls: "sys-button",
+        onclick: "alert(document.getElementById('IFrameWindow').contentWindow.location.href);"
+    }
+    
+    //{
+    //    html: "&lt;span class='mif-printer' title='Print'>&lt;/span>",
+    //    cls: "sys-button",
+    //    onclick: "Gs.Functions.PrintWindowElement();"
+    //},
+
+];
+
+
+
+Gs.Behaviors.ChangeSchemeTo = function (n) {
+    $("#AppPanel").css({ backgroundColor: n.split("?")[1] });
+    $("#portal-color-scheme").attr("href", window.location.origin + "/server-tools/Metro/metro4/css/schemes/" + n.split("?")[0]);
+    $("#scheme-name").html(n.split("?")[0]);
+    Metro.storage.setItem('WebScheme', n.split("?")[0]);
+}
+
+//Set Default Storage Values
+if (Metro.storage.getItem('WebScheme', null) == null) {
+    Metro.storage.setItem('WebScheme', "sky-net.css");
+    Gs.Behaviors.ChangeSchemeTo(Metro.storage.getItem('WebScheme', null));
+} else { Gs.Behaviors.ChangeSchemeTo(Metro.storage.getItem('WebScheme', null)); }
+
+//Start Set User Default Setting
+Metro.storage.setItem('UserSettingList', Gs.Variables.UserSettingList);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#EditBlogMenu">EditBlogMenu</a></li><li><a href="global.html#GenerateFavorites">GenerateFavorites</a></li><li><a href="global.html#GenerateMenuList">GenerateMenuList</a></li><li><a href="global.html#GenerateOnlineToolList">GenerateOnlineToolList</a></li><li><a href="global.html#GenerateWebSearchList">GenerateWebSearchList</a></li><li><a href="global.html#HighlightCode">HighlightCode</a></li><li><a href="global.html#InvalidForm">InvalidForm</a></li><li><a href="global.html#LoadFavorites">LoadFavorites</a></li><li><a href="global.html#LoadNotesList">LoadNotesList</a></li><li><a href="global.html#LoadOnlineToolList">LoadOnlineToolList</a></li><li><a href="global.html#LoadSearchWindow">LoadSearchWindow</a></li><li><a href="global.html#Mermaid">Mermaid</a></li><li><a href="global.html#OpenNotesList">OpenNotesList</a></li><li><a href="global.html#RefreshPortalMenuList">RefreshPortalMenuList</a></li><li><a href="global.html#SetQuestionCount">SetQuestionCount</a></li><li><a href="global.html#SetStripeKey">SetStripeKey</a></li><li><a href="global.html#ValidateForm">ValidateForm</a></li><li><a href="global.html#ValidateRegForm">ValidateRegForm</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Jun 28 2026 15:26:38 GMT+0200 (středoevropský letní čas)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

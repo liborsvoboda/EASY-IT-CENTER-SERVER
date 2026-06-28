@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EasyITCenter.DBModel
 {
     [Table("SolutionLanguageList")]
-    [Index("Name", Name = "IX_ServerLanguageList", IsUnique = true)]
+    [Index("CountryCode", Name = "IX_ServerLanguageList", IsUnique = true)]
     public partial class SolutionLanguageList
     {
         public SolutionLanguageList()
@@ -20,7 +20,7 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(10)]
         [Unicode(false)]
-        public string Name { get; set; } = null!;
+        public string CountryCode { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]
         public string FullName { get; set; } = null!;

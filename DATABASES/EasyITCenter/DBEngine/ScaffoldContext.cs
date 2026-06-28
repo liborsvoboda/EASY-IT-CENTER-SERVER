@@ -242,7 +242,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.SolutionLanguageListNameNavigation)
                     .WithMany(p => p.BusinessAddressLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.CountryCode)
                     .HasForeignKey(d => d.SolutionLanguageListName)
                     .HasConstraintName("FK_BusinessAddressList_SolutionLanguageList");
 
@@ -1452,7 +1452,7 @@ namespace EasyITCenter.DBModel
 
                 entity.HasOne(d => d.SolutionLanguageListNameNavigation)
                     .WithMany(p => p.SolutionUserLists)
-                    .HasPrincipalKey(p => p.Name)
+                    .HasPrincipalKey(p => p.CountryCode)
                     .HasForeignKey(d => d.SolutionLanguageListName)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionUserList_SolutionLanguageList");

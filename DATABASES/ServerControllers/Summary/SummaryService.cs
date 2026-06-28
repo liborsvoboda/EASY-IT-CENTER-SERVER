@@ -28,7 +28,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> GenerateSummaryFile([FromBody] SummaryFileRequest summaryFileRequest) {
             try {
 
-                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     summaryFileRequest.MdFilesPath = summaryFileRequest.MdFilesPath.StartsWith("/") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath.StartsWith("\\") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath;
 
                     GlobalFunctions.CreateSummaryFromPath(Path.Combine(SrvRuntime.WebRootPath, summaryFileRequest.MdFilesPath));
@@ -73,7 +73,7 @@ namespace EasyITCenter.Controllers {
         [HttpPost("/SummaryService/GeneratePublicSummaryFile")]
         public async Task<IActionResult> GeneratePublicSummaryFile([FromBody] SummaryFileRequest summaryFileRequest) {
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     summaryFileRequest.MdFilesPath = summaryFileRequest.MdFilesPath.StartsWith("/") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath.StartsWith("\\") ? summaryFileRequest.MdFilesPath.Substring(1) : summaryFileRequest.MdFilesPath;
 
                     GlobalFunctions.CreateSummaryFromPath(Path.Combine(SrvRuntime.SrvPublicPath, summaryFileRequest.MdFilesPath));

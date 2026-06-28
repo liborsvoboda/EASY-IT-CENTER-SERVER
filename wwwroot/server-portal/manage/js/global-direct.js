@@ -170,10 +170,10 @@ function GenerateMenuList(ignoreUrl = false) {
                 menuItem.Description = mItem.description;
                 menuItem.Public = mItem.public;
                 menuItem.Active = mItem.active;
-                menuItem.AccessRoleWrite = mItem.accessRoleWrite;
-                menuItem.AccessUserWrite = mItem.accessUserWrite;
-                menuItem.AccessRoleRead = mItem.accessRoleRead;
-                menuItem.AccessUserRead = mItem.accessUserRead;
+                menuItem.AccessRoleWrite = mItem.accessRoleWrite != null ? mItem.accessRoleWrite.split(",") : "";
+                menuItem.AccessUserWrite = mItem.accessUserWrite != null ? mItem.accessUserWrite.split(",") : "";
+                menuItem.AccessRoleRead = mItem.accessRoleRead != null ? mItem.accessRoleRead.split(",") : "";
+                menuItem.AccessUserRead = mItem.accessUserRead != null ? mItem.accessUserRead.split(",") : "";
             case "Sequence":
                 menuItem.Sequence = parseInt(mItem.value);
                 break;

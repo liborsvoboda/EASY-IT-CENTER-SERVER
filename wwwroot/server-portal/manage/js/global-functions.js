@@ -583,10 +583,12 @@ Gs.Functions.LoadHtmlContent = function (elementId, url) {
 * @param {string} elementId elementId
 * @param {string} url url of Iframe
 */
-Gs.Functions.LoadHtmlPageToFrame = function (elementId, url) {
-    let frame = '<div id=MainWindow data-role="window" data-custom-buttons="WindowButtons" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
-        + '<iframe id="IFrameWindow" src="' + url + '" width="100%" height="700" frameborder="0" scrolling="yes" style="width: 100%; height: 100%;" ></iframe>';
-    $('#' + elementId).html(frame);
+Gs.Functions.LoadHtmlPageToFrame = function (elementId, url, openWindow = false) {
+    if (openWindow) { window.open(url, '_blank'); } else {
+        let frame = '<div id=MainWindow data-role="window" data-custom-buttons="WindowButtons" data-btn-close="false" class="h-100" data-btn-min="false" data-btn-max="false" data-width="100%" data-height="800" data-draggable="false" >'
+            + '<iframe id="IFrameWindow" src="' + url + '" width="100%" height="700" frameborder="0" scrolling="yes" style="width: 100%; height: 100%;" ></iframe>';
+        $('#' + elementId).html(frame);
+    }
   
 }
 
@@ -888,6 +890,7 @@ Gs.Functions.AddSuggestionSave = async function () {
         Documentation: "",
         Kind: 1,
         InsertText: Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "fastSuggestion" })[0].model.getValue(),
+        MdContent: $('#FastHelpEditor')[0].contentWindow.mdEditor.getMarkdown(),
         UserId: Metro.storage.getItem("ApiToken", null) != null ? Metro.storage.getItem("ApiToken", null).Id : null
     }
     await Gs.Apis.RunServerPutApi("EasyITCenterSolutionMonacoLanguageList", jsonData, null);

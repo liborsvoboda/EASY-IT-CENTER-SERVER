@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: global-socket.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: global-socket.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>﻿
+
+/**
+* Function SetInterval 30 sec for WebSocketRefresh
+* @function
+*/
+Gs.Socket.PingInterval = setInterval(() => {
+    Gs.Socket.SendChatMessageWS(1000, JSON.stringify({}));
+}, 30000);
+
+
+/**
+* Function SendChat Message Web Socket
+* @function
+* @param {string} interval interval in milisecond
+* @param {string} message webSocket message
+*/
+Gs.Socket.SendChatMessageWS = function (interval, message = null) {
+    if (Gs.Variables.Socket.chatSocket.readyState === 1) {
+
+        if (message != null) {
+            //SEND MESSAGE
+            Gs.Variables.Socket.chatSocket.send(JSON.stringify(message));
+            Gs.Variables.Socket.chatSocket.close();
+        }
+        Gs.Variables.Socket.chatSocket = new WebSocket(`${Metro.storage.getItem('ApiOriginSuffix', null).replace("http:", "ws:").replace("https:", "wss:")}WebSocketService/chat`)
+        Gs.Socket.SetReceivingChat();
+    
+        
+    } else {
+        setTimeout(function () {
+            Gs.Socket.SendChatMessageWS(interval, message);
+        }, interval);
+    }
+};
+
+
+/**
+* Function Set Receiving Chat Message to Chat
+* @function
+*/
+Gs.Socket.SetReceivingChat = function () {
+
+    //RECEIVE MESSAGE
+    Gs.Variables.Socket.chatSocket.addEventListener("message", (event) => {
+        event.data = event.data.replaceAll("\u0000", "");
+        let message = Gs.Functions.WhatIsIt(event.data) == "String" &amp;&amp; event.data.length > 0 ? JSON.parse(event.data) : {};
+
+        //ONLY OTHER MESSAGES
+        if (Gs.Functions.WhatIsIt(event.data) == "String" &amp;&amp; message.id != undefined &amp;&amp; message.id != Gs.Variables.chatmessage.id) {
+
+            message.position = "left";
+            message.avatar = message.name == "Anonymous" ? "/server-portal/images/anonymous.jpg" : message.avatar;
+
+            let chatMessageList = Metro.storage.getItem("ChatMessageList", null);
+            if (chatMessageList.filter(obj => { return obj.id == message.id }).length == 0) {
+                chatMessageList.push(message);
+            }
+            Metro.storage.setItem("ChatMessageList", chatMessageList);
+
+            let chatWindow = Metro.getPlugin("#ChatWindow", "chat");
+            if (chatWindow != undefined) {
+                chatWindow.add(message);
+                $("#ChatMessageCount").html("0");
+            } else { $("#ChatMessageCount").html((parseInt($("#ChatMessageCount").html()) + 1).toString()); }
+        }
+    });
+
+}
+
+
+/**
+* Function SendChat Message 
+* @function
+* @param {string} message message
+*/
+Gs.Socket.SendChatMessage = function (message) {
+    let chatMessageList = Metro.storage.getItem("ChatMessageList", null);
+    Gs.Variables.chatmessage = message;
+    chatMessageList.push(message);
+    Metro.storage.setItem("ChatMessageList", chatMessageList);
+    Gs.Socket.SendChatMessageWS(1000, message);
+}
+
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#EditBlogMenu">EditBlogMenu</a></li><li><a href="global.html#GenerateFavorites">GenerateFavorites</a></li><li><a href="global.html#GenerateMenuList">GenerateMenuList</a></li><li><a href="global.html#GenerateOnlineToolList">GenerateOnlineToolList</a></li><li><a href="global.html#GenerateWebSearchList">GenerateWebSearchList</a></li><li><a href="global.html#HighlightCode">HighlightCode</a></li><li><a href="global.html#InvalidForm">InvalidForm</a></li><li><a href="global.html#LoadFavorites">LoadFavorites</a></li><li><a href="global.html#LoadNotesList">LoadNotesList</a></li><li><a href="global.html#LoadOnlineToolList">LoadOnlineToolList</a></li><li><a href="global.html#LoadSearchWindow">LoadSearchWindow</a></li><li><a href="global.html#Mermaid">Mermaid</a></li><li><a href="global.html#OpenNotesList">OpenNotesList</a></li><li><a href="global.html#RefreshPortalMenuList">RefreshPortalMenuList</a></li><li><a href="global.html#SetQuestionCount">SetQuestionCount</a></li><li><a href="global.html#SetStripeKey">SetStripeKey</a></li><li><a href="global.html#ValidateForm">ValidateForm</a></li><li><a href="global.html#ValidateRegForm">ValidateRegForm</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Jun 28 2026 15:26:38 GMT+0200 (středoevropský letní čas)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

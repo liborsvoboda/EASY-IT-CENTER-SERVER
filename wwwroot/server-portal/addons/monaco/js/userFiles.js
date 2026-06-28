@@ -84,21 +84,21 @@ require(['vs/editor/editor.main'], function () {
         mixedenumList.forEach(mixedEnum => {
             if (mixedEnum.ItemsGroup == "MonacoLanguageType") {
                 var opt = document.createElement('option');
-                opt.value = mixedEnum.Name;
-                opt.innerHTML = mixedEnum.Name;
+                opt.value = mixedEnum.SystemName;
+                opt.innerHTML = mixedEnum.SystemName;
                 selectElement.appendChild(opt);
             }
         });
 
         mixedenumList.forEach(mixedEnum => {
-            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } }).length > 0) {
-                monaco.languages.registerCompletionItemProvider(mixedEnum.Name, {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.SystemName) { return obj; } }).length > 0) {
+                monaco.languages.registerCompletionItemProvider(mixedEnum.SystemName, {
                     provideCompletionItems: function (model, position) {
-                        const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.Name) { return obj; } });
+                        const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.SystemName) { return obj; } });
                         return { suggestions: suggestions };
                     }
                 });
-                monaco.languages.register({ id: mixedEnum.Name });
+                monaco.languages.register({ id: mixedEnum.SystemName });
             }
         });
     }

@@ -16,7 +16,7 @@
 			$("#tree").fancytree({
 				checkbox: false,
 				source: {
-                    url: "/server-library/MetroDocs/Metro4/DocsB/metro/jsondata.json"
+                    url: "./jsondata.json"
 				},
 				activate: function (event, data) {
                     $("#FrameWindow").html("<iframe id=IFrameWindow src='" + data.node.key + "' class='h-100' height='100%' frameborder='0' scrolling='yes' style='width:100%; height: 100%;' ></iframe>");
