@@ -69,7 +69,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ServerModuleAndServiceList> ServerModuleAndServiceLists { get; set; } = null!;
         public virtual DbSet<ServerParameterList> ServerParameterLists { get; set; } = null!;
         public virtual DbSet<ServerStartUpScriptList> ServerStartUpScriptLists { get; set; } = null!;
-        public virtual DbSet<ServerStaticOrMvcDefPathList> ServerStaticOrMvcDefPathLists { get; set; } = null!;
+        public virtual DbSet<ServerStaticApiPathList> ServerStaticApiPathLists { get; set; } = null!;
         public virtual DbSet<ServerStorageVersionFileSupportList> ServerStorageVersionFileSupportLists { get; set; } = null!;
         public virtual DbSet<ServerStorageVersionSettingSupportList> ServerStorageVersionSettingSupportLists { get; set; } = null!;
         public virtual DbSet<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; } = null!;
@@ -1110,12 +1110,12 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_ServerStartUpScriptList_SolutionUserList");
             });
 
-            modelBuilder.Entity<ServerStaticOrMvcDefPathList>(entity =>
+            modelBuilder.Entity<ServerStaticApiPathList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.ServerStaticOrMvcDefPathLists)
+                    .WithMany(p => p.ServerStaticApiPathLists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServerStaticOrMvcDefPathList_UserList");

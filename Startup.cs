@@ -138,11 +138,8 @@ namespace EasyITCenter {
 
 
                     //TODO NOT CORRECT AND MISSING ACCESS IN DB
-                    //Excluded Url For Server Browsing From Page Settings, redirected Defined paths
-                    if (DbOperations.CheckDBServerApiRule(requestPath)?.Count() > 0
-                    //|| (!string.IsNullOrEmpty(System.IO.Path.GetExtension(context.Request.Path)))
-                    || context.Response.StatusCode == StatusCodes.Status301MovedPermanently || context.Response.StatusCode == StatusCodes.Status302Found
-                    ) { return; }
+                    //Excluded STATIC API For Server Browsing From Page Settings, redirected Defined paths
+                    if (DbOperations.CheckDBServerApiRule(requestPath)?.Count() > 0 || context.Response.StatusCode == StatusCodes.Status301MovedPermanently || context.Response.StatusCode == StatusCodes.Status302Found) { return; }
 
 
 
@@ -150,7 +147,7 @@ namespace EasyITCenter {
                     ServerApiSecurityList? serverApiSecurity = DbOperations.GetServerApiSecurity(requestPath);
                     if (serverApiSecurity != null) {
                         if (context.User.Identity != null && context.User.FindFirstValue(ClaimTypes.PrimarySid) == null
-                        && ((context.Request.Method == "GET" && serverApiSecurity.ReadRestrictedAccess) || (context.Request.Method == "POST" && serverApiSecurity.WriteRestrictedAccess))) {
+                        && ( ( context.Request.Method == "GET" && serverApiSecurity.ReadRestrictedAccess ) || ( context.Request.Method == "POST" && serverApiSecurity.WriteRestrictedAccess ) )) {
                             if (serverApiSecurity.RedirectPathOnError?.Length == 0) { redirected = true; context.Request.Path = "/StatusPageService/401UnauthorizedPage"; await next(); } else {
                                 ServerModuleAndServiceList? loginModule = new EasyITCenterContext().ServerModuleAndServiceLists.FirstOrDefault(a => a.IsLoginModule);
                                 if (context.Items.FirstOrDefault(a => a.Key.ToString() == "LoginModule").Value != null) { context.Items.Remove("LoginModule"); }
@@ -159,8 +156,8 @@ namespace EasyITCenter {
                                 redirected = true; context.Request.Path = "/SystemModules"; await next();
                             }
                         } else if (context.User.Identity != null && context.User.FindFirstValue(ClaimTypes.PrimarySid) != null
-                              && ((context.Request.Method == "GET" && serverApiSecurity.ReadRestrictedAccess && serverApiSecurity.AccessRoleRead != null && !serverApiSecurity.AccessRoleRead.ToLower().Split(",").Contains(context.User.FindFirstValue(ClaimTypes.Role).ToLower()))
-                              || (context.Request.Method != "GET" && serverApiSecurity.WriteRestrictedAccess && serverApiSecurity.AccessRoleWrite != null && !serverApiSecurity.AccessRoleWrite.ToLower().Split(",").Contains(context.User.FindFirstValue(ClaimTypes.Role).ToLower()))
+                              && ( ( context.Request.Method == "GET" && serverApiSecurity.ReadRestrictedAccess && serverApiSecurity.AccessRoleRead != null && !serverApiSecurity.AccessRoleRead.ToLower().Split(",").Contains(context.User.FindFirstValue(ClaimTypes.Role).ToLower()) )
+                              || ( context.Request.Method != "GET" && serverApiSecurity.WriteRestrictedAccess && serverApiSecurity.AccessRoleWrite != null && !serverApiSecurity.AccessRoleWrite.ToLower().Split(",").Contains(context.User.FindFirstValue(ClaimTypes.Role).ToLower()) )
                               )) {
                             if (serverApiSecurity.RedirectPathOnError?.Length == 0) { redirected = true; context.Request.Path = "/StatusPageService/401UnauthorizedPage"; await next(); } else {
                                 ServerModuleAndServiceList? loginModule = new EasyITCenterContext().ServerModuleAndServiceLists.FirstOrDefault(a => a.IsLoginModule);
@@ -180,9 +177,9 @@ namespace EasyITCenter {
                     //Verify Request For Detect Layout, Redirection, Module, Correct File Path, WebMenu Selection
                     RouteLayoutTypes routeLayout = RouteLayoutTypes.EmptyLayout; RoutingActionTypes commandType = RoutingActionTypes.None; string fileValidUrl = context.Request.Path;
                     context = CoreOperations.ChechUrlRequestValidOrAuthorized(context);
-                    try { routeLayout = ((RouteLayoutTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "RouteLayoutTypes").Value); } catch { }
-                    try { commandType = ((RoutingActionTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "CommandType").Value); } catch { }
-                    try { fileValidUrl = ((string)context.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value); } catch { }
+                    try { routeLayout = ( (RouteLayoutTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "RouteLayoutTypes").Value ); } catch { }
+                    try { commandType = ( (RoutingActionTypes)context.Items.FirstOrDefault(a => a.Key.ToString() == "CommandType").Value ); } catch { }
+                    try { fileValidUrl = ( (string)context.Items.FirstOrDefault(a => a.Key.ToString() == "FileValidUrl").Value ); } catch { }
 
 
 
@@ -191,14 +188,9 @@ namespace EasyITCenter {
                     //Show MarkDownFile in Layout by missing .md extension
                     if (!redirected && routeLayout == RouteLayoutTypes.ViewerMarkDownFileLayout) { redirected = true; context.Request.Path = "/ViewerMarkDownFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
                     //Show Report File in Layout by .frx extension
-                    else if (!redirected && routeLayout == RouteLayoutTypes.ViewerReportFileLayout) { redirected = true; context.Request.Path = "/ReportViewer/ViewerReportFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } 
-                    else if (!redirected && routeLayout == RouteLayoutTypes.ServerPortalLayout) { redirected = true; return; } 
-                    else if (!redirected && routeLayout == RouteLayoutTypes.SystemPortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemPortal"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } 
-                    else if (!redirected && routeLayout == RouteLayoutTypes.SystemModulesLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemModules"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
+                    else if (!redirected && routeLayout == RouteLayoutTypes.ViewerReportFileLayout) { redirected = true; context.Request.Path = "/ReportViewer/ViewerReportFile"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } else if (!redirected && routeLayout == RouteLayoutTypes.ServerPortalLayout) { redirected = true; return; } else if (!redirected && routeLayout == RouteLayoutTypes.SystemPortalLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemPortal"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } else if (!redirected && routeLayout == RouteLayoutTypes.SystemModulesLayout && requestPath != fileValidUrl) { redirected = true; context.Request.Path = "/SystemModules"; context.Response.StatusCode = StatusCodes.Status200OK; await next(); }
 
-                    if (!redirected && commandType == RoutingActionTypes.Return) { return; } 
-                    else if (!redirected && commandType == RoutingActionTypes.Next) { context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } 
-                    else if (!redirected && commandType == RoutingActionTypes.Next && context.Request.Path.ToString().ToLower() == fileValidUrl) { return; }
+                    if (!redirected && commandType == RoutingActionTypes.Return) { return; } else if (!redirected && commandType == RoutingActionTypes.Next) { context.Request.Path = fileValidUrl; context.Response.StatusCode = StatusCodes.Status200OK; await next(); } else if (!redirected && commandType == RoutingActionTypes.Next && context.Request.Path.ToString().ToLower() == fileValidUrl) { return; }
                 }
             });
 
@@ -211,37 +203,29 @@ namespace EasyITCenter {
             app.UseHsts();
             if (bool.Parse(DbOperations.GetServerParameterLists("ConfigServerStartupOnHttps").Value)) { app.UseHttpsRedirection(); }
 
-            //Allowed File Types For Web TODO define over Administration
+
+            //STATIC FILES PART
             //https://stackoverflow.com/questions/1612767/file-extensions-and-mime-types-in-net
             FileExtensionContentTypeProvider? staticFilesProvider = new FileExtensionContentTypeProvider();
-            staticFilesProvider.Mappings[".js"] = "text/javascript"; staticFilesProvider.Mappings[".css"] = "text/css";
-            staticFilesProvider.Mappings[".json"] = "application/json"; staticFilesProvider.Mappings[".code"] = "text/cs";
-            staticFilesProvider.Mappings[".xaml"] = "text/xaml"; staticFilesProvider.Mappings[".zip"] = "application/zip";
-            staticFilesProvider.Mappings[".tsx"] = "text/javascript"; staticFilesProvider.Mappings[".html"] = "text/html; charset=utf-8";
-            staticFilesProvider.Mappings[".jpg"] = "image/jpeg"; staticFilesProvider.Mappings[".jpeg"] = "image/jpeg";
-            staticFilesProvider.Mappings[".png"] = "image/png"; staticFilesProvider.Mappings[".gif"] = "image/gif";
-            staticFilesProvider.Mappings[".ico"] = "image/vnd.microsoft.icon"; staticFilesProvider.Mappings[".ttf"] = "font/ttf";
-            staticFilesProvider.Mappings[".ts"] = "text/javascript"; staticFilesProvider.Mappings[".tiff"] = "image/tiff";
-            staticFilesProvider.Mappings[".svg"] = "image/svg+xml"; staticFilesProvider.Mappings[".bmp"] = "image/bmp";
-            staticFilesProvider.Mappings[".mp4"] = "video/mp4"; staticFilesProvider.Mappings[".snippets"] = "text/plain";
-            staticFilesProvider.Mappings[".md"] = "text/markdown"; staticFilesProvider.Mappings[".mpeg"] = "audio/mpeg";
-            staticFilesProvider.Mappings[".exe"] = "application/exe"; staticFilesProvider.Mappings[".dll"] = "x-msdownload";
-            staticFilesProvider.Mappings[".ppt"] = "application/vnd.ms-powerpoint"; staticFilesProvider.Mappings[".xls"] = "application/vnd.ms-excel";
-            staticFilesProvider.Mappings[".doc"] = "application/msword"; staticFilesProvider.Mappings[".jar"] = "application/java-archive";
-            staticFilesProvider.Mappings[".xml"] = "application/xml";
+            List<ServerAllowedMimeTypeList> mimeData;
+            using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) {
+                mimeData = new EasyITCenterContext().ServerAllowedMimeTypeLists.Where(a => a.Active).ToList();
+            } if (mimeData.Any()) { mimeData.ForEach(mime => { staticFilesProvider.Mappings[mime.FileExtension] = mime.MimeType; }); }
 
-            //app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html" });
-            app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true, ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress,
+            app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = bool.Parse(DbOperations.GetServerParameterLists("StaticApiAllowAllMimeTypes").Value), ContentTypeProvider = staticFilesProvider, HttpsCompression = HttpsCompressionMode.Compress, DefaultContentType = "text/html",
                 OnPrepareResponse = (context) => { context = CoreOperations.IncludeStaticCookieTokenToRequest(context);
-                    //TODO Ignore WHEN SHARED Check RIGHT USER & HIS FOLDER
-                    if (!HttpContextExtension.IsLogged()
-                        && ( context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvUserPath)}") || context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SystemAppsPath)}") || context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvToolsPath)}") ) 
-                        && ( !context.Context.Request.Path.ToString().Contains($"{HttpContextExtension.GetUserName()?.ToLower()}/Public", StringComparison.OrdinalIgnoreCase) || !context.Context.Request.Path.ToString().Contains($"{HttpContextExtension.GetUserName()?.ToLower()}/Shared", StringComparison.OrdinalIgnoreCase) )
-                        ) {
-                        context.Context.Response.Redirect("/StatusPageService/401UnauthorizedPage", true);
-                    }
+                    if (
+                    //BLOCK DENIED LOGGED PUBLIC 
+                    ( HttpContextExtension.IsLogged() && context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvPublicPath)}") && !HttpContextExtension.IsSuperAdmin() && !HttpContextExtension.IsAdmin() && !HttpContextExtension.IsWebAdmin()) //BLOCK 
+                    //BLOCK UNLOGED PUBLIC PATH
+                    || (!HttpContextExtension.IsLogged() && context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvPublicPath)}"))
+                    //BLOCK UNLOGGED USER PATH WITHOUT Public & Shared Folder
+                    || (!HttpContextExtension.IsLogged() && ( context.Context.Request.Path.StartsWithSegments($"/{FileOperations.GetLastFolderFromPath(SrvRuntime.SrvUserPath)}") && ( !context.Context.Request.Path.ToString().Contains($"{HttpContextExtension.GetUserName()?.ToLower()}/Public", StringComparison.OrdinalIgnoreCase) || !context.Context.Request.Path.ToString().Contains($"{HttpContextExtension.GetUserName()?.ToLower()}/Shared", StringComparison.OrdinalIgnoreCase) )))
+                    ) { context.Context.Response.Redirect("/StatusPageService/401UnauthorizedPage", true); }
                 }
             });
+
+
 
             app.UseCookiePolicy();
             app.UseSession();
@@ -260,22 +244,16 @@ namespace EasyITCenter {
             ServerModulesEnabling.EnableDocumentation(ref app);
             ServerEnablingServices.EnableRssFeed(ref app);
 
+            //BROWSABLE STATIC PATHs
             if (bool.Parse(DbOperations.GetServerParameterLists("WebBrowserContentEnabled").Value)) { //Browsable Path Definitions
-                List<ServerStaticOrMvcDefPathList> data;
-                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { data = new EasyITCenterContext().ServerStaticOrMvcDefPathLists.Where(a => a.IsBrowsable && a.Active).ToList(); }
-
-                data.ForEach(path => {
-                    try {
-                        app.UseFileServer(new FileServerOptions {
-                            FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath))),
-                            RequestPath = path.WebRootSubPath.StartsWith("/") ? path.WebRootSubPath : "/" + path.WebRootSubPath, EnableDirectoryBrowsing = true
-                        });
-                        if (!string.IsNullOrWhiteSpace(path.AliasPath)) { app.UseFileServer(new FileServerOptions { FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath))),
-                            RequestPath = !string.IsNullOrWhiteSpace(path.AliasPath) ? (path.AliasPath.StartsWith("/") ? path.AliasPath : "/" + path.AliasPath) : "", EnableDirectoryBrowsing = true
-                        });
-                        }
-                    } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
-                });
+                List<ServerStaticApiPathList> staticData = new List<ServerStaticApiPathList>();
+                using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted })) { staticData = new EasyITCenterContext().ServerStaticApiPathLists.Where(a => a.Active).ToList(); }
+                if (staticData.Any()) { staticData.ForEach(path => {
+                        try { app.UseFileServer(new FileServerOptions { FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath))), RequestPath = path.WebRootSubPath.StartsWith("/") ? path.WebRootSubPath : "/" + path.WebRootSubPath, EnableDirectoryBrowsing = (path.IsBrowsable ? true : false) });
+                            if (!string.IsNullOrWhiteSpace(path.AliasPath)) { app.UseFileServer(new FileServerOptions {FileProvider = new PhysicalFileProvider(Path.Combine(SrvRuntime.WebRootPath + FileOperations.ConvertSystemFilePathFromUrl(path.WebRootSubPath))),RequestPath = !string.IsNullOrWhiteSpace(path.AliasPath) ? ( path.AliasPath.StartsWith("/") ? path.AliasPath : "/" + path.AliasPath ) : "", EnableDirectoryBrowsing = ( path.IsBrowsable ? true : false ) }); }
+                        } catch (Exception Ex) { CoreOperations.SendEmail(new SendMailRequest() { Content = DataOperations.GetErrMsg(Ex) }); }
+                    });
+                }
             }
 
             if (bool.Parse(DbOperations.GetServerParameterLists("WebMvcPagesEngineEnabled").Value)) { app.UseMvcWithDefaultRoute(); }

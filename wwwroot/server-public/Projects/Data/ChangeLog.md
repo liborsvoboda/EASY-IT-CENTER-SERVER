@@ -50,7 +50,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
-- update ([194627d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/194627d89ea16ddeaa2718c328b9d2aaa143599b) by Libor Svoboda).
+- update ([09168f8](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/09168f8622b17ea77c347f365903dfd2f0ee38c3) by Libor Svoboda).
 - repaired server-tools ([1ceb0e9](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1ceb0e968392ede8c62c0558850870d62bc9c190) by lioborsvoboda).
 - repair server portal tools ([bdc9cc3](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/bdc9cc39c50a6c6771006f664e524b2ee3f5a62b) by lioborsvoboda).
 - repair server-tools ([2619a6d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/2619a6d05bd5e02c2020292db56d4a10678b6c26) by lioborsvoboda).

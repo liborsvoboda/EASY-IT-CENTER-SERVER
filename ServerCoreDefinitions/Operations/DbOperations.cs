@@ -42,8 +42,8 @@ namespace EasyITCenter.ServerCoreStructure {
                             int wgIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == wgDataLL.GetType());
                             if (wgIndexLL >= 0) SrvRuntime.LocalDBTableList[wgIndexLL] = wgDataLL; else SrvRuntime.LocalDBTableList.Add(wgDataLL);
                             break;
-                        case "ServerStaticOrMvcDefPathLists":
-                            List<ServerStaticOrMvcDefPathList>? ssmDataLL = new EasyITCenterContext().ServerStaticOrMvcDefPathLists.ToList();
+                        case "ServerStaticApiPathLists":
+                            List<ServerStaticApiPathList>? ssmDataLL = new EasyITCenterContext().ServerStaticApiPathLists.ToList();
                             int ssmIndexLL = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == ssmDataLL.GetType());
                             if (ssmIndexLL >= 0) SrvRuntime.LocalDBTableList[ssmIndexLL] = ssmDataLL; else SrvRuntime.LocalDBTableList.Add(ssmDataLL);
                             break;
@@ -99,7 +99,7 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="serverPath"></param>
         /// <returns></returns>
-        public static List<ServerStaticOrMvcDefPathList>? CheckDBServerApiRule(string serverPath) {
+        public static List<ServerStaticApiPathList>? CheckDBServerApiRule(string serverPath) {
             return CheckDBServerApiRuleOffline(serverPath);// : CheckDBServerApiRuleOnline(serverPath);
         }
 
@@ -288,11 +288,11 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="serverPath"></param>
         /// <returns></returns>
-        private static List<ServerStaticOrMvcDefPathList>? CheckDBServerApiRuleOffline(string serverPath) {
-            int index = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == new List<ServerStaticOrMvcDefPathList>().GetType());
+        private static List<ServerStaticApiPathList>? CheckDBServerApiRuleOffline(string serverPath) {
+            int index = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == new List<ServerStaticApiPathList>().GetType());
             serverPath = (serverPath.StartsWith("/") ? serverPath.Substring(1).ToLower() : serverPath.ToLower());
 
-            return ((List<ServerStaticOrMvcDefPathList>)SrvRuntime.LocalDBTableList[index]).Where(a => serverPath.StartsWith(a.WebRootSubPath.ToLower()) && a.IsStaticOrMvcDefOnly && a.Active).ToList();
+            return ((List<ServerStaticApiPathList>)SrvRuntime.LocalDBTableList[index]).Where(a => serverPath.StartsWith(a.WebRootSubPath.ToLower()) && a.Active).ToList();
         }
 
 
@@ -304,9 +304,9 @@ namespace EasyITCenter.ServerCoreStructure {
         /// </summary>
         /// <param name="serverPath"></param>
         /// <returns></returns>
-        private static List<ServerStaticOrMvcDefPathList>? CheckDBServerApiRuleOnline(string serverPath) {
+        private static List<ServerStaticApiPathList>? CheckDBServerApiRuleOnline(string serverPath) {
             serverPath = (serverPath.StartsWith("/") ? serverPath.Substring(1).ToLower() : serverPath.ToLower());
-            return new EasyITCenterContext().ServerStaticOrMvcDefPathLists.Where(a => serverPath.StartsWith(a.WebRootSubPath.ToLower()) && a.IsStaticOrMvcDefOnly && a.Active).ToList();
+            return new EasyITCenterContext().ServerStaticApiPathLists.Where(a => serverPath.StartsWith(a.WebRootSubPath.ToLower()) && a.Active).ToList();
         }
 
 
@@ -319,16 +319,10 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <returns></returns>
         private static string DBTranslateOffline(string word, string? language = null) {
             if (string.IsNullOrEmpty(language)) { language = DbOperations.GetServerParameterLists("ServiceServerLanguage").Value; }
-            string result;
-            int index = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == new List<SystemTranslationList>().GetType());
-
-            //Check Exist AND Insert New
-            try {
+            string result; int index = SrvRuntime.LocalDBTableList.FindIndex(a => a.GetType() == new List<SystemTranslationList>().GetType());
+            try { //Check Exist AND Insert New
                 if (!((List<SystemTranslationList>)SrvRuntime.LocalDBTableList[index]).Where(a => a.SystemName.ToLower() == word.ToLower()).Any()) {
-                    result = word;
-                    //SystemTranslationList newWord = new() { SystemName = word, DescriptionCz = "", DescriptionEn = "", UserId = 1 };
-                    //new EasyITCenterContext().SystemTranslationLists.Add(newWord).Context.SaveChanges();
-                    LoadOrRefreshStaticDbDials(ServerLocalDbDialsTypes.SystemTranslationLists);
+                    result = word; LoadOrRefreshStaticDbDials(ServerLocalDbDialsTypes.SystemTranslationLists);
                     return result;
                 }
             } catch { }
@@ -336,7 +330,6 @@ namespace EasyITCenter.ServerCoreStructure {
             //Return From List
             if (language == "cz") result = ((List<SystemTranslationList>)SrvRuntime.LocalDBTableList[index]).Where(a => a.SystemName.ToLower() == word.ToLower()).Select(a => a.DescriptionCz).FirstOrDefault();
             else result = ((List<SystemTranslationList>)SrvRuntime.LocalDBTableList[index]).Where(a => a.SystemName.ToLower() == word.ToLower()).Select(a => a.DescriptionEn).FirstOrDefault();
-
             if (string.IsNullOrWhiteSpace(result)) { result = word; }
             return result;
         }
@@ -350,9 +343,7 @@ namespace EasyITCenter.ServerCoreStructure {
         private static string DBTranslateOnline(string word, string? language = null) {
             if (string.IsNullOrEmpty(language)) { language = DbOperations.GetServerParameterLists("ServiceServerLanguage").Value; }
             string result;
-
-            //Check Exist AND Insert New
-            try {
+            try { //Check Exist AND Insert New
                 if (!new EasyITCenterContext().SystemTranslationLists.Where(a => a.SystemName.ToLower() == word.ToLower()).Any()) {
                     result = word;
                     SystemTranslationList newWord = new() { SystemName = word, DescriptionCz = "", DescriptionEn = "", UserId = 1 };
@@ -364,7 +355,6 @@ namespace EasyITCenter.ServerCoreStructure {
             //Return From List
             if (language == "cz") result = new EasyITCenterContext().SystemTranslationLists.Where(a => a.SystemName.ToLower() == word.ToLower()).Select(a => a.DescriptionCz).FirstOrDefault();
             else result = new EasyITCenterContext().SystemTranslationLists.Where(a => a.SystemName.ToLower() == word.ToLower()).Select(a => a.DescriptionEn).FirstOrDefault();
-
             if (string.IsNullOrWhiteSpace(result)) { result = word; }
             return result;
         }

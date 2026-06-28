@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyITCenter.DBModel
 {
-    [Table("ServerStaticOrMvcDefPathList")]
+    [Table("ServerStaticApiPathList")]
     [Index("SystemName", Name = "IX_ServerStaticOrMvcDefPathList", IsUnique = true)]
-    public partial class ServerStaticOrMvcDefPathList
+    public partial class ServerStaticApiPathList
     {
         [Key]
         public int Id { get; set; }
@@ -24,13 +24,12 @@ namespace EasyITCenter.DBModel
         [Unicode(false)]
         public string? Description { get; set; }
         public bool IsBrowsable { get; set; }
-        public bool IsStaticOrMvcDefOnly { get; set; }
         public int UserId { get; set; }
         public bool Active { get; set; }
         public DateTime TimeStamp { get; set; }
 
         [ForeignKey("UserId")]
-        [InverseProperty("ServerStaticOrMvcDefPathLists")]
+        [InverseProperty("ServerStaticApiPathLists")]
         public virtual SolutionUserList User { get; set; } = null!;
     }
 }

@@ -70,7 +70,7 @@
         SystemTranslationLists,
         ServerModuleAndServiceLists,
         ServerParameterLists,
-        ServerStaticOrMvcDefPathLists,
+        ServerStaticApiPathLists,
         WebCoreFileLists,
         WebGlobalPageBlockLists
         
