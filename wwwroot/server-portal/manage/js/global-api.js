@@ -1,4 +1,5 @@
 ﻿
+
 /**
 * Function for Collective run APIS and Start function on APIs done
 * ////{ UUID, Api: [Id = RandomString,Sequence = 0 - XXXX number same for Serial API, Other for Paraler API, Processing = true/false, Processed = true/false, Type: ApiName + WindowFunction,
@@ -93,6 +94,32 @@ Gs.Apis.RunApiManager = async function () {
 }
 
 
+
+
+/*
+Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, storageName = null, windowFunction = null, Id = null) {
+    if (!Gs.Variables.ixDbInit) { await Gs.Apis.LocalStoreDownloadApi(apiPath, jsonData, filename, binary, storageName, windowFunction, Id); }
+    else { await Gs.Apis.RunIndexDbDownloadApi(apiPath, jsonData, filename, binary, storageName, windowFunction, Id); }
+}
+Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windowFunction = null, Id = null) {
+    if (!Gs.Variables.ixDbInit) { await Gs.Apis.RunLocalStorePostApi(apiPath, jsonData, storageName, windowFunction, Id); }
+    else { await Gs.Apis.RunIndexDbPostApi(apiPath, jsonData, storageName, windowFunction, Id); }
+}
+Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, windowFunction = null, Id = null) {
+    if (!Gs.Variables.ixDbInit) { await awaitGs.Apis.RunLocalStorePutApi(apiPath, jsonData, storageName, windowFunction, Id); }
+    else { await awaitGs.Apis.RunIndexDbPostApi(apiPath, jsonData, storageName, windowFunction, Id); }
+}
+Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction = null, Id = null) {
+    if (!Gs.Variables.ixDbInit) { await Gs.Apis.RunLocalStoreGetApi(apiPath, storageName, windowFunction, Id); }
+    else { await Gs.Apis.RunIndexDbGetApi(apiPath, storageName, windowFunction, Id); }
+}
+Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null, Id = null) {
+    if (!Gs.Variables.ixDbInit) { await Gs.Apis.RunLocalStoreDeleteApi(apiPath, windowFunction, Id); }
+    else { await Gs.Apis.RunIndexDbDeleteApi(apiPath, windowFunction, Id); }
+}
+*/
+
+
 /**
 * Function for Save Captured Video of User Cloud Request
 * @function
@@ -131,10 +158,10 @@ Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, stora
     $.ajax({
         global: false,
         type: "POST",
-        url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath,
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
         async: true,
         cache: false,
-        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : "",
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
         data: JSON.stringify(jsonData),
         contentType: "application/json; charset=utf-8",
         //dataType: 'binary', 
@@ -145,8 +172,8 @@ Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, stora
             if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
             if (storageName != null) {//SAVE to Storage
                 if (result.Result != undefined && result.Result != "") {
-                    Metro.storage.setItem(storageName, result.Result);
-                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") { Metro.storage.setItem(storageName, []); }
+                   Metro.storage.setItem(storageName, result.Result);
+                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") {Metro.storage.setItem(storageName, []); }
                 else { Metro.storage.setItem(storageName, result); }
             } else { //DOWNLOAD When not saved to Storage
                 let a = document.createElement('a');
@@ -188,15 +215,17 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
     $.ajax({
         global: false,
         type: "POST",
-        url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath,
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
         async: true,
         cache: false,
-        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : "",
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
         data: JSON.stringify(jsonData),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
+            //Set Processed to API Manager
             if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+
             if (storageName != null) {
                 if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
@@ -208,7 +237,7 @@ Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windo
             
             if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
             else {
-                if (storageName != null) { Metro.storage.setItem(storageName, []); }
+                if (storageName != null) {Metro.storage.setItem(storageName, []); }
                 if (windowFunction != null) { window[windowFunction](); }
                 Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false;
             }
@@ -240,14 +269,15 @@ Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, window
     $.ajax({
         global: false,
         type: "PUT",
-        url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath,
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
         async: true,
         cache: false,
-        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : "",
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
         data: JSON.stringify(jsonData),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
+            //Set Processed to API Manager
             if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
 
             if (storageName != null) {
@@ -292,14 +322,16 @@ Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction =
     $.ajax({
         global: false,
         type: "GET",
-        url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath,
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
         async: true,
         cache: false,
-        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : "",
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+            //Set Processed to API Manager
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; } 
+
             if (storageName != null) {
                 if (result.Result != undefined && result.Result != "") {
                     Metro.storage.setItem(storageName, result.Result);
@@ -341,14 +373,16 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null, Id 
     $.ajax({
         global: false,
         type: "DELETE",
-        url: Metro.storage.getItem('ApiOriginSuffix', null) + apiPath,
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
         async: true,
         cache: false,
-        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : "",
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
+            //Set Processed to API Manager
             if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+
             if (windowFunction != null) { window[windowFunction](); }
             Gs.Behaviors.HidePageLoading();
 
@@ -378,10 +412,10 @@ Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null, Id 
     $.ajax({
         global: false,
         type: "GET",
-        url: Metro.storage.getItem('ApiOriginSuffix', null) + "PortalApiTableService/GetUserSettingList",
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + "PortalApiTableService/GetUserSettingList",
         async: true,
         cache: false,
-        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : "",
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
@@ -426,4 +460,274 @@ Gs.Apis.SignOut = function () {
     Cookies.remove('ApiToken');
     Metro.storage.delItem('ApiToken');
     window.location.href = Metro.storage.getItem("DefaultPath", null);
+}
+
+
+
+
+//XXXXXXX
+/**
+* Function for Downloading binary file from Server
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} jsonData Post Json Data
+* @param {string} filename Filename for Download File
+* @param {boolean} binary Binary or Text file
+* @param {string} storageName Name of LocalStorage for Saving Result
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
+Gs.Apis.RunIndexDbDownloadApi = async function (apiPath, jsonData, filename, binary, storageName = null, windowFunction = null, Id = null) {
+    //used for Downloading files
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "POST",
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
+        async: true,
+        cache: false,
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        //dataType: 'binary', 
+        xhrFields: {
+            'responseType': binary ? 'blob' : "text"
+        },
+        success: function (result) {
+            //Set Processed to API Manager
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+
+            if (storageName != null) {//SAVE to Storage
+                if (result.Result != undefined && result.Result != "") {
+                    Gs.Database.SaveData(storageName, result.Result, true);
+                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") { Gs.Database.SaveData(storageName, [], true); }
+                else { Gs.Database.SaveData(storageName, result, true); }
+            } else { //DOWNLOAD When not saved to Storage
+                let a = document.createElement('a');
+                a.href = window.URL.createObjectURL(result);
+                a.download = result.type == "application/x-zip-compressed" ? filename + ".zip" : filename + ".md";
+                document.body.appendChild(a); a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(a.href);
+            }
+
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+        },
+        error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+            console.log(err);
+            if (storageName != null) { Gs.Database.Delete(storageName); }
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+            Gs.Objects.ShowNotify("alert", err.statusText); return false;
+            return false;
+        }
+    });
+}
+
+
+/**
+* Function for call API POST Request
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} jsonData Post Json Data
+* @param {string} storageName Name of LocalStorage for Saving Result
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
+Gs.Apis.RunIndexDbPostApi = async function (apiPath, jsonData, storageName, windowFunction = null, Id = null) {
+    console.log(apiPath, jsonData, storageName, windowFunction = null, Id = null);
+
+    //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "POST",
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
+        async: true,
+        cache: false,
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            //Set Processed to API Manager
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+
+            if (storageName != null) {
+                if (result.Result != undefined && result.Result != "") {
+                    Gs.Database.SaveData(storageName, result.Result, true);
+                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") { Gs.Database.SaveData(storageName, [], true); }
+                else { Gs.Database.SaveData(storageName, result, true); }
+            }
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+
+            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
+            else {
+                if (storageName != null) { Gs.Database.SaveData(storageName, [], true); }
+                if (windowFunction != null) { window[windowFunction](); }
+                Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false;
+            }
+        },
+        error: function (err) {
+            //Set Processed to API Manager
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+            console.log(err);
+            if (storageName != null) { Gs.Database.SaveData(storageName, [], true); }
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+            Gs.Objects.ShowNotify("alert", err.statusText); return false;
+        }
+    });
+}
+
+
+/**
+* Function for call API PUT Request
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} jsonData Post Json Data
+* @param {string} storageName Name of LocalStorage for Saving Result
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
+Gs.Apis.RunIndexDbPutApi = async function (apiPath, jsonData, storageName, windowFunction = null, Id = null) {
+    //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "PUT",
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
+        async: true,
+        cache: false,
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            //Set Processed to API Manager
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+
+            if (storageName != null) {
+                if (result.Result != undefined && result.Result != "") {
+                    Gs.Database.SaveData(storageName, result.Result, true);
+                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") { Gs.Database.SaveData(storageName, [], true); }
+                else { Gs.Database.SaveData(storageName, result, true); }
+            }
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+
+            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
+            else {
+                if (storageName != null) { Gs.Database.SaveData(storageName, [], true); }
+                if (windowFunction != null) { window[windowFunction](); }
+                Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false;
+            }
+        },
+        error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+            console.log(err);
+            if (storageName != null) { Gs.Database.SaveData(storageName, [], true); }
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+            Gs.Objects.ShowNotify("alert", err.statusText); return false;
+        }
+    });
+}
+
+
+/**
+* Function for call API GET Request
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} storageName Name of LocalStorage for Saving Result
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
+Gs.Apis.RunIndexDbGetApi = async function (apiPath, storageName, windowFunction = null, Id = null) {
+    //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "GET",
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
+        async: true,
+        cache: false,
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            //Set Processed to API Manager
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+
+            if (storageName != null) {
+                if (result.Result != undefined && result.Result != "") {
+                    Gs.Database.SaveData(storageName, result.Result, true);
+                } else if (result.Status == "UnauthorizedRequest" || result.Result == "") { Gs.Database.SaveData(storageName, [], true); }
+                else { Gs.Database.SaveData(storageName, result, true); }
+            }
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+
+            if (result.Status == undefined || result.Status == "success") { return true; }
+            else {
+                if (storageName != null) { Metro.storage.setItem(storageName, []); }
+                if (windowFunction != null) { window[windowFunction](); }
+                Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false;
+            }
+        },
+        error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+            console.log(err);
+            if (storageName != null) { Gs.Database.SaveData(storageName, [], true); }
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+            Gs.Objects.ShowNotify("alert", err.statusText); return false;
+        }
+    });
+}
+
+
+/**
+* Function for call API DELETE Request
+* @function
+* @param {string} apiPath API path of Server
+* @param {string} windowFunction Function name for call after API is done
+* @return {boolean} return status
+*/
+Gs.Apis.RunIndexDbDeleteApi = async function (apiPath, windowFunction = null, Id = null) {
+    //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "DELETE",
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
+        async: true,
+        cache: false,
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            //Set Processed to API Manager
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+
+            if (result.Status == undefined || result.Status == "success") { Gs.Objects.ShowNotify("success", result.Result); return true; }
+            else {
+                if (windowFunction != null) { window[windowFunction](); }
+                Gs.Objects.ShowNotify("alert", result.Status + " " + result.ErrorMessage); return false;
+            }
+        },
+        error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+            console.log(err);
+            if (windowFunction != null) { window[windowFunction](); }
+            Gs.Behaviors.HidePageLoading();
+            Gs.Objects.ShowNotify("alert", err.statusText); return false;
+        }
+    });
 }

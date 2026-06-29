@@ -14,43 +14,43 @@
     color: #ffffff;;
 }
 
-    .console .output {
-        overflow: auto;
+.console .consoleoutput {
+    overflow: auto;
+}
+
+.console .consoleoutput {
+    border: 1px solid #333;
+}
+
+    .console .consoleoutput .info_console {
+        background-color: #acdbe8;
+        color: #084859;
     }
 
-        .console .output {
-            border: 1px solid #333;
-        }
+    .console .consoleoutput .debug_console {
+        background-color: #b5e8ac;
+        color: #188f03;
+    }
 
-        .console .output .info_console {
-            background-color: #acdbe8;
-            color: #084859;
-        }
+    .console .consoleoutput .warn_console {
+        background-color: #ffc9a3;
+        color: #cc0000;
+    }
 
-        .console .output .debug_console {
-            background-color: #b5e8ac;
-            color: #188f03;
-        }
+    .console .consoleoutput .error_console {
+        background-color: #300;
+        color: #C00;
+    }
 
-        .console .output .warn_console {
-            background-color: #ffc9a3;
-            color: #cc0000;
-        }
+.console .consoleoutput {
+    content: '->';
+    margin-right: 4px;
+}
 
-        .console .output .error_console {
-            background-color: #300;
-            color: #C00;
-        }
-
-        .console .output {
-            content: '->';
-            margin-right: 4px;
-        }
-
-        .console .output .return:before {
-            content: '<-';
-            margin-right: 4px;
-        }
+    .console .consoleoutput .return:before {
+        content: '<-';
+        margin-right: 4px;
+    }
 
 .browserconsoleinput {
     border: none;
@@ -61,4 +61,9 @@
     font-size: 16px;
     width: calc(100% - 25px);
     padding: 0;
+}
+
+
+.return {
+    color: white;
 }

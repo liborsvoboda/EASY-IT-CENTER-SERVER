@@ -17,8 +17,7 @@ Gs.Behaviors.AutoService = function () {
         setTimeout(function () {
             //Auto API
             if (Gs.Variables.apiTaskList.length > 0) { Gs.Apis.RunApiManager(); }
-
-
+            
 
             Gs.Behaviors.AutoService();
         }, 1000);
@@ -31,6 +30,16 @@ Gs.Behaviors.AutoService = function () {
   * @function
  */
 Gs.Behaviors.PortalStartup = async function () { //LOGGED
+
+    //STARTUP
+    /* Generate WebBrowserConsole */
+    Gs.Objects.OpenBrowserConsole(); Metro.window.hide($("#WebBrowserConsole"));
+
+
+
+
+    //STARTUP
+
     if (Metro.storage.getItem("ApiToken", null) != null) {
         Cookies.set("ApiToken", Metro.storage.getItem("ApiToken", null).Token);
         Gs.Variables.username = Metro.storage.getItem("ApiToken", null).Username;
@@ -56,7 +65,7 @@ Gs.Behaviors.PortalStartup = async function () { //LOGGED
 
 
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
-    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure)), StorageName: "MixedEnumList" } );
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure)), StorageName: "SolutionMixedEnumList" } );
     Gs.Variables.getSpProcedure[1].tableName = "SolutionMonacoSuggestionList";
     Gs.Variables.getSpProcedure[2].camelCase = true;
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure)), StorageName: "MonacoSuggestionList" } );
@@ -66,26 +75,6 @@ Gs.Behaviors.PortalStartup = async function () { //LOGGED
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "InformationService/GetVersion", StorageName: "ServerVersion" } );
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "InformationService/GetStripePublicKey", StorageName: "StripePublicKey", WindowFunction: "SetStripeKey" } );
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(),  Id: Gs.Functions.RandomString(), Sequence: 0, Type: "WindowFunction", WindowFunction: "LoadOnlineToolList" } );
-
-
-    /*
-    Gs.Variables.getSpProcedure[1].tableName = "SolutionMixedEnumList";
-    await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MixedEnumList");
-
-    Gs.Variables.getSpProcedure[1].tableName = "SolutionMonacoSuggestionList";
-    Gs.Variables.getSpProcedure[2].camelCase = true;
-    await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "MonacoSuggestionList");
-    Gs.Variables.getSpProcedure[2].camelCase = false;
-
-    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetQuestionForResponseList", "AdminQuestionList", "SetQuestionCount");
-
-    await Gs.Apis.RunServerGetApi("PortalApiTableService/GetApiTableDataList/PortalMenu", "PortalMenuList","GenerateMenuList");
-    await Gs.Apis.RunServerGetApi("InformationService/GetVersion", "ServerVersion");
-    await Gs.Apis.RunServerGetApi("InformationService/GetStripePublicKey", "StripePublicKey", "SetStripeKey");
-
-    await LoadOnlineToolList();
-    */
-
 
     //Check Stripe Payment
     if (StripePayed != null && StripePayed) {
@@ -117,22 +106,22 @@ Gs.Behaviors.PortalStartup = async function () { //LOGGED
  *Hide Page Loading
   * @function
  */
-Gs.Behaviors.HidePageLoading = function () { Metro.activity.close(pageLoader); }
+Gs.Behaviors.HidePageLoading = function () { Metro.activity.close(Gs.Variables.pageLoader); }
 
 /**
  *Show Page Loading
   * @function
  */
 Gs.Behaviors.ShowPageLoading = function () {
-    if (pageLoader != undefined) {
-        if (pageLoader[0]["DATASET:UID:M4Q"] == undefined) { pageLoader = null; }
+    if (Gs.Variables.pageLoader != undefined) {
+        if (Gs.Variables.pageLoader[0]["DATASET:UID:M4Q"] == undefined) { Gs.Variables.pageLoader = null; }
         else {
-            try { Metro.activity.close(pageLoader); } catch {
-                try { pageLoader.close(); } catch { pageLoader = pageLoader[0]["DATASET:UID:M4Q"].dialog; pageLoader.close(); }; pageLoader = null;
+            try { Metro.activity.close(Gs.Variables.pageLoader); } catch {
+                try { Gs.Variables.pageLoader.close(); } catch { Gs.Variables.pageLoader = Gs.Variables.pageLoader[0]["DATASET:UID:M4Q"].dialog; Gs.Variables.pageLoader.close(); }; Gs.Variables.pageLoader = null;
             }
         }
     }
-    pageLoader = Metro.activity.open({ type: 'square', style: 'color', overlayClickClose: true, /*overlayColor: '#fff', overlayAlpha: 1*/ });
+    Gs.Variables.pageLoader = Metro.activity.open({ type: 'square', style: 'color', overlayClickClose: true, /*overlayColor: '#fff', overlayAlpha: 1*/ });
 }
 
 
@@ -615,7 +604,7 @@ Gs.Behaviors.ShareReceiveClearChat = function () {
 
 
 /**
-* Load Data To Tool in 1 Sec Cycle
+* Cycle Time Mechanism for Correct SET of EDITORS  Load Data To Tool in 1 Sec Cycle
 * @function
 * @param {string} tool tool Name from Program Code
 */

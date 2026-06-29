@@ -56,7 +56,15 @@ Gs.Functions.RemoveElement = function (elementId) {
     if (element != null) { element.remove(); }
 }
 
-
+/**
+* Function Element from Page
+* @function
+*/
+Gs.Functions.RemoveElementByClass = function (className) {
+    let element = document.getElementsByClassName(className)[0];
+    if (element != null) { element[0].remove(); }
+}
+   
 /**
 * Function Add Class to Element
 * @function

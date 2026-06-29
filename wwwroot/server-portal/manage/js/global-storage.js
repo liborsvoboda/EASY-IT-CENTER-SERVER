@@ -1,4 +1,6 @@
-﻿
+﻿let indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+
+
 
 /*Start Set Global Constants*/
 Metro.storage.setItem('BackendServerAddress', window.location.origin);
@@ -18,6 +20,7 @@ if (Metro.storage.getItem('ConsoleLogList', null) == null) { Metro.storage.setIt
 * 
 */
 window.Gs = {
+    Database: {},
     Behaviors: {},
     Objects: {},
     Functions: {},
@@ -26,7 +29,15 @@ window.Gs = {
     Socket: {},
     SignalR: {},
     Variables: {
+        ixDbInit: false, //True USE IndexedDB, False use LocalStorage
+        database: indexedDB.open("EICserverPortal", 4),
+        dbData: null,
+        dbStore: null,
+        dbIndex: null,
+        dbObjectStore: null,
+        dbTransaction: null,
         breakException: {},
+        pageLoader: null,
         chatmessage: {},
         username: "127.0.0.1",
         fullname: "Anonymous",
@@ -83,39 +94,42 @@ window.Gs = {
 }
 
 
-/*
+// Custom Console Definition
 let console = (function (oldCons) {
     return {
         log: function (text) {
-            //oldCons.log(text);
             let data = Metro.storage.getItem('ConsoleLogList', null);
-            data.push({ id: data.length + 1, type: "debug", message: JSON.stringify(text) });
-            Metro.storage.setItem('ConsoleLogList', data);
+            if (data != null) {
+                data.push({ id: data.length + 1, type: "debug", message: JSON.stringify(text) });
+                Metro.storage.setItem('ConsoleLogList', data);
+            } Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "debug_console");
+
         },
         info: function (text) {
-            //oldCons.info(text);
             let data = Metro.storage.getItem('ConsoleLogList', null);
-            data.push({ id: data.length + 1, type: "info", message: JSON.stringify(text) });
-            Metro.storage.setItem('ConsoleLogList', data);
+            if (data != null) {
+                data.push({ id: data.length + 1, type: "info", message: JSON.stringify(text) });
+                Metro.storage.setItem('ConsoleLogList', data);
+            } Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "info_console");
         },
         warn: function (text) {
-           // oldCons.warn(text);
             let data = Metro.storage.getItem('ConsoleLogList', null);
-            data.push({ id: data.length + 1, type: "warn", message: JSON.stringify(text) });
-            Metro.storage.setItem('ConsoleLogList', data);
+            if (data != null) {
+                data.push({ id: data.length + 1, type: "warn", message: JSON.stringify(text) });
+                Metro.storage.setItem('ConsoleLogList', data);
+            } Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "warn_console");
         },
         error: function (text) {
-            //oldCons.error(text);
             let data = Metro.storage.getItem('ConsoleLogList', null);
-            data.push({ id: data.length + 1, type: "error", message: JSON.stringify(text) });
-            Metro.storage.setItem('ConsoleLogList', data);
+            if (data != null) {
+                data.push({ id: data.length + 1, type: "error", message: JSON.stringify(text) });
+                Metro.storage.setItem('ConsoleLogList', data);
+            } Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "error_console");
         }
     };
 }(window.console));
-
-//Then redefine the old console
 window.console = console;
-*/
+
 
 window.WindowButtons = [
     {

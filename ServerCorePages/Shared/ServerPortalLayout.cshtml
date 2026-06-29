@@ -52,10 +52,11 @@
     <link rel="stylesheet" href="/server-tools/Style/animate/css/animate.css" />
 
 
-    <link rel="stylesheet" href="/server-portal/manage/css/global.css" />
+    <!--Web Console-->
+    <link rel="stylesheet" href="/server-tools/IFrameObject/console/css/style.css" />
 
-    <!--WEB Console-->
-@*     <link rel="stylesheet" href="/server-tools/IFrameObject/console/css/style.css" /> *@
+
+    <link rel="stylesheet" href="/server-portal/manage/css/global.css" />
 
     <!--Metro-->
     <script type="text/javascript" src="/server-tools/Metro/metro4/js/jquery-3.6.0.min.js"></script>
@@ -82,6 +83,8 @@
     <script type="text/javascript" src="/server-tools/DocsSolution/jspreadsheet/js/jexcel.js"></script>
     <script type="text/javascript" src="/server-tools/DocsSolution/jspreadsheet/js/jsuites.js"></script>
 
+    <!--DATABASE-->
+     <script type="text/javascript" src="/server-tools/Database/weblocaldb/localdb.js"></script>
 
     <!--STRIPE-->
     <script type="text/javascript" src="https://js.stripe.com/clover/stripe.js"></script>
@@ -91,6 +94,7 @@
 
     <!--Manage-->
     <script type="text/javascript" src="/server-portal/manage/js/global-storage.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-database.js"></script>
     <script type="text/javascript" src="/server-portal/manage/js/global-direct.js"></script>
     <script type="text/javascript" src="/server-portal/manage/js/global-behavior.js"></script>
     <script type="text/javascript" src="/server-portal/manage/js/global-object.js"></script>
@@ -125,10 +129,6 @@
 
     <!-- ImageView-->
     <script type="text/javascript" src="/server-tools/FrameWorkUI/jquery/js/waterfall.js"></script>
-
-
-    <!-- Web Console -->
-    @* <script type="text/javascript" src="/server-tools/IFrameObject/console/js/browser-console.js"></script> *@
 
 
 @*     <script type="text/javascript" src="/server-portal/addons/InteliJsEditor/codemirror.js"></script>
@@ -204,7 +204,7 @@
 
   Gs.Behaviors.AutoService();
   Gs.Behaviors.PortalStartup();
-
+  $(document).ready(function () { Metro.notify.killAll(); });
    
 </script>
 </html>

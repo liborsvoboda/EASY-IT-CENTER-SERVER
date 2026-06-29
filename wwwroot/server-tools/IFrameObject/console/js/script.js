@@ -5,26 +5,28 @@
         let conInput = document.getElementById('browserconsoleinput');
         let self = this;
         self.consoleBackbuffer = [];
-        conInput.addEventListener('keydown', function(e) {
-            if (13 === e.keyCode) {
-                let input = conInput.value;
-                self.consoleBackbuffer.push(input);
-                conInput.value = "";
-                if (input.toLowerCase() === 'clear') {
-                    self.clear();
-                    return;
-                }
-                self.addConsoleLine(input, 'browserconsoleinput');
-                try {
-                    let returnVal = eval.apply(this, [input]);
-                    self.addConsoleLine(returnVal, 'return');
-                } catch (e) {
-                    self.handleError(e);
-                }
-            }
-        });
-        conInput.focus();
 
+        if (conInput != null) {
+            conInput.addEventListener('keydown', function (e) {
+                if (13 === e.keyCode) {
+                    let input = conInput.value;
+                    self.consoleBackbuffer.push(input);
+                    conInput.value = "";
+                    if (input.toLowerCase() === 'clear') {
+                        self.clear();
+                        return;
+                    }
+                    self.addConsoleLine(input, 'browserconsoleinput');
+                    try {
+                        let returnVal = eval.apply(this, [input]);
+                        self.addConsoleLine(returnVal, 'return');
+                    } catch (e) {
+                        self.handleError(e);
+                    }
+                }
+            });
+            conInput.focus();
+        }
         socket.onmessage = function (event) {
             self.addConsoleLine(event.data, 'log_console');
         };

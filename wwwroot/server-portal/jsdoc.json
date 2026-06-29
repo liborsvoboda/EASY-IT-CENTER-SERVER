@@ -17,6 +17,7 @@
   ],
     "source": {
       "include": [
+        "manage/js/global-database.js",
         "manage/js/global-direct.js",
         "manage/js/global-storage.js",
         "manage/js/global-behavior.js",

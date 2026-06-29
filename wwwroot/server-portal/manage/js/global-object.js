@@ -319,20 +319,22 @@ Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false, frameN
 * @param {string} title window title
 * @param {string} html html string
 */
-Gs.Objects.WindowHtmlCreate = function (elementId, title, html) {
+Gs.Objects.WindowHtmlCreate = function (elementId, title, html, hidden = false, closeButton = true) {
     let custwindow = Metro.window.create({
         cls: "p-0", title: title, clsCaption: 'bg-orange',
         btnMin: true, btnMax: true, shadow: true,
         draggable: true, resizable: true,
         width: "100%", height: "100%",
         place: 'center',
-        clsWindow: "supertop",
+        clsWindow: `supertop`,
         icon: "<span class='mif-hour-glass'></spam>",
         onCaptionDblClick: function () { },
-        btnClose: true,
-        content: html
+        btnClose: closeButton,
+        content: html,
+        customButtons: (!closeButton ? [{ html: "<span class='mif-cancel' title='Close'></span>", cls: "warning", onclick: `Metro.window.hide("#${elementId}")` }] : [])
     });
     custwindow[0].id = elementId;
+
 }
 
 
@@ -925,8 +927,73 @@ Gs.Objects.RemoveWebSearchList = async function (menuName, recGuid) {
 */
 Gs.Objects.OpenBrowserConsole = function () {
     let html = `<div id="ConsoleWindow" class="w-100 h-100" style="width: 100vw; height: 100vh; background-color: black;">
-                            <div class="console"><div id="browser-console-output" class="output"></div></div>
+                            <div class="console"><div id="browser-console-output" class="consoleoutput"></div></div>
                             <div class="browserconsoleinput"><input class="browserconsoleinput" id="browserconsoleinput" type="text" /></div>
                         </div>`;
-    Gs.Objects.WindowHtmlCreate("ConsoleWindow", "Web Console Debugger", html);
+    Gs.Objects.WindowHtmlCreate("WebBrowserConsole", "Web Console Debugger", html, true, false);
+}
+
+
+//Show Hidden Console
+Gs.Objects.ShowBrowserConsole = function () {
+    Metro.window.show($("#WebBrowserConsole"));
+
+    class Console {
+        constructor() {
+            let conInput = document.getElementById('browserconsoleinput');
+            let self = this;
+            self.consoleBackbuffer = [];
+
+            conInput.addEventListener('keydown', function (e) {
+                if (13 === e.keyCode) {
+                    let input = conInput.value;
+                    self.consoleBackbuffer.push(input);
+                    conInput.value = "";
+                    if (input.toLowerCase() === 'clear') {
+                        self.clear();
+                        return;
+                    }
+                    self.AddWebConsoleLine(input, 'browserconsoleinput');
+                    try {
+                        let returnVal = eval.apply(this, [input]);
+                        self.AddWebConsoleLine(returnVal, 'return');
+                    } catch (e) {
+                        self.AddWebConsoleLine(e, 'error_console');
+                    }
+                }
+            });
+            conInput.focus();
+        }
+
+        clear() {
+            Metro.storage.setItem("ConsoleLogList", null);
+            while (document.getElementById('browser-console-output').hasChildNodes) {
+                let blah = document.getElementById('browser-console-output').lastChild;
+                if (blah === null) { break; }
+                document.getElementById('browser-console-output').removeChild(blah);
+            }
+        }
+
+        AddWebConsoleLine(msg, type) {
+            let output = document.getElementById('browser-console-output');
+            let newLine = document.createElement('div');
+            newLine.classList.add(type);
+            newLine.innerText = msg;
+            output.appendChild(newLine);
+        }
+    }
+
+    const con = new Console();
+
+    window.addEventListener("error", (event) => { Gs.Functions.AddWebConsoleLine(event.message, "error_console"); });
+}
+
+
+
+Gs.Functions.AddWebConsoleLine = function (msg, type) {
+    let output = document.getElementById('browser-console-output');
+    let newLine = document.createElement('div');
+    newLine.classList.add(type);
+    newLine.innerText = msg;
+    output.appendChild(newLine);
 }
