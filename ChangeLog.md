@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- added Web Browser Console ([972e2c1](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/972e2c1eb1da92c127206c71fde94f752929854f) by Libor Svoboda).
 - added Metro2-5-WPF Locally ([5a26bbc](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/5a26bbcf7bb290857768c92dabaf9abac24f8f9a) by Libor Svoboda).
 - added SystemName for Translation ([6e482a6](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/6e482a6f02927cfba30ff2230324770db4a265f3) by Libor Svoboda).
 - Added MD Content and Version for Developing ([5903841](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/590384194a44bef22c7ad31396215a3808a6976c) by Libor Svoboda).

@@ -3,18 +3,26 @@
 * 
 * 
 */
-//Gs.Variables.database = indexedDB.open("EICserverPortal", 4);
+
 
 Gs.Variables.database.onupgradeneeded = (event) => {
     Gs.Variables.dbData = event.target.result;
-    Gs.Variables.dbStore = Gs.Variables.dbData.createObjectStore("PortalMenuList", { keyPath: "Id", });
-    Gs.Variables.ixDbInit = true;
+    try {
+        if (!Gs.Variables.dbData.objectStoreNames.contains("PortalMenuList")) {
+            Gs.Variables.dbStore = Gs.Variables.dbData.createObjectStore("PortalMenuList", { keyPath: "Id", });
+        }
+        Gs.Variables.ixDbInit = true;
+    } catch { }
 }
 
 Gs.Variables.database.onsuccess = (event) => {
     Gs.Variables.dbData = event.target.result;
-    Gs.Variables.dbStore = Gs.Variables.dbData.createObjectStore("PortalMenuList", { keyPath: "Id", });
-    Gs.Variables.ixDbInit = true;
+    try {
+        if (!Gs.Variables.dbData.objectStoreNames.contains("PortalMenuList")) {
+            Gs.Variables.dbStore = Gs.Variables.dbData.createObjectStore("PortalMenuList", { keyPath: "Id", });
+        }
+        Gs.Variables.ixDbInit = true;
+    } catch { }
 }
 
 

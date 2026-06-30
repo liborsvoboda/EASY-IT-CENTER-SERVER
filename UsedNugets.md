@@ -9,7 +9,9 @@
 
 [MSSQL CZ-Doc](https://learn.microsoft.com/cs-cz)
 
-
+# Executable Javascript from NET
+[JINT](https://github.com/sebastienros/jint/tree/main)
+[ClearScript](https://github.com/ClearFoundry/ClearScript/tree/master)
 
 
 # Install Go
