@@ -29,6 +29,7 @@ window.Gs = {
     Socket: {},
     SignalR: {},
     Variables: {
+        RegisteredFrameList: [],
         ixDbInit: false, //True USE IndexedDB, False use LocalStorage
         database: indexedDB.open("EICserverPortal", 4),
         dbData: null,

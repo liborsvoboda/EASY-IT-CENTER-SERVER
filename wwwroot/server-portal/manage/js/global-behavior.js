@@ -72,7 +72,7 @@ Gs.Behaviors.PortalStartup = async function () { //LOGGED
     Gs.Variables.getSpProcedure[2].camelCase = false;
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "PortalApiTableService/GetQuestionForResponseList", StorageName: "AdminQuestionList", WindowFunction: "SetQuestionCount" } );
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "PortalApiTableService/GetApiTableDataList/PortalMenu", StorageName: "PortalMenuList", WindowFunction: "GenerateMenuList" } );
-    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "InformationService/GetVersion", StorageName: "ServerVersion" } );
+    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "InformationService/GetVersion", StorageName: "ServerVersion", WindowFunction: "SetVersion" } );
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "InformationService/GetStripePublicKey", StorageName: "StripePublicKey", WindowFunction: "SetStripeKey" } );
     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(),  Id: Gs.Functions.RandomString(), Sequence: 0, Type: "WindowFunction", WindowFunction: "LoadOnlineToolList" } );
 
@@ -481,8 +481,8 @@ Gs.Behaviors.ShowWindowCode = function () {
 * Show IFrame Window Source Code in Modal Window
 * @function
 */
-Gs.Behaviors.ShowWindowFrameWindowCode = function () {
-    Gs.Functions.ShowWindowFrameSource();
+Gs.Behaviors.ShowWindowFrameWindowCode = function (elementId) {
+    Gs.Functions.ShowWindowFrameSource(elementId);
 }
 
 /**

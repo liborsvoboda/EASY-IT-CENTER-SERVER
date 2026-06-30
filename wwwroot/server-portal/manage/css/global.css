@@ -14,6 +14,10 @@ body {
     text-align: center !important; 
 }
 
+.z-indexWindow {
+    z-index: 10000;
+}
+
 .qxCTlb {
     position: fixed !important;
     top: 40px !important;

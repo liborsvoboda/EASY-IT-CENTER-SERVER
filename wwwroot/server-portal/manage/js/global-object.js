@@ -303,7 +303,7 @@ Gs.Objects.WindowIframeCreate = function (title, url, lastWindow = false, frameN
             }
         ],
         clsWindow: "supertop",
-        icon: "<span class='mif-hour-glass'></spam>",
+        icon: "<span class='mif-hour-glass'></span>",
         onCaptionDblClick: function () { },
         btnClose: true,
         content: `<iframe id='${frameName}' src='${url}' width='100%' height='800' frameborder='0' scrolling='yes' style='width: 100%; height: 100 %;'></iframe>`
@@ -357,8 +357,7 @@ Gs.Objects.OpenInExternalWindow = function (title, url, lastWindow = false) {
 * @param {string} url opened URL
 * @param {boolean} lastWindow if LastWindow URL is Taken
 */
-Gs.Objects.WindowFrameOpenInExternalWindow = function (title, url, lastWindow = false) {
-    if (lastWindow) { (url = document.getElementById("WindowFrame") != null ? document.getElementById("WindowFrame").src : "/") }
+Gs.Objects.WindowFrameOpenInExternalWindow = function (url) {
     window.open(url, '_blank');
 }
 
@@ -608,11 +607,11 @@ Gs.Objects.OpenChat = async function () {
 Gs.Objects.OpenShareWindow = async function (selectedUser = null) {
     if ($("#SharePanel").html() == undefined) {
          
-        let html = `<div class="row ml-3"><span class="h3">${Gs.Variables.username}: Share Window Chat</span><select id="userList" data-role="select" data-on-change="Gs.Functions.ShareUserSelected" data-cls-select="ml-10 w-25" data-clear-button="true" data-add-empty-value="true" data-prepend="Select User" data-empty-value="" ></select>`
+        let html = `<div id="SharePanel"><div class="row ml-3"><span class="h3">${Gs.Variables.username}: Share Window Chat</span><select id="userList" data-role="select" data-on-change="Gs.Functions.ShareUserSelected" data-cls-select="ml-10 w-25" data-clear-button="true" data-add-empty-value="true" data-prepend="Select User" data-empty-value="" ></select>`
         html += `<button id="ShareButton" onclick="Gs.Media.StartShareCaptureScreen()" class="button pos-absolute success shadowed disabled" style="right:140px;">Start Share Window</button><button onclick="Gs.Behaviors.ShareClearChat()" class="button pos-absolute warning shadowed" style="right:30px;">Clear Chat</button></div>`;
         html += `<div class="row ml-3"><video id="videoPreview" autoplay style="width: 730px;height: 600px;background-color: lightgray;"></video><div id="ShareChatWindow" data-role="chat" data-width="400" data-height="600" class="" data-on-send="Gs.SignalR.SendStreamChatMessage" data-cls-send-button="bg-green" data-name="${Gs.Variables.username}" data-title="Portal Chat with Selected User" data-cls-chat="bg-olive" style="position: absolute;right: 20px;" `;
         html += ` data-random-color="true" data-cls-message-left="default" data-cls-message-right="bg-cyan fg-white bd-cyan" data-readonly="false" ></div>`;
-        html += `</div>`;
+        html += `</div></div>`;
         Gs.Objects.WindowHtmlCreate("SharePanel","Share Desktop & Chat", html);
 
         setTimeout(function () {
@@ -990,10 +989,3 @@ Gs.Objects.ShowBrowserConsole = function () {
 
 
 
-Gs.Functions.AddWebConsoleLine = function (msg, type) {
-    let output = document.getElementById('browser-console-output');
-    let newLine = document.createElement('div');
-    newLine.classList.add(type);
-    newLine.innerText = msg;
-    output.appendChild(newLine);
-}

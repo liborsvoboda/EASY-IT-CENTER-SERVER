@@ -43,16 +43,16 @@
     createWindow: function(o){
         o.onDragStart = function(){
             win = $(this);
-            $(".window").css("z-index", 1);
+            $(".window").css("z-index", 10000);
 
             if (!win.hasClass("modal")) {
-                win.css("z-index", 3);
+                win.css("z-index", 10002);
             }
         };
         o.onDragStop = function(){
             win = $(this);
             if (!win.hasClass("modal"))
-                win.css("z-index", 2);
+                win.css("z-index", 10001);
         };
         o.onWindowDestroy = function(win){
             Desktop.removeFromTaskBar($(win));
@@ -81,54 +81,80 @@
 
 Desktop.setup();
 
-function CreateStudioWindow(tool) {
-    var w = Desktop.createWindow({
-        resizeable: true,
-        draggable: true,
-        width: 1000,
-        height: '80%',
-        icon: tool.Icon,
-        title: tool.Name,
-        content: tool.InitContent,
-        onShow: tool.InitOnShow,
-        shadow: true,
-        clsCaption: "text-center",
-        clsContent:"h-100",
-        onClose: function (win) {
-            UnRegisterStudio(tool.Id);
-            var win = $(win);
-            win.addClass("ani-swoopOutTop");
-        }
-    });
-}
+//function CreateStudioWindow(tool) {
+//    var w = Desktop.createWindow({
+//        resizeable: true,
+//        draggable: true,
+//        width: 1000,
+//        height: '80%',
+//        icon: tool.Icon,
+//        title: tool.Name,
+//        content: tool.InitContent,
+//        onShow: tool.InitOnShow,
+//        shadow: true,
+//        clsCaption: "text-center",
+//        clsContent:"h-100",
+//        onClose: function (win) {
+//            UnRegisterStudio(tool.Id);
+//            var win = $(win);
+//            win.addClass("ani-swoopOutTop");
+//        }
+//    });
+//}
 
 
 function OpenFrameWindow(tool) {
-    var customButtons = [
-        //{
-        //    html: "<span class='mif-open-book' title='Otevřít v Novém Okně'></span>",
-        //    cls: "sys-button",
-        //    onclick: "window.open('" + tool.Url + "','_blank')"
-        //},
+    let customButtons = [
         {
-            html: "<span class='mif-backward' title='Zpět do Výchozí Pozice '></span>",
+            html: "<span class='mif-help' title='Open Readme.md'></span>",
+            cls: "success",
+            onclick: `Gs.Objects.InfoboxFrameCreate('HelpViewer','${tool.Url}Readme', false);`
+        },
+        {
+            html: "<span class='mif-help' title='Show Readme.md Code'></span>",
             cls: "warning",
-            onclick: "$(\"#FrameWindow_" + tool.Id + "\").attr(\"src\",\"" + tool.Url + "\")"
+            onclick: `Gs.Objects.InfoboxFrameCreate('HelpCodeViewer','${tool.Url}Readme.md', false);`
+        },
+        {
+            html: "<span class='mif-file-code' title='Show Window Code'></span>",
+            cls: "alert",
+            onclick: `Gs.Behaviors.ShowWindowFrameWindowCode("FrameWindow_${tool.Id}");`
+        },
+        {
+            html: "<span class='mif-windows' title='Open in External Window'></span>",
+            cls: "sys-button",
+            onclick: `Gs.Objects.WindowFrameOpenInExternalWindow("${tool.Url}");`
+        },
+        {
+            html: "<span class='mif-vpn-publ' title='Show URL'></span>",
+            cls: "sys-button",
+            onclick: `alert(document.getElementById("FrameWindow_${tool.Id}").contentWindow.location.href);`
+        },
+        {
+            html: "<span class='mif-backward' title='Back to URL'></span>",
+            cls: "warning",
+            onclick: `$(\"#FrameWindow_${tool.Id}").attr("src","${tool.Url}")`
         }
     ];
+
+
     var w = Desktop.createWindow({
         resizeable: true,
         draggable: true,
         customButtons: customButtons,
-        width: 600,
-        height: '60%',
+        width: "100%",
+        height: '100%',
         icon: tool.Icon,
-        title: tool.Name,
+        title: tool.Title,
         content: tool.InitContent,
         onShow: tool.InitOnShow,
+        btnMin: true,
+        btnMax: true,
         shadow: true,
-        clsCaption: "text-center",
+        cls: "p-0",
+        clsCaption: "text-center bg-orange",
         clsContent: "h-100",
+        clsWindow: "z-indexWindow",
         onShow: function (win) {
             var win = $(win);
             win.addClass("ani-swoopInTop");
@@ -137,7 +163,7 @@ function OpenFrameWindow(tool) {
             }, 1000);
         },
         onClose: function (win) {
-            UnRegisterFrame(tool.Id);
+            Gs.Functions.UnRegisterFrame(tool.Id);
             var win = $(win);
             win.addClass("ani-swoopOutTop");
         }
@@ -145,34 +171,30 @@ function OpenFrameWindow(tool) {
 }
 
 
-function OpenYoutubeVideo(){
-    Desktop.createWindow({
-        resizeable: true,
-        draggable: true,
-        width: 500,
-        icon: "<span class='mif-youtube'></span>",
-        title: "Youtube video",
-        content: "https://www.youtube.com/embed/RkPdCWGXEwY?list=PLmE7gP9LTBimNJQ444ypG8HVce23fa2Hb",
-        clsContent: "bg-dark",
-        onClose: function (win) {
-            var win = $(win);
-            win.addClass("ani-swoopOutTop");
-        }
-    });
-}
-
-//function openCharm() {
-//    var charm = $("#charm").data("charms");
-//    charm.toggle();
+//function OpenYoutubeVideo(){
+//    Desktop.createWindow({
+//        resizeable: true,
+//        draggable: true,
+//        width: 500,
+//        icon: "<span class='mif-youtube'></span>",
+//        title: "Youtube video",
+//        content: "https://www.youtube.com/embed/RkPdCWGXEwY?list=PLmE7gP9LTBimNJQ444ypG8HVce23fa2Hb",
+//        clsContent: "bg-dark",
+//        onClose: function (win) {
+//            var win = $(win);
+//            win.addClass("ani-swoopOutTop");
+//        }
+//    });
 //}
 
-$(".window-area").on("click", function(){
-    Metro.charms.close("#charm");
-});
 
-$(".charm-tile").on("click", function(){
-    $(this).toggleClass("active");
-});
+//$(".window-area").on("click", function(){
+//    Metro.charms.close("#charm");
+//});
+
+//$(".charm-tile").on("click", function(){
+//    $(this).toggleClass("active");
+//});
 
 //Start Panel
 

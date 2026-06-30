@@ -26,13 +26,16 @@
 			width: 100%;
 			min-height: 100%;
 		}
+        .monacocontainer {
+            min-height: 100%;
+        }
 	</style>
 
 	<title>Fancytree - Browser</title>
 	<script type="text/javascript">
 
 		async function StartUp() {
-			const dataJs = await fetch('/server-portal/addons/monaco/codepreview.js').then((r) => r.text())
+			const dataJs = await fetch('/server-portal/addons/monaco/js/codepreview.js').then((r) => r.text())
 			new Function(dataJs)();
 		}
 

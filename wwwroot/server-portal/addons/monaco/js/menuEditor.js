@@ -93,7 +93,7 @@ require(['vs/editor/editor.main'], function () {
     */
 
 
-    let mixedenumList = Metro.storage.getItem("MixedEnumList", null);
+    let mixedenumList = Metro.storage.getItem("SolutionMixedEnumList", null);
 
     let selectElement = document.querySelector('.language');
     if (selectElement.options.length == 0) {

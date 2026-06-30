@@ -26,13 +26,16 @@
 			width: 100%;
 			min-height: 100%;
 		}
+        .monacocontainer {
+            min-height: 100%;
+        }
 	</style>
 
 	<title>Code Library Browser</title>
 	<script type="text/javascript">
 
 		async function StartUp() {
-			const dataJs = await fetch('/server-portal/addons/monaco/codePreview.js').then((r) => r.text())
+			const dataJs = await fetch('/server-portal/addons/monaco/js/codePreview.js').then((r) => r.text())
 			new Function(dataJs)();
 		}
 

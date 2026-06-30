@@ -279,9 +279,9 @@ Gs.Functions.ShowFrameSource = function () {
 * Function ShowWindowFrameSource to new Window with Source Code
 * @function
 */
-Gs.Functions.ShowWindowFrameSource = function () {
+Gs.Functions.ShowWindowFrameSource = function (elementId) {
     var source = "<html>";
-    source += document.getElementById('WindowFrame').contentWindow.document.body.innerHTML;
+    source += document.getElementById(elementId).contentWindow.document.body.innerHTML;
     source += "</html>";
     source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     source = "<pre>" + source + "</pre>";
@@ -613,6 +613,8 @@ Gs.Functions.GetFunctionList = function () {
     for (var p in Gs.Apis) { if (typeof Gs.Apis[p] === "function") { functionList.push({ title: `Gs.Apis.${p}()`, folder: false, checkbox: false, key: Gs.Apis[p].toString() }); } }
     for (var p in Gs.Socket) { if (typeof Gs.Socket[p] === "function") { functionList.push({ title: `Gs.Socket.${p}()`, folder: false, checkbox: false, key: Gs.Socket[p].toString() }); } }
     for (var p in Gs.SignalR) { if (typeof Gs.SignalR[p] === "function") { functionList.push({ title: `Gs.SignalR.${p}()`, folder: false, checkbox: false, key: Gs.SignalR[p].toString() }); } }
+    for (var p in Gs.Database) { if (typeof Gs.Database[p] === "function") { functionList.push({ title: `Gs.Database.${p}()`, folder: false, checkbox: false, key: Gs.Database[p].toString() }); } }
+    for (var p in Gs.Direct) { if (typeof Gs.Direct[p] === "function") { functionList.push({ title: `Gs.Direct.${p}()`, folder: false, checkbox: false, key: Gs.Direct[p].toString() }); } }
     
     Metro.storage.setItem('FunctionList', functionList.sort((a, b) => (a.title > b.title) * 2 - 1));
 }
@@ -1025,3 +1027,48 @@ Gs.Functions.SaveNotesList = async function () {
 }
 
 
+/**
+* Get New Free Id for Register Open Window
+* @function
+*/
+Gs.Functions.GetNewIdForRegisterFrame = function () { return Gs.Variables.RegisteredFrameList.length.toString(); }
+
+
+Gs.Functions.RegisterFrameWindow = function (title, url, html = null) {
+    let temp_tool = {
+        Id: Gs.Functions.GetNewIdForRegisterFrame(),
+        Title: title,
+        Icon: `<span class='d-flex mif-window' data-role='hint' data-hint-position='top' data-hint-text='${title}'> win:${Gs.Functions.GetNewIdForRegisterFrame()}</span>`,
+        Url: url,
+        InitOnShow: "",
+        InitContent: html != null ? html : `<iframe id='FrameWindow_${Gs.Functions.GetNewIdForRegisterFrame()}' class='w-100 h-100' src='${url}' ></iframe>`
+    };
+    Gs.Variables.RegisteredFrameList.push(temp_tool);
+    OpenFrameWindow(temp_tool);
+
+    let windows = document.querySelectorAll('div[data-role="window"]');
+    windows.forEach(win => {
+        win.className = "h-100";
+    });
+}
+
+
+
+
+/**
+* Unregister Openned Window on Close action
+* @function
+*/
+Gs.Functions.UnRegisterFrame = function (id) { Gs.Variables.RegisteredFrameList.splice(id, 1); }
+
+
+
+Gs.Functions.AddWebConsoleLine = function (msg, type) {
+    let output = document.getElementById('browser-console-output');
+    let newLine = document.createElement('div');
+    newLine.classList.add(type);
+    newLine.innerText = msg;
+    try {
+        output.appendChild(newLine);
+    } catch { }
+}

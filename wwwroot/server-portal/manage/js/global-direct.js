@@ -410,7 +410,7 @@ function GenerateFavorites() {
 
     let menuWeb = "", menuGithub = "", menuServer = "";
     menu.forEach(favorite => {
-        let cmd = favorite.MenuNewWindow.toLowerCase() == "false" ? `Gs.Objects.WindowIframeCreate('${favorite.MenuName}','${favorite.MenuUrl}')` : `window.open('${favorite.MenuUrl}')`;
+        let cmd = favorite.MenuNewWindow.toLowerCase() == "false" ? `Gs.Functions.RegisterFrameWindow('${favorite.MenuName}','${favorite.MenuUrl}')` : `window.open('${favorite.MenuUrl}')`;
 
         if (favorite.MenuGroup == "Web") {
             menuWeb += `<div data-role="tile" class="m-1 shadowed" data-size="small" data-effect="hover-slide-up">
@@ -504,7 +504,7 @@ function GenerateOnlineToolList() {
 
     let menuOnline = "", menuData = "", menuDeveloper = "";
     menu.forEach(online => {
-        let cmd = online.MenuNewWindow.toLowerCase() == "false" ? `Gs.Objects.WindowIframeCreate('${online.MenuName}','${online.MenuUrl}')` : `window.open('${online.MenuUrl}')`;
+        let cmd = online.MenuNewWindow.toLowerCase() == "false" ? `Gs.Functions.RegisterFrameWindow('${online.MenuName}','${online.MenuUrl}')` : `window.open('${online.MenuUrl}')`;
 
         if (online.MenuGroup == "Online Tool") {
             menuOnline += `<div data-role="tile" class="m-1 shadowed" data-size="small" data-effect="hover-slide-up">
@@ -590,7 +590,7 @@ function GenerateWebSearchList() {
     menu.sort((a, b) => a.MenuName > b.MenuName ? 1 : -1);
     Metro.storage.setItem('WebSearchList', menu);
 
-    let html = `<button class="button success pos-absolute mb-4" style="z-index: 2000;right: 200px;" onclick="Gs.Objects.AddWebSearchList()"><span class="mif-plus mif-3x"></span>Add Web Search</button>
+    let html = `<div id="SearchWindow"><button class="button success pos-absolute mb-4" style="z-index: 2000;right: 200px;" onclick="Gs.Objects.AddWebSearchList()"><span class="mif-plus mif-3x"></span>Add Web Search</button>
     <button class="button alert pos-absolute mb-4" style="z-index: 2000;right: 0px;" onclick="Gs.Objects.GenerateRemoveWebSearchList()"><span class="mif-minus mif-3x"></span>Remove Web Search</button>
     <ul data-role="tabs" data-expand="true">`;
     menu.forEach(search => {
@@ -603,9 +603,9 @@ function GenerateWebSearchList() {
                 <iframe src="${search.MenuUrl}" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:100%;position: fixed;"></iframe></div>`;
         } else { window.open(`${search.MenuUrl}`); }
     });
-    html += `</div>`;
+    html += `</div></div>`;
 
-    Gs.Objects.WindowHtmlCreate("SearchWindow", "Global Search", html);
+    Gs.Functions.RegisterFrameWindow("Global Search", "", html);
 }
 
 
@@ -640,3 +640,6 @@ function OpenNotesList() {
 
 
 
+function SetVersion() {
+    document.getElementById("NavPanel").lastChild.data = `Server Version: ${Metro.storage.getItem("ServerVersion", null)}`;
+}

@@ -1,4 +1,4 @@
-.desktop {
+﻿.desktop {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -360,7 +360,6 @@
 
 .tabs {
     background-color: transparent !important;
-    padding-bottom: 60px;
 }
 
 .tabs-expand > ul.tabs-list > li.active {
