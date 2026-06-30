@@ -1049,8 +1049,12 @@
                     Gs.Functions.AddClass('SetMonaco', 'disabled'); $("#MonacoTheme").show(); $("#MonacoLanguage").show();
 
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
-                    Gs.Variables.monacoEditorList = [];
-                    new Function(dataJs)();
+                    if (Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'userFilesPreview') != -1) {
+                        Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'userFilesPreview'), 1);
+                        new Function(dataJs)();
+                    } else {
+                        new Function(dataJs)();
+                    }
                     break;
                 case "STLviewer":
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-tools/DocsSolution/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
@@ -1084,8 +1088,12 @@
                     Gs.Functions.AddClass('SetMonaco', 'disabled'); $("#MonacoTheme").show(); $("#MonacoLanguage").show();
 
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
-                    Gs.Variables.monacoEditorList = [];
-                    new Function(dataJs)();
+                    if (Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'userFilesPreview') != -1) {
+                        Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'userFilesPreview'), 1);
+                        new Function(dataJs)();
+                    } else {
+                        new Function(dataJs)();
+                    }
                     break;
                 case "TinyMCE":
                     $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();

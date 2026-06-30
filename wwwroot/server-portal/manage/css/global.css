@@ -605,8 +605,8 @@ body {
     }
 
 .window-area {
-    background: url("/server-Integrated/razor-pages/server-portal/images/anime-background-images-1.jpg") center center no-repeat;
-    background-size: cover;
+/*    background: url("/server-Integrated/razor-pages/server-portal/images/anime-background-images-1.jpg") center center no-repeat;
+    background-size: cover;*/
 }
 
 #charm {

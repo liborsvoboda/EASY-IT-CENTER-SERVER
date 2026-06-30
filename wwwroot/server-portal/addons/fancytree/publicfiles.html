@@ -945,8 +945,12 @@
                     Gs.Functions.AddClass('SetMonaco', 'disabled'); $("#MonacoTheme").show(); $("#MonacoLanguage").show();
 
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
-                    Gs.Variables.monacoEditorList = [];
-                    new Function(dataJs)();
+                    if (Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'userFilesPreview') != -1) {
+                        Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'userFilesPreview'), 1);
+                        new Function(dataJs)();
+                    } else {
+                        new Function(dataJs)();
+                    }
                     break;
                 case "STLviewer":
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-tools/DocsSolution/stl-viewer/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
@@ -980,8 +984,12 @@
                     Gs.Functions.AddClass('SetMonaco', 'disabled'); $("#MonacoTheme").show(); $("#MonacoLanguage").show();
 
                     $("#FrameWindow").html('<div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>');
-                    Gs.Variables.monacoEditorList = [];
-                    new Function(dataJs)();
+                    if (Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'userFilesPreview') != -1) {
+                        Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'userFilesPreview'), 1);
+                        new Function(dataJs)();
+                    } else {
+                        new Function(dataJs)();
+                    }
                     break;
                 case "TinyMCE":
                     $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
@@ -1105,6 +1113,17 @@
                                         $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
                                     }
                                 }, 1000);
+                            } else {
+                                $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                                Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
+                                Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled'); Gs.Functions.RemoveClass('SetMDEditor', 'disabled');
+                                Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
+
+                                let html = `<h3>Folder is Selected</h3>
+                                <o>You can Set Any Editor for Start to Create New Any Document</p>.
+                                <p>For Saving this New Document Use "SAVE Ass" Button in Right Click Menu or in Editor Menu.</p>
+                                `;
+                                $("#FrameWindow").html(html);
                             }
                             break;
                         case "STLviewer":

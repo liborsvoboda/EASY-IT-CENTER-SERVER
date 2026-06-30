@@ -285,7 +285,7 @@ Gs.Behaviors.LoadUserSettings = function () {
 * @param {number}     num Id of HtmlContent saved in Storage.
 */
 Gs.Behaviors.BeforeSetMenu = function (htmlContentId) {
-    Gs.Variables.monacoEditorList = [];
+    //Gs.Variables.monacoEditorList = [];
 
     //SET UserSetting
     Gs.Behaviors.LoadUserSettings();

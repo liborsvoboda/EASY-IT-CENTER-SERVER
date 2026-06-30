@@ -154,7 +154,13 @@ function SetQuestionCount() {
 * @function
 * @param {boolean} ignoreUrl ignore URL Option
 */
-function GenerateMenuList(ignoreUrl = false) {
+async function GenerateMenuList(ignoreUrl = false) {
+
+    //Init Portal Menu Editor
+    const dataJs = await fetch('/server-portal/addons/monaco/js/menuEditor.js').then((r) => r.text())
+    new Function(dataJs)(); 
+
+
     let htmlContent = "";
 
     let lastGuid = null, menuItem = {}, menu = [];
