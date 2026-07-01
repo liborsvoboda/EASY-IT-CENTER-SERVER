@@ -3,13 +3,151 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Document Editor</title>
-    <script src="./js/wodotexteditor.js" type="text/javascript" charset="utf-8"></script>
-    <script src="./js/filesaver.js" type="text/javascript" charset="utf-8"></script>
-    <script src="./js/localfileeditor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/server-portal/addons/officeeditor/js/wodotexteditor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/server-portal/addons/officeeditor/js/filesaver.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/server-portal/addons/officeeditor/js/localfileeditor.js" type="text/javascript" charset="utf-8"></script>
   </head>
 
   <body style="width:100%; height:100%; margin:0px; padding:0px" onload="createEditor();">
     <div id="editorContainer" style="width:100%; height:100%; margin:0px; padding:0px">
     </div>
+	
+	<script>
+		window.Filename = "";
+		window.File = null;window.Files = null;window.FileResult = null;
+		
+	    function enhanceRuntime() {
+			var openedFiles = {},
+				readFile = runtime.readFile;
+			runtime.readFile = function (path, encoding, callback) {
+				var array;
+				if (openedFiles.hasOwnProperty(path)) {
+					array = new Uint8Array(openedFiles[path]);
+					callback(undefined, array);
+				} else {
+					return readFile(path, encoding, callback);
+				}
+			};
+			runtime.registerFile = function (path, data) {
+				openedFiles[path] = data;
+			};
+		}
+	
+		function createFileLoadForm() {
+			var form = document.createElement("form"),
+				input = document.createElement("input");
+
+			function internalHandler(evt) {
+				if (input.value !== "") {
+					fileSelectHandler(evt);
+				}
+				// reset to "", so selecting the same file next time still trigger the change handler
+				input.value = "";
+			}
+			form.appendChild(input);
+			form.style.display = "none";
+			input.id = "fileloader";
+			input.setAttribute("type", "file");
+			input.addEventListener("change", internalHandler, false);
+			document.body.appendChild(form);
+	   }
+	   
+	   function load() {
+			var form = document.getElementById("fileloader");
+			if (!form) {
+				enhanceRuntime();
+				createFileLoadForm();
+				form = document.getElementById("fileloader");
+			}
+			form.click();
+		}
+		
+		
+		function saveAss() {
+			function saveByteArrayLocally(err, data) {
+				if (err) {
+					alert(err);
+					return;
+				}
+				// TODO: odfcontainer should have a property mimetype
+				var mimetype = "application/vnd.oasis.opendocument.text",
+					filename = FileName || "doc.odt",
+					blob = new Blob([data.buffer], {type: mimetype});
+					window.File = blob;
+				//saveAs(blob, filename);
+				// TODO: hm, saveAs could fail or be cancelled
+				editor.setDocumentModified(false);
+			}
+
+			editor.getDocumentAsByteArray(saveByteArrayLocally);
+		}
+
+		function save() {
+			function saveByteArrayLocally(err, data) {
+				if (err) {
+					alert(err);
+					return;
+				}
+				// TODO: odfcontainer should have a property mimetype
+				var mimetype = "application/vnd.oasis.opendocument.text",
+					filename = FileName || "doc.odt",
+					blob = new Blob([data.buffer], {type: mimetype});
+				saveAs(blob, filename);
+				// TODO: hm, saveAs could fail or be cancelled
+				editor.setDocumentModified(false);
+			}
+
+			editor.getDocumentAsByteArray(saveByteArrayLocally);
+		}
+
+		editorOptions = {
+			loadCallback: load,
+			saveCallback: save,
+			saveAssCallback: saveAss,
+			allFeaturesEnabled: true
+		};
+		
+		function onEditorCreated(err, e) {
+			//var docUrl = guessDocUrl();
+
+			if (err) {
+				// something failed unexpectedly
+				alert(err);
+				return;
+			}
+
+			editor = e;
+			editor.setUserData({
+				fullName: "Office Editor",
+				color:    "black"
+			});
+			/*
+			window.addEventListener("beforeunload", function (e) {
+				var confirmationMessage = "There are unsaved changes to the file.";
+
+				if (editor.isDocumentModified()) {
+					// Gecko + IE
+					(e || window.event).returnValue = confirmationMessage;
+					// Webkit, Safari, Chrome etc.
+					return confirmationMessage;
+				}
+			});
+			
+
+			if (docUrl) {
+				loadedFilename = docUrl;
+				editor.openDocumentFromUrl(docUrl, startEditing);
+			}
+			*/
+		}
+	
+		Wodo.createTextEditor('editorContainer', editorOptions, onEditorCreated);
+		function startEditing() {};
+		
+		setTimeout(function(){
+			editor.openDocumentFromUrl("./welcome.odt", startEditing());
+		},3000);
+		
+	</script>
   </body>
 </html>

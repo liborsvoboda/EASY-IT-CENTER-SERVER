@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- added Start Create new Docs on Folder selection ([9ed9349](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/9ed9349fa603efb5d17266afcfca6d4675a29fac) by Libor Svoboda).
 - added Window Manager ([d8cebd6](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/d8cebd6d17c00422ed3ec1dff72b7bb1583dc539) by Libor Svoboda).
 - added DrawDB ([92bc06c](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/92bc06cd0e8dce0015ae6bcd9c6b3bdd291fb383) by Libor Svoboda).
 - added Web Browser Console ([972e2c1](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/972e2c1eb1da92c127206c71fde94f752929854f) by Libor Svoboda).

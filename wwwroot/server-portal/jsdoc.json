@@ -17,6 +17,7 @@
   ],
     "source": {
       "include": [
+        "manage/js/global-desktop.js",
         "manage/js/global-database.js",
         "manage/js/global-direct.js",
         "manage/js/global-storage.js",
@@ -26,7 +27,8 @@
         "manage/js/global-media.js",
         "manage/js/global-object.js",
         "manage/js/global-signalr.js",
-        "manage/js/global-socket.js"
+        "manage/js/global-socket.js",
+        "manage/js/global-generator.js"
       ]
     },
   "opts": {

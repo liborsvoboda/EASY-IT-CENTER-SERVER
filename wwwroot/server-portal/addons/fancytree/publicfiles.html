@@ -81,7 +81,7 @@
 <body>
     <div class="row w-100 h-100 d-inline-flex">
         <div id="DataTree" class="h-100" style="width: 300px; overflow-y: auto; padding-top: 25px;"></div>
-        <div id="FrameWindow" class="h-100 row" height="100%" frameborder="0" scrolling="yes" style="width: calc(100% - 300px); height: 100%; position: relative; padding-top: 25px;">
+        <div id="FrameWindow" class="h-100" height="100%" frameborder="0" scrolling="yes" style="width: calc(100% - 300px); height: 100%; position: relative; padding-top: 25px;">
             <div id="userFilesPreview" class="row" style="height: 100%; width: 100%; position: fixed; display: block !important;"></div>
         </div>
 
@@ -96,18 +96,16 @@
         <div id="ActionMenu" class="w-100 pos-fixed" style="z-index: 9999999999;">
             <nav data-role="ribbonmenu">
                 <ul class="tabs-holder">
-                    <li onclick="ReloadUserStorage();" class=""><a href="#">Reload</a></li>
-                    <li><a href="#sectionFile">Editors</a></li>
-                    <!--
-                        <li><a href="#">Download</a></li>
-                        <li><a href="#">Media</a></li>
-                    -->
-                    <li onclick="SetEditor('Preview');" class=""><a href="#">Preview Html&Md</a></li>
+                    <li onclick="ReloadUserStorage();" class="text-bold bg-green shadowed c-pointer"><a href="#">Reload</a></li>
+                    <li class="text-bold bg-yellow shadowed c-pointer"><a href="#sectionFile">Editors</a></li>
+                    <li id="PreviewHtml" onclick="ShowPreviewMdHtml();" class="text-bold bg-green shadowed c-pointer disabled"><a href="#">Preview Html&Md</a></li>
+                    <!--<li onclick="SetVersioning();" class="text-bold bg-blue shadowed c-pointer"><a href="#">Set Versioning</a></li>-->
+                    <li id="SaveAss" onclick="SaveNewFileAss();" class="disabled bg-orange text-bold shadowed c-pointer"><a href="#">SAVE Ass</a></li>
                 </ul>
                 <div class="content-holder">
                     <div class="section" id="sectionFile">
                         <div class="group">
-                            <button id="SetMonaco" class="ribbon-button disabled" onclick=SetEditor('Monaco');Gs.Functions.RemoveClass('sectionFile','active');>
+                            <button id="SetMonaco" class="ribbon-button disabled shadowed" onclick=SetEditor('Monaco');Gs.Functions.RemoveClass('sectionFile','active');Gs.Functions.AddClass('sectionFile','non-active');>
                                 <span class="icon">
                                     <span class="mif-codepen"></span>
                                 </span>
@@ -116,25 +114,25 @@
                             <span class="title">Code Editors</span>
                         </div>
                         <div class="group">
-                            <button id="SetTinyMCE" class="ribbon-button" onclick=SetEditor('TinyMCE');Gs.Functions.RemoveClass('sectionFile','active');>
+                            <button id="SetTinyMCE" class="ribbon-button shadowed" onclick=SetEditor('TinyMCE');Gs.Functions.RemoveClass('sectionFile','active');Gs.Functions.AddClass('sectionFile','non-active');>
                                 <span class="icon">
                                     <span class="mif-table"></span>
                                 </span>
                                 <span class="caption">TinyMCE</span>
                             </button>
-                            <button id="SetFroala" class="ribbon-button" onclick=SetEditor('Froala');Gs.Functions.RemoveClass('sectionFile','active');>
+                            <button id="SetFroala" class="ribbon-button shadowed" onclick=SetEditor('Froala');Gs.Functions.RemoveClass('sectionFile','active');Gs.Functions.AddClass('sectionFile','non-active');>
                                 <span class="icon">
                                     <span class="mif-flow-tree"></span>
                                 </span>
                                 <span class="caption">Froala</span>
                             </button>
-                            <button id="SetSUNEdit" class="ribbon-button" onclick=SetEditor('SUNEdit');Gs.Functions.RemoveClass('sectionFile','active');>
+                            <button id="SetSUNEdit" class="ribbon-button shadowed" onclick=SetEditor('SUNEdit');Gs.Functions.RemoveClass('sectionFile','active');Gs.Functions.AddClass('sectionFile','non-active');>
                                 <span class="icon">
                                     <span class="mif-sun3"></span>
                                 </span>
                                 <span class="caption">Sun</span>
                             </button>
-                            <button id="SetSummer" class="ribbon-button" onclick=SetEditor('Summer');Gs.Functions.RemoveClass('sectionFile','active');>
+                            <button id="SetSummer" class="ribbon-button shadowed" onclick=SetEditor('Summer');Gs.Functions.RemoveClass('sectionFile','active');Gs.Functions.AddClass('sectionFile','non-active');>
                                 <span class="icon">
                                     <span class="mif-sun"></span>
                                 </span>
@@ -143,13 +141,13 @@
                             <span class="title">Basic HTML Editors</span>
                         </div>
                         <div class="group">
-                            <button id="SetMDEditor" class="ribbon-button" onclick=SetEditor('MDEditor');Gs.Functions.RemoveClass('sectionFile','active');>
+                            <button id="SetMDEditor" class="ribbon-button shadowed" onclick=SetEditor('MDEditor');Gs.Functions.RemoveClass('sectionFile','active');Gs.Functions.AddClass('sectionFile','non-active');>
                                 <span class="icon">
                                     <span class="mif-calendar"></span>
                                 </span>
                                 <span class="caption">MD Editor</span>
                             </button>
-                            <button id="SetJSONEditor" class="ribbon-button" onclick=SetEditor('JSONEditor');Gs.Functions.RemoveClass('sectionFile','active');>
+                            <button id="SetJSONEditor" class="ribbon-button shadowed" onclick=SetEditor('JSONEditor');Gs.Functions.RemoveClass('sectionFile','active');Gs.Functions.AddClass('sectionFile','non-active');>
                                 <span class="icon">
                                     <span class="mif-dropbox"></span>
                                 </span>
@@ -169,7 +167,7 @@
         Files = [];
 
         async function StartUp() {
-            dataJs = await fetch('/server-portal/addons/monaco/userFiles.js').then((r) => r.text())
+            dataJs = await fetch('/server-portal/addons/monaco/js/userFiles.js').then((r) => r.text())
             new Function(dataJs)(); Metro.storage.setItem("SelectedEditor", "Monaco");
             InitiateTree();
         }
@@ -901,6 +899,13 @@
         }
 
 
+
+        //Show Preview in InfoBox
+        function ShowPreviewMdHtml() {
+            Gs.Objects.InfoboxFrameCreate('ChangeLog', ($('#DataTree').fancytree("getActiveNode").data.extension == "md" ? $('#DataTree').fancytree("getActiveNode").key.replace(".md", "") : $('#DataTree').fancytree("getActiveNode").key));
+        }
+
+
         function SetSearchResult() {
             let fileList = Metro.storage.getItem("SearchResultFileList", null);
             $("#DataTree").fancytree("getRootNode").tree.clear();
@@ -916,7 +921,7 @@
             $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
             Gs.Functions.AddClass('SetMonaco', 'disabled'); Gs.Functions.AddClass('SetTinyMCE', 'disabled'); Gs.Functions.AddClass('SetFroala', 'disabled');
             Gs.Functions.AddClass('SetSUNEdit', 'disabled'); Gs.Functions.AddClass('SetSummer', 'disabled'); Gs.Functions.AddClass('SetMDEditor', 'disabled');
-            Gs.Functions.AddClass('SetJSONEditor', 'disabled');
+            Gs.Functions.AddClass('SetJSONEditor', 'disabled'); Gs.Functions.AddClass('PreviewHtml', 'disabled');
             Gs.Functions.RemoveClass('FrameWindow', 'fr-fullscreen-wrapper'); EditorInit = null;
 
             //SET EDITOR
@@ -972,11 +977,11 @@
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-tools/Editor/jsonData/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     break;
                 case "MDEditor":
-                    Gs.Functions.AddClass('SetMDEditor', 'disabled');
+                    Gs.Functions.AddClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('PreviewHtml', 'disabled');
                     $("#FrameWindow").html('<iframe id="HelpEditor" src="/server-tools/Editor/markdown/index.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     break;
                 case "Monaco":
-                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide(); Gs.Functions.RemoveClass('PreviewHtml', 'disabled');
                     Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
                     Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
                     //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
@@ -992,7 +997,7 @@
                     }
                     break;
                 case "TinyMCE":
-                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide(); Gs.Functions.RemoveClass('PreviewHtml', 'disabled');
                     Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
                     Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
                     //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
@@ -1013,7 +1018,7 @@
 
                     break;
                 case "Froala":
-                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide(); Gs.Functions.RemoveClass('PreviewHtml', 'disabled');
                     Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
                     Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
                     //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
@@ -1025,7 +1030,7 @@
                     });
                     break;
                 case "SUNEdit":
-                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide(); Gs.Functions.RemoveClass('PreviewHtml', 'disabled');
                     Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
                     Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
                     //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
@@ -1048,7 +1053,7 @@
                     });
                     break;
                 case "Summer":
-                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide(); Gs.Functions.RemoveClass('PreviewHtml', 'disabled');
                     Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
                     Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled');
                     //Gs.Functions.RemoveClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
@@ -1066,8 +1071,8 @@
 				case "OfficeEditor":
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="/server-tools/DocsSolution/officeeditor/officeeditor.html" width="100%" height="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
                     break;
-                case "Preview":
-                    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + ($('#DataTree').fancytree("getActiveNode").data.extension == "md" ? $('#DataTree').fancytree("getActiveNode").key.replace(".md", "") : $('#DataTree').fancytree("getActiveNode").key) + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                //case "Preview":
+                //    $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + ($('#DataTree').fancytree("getActiveNode").data.extension == "md" ? $('#DataTree').fancytree("getActiveNode").key.replace(".md", "") : $('#DataTree').fancytree("getActiveNode").key) + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
                 default:
             }
             LoadEditorData();
@@ -1079,104 +1084,114 @@
             setTimeout(function () {
                 editor = Metro.storage.getItem("SelectedEditor", null);
                 try {
-                    switch (editor) {
-                        case "MiniPaint":
-                            let toDataURL = url => fetch(url)
-                                .then(response => response.blob())
-                                .then(blob => new Promise((resolve, reject) => {
-                                    const reader = new FileReader()
-                                    reader.onloadend = () => resolve(reader.result)
-                                    reader.onerror = reject
-                                    reader.readAsDataURL(blob)
-                                }));
-                            toDataURL(Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key)
-                                .then(dataUrl => {
-                                    $("#DataFrameWindow")[0].contentWindow.FileOpen.open_resource(dataUrl);
-                                });
-                            break;
-                        case "ImageEditor":
-                            $("#DataFrameWindow")[0].contentWindow.ImageEditor.render({ source: Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key });
-                            break;
-                        case "XLSViewer":
-                            $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
-                            break;
-                        case "DOCViewer":
-                            $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/docx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
-                            break;
-                        case "PPTXViewer":
-                            $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
-                            break;
-                        case "Other":
-                            if (!$('#DataTree').fancytree("getActiveNode").folder) {
-                                setTimeout(function () {
-                                    if ($('#DataTree').fancytree("getActiveNode") != null) {
-                                        $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
-                                    }
-                                }, 1000);
-                            } else {
-                                $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
-                                Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
-                                Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled'); Gs.Functions.RemoveClass('SetMDEditor', 'disabled');
-                                Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
+                    if (!$('#DataTree').fancytree("getActiveNode").folder || ($('#DataTree').fancytree("getActiveNode").folder && editor == "Other")) {
+                        Gs.Functions.AddClass('SaveAss', 'disabled');
 
-                                let html = `<h3>Folder is Selected</h3>
-                                <o>You can Set Any Editor for Start to Create New Any Document</p>.
-                                <p>For Saving this New Document Use "SAVE Ass" Button in Right Click Menu or in Editor Menu.</p>
-                                `;
-                                $("#FrameWindow").html(html);
-                            }
-                            break;
-                        case "STLviewer":
-                            if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.init($('#DataTree').fancytree("getActiveNode").key); }
-                            break;
-                        case "PDFviewer":
-                            if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.PDFViewerApplication.open($('#DataTree').fancytree("getActiveNode").key, 'default.pdf'); }
-                            break;
-                        case "Audio":
-                            $("#FrameWindow").html('<audio id="Audio" data-role="audio-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark p-10 m-10" style="width:100%;height: calc(100vh);"></audio>');
-                            break;
-                        case "Video":
-                            $("#FrameWindow").html('<video id="Video" data-role="video-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" style="width:100%;height: calc(100vh);"></video>');
-                            break;
-                        case "Image":
-                            $("#FrameWindow").html('<img src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="row" style="height: 100%;padding-left: 10px;">');
-                            break;
-                        case "JSONEditor":
-                            if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
-                            break;
-                        case "MDEditor":
-                            if ($('#DataTree').fancytree("getActiveNode") != null) {
-                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $('#HelpEditor')[0].contentWindow.mdEditor.setMarkdown(data); });
-                            }
-                            break;
-                        case "Monaco":
-                            if ($('#DataTree').fancytree("getActiveNode") != null) {
-                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
-                            }
-                            break;
-                        case "TinyMCE":
-                            if (document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux") != null) { $("#FrameWindow").append(document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux")); }
-                            if ($('#DataTree').fancytree("getActiveNode") != null) {
-                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { tinymce.get('TinyMCE').setContent(data); });
-                            }
-                            break;
-                        case "Froala":
-                            if ($('#DataTree').fancytree("getActiveNode") != null) {
-                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.html.set(data); });
-                            }
-                            break;
-                        case "SUNEdit":
-                            if ($('#DataTree').fancytree("getActiveNode") != null) {
-                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.setContents(data); });
-                            }
-                            break;
-                        case "Summer":
-                            if ($('#DataTree').fancytree("getActiveNode") != null) {
-                                $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $(`#SummerEditor`).summernote(`code`, data); });
-                            }
-                            break;
-                        default:
+                        switch (editor) {
+                            case "MiniPaint":
+                                let toDataURL = url => fetch(url)
+                                    .then(response => response.blob())
+                                    .then(blob => new Promise((resolve, reject) => {
+                                        const reader = new FileReader()
+                                        reader.onloadend = () => resolve(reader.result)
+                                        reader.onerror = reject
+                                        reader.readAsDataURL(blob)
+                                    }));
+                                toDataURL(Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key)
+                                    .then(dataUrl => {
+                                        $("#DataFrameWindow")[0].contentWindow.FileOpen.open_resource(dataUrl);
+                                    });
+                                break;
+                            case "ImageEditor":
+                                if (!$('#DataTree').fancytree("getActiveNode").folder) {
+                                    $("#DataFrameWindow")[0].contentWindow.ImageEditor.render({ source: Metro.storage.getItem('ApiOriginSuffix', null) + $('#DataTree').fancytree("getActiveNode").key });
+                                }
+                                break;
+                            case "XLSViewer":
+                                //$("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/xlsx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                                break;
+                            case "DOCViewer":
+                                //$("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/docx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                                break;
+                            case "PPTXViewer":
+                                //$("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + 'server-tools/DocsSolution/pptx/index.html" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>')
+                                break;
+                            case "Other":
+                                if (!$('#DataTree').fancytree("getActiveNode").folder) {
+                                    setTimeout(function () {
+                                        if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                            $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
+                                        }
+                                    }, 1000);
+                                } else {
+                                    $("#MonacoTheme").hide(); $("#MonacoLanguage").hide();
+                                    Gs.Functions.RemoveClass('SetMonaco', 'disabled'); Gs.Functions.RemoveClass('SetTinyMCE', 'disabled'); Gs.Functions.RemoveClass('SetFroala', 'disabled');
+                                    Gs.Functions.RemoveClass('SetSUNEdit', 'disabled'); Gs.Functions.RemoveClass('SetSummer', 'disabled'); Gs.Functions.RemoveClass('SetMDEditor', 'disabled');
+                                    Gs.Functions.RemoveClass('SetJSONEditor', 'disabled');
+
+                                    let html = `<div class="pl-10 pt-10 row w-100 h3">Folder is Selected</div>
+                                            <div class="pl-10 row w-100">You can Set Any Editor for Start to Create New Any Document</div>
+                                            <div class="pl-10 row w-100">For Saving this New Document Use "SAVE Ass" Button in Main Menu.</div>
+                                            `;
+                                    $("#FrameWindow").html(html);
+                                }
+                                break;
+                            case "STLviewer":
+                                if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.init($('#DataTree').fancytree("getActiveNode").key); }
+                                break;
+                            case "PDFviewer":
+                                if ($('#DataTree').fancytree("getActiveNode") != null) { $("#DataFrameWindow")[0].contentWindow.PDFViewerApplication.open($('#DataTree').fancytree("getActiveNode").key, 'default.pdf'); }
+                                break;
+                            case "Audio":
+                                $("#FrameWindow").html('<audio id="Audio" data-role="audio-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="dark p-10 m-10" style="width:100%;height: calc(100vh);"></audio>');
+                                break;
+                            case "Video":
+                                $("#FrameWindow").html('<video id="Video" data-role="video-player" data-src="' + $('#DataTree').fancytree("getActiveNode").key + '" style="width:100%;height: calc(100vh);"></video>');
+                                break;
+                            case "Image":
+                                $("#FrameWindow").html('<img src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="row" style="height: 100%;padding-left: 10px;">');
+                                break;
+                            case "JSONEditor":
+                                if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
+                                break;
+                            case "MDEditor":
+                                if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                    $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $('#HelpEditor')[0].contentWindow.mdEditor.setMarkdown(data); });
+                                }
+                                break;
+                            case "Monaco":
+                                if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                    $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "userFilesPreview" })[0].editor.getModel().setValue(data); });
+                                }
+                                break;
+                            case "TinyMCE":
+                                if (document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux") != null) { $("#FrameWindow").append(document.querySelector("body > div.tox.tox-silver-sink.tox-tinymce-aux")); }
+                                if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                    $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { tinymce.get('TinyMCE').setContent(data); });
+                                }
+                                break;
+                            case "Froala":
+                                if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                    $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.html.set(data); });
+                                }
+                                break;
+                            case "SUNEdit":
+                                if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                    $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { EditorInit.setContents(data); });
+                                }
+                                break;
+                            case "Summer":
+                                if ($('#DataTree').fancytree("getActiveNode") != null) {
+                                    $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { $(`#SummerEditor`).summernote(`code`, data); });
+                                }
+                                break;
+                            default:
+                        }
+
+                    } else if ($('#DataTree').fancytree("getActiveNode").folder && editor != "Other") {
+                        Gs.Functions.RemoveClass('SaveAss', 'disabled');
                     }
+
                     Gs.Behaviors.HidePageLoading();
                 } catch { LoadEditorData(); }
             }, 1000);
