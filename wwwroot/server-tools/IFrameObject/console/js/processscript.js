@@ -5,6 +5,7 @@ socket.onmessage = function (event) {
     con.addConsoleLine(message.Message, message.Type == "error" ? 'error_console' : 'warn_console');
 };
 
+ProcessId = null;
 class Console {
     constructor() {
        
@@ -23,7 +24,7 @@ class Console {
                 }
                 self.addConsoleLine(input, 'browserconsoleinput');
                 try {
-                    con.SendChatMessageWS(1000, JSON.stringify({ Console: true , Message: input }));
+                    con.SendChatMessageWS(1000, JSON.stringify({ ProcessId: ProcessId, Console: true , Command: input }));
                     self.addConsoleLine(input, 'return');
                 } catch (e) {
                 }
@@ -47,6 +48,7 @@ class Console {
             socket = new WebSocket(`${Metro.storage.getItem('ApiOriginSuffix', null).replace("http:", "ws:").replace("https:", "wss:")}WebSocketService/Process`)
             socket.onmessage = function (event) {
                 let message = JSON.parse(event.data);
+                ProcessId = message.ProcessId;
                 con.addConsoleLine(message.Message, message.Type == "error" ? 'error_console' : 'info_console');
             };
 

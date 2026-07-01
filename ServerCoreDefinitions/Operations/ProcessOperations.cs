@@ -87,16 +87,18 @@ namespace EasyITCenter.ServerCoreStructure {
                     proc.StartInfo.RedirectStandardInput = true;
                     proc.StartInfo.Verb = (Environment.OSVersion.Version.Major >= 6) ? "runas" : "";
 
-                    //proc.OutputDataReceived += Proc_OutputDataReceived;
-                    //proc.ErrorDataReceived += Proc_ErrorDataReceived;
+                    proc.OutputDataReceived += Proc_OutputDataReceived;
+                    proc.ErrorDataReceived += Proc_ErrorDataReceived;
+                    proc.Exited += ServerProcessFinishedAsync;
+                    proc.Disposed += ServerProcessFinishedAsync;
 
                     proc.Start();
 
                     proc.StandardOutput.ReadToEndAsync().ContinueWith(t => {
-                        Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { Type = "message", Message = t.Result }));
+                        Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { ProcessId = proc.Id, Type = "message", Message = t.Result }));
                     });
                     proc.StandardError.ReadToEndAsync().ContinueWith(t => {
-                        Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { Type = "error", Message = t.Result }));
+                        Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { ProcessId = proc.Id, Type = "error", Message = t.Result }));
                     });
 
                     ServerStartUpScriptList startupScript = null;
@@ -115,15 +117,9 @@ namespace EasyITCenter.ServerCoreStructure {
                     }
 
                   
-                    //proc.StandardError.ReadToEndAsync().ContinueWith(t => resultError = t.Result);
                     //proc.StandardInput.WriteLine(processDefinition.Arguments);
-                    
                     //proc.WaitForInputIdle();
-                    
 
-
-                    proc.Exited += ServerProcessFinishedAsync;
-                    proc.Disposed += ServerProcessFinishedAsync;
                     if (!proc.HasExited)
                     {
                         SrvRuntime.SrvProcessManager.Add(new Tuple<int, string, string, Process>(proc.Id, !string.IsNullOrWhiteSpace(processDefinition.StartupScriptName) ? processDefinition.StartupScriptName : proc.ProcessName, (startupScript?.Description == null ? string.Empty : startupScript?.Description), proc));
@@ -148,7 +144,7 @@ namespace EasyITCenter.ServerCoreStructure {
 
 
         private static void Proc_ErrorDataReceived(object sender, DataReceivedEventArgs e) {
-            Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { Type = "error", Message = e.Data }));
+            Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { Type = "message", Message = e.Data }));
         }
 
         private static void Proc_OutputDataReceived(object sender, DataReceivedEventArgs e) {

@@ -44,7 +44,7 @@ namespace EasyITCenter.Managers {
             WebSocketReceiveResult? receiveResult = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
             while (!receiveResult.CloseStatus.HasValue) {
-                ServerCentralWebSocketService(socketAPIPath, JsonSerializer.Deserialize<dynamic>(System.Text.Encoding.UTF8.GetString(new ArraySegment<byte>(buffer)).Replace("\0", "")));
+                ServerCentralWebSocketService(socketAPIPath, System.Text.Encoding.UTF8.GetString(new ArraySegment<byte>(buffer)).Replace("\0", ""));
                 SendMessageAndUpdateWebSocketsInSpecificPath(socketAPIPath, System.Text.Encoding.UTF8.GetString(new ArraySegment<byte>(buffer)).Replace("\0", ""));
                 receiveResult = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             }
@@ -82,6 +82,7 @@ namespace EasyITCenter.Managers {
             try {
                 foreach (Tuple<WebSocket, WebSocketLocation> socket in SrvRuntime.CentralWebSocketList) {
                     if (socket.Item2.socketAPIPath == socketAPIPath) {
+                        ServerCentralWebSocketService(socketAPIPath, message);
                         await SendMessageToClientSocket(socket.Item1, message);
                         socket.Item2.SocketTimeout = DateTimeOffset.UtcNow.AddMinutes(double.Parse(DbOperations.GetServerParameterLists("WebSocketTimeoutMin").Value));
                     }
@@ -107,25 +108,43 @@ namespace EasyITCenter.Managers {
 
 
 
+        /// <summary>
+        /// Server Central WebSocket Services
+        /// Used For All Communication Types Without Chat and ServerMonitoring
+        /// Use for Processes, API, Folder/File Actions, 
+        /// </summary>
+        /// <param name="socketAPIPath"></param>
+        /// <param name="message"></param>
+        public static void ServerCentralWebSocketService(string socketAPIPath, string message) {
 
-        public static void ServerCentralWebSocketService(string socketAPIPath, dynamic message) {
+            if (message != "{}") {
+
+                switch (socketAPIPath) {
+                    case { } when socketAPIPath.ToLower().StartsWith("process"):
+                        try {
+                            //Command From Web Console to Process
+                            if (bool.Parse(JsonSerializer.Deserialize<JsonElement>(message).GetProperty("Console").ValueKind.ToString())) {
+                                SrvRuntime.SrvProcessManager.ForEach(process => {
+                                    if (process.Item4.Id == int.Parse(JsonSerializer.Deserialize<JsonElement>(message).GetProperty("ProcessId").ValueKind.ToString())) {
+                                        process.Item4.StandardInput.WriteLine(JsonSerializer.Deserialize<JsonElement>(message).GetProperty("Command").GetString());
+                                    }
+                                });
+                            }
+                        } catch { }
+                        break;
+
+                    default:
+                        // code block
+                        break;
+                }
 
 
-            switch (socketAPIPath) {
-                case { } when socketAPIPath.ToLower().StartsWith("process"):
 
-                    //WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(socketAPIPath, json);
-                    break;
 
-                default:
-                    // code block
-                    break;
+
+
+
             }
-
-            
-
-
-
         }
     }
 }
