@@ -40,7 +40,7 @@
                 using var webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
                 Managers.WebSocketManager.AddSocketConnectionToCentralList(webSocket, "");
                 await Managers.WebSocketManager.ListenClientWebSocketMessages(webSocket, "");
-                //await Echo(HttpContext, webSocket);
+
             }
             else {
                 HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;

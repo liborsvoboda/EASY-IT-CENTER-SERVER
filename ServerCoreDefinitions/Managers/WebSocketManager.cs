@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Sharp7;
+using System.Linq;
 using System.Text;
 
 namespace EasyITCenter.Managers {
@@ -43,6 +44,7 @@ namespace EasyITCenter.Managers {
             WebSocketReceiveResult? receiveResult = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
             while (!receiveResult.CloseStatus.HasValue) {
+                ServerCentralWebSocketService(socketAPIPath, JsonSerializer.Deserialize<dynamic>(System.Text.Encoding.UTF8.GetString(new ArraySegment<byte>(buffer)).Replace("\0", "")));
                 SendMessageAndUpdateWebSocketsInSpecificPath(socketAPIPath, System.Text.Encoding.UTF8.GetString(new ArraySegment<byte>(buffer)).Replace("\0", ""));
                 receiveResult = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             }
@@ -98,11 +100,32 @@ namespace EasyITCenter.Managers {
                     if (socket.Item2.SocketTimeout < DateTimeOffset.UtcNow) { socket.Item1.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None); }
                 });
                 SrvRuntime.CentralWebSocketList.RemoveAll(socket => socket.Item1.State != WebSocketState.Open);
-                
+
             } catch { }
             return SrvRuntime.CentralWebSocketList.Count;
         }
 
-        
+
+
+
+        public static void ServerCentralWebSocketService(string socketAPIPath, dynamic message) {
+
+
+            switch (socketAPIPath) {
+                case { } when socketAPIPath.ToLower().StartsWith("process"):
+
+                    //WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(socketAPIPath, json);
+                    break;
+
+                default:
+                    // code block
+                    break;
+            }
+
+            
+
+
+
+        }
     }
 }

@@ -79,13 +79,25 @@ namespace EasyITCenter.ServerCoreStructure {
                 if (processDefinition.ProcessType != ProcessType.powershellScript) {
                     proc.StartInfo.UseShellExecute = false;
                     proc.StartInfo.WorkingDirectory = processDefinition.WorkingDirectory + (processDefinition.WorkingDirectory.EndsWith("\\") ? "" : "\\") ?? null;
-                    //proc.StartInfo.LoadUserProfile = false;
+                    proc.StartInfo.LoadUserProfile = false;
                     proc.StartInfo.CreateNoWindow = true;
                     proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     proc.StartInfo.RedirectStandardOutput = true;
                     proc.StartInfo.RedirectStandardError = true;
+                    proc.StartInfo.RedirectStandardInput = true;
                     proc.StartInfo.Verb = (Environment.OSVersion.Version.Major >= 6) ? "runas" : "";
+
+                    //proc.OutputDataReceived += Proc_OutputDataReceived;
+                    //proc.ErrorDataReceived += Proc_ErrorDataReceived;
+
                     proc.Start();
+
+                    proc.StandardOutput.ReadToEndAsync().ContinueWith(t => {
+                        Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { Type = "message", Message = t.Result }));
+                    });
+                    proc.StandardError.ReadToEndAsync().ContinueWith(t => {
+                        Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { Type = "error", Message = t.Result }));
+                    });
 
                     ServerStartUpScriptList startupScript = null;
                     if (!string.IsNullOrWhiteSpace(processDefinition.StartupScriptName))
@@ -102,15 +114,19 @@ namespace EasyITCenter.ServerCoreStructure {
                         }
                     }
 
-                    //proc.OutputDataReceived +=;
+                  
+                    //proc.StandardError.ReadToEndAsync().ContinueWith(t => resultError = t.Result);
+                    //proc.StandardInput.WriteLine(processDefinition.Arguments);
+                    
+                    //proc.WaitForInputIdle();
+                    
+
+
                     proc.Exited += ServerProcessFinishedAsync;
                     proc.Disposed += ServerProcessFinishedAsync;
                     if (!proc.HasExited)
                     {
                         SrvRuntime.SrvProcessManager.Add(new Tuple<int, string, string, Process>(proc.Id, !string.IsNullOrWhiteSpace(processDefinition.StartupScriptName) ? processDefinition.StartupScriptName : proc.ProcessName, (startupScript?.Description == null ? string.Empty : startupScript?.Description), proc));
-                        //proc.OutputDataReceived +=;
-                        proc.Exited += ServerProcessFinishedAsync;
-                        proc.Disposed += ServerProcessFinishedAsync;
                     }
 
                     if (processDefinition.WaitForExit)
@@ -126,6 +142,19 @@ namespace EasyITCenter.ServerCoreStructure {
             }
             return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), InsertedId = 0, RecordCount = 1, ErrorMessage = resultOutput + Environment.NewLine + resultError });
         }
+
+
+
+
+
+        private static void Proc_ErrorDataReceived(object sender, DataReceivedEventArgs e) {
+            Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { Type = "error", Message = e.Data }));
+        }
+
+        private static void Proc_OutputDataReceived(object sender, DataReceivedEventArgs e) {
+            Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath("Process", JsonSerializer.Serialize(new { Type = "error", Message = e.Data }));
+        }
+
 
 
         /// <summary>

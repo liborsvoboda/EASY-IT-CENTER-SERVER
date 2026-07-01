@@ -71,8 +71,8 @@ namespace EasyITCenter.ServerCoreStructure {
         public static List<IHostedService> SrvHostedServiceManager = new();
 
 
-        public static List<Tuple<WebSocket, WebSocketLocation>> CentralWebSocketList = new List<Tuple<WebSocket, WebSocketLocation>>();
         public static List<ActionDescriptor> SrvRegisteredRoutesList;
+        public static List<Tuple<WebSocket, WebSocketLocation>> CentralWebSocketList = new List<Tuple<WebSocket, WebSocketLocation>>();
         public static List<Tuple<int, string, string, Process>> SrvProcessManager = new();
 
 

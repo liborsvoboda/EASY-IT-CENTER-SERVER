@@ -26,6 +26,7 @@ namespace EasyITCenter.DBModel
         [StringLength(2048)]
         [Unicode(false)]
         public string? WorkingDirectory { get; set; }
+        public bool WaitForExit { get; set; }
         [Unicode(false)]
         public string? InstallCommand { get; set; }
         [Unicode(false)]
