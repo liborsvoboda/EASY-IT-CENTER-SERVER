@@ -645,7 +645,26 @@ function OpenNotesList() {
 }
 
 
-
+/**
+* Function Set Portal Version
+* @function
+*/
 function SetVersion() {
     document.getElementById("NavPanel").lastChild.data = `Server Version: ${Metro.storage.getItem("ServerVersion", null)}`;
+}
+
+
+
+
+/**
+* Fill Portal Generator Schema Fields Selector
+* @function
+*/
+function GeneratorLoadTableSchema() {
+    let select = Metro.getPlugin("#menuGeneratorTableSchema", "select"); let options = []; select.data("");
+    let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
+    tableSchemaList.forEach(schema => {
+        options.push({ val: schema.data, title: schema.data, selected: false });
+    }); select.addOptions(options); 
+
 }

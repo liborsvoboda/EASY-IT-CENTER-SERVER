@@ -24,6 +24,7 @@ window.Gs = {
     Behaviors: {},
     Objects: {},
     Functions: {},
+    Generator: {},
     Apis: {},
     Media: {},
     Socket: {},

@@ -57,6 +57,8 @@
     /// </summary>
     public class GenericDataList {
         public string Data { get; set; }
+        public string DataType { get; set; }
+        public string DataNull { get; set; }
     }
 
 

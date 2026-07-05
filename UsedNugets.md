@@ -21,18 +21,6 @@ https://go.dev/doc/install
 # Apache FTP
 https://downloads.apache.org/
 
-Office Online
-https://www.rollapp.com/rollmyfile/button/new
-
-Office Viewer
-https://officeviewer.herokuapp.com/
-
-# Convert Files Online
-https://pdfixer.com/?cmpid=69d4b01c621a0dc7edc8fc19&utm_campaign={replace}&sub2=excel%20to%20pdf&sub3=&sub4=200293547212&sub5=804225583805&sub6=23734880857&sub7=c&sub8=&sub9=d&sub10=officeviewer.herokuapp.com&utm_source=Google&wbraid={wbraid}&gbraid={gbraid}&ref_id=EAIaIQobChMI0ue8kI2GlQMVYADrBB0bEjTuEAEYASAAEgKqRPD_BwE&gad_source=5&gad_campaignid=23734880857&gclid=EAIaIQobChMI0ue8kI2GlQMVYADrBB0bEjTuEAEYASAAEgKqRPD_BwE
-
-
-Pivot Editor
-https://pivot.apache.org/demos/
 
 
 #PowerShell Script Library
@@ -86,9 +74,6 @@ html minify
 # Dynamic APIconfigurator
 udelat konfiguraci pro REST SET a pro Vlastní SQL
 
-
-# Migrate Database
-https://www.sqlines.com/online
 
 # Mail Server
 https://github.com/pruiz/LumiSoft.Net

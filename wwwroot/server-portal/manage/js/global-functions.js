@@ -615,6 +615,7 @@ Gs.Functions.GetFunctionList = function () {
     for (var p in Gs.SignalR) { if (typeof Gs.SignalR[p] === "function") { functionList.push({ title: `Gs.SignalR.${p}()`, folder: false, checkbox: false, key: Gs.SignalR[p].toString() }); } }
     for (var p in Gs.Database) { if (typeof Gs.Database[p] === "function") { functionList.push({ title: `Gs.Database.${p}()`, folder: false, checkbox: false, key: Gs.Database[p].toString() }); } }
     for (var p in Gs.Direct) { if (typeof Gs.Direct[p] === "function") { functionList.push({ title: `Gs.Direct.${p}()`, folder: false, checkbox: false, key: Gs.Direct[p].toString() }); } }
+    for (var p in Gs.Generator) { if (typeof Gs.Generator[p] === "function") { functionList.push({ title: `Gs.Generator.${p}()`, folder: false, checkbox: false, key: Gs.Generator[p].toString() }); } }
     
     Metro.storage.setItem('FunctionList', functionList.sort((a, b) => (a.title > b.title) * 2 - 1));
 }
@@ -1062,7 +1063,10 @@ Gs.Functions.RegisterFrameWindow = function (title, url, html = null) {
 Gs.Functions.UnRegisterFrame = function (id) { Gs.Variables.RegisteredFrameList.splice(id, 1); }
 
 
-
+/**
+* Function Add WebConsole Input
+* @function
+*/
 Gs.Functions.AddWebConsoleLine = function (msg, type) {
     let output = document.getElementById('browser-console-output');
     let newLine = document.createElement('div');
@@ -1071,4 +1075,14 @@ Gs.Functions.AddWebConsoleLine = function (msg, type) {
     try {
         output.appendChild(newLine);
     } catch { }
+}
+
+
+/**
+* Function Return Words from CamelCase
+* @function
+*/
+Gs.Functions.AddSpaceCamelCase = function (string) {
+    string = string.charAt(0).toUpperCase() + string.slice(1);
+    return string.replace(/([A-Z])/g, " $1").trim();
 }
