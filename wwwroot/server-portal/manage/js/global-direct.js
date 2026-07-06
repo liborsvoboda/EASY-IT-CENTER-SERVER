@@ -665,6 +665,5 @@ function GeneratorLoadTableSchema() {
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
     tableSchemaList.forEach(schema => {
         options.push({ val: schema.data, title: schema.data, selected: false });
-    }); select.addOptions(options); 
-
+    }); select.addOptions(options);
 }

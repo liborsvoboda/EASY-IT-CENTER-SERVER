@@ -15,7 +15,9 @@ namespace EasyITCenter.DBModel
         [StringLength(50)]
         [Unicode(false)]
         public string InheritedCodeType { get; set; } = null!;
-        public int GroupId { get; set; }
+        [StringLength(50)]
+        [Unicode(false)]
+        public string GroupId { get; set; } = null!;
         public int Sequence { get; set; }
         [StringLength(50)]
         [Unicode(false)]

@@ -6,7 +6,7 @@
 */
 Gs.Generator.GenerateFormRequest = async function () {
     let content = `<p data-role="hint" data-hint-position="top" data-cls-hint="supertop" data-hint-text="Insert Table Name and Load Table Field">Table Name</p>
-    <div><input id='menuGeneratorTableName' type='text' data-role='input' ><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Generator.GetTableSchemaList()">Load Fields</button>
+    <div><input id='menuGeneratorTableName' type='text' data-role='input' ><button class="button success mb-4" style="position: absolute;right: 0px;" onclick="Gs.Generator.GetTableSchemaList();">Load Fields</button>
     <p data-role="hint" data-hint-position="top" data-cls-hint="supertop" data-hint-text="Select Table Fields for Form Table which will be shown">Select Table Fields</p>
     <select id="menuGeneratorTableSchema" data-role="select" data-cls-select="" data-clear-button="true" data-prepend="Select Table Fields" multiple></select>
      <p data-role="hint" data-hint-position="top" data-cls-hint="supertop" data-hint-text="Insert Page Name">Insert Page Name</p>
@@ -23,10 +23,26 @@ Gs.Generator.GenerateFormRequest = async function () {
                 html += Gs.Generator.GeneratorHtmlForm();
                 html += Gs.Generator.GeneratorHtmlEditors();
                 html += Gs.Generator.GeneratorPageFooter();
+                Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].editor.getModel().setValue(html);
 
+                let javascript = "";
+                javascript = Gs.Generator.GeneratorJavascriptInit();
+                javascript += Gs.Generator.GeneratorJavascriptStartUp();
+                javascript += Gs.Generator.GeneratorJavascriptReloadTable();
+                javascript += Gs.Generator.GeneratorJavascriptClearForm();
+                javascript += Gs.Generator.GeneratorJavascriptSetEmptyEditor();
+                javascript += Gs.Generator.GeneratorJavascriptSetRecId();
+                javascript += Gs.Generator.GeneratorJavascriptMenuToJson();
+                javascript += Gs.Generator.GeneratorJavascriptSaveMenu();
+                javascript += Gs.Generator.GeneratorJavascriptDeleteSelectedMenu();
+                Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].editor.getModel().setValue(javascript);
+
+                let css = "";
+                css = Gs.Generator.GeneratorCss();
+                Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].editor.getModel().setValue(css);
             } else { alert("Data must be Inserted"); }
         }
-    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+    }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }];
     Gs.Objects.CreateDialogRequest("Generate new Form Page", content, actions);
 }
 
@@ -37,6 +53,7 @@ Gs.Generator.GenerateFormRequest = async function () {
 */
 Gs.Generator.GetTableSchemaList = async function () {
     await Gs.Apis.RunServerGetApi(`DatabaseService/SpGetTableSchema/${$("#menuGeneratorTableName").val()}`, "TableSchemaList", "GeneratorLoadTableSchema");
+    $("#menuGeneratorName").val(Gs.Functions.AddSpaceCamelCase($("#menuGeneratorTableName").val()));
 }
 
 
@@ -49,18 +66,8 @@ Gs.Generator.GeneratorHtmlHeader = function() {
 
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
     tableSchemaList.forEach(schema => {
-        if (schema.data.toLowerCase() == "codecontent" ||schema.data.toLowerCase() == "htmlcontent" || schema.data.toLowerCase() == "jscontent" || schema.data.toLowerCase() == "csscontent") {
-            html += `<style>
-                        .monaco-editor {
-			                min-width: 100%;
-			                width: 100%;
-			                min-height: 100%;
-		                }
-                        .monacocontainer {
-                            min-height: 100%;
-                            text-align: left;
-                        }
-                    </style>`;
+        if (schema.data.toLowerCase() == "codecontent" || schema.data.toLowerCase() == "htmlcontent" || schema.data.toLowerCase() == "jscontent" || schema.data.toLowerCase() == "csscontent") {
+            html += ``;
         }
     });
     html +=`</HEAD>
@@ -101,7 +108,7 @@ Gs.Generator.GeneratorHtmlButtons = function () {
     let html = `
     <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
         <DIV class=text-right>
-            <BUTTON id="copyButton" class="button primary outline mt-5 shadowed" type=button onclick=CopyRecord();  >Delete</BUTTON>
+            <BUTTON id="copyButton" class="button primary outline shadowed" type=button onclick=CopyRecord();  >Copy</BUTTON>
             <BUTTON class="button warning outline shadowed" type=reset onclick=ClearForm(); >Clear Form</BUTTON>
             <BUTTON onclick="saveNewRec= false;SaveMenu();" class="button success outline shadowed" type=submit>Save</BUTTON>
             <BUTTON id="deleteButton" class="button alert outline mt-5 shadowed" type=button onclick=DeleteSelectedMenu();  >Delete</BUTTON>
@@ -140,6 +147,9 @@ Gs.Generator.GeneratorHtmlTable = function () {
 * @function
 */
 Gs.Generator.GeneratorHtmlForm = function () {
+
+    let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
+
     let html = `
     <DIV id="_menuForm" style="width:100%;">
     <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
@@ -151,7 +161,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
+                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
                     </select>
             </DIV></DIV>`;
         }
@@ -160,7 +170,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
+                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
                     </select>
             </DIV></DIV>`;
         }
@@ -185,7 +195,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}" multiple>
+                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}" multiple>
                     </select>
             </DIV></DIV>`;
         } else if (schema.data.toLowerCase() == "sequence") {
@@ -193,7 +203,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <input id="menu${schema.data}" type="text" data-role="spinner" data-step="10" data-default-value="0.00" data-plus-icon="<span class='mif-plus fg-white'></span>" data-minus-icon="<span class='mif-minus fg-white'></span>" >
+                    <input id="menu${schema.data}" type="text" data-role="spinner" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-step="10" data-default-value="0.00" data-plus-icon="<span class='mif-plus fg-white'></span>" data-minus-icon="<span class='mif-minus fg-white'></span>" >
             </DIV></DIV>`;
         }
         else if (schema.dataType.toLowerCase() == "decimal") {
@@ -201,7 +211,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <input id="menu${schema.data}" type="text" data-role="spinner" data-default-value="0.00" data-plus-icon="<span class='mif-plus fg-white'></span>" data-minus-icon="<span class='mif-minus fg-white'></span>" >
+                    <input id="menu${schema.data}" type="text" data-role="spinner" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-default-value="0.00" data-plus-icon="<span class='mif-plus fg-white'></span>" data-minus-icon="<span class='mif-minus fg-white'></span>" >
             </DIV></DIV>`;
         }
         else if (schema.dataType.toLowerCase() == "datetime" && schema.data.toLowerCase().endsWith("date")) {
@@ -209,7 +219,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <input id="menu${schema.data}" type="text" data-role="calendarpicker">
+                    <input id="menu${schema.data}" type="text" data-role="calendarpicker" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')}>
             </DIV></DIV>`;
         }
         //else if (schema.dataType.toLowerCase() == "datetime" && schema.data.toLowerCase().endsWith("datetime")) {
@@ -225,7 +235,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <input id="menu${schema.data}" data-role="timepicker">
+                    <input id="menu${schema.data}" data-role="timepicker" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')}>
             </DIV></DIV>`;
         }
         else if (schema.dataType.toLowerCase() == "int") {
@@ -233,15 +243,14 @@ Gs.Generator.GeneratorHtmlForm = function () {
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <input id="menu${schema.data}"  type="text" data-role="spinner" data-plus-icon="<span class='mif-plus fg-white'></span>" data-minus-icon="<span class='mif-minus fg-white'></span>" >
+                    <input id="menu${schema.data}"  type="text" data-role="spinner" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-plus-icon="<span class='mif-plus fg-white'></span>" data-minus-icon="<span class='mif-minus fg-white'></span>" >
             </DIV></DIV>`;
         }
         else if (schema.dataType.toLowerCase() == "varchar") {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <DIV class="form-group">
-                    <p>${schema.data}</p>
-                    <INPUT id="menu${schema.data}" style="HEIGHT: auto" data-role="input" data-validate="required" autocomplete="off" data-label="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
+                    <INPUT id="menu${schema.data}" style="HEIGHT: auto" data-role="input" ${(schema.dataNull == 'YES' ? 'data-validate="required"' :'')} data-validate="required" autocomplete="off" data-label="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
             </DIV></DIV>
             `;
         }
@@ -315,4 +324,164 @@ Gs.Generator.GeneratorPageFooter = function () {
         </DIV></BODY></HTML>
     `;
     return html;
+}
+
+
+/**
+* Function Generate Css for Page
+* @function
+*/
+Gs.Generator.GeneratorCss = function () {
+    let css = ``;
+    css += `
+    .monaco-editor {
+	    min-width: 100%;
+	    width: 100%;
+	    min-height: 100%;
+    }
+    .monacocontainer {
+        min-height: 100%;
+        text-align: left;
+    }`;
+    return css;
+
+}
+
+
+/**
+* Function Generate Javascript Page Init
+* @function
+*/
+Gs.Generator.GeneratorJavascriptInit = function () {
+    let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
+    tableSchemaList.forEach(schema => {
+        if (schema.data.toLowerCase() == "description") { }
+    });
+    let javascript = `
+    //Declarations
+    formIsValid = false;
+    `;
+
+    tableSchemaList.forEach(schema => {
+        if (schema.data.toLowerCase() == "description") {
+            javascript += `
+            //Startup Actions
+            $('#menuDescription').summernote({tabsize: 2,height: 150, maxHeight: 150,
+                lang: 'cs-CZ',
+                placeholder: 'write Description...',
+                toolbar: [['style', ['style']],['font', ['bold', 'underline', 'clear']],['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],['color', ['color']],['para', ['ul', 'ol', 'paragraph']],['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]]
+            });
+            `;
+        }
+    });
+
+    javascript += `
+    //Startup Actions
+    $(document).ready(function () { StartUp(); });
+    `;
+    return javascript;
+}
+
+
+
+/**
+* Function Generate Javascript Page Init
+* @function
+*/
+Gs.Generator.GeneratorJavascriptStartUp = function () {
+
+
+
+
+}
+
+
+
+/**
+* Function Generate Javascript Page Init
+* @function
+*/
+Gs.Generator.GeneratorJavascriptReloadTable = function () {
+
+
+
+
+}
+
+
+
+/**
+* Function Generate Javascript Page Init
+* @function
+*/
+Gs.Generator.GeneratorJavascriptClearForm = function () {
+
+
+
+
+}
+
+
+/**
+* Function Generate Javascript Page Init
+* @function
+*/
+Gs.Generator.GeneratorJavascriptSetEmptyEditor = function () {
+
+
+
+
+}
+
+
+
+/**
+* Function Generate Javascript Page Init
+* @function
+*/
+Gs.Generator.GeneratorJavascriptSetRecId = function () {
+
+
+
+
+}
+
+
+/**
+* Function Generate Javascript Page Init
+* @function
+*/
+Gs.Generator.GeneratorJavascriptMenuToJson = function () {
+
+
+
+
+}
+
+
+
+/**
+* Function Generate Javascript Page Init
+* @function
+*/
+Gs.Generator.GeneratorJavascriptSaveMenu = function () {
+
+
+
+
+}
+
+
+
+/**
+* Function Generate Javascript Page Init
+* @function
+*/
+Gs.Generator.GeneratorJavascriptDeleteSelectedMenu = function () {
+
+
+
+
 }
