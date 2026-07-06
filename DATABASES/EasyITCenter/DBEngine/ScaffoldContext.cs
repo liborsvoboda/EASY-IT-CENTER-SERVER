@@ -743,6 +743,19 @@ namespace EasyITCenter.DBModel
                 entity.Property(e => e.Active).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.DocSrvDocumentationGroupListNameNavigation)
+                    .WithMany(p => p.DocSrvDocumentationLists)
+                    .HasPrincipalKey(p => p.Name)
+                    .HasForeignKey(d => d.DocSrvDocumentationGroupListName)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DocSrvDocumentationList_DocSrvDocumentationGroupList");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.DocSrvDocumentationLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DocSrvDocumentationList_SolutionUserList");
             });
 
             modelBuilder.Entity<LicSrvLicenseActivationFailList>(entity =>

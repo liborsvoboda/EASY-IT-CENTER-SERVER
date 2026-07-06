@@ -11,7 +11,7 @@
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
                 data = new EasyITCenterContext().DocSrvDocumentationLists
-                    .OrderBy(a => a.DocumentationGroup.Sequence).ThenBy(a => a.Sequence).ThenBy(a => a.Name)
+                    .OrderBy(a => a.Sequence).ThenBy(a => a.Name)
                     .ToList();
             }
 

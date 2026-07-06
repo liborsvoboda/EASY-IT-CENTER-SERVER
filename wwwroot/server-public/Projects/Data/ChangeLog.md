@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added HTML Generator ([3bd5e86](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/3bd5e86cb2c5a7fe33d459467111da6ed471f008) by Libor Svoboda).
 - added Server Console ([5305122](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/53051229da99de28f6ff30dadd6851bdf4a9565f) by Libor Svoboda).
 - added new Doc Editing Storage Cloud ([cbe0a8d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/cbe0a8d07f9bcfdd597af535347937229a49393f) by Libor Svoboda).
 - added Start Create new Docs on Folder selection ([9ed9349](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/9ed9349fa603efb5d17266afcfca6d4675a29fac) by Libor Svoboda).

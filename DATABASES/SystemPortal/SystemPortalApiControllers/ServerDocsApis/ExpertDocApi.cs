@@ -17,10 +17,8 @@
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
                 data = new EasyITCenterContext().DocSrvDocumentationLists
-                    .Include(a => a.DocumentationGroup)
                     .Where(a => a.Active)
-                    .OrderBy(a => a.Sequence).ToList()
-                    .OrderBy(a => a.DocumentationGroup.Sequence).ToList();
+                    .OrderBy(a => a.Sequence).ToList();
             }
 
             data.ForEach(documentation => {
@@ -47,7 +45,7 @@
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
-                data = new EasyITCenterContext().DocSrvDocumentationLists.Where(a => a.DocumentationGroupId == id && a.Active).ToList();
+                data = new EasyITCenterContext().DocSrvDocumentationLists.Where(a => a.Id == id && a.Active).ToList();
             }
 
             return JsonSerializer.Serialize(data, new JsonSerializerOptions() {

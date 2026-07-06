@@ -13,12 +13,11 @@ namespace EasyITCenter.DBModel
         public DocSrvDocumentationGroupList()
         {
             DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
+            DocSrvDocumentationLists = new HashSet<DocSrvDocumentationList>();
         }
 
         [Key]
-        [StringLength(50)]
-        [Unicode(false)]
-        public string Id { get; set; } = null!;
+        public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
         public string Name { get; set; } = null!;
@@ -35,5 +34,6 @@ namespace EasyITCenter.DBModel
         public virtual SolutionUserList User { get; set; } = null!;
         [InverseProperty("Group")]
         public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
+        public virtual ICollection<DocSrvDocumentationList> DocSrvDocumentationLists { get; set; }
     }
 }

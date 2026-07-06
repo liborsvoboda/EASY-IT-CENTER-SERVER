@@ -43,6 +43,7 @@ namespace EasyITCenter.DBModel
             BusinessWarehouseLists = new HashSet<BusinessWarehouseList>();
             DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
             DocSrvDocumentationGroupLists = new HashSet<DocSrvDocumentationGroupList>();
+            DocSrvDocumentationLists = new HashSet<DocSrvDocumentationList>();
             LicSrvLicenseAlgorithmLists = new HashSet<LicSrvLicenseAlgorithmList>();
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableLists = new HashSet<PortalApiTableList>();
@@ -206,6 +207,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<DocSrvDocumentationGroupList> DocSrvDocumentationGroupLists { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<DocSrvDocumentationList> DocSrvDocumentationLists { get; set; }
         [InverseProperty("SolutionUserList")]
         public virtual ICollection<LicSrvLicenseAlgorithmList> LicSrvLicenseAlgorithmLists { get; set; }
         [InverseProperty("User")]
