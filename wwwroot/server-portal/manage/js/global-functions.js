@@ -1086,3 +1086,12 @@ Gs.Functions.AddSpaceCamelCase = function (string) {
     string = string.charAt(0).toUpperCase() + string.slice(1);
     return string.replace(/([A-Z])/g, " $1").trim();
 }
+
+
+/**
+* Function Return CamelCase String
+* @function
+*/
+Gs.Functions.CamelCaseString = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
