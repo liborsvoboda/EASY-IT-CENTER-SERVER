@@ -96,13 +96,16 @@ Gs.Generator.GeneratorHtmlHeader = function() {
                                 <LI class="fg-black "><A href="#_menuForm">Form</A></LI>`
                                 tableSchemaList.forEach(schema => {
                                     if (schema.data.toLowerCase() == "codecontent" ||schema.data.toLowerCase() == "htmlcontent" || schema.data.toLowerCase() == "jscontent" || schema.data.toLowerCase() == "csscontent") {
-                                        html += `<LI class="fg-black "><A href="#_menuCodeEditor">Code Content</A></LI>`;
+                                        html += `
+                                        <LI class="fg-black "><A href="#_menuCodeEditor">Code Content</A></LI>`;
                                     }
                                     if (schema.data.toLowerCase() == "mdcontent") {
-                                        html += `<LI class="fg-black "><A href="#_menuMdEditor">MarkDown Content</A></LI>`;
+                                        html += `
+                                        <LI class="fg-black "><A href="#_menuMdEditor">MarkDown Content</A></LI>`;
                                     }
                                     if (schema.data.toLowerCase() == "jsoncontent") {
-                                        html += `<LI class="fg-black "><A href="#_menuJsonEditor">JSON Content</A></LI>`;
+                                        html += `
+                                        <LI class="fg-black "><A href="#_menuJsonEditor">JSON Content</A></LI>`;
                                     }
                                 });
                     html += `</UL>
