@@ -986,7 +986,7 @@
 
         //STARTUP
         $(document).ready(function () { StartUp(); });
-
+        Gs.Behaviors.AutoService();
 
         function ReloadUserStorage() {
             SetEditor("");
@@ -1006,15 +1006,14 @@
 
 
         async function SetVersioning() {
-            await Gs.Apis.RunServerGetApi("InformationService/GetStorageFolderList", "StorageFolderList", "SetVersioning1");
+            let uuid = Gs.Functions.GenerateUUID();
+            Gs.Variables.apiTaskList.push({ UUID: uuid, Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerGetApi", ApiPath: "InformationService/GetStorageFolderList", StorageName: "StorageFolderList" });
+            let jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure)); jsonData[1].tableName = "ServerStorageVersionList";
+            Gs.Variables.apiTaskList.push({ UUID: uuid, Id: Gs.Functions.RandomString(), Sequence: 10, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "ServerStorageVersionList", WindowFunction: "SetVersioningPage" });
+
         }
-        async function SetVersioning1() {
-            Gs.Variables.getSpProcedure[1].tableName = "ServerStorageVersionList";
-            await Gs.Apis.RunServerPostApi("DatabaseService/SpProcedure/GetGenericDataListByParams", Gs.Variables.getSpProcedure, "ServerStorageVersionList", "SetVersioning2");
-        }
-        async function SetVersioning2() {
-            SaveOpenOffice
-            let html = "<div class='row'><div class='cell-4 offset-4'><ul data-role='listview' data-selectable='true'>";
+        async function SetVersioningPage() {
+            let html = "<div class='row'><div class='cell-4 offset-4' onclick='SaveVersioningRec()' ><ul id='VersioningFiles' data-role='listview' data-selectable='true' >";
             let dataList = Metro.storage.getItem("StorageFolderList", null).split(";").sort();
             dataList.forEach(item => {
                 if (item.length > 0) { html += `<li data-icon="<span class='mif-folder fg-cyan'>" data-caption="${item}"></li>`; }
@@ -1022,6 +1021,14 @@
             html += "</ul></div></div> ";
 
             $("#FrameWindow").html(html);
+        }
+
+        async function SaveVersioningRec() {
+            let selected = Metro.getPlugin("#VersioningFiles", "listview");
+            selected.getSelected();
+            //select.getSelected()[0].dataset.caption
+            
+
         }
 
 

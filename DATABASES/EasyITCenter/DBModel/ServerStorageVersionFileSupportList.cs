@@ -8,7 +8,7 @@ namespace EasyITCenter.DBModel
 {
     [Table("ServerStorageVersionFileSupportList")]
     [Index("Folder", "UserId", Name = "IX_ServerStorageVersionFileList")]
-    [Index("Path", "Version", "UserId", Name = "IX_ServerStorageVersionList", IsUnique = true)]
+    [Index("Path", "AutoVersion", "UserId", Name = "IX_ServerStorageVersionList", IsUnique = true)]
     [Index("Path", Name = "IX_ServerStorageVersionList_1")]
     public partial class ServerStorageVersionFileSupportList
     {
@@ -20,9 +20,8 @@ namespace EasyITCenter.DBModel
         [StringLength(800)]
         [Unicode(false)]
         public string Path { get; set; } = null!;
-        [Unicode(false)]
-        public string File { get; set; } = null!;
-        public int Version { get; set; }
+        public byte[] File { get; set; } = null!;
+        public int AutoVersion { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 

@@ -15,8 +15,7 @@ namespace EasyITCenter.DBModel
         [StringLength(50)]
         [Unicode(false)]
         public string Folder { get; set; } = null!;
-        [Unicode(false)]
-        public string? Description { get; set; }
+        public bool VersionEnabled { get; set; }
         public int UserId { get; set; }
         public DateTime TimeStamp { get; set; }
 

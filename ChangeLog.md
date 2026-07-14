@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added Page Generator, Repaired Public Storage ([fd53c09](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/fd53c09f6f155e68ffdcfddb8a644bba22e7bd03) by Libor Svoboda).
 - Added HTML Generator ([3bd5e86](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/3bd5e86cb2c5a7fe33d459467111da6ed471f008) by Libor Svoboda).
 - added Server Console ([5305122](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/53051229da99de28f6ff30dadd6851bdf4a9565f) by Libor Svoboda).
 - added new Doc Editing Storage Cloud ([cbe0a8d](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/cbe0a8d07f9bcfdd597af535347937229a49393f) by Libor Svoboda).
@@ -58,6 +59,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Misc
 
+- repair ([8b9d8b6](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/8b9d8b6ebfb1a0b5430db970991730af63956983) by Libor Svoboda).
+- Update Documentation GroupName ([b253f2b](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/b253f2b1f04e7e190c156edfbde34dd92326d520) by Libor Svoboda).
 - update ([a5d92b8](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/a5d92b8b6267b83dc2e4d032eb63db306d022f47) by Libor Svoboda).
 - repaired server-tools ([1ceb0e9](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/1ceb0e968392ede8c62c0558850870d62bc9c190) by lioborsvoboda).
 - repair server portal tools ([bdc9cc3](https://github.com/liborsvoboda/EASY-IT-CENTER-SERVER/commit/bdc9cc39c50a6c6771006f664e524b2ee3f5a62b) by lioborsvoboda).

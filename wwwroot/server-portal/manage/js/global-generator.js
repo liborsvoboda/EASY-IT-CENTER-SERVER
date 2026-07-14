@@ -205,6 +205,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
                         <div id="menu${schema.data}"></div>
             </DIV></DIV></DIV>
             `;
+
         } else if (schema.data.toLowerCase() == "accessrole" || schema.data.toLowerCase() == "accessuser") {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
@@ -212,22 +213,36 @@ Gs.Generator.GeneratorHtmlForm = function () {
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
                     <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}" multiple>
                     </select>
-            </DIV></DIV>`;
+            </DIV></DIV
+            `;
+
         } else if (schema.data.toLowerCase() == "sequence") {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}" type="text" data-role="spinner" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-step="10" data-default-value="0.00" data-plus-icon="<span class='mif-plus fg-black'></span>" data-minus-icon="<span class='mif-minus fg-black'></span>" >
-            </DIV></DIV>`;
-        }
-        else if (schema.dataType.toLowerCase() == "decimal") {
+            </DIV></DIV>
+            `;
+
+        } else if (schema.data.toLowerCase().indexOf("list") > -1) {
+            html += `
+            <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
+                <DIV class="form-group">
+                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
+                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}" multiple>
+                    </select>
+            </DIV></DIV>
+            `;
+
+        } else if (schema.dataType.toLowerCase() == "decimal") {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}" type="text" data-role="spinner" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-default-value="0.00" data-plus-icon="<span class='mif-plus fg-black'></span>" data-minus-icon="<span class='mif-minus fg-black'></span>" >
-            </DIV></DIV>`;
+            </DIV></DIV>
+            `;
         }
         else if (schema.dataType.toLowerCase() == "datetime" && schema.data.toLowerCase().endsWith("date")) {
             html += `
@@ -235,7 +250,8 @@ Gs.Generator.GeneratorHtmlForm = function () {
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}" type="text" data-role="calendarpicker" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')}>
-            </DIV></DIV>`;
+            </DIV></DIV>
+            `;
         }
         //else if (schema.dataType.toLowerCase() == "datetime" && schema.data.toLowerCase().endsWith("datetime")) {
         //    html += `
@@ -251,7 +267,8 @@ Gs.Generator.GeneratorHtmlForm = function () {
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}" data-role="timepicker" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')}>
-            </DIV></DIV>`;
+            </DIV></DIV>
+            `;
         }
         else if (schema.dataType.toLowerCase() == "int") {
             html += `
@@ -259,7 +276,8 @@ Gs.Generator.GeneratorHtmlForm = function () {
                 <DIV class="form-group">
                 <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}"  type="text" data-role="spinner" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-plus-icon="<span class='mif-plus fg-white'></span>" data-minus-icon="<span class='mif-minus fg-white'></span>" >
-            </DIV></DIV>`;
+            </DIV></DIV>
+            `;
         }
         else if (schema.dataType.toLowerCase() == "varchar") {
             html += `

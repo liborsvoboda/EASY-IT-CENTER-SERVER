@@ -1,20 +1,20 @@
-﻿using ServerCorePages;
+﻿using CSJsonDB;
+using EasyITCenter.Controllers;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.IdentityModel.Tokens;
+using MimeKit;
 using NUglify.Helpers;
+using PuppeteerSharp;
+using ScrapySharp.Network;
+using ServerCorePages;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Net.Mail;
 using System.Runtime.InteropServices;
-using ScrapySharp.Network;
-using CSJsonDB;
-using EasyITCenter.Controllers;
-using PuppeteerSharp;
 using Tensorflow;
-using Microsoft.AspNetCore.StaticFiles;
-
 
 namespace EasyITCenter.ServerCoreStructure {
 
@@ -251,42 +251,27 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="mailRequest">    </param>
         /// <param name="sendImmediately"></param>
         public static string SendEmail(SendMailRequest mailRequest, bool sendImmediately = false) {
-            List<string> tempFiles = null;
             try {
                 if ((!SrvRuntime.DebugMode && !bool.Parse(DbOperations.GetServerParameterLists("ConfigLogWarnPlusToDbEnabled").Value)) || sendImmediately) {
                     if (bool.Parse(DbOperations.GetServerParameterLists("ServiceCoreCheckerEmailSenderActive").Value) || sendImmediately) {
-                        MailMessage Email = new() { From = new MailAddress(mailRequest.Sender ?? DbOperations.GetServerParameterLists("EmailerSMTPLoginUsername").Value) };
 
-                        if (mailRequest.Recipients != null && mailRequest.Recipients.Any()) { mailRequest.Recipients.ForEach(email => { Email.To.Add(email); }); }
-                        else { Email.To.Add(DbOperations.GetServerParameterLists("EmailerServiceEmailAddress").Value); }
+                        MimeMessage Email = new MimeMessage();
+                        if (mailRequest.Sender == null) { Email.From.Add(new MailboxAddress(DbOperations.GetServerParameterLists("EmailerSenderAddress").Value, DbOperations.GetServerParameterLists("EmailerSenderAddress").Value)); }
+                        else { Email.From.Add(new MailboxAddress(mailRequest.Sender, mailRequest.Sender)); }
 
-                        Email.Subject = mailRequest.Subject ?? DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value;
-                        Email.Body = mailRequest.Content;
-                        Email.IsBodyHtml = true;
+                        mailRequest.Recipients.ForEach(email => { Email.To.Add(new MailboxAddress(email, email)); });
 
-                        //Attachments
-                        if (mailRequest.AttachmentList?.Count > 0) {
-                            mailRequest.AttachmentList.ForEach(attachment => {
-                                string path = Path.Combine(SrvRuntime.SrvTempPath, DataOperations.RandomString(20), attachment.Item1);
-                                tempFiles?.Add(path);
-                                FileOperations.ByteArrayToFile(path, attachment.Item2, true);
-                                Email.Attachments.Add(new Attachment(path));
-                            });
+                        Email.Subject = string.IsNullOrWhiteSpace(mailRequest.Subject) ? DbOperations.GetServerParameterLists("ConfigCoreServerRegisteredName").Value : mailRequest.Subject;
+                        Email.Body = new TextPart("html") { Text = mailRequest.Content };
+                        
+                        if (mailRequest.AttachmentList?.Count > 0) { mailRequest.AttachmentList.ForEach(attachment => { Email.Attachments.Add(attachment.Item1, attachment.Item2); }); }
 
+                        using (var client = new SmtpClient()) {
+                            client.Connect(DbOperations.GetServerParameterLists("EmailerSMTPServerAddress").Value, int.Parse(DbOperations.GetServerParameterLists("EmailerSMTPPort").Value), bool.Parse(DbOperations.GetServerParameterLists("EmailerSMTPSslIsEnabled").Value));
+                            client.Authenticate(DbOperations.GetServerParameterLists("EmailerSMTPLoginUsername").Value, DbOperations.GetServerParameterLists("EmailerSMTPLoginPassword").Value);
+                            client.Send(Email);
+                            client.Disconnect(true);
                         }
-
-
-                        SmtpClient MailClient = new(DbOperations.GetServerParameterLists("EmailerSMTPServerAddress").Value, int.Parse(DbOperations.GetServerParameterLists("EmailerSMTPPort").Value)) {
-                            Credentials = new NetworkCredential(DbOperations.GetServerParameterLists("EmailerSMTPLoginUsername").Value, DbOperations.GetServerParameterLists("EmailerSMTPLoginPassword").Value),
-                            EnableSsl = bool.Parse(DbOperations.GetServerParameterLists("EmailerSMTPSslIsEnabled").Value),
-                            Host = DbOperations.GetServerParameterLists("EmailerSMTPServerAddress").Value,
-                            Port = int.Parse(DbOperations.GetServerParameterLists("EmailerSMTPPort").Value)
-                        };
-                        MailClient.Timeout = 5000;
-                        MailClient.SendAsync(Email, Guid.NewGuid().ToString());
-                        MailClient.Dispose();
-
-                        try { tempFiles?.ForEach(tempFile => { Directory.Delete(Path.GetDirectoryName(tempFile)); }); } catch { }
                     }
                 }
                 else {
