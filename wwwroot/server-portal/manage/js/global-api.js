@@ -94,32 +94,6 @@ Gs.Apis.RunApiManager = async function () {
 }
 
 
-
-
-/*
-Gs.Apis.DownloadApi = async function (apiPath, jsonData, filename, binary, storageName = null, windowFunction = null, Id = null) {
-    if (!Gs.Variables.ixDbInit) { await Gs.Apis.LocalStoreDownloadApi(apiPath, jsonData, filename, binary, storageName, windowFunction, Id); }
-    else { await Gs.Apis.RunIndexDbDownloadApi(apiPath, jsonData, filename, binary, storageName, windowFunction, Id); }
-}
-Gs.Apis.RunServerPostApi = async function (apiPath, jsonData, storageName, windowFunction = null, Id = null) {
-    if (!Gs.Variables.ixDbInit) { await Gs.Apis.RunLocalStorePostApi(apiPath, jsonData, storageName, windowFunction, Id); }
-    else { await Gs.Apis.RunIndexDbPostApi(apiPath, jsonData, storageName, windowFunction, Id); }
-}
-Gs.Apis.RunServerPutApi = async function (apiPath, jsonData, storageName, windowFunction = null, Id = null) {
-    if (!Gs.Variables.ixDbInit) { await awaitGs.Apis.RunLocalStorePutApi(apiPath, jsonData, storageName, windowFunction, Id); }
-    else { await awaitGs.Apis.RunIndexDbPostApi(apiPath, jsonData, storageName, windowFunction, Id); }
-}
-Gs.Apis.RunServerGetApi = async function (apiPath, storageName, windowFunction = null, Id = null) {
-    if (!Gs.Variables.ixDbInit) { await Gs.Apis.RunLocalStoreGetApi(apiPath, storageName, windowFunction, Id); }
-    else { await Gs.Apis.RunIndexDbGetApi(apiPath, storageName, windowFunction, Id); }
-}
-Gs.Apis.RunServerDeleteApi = async function (apiPath, windowFunction = null, Id = null) {
-    if (!Gs.Variables.ixDbInit) { await Gs.Apis.RunLocalStoreDeleteApi(apiPath, windowFunction, Id); }
-    else { await Gs.Apis.RunIndexDbDeleteApi(apiPath, windowFunction, Id); }
-}
-*/
-
-
 /**
 * Function for Save Captured Video of User Cloud Request
 * @function

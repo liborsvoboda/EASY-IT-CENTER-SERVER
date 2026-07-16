@@ -703,9 +703,14 @@ Gs.Objects.AddSuggest = async function () {
     Gs.Objects.InfoboxObjectCreate("AddSuggest", html, width = "1000", height = "800");
 
     setTimeout(async function () {
-        Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(p => p.elementId == "fastSuggestion"), 1);
-        let dataJs = await fetch(`/server-portal/addons/monaco/js/fastSuggestion.js`).then((r) => r.text());
-        new Function(dataJs)();
+        if (Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'fastSuggestion') != -1) {
+            Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'fastSuggestion'), 1);
+            let dataJs = await fetch("/server-portal/addons/monaco/js/fastSuggestion.js").then((r) => r.text())
+            new Function(dataJs)();
+        } else {
+            let dataJs = await fetch("/server-portal/addons/monaco/js/fastSuggestion.js").then((r) => r.text())
+            new Function(dataJs)();
+        }
 
         $("#menuLabel").val("");
         let select = Metro.getPlugin("#menuInheritedMonacoLanguageType", "select"); let options = []; select.data("");

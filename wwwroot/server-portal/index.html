@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
-<html lang="en" class=" scrollbar-type-1 sb-cyan">
+<html  lang="en" class=" scrollbar-type-1 sb-cyan">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" "  />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"" />
     <meta name="charset" content="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -15,50 +16,58 @@
 
     <META content=text/html;utf-8 http-equiv=content-type>
 
-    <!--@* styles *@-->
-    <link rel="stylesheet" href="/server-portal/addons/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/server-portal/addons/summernote/css/summernote.min.css" />
+    <!--SummerNote-->
+    <link rel="stylesheet" href="/server-tools/Editor/summernote/css/bootstrap.css">
+    <link rel="stylesheet" href="/server-tools/Editor/summernote/css/summernote.min.css" />
 
-    <link rel="stylesheet" href="/server-portal/metro/css/metro-all.css" />
-    <link rel="stylesheet" href="/server-portal/addons/animate/css/animate.css" />
+    <!--Metro-->
+    <link rel="stylesheet" href="/server-tools/Metro/metro4/css/metro-all.css" />
+    <link rel="stylesheet" href="/server-tools/Style/animate/css/animate.css" />
+
+
+    <!--Web Console-->
+    <link rel="stylesheet" href="/server-tools/IFrameObject/console/css/style.css" />
 
     <link rel="stylesheet" href="/server-portal/manage/css/global.css" />
+    <link rel="stylesheet" href="/server-portal/manage/css/desktop.css" />
 
-    <!--@* scripts *@-->
-    <script type="text/javascript" src="/server-portal/addons/jquery/jquery-3.6.0.min.js"></script>
+    <!--Metro-->
+    <script type="text/javascript" src="/server-tools/Metro/metro4/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/server-tools/Metro/metro4/js/metro.4.5.2.min.js"></script>
 
-    <!--@* SummerNote *@-->
-    <script type="text/javascript" src="/server-portal/addons/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/summernote/js/summernote.min.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/summernote/lang/summernote-cs-CZ.min.js"></script>
+    <!--SummerNote-->
+    <script type="text/javascript" src="/server-tools/Editor/summernote/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/server-tools/Editor/summernote/js/summernote.min.js"></script>
+    <script type="text/javascript" src="/server-tools/Editor/summernote/lang/summernote-cs-CZ.min.js"></script>
 
     <!--FROALA-->
-    <link rel="stylesheet" type="text/css" href="/server-portal/addons/froalaeditor/froala.min.css" />
-    <link rel="stylesheet" type="text/css" href="/server-portal/addons/froalaeditor/plugins/fullscreen.min.css" />
-    <script type="text/javascript" src="/server-portal/addons/froalaeditor/froala.min.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/froalaeditor/plugins/fullscreen.min.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/froalaeditor/languages/cs.js"></script>
+    <link rel="stylesheet" type="text/css" href="/server-tools/Editor/froalaeditor/froala.min.css" />
+    <link rel="stylesheet" type="text/css" href="/server-tools/Editor/froalaeditor/plugins/fullscreen.min.css" />
+    <script type="text/javascript" src="/server-tools/Editor/froalaeditor/froala.min.js"></script>
+    <script type="text/javascript" src="/server-tools/Editor/froalaeditor/plugins/fullscreen.min.js"></script>
+    <script type="text/javascript" src="/server-tools/Editor/froalaeditor/languages/cs.js"></script>
 
 
     <!--JsSpreadsheet-->
-    <link rel="stylesheet" type="text/css" href="/server-portal/addons/jspreadsheet/css/jexcel.css" />
-    <link rel="stylesheet" type="text/css" href="/server-portal/addons/jspreadsheet/css/jspreadsheet.min.css" />
-    <link rel="stylesheet" type="text/css" href="/server-portal/addons/jspreadsheet/css/jsuites.css" />
-    <script type="text/javascript" src="/server-portal/addons/jspreadsheet/js/index.min.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/jspreadsheet/js/jexcel.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/jspreadsheet/js/jsuites.js"></script>
+    <link rel="stylesheet" type="text/css" href="/server-tools/DocsSolution/jspreadsheet/css/jexcel.css" />
+    <link rel="stylesheet" type="text/css" href="/server-tools/DocsSolution/jspreadsheet/css/jspreadsheet.min.css" />
+    <link rel="stylesheet" type="text/css" href="/server-tools/DocsSolution/jspreadsheet/css/jsuites.css" />
+    <script type="text/javascript" src="/server-tools/DocsSolution/jspreadsheet/js/index.min.js"></script>
+    <script type="text/javascript" src="/server-tools/DocsSolution/jspreadsheet/js/jexcel.js"></script>
+    <script type="text/javascript" src="/server-tools/DocsSolution/jspreadsheet/js/jsuites.js"></script>
 
-    <!--@* Metro *@-->
-    <script type="text/javascript" src="/server-portal/metro/js/metro.4.5.2.min.js"></script>
 
-    <!--@* STRIPE *@-->
-    <script type="text/javascript" crossorigin='anonymous' src="https://js.stripe.com/clover/stripe.js"></script>
+    <!--STRIPE-->
+    <script type="text/javascript" src="https://js.stripe.com/clover/stripe.js"></script>
 
-    <!--@* SIGNALR *@-->
+    <!--SIGNALR-->
     <script type="text/javascript" src="/server-portal/addons/signalr/signalr.js"></script>
 
-    <!--@* Manage *@-->
+    <!--Manage-->
     <script type="text/javascript" src="/server-portal/manage/js/global-storage.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-database.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-desktop.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-direct.js"></script>
     <script type="text/javascript" src="/server-portal/manage/js/global-behavior.js"></script>
     <script type="text/javascript" src="/server-portal/manage/js/global-object.js"></script>
     <script type="text/javascript" src="/server-portal/manage/js/global-functions.js"></script>
@@ -66,193 +75,161 @@
     <script type="text/javascript" src="/server-portal/manage/js/global-media.js"></script>
     <script type="text/javascript" src="/server-portal/manage/js/global-socket.js"></script>
     <script type="text/javascript" src="/server-portal/manage/js/global-signalr.js"></script>
+    <script type="text/javascript" src="/server-portal/manage/js/global-generator.js"></script>
 
 
-    <script type="text/javascript" src="/server-portal/manage/js/clipboard.min.js"></script>
-    <script type="text/javascript" src="/server-portal/manage/js/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/server-tools/Javascript/clipboard/clipboard.min.js"></script>
+    <script type="text/javascript" src="/server-tools/Javascript/cookie/js.cookie.min.js"></script>
 
 
-    <!--@* PRINT *@-->
-    <script type="text/javascript" src="/server-portal/manage/js/html2canvas.min.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/jquery/jquery.printElement.min.js"></script>
-    <script type="text/javascript" src="/server-portal/manage/js/jspdf.js"></script>
-    <script type="text/javascript" src="/server-portal/manage/js/json-to-table.js"></script>
+    <!--PRINT-->
+    <script type="text/javascript" src="/server-tools/Javascript/htmltocanvas/html2canvas.min.js"></script>
+    <script type="text/javascript" src="/server-tools/FrameWorkUI/jquery/js/jquery.printElement.min.js"></script>
+    <script type="text/javascript" src="/server-tools/DocsSolution/jspdf/jspdf.js"></script>
+    <script type="text/javascript" src="/server-tools/DocsSolution/json2/json-to-table.js"></script>
 
-    <!--@* TOOLS *@-->
-    <script type="text/javascript" src="/server-portal/manage/js/mermaid.min.cdn.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/highlightjs/highlight.min.js"></script>
+    <!--TOOLS-->
+    <script type="text/javascript" src="/server-tools/Media/mermaid/mermaid.min.cdn.js"></script>
+    <script type="text/javascript" src="/server-tools/Media/highlightjs/highlight.min.js"></script>
 
     <!--Export Table-->
-    <script type="text/javascript" src="/server-portal/addons/alldocsexport/libs/FileSaver/FileSaver.min.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/alldocsexport/libs/html2canvas/html2canvas.min.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/alldocsexport/libs/jsPDF/jspdf.min.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/alldocsexport/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/alldocsexport/tableExport.js"></script>
+    <script type="text/javascript" src="/server-tools/DocsSolution/alldocsexport/libs/FileSaver/FileSaver.min.js"></script>
+    <script type="text/javascript" src="/server-tools/DocsSolution/alldocsexport/libs/html2canvas/html2canvas.min.js"></script>
+    <script type="text/javascript" src="/server-tools/DocsSolution/alldocsexport/libs/jsPDF/jspdf.min.js"></script>
+    <script type="text/javascript" src="/server-tools/DocsSolution/alldocsexport/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+    <script type="text/javascript" src="/server-tools/DocsSolution/alldocsexport/tableExport.js"></script>
 
-    
-    <!--<script type="text/javascript" src="/server-portal/addons/InteliJsEditor/codemirror.js"></script>
-    <script type="text/javascript" src="/server-portal/addons/InteliJsEditor/jseditor.js"></script>-->
+
+    <!-- ImageView-->
+    <script type="text/javascript" src="/server-tools/FrameWorkUI/jquery/js/waterfall.js"></script>
 
     <!--MONACO-->
-    <script type="text/javascript" src="/server-portal/addons/monaco/js/monaco-editor/min/vs/loader.js"></script>
+    <script type="text/javascript" src="/server-tools/Editor/monaco/js/monaco-editor/min/vs/loader.js"></script>
 
-    <!--@* Google Translation *@-->
+     <!--Google Translation-->
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 
-<body class="m4-cloak h-vh-100">
-    <div data-role="navview" data-toggle="#paneToggle" data-expand="xl" data-compact="lg" data-active-state="true">
-        <div class="navview-pane">
-            <div class="bg-cyan d-flex flex-align-center">
-                <button class="pull-button m-0 bg-darkCyan-hover">
-                    <span class="mif-menu fg-white"></span>
-                </button>
-                <h2 class="c-pointer text-light m-0 fg-white pl-1" style="line-height: 52px" data-role="hint" data-cls-hint="bg-github fg-white drop-shadow" data-hint-position="right" data-hint-text="EasyIT-Server & EasySYSTEM-Builder UNLIMITED IT Cloud Solution">EIC&ESB Cloud</h2>
-            </div>
 
-            <!--<div class="suggest-box" style="min-height:30px !important;height: 30px !important;">
-            </div>-->
+<body class="m4-cloak window-area " style="min-height: calc(100vh - 40px) !important;height: calc(100vh - 40px) !important;">
+	<div data-role="navview" data-toggle="#paneToggle" data-expand="xl" data-compact="lg" data-active-state="true">
+		<div id="NavPanel" class="navview-pane">
+			<div class="bg-cyan d-flex flex-align-center">
+				<button class="pull-button m-0 bg-darkCyan-hover">
+					<span class="mif-menu fg-white"></span>
+				</button>
+				<h2 class="c-pointer text-light m-0 fg-white pl-1" style="line-height: 52px" data-role="hint" data-cls-hint="bg-github fg-white drop-shadow" data-hint-position="right" data-hint-text="EasyIT-Server & EasySYSTEM-Builder UNLIMITED IT Cloud Solution" >EIC&ESB Cloud</h2>
+			</div>
 
-            <div class="suggest-box">
-                <input type="text" data-role="input" data-clear-button="false" data-search-button="true">
-                <button class="holder">
-                    <span class="mif-search fg-white"></span>
-                </button>
-            </div>
+			<div class="suggest-box">
+				<input type="text" data-role="input" data-clear-button="false" data-search-button="true">
+				<button class="holder">
+					<span class="mif-search fg-white"></span>
+				</button>
+			</div>
+			
+			<ul class="navview-menu mt-4" id="PortalMenu">
+				
+				<li class="item-header">Portal Template</li>
+				<li>
+					<a href="/server-integrated/razor-pages/pandoratemplate" target="_blank">
+						<span class="icon"><span class="mif-brightness-auto fg-red"></span></span>
+						<span class="caption">Pandora Template</span>
+					</a>
+				</li> 
+			</ul>
 
-            <!--Left Menu-->
-            <ul class="navview-menu mt-4" id="PortalMenu">
-                <li class="item-header">Portal Template</li>
-                <li>
-                    <a href="/server-integrated/razor-pages/pandoratemplate" target="_blank">
-                        <span class="icon"><span class="mif-brightness-auto fg-red"></span></span>
-                        <span class="caption">Pandora Template</span>
-                    </a>
-                </li>
-            </ul>
+			<div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0;min-height:30px !important;height:30px !important">
+			</div>
+		</div>
+		<div class="navview-content h-100">
+			
+			<div data-role="appbar" class="pos-absolute bg-darkCyan fg-white">
 
-            <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0;min-height:30px !important;height:30px !important">
-            </div>
-        </div>
-        <div class="navview-content h-100">
+				<a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
 
-            <!--HEADER MENU-->
-            <div data-role="appbar" class="pos-absolute bg-darkCyan fg-white">
+				<div class="app-bar-container ml-left">
+					<a href="#" class="app-bar-item shadowed" title="Help Center" onclick="Gs.Objects.WindowIframeCreate('Virtual Assistant','/server-tools/IFrameObject/assistent/assistent.html');" >
+						<span class="mif-info mif-5x"></span>
+						<span class="ml-2 app-bar-name">Any Question?</span>
+						<span id="QuestionCount" class="badge bg-green fg-white">0</span>
+					</a>
+					<a href="#" class="app-bar-item shadowed" title="Setting" alt="Setting" onclick=Gs.Objects.ShowToolPanel(); >
+						<span class="mif-language mif-5x"></span>
+						<span class="ml-2 app-bar-name"> Settings</span>
+					</a>
 
-                <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
+					<a href="#" class="app-bar-item shadowed" title="Favorites" onclick="Gs.Objects.ShowFavoritesPanel(false);" >
+						<span class="mif-favorite mif-5x"></span>
+						<span class="ml-2 app-bar-name">Favorites</span>
+					</a> 
+					
+					<a href="#" class="app-bar-item shadowed" title="Modal Menu" onclick=Gs.Objects.ShowModalMenu("ModalMenu",false); >
+						<span class="mif-assignment mif-5x"></span>
+						<span class="ml-2 app-bar-name">Modal Menu</span>
+					</a> 
+					
+					<a href="#" class="app-bar-item shadowed" title="Online/Data/Developer Tools" onclick="Gs.Objects.ShowOnlineToolPanel(false);" >
+						<span class="mif-import-contacts mif-5x"></span>
+						<span class="ml-2 app-bar-name">Online Tools</span>
+					</a>
 
-                <div class="app-bar-container ml-left">
-                    <a href="#" class="app-bar-item shadowed" title="Help Center" onclick="Gs.Objects.WindowIframeCreate('Virtual Assistant','/server-portal/addons/assistent/assistent.html');">
-                        <span class="mif-info mif-5x"></span>
-                        <span class="ml-2 app-bar-name">Any Question?</span>
-                        <span id="QuestionCount" class="badge bg-green fg-white">0</span>
-                    </a>
-                    <a href="#" class="app-bar-item shadowed" title="Setting" alt="Setting" onclick=Gs.Objects.ShowToolPanel();>
-                        <span class="mif-language mif-5x"></span>
-                        <span class="ml-2 app-bar-name"> Settings</span>
-                    </a>
+					<a href="#" class="app-bar-item shadowed" title="Meeting Online" onclick=window.open("https://calendar.app.google/7GtS8wkYG9HoUVAB7");>
+						<span class="mif-contacts-dialer mif-5x"></span>
+						<span class="ml-2 app-bar-name">Meeting</span>
+					</a>
 
-                    <a href="#" class="app-bar-item shadowed" title="Favorites" onclick="Gs.Objects.ShowFavoritesPanel(false);">
-                        <span class="mif-favorite mif-5x"></span>
-                        <span class="ml-2 app-bar-name">Favorites</span>
-                    </a>
+					<a id="ShareMainButton" href="#" class="app-bar-item shadowed" title="Share Window Chat" onclick=Gs.Objects.OpenShareWindow();>
+						<span class="mif-share mif-5x"></span>
+						<span class="ml-2 app-bar-name">Share</span>
+						<span id="ShareChatMessageCount" class="badge bg-green fg-white">0</span>
+					</a>
 
-                    <a href="#" class="app-bar-item shadowed" title="Modal Menu" onclick=Gs.Objects.ShowModalMenu("ModalMenu",false);>
-                        <span class="mif-assignment mif-5x"></span>
-                        <span class="ml-2 app-bar-name">Modal Menu</span>
-                    </a>
+					<a href="#" class="app-bar-item shadowed" title="Global Chat" onclick=Gs.Objects.OpenChat(); >
+						<span class="mif-chat mif-5x"></span>
+						<span class="ml-2 app-bar-name">Chat</span>
+						 <span id="ChatMessageCount" class="badge bg-green fg-white">0</span>
+					</a>
 
-                    <a href="#" class="app-bar-item shadowed" title="Online/Data/Developer Tools" onclick="Gs.Objects.ShowOnlineToolPanel(false);">
-                        <span class="mif-import-contacts mif-5x"></span>
-                        <span class="ml-2 app-bar-name">Online Tools</span>
-                    </a>
-
-                    <a href="#" class="app-bar-item shadowed" title="Meeting Online" onclick=window.open("https://calendar.app.google/7GtS8wkYG9HoUVAB7");>
-                        <span class="mif-contacts-dialer mif-5x"></span>
-                        <span class="ml-2 app-bar-name">Meeting</span>
-                    </a>
-
-                    <a id="ShareMainButton" href="#" class="app-bar-item shadowed" title="Share Window Chat" onclick=Gs.Objects.OpenShareWindow();>
-                        <span class="mif-share mif-5x"></span>
-                        <span class="ml-2 app-bar-name">Share</span>
-                        <span id="ShareChatMessageCount" class="badge bg-green fg-white">0</span>
-                    </a>
-
-                    <a href="#" class="app-bar-item shadowed" title="Global Chat" onclick=Gs.Objects.OpenChat();>
-                        <span class="mif-chat mif-5x"></span>
-                        <span class="ml-2 app-bar-name">Chat</span>
-                        <span id="ChatMessageCount" class="badge bg-green fg-white">0</span>
-                    </a>
-
-                </div>
+				</div>
 
 
-                <div class="app-bar-container ml-auto">
-                    <a href="#" class="app-bar-item shadowed" title="Basket" onclick="$('#BasketPrice').html() == '0 Kč' ? Gs.Objects.DownloadBasket() : Gs.Objects.OpenBasket();">
-                        <span class="mif-shopping-basket mif-5x"></span>
-                        <span class="ml-2 app-bar-name">Basket</span>
-                        <span id="BasketPrice" class="badge bg-green fg-white">0 Kč</span>
-                    </a>
-                </div>
+				<div class="app-bar-container ml-auto" >
+					<a href="#" class="app-bar-item shadowed" title="Basket" onclick="$('#BasketPrice').html() == '0 Kč' ? Gs.Objects.DownloadBasket() : Gs.Objects.OpenBasket();">
+						<span class="mif-shopping-basket mif-5x"></span>
+						<span class="ml-2 app-bar-name">Basket</span>
+						<span id="BasketPrice" class="badge bg-green fg-white">0 Kč</span>
+					</a>
+				</div>
 
+				<div class="app-bar-container ml-auto">
+					<div class="app-bar-container">
+						<a href="#" class="app-bar-item shadowed">
+							<img src="/server-portal/images/logo.png" class="avatar">
+								<span id="LoginName" class="ml-2 app-bar-name"></span>
+						</a>
+						<div class="user-block shadow-1" data-role="collapse" data-collapsed="true">
+							<div class="bg-darkCyan fg-white p-2 text-middle">
+								<img src="/server-portal/images/logo.png" class="avatar">
+								<div class="h4 mb-0"></div>
+							</div>
+							<div class="bg-white d-flex flex-justify-between flex-equal-items p-2">
+								<button class="button flat-button">News</button>
+								<button class="button flat-button" onclick="Gs.Objects.InfoboxFrameCreate('ChangeLog','/server-public/Projects/Data/ChangeLog')">ChangeLog</button>
+								<button class="button flat-button" onclick="LoadNotesList();">Notes</button>
+							</div>
+							<div id="LoginReaction" class="bg-white d-flex flex-justify-between flex-equal-items p-2 bg-light">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="FrameWindow" class="content-inner h-100" style="overflow-y: auto">
+				<noscript>Please enable JavaScript in your browser!</noscript>
+			</div>
+		</div>
+	</div>
 
-
-                <div class="app-bar-container ml-auto">
-
-                    <!--<a href="#" class="app-bar-item">
-                <span class="mif-envelop"></span>
-                <span class="badge bg-green fg-white mt-2 mr-1">4</span>
-            </a>
-            <a href="#" class="app-bar-item">
-                <span class="mif-bell"></span>
-                <span class="badge bg-orange fg-white mt-2 mr-1">10</span>
-            </a>
-            <a href="#" class="app-bar-item">
-                <span class="mif-flag"></span>
-                <span class="badge bg-red fg-white mt-2 mr-1">9</span>
-            </a>-->
-
-
-                    <div class="app-bar-container">
-                        <a href="#" class="app-bar-item shadowed">
-                            <img src="/server-portal/images/logo.png" class="avatar">
-                            <span id="LoginName" class="ml-2 app-bar-name"></span>
-                        </a>
-                        <div class="user-block shadow-1" data-role="collapse" data-collapsed="true">
-                            <div class="bg-darkCyan fg-white p-2 text-middle">
-                                <img src="/server-portal/images/logo.png" class="avatar">
-                                <div class="h4 mb-0"></div>
-                            </div>
-                            <div class="bg-white d-flex flex-justify-between flex-equal-items p-2">
-                                <button class="button flat-button">News</button>
-                                <button class="button flat-button" onclick="Gs.Objects.InfoboxFrameCreate('ChangeLog','/server-public/Projects/Data/ChangeLog')">ChangeLog</button>
-                                <button class="button flat-button" onclick="LoadNotesList();">Notes</button>
-                            </div>
-                            <div id="LoginReaction" class="bg-white d-flex flex-justify-between flex-equal-items p-2 bg-light">
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!--<a href="#" class="app-bar-item drop-shadow">
-                <span class="mif-cogs" onclick=Gs.Objects.ShowMessagePanel(false)></span>
-            </a>-->
-
-
-                </div>
-            </div>
-
-            <!--END OF HEADER MENU-->
-
-            <!--MAIN WINDOW-->
-            <div id="FrameWindow" class="content-inner h-100" style="overflow-y: auto">
-                <noscript>Please enable JavaScript in your browser!</noscript>
-            </div>
-
-        </div>
-    </div>
-
-    <!--MODAL MENU-->
     <div id="FavoritesPanel" data-role="charms" style="width:400px !important;height:calc(100%) !important;" data-position="left" data-opacity=".7">
         <button class="button success mb-4" onclick="Gs.Objects.AddToFavorites()" style="left: 225px;"><span class="mif-plus mif-3x"></span>Add Favorites</button>
         <ul data-role="tabs" data-expand="true">
@@ -262,13 +239,19 @@
         </ul>
         <div class="border bd-default no-border-top p-2" style="height: calc(100% - 100px);">
             <div id="WebMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
-                Web Favorites Links
+                <div id="WebMenuIcons" class="tiles-grid">
+                    Web Favorites Links
+                </div>
             </div>
             <div id="GithubMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
-                Github Favorites Links
+                <div id="GithubMenuIcons" class="tiles-grid">
+                    Github Favorites Links
+                </div>
             </div>
             <div id="ServerMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
-                Server Favorites Links
+                <div id="ServerMenuIcons" class="tiles-grid">
+                    Server Favorites Links
+                </div>
             </div>
         </div>
     </div>
@@ -282,21 +265,27 @@
             <li><a href="#DeveloperMenu">Developer</a></li>
         </ul>
         <div class="border bd-default no-border-top p-2" style="height: calc(100% - 100px);">
-            <div id="OnlineMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
-                Online Web Links
+            <div id="OnlineMenu" style="overflow-y: auto;height: 100%;">
+                <div id="OnlineMenuIcons" class="tiles-grid">
+                    Online Web Links
+                </div>
             </div>
             <div id="DataMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
-                Data Web Links
+                <div id="DataMenuIcons" class="tiles-grid">
+                    Data Web Links
+                </div>
             </div>
             <div id="DeveloperMenu" class="tiles-grid" style="overflow-y: auto;height: 100%;">
-                Developer Web Links
+                <div id="DeveloperMenuIcons" class="tiles-grid">
+                    Developer Web Links
+                </div>
             </div>
         </div>
     </div>
 
 
-    <!--@* Menu Editor *@-->
-    <div id="monacoWeb" class="info-box" data-role="infobox" data-width='80%' data-height='800px'>
+    <!-- Menu Editor -->
+    <div id="monacoWeb" class="info-box" data-role="infobox" data-width='80%' data-height='800px' >
         <span class="button square closer"></span>
         <div class="info-box-content" style='overflow: auto;height: 750px;'>
 
@@ -305,7 +294,7 @@
                 <li><a href="#_menuJs">Javascript</a></li>
                 <li><a href="#_menuCss">CSS</a></li>
                 <li><a href="#_menuPreview">Preview</a></li>
-                <li><a href="#_menuMdHelp">Help</a></li>
+                <li><a href="#_menuMdContent">Help</a></li>
             </ul>
 
             <div class="border bd-default no-border-top p-2">
@@ -318,55 +307,70 @@
                 <div id="_menuCss">
                     <div id="monacoCSS" style='top: -50px;'></div>
                 </div>
-                <div id="_menuPreview">
+                 <div id="_menuPreview">
                     <div id="menuPreview" style="overflow:auto;width:100%; height:700px;"></div>
-                    <button class="button success" style="position: absolute;top: -50px;left: 50%;z-index: 2000;" onclick=Gs.Objects.RefreshPreview();>Refresh</button>
+                    <button class="button success" style="position: absolute;top: -50px;left: 50%;z-index: 2000;" onclick=Gs.Objects.RefreshPreview(); >Refresh</button>
                 </div>
-                <div id="_menuMdHelp">
+                <div id="_menuMdContent">
                     <div style="overflow:auto;width:100%; height:700px;">
-                        <iframe id="HelpEditor" src="/server-portal/addons/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>
+                        <iframe id="HelpEditor" src="/server-tools/Editor/markdown/index.html" width="100%" height="700" frameborder="0" scrolling="yes" style="width:100%; height:100%;"></iframe>
                     </div>
                 </div>
             </div>
 
             <select class="language" style='position: absolute;left: 90%;z-index: 2000;top: 75px;right: 0px;'></select>
 
-            <select class="theme" style='position: absolute;left: 90%;z-index: 2000;top: 105px;right: 50px;'>
-                <option>vs-dark</option>
+           <select class="theme" style='position: absolute;left: 90%;z-index: 2000;top: 105px;right: 50px;'>
+               <option>vs-dark</option>
                 <option>vs</option>
-                <option>hc-black</option>
+			    <option>hc-black</option>
             </select>
         </div>
     </div>
 
 
-    <!--@* Menu Modal Menu *@-->
-    <ul id="ModalMenu" data-role="bottomsheet" class="hidden">
+    <div>
+        <div class="task-bar">
+            <div class="task-bar-section">
+            </div>
+
+
+            <!-- TaskBarIcons -->
+            <div class="task-bar-section tasks"></div>
+            <div class="task-bar-section system-tray ml-auto">
+                <span style="line-height: 40px;" class="pr-4"><span data-role="clock" class="w-auto fg-white reduce-1" data-show-date="false"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Modal Menu -->
+    <ul id="ModalMenu" data-role="bottomsheet" class="hidden pos-absolute" style="left:90%;">
         <li class="shadowed"><span class="icon mif-question" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.GetMyQuestionList();"></span>Questions</li>
-        <li class="shadowed"><span class="icon mif-library" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Code Library & Templates','/server-portal/addons/fancytree/codelibrary.html');"></span>Templates</li>
+        <li class="shadowed"><span class="icon mif-library" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Functions.RegisterFrameWindow('Code Library & Templates','/server-portal/addons/fancytree/codelibrary.html');"></span>Templates</li>
+        <li class="shadowed"><span class="icon mif-import-contacts" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Functions.RegisterFrameWindow('Function List','/server-portal/addons/fancytree/codepreview.html');"></span>Functions</li>
         <li class="shadowed"><span class="icon mif-download" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.InfoboxFrameCreate('Downloads','/server-downloads');"></span>Downloads</li>
         <li class="shadowed"><span class="icon mif-printer" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.ShowPrintExport();"></span>Print</li>
-        <li class="shadowed"><span class="icon mif-import-contacts" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Function List','/server-portal/addons/fancytree/codepreview.html');"></span>Functions</li>
         <li class="shadowed"><span class="icon mif-import-export" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.ShowExportDialog('Export Table');"></span>Export Tbl</li>
-        
-        <!--<li class="shadowed"><span class="icon mif-github" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);"></span>Github</li>--> 
-        <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);LoadSearchWindow();"></span>Search</li>
+        <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);LoadSearchWindow();"></span>WebSearch</li>
+        <li class="shadowed"><span class="icon mif-search" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);"></span>DocSearch</li>
         <li class="divider"></li>
         <li class="shadowed"><span class="icon mif-file-code" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.AddSuggest();"></span>Suggest+</li>
         <li class="shadowed"><span class="icon mif-help" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.EditHelpMenu();"></span>Edit Help</li>
         <li class="shadowed"><span class="icon mif-blogger" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.OpenBlogMenu();"></span>Blog</li>
-        <li class="shadowed"><span class="icon mif-comment" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Metro.storage.delItem('JsonGeneratorService');Gs.Objects.WindowIframeCreate('JSON Editor','/server-portal/addons/jsonData/')"></span>JsonEdit</li>
-        <li class="shadowed"><span class="icon mif-codepen" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Code Compiler','/server-portal/addons/compiler/')"></span>Compiler</li>
-        <li class="shadowed"><span class="icon mif-chart-line" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.WindowIframeCreate('Graph Editor','/server-portal/addons/mermaid-studio/')"></span>GraphEdit</li>
-    </ul><!--END OF MODAL MENU-->
+        <li class="shadowed"><span class="icon mif-cast-connected" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Objects.ShowBrowserConsole();"></span>Console</li>
+        <li class="shadowed"><span class="icon mif-codepen" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Functions.RegisterFrameWindow('Javascript Console Runner','/server-tools/IFrameObject/webconsole/');"></span> Run JS</li>
+        <li class="shadowed"><span class="icon mif-equalizer" onclick="Gs.Objects.ShowModalMenu('ModalMenu',true);Gs.Functions.RegisterFrameWindow('Server Process Console','/server-tools/IFrameObject/console/process-console.html');"></span>Srv.Process</li>
+    </ul>
+
+
+    
 
 </body>
-<script type="text/javascript" src="/server-portal/addons/chartjs/Chart.bundle.min.js"></script>
-<script type="text/javascript" src="/server-portal/addons/qrcode/qrcode.min.js"></script>
-<script type="text/javascript" src="/server-portal/addons/jsbarcode/JsBarcode.all.min.js"></script>
-<script type="text/javascript" src="/server-portal/addons/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="/server-portal/manage/js/require.js"></script>
-<script type="text/javascript" src="/server-portal/addons/screensaver/screensaver.js"></script>
+<script type="text/javascript" src="/server-tools/ChartSolution/chartjs/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="/server-tools/DocsSolution/qrcode/qrcode.min.js"></script>
+<script type="text/javascript" src="/server-tools/DocsSolution/jsbarcode/JsBarcode.all.min.js"></script>
+<script type="text/javascript" src="/server-tools/Javascript/require/require.js"></script>
+<script type="text/javascript" src="/server-tools/Media/screensaver/screensaver.js"></script>
 
 <!-- Google Calendar Appointment Scheduling begin -->
 <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
@@ -383,15 +387,16 @@
 <!-- end Google Calendar Appointment Scheduling -->
 
 <script>
-
+    
     /*
     $(document).ready(function () {
         $('.sidebar-menu').tree()
     })
     */
 
-   Gs.Behaviors.PortalStartup();
-
-
+  Gs.Behaviors.AutoService();
+  Gs.Behaviors.PortalStartup();
+  $(document).ready(function () { Metro.notify.killAll(); });
+   
 </script>
 </html>

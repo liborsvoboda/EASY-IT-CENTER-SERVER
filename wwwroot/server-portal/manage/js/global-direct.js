@@ -454,7 +454,7 @@ function GenerateFavorites() {
         }
 
     });
-    $("#WebMenu").html(menuWeb); $("#GithubMenu").html(menuGithub); $("#ServerMenu").html(menuServer);
+    $("#WebMenuIcons").html(menuWeb); $("#GithubMenuIcons").html(menuGithub); $("#ServerMenuIcons").html(menuServer);
 }
 
 /**
@@ -548,7 +548,7 @@ function GenerateOnlineToolList() {
         }
 
     });
-    $("#OnlineMenu").html(menuOnline); $("#DataMenu").html(menuData); $("#DeveloperMenu").html(menuDeveloper);
+    $("#OnlineMenuIcons").html(menuOnline); $("#DataMenuIcons").html(menuData); $("#DeveloperMenuIcons").html(menuDeveloper);
 }
 
 
