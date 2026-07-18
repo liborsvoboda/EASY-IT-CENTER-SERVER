@@ -206,7 +206,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             </DIV></DIV></DIV>
             `;
 
-        } else if (schema.data.toLowerCase() == "accessrole" || schema.data.toLowerCase() == "accessuser") {
+        } else if (schema.data.toLowerCase().indexOf("accessrole") > -1 || schema.data.toLowerCase().indexOf("accessuser") > -1) {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
@@ -459,12 +459,12 @@ Gs.Generator.GeneratorJavascriptStartUp = function () {
         `;
 
     tableSchemaList.forEach(schema => {
-        if (schema.data.toLowerCase() == "acessrole") {
+        if (schema.data.toLowerCase().indexOf("accessrole") > -1) {
             javascript += `jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure)); jsonData[1].tableName = "SolutionUserRoleList";
                     Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "SolutionUserRoleList" } );
                 `;
 
-        } else if (schema.data.toLowerCase() == "acessuser") {
+        } else if (schema.data.toLowerCase().indexOf("accessuser") > -1) {
             javascript += `jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure));jsonData[1].tableName = "SolutionUserList";
                 Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "SolutionUserList" } );
             `;
@@ -545,18 +545,18 @@ Gs.Generator.GeneratorJavascriptClearForm = function () {
         if (schema.data.toLowerCase() == "autoversion") {
 
 
-        } else if (schema.data.toLowerCase() == "acessrole") {
+        } else if (schema.data.toLowerCase().indexOf("accessrole") > -1) {
             javascript += `
-            select = Metro.getPlugin("#menuacessRole", "select");options = [];select.data("");
+            select = Metro.getPlugin("#menuAccessRole", "select");options = [];select.data("");
             let userRoleList = Metro.storage.getItem('SolutionUserRoleList', null);
             userRoleList.forEach(role => {
                 options.push({ val: role.SystemName, title: role.SystemName, selected: false });
             });select.addOptions(options);
             `;
 
-        } else if (schema.data.toLowerCase() == "acessuser") {
+        } else if (schema.data.toLowerCase().indexOf("accessuser") > -1) {
             javascript += `
-            select = Metro.getPlugin("#menuacessUser", "select");options = [];select.data("");
+            select = Metro.getPlugin("#menuAccessUser", "select");options = [];select.data("");
             let userList = Metro.storage.getItem('SolutionUserList', null);
             userList.forEach(user => {
                 options.push({ val: user.Id, title: user.UserName, selected: false });
@@ -677,18 +677,18 @@ Gs.Generator.GeneratorJavascriptSetRecId = function () {
         if (schema.data.toLowerCase() == "autoversion") {
 
 
-        } else if (schema.data.toLowerCase() == "acessrole") {
+        } else if (schema.data.toLowerCase().indexOf("accessrole") > -1) {
             javascript += `
-            select = Metro.getPlugin("#menuacessRole", "select");options = [];select.data("");
+            select = Metro.getPlugin("#menuAccessRole", "select");options = [];select.data("");
             let userRoleList = Metro.storage.getItem('SolutionUserRoleList', null);
             userRoleList.forEach(role => {
                 options.push({ val: role.SystemName, title: role.SystemName, selected: selectedRec.AccessRole.indexOf(role.SystemName) > -1 ? true : false });
             });select.addOptions(options);
             `;
 
-        } else if (schema.data.toLowerCase() == "acessuser") {
+        } else if (schema.data.toLowerCase().indexOf("accessuser") > -1) {
             javascript += `
-            select = Metro.getPlugin("#menuacessUser", "select");options = [];select.data("");
+            select = Metro.getPlugin("#menuAccessUser", "select");options = [];select.data("");
             let userList = Metro.storage.getItem('SolutionUserList', null);
             userList.forEach(user => {
                 options.push({ val: user.Id, title: user.UserName, selected: selectedRec.AccessUser.indexOf(user.Id) > -1 ? true : false });
