@@ -40,8 +40,6 @@ namespace EasyITCenter.DBModel
             SolutionShareSourceLists = new HashSet<SolutionShareSourceList>();
             SolutionTaskListInheritedStatusTypeNavigations = new HashSet<SolutionTaskList>();
             SolutionTaskListInheritedTargetTypeNavigations = new HashSet<SolutionTaskList>();
-            SystemApplicationListInheritedAppCategoryTypeNavigations = new HashSet<SystemApplicationList>();
-            SystemApplicationListInheritedAppTypeNavigations = new HashSet<SystemApplicationList>();
             SystemCustomPageListInheritedFormTypeNavigations = new HashSet<SystemCustomPageList>();
             SystemCustomPageListInheritedSystemApiCallTypeNavigations = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
@@ -101,8 +99,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionShareSourceList> SolutionShareSourceLists { get; set; }
         public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedStatusTypeNavigations { get; set; }
         public virtual ICollection<SolutionTaskList> SolutionTaskListInheritedTargetTypeNavigations { get; set; }
-        public virtual ICollection<SystemApplicationList> SystemApplicationListInheritedAppCategoryTypeNavigations { get; set; }
-        public virtual ICollection<SystemApplicationList> SystemApplicationListInheritedAppTypeNavigations { get; set; }
         public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedFormTypeNavigations { get; set; }
         public virtual ICollection<SystemCustomPageList> SystemCustomPageListInheritedSystemApiCallTypeNavigations { get; set; }
         public virtual ICollection<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; }

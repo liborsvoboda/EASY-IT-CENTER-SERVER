@@ -14,21 +14,21 @@ img {
   height: 100px;
   width: auto;
 }
-.container {
+.cardblock {
   width: 1000px;
   position: relative;
   display: flex;
   justify-content: space-between;
 }
-.container .card {
+.cardblock .card {
   position: relative;
 }
-.container .face {
+.cardblock .face {
   width: 300px;
   height: 200px;
   transition: 0.3s;
 }
-.container .face1 {
+.cardblock .face1 {
   position: relative;
   background: #333333;
   display: flex;
@@ -37,11 +37,11 @@ img {
   z-index: 1;
   transform: translateY(100px);
 }
-.container .card:hover .face1 {
+.cardblock .card:hover .face1 {
   transform: translateY(0);
   background: #ff0057;
 }
-.container .face2 {
+.cardblock .face2 {
   position: relative;
   background: #ffffff;
   display: flex;
@@ -52,14 +52,14 @@ img {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
   transform: translateY(-100px);
 }
-.container .card:hover .face2 {
+.cardblock .card:hover .face2 {
   transform: translateY(0);
 }
-.container p {
+.cardblock p {
   margin: 0;
   padding: 0;
 }
-.container a {
+.cardblock a {
   margin: 15px 0 0;
   display: inline-block;
   text-decoration: none;
@@ -68,18 +68,18 @@ img {
   padding: 5px;
   border: 1px solid #333333;
 }
-.container a:hover {
+.cardblock a:hover {
   background: #333333;
   color: #ffffff;
 }
-.container .face1 .content {
+.cardblock .face1 .content {
   opacity: 0.2;
   transition: 0.5s;
 }
-.container .card:hover .face1 .content {
+.cardblock .card:hover .face1 .content {
   opacity: 1;
 }
-.container .face1 h3 {
+.cardblock .face1 h3 {
   margin: 10px 0 0;
   padding: 0;
   color: #ffffff;

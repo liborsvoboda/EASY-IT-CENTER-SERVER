@@ -80,7 +80,6 @@ namespace EasyITCenter.DBModel
             SolutionShareSourceLists = new HashSet<SolutionShareSourceList>();
             SolutionTaskLists = new HashSet<SolutionTaskList>();
             SolutionUserRoleLists = new HashSet<SolutionUserRoleList>();
-            SystemApplicationLists = new HashSet<SystemApplicationList>();
             SystemCustomPageLists = new HashSet<SystemCustomPageList>();
             SystemDocumentAdviceLists = new HashSet<SystemDocumentAdviceList>();
             SystemGroupMenuLists = new HashSet<SystemGroupMenuList>();
@@ -281,8 +280,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionTaskList> SolutionTaskLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionUserRoleList> SolutionUserRoleLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<SystemApplicationList> SystemApplicationLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SystemCustomPageList> SystemCustomPageLists { get; set; }
         [InverseProperty("User")]

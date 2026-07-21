@@ -413,7 +413,7 @@ Gs.Functions.CopyWindowElement = async function () {
             aux.select();
             document.execCommand("copy",false);
             document.body.removeChild(aux);
-
+            
             let t = document.querySelector("#IFrameWindow").contentWindow.document.body.innerHTML;
             await navigator.clipboard.writeText(t);
         } else if (elementId == "FrameWindow") {

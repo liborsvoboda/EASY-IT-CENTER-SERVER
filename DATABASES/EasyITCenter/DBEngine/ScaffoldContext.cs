@@ -91,7 +91,6 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionTaskList> SolutionTaskLists { get; set; } = null!;
         public virtual DbSet<SolutionUserList> SolutionUserLists { get; set; } = null!;
         public virtual DbSet<SolutionUserRoleList> SolutionUserRoleLists { get; set; } = null!;
-        public virtual DbSet<SystemApplicationList> SystemApplicationLists { get; set; } = null!;
         public virtual DbSet<SystemCustomPageList> SystemCustomPageLists { get; set; } = null!;
         public virtual DbSet<SystemDocumentAdviceList> SystemDocumentAdviceLists { get; set; } = null!;
         public virtual DbSet<SystemGroupMenuList> SystemGroupMenuLists { get; set; } = null!;
@@ -1467,31 +1466,6 @@ namespace EasyITCenter.DBModel
                     .WithMany(p => p.SolutionUserRoleLists)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_SolutionUserRoleList_SolutionUserList");
-            });
-
-            modelBuilder.Entity<SystemApplicationList>(entity =>
-            {
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.InheritedAppCategoryTypeNavigation)
-                    .WithMany(p => p.SystemApplicationListInheritedAppCategoryTypeNavigations)
-                    .HasPrincipalKey(p => p.SystemName)
-                    .HasForeignKey(d => d.InheritedAppCategoryType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SystemApplicationList_SolutionMixedEnumList");
-
-                entity.HasOne(d => d.InheritedAppTypeNavigation)
-                    .WithMany(p => p.SystemApplicationListInheritedAppTypeNavigations)
-                    .HasPrincipalKey(p => p.SystemName)
-                    .HasForeignKey(d => d.InheritedAppType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SystemApplicationList_SolutionMixedEnumList1");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SystemApplicationLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SystemApplicationList_SolutionUserList");
             });
 
             modelBuilder.Entity<SystemCustomPageList>(entity =>

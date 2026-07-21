@@ -1,5 +1,5 @@
 ﻿
-localStorage.setItem('DetectedLanguage', (navigator.language || navigator.userLanguage).substring(0, 2));
+localStorage.setItem('DetectedLanguage', (navigator.languages != undefined && navigator.languages.length > 1) ? navigator.languages[1].substring(0, 2): (navigator.language || navigator.userLanguage).substring(0, 2));
 
 //Function for  Mermaid Data to Graphics Conversion
 async function Mermaid() { try { await mermaid.run({ nodes: document.querySelectorAll('.language-mermaid'), }); } catch (err) { } }

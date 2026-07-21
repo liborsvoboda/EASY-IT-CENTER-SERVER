@@ -441,6 +441,12 @@ Hosting, Dynamic API,WEB,Portals,Services,Mail,FTP,..</Description>
   
  
  
+  <ItemGroup>
+    <Folder Include="DATABASES\ServerControllers\ESBApplications\" />
+  </ItemGroup>
+  
+ 
+ 
  
    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="robocopy &quot;$(ProjectDir)wwwroot&quot; &quot;$(ProjectDir)bin\$(ConfigurationName)\net6.0\wwwroot&quot; /s /e &#xD;&#xA; exit /b 0" />
