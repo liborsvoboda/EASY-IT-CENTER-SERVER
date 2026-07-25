@@ -2,7 +2,6 @@
 using Docfx.MarkdigEngine.Extensions;
 using EasyITCenter.ServerCoreServers;
 using EasyITCenter.ServerCoreStructure;
-using EASYTools.DBEntitySchema.Core;
 using Markdig;
 using Markdig.Extensions.AutoIdentifiers;
 using MarkdownDocumenting.Extensions;
@@ -16,6 +15,7 @@ using Quartz.Impl;
 using Quartz.Spi;
 using Westwind.AspNetCore.LiveReload;
 using Westwind.AspNetCore.Markdown;
+using DBEntitySchema.Core;
 
 
 namespace EasyITCenter.ServerCoreConfiguration {
