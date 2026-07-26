@@ -205,6 +205,9 @@
             new Function(dataJs)();
             Metro.storage.setItem("SelectedEditor", "Monaco");
             InitiateTree();
+            //STARTUP
+            /* Generate WebBrowserConsole */
+            Gs.Objects.OpenBrowserConsole(); Metro.window.hide($("#WebBrowserConsole"));
         }
 
 
@@ -1385,7 +1388,8 @@
                                 $("#FrameWindow").html('<img src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="row" style="height: 100%;padding-left: 10px;">');
                                 break;
                             case "JSONEditor":
-                                if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
+                                if ($('#DataTree').fancytree("getActiveNode") != null) { $.ajax({ url: $('#DataTree').fancytree("getActiveNode").key }).done(function (data) { document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue(data); }); }
+                                //if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
                                 break;
                             case "MDEditor":
                                 if ($('#DataTree').fancytree("getActiveNode") != null) {

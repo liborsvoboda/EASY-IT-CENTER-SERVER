@@ -45,7 +45,7 @@
         [Consumes("application/json")]
         public async Task<string> InsertSolutionUserList([FromBody] SolutionUserList record) {
             try {
-                if (HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     record.Role = null;  //EntityState.Detached IDENTITY_INSERT is set to OFF
                     record.Password = BCrypt.Net.BCrypt.HashPassword(record.Password);
                     var data = new EasyITCenterContext().SolutionUserLists.Add(record);
@@ -63,7 +63,7 @@
         [Consumes("application/json")]
         public async Task<string> UpdateSolutionUserList([FromBody] SolutionUserList record) {
             try {
-                if (HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     record.Password = BCrypt.Net.BCrypt.HashPassword(record.Password);
                     var data = new EasyITCenterContext().SolutionUserLists.Update(record);
                     int result = await data.Context.SaveChangesAsync();
@@ -78,7 +78,7 @@
         [Consumes("application/json")]
         public async Task<string> DeleteSolutionUserList(string id) {
             try {
-                if (HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     SolutionUserList record = new() { Id = int.Parse(id) };

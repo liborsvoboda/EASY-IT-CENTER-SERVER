@@ -102,7 +102,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
             services.AddHostedService<AutoSchedulerService>();
             ServerCoreAutoScheduler.AutoSchedulerPlanner().GetAwaiter().GetResult();
 
-            if (!bool.Parse(DbOperations.GetServerParameterLists("ModuleAutoSchedulerEnabled").Value)) { scheduler.PauseAll(default); }
+            if (!bool.Parse(DbOperations.GetServerParameterLists("ModuleAutoSchedulerEnabled").Value)) { scheduler.PauseAll(default).GetAwaiter().GetResult(); }
         }
 
 

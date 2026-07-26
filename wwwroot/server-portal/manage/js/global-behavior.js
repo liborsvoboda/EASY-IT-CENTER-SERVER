@@ -35,9 +35,6 @@ Gs.Behaviors.PortalStartup = async function () { //LOGGED
     /* Generate WebBrowserConsole */
     Gs.Objects.OpenBrowserConsole(); Metro.window.hide($("#WebBrowserConsole"));
 
-
-
-
     //STARTUP
 
     if (Metro.storage.getItem("ApiToken", null) != null) {

@@ -20,7 +20,7 @@
         [HttpGet("/WebApi/WebPages/GetTemplateWebMenuList")]
         public async Task<string> GetTemplateWebMenuList() {
             try {
-                //if (CommunicationController.IsAdmin()) {
+                //if (CommunicationController.IsAdmin() || CommunicationController.IsSuperAdmin()) {
                 List<WebMenuList> data;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                     IsolationLevel = IsolationLevel.ReadUncommitted

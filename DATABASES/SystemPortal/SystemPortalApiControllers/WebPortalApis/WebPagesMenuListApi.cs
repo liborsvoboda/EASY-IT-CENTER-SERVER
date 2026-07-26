@@ -11,7 +11,7 @@ namespace EasyITCenter.Controllers {
         [Authorize]
         [HttpGet("/WebApi/WebPages/GetAdminWebMenuList")]
         public async Task<string> GetAdminWebMenuList() {
-            if (HttpContextExtension.IsAdmin()) {
+            if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                 bool IpIsBlocked = false;
                 // check If blocked and write Visit On menu load
                 try {
@@ -118,7 +118,7 @@ namespace EasyITCenter.Controllers {
                 })) {
                     data = new EasyITCenterContext().WebMenuLists
                         .Include(a => a.Group)
-                        .Where(a => ((!a.AdminMenu && !a.UserMenu) || ((a.UserMenu || !a.AdminMenu) && authRole == "webuser") || ((a.UserMenu || a.AdminMenu) && authRole == "admin")) && a.Active && a.Group.Active)
+                        .Where(a => ((!a.AdminMenu && !a.UserMenu) || ((a.UserMenu || !a.AdminMenu) && authRole == "webuser") || ((a.UserMenu || a.AdminMenu) && (authRole == "admin" || authRole == "webadmin" || authRole == "superadmin") )) && a.Active && a.Group.Active)
                         .OrderBy(a => a.Sequence)
                         .ToList().OrderBy(a => a.Group.Sequence).ToList();
                 }
@@ -198,7 +198,7 @@ namespace EasyITCenter.Controllers {
                     data = new EasyITCenterContext().WebMenuLists.Where(a => a.Id == id).FirstOrDefault();
 
                     if (data == null) data = new EasyITCenterContext().WebMenuLists
-                            .Where(a => ((!a.AdminMenu && !a.UserMenu) || ((a.UserMenu || !a.AdminMenu) && authRole == "webuser") || ((a.UserMenu || a.AdminMenu) && authRole == "admin")) && a.Active && a.Group.Active && a.Default)
+                            .Where(a => ((!a.AdminMenu && !a.UserMenu) || ((a.UserMenu || !a.AdminMenu) && authRole == "webuser") || ((a.UserMenu || a.AdminMenu) && (authRole == "admin" || authRole == "webadmin" || authRole == "superadmin"))) && a.Active && a.Group.Active && a.Default)
                             .FirstOrDefault();
                 }
 

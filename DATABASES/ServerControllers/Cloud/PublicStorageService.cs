@@ -92,7 +92,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> CreatePublicFolder([FromBody] UserStorageContent userStorageContent) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userRootPath = SrvRuntime.SrvPublicPath;
                     userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                     FileOperations.CreateDirectory(Path.Combine(userRootPath, userStorageContent.Path));
@@ -118,7 +118,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> MovePublicFolder([FromBody] UserStorageRenameDir userStorageRenameDir) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userRootPath = SrvRuntime.SrvPublicPath;
                     userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
                     userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
@@ -144,7 +144,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> CopyPublicFolder([FromBody] UserStorageRenameDir userStorageRenameDir) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userRootPath = SrvRuntime.SrvPublicPath;
                     userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
                     userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
@@ -197,7 +197,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> ClearPublicFolder([FromBody] UserStorageContent userStorageContent) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                     userRootPath = Path.Combine(SrvRuntime.SrvPublicPath, userStorageContent.Path);
                     FileOperations.ClearFolder(userRootPath);
@@ -221,7 +221,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> DeletePublicFolder([FromBody] UserStorageContent userStorageContent) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                     userRootPath = Path.Combine(SrvRuntime.SrvPublicPath, userStorageContent.Path);
                     FileOperations.DeleteDirectory(userRootPath);
@@ -245,7 +245,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> CreatePublicFile([FromBody] UserStorageContent userStorageContent) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                     userRootPath = Path.Combine(SrvRuntime.SrvUserPath, userStorageContent.Path, userStorageContent.Filename);
                     FileOperations.CreateFile(userRootPath);
@@ -270,7 +270,7 @@ namespace EasyITCenter.Controllers {
             string userRootPath = null; string result = null;
 
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userRootPath = SrvRuntime.SrvPublicPath;
                     userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
 
@@ -295,7 +295,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> MovePublicFile([FromBody] UserStorageRenameDir userStorageRenameDir) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userRootPath = SrvRuntime.SrvPublicPath;
 
                     userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
@@ -322,7 +322,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> CopyPublicFile([FromBody] UserStorageRenameDir userStorageRenameDir) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userRootPath = SrvRuntime.SrvPublicPath;
                     userStorageRenameDir.SourcePath = userStorageRenameDir.SourcePath.StartsWith("/") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath.StartsWith("\\") ? userStorageRenameDir.SourcePath.Substring(1) : userStorageRenameDir.SourcePath;
                     userStorageRenameDir.TargetPath = userStorageRenameDir.TargetPath.StartsWith("/") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath.StartsWith("\\") ? userStorageRenameDir.TargetPath.Substring(1) : userStorageRenameDir.TargetPath;
@@ -348,7 +348,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> DeletePublicFile([FromBody] UserStorageContent userStorageContent) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
                     
                     userRootPath = Path.Combine(SrvRuntime.SrvPublicPath, userStorageContent.Path);
@@ -441,7 +441,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> UploadPublicFiles([FromBody] UserStorageContent userStorageContent) {
             string userRootPath = null;
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     userRootPath = SrvRuntime.SrvPublicPath;
                     userStorageContent.Path = userStorageContent.Path.StartsWith("/") ? userStorageContent.Path.Substring(1) : userStorageContent.Path.StartsWith("\\") ? userStorageContent.Path.Substring(1) : userStorageContent.Path;
 
@@ -466,7 +466,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> DownloadHtmlFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
             
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     var browserFetcher = new BrowserFetcher();
                     await browserFetcher.DownloadAsync();
                     await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
@@ -498,7 +498,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> DownloadMdFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
 
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     string MdAsHtml = await Markdown.ParseFromUrlAsync(downloadFileRequest.Url, true, false, false);
 
                     FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvPublicPath, "Downloads", downloadFileRequest.Filename), MdAsHtml, true);
@@ -522,7 +522,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> DownloadPdfFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
 
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     var browserFetcher = new BrowserFetcher();
                     await browserFetcher.DownloadAsync();
                     await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
@@ -551,7 +551,7 @@ namespace EasyITCenter.Controllers {
         public async Task<string> DownloadImageFromUrl([FromBody] DownloadFileRequest downloadFileRequest) {
 
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     var browserFetcher = new BrowserFetcher();
                     await browserFetcher.DownloadAsync();
                     await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
@@ -579,7 +579,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> SaveMarkdownFile([FromBody] Files file) {
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvPublicPath, "Help", file.Filename + ".md"), file.Content, true);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
@@ -595,7 +595,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> SaveHtmlFile([FromBody] Files file) {
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     FileOperations.WriteToFile(Path.Combine(SrvRuntime.SrvPublicPath, "WebPages", file.Filename + ".html"), file.Content, true);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
@@ -616,7 +616,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> UnpackArchive([FromBody] UnpackArchiveRequest unpackArchiveRequest) {
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     FileOperations.CreateDirectory(Path.Combine(SrvRuntime.SrvPublicPath, unpackArchiveRequest.TargetFolder));
                     System.IO.Compression.ZipFile.ExtractToDirectory(Path.Combine(SrvRuntime.SrvPublicPath, unpackArchiveRequest.FilePath), Path.Combine(SrvRuntime.SrvPublicPath, unpackArchiveRequest.TargetFolder));
 
@@ -638,7 +638,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> SaveMediaFile([FromBody] SaveMediaFileRequest saveMediaFileRequest) {
             try {
-                if ((HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) && !string.IsNullOrWhiteSpace(saveMediaFileRequest.Content) ) {
+                if ((HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) && !string.IsNullOrWhiteSpace(saveMediaFileRequest.Content) ) {
                     FileOperations.ByteArrayToFile(Path.Combine(SrvRuntime.SrvPublicPath, saveMediaFileRequest.Path, saveMediaFileRequest.Filename + ( saveMediaFileRequest.Path == "Images" ? ".png" : saveMediaFileRequest.Path == "Audio" ? ".mp3" : ".mp4" )), Convert.FromBase64String(saveMediaFileRequest.Content.Split(",").Last()), true);
 
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
@@ -660,7 +660,7 @@ namespace EasyITCenter.Controllers {
         public async Task<IActionResult> ReplaceInFiles([FromBody] ReplaceInFilesRequest replaceInFilesRequest) {
             try {
 
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     replaceInFilesRequest.WebRootPath = replaceInFilesRequest.WebRootPath.StartsWith("/") ? replaceInFilesRequest.WebRootPath.Substring(1) : replaceInFilesRequest.WebRootPath.StartsWith("\\") ? replaceInFilesRequest.WebRootPath.Substring(1) : replaceInFilesRequest.WebRootPath;
                     List<string>? sourceFiles = FileOperations.GetPathFiles(Path.Combine(SrvRuntime.SrvPublicPath, replaceInFilesRequest.WebRootPath), replaceInFilesRequest.FileMask, replaceInFilesRequest.RootDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
                     sourceFiles.ForEach(file => {

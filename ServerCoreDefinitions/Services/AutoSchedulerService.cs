@@ -147,7 +147,7 @@ namespace EasyITCenter.Services {
                         }
                         else if (jobType == "sqlemail") {
                             try {
-                                if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin") {
+                                if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin" || jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "superadmin") {
                                     IDictionary<string, string> sqlmaildata = JsonSerializer.Deserialize<IDictionary<string, string>>(data);
                                     CoreOperations.SendEmail(new SendMailRequest() {
                                         Sender = DbOperations.GetServerParameterLists("ConfigManagerEmailAddress").Value,
@@ -161,7 +161,7 @@ namespace EasyITCenter.Services {
                         }
                         else if (jobType == "command") {
                             try {
-                                if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin") {
+                                if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin" || jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "superadmin") {
                                     IDictionary<string, string>? parseData = null;
                                     try { parseData = JsonSerializer.Deserialize<IDictionary<string, string>>(data); } catch { }
                                     RunProcessRequest? process = new RunProcessRequest() {
@@ -176,7 +176,7 @@ namespace EasyITCenter.Services {
                         }
                         else if (jobType == "sqlquery") {
                             try {
-                                if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin") {
+                                if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin" || jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "superadmin") {
                                     _ = new EasyITCenterContext().GetListOf<GenericDataList>($"EXEC {data};");
                                 }
 
@@ -191,7 +191,7 @@ namespace EasyITCenter.Services {
                         }
                         else if (jobType == "sqlwebsocketnotify") {
                             try {
-                                if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin") {
+                                if (jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "admin" || jobData.First(a => a.Key.ToLower() == "userrole").Value?.ToString() == "superadmin") {
                                     string? result = new EasyITCenterContext().GetListOf<GenericDataList>($"EXEC {data};").ToString();
                                     Managers.WebSocketManager.SendMessageAndUpdateWebSocketsInSpecificPath(DbOperations.GetServerParameterLists("WebSocketGlobalNotifyPath").Value, result);
                                 }

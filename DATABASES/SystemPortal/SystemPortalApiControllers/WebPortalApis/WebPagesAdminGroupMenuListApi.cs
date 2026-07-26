@@ -39,7 +39,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> InsertOrUpdateGroupWebMenuList([FromBody] WebSettingList1 record) {
             try {
-                if (HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     string authId = User.FindFirst(ClaimTypes.PrimarySid.ToString()).Value;
 
                     int RecId = int.Parse(record.Settings.FirstOrDefault(a => a.Key == "Id").Value);
@@ -83,7 +83,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> DeleteWebGroupMenuList(string id) {
             try {
-                if (HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     WebGroupMenuList record = new() { Id = int.Parse(id) };

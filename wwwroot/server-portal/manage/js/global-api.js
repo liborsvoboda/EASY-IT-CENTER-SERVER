@@ -50,6 +50,12 @@ Gs.Apis.RunApiManager = async function () {
                             await Gs.Apis.DownloadApi(api.ApiPath, api.JsonData, api.Filename, api.Binary, api.StorageName, api.WindowFunction, api.Id);
                             if (arr.length - 1 > index && arr[index + 1] != undefined && arr[index + 1].UUID == api.UUID && arr[index + 1].Sequence > api.Sequence) { throw new Error("Break ForEach"); }
                             break;
+                        case "DonloadTextFileApi":
+                            //(apiPath) Save Result to: Gs.Variables.TextFile
+                            api.Processing = true;
+                            await Gs.Apis.DonloadTextFileApi(api.ApiPath, api.Id);
+                            if (arr.length - 1 > index && arr[index + 1] != undefined && arr[index + 1].UUID == api.UUID && arr[index + 1].Sequence > api.Sequence) { throw new Error("Break ForEach"); }
+                            break;
                         case "RunServerPostApi":
                             //(apiPath, jsonData, storageName = null, windowFunction = null )
                             api.Processing = true;
@@ -114,6 +120,44 @@ Gs.Apis.SavePublicCapturedVideo = async function (filename) {
     Gs.Media.ClearCapturedVideo();
 }
 
+
+
+/**
+* Download Text File from URL
+* @function
+* @param {string} apiPath File Path
+*/
+Gs.Apis.DonloadTextFileApi = async function (apiPath, Id = null) {
+    //windowFunction is Only for window.fnName() NOT window.Gs.XXX.XXX Use for Reload Table
+    Gs.Behaviors.ShowPageLoading();
+    $.ajax({
+        global: false,
+        type: "GET",
+        url: Metro.storage.getItem('ApiOriginSuffix', "") + apiPath,
+        async: true,
+        cache: false,
+        headers: Metro.storage.getItem("ApiToken", null) != null ? { 'Authorization': 'Bearer ' + Metro.storage.getItem('ApiToken', null).Token } : {},
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+
+            Gs.Behaviors.HidePageLoading();
+            Gs.Variables.TextFile = result;
+            return result;
+        },
+        error: function (err) {
+            if (Id != null) { Gs.Variables.apiTaskList.filter(obj => { return obj.Id == Id })[0].Processed = true; }
+            console.log(err);
+
+            Gs.Objects.ShowNotify("alert", err.statusText);
+
+            Gs.Behaviors.HidePageLoading();
+            Gs.Variables.TextFile = null;
+            return null;
+        }
+    });
+}
 
 /**
 * Function for Downloading binary file from Server

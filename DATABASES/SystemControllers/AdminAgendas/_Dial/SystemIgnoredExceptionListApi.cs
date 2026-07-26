@@ -45,7 +45,7 @@
         [Consumes("application/json")]
         public async Task<string> InsertSystemIgnoredExceptionList([FromBody] SystemIgnoredExceptionList record) {
             try {
-                if (HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     record.User = null;  //EntityState.Detached IDENTITY_INSERT is set to OFF
                     var data = new EasyITCenterContext().SystemIgnoredExceptionLists.Add(record);
                     int result = await data.Context.SaveChangesAsync();
@@ -78,7 +78,7 @@
         [Consumes("application/json")]
         public async Task<string> DeleteSystemIgnoredExceptionList(string id) {
             try {
-                if (HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     SystemIgnoredExceptionList record = new() { Id = int.Parse(id) };

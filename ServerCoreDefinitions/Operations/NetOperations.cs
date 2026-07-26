@@ -15,12 +15,28 @@ namespace EasyITCenter.ServerCoreStructure {
     /// </summary>
     public static class NetOperations {
 
-      /// <summary>
-      /// used Nuget: SoapHttpClient from https://github.com/pmorelli92/SoapHttpClient
-      /// nsUrl = ns definition URL, wsdlUrl = WSDL URL, operation = Operation Name from WSDL Definition
-      /// Example: GetSOAPData("http://webservice.riro.rinkai/","https://www.rinkai.eu/riro/WebService10Interface?wsdl","GetVersion10")
-      /// </summary>
-      /// <returns></returns>
+
+
+
+        /// <summary>
+        /// Calls the GET API URL with string Response
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <returns></returns>
+        public static async Task<string> CallGetApiUrl(string url)
+        {
+            HttpClient httpClient = new HttpClient();
+            return await httpClient.GetStringAsync(url);
+        }
+
+
+
+        /// <summary>
+        /// used Nuget: SoapHttpClient from https://github.com/pmorelli92/SoapHttpClient
+        /// nsUrl = ns definition URL, wsdlUrl = WSDL URL, operation = Operation Name from WSDL Definition
+        /// Example: GetSoapDataFromURL("http://webservice.riro.rinkai/","https://www.rinkai.eu/riro/WebService10Interface?wsdl","GetVersion10")
+        /// </summary>
+        /// <returns></returns>
         public static string GetSoapDataFromURL(string nsUrl,string wsdlUrl,string operationName) {
             string result = null;
             try {

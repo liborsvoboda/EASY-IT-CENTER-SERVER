@@ -6,7 +6,7 @@ namespace EasyITCenter.Controllers {
     /// </summary>
     /// <seealso cref="ControllerBase"/>
     [Authorize]
-    [Authorize(Roles = "webadmin,admin")]
+    [Authorize(Roles = "webadmin,admin,superadmin")]
     [Route("[controller]")]
     [ApiController]
     public abstract class AdminGenericProviderApi<DbEntity, Tentity, TKey> : ControllerBase where DbEntity : EasyITCenterContext where Tentity : class where TKey : notnull {

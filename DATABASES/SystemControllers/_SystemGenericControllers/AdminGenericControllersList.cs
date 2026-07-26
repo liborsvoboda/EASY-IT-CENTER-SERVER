@@ -6,7 +6,7 @@ namespace EasyITCenter.Controllers {
     /* Example
     API URL is: http://localhost:8000/ServerGenericAuthApi/SystemParameterList
     [Authorize]
-    [Authorize(Roles="webadmin,admin")]
+    [Authorize(Roles="webadmin,admin,superadmin")]
     [Route("ServerApi/AuthServices/[controller]")]
     [ApiController]
     public class SystemParameterListController : AdminGenericControllersList<EasyITCenterContext, SystemParameterList, int> {

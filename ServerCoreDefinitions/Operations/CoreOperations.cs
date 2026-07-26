@@ -294,7 +294,9 @@ namespace EasyITCenter.ServerCoreStructure {
         /// <param name="password">The password.</param>
         /// <returns></returns>
         public static X509Certificate2 GetSelfSignedCertificate(string password) {
-            var commonName = DbOperations.GetServerParameterLists("ConfigCertificateDomain").Value;
+            var commonName = DbOperations.GetServerParameterLists("ConfigCertificateDomain").Value.Contains(',')
+                    ? DbOperations.GetServerParameterLists("ConfigCertificateDomain").Value.Split(',')[0]
+                    : DbOperations.GetServerParameterLists("ConfigCertificateDomain").Value.Split(';')[0]; 
             var rsaKeySize = 2048;
             var years = 10;
             var hashAlgorithm = HashAlgorithmName.SHA256;
@@ -343,16 +345,6 @@ namespace EasyITCenter.ServerCoreStructure {
                 return new X509Certificate2(certificate, password);
             } catch (Exception Ex) { SendEmail(new SendMailRequest() { Content = "Incorrect Certificate Path or Password, " + DataOperations.GetErrMsg(Ex) }); }
             return GetSelfSignedCertificate(DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value);
-        }
-
-        /// <summary>
-        /// Calls the GET API URL with string Response
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <returns></returns>
-        public static async Task<string> CallGetApiUrl(string url) {
-            HttpClient httpClient = new HttpClient();
-            return await httpClient.GetStringAsync(url);
         }
 
 

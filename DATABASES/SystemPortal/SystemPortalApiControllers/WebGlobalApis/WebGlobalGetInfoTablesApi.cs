@@ -34,7 +34,7 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/WebApi/WebPages/WebCodeLibraryList")]
         public async Task<string> GetWebCodeLibrary() {
             try {
-                //if (CommunicationController.IsAdmin()) {
+                //if (CommunicationController.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                 List<SolutionCodeLibraryList> data;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                     IsolationLevel = IsolationLevel.ReadUncommitted
@@ -55,7 +55,7 @@ namespace EasyITCenter.Controllers {
         [HttpGet("/WebApi/WebPages/GetWebMenuList")]
         public async Task<string> GetTemplateWebMenuList() {
             try {
-                //if (CommunicationController.IsAdmin()) {
+                //if (CommunicationController.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                 List<WebMenuList> data;
                 using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                     IsolationLevel = IsolationLevel.ReadUncommitted
@@ -77,7 +77,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> InsertOrUpdateWebMenuList([FromBody] WebSettingList1 record) {
             try {
-                if (HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     string authId = User.FindFirst(ClaimTypes.PrimarySid.ToString()).Value;
                     string clientIPAddr = null;
                     int RecId = int.Parse(record.Settings.FirstOrDefault(a => a.Key == "Id").Value);
@@ -125,7 +125,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> DeleteWebMenuList(string id) {
             try {
-                if (HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     WebMenuList record = new() { Id = int.Parse(id) };

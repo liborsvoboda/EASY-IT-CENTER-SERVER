@@ -55,7 +55,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> InsertEasyITCenterSolutionMonacoLanguageList([FromBody] SolutionMonacoSuggestionList record) {
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     EntityEntry<SolutionMonacoSuggestionList>? data = new EasyITCenterContext().SolutionMonacoSuggestionLists.Add(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -73,7 +73,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> UpdateEasyITCenterSolutionMonacoLanguageList([FromBody] SolutionMonacoSuggestionList record) {
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     EntityEntry<SolutionMonacoSuggestionList>? data = new EasyITCenterContext().SolutionMonacoSuggestionLists.Update(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -89,7 +89,7 @@ namespace EasyITCenter.Controllers {
         [Consumes("application/json")]
         public async Task<string> DeleteEasyITCenterSolutionMonacoLanguageList(string id) {
             try {
-                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+                if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
                     SolutionMonacoSuggestionList record = new() { Id = int.Parse(id) };

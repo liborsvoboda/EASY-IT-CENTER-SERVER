@@ -20,7 +20,7 @@
       <script>
           window.onload = () => {
               window.ui = SwaggerUIBundle({
-                  url: "http://localhost:5000/swagger/" + Metro.storage.getItem('ServerVersion', null) + "/swagger.json",
+                  url: `${Metro.storage.getItem('BackendServerAddress', null)}/swagger/${Metro.storage.getItem('ServerVersion', null) }/swagger.json`,
                   dom_id: "#swagger-ui",
                   /*presets: [
                       SwaggerUIBundle.presets.apis,

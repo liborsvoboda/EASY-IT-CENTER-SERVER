@@ -190,11 +190,6 @@
         EditorInit = null;
         Files = [];
 
-        //Commercial OpenOffice
-        let key = "SeCur3AP1K3y";
-        let rollMyFile = new RollMyFile(key, function () {
-        });
-
 
 
         async function StartUp() {
@@ -1055,6 +1050,12 @@
         };
 
 
+        function SetJsonEditor(data) {
+           console.log(data);
+           document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue(data);
+        }
+
+
         async function SetEditor(editor) {
             //if (!$('#DataTree').fancytree("getActiveNode").folder) { Gs.Behaviors.ShowPageLoading(); }
             Metro.storage.setItem("SelectedEditor", editor);
@@ -1118,6 +1119,9 @@
                 case "JSONEditor":
                     Gs.Functions.AddClass('SetJSONEditor', 'disabled');
                     $("#FrameWindow").html('<iframe id="DataFrameWindow" src="' + Metro.storage.getItem('ApiOriginSuffix', null) + "server-tools/Editor/jsonData/index.html" + '" width="100%" frameborder="0" scrolling="yes" style="width:100%; height:calc(100vh);"></iframe>');
+                    if ($('#DataTree').fancytree("getActiveNode") != null) {
+                        Gs.Apis.DonloadTextFileApi($('#DataTree').fancytree("getActiveNode").key);
+                    }
                     break;
                 case "MDEditor":
                     Gs.Functions.AddClass('SetMDEditor', 'disabled'); Gs.Functions.RemoveClass('PreviewHtml', 'disabled');
@@ -1300,7 +1304,10 @@
                                 $("#FrameWindow").html('<img src="' + $('#DataTree').fancytree("getActiveNode").key + '" class="row" style="height: 100%;padding-left: 10px;">');
                                 break;
                             case "JSONEditor":
-                                if ($('#DataTree').fancytree("getActiveNode") != null) { document.querySelector("#DataFrameWindow").contentWindow.inputEditor.setValue($('#DataTree').fancytree("getActiveNode").key); }
+                                if (Gs.Variables.TextFile != null) {
+                                    SetJsonEditor(Gs.Variables.TextFile);
+                                    Gs.Variables.TextFile = null;
+                                }
                                 break;
                             case "MDEditor":
                                 if ($('#DataTree').fancytree("getActiveNode") != null) {

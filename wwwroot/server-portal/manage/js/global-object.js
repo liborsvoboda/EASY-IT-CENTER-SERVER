@@ -940,8 +940,22 @@ Gs.Objects.OpenBrowserConsole = function () {
 
 //Show Hidden Console
 Gs.Objects.ShowBrowserConsole = function () {
+
+    //Clear Console Lines
+    while (document.getElementById('browser-console-output').hasChildNodes) {
+        let blah = document.getElementById('browser-console-output').lastChild;
+        if (blah === null) { break; }
+        document.getElementById('browser-console-output').removeChild(blah);
+    }
+    //Fill Console Window Before Open
+    Gs.Variables.ConsoleLogList.forEach(consoleline => {
+        Gs.Functions.AddWebConsoleLine(consoleline.message, `${consoleline.type}_console`);
+    }); 
+
+    //Show Console Window
     Metro.window.show($("#WebBrowserConsole"));
 
+    //Declare Console 
     class Console {
         constructor() {
             let conInput = document.getElementById('browserconsoleinput');
@@ -949,8 +963,21 @@ Gs.Objects.ShowBrowserConsole = function () {
             self.consoleBackbuffer = [];
 
             conInput.addEventListener('keydown', function (e) {
+                if (38 === e.keyCode) {
+                    conInput.value = Gs.Variables.ConsoleHistoryList[Gs.Variables.ConsoleHistoryIndex] == undefined ? "" : Gs.Variables.ConsoleHistoryList[Gs.Variables.ConsoleHistoryIndex];
+                    if (Gs.Variables.ConsoleHistoryIndex > 0) { Gs.Variables.ConsoleHistoryIndex--; }
+                }
+                if (40 === e.keyCode) {
+                    conInput.value = Gs.Variables.ConsoleHistoryList[Gs.Variables.ConsoleHistoryIndex] == undefined ? "" : Gs.Variables.ConsoleHistoryList[Gs.Variables.ConsoleHistoryIndex];
+                    if (Gs.Variables.ConsoleHistoryIndex < Gs.Variables.ConsoleHistoryList.length) { Gs.Variables.ConsoleHistoryIndex++; }
+                }
                 if (13 === e.keyCode) {
                     let input = conInput.value;
+                    if (input != "undefined") {
+                        Gs.Variables.ConsoleHistoryList.push(input);
+                        Gs.Variables.ConsoleHistoryIndex = Gs.Variables.ConsoleHistoryList.length - 1;
+                    }
+
                     self.consoleBackbuffer.push(input);
                     conInput.value = "";
                     if (input.toLowerCase() === 'clear') {
@@ -960,7 +987,9 @@ Gs.Objects.ShowBrowserConsole = function () {
                     self.AddWebConsoleLine(input, 'browserconsoleinput');
                     try {
                         let returnVal = eval.apply(this, [input]);
-                        self.AddWebConsoleLine(returnVal, 'return');
+                        if (returnVal.toString().indexOf("[object Object]") > -1) { self.AddWebConsoleLine(JSON.stringify(returnVal, undefined, 2), 'return'); }
+                        else { self.AddWebConsoleLine(returnVal, 'return'); }
+                        
                     } catch (e) {
                         self.AddWebConsoleLine(e, 'error_console');
                     }
@@ -970,7 +999,7 @@ Gs.Objects.ShowBrowserConsole = function () {
         }
 
         clear() {
-            Metro.storage.setItem("ConsoleLogList", null);
+            Gs.Variables.ConsoleLogList = [];
             while (document.getElementById('browser-console-output').hasChildNodes) {
                 let blah = document.getElementById('browser-console-output').lastChild;
                 if (blah === null) { break; }

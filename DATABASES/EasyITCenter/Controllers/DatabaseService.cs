@@ -56,7 +56,7 @@ namespace EasyITCenter.Controllers {
         [HttpPost("/DatabaseService/RunAdminQuery")]
         [Consumes("application/json")]
         public async Task<string> RunAdminQuery([FromBody] string query) {
-            if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin()) {
+            if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                 try {
                     DataView data = ((DataView)(await new EasyITCenterContext().ExecuteReaderAsync($"{query}")).DefaultView);
                     return Newtonsoft.Json.JsonConvert.SerializeObject(data.Table, (Newtonsoft.Json.Formatting)Formatting.Indented);

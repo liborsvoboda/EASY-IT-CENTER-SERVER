@@ -11,7 +11,7 @@
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
-                if (HttpContextExtension.IsAdmin()) { data = new EasyITCenterContext().BasicImageGalleryLists.ToList(); }
+                if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) { data = new EasyITCenterContext().BasicImageGalleryLists.ToList(); }
                 else {
                     data = new EasyITCenterContext().BasicImageGalleryLists.Include(a => a.User)
                         .Where(a => a.User.UserName == Request.HttpContext.User.Claims.First().Issuer).ToList();

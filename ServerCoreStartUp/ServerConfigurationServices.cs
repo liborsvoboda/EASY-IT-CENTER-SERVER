@@ -45,7 +45,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services">The services.</param>
         internal static void ConfigureFTPServer(ref IServiceCollection services) {
             
-            services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "*"; /*opt.Port*/ });
+            services.Configure<FtpServerOptions>(opt => { opt.ServerAddress = "*"; opt.Port = int.Parse(DbOperations.GetServerParameterLists("ServerFtpPort").Value); });
             services.Configure<FubarDev.FtpServer.FileSystem.DotNet.DotNetFileSystemOptions>(opt => {
                 opt.RootPath = !bool.Parse(DbOperations.GetServerParameterLists("ServerFtpSecurityEnabled").Value) ? Path.Combine(SrvRuntime.SrvPublicPath) : Path.Combine(SrvRuntime.SrvUserPath);
                 opt.AllowNonEmptyDirectoryDelete = true;
@@ -63,7 +63,7 @@ namespace EasyITCenter.ServerCoreConfiguration {
                 SrvRuntime.ServerFTPProvider = serviceProvider.GetRequiredService<IFtpServerHost>();
                 SrvRuntime.FTPSrvStatus = true;
             }
-            if (!bool.Parse(DbOperations.GetServerParameterLists("ServerFtpEngineEnabled").Value)) { SrvRuntime.ServerFTPProvider.StopAsync(); }
+            if (!bool.Parse(DbOperations.GetServerParameterLists("ServerFtpEngineEnabled").Value)) { SrvRuntime.ServerFTPProvider.StopAsync().GetAwaiter().GetResult(); }
         }
 
         /// <summary>
@@ -289,27 +289,28 @@ namespace EasyITCenter.ServerCoreConfiguration {
         /// <param name="services"></param>
         internal static void ConfigureDefaultAuthentication(ref IServiceCollection services) {
 
-            services.AddAuthentication(x => {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => {
-                x.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = CoreOperations.ValidAndGetTokenParameters();
-                x.ForwardSignIn = new EasyITCenterContext().ServerModuleAndServiceLists.Where(a => a.IsLoginModule).FirstOrDefault()?.UrlSubPath;
-                if (bool.Parse(DbOperations.GetServerParameterLists("ConfigTimeTokenValidationEnabled").Value)) { x.TokenValidationParameters.LifetimeValidator = AuthenticationService.TokenLifetimeValidator; }
-                x.Events = new JwtBearerEvents {
-                    OnAuthenticationFailed = context => {
-                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException)) {
-                            context.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
+            services
+                .AddAuthentication(x => {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(x => {
+                    x.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = CoreOperations.ValidAndGetTokenParameters();
+                    x.ForwardSignIn = new EasyITCenterContext().ServerModuleAndServiceLists.Where(a => a.IsLoginModule).FirstOrDefault()?.UrlSubPath;
+                    if (bool.Parse(DbOperations.GetServerParameterLists("ConfigTimeTokenValidationEnabled").Value)) { x.TokenValidationParameters.LifetimeValidator = AuthenticationService.TokenLifetimeValidator; }
+                    x.Events = new JwtBearerEvents {
+                        OnAuthenticationFailed = context => {
+                            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException)) {
+                                context.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
+                            }
+                            return Task.CompletedTask;
                         }
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                    };
+                });
             
         }
 

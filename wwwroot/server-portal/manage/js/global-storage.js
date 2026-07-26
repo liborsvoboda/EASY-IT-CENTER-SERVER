@@ -11,7 +11,6 @@ Metro.storage.setItem('DefaultPath', Metro.storage.getItem('DefaultPath', null) 
 if (Metro.storage.getItem('BasketPriceList', null) == null) { Metro.storage.setItem('BasketPriceList', []); }
 if (Metro.storage.getItem('ChatMessageList', null) == null) { Metro.storage.setItem('ChatMessageList', []); }
 if (Metro.storage.getItem('ShareChatMessageList', null) == null) { Metro.storage.setItem('ShareChatMessageList', []); }
-if (Metro.storage.getItem('ConsoleLogList', null) == null) { Metro.storage.setItem('ConsoleLogList', []); }
 
 
 /**
@@ -19,7 +18,7 @@ if (Metro.storage.getItem('ConsoleLogList', null) == null) { Metro.storage.setIt
 * { UUID, Api: [Id = RandomString,Sequence = 0 - XXXX number same for Paraler Call, Other for Serial, Processing = true/false, Processed = true/false, Type: ApiName + WindowFunction, next Same ass Definition//apiPath, jsonData, filename, binary, storageName = null, windowFunction = null ] }
 * 
 */
-window.Gs = {
+window.Gs = { //Functions Library 
     Database: {},
     Behaviors: {},
     Objects: {},
@@ -29,8 +28,15 @@ window.Gs = {
     Media: {},
     Socket: {},
     SignalR: {},
+
     Variables: {
-        RegisteredFrameList: [],
+        TextFile: null,          //Api DonloadTextFileApi Save to this Variable
+
+        ConsoleHistoryIndex: 0,      //Web Console Input History Current Index
+        ConsoleHistoryList: [],      //Web Console Input History List
+        ConsoleLogList: [],      //Web Console Log List
+        RegisteredFrameList: [], //Registered Frame List
+
         ixDbInit: false, //True USE IndexedDB, False use LocalStorage
         database: indexedDB.open("EICserverPortal", 4),
         dbData: null,
@@ -38,18 +44,21 @@ window.Gs = {
         dbIndex: null,
         dbObjectStore: null,
         dbTransaction: null,
+
         breakException: {},
         pageLoader: null,
         chatmessage: {},
+
         username: "127.0.0.1",
         fullname: "Anonymous",
+
         stripe: null,
-        monacoEditorList: [],
-        apiTaskList: [], 
-        screensaver: {},
-        notifySetting :{
+        monacoEditorList: [],  //Monaco Editors List
+        apiTaskList: [],  //Api Manager Task List
+        screensaver: {},  //Scren Saver
+        notifySetting :{ //Notify Setting
             notifyWidth: 300,
-            notifyDuration: 5000,
+            notifyDuration: 8000,
             notifyAnimation: "easeOutBounce"
         },
         getSpProcedure :[
@@ -62,13 +71,13 @@ window.Gs = {
             { tableName: null },
             { dataRec: null }
         ],
-        media: {
+        media: {  //Media Recorder
             audioRecorder: null,
             mediaRecorder: null, 
             mediaStream: null,
             videoData: [],
         },
-        UserSettingList: {
+        UserSettingList: {  //Default UserSettingList
             EnableAutoTranslate: false,
             EnableShowDescription: true,
             RememberLastJson: true,
@@ -78,10 +87,10 @@ window.Gs = {
         RemoveObjectList: {
             dialog: null
         },
-        Socket: {
+        Socket: { //WebSocket Global Chat
             chatSocket: new WebSocket(`${Metro.storage.getItem('ApiOriginSuffix', null).replace("http:", "ws:").replace("https:", "wss:")}WebSocketService/chat`)
         },
-        SignalR: {
+        SignalR: { // Share Chat Window
             streamChat: null,
             displayMediaOptions : {
                 video: {
@@ -98,35 +107,23 @@ window.Gs = {
 
 // Custom Console Definition
 let console = (function (oldCons) {
+    //window.consoleOld = oldCons;
     return {
         log: function (text) {
-            let data = Metro.storage.getItem('ConsoleLogList', null);
-            if (data != null) {
-                data.push({ id: data.length + 1, type: "debug", message: JSON.stringify(text) });
-                Metro.storage.setItem('ConsoleLogList', data);
-            } Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "debug_console");
-
+            Gs.Variables.ConsoleLogList.push({ id: Gs.Variables.ConsoleLogList.length + 1, type: "debug", message: JSON.stringify(text) });
+            Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "debug_console");
         },
         info: function (text) {
-            let data = Metro.storage.getItem('ConsoleLogList', null);
-            if (data != null) {
-                data.push({ id: data.length + 1, type: "info", message: JSON.stringify(text) });
-                Metro.storage.setItem('ConsoleLogList', data);
-            } Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "info_console");
+            Gs.Variables.ConsoleLogList.push({ id: Gs.Variables.ConsoleLogList.length + 1, type: "info", message: JSON.stringify(text) });
+            Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "info_console");
         },
         warn: function (text) {
-            let data = Metro.storage.getItem('ConsoleLogList', null);
-            if (data != null) {
-                data.push({ id: data.length + 1, type: "warn", message: JSON.stringify(text) });
-                Metro.storage.setItem('ConsoleLogList', data);
-            } Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "warn_console");
+            Gs.Variables.ConsoleLogList.push({ id: Gs.Variables.ConsoleLogList.length + 1, type: "warn", message: JSON.stringify(text) });
+            Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "warn_console");
         },
         error: function (text) {
-            let data = Metro.storage.getItem('ConsoleLogList', null);
-            if (data != null) {
-                data.push({ id: data.length + 1, type: "error", message: JSON.stringify(text) });
-                Metro.storage.setItem('ConsoleLogList', data);
-            } Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "error_console");
+            Gs.Variables.ConsoleLogList.push({ id: Gs.Variables.ConsoleLogList.length + 1, type: "error", message: JSON.stringify(text) });
+            Gs.Functions.AddWebConsoleLine(JSON.stringify(text), "error_console");
         }
     };
 }(window.console));
