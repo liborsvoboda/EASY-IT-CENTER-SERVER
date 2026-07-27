@@ -19,15 +19,20 @@ namespace EasyITCenter.Controllers {
     public partial class SpUserMenuList {
         public int Id { get; set; }
         public string InheritedSystemMenuType { get; set; } = null!;
-        public int GroupId { get; set; }
-        public string FormPageName { get; set; } = null!;
-        public string AccessRole { get; set; } = null!;
-        public string? AccessUser { get; set; } = null;
+        public int SystemGroupMenuListId { get; set; }
+        public string TableName { get; set; } = null!;
+        public string AccessRoleWrite { get; set; } = null!;
+        public string? AccessUserWrite { get; set; } = null;
+        public string AccessRoleRead { get; set; } = null;
+        public string AccessUserRead { get; set; } = null;
         public string? OrderBy { get; set; }
+        public string InheritedQueryLimitType { get; set; } = null;
         public string? Description { get; set; }
-        public int UserId { get; set; }
+        public int SolutionUserListId { get; set; }
         public bool NotShowInMenu { get; set; }
+        public bool OnlyOwnRec { get; set; }
         public bool Active { get; set; }
+        public int Version { get; set; }
         public DateTime TimeStamp { get; set; }
         public string GroupName { get; set; } = null!;
     }
@@ -251,15 +256,17 @@ namespace EasyITCenter.Controllers {
         /// 
         /// </summary>
         /// <returns></returns>
-        [Authorize]
         [HttpGet("/DatabaseService/SpGetUserMenuList")]
         public async Task<string> SpGetUserMenuList() {
             try
             {
-                List<SpUserMenuList> data = new List<SpUserMenuList>();
+                if (HttpContextExtension.IsLogged())
+                {
+                    List<SpUserMenuList> data = new List<SpUserMenuList>();
 
-                data = new EasyITCenterContext().GetListOf<SpUserMenuList>("EXEC SpGetUserMenuList @userRole = N'" + HttpContextExtension.GetUserRole() + "', @userId = " + HttpContextExtension.GetUserId() + " ;");
-                return System.Text.Json.JsonSerializer.Serialize(data, new JsonSerializerOptions() {ReferenceHandler = ReferenceHandler.IgnoreCycles,WriteIndented = true,DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
+                    data = new EasyITCenterContext().GetListOf<SpUserMenuList>($"EXEC SpGetUserMenuList @userRole = N'{HttpContextExtension.GetUserRole()}', @userId ={HttpContextExtension.GetUserId()} ;");
+                    return System.Text.Json.JsonSerializer.Serialize(data, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, WriteIndented = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+                } else { return System.Text.Json.JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = DbOperations.DBTranslate(DBResult.DeniedYouAreNotAdmin.ToString()) }); }
             } catch (Exception ex) {
                 return System.Text.Json.JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = DataOperations.GetUserApiErrMessage(ex) });
             }
