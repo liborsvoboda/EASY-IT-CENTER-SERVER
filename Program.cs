@@ -115,7 +115,7 @@ namespace EasyITCenter {
 
                             if (!bool.Parse(DbOperations.GetServerParameterLists("ConfigServerGetLetsEncrypt").Value)) {
                                 opt.UseHttps(DbOperations.GetServerParameterLists("ConfigCertificateFile").Value.Length > 0
-                                    ? CoreOperations.GetSelfSignedCertificateFromFile(Path.Combine(SrvRuntime.SrvCertPath,"certificate.pfx"))
+                                    ? CoreOperations.GetSelfSignedCertificateFromFile(Path.Combine(SrvRuntime.SrvCertPath, DbOperations.GetServerParameterLists("ConfigCertificateFile").Value))
                                         : CoreOperations.GetSelfSignedCertificate(DbOperations.GetServerParameterLists("ConfigCertificatePassword").Value),
                                       cfg => {
                                           cfg.SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
