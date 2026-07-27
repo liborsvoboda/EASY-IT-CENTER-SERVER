@@ -705,6 +705,7 @@ Gs.Objects.AddSuggest = async function () {
     setTimeout(async function () {
         if (Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'fastSuggestion') != -1) {
             Gs.Variables.monacoEditorList.splice(Gs.Variables.monacoEditorList.findIndex(item => item.elementId === 'fastSuggestion'), 1);
+
             let dataJs = await fetch("/server-portal/addons/monaco/js/fastSuggestion.js").then((r) => r.text())
             new Function(dataJs)();
         } else {
@@ -764,7 +765,7 @@ Gs.Objects.ShowOnlineTools = function () {
 * @function
 */
 Gs.Objects.TestWindowLink = function () {
-    if ($("#menuNewWindow").val('checked')[0].checked) {
+    if ($("#menuNewWindow")[0].checked) {
         window.open($("#menuUrl").val());
     } else {
         Gs.Objects.WindowIframeCreate($("#menuName").val(), $("#menuUrl").val());
@@ -782,7 +783,7 @@ Gs.Objects.AddToFavorites = async function () {
         caption: "Add", cls: "js-dialog-close success",
         onclick: async function () {
             if ($("#menuName").val().length > 0 && $("#menuUrl").val().length > 0) {
-                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToFavorites", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow").val('checked')[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadFavorites");
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToFavorites", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow")[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadFavorites");
             } else { alert("Data must be Inserted"); }
         }
     }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -827,7 +828,7 @@ Gs.Objects.AddToOnlineToolList = async function () {
         caption: "Add", cls: "js-dialog-close success",
         onclick: async function () {
             if ($("#menuName").val().length > 0 && $("#menuUrl").val().length > 0) {
-                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToOnlineToolList", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow").val('checked')[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadOnlineToolList");
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddToOnlineToolList", { MenuGroup: $("#menuGroup").val(), MenuName: $("#menuName").val(), MenuIcon: $("#menuIcon").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow")[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadOnlineToolList");
             } else { alert("Data must be Inserted"); }
         }
     }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -870,7 +871,7 @@ Gs.Objects.GenerateRemoveWebSearchList = async function () {
     let webSearch = Metro.storage.getItem('WebSearchList', null);
     let content = `<div>`;
     webSearch.forEach(search => {
-        content += `<button id="${search.RecGuid}" class='button alert outline ml-2 mr-2' onclick="Gs.Objects.RemoveWebSearchList('${search.MenuName}','${search.RecGuid}')">Remove ${search.MenuName}</button>`;
+        content += `<button id="${search.RecGuid}" class='button alert outline ml-2 mr-2'  onclick="Gs.Objects.RemoveWebSearchList('${search.MenuName}','${search.RecGuid}')">Remove ${search.MenuName}</button>`;
     });
     content += `</div>`;
     let actions = [{ caption: "Close", cls: "js-dialog-close alert", onclick: function () { } }]
@@ -888,7 +889,7 @@ Gs.Objects.AddWebSearchList = async function () {
         caption: "Add", cls: "js-dialog-close success",
         onclick: async function () {
             if ($("#menuName").val().length > 0 && $("#menuUrl").val().length > 0) {
-                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddWebSearchList", { MenuName: $("#menuName").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow").val('checked')[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadSearchWindow");
+                await Gs.Apis.RunServerPostApi("PortalApiTableService/AddWebSearchList", { MenuName: $("#menuName").val(), MenuUrl: $("#menuUrl").val(), MenuNewWindow: $("#menuNewWindow")[0].checked, MenuDescription: $("#menuDescription").summernote('code') }, null, "LoadSearchWindow");
             } else { alert("Data must be Inserted"); }
         }
     }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]

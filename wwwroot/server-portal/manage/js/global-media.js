@@ -320,3 +320,5 @@ Gs.Media.GenerateImageWithCanvas = function (track, videoElement) {
 
 	return image;
 }
+
+

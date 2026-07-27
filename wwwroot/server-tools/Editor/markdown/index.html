@@ -10,8 +10,8 @@
     <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
     <meta name="description" content="Universal MarkDown Editor" />
     <title>Universal MarkDown Editor</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/editormd.css" />
+    <link rel="stylesheet" href="./Example/css/style.css" />
+    <link rel="stylesheet" href="./Example/css/editormd.css" />
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
 
 </head>
@@ -19,9 +19,9 @@
     <div id="layout">
     <div id="MdEditor"></div>
     </div>
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/editormd.js"></script>
-    <script src="languages/en.js"></script>
+    <script src="./Example/js/jquery-3.6.0.min.js"></script>
+    <script src="./Example/js/editormd.js"></script>
+    <script src="./Example/languages/en.js"></script>
     <script type="text/javascript">
         var mdEditor;
 
@@ -174,14 +174,14 @@
             // END Definition  Of Editor
 
             $("#create-btn").click(function () {
-                $.getScript("./js/editormd.js", function () {
+                $.getScript("./Example/js/editormd.js", function () {
                     $("#layout").append("<div id=\"MdEditor\"></div>");
 
                     mdEditormd = editormd("MdEditor", {
                         width: "90%",
                         height: 640,
                         markdown: "### 动态创建 Editor.md\r\n\r\nDynamic create Editor.md",
-                        path: './lib/'
+                        path: './Example/lib/'
                     });
                 });
             });

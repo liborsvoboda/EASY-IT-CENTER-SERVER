@@ -19,7 +19,7 @@ require(['vs/editor/editor.main'], function () {
                 preview: true, insertMode: "replace"
             },
             automaticLayout: true, fixedOverflowWidgets: true,
-            //language: language,
+            language: language,
         });
         
         Gs.Variables.monacoEditorList.push({ elementId: elementId, editor: editor, model: model });

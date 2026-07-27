@@ -1,0 +1,1178 @@
+{
+  "homepages": [],
+  "source_base_path": "E:/Projekty/zEasy/EASY-IT-CENTER/EASY-IT-CENTER-SERVER/wwwroot/server-public/EIC_ESB_Sources/DocsSetting/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/AutomatickéFunkcinality.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/AutomatickéFunkcinality.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/AutomatickéFunkcinality.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/AutomatickéFunkcinality.html",
+          "hash": "yaI3EE/uG4Nuarq8VB39Bg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/CeníkaKontakty.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/CeníkaKontakty.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/CeníkaKontakty.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/CeníkaKontakty.html",
+          "hash": "7SHW7Fd76K1NUfjYPsXRyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"current-price-list---you-will-finally-experience-a-record-return-and-not-only-in-money\" sourcefile=\"EASY-DATA/Docs/Cen&#237;kaKontakty.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">CURRENT PRICE LIST - You will finally experience a record return and not only in money</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/DatabázeNápověda.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/DatabázeNápověda.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/DatabázeNápověda.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/DatabázeNápověda.html",
+          "hash": "eXWmcpk12XAklS4cOBEaLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"databases-on-modern-way---finally\" sourcefile=\"EASY-DATA/Docs/Datab&#225;zeN&#225;pověda.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\"><strong>DATABASES on Modern way - finally</strong></h1>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/DoplňujícíSubProjekty.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/DoplňujícíSubProjekty.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/DoplňujícíSubProjekty.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/DoplňujícíSubProjekty.html",
+          "hash": "/myfdi38C5wn+70LJ3Pjcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h2 id=\"easytools\" sourcefile=\"EASY-DATA/Docs/Doplňuj&#237;c&#237;SubProjekty.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">EASYTOOLS</h2>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/EDCRadyprogramování.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/EDCRadyprogramování.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/EDCRadyprogramování.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/EDCRadyprogramování.html",
+          "hash": "YQgIhvnkuHtXlhxCSKZk9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"literature\" sourcefile=\"EASY-DATA/Docs/EDCRadyprogramov&#225;n&#237;.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Literature:</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/EICOSImplementace.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/EICOSImplementace.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/EICOSImplementace.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/EICOSImplementace.html",
+          "hash": "hOa5UXlhOSAlc+rSbPrU5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/EICRadyprogramování.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/EICRadyprogramování.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/EICRadyprogramování.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/EICRadyprogramování.html",
+          "hash": "LL0EyG8mKSoNaZQZMm6LhA=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"literature\" sourcefile=\"EASY-DATA/Docs/EICRadyprogramov&#225;n&#237;.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Literature:</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/EICServerAPICZ.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/EICServerAPICZ.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/EICServerAPICZ.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/EICServerAPICZ.html",
+          "hash": "dMH+tkXANAIgizPMDaaR/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"server-static-api-pro-moduly-správu-a-ovládání\" sourcefile=\"EASY-DATA/Docs/EICServerAPICZ.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Server Static API pro moduly, správu a ovládání</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/EICXMLCodeDocs.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/EICXMLCodeDocs.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/EICXMLCodeDocs.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/EICXMLCodeDocs.html",
+          "hash": "4QdsAA9msUAfyc/Eh8Rz9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/ESBRadyprogramování.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/ESBRadyprogramování.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/ESBRadyprogramování.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/ESBRadyprogramování.html",
+          "hash": "a6d0fE+2ZMXQa2WfFQwfhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"easybuilder-description-system-core\" sourcefile=\"EASY-DATA/Docs/ESBRadyprogramov&#225;n&#237;.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">EASYBuilder Description SYSTEM CORE</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/ESBTiskovéřešení.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/ESBTiskovéřešení.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/ESBTiskovéřešení.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/ESBTiskovéřešení.html",
+          "hash": "YSwLm2eUkhvUYccv2Wof8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"fyi-reporting----freeware-full-report-designer-and-viewer\" sourcefile=\"EASY-DATA/Docs/ESBTiskov&#233;řešen&#237;.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">FYI Reporting  - FreeWare Full Report Designer and Viewer</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/ESBXMLCodeDocs.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/ESBXMLCodeDocs.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/ESBXMLCodeDocs.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/ESBXMLCodeDocs.html",
+          "hash": "BntQEJ8GCWAD8kbJqCzpiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"easyitsystemcenter\" sourcefile=\"EASY-DATA/Docs/ESBXMLCodeDocs.md\" sourcestartlinenumber=\"2\" sourceendlinenumber=\"2\">EasyITSystemCenter</h1>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/ExpertDocConfiguration.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/ExpertDocConfiguration.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader",
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/ExpertDocConfiguration.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/ExpertDocConfiguration.html",
+          "hash": "qEsO3ojl3dEwr38FJt7CUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"using-configurations\" sourcefile=\"EASY-DATA/Docs/ExpertDocConfiguration.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Using Configurations</h1>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/ExpertDockonfigurace.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/ExpertDockonfigurace.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/ExpertDockonfigurace.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/ExpertDockonfigurace.html",
+          "hash": "12hLTTOjW6eUhKlG3xwkSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"použití-konfigurací\" sourcefile=\"EASY-DATA/Docs/ExpertDockonfigurace.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Použití konfigurací</h1>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/ExpertDocumentWebServerCZ.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/ExpertDocumentWebServerCZ.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/ExpertDocumentWebServerCZ.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/ExpertDocumentWebServerCZ.html",
+          "hash": "oOBygcHJkSgAeqL6nP0JOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"portál-dynamické-multimediální-dokumentace\" sourcefile=\"EASY-DATA/Docs/ExpertDocumentWebServerCZ.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Portál dynamické multimediální dokumentace</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/ExpertDocumentWebServerEN.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/ExpertDocumentWebServerEN.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/ExpertDocumentWebServerEN.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/ExpertDocumentWebServerEN.html",
+          "hash": "asRmhC1hnbpV2sXAwdXtcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"server-dynamic-multimedial-documentation-portal\" sourcefile=\"EASY-DATA/Docs/ExpertDocumentWebServerEN.md\" sourcestartlinenumber=\"3\" sourceendlinenumber=\"3\">Server Dynamic MultiMedial Documentation Portal</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/GlobálníFunkce.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/GlobálníFunkce.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/GlobálníFunkce.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/GlobálníFunkce.html",
+          "hash": "rJH8VkmFPt8QMjSn8sv/7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h2 id=\"typy-globálních-operacífunkcí\" sourcefile=\"EASY-DATA/Docs/Glob&#225;ln&#237;Funkce.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Typy Globálních Operací/Funkcí</h2>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/GrafickéUkázky.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/GrafickéUkázky.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/GrafickéUkázky.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/GrafickéUkázky.html",
+          "hash": "IjkIgq9H6io9jmjXnPI1Iw=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"all-documentation-graphics-code-posibilities\" sourcefile=\"EASY-DATA/Docs/Grafick&#233;Uk&#225;zky.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">All Documentation Graphics Code Posibilities</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/KonfiguraceServeru.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/KonfiguraceServeru.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/KonfiguraceServeru.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/KonfiguraceServeru.html",
+          "hash": "WBdKuj4+z3Cmp/Mg7siwHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/LogikaaStuktura.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/LogikaaStuktura.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/LogikaaStuktura.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/LogikaaStuktura.html",
+          "hash": "9QIw9Jjh+UehVV7EDm5evA=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h2 id=\"system-project-structure---decription\" sourcefile=\"EASY-DATA/Docs/LogikaaStuktura.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">SYSTEM PROJECT STRUCTURE - DECRIPTION</h2>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/PopisZměnaVývoje.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/PopisZměnaVývoje.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/PopisZměnaVývoje.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/PopisZměnaVývoje.html",
+          "hash": "hxyZ1N1QYvBtBy+n+m5TRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h2 id=\"projects-legend\" sourcefile=\"EASY-DATA/Docs/PopisZměnaV&#253;voje.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Projects Legend</h2>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/PoužitéNástoje3rd.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/PoužitéNástoje3rd.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/PoužitéNástoje3rd.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/PoužitéNástoje3rd.html",
+          "hash": "//NFGakty0UFVSi+F66GNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/StaticWebPortál.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/StaticWebPortál.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/StaticWebPortál.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/StaticWebPortál.html",
+          "hash": "YipWCQ/IuIg5gOOysLzDug=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"osnova\" sourcefile=\"EASY-DATA/Docs/StaticWebPort&#225;l.md\" sourcestartlinenumber=\"2\" sourceendlinenumber=\"2\">Osnova</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/StructureCZ.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/StructureCZ.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader",
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/StructureCZ.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/StructureCZ.html",
+          "hash": "fyrR4cwOrnHJMPdlyXSrtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/StructureEN.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/StructureEN.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader",
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/StructureEN.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/StructureEN.html",
+          "hash": "hq08JwEtTuL+Gwihfe8SWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/UkázkyFormátování.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/UkázkyFormátování.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/UkázkyFormátování.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/UkázkyFormátování.html",
+          "hash": "/PEO7L0pEfgjpk4keRvKZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/VizeaNápadyaPostupy.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/VizeaNápadyaPostupy.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/VizeaNápadyaPostupy.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/VizeaNápadyaPostupy.html",
+          "hash": "ySD1V7oMtICpVIrCuwd6Ug=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"lownofull-code-extremely-easy-to-develop-any-system\" sourcefile=\"EASY-DATA/Docs/VizeaN&#225;padyaPostupy.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">LOW/NO/FULL code EXTREMELY EASY TO DEVELOP ANY SYSTEM</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/Docs/ÚvodníInformace.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/Docs/ÚvodníInformace.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/Docs/ÚvodníInformace.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/Docs/ÚvodníInformace.html",
+          "hash": "Mk6yAwRpc2YKgoaWZtY64A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/EICExamplesOnline.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/EICExamplesOnline.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/EICExamplesOnline.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/EICExamplesOnline.html",
+          "hash": "RDkZLkx+B/w1u1UXV5wKVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"ukázka-veřejně-dostupných-nástrojů-modulů-serveru\" sourcefile=\"EASY-DATA/EICExamplesOnline.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Ukázka Veřejně Dostupných Nástrojů, Modulů Serveru</h1>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/EICTemplates.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/EICTemplates.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/EICTemplates.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/EICTemplates.html",
+          "hash": "EW6yrGG6SrlJLDADWRdDQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/EICdocfx/docfx.json",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/EICdocfx/docfx.json"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/EICdocfx/generateEICInfoWeb.cmd",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/EICdocfx/generateEICInfoWeb.cmd"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/EICdocfx/index.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/EICdocfx/index.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/EICdocfx/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/EICdocfx/index.html",
+          "hash": "FLTOsbbJLXzXgFGOZn3lcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"dokumentace-easyitcenter-to-je-groupware\" sourcefile=\"EASY-DATA/EICdocfx/index.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Dokumentace <strong>EasyITcenter</strong> to je GroupWare</h1>"
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/EICdocfx/toc.yml",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/EICdocfx/toc.yml"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "EASY-DATA/EICdocfx/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/EICdocfx/toc.html",
+          "hash": "JKLXLJqoRj7NPsOzF8uOEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/ESBOnlineTools.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/ESBOnlineTools.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/ESBOnlineTools.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/ESBOnlineTools.html",
+          "hash": "jwRzzrKM6gUHQ/3/7kQKBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"ukázka-veřejně-dostupných-nástrojů-modulů-serveru\" sourcefile=\"EASY-DATA/ESBOnlineTools.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Ukázka Veřejně Dostupných Nástrojů, Modulů Serveru</h1>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/ESBTemplates.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/ESBTemplates.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/ESBTemplates.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/ESBTemplates.html",
+          "hash": "DOSxEsQih/IWxTBP9KvsRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/ESBdocfx/docfx.json",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/ESBdocfx/docfx.json"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/ESBdocfx/generateESBInfoWeb.cmd",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/ESBdocfx/generateESBInfoWeb.cmd"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/ESBdocfx/index.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/ESBdocfx/index.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader",
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/ESBdocfx/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/ESBdocfx/index.html",
+          "hash": "FftEq8QZaMTye+6uzf9LSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"dokumentace-easysystembuilder-to-je-groupware\" sourcefile=\"EASY-DATA/ESBdocfx/index.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Dokumentace <strong>EasySYSTEMbuilder</strong> to je GroupWare</h1>"
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/ESBdocfx/toc.yml",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/ESBdocfx/toc.yml"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "EASY-DATA/ESBdocfx/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/ESBdocfx/toc.html",
+          "hash": "Uwlq7BjoqPzBSBRN49DqlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/EasyITCenter-Server.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/EasyITCenter-Server.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/EasyITCenter-Server.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/EasyITCenter-Server.html",
+          "hash": "c37ctAz1Dup3WUO8J04f4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/EasyITCenter-System.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/EasyITCenter-System.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/EasyITCenter-System.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/EasyITCenter-System.html",
+          "hash": "uWIhVvBiFw1qnkgIGrRDsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/SUMMARY.md",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/SUMMARY.md"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "EASY-DATA/SUMMARY.md",
+      "output": {
+        ".html": {
+          "relative_path": "EASY-DATA/SUMMARY.html",
+          "hash": "B9iSfKJEcvE9DIphCK44qQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h3 id=\"eicesb-globální-it-řešení-na-míru\" sourcefile=\"EASY-DATA/SUMMARY.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">EIC&amp;ESB-Globální IT Řešení na míru</h3>"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "EASY-DATA/system.png",
+      "output": {
+        "resource": {
+          "relative_path": "EASY-DATA/system.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "Readme.md",
+      "output": {
+        ".html": {
+          "relative_path": "Readme.html",
+          "hash": "+nVj7Xsdn0cqoIWRH9YzqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"dokumentace-easysystembuilder-to-je-groupware\" sourcefile=\"Readme.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Dokumentace <strong>EasySYSTEMbuilder</strong> to je GroupWare</h1>"
+    },
+    {
+      "log_codes": [
+        "InvalidYamlHeader"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "CrW8KnzDoMS/V9z0ygmFMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": "",
+      "rawTitle": "<h1 id=\"dokumentace-easysystembuilder-to-je-groupware\" sourcefile=\"index.md\" sourcestartlinenumber=\"1\" sourceendlinenumber=\"1\">Dokumentace <strong>EasySYSTEMbuilder</strong> to je GroupWare</h1>"
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "oY7fzU/Tnboau9yk1LyWxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 39,
+          "skipped_file_count": 39
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

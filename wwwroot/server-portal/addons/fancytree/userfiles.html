@@ -25,12 +25,12 @@
     <script type="text/javascript" src="/server-tools/Metro/metro4/js/metro.4.5.2.min.js"></script>
 
     <!-- OpenOffice -->
-    <script type="text/javascript" src="/server-tools/DocsSolution/openoffice/js/rollmyfile.js"></script>
+    <script type="text/javascript" src="/server-tools/Commercial/openoffice/js/rollmyfile.js"></script>
 
     <!--Media-->
-    <script type="text/javascript" src="/server-tools/Media/record-mp3/js/MediaStreamRecorder.js"></script>
-    <script type="text/javascript" src="/server-tools/Media/record-mp3/js/recorder.js"></script>
-    <script type="text/javascript" src="/server-tools/Media/record-mp3/js/lame.min.js"></script>
+    <script type="text/javascript" src="/server-tools/Media/record-mp3/Example/js/MediaStreamRecorder.js"></script>
+    <script type="text/javascript" src="/server-tools/Media/record-mp3/Example/js/recorder.js"></script>
+    <script type="text/javascript" src="/server-tools/Media/record-mp3/Example/js/lame.min.js"></script>
 
     <!--Canvas-->
     <script type="text/javascript" src="/server-tools/Javascript/htmltocanvas/html2canvas.min.js"></script>
@@ -98,11 +98,12 @@
         <div id="ActionMenu" class="w-100 pos-fixed" style="z-index: 9999999999;">
             <nav data-role="ribbonmenu">
                 <ul class="tabs-holder">
-                    <li onclick="ReloadUserStorage();" class="text-bold bg-green shadowed c-pointer"><a href="#">Reload</a></li>
-                    <li class="text-bold bg-yellow shadowed c-pointer"><a href="#sectionFile">Editors</a></li>
-                    <li id="PreviewHtml" onclick="ShowPreviewMdHtml();" class="text-bold bg-green shadowed c-pointer disabled"><a href="#">Preview Html&Md</a></li>
-                    <li onclick="SetVersioning();" class="text-bold bg-blue shadowed c-pointer"><a href="#">Set Versioning</a></li>
-                    <li id="SaveAss" onclick="SaveNewFileAss();" class="disabled bg-orange text-bold shadowed c-pointer"><a href="#">SAVE Ass</a></li>
+                    <li onclick="ReloadUserStorage();" class="text-bold bg-green shadowed c-pointer" data-role="hint" data-hint-position="bottom" data-hint-text="Reload Folders & Files"><a href="#">Reload</a></li>
+                    <li class="text-bold bg-yellow shadowed c-pointer" data-role="hint" data-hint-position="bottom" data-hint-text="Select Other Editor"><a href="#sectionFile">Editors</a></li>
+                    <li id="PreviewHtml" onclick="ShowPreviewMdHtml();" class="text-bold bg-green shadowed c-pointer disabled" data-role="hint" data-hint-position="bottom" data-hint-text="Open Window Preview for HTML or MD"><a href="#">Preview Html&Md</a></li>
+                    <li id="SaveAss" onclick="SaveNewFileAss();" class="disabled bg-orange text-bold shadowed c-pointer" data-role="hint" data-hint-position="bottom" data-hint-text="Save Ass Openned Editor"><a href="#">SAVE Ass</a></li>
+                    <li onclick="SetVersioning();" class="text-bold bg-blue shadowed c-pointer" data-role="hint" data-hint-position="bottom" data-hint-text="Set Backup Versioning Folders"><a href="#">Set Versioning</a></li>
+                    <li id="InstallAddon" onclick="window.open('https://chromewebstore.google.com/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj','_blank');" class="bg-cyan text-bold shadowed c-pointer" data-role="hint" data-hint-position="bottom" data-hint-text="Install Chrome Office Editor Addon"><a href="#">Office Editor</a></li>
                 </ul>
                 <div class="content-holder">
                     <div class="section" id="sectionFile">
@@ -405,6 +406,7 @@
                                 "sep3": "---------",
                                 "recordDesktop": { "name": "Record Desktop", "icon": "add" },
                                 "recordCamera": { "name": "Record Camera", "icon": "add" },
+                                "downloadYoutube": { "name": "Download Youtube", "icon": "add" },
                             };
                         } else if (!node.folder && node.data.path.startsWith("Translate")) {
                             return {
@@ -443,7 +445,7 @@
                                 "convertToMd": { "name": "Convert To Md", "icon": "add" },
                                 "showFileUrl": { "name": "Show File Url", "icon": "add" },
                             };
-                        } else if (!node.folder && (node.data.path.toLowerCase().endsWith(".md") || node.data.path.toLowerCase().endsWith(".markdown")) ) {
+                        } else if (!node.folder && (node.data.path.toLowerCase().endsWith(".md") || node.data.path.toLowerCase().endsWith(".markdown"))) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
                                 "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
@@ -479,7 +481,7 @@
                                 "minifyFile": { "name": "Create Minified", "icon": "add" },
                                 "showFileUrl": { "name": "Show File Url", "icon": "add" },
                             };
-                        } else if (!node.folder && (node.data.path.toLowerCase().endsWith(".png") || node.data.path.toLowerCase().endsWith(".jpeg") || node.data.path.toLowerCase().endsWith(".jpg") || node.data.path.toLowerCase().endsWith(".tiff") || node.data.path.toLowerCase().endsWith(".bmp") || node.data.path.toLowerCase().endsWith(".svg"))) {
+                        } else if (!node.folder && (node.data.path.toLowerCase().endsWith(".png") || node.data.path.toLowerCase().endsWith(".jpeg") || node.data.path.toLowerCase().endsWith(".jpg") || node.data.path.toLowerCase().endsWith(".tiff") || node.data.path.toLowerCase().endsWith(".bmp") || node.data.path.toLowerCase().endsWith(".svg") || node.data.path.toLowerCase().endsWith(".gif"))) {
                             return {
                                 "saveFile": { "name": "Save File", "icon": "paste" },
                                 "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
@@ -504,6 +506,21 @@
                                 "convertXlsxToHtml": { "name": "Convert to Html", "icon": "paste" },
                                 "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
                                 "showFileUrl": { "name": "Show File Url", "icon": "add" },
+                                "sep2": "---------",
+                                "openChromeEditor": { "name": "Open Chrome Editor ", "icon": "add" },
+                            };
+                        } else if (!node.folder && (node.data.path.toLowerCase().endsWith(".pdf") || node.data.path.toLowerCase().endsWith(".pptx") || node.data.path.toLowerCase().endsWith(".ppt") || node.data.path.toLowerCase().endsWith(".docx") || node.data.path.toLowerCase().endsWith(".doc") || node.data.path.toLowerCase().endsWith(".xls"))) {
+                            return {
+                                "saveFile": { "name": "Save File", "icon": "paste" },
+                                "saveAssFile": { "name": "Save Ass File", "icon": "paste" },
+                                "moveFile": { "name": "Move to Folder\\File", "icon": "paste" },
+                                "copyFile": { "name": "Copy to Folder\\File", "icon": "copy" },
+                                "deleteFile": { "name": "Delete File", "icon": "delete" },
+                                "sep1": "---------",
+                                "downloadFile": { "name": "Download File (Zip)", "icon": "paste" },
+                                "showFileUrl": { "name": "Show File Url", "icon": "add" },
+                                "sep2": "---------",
+                                "openChromeEditor": { "name": "Open Chrome Editor ", "icon": "add" },
                             };
                         } else if (!node.folder) {
                             return {
@@ -521,8 +538,23 @@
                     actions: async function (node, action, options) {
                         Gs.Functions.RemoveClass('sectionFile', 'active'); Gs.Functions.AddClass('sectionFile', 'non-active');
 
+                        
+                        if (action == "downloadYoutube") {
+                            let content = "<div><input id='VideoId' type='text' data-role='input' data-prepend='Video Id:' ></div>";
+                            let actions = [{
+                                caption: "Download", cls: "js-dialog-close success",
+                                onclick: async function () {
+                                    if ($("#VideoId").val().length > 0) {
+                                        await Gs.Apis.RunServerPostApi("YoutubeService/DownloadVideos", { Id: $("#VideoId").val() }, null, "ReloadUserStorage");
+                                    } else { alert("Data must be Inserted"); }
+                                }
+                            }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
+                            Gs.Objects.CreateDialogRequest("Download Youtube", content, actions);
 
-                        if (action == "translateFile"){
+                        } else if (action == "openChromeEditor") {
+                            window.open(window.location.origin + $('#DataTree').fancytree("getActiveNode").key,"_blank");
+
+                        } else if (action == "translateFile"){
                             let content = "<div><input id='DllFilename' type='text' data-role='input' data-prepend='Dll Filename:' ></div>";
                             let actions = [{
                                 caption: "Translate", cls: "js-dialog-close success",
@@ -582,15 +614,13 @@
                             let actions = [{
                                 caption: "Replace", cls: "js-dialog-close success",
                                 onclick: async function () {
-                                    await Gs.Apis.RunServerPostApi("UserStorageService/ReplaceInFiles", { FileMask: $("#FileMask").val(), SourceContent: $("#SourceContent").val(), TargetContent: $("#TargetContent").val(), WebRootPath: node.data.path, RootDirectoryOnly: $("#RootDirOnly").val('checked')[0].checked }, null, "ReloadUserStorage");
+                                    await Gs.Apis.RunServerPostApi("UserStorageService/ReplaceInFiles", { FileMask: $("#FileMask").val(), SourceContent: $("#SourceContent").val(), TargetContent: $("#TargetContent").val(), WebRootPath: node.data.path, RootDirectoryOnly: $("#RootDirOnly")[0].checked }, null, "ReloadUserStorage");
                                 }
                             }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }]
                             Gs.Objects.CreateDialogRequest("Replace In Files", content, actions);
 
                         } else if (action == "openInNewWindow") {
-                            let path = Metro.storage.getItem('ApiOriginSuffix', null);
-                            let username = Metro.storage.getItem('ApiToken', null).Username;
-                            window.open(path + `server-users/${username}/` + node.data.path);
+                            window.open(`${Metro.storage.getItem('ApiOriginSuffix', null)}server-users/${Metro.storage.getItem('ApiToken', null).Username}/${node.data.path}`);
 
                         } else if (action == "recordAudio") {
                             let content = "<div><input id='Filename' type='text' data-role='input' data-prepend='Filename:' ><BUTTON class='button success outline shadowed' onclick=Gs.Media.StartRecordAudio(); >Start</BUTTON><BUTTON onclick ='Gs.Media.StopRecordAudio()' class='button warning outline shadowed'> Stop</BUTTON></div>";

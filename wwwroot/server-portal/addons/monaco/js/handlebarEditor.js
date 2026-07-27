@@ -93,7 +93,8 @@ require(['vs/editor/editor.main'], function () {
         });
 
         mixedenumList.forEach(mixedEnum => {
-            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.SystemName) { return obj; } }).length > 0) {
+            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active
+                && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.SystemName) { return obj; } }).length > 0) {
                 monaco.languages.registerCompletionItemProvider(mixedEnum.SystemName, {
                     provideCompletionItems: function (model, position) {
                         const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.SystemName) { return obj; } });
