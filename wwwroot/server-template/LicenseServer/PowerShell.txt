@@ -1,0 +1,30 @@
+-Validate [Validate]
+
+Param($Validate)
+$Language = AI_GetMsiProperty ProductLanguage
+$ProductName = AI_GetMsiProperty ProductName
+$InsertedCode = AI_GetMsiProperty VALIDATION_PROP
+[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms')
+#[System.Windows.Forms.MessageBox]::Show($InsertedCode)
+$url = "http://109.164.71.204:5000/LicenseActivator/" + $InsertedCode + "/" + $ProductName
+try {
+	$Response = Invoke-WebRequest -URI $url
+	$Validate = [int][bool]::Parse($Response.Content)
+	AI_SetMsiProperty Validate $Validate
+	if ( $Validate -eq 1 ) {
+		if ($Language -eq 1029){ AI_SetMsiProperty VALIDATION_PROP "Kód je platný." }
+		else { AI_SetMsiProperty VALIDATION_PROP "Code is Valid." }
+		#if ($Language -eq 1029){ [System.Windows.Forms.MessageBox]::Show("Kód je platný. Můžete pokračovat v instalaci.") }
+		#else { [System.Windows.Forms.MessageBox]::Show("Code is Valid. You can continue with the installation.") }
+	} else {
+		if ($Language -eq 1029){ AI_SetMsiProperty VALIDATION_PROP "Kód není platný." }
+		else { AI_SetMsiProperty VALIDATION_PROP "Code is not valid." }
+		#if ($Language -eq 1029){ [System.Windows.Forms.MessageBox]::Show("Kód není platný.") }
+		#else { [System.Windows.Forms.MessageBox]::Show("Code is not valid.") }
+	}
+} catch {
+	if ($Language -eq 1029){ AI_SetMsiProperty VALIDATION_PROP "Server není dostupný. Zkuste to prosím později." }
+	else { AI_SetMsiProperty VALIDATION_PROP "Server is not accesible. Please try it again later." }
+	#if ($Language -eq 1029){ [System.Windows.Forms.MessageBox]::Show("Server není dostupný. Zkuste to prosím později.") }
+	#else { [System.Windows.Forms.MessageBox]::Show("Server is not accesible. Please try it again later.") }
+}

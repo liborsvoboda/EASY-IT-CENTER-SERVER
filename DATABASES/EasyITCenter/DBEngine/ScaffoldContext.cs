@@ -74,12 +74,13 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<ServerStorageVersionSettingSupportList> ServerStorageVersionSettingSupportLists { get; set; } = null!;
         public virtual DbSet<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; } = null!;
         public virtual DbSet<ServerToolTypeList> ServerToolTypeLists { get; set; } = null!;
+        public virtual DbSet<SharedMonacoLanguageList> SharedMonacoLanguageLists { get; set; } = null!;
+        public virtual DbSet<SharedMonacoSuggestionList> SharedMonacoSuggestionLists { get; set; } = null!;
         public virtual DbSet<SolutionCodeLibraryList> SolutionCodeLibraryLists { get; set; } = null!;
         public virtual DbSet<SolutionEmailerList> SolutionEmailerLists { get; set; } = null!;
         public virtual DbSet<SolutionFailList> SolutionFailLists { get; set; } = null!;
         public virtual DbSet<SolutionLanguageList> SolutionLanguageLists { get; set; } = null!;
         public virtual DbSet<SolutionMixedEnumList> SolutionMixedEnumLists { get; set; } = null!;
-        public virtual DbSet<SolutionMonacoSuggestionList> SolutionMonacoSuggestionLists { get; set; } = null!;
         public virtual DbSet<SolutionMottoList> SolutionMottoLists { get; set; } = null!;
         public virtual DbSet<SolutionOperationList> SolutionOperationLists { get; set; } = null!;
         public virtual DbSet<SolutionRegistrationParameterList> SolutionRegistrationParameterLists { get; set; } = null!;
@@ -1085,6 +1086,8 @@ namespace EasyITCenter.DBModel
 
             modelBuilder.Entity<ServerStartUpScriptList>(entity =>
             {
+                entity.Property(e => e.InheritedScriptType).HasDefaultValueSql("('script')");
+
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Version).HasDefaultValueSql("((1))");
@@ -1184,6 +1187,37 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_ServerToolTypeList_UserList");
             });
 
+            modelBuilder.Entity<SharedMonacoLanguageList>(entity =>
+            {
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.SolutionUserList)
+                    .WithMany(p => p.SharedMonacoLanguageLists)
+                    .HasForeignKey(d => d.SolutionUserListId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SharedMonacoLanguageList_SolutionTaskList");
+            });
+
+            modelBuilder.Entity<SharedMonacoSuggestionList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.MonacoLanguageListLanguageNavigation)
+                    .WithMany(p => p.SharedMonacoSuggestionLists)
+                    .HasPrincipalKey(p => p.Language)
+                    .HasForeignKey(d => d.MonacoLanguageListLanguage)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SharedMonacoSuggestionList_SharedMonacoLanguageList");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SharedMonacoSuggestionLists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SolutionMonacoSuggestionList_SolutionUserList");
+            });
+
             modelBuilder.Entity<SolutionCodeLibraryList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
@@ -1248,26 +1282,6 @@ namespace EasyITCenter.DBModel
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GlobalMixedEnumList_UserList");
-            });
-
-            modelBuilder.Entity<SolutionMonacoSuggestionList>(entity =>
-            {
-                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Version).HasDefaultValueSql("((1))");
-
-                entity.HasOne(d => d.InheritedMonacoLanguageTypeNavigation)
-                    .WithMany(p => p.SolutionMonacoSuggestionLists)
-                    .HasPrincipalKey(p => p.SystemName)
-                    .HasForeignKey(d => d.InheritedMonacoLanguageType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionMonacoSuggestionList_SolutionMixedEnumList");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SolutionMonacoSuggestionLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionMonacoSuggestionList_SolutionUserList");
             });
 
             modelBuilder.Entity<SolutionMottoList>(entity =>

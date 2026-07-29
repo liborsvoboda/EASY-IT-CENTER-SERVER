@@ -1,0 +1,28 @@
+{
+	PackageType: "Editor",
+	PackageName: "PackageName",
+	Author: "Libor Svoboda",
+	Price: 0,
+	Currency: "czk",
+	BankAccount: "35-4325020227",
+	BankCode: "0100",
+	Phone: "00420724986873",
+	Email: "libor.svoboda@kliknetezde.cz"
+	Tags: "editor,javascript"
+	Description: "Package Short Description",
+	Version: 1,
+	ProgLanguage: "javascript",
+	
+	InstallScript: [ 
+		Name: "", ScriptType: "SubServer", OsType: "Windows", ProcessType: "cmd", Description: "", WaitForExit: false, InstallCommand: "", StartCommand: "" 
+	],
+	OnlineTool: [
+		Name: "", Description: "", Url: "", OpenInNewWindow: ""
+	],
+	Suggestion: [
+		LanguageType: "ownJavascript", Label: "", Documentation: "", InsertText: ""
+	],
+	Template: [
+		Type: "Web", Category: "MultiPages"
+	]
+}

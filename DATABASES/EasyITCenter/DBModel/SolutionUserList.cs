@@ -66,11 +66,12 @@ namespace EasyITCenter.DBModel
             ServerStorageVersionSettingSupportLists = new HashSet<ServerStorageVersionSettingSupportList>();
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             ServerToolTypeLists = new HashSet<ServerToolTypeList>();
+            SharedMonacoLanguageLists = new HashSet<SharedMonacoLanguageList>();
+            SharedMonacoSuggestionLists = new HashSet<SharedMonacoSuggestionList>();
             SolutionCodeLibraryLists = new HashSet<SolutionCodeLibraryList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
             SolutionLanguageLists = new HashSet<SolutionLanguageList>();
             SolutionMixedEnumLists = new HashSet<SolutionMixedEnumList>();
-            SolutionMonacoSuggestionLists = new HashSet<SolutionMonacoSuggestionList>();
             SolutionMottoLists = new HashSet<SolutionMottoList>();
             SolutionOperationLists = new HashSet<SolutionOperationList>();
             SolutionRegistrationParameterLists = new HashSet<SolutionRegistrationParameterList>();
@@ -252,6 +253,10 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ServerToolTypeList> ServerToolTypeLists { get; set; }
+        [InverseProperty("SolutionUserList")]
+        public virtual ICollection<SharedMonacoLanguageList> SharedMonacoLanguageLists { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<SharedMonacoSuggestionList> SharedMonacoSuggestionLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionCodeLibraryList> SolutionCodeLibraryLists { get; set; }
         [InverseProperty("User")]
@@ -260,8 +265,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionLanguageList> SolutionLanguageLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionMixedEnumList> SolutionMixedEnumLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<SolutionMonacoSuggestionList> SolutionMonacoSuggestionLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionMottoList> SolutionMottoLists { get; set; }
         [InverseProperty("User")]

@@ -32,7 +32,6 @@ namespace EasyITCenter.DBModel
             ServerToolPanelDefinitionLists = new HashSet<ServerToolPanelDefinitionList>();
             SolutionCodeLibraryLists = new HashSet<SolutionCodeLibraryList>();
             SolutionFailLists = new HashSet<SolutionFailList>();
-            SolutionMonacoSuggestionLists = new HashSet<SolutionMonacoSuggestionList>();
             SolutionOperationListInheritedApiResultTypeNavigations = new HashSet<SolutionOperationList>();
             SolutionOperationListInheritedOperationTypeNavigations = new HashSet<SolutionOperationList>();
             SolutionSchedulerListInheritedGroupNameNavigations = new HashSet<SolutionSchedulerList>();
@@ -91,7 +90,6 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<ServerToolPanelDefinitionList> ServerToolPanelDefinitionLists { get; set; }
         public virtual ICollection<SolutionCodeLibraryList> SolutionCodeLibraryLists { get; set; }
         public virtual ICollection<SolutionFailList> SolutionFailLists { get; set; }
-        public virtual ICollection<SolutionMonacoSuggestionList> SolutionMonacoSuggestionLists { get; set; }
         public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedApiResultTypeNavigations { get; set; }
         public virtual ICollection<SolutionOperationList> SolutionOperationListInheritedOperationTypeNavigations { get; set; }
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerListInheritedGroupNameNavigations { get; set; }
