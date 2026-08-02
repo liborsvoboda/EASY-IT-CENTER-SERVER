@@ -6,3 +6,10 @@
 
 **You need ApiKey**
 [Documentation](https://rollapp.readme.io/reference/rollmyfile-js-api)
+
+- Init Code     
+````
+        let key = "SeCur3AP1K3y";
+        let rollMyFile = new RollMyFile(key, function () {
+        });
+````

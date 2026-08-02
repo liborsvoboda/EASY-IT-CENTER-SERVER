@@ -1,5 +1,9 @@
 # Require
 
-library for some tools which must be used
-vith load over Require    
+library for some tools which must be loaded over Require    
+
+**Command**
+````
+
+````
 

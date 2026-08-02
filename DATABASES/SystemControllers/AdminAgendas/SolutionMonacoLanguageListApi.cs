@@ -4,18 +4,18 @@ namespace EasyITCenter.Controllers {
 
     
     [ApiController]
-    [Route("EasyITCenterSolutionMonacoLanguageList")]
-    public class SolutionMonacoLanguageListApi : ControllerBase {
+    [Route("EasyITCenterSharedMonacoLanguageList")]
+    public class SharedMonacoLanguageListApi : ControllerBase {
 
 
         [AllowAnonymous]
-        [HttpGet("/EasyITCenterSolutionMonacoLanguageList")]
-        public async Task<string> GetEasyITCenterSolutionMonacoLanguageList() {
-            List<SolutionMonacoSuggestionList> data;
+        [HttpGet("/EasyITCenterSharedMonacoLanguageList")]
+        public async Task<string> GetEasyITCenterSharedMonacoLanguageList() {
+            List<SharedMonacoSuggestionList> data;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
-                data = new EasyITCenterContext().SolutionMonacoSuggestionLists.ToList();
+                data = new EasyITCenterContext().SharedMonacoSuggestionLists.ToList();
             }
 
             return JsonSerializer.Serialize(data);
@@ -23,13 +23,13 @@ namespace EasyITCenter.Controllers {
 
 
         [AllowAnonymous]
-        [HttpGet("/EasyITCenterSolutionMonacoLanguageList/Filter/{filter}")]
-        public async Task<string> GetEasyITCenterSolutionMonacoLanguageListByFilter(string filter) {
-            List<SolutionMonacoSuggestionList> data;
+        [HttpGet("/EasyITCenterSharedMonacoLanguageList/Filter/{filter}")]
+        public async Task<string> GetEasyITCenterSharedMonacoLanguageListByFilter(string filter) {
+            List<SharedMonacoSuggestionList> data;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted //with NO LOCK
             })) {
-                data = new EasyITCenterContext().SolutionMonacoSuggestionLists.FromSqlRaw("SELECT * FROM SolutionMonacoSuggestionLists WHERE 1=1 AND " + filter.Replace("+", " ")).AsNoTracking().ToList();
+                data = new EasyITCenterContext().SharedMonacoSuggestionLists.FromSqlRaw("SELECT * FROM SharedMonacoSuggestionLists WHERE 1=1 AND " + filter.Replace("+", " ")).AsNoTracking().ToList();
             }
 
             return JsonSerializer.Serialize(data);
@@ -37,13 +37,13 @@ namespace EasyITCenter.Controllers {
 
 
         [AllowAnonymous]
-        [HttpGet("/EasyITCenterSolutionMonacoLanguageList/{id}")]
-        public async Task<string> GetEasyITCenterSolutionMonacoLanguageListKey(int id) {
-            SolutionMonacoSuggestionList data;
+        [HttpGet("/EasyITCenterSharedMonacoLanguageList/{id}")]
+        public async Task<string> GetEasyITCenterSharedMonacoLanguageListKey(int id) {
+            SharedMonacoSuggestionList data;
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {
                 IsolationLevel = IsolationLevel.ReadUncommitted
             })) {
-                data = new EasyITCenterContext().SolutionMonacoSuggestionLists.Where(a => a.Id == id).First();
+                data = new EasyITCenterContext().SharedMonacoSuggestionLists.Where(a => a.Id == id).First();
             }
 
             return JsonSerializer.Serialize(data);
@@ -51,12 +51,12 @@ namespace EasyITCenter.Controllers {
 
 
         [Authorize]
-        [HttpPut("/EasyITCenterSolutionMonacoLanguageList")]
+        [HttpPut("/EasyITCenterSharedMonacoLanguageList")]
         [Consumes("application/json")]
-        public async Task<string> InsertEasyITCenterSolutionMonacoLanguageList([FromBody] SolutionMonacoSuggestionList record) {
+        public async Task<string> InsertEasyITCenterSharedMonacoLanguageList([FromBody] SharedMonacoSuggestionList record) {
             try {
                 if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
-                    EntityEntry<SolutionMonacoSuggestionList>? data = new EasyITCenterContext().SolutionMonacoSuggestionLists.Add(record);
+                    EntityEntry<SharedMonacoSuggestionList>? data = new EasyITCenterContext().SharedMonacoSuggestionLists.Add(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                     else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -69,12 +69,12 @@ namespace EasyITCenter.Controllers {
 
 
         [Authorize]
-        [HttpPost("/EasyITCenterSolutionMonacoLanguageList")]
+        [HttpPost("/EasyITCenterSharedMonacoLanguageList")]
         [Consumes("application/json")]
-        public async Task<string> UpdateEasyITCenterSolutionMonacoLanguageList([FromBody] SolutionMonacoSuggestionList record) {
+        public async Task<string> UpdateEasyITCenterSharedMonacoLanguageList([FromBody] SharedMonacoSuggestionList record) {
             try {
                 if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
-                    EntityEntry<SolutionMonacoSuggestionList>? data = new EasyITCenterContext().SolutionMonacoSuggestionLists.Update(record);
+                    EntityEntry<SharedMonacoSuggestionList>? data = new EasyITCenterContext().SharedMonacoSuggestionLists.Update(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                     else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });
@@ -85,16 +85,16 @@ namespace EasyITCenter.Controllers {
 
 
         [Authorize]
-        [HttpDelete("/EasyITCenterSolutionMonacoLanguageList/{id}")]
+        [HttpDelete("/EasyITCenterSharedMonacoLanguageList/{id}")]
         [Consumes("application/json")]
-        public async Task<string> DeleteEasyITCenterSolutionMonacoLanguageList(string id) {
+        public async Task<string> DeleteEasyITCenterSharedMonacoLanguageList(string id) {
             try {
                 if (HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     if (!int.TryParse(id, out int Ids)) return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = 0, ErrorMessage = "Id is not set" });
 
-                    SolutionMonacoSuggestionList record = new() { Id = int.Parse(id) };
+                    SharedMonacoSuggestionList record = new() { Id = int.Parse(id) };
 
-                    EntityEntry<SolutionMonacoSuggestionList>? data = new EasyITCenterContext().SolutionMonacoSuggestionLists.Remove(record);
+                    EntityEntry<SharedMonacoSuggestionList>? data = new EasyITCenterContext().SharedMonacoSuggestionLists.Remove(record);
                     int result = await data.Context.SaveChangesAsync();
                     if (result > 0) return JsonSerializer.Serialize(new ResultMessage() { InsertedId = record.Id, Status = DBResult.success.ToString(), RecordCount = result, ErrorMessage = string.Empty });
                     else return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.error.ToString(), RecordCount = result, ErrorMessage = string.Empty });

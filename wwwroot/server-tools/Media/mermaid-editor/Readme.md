@@ -1,6 +1,43 @@
-﻿# Mermaid Examples
+﻿# Mermaid Editor
+
+- Generate UML, Graphs, and more Image Objects
+
+
+
+# Mermaid Examples
 
 ### Class
+
+  <pre class="flowchart">
+graph TD
+A[aaa] --> B(bbb)
+A --> C((ccc))
+B --> D{ddd}
+C --- D
+  </pre>
+  <pre class="flowchart">
+graph LR
+A --> B
+A{"shape": "rect", "label": "Hello", "rx": 15, "ry": 5}
+B{"shape": "circle", "label": "World"}
+  </pre>
+  <pre class="flowchart">
+graph LR
+A --- B
+  </pre>
+  <pre class="flowchart">
+graph LR
+A ---|hello| B
+  </pre>
+  <pre class="flowchart">
+graph LR
+A --- B
+B -.- C
+C -.-> D
+D === E
+E ==> F
+  </pre>
+  
 
 <pre class="class-mermaid">
      

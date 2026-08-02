@@ -41,24 +41,66 @@ require(['vs/editor/editor.main'], function () {
     addNewEditor("", "monacoJS", 'javascript');
     addNewEditor("", "monacoCSS", 'css');
 
-    /*
-    var languageSelected = document.querySelector('.language');    
-    languageSelected.onchange = function () {
-        monaco.editor.setModelLanguage(window.monaco.editor.getModels()[0], "html")
-    }
-    */
+    //THEME Selector
+    let themeSelect = document.createElement("SELECT");
+    themeSelect.setAttribute("id", "EditorThemeSelector");
+    themeSelect.style['position'] = 'absolute';
+    themeSelect.style['z-index'] = '2000';
+    themeSelect.style["top"] = "20px";
+    themeSelect.style["right"] = "30px";
 
-    let languageSelected = document.querySelector('.language');
-    languageSelected.onchange = function () {
-        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model, languageSelected.value)
-        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model, languageSelected.value)
-        monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model, languageSelected.value)
-    }
+    let option = document.createElement("option"); option.setAttribute("value", "vs-dark");option.innerHTML = "vs-dark";themeSelect.appendChild(option);
+    let option1 = document.createElement("option"); option1.setAttribute("value", "vs"); option1.innerHTML = "vs"; themeSelect.appendChild(option1);
+    let option2 = document.createElement("option"); option2.setAttribute("value", "hc-black"); option2.innerHTML = "hc-black"; themeSelect.appendChild(option2);
+    document.getElementById("EditorSelection").appendChild(themeSelect);
 
-    var themeSelected = document.querySelector('.theme');    
+    var themeSelected = document.getElementById('EditorThemeSelector');
     themeSelected.onchange = function () {
-        monaco.editor.setTheme(themeSelected.value)
+        monaco.editor.setTheme(themeSelected.value);
     }
+
+    //LANGUAGE SELECTOR
+    let languageSelect = document.createElement("SELECT");
+    languageSelect.setAttribute("id", "EditorLanguageSelector");
+    languageSelect.style['position'] = 'absolute';
+    languageSelect.style['z-index'] = '2000';
+    languageSelect.style["top"] = "50px";
+    languageSelect.style["right"] = "30px";
+    document.getElementById("EditorSelection").appendChild(languageSelect);
+
+    let sharedMonacoLanguageList = Metro.storage.getItem("SharedMonacoLanguageList", null);
+
+    let languageElement = document.getElementById('EditorLanguageSelector');
+    if (languageElement.options.length == 0) {
+        sharedMonacoLanguageList.forEach(language => {
+            if (language.Active && !language.Custom) {
+                let opt = document.createElement('option');
+                opt.value = language.Language;opt.innerHTML = language.Language;
+                languageElement.appendChild(opt);
+
+            } else if (language.Active && language.Custom) {
+                let opt = document.createElement('option');
+                opt.value = language.Language; opt.innerHTML = language.Language;
+                languageElement.appendChild(opt);
+
+                monaco.languages.registerCompletionItemProvider(language.Language, {
+                    provideCompletionItems: function (model, position) {
+                        const suggestions = Metro.storage.getItem('SharedMonacoSuggestionList', null).filter(obj => { if (obj.monacoLanguageListLanguage == language.Language) { return obj; } });
+                        return { suggestions: suggestions };
+                    }
+                });
+                monaco.languages.register({ id: language.Language });
+            }
+        });
+    }
+
+     languageElement.onchange = function () {
+         monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].model, languageElement.value)
+         monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].model, languageElement.value)
+         monaco.editor.setModelLanguage(Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].model, languageElement.value)
+     }
+
+   
     
 
     
@@ -93,30 +135,5 @@ require(['vs/editor/editor.main'], function () {
     */
 
 
-    let mixedenumList = Metro.storage.getItem("SolutionMixedEnumList", null);
-
-    let selectElement = document.querySelector('.language');
-    if (selectElement.options.length == 0) {
-        mixedenumList.forEach(mixedEnum => {
-            if (mixedEnum.ItemsGroup == "MonacoLanguageType") {
-                var opt = document.createElement('option');
-                opt.value = mixedEnum.SystemName;
-                opt.innerHTML = mixedEnum.SystemName;
-                selectElement.appendChild(opt);
-            }
-        });
-
-        mixedenumList.forEach(mixedEnum => {
-            if (mixedEnum.ItemsGroup == "MonacoLanguageType" && mixedEnum.Active && Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.SystemName) { return obj; } }).length > 0) {
-                monaco.languages.registerCompletionItemProvider(mixedEnum.SystemName, {
-                    provideCompletionItems: function (model, position) {
-                        const suggestions = Metro.storage.getItem('MonacoSuggestionList', null).filter(obj => { if (obj.inheritedMonacoLanguageType == mixedEnum.SystemName) { return obj; } });
-                        return { suggestions: suggestions };
-                    }
-                });
-                monaco.languages.register({ id: mixedEnum.SystemName });
-            }
-        });
-    }
-    
+ 
 });

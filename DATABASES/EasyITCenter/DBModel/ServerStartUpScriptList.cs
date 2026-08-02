@@ -14,6 +14,9 @@ namespace EasyITCenter.DBModel
         public int Id { get; set; }
         [StringLength(50)]
         [Unicode(false)]
+        public string InheritedScriptType { get; set; } = null!;
+        [StringLength(50)]
+        [Unicode(false)]
         public string Name { get; set; } = null!;
         [StringLength(50)]
         [Unicode(false)]

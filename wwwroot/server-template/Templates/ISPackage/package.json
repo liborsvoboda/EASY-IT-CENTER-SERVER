@@ -12,8 +12,9 @@
 	Description: "Package Short Description",
 	Version: 1,
 	ProgLanguage: "javascript",
+	ESBWebTool: false,
 	
-	InstallScript: [ 
+	StartUpScript: [ 
 		Name: "", ScriptType: "SubServer", OsType: "Windows", ProcessType: "cmd", Description: "", WaitForExit: false, InstallCommand: "", StartCommand: "" 
 	],
 	OnlineTool: [
@@ -24,5 +25,11 @@
 	],
 	Template: [
 		Type: "Web", Category: "MultiPages"
+	],
+	HeadStyleFiles: [
+		FileName: ""
+	],
+	HeadJavascriptFiles: [
+		FileName: ""
 	]
 }

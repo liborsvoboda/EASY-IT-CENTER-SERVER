@@ -1,0 +1,26 @@
+<html lang="cs" style="overflow: visible;"><head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="./css/bootstrap.css">
+	<link rel="stylesheet" href="./css/summernote.css">
+	
+	<script type="text/javascript" src="./js/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="./js/bootstrap.js"></script>
+	<script type="text/javascript" src="./js/summernote.js"></script>
+	<script type="text/javascript" src="./lang/summernote-cs-CZ.min.js"></script>
+</head>
+<body style="overflow: visible;">
+<div id="Description"></div>
+<script>
+
+$('#Description').summernote({tabsize: 2,height: 150, maxHeight: 150,
+    lang: 'cs-CZ',
+    placeholder: 'write Description...',
+    toolbar: [['style', ['style']],['font', ['bold', 'underline', 'clear']],['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],['color', ['color']],['para', ['ul', 'ol', 'paragraph']],['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']]]
+});
+
+</script>
+
+<div class="note-modal-backdrop" style="display: none;"></div></body></html>

@@ -539,6 +539,7 @@ Gs.Generator.GeneratorJavascriptClearForm = function () {
         table.clearSelected();
         let select= null;let options = [];
     `;
+    let inheritedIndex = 0;let listIndex = 0;
 
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
     tableSchemaList.forEach(schema => {
@@ -564,21 +565,23 @@ Gs.Generator.GeneratorJavascriptClearForm = function () {
             `;
 
         } else if (schema.data.toLowerCase().startsWith("inherited")) {
+            inheritedIndex++;
             javascript += `
             select = Metro.getPlugin("#menu${schema.data}", "select");options = [];select.data("");
-            let mixedEnumList = Metro.storage.getItem('SolutionMixedEnumList', null);
-            mixedEnumList.forEach(data => {
+            let mixedEnumList${inheritedIndex} = Metro.storage.getItem('SolutionMixedEnumList', null);
+            mixedEnumList${inheritedIndex}.forEach(data => {
                 if(data.ItemsGroup == "${schema.data.split("Inherited")[1]}"){
-                    options.push({ val: data.SystemName, title: user.SystemName, selected: false });
+                    options.push({ val: data.SystemName, title: data.SystemName, selected: false });
                 }
             });select.addOptions(options);
             `;
 
         } else if (schema.data.toLowerCase().indexOf("list") > -1) {
+            listIndex++;
             javascript += `
             select = Metro.getPlugin("#menu${schema.data}", "select");options = [];select.data("");
-            let dataList = Metro.storage.getItem("${schema.data.split("List")[0]}List", null);
-            dataList.forEach(data => {
+            let dataList${listIndex} = Metro.storage.getItem("${schema.data.split("List")[0]}List", null);
+            dataList${listIndex}.forEach(data => {
                 options.push({ val: data.${schema.data.split("List")[1]}, title: data.${schema.data.split("List")[1]}, selected: false });
             });select.addOptions(options);
             `;
@@ -671,6 +674,7 @@ Gs.Generator.GeneratorJavascriptSetRecId = function () {
         let tableData = Metro.storage.getItem("${$("#menuGeneratorTableName").val()}", null);
         let selectedRec = tableData.filter(menu => { return menu.Id != undefined ? menu.Id == table.getSelectedItems()[0][0] : menu.Guid == table.getSelectedItems()[0][0] ; })[0];
     `;
+    let inheritedIndex = 0; let listIndex = 0;
 
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
     tableSchemaList.forEach(schema => {
@@ -696,10 +700,11 @@ Gs.Generator.GeneratorJavascriptSetRecId = function () {
             `;
 
         } else if (schema.data.toLowerCase().startsWith("inherited")) {
+            inheritedIndex++;
             javascript += `
             select = Metro.getPlugin("#menu${schema.data}", "select");options = [];select.data("");
-            let mixedEnumList = Metro.storage.getItem('SolutionMixedEnumList', null);
-            mixedEnumList.forEach(data => {
+            let mixedEnumList${inheritedIndex} = Metro.storage.getItem('SolutionMixedEnumList', null);
+            mixedEnumList${inheritedIndex}.forEach(data => {
                 if(data.ItemsGroup == "${schema.data.split("Inherited")[1]}"){
                     options.push({ val: data.SystemName, title: user.SystemName, selected: selectedRec.${schema.data} == data.SystemName ? true : false });
                 }
@@ -707,10 +712,11 @@ Gs.Generator.GeneratorJavascriptSetRecId = function () {
             `;
 
         } else if (schema.data.toLowerCase().indexOf("list") > -1) {
+            listIndex++;
             javascript += `
             select = Metro.getPlugin("#menu${schema.data}", "select");options = [];select.data("");
-            let dataList = Metro.storage.getItem("${schema.data.split("List")[0]}List", null);
-            dataList.forEach(data => {
+            let dataList${listIndex} = Metro.storage.getItem("${schema.data.split("List")[0]}List", null);
+            dataList${listIndex}.forEach(data => {
                 options.push({ val: data.${schema.data.split("List")[1]}, title: data.${schema.data.split("List")[1]}, selected: selectedRec.${schema.data} == data.${schema.data.split("List")[1]} ? true : false });
             });select.addOptions(options);
             `;
