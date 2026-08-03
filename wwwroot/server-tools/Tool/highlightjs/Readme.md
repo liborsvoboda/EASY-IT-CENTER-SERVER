@@ -1,5 +1,56 @@
 # Highlight.js
 
+[Github](https://github.com/highlightjs/highlight.js)    
+
+**Code**
+````
+<pre><code class="language-html">...</code></pre>
+````
+
+- highlighting      
+- 
+````
+document.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelectorAll('pre code').forEach((el) => {
+    hljs.highlightElement(el);
+  });
+});
+````
+
+- highlighting html
+````
+<div class='code'>...</div>
+
+document.querySelectorAll('div.code').forEach(el => {
+  // then highlight each
+  hljs.highlightElement(el);
+});
+````
+
+- Highlight worker.js
+
+```` 
+- in Main file:
+
+addEventListener('load', () => {
+  const code = document.querySelector('#code');
+  const worker = new Worker('worker.js');
+  worker.onmessage = (event) => { code.innerHTML = event.data; }
+  worker.postMessage(code.textContent);
+});
+
+- worker.js:
+
+onmessage = (event) => {
+  importScripts('<path>/highlight.min.js');
+  const result = self.hljs.highlightAuto(event.data);
+  postMessage(result.value);
+};
+````
+
+
+# Highlight.js
+
 [![latest version](https://badgen.net/npm/v/highlight.js?label=latest)](https://www.npmjs.com/package/highlight.js)
 [![license](https://badgen.net/github/license/highlightjs/highlight.js?color=cyan)](https://github.com/highlightjs/highlight.js/blob/main/LICENSE)
 [![install size](https://badgen.net/packagephobia/install/highlight.js?label=npm+install)](https://packagephobia.now.sh/result?p=highlight.js)
@@ -488,6 +539,7 @@ See our [building documentation][6] for more information.
 
 
 ## Requirements
+
 
 Highlight.js works on all modern browsers and currently supported Node.js versions.  You'll need the following software to contribute to the core library:
 
