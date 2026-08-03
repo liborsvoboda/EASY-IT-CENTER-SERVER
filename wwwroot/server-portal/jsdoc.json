@@ -17,18 +17,18 @@
   ],
     "source": {
       "include": [
-        "manage/js/global-desktop.js",
-        "manage/js/global-database.js",
-        "manage/js/global-direct.js",
-        "manage/js/global-storage.js",
-        "manage/js/global-behavior.js",
-        "manage/js/global-functions.js",
-        "manage/js/global-api.js",
-        "manage/js/global-media.js",
-        "manage/js/global-object.js",
-        "manage/js/global-signalr.js",
-        "manage/js/global-socket.js",
-        "manage/js/global-generator.js"
+        "manage/jsdoc/global-api.js",
+        "manage/jsdoc/global-behavior.js",
+        "manage/jsdoc/global-database.js",
+        "manage/jsdoc/global-desktop.js",
+        "manage/jsdoc/global-direct.js",
+        "manage/jsdoc/global-functions.js",
+        "manage/jsdoc/global-generator.js",
+        "manage/jsdoc/global-media.js",
+        "manage/jsdoc/global-object.js",
+        "manage/jsdoc/global-signalr.js",
+        "manage/jsdoc/global-socket.js",
+        "manage/jsdoc/global-storage.js"
       ]
     },
   "opts": {

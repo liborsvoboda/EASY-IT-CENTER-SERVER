@@ -4,14 +4,14 @@
 * Function Generate and Show New Form Page on Portal Menu
 * @function
 */
-Gs.Generator.GenerateFormRequest = async function () {
+async function GenerateFormRequest () {
     let content = `<p data-role="hint" data-hint-position="top" data-cls-hint="supertop" data-hint-text="Insert Table Name and Load Table Field">Table Name</p>
-    <div><input id='menuGeneratorTableName' type='text' data-role='input' ><button class="button success mb-4 shadowed" style="position: absolute;right: 0px;" onclick="Gs.Generator.GetTableSchemaList();">Load Fields</button>
+    <div><input id='menuGeneratorTableName' type='text' data-role='input' ><button class="button success mb-4 shadowed" style="position: absolute;right: 0px;" onclick="async function GetTableSchemaList();">Load Fields</button>
     <p data-role="hint" data-hint-position="top" data-cls-hint="supertop" data-hint-text="Select Table Fields for Form Table which will be shown">Select Table Fields</p>
     <select id="menuGeneratorTableSchema" data-role="select" data-cls-select="" data-clear-button="true" data-prepend="Select Table Fields" multiple></select>
      <p data-role="hint" data-hint-position="top" data-cls-hint="supertop" data-hint-text="Insert Page Name">Insert Page Name</p>
     <input id='menuGeneratorName' type='text' data-role='input' >
-    <button class="button primary mb-4 shadowed" style="position: absolute;right: 0px;" onclick="Gs.Generator.GeneratePage();">Generate</button>
+    <button class="button primary mb-4 shadowed" style="position: absolute;right: 0px;" onclick="async function GeneratePage();">Generate</button>
     <p></p>
     </div>`;
     let actions = [{
@@ -22,40 +22,40 @@ Gs.Generator.GenerateFormRequest = async function () {
             } else { alert("Data must be Inserted"); }
         }
     }, { caption: "Cancel", cls: "js-dialog-close alert", onclick: function () { } }];
-    Gs.Objects.CreateDialogRequest("Generate new Form Page", content, actions);
+    CreateDialogRequest("Generate new Form Page", content, actions);
 }
 
 
 
-Gs.Generator.GeneratePage = function () {
+function GeneratePage () {
     if ($("#menuGeneratorTableName").val().length > 0 && $("#menuGeneratorName").val().length > 0) {
         let html = "";
-        html += Gs.Generator.GeneratorHtmlHeader();
-        html += Gs.Generator.GeneratorHtmlButtons();
-        html += Gs.Generator.GeneratorHtmlTable();
-        html += Gs.Generator.GeneratorHtmlForm();
-        html += Gs.Generator.GeneratorHtmlEditors();
-        html += Gs.Generator.GeneratorPageFooter();
+        html += GeneratorHtmlHeader();
+        html += GeneratorHtmlButtons();
+        html += GeneratorHtmlTable();
+        html += GeneratorHtmlForm();
+        html += GeneratorHtmlEditors();
+        html += GeneratorPageFooter();
         Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoHTML" })[0].editor.getModel().setValue(html);
 
         let javascript = "";
-        javascript += Gs.Generator.GeneratorJavascriptInit();
-        javascript += Gs.Generator.GeneratorJavascriptStartUp();
-        javascript += Gs.Generator.GeneratorJavascriptReloadTable();
-        javascript += Gs.Generator.GeneratorJavascriptClearForm();
-        javascript += Gs.Generator.GeneratorJavascriptSetEmptyEditor();
-        javascript += Gs.Generator.GeneratorJavascriptSetRecId();
-        javascript += Gs.Generator.GeneratorJavascriptMenuToJson();
-        javascript += Gs.Generator.GeneratorJavascriptSaveMenu();
-        javascript += Gs.Generator.GeneratorJavascriptDeleteSelectedMenu();
-        javascript += Gs.Generator.GeneratorJavascriptCopyRecord();
+        javascript += GeneratorJavascriptInit();
+        javascript += GeneratorJavascriptStartUp();
+        javascript += GeneratorJavascriptReloadTable();
+        javascript += GeneratorJavascriptClearForm();
+        javascript += GeneratorJavascriptSetEmptyEditor();
+        javascript += GeneratorJavascriptSetRecId();
+        javascript += GeneratorJavascriptMenuToJson();
+        javascript += GeneratorJavascriptSaveMenu();
+        javascript += GeneratorJavascriptDeleteSelectedMenu();
+        javascript += GeneratorJavascriptCopyRecord();
         Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoJS" })[0].editor.getModel().setValue(javascript);
 
         let css = "";
-        css += Gs.Generator.GeneratorCss();
+        css += GeneratorCss();
         Gs.Variables.monacoEditorList.filter(obj => { return obj.elementId == "monacoCSS" })[0].editor.getModel().setValue(css);
-        Gs.Objects.ShowNotify("info", "Page was Generated");
-    } else { Gs.Objects.ShowNotify("alert", "Page was Not Generated. Insert Data First"); }
+        ShowNotify("info", "Page was Generated");
+    } else { ShowNotify("alert", "Page was Not Generated. Insert Data First"); }
 }
 
 
@@ -63,9 +63,9 @@ Gs.Generator.GeneratePage = function () {
 * Function Get Table Schema List
 * @function
 */
-Gs.Generator.GetTableSchemaList = async function () {
+async function GetTableSchemaList () {
     await Gs.Apis.RunServerGetApi(`DatabaseService/SpGetTableSchema/${$("#menuGeneratorTableName").val()}`, "TableSchemaList", "GeneratorLoadTableSchema");
-    $("#menuGeneratorName").val(Gs.Functions.AddSpaceCamelCase($("#menuGeneratorTableName").val()));
+    $("#menuGeneratorName").val(AddSpaceCamelCase($("#menuGeneratorTableName").val()));
 }
 
 
@@ -73,7 +73,7 @@ Gs.Generator.GetTableSchemaList = async function () {
 * Function Generate Page Header
 * @function
 */
-Gs.Generator.GeneratorHtmlHeader = function() {
+function GeneratorHtmlHeader() {
     let html = `<HTML><HEAD><META content=text/html;utf-8 http-equiv=content-type>`;
 
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
@@ -119,7 +119,7 @@ Gs.Generator.GeneratorHtmlHeader = function() {
 * Function Generate Page Buttons
 * @function
 */
-Gs.Generator.GeneratorHtmlButtons = function () {
+function GeneratorHtmlButtons () {
     let html = `
     <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
         <DIV class=text-right>
@@ -138,7 +138,7 @@ Gs.Generator.GeneratorHtmlButtons = function () {
 * Function Generate Page Table
 * @function
 */
-Gs.Generator.GeneratorHtmlTable = function () {
+function GeneratorHtmlTable () {
     let html = `
     <DIV id="_menuList" style="width:100%;">
         <DIV class="d-flex row gutters ml-5 mr-5 mb-5 border">
@@ -161,7 +161,7 @@ Gs.Generator.GeneratorHtmlTable = function () {
 * Function Generate Page Form
 * @function
 */
-Gs.Generator.GeneratorHtmlForm = function () {
+function GeneratorHtmlForm () {
 
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
 
@@ -175,8 +175,8 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
-                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
+                <p>${AddSpaceCamelCase(schema.data)}</p>
+                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${AddSpaceCamelCase(schema.data)}">
                     </select>
             </DIV></DIV>`;
         }
@@ -184,8 +184,8 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
-                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
+                <p>${AddSpaceCamelCase(schema.data)}</p>
+                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${AddSpaceCamelCase(schema.data)}">
                     </select>
             </DIV></DIV>`;
         }
@@ -210,8 +210,8 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
-                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}" multiple>
+                <p>${AddSpaceCamelCase(schema.data)}</p>
+                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${AddSpaceCamelCase(schema.data)}" multiple>
                     </select>
             </DIV></DIV
             `;
@@ -220,7 +220,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
-                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
+                <p>${AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}" type="text" data-role="spinner" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-step="10" data-default-value="0.00" data-plus-icon="<span class='mif-plus fg-black'></span>" data-minus-icon="<span class='mif-minus fg-black'></span>" >
             </DIV></DIV>
             `;
@@ -229,8 +229,8 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
-                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
-                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${Gs.Functions.AddSpaceCamelCase(schema.data)}" multiple>
+                <p>${AddSpaceCamelCase(schema.data)}</p>
+                    <select id="menu${schema.data}" data-role="select" data-use-placeholder="true" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-placeholder="${AddSpaceCamelCase(schema.data)}" multiple>
                     </select>
             </DIV></DIV>
             `;
@@ -239,7 +239,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
-                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
+                <p>${AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}" type="text" data-role="spinner" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-default-value="0.00" data-plus-icon="<span class='mif-plus fg-black'></span>" data-minus-icon="<span class='mif-minus fg-black'></span>" >
             </DIV></DIV>
             `;
@@ -248,7 +248,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
-                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
+                <p>${AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}" type="text" data-role="calendarpicker" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')}>
             </DIV></DIV>
             `;
@@ -257,7 +257,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
         //    html += `
         //    <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
         //        <DIV class="form-group">
-        //        <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
+        //        <p>${AddSpaceCamelCase(schema.data)}</p>
         //            <input id="menu${schema.data}"  type="text" data-role="spinner" data-plus-icon="<span class='mif-plus fg-white'></span>" data-minus-icon="<span class='mif-minus fg-white'></span>" >
         //    </DIV></DIV>`;
         //}
@@ -265,7 +265,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
-                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
+                <p>${AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}" data-role="timepicker" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')}>
             </DIV></DIV>
             `;
@@ -274,7 +274,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pt-8 col-12">
                 <DIV class="form-group">
-                <p>${Gs.Functions.AddSpaceCamelCase(schema.data)}</p>
+                <p>${AddSpaceCamelCase(schema.data)}</p>
                     <input id="menu${schema.data}"  type="text" data-role="spinner" ${(schema.dataNull == 'YES' ? 'data-validate="required"' : '')} data-plus-icon="<span class='mif-plus fg-white'></span>" data-minus-icon="<span class='mif-minus fg-white'></span>" >
             </DIV></DIV>
             `;
@@ -283,7 +283,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <DIV class="form-group">
-                    <INPUT id="menu${schema.data}" style="HEIGHT: auto" data-role="input" ${(schema.dataNull == 'YES' ? 'data-validate="required"' :'')} data-validate="required" autocomplete="off" data-label="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
+                    <INPUT id="menu${schema.data}" style="HEIGHT: auto" data-role="input" ${(schema.dataNull == 'YES' ? 'data-validate="required"' :'')} data-validate="required" autocomplete="off" data-label="${AddSpaceCamelCase(schema.data)}">
             </DIV></DIV>
             `;
         }
@@ -291,7 +291,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
             html += `
             <DIV class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <DIV class="form-group pt-5">
-                    <INPUT id="menu${schema.data}" style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="${Gs.Functions.AddSpaceCamelCase(schema.data)}">
+                    <INPUT id="menu${schema.data}" style="HEIGHT: auto" autocomplete="off" data-role="checkbox" data-caption="${AddSpaceCamelCase(schema.data)}">
             </DIV></DIV>
             `;
         }
@@ -307,7 +307,7 @@ Gs.Generator.GeneratorHtmlForm = function () {
 * Function Generate Page Editors
 * @function
 */
-Gs.Generator.GeneratorHtmlEditors = function () {
+function GeneratorHtmlEditors () {
     let html = ``;
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
     tableSchemaList.forEach(schema => {
@@ -348,7 +348,7 @@ Gs.Generator.GeneratorHtmlEditors = function () {
 * Function Generate Close Page Footer
 * @function
 */
-Gs.Generator.GeneratorPageFooter = function () {
+function GeneratorPageFooter () {
     let html = `
         </DIV></DIV>
         </FORM></DIV></WINDOW>
@@ -364,7 +364,7 @@ Gs.Generator.GeneratorPageFooter = function () {
 * Function Generate Css for Page
 * @function
 */
-Gs.Generator.GeneratorCss = function () {
+function GeneratorCss () {
     let css = ``;
     css += `
     .monaco-editor {
@@ -385,7 +385,7 @@ Gs.Generator.GeneratorCss = function () {
 * Function Generate Javascript Page Init
 * @function
 */
-Gs.Generator.GeneratorJavascriptInit = function () {
+function GeneratorJavascriptInit () {
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
     tableSchemaList.forEach(schema => {
         if (schema.data.toLowerCase() == "description") { }
@@ -424,7 +424,7 @@ Gs.Generator.GeneratorJavascriptInit = function () {
 * Function Generate Javascript Page StartUp
 * @function
 */
-Gs.Generator.GeneratorJavascriptStartUp = function () {
+function GeneratorJavascriptStartUp () {
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
 
     let javascript = `
@@ -461,27 +461,27 @@ Gs.Generator.GeneratorJavascriptStartUp = function () {
     tableSchemaList.forEach(schema => {
         if (schema.data.toLowerCase().indexOf("accessrole") > -1) {
             javascript += `jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure)); jsonData[1].tableName = "SolutionUserRoleList";
-                    Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "SolutionUserRoleList" } );
+                    Gs.Variables.apiTaskList.push({ UUID: GenerateUUID(), Id: RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "SolutionUserRoleList" } );
                 `;
 
         } else if (schema.data.toLowerCase().indexOf("accessuser") > -1) {
             javascript += `jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure));jsonData[1].tableName = "SolutionUserList";
-                Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "SolutionUserList" } );
+                Gs.Variables.apiTaskList.push({ UUID: GenerateUUID(), Id: RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "SolutionUserList" } );
             `;
 
         } else if (schema.data.toLowerCase().startsWith("inherited")) {
             javascript += `jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure));jsonData[1].tableName = "SolutionMixedEnumList";
-                Gs.Variables.apiTaskList.push({ UUID:Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "SolutionMixedEnumList" } );
+                Gs.Variables.apiTaskList.push({ UUID:GenerateUUID(), Id: RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "SolutionMixedEnumList" } );
             `;
         } else if (schema.data.toLowerCase().indexOf("list") > -1) {
             javascript += `jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure));jsonData[1].tableName = "${schema.data.split("List")[0]}List";
-                Gs.Variables.apiTaskList.push({ UUID:Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "${schema.data.split("List")[0]}List" } );
+                Gs.Variables.apiTaskList.push({ UUID:GenerateUUID(), Id: RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "${schema.data.split("List")[0]}List" } );
             `;
         }
     });
 
     javascript += `jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure));jsonData[1].tableName = "${$("#menuGeneratorTableName").val()}";
-                Gs.Variables.apiTaskList.push({ UUID:Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "${$("#menuGeneratorTableName").val() }", WindowFunction: "ReloadTable" } );
+                Gs.Variables.apiTaskList.push({ UUID:GenerateUUID(), Id: RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/GetGenericDataListByParams", JsonData: jsonData, StorageName: "${$("#menuGeneratorTableName").val() }", WindowFunction: "ReloadTable" } );
 
 
                 let table = Metro.getPlugin("#menuTable", "table");
@@ -498,14 +498,14 @@ Gs.Generator.GeneratorJavascriptStartUp = function () {
 * Function Generate Javascript Page ReloadTable
 * @function
 */
-Gs.Generator.GeneratorJavascriptReloadTable = function () {
+function GeneratorJavascriptReloadTable () {
     let select = Metro.getPlugin("#menuGeneratorTableSchema", "select"); 
     
     let javascript = `
     
     function ReloadTable(){
         let data = [];
-        Gs.Functions.AddClass("deleteButton", "disabled");
+        AddClass("deleteButton", "disabled");
         let tableData = Metro.storage.getItem("${$("#menuGeneratorTableName").val()}", null);
         tableData.forEach(item => { data.push([ 
             `;
@@ -528,11 +528,11 @@ Gs.Generator.GeneratorJavascriptReloadTable = function () {
 * Function Generate Javascript Page ClearForm
 * @function
 */
-Gs.Generator.GeneratorJavascriptClearForm = function () {
+function GeneratorJavascriptClearForm () {
     let javascript = `
     function ClearForm(){
-        Gs.Functions.AddClass("deleteButton","disabled");
-        Gs.Functions.AddClass("copyButton","disabled");
+        AddClass("deleteButton","disabled");
+        AddClass("copyButton","disabled");
         copyRecord = false;
 
         var table = Metro.getPlugin("#menuTable", "table");
@@ -628,7 +628,7 @@ Gs.Generator.GeneratorJavascriptClearForm = function () {
 * Function Generate Javascript Page EmptyEditor
 * @function
 */
-Gs.Generator.GeneratorJavascriptSetEmptyEditor = function () {
+function GeneratorJavascriptSetEmptyEditor () {
     let javascript = `
     function SetEmptyEditor() {
         setTimeout(function() {
@@ -667,7 +667,7 @@ Gs.Generator.GeneratorJavascriptSetEmptyEditor = function () {
 * Function Generate Javascript Page SetRecId
 * @function
 */
-Gs.Generator.GeneratorJavascriptSetRecId = function () {
+function GeneratorJavascriptSetRecId () {
     let javascript = `
     function SetRecId() {
         var table = Metro.getPlugin("#menuTable", "table");
@@ -766,8 +766,8 @@ Gs.Generator.GeneratorJavascriptSetRecId = function () {
         }
     });
     javascript += `
-    Gs.Functions.RemoveClass("deleteButton","disabled");
-    Gs.Functions.RemoveClass("copyButton","disabled");
+    RemoveClass("deleteButton","disabled");
+    RemoveClass("copyButton","disabled");
 
     }`;
 
@@ -779,7 +779,7 @@ Gs.Generator.GeneratorJavascriptSetRecId = function () {
 * Function Generate Javascript Page MenuToJson
 * @function
 */
-Gs.Generator.GeneratorJavascriptMenuToJson = function () {
+function GeneratorJavascriptMenuToJson () {
     let tableSchemaList = Metro.storage.getItem('TableSchemaList', null);
 
     let javascript = `
@@ -800,30 +800,30 @@ Gs.Generator.GeneratorJavascriptMenuToJson = function () {
 
         } else if (schema.data.toLowerCase() == "id" || schema.data.toLowerCase() == "guid") {
             javascript += `
-            ${Gs.Functions.CamelCaseString(schema.data) + ": selectedTableRec." + schema.data},
+            ${CamelCaseString(schema.data) + ": selectedTableRec." + schema.data},
             `;
         } else if (schema.data.toLowerCase() == "description") {
             javascript += `Description: $("#menuDescription").summernote("code"),
             `;
         } else if (schema.data.toLowerCase().startsWith("inherited")) {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: $("#menu${schema.data}").val(),
+            javascript += `${CamelCaseString(schema.data)}: $("#menu${schema.data}").val(),
             `;
         } else if (schema.dataType == "bit") {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: $("#menu${schema.data}").val('checked')[0].checked,
+            javascript += `${CamelCaseString(schema.data)}: $("#menu${schema.data}").val('checked')[0].checked,
             `;
         } else if (schema.data.toLowerCase() == "codecontent" || schema.data.toLowerCase() == "htmlcontent" || schema.data.toLowerCase() == "jscontent" || schema.data.toLowerCase() == "csscontent") {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: Gs.Variables.monacoEditorList.filter(obj=>{return obj.elementId == "monacoPreview"})[0].model.getValue(),
+            javascript += `${CamelCaseString(schema.data)}: Gs.Variables.monacoEditorList.filter(obj=>{return obj.elementId == "monacoPreview"})[0].model.getValue(),
             `;
 
         } else if (schema.data.toLowerCase() == "mdcontent") {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown(),
+            javascript += `${CamelCaseString(schema.data)}: $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown(),
             `;
 
         } else if (schema.data.toLowerCase() == "jsoncontent") {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: document.getElementById("JsonEditor").contentWindow.inputEditor.doc.getValue(),
+            javascript += `${CamelCaseString(schema.data)}: document.getElementById("JsonEditor").contentWindow.inputEditor.doc.getValue(),
             `;
         } else {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: $("#menu${schema.data}").val(),
+            javascript += `${CamelCaseString(schema.data)}: $("#menu${schema.data}").val(),
             `;
         }
     });
@@ -842,24 +842,24 @@ Gs.Generator.GeneratorJavascriptMenuToJson = function () {
             javascript += `Description: $("#menuDescription").summernote("code"),
             `;
         } else if (schema.data.toLowerCase().startsWith("inherited")) {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: $("#menu${schema.data}").val(),
+            javascript += `${CamelCaseString(schema.data)}: $("#menu${schema.data}").val(),
             `;
         } else if (schema.dataType == "bit") {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: $("#menu${schema.data}").val('checked')[0].checked,
+            javascript += `${CamelCaseString(schema.data)}: $("#menu${schema.data}").val('checked')[0].checked,
             `;
         } else if (schema.data.toLowerCase() == "codecontent" || schema.data.toLowerCase() == "htmlcontent" || schema.data.toLowerCase() == "jscontent" || schema.data.toLowerCase() == "csscontent") {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: Gs.Variables.monacoEditorList.filter(obj=>{return obj.elementId == "monacoPreview"})[0].model.getValue(),
+            javascript += `${CamelCaseString(schema.data)}: Gs.Variables.monacoEditorList.filter(obj=>{return obj.elementId == "monacoPreview"})[0].model.getValue(),
             `;
 
         } else if (schema.data.toLowerCase() == "mdcontent") {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown(),
+            javascript += `${CamelCaseString(schema.data)}: $('#HelpEditor')[0].contentWindow.mdEditor.getMarkdown(),
             `;
 
         } else if (schema.data.toLowerCase() == "jsoncontent") {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: document.getElementById("JsonEditor").contentWindow.inputEditor.doc.getValue(),
+            javascript += `${CamelCaseString(schema.data)}: document.getElementById("JsonEditor").contentWindow.inputEditor.doc.getValue(),
             `;
         } else {
-            javascript += `${Gs.Functions.CamelCaseString(schema.data)}: $("#menu${schema.data}").val(),
+            javascript += `${CamelCaseString(schema.data)}: $("#menu${schema.data}").val(),
             `;
         }
 
@@ -879,7 +879,7 @@ Gs.Generator.GeneratorJavascriptMenuToJson = function () {
 * Function Generate Javascript Page Save
 * @function
 */
-Gs.Generator.GeneratorJavascriptSaveMenu = function () {
+function GeneratorJavascriptSaveMenu () {
     let javascript = `
     async function SaveMenu() {
         let jsonData = null;let dataForm = {};
@@ -891,7 +891,7 @@ Gs.Generator.GeneratorJavascriptSaveMenu = function () {
             jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure));
             jsonData[1].tableName = "${$("#menuGeneratorTableName").val()}";
             jsonData[1].dataRec = JSON.stringify(dataForm);
-            Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/SetGenericDataListByParams", JsonData: jsonData, WindowFunction: "StartUp" } );
+            Gs.Variables.apiTaskList.push({ UUID: GenerateUUID(), Id: RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/SetGenericDataListByParams", JsonData: jsonData, WindowFunction: "StartUp" } );
         }
     }
     `;
@@ -904,7 +904,7 @@ Gs.Generator.GeneratorJavascriptSaveMenu = function () {
 * Function Generate Javascript Page Delete
 * @function
 */
-Gs.Generator.GeneratorJavascriptDeleteSelectedMenu = function () {
+function GeneratorJavascriptDeleteSelectedMenu () {
     let javascript = `
     async function DeleteSelectedMenu() {
         let table = Metro.getPlugin("#menuTable", "table");
@@ -912,7 +912,7 @@ Gs.Generator.GeneratorJavascriptDeleteSelectedMenu = function () {
         jsonData = JSON.parse(JSON.stringify(Gs.Variables.getSpProcedure));
         jsonData[1].tableName = "${$("#menuGeneratorTableName").val()}";
         jsonData[1].dataRec = JSON.stringify({ Id : table.getSelectedItems()[0][0]});;
-        Gs.Variables.apiTaskList.push({ UUID: Gs.Functions.GenerateUUID(), Id: Gs.Functions.RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/SetGenericDataListByParams", JsonData: jsonData, WindowFunction: "StartUp" } );
+        Gs.Variables.apiTaskList.push({ UUID: GenerateUUID(), Id: RandomString(), Sequence: 0, Type: "RunServerPostApi", ApiPath: "DatabaseService/SpProcedure/SetGenericDataListByParams", JsonData: jsonData, WindowFunction: "StartUp" } );
     }
     `;
     return javascript;
@@ -923,11 +923,11 @@ Gs.Generator.GeneratorJavascriptDeleteSelectedMenu = function () {
 * Function Generate Javascript Page Copy Record
 * @function
 */
-Gs.Generator.GeneratorJavascriptCopyRecord = function () {
+function GeneratorJavascriptCopyRecord () {
     let javascript = `
     async function CopyRecord() {
         copyRecord = true;
-        Gs.Functions.AddClass("copyButton","disabled");
+        AddClass("copyButton","disabled");
     }
     `;
     return javascript;

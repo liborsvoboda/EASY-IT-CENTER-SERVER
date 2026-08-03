@@ -134,7 +134,7 @@ window.WindowButtons = [
     {
         html: "<span class='mif-file-code' title='Show Window Code'></span>",
         cls: "alert",
-        onclick: "ShowWindowCode()"
+        onclick: "Gs.Behaviors.ShowWindowCode()"
     },
     {
         html: "<span class='mif-help' title='Show Menu Help'></span>",
@@ -172,7 +172,7 @@ window.WindowButtons = [
 
 
 
-ChangeSchemeTo = function (n) {
+Gs.Behaviors.ChangeSchemeTo = function (n) {
     $("#AppPanel").css({ backgroundColor: n.split("?")[1] });
     $("#portal-color-scheme").attr("href", window.location.origin + "/server-tools/Metro/metro4/css/schemes/" + n.split("?")[0]);
     $("#scheme-name").html(n.split("?")[0]);
@@ -182,8 +182,8 @@ ChangeSchemeTo = function (n) {
 //Set Default Storage Values
 if (Metro.storage.getItem('WebScheme', null) == null) {
     Metro.storage.setItem('WebScheme', "sky-net.css");
-    ChangeSchemeTo(Metro.storage.getItem('WebScheme', null));
-} else { ChangeSchemeTo(Metro.storage.getItem('WebScheme', null)); }
+    Gs.Behaviors.ChangeSchemeTo(Metro.storage.getItem('WebScheme', null));
+} else { Gs.Behaviors.ChangeSchemeTo(Metro.storage.getItem('WebScheme', null)); }
 
 //Start Set User Default Setting
 Metro.storage.setItem('UserSettingList', Gs.Variables.UserSettingList);

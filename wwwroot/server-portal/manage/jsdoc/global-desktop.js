@@ -8,12 +8,12 @@
 
     wins: {},
 
-    setup: function (options) {
-        this.options = $.extend({}, this.options, options);
+    setup: function(options){
+        this.options = $.extend( {}, this.options, options );
         return this;
     },
 
-    addToTaskBar: function (wnd) {
+    addToTaskBar: function(wnd){
         var icon = wnd.getIcon();
         var wID = wnd.win.attr("id");
         var item = $("<span>").addClass("task-bar-item started c-pointer supertop").html(icon);
@@ -21,17 +21,17 @@
         item.data("wID", wID);
 
         item.on("click", function () {
-            $("#" + item.data("wID")).toggle();
+            $("#"+item.data("wID")).toggle();
         });
 
         item.appendTo($(this.options.taskBar));
     },
 
-    removeFromTaskBar: function (wnd) {
+    removeFromTaskBar: function(wnd){
         var wID = wnd.attr("id");
         var items = $(".task-bar-item");
         var that = this;
-        $.each(items, function () {
+        $.each(items, function(){
             var item = $(this);
             if (item.data("wID") === wID) {
                 delete that.wins[wID];
@@ -40,8 +40,8 @@
         })
     },
 
-    createWindow: function (o) {
-        o.onDragStart = function () {
+    createWindow: function(o){
+        o.onDragStart = function(){
             win = $(this);
             $(".window").css("z-index", 10000);
 
@@ -49,12 +49,12 @@
                 win.css("z-index", 10002);
             }
         };
-        o.onDragStop = function () {
+        o.onDragStop = function(){
             win = $(this);
             if (!win.hasClass("modal"))
                 win.css("z-index", 10001);
         };
-        o.onWindowDestroy = function (win) {
+        o.onWindowDestroy = function(win){
             Desktop.removeFromTaskBar($(win));
         };
 
@@ -87,7 +87,7 @@ function OpenFrameWindow(tool) {
         {
             html: "<span class='mif-help' title='Open Readme.md'></span>",
             cls: "success",
-            onclick: `Gs.Objects.InfoboxFrameCreate('HelpViewer','${tool.Url.replace((tool.Url.toLowerCase().indexOf(".html") > -1 ? tool.Url.split("/").pop() : ""), "")}Readme', false);`
+            onclick: `Gs.Objects.InfoboxFrameCreate('HelpViewer','${tool.Url.replace((tool.Url.toLowerCase().indexOf(".html") > -1 ? tool.Url.split("/").pop() : ""),"")}Readme', false);`
         },
         {
             html: "<span class='mif-help' title='Show Readme.md Code'></span>",
@@ -162,7 +162,7 @@ var setTilesAreaSize = function () {
         }
     });
 
-    $(".tiles-area").css({ width: tileAreaWidth });
+    $(".tiles-area").css({  width: tileAreaWidth });
 
     if (width > Metro.media_sizes.LD) {
         $(".start-screen").css({
@@ -184,7 +184,7 @@ $.each($('[class*=tile-]'), function () {
     }, Math.floor(Math.random() * 500));
 });
 
-$(".tiles-group").animate({ left: 0 });
+$(".tiles-group").animate({  left: 0 });
 
 $("#StartPanel").on(Metro.events.resize + "-start-screen-resize", function () { setTilesAreaSize(); });
 

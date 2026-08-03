@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //.configureLogging(signalR.LogLevel.Information)
         .build();
 
-    Gs.Variables.SignalR.streamChat.onclose(Gs.SignalR.Start());
+    Gs.Variables.SignalR.streamChat.onclose(async function Start());
 
 
     Gs.Variables.SignalR.streamChat.on("ReceiveStreamChat", (user, message) => {
@@ -58,17 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    Gs.SignalR.Start();
-    setTimeout(function () { Gs.SignalR.GetUsers(); }, 1000);
+    Start();
+    setTimeout(function () { GetUsers(); }, 1000);
 });
 
 
-Gs.SignalR.Start = async function () {
+async function Start () {
     try {
         if (Gs.Variables.SignalR.streamChat.state == signalR.HubConnectionState.Disconnected) { await Gs.Variables.SignalR.streamChat.start(); }
     } catch (err) {
         console.log(err, Gs.Variables.SignalR.streamChat.state);
-        if (Gs.Variables.SignalR.streamChat.state == signalR.HubConnectionState.Disconnected) { setTimeout(Gs.SignalR.Start(), 1000); }
+        if (Gs.Variables.SignalR.streamChat.state == signalR.HubConnectionState.Disconnected) { setTimeout(Start(), 1000); }
     }
 }
 
@@ -77,9 +77,9 @@ Gs.SignalR.Start = async function () {
 * Function SetInterval 30 sec for SignarlR Refresh
 * @function
 */
-Gs.SignalR.PingInterval = async function() {
+async function PingInterval() {
     setTimeout(async () => {
-        await Gs.SignalR.GetUsers();
+        await GetUsers();
     }, 30000);
 }
 
@@ -87,7 +87,7 @@ Gs.SignalR.PingInterval = async function() {
 * Function Get Online Users 
 * @function
 */
-Gs.SignalR.GetUsers = async function () {
+async function GetUsers () {
     if (Gs.Variables.SignalR.streamChat.state == signalR.HubConnectionState.Disconnected) { await Gs.Variables.SignalR.streamChat.start(); }
     if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Connected) {
         Gs.Variables.SignalR.streamChat.invoke("RequestUsers").catch(function (err) {
@@ -97,7 +97,7 @@ Gs.SignalR.GetUsers = async function () {
 }
 
 
-Gs.SignalR.StartVideoStream = async function (stopStreaming) {
+async function StartVideoStream (stopStreaming) {
     try {
         if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Disconnected) { await Gs.Variables.SignalR.streamChat.start(); }
 
@@ -114,7 +114,7 @@ Gs.SignalR.StartVideoStream = async function (stopStreaming) {
 
         if (!stopStreaming) {
             setTimeout(function () {
-                Gs.SignalR.StartVideoStream(Gs.Variables.SignalR.stopStreaming);
+                StartVideoStream(Gs.Variables.SignalR.stopStreaming);
             },2000);
         }
     } catch (err) {
@@ -128,7 +128,7 @@ Gs.SignalR.StartVideoStream = async function (stopStreaming) {
 * @function
 * @param {string} message message
 */
-Gs.SignalR.SendStreamChatMessage = async function (message) {
+async function SendStreamChatMessage (message) {
     if (Gs.Variables.SignalR.streamChat.state === signalR.HubConnectionState.Disconnected) { await Gs.Variables.SignalR.streamChat.start(); }
 
     let chatMessageList = Metro.storage.getItem("ShareChatMessageList", null);

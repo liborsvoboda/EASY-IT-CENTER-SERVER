@@ -4,11 +4,9 @@
 * Function SetInterval 30 sec for WebSocketRefresh
 * @function
 */
-function PingInterval() {
-    setInterval(() => {
-        SendChatMessageWS(1000, JSON.stringify({}));
-    }, 30000);
-}
+Gs.Socket.PingInterval = setInterval(() => {
+    Gs.Socket.SendChatMessageWS(1000, JSON.stringify({}));
+}, 30000);
 
 
 /**
@@ -17,7 +15,7 @@ function PingInterval() {
 * @param {string} interval interval in milisecond
 * @param {string} message webSocket message
 */
-function SendChatMessageWS (interval, message = null) {
+Gs.Socket.SendChatMessageWS = function (interval, message = null) {
     if (Gs.Variables.Socket.chatSocket.readyState === 1) {
 
         if (message != null) {
@@ -26,12 +24,12 @@ function SendChatMessageWS (interval, message = null) {
             Gs.Variables.Socket.chatSocket.close();
         }
         Gs.Variables.Socket.chatSocket = new WebSocket(`${Metro.storage.getItem('ApiOriginSuffix', null).replace("http:", "ws:").replace("https:", "wss:")}WebSocketService/chat`)
-        SetReceivingChat();
+        Gs.Socket.SetReceivingChat();
     
         
     } else {
         setTimeout(function () {
-            SendChatMessageWS(interval, message);
+            Gs.Socket.SendChatMessageWS(interval, message);
         }, interval);
     }
 };
@@ -41,15 +39,15 @@ function SendChatMessageWS (interval, message = null) {
 * Function Set Receiving Chat Message to Chat
 * @function
 */
-function SetReceivingChat () {
+Gs.Socket.SetReceivingChat = function () {
 
     //RECEIVE MESSAGE
     Gs.Variables.Socket.chatSocket.addEventListener("message", (event) => {
         event.data = event.data.replaceAll("\u0000", "");
-        let message = WhatIsIt(event.data) == "String" && event.data.length > 0 ? JSON.parse(event.data) : {};
+        let message = Gs.Functions.WhatIsIt(event.data) == "String" && event.data.length > 0 ? JSON.parse(event.data) : {};
 
         //ONLY OTHER MESSAGES
-        if (WhatIsIt(event.data) == "String" && message.id != undefined && message.id != Gs.Variables.chatmessage.id) {
+        if (Gs.Functions.WhatIsIt(event.data) == "String" && message.id != undefined && message.id != Gs.Variables.chatmessage.id) {
 
             message.position = "left";
             message.avatar = message.name == "Anonymous" ? "/server-portal/images/anonymous.jpg" : message.avatar;
@@ -76,12 +74,12 @@ function SetReceivingChat () {
 * @function
 * @param {string} message message
 */
-function SendChatMessage (message) {
+Gs.Socket.SendChatMessage = function (message) {
     let chatMessageList = Metro.storage.getItem("ChatMessageList", null);
     Gs.Variables.chatmessage = message;
     chatMessageList.push(message);
     Metro.storage.setItem("ChatMessageList", chatMessageList);
-    SendChatMessageWS(1000, message);
+    Gs.Socket.SendChatMessageWS(1000, message);
 }
 
 
