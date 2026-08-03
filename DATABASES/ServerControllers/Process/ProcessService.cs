@@ -61,8 +61,15 @@ namespace EasyITCenter.Controllers {
                 if (HttpContextExtension.IsAdmin() || HttpContextExtension.IsWebAdmin() || HttpContextExtension.IsSuperAdmin()) {
                     processRequest.Command = processRequest.Command.StartsWith("/") ? processRequest.Command.Substring(1) : processRequest.Command.StartsWith("\\") ? processRequest.Command.Substring(1) : processRequest.Command;
 
-                    processRequest.Command = processRequest.Command.Replace("wwwroot", SrvRuntime.WebRootPath);
-                    processRequest.WorkingDirectory = processRequest.WorkingDirectory.Replace("wwwroot", SrvRuntime.WebRootPath);
+                    //REPLACE PATHS variables with actual paths
+                    processRequest.Command = processRequest.Command.Replace("wwwroot", SrvRuntime.WebRootPath)
+                        .Replace("projectpath", Environment.CurrentDirectory).Replace("startuppath", SrvRuntime.StartupPath).Replace("generatorpath", SrvRuntime.SrvGeneratorsPath)
+                        .Replace("privatepath", SrvRuntime.SrvPrivatePath).Replace("publicpath", SrvRuntime.SrvPublicPath).Replace("toolspath", SrvRuntime.SrvToolsPath);
+
+                    //REPLACE PATHS variables with actual paths
+                    processRequest.WorkingDirectory = processRequest?.WorkingDirectory?.Replace("wwwroot", SrvRuntime.WebRootPath).Replace("projectpath", Environment.CurrentDirectory)
+                        .Replace("startuppath", SrvRuntime.StartupPath).Replace("generatorpath", SrvRuntime.SrvGeneratorsPath).Replace("privatepath", SrvRuntime.SrvPrivatePath)
+                        .Replace("publicpath", SrvRuntime.SrvPublicPath).Replace("toolspath", SrvRuntime.SrvToolsPath);
 
                     await ProcessOperations.ServerProcessStartAsync(processRequest);
                     return base.Json(new WebClasses.JsonResult() { Result = string.Empty, Status = DBResult.success.ToString() });

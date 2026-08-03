@@ -1,0 +1,669 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>solidity - Indexed Centralized Docs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="EasyITcenter &amp; EasySYSTEMbuilder Groupware Solution Projects Documentation">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./css/global.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="Summary.html">Summary</a></li><li class="chapter-item expanded "><a href="ada.html"><strong aria-hidden="true">1.</strong> ada</a></li><li class="chapter-item expanded "><a href="adb.html"><strong aria-hidden="true">2.</strong> adb</a></li><li class="chapter-item expanded "><a href="alias.html"><strong aria-hidden="true">3.</strong> alias</a></li><li class="chapter-item expanded "><a href="android-versions.html"><strong aria-hidden="true">4.</strong> android-versions</a></li><li class="chapter-item expanded "><a href="angular.html"><strong aria-hidden="true">5.</strong> angular</a></li><li class="chapter-item expanded "><a href="arrow-functions.html"><strong aria-hidden="true">6.</strong> arrow-functions</a></li><li class="chapter-item expanded "><a href="assembly.html"><strong aria-hidden="true">7.</strong> assembly</a></li><li class="chapter-item expanded "><a href="async-http-client.html"><strong aria-hidden="true">8.</strong> async-http-client</a></li><li class="chapter-item expanded "><a href="axios.html"><strong aria-hidden="true">9.</strong> axios</a></li><li class="chapter-item expanded "><a href="azure.html"><strong aria-hidden="true">10.</strong> azure</a></li><li class="chapter-item expanded "><a href="bash.html"><strong aria-hidden="true">11.</strong> bash</a></li><li class="chapter-item expanded "><a href="bcryptjs.html"><strong aria-hidden="true">12.</strong> bcryptjs</a></li><li class="chapter-item expanded "><a href="bootstrap.html"><strong aria-hidden="true">13.</strong> bootstrap</a></li><li class="chapter-item expanded "><a href="bulma.html"><strong aria-hidden="true">14.</strong> bulma</a></li><li class="chapter-item expanded "><a href="c.html"><strong aria-hidden="true">15.</strong> c</a></li><li class="chapter-item expanded "><a href="cat.html"><strong aria-hidden="true">16.</strong> cat</a></li><li class="chapter-item expanded "><a href="cd.html"><strong aria-hidden="true">17.</strong> cd</a></li><li class="chapter-item expanded "><a href="challenges-code-preloads.html"><strong aria-hidden="true">18.</strong> challenges-code-preloads</a></li><li class="chapter-item expanded "><a href="chmod.html"><strong aria-hidden="true">19.</strong> chmod</a></li><li class="chapter-item expanded "><a href="cksum.html"><strong aria-hidden="true">20.</strong> cksum</a></li><li class="chapter-item expanded "><a href="clojure.html"><strong aria-hidden="true">21.</strong> clojure</a></li><li class="chapter-item expanded "><a href="cmp.html"><strong aria-hidden="true">22.</strong> cmp</a></li><li class="chapter-item expanded "><a href="cobol.html"><strong aria-hidden="true">23.</strong> cobol</a></li><li class="chapter-item expanded "><a href="comm.html"><strong aria-hidden="true">24.</strong> comm</a></li><li class="chapter-item expanded "><a href="commonlisp.html"><strong aria-hidden="true">25.</strong> commonlisp</a></li><li class="chapter-item expanded "><a href="cp.html"><strong aria-hidden="true">26.</strong> cp</a></li><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">27.</strong> cpp</a></li><li class="chapter-item expanded "><a href="cron.html"><strong aria-hidden="true">28.</strong> cron</a></li><li class="chapter-item expanded "><a href="crontab.html"><strong aria-hidden="true">29.</strong> crontab</a></li><li class="chapter-item expanded "><a href="csharp.html"><strong aria-hidden="true">30.</strong> csharp</a></li><li class="chapter-item expanded "><a href="css.html"><strong aria-hidden="true">31.</strong> css</a></li><li class="chapter-item expanded "><a href="curl.html"><strong aria-hidden="true">32.</strong> curl</a></li><li class="chapter-item expanded "><a href="cut.html"><strong aria-hidden="true">33.</strong> cut</a></li><li class="chapter-item expanded "><a href="d.html"><strong aria-hidden="true">34.</strong> d</a></li><li class="chapter-item expanded "><a href="dart.html"><strong aria-hidden="true">35.</strong> dart</a></li><li class="chapter-item expanded "><a href="dns.html"><strong aria-hidden="true">36.</strong> dns</a></li><li class="chapter-item expanded "><a href="docker.html"><strong aria-hidden="true">37.</strong> docker</a></li><li class="chapter-item expanded "><a href="dockerfile.html"><strong aria-hidden="true">38.</strong> dockerfile</a></li><li class="chapter-item expanded "><a href="dotenv.html"><strong aria-hidden="true">39.</strong> dotenv</a></li><li class="chapter-item expanded "><a href="echo.html"><strong aria-hidden="true">40.</strong> echo</a></li><li class="chapter-item expanded "><a href="ejs-embedded-javascript-templates.html"><strong aria-hidden="true">41.</strong> ejs-embedded-javascript-templates</a></li><li class="chapter-item expanded "><a href="elixir.html"><strong aria-hidden="true">42.</strong> elixir</a></li><li class="chapter-item expanded "><a href="erlang.html"><strong aria-hidden="true">43.</strong> erlang</a></li><li class="chapter-item expanded "><a href="es2csv.html"><strong aria-hidden="true">44.</strong> es2csv</a></li><li class="chapter-item expanded "><a href="express.html"><strong aria-hidden="true">45.</strong> express</a></li><li class="chapter-item expanded "><a href="figma.html"><strong aria-hidden="true">46.</strong> figma</a></li><li class="chapter-item expanded "><a href="find.html"><strong aria-hidden="true">47.</strong> find</a></li><li class="chapter-item expanded "><a href="flutter.html"><strong aria-hidden="true">48.</strong> flutter</a></li><li class="chapter-item expanded "><a href="fortran.html"><strong aria-hidden="true">49.</strong> fortran</a></li><li class="chapter-item expanded "><a href="foundation.html"><strong aria-hidden="true">50.</strong> foundation</a></li><li class="chapter-item expanded "><a href="fsharp.html"><strong aria-hidden="true">51.</strong> fsharp</a></li><li class="chapter-item expanded "><a href="git.html"><strong aria-hidden="true">52.</strong> git</a></li><li class="chapter-item expanded "><a href="go.html"><strong aria-hidden="true">53.</strong> go</a></li><li class="chapter-item expanded "><a href="google-analytics.html"><strong aria-hidden="true">54.</strong> google-analytics</a></li><li class="chapter-item expanded "><a href="google-nexus-screen-resolutions.html"><strong aria-hidden="true">55.</strong> google-nexus-screen-resolutions</a></li><li class="chapter-item expanded "><a href="google-pixel-screen-resolutions.html"><strong aria-hidden="true">56.</strong> google-pixel-screen-resolutions</a></li><li class="chapter-item expanded "><a href="grep.html"><strong aria-hidden="true">57.</strong> grep</a></li><li class="chapter-item expanded "><a href="groovy-http-calls.html"><strong aria-hidden="true">58.</strong> groovy-http-calls</a></li><li class="chapter-item expanded "><a href="groovy.html"><strong aria-hidden="true">59.</strong> groovy</a></li><li class="chapter-item expanded "><a href="gson.html"><strong aria-hidden="true">60.</strong> gson</a></li><li class="chapter-item expanded "><a href="haskell.html"><strong aria-hidden="true">61.</strong> haskell</a></li><li class="chapter-item expanded "><a href="head.html"><strong aria-hidden="true">62.</strong> head</a></li><li class="chapter-item expanded "><a href="heroku.html"><strong aria-hidden="true">63.</strong> heroku</a></li><li class="chapter-item expanded "><a href="homebrew.html"><strong aria-hidden="true">64.</strong> homebrew</a></li><li class="chapter-item expanded "><a href="html.html"><strong aria-hidden="true">65.</strong> html</a></li><li class="chapter-item expanded "><a href="http-staus-codes.html"><strong aria-hidden="true">66.</strong> http-staus-codes</a></li><li class="chapter-item expanded "><a href="iphone-screen-resolutions.html"><strong aria-hidden="true">67.</strong> iphone-screen-resolutions</a></li><li class="chapter-item expanded "><a href="java-primitive-data-types.html"><strong aria-hidden="true">68.</strong> java-primitive-data-types</a></li><li class="chapter-item expanded "><a href="java-strings.html"><strong aria-hidden="true">69.</strong> java-strings</a></li><li class="chapter-item expanded "><a href="java-versions.html"><strong aria-hidden="true">70.</strong> java-versions</a></li><li class="chapter-item expanded "><a href="java.html"><strong aria-hidden="true">71.</strong> java</a></li><li class="chapter-item expanded "><a href="javascript-fetch.html"><strong aria-hidden="true">72.</strong> javascript-fetch</a></li><li class="chapter-item expanded "><a href="javascript-versions.html"><strong aria-hidden="true">73.</strong> javascript-versions</a></li><li class="chapter-item expanded "><a href="javascript.html"><strong aria-hidden="true">74.</strong> javascript</a></li><li class="chapter-item expanded "><a href="jest.html"><strong aria-hidden="true">75.</strong> jest</a></li><li class="chapter-item expanded "><a href="jquery.html"><strong aria-hidden="true">76.</strong> jquery</a></li><li class="chapter-item expanded "><a href="jshell.html"><strong aria-hidden="true">77.</strong> jshell</a></li><li class="chapter-item expanded "><a href="jsonata.html"><strong aria-hidden="true">78.</strong> jsonata</a></li><li class="chapter-item expanded "><a href="jsoup.html"><strong aria-hidden="true">79.</strong> jsoup</a></li><li class="chapter-item expanded "><a href="kill.html"><strong aria-hidden="true">80.</strong> kill</a></li><li class="chapter-item expanded "><a href="kotlin.html"><strong aria-hidden="true">81.</strong> kotlin</a></li><li class="chapter-item expanded "><a href="kubernetes.html"><strong aria-hidden="true">82.</strong> kubernetes</a></li><li class="chapter-item expanded "><a href="link.html"><strong aria-hidden="true">83.</strong> link</a></li><li class="chapter-item expanded "><a href="linux.html"><strong aria-hidden="true">84.</strong> linux</a></li><li class="chapter-item expanded "><a href="lodash.html"><strong aria-hidden="true">85.</strong> lodash</a></li><li class="chapter-item expanded "><a href="ls.html"><strong aria-hidden="true">86.</strong> ls</a></li><li class="chapter-item expanded "><a href="lua.html"><strong aria-hidden="true">87.</strong> lua</a></li><li class="chapter-item expanded "><a href="make.html"><strong aria-hidden="true">88.</strong> make</a></li><li class="chapter-item expanded "><a href="man.html"><strong aria-hidden="true">89.</strong> man</a></li><li class="chapter-item expanded "><a href="mariadb.html"><strong aria-hidden="true">90.</strong> mariadb</a></li><li class="chapter-item expanded "><a href="markdown.html"><strong aria-hidden="true">91.</strong> markdown</a></li><li class="chapter-item expanded "><a href="materialize.html"><strong aria-hidden="true">92.</strong> materialize</a></li><li class="chapter-item expanded "><a href="maven.html"><strong aria-hidden="true">93.</strong> maven</a></li><li class="chapter-item expanded "><a href="milligram.html"><strong aria-hidden="true">94.</strong> milligram</a></li><li class="chapter-item expanded "><a href="mkdir.html"><strong aria-hidden="true">95.</strong> mkdir</a></li><li class="chapter-item expanded "><a href="mongodb.html"><strong aria-hidden="true">96.</strong> mongodb</a></li><li class="chapter-item expanded "><a href="mv.html"><strong aria-hidden="true">97.</strong> mv</a></li><li class="chapter-item expanded "><a href="mysql.html"><strong aria-hidden="true">98.</strong> mysql</a></li><li class="chapter-item expanded "><a href="netlify.html"><strong aria-hidden="true">99.</strong> netlify</a></li><li class="chapter-item expanded "><a href="nodejs.html"><strong aria-hidden="true">100.</strong> nodejs</a></li><li class="chapter-item expanded "><a href="nodemon.html"><strong aria-hidden="true">101.</strong> nodemon</a></li><li class="chapter-item expanded "><a href="ocaml.html"><strong aria-hidden="true">102.</strong> ocaml</a></li><li class="chapter-item expanded "><a href="octave.html"><strong aria-hidden="true">103.</strong> octave</a></li><li class="chapter-item expanded "><a href="okhttp.html"><strong aria-hidden="true">104.</strong> okhttp</a></li><li class="chapter-item expanded "><a href="onecompiler-apis.html"><strong aria-hidden="true">105.</strong> onecompiler-apis</a></li><li class="chapter-item expanded "><a href="onecompiler-enterprise-apis.html"><strong aria-hidden="true">106.</strong> onecompiler-enterprise-apis</a></li><li class="chapter-item expanded "><a href="oracle.html"><strong aria-hidden="true">107.</strong> oracle</a></li><li class="chapter-item expanded "><a href="papercss.html"><strong aria-hidden="true">108.</strong> papercss</a></li><li class="chapter-item expanded "><a href="pascal.html"><strong aria-hidden="true">109.</strong> pascal</a></li><li class="chapter-item expanded "><a href="perl.html"><strong aria-hidden="true">110.</strong> perl</a></li><li class="chapter-item expanded "><a href="php.html"><strong aria-hidden="true">111.</strong> php</a></li><li class="chapter-item expanded "><a href="plsql.html"><strong aria-hidden="true">112.</strong> plsql</a></li><li class="chapter-item expanded "><a href="pm2.html"><strong aria-hidden="true">113.</strong> pm2</a></li><li class="chapter-item expanded "><a href="postgresql.html"><strong aria-hidden="true">114.</strong> postgresql</a></li><li class="chapter-item expanded "><a href="prolog.html"><strong aria-hidden="true">115.</strong> prolog</a></li><li class="chapter-item expanded "><a href="prop-types.html"><strong aria-hidden="true">116.</strong> prop-types</a></li><li class="chapter-item expanded "><a href="ps.html"><strong aria-hidden="true">117.</strong> ps</a></li><li class="chapter-item expanded "><a href="pwd.html"><strong aria-hidden="true">118.</strong> pwd</a></li><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">119.</strong> python</a></li><li class="chapter-item expanded "><a href="python2.html"><strong aria-hidden="true">120.</strong> python2</a></li><li class="chapter-item expanded "><a href="r.html"><strong aria-hidden="true">121.</strong> r</a></li><li class="chapter-item expanded "><a href="racket.html"><strong aria-hidden="true">122.</strong> racket</a></li><li class="chapter-item expanded "><a href="react-helmet.html"><strong aria-hidden="true">123.</strong> react-helmet</a></li><li class="chapter-item expanded "><a href="react-prerequisites.html"><strong aria-hidden="true">124.</strong> react-prerequisites</a></li><li class="chapter-item expanded "><a href="reactjs.html"><strong aria-hidden="true">125.</strong> reactjs</a></li><li class="chapter-item expanded "><a href="redis.html"><strong aria-hidden="true">126.</strong> redis</a></li><li class="chapter-item expanded "><a href="request.html"><strong aria-hidden="true">127.</strong> request</a></li><li class="chapter-item expanded "><a href="rm.html"><strong aria-hidden="true">128.</strong> rm</a></li><li class="chapter-item expanded "><a href="rmdir.html"><strong aria-hidden="true">129.</strong> rmdir</a></li><li class="chapter-item expanded "><a href="ruby.html"><strong aria-hidden="true">130.</strong> ruby</a></li><li class="chapter-item expanded "><a href="rust.html"><strong aria-hidden="true">131.</strong> rust</a></li><li class="chapter-item expanded "><a href="scala.html"><strong aria-hidden="true">132.</strong> scala</a></li><li class="chapter-item expanded "><a href="scp.html"><strong aria-hidden="true">133.</strong> scp</a></li><li class="chapter-item expanded "><a href="search-engins.html"><strong aria-hidden="true">134.</strong> search-engins</a></li><li class="chapter-item expanded "><a href="semantic-ui.html"><strong aria-hidden="true">135.</strong> semantic-ui</a></li><li class="chapter-item expanded "><a href="skeleton.html"><strong aria-hidden="true">136.</strong> skeleton</a></li><li class="chapter-item expanded "><a href="solidity.html" class="active"><strong aria-hidden="true">137.</strong> solidity</a></li><li class="chapter-item expanded "><a href="sql.html"><strong aria-hidden="true">138.</strong> sql</a></li><li class="chapter-item expanded "><a href="sqlite.html"><strong aria-hidden="true">139.</strong> sqlite</a></li><li class="chapter-item expanded "><a href="super-csv.html"><strong aria-hidden="true">140.</strong> super-csv</a></li><li class="chapter-item expanded "><a href="swift.html"><strong aria-hidden="true">141.</strong> swift</a></li><li class="chapter-item expanded "><a href="tail.html"><strong aria-hidden="true">142.</strong> tail</a></li><li class="chapter-item expanded "><a href="tar-gz.html"><strong aria-hidden="true">143.</strong> tar-gz</a></li><li class="chapter-item expanded "><a href="tcl.html"><strong aria-hidden="true">144.</strong> tcl</a></li><li class="chapter-item expanded "><a href="typescript.html"><strong aria-hidden="true">145.</strong> typescript</a></li><li class="chapter-item expanded "><a href="uikit.html"><strong aria-hidden="true">146.</strong> uikit</a></li><li class="chapter-item expanded "><a href="underscore.html"><strong aria-hidden="true">147.</strong> underscore</a></li><li class="chapter-item expanded "><a href="vb.html"><strong aria-hidden="true">148.</strong> vb</a></li><li class="chapter-item expanded "><a href="vuejs.html"><strong aria-hidden="true">149.</strong> vuejs</a></li><li class="chapter-item expanded "><a href="vyper.html"><strong aria-hidden="true">150.</strong> vyper</a></li><li class="chapter-item expanded "><a href="wc.html"><strong aria-hidden="true">151.</strong> wc</a></li><li class="chapter-item expanded "><a href="windows-shortcuts.html"><strong aria-hidden="true">152.</strong> windows-shortcuts</a></li><li class="chapter-item expanded "><a href="yaml.html"><strong aria-hidden="true">153.</strong> yaml</a></li><li class="spacer"></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Indexed Centralized Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://groupware.cz:5000/Home/Public" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Solidity Cheatsheet
+description: Solidity is a statically-typed curly-braces programming language designed for developing smart contracts that run on Ethereum.
+created: 2022-10-01
+updated: 2022-10-01</h2>
+<p>Solidity is an object-oriented, high-level language for implementing smart contracts. Smart contracts are programs which govern the behaviour of accounts within the Ethereum state.</p>
+<h2 id="basic-contract-using-solidity"><a class="header" href="#basic-contract-using-solidity">Basic Contract using Solidity</a></h2>
+<pre><code>// SPDX-License-Identifier: GPL-3.0
+pragma solidity &gt;=0.4.16 &lt;0.9.0;
+
+contract SimpleStorage {
+    uint storedData;
+
+    function set(uint x) public {
+        storedData = x;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
+}
+</code></pre>
+<h3 id="pragma"><a class="header" href="#pragma">Pragma</a></h3>
+<pre><code>pragma solidity ^{version};
+pragma solidity ^0.4.25;
+</code></pre>
+<hr />
+<h2 id="import-files"><a class="header" href="#import-files">Import Files</a></h2>
+<p><code>import &quot;filename&quot;;</code></p>
+<p><code>import * as symbolName from &quot;filename&quot;;</code> or <code>import &quot;filename&quot; as symbolName;</code></p>
+<p><code>import {symbol1 as alias, symbol2} from &quot;filename&quot;;</code></p>
+<h2 id="data-types"><a class="header" href="#data-types">Data Types</a></h2>
+<p><code>type [public] [constant] name;</code>
+<code>uint public amount;</code>
+<code>delete amount;</code> - deletes variable content</p>
+<p>Getters are automatically generated for public vars. constant vars have to be initialized on declaration.</p>
+<h3 id="boolean"><a class="header" href="#boolean">Boolean</a></h3>
+<p><code>bool</code> : <code>true</code> or <code>false</code></p>
+<p>Operators:</p>
+<ul>
+<li>Logical : <code>!</code> (logical negation), <code>&amp;&amp;</code> (AND), <code>||</code> (OR)</li>
+<li>Comparisons : <code>==</code> (equality), <code>!=</code> (inequality)</li>
+</ul>
+<h3 id="integer"><a class="header" href="#integer">Integer</a></h3>
+<p>Unsigned : <code>uint8 | uint16 | uint32 | uint64 | uint128 | uint256(uint)</code></p>
+<p>Signed   : <code>int8  | int16  | int32  | int64  | int128  | int256(int) </code></p>
+<p>Operators:</p>
+<ul>
+<li>Comparisons: <code>&lt;=</code>, <code>&lt;</code>, <code>==</code>, <code>!=</code>, <code>&gt;=</code> and <code>&gt;</code></li>
+<li>Bit operators: <code>&amp;</code>, <code>|</code>, <code>^</code> (bitwise exclusive or) and <code>~</code> (bitwise negation)</li>
+<li>Arithmetic operators: <code>+</code>, <code>-</code>, unary <code>-</code>, unary <code>+</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>**</code> (exponentiation), <code>&lt;&lt;</code> (left shift) and <code>&gt;&gt;</code> (right shift)</li>
+</ul>
+<h3 id="address"><a class="header" href="#address">Address</a></h3>
+<p><code>address</code>: Holds an Ethereum address (20 byte value).
+<code>address payable</code> : Same as address, but includes additional methods <code>transfer</code> and <code>send</code></p>
+<p>Operators:</p>
+<ul>
+<li>Comparisons: <code>&lt;=</code>, <code>&lt;</code>, <code>==</code>, <code>!=</code>, <code>&gt;=</code> and <code>&gt;</code></li>
+</ul>
+<p>Methods:</p>
+<h4 id="balance"><a class="header" href="#balance">balance</a></h4>
+<ul>
+<li><code>&lt;address&gt;.balance (uint256)</code>: balance of the Address in Wei</li>
+</ul>
+<h4 id="transfer-and-send"><a class="header" href="#transfer-and-send">transfer and send</a></h4>
+<ul>
+<li><code>&lt;address&gt;.transfer(uint256 amount)</code>: send given amount of Wei to Address, throws on failure</li>
+<li><code>&lt;address&gt;.send(uint256 amount) returns (bool)</code>: send given amount of Wei to Address, returns false on failure</li>
+</ul>
+<h4 id="call"><a class="header" href="#call">call</a></h4>
+<ul>
+<li><code>&lt;address&gt;.call(...) returns (bool)</code>: issue low-level CALL, returns false on failure</li>
+</ul>
+<h4 id="delegatecall"><a class="header" href="#delegatecall">delegatecall</a></h4>
+<ul>
+<li><code>&lt;address&gt;.delegatecall(...) returns (bool)</code>: issue low-level DELEGATECALL, returns false on failure.</li>
+</ul>
+<h4 id="callcode"><a class="header" href="#callcode">callcode</a></h4>
+<ul>
+<li><code>&lt;address&gt;.callcode(...) returns (bool)</code>: issue low-level CALLCODE, returns false on failure</li>
+</ul>
+<h2 id="control-structures"><a class="header" href="#control-structures">Control Structures</a></h2>
+<p>Most of the control structures from JavaScript are available in Solidity except for <code>switch</code> and <code>goto</code>. </p>
+<ul>
+<li><code>if</code> <code>else</code></li>
+<li><code>while</code></li>
+<li><code>do</code></li>
+<li><code>for</code></li>
+<li><code>break</code></li>
+<li><code>continue</code></li>
+<li><code>return</code></li>
+<li><code>? :</code></li>
+</ul>
+<h3 id="flow-control"><a class="header" href="#flow-control">Flow Control</a></h3>
+<p><code>if (condition) { ... };</code>
+<code>if (condition) { ... } else { ... };</code>
+<code>for (declaration; condition; expression) { ... };</code></p>
+<p><code>while (condition) { ... };</code>
+<code>do { ... } while (condition);</code>
+<code>condition ? expression : expression;</code></p>
+<blockquote>
+<p>continue, break and return can be used to influence flow.</p>
+</blockquote>
+<h3 id="array"><a class="header" href="#array">Array</a></h3>
+<p>Arrays can be dynamic or have a fixed size.</p>
+<pre><code class="language-solidity">uint[] dynamicSizeArray;
+
+uint[7] fixedSizeArray;
+</code></pre>
+<p><code>myArray[3]; - get element</code>
+<code>myArray[3] = 8; - set element</code>
+<code>uint[] memory myArray = new uint[](5);</code> </p>
+<blockquote>
+<p>memory array with size determined at runtime. Memory arrays can't have dynamic size</p>
+</blockquote>
+<h3 id="fixed-byte-arrays"><a class="header" href="#fixed-byte-arrays">Fixed byte arrays</a></h3>
+<p><code>bytes1(byte)</code>, <code>bytes2</code>, <code>bytes3</code>, ..., <code>bytes32</code>.</p>
+<p>Operators:</p>
+<p>Comparisons: <code>&lt;=</code>, <code>&lt;</code>, <code>==</code>, <code>!=</code>, <code>&gt;=</code>, <code>&gt;</code> (evaluate to bool)
+Bit operators: <code>&amp;</code>, <code>|</code>, <code>^</code> (bitwise exclusive or), <code>~</code> (bitwise negation), <code>&lt;&lt;</code> (left shift), <code>&gt;&gt;</code> (right shift)
+Index access: If x is of type bytesI, then x[k] for 0 &lt;= k &lt; I returns the k th byte (read-only).</p>
+<p>Members</p>
+<ul>
+<li><code>.length</code> : read-only</li>
+</ul>
+<h3 id="dynamic-byte-arrays"><a class="header" href="#dynamic-byte-arrays">Dynamic byte arrays</a></h3>
+<p><code>bytes</code>: Dynamically-sized <code>byte</code> array. It is similar to <code>byte[]</code>, but it is packed tightly in calldata. Not a value-type!</p>
+<p><code>string</code>: Dynamically-sized UTF-8-encoded string. It is equal to <code>bytes</code> but does not allow length or index access. Not a value-type!</p>
+<h3 id="enum"><a class="header" href="#enum">Enum</a></h3>
+<p>Enum works just like in every other language.</p>
+<pre><code class="language-solidity">enum ActionChoices { 
+  GoLeft, 
+  GoRight, 
+  GoStraight, 
+  SitStill 
+}
+
+ActionChoices choice = ActionChoices.GoStraight;
+</code></pre>
+<h3 id="struct"><a class="header" href="#struct">Struct</a></h3>
+<p>New types can be declared using struct.</p>
+<pre><code class="language-solidity">struct Funder {
+    address addr;
+    uint amount;
+}
+
+Funder funders;
+</code></pre>
+<h3 id="mapping"><a class="header" href="#mapping">Mapping</a></h3>
+<p>Declared as <code>mapping(_KeyType =&gt; _ValueType)</code></p>
+<p>Mappings can be seen as <strong>hash tables</strong> which are virtually initialized such that every possible key exists and is mapped to a value.</p>
+<p><strong>key</strong> can be almost any type except for a mapping, a dynamically sized array, a contract, an enum, or a struct. <strong>value</strong> can actually be any type, including mappings.</p>
+<blockquote>
+<p>All possible mapping keys always exists and have a default byte value of all zeroes. Can't be iterated, checked for length, retrieve which keys were set etc. Also can't be created in memory.</p>
+</blockquote>
+<hr />
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<h3 id="structure"><a class="header" href="#structure">Structure</a></h3>
+<p><code>function (&lt;parameter types&gt;) {internal|external|public|private} [pure|constant|view|payable] [returns (&lt;return types&gt;)]</code></p>
+<h3 id="access-modifiers"><a class="header" href="#access-modifiers">Access modifiers</a></h3>
+<ul>
+<li><code>public</code> - Accessible from this contract, inherited contracts and externally</li>
+<li><code>private</code> - Accessible only from this contract</li>
+<li><code>internal</code> - Accessible only from this contract and contracts inheriting from it</li>
+<li><code>external</code> - Cannot be accessed internally, only externally. Recommended to reduce gas. Access internally with <code>this.f</code>.</li>
+</ul>
+<h3 id="parameters"><a class="header" href="#parameters">Parameters</a></h3>
+<h4 id="input-parameters"><a class="header" href="#input-parameters">Input parameters</a></h4>
+<p>Parameters are declared just like variables and are <code>memory</code> variables.</p>
+<pre><code class="language-solidity">function f(uint _a, uint _b) {}
+</code></pre>
+<h4 id="output-parameters"><a class="header" href="#output-parameters">Output parameters</a></h4>
+<p>Output parameters are declared after the <code>returns</code> keyword</p>
+<pre><code class="language-solidity">function f(uint _a, uint _b) returns (uint _sum) {
+   _sum = _a + _b;
+}
+</code></pre>
+<p>Output can also be specified using <code>return</code> statement. In that case, we can omit parameter name <code>returns (uint)</code>.</p>
+<p>Multiple return types are possible with <code>return (v0, v1, ..., vn)</code>.</p>
+<h3 id="constructor"><a class="header" href="#constructor">Constructor</a></h3>
+<p>Function that is executed during contract deployment. Defined using the <code>constructor</code> keyword.</p>
+<pre><code class="language-solidity">contract C {
+   address owner;
+   uint status;
+   constructor(uint _status) {
+       owner = msg.sender;
+       status = _status;
+   }
+}
+</code></pre>
+<h3 id="function-calls"><a class="header" href="#function-calls">Function Calls</a></h3>
+<h4 id="internal-function-calls"><a class="header" href="#internal-function-calls">Internal Function Calls</a></h4>
+<p>Functions of the current contract can be called directly (internally - via jumps) and also recursively</p>
+<pre><code class="language-solidity">contract C {
+    function funA() returns (uint) { 
+       return 5; 
+    }
+    
+    function FunB(uint _a) returns (uint ret) { 
+       return funA() + _a; 
+    }
+}
+</code></pre>
+<h4 id="external-function-calls"><a class="header" href="#external-function-calls">External Function Calls</a></h4>
+<p><code>this.g(8);</code> and <code>c.g(2);</code> (where c is a contract instance) are also valid function calls, but, the function will be called “externally”, via a message call.</p>
+<blockquote>
+<p><code>.gas()</code> and <code>.value()</code> can also be used with external function calls.</p>
+</blockquote>
+<h4 id="named-calls"><a class="header" href="#named-calls">Named Calls</a></h4>
+<p>Function call arguments can also be given by name in any order as below.</p>
+<pre><code class="language-solidity">function f(uint a, uint b) {  }
+
+function g() {
+    f({b: 1, a: 2});
+}
+</code></pre>
+<h4 id="unnamed-function-parameters"><a class="header" href="#unnamed-function-parameters">Unnamed function parameters</a></h4>
+<p>Parameters will be present on the stack, but are not accessible.</p>
+<pre><code class="language-solidity">function f(uint a, uint) returns (uint) {
+    return a;
+}
+</code></pre>
+<h3 id="function-modifier"><a class="header" href="#function-modifier">Function Modifier</a></h3>
+<p>Modifiers can automatically check a condition prior to executing the function.</p>
+<pre><code class="language-solidity">modifier onlyOwner {
+    require(msg.sender == owner);
+    _;
+}
+
+function close() onlyOwner {
+    selfdestruct(owner);
+}
+</code></pre>
+<h3 id="function-type"><a class="header" href="#function-type">Function type</a></h3>
+<p>Pass function as a parameter to another function. Similar to <code>callbacks</code> and <code>delegates</code></p>
+<pre><code class="language-solidity">pragma solidity ^0.4.18;
+
+contract Oracle {
+  struct Request {
+    bytes data;
+    function(bytes memory) external callback;
+  }
+  Request[] requests;
+  event NewRequest(uint);
+  function query(bytes data, function(bytes memory) external callback) {
+    requests.push(Request(data, callback));
+    NewRequest(requests.length - 1);
+  }
+  function reply(uint requestID, bytes response) {
+    // Here goes the check that the reply comes from a trusted source
+    requests[requestID].callback(response);
+  }
+}
+
+contract OracleUser {
+  Oracle constant oracle = Oracle(0x1234567); // known contract
+  function buySomething() {
+    oracle.query(&quot;USD&quot;, this.oracleResponse);
+  }
+  function oracleResponse(bytes response) {
+    require(msg.sender == address(oracle));
+  }
+}
+</code></pre>
+<h3 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h3>
+<p>Functions can be declared <code>pure</code> in which case they promise not to read from or modify the state.</p>
+<pre><code class="language-solidity">function f(uint a) pure returns (uint) {
+    return a * 42;
+}
+</code></pre>
+<h3 id="payable-functions"><a class="header" href="#payable-functions">Payable Functions</a></h3>
+<p>Functions that receive <code>Ether</code> are marked as <code>payable</code> function.</p>
+<h3 id="fallback-function"><a class="header" href="#fallback-function">Fallback Function</a></h3>
+<p>A contract can have exactly one <strong>unnamed function</strong>. This function cannot have arguments and cannot return anything. It is executed on a call to the contract if none of the other functions match the given function identifier (or if no data was supplied at all).</p>
+<pre><code class="language-solidity">function() {
+  // Do something
+}
+</code></pre>
+<h3 id="mathematical-and-cryptographic-functions"><a class="header" href="#mathematical-and-cryptographic-functions">Mathematical and Cryptographic Functions</a></h3>
+<ul>
+<li><code>addmod(uint x, uint y, uint k) returns (uint)</code>:
+compute (x + y) % k where the addition is performed with arbitrary precision and does not wrap around at 2**256.</li>
+<li><code>mulmod(uint x, uint y, uint k) returns (uint)</code>:
+compute (x * y) % k where the multiplication is performed with arbitrary precision and does not wrap around at 2**256.</li>
+<li><code>sha3(...) returns (bytes32)</code>:
+alias to keccak256</li>
+<li><code>ripemd160(...) returns (bytes20)</code>:
+compute RIPEMD-160 hash of the (tightly packed) arguments</li>
+<li><code>keccak256(...) returns (bytes32)</code>:
+compute the Ethereum-SHA-3 (Keccak-256) hash of the (tightly packed) arguments</li>
+<li><code>sha256(...) returns (bytes32)</code>:
+compute the SHA-256 hash of the (tightly packed) arguments</li>
+</ul>
+<hr />
+<h2 id="interface"><a class="header" href="#interface">Interface</a></h2>
+<p><code>Interfaces</code> are similar to abstract contracts, but they have restrictions:</p>
+<ul>
+<li>Cannot have any functions implemented.</li>
+<li>Cannot inherit other contracts or interfaces.</li>
+<li>Cannot define constructor.</li>
+<li>Cannot define variables.</li>
+<li>Cannot define structs.</li>
+<li>Cannot define enums.</li>
+</ul>
+<blockquote>
+<p>Interfaces are like abstract contracts which other contracts can inherit. Inheriting contract has to implement all interface methods. Interfaces can't contain anything else than function signatures.</p>
+</blockquote>
+<pre><code class="language-solidity">pragma solidity ^0.4.11;
+
+interface Token {
+    function transfer(address recipient, uint amount);
+}
+</code></pre>
+<hr />
+<h2 id="contracts"><a class="header" href="#contracts">Contracts</a></h2>
+<h3 id="creating-contracts-using-new"><a class="header" href="#creating-contracts-using-new">Creating contracts using <code>new</code></a></h3>
+<p>Contracts can be created from another contract using <code>new</code> keyword. The source of the contract has to be known in advance.</p>
+<pre><code class="language-solidity">contract A {
+    function add(uint _a, uint _b) returns (uint) {
+        return _a + _b;
+    }
+}
+
+contract C {
+    address a;
+    function f(uint _a) {
+        a = new A();
+    }
+}
+</code></pre>
+<h3 id="contract-inheritance"><a class="header" href="#contract-inheritance">Contract Inheritance</a></h3>
+<p>Solidity supports multiple inheritance and polymorphism.</p>
+<pre><code class="language-solidity">contract owned {
+    function owned() { owner = msg.sender; }
+    address owner;
+}
+
+contract mortal is owned {
+    function kill() {
+        if (msg.sender == owner) selfdestruct(owner);
+    }
+}
+
+contract final is mortal {
+    function kill() { 
+        super.kill(); // Calls kill() of mortal.
+    }
+}
+</code></pre>
+<h5 id="example"><a class="header" href="#example">Example</a></h5>
+<p><code>Memo memo = new Memo(&quot;my precious memo&quot;);</code> - create new contract
+<code>Memo memo = Memo(existingMemoAddress);</code> - intialize already existing contract
+<code>this;</code> - current contract
+<code>address(this);</code> - converts contract to address
+<code>selfdestruct(ownerAddress);</code> - destroys contract and sends it's funds to address. Must be called from contract.</p>
+<h4 id="constructor-of-base-class"><a class="header" href="#constructor-of-base-class">Constructor of base class</a></h4>
+<pre><code class="language-solidity">contract A {
+    uint a;
+    constructor(uint _a) { a = _a; }
+}
+
+contract B is A(1) {
+    constructor(uint _b) A(_b) {
+    }
+}
+</code></pre>
+<h3 id="abstract-contracts"><a class="header" href="#abstract-contracts">Abstract Contracts</a></h3>
+<p>Contracts that contain implemented and non-implemented functions. Such contracts cannot be compiled, but they can be used as base contracts.</p>
+<pre><code class="language-solidity">pragma solidity ^0.4.0;
+
+contract A {
+    function C() returns (bytes32);
+}
+
+contract B is A {
+    function C() returns (bytes32) { return &quot;c&quot;; }
+}
+</code></pre>
+<hr />
+<h2 id="deprecations"><a class="header" href="#deprecations">Deprecations</a></h2>
+<p><code>constant</code> - function modifier
+<code>year</code> - time literal suffix
+<code>throw</code> - alias to revert
+<code>block.blockhash(block_number);</code> - replaced by global blockhash(block_number);
+<code>msg.gas</code> - replaced by global gasleft();
+<code>suicide</code> - alias to selfdestruct(address)
+<code>keccak256(a, b)</code> - deprecated in favor ofkeccak256(abi.encodePacked(a, b))</p>
+<h2 id="events"><a class="header" href="#events">Events</a></h2>
+<p>Events allow the convenient usage of the EVM logging facilities, which in turn can be used to “call” JavaScript callbacks in the user interface of a dapp, which listen for these events.</p>
+<p>Up to three parameters can receive the attribute indexed, which will cause the respective arguments to be searched for.</p>
+<blockquote>
+<p>All non-indexed arguments will be stored in the data part of the log.</p>
+</blockquote>
+<pre><code class="language-solidity">pragma solidity ^0.4.0;
+
+contract ClientReceipt {
+    event Deposit(
+        address indexed _from,
+        bytes32 indexed _id,
+        uint _value
+    );
+
+    function deposit(bytes32 _id) payable {
+        emit Deposit(msg.sender, _id, msg.value);
+    }
+}
+</code></pre>
+<h2 id="library"><a class="header" href="#library">Library</a></h2>
+<p>Libraries are similar to contracts, but they are deployed only once at a specific address, and their code is used with <a href="#delegatecall"><code>delegatecall</code></a> (<code>callcode</code>). </p>
+<pre><code class="language-solidity">library arithmatic {
+    function add(uint _a, uint _b) returns (uint) {
+        return _a + _b;
+    }
+}
+
+contract C {
+    uint sum;
+
+    function f() {
+        sum = arithmatic.add(2, 3);
+    }
+}
+</code></pre>
+<h2 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h2>
+<ul>
+<li><code>assert(bool condition)</code>: throws if the condition is not met - to be used for internal errors.</li>
+<li><code>require(bool condition)</code>: throws if the condition is not met - to be used for errors in inputs or external components.</li>
+<li><code>revert()</code>: abort execution and revert state changes</li>
+</ul>
+<pre><code class="language-solidity"> function sendHalf(address addr) payable returns (uint balance) {
+    require(msg.value % 2 == 0); // Only allow even numbers
+    uint balanceBeforeTransfer = this.balance;
+    addr.transfer(msg.value / 2);
+    assert(this.balance == balanceBeforeTransfer - msg.value / 2);
+    return this.balance;
+}
+</code></pre>
+<hr />
+<h2 id="variables"><a class="header" href="#variables">Variables</a></h2>
+<h3 id="transaction-variables"><a class="header" href="#transaction-variables">Transaction variables</a></h3>
+<ul>
+<li><code>msg.data (bytes)</code>: complete calldata</li>
+<li><code>msg.gas (uint)</code>: remaining gas</li>
+<li><code>msg.sender (address)</code>: sender of the message (current call)</li>
+<li><code>msg.sig (bytes4)</code>: first four bytes of the calldata (i.e. function identifier)</li>
+<li><code>msg.value (uint)</code>: number of wei sent with the message</li>
+<li><code>tx.gasprice (uint)</code>: gas price of the transaction</li>
+<li><code>tx.origin (address)</code>: sender of the transaction (full call chain)</li>
+</ul>
+<h3 id="block-variables"><a class="header" href="#block-variables">Block variables</a></h3>
+<ul>
+<li><code>block.blockhash(uint blockNumber) returns (bytes32)</code>: hash of the given block - only works for the 256 most recent blocks excluding current</li>
+<li><code>block.coinbase (address)</code>: current block miner’s address</li>
+<li><code>block.difficulty (uint)</code>: current block difficulty</li>
+<li><code>block.gaslimit (uint)</code>: current block gaslimit</li>
+<li><code>block.number (uint)</code>: current block number</li>
+<li><code>block.timestamp (uint)</code>: current block timestamp as seconds since unix epoch</li>
+<li><code>now (uint)</code>: current block timestamp (alias for <code>block.timestamp</code>)</li>
+</ul>
+<p>Here is an image cheatsheet for quick recall. <a href="https://intellipaat.com/mediaFiles/2019/03/Solidity-Cheat-Sheet.jpg">Image</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="skeleton.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="sql.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="skeleton.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="sql.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/mermaid.min.cdn.js"></script>
+        <script src="./js/jquery-storage.js"></script>
+        <script src="./js/autotranslate.js"></script>
+        <script src="./js/globalscript.js"></script>
+
+
+    </div>
+    </body>
+</html>

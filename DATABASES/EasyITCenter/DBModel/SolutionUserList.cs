@@ -47,6 +47,7 @@ namespace EasyITCenter.DBModel
             LicSrvLicenseAlgorithmLists = new HashSet<LicSrvLicenseAlgorithmList>();
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableLists = new HashSet<PortalApiTableList>();
+            PortalSettingLists = new HashSet<PortalSettingList>();
             ProdGuidGroupLists = new HashSet<ProdGuidGroupList>();
             ProdGuidOperationLists = new HashSet<ProdGuidOperationList>();
             ProdGuidPartLists = new HashSet<ProdGuidPartList>();
@@ -76,8 +77,7 @@ namespace EasyITCenter.DBModel
             SolutionOperationLists = new HashSet<SolutionOperationList>();
             SolutionRegistrationParameterLists = new HashSet<SolutionRegistrationParameterList>();
             SolutionSchedulerLists = new HashSet<SolutionSchedulerList>();
-            SolutionServerToolsGroupLists = new HashSet<SolutionServerToolsGroupList>();
-            SolutionServerToolsNameLists = new HashSet<SolutionServerToolsNameList>();
+            SolutionServerToolVariableLists = new HashSet<SolutionServerToolVariableList>();
             SolutionShareSourceLists = new HashSet<SolutionShareSourceList>();
             SolutionTaskLists = new HashSet<SolutionTaskList>();
             SolutionUserRoleLists = new HashSet<SolutionUserRoleList>();
@@ -215,6 +215,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }
+        [InverseProperty("SolutionUserList")]
+        public virtual ICollection<PortalSettingList> PortalSettingLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<ProdGuidGroupList> ProdGuidGroupLists { get; set; }
         [InverseProperty("User")]
@@ -273,10 +275,8 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<SolutionRegistrationParameterList> SolutionRegistrationParameterLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionSchedulerList> SolutionSchedulerLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<SolutionServerToolsGroupList> SolutionServerToolsGroupLists { get; set; }
-        [InverseProperty("User")]
-        public virtual ICollection<SolutionServerToolsNameList> SolutionServerToolsNameLists { get; set; }
+        [InverseProperty("SolutionUserList")]
+        public virtual ICollection<SolutionServerToolVariableList> SolutionServerToolVariableLists { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<SolutionShareSourceList> SolutionShareSourceLists { get; set; }
         [InverseProperty("User")]

@@ -1,0 +1,508 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>react-prerequisites - Indexed Centralized Docs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="EasyITcenter &amp; EasySYSTEMbuilder Groupware Solution Projects Documentation">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./css/global.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="Summary.html">Summary</a></li><li class="chapter-item expanded "><a href="ada.html"><strong aria-hidden="true">1.</strong> ada</a></li><li class="chapter-item expanded "><a href="adb.html"><strong aria-hidden="true">2.</strong> adb</a></li><li class="chapter-item expanded "><a href="alias.html"><strong aria-hidden="true">3.</strong> alias</a></li><li class="chapter-item expanded "><a href="android-versions.html"><strong aria-hidden="true">4.</strong> android-versions</a></li><li class="chapter-item expanded "><a href="angular.html"><strong aria-hidden="true">5.</strong> angular</a></li><li class="chapter-item expanded "><a href="arrow-functions.html"><strong aria-hidden="true">6.</strong> arrow-functions</a></li><li class="chapter-item expanded "><a href="assembly.html"><strong aria-hidden="true">7.</strong> assembly</a></li><li class="chapter-item expanded "><a href="async-http-client.html"><strong aria-hidden="true">8.</strong> async-http-client</a></li><li class="chapter-item expanded "><a href="axios.html"><strong aria-hidden="true">9.</strong> axios</a></li><li class="chapter-item expanded "><a href="azure.html"><strong aria-hidden="true">10.</strong> azure</a></li><li class="chapter-item expanded "><a href="bash.html"><strong aria-hidden="true">11.</strong> bash</a></li><li class="chapter-item expanded "><a href="bcryptjs.html"><strong aria-hidden="true">12.</strong> bcryptjs</a></li><li class="chapter-item expanded "><a href="bootstrap.html"><strong aria-hidden="true">13.</strong> bootstrap</a></li><li class="chapter-item expanded "><a href="bulma.html"><strong aria-hidden="true">14.</strong> bulma</a></li><li class="chapter-item expanded "><a href="c.html"><strong aria-hidden="true">15.</strong> c</a></li><li class="chapter-item expanded "><a href="cat.html"><strong aria-hidden="true">16.</strong> cat</a></li><li class="chapter-item expanded "><a href="cd.html"><strong aria-hidden="true">17.</strong> cd</a></li><li class="chapter-item expanded "><a href="challenges-code-preloads.html"><strong aria-hidden="true">18.</strong> challenges-code-preloads</a></li><li class="chapter-item expanded "><a href="chmod.html"><strong aria-hidden="true">19.</strong> chmod</a></li><li class="chapter-item expanded "><a href="cksum.html"><strong aria-hidden="true">20.</strong> cksum</a></li><li class="chapter-item expanded "><a href="clojure.html"><strong aria-hidden="true">21.</strong> clojure</a></li><li class="chapter-item expanded "><a href="cmp.html"><strong aria-hidden="true">22.</strong> cmp</a></li><li class="chapter-item expanded "><a href="cobol.html"><strong aria-hidden="true">23.</strong> cobol</a></li><li class="chapter-item expanded "><a href="comm.html"><strong aria-hidden="true">24.</strong> comm</a></li><li class="chapter-item expanded "><a href="commonlisp.html"><strong aria-hidden="true">25.</strong> commonlisp</a></li><li class="chapter-item expanded "><a href="cp.html"><strong aria-hidden="true">26.</strong> cp</a></li><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">27.</strong> cpp</a></li><li class="chapter-item expanded "><a href="cron.html"><strong aria-hidden="true">28.</strong> cron</a></li><li class="chapter-item expanded "><a href="crontab.html"><strong aria-hidden="true">29.</strong> crontab</a></li><li class="chapter-item expanded "><a href="csharp.html"><strong aria-hidden="true">30.</strong> csharp</a></li><li class="chapter-item expanded "><a href="css.html"><strong aria-hidden="true">31.</strong> css</a></li><li class="chapter-item expanded "><a href="curl.html"><strong aria-hidden="true">32.</strong> curl</a></li><li class="chapter-item expanded "><a href="cut.html"><strong aria-hidden="true">33.</strong> cut</a></li><li class="chapter-item expanded "><a href="d.html"><strong aria-hidden="true">34.</strong> d</a></li><li class="chapter-item expanded "><a href="dart.html"><strong aria-hidden="true">35.</strong> dart</a></li><li class="chapter-item expanded "><a href="dns.html"><strong aria-hidden="true">36.</strong> dns</a></li><li class="chapter-item expanded "><a href="docker.html"><strong aria-hidden="true">37.</strong> docker</a></li><li class="chapter-item expanded "><a href="dockerfile.html"><strong aria-hidden="true">38.</strong> dockerfile</a></li><li class="chapter-item expanded "><a href="dotenv.html"><strong aria-hidden="true">39.</strong> dotenv</a></li><li class="chapter-item expanded "><a href="echo.html"><strong aria-hidden="true">40.</strong> echo</a></li><li class="chapter-item expanded "><a href="ejs-embedded-javascript-templates.html"><strong aria-hidden="true">41.</strong> ejs-embedded-javascript-templates</a></li><li class="chapter-item expanded "><a href="elixir.html"><strong aria-hidden="true">42.</strong> elixir</a></li><li class="chapter-item expanded "><a href="erlang.html"><strong aria-hidden="true">43.</strong> erlang</a></li><li class="chapter-item expanded "><a href="es2csv.html"><strong aria-hidden="true">44.</strong> es2csv</a></li><li class="chapter-item expanded "><a href="express.html"><strong aria-hidden="true">45.</strong> express</a></li><li class="chapter-item expanded "><a href="figma.html"><strong aria-hidden="true">46.</strong> figma</a></li><li class="chapter-item expanded "><a href="find.html"><strong aria-hidden="true">47.</strong> find</a></li><li class="chapter-item expanded "><a href="flutter.html"><strong aria-hidden="true">48.</strong> flutter</a></li><li class="chapter-item expanded "><a href="fortran.html"><strong aria-hidden="true">49.</strong> fortran</a></li><li class="chapter-item expanded "><a href="foundation.html"><strong aria-hidden="true">50.</strong> foundation</a></li><li class="chapter-item expanded "><a href="fsharp.html"><strong aria-hidden="true">51.</strong> fsharp</a></li><li class="chapter-item expanded "><a href="git.html"><strong aria-hidden="true">52.</strong> git</a></li><li class="chapter-item expanded "><a href="go.html"><strong aria-hidden="true">53.</strong> go</a></li><li class="chapter-item expanded "><a href="google-analytics.html"><strong aria-hidden="true">54.</strong> google-analytics</a></li><li class="chapter-item expanded "><a href="google-nexus-screen-resolutions.html"><strong aria-hidden="true">55.</strong> google-nexus-screen-resolutions</a></li><li class="chapter-item expanded "><a href="google-pixel-screen-resolutions.html"><strong aria-hidden="true">56.</strong> google-pixel-screen-resolutions</a></li><li class="chapter-item expanded "><a href="grep.html"><strong aria-hidden="true">57.</strong> grep</a></li><li class="chapter-item expanded "><a href="groovy-http-calls.html"><strong aria-hidden="true">58.</strong> groovy-http-calls</a></li><li class="chapter-item expanded "><a href="groovy.html"><strong aria-hidden="true">59.</strong> groovy</a></li><li class="chapter-item expanded "><a href="gson.html"><strong aria-hidden="true">60.</strong> gson</a></li><li class="chapter-item expanded "><a href="haskell.html"><strong aria-hidden="true">61.</strong> haskell</a></li><li class="chapter-item expanded "><a href="head.html"><strong aria-hidden="true">62.</strong> head</a></li><li class="chapter-item expanded "><a href="heroku.html"><strong aria-hidden="true">63.</strong> heroku</a></li><li class="chapter-item expanded "><a href="homebrew.html"><strong aria-hidden="true">64.</strong> homebrew</a></li><li class="chapter-item expanded "><a href="html.html"><strong aria-hidden="true">65.</strong> html</a></li><li class="chapter-item expanded "><a href="http-staus-codes.html"><strong aria-hidden="true">66.</strong> http-staus-codes</a></li><li class="chapter-item expanded "><a href="iphone-screen-resolutions.html"><strong aria-hidden="true">67.</strong> iphone-screen-resolutions</a></li><li class="chapter-item expanded "><a href="java-primitive-data-types.html"><strong aria-hidden="true">68.</strong> java-primitive-data-types</a></li><li class="chapter-item expanded "><a href="java-strings.html"><strong aria-hidden="true">69.</strong> java-strings</a></li><li class="chapter-item expanded "><a href="java-versions.html"><strong aria-hidden="true">70.</strong> java-versions</a></li><li class="chapter-item expanded "><a href="java.html"><strong aria-hidden="true">71.</strong> java</a></li><li class="chapter-item expanded "><a href="javascript-fetch.html"><strong aria-hidden="true">72.</strong> javascript-fetch</a></li><li class="chapter-item expanded "><a href="javascript-versions.html"><strong aria-hidden="true">73.</strong> javascript-versions</a></li><li class="chapter-item expanded "><a href="javascript.html"><strong aria-hidden="true">74.</strong> javascript</a></li><li class="chapter-item expanded "><a href="jest.html"><strong aria-hidden="true">75.</strong> jest</a></li><li class="chapter-item expanded "><a href="jquery.html"><strong aria-hidden="true">76.</strong> jquery</a></li><li class="chapter-item expanded "><a href="jshell.html"><strong aria-hidden="true">77.</strong> jshell</a></li><li class="chapter-item expanded "><a href="jsonata.html"><strong aria-hidden="true">78.</strong> jsonata</a></li><li class="chapter-item expanded "><a href="jsoup.html"><strong aria-hidden="true">79.</strong> jsoup</a></li><li class="chapter-item expanded "><a href="kill.html"><strong aria-hidden="true">80.</strong> kill</a></li><li class="chapter-item expanded "><a href="kotlin.html"><strong aria-hidden="true">81.</strong> kotlin</a></li><li class="chapter-item expanded "><a href="kubernetes.html"><strong aria-hidden="true">82.</strong> kubernetes</a></li><li class="chapter-item expanded "><a href="link.html"><strong aria-hidden="true">83.</strong> link</a></li><li class="chapter-item expanded "><a href="linux.html"><strong aria-hidden="true">84.</strong> linux</a></li><li class="chapter-item expanded "><a href="lodash.html"><strong aria-hidden="true">85.</strong> lodash</a></li><li class="chapter-item expanded "><a href="ls.html"><strong aria-hidden="true">86.</strong> ls</a></li><li class="chapter-item expanded "><a href="lua.html"><strong aria-hidden="true">87.</strong> lua</a></li><li class="chapter-item expanded "><a href="make.html"><strong aria-hidden="true">88.</strong> make</a></li><li class="chapter-item expanded "><a href="man.html"><strong aria-hidden="true">89.</strong> man</a></li><li class="chapter-item expanded "><a href="mariadb.html"><strong aria-hidden="true">90.</strong> mariadb</a></li><li class="chapter-item expanded "><a href="markdown.html"><strong aria-hidden="true">91.</strong> markdown</a></li><li class="chapter-item expanded "><a href="materialize.html"><strong aria-hidden="true">92.</strong> materialize</a></li><li class="chapter-item expanded "><a href="maven.html"><strong aria-hidden="true">93.</strong> maven</a></li><li class="chapter-item expanded "><a href="milligram.html"><strong aria-hidden="true">94.</strong> milligram</a></li><li class="chapter-item expanded "><a href="mkdir.html"><strong aria-hidden="true">95.</strong> mkdir</a></li><li class="chapter-item expanded "><a href="mongodb.html"><strong aria-hidden="true">96.</strong> mongodb</a></li><li class="chapter-item expanded "><a href="mv.html"><strong aria-hidden="true">97.</strong> mv</a></li><li class="chapter-item expanded "><a href="mysql.html"><strong aria-hidden="true">98.</strong> mysql</a></li><li class="chapter-item expanded "><a href="netlify.html"><strong aria-hidden="true">99.</strong> netlify</a></li><li class="chapter-item expanded "><a href="nodejs.html"><strong aria-hidden="true">100.</strong> nodejs</a></li><li class="chapter-item expanded "><a href="nodemon.html"><strong aria-hidden="true">101.</strong> nodemon</a></li><li class="chapter-item expanded "><a href="ocaml.html"><strong aria-hidden="true">102.</strong> ocaml</a></li><li class="chapter-item expanded "><a href="octave.html"><strong aria-hidden="true">103.</strong> octave</a></li><li class="chapter-item expanded "><a href="okhttp.html"><strong aria-hidden="true">104.</strong> okhttp</a></li><li class="chapter-item expanded "><a href="onecompiler-apis.html"><strong aria-hidden="true">105.</strong> onecompiler-apis</a></li><li class="chapter-item expanded "><a href="onecompiler-enterprise-apis.html"><strong aria-hidden="true">106.</strong> onecompiler-enterprise-apis</a></li><li class="chapter-item expanded "><a href="oracle.html"><strong aria-hidden="true">107.</strong> oracle</a></li><li class="chapter-item expanded "><a href="papercss.html"><strong aria-hidden="true">108.</strong> papercss</a></li><li class="chapter-item expanded "><a href="pascal.html"><strong aria-hidden="true">109.</strong> pascal</a></li><li class="chapter-item expanded "><a href="perl.html"><strong aria-hidden="true">110.</strong> perl</a></li><li class="chapter-item expanded "><a href="php.html"><strong aria-hidden="true">111.</strong> php</a></li><li class="chapter-item expanded "><a href="plsql.html"><strong aria-hidden="true">112.</strong> plsql</a></li><li class="chapter-item expanded "><a href="pm2.html"><strong aria-hidden="true">113.</strong> pm2</a></li><li class="chapter-item expanded "><a href="postgresql.html"><strong aria-hidden="true">114.</strong> postgresql</a></li><li class="chapter-item expanded "><a href="prolog.html"><strong aria-hidden="true">115.</strong> prolog</a></li><li class="chapter-item expanded "><a href="prop-types.html"><strong aria-hidden="true">116.</strong> prop-types</a></li><li class="chapter-item expanded "><a href="ps.html"><strong aria-hidden="true">117.</strong> ps</a></li><li class="chapter-item expanded "><a href="pwd.html"><strong aria-hidden="true">118.</strong> pwd</a></li><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">119.</strong> python</a></li><li class="chapter-item expanded "><a href="python2.html"><strong aria-hidden="true">120.</strong> python2</a></li><li class="chapter-item expanded "><a href="r.html"><strong aria-hidden="true">121.</strong> r</a></li><li class="chapter-item expanded "><a href="racket.html"><strong aria-hidden="true">122.</strong> racket</a></li><li class="chapter-item expanded "><a href="react-helmet.html"><strong aria-hidden="true">123.</strong> react-helmet</a></li><li class="chapter-item expanded "><a href="react-prerequisites.html" class="active"><strong aria-hidden="true">124.</strong> react-prerequisites</a></li><li class="chapter-item expanded "><a href="reactjs.html"><strong aria-hidden="true">125.</strong> reactjs</a></li><li class="chapter-item expanded "><a href="redis.html"><strong aria-hidden="true">126.</strong> redis</a></li><li class="chapter-item expanded "><a href="request.html"><strong aria-hidden="true">127.</strong> request</a></li><li class="chapter-item expanded "><a href="rm.html"><strong aria-hidden="true">128.</strong> rm</a></li><li class="chapter-item expanded "><a href="rmdir.html"><strong aria-hidden="true">129.</strong> rmdir</a></li><li class="chapter-item expanded "><a href="ruby.html"><strong aria-hidden="true">130.</strong> ruby</a></li><li class="chapter-item expanded "><a href="rust.html"><strong aria-hidden="true">131.</strong> rust</a></li><li class="chapter-item expanded "><a href="scala.html"><strong aria-hidden="true">132.</strong> scala</a></li><li class="chapter-item expanded "><a href="scp.html"><strong aria-hidden="true">133.</strong> scp</a></li><li class="chapter-item expanded "><a href="search-engins.html"><strong aria-hidden="true">134.</strong> search-engins</a></li><li class="chapter-item expanded "><a href="semantic-ui.html"><strong aria-hidden="true">135.</strong> semantic-ui</a></li><li class="chapter-item expanded "><a href="skeleton.html"><strong aria-hidden="true">136.</strong> skeleton</a></li><li class="chapter-item expanded "><a href="solidity.html"><strong aria-hidden="true">137.</strong> solidity</a></li><li class="chapter-item expanded "><a href="sql.html"><strong aria-hidden="true">138.</strong> sql</a></li><li class="chapter-item expanded "><a href="sqlite.html"><strong aria-hidden="true">139.</strong> sqlite</a></li><li class="chapter-item expanded "><a href="super-csv.html"><strong aria-hidden="true">140.</strong> super-csv</a></li><li class="chapter-item expanded "><a href="swift.html"><strong aria-hidden="true">141.</strong> swift</a></li><li class="chapter-item expanded "><a href="tail.html"><strong aria-hidden="true">142.</strong> tail</a></li><li class="chapter-item expanded "><a href="tar-gz.html"><strong aria-hidden="true">143.</strong> tar-gz</a></li><li class="chapter-item expanded "><a href="tcl.html"><strong aria-hidden="true">144.</strong> tcl</a></li><li class="chapter-item expanded "><a href="typescript.html"><strong aria-hidden="true">145.</strong> typescript</a></li><li class="chapter-item expanded "><a href="uikit.html"><strong aria-hidden="true">146.</strong> uikit</a></li><li class="chapter-item expanded "><a href="underscore.html"><strong aria-hidden="true">147.</strong> underscore</a></li><li class="chapter-item expanded "><a href="vb.html"><strong aria-hidden="true">148.</strong> vb</a></li><li class="chapter-item expanded "><a href="vuejs.html"><strong aria-hidden="true">149.</strong> vuejs</a></li><li class="chapter-item expanded "><a href="vyper.html"><strong aria-hidden="true">150.</strong> vyper</a></li><li class="chapter-item expanded "><a href="wc.html"><strong aria-hidden="true">151.</strong> wc</a></li><li class="chapter-item expanded "><a href="windows-shortcuts.html"><strong aria-hidden="true">152.</strong> windows-shortcuts</a></li><li class="chapter-item expanded "><a href="yaml.html"><strong aria-hidden="true">153.</strong> yaml</a></li><li class="spacer"></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Indexed Centralized Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://groupware.cz:5000/Home/Public" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: React Prerequisites
+description: Latest &amp; Greatest Javascript features you need to know before starting with react
+created: 2018-11-07
+updated: 2018-11-07</h2>
+<h2 id="pre-requisites-to-learn-react"><a class="header" href="#pre-requisites-to-learn-react">Pre-requisites to learn React</a></h2>
+<h3 id="good-to-know"><a class="header" href="#good-to-know">Good to know</a></h3>
+<ul>
+<li>Server Side Rendering (SSR), Client Side Rendering(CSR )</li>
+<li>JSX</li>
+<li>Transpiling (Babel)</li>
+<li>PWA (Progressive Web App)</li>
+<li>Chrome V8, Node, NPM</li>
+<li>TypeScript (Strict syntactical superset of JavaScript)</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>Impure Functions with Side Effects &amp; Pure Functions
+<code>Maintaining referential transparency</code></p>
+</li>
+<li>
+<p>Stateful &amp; Stateless 
+<code>Pure functions are stateless</code> </p>
+</li>
+<li>
+<p>Mutability &amp; Immutability
+<code>By design JS is mutable</code>
+<code>Object.freeze(obj)</code>, <code> npm deep-freeze</code>
+<code>immutable.js, support from Lodash, underscorejs </code>
+<code> Immutable state tree is a must in Redux</code></p>
+</li>
+<li>
+<p>Imperative (how: <code>for</code>), Declarative (what: <code>.map</code>)</p>
+</li>
+<li>
+<p>Higher-order Functions</p>
+</li>
+</ul>
+<hr />
+<ul>
+<li>Functional Programming with JS</li>
+<li>Observables (streams) Hot &amp; Cold</li>
+<li>Reactive Programming (RxJS)
+<code>Propagating and responding to incoming events over time, declaratively</code></li>
+</ul>
+<hr />
+<h2 id="javascript-versions"><a class="header" href="#javascript-versions">Javascript versions</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Version</th><th>Year</th><th>Version</th><th>Features added</th></tr></thead><tbody>
+<tr><td>5</td><td>2009</td><td>ECMAScript 5</td><td>strict mode, JSON support</td></tr>
+<tr><td>6</td><td>2015</td><td>ECMAScript 2015 (ES 6)</td><td>let, const, Modules, Promises, Classes &amp; Inheritance, Template Literals, Object destructing, Generators, Map and Set, default parameter values</td></tr>
+<tr><td>7</td><td>2016</td><td>ECMAScript 2016</td><td>Array.includes(), <code>**</code></td></tr>
+<tr><td>8</td><td>2017</td><td>ECMAScript 2017</td><td>Async Functions, Object.entries</td></tr>
+<tr><td>9</td><td>2018</td><td>ECMAScript 2018</td><td>Spread operator</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="json-support"><a class="header" href="#json-support">JSON Support</a></h2>
+<pre><code class="language-javascript">const userObj = {
+	name: &quot;Foo&quot;,
+	age : 27,
+	roles : [&quot;admin&quot;, &quot;user&quot;]
+};
+
+const userObjString = JSON.stringify(userObj);
+const userObjFromString = JSON.parse(userObjString);
+
+</code></pre>
+<hr />
+<h2 id="let-const"><a class="header" href="#let-const">let, const</a></h2>
+<ul>
+<li>var has function scope, i.e its accessible inside the function it declared </li>
+</ul>
+<pre><code class="language-javascript">
+var arr = [ &quot;zero&quot;, &quot;one&quot;, &quot;two&quot; ];
+var functions = [];
+
+for(var i=0; i&lt;arr.length-1; i++) {
+	functions.push(function() {
+		return arr[i];
+	});
+}
+console.log('0:', functions[0](), '1:', functions[1]());
+        
+</code></pre>
+<ul>
+<li>let block scope</li>
+<li>const also block scope </li>
+</ul>
+<hr />
+<h2 id="arrow-functions"><a class="header" href="#arrow-functions">Arrow functions</a></h2>
+<pre><code class="language-javascript">let square = function(inp){
+	return inp ** 2
+}
+
+</code></pre>
+<pre><code class="language-javascript">let square = inp =&gt; inp ** 2
+</code></pre>
+<p>example</p>
+<pre><code class="language-javascript">const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+const squaresOfEvenNumbers = numbers
+.filter(ele =&gt; ele % 2 == 0)
+.map(ele =&gt; ele ** 2)
+.reduce((acc, ele) =&gt; acc + ele);
+
+console.log(squaresOfEvenNumbers);
+
+
+</code></pre>
+<hr />
+<h2 id="string-templating"><a class="header" href="#string-templating">String templating</a></h2>
+<br>
+<pre><code class="language-javasctipt">let name = 'foo';
+console.log(`hello ${name} 2+2 is ${2+2}`);
+
+</code></pre>
+<hr />
+<h2 id="object-destructuring"><a class="header" href="#object-destructuring">Object Destructuring</a></h2>
+<pre><code class="language-javascript">let user = { firstName: &quot;foo&quot;, lastName: &quot;bar&quot;, 
+	     age: 27, junk: &quot;bla&quot;};
+
+// Assigning to variables
+let {firstName, age} = user;
+let {firstName : f, age : a} = user;
+
+// Using methods
+function displayUserAge({firstName, age}){
+	console.log(`${firstName}'s age: ${age}`)
+}
+</code></pre>
+<hr />
+<h2 id="default-values"><a class="header" href="#default-values">Default Values</a></h2>
+<pre><code class="language-javascript">function setName(name = &quot;NA&quot;){
+	return name;
+};
+console.log(setName()); // NA
+console.log(setName(&quot;foo&quot;)); // foo
+
+func = function({x = 10,y = 11,z = 12} = {x:1,y:2,z:3}) {
+    console.log(x,y,z);
+};
+
+func(); // ?
+func({}); // ?
+
+</code></pre>
+<hr />
+<h2 id="default-values-1"><a class="header" href="#default-values-1">Default Values</a></h2>
+<pre><code class="language-javascript">function setName(name = &quot;NA&quot;){
+	return name;
+};
+console.log(setName()); // NA
+console.log(setName(&quot;foo&quot;)); // foo
+
+func = function({x = 10,y = 11,z = 12} = {x:1,y:2,z:3}) {
+    console.log(x,y,z);
+};
+
+func(); //1 2 3  (hits the object literal default)
+func({}); //10 11 12   (hits the value defaults)
+
+</code></pre>
+<hr />
+<h2 id="spread-operators"><a class="header" href="#spread-operators">Spread Operators</a></h2>
+<pre><code class="language-javascript">const naturalNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+const wholeNumbers = [0, ...naturalNumbers];
+
+const negativeNumbers = naturalNumbers.map(ele =&gt; -ele);
+
+const integers = [...negativeNumbers, ...wholeNumbers];
+</code></pre>
+<p>Example</p>
+<pre><code class="language-javascript">let obj = {a: 1, b:2, c:3, d:4, e: 5, f:6, g: 7};
+
+let{a, b, ...others} = obj;
+
+</code></pre>
+<hr />
+<h2 id="fetch-api"><a class="header" href="#fetch-api">Fetch API</a></h2>
+<pre><code class="language-javascript">//GET
+fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(res =&gt; res.json())
+      .then(json =&gt; console.log(json))
+
+//FORM POST
+const userObj = {name: &quot;Foo&quot;}
+
+fetch([url], { method: 'POST',
+		body: Json.stringify(userObj)})
+		.then(res =&gt; res.text())
+		.then(text =&gt; console.log(text))
+
+</code></pre>
+<hr />
+<h2 id="flow-generators-promise-async--await"><a class="header" href="#flow-generators-promise-async--await"><del>Flow Generators</del>, Promise, Async &amp; Await</a></h2>
+<pre><code class="language-javascript">async getTodos(userObj){
+	const res = await fetch([url]);
+	const data = await res.json()    
+	return data;
+}
+
+let data = await getTodos({fn: &quot;foo&quot;});
+
+</code></pre>
+<hr />
+<h2 id="classes"><a class="header" href="#classes">Classes</a></h2>
+<p>Classes are Functions (Functions are Objects)</p>
+<pre><code class="language-javascript">class User{
+
+	constructor(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+    
+	sayHello(){
+		return `Hi ${this.name}`
+	}
+}
+
+const user1 = new User('foo', 27);
+const user2 = new User('bar', 28);
+
+</code></pre>
+<hr />
+<h2 id="module-system"><a class="header" href="#module-system">Module system</a></h2>
+<pre><code class="language-javascript">\utils.js
+--------
+
+const username = &quot;foo&quot;;
+const password = &quot;bar&quot;;
+
+const config = { maxConn: 10, delay: 30000 };
+
+function connect(username, password){
+	return connection;
+}
+
+export { username, password };
+export config;
+export default connect; // at most one
+
+
+\index.js
+---------
+import connect, {username as foo, config} from './utils.js';
+
+</code></pre>
+<hr />
+<h2 id="classes-with-module--system"><a class="header" href="#classes-with-module--system">Classes with module  system</a></h2>
+<pre><code class="language-javascript">user.js
+-------
+class User{
+
+	constructor(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+    
+	sayHello(){
+		return `Hi ${this.name}`
+	}
+}
+export default User;
+
+index.js
+--------
+import User from './user.js';
+
+const user1 = new User('foo', 27);
+const user2 = new User('bar', 28);
+
+</code></pre>
+<hr />
+<h2 id="npm"><a class="header" href="#npm">NPM</a></h2>
+<pre><code class="language-jsom">{
+  &quot;name&quot;: &quot;my_package&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;dependencies&quot;: {
+    &quot;my_dep_1&quot;: &quot;2.1.0&quot;,
+	&quot;my_dep_2&quot;: &quot;~version&quot;, // allows patch 
+	&quot;my_dep_3&quot;: &quot;^version&quot;, // allows patch and minor updates
+	&quot;my_dep_4&quot;: &quot;=version&quot;, // &quot;my_dep_4&quot;: &quot;version&quot;,
+	&quot;my_dep_5&quot;: &quot;&gt;version&quot;,
+	&quot;my_dep_6&quot;: &quot;&gt;=version&quot;,
+	&quot;my_dep_7&quot;: &quot;&lt;version&quot;,
+	&quot;my_dep_8&quot;: &quot;&lt;=version&quot;,
+	&quot;my_dep_9&quot;: &quot;*&quot;,
+	&quot;my_dep_10&quot;: &quot;latest&quot;,
+  },
+  &quot;devDependencies&quot; : {
+    &quot;my_test_framework&quot;: &quot;3.1.0&quot;
+  }
+}
+</code></pre>
+<hr />
+<p>Example Projects:</p>
+<p><a href="https://codesandbox.io/s/4xx659x11x">https://codesandbox.io/s/4xx659x11x</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="react-helmet.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="reactjs.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="react-helmet.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="reactjs.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/mermaid.min.cdn.js"></script>
+        <script src="./js/jquery-storage.js"></script>
+        <script src="./js/autotranslate.js"></script>
+        <script src="./js/globalscript.js"></script>
+
+
+    </div>
+    </body>
+</html>

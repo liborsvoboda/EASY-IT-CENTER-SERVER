@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>azure - Indexed Centralized Docs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="EasyITcenter &amp; EasySYSTEMbuilder Groupware Solution Projects Documentation">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./css/global.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="Summary.html">Summary</a></li><li class="chapter-item expanded "><a href="ada.html"><strong aria-hidden="true">1.</strong> ada</a></li><li class="chapter-item expanded "><a href="adb.html"><strong aria-hidden="true">2.</strong> adb</a></li><li class="chapter-item expanded "><a href="alias.html"><strong aria-hidden="true">3.</strong> alias</a></li><li class="chapter-item expanded "><a href="android-versions.html"><strong aria-hidden="true">4.</strong> android-versions</a></li><li class="chapter-item expanded "><a href="angular.html"><strong aria-hidden="true">5.</strong> angular</a></li><li class="chapter-item expanded "><a href="arrow-functions.html"><strong aria-hidden="true">6.</strong> arrow-functions</a></li><li class="chapter-item expanded "><a href="assembly.html"><strong aria-hidden="true">7.</strong> assembly</a></li><li class="chapter-item expanded "><a href="async-http-client.html"><strong aria-hidden="true">8.</strong> async-http-client</a></li><li class="chapter-item expanded "><a href="axios.html"><strong aria-hidden="true">9.</strong> axios</a></li><li class="chapter-item expanded "><a href="azure.html" class="active"><strong aria-hidden="true">10.</strong> azure</a></li><li class="chapter-item expanded "><a href="bash.html"><strong aria-hidden="true">11.</strong> bash</a></li><li class="chapter-item expanded "><a href="bcryptjs.html"><strong aria-hidden="true">12.</strong> bcryptjs</a></li><li class="chapter-item expanded "><a href="bootstrap.html"><strong aria-hidden="true">13.</strong> bootstrap</a></li><li class="chapter-item expanded "><a href="bulma.html"><strong aria-hidden="true">14.</strong> bulma</a></li><li class="chapter-item expanded "><a href="c.html"><strong aria-hidden="true">15.</strong> c</a></li><li class="chapter-item expanded "><a href="cat.html"><strong aria-hidden="true">16.</strong> cat</a></li><li class="chapter-item expanded "><a href="cd.html"><strong aria-hidden="true">17.</strong> cd</a></li><li class="chapter-item expanded "><a href="challenges-code-preloads.html"><strong aria-hidden="true">18.</strong> challenges-code-preloads</a></li><li class="chapter-item expanded "><a href="chmod.html"><strong aria-hidden="true">19.</strong> chmod</a></li><li class="chapter-item expanded "><a href="cksum.html"><strong aria-hidden="true">20.</strong> cksum</a></li><li class="chapter-item expanded "><a href="clojure.html"><strong aria-hidden="true">21.</strong> clojure</a></li><li class="chapter-item expanded "><a href="cmp.html"><strong aria-hidden="true">22.</strong> cmp</a></li><li class="chapter-item expanded "><a href="cobol.html"><strong aria-hidden="true">23.</strong> cobol</a></li><li class="chapter-item expanded "><a href="comm.html"><strong aria-hidden="true">24.</strong> comm</a></li><li class="chapter-item expanded "><a href="commonlisp.html"><strong aria-hidden="true">25.</strong> commonlisp</a></li><li class="chapter-item expanded "><a href="cp.html"><strong aria-hidden="true">26.</strong> cp</a></li><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">27.</strong> cpp</a></li><li class="chapter-item expanded "><a href="cron.html"><strong aria-hidden="true">28.</strong> cron</a></li><li class="chapter-item expanded "><a href="crontab.html"><strong aria-hidden="true">29.</strong> crontab</a></li><li class="chapter-item expanded "><a href="csharp.html"><strong aria-hidden="true">30.</strong> csharp</a></li><li class="chapter-item expanded "><a href="css.html"><strong aria-hidden="true">31.</strong> css</a></li><li class="chapter-item expanded "><a href="curl.html"><strong aria-hidden="true">32.</strong> curl</a></li><li class="chapter-item expanded "><a href="cut.html"><strong aria-hidden="true">33.</strong> cut</a></li><li class="chapter-item expanded "><a href="d.html"><strong aria-hidden="true">34.</strong> d</a></li><li class="chapter-item expanded "><a href="dart.html"><strong aria-hidden="true">35.</strong> dart</a></li><li class="chapter-item expanded "><a href="dns.html"><strong aria-hidden="true">36.</strong> dns</a></li><li class="chapter-item expanded "><a href="docker.html"><strong aria-hidden="true">37.</strong> docker</a></li><li class="chapter-item expanded "><a href="dockerfile.html"><strong aria-hidden="true">38.</strong> dockerfile</a></li><li class="chapter-item expanded "><a href="dotenv.html"><strong aria-hidden="true">39.</strong> dotenv</a></li><li class="chapter-item expanded "><a href="echo.html"><strong aria-hidden="true">40.</strong> echo</a></li><li class="chapter-item expanded "><a href="ejs-embedded-javascript-templates.html"><strong aria-hidden="true">41.</strong> ejs-embedded-javascript-templates</a></li><li class="chapter-item expanded "><a href="elixir.html"><strong aria-hidden="true">42.</strong> elixir</a></li><li class="chapter-item expanded "><a href="erlang.html"><strong aria-hidden="true">43.</strong> erlang</a></li><li class="chapter-item expanded "><a href="es2csv.html"><strong aria-hidden="true">44.</strong> es2csv</a></li><li class="chapter-item expanded "><a href="express.html"><strong aria-hidden="true">45.</strong> express</a></li><li class="chapter-item expanded "><a href="figma.html"><strong aria-hidden="true">46.</strong> figma</a></li><li class="chapter-item expanded "><a href="find.html"><strong aria-hidden="true">47.</strong> find</a></li><li class="chapter-item expanded "><a href="flutter.html"><strong aria-hidden="true">48.</strong> flutter</a></li><li class="chapter-item expanded "><a href="fortran.html"><strong aria-hidden="true">49.</strong> fortran</a></li><li class="chapter-item expanded "><a href="foundation.html"><strong aria-hidden="true">50.</strong> foundation</a></li><li class="chapter-item expanded "><a href="fsharp.html"><strong aria-hidden="true">51.</strong> fsharp</a></li><li class="chapter-item expanded "><a href="git.html"><strong aria-hidden="true">52.</strong> git</a></li><li class="chapter-item expanded "><a href="go.html"><strong aria-hidden="true">53.</strong> go</a></li><li class="chapter-item expanded "><a href="google-analytics.html"><strong aria-hidden="true">54.</strong> google-analytics</a></li><li class="chapter-item expanded "><a href="google-nexus-screen-resolutions.html"><strong aria-hidden="true">55.</strong> google-nexus-screen-resolutions</a></li><li class="chapter-item expanded "><a href="google-pixel-screen-resolutions.html"><strong aria-hidden="true">56.</strong> google-pixel-screen-resolutions</a></li><li class="chapter-item expanded "><a href="grep.html"><strong aria-hidden="true">57.</strong> grep</a></li><li class="chapter-item expanded "><a href="groovy-http-calls.html"><strong aria-hidden="true">58.</strong> groovy-http-calls</a></li><li class="chapter-item expanded "><a href="groovy.html"><strong aria-hidden="true">59.</strong> groovy</a></li><li class="chapter-item expanded "><a href="gson.html"><strong aria-hidden="true">60.</strong> gson</a></li><li class="chapter-item expanded "><a href="haskell.html"><strong aria-hidden="true">61.</strong> haskell</a></li><li class="chapter-item expanded "><a href="head.html"><strong aria-hidden="true">62.</strong> head</a></li><li class="chapter-item expanded "><a href="heroku.html"><strong aria-hidden="true">63.</strong> heroku</a></li><li class="chapter-item expanded "><a href="homebrew.html"><strong aria-hidden="true">64.</strong> homebrew</a></li><li class="chapter-item expanded "><a href="html.html"><strong aria-hidden="true">65.</strong> html</a></li><li class="chapter-item expanded "><a href="http-staus-codes.html"><strong aria-hidden="true">66.</strong> http-staus-codes</a></li><li class="chapter-item expanded "><a href="iphone-screen-resolutions.html"><strong aria-hidden="true">67.</strong> iphone-screen-resolutions</a></li><li class="chapter-item expanded "><a href="java-primitive-data-types.html"><strong aria-hidden="true">68.</strong> java-primitive-data-types</a></li><li class="chapter-item expanded "><a href="java-strings.html"><strong aria-hidden="true">69.</strong> java-strings</a></li><li class="chapter-item expanded "><a href="java-versions.html"><strong aria-hidden="true">70.</strong> java-versions</a></li><li class="chapter-item expanded "><a href="java.html"><strong aria-hidden="true">71.</strong> java</a></li><li class="chapter-item expanded "><a href="javascript-fetch.html"><strong aria-hidden="true">72.</strong> javascript-fetch</a></li><li class="chapter-item expanded "><a href="javascript-versions.html"><strong aria-hidden="true">73.</strong> javascript-versions</a></li><li class="chapter-item expanded "><a href="javascript.html"><strong aria-hidden="true">74.</strong> javascript</a></li><li class="chapter-item expanded "><a href="jest.html"><strong aria-hidden="true">75.</strong> jest</a></li><li class="chapter-item expanded "><a href="jquery.html"><strong aria-hidden="true">76.</strong> jquery</a></li><li class="chapter-item expanded "><a href="jshell.html"><strong aria-hidden="true">77.</strong> jshell</a></li><li class="chapter-item expanded "><a href="jsonata.html"><strong aria-hidden="true">78.</strong> jsonata</a></li><li class="chapter-item expanded "><a href="jsoup.html"><strong aria-hidden="true">79.</strong> jsoup</a></li><li class="chapter-item expanded "><a href="kill.html"><strong aria-hidden="true">80.</strong> kill</a></li><li class="chapter-item expanded "><a href="kotlin.html"><strong aria-hidden="true">81.</strong> kotlin</a></li><li class="chapter-item expanded "><a href="kubernetes.html"><strong aria-hidden="true">82.</strong> kubernetes</a></li><li class="chapter-item expanded "><a href="link.html"><strong aria-hidden="true">83.</strong> link</a></li><li class="chapter-item expanded "><a href="linux.html"><strong aria-hidden="true">84.</strong> linux</a></li><li class="chapter-item expanded "><a href="lodash.html"><strong aria-hidden="true">85.</strong> lodash</a></li><li class="chapter-item expanded "><a href="ls.html"><strong aria-hidden="true">86.</strong> ls</a></li><li class="chapter-item expanded "><a href="lua.html"><strong aria-hidden="true">87.</strong> lua</a></li><li class="chapter-item expanded "><a href="make.html"><strong aria-hidden="true">88.</strong> make</a></li><li class="chapter-item expanded "><a href="man.html"><strong aria-hidden="true">89.</strong> man</a></li><li class="chapter-item expanded "><a href="mariadb.html"><strong aria-hidden="true">90.</strong> mariadb</a></li><li class="chapter-item expanded "><a href="markdown.html"><strong aria-hidden="true">91.</strong> markdown</a></li><li class="chapter-item expanded "><a href="materialize.html"><strong aria-hidden="true">92.</strong> materialize</a></li><li class="chapter-item expanded "><a href="maven.html"><strong aria-hidden="true">93.</strong> maven</a></li><li class="chapter-item expanded "><a href="milligram.html"><strong aria-hidden="true">94.</strong> milligram</a></li><li class="chapter-item expanded "><a href="mkdir.html"><strong aria-hidden="true">95.</strong> mkdir</a></li><li class="chapter-item expanded "><a href="mongodb.html"><strong aria-hidden="true">96.</strong> mongodb</a></li><li class="chapter-item expanded "><a href="mv.html"><strong aria-hidden="true">97.</strong> mv</a></li><li class="chapter-item expanded "><a href="mysql.html"><strong aria-hidden="true">98.</strong> mysql</a></li><li class="chapter-item expanded "><a href="netlify.html"><strong aria-hidden="true">99.</strong> netlify</a></li><li class="chapter-item expanded "><a href="nodejs.html"><strong aria-hidden="true">100.</strong> nodejs</a></li><li class="chapter-item expanded "><a href="nodemon.html"><strong aria-hidden="true">101.</strong> nodemon</a></li><li class="chapter-item expanded "><a href="ocaml.html"><strong aria-hidden="true">102.</strong> ocaml</a></li><li class="chapter-item expanded "><a href="octave.html"><strong aria-hidden="true">103.</strong> octave</a></li><li class="chapter-item expanded "><a href="okhttp.html"><strong aria-hidden="true">104.</strong> okhttp</a></li><li class="chapter-item expanded "><a href="onecompiler-apis.html"><strong aria-hidden="true">105.</strong> onecompiler-apis</a></li><li class="chapter-item expanded "><a href="onecompiler-enterprise-apis.html"><strong aria-hidden="true">106.</strong> onecompiler-enterprise-apis</a></li><li class="chapter-item expanded "><a href="oracle.html"><strong aria-hidden="true">107.</strong> oracle</a></li><li class="chapter-item expanded "><a href="papercss.html"><strong aria-hidden="true">108.</strong> papercss</a></li><li class="chapter-item expanded "><a href="pascal.html"><strong aria-hidden="true">109.</strong> pascal</a></li><li class="chapter-item expanded "><a href="perl.html"><strong aria-hidden="true">110.</strong> perl</a></li><li class="chapter-item expanded "><a href="php.html"><strong aria-hidden="true">111.</strong> php</a></li><li class="chapter-item expanded "><a href="plsql.html"><strong aria-hidden="true">112.</strong> plsql</a></li><li class="chapter-item expanded "><a href="pm2.html"><strong aria-hidden="true">113.</strong> pm2</a></li><li class="chapter-item expanded "><a href="postgresql.html"><strong aria-hidden="true">114.</strong> postgresql</a></li><li class="chapter-item expanded "><a href="prolog.html"><strong aria-hidden="true">115.</strong> prolog</a></li><li class="chapter-item expanded "><a href="prop-types.html"><strong aria-hidden="true">116.</strong> prop-types</a></li><li class="chapter-item expanded "><a href="ps.html"><strong aria-hidden="true">117.</strong> ps</a></li><li class="chapter-item expanded "><a href="pwd.html"><strong aria-hidden="true">118.</strong> pwd</a></li><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">119.</strong> python</a></li><li class="chapter-item expanded "><a href="python2.html"><strong aria-hidden="true">120.</strong> python2</a></li><li class="chapter-item expanded "><a href="r.html"><strong aria-hidden="true">121.</strong> r</a></li><li class="chapter-item expanded "><a href="racket.html"><strong aria-hidden="true">122.</strong> racket</a></li><li class="chapter-item expanded "><a href="react-helmet.html"><strong aria-hidden="true">123.</strong> react-helmet</a></li><li class="chapter-item expanded "><a href="react-prerequisites.html"><strong aria-hidden="true">124.</strong> react-prerequisites</a></li><li class="chapter-item expanded "><a href="reactjs.html"><strong aria-hidden="true">125.</strong> reactjs</a></li><li class="chapter-item expanded "><a href="redis.html"><strong aria-hidden="true">126.</strong> redis</a></li><li class="chapter-item expanded "><a href="request.html"><strong aria-hidden="true">127.</strong> request</a></li><li class="chapter-item expanded "><a href="rm.html"><strong aria-hidden="true">128.</strong> rm</a></li><li class="chapter-item expanded "><a href="rmdir.html"><strong aria-hidden="true">129.</strong> rmdir</a></li><li class="chapter-item expanded "><a href="ruby.html"><strong aria-hidden="true">130.</strong> ruby</a></li><li class="chapter-item expanded "><a href="rust.html"><strong aria-hidden="true">131.</strong> rust</a></li><li class="chapter-item expanded "><a href="scala.html"><strong aria-hidden="true">132.</strong> scala</a></li><li class="chapter-item expanded "><a href="scp.html"><strong aria-hidden="true">133.</strong> scp</a></li><li class="chapter-item expanded "><a href="search-engins.html"><strong aria-hidden="true">134.</strong> search-engins</a></li><li class="chapter-item expanded "><a href="semantic-ui.html"><strong aria-hidden="true">135.</strong> semantic-ui</a></li><li class="chapter-item expanded "><a href="skeleton.html"><strong aria-hidden="true">136.</strong> skeleton</a></li><li class="chapter-item expanded "><a href="solidity.html"><strong aria-hidden="true">137.</strong> solidity</a></li><li class="chapter-item expanded "><a href="sql.html"><strong aria-hidden="true">138.</strong> sql</a></li><li class="chapter-item expanded "><a href="sqlite.html"><strong aria-hidden="true">139.</strong> sqlite</a></li><li class="chapter-item expanded "><a href="super-csv.html"><strong aria-hidden="true">140.</strong> super-csv</a></li><li class="chapter-item expanded "><a href="swift.html"><strong aria-hidden="true">141.</strong> swift</a></li><li class="chapter-item expanded "><a href="tail.html"><strong aria-hidden="true">142.</strong> tail</a></li><li class="chapter-item expanded "><a href="tar-gz.html"><strong aria-hidden="true">143.</strong> tar-gz</a></li><li class="chapter-item expanded "><a href="tcl.html"><strong aria-hidden="true">144.</strong> tcl</a></li><li class="chapter-item expanded "><a href="typescript.html"><strong aria-hidden="true">145.</strong> typescript</a></li><li class="chapter-item expanded "><a href="uikit.html"><strong aria-hidden="true">146.</strong> uikit</a></li><li class="chapter-item expanded "><a href="underscore.html"><strong aria-hidden="true">147.</strong> underscore</a></li><li class="chapter-item expanded "><a href="vb.html"><strong aria-hidden="true">148.</strong> vb</a></li><li class="chapter-item expanded "><a href="vuejs.html"><strong aria-hidden="true">149.</strong> vuejs</a></li><li class="chapter-item expanded "><a href="vyper.html"><strong aria-hidden="true">150.</strong> vyper</a></li><li class="chapter-item expanded "><a href="wc.html"><strong aria-hidden="true">151.</strong> wc</a></li><li class="chapter-item expanded "><a href="windows-shortcuts.html"><strong aria-hidden="true">152.</strong> windows-shortcuts</a></li><li class="chapter-item expanded "><a href="yaml.html"><strong aria-hidden="true">153.</strong> yaml</a></li><li class="spacer"></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Indexed Centralized Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://groupware.cz:5000/Home/Public" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Microsoft Azure Fundamentals Cheatsheet
+description: Azure cheatsheet contains important concepts while working with azure.
+created: 2022-10-14
+updated: 2022-10-14</h2>
+<p>Azure Fundamentals consist  of cloud concepts, Azure services, Azure workloads, security and privacy in Azure, as well as Azure pricing and support.</p>
+<h2 id="basics"><a class="header" href="#basics">Basics</a></h2>
+<p>Cloud computing has started to evolve as one of the pillars of the new normal during the global pandemic. Amongst all the major players,like google cloud , amazon cloud  Microsoft Azure is becomming  one of the leading choices of enterprises worldwide. </p>
+<h2 id="azure-cloud-concepts"><a class="header" href="#azure-cloud-concepts">Azure Cloud Concepts</a></h2>
+<h2 id="1-benifits-of-cloud-computing"><a class="header" href="#1-benifits-of-cloud-computing">1. Benifits of Cloud Computing</a></h2>
+<p>Cost-effective solutions
+Easy accessibility from anywhere
+Faster Deployments of typically large environments</p>
+<h3 id="2-cloud-models"><a class="header" href="#2-cloud-models">2. Cloud Models</a></h3>
+<p>The cloud models define the deployment type of cloud resources. The three main cloud models are: </p>
+<h2 id="private-public-and-hybrid"><a class="header" href="#private-public-and-hybrid">private, public, and hybrid.</a></h2>
+<h3 id="21-private-cloud"><a class="header" href="#21-private-cloud">2.1. Private Cloud</a></h3>
+<p>It’s a cloud  that’s used by a single entity(where security is main concern). Private cloud provides much greater control for the company and its IT department. However, it also comes with 'greater cost' and 'fewer'  of the benefits of a public cloud deployment</p>
+<h3 id="22-public-cloud"><a class="header" href="#22-public-cloud">2.2. Public cloud</a></h3>
+<p>A public cloud is built, controlled, and maintained by a third-party cloud provider. With a public cloud, anyone that wants to purchase cloud services can access and use resources. 
+Typical examples of public cloud are </p>
+<h2 id="-google--aws--azure"><a class="header" href="#-google--aws--azure">-Google , Aws , Azure</a></h2>
+<h3 id="23-hybrid-cloud"><a class="header" href="#23-hybrid-cloud">2.3. Hybrid Cloud</a></h3>
+<p>A hybrid cloud is a computing environment that uses both public and private clouds in an inter-connected environment. A hybrid cloud environment can be used to allow a private cloud to surge for increased, temporary demand by deploying public cloud resources.
+It can be used to provide an extra layer of security. For example, users can flexibly choose which services to keep in public cloud and which to deploy to their private cloud infrastructure.</p>
+<h2 id="3-cloud-models"><a class="header" href="#3-cloud-models">3. Cloud Models</a></h2>
+<h3 id="31-shared-responsibility-model"><a class="header" href="#31-shared-responsibility-model">3.1 Shared Responsibility Model</a></h3>
+<p>shared responsibility model, these responsibilities get shared between the cloud provider and the consumer. Physical security, power, cooling, and network connectivity are the responsibility of the cloud provider. Responsibilities are shared between Cloud Provider and consumer based on Azure offerings(Saas , Paas , Iaas).
+For Onpremise offering everything is responsibility of customer.</p>
+<h3 id="32-consumption-based-model"><a class="header" href="#32-consumption-based-model">3.2 Consumption Based Model</a></h3>
+<p>In IT infrastructure models, there are two types of expenses to consider. First being Capital expenditure (CapEx) and  second operational expenditure (OpEx).
+○ CapEx is typically a one-time, up-front expenditure to purchase or secure tangible resources
+○ OpEx is spending money on services or products over time. </p>
+<h3 id="4-examples-of-consumption-based-model-cap-ex--op-ex"><a class="header" href="#4-examples-of-consumption-based-model-cap-ex--op-ex">4 Examples of Consumption Based Model (Cap-Ex &amp; Op-Ex)</a></h3>
+<h3 id="cap-ex"><a class="header" href="#cap-ex">Cap-Ex</a></h3>
+<p>Buying new building, repaving the parking lot, building a datacenter, or buying a company vehicle.</p>
+<h3 id="op-ex"><a class="header" href="#op-ex">Op-Ex</a></h3>
+<p>leasing a company vehicle, or signing up for cloud services .</p>
+<h2 id="5-cloud-services-iaas--paas--saas"><a class="header" href="#5-cloud-services-iaas--paas--saas">5 .Cloud Services( Iaas , Paas , Saas)</a></h2>
+<h3 id="infrastructure-as-a-serviceiaas-"><a class="header" href="#infrastructure-as-a-serviceiaas-">Infrastructure as a service(Iaas)-</a></h3>
+<p>It is most flexible category of cloud services, as it provides you the maximum amount of control for your cloud resources. In an IaaS model, the cloud provider is responsible for -  maintaining the hardware, network connectivity (to the internet), and physical security. You’re responsible for - operating system installation, configuration, and maintenance; network configuration; database and storage configuration;</p>
+<h3 id="51--platform-as-a-service-paas-"><a class="header" href="#51--platform-as-a-service-paas-">5.1  Platform as a service (PaaS)-</a></h3>
+<p>is a middle ground between renting space in a datacenter (infrastructure as a service) and paying for a complete and deployed solution (software as a service). In a PaaS environment, the cloud provider maintains - physical infrastructure, physical security, and connection to the internet.
+PaaS scenario, you don't have to worry about the licensing or patching for operating systems and databases.
+PaaS is  suited to provide a complete development environment without the headache of maintaining all the development infrastructure.</p>
+<h3 id="52-software-as-a-service-saas-"><a class="header" href="#52-software-as-a-service-saas-">5.2 Software as a service (SaaS)-</a></h3>
+<p>is the most complete cloud service model from a product perspective. With 'SaaS', you are essentially renting or using a fully developed application. Financial software, messaging applications, Email  and connectivity of  software are examples under category of Saas offering.</p>
+<h2 id="53-benifits-of-managment-in-cloud"><a class="header" href="#53-benifits-of-managment-in-cloud">5.3 Benifits of Managment in Cloud</a></h2>
+<p><em>Automatically scale resource deployment as per need.</em>
+<em>Monitor the health of resources and automatically replace failing resources.</em>
+<em>Receive automatic alerts based on configured metrics .</em></p>
+<h2 id="6-scaling-in-cloud"><a class="header" href="#6-scaling-in-cloud">6. Scaling In Cloud</a></h2>
+<p>When building or deploying a cloud application, two of the biggest considerations are uptime (or availability) and the ability to handle demand (scale)</p>
+<h3 id="types-of-scaling"><a class="header" href="#types-of-scaling"><em>Types Of Scaling</em></a></h3>
+<h3 id="horizontal-scaling"><a class="header" href="#horizontal-scaling">Horizontal Scaling</a></h3>
+<h3 id="vertical-scaling"><a class="header" href="#vertical-scaling">Vertical Scaling</a></h3>
+<h2 id="horizontal-scaling--"><a class="header" href="#horizontal-scaling--">Horizontal Scaling -</a></h2>
+<p>In horizontal scaling, if you suddenly experienced a steep jump in demand, your deployed resources could be scaled out (either automatically or manually). This can be done by add additional virtual machines or containers, scaling out.</p>
+<h2 id="vertical-scaling---"><a class="header" href="#vertical-scaling---">Vertical Scaling  -</a></h2>
+<p>you could vertically scale up to add more CPUs or RAM to the virtual machine &amp; also  you could vertically scale down by lowering the CPU or RAM specifications.</p>
+<h3 id="7azure-accounts--"><a class="header" href="#7azure-accounts--">7.Azure Accounts -</a></h3>
+<p>To create and use Azure services, you need an Azure subscription
+When you're working with your own applications and business needs, you need to create an Azure account, and a subscription will be created for you.</p>
+<h3 id="71-azure-free-account-includes"><a class="header" href="#71-azure-free-account-includes">7.1 Azure Free Account includes:</a></h3>
+<p>Free access to popular Azure products for 12 months.
+A credit to use for the first 30 days.
+Access to more than 25 products that are always free. </p>
+<h3 id="72-azure-student-account"><a class="header" href="#72-azure-student-account">7.2 Azure Student Account</a></h3>
+<p>Free access to certain Azure services for 12 months.
+A credit to use in the first 12 months.
+Free access to certain software developer tools.</p>
+<h2 id="8--steps-to-create-azure-resources"><a class="header" href="#8--steps-to-create-azure-resources">8 . Steps to Create Azure Resources</a></h2>
+<h3 id="create-a-virtual-machine"><a class="header" href="#create-a-virtual-machine">create a virtual Machine</a></h3>
+<ol>
+<li>
+<p>Sign in to the Azure portal.</p>
+</li>
+<li>
+<p>Select Create a resource &gt; Compute &gt; Virtual Machine &gt; Create.</p>
+</li>
+<li>
+<p>The Create a virtual machine pane opens to the basics tab.</p>
+</li>
+<li>
+<p>Verify or enter the following values for each setting. If a setting isn’t specified, leave the default value.
+| Setting            | value                     |
+| -----------         |---------                 |<br />
+|Subscription        | Concierge Subscription    |
+| Resource group     | Resource group            | 
+| Username           |  azureuser                |
+Public inbound ports | None                      |</p>
+</li>
+<li>
+<p>Select Review and Create.</p>
+</li>
+</ol>
+<h3 id="9-azure-compute--networking-services"><a class="header" href="#9-azure-compute--networking-services">9 .Azure Compute &amp; Networking Services.</a></h3>
+<h2 id="91-azure-virtual-machines--"><a class="header" href="#91-azure-virtual-machines--">9.1 Azure Virtual Machines -</a></h2>
+<p>Azure Virtual Machines (VMs), you can create and use VMs in the cloud. VMs provide infrastructure as a service (IaaS) in the form of a virtualized server and can be used in many ways. 
+Vm can be helpfull when 
+<strong>Total control over the operating system (OS).</strong>
+<strong>The ability to run custom software.</strong>
+<strong>To use custom hosting configurations.</strong></p>
+<h2 id="92--virtual-machine-scale-set"><a class="header" href="#92--virtual-machine-scale-set">9.2  Virtual Machine scale set</a></h2>
+<p>Scale sets allow you to centrally manage, configure, and update a large number of VMs in minutes. The number of VM instances can automatically increase or decrease in response to demand, or you can set it to scale based on a defined schedule.
+Helpfull in building  large-scale services for areas such as compute, big data, and container workloads.</p>
+<h2 id="93--virtual-availability-sets"><a class="header" href="#93--virtual-availability-sets">9.3  Virtual availability sets</a></h2>
+<p>availability sets are another tool to help you build a more resilient, highly available environment. Availability sets are designed to ensure that VMs stagger updates and have varied power and network connectivity, preventing you from losing all your VMs with a single network or power failure.</p>
+<h2 id="10-examples-when-to-use-virtual-machines"><a class="header" href="#10-examples-when-to-use-virtual-machines">10 .Examples when to use Virtual Machines.</a></h2>
+<p>During testing and development
+When extending your datacenter to the cloud
+During disaster recovery:</p>
+<h2 id="11azure-functions"><a class="header" href="#11azure-functions">11.Azure Functions</a></h2>
+<p>Azure Functions is an event-driven, serverless compute option that doesn’t require maintaining virtual machines or containers. </p>
+<h2 id="12-azure-virtual-private-networks"><a class="header" href="#12-azure-virtual-private-networks">12. Azure Virtual Private Networks</a></h2>
+<p>A virtual private network (VPN) uses an encrypted tunnel within another network. VPNs are typically deployed to connect two or more trusted private networks to one another over an untrusted network . Traffic is encrypted while traveling over the untrusted network to prevent eavesdropping or other attacks.</p>
+<h2 id="13virtual-private-network-gateways"><a class="header" href="#13virtual-private-network-gateways">13.Virtual Private Network Gateways</a></h2>
+<p>A VPN gateway is a type of virtual network gateway.
+*Connect on-premises datacenters to virtual networks through a site-to-site connection. *</p>
+<ul>
+<li>Connect virtual networks to other virtual networks through a network-to-network connection.*</li>
+</ul>
+<h2 id="14-vpn-gateway-is-usefull-in-folllowing-cases-"><a class="header" href="#14-vpn-gateway-is-usefull-in-folllowing-cases-">14 .VPN Gateway is usefull in folllowing cases-</a></h2>
+<p><em>Connections between virtual networks</em>
+<em>Point-to-site connections</em>
+<em>Multisite connections</em></p>
+<h2 id="15-azure-dns"><a class="header" href="#15-azure-dns">15. Azure DNS</a></h2>
+<p>Azure DNS is a hosting service for DNS domains that provides name resolution by using Microsoft Azure infrastructure</p>
+<h2 id="benifits-of-azure-dns"><a class="header" href="#benifits-of-azure-dns">Benifits of Azure DNS</a></h2>
+<p><em>Security</em>
+<em>Customizable virtual networks</em>
+<em>Alias records</em></p>
+<h3 id="azure-storage-services"><a class="header" href="#azure-storage-services">Azure Storage Services.</a></h3>
+<h2 id="azure-blobs"><a class="header" href="#azure-blobs"><em>Azure Blobs</em></a></h2>
+<h2 id="azure-files"><a class="header" href="#azure-files"><em>Azure Files</em></a></h2>
+<h2 id="azure-queues"><a class="header" href="#azure-queues"><em>Azure Queues</em></a></h2>
+<h2 id="azure-disks"><a class="header" href="#azure-disks"><em>Azure Disks</em></a></h2>
+<h2 id="16-benifits-of-azure-services"><a class="header" href="#16-benifits-of-azure-services">16. Benifits of Azure Services</a></h2>
+<p>Durable and highly available
+Secure
+Managed
+Accessible </p>
+<h2 id="links-to-resources"><a class="header" href="#links-to-resources">Links to Resources</a></h2>
+<p>https://learn.microsoft.com/en-us/certifications/azure-fundamentals/
+https://azure.microsoft.com/en-in/free/</p>
+<pre><code>
+
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="axios.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="bash.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="axios.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="bash.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/mermaid.min.cdn.js"></script>
+        <script src="./js/jquery-storage.js"></script>
+        <script src="./js/autotranslate.js"></script>
+        <script src="./js/globalscript.js"></script>
+
+
+    </div>
+    </body>
+</html>

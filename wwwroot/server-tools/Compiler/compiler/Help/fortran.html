@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>fortran - Indexed Centralized Docs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="EasyITcenter &amp; EasySYSTEMbuilder Groupware Solution Projects Documentation">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./css/global.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="Summary.html">Summary</a></li><li class="chapter-item expanded "><a href="ada.html"><strong aria-hidden="true">1.</strong> ada</a></li><li class="chapter-item expanded "><a href="adb.html"><strong aria-hidden="true">2.</strong> adb</a></li><li class="chapter-item expanded "><a href="alias.html"><strong aria-hidden="true">3.</strong> alias</a></li><li class="chapter-item expanded "><a href="android-versions.html"><strong aria-hidden="true">4.</strong> android-versions</a></li><li class="chapter-item expanded "><a href="angular.html"><strong aria-hidden="true">5.</strong> angular</a></li><li class="chapter-item expanded "><a href="arrow-functions.html"><strong aria-hidden="true">6.</strong> arrow-functions</a></li><li class="chapter-item expanded "><a href="assembly.html"><strong aria-hidden="true">7.</strong> assembly</a></li><li class="chapter-item expanded "><a href="async-http-client.html"><strong aria-hidden="true">8.</strong> async-http-client</a></li><li class="chapter-item expanded "><a href="axios.html"><strong aria-hidden="true">9.</strong> axios</a></li><li class="chapter-item expanded "><a href="azure.html"><strong aria-hidden="true">10.</strong> azure</a></li><li class="chapter-item expanded "><a href="bash.html"><strong aria-hidden="true">11.</strong> bash</a></li><li class="chapter-item expanded "><a href="bcryptjs.html"><strong aria-hidden="true">12.</strong> bcryptjs</a></li><li class="chapter-item expanded "><a href="bootstrap.html"><strong aria-hidden="true">13.</strong> bootstrap</a></li><li class="chapter-item expanded "><a href="bulma.html"><strong aria-hidden="true">14.</strong> bulma</a></li><li class="chapter-item expanded "><a href="c.html"><strong aria-hidden="true">15.</strong> c</a></li><li class="chapter-item expanded "><a href="cat.html"><strong aria-hidden="true">16.</strong> cat</a></li><li class="chapter-item expanded "><a href="cd.html"><strong aria-hidden="true">17.</strong> cd</a></li><li class="chapter-item expanded "><a href="challenges-code-preloads.html"><strong aria-hidden="true">18.</strong> challenges-code-preloads</a></li><li class="chapter-item expanded "><a href="chmod.html"><strong aria-hidden="true">19.</strong> chmod</a></li><li class="chapter-item expanded "><a href="cksum.html"><strong aria-hidden="true">20.</strong> cksum</a></li><li class="chapter-item expanded "><a href="clojure.html"><strong aria-hidden="true">21.</strong> clojure</a></li><li class="chapter-item expanded "><a href="cmp.html"><strong aria-hidden="true">22.</strong> cmp</a></li><li class="chapter-item expanded "><a href="cobol.html"><strong aria-hidden="true">23.</strong> cobol</a></li><li class="chapter-item expanded "><a href="comm.html"><strong aria-hidden="true">24.</strong> comm</a></li><li class="chapter-item expanded "><a href="commonlisp.html"><strong aria-hidden="true">25.</strong> commonlisp</a></li><li class="chapter-item expanded "><a href="cp.html"><strong aria-hidden="true">26.</strong> cp</a></li><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">27.</strong> cpp</a></li><li class="chapter-item expanded "><a href="cron.html"><strong aria-hidden="true">28.</strong> cron</a></li><li class="chapter-item expanded "><a href="crontab.html"><strong aria-hidden="true">29.</strong> crontab</a></li><li class="chapter-item expanded "><a href="csharp.html"><strong aria-hidden="true">30.</strong> csharp</a></li><li class="chapter-item expanded "><a href="css.html"><strong aria-hidden="true">31.</strong> css</a></li><li class="chapter-item expanded "><a href="curl.html"><strong aria-hidden="true">32.</strong> curl</a></li><li class="chapter-item expanded "><a href="cut.html"><strong aria-hidden="true">33.</strong> cut</a></li><li class="chapter-item expanded "><a href="d.html"><strong aria-hidden="true">34.</strong> d</a></li><li class="chapter-item expanded "><a href="dart.html"><strong aria-hidden="true">35.</strong> dart</a></li><li class="chapter-item expanded "><a href="dns.html"><strong aria-hidden="true">36.</strong> dns</a></li><li class="chapter-item expanded "><a href="docker.html"><strong aria-hidden="true">37.</strong> docker</a></li><li class="chapter-item expanded "><a href="dockerfile.html"><strong aria-hidden="true">38.</strong> dockerfile</a></li><li class="chapter-item expanded "><a href="dotenv.html"><strong aria-hidden="true">39.</strong> dotenv</a></li><li class="chapter-item expanded "><a href="echo.html"><strong aria-hidden="true">40.</strong> echo</a></li><li class="chapter-item expanded "><a href="ejs-embedded-javascript-templates.html"><strong aria-hidden="true">41.</strong> ejs-embedded-javascript-templates</a></li><li class="chapter-item expanded "><a href="elixir.html"><strong aria-hidden="true">42.</strong> elixir</a></li><li class="chapter-item expanded "><a href="erlang.html"><strong aria-hidden="true">43.</strong> erlang</a></li><li class="chapter-item expanded "><a href="es2csv.html"><strong aria-hidden="true">44.</strong> es2csv</a></li><li class="chapter-item expanded "><a href="express.html"><strong aria-hidden="true">45.</strong> express</a></li><li class="chapter-item expanded "><a href="figma.html"><strong aria-hidden="true">46.</strong> figma</a></li><li class="chapter-item expanded "><a href="find.html"><strong aria-hidden="true">47.</strong> find</a></li><li class="chapter-item expanded "><a href="flutter.html"><strong aria-hidden="true">48.</strong> flutter</a></li><li class="chapter-item expanded "><a href="fortran.html" class="active"><strong aria-hidden="true">49.</strong> fortran</a></li><li class="chapter-item expanded "><a href="foundation.html"><strong aria-hidden="true">50.</strong> foundation</a></li><li class="chapter-item expanded "><a href="fsharp.html"><strong aria-hidden="true">51.</strong> fsharp</a></li><li class="chapter-item expanded "><a href="git.html"><strong aria-hidden="true">52.</strong> git</a></li><li class="chapter-item expanded "><a href="go.html"><strong aria-hidden="true">53.</strong> go</a></li><li class="chapter-item expanded "><a href="google-analytics.html"><strong aria-hidden="true">54.</strong> google-analytics</a></li><li class="chapter-item expanded "><a href="google-nexus-screen-resolutions.html"><strong aria-hidden="true">55.</strong> google-nexus-screen-resolutions</a></li><li class="chapter-item expanded "><a href="google-pixel-screen-resolutions.html"><strong aria-hidden="true">56.</strong> google-pixel-screen-resolutions</a></li><li class="chapter-item expanded "><a href="grep.html"><strong aria-hidden="true">57.</strong> grep</a></li><li class="chapter-item expanded "><a href="groovy-http-calls.html"><strong aria-hidden="true">58.</strong> groovy-http-calls</a></li><li class="chapter-item expanded "><a href="groovy.html"><strong aria-hidden="true">59.</strong> groovy</a></li><li class="chapter-item expanded "><a href="gson.html"><strong aria-hidden="true">60.</strong> gson</a></li><li class="chapter-item expanded "><a href="haskell.html"><strong aria-hidden="true">61.</strong> haskell</a></li><li class="chapter-item expanded "><a href="head.html"><strong aria-hidden="true">62.</strong> head</a></li><li class="chapter-item expanded "><a href="heroku.html"><strong aria-hidden="true">63.</strong> heroku</a></li><li class="chapter-item expanded "><a href="homebrew.html"><strong aria-hidden="true">64.</strong> homebrew</a></li><li class="chapter-item expanded "><a href="html.html"><strong aria-hidden="true">65.</strong> html</a></li><li class="chapter-item expanded "><a href="http-staus-codes.html"><strong aria-hidden="true">66.</strong> http-staus-codes</a></li><li class="chapter-item expanded "><a href="iphone-screen-resolutions.html"><strong aria-hidden="true">67.</strong> iphone-screen-resolutions</a></li><li class="chapter-item expanded "><a href="java-primitive-data-types.html"><strong aria-hidden="true">68.</strong> java-primitive-data-types</a></li><li class="chapter-item expanded "><a href="java-strings.html"><strong aria-hidden="true">69.</strong> java-strings</a></li><li class="chapter-item expanded "><a href="java-versions.html"><strong aria-hidden="true">70.</strong> java-versions</a></li><li class="chapter-item expanded "><a href="java.html"><strong aria-hidden="true">71.</strong> java</a></li><li class="chapter-item expanded "><a href="javascript-fetch.html"><strong aria-hidden="true">72.</strong> javascript-fetch</a></li><li class="chapter-item expanded "><a href="javascript-versions.html"><strong aria-hidden="true">73.</strong> javascript-versions</a></li><li class="chapter-item expanded "><a href="javascript.html"><strong aria-hidden="true">74.</strong> javascript</a></li><li class="chapter-item expanded "><a href="jest.html"><strong aria-hidden="true">75.</strong> jest</a></li><li class="chapter-item expanded "><a href="jquery.html"><strong aria-hidden="true">76.</strong> jquery</a></li><li class="chapter-item expanded "><a href="jshell.html"><strong aria-hidden="true">77.</strong> jshell</a></li><li class="chapter-item expanded "><a href="jsonata.html"><strong aria-hidden="true">78.</strong> jsonata</a></li><li class="chapter-item expanded "><a href="jsoup.html"><strong aria-hidden="true">79.</strong> jsoup</a></li><li class="chapter-item expanded "><a href="kill.html"><strong aria-hidden="true">80.</strong> kill</a></li><li class="chapter-item expanded "><a href="kotlin.html"><strong aria-hidden="true">81.</strong> kotlin</a></li><li class="chapter-item expanded "><a href="kubernetes.html"><strong aria-hidden="true">82.</strong> kubernetes</a></li><li class="chapter-item expanded "><a href="link.html"><strong aria-hidden="true">83.</strong> link</a></li><li class="chapter-item expanded "><a href="linux.html"><strong aria-hidden="true">84.</strong> linux</a></li><li class="chapter-item expanded "><a href="lodash.html"><strong aria-hidden="true">85.</strong> lodash</a></li><li class="chapter-item expanded "><a href="ls.html"><strong aria-hidden="true">86.</strong> ls</a></li><li class="chapter-item expanded "><a href="lua.html"><strong aria-hidden="true">87.</strong> lua</a></li><li class="chapter-item expanded "><a href="make.html"><strong aria-hidden="true">88.</strong> make</a></li><li class="chapter-item expanded "><a href="man.html"><strong aria-hidden="true">89.</strong> man</a></li><li class="chapter-item expanded "><a href="mariadb.html"><strong aria-hidden="true">90.</strong> mariadb</a></li><li class="chapter-item expanded "><a href="markdown.html"><strong aria-hidden="true">91.</strong> markdown</a></li><li class="chapter-item expanded "><a href="materialize.html"><strong aria-hidden="true">92.</strong> materialize</a></li><li class="chapter-item expanded "><a href="maven.html"><strong aria-hidden="true">93.</strong> maven</a></li><li class="chapter-item expanded "><a href="milligram.html"><strong aria-hidden="true">94.</strong> milligram</a></li><li class="chapter-item expanded "><a href="mkdir.html"><strong aria-hidden="true">95.</strong> mkdir</a></li><li class="chapter-item expanded "><a href="mongodb.html"><strong aria-hidden="true">96.</strong> mongodb</a></li><li class="chapter-item expanded "><a href="mv.html"><strong aria-hidden="true">97.</strong> mv</a></li><li class="chapter-item expanded "><a href="mysql.html"><strong aria-hidden="true">98.</strong> mysql</a></li><li class="chapter-item expanded "><a href="netlify.html"><strong aria-hidden="true">99.</strong> netlify</a></li><li class="chapter-item expanded "><a href="nodejs.html"><strong aria-hidden="true">100.</strong> nodejs</a></li><li class="chapter-item expanded "><a href="nodemon.html"><strong aria-hidden="true">101.</strong> nodemon</a></li><li class="chapter-item expanded "><a href="ocaml.html"><strong aria-hidden="true">102.</strong> ocaml</a></li><li class="chapter-item expanded "><a href="octave.html"><strong aria-hidden="true">103.</strong> octave</a></li><li class="chapter-item expanded "><a href="okhttp.html"><strong aria-hidden="true">104.</strong> okhttp</a></li><li class="chapter-item expanded "><a href="onecompiler-apis.html"><strong aria-hidden="true">105.</strong> onecompiler-apis</a></li><li class="chapter-item expanded "><a href="onecompiler-enterprise-apis.html"><strong aria-hidden="true">106.</strong> onecompiler-enterprise-apis</a></li><li class="chapter-item expanded "><a href="oracle.html"><strong aria-hidden="true">107.</strong> oracle</a></li><li class="chapter-item expanded "><a href="papercss.html"><strong aria-hidden="true">108.</strong> papercss</a></li><li class="chapter-item expanded "><a href="pascal.html"><strong aria-hidden="true">109.</strong> pascal</a></li><li class="chapter-item expanded "><a href="perl.html"><strong aria-hidden="true">110.</strong> perl</a></li><li class="chapter-item expanded "><a href="php.html"><strong aria-hidden="true">111.</strong> php</a></li><li class="chapter-item expanded "><a href="plsql.html"><strong aria-hidden="true">112.</strong> plsql</a></li><li class="chapter-item expanded "><a href="pm2.html"><strong aria-hidden="true">113.</strong> pm2</a></li><li class="chapter-item expanded "><a href="postgresql.html"><strong aria-hidden="true">114.</strong> postgresql</a></li><li class="chapter-item expanded "><a href="prolog.html"><strong aria-hidden="true">115.</strong> prolog</a></li><li class="chapter-item expanded "><a href="prop-types.html"><strong aria-hidden="true">116.</strong> prop-types</a></li><li class="chapter-item expanded "><a href="ps.html"><strong aria-hidden="true">117.</strong> ps</a></li><li class="chapter-item expanded "><a href="pwd.html"><strong aria-hidden="true">118.</strong> pwd</a></li><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">119.</strong> python</a></li><li class="chapter-item expanded "><a href="python2.html"><strong aria-hidden="true">120.</strong> python2</a></li><li class="chapter-item expanded "><a href="r.html"><strong aria-hidden="true">121.</strong> r</a></li><li class="chapter-item expanded "><a href="racket.html"><strong aria-hidden="true">122.</strong> racket</a></li><li class="chapter-item expanded "><a href="react-helmet.html"><strong aria-hidden="true">123.</strong> react-helmet</a></li><li class="chapter-item expanded "><a href="react-prerequisites.html"><strong aria-hidden="true">124.</strong> react-prerequisites</a></li><li class="chapter-item expanded "><a href="reactjs.html"><strong aria-hidden="true">125.</strong> reactjs</a></li><li class="chapter-item expanded "><a href="redis.html"><strong aria-hidden="true">126.</strong> redis</a></li><li class="chapter-item expanded "><a href="request.html"><strong aria-hidden="true">127.</strong> request</a></li><li class="chapter-item expanded "><a href="rm.html"><strong aria-hidden="true">128.</strong> rm</a></li><li class="chapter-item expanded "><a href="rmdir.html"><strong aria-hidden="true">129.</strong> rmdir</a></li><li class="chapter-item expanded "><a href="ruby.html"><strong aria-hidden="true">130.</strong> ruby</a></li><li class="chapter-item expanded "><a href="rust.html"><strong aria-hidden="true">131.</strong> rust</a></li><li class="chapter-item expanded "><a href="scala.html"><strong aria-hidden="true">132.</strong> scala</a></li><li class="chapter-item expanded "><a href="scp.html"><strong aria-hidden="true">133.</strong> scp</a></li><li class="chapter-item expanded "><a href="search-engins.html"><strong aria-hidden="true">134.</strong> search-engins</a></li><li class="chapter-item expanded "><a href="semantic-ui.html"><strong aria-hidden="true">135.</strong> semantic-ui</a></li><li class="chapter-item expanded "><a href="skeleton.html"><strong aria-hidden="true">136.</strong> skeleton</a></li><li class="chapter-item expanded "><a href="solidity.html"><strong aria-hidden="true">137.</strong> solidity</a></li><li class="chapter-item expanded "><a href="sql.html"><strong aria-hidden="true">138.</strong> sql</a></li><li class="chapter-item expanded "><a href="sqlite.html"><strong aria-hidden="true">139.</strong> sqlite</a></li><li class="chapter-item expanded "><a href="super-csv.html"><strong aria-hidden="true">140.</strong> super-csv</a></li><li class="chapter-item expanded "><a href="swift.html"><strong aria-hidden="true">141.</strong> swift</a></li><li class="chapter-item expanded "><a href="tail.html"><strong aria-hidden="true">142.</strong> tail</a></li><li class="chapter-item expanded "><a href="tar-gz.html"><strong aria-hidden="true">143.</strong> tar-gz</a></li><li class="chapter-item expanded "><a href="tcl.html"><strong aria-hidden="true">144.</strong> tcl</a></li><li class="chapter-item expanded "><a href="typescript.html"><strong aria-hidden="true">145.</strong> typescript</a></li><li class="chapter-item expanded "><a href="uikit.html"><strong aria-hidden="true">146.</strong> uikit</a></li><li class="chapter-item expanded "><a href="underscore.html"><strong aria-hidden="true">147.</strong> underscore</a></li><li class="chapter-item expanded "><a href="vb.html"><strong aria-hidden="true">148.</strong> vb</a></li><li class="chapter-item expanded "><a href="vuejs.html"><strong aria-hidden="true">149.</strong> vuejs</a></li><li class="chapter-item expanded "><a href="vyper.html"><strong aria-hidden="true">150.</strong> vyper</a></li><li class="chapter-item expanded "><a href="wc.html"><strong aria-hidden="true">151.</strong> wc</a></li><li class="chapter-item expanded "><a href="windows-shortcuts.html"><strong aria-hidden="true">152.</strong> windows-shortcuts</a></li><li class="chapter-item expanded "><a href="yaml.html"><strong aria-hidden="true">153.</strong> yaml</a></li><li class="spacer"></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Indexed Centralized Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://groupware.cz:5000/Home/Public" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="fortran-online-compiler"><a class="header" href="#fortran-online-compiler">Fortran Online Compiler</a></h1>
+<p>Write, Run &amp; Share Fortran code online using OneCompiler's Fortran online compiler for free. It's one of the robust, feature-rich online compilers for Fortran language, running on the latest version 7. Getting started with the OneCompiler's Fortran compiler is simple and pretty fast. The editor shows sample boilerplate code when you choose language as <code>Fortran</code> and start coding. </p>
+<h1 id="read-inputs-from-stdin"><a class="header" href="#read-inputs-from-stdin">Read inputs from stdin</a></h1>
+<p>OneCompiler's Fortran online editor supports stdin and users can give inputs to programs using the STDIN textbox under the I/O tab. Following is a sample Fortran program which takes name as input and prints hello message with your name.</p>
+<pre><code class="language-fortran">program hello
+  character :: name*30
+  read *, name
+	print *, &quot;Hello &quot;, name
+end program hello
+</code></pre>
+<h1 id="about-fortran"><a class="header" href="#about-fortran">About Fortran</a></h1>
+<p>Fortran language was initially developed for scientific calculations by IBM in 1957. It has a number of in-built functions to perform mathematical calculations and is ideal for applications which has more mathematical calculations. </p>
+<h1 id="syntax-help"><a class="header" href="#syntax-help">Syntax help</a></h1>
+<h2 id="data-types"><a class="header" href="#data-types">Data Types</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Data type</th><th>Description</th><th>Usage</th></tr></thead><tbody>
+<tr><td>Integer</td><td>To store integer variables</td><td>integer :: x</td></tr>
+<tr><td>Real</td><td>To store float values</td><td>real :: x</td></tr>
+<tr><td>Complex</td><td>To store complex numbers</td><td>complex :: x,y</td></tr>
+<tr><td>Logical</td><td>To store boolean values True or false</td><td>logical :: x=.True. , logical :: x = .FALSE.</td></tr>
+<tr><td>Character</td><td>To store characters and strings</td><td>character :: x</td></tr>
+</tbody></table>
+</div>
+<h2 id="variables"><a class="header" href="#variables">Variables</a></h2>
+<p>Variable is a name given to the storage area in order to manipulate them in our programs.</p>
+<pre><code>data type :: variable_name
+</code></pre>
+<h2 id="arrays"><a class="header" href="#arrays">Arrays</a></h2>
+<p>Array is a collection of similar data which is stored in continuous memory addresses.</p>
+<h3 id="syntax"><a class="header" href="#syntax">Syntax</a></h3>
+<pre><code class="language-fortran">data-type, dimension (x,y) :: array-name
+</code></pre>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<pre><code class="language-fortran">integer, dimension(3,3) :: cube
+</code></pre>
+<h2 id="loops"><a class="header" href="#loops">Loops</a></h2>
+<h3 id="1-do"><a class="header" href="#1-do">1. Do:</a></h3>
+<p>Do is used to execute a set of statement(s) iteratively when a given condition is true and the loop variable must be an integer.</p>
+<pre><code class="language-fortran">do i = start, stop [,step]    
+   ! code
+end do
+</code></pre>
+<h3 id="2-do-while"><a class="header" href="#2-do-while">2. Do-While:</a></h3>
+<p>Do-While is used to execute a set of statement(s) iteratively  when a given condition is true.</p>
+<pre><code class="language-fortran">do while (condition) 
+   !Code
+end do
+</code></pre>
+<h3 id="3-if"><a class="header" href="#3-if">3. If:</a></h3>
+<p>If is used to execute a set of statements based on a condition.</p>
+<pre><code class="language-fortran">if (logical-expression) then      
+   !Code  
+end if
+</code></pre>
+<h3 id="4-if-else"><a class="header" href="#4-if-else">4. If-Else:</a></h3>
+<p>If is used to execute a set of statements based on a condition and execute another set of statements present in else block, if condition specified in If block fails.</p>
+<pre><code class="language-fortran">if (logical-expression) then     
+   !code when the condition is true
+else
+   !code when the condition fails
+end if
+</code></pre>
+<h3 id="5-case"><a class="header" href="#5-case">5. Case:</a></h3>
+<p>Case is similar to switch in C language. </p>
+<pre><code class="language-fortran">[name:] select case (regular-expression) 
+   case (value1)          
+   ! code for value 1          
+   ... case (value2)           
+   ! code for value 2           
+   ...       
+   case default          
+   ! default code          
+   ...   
+end select [name]
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="flutter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="foundation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="flutter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="foundation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/mermaid.min.cdn.js"></script>
+        <script src="./js/jquery-storage.js"></script>
+        <script src="./js/autotranslate.js"></script>
+        <script src="./js/globalscript.js"></script>
+
+
+    </div>
+    </body>
+</html>

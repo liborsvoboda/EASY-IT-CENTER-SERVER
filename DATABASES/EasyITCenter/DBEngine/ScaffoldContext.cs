@@ -55,6 +55,7 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<MigrationsHistoryList> MigrationsHistoryLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; } = null!;
         public virtual DbSet<PortalApiTableList> PortalApiTableLists { get; set; } = null!;
+        public virtual DbSet<PortalSettingList> PortalSettingLists { get; set; } = null!;
         public virtual DbSet<ProdGuidGroupList> ProdGuidGroupLists { get; set; } = null!;
         public virtual DbSet<ProdGuidOperationList> ProdGuidOperationLists { get; set; } = null!;
         public virtual DbSet<ProdGuidPartList> ProdGuidPartLists { get; set; } = null!;
@@ -86,8 +87,9 @@ namespace EasyITCenter.DBModel
         public virtual DbSet<SolutionRegistrationParameterList> SolutionRegistrationParameterLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerList> SolutionSchedulerLists { get; set; } = null!;
         public virtual DbSet<SolutionSchedulerProcessSupportList> SolutionSchedulerProcessSupportLists { get; set; } = null!;
-        public virtual DbSet<SolutionServerToolsGroupList> SolutionServerToolsGroupLists { get; set; } = null!;
-        public virtual DbSet<SolutionServerToolsNameList> SolutionServerToolsNameLists { get; set; } = null!;
+        public virtual DbSet<SolutionServerToolGroupList> SolutionServerToolGroupLists { get; set; } = null!;
+        public virtual DbSet<SolutionServerToolNameList> SolutionServerToolNameLists { get; set; } = null!;
+        public virtual DbSet<SolutionServerToolVariableList> SolutionServerToolVariableLists { get; set; } = null!;
         public virtual DbSet<SolutionShareSourceList> SolutionShareSourceLists { get; set; } = null!;
         public virtual DbSet<SolutionTaskList> SolutionTaskLists { get; set; } = null!;
         public virtual DbSet<SolutionUserList> SolutionUserLists { get; set; } = null!;
@@ -858,6 +860,24 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_PortalApiTableList_SolutionUserList");
             });
 
+            modelBuilder.Entity<PortalSettingList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.InheritedDataTypeNavigation)
+                    .WithMany(p => p.PortalSettingLists)
+                    .HasPrincipalKey(p => p.SystemName)
+                    .HasForeignKey(d => d.InheritedDataType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalSettingList_SolutionMixedEnumList");
+
+                entity.HasOne(d => d.SolutionUserList)
+                    .WithMany(p => p.PortalSettingLists)
+                    .HasForeignKey(d => d.SolutionUserListId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PortalSettingList_SolutionUserList");
+            });
+
             modelBuilder.Entity<ProdGuidGroupList>(entity =>
             {
                 entity.HasOne(d => d.User)
@@ -1374,34 +1394,36 @@ namespace EasyITCenter.DBModel
                     .HasConstraintName("FK_SolutionSchedulerProcessList_SolutionSchedulerList");
             });
 
-            modelBuilder.Entity<SolutionServerToolsGroupList>(entity =>
+            modelBuilder.Entity<SolutionServerToolGroupList>(entity =>
             {
+                entity.HasKey(e => e.GroupName)
+                    .HasName("PK_SolutionServerToolsGroupList");
+
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SolutionServerToolsGroupLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionServerToolsGroupList_SolutionUserList");
             });
 
-            modelBuilder.Entity<SolutionServerToolsNameList>(entity =>
+            modelBuilder.Entity<SolutionServerToolNameList>(entity =>
             {
                 entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
 
                 entity.HasOne(d => d.SystemGroupMenuListNameNavigation)
-                    .WithMany(p => p.SolutionServerToolsNameLists)
+                    .WithMany(p => p.SolutionServerToolNameLists)
                     .HasForeignKey(d => d.SystemGroupMenuListName)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SolutionServerToolsNameList_SolutionServerToolsGroupList");
+            });
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.SolutionServerToolsNameLists)
-                    .HasForeignKey(d => d.UserId)
+            modelBuilder.Entity<SolutionServerToolVariableList>(entity =>
+            {
+                entity.Property(e => e.TimeStamp).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.SolutionUserList)
+                    .WithMany(p => p.SolutionServerToolVariableLists)
+                    .HasForeignKey(d => d.SolutionUserListId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SolutionServerToolsNameList_SolutionUserList");
+                    .HasConstraintName("FK_SolutionServerToolVariableList_SolutionUserList");
             });
 
             modelBuilder.Entity<SolutionShareSourceList>(entity =>

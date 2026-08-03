@@ -1092,15 +1092,21 @@ namespace EasyITCenter.Controllers
             EasyITCenterContext data = new EasyITCenterContext(); PortalApiTableColumnDataList record = new();
             try {
                 if (HttpContextExtension.IsLogged()) {
-                    record = new() { Id = setMdMenuHelp.Id, RecGuid = setMdMenuHelp.RecGuid, ApiTableName = "PortalMenu", InheritedDataType = "string", ApiTableColumnName = "MdContent", Value = setMdMenuHelp.Value, Description = null, Active = true, UserId = (int)HttpContextExtension.GetUserId() };
 
-                    DatabaseContextExtensions.RunTransaction(data, (trans) => {
-                        data.PortalApiTableColumnDataLists.Update(record);
-                        data.SaveChanges();
-                        return true;
-                    });
+                    using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted }))
+                    { record = new EasyITCenterContext().PortalApiTableColumnDataLists.Where(a => a.Id == setMdMenuHelp.Id).FirstOrDefault(); }
 
-                    return JsonSerializer.Serialize(new ResultMessage() { Result = string.Empty, InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                    if (record != null){
+                        record.Value = setMdMenuHelp.Value;
+
+                        DatabaseContextExtensions.RunTransaction(data, (trans) => {
+                            data.PortalApiTableColumnDataLists.Update(record);
+                            data.SaveChanges();
+                            return true;
+                        });
+
+                        return JsonSerializer.Serialize(new ResultMessage() { Result = string.Empty, InsertedId = 0, Status = DBResult.success.ToString(), RecordCount = 1, ErrorMessage = string.Empty });
+                    } else { return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty }); }
                 } else {
                     return JsonSerializer.Serialize(new ResultMessage() { Status = DBResult.UnauthorizedRequest.ToString(), RecordCount = 0, ErrorMessage = string.Empty });
                 }

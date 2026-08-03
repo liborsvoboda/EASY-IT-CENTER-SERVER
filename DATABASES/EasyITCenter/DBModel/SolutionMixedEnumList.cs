@@ -17,6 +17,7 @@ namespace EasyITCenter.DBModel
             DocSrvDocTemplateLists = new HashSet<DocSrvDocTemplateList>();
             PortalApiTableColumnDataLists = new HashSet<PortalApiTableColumnDataList>();
             PortalApiTableLists = new HashSet<PortalApiTableList>();
+            PortalSettingLists = new HashSet<PortalSettingList>();
             ServerApiSecurityLists = new HashSet<ServerApiSecurityList>();
             ServerGeneratorListInheritedCategoryTypeNavigations = new HashSet<ServerGeneratorList>();
             ServerGeneratorListInheritedDownloadTypeNavigations = new HashSet<ServerGeneratorList>();
@@ -75,6 +76,7 @@ namespace EasyITCenter.DBModel
         public virtual ICollection<DocSrvDocTemplateList> DocSrvDocTemplateLists { get; set; }
         public virtual ICollection<PortalApiTableColumnDataList> PortalApiTableColumnDataLists { get; set; }
         public virtual ICollection<PortalApiTableList> PortalApiTableLists { get; set; }
+        public virtual ICollection<PortalSettingList> PortalSettingLists { get; set; }
         public virtual ICollection<ServerApiSecurityList> ServerApiSecurityLists { get; set; }
         public virtual ICollection<ServerGeneratorList> ServerGeneratorListInheritedCategoryTypeNavigations { get; set; }
         public virtual ICollection<ServerGeneratorList> ServerGeneratorListInheritedDownloadTypeNavigations { get; set; }
